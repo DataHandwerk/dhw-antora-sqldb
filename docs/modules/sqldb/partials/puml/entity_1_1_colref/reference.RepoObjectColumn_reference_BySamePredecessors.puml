@@ -1,0 +1,117 @@
+left to right direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+}
+
+
+entity reference.RepoObject_reference_union << V >> {
+  **referenced_RepoObject_guid** : uniqueidentifier
+  **referencing_RepoObject_guid** : uniqueidentifier
+  --
+  * InformationSource : varchar(31)
+  * one : int
+  referenced_entity_name : nvarchar(128)
+  * referenced_fullname : nvarchar(517)
+  referenced_id : int
+  referenced_node_id : bigint
+  referenced_schema_name : nvarchar(128)
+  referenced_type : char(2)
+  referencing_entity_name : nvarchar(128)
+  * referencing_fullname : nvarchar(517)
+  referencing_id : int
+  referencing_node_id : bigint
+  referencing_schema_name : nvarchar(128)
+  referencing_type : varchar(2)
+}
+
+entity reference.RepoObjectColumn_reference_BySamePredecessors << V >> {
+  --
+  definition : nvarchar(max)
+  * InformationSource : varchar(37)
+  is_computed : bit
+  is_hidden : bit
+  is_referenced_object : bit
+  is_referencing_object_equal_referenced_object : bit
+  referenced_column_name : nvarchar(128)
+  referenced_entity_name : nvarchar(128)
+  referenced_id : int
+  referenced_minor_id : int
+  referenced_node_id : bigint
+  referenced_RepoObject_guid : uniqueidentifier
+  referenced_RepoObjectColumn_guid : uniqueidentifier
+  referenced_schema_name : nvarchar(128)
+  referenced_type : char(2)
+  referencing_column_name : nvarchar(128)
+  * referencing_entity_name : nvarchar(128)
+  referencing_id : int
+  referencing_minor_id : int
+  referencing_node_id : bigint
+  * referencing_RepoObject_guid : uniqueidentifier
+  referencing_RepoObjectColumn_guid : uniqueidentifier
+  * referencing_schema_name : nvarchar(128)
+  referencing_type : char(2)
+}
+
+entity reference.RepoObjectColumn_reference_FirstResultSet << V >> {
+  --
+  * InformationSource : varchar(37)
+  is_hidden : bit
+  is_referenced_object : bit
+  is_referencing_object_equal_referenced_object : bit
+  referenced_column_name : nvarchar(128)
+  referenced_entity_name : nvarchar(128)
+  referenced_id : int
+  referenced_minor_id : int
+  referenced_node_id : bigint
+  referenced_RepoObject_guid : uniqueidentifier
+  referenced_RepoObjectColumn_guid : uniqueidentifier
+  referenced_schema_name : nvarchar(128)
+  referenced_type : char(2)
+  referencing_column_name : nvarchar(128)
+  * referencing_entity_name : nvarchar(128)
+  referencing_id : int
+  referencing_minor_id : int
+  referencing_node_id : bigint
+  * referencing_RepoObject_guid : uniqueidentifier
+  referencing_RepoObjectColumn_guid : uniqueidentifier
+  * referencing_schema_name : nvarchar(128)
+  referencing_type : char(2)
+}
+
+reference.RepoObject_reference_union <.. reference.RepoObjectColumn_reference_BySamePredecessors
+reference.RepoObject_reference_union <.. reference.RepoObjectColumn_reference_FirstResultSet
+reference.RepoObjectColumn_reference_FirstResultSet <.. reference.RepoObjectColumn_reference_BySamePredecessors
+reference.RepoObject_reference_union::referenced_entity_name <-- reference.RepoObjectColumn_reference_BySamePredecessors::referenced_entity_name
+reference.RepoObject_reference_union::referenced_RepoObject_guid <-- reference.RepoObjectColumn_reference_BySamePredecessors::referenced_RepoObject_guid
+reference.RepoObject_reference_union::referenced_schema_name <-- reference.RepoObjectColumn_reference_BySamePredecessors::referenced_schema_name
+reference.RepoObject_reference_union::referenced_type <-- reference.RepoObjectColumn_reference_BySamePredecessors::referenced_type
+reference.RepoObjectColumn_reference_FirstResultSet::InformationSource <-- reference.RepoObjectColumn_reference_BySamePredecessors::InformationSource
+reference.RepoObjectColumn_reference_FirstResultSet::is_hidden <-- reference.RepoObjectColumn_reference_BySamePredecessors::is_hidden
+reference.RepoObjectColumn_reference_FirstResultSet::referencing_column_name <-- reference.RepoObjectColumn_reference_BySamePredecessors::referencing_column_name
+reference.RepoObjectColumn_reference_FirstResultSet::referencing_entity_name <-- reference.RepoObjectColumn_reference_BySamePredecessors::referencing_entity_name
+reference.RepoObjectColumn_reference_FirstResultSet::referencing_id <-- reference.RepoObjectColumn_reference_BySamePredecessors::referencing_id
+reference.RepoObjectColumn_reference_FirstResultSet::referencing_minor_id <-- reference.RepoObjectColumn_reference_BySamePredecessors::referencing_minor_id
+reference.RepoObjectColumn_reference_FirstResultSet::referencing_node_id <-- reference.RepoObjectColumn_reference_BySamePredecessors::referencing_node_id
+reference.RepoObjectColumn_reference_FirstResultSet::referencing_RepoObject_guid <-- reference.RepoObjectColumn_reference_BySamePredecessors::referencing_RepoObject_guid
+reference.RepoObjectColumn_reference_FirstResultSet::referencing_RepoObjectColumn_guid <-- reference.RepoObjectColumn_reference_BySamePredecessors::referencing_RepoObjectColumn_guid
+reference.RepoObjectColumn_reference_FirstResultSet::referencing_schema_name <-- reference.RepoObjectColumn_reference_BySamePredecessors::referencing_schema_name
+reference.RepoObjectColumn_reference_FirstResultSet::referencing_type <-- reference.RepoObjectColumn_reference_BySamePredecessors::referencing_type

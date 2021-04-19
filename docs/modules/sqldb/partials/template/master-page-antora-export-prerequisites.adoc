@@ -1,0 +1,42 @@
+
+[discrete]
+=== Prerequisites
+
+* export folders should exist, no error message is generated, if they are missing
+* uses `xp_cmdshell`, to call `bcp`, you need to enable:
++
+====
+[source,sql]
+----
+--before executing the procedure:
+--Temporarily or permanently enable xp_cmdshell
+sp_configure 'show advanced options'
+ , 1;
+
+RECONFIGURE
+GO
+
+sp_configure 'xp_cmdshell'
+ , 1;
+
+RECONFIGURE
+GO
+
+EXEC docs.usp_AntoraExport
+
+--you can also disable later again:
+--Disable xp_cmdshell
+sp_configure 'xp_cmdshell'
+ , 0
+
+RECONFIGURE
+GO
+
+sp_configure 'show advanced options'
+ , 0
+
+RECONFIGURE
+GO
+----
+====
+

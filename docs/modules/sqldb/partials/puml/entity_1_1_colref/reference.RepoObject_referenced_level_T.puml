@@ -1,0 +1,84 @@
+left to right direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+}
+
+
+entity docs.ftv_RepoObject_Reference_PlantUml_EntityRefList << IF >> {
+  --
+  PumlEntityList : nvarchar(max)
+  PumlEntityOnlyPkList : nvarchar(max)
+  Referenced_Depth : int
+  Referencing_Depth : int
+  ro_guid : uniqueidentifier
+}
+
+entity reference.ftv_RepoObject_ReferencedReferencing << IF >> {
+  --
+  Node_fullname2 : nvarchar(257)
+  Node_guid : uniqueidentifier
+  Referenced_Depth : int
+  Referencing_Depth : int
+  ro_guid : uniqueidentifier
+}
+
+entity reference.RepoObject_referenced_level << V >> {
+  **StartingNode_guid** : uniqueidentifier
+  **LastNode_guid** : uniqueidentifier
+  * **referenced_level** : int
+  --
+  LastNode_fullname : nvarchar(261)
+  LastNode_fullname2 : nvarchar(257)
+  ListNode : nvarchar(4000)
+  StartingNode_fullname : nvarchar(261)
+  StartingNode_fullname2 : nvarchar(257)
+}
+
+entity reference.RepoObject_referenced_level_T << U >> {
+  **StartingNode_guid** : uniqueidentifier
+  **LastNode_guid** : uniqueidentifier
+  * **referenced_level** : int
+  --
+  LastNode_fullname : nvarchar(261)
+  LastNode_fullname2 : nvarchar(257)
+  ListNode : nvarchar(4000)
+  StartingNode_fullname : nvarchar(261)
+  StartingNode_fullname2 : nvarchar(257)
+}
+
+entity reference.usp_PERSIST_RepoObject_referenced_level_T << P >> {
+  --
+}
+
+reference.RepoObject_referenced_level <.. reference.RepoObject_referenced_level_T
+reference.RepoObject_referenced_level <.. reference.usp_PERSIST_RepoObject_referenced_level_T
+reference.RepoObject_referenced_level_T <.. reference.usp_PERSIST_RepoObject_referenced_level_T
+reference.RepoObject_referenced_level_T <.. reference.ftv_RepoObject_ReferencedReferencing
+reference.RepoObject_referenced_level_T <.. docs.ftv_RepoObject_Reference_PlantUml_EntityRefList
+reference.RepoObject_referenced_level::LastNode_fullname <-- reference.RepoObject_referenced_level_T::LastNode_fullname
+reference.RepoObject_referenced_level::LastNode_fullname2 <-- reference.RepoObject_referenced_level_T::LastNode_fullname2
+reference.RepoObject_referenced_level::LastNode_guid <-- reference.RepoObject_referenced_level_T::LastNode_guid
+reference.RepoObject_referenced_level::ListNode <-- reference.RepoObject_referenced_level_T::ListNode
+reference.RepoObject_referenced_level::referenced_level <-- reference.RepoObject_referenced_level_T::referenced_level
+reference.RepoObject_referenced_level::StartingNode_fullname <-- reference.RepoObject_referenced_level_T::StartingNode_fullname
+reference.RepoObject_referenced_level::StartingNode_fullname2 <-- reference.RepoObject_referenced_level_T::StartingNode_fullname2
+reference.RepoObject_referenced_level::StartingNode_guid <-- reference.RepoObject_referenced_level_T::StartingNode_guid

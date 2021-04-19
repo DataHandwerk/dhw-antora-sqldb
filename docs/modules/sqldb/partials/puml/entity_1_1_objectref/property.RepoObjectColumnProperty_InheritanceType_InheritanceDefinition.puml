@@ -1,0 +1,59 @@
+left to right direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+}
+
+
+entity config.Parameter << U >> {
+  * **Parameter_name** : varchar(100)
+  * **sub_Parameter** : nvarchar(128)
+}
+
+entity property.PropertyName_RepoObjectColumn << V >> {
+  * **property_name** : nvarchar(128)
+}
+
+entity property.RepoObjectColumnProperty << U >> {
+  * **RepoObjectColumnProperty_id** : int
+}
+
+entity property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition << V >> {
+  * **RepoObjectColumn_guid** : uniqueidentifier
+  * **property_name** : nvarchar(128)
+}
+
+entity property.RepoObjectColumnProperty_InheritanceType_resulting_InheritanceDefinition << V >> {
+  * **RepoObjectColumn_guid** : uniqueidentifier
+  * **property_name** : nvarchar(128)
+}
+
+entity repo.RepoObjectColumn << U >> {
+  * **RepoObjectColumn_guid** : uniqueidentifier
+}
+
+config.Parameter <.. property.PropertyName_RepoObjectColumn
+config.Parameter <.. property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition
+property.PropertyName_RepoObjectColumn <.. property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition
+property.RepoObjectColumnProperty <.. property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition
+property.RepoObjectColumnProperty <.. property.PropertyName_RepoObjectColumn
+property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition <.. property.RepoObjectColumnProperty_InheritanceType_resulting_InheritanceDefinition
+repo.RepoObjectColumn <.. property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition

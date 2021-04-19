@@ -1,0 +1,60 @@
+left to right direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+}
+
+
+entity docs.usp_AntoraExport << P >> {
+}
+
+entity logs.usp_ExecutionLog_insert << P >> {
+}
+
+entity property.RepoObjectProperty << U >> {
+  * **RepoObjectProperty_id** : int
+}
+
+entity property.RepoObjectProperty_Collect_source_ROGross << V >> {
+  * **RepoObject_guid** : uniqueidentifier
+  * **property_name** : varchar(39)
+}
+
+entity property.RepoObjectProperty_Collect_source_sql_modules_definition << V >> {
+  * **RepoObject_guid** : uniqueidentifier
+  **property_name** : nvarchar(128)
+}
+
+entity property.RepoObjectProperty_Collect_source_uspgenerator << V >> {
+  **RepoObject_guid** : uniqueidentifier
+  * **property_name** : varchar(14)
+}
+
+entity property.usp_RepoObjectProperty_collect << P >> {
+}
+
+logs.usp_ExecutionLog_insert <.. property.usp_RepoObjectProperty_collect
+logs.usp_ExecutionLog_insert <.. docs.usp_AntoraExport
+property.RepoObjectProperty <.. property.usp_RepoObjectProperty_collect
+property.RepoObjectProperty_Collect_source_ROGross <.. property.usp_RepoObjectProperty_collect
+property.RepoObjectProperty_Collect_source_sql_modules_definition <.. property.usp_RepoObjectProperty_collect
+property.RepoObjectProperty_Collect_source_uspgenerator <.. property.usp_RepoObjectProperty_collect
+property.usp_RepoObjectProperty_collect <.. docs.usp_AntoraExport
