@@ -1,0 +1,56 @@
+Left to right direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+}
+
+
+entity property.RepoSchemaProperty << U >> {
+**PK_RepoSchemaProperty**
+
+..
+RepoSchemaProperty_id; int
+--
+UK_RepoSchemaProperty
+
+..
+RepoSchema_guid; uniqueidentifier
+property_name; nvarchar(128)
+--
+- idx_RepoSchemaProperty__1
+
+..
+RepoSchema_guid; uniqueidentifier
+}
+
+entity repo.RepoSchema << U >> {
+**PK_RepoSchema**
+
+..
+RepoSchema_guid; uniqueidentifier
+--
+UK_RepoSchema
+
+..
+RepoSchema_name; nvarchar(128)
+}
+
+repo.RepoSchema::PK_RepoSchema <-- property.RepoSchemaProperty::idx_RepoSchemaProperty__1

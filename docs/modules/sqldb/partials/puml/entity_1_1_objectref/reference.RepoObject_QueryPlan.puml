@@ -25,15 +25,18 @@ skinparam class {
 
 entity reference.RepoObject_QueryPlan << U >> {
   * **RepoObject_guid** : uniqueidentifier
+  --
 }
 
 entity reference.usp_RepoObject_update_SysObjectQueryPlan << P >> {
+  --
 }
 
 entity repo.RepoObject_gross << V >> {
   * **RepoObject_guid** : uniqueidentifier
+  --
 }
 
-reference.RepoObject_QueryPlan <.. reference.usp_RepoObject_update_SysObjectQueryPlan
 reference.RepoObject_QueryPlan <.. repo.RepoObject_gross
+reference.RepoObject_QueryPlan <.. reference.usp_RepoObject_update_SysObjectQueryPlan
 repo.RepoObject_gross <.. reference.usp_RepoObject_update_SysObjectQueryPlan

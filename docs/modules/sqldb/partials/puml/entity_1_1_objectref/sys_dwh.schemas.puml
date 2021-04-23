@@ -23,10 +23,24 @@ skinparam class {
 }
 
 
+entity repo_sys.ExtendedProperties << V >> {
+  --
+}
+
 entity repo_sys.SysObject << V >> {
+  --
+}
+
+entity repo_sys.SysSchema << V >> {
+  --
 }
 
 entity sys_dwh.schemas << SN >> {
+  --
 }
 
+repo_sys.ExtendedProperties <.. repo_sys.SysObject
+repo_sys.ExtendedProperties <.. repo_sys.SysSchema
+sys_dwh.schemas <.. repo_sys.SysSchema
+sys_dwh.schemas <.. repo_sys.ExtendedProperties
 sys_dwh.schemas <.. repo_sys.SysObject

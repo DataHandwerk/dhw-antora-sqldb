@@ -24,11 +24,13 @@ skinparam class {
 
 
 entity config.ftv_dwh_database << IF >> {
+  --
 }
 
 entity config.Parameter << U >> {
   * **Parameter_name** : varchar(100)
   * **sub_Parameter** : nvarchar(128)
+  --
 }
 
 entity reference.RepoObjectColumn_reference_QueryPlan << V >> {
@@ -36,34 +38,41 @@ entity reference.RepoObjectColumn_reference_QueryPlan << V >> {
   **referencing_minor_id** : int
   **referenced_id** : int
   **referenced_minor_id** : int
+  --
 }
 
 entity reference.usp_update_Referencing_Count << P >> {
+  --
 }
 
 entity repo.usp_update_Referencing_Count << P >> {
+  --
 }
 
 entity repo_sys.ExtendedProperties << V >> {
+  --
 }
 
 entity repo_sys.sql_expression_dependencies << V >> {
+  --
 }
 
 entity repo_sys.SysColumn << V >> {
+  --
 }
 
 entity uspgenerator.GeneratorUsp_SqlUsp << V >> {
   * **usp_id** : int
+  --
 }
 
-config.ftv_dwh_database <.. repo_sys.SysColumn
-config.ftv_dwh_database <.. uspgenerator.GeneratorUsp_SqlUsp
 config.ftv_dwh_database <.. repo_sys.ExtendedProperties
+config.ftv_dwh_database <.. uspgenerator.GeneratorUsp_SqlUsp
 config.ftv_dwh_database <.. repo_sys.sql_expression_dependencies
 config.ftv_dwh_database <.. reference.RepoObjectColumn_reference_QueryPlan
 config.ftv_dwh_database <.. reference.usp_update_Referencing_Count
 config.ftv_dwh_database <.. repo.usp_update_Referencing_Count
+config.ftv_dwh_database <.. repo_sys.SysColumn
 config.Parameter <.. config.ftv_dwh_database
 repo_sys.ExtendedProperties <.. repo_sys.SysColumn
 repo_sys.SysColumn <.. repo_sys.sql_expression_dependencies

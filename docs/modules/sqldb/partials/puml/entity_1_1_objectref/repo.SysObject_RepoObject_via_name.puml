@@ -25,23 +25,28 @@ skinparam class {
 
 entity repo.RepoObject << U >> {
   * **RepoObject_guid** : uniqueidentifier
+  --
 }
 
 entity repo.SysObject_RepoObject_via_name << V >> {
+  --
 }
 
 entity repo.usp_sync_guid_RepoObject << P >> {
+  --
 }
 
 entity repo_sys.IndexColumn_unique << V >> {
+  --
 }
 
 entity repo_sys.SysObject << V >> {
+  --
 }
 
 repo.RepoObject <.. repo.SysObject_RepoObject_via_name
 repo.RepoObject <.. repo.usp_sync_guid_RepoObject
 repo.SysObject_RepoObject_via_name <.. repo.usp_sync_guid_RepoObject
 repo.SysObject_RepoObject_via_name <.. repo_sys.IndexColumn_unique
-repo_sys.SysObject <.. repo.usp_sync_guid_RepoObject
 repo_sys.SysObject <.. repo.SysObject_RepoObject_via_name
+repo_sys.SysObject <.. repo.usp_sync_guid_RepoObject

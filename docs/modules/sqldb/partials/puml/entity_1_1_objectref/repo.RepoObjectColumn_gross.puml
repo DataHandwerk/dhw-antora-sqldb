@@ -25,20 +25,25 @@ skinparam class {
 
 entity docs.RepoObject_ColumnList << V >> {
   * **RepoObject_guid** : uniqueidentifier
+  --
 }
 
 entity graph.RepoObjectColumn_S << V >> {
   * **RepoObjectColumn_guid** : uniqueidentifier
+  --
 }
 
 entity property.fs_get_RepoObjectColumnProperty_nvarchar << FN >> {
+  --
 }
 
 entity property.RepoObjectColumnProperty_ForUpdate << V >> {
   * **RepoObjectColumnProperty_id** : int
+  --
 }
 
 entity reference.RepoObjectColumn_reference_FirstResultSet << V >> {
+  --
 }
 
 entity reference.RepoObjectColumn_reference_QueryPlan << V >> {
@@ -46,46 +51,54 @@ entity reference.RepoObjectColumn_reference_QueryPlan << V >> {
   **referencing_minor_id** : int
   **referenced_id** : int
   **referenced_minor_id** : int
+  --
 }
 
 entity reference.RepoObjectColumn_ReferencedList << V >> {
+  --
 }
 
 entity reference.RepoObjectColumn_ReferencingList << V >> {
+  --
 }
 
 entity repo.IndexColumn_union << V >> {
   **index_guid** : uniqueidentifier
   * **index_column_id** : int
+  --
 }
 
 entity repo.RepoObject << U >> {
   * **RepoObject_guid** : uniqueidentifier
+  --
 }
 
 entity repo.RepoObject_ColumnList << V >> {
   * **RepoObject_guid** : uniqueidentifier
+  --
 }
 
 entity repo.RepoObjectColumn << U >> {
   * **RepoObjectColumn_guid** : uniqueidentifier
+  --
 }
 
 entity repo.RepoObjectColumn_gross << V >> {
   * **RepoObjectColumn_guid** : uniqueidentifier
+  --
 }
 
 property.fs_get_RepoObjectColumnProperty_nvarchar <.. repo.RepoObjectColumn_gross
 reference.RepoObjectColumn_ReferencedList <.. repo.RepoObjectColumn_gross
 reference.RepoObjectColumn_ReferencingList <.. repo.RepoObjectColumn_gross
 repo.IndexColumn_union <.. repo.RepoObjectColumn_gross
-repo.RepoObject <.. repo.RepoObjectColumn_gross
 repo.RepoObject <.. reference.RepoObjectColumn_reference_QueryPlan
 repo.RepoObject <.. reference.RepoObjectColumn_reference_FirstResultSet
+repo.RepoObject <.. repo.RepoObjectColumn_gross
 repo.RepoObjectColumn <.. repo.RepoObjectColumn_gross
-repo.RepoObjectColumn_gross <.. repo.RepoObject_ColumnList
-repo.RepoObjectColumn_gross <.. reference.RepoObjectColumn_reference_QueryPlan
+repo.RepoObjectColumn_gross <.. reference.RepoObjectColumn_reference_FirstResultSet
 repo.RepoObjectColumn_gross <.. graph.RepoObjectColumn_S
 repo.RepoObjectColumn_gross <.. docs.RepoObject_ColumnList
 repo.RepoObjectColumn_gross <.. property.RepoObjectColumnProperty_ForUpdate
-repo.RepoObjectColumn_gross <.. reference.RepoObjectColumn_reference_FirstResultSet
+repo.RepoObjectColumn_gross <.. reference.RepoObjectColumn_reference_QueryPlan
+repo.RepoObjectColumn_gross <.. repo.RepoObject_ColumnList

@@ -26,29 +26,35 @@ skinparam class {
 entity reference.RepoObject_reference_union << V >> {
   **referenced_RepoObject_guid** : uniqueidentifier
   **referencing_RepoObject_guid** : uniqueidentifier
+  --
 }
 
 entity reference.RepoObjectColumn_reference_BySamePredecessors << V >> {
+  --
 }
 
 entity reference.RepoObjectColumn_reference_FirstResultSet << V >> {
+  --
 }
 
 entity reference.RepoObjectSource_FirstResultSet << U >> {
   * **RepoObject_guid** : uniqueidentifier
   * **column_ordinal** : int
+  --
 }
 
 entity repo.RepoObject << U >> {
   * **RepoObject_guid** : uniqueidentifier
+  --
 }
 
 entity repo.RepoObjectColumn_gross << V >> {
   * **RepoObjectColumn_guid** : uniqueidentifier
+  --
 }
 
-reference.RepoObject_reference_union <.. reference.RepoObjectColumn_reference_FirstResultSet
 reference.RepoObject_reference_union <.. reference.RepoObjectColumn_reference_BySamePredecessors
+reference.RepoObject_reference_union <.. reference.RepoObjectColumn_reference_FirstResultSet
 reference.RepoObjectColumn_reference_FirstResultSet <.. reference.RepoObjectColumn_reference_BySamePredecessors
 reference.RepoObjectSource_FirstResultSet <.. reference.RepoObjectColumn_reference_FirstResultSet
 repo.RepoObject <.. repo.RepoObjectColumn_gross

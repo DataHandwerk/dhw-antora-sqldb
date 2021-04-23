@@ -26,6 +26,7 @@ skinparam class {
 entity reference.RepoObject_reference_persistence << V >> {
   **referenced_RepoObject_guid** : uniqueidentifier
   * **referencing_RepoObject_guid** : uniqueidentifier
+  --
 }
 
 entity reference.RepoObjectColumn_reference_Persistence << V >> {
@@ -33,55 +34,66 @@ entity reference.RepoObjectColumn_reference_Persistence << V >> {
   **referencing_minor_id** : int
   **referenced_id** : int
   **referenced_minor_id** : int
+  --
 }
 
 entity repo.RepoObject_gross << V >> {
   * **RepoObject_guid** : uniqueidentifier
+  --
 }
 
 entity repo.RepoObject_persistence << U >> {
   * **target_RepoObject_guid** : uniqueidentifier
+  --
 }
 
 entity repo.RepoObject_persistence_column << V >> {
   * **target_RepoObject_guid** : uniqueidentifier
   **RepoObjectColumn_guid_s** : uniqueidentifier
+  --
 }
 
 entity repo.RepoObject_persistence_ForUpdate << V >> {
   * **target_RepoObject_guid** : uniqueidentifier
+  --
 }
 
 entity repo.RepoObject_persistence_ObjectNames << V >> {
   * **target_RepoObject_guid** : uniqueidentifier
+  --
 }
 
 entity repo.RepoObjectColumn_HistValidColums_setpoint << V >> {
   * **RepoObject_guid** : uniqueidentifier
   **RepoObjectColumn_name** : sysname
+  --
 }
 
 entity repo.usp_Index_finish << P >> {
+  --
 }
 
 entity repo.usp_persistence_set << P >> {
+  --
 }
 
 entity repo.usp_sync_guid_RepoObject << P >> {
+  --
 }
 
 entity repo.usp_sync_guid_RepoObjectColumn << P >> {
+  --
 }
 
 repo.RepoObject_persistence <.. repo.usp_sync_guid_RepoObjectColumn
-repo.RepoObject_persistence <.. repo.usp_persistence_set
 repo.RepoObject_persistence <.. repo.usp_sync_guid_RepoObject
 repo.RepoObject_persistence <.. repo.RepoObject_persistence_ForUpdate
+repo.RepoObject_persistence <.. repo.usp_persistence_set
 repo.RepoObject_persistence <.. repo.RepoObject_gross
 repo.RepoObject_persistence <.. repo.usp_Index_finish
 repo.RepoObject_persistence <.. repo.RepoObjectColumn_HistValidColums_setpoint
-repo.RepoObject_persistence <.. repo.RepoObject_persistence_column
-repo.RepoObject_persistence <.. repo.RepoObject_persistence_ObjectNames
 repo.RepoObject_persistence <.. reference.RepoObjectColumn_reference_Persistence
+repo.RepoObject_persistence <.. repo.RepoObject_persistence_ObjectNames
+repo.RepoObject_persistence <.. repo.RepoObject_persistence_column
 repo.RepoObject_persistence <.. reference.RepoObject_reference_persistence
 repo.RepoObjectColumn_HistValidColums_setpoint <.. repo.usp_sync_guid_RepoObjectColumn

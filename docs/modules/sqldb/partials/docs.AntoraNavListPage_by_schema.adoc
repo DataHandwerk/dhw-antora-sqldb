@@ -42,7 +42,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-04-13 19:02:37
+2021-04-23 11:54:43
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -74,7 +74,7 @@ view
 |===
 |
 |nav_list
-|nvarchar(311)
+|nvarchar(4000)
 |NOT NULL
 |
 |
@@ -102,7 +102,7 @@ view
 
 |
 |<<column-nav_list>>
-|nvarchar(311)
+|nvarchar(4000)
 |NOT NULL
 |
 |
@@ -142,6 +142,7 @@ view
 
 // tag::antorareferencedlist[]
 * xref:repo.RepoObject.adoc[]
+* xref:repo.RepoSchema.adoc[]
 // end::antorareferencedlist[]
 
 
@@ -338,6 +339,7 @@ schema_name
 
 // tag::referencedobjectlist[]
 * [repo].[RepoObject]
+* [repo].[RepoSchema]
 // end::referencedobjectlist[]
 
 
@@ -360,7 +362,8 @@ schema_name
 // tag::sql_modules_definition[]
 [source,sql]
 ----
-Create View docs.AntoraNavListPage_by_schema
+
+CREATE View docs.AntoraNavListPage_by_schema
 As
 Select
     RepoObject_schema_name
@@ -369,11 +372,24 @@ Select
                         , RepoObject_schema_name
                         , Char ( 13 ) + Char ( 10 )
                         , Char ( 13 ) + Char ( 10 )
+                        , '== Description'
+                        , Char ( 13 ) + Char ( 10 )
+                        , Char ( 13 ) + Char ( 10 )
+                        , Max ( rs.RepoSchema_ms_description )
+                        , Char ( 13 ) + Char ( 10 )
+                        , Char ( 13 ) + Char ( 10 )
+                        , '== Objects'
+                        , Char ( 13 ) + Char ( 10 )
+                        , Char ( 13 ) + Char ( 10 )
                         , '\include::partial$navlist/navlist-schema-' + RepoObject_schema_name + '.adoc[]'
                         , Char ( 13 ) + Char ( 10 )
                       )
 From
-    repo.RepoObject ro
+    repo.RepoObject     ro
+    Left Join
+        repo.RepoSchema rs
+            On
+            rs.RepoSchema_name = ro.RepoObject_schema_name
 Group By
     RepoObject_schema_name;
 

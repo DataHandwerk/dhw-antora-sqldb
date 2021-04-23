@@ -25,58 +25,69 @@ skinparam class {
 
 entity docs.RepoObject_Plantuml_ObjectRefList << V >> {
   * **RepoObject_guid** : uniqueidentifier
+  --
 }
 
 entity graph.ReferencedObject << U >> {
+  --
 }
 
 entity graph.ReferencingObject << U >> {
+  --
 }
 
 entity graph.RepoObject << U >> {
+  --
 }
 
 entity graph.RepoObject_S << V >> {
   * **RepoObject_guid** : uniqueidentifier
+  --
 }
 
 entity reference.ftv_RepoObject_ReferencedReferencing << IF >> {
+  --
 }
 
 entity reference.RepoObject_referenced_level << V >> {
   **StartingNode_guid** : uniqueidentifier
   **LastNode_guid** : uniqueidentifier
   * **referenced_level** : int
+  --
 }
 
 entity reference.RepoObject_referenced_level_T << U >> {
   **StartingNode_guid** : uniqueidentifier
   **LastNode_guid** : uniqueidentifier
   * **referenced_level** : int
+  --
 }
 
 entity reference.RepoObject_referencing_level << V >> {
   **StartingNode_guid** : uniqueidentifier
   **LastNode_guid** : uniqueidentifier
   * **referencing_level** : int
+  --
 }
 
 entity reference.RepoObject_referencing_level_T << U >> {
   **StartingNode_guid** : uniqueidentifier
   **LastNode_guid** : uniqueidentifier
   * **referencing_level** : int
+  --
 }
 
 entity repo.RepoObject << U >> {
   * **RepoObject_guid** : uniqueidentifier
+  --
 }
 
 graph.ReferencedObject <.. reference.RepoObject_referenced_level
 graph.ReferencedObject <.. docs.RepoObject_Plantuml_ObjectRefList
 graph.ReferencingObject <.. reference.RepoObject_referencing_level
+graph.RepoObject <.. reference.RepoObject_referencing_level
 graph.RepoObject <.. reference.RepoObject_referenced_level
 graph.RepoObject <.. docs.RepoObject_Plantuml_ObjectRefList
-graph.RepoObject <.. reference.RepoObject_referencing_level
 graph.RepoObject_S <.. graph.RepoObject
 reference.ftv_RepoObject_ReferencedReferencing <.. docs.RepoObject_Plantuml_ObjectRefList
 reference.RepoObject_referenced_level <.. reference.RepoObject_referenced_level_T

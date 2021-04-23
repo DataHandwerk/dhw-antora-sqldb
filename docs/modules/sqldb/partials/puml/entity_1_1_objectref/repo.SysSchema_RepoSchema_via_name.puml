@@ -1,0 +1,47 @@
+left to right direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+}
+
+
+entity repo.RepoSchema << U >> {
+  * **RepoSchema_guid** : uniqueidentifier
+  --
+}
+
+entity repo.SysSchema_RepoSchema_via_name << V >> {
+  --
+}
+
+entity repo.usp_sync_guid_RepoSchema << P >> {
+  --
+}
+
+entity repo_sys.SysSchema << V >> {
+  --
+}
+
+repo.RepoSchema <.. repo.usp_sync_guid_RepoSchema
+repo.RepoSchema <.. repo.SysSchema_RepoSchema_via_name
+repo.SysSchema_RepoSchema_via_name <.. repo.usp_sync_guid_RepoSchema
+repo_sys.SysSchema <.. repo.SysSchema_RepoSchema_via_name
+repo_sys.SysSchema <.. repo.usp_sync_guid_RepoSchema

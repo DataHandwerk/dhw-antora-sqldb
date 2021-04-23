@@ -24,52 +24,80 @@ skinparam class {
 
 
 entity config.ftv_dwh_database << IF >> {
+  --
 }
 
 entity property.RepoObjectColumnProperty_sys_repo << V >> {
   * **RepoObjectColumn_guid** : uniqueidentifier
   * **property_name** : sysname
+  --
 }
 
 entity property.RepoObjectProperty_sys_repo << V >> {
   * **RepoObject_guid** : uniqueidentifier
   * **property_name** : sysname
+  --
+}
+
+entity property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate << P >> {
+  --
 }
 
 entity repo_sys.ExtendedProperties << V >> {
+  --
 }
 
 entity repo_sys.ExtendedProperties_ParameterForAddUpdateDrop << V >> {
+  --
 }
 
 entity repo_sys.SysColumn << V >> {
+  --
 }
 
 entity repo_sys.SysObject << V >> {
+  --
+}
+
+entity repo_sys.SysSchema << V >> {
+  --
 }
 
 entity sys_dwh.columns << SN >> {
+  --
 }
 
 entity sys_dwh.extended_properties << SN >> {
+  --
 }
 
 entity sys_dwh.indexes << SN >> {
+  --
 }
 
 entity sys_dwh.objects << SN >> {
+  --
 }
 
 entity sys_dwh.parameters << SN >> {
+  --
 }
 
-config.ftv_dwh_database <.. repo_sys.ExtendedProperties
+entity sys_dwh.schemas << SN >> {
+  --
+}
+
 config.ftv_dwh_database <.. repo_sys.SysColumn
-repo_sys.ExtendedProperties <.. repo_sys.SysColumn
+config.ftv_dwh_database <.. repo_sys.ExtendedProperties
+property.RepoObjectColumnProperty_sys_repo <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
+property.RepoObjectProperty_sys_repo <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
+repo_sys.ExtendedProperties <.. repo_sys.SysSchema
 repo_sys.ExtendedProperties <.. repo_sys.SysObject
+repo_sys.ExtendedProperties <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
+repo_sys.ExtendedProperties <.. repo_sys.SysColumn
 repo_sys.ExtendedProperties <.. repo_sys.ExtendedProperties_ParameterForAddUpdateDrop
-repo_sys.ExtendedProperties <.. property.RepoObjectColumnProperty_sys_repo
 repo_sys.ExtendedProperties <.. property.RepoObjectProperty_sys_repo
+repo_sys.ExtendedProperties <.. property.RepoObjectColumnProperty_sys_repo
 repo_sys.SysObject <.. repo_sys.SysColumn
 sys_dwh.columns <.. repo_sys.SysColumn
 sys_dwh.columns <.. repo_sys.ExtendedProperties
@@ -79,3 +107,6 @@ sys_dwh.objects <.. repo_sys.ExtendedProperties
 sys_dwh.objects <.. repo_sys.SysObject
 sys_dwh.objects <.. repo_sys.ExtendedProperties_ParameterForAddUpdateDrop
 sys_dwh.parameters <.. repo_sys.ExtendedProperties
+sys_dwh.schemas <.. repo_sys.ExtendedProperties
+sys_dwh.schemas <.. repo_sys.SysObject
+sys_dwh.schemas <.. repo_sys.SysSchema

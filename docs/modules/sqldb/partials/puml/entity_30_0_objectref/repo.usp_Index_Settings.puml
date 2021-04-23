@@ -24,112 +24,144 @@ skinparam class {
 
 
 entity config.ftv_dwh_database << IF >> {
+  --
 }
 
 entity config.Parameter << U >> {
   * **Parameter_name** : varchar(100)
   * **sub_Parameter** : nvarchar(128)
+  --
 }
 
 entity logs.ExecutionLog << U >> {
   * **id** : bigint
+  --
 }
 
 entity logs.usp_ExecutionLog_insert << P >> {
+  --
 }
 
 entity repo.Index_IndexPattern << V >> {
   **index_guid** : uniqueidentifier
+  --
 }
 
 entity repo.Index_Settings << U >> {
   * **index_guid** : uniqueidentifier
+  --
 }
 
 entity repo.Index_virtual << U >> {
   * **index_guid** : uniqueidentifier
+  --
 }
 
 entity repo.IndexColumn_union << V >> {
   **index_guid** : uniqueidentifier
   * **index_column_id** : int
+  --
 }
 
 entity repo.IndexColumn_virtual << U >> {
   * **index_guid** : uniqueidentifier
   * **index_column_id** : int
+  --
 }
 
 entity repo.IndexColumn_virtual_gross << V >> {
   * **index_column_id** : int
+  --
 }
 
 entity repo.RepoObject << U >> {
   * **RepoObject_guid** : uniqueidentifier
+  --
 }
 
 entity repo.RepoObjectColumn << U >> {
   * **RepoObjectColumn_guid** : uniqueidentifier
+  --
 }
 
 entity repo.SysColumn_RepoObjectColumn_via_name << V >> {
+  --
 }
 
 entity repo.SysObject_RepoObject_via_name << V >> {
+  --
 }
 
 entity repo.usp_Index_Settings << P >> {
+  --
 }
 
 entity repo_sys.ExtendedProperties << V >> {
+  --
 }
 
 entity repo_sys.IndexColumn_unique << V >> {
+  --
 }
 
 entity repo_sys.SysColumn << V >> {
+  --
 }
 
 entity repo_sys.SysObject << V >> {
+  --
 }
 
 entity sys_dwh.columns << SN >> {
+  --
 }
 
 entity sys_dwh.computed_columns << SN >> {
+  --
 }
 
 entity sys_dwh.default_constraints << SN >> {
+  --
 }
 
 entity sys_dwh.extended_properties << SN >> {
+  --
 }
 
 entity sys_dwh.identity_columns << SN >> {
+  --
 }
 
 entity sys_dwh.index_columns << SN >> {
+  --
 }
 
 entity sys_dwh.indexes << SN >> {
+  --
 }
 
 entity sys_dwh.objects << SN >> {
+  --
 }
 
 entity sys_dwh.parameters << SN >> {
+  --
 }
 
 entity sys_dwh.schemas << SN >> {
+  --
 }
 
 entity sys_dwh.sql_modules << SN >> {
+  --
 }
 
 entity sys_dwh.tables << SN >> {
+  --
 }
 
 entity sys_dwh.types << SN >> {
+  --
 }
 
 config.ftv_dwh_database <.. repo_sys.ExtendedProperties
@@ -143,9 +175,9 @@ repo.Index_virtual <.. repo.IndexColumn_virtual_gross
 repo.IndexColumn_union <.. repo.Index_IndexPattern
 repo.IndexColumn_virtual <.. repo.IndexColumn_virtual_gross
 repo.IndexColumn_virtual_gross <.. repo.IndexColumn_union
+repo.RepoObject <.. repo.SysObject_RepoObject_via_name
 repo.RepoObject <.. repo.SysColumn_RepoObjectColumn_via_name
 repo.RepoObject <.. repo.IndexColumn_virtual_gross
-repo.RepoObject <.. repo.SysObject_RepoObject_via_name
 repo.RepoObjectColumn <.. repo.IndexColumn_virtual_gross
 repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_name
 repo.SysColumn_RepoObjectColumn_via_name <.. repo_sys.IndexColumn_unique
@@ -168,6 +200,7 @@ sys_dwh.indexes <.. repo_sys.ExtendedProperties
 sys_dwh.objects <.. repo_sys.ExtendedProperties
 sys_dwh.objects <.. repo_sys.SysObject
 sys_dwh.parameters <.. repo_sys.ExtendedProperties
+sys_dwh.schemas <.. repo_sys.ExtendedProperties
 sys_dwh.schemas <.. repo_sys.SysObject
 sys_dwh.sql_modules <.. repo_sys.SysObject
 sys_dwh.tables <.. repo_sys.SysObject

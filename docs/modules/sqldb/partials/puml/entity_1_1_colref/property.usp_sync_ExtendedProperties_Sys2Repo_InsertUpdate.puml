@@ -88,11 +88,57 @@ entity property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate << P >> {
   --
 }
 
+entity repo.RepoSchema << U >> {
+  * **RepoSchema_guid** : uniqueidentifier
+  --
+  is_SysSchema_missing : bit
+  RepoSchema_ms_description : nvarchar(4000)
+  * RepoSchema_name : nvarchar(128)
+  SysSchema_id : int
+  * SysSchema_name : nvarchar(128)
+  {abstract} has_different_sys_names : bit
+  * {static} is_RepoSchema_name_uniqueidentifier : int
+  * {static} is_SysSchema_name_uniqueidentifier : int
+}
+
+entity repo_sys.ExtendedProperties << V >> {
+  --
+  * class : tinyint
+  class_desc : nvarchar(60)
+  entity_column_name : nvarchar(128)
+  entity_index_name : nvarchar(128)
+  entity_parameter_name : nvarchar(128)
+  level2type : varchar(9)
+  * major_id : int
+  * minor_id : int
+  minor_name : nvarchar(128)
+  parent_name : sysname
+  parent_object_id : int
+  parent_type : char(2)
+  property_basetype : sql_variant
+  * property_name : sysname
+  property_nvarchar : nvarchar(4000)
+  property_value : sql_variant
+  SysObject_name : nvarchar(128)
+  SysObject_schema_name : nvarchar(128)
+}
+
 logs.usp_ExecutionLog_insert <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
 property.RepoObjectColumnProperty <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
 property.RepoObjectColumnProperty <.. property.RepoObjectColumnProperty_sys_repo
 property.RepoObjectColumnProperty_sys_repo <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
-property.RepoObjectProperty <.. property.RepoObjectProperty_sys_repo
 property.RepoObjectProperty <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
+property.RepoObjectProperty <.. property.RepoObjectProperty_sys_repo
 property.RepoObjectProperty_sys_repo <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
-
+repo.RepoSchema <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
+repo_sys.ExtendedProperties <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
+repo_sys.ExtendedProperties <.. property.RepoObjectProperty_sys_repo
+repo_sys.ExtendedProperties <.. property.RepoObjectColumnProperty_sys_repo
+repo_sys.ExtendedProperties::property_name <-- property.RepoObjectProperty_sys_repo::property_name
+repo_sys.ExtendedProperties::property_name <-- property.RepoObjectColumnProperty_sys_repo::property_name
+repo_sys.ExtendedProperties::property_value <-- property.RepoObjectColumnProperty_sys_repo::property_value
+repo_sys.ExtendedProperties::property_value <-- property.RepoObjectProperty_sys_repo::property_value
+repo_sys.ExtendedProperties::SysObject_name <-- property.RepoObjectProperty_sys_repo::SysObject_name
+repo_sys.ExtendedProperties::SysObject_name <-- property.RepoObjectColumnProperty_sys_repo::SysObject_name
+repo_sys.ExtendedProperties::SysObject_schema_name <-- property.RepoObjectColumnProperty_sys_repo::SysObject_schema_name
+repo_sys.ExtendedProperties::SysObject_schema_name <-- property.RepoObjectProperty_sys_repo::SysObject_schema_name

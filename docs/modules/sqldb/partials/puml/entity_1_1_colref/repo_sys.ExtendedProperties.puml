@@ -52,6 +52,10 @@ entity property.RepoObjectProperty_sys_repo << V >> {
   SysObject_schema_name : nvarchar(128)
 }
 
+entity property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate << P >> {
+  --
+}
+
 entity repo_sys.ExtendedProperties << V >> {
   --
   * class : tinyint
@@ -175,6 +179,14 @@ entity repo_sys.SysObject << V >> {
   type_desc : nvarchar(60)
 }
 
+entity repo_sys.SysSchema << V >> {
+  --
+  * SysSchema_id : int
+  * SysSchema_name : sysname
+  SysSchema_principal_id : int
+  SysSchema_RepoSchema_guid : uniqueidentifier
+}
+
 entity sys_dwh.columns << SN >> {
   --
 }
@@ -195,13 +207,21 @@ entity sys_dwh.parameters << SN >> {
   --
 }
 
-config.ftv_dwh_database <.. repo_sys.ExtendedProperties
+entity sys_dwh.schemas << SN >> {
+  --
+}
+
 config.ftv_dwh_database <.. repo_sys.SysColumn
-repo_sys.ExtendedProperties <.. repo_sys.SysColumn
+config.ftv_dwh_database <.. repo_sys.ExtendedProperties
+property.RepoObjectColumnProperty_sys_repo <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
+property.RepoObjectProperty_sys_repo <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
+repo_sys.ExtendedProperties <.. repo_sys.SysSchema
 repo_sys.ExtendedProperties <.. repo_sys.SysObject
+repo_sys.ExtendedProperties <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
+repo_sys.ExtendedProperties <.. repo_sys.SysColumn
 repo_sys.ExtendedProperties <.. repo_sys.ExtendedProperties_ParameterForAddUpdateDrop
-repo_sys.ExtendedProperties <.. property.RepoObjectColumnProperty_sys_repo
 repo_sys.ExtendedProperties <.. property.RepoObjectProperty_sys_repo
+repo_sys.ExtendedProperties <.. property.RepoObjectColumnProperty_sys_repo
 repo_sys.SysObject <.. repo_sys.SysColumn
 sys_dwh.columns <.. repo_sys.SysColumn
 sys_dwh.columns <.. repo_sys.ExtendedProperties
@@ -211,16 +231,19 @@ sys_dwh.objects <.. repo_sys.ExtendedProperties
 sys_dwh.objects <.. repo_sys.SysObject
 sys_dwh.objects <.. repo_sys.ExtendedProperties_ParameterForAddUpdateDrop
 sys_dwh.parameters <.. repo_sys.ExtendedProperties
+sys_dwh.schemas <.. repo_sys.ExtendedProperties
+sys_dwh.schemas <.. repo_sys.SysObject
+sys_dwh.schemas <.. repo_sys.SysSchema
 repo_sys.ExtendedProperties::class <-- repo_sys.ExtendedProperties_ParameterForAddUpdateDrop::class
 repo_sys.ExtendedProperties::class_desc <-- repo_sys.ExtendedProperties_ParameterForAddUpdateDrop::class_desc
 repo_sys.ExtendedProperties::minor_id <-- repo_sys.ExtendedProperties_ParameterForAddUpdateDrop::minor_id
 repo_sys.ExtendedProperties::property_name <-- repo_sys.ExtendedProperties_ParameterForAddUpdateDrop::property_name
 repo_sys.ExtendedProperties::property_name <-- property.RepoObjectColumnProperty_sys_repo::property_name
 repo_sys.ExtendedProperties::property_name <-- property.RepoObjectProperty_sys_repo::property_name
-repo_sys.ExtendedProperties::property_value <-- property.RepoObjectColumnProperty_sys_repo::property_value
 repo_sys.ExtendedProperties::property_value <-- property.RepoObjectProperty_sys_repo::property_value
+repo_sys.ExtendedProperties::property_value <-- property.RepoObjectColumnProperty_sys_repo::property_value
 repo_sys.ExtendedProperties::property_value <-- repo_sys.ExtendedProperties_ParameterForAddUpdateDrop::property_value
-repo_sys.ExtendedProperties::SysObject_name <-- property.RepoObjectProperty_sys_repo::SysObject_name
 repo_sys.ExtendedProperties::SysObject_name <-- property.RepoObjectColumnProperty_sys_repo::SysObject_name
-repo_sys.ExtendedProperties::SysObject_schema_name <-- property.RepoObjectColumnProperty_sys_repo::SysObject_schema_name
+repo_sys.ExtendedProperties::SysObject_name <-- property.RepoObjectProperty_sys_repo::SysObject_name
 repo_sys.ExtendedProperties::SysObject_schema_name <-- property.RepoObjectProperty_sys_repo::SysObject_schema_name
+repo_sys.ExtendedProperties::SysObject_schema_name <-- property.RepoObjectColumnProperty_sys_repo::SysObject_schema_name

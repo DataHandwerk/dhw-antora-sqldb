@@ -24,24 +24,29 @@ skinparam class {
 
 
 entity reference.usp_update_Referencing_Count << P >> {
+  --
 }
 
 entity repo.RepoObject << U >> {
   * **RepoObject_guid** : uniqueidentifier
+  --
 }
 
 entity repo.usp_update_Referencing_Count << P >> {
+  --
 }
 
 entity repo_sys.RepoObjectReferenced << V >> {
+  --
 }
 
 entity sys_dwh.dm_sql_referenced_entities << SN >> {
+  --
 }
 
+repo.RepoObject <.. repo.usp_update_Referencing_Count
 repo.RepoObject <.. repo_sys.RepoObjectReferenced
 repo.RepoObject <.. reference.usp_update_Referencing_Count
-repo.RepoObject <.. repo.usp_update_Referencing_Count
-repo_sys.RepoObjectReferenced <.. repo.usp_update_Referencing_Count
 repo_sys.RepoObjectReferenced <.. reference.usp_update_Referencing_Count
+repo_sys.RepoObjectReferenced <.. repo.usp_update_Referencing_Count
 sys_dwh.dm_sql_referenced_entities <.. repo_sys.RepoObjectReferenced

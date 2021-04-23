@@ -25,26 +25,31 @@ skinparam class {
 
 entity docs.RepoObject_IndexList << V >> {
   **RepoObject_guid** : uniqueidentifier
+  --
 }
 
 entity docs.RepoObject_IndexList_T << U >> {
   **RepoObject_guid** : uniqueidentifier
+  --
 }
 
 entity docs.usp_PERSIST_RepoObject_IndexList_T << P >> {
+  --
 }
 
 entity repo.ForeignKey_gross << V >> {
   **ForeignKey_guid** : uniqueidentifier
+  --
 }
 
 entity repo.Index_gross << V >> {
   * **index_guid** : uniqueidentifier
+  --
 }
 
 docs.RepoObject_IndexList <.. docs.RepoObject_IndexList_T
 docs.RepoObject_IndexList <.. docs.usp_PERSIST_RepoObject_IndexList_T
 docs.RepoObject_IndexList_T <.. docs.usp_PERSIST_RepoObject_IndexList_T
 repo.ForeignKey_gross <.. docs.RepoObject_IndexList
-repo.Index_gross <.. repo.ForeignKey_gross
 repo.Index_gross <.. docs.RepoObject_IndexList
+repo.Index_gross <.. repo.ForeignKey_gross

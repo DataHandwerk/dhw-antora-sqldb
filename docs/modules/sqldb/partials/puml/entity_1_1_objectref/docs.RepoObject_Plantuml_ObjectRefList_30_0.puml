@@ -25,28 +25,34 @@ skinparam class {
 
 entity docs.RepoObject_Plantuml << V >> {
   * **RepoObject_guid** : uniqueidentifier
+  --
 }
 
 entity docs.RepoObject_Plantuml_ObjectRefList_30_0 << V >> {
   * **RepoObject_guid** : uniqueidentifier
+  --
 }
 
 entity graph.ReferencedObject << U >> {
+  --
 }
 
 entity graph.RepoObject << U >> {
+  --
 }
 
 entity reference.ftv_RepoObject_ReferencedReferencing << IF >> {
+  --
 }
 
 entity repo.RepoObject << U >> {
   * **RepoObject_guid** : uniqueidentifier
+  --
 }
 
 docs.RepoObject_Plantuml_ObjectRefList_30_0 <.. docs.RepoObject_Plantuml
 graph.ReferencedObject <.. docs.RepoObject_Plantuml_ObjectRefList_30_0
 graph.RepoObject <.. docs.RepoObject_Plantuml_ObjectRefList_30_0
 reference.ftv_RepoObject_ReferencedReferencing <.. docs.RepoObject_Plantuml_ObjectRefList_30_0
-repo.RepoObject <.. docs.RepoObject_Plantuml_ObjectRefList_30_0
 repo.RepoObject <.. reference.ftv_RepoObject_ReferencedReferencing
+repo.RepoObject <.. docs.RepoObject_Plantuml_ObjectRefList_30_0

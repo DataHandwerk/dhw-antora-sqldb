@@ -19,11 +19,11 @@ RepoObjectColumn_name +
 nvarchar(128) +
 PK, Unique, Real: 0, 0, 0
 ** xref:sqlparse.RepoObject_SqlModules_71_reference_ExpliciteTableAlias.adoc[], xref:sqlparse.RepoObject_SqlModules_71_reference_ExpliciteTableAlias.adoc#index-idx_RepoObject_SqlModules_71_reference_ExpliciteTableAlias__4[idx_RepoObject_SqlModules_71_reference_ExpliciteTableAlias__4] +
-RepoObjectColumn_name +
+source_RepoObjectColumn_name +
 nvarchar(128) +
 PK, Unique, Real: 0, 0, 0
 ** xref:sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias.adoc[], xref:sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias.adoc#index-idx_RepoObject_SqlModules_72_reference_NoTableAlias__4[idx_RepoObject_SqlModules_72_reference_NoTableAlias__4] +
-RepoObjectColumn_name +
+source_RepoObjectColumn_name +
 nvarchar(128) +
 PK, Unique, Real: 0, 0, 0
 
@@ -1022,19 +1022,19 @@ RepoObjectColumn_guid +
 uniqueidentifier +
 PK, Unique, Real: 0, 0, 0
 ** xref:sqlparse.RepoObject_SqlModules_71_reference_ExpliciteTableAlias.adoc[], xref:sqlparse.RepoObject_SqlModules_71_reference_ExpliciteTableAlias.adoc#index-idx_RepoObject_SqlModules_71_reference_ExpliciteTableAlias__2[idx_RepoObject_SqlModules_71_reference_ExpliciteTableAlias__2] +
-RepoObjectColumn_guid +
+source_RepoObjectColumn_guid +
 uniqueidentifier +
 PK, Unique, Real: 0, 0, 0
 ** xref:sqlparse.RepoObject_SqlModules_71_reference_ExpliciteTableAlias.adoc[], xref:sqlparse.RepoObject_SqlModules_71_reference_ExpliciteTableAlias.adoc#index-idx_RepoObject_SqlModules_71_reference_ExpliciteTableAlias__3[idx_RepoObject_SqlModules_71_reference_ExpliciteTableAlias__3] +
-source_RepoObjectColumn_guid +
-uniqueidentifier +
-PK, Unique, Real: 0, 0, 0
-** xref:sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias.adoc[], xref:sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias.adoc#index-idx_RepoObject_SqlModules_72_reference_NoTableAlias__2[idx_RepoObject_SqlModules_72_reference_NoTableAlias__2] +
 RepoObjectColumn_guid +
 uniqueidentifier +
 PK, Unique, Real: 0, 0, 0
-** xref:sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias.adoc[], xref:sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias.adoc#index-idx_RepoObject_SqlModules_72_reference_NoTableAlias__3[idx_RepoObject_SqlModules_72_reference_NoTableAlias__3] +
+** xref:sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias.adoc[], xref:sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias.adoc#index-idx_RepoObject_SqlModules_72_reference_NoTableAlias__2[idx_RepoObject_SqlModules_72_reference_NoTableAlias__2] +
 source_RepoObjectColumn_guid +
+uniqueidentifier +
+PK, Unique, Real: 0, 0, 0
+** xref:sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias.adoc[], xref:sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias.adoc#index-idx_RepoObject_SqlModules_72_reference_NoTableAlias__3[idx_RepoObject_SqlModules_72_reference_NoTableAlias__3] +
+RepoObjectColumn_guid +
 uniqueidentifier +
 PK, Unique, Real: 0, 0, 0
 
@@ -1152,11 +1152,11 @@ referenced_schema_name,referencing_entity_name +
 nvarchar(128),nvarchar(128) +
 PK, Unique, Real: 0, 0, 0
 ** xref:reference.RepoObjectColumn_reference_Persistence.adoc[], xref:reference.RepoObjectColumn_reference_Persistence.adoc#index-idx_RepoObjectColumn_reference_Persistence__1[idx_RepoObjectColumn_reference_Persistence__1] +
-referencing_schema_name,referenced_entity_name +
+referenced_schema_name,referenced_entity_name +
 nvarchar(128),nvarchar(128) +
 PK, Unique, Real: 0, 0, 0
 ** xref:reference.RepoObjectColumn_reference_SqlModules.adoc[], xref:reference.RepoObjectColumn_reference_SqlModules.adoc#index-idx_RepoObjectColumn_reference_SqlModules__1[idx_RepoObjectColumn_reference_SqlModules__1] +
-referenced_schema_name,referenced_entity_name +
+referencing_schema_name,referenced_entity_name +
 nvarchar(128),nvarchar(128) +
 PK, Unique, Real: 0, 0, 0
 ** xref:repo.ForeignKey_Indexes.adoc[], xref:repo.ForeignKey_Indexes.adoc#index-idx_ForeignKey_Indexes__3[idx_ForeignKey_Indexes__3] +
@@ -1370,6 +1370,10 @@ PK, Unique, Real: 0, 0, 0
 id +
 int +
 PK, Unique, Real: 1, 1, 1
+** xref:property.RepoSchemaProperty.adoc[], xref:property.RepoSchemaProperty.adoc#index-PK_RepoSchemaProperty[PK_RepoSchemaProperty] +
+RepoSchemaProperty_id +
+int +
+PK, Unique, Real: 1, 1, 1
 ** xref:repo.check_IndexColumn_virtual_referenced_setpoint.adoc[], xref:repo.check_IndexColumn_virtual_referenced_setpoint.adoc#index-idx_check_IndexColumn_virtual_referenced_setpoint__3[idx_check_IndexColumn_virtual_referenced_setpoint__3] +
 index_column_id +
 int +
@@ -1430,6 +1434,18 @@ PK, Unique, Real: 0, 0, 0
 level2name +
 nvarchar(128) +
 PK, Unique, Real: 0, 0, 0
+** xref:repo.RepoSchema.adoc[], xref:repo.RepoSchema.adoc#index-UK_RepoSchema[UK_RepoSchema] +
+RepoSchema_name +
+nvarchar(128) +
+PK, Unique, Real: 0, 1, 1
+** xref:repo.SysSchema_RepoSchema_via_guid.adoc[], xref:repo.SysSchema_RepoSchema_via_guid.adoc#index-idx_SysSchema_RepoSchema_via_guid__2[idx_SysSchema_RepoSchema_via_guid__2] +
+RepoSchema_name +
+nvarchar(128) +
+PK, Unique, Real: 0, 0, 0
+** xref:repo.SysSchema_RepoSchema_via_name.adoc[], xref:repo.SysSchema_RepoSchema_via_name.adoc#index-idx_SysSchema_RepoSchema_via_name__2[idx_SysSchema_RepoSchema_via_name__2] +
+RepoSchema_name +
+nvarchar(128) +
+PK, Unique, Real: 0, 0, 0
 ** xref:property.ExtendedProperty_Repo2Sys_level2_Union.adoc[], xref:property.ExtendedProperty_Repo2Sys_level2_Union.adoc#index-PK_ExtendedProperty_Repo2Sys_level2_Union[PK_ExtendedProperty_Repo2Sys_level2_Union] +
 level0type,level0name,level1type,level1name,level2type,level2name,property_name +
 nvarchar(6),nvarchar(128),varchar(9),nvarchar(128),nvarchar(10),nvarchar(128),nvarchar(128) +
@@ -1454,6 +1470,10 @@ PK, Unique, Real: 1, 1, 0
 OperationKey +
 uniqueidentifier +
 PK, Unique, Real: 1, 1, 1
+** xref:property.RepoSchemaProperty.adoc[], xref:property.RepoSchemaProperty.adoc#index-idx_RepoSchemaProperty__1[idx_RepoSchemaProperty__1] +
+RepoSchema_guid +
+uniqueidentifier +
+PK, Unique, Real: 0, 0, 0
 ** xref:reference.RepoObject_ReferencedList.adoc[], xref:reference.RepoObject_ReferencedList.adoc#index-idx_RepoObject_ReferencedList__1[idx_RepoObject_ReferencedList__1] +
 Referencing_guid +
 uniqueidentifier +
@@ -1470,6 +1490,18 @@ PK, Unique, Real: 0, 0, 0
 Referenced_guid +
 uniqueidentifier +
 PK, Unique, Real: 0, 0, 0
+** xref:repo.RepoSchema.adoc[], xref:repo.RepoSchema.adoc#index-PK_RepoSchema[PK_RepoSchema] +
+RepoSchema_guid +
+uniqueidentifier +
+PK, Unique, Real: 1, 1, 1
+** xref:repo.SysSchema_RepoSchema_via_guid.adoc[], xref:repo.SysSchema_RepoSchema_via_guid.adoc#index-idx_SysSchema_RepoSchema_via_guid__1[idx_SysSchema_RepoSchema_via_guid__1] +
+RepoSchema_guid +
+uniqueidentifier +
+PK, Unique, Real: 0, 0, 0
+** xref:repo.SysSchema_RepoSchema_via_name.adoc[], xref:repo.SysSchema_RepoSchema_via_name.adoc#index-idx_SysSchema_RepoSchema_via_name__1[idx_SysSchema_RepoSchema_via_name__1] +
+RepoSchema_guid +
+uniqueidentifier +
+PK, Unique, Real: 0, 0, 0
 ** xref:reference.RepoObject_ReferenceTree.adoc[], xref:reference.RepoObject_ReferenceTree.adoc#index-PK_RepoObject_ReferenceTree[PK_RepoObject_ReferenceTree] +
 RepoObject_guid,Referenced_Depth,Referencing_Depth,Referenced_guid,Referencing_guid +
 uniqueidentifier,int,int,uniqueidentifier,uniqueidentifier +
@@ -1482,6 +1514,10 @@ PK, Unique, Real: 1, 1, 0
 RepoObject_guid,Referenced_Depth,Referencing_Depth,Referenced_guid,Referencing_guid +
 uniqueidentifier,int,int,uniqueidentifier,uniqueidentifier +
 PK, Unique, Real: 1, 1, 0
+** xref:property.RepoSchemaProperty.adoc[], xref:property.RepoSchemaProperty.adoc#index-UK_RepoSchemaProperty[UK_RepoSchemaProperty] +
+RepoSchema_guid,property_name +
+uniqueidentifier,nvarchar(128) +
+PK, Unique, Real: 0, 1, 1
 ** xref:docs.ForeignKey_RelationScript.adoc[], xref:docs.ForeignKey_RelationScript.adoc#index-PK_ForeignKey_RelationScript[PK_ForeignKey_RelationScript] +
 referenced_RepoObject_guid,referencing_RepoObject_guid +
 uniqueidentifier,uniqueidentifier +

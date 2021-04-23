@@ -24,60 +24,77 @@ skinparam class {
 
 
 entity config.ftv_dwh_database << IF >> {
+  --
 }
 
 entity config.Parameter << U >> {
   * **Parameter_name** : varchar(100)
   * **sub_Parameter** : nvarchar(128)
+  --
 }
 
 entity property.RepoObjectProperty_Collect_source_sql_modules_definition << V >> {
   * **RepoObject_guid** : uniqueidentifier
   **property_name** : nvarchar(128)
+  --
 }
 
 entity repo.RepoObject << U >> {
   * **RepoObject_guid** : uniqueidentifier
+  --
 }
 
 entity repo_sys.ExtendedProperties << V >> {
+  --
 }
 
 entity repo_sys.SysObject << V >> {
+  --
 }
 
 entity sqlparse.RepoObject_SqlModules << U >> {
   * **RepoObject_guid** : uniqueidentifier
+  --
 }
 
 entity sqlparse.RepoObject_SqlModules_Repo_Sys << V >> {
+  --
 }
 
 entity sys_dwh.columns << SN >> {
+  --
 }
 
 entity sys_dwh.extended_properties << SN >> {
+  --
 }
 
 entity sys_dwh.indexes << SN >> {
+  --
 }
 
 entity sys_dwh.objects << SN >> {
+  --
 }
 
 entity sys_dwh.parameters << SN >> {
+  --
 }
 
 entity sys_dwh.schemas << SN >> {
+  --
 }
 
 entity sys_dwh.sql_modules << SN >> {
+  --
 }
 
 entity sys_dwh.tables << SN >> {
+  --
 }
 
 entity tool.ftv_extract_substrings << IF >> {
+  --
 }
 
 config.ftv_dwh_database <.. repo_sys.ExtendedProperties
@@ -93,6 +110,7 @@ sys_dwh.indexes <.. repo_sys.ExtendedProperties
 sys_dwh.objects <.. repo_sys.ExtendedProperties
 sys_dwh.objects <.. repo_sys.SysObject
 sys_dwh.parameters <.. repo_sys.ExtendedProperties
+sys_dwh.schemas <.. repo_sys.ExtendedProperties
 sys_dwh.schemas <.. repo_sys.SysObject
 sys_dwh.sql_modules <.. repo_sys.SysObject
 sys_dwh.tables <.. repo_sys.SysObject

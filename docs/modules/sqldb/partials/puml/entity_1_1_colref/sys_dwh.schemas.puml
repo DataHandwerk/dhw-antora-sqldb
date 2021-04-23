@@ -23,6 +23,28 @@ skinparam class {
 }
 
 
+entity repo_sys.ExtendedProperties << V >> {
+  --
+  * class : tinyint
+  class_desc : nvarchar(60)
+  entity_column_name : nvarchar(128)
+  entity_index_name : nvarchar(128)
+  entity_parameter_name : nvarchar(128)
+  level2type : varchar(9)
+  * major_id : int
+  * minor_id : int
+  minor_name : nvarchar(128)
+  parent_name : sysname
+  parent_object_id : int
+  parent_type : char(2)
+  property_basetype : sql_variant
+  * property_name : sysname
+  property_nvarchar : nvarchar(4000)
+  property_value : sql_variant
+  SysObject_name : nvarchar(128)
+  SysObject_schema_name : nvarchar(128)
+}
+
 entity repo_sys.SysObject << V >> {
   --
   * create_date : datetime
@@ -48,9 +70,21 @@ entity repo_sys.SysObject << V >> {
   type_desc : nvarchar(60)
 }
 
+entity repo_sys.SysSchema << V >> {
+  --
+  * SysSchema_id : int
+  * SysSchema_name : sysname
+  SysSchema_principal_id : int
+  SysSchema_RepoSchema_guid : uniqueidentifier
+}
+
 entity sys_dwh.schemas << SN >> {
   --
 }
 
+repo_sys.ExtendedProperties <.. repo_sys.SysObject
+repo_sys.ExtendedProperties <.. repo_sys.SysSchema
+sys_dwh.schemas <.. repo_sys.SysSchema
+sys_dwh.schemas <.. repo_sys.ExtendedProperties
 sys_dwh.schemas <.. repo_sys.SysObject
 

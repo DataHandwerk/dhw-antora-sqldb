@@ -239,14 +239,14 @@ entity repo_sys.SysColumn << V >> {
   * xml_collection_id : int
 }
 
-repo.RepoObject <.. repo.SysColumn_RepoObjectColumn_via_name
 repo.RepoObject <.. repo.usp_sync_guid_RepoObjectColumn
-repo.RepoObjectColumn <.. repo.usp_sync_guid_RepoObjectColumn
+repo.RepoObject <.. repo.SysColumn_RepoObjectColumn_via_name
 repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_name
+repo.RepoObjectColumn <.. repo.usp_sync_guid_RepoObjectColumn
 repo.SysColumn_RepoObjectColumn_via_name <.. repo_sys.IndexColumn_unique
 repo.SysColumn_RepoObjectColumn_via_name <.. repo.usp_sync_guid_RepoObjectColumn
-repo_sys.SysColumn <.. repo.usp_sync_guid_RepoObjectColumn
 repo_sys.SysColumn <.. repo.SysColumn_RepoObjectColumn_via_name
+repo_sys.SysColumn <.. repo.usp_sync_guid_RepoObjectColumn
 repo.RepoObject::is_repo_managed <-- repo.SysColumn_RepoObjectColumn_via_name::is_repo_managed
 repo.RepoObject::RepoObject_fullname <-- repo.SysColumn_RepoObjectColumn_via_name::RepoObject_fullname
 repo.RepoObject::SysObject_fullname <-- repo.SysColumn_RepoObjectColumn_via_name::SysObject_fullname

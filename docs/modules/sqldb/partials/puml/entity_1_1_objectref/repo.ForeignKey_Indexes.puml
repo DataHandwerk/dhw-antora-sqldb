@@ -25,25 +25,30 @@ skinparam class {
 
 entity repo.ForeignKey_Indexes << V >> {
   **ForeignKey_guid** : uniqueidentifier
+  --
 }
 
 entity repo.ForeignKey_Indexes_union << V >> {
   **ForeignKey_guid** : uniqueidentifier
+  --
 }
 
 entity repo.ForeignKey_IndexPattern << V >> {
   * **constraint_object_id** : int
   **ForeignKey_guid** : uniqueidentifier
+  --
 }
 
 entity repo.Index_gross << V >> {
   * **index_guid** : uniqueidentifier
+  --
 }
 
 entity repo.usp_Index_ForeignKey << P >> {
+  --
 }
 
-repo.ForeignKey_Indexes <.. repo.ForeignKey_Indexes_union
 repo.ForeignKey_Indexes <.. repo.usp_Index_ForeignKey
+repo.ForeignKey_Indexes <.. repo.ForeignKey_Indexes_union
 repo.ForeignKey_IndexPattern <.. repo.ForeignKey_Indexes
 repo.Index_gross <.. repo.ForeignKey_Indexes

@@ -24,6 +24,7 @@ skinparam class {
 
 
 entity reference.ftv_RepoObject_ColumReferenceRepoObject << IF >> {
+  --
 }
 
 entity reference.RepoObjectColumn_reference_SqlModules << V >> {
@@ -31,79 +32,98 @@ entity reference.RepoObjectColumn_reference_SqlModules << V >> {
   **referencing_minor_id** : int
   **referenced_id** : int
   **referenced_minor_id** : int
+  --
 }
 
 entity reference.RepoObjectColumn_reference_union << V >> {
+  --
 }
 
 entity reference.RepoObjectColumn_RelationScript << V >> {
+  --
 }
 
 entity repo.check_IndexColumn_virtual_referenced_setpoint << V >> {
   * **index_guid** : uniqueidentifier
   * **index_column_id** : int
+  --
 }
 
 entity repo.Index_referencing_IndexPatternColumnGuid << V >> {
   **source_index_guid** : uniqueidentifier
   **referencing_RepoObject_guid** : uniqueidentifier
+  --
 }
 
 entity repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing << V >> {
   **index_guid** : uniqueidentifier
   * **index_column_id** : int
   **RowNumberInReferencing** : bigint
+  --
 }
 
 entity repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T << U >> {
   **index_guid** : uniqueidentifier
   * **index_column_id** : int
   **RowNumberInReferencing** : bigint
+  --
 }
 
 entity repo.IndexColumn_virtual_referenced_setpoint << V >> {
   * **index_guid** : uniqueidentifier
   * **index_column_id** : int
+  --
 }
 
 entity repo.IndexReferencedReferencing_HasFullColumnsInReferencing << V >> {
+  --
 }
 
 entity repo.RepoObjectColumn_MissingSource_TypeV << V >> {
   * **RepoObjectColumn_guid** : uniqueidentifier
+  --
 }
 
 entity repo.usp_index_inheritance << P >> {
+  --
 }
 
 entity repo.usp_main << P >> {
+  --
 }
 
 entity repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T << P >> {
+  --
 }
 
 entity sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union << V >> {
+  --
 }
 
 entity sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union_T << U >> {
+  --
 }
 
 entity sqlparse.RepoObject_SqlModules_71_reference_ExpliciteTableAlias << V >> {
+  --
 }
 
 entity sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias << V >> {
+  --
 }
 
 entity sqlparse.RepoObject_SqlModules_79_reference_union << V >> {
+  --
 }
 
 entity sqlparse.usp_PERSIST_RepoObject_SqlModules_61_SelectIdentifier_Union_T << P >> {
+  --
 }
 
 reference.RepoObjectColumn_reference_SqlModules <.. reference.RepoObjectColumn_reference_union
 reference.RepoObjectColumn_reference_union <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing
-reference.RepoObjectColumn_reference_union <.. repo.usp_main
 reference.RepoObjectColumn_reference_union <.. repo.RepoObjectColumn_MissingSource_TypeV
+reference.RepoObjectColumn_reference_union <.. repo.usp_main
 reference.RepoObjectColumn_reference_union <.. reference.RepoObjectColumn_RelationScript
 reference.RepoObjectColumn_RelationScript <.. reference.ftv_RepoObject_ColumReferenceRepoObject
 repo.Index_referencing_IndexPatternColumnGuid <.. repo.IndexReferencedReferencing_HasFullColumnsInReferencing
@@ -111,15 +131,15 @@ repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing <.. repo.Inde
 repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing <.. repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T
 repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T
 repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.IndexReferencedReferencing_HasFullColumnsInReferencing
-repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.Index_referencing_IndexPatternColumnGuid
 repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.IndexColumn_virtual_referenced_setpoint
+repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.Index_referencing_IndexPatternColumnGuid
 repo.IndexColumn_virtual_referenced_setpoint <.. repo.check_IndexColumn_virtual_referenced_setpoint
 repo.IndexColumn_virtual_referenced_setpoint <.. repo.usp_index_inheritance
 repo.IndexReferencedReferencing_HasFullColumnsInReferencing <.. repo.usp_index_inheritance
 repo.usp_index_inheritance <.. repo.usp_main
 repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.usp_index_inheritance
-sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union <.. sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union_T
 sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union <.. sqlparse.usp_PERSIST_RepoObject_SqlModules_61_SelectIdentifier_Union_T
+sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union <.. sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union_T
 sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union_T <.. sqlparse.usp_PERSIST_RepoObject_SqlModules_61_SelectIdentifier_Union_T
 sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union_T <.. sqlparse.RepoObject_SqlModules_71_reference_ExpliciteTableAlias
 sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union_T <.. sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias

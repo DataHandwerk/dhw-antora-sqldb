@@ -169,12 +169,12 @@ entity repo.usp_main << P >> {
   --
 }
 
-logs.usp_ExecutionLog_insert <.. reference.usp_RepoObjectSource_FirstResultSet
 logs.usp_ExecutionLog_insert <.. repo.usp_main
+logs.usp_ExecutionLog_insert <.. reference.usp_RepoObjectSource_FirstResultSet
 reference.RepoObjectSource_FirstResultSet <.. reference.usp_RepoObjectSource_FirstResultSet
 reference.usp_RepoObjectSource_FirstResultSet <.. repo.usp_main
-repo.RepoObject <.. repo.RepoObject_gross
 repo.RepoObject <.. reference.usp_RepoObjectSource_FirstResultSet
+repo.RepoObject <.. repo.RepoObject_gross
 repo.RepoObject_gross <.. reference.usp_RepoObjectSource_FirstResultSet
 repo.RepoObject::has_different_sys_names <-- repo.RepoObject_gross::has_different_sys_names
 repo.RepoObject::has_execution_plan_issue <-- repo.RepoObject_gross::has_execution_plan_issue

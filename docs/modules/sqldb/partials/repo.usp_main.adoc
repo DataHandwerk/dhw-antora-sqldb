@@ -417,19 +417,23 @@ EXEC [repo].[usp_main]
 // tag::ms_description[]
 main procedure
 
-this central procedure must be executed regularly
+this central procedure must be executed regularly, try to get e feeling, when it is required +
+It does:
 
-* to synchronize the repository with the database
-* for index processing
+* `EXEC repo.usp_sync_guid` to synchronize repository database and dwh database
+** some dwh database extended properties (ep) are synchronized with repository database
+*** ep RepoObject_guid for each database object
+*** ep RepoObjectColumn_guid for each database object column
+* index processing
 ** combination of real and virtual indexes
 ** virtual and real foreign key
 ** code generation and updates for persistence procedures
-* references and data lineage
+* process references and data lineage
 * inheritance of properties
 
-* should be called very often
-* see xref:sqldb:repo.usp_main.adoc#_procdure_steps[Procedure steps] for details.
-* use links in xref:sqldb:repo.usp_main.adoc#_referenced_objects[Referenced objects] to get details of called sub procedures
+see xref:sqldb:repo.usp_main.adoc#_procdure_steps[Procedure steps] for details.
+
+use links in xref:sqldb:repo.usp_main.adoc#_referenced_objects[Referenced objects] to get details of called sub procedures
 // end::ms_description[]
 
 

@@ -25,31 +25,38 @@ skinparam class {
 
 entity repo.Index_unique_IndexPatternColumnGuid << V >> {
   **index_guid** : uniqueidentifier
+  --
 }
 
 entity repo.IndexColumn_union << V >> {
   **index_guid** : uniqueidentifier
   * **index_column_id** : int
+  --
 }
 
 entity repo.SysColumn_RepoObjectColumn_via_name << V >> {
+  --
 }
 
 entity repo.SysObject_RepoObject_via_name << V >> {
+  --
 }
 
 entity repo_sys.IndexColumn_unique << V >> {
+  --
 }
 
 entity sys_dwh.index_columns << SN >> {
+  --
 }
 
 entity sys_dwh.indexes << SN >> {
+  --
 }
 
 repo.SysColumn_RepoObjectColumn_via_name <.. repo_sys.IndexColumn_unique
 repo.SysObject_RepoObject_via_name <.. repo_sys.IndexColumn_unique
-repo_sys.IndexColumn_unique <.. repo.Index_unique_IndexPatternColumnGuid
 repo_sys.IndexColumn_unique <.. repo.IndexColumn_union
+repo_sys.IndexColumn_unique <.. repo.Index_unique_IndexPatternColumnGuid
 sys_dwh.index_columns <.. repo_sys.IndexColumn_unique
 sys_dwh.indexes <.. repo_sys.IndexColumn_unique

@@ -26,7 +26,7 @@ skinparam class {
 entity docs.AntoraNavListPage_by_schema << V >> {
   * **RepoObject_schema_name** : nvarchar(128)
   --
-  * nav_list : nvarchar(311)
+  * nav_list : nvarchar(4000)
 }
 
 entity repo.RepoObject << U >> {
@@ -67,5 +67,19 @@ entity repo.RepoObject << U >> {
   * {static} usp_persistence_name : nvarchar(140)
 }
 
+entity repo.RepoSchema << U >> {
+  * **RepoSchema_guid** : uniqueidentifier
+  --
+  is_SysSchema_missing : bit
+  RepoSchema_ms_description : nvarchar(4000)
+  * RepoSchema_name : nvarchar(128)
+  SysSchema_id : int
+  * SysSchema_name : nvarchar(128)
+  {abstract} has_different_sys_names : bit
+  * {static} is_RepoSchema_name_uniqueidentifier : int
+  * {static} is_SysSchema_name_uniqueidentifier : int
+}
+
 repo.RepoObject <.. docs.AntoraNavListPage_by_schema
+repo.RepoSchema <.. docs.AntoraNavListPage_by_schema
 repo.RepoObject::RepoObject_schema_name <-- docs.AntoraNavListPage_by_schema::RepoObject_schema_name

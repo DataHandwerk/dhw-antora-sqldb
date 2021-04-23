@@ -31,50 +31,60 @@ entity property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn << V >> {
   * **level2type** : nvarchar(6)
   * **level2name** : nvarchar(128)
   * **property_name** : nvarchar(128)
+  --
 }
 
 entity property.fs_get_RepoObjectColumnProperty_nvarchar << FN >> {
+  --
 }
 
 entity property.PropertyName_RepoObjectColumn << V >> {
   * **property_name** : nvarchar(128)
+  --
 }
 
 entity property.RepoObjectColumnProperty << U >> {
   * **RepoObjectColumnProperty_id** : int
+  --
 }
 
 entity property.RepoObjectColumnProperty_ForUpdate << V >> {
   * **RepoObjectColumnProperty_id** : int
+  --
 }
 
 entity property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition << V >> {
   * **RepoObjectColumn_guid** : uniqueidentifier
   * **property_name** : nvarchar(128)
+  --
 }
 
 entity property.RepoObjectColumnProperty_sys_repo << V >> {
   * **RepoObjectColumn_guid** : uniqueidentifier
   * **property_name** : sysname
+  --
 }
 
 entity property.usp_RepoObjectColumn_Inheritance << P >> {
+  --
 }
 
 entity property.usp_RepoObjectColumnProperty_set << P >> {
+  --
 }
 
 entity property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate << P >> {
+  --
 }
 
 property.PropertyName_RepoObjectColumn <.. property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition
-property.RepoObjectColumnProperty <.. property.RepoObjectColumnProperty_ForUpdate
-property.RepoObjectColumnProperty <.. property.usp_RepoObjectColumnProperty_set
-property.RepoObjectColumnProperty <.. property.usp_RepoObjectColumn_Inheritance
 property.RepoObjectColumnProperty <.. property.fs_get_RepoObjectColumnProperty_nvarchar
-property.RepoObjectColumnProperty <.. property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition
-property.RepoObjectColumnProperty <.. property.RepoObjectColumnProperty_sys_repo
 property.RepoObjectColumnProperty <.. property.PropertyName_RepoObjectColumn
-property.RepoObjectColumnProperty <.. property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn
 property.RepoObjectColumnProperty <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
+property.RepoObjectColumnProperty <.. property.RepoObjectColumnProperty_sys_repo
+property.RepoObjectColumnProperty <.. property.usp_RepoObjectColumn_Inheritance
+property.RepoObjectColumnProperty <.. property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition
+property.RepoObjectColumnProperty <.. property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn
+property.RepoObjectColumnProperty <.. property.usp_RepoObjectColumnProperty_set
+property.RepoObjectColumnProperty <.. property.RepoObjectColumnProperty_ForUpdate
 property.RepoObjectColumnProperty_sys_repo <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate

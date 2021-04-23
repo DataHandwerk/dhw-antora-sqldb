@@ -25,25 +25,31 @@ skinparam class {
 
 entity property.RepoObjectColumnProperty << U >> {
   * **RepoObjectColumnProperty_id** : int
+  --
 }
 
 entity property.RepoObjectColumnProperty_sys_repo << V >> {
   * **RepoObjectColumn_guid** : uniqueidentifier
   * **property_name** : sysname
+  --
 }
 
 entity property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate << P >> {
+  --
 }
 
 entity repo.RepoObject << U >> {
   * **RepoObject_guid** : uniqueidentifier
+  --
 }
 
 entity repo.RepoObjectColumn << U >> {
   * **RepoObjectColumn_guid** : uniqueidentifier
+  --
 }
 
 entity repo_sys.ExtendedProperties << V >> {
+  --
 }
 
 property.RepoObjectColumnProperty <.. property.RepoObjectColumnProperty_sys_repo
@@ -52,3 +58,4 @@ property.RepoObjectColumnProperty_sys_repo <.. property.usp_sync_ExtendedPropert
 repo.RepoObject <.. property.RepoObjectColumnProperty_sys_repo
 repo.RepoObjectColumn <.. property.RepoObjectColumnProperty_sys_repo
 repo_sys.ExtendedProperties <.. property.RepoObjectColumnProperty_sys_repo
+repo_sys.ExtendedProperties <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate

@@ -24,47 +24,57 @@ skinparam class {
 
 
 entity graph.ReferencedObject << U >> {
+  --
 }
 
 entity graph.ReferencingObject << U >> {
+  --
 }
 
 entity graph.RepoObject << U >> {
+  --
 }
 
 entity graph.RepoObject_S << V >> {
   * **RepoObject_guid** : uniqueidentifier
+  --
 }
 
 entity reference.ftv_RepoObject_ReferencedReferencing << IF >> {
+  --
 }
 
 entity reference.RepoObject_referenced_level << V >> {
   **StartingNode_guid** : uniqueidentifier
   **LastNode_guid** : uniqueidentifier
   * **referenced_level** : int
+  --
 }
 
 entity reference.RepoObject_referenced_level_T << U >> {
   **StartingNode_guid** : uniqueidentifier
   **LastNode_guid** : uniqueidentifier
   * **referenced_level** : int
+  --
 }
 
 entity reference.RepoObject_referencing_level << V >> {
   **StartingNode_guid** : uniqueidentifier
   **LastNode_guid** : uniqueidentifier
   * **referencing_level** : int
+  --
 }
 
 entity reference.RepoObject_referencing_level_T << U >> {
   **StartingNode_guid** : uniqueidentifier
   **LastNode_guid** : uniqueidentifier
   * **referencing_level** : int
+  --
 }
 
 entity repo.RepoObject << U >> {
   * **RepoObject_guid** : uniqueidentifier
+  --
 }
 
 graph.ReferencedObject <.. reference.RepoObject_referenced_level
@@ -76,5 +86,5 @@ reference.RepoObject_referenced_level <.. reference.RepoObject_referenced_level_
 reference.RepoObject_referenced_level_T <.. reference.ftv_RepoObject_ReferencedReferencing
 reference.RepoObject_referencing_level <.. reference.RepoObject_referencing_level_T
 reference.RepoObject_referencing_level_T <.. reference.ftv_RepoObject_ReferencedReferencing
-repo.RepoObject <.. reference.ftv_RepoObject_ReferencedReferencing
 repo.RepoObject <.. graph.RepoObject_S
+repo.RepoObject <.. reference.ftv_RepoObject_ReferencedReferencing

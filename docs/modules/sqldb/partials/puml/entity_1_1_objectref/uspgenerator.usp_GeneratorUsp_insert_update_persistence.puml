@@ -24,41 +24,49 @@ skinparam class {
 
 
 entity logs.usp_ExecutionLog_insert << P >> {
+  --
 }
 
 entity repo.RepoObject_gross << V >> {
   * **RepoObject_guid** : uniqueidentifier
+  --
 }
 
 entity repo.usp_main << P >> {
+  --
 }
 
 entity uspgenerator.GeneratorUsp << U >> {
   * **id** : int
+  --
 }
 
 entity uspgenerator.GeneratorUspStep << U >> {
   * **id** : int
+  --
 }
 
 entity uspgenerator.GeneratorUspStep_Persistence << V >> {
   * **usp_id** : int
+  --
 }
 
 entity uspgenerator.GeneratorUspStep_Persistence_IsInactive_setpoint << V >> {
   * **usp_id** : int
+  --
 }
 
 entity uspgenerator.usp_GeneratorUsp_insert_update_persistence << P >> {
+  --
 }
 
 logs.usp_ExecutionLog_insert <.. uspgenerator.usp_GeneratorUsp_insert_update_persistence
 logs.usp_ExecutionLog_insert <.. repo.usp_main
 repo.RepoObject_gross <.. uspgenerator.GeneratorUspStep_Persistence_IsInactive_setpoint
-repo.RepoObject_gross <.. uspgenerator.usp_GeneratorUsp_insert_update_persistence
 repo.RepoObject_gross <.. uspgenerator.GeneratorUspStep_Persistence
-uspgenerator.GeneratorUsp <.. uspgenerator.GeneratorUspStep_Persistence
+repo.RepoObject_gross <.. uspgenerator.usp_GeneratorUsp_insert_update_persistence
 uspgenerator.GeneratorUsp <.. uspgenerator.usp_GeneratorUsp_insert_update_persistence
+uspgenerator.GeneratorUsp <.. uspgenerator.GeneratorUspStep_Persistence
 uspgenerator.GeneratorUsp <.. uspgenerator.GeneratorUspStep_Persistence_IsInactive_setpoint
 uspgenerator.GeneratorUspStep <.. uspgenerator.usp_GeneratorUsp_insert_update_persistence
 uspgenerator.GeneratorUspStep_Persistence <.. uspgenerator.usp_GeneratorUsp_insert_update_persistence
