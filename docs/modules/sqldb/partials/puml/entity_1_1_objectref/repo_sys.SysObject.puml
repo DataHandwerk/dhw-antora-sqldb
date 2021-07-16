@@ -81,20 +81,20 @@ entity sys_dwh.tables << SN >> {
 
 repo.SysObject_RepoObject_via_guid <.. repo.usp_sync_guid_RepoObject
 repo.SysObject_RepoObject_via_name <.. repo.usp_sync_guid_RepoObject
-repo_sys.ExtendedProperties <.. repo_sys.SysObject
 repo_sys.ExtendedProperties <.. repo_sys.SysColumn
+repo_sys.ExtendedProperties <.. repo_sys.SysObject
 repo_sys.SysColumn <.. repo_sys.sql_expression_dependencies
 repo_sys.SysObject <.. repo_sys.parameters
-repo_sys.SysObject <.. repo_sys.sql_expression_dependencies
 repo_sys.SysObject <.. sqlparse.RepoObject_SqlModules_Repo_Sys
-repo_sys.SysObject <.. repo.usp_sync_guid_RepoObject
+repo_sys.SysObject <.. repo.SysObject_RepoObject_via_guid
+repo_sys.SysObject <.. repo.SysObject_RepoObject_via_name
 repo_sys.SysObject <.. repo_sys.SysColumn
 repo_sys.SysObject <.. repo_sys.ColumnReference
-repo_sys.SysObject <.. repo.SysObject_RepoObject_via_name
-repo_sys.SysObject <.. repo.SysObject_RepoObject_via_guid
-sys_dwh.objects <.. repo_sys.SysObject
+repo_sys.SysObject <.. repo_sys.sql_expression_dependencies
+repo_sys.SysObject <.. repo.usp_sync_guid_RepoObject
 sys_dwh.objects <.. repo_sys.ExtendedProperties
-sys_dwh.schemas <.. repo_sys.ExtendedProperties
+sys_dwh.objects <.. repo_sys.SysObject
 sys_dwh.schemas <.. repo_sys.SysObject
+sys_dwh.schemas <.. repo_sys.ExtendedProperties
 sys_dwh.sql_modules <.. repo_sys.SysObject
 sys_dwh.tables <.. repo_sys.SysObject

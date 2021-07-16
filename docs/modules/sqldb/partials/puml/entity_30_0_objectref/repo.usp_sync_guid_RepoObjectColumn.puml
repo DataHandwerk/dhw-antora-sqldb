@@ -27,6 +27,10 @@ entity config.fs_dwh_database_name << FN >> {
   --
 }
 
+entity config.fs_get_parameter_value << FN >> {
+  --
+}
+
 entity config.ftv_dwh_database << IF >> {
   --
 }
@@ -52,6 +56,10 @@ entity config.type << V >> {
 
 entity config.type_level1type_level2type << V >> {
   **type** : nvarchar(128)
+  --
+}
+
+entity docs.fs_cleanStringForAnchorId << FN >> {
   --
 }
 
@@ -101,6 +109,12 @@ entity reference.RepoObjectColumn_ReferencingList << V >> {
 entity reference.RepoObjectColumn_ReferencingReferenced << V >> {
   **Referenced_guid** : uniqueidentifier
   **Referencing_guid** : uniqueidentifier
+  --
+}
+
+entity reference.RepoObjectColumnSource_virtual << U >> {
+  * **RepoObjectColumn_guid** : uniqueidentifier
+  * **Source_RepoObjectColumn_guid** : uniqueidentifier
   --
 }
 
@@ -245,22 +259,26 @@ entity sys_dwh.types << SN >> {
 }
 
 config.fs_dwh_database_name <.. repo_sys.usp_AddOrUpdateExtendedProperty
+config.fs_get_parameter_value <.. repo.usp_sync_guid_RepoObjectColumn
 config.ftv_dwh_database <.. repo_sys.ExtendedProperties
 config.ftv_dwh_database <.. repo_sys.SysColumn
 config.ftv_get_parameter_value <.. repo.RepoObjectColumn_HistValidColums_setpoint
-config.Parameter <.. config.fs_dwh_database_name
-config.Parameter <.. config.ftv_dwh_database
 config.Parameter <.. config.ftv_get_parameter_value
+config.Parameter <.. config.ftv_dwh_database
+config.Parameter <.. config.fs_dwh_database_name
+config.Parameter <.. config.fs_get_parameter_value
 config.spt_values <.. config.type
 config.type <.. config.type_level1type_level2type
 config.type_level1type_level2type <.. repo.usp_sync_guid_RepoObjectColumn
+docs.fs_cleanStringForAnchorId <.. reference.RepoObjectColumn_ReferencedList
+docs.fs_cleanStringForAnchorId <.. reference.RepoObjectColumn_ReferencingList
 graph.ReferencedObjectColumn <.. reference.RepoObjectColumn_ReferencingReferenced
-graph.RepoObjectColumn <.. graph.usp_PERSIST_RepoObjectColumn
 graph.RepoObjectColumn <.. reference.RepoObjectColumn_ReferencingReferenced
 graph.RepoObjectColumn <.. repo.usp_sync_guid_RepoObjectColumn
-graph.RepoObjectColumn_S <.. repo.usp_sync_guid_RepoObjectColumn
+graph.RepoObjectColumn <.. graph.usp_PERSIST_RepoObjectColumn
 graph.RepoObjectColumn_S <.. graph.usp_PERSIST_RepoObjectColumn
 graph.RepoObjectColumn_S <.. graph.RepoObjectColumn
+graph.RepoObjectColumn_S <.. repo.usp_sync_guid_RepoObjectColumn
 graph.usp_PERSIST_RepoObjectColumn <.. repo.usp_sync_guid_RepoObjectColumn
 logs.ExecutionLog <.. logs.usp_ExecutionLog_insert
 logs.usp_ExecutionLog_insert <.. repo.usp_sync_guid_RepoObjectColumn
@@ -269,26 +287,27 @@ property.fs_get_RepoObjectColumnProperty_nvarchar <.. repo.RepoObjectColumn_gros
 property.RepoObjectColumnProperty <.. property.fs_get_RepoObjectColumnProperty_nvarchar
 reference.RepoObjectColumn_ReferencedList <.. repo.RepoObjectColumn_gross
 reference.RepoObjectColumn_ReferencingList <.. repo.RepoObjectColumn_gross
-reference.RepoObjectColumn_ReferencingReferenced <.. reference.RepoObjectColumn_ReferencedList
 reference.RepoObjectColumn_ReferencingReferenced <.. reference.RepoObjectColumn_ReferencingList
+reference.RepoObjectColumn_ReferencingReferenced <.. reference.RepoObjectColumn_ReferencedList
+reference.RepoObjectColumnSource_virtual <.. repo.usp_sync_guid_RepoObjectColumn
 repo.Index_virtual <.. repo.IndexColumn_virtual_gross
 repo.IndexColumn_union <.. repo.RepoObjectColumn_gross
 repo.IndexColumn_virtual <.. repo.IndexColumn_virtual_gross
 repo.IndexColumn_virtual <.. repo.usp_sync_guid_RepoObjectColumn
 repo.IndexColumn_virtual_gross <.. repo.IndexColumn_union
 repo.RepoObject <.. repo.RepoObjectColumn_gross
-repo.RepoObject <.. repo.SysColumn_RepoObjectColumn_via_guid
 repo.RepoObject <.. repo.SysColumn_RepoObjectColumn_via_name
+repo.RepoObject <.. repo.SysColumn_RepoObjectColumn_via_guid
+repo.RepoObject <.. repo.IndexColumn_virtual_gross
 repo.RepoObject <.. repo.SysObject_RepoObject_via_name
 repo.RepoObject <.. repo.usp_sync_guid_RepoObjectColumn
-repo.RepoObject <.. repo.IndexColumn_virtual_gross
 repo.RepoObject_persistence <.. repo.usp_sync_guid_RepoObjectColumn
 repo.RepoObject_persistence <.. repo.RepoObjectColumn_HistValidColums_setpoint
-repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_name
 repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_guid
+repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_name
 repo.RepoObjectColumn <.. repo.RepoObjectColumn_gross
-repo.RepoObjectColumn <.. repo.usp_sync_guid_RepoObjectColumn
 repo.RepoObjectColumn <.. repo.RepoObjectColumn_RequiredRepoObjectColumnMerge
+repo.RepoObjectColumn <.. repo.usp_sync_guid_RepoObjectColumn
 repo.RepoObjectColumn <.. repo.IndexColumn_virtual_gross
 repo.RepoObjectColumn_gross <.. graph.RepoObjectColumn_S
 repo.RepoObjectColumn_HistValidColums_setpoint <.. repo.usp_sync_guid_RepoObjectColumn
@@ -297,8 +316,8 @@ repo.SysColumn_RepoObjectColumn_via_guid <.. repo.usp_sync_guid_RepoObjectColumn
 repo.SysColumn_RepoObjectColumn_via_name <.. repo.usp_sync_guid_RepoObjectColumn
 repo.SysColumn_RepoObjectColumn_via_name <.. repo_sys.IndexColumn_unique
 repo.SysObject_RepoObject_via_name <.. repo_sys.IndexColumn_unique
-repo_sys.ExtendedProperties <.. repo_sys.SysObject
 repo_sys.ExtendedProperties <.. repo_sys.SysColumn
+repo_sys.ExtendedProperties <.. repo_sys.SysObject
 repo_sys.IndexColumn_unique <.. repo.IndexColumn_union
 repo_sys.SysColumn <.. repo.SysColumn_RepoObjectColumn_via_guid
 repo_sys.SysColumn <.. repo.SysColumn_RepoObjectColumn_via_name

@@ -39,7 +39,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-04-13 19:02:38
+2021-07-14 19:36:07
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -65,7 +65,7 @@ view
 
 .Referenced Columns
 --
-* xref:sqlparse.RepoObject_SqlModules.adoc#column-is_json_sql_modules_json[sqlparse.RepoObject_SqlModules.is_json_sql_modules_json]
+* xref:sqlparse.RepoObject_SqlModules.adoc#column-is_json_sql_modules_json[+sqlparse.RepoObject_SqlModules.is_json_sql_modules_json+]
 --
 
 
@@ -98,7 +98,7 @@ view
 
 .Referenced Columns
 --
-* xref:repo_sys.SysObject.adoc#column-modify_date[repo_sys.SysObject.modify_date]
+* xref:repo_sys.SysObject.adoc#column-modify_date[+repo_sys.SysObject.modify_date+]
 --
 
 
@@ -117,12 +117,12 @@ view
 
 .Referenced Columns
 --
-* xref:repo.RepoObject.adoc#column-RepoObject_guid[repo.RepoObject.RepoObject_guid]
+* xref:repo.RepoObject.adoc#column-RepoObject_guid[+repo.RepoObject.RepoObject_guid+]
 --
 
 .Referencing Columns
 --
-* xref:property.RepoObjectProperty_Collect_source_sql_modules_definition.adoc#column-RepoObject_guid[property.RepoObjectProperty_Collect_source_sql_modules_definition.RepoObject_guid]
+* xref:property.RepoObjectProperty_Collect_source_sql_modules_definition.adoc#column-RepoObject_guid[+property.RepoObjectProperty_Collect_source_sql_modules_definition.RepoObject_guid+]
 --
 
 
@@ -141,12 +141,12 @@ view
 
 .Referenced Columns
 --
-* xref:repo_sys.SysObject.adoc#column-sql_modules_definition[repo_sys.SysObject.sql_modules_definition]
+* xref:repo_sys.SysObject.adoc#column-sql_modules_definition[+repo_sys.SysObject.sql_modules_definition+]
 --
 
 .Referencing Columns
 --
-* xref:repo.RepoObject_gross.adoc#column-sql_modules_definition[repo.RepoObject_gross.sql_modules_definition]
+* xref:repo.RepoObject_gross.adoc#column-sql_modules_definition[+repo.RepoObject_gross.sql_modules_definition+]
 --
 
 
@@ -165,7 +165,7 @@ view
 
 .Referenced Columns
 --
-* xref:sqlparse.RepoObject_SqlModules.adoc#column-sql_modules_dt[sqlparse.RepoObject_SqlModules.sql_modules_dt]
+* xref:sqlparse.RepoObject_SqlModules.adoc#column-sql_modules_dt[+sqlparse.RepoObject_SqlModules.sql_modules_dt+]
 --
 
 
@@ -184,12 +184,12 @@ view
 
 .Referenced Columns
 --
-* xref:sqlparse.RepoObject_SqlModules.adoc#column-sql_modules_formatted[sqlparse.RepoObject_SqlModules.sql_modules_formatted]
+* xref:sqlparse.RepoObject_SqlModules.adoc#column-sql_modules_formatted[+sqlparse.RepoObject_SqlModules.sql_modules_formatted+]
 --
 
 .Referencing Columns
 --
-* xref:repo.RepoObject_gross.adoc#column-sql_modules_formatted[repo.RepoObject_gross.sql_modules_formatted]
+* xref:repo.RepoObject_gross.adoc#column-sql_modules_formatted[+repo.RepoObject_gross.sql_modules_formatted+]
 --
 
 
@@ -208,12 +208,12 @@ view
 
 .Referenced Columns
 --
-* xref:sqlparse.RepoObject_SqlModules.adoc#column-sql_modules_formatted2[sqlparse.RepoObject_SqlModules.sql_modules_formatted2]
+* xref:sqlparse.RepoObject_SqlModules.adoc#column-sql_modules_formatted2[+sqlparse.RepoObject_SqlModules.sql_modules_formatted2+]
 --
 
 .Referencing Columns
 --
-* xref:repo.RepoObject_gross.adoc#column-sql_modules_formatted2[repo.RepoObject_gross.sql_modules_formatted2]
+* xref:repo.RepoObject_gross.adoc#column-sql_modules_formatted2[+repo.RepoObject_gross.sql_modules_formatted2+]
 --
 
 
@@ -232,7 +232,7 @@ view
 
 .Referenced Columns
 --
-* xref:sqlparse.RepoObject_SqlModules.adoc#column-sql_modules_json[sqlparse.RepoObject_SqlModules.sql_modules_json]
+* xref:sqlparse.RepoObject_SqlModules.adoc#column-sql_modules_json[+sqlparse.RepoObject_SqlModules.sql_modules_json+]
 --
 
 
@@ -256,7 +256,7 @@ reference in [repo_sys].[type]
 
 .Referenced Columns
 --
-* xref:repo.RepoObject.adoc#column-SysObject_type[repo.RepoObject.SysObject_type]
+* xref:repo.RepoObject.adoc#column-SysObject_type[+repo.RepoObject.SysObject_type+]
 --
 
 
@@ -356,8 +356,8 @@ reference in [repo_sys].[type]
 
 // tag::AntoraIndexList[]
 
-[[index-idx_RepoObject_SqlModules_Repo_Sys__1]]
-=== idx_RepoObject_SqlModules_Repo_Sys__1
+[[index-idx_RepoObject_SqlModules_Repo_Sys_1]]
+=== idx_RepoObject_SqlModules_Repo_Sys++__++1
 
 * IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_repoobject_guid[RepoObject_guid]
 +
@@ -608,7 +608,8 @@ reference in [repo_sys].[type]
 // tag::sql_modules_definition[]
 [source,sql]
 ----
-Create View [sqlparse].RepoObject_SqlModules_Repo_Sys
+
+CREATE View sqlparse.RepoObject_SqlModules_Repo_Sys
 As
 --
 Select
@@ -643,16 +644,17 @@ Select
                                0
                        End As Bit)
 From
-    repo.RepoObject                As ro
+    repo.RepoObject                    As ro
     Inner Join
-        repo_sys.SysObject         As so
+        repo_sys.SysObject             As so
             On
-            ro.RepoObject_guid  = so.SysObject_RepoObject_guid
+            --ro.RepoObject_guid  = so.SysObject_RepoObject_guid
+            so.SysObject_fullname2 = ro.SysObject_fullname2
 
     Left Join
-        [sqlparse].RepoObject_SqlModules As ros
+        sqlparse.RepoObject_SqlModules As ros
             On
-            ros.RepoObject_guid = ro.RepoObject_guid
+            ros.RepoObject_guid    = ro.RepoObject_guid
 Where
     Not so.sql_modules_definition Is Null;
 

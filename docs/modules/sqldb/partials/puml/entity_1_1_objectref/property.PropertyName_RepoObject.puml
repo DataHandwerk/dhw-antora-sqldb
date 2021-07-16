@@ -34,7 +34,7 @@ entity docs.AntoraTemplate_examples << V >> {
 }
 
 entity property.PropertyName_RepoObject << V >> {
-  * **property_name** : nvarchar(128)
+  **property_name** : nvarchar(128)
   --
 }
 
@@ -45,13 +45,13 @@ entity property.RepoObjectProperty << U >> {
 
 entity property.RepoObjectProperty_cross << V >> {
   * **RepoObject_guid** : uniqueidentifier
-  * **property_name** : nvarchar(128)
+  **property_name** : nvarchar(128)
   --
 }
 
 entity property.RepoObjectProperty_InheritanceType_InheritanceDefinition << V >> {
   * **RepoObject_guid** : uniqueidentifier
-  * **property_name** : nvarchar(128)
+  **property_name** : nvarchar(128)
   --
 }
 
@@ -60,5 +60,5 @@ config.Parameter <.. property.RepoObjectProperty_InheritanceType_InheritanceDefi
 property.PropertyName_RepoObject <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition
 property.PropertyName_RepoObject <.. property.RepoObjectProperty_cross
 property.PropertyName_RepoObject <.. docs.AntoraTemplate_examples
-property.RepoObjectProperty <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition
 property.RepoObjectProperty <.. property.PropertyName_RepoObject
+property.RepoObjectProperty <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition

@@ -118,10 +118,10 @@ entity logs.ExecutionLog_gross << V >> {
   parameter_19 : sql_variant
   parameter_20 : sql_variant
   parent_execution_log_id : bigint
-  * plantUML_Sequence : nvarchar(1550)
   proc_id : int
   proc_name : nvarchar(128)
   proc_schema_name : nvarchar(128)
+  * puml_Sequence : nvarchar(1550)
   source_object : nvarchar(261)
   ssis_execution_id : bigint
   step_id : int
@@ -131,7 +131,7 @@ entity logs.ExecutionLog_gross << V >> {
   updated : int
 }
 
-entity logs.ftv_ExecutionLog_tree << IF >> {
+entity logs.ftv_ExecutionLog_puml_tree << IF >> {
   --
   Depth : int
   duration__current_execution_guid : int
@@ -146,7 +146,7 @@ entity logs.ftv_ExecutionLog_tree << IF >> {
 }
 
 logs.ExecutionLog <.. logs.ExecutionLog_gross
-logs.ExecutionLog_gross <.. logs.ftv_ExecutionLog_tree
+logs.ExecutionLog_gross <.. logs.ftv_ExecutionLog_puml_tree
 logs.ExecutionLog::created_dt <-- logs.ExecutionLog_gross::created_dt
 logs.ExecutionLog::current_execution_guid <-- logs.ExecutionLog_gross::current_execution_guid
 logs.ExecutionLog::deleted <-- logs.ExecutionLog_gross::deleted

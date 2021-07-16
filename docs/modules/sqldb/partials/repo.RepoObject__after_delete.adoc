@@ -3,6 +3,7 @@
 == existing_properties
 
 // tag::existing_properties[]
+:ExistsProperty--sql_modules_definition:
 // end::existing_properties[]
 
 == RepoObject_guid
@@ -294,6 +295,33 @@ trigger
 // tag::sql_modules_definition[]
 [source,sql]
 ----
+-- =============================================
+-- Author:		Germo Goertz
+-- Create date: 2021-01-01
+-- Description:	trigger is required because only one updating FK from other tables is possible
+-- =============================================
+CREATE TRIGGER [repo].[RepoObject__after_delete] ON repo.RepoObject
+AFTER DELETE
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON;
+
+    --FK would ON DELETE would be better, but FK is defined already for [target_RepoObject_guid]
+    UPDATE   repo.RepoObject_persistence
+      SET
+          [source_RepoObject_guid] = NULL
+    WHERE
+          [source_RepoObject_guid] IN
+    (
+        SELECT
+               [RepoObject_guid]
+        FROM
+             [deleted]
+    );
+
+END
 
 ----
 // end::sql_modules_definition[]

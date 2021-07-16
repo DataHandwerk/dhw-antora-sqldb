@@ -109,21 +109,51 @@ entity logs.ExecutionLog_parent << V >> {
   parent_step_name : nvarchar(1000)
 }
 
-entity logs.ExecutionLog_plantUML_Sequence_start_stop << V >> {
+entity logs.ExecutionLog_puml_Sequence_start_stop << V >> {
   * **id** : bigint
   --
   created_dt : datetime
+  * execution_instance_guid : uniqueidentifier
   parent_proc_fullname : nvarchar(517)
-  * plantUML_Sequence_start_stop : nvarchar(1574)
   * proc_fullname : nvarchar(517)
+  * puml_Sequence_start_stop : nvarchar(1574)
 }
 
 logs.ExecutionLog <.. logs.ExecutionLog_parent
-logs.ExecutionLog <.. logs.ExecutionLog_plantUML_Sequence_start_stop
-logs.ExecutionLog_parent <.. logs.ExecutionLog_plantUML_Sequence_start_stop
-logs.ExecutionLog::created_dt <-- logs.ExecutionLog_plantUML_Sequence_start_stop::created_dt
-logs.ExecutionLog::id <-- logs.ExecutionLog_plantUML_Sequence_start_stop::id
+logs.ExecutionLog <.. logs.ExecutionLog_puml_Sequence_start_stop
+logs.ExecutionLog_parent <.. logs.ExecutionLog_puml_Sequence_start_stop
+logs.ExecutionLog::created_dt <-- logs.ExecutionLog_parent::parent_created_dt
+logs.ExecutionLog::created_dt <-- logs.ExecutionLog_puml_Sequence_start_stop::created_dt
+logs.ExecutionLog::current_execution_guid <-- logs.ExecutionLog_parent::parent_current_execution_guid
+logs.ExecutionLog::execution_instance_guid <-- logs.ExecutionLog_puml_Sequence_start_stop::execution_instance_guid
+logs.ExecutionLog::id <-- logs.ExecutionLog_puml_Sequence_start_stop::id
 logs.ExecutionLog::id <-- logs.ExecutionLog_parent::id
+logs.ExecutionLog::parameter_01 <-- logs.ExecutionLog_parent::parent_parameter_01
+logs.ExecutionLog::parameter_02 <-- logs.ExecutionLog_parent::parent_parameter_02
+logs.ExecutionLog::parameter_03 <-- logs.ExecutionLog_parent::parent_parameter_03
+logs.ExecutionLog::parameter_04 <-- logs.ExecutionLog_parent::parent_parameter_04
+logs.ExecutionLog::parameter_05 <-- logs.ExecutionLog_parent::parent_parameter_05
+logs.ExecutionLog::parameter_06 <-- logs.ExecutionLog_parent::parent_parameter_06
+logs.ExecutionLog::parameter_07 <-- logs.ExecutionLog_parent::parent_parameter_07
+logs.ExecutionLog::parameter_08 <-- logs.ExecutionLog_parent::parent_parameter_08
+logs.ExecutionLog::parameter_09 <-- logs.ExecutionLog_parent::parent_parameter_09
+logs.ExecutionLog::parameter_10 <-- logs.ExecutionLog_parent::parent_parameter_10
+logs.ExecutionLog::parameter_11 <-- logs.ExecutionLog_parent::parent_parameter_11
+logs.ExecutionLog::parameter_12 <-- logs.ExecutionLog_parent::parent_parameter_12
+logs.ExecutionLog::parameter_13 <-- logs.ExecutionLog_parent::parent_parameter_13
+logs.ExecutionLog::parameter_14 <-- logs.ExecutionLog_parent::parent_parameter_14
+logs.ExecutionLog::parameter_15 <-- logs.ExecutionLog_parent::parent_parameter_15
+logs.ExecutionLog::parameter_16 <-- logs.ExecutionLog_parent::parent_parameter_16
+logs.ExecutionLog::parameter_17 <-- logs.ExecutionLog_parent::parent_parameter_17
+logs.ExecutionLog::parameter_18 <-- logs.ExecutionLog_parent::parent_parameter_18
+logs.ExecutionLog::parameter_19 <-- logs.ExecutionLog_parent::parent_parameter_19
+logs.ExecutionLog::parameter_20 <-- logs.ExecutionLog_parent::parent_parameter_20
 logs.ExecutionLog::parent_execution_log_id <-- logs.ExecutionLog_parent::parent_execution_log_id
-logs.ExecutionLog::proc_fullname <-- logs.ExecutionLog_plantUML_Sequence_start_stop::proc_fullname
-logs.ExecutionLog_parent::parent_proc_fullname <-- logs.ExecutionLog_plantUML_Sequence_start_stop::parent_proc_fullname
+logs.ExecutionLog::proc_fullname <-- logs.ExecutionLog_parent::parent_proc_fullname
+logs.ExecutionLog::proc_fullname <-- logs.ExecutionLog_puml_Sequence_start_stop::proc_fullname
+logs.ExecutionLog::proc_id <-- logs.ExecutionLog_parent::parent_proc_id
+logs.ExecutionLog::proc_name <-- logs.ExecutionLog_parent::parent_proc_name
+logs.ExecutionLog::proc_schema_name <-- logs.ExecutionLog_parent::parent_proc_schema_name
+logs.ExecutionLog::step_id <-- logs.ExecutionLog_parent::parent_step_id
+logs.ExecutionLog::step_name <-- logs.ExecutionLog_parent::parent_step_name
+logs.ExecutionLog_parent::parent_proc_fullname <-- logs.ExecutionLog_puml_Sequence_start_stop::parent_proc_fullname

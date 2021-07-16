@@ -3,6 +3,7 @@
 == existing_properties
 
 // tag::existing_properties[]
+:ExistsProperty--sql_modules_definition:
 // end::existing_properties[]
 
 == RepoObject_guid
@@ -294,6 +295,16 @@ trigger
 // tag::sql_modules_definition[]
 [source,sql]
 ----
+CREATE TRIGGER [repo].[RepoObject__after_update] ON repo.RepoObject
+AFTER UPDATE
+AS
+UPDATE a
+  SET
+      [modify_dt] = GETDATE()
+FROM   [repo].[RepoObject] AS [a]
+       JOIN
+       [inserted] AS [b]
+       ON [a].[RepoObject_guid] = [b].[RepoObject_guid]
 
 ----
 // end::sql_modules_definition[]

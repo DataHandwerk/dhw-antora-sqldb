@@ -63,19 +63,42 @@ entity repo.usp_main << P >> {
   --
 }
 
+entity repo.usp_persistence_set << P >> {
+  --
+}
+
 entity repo.usp_RepoObjectColumn_update_RepoObjectColumn_column_id << P >> {
   --
 }
 
-config.fs_get_parameter_value <.. repo.usp_RepoObjectColumn_update_RepoObjectColumn_column_id
-config.fs_get_parameter_value <.. repo.usp_main
-config.fs_get_parameter_value <.. docs.usp_AntoraExport_DocSnippet
-config.fs_get_parameter_value <.. docs.usp_AntoraExport_ObjectPartialProperties
-config.fs_get_parameter_value <.. docs.usp_AntoraExport_ObjectPage
-config.fs_get_parameter_value <.. docs.usp_AntoraExport_navigation
-config.fs_get_parameter_value <.. docs.usp_AntoraExport_ObjectPageTemplate
-config.fs_get_parameter_value <.. docs.usp_AntoraExport_ObjectPuml
+entity repo.usp_sync_guid << P >> {
+  --
+}
+
+entity repo.usp_sync_guid_RepoObject << P >> {
+  --
+}
+
+entity repo.usp_sync_guid_RepoObjectColumn << P >> {
+  --
+}
+
+entity repo.usp_sync_guid_RepoSchema << P >> {
+  --
+}
+
 config.fs_get_parameter_value <.. docs.usp_AntoraExport_Page_IndexSemanticGroup
+config.fs_get_parameter_value <.. docs.usp_AntoraExport_ObjectPuml
+config.fs_get_parameter_value <.. docs.usp_AntoraExport_ObjectPageTemplate
+config.fs_get_parameter_value <.. docs.usp_AntoraExport_navigation
+config.fs_get_parameter_value <.. docs.usp_AntoraExport_ObjectPage
+config.fs_get_parameter_value <.. docs.usp_AntoraExport_ObjectPartialProperties
+config.fs_get_parameter_value <.. docs.usp_AntoraExport_DocSnippet
+config.fs_get_parameter_value <.. repo.usp_sync_guid_RepoSchema
+config.fs_get_parameter_value <.. repo.usp_main
+config.fs_get_parameter_value <.. repo.usp_sync_guid_RepoObjectColumn
+config.fs_get_parameter_value <.. repo.usp_sync_guid_RepoObject
+config.fs_get_parameter_value <.. repo.usp_RepoObjectColumn_update_RepoObjectColumn_column_id
 docs.usp_AntoraExport_DocSnippet <.. docs.usp_AntoraExport
 docs.usp_AntoraExport_navigation <.. docs.usp_AntoraExport
 docs.usp_AntoraExport_ObjectPage <.. docs.usp_AntoraExport
@@ -84,3 +107,8 @@ docs.usp_AntoraExport_ObjectPartialProperties <.. docs.usp_AntoraExport
 docs.usp_AntoraExport_ObjectPuml <.. docs.usp_AntoraExport
 docs.usp_AntoraExport_Page_IndexSemanticGroup <.. docs.usp_AntoraExport
 repo.usp_RepoObjectColumn_update_RepoObjectColumn_column_id <.. repo.usp_main
+repo.usp_sync_guid <.. repo.usp_main
+repo.usp_sync_guid <.. repo.usp_persistence_set
+repo.usp_sync_guid_RepoObject <.. repo.usp_sync_guid
+repo.usp_sync_guid_RepoObjectColumn <.. repo.usp_sync_guid
+repo.usp_sync_guid_RepoSchema <.. repo.usp_sync_guid

@@ -62,6 +62,10 @@ entity repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing << V >
   --
 }
 
+entity repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_check << V >> {
+  --
+}
+
 entity repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T << U >> {
   **index_guid** : uniqueidentifier
   * **index_column_id** : int
@@ -128,10 +132,10 @@ entity sqlparse.usp_PERSIST_RepoObject_SqlModules_61_SelectIdentifier_Union_T <<
 }
 
 reference.RepoObjectColumn_reference_SqlModules <.. reference.RepoObjectColumn_reference_union
-reference.RepoObjectColumn_reference_union <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing
-reference.RepoObjectColumn_reference_union <.. repo.usp_main
-reference.RepoObjectColumn_reference_union <.. repo.RepoObjectColumn_MissingSource_TypeV
 reference.RepoObjectColumn_reference_union <.. reference.RepoObjectColumn_RelationScript
+reference.RepoObjectColumn_reference_union <.. repo.usp_main
+reference.RepoObjectColumn_reference_union <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing
+reference.RepoObjectColumn_reference_union <.. repo.RepoObjectColumn_MissingSource_TypeV
 reference.RepoObjectColumn_RelationScript <.. reference.ftv_RepoObject_ColumReferenceRepoObject
 repo.Index_referencing_IndexPatternColumnGuid <.. repo.IndexReferencedReferencing_HasFullColumnsInReferencing
 repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T
@@ -139,17 +143,18 @@ repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing <.. repo.usp_
 repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T
 repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.IndexReferencedReferencing_HasFullColumnsInReferencing
 repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.Index_referencing_IndexPatternColumnGuid
+repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_check
 repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.IndexColumn_virtual_referenced_setpoint
-repo.IndexColumn_virtual_referenced_setpoint <.. repo.check_IndexColumn_virtual_referenced_setpoint
 repo.IndexColumn_virtual_referenced_setpoint <.. repo.usp_index_inheritance
+repo.IndexColumn_virtual_referenced_setpoint <.. repo.check_IndexColumn_virtual_referenced_setpoint
 repo.IndexReferencedReferencing_HasFullColumnsInReferencing <.. repo.usp_index_inheritance
 repo.usp_index_inheritance <.. repo.usp_main
 repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.usp_index_inheritance
 sqlparse.RepoObject_SqlModules_26_IdentifierList_children_IdentifierSplit_QuoteName <.. sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union
-sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union <.. sqlparse.usp_PERSIST_RepoObject_SqlModules_61_SelectIdentifier_Union_T
 sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union <.. sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union_T
-sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union_T <.. sqlparse.RepoObject_SqlModules_71_reference_ExpliciteTableAlias
+sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union <.. sqlparse.usp_PERSIST_RepoObject_SqlModules_61_SelectIdentifier_Union_T
 sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union_T <.. sqlparse.usp_PERSIST_RepoObject_SqlModules_61_SelectIdentifier_Union_T
+sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union_T <.. sqlparse.RepoObject_SqlModules_71_reference_ExpliciteTableAlias
 sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union_T <.. sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias
 sqlparse.RepoObject_SqlModules_71_reference_ExpliciteTableAlias <.. sqlparse.RepoObject_SqlModules_79_reference_union
 sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias <.. sqlparse.RepoObject_SqlModules_79_reference_union

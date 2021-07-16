@@ -1,0 +1,46 @@
+left to right direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+}
+
+
+entity reference.RepoObjectColumn_reference_virtual << V >> {
+  --
+}
+
+entity reference.RepoObjectColumnSource_virtual << U >> {
+  * **RepoObjectColumn_guid** : uniqueidentifier
+  * **Source_RepoObjectColumn_guid** : uniqueidentifier
+  --
+}
+
+entity reference.usp_RepoObjectColumnSource_virtual_set << P >> {
+  --
+}
+
+entity repo.usp_sync_guid_RepoObjectColumn << P >> {
+  --
+}
+
+reference.RepoObjectColumnSource_virtual <.. reference.RepoObjectColumn_reference_virtual
+reference.RepoObjectColumnSource_virtual <.. reference.usp_RepoObjectColumnSource_virtual_set
+reference.RepoObjectColumnSource_virtual <.. repo.usp_sync_guid_RepoObjectColumn

@@ -54,11 +54,19 @@ entity reference.RepoObjectColumn_reference_QueryPlan << V >> {
   --
 }
 
+entity reference.RepoObjectColumn_reference_virtual << V >> {
+  --
+}
+
 entity reference.RepoObjectColumn_ReferencedList << V >> {
   --
 }
 
 entity reference.RepoObjectColumn_ReferencingList << V >> {
+  --
+}
+
+entity reference.usp_RepoObjectColumnSource_virtual_set << P >> {
   --
 }
 
@@ -92,13 +100,16 @@ property.fs_get_RepoObjectColumnProperty_nvarchar <.. repo.RepoObjectColumn_gros
 reference.RepoObjectColumn_ReferencedList <.. repo.RepoObjectColumn_gross
 reference.RepoObjectColumn_ReferencingList <.. repo.RepoObjectColumn_gross
 repo.IndexColumn_union <.. repo.RepoObjectColumn_gross
-repo.RepoObject <.. reference.RepoObjectColumn_reference_QueryPlan
-repo.RepoObject <.. reference.RepoObjectColumn_reference_FirstResultSet
 repo.RepoObject <.. repo.RepoObjectColumn_gross
+repo.RepoObject <.. reference.RepoObjectColumn_reference_FirstResultSet
+repo.RepoObject <.. reference.RepoObjectColumn_reference_QueryPlan
+repo.RepoObjectColumn <.. reference.usp_RepoObjectColumnSource_virtual_set
 repo.RepoObjectColumn <.. repo.RepoObjectColumn_gross
-repo.RepoObjectColumn_gross <.. reference.RepoObjectColumn_reference_FirstResultSet
+repo.RepoObjectColumn_gross <.. repo.RepoObject_ColumnList
+repo.RepoObjectColumn_gross <.. reference.usp_RepoObjectColumnSource_virtual_set
+repo.RepoObjectColumn_gross <.. property.RepoObjectColumnProperty_ForUpdate
 repo.RepoObjectColumn_gross <.. graph.RepoObjectColumn_S
 repo.RepoObjectColumn_gross <.. docs.RepoObject_ColumnList
-repo.RepoObjectColumn_gross <.. property.RepoObjectColumnProperty_ForUpdate
+repo.RepoObjectColumn_gross <.. reference.RepoObjectColumn_reference_FirstResultSet
 repo.RepoObjectColumn_gross <.. reference.RepoObjectColumn_reference_QueryPlan
-repo.RepoObjectColumn_gross <.. repo.RepoObject_ColumnList
+repo.RepoObjectColumn_gross <.. reference.RepoObjectColumn_reference_virtual

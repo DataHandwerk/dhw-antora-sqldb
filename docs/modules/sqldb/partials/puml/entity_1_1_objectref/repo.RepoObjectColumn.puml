@@ -74,6 +74,10 @@ entity reference.RepoObjectColumn_RelationScript << V >> {
   --
 }
 
+entity reference.usp_RepoObjectColumnSource_virtual_set << P >> {
+  --
+}
+
 entity reference.usp_RepoObjectSource_QueryPlan << P >> {
   --
 }
@@ -92,6 +96,10 @@ entity repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing << V >
   **index_guid** : uniqueidentifier
   * **index_column_id** : int
   **RowNumberInReferencing** : bigint
+  --
+}
+
+entity repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_check << V >> {
   --
 }
 
@@ -159,30 +167,33 @@ entity sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias << V >> {
 }
 
 repo.RepoObjectColumn <.. sqlparse.RepoObject_SqlModules_71_reference_ExpliciteTableAlias
-repo.RepoObjectColumn <.. sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias
 repo.RepoObjectColumn <.. repo.usp_Index_virtual_set
 repo.RepoObjectColumn <.. repo.usp_sync_guid_RepoObjectColumn
-repo.RepoObjectColumn <.. repo.RepoObject_SqlCreateTable
-repo.RepoObjectColumn <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing
-repo.RepoObjectColumn <.. repo.check_IndexColumn_virtual_referenced_setpoint
 repo.RepoObjectColumn <.. repo.RepoObjectColumn_MissingSource_TypeV
-repo.RepoObjectColumn <.. reference.usp_RepoObjectSource_QueryPlan
+repo.RepoObjectColumn <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing
+repo.RepoObjectColumn <.. repo.RepoObject_SqlCreateTable
 repo.RepoObjectColumn <.. reference.usp_update_Referencing_Count
-repo.RepoObjectColumn <.. repo.RepoObjectColumn_gross
+repo.RepoObjectColumn <.. reference.usp_RepoObjectSource_QueryPlan
+repo.RepoObjectColumn <.. repo.check_IndexColumn_virtual_referenced_setpoint
 repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_name
-repo.RepoObjectColumn <.. property.RepoObjectColumnProperty_sys_repo
 repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_guid
+repo.RepoObjectColumn <.. repo.RepoObjectColumn_gross
+repo.RepoObjectColumn <.. property.RepoObjectColumnProperty_sys_repo
 repo.RepoObjectColumn <.. reference.RepoObjectColumn_reference_Persistence
 repo.RepoObjectColumn <.. repo.IndexColumn_virtual_gross
 repo.RepoObjectColumn <.. repo.RepoObject_persistence_column
+repo.RepoObjectColumn <.. repo.RepoObjectColumn_RequiredRepoObjectColumnMerge
+repo.RepoObjectColumn <.. property.usp_RepoObjectColumnProperty_set
+repo.RepoObjectColumn <.. reference.usp_RepoObjectColumnSource_virtual_set
+repo.RepoObjectColumn <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_check
+repo.RepoObjectColumn <.. repo.usp_update_Referencing_Count
 repo.RepoObjectColumn <.. reference.RepoObjectColumn_RelationScript
-repo.RepoObjectColumn <.. reference.RepoObjectColumn_ReferenceTree
 repo.RepoObjectColumn <.. property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition
 repo.RepoObjectColumn <.. property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn
 repo.RepoObjectColumn <.. reference.RepoObjectColumn_reference_SqlModules
-repo.RepoObjectColumn <.. repo.usp_update_Referencing_Count
-repo.RepoObjectColumn <.. property.usp_RepoObjectColumnProperty_set
-repo.RepoObjectColumn <.. repo.RepoObjectColumn_RequiredRepoObjectColumnMerge
+repo.RepoObjectColumn <.. sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias
+repo.RepoObjectColumn <.. reference.RepoObjectColumn_ReferenceTree
+repo.RepoObjectColumn_gross <.. reference.usp_RepoObjectColumnSource_virtual_set
 repo.RepoObjectColumn_RequiredRepoObjectColumnMerge <.. repo.usp_sync_guid_RepoObjectColumn
 repo.SysColumn_RepoObjectColumn_via_guid <.. repo.usp_sync_guid_RepoObjectColumn
 repo.SysColumn_RepoObjectColumn_via_name <.. repo.usp_sync_guid_RepoObjectColumn

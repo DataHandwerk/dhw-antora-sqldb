@@ -53,7 +53,7 @@ entity reference.RepoObjectColumn_reference_Persistence << V >> {
 entity reference.RepoObjectColumn_reference_union << V >> {
   --
   definition : nvarchar(max)
-  * InformationSource : varchar(31)
+  * InformationSource : varchar(34)
   is_computed : bit
   is_referenced_object : bit
   is_referencing_object_equal_referenced_object : bit
@@ -181,17 +181,17 @@ repo.RepoObject::node_id <-- reference.RepoObjectColumn_reference_Persistence::r
 repo.RepoObject::node_id <-- reference.RepoObjectColumn_reference_Persistence::referencing_node_id
 repo.RepoObject::SysObject_id <-- reference.RepoObjectColumn_reference_Persistence::referenced_id
 repo.RepoObject::SysObject_id <-- reference.RepoObjectColumn_reference_Persistence::referencing_id
-repo.RepoObject::SysObject_name <-- reference.RepoObjectColumn_reference_Persistence::referencing_entity_name
 repo.RepoObject::SysObject_name <-- reference.RepoObjectColumn_reference_Persistence::referenced_entity_name
-repo.RepoObject::SysObject_schema_name <-- reference.RepoObjectColumn_reference_Persistence::referencing_schema_name
+repo.RepoObject::SysObject_name <-- reference.RepoObjectColumn_reference_Persistence::referencing_entity_name
 repo.RepoObject::SysObject_schema_name <-- reference.RepoObjectColumn_reference_Persistence::referenced_schema_name
+repo.RepoObject::SysObject_schema_name <-- reference.RepoObjectColumn_reference_Persistence::referencing_schema_name
 repo.RepoObject::SysObject_type <-- reference.RepoObjectColumn_reference_Persistence::referencing_type
 repo.RepoObject::SysObject_type <-- reference.RepoObjectColumn_reference_Persistence::referenced_type
 repo.RepoObject_persistence::source_RepoObject_guid <-- reference.RepoObjectColumn_reference_Persistence::referenced_RepoObject_guid
 repo.RepoObject_persistence::target_RepoObject_guid <-- reference.RepoObjectColumn_reference_Persistence::referencing_RepoObject_guid
 repo.RepoObjectColumn::RepoObjectColumn_guid <-- reference.RepoObjectColumn_reference_Persistence::referencing_RepoObjectColumn_guid
 repo.RepoObjectColumn::RepoObjectColumn_guid <-- reference.RepoObjectColumn_reference_Persistence::referenced_RepoObjectColumn_guid
-repo.RepoObjectColumn::SysObjectColumn_column_id <-- reference.RepoObjectColumn_reference_Persistence::referencing_minor_id
 repo.RepoObjectColumn::SysObjectColumn_column_id <-- reference.RepoObjectColumn_reference_Persistence::referenced_minor_id
-repo.RepoObjectColumn::SysObjectColumn_name <-- reference.RepoObjectColumn_reference_Persistence::referencing_column_name
+repo.RepoObjectColumn::SysObjectColumn_column_id <-- reference.RepoObjectColumn_reference_Persistence::referencing_minor_id
 repo.RepoObjectColumn::SysObjectColumn_name <-- reference.RepoObjectColumn_reference_Persistence::referenced_column_name
+repo.RepoObjectColumn::SysObjectColumn_name <-- reference.RepoObjectColumn_reference_Persistence::referencing_column_name

@@ -159,4 +159,9 @@ graph.RepoObject <.. repo.usp_main
 reference.Match_RepoObject_referenced_UspPersistence <.. repo.usp_main
 reference.Match_RepoObject_referenced_UspPersistence <.. reference.Reference_UspPersistence
 repo.RepoObject_gross <.. reference.Match_RepoObject_referenced_UspPersistence
-
+repo.RepoObject_gross::RepoObject_schema_name <-- reference.Match_RepoObject_referenced_UspPersistence::FirstNode_schema_name
+repo.RepoObject_gross::RepoObject_schema_name <-- reference.Match_RepoObject_referenced_UspPersistence::LastNode_schema_name
+repo.RepoObject_gross::usp_persistence_name <-- reference.Match_RepoObject_referenced_UspPersistence::First_usp_persistence_name
+repo.RepoObject_gross::usp_persistence_name <-- reference.Match_RepoObject_referenced_UspPersistence::Last_usp_persistence_name
+repo.RepoObject_gross::usp_persistence_RepoObject_guid <-- reference.Match_RepoObject_referenced_UspPersistence::Last_usp_persistence_RepoObject_guid
+repo.RepoObject_gross::usp_persistence_RepoObject_guid <-- reference.Match_RepoObject_referenced_UspPersistence::First_usp_persistence_RepoObject_guid

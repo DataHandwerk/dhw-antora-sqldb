@@ -38,6 +38,32 @@ entity config.Parameter << U >> {
   --
 }
 
+entity docs.fs_cleanStringForAnchorId << FN >> {
+  --
+}
+
+entity graph.ReferencedObjectColumn << U >> {
+  --
+}
+
+entity graph.RepoObjectColumn << U >> {
+  --
+}
+
+entity graph.RepoObjectColumn_S << V >> {
+  * **RepoObjectColumn_guid** : uniqueidentifier
+  --
+}
+
+entity property.fs_get_RepoObjectColumnProperty_nvarchar << FN >> {
+  --
+}
+
+entity property.RepoObjectColumnProperty << U >> {
+  * **RepoObjectColumnProperty_id** : int
+  --
+}
+
 entity reference.RepoObject_reference_persistence << V >> {
   **referenced_RepoObject_guid** : uniqueidentifier
   * **referencing_RepoObject_guid** : uniqueidentifier
@@ -53,6 +79,10 @@ entity reference.RepoObject_reference_SqlExpressionDependencies << V >> {
 entity reference.RepoObject_reference_union << V >> {
   **referenced_RepoObject_guid** : uniqueidentifier
   **referencing_RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity reference.RepoObject_reference_virtual << V >> {
   --
 }
 
@@ -81,6 +111,36 @@ entity reference.RepoObjectColumn_reference_SqlModules << V >> {
 }
 
 entity reference.RepoObjectColumn_reference_union << V >> {
+  --
+}
+
+entity reference.RepoObjectColumn_reference_virtual << V >> {
+  --
+}
+
+entity reference.RepoObjectColumn_ReferencedList << V >> {
+  --
+}
+
+entity reference.RepoObjectColumn_ReferencingList << V >> {
+  --
+}
+
+entity reference.RepoObjectColumn_ReferencingReferenced << V >> {
+  **Referenced_guid** : uniqueidentifier
+  **Referencing_guid** : uniqueidentifier
+  --
+}
+
+entity reference.RepoObjectColumnSource_virtual << U >> {
+  * **RepoObjectColumn_guid** : uniqueidentifier
+  * **Source_RepoObjectColumn_guid** : uniqueidentifier
+  --
+}
+
+entity reference.RepoObjectSource_virtual << U >> {
+  * **RepoObject_guid** : uniqueidentifier
+  * **Source_RepoObject_guid** : uniqueidentifier
   --
 }
 
@@ -160,6 +220,11 @@ entity repo.RepoObject_persistence << U >> {
 }
 
 entity repo.RepoObjectColumn << U >> {
+  * **RepoObjectColumn_guid** : uniqueidentifier
+  --
+}
+
+entity repo.RepoObjectColumn_gross << V >> {
   * **RepoObjectColumn_guid** : uniqueidentifier
   --
 }
@@ -398,24 +463,40 @@ entity sys_dwh.types << SN >> {
   --
 }
 
-config.ftv_dwh_database <.. repo_sys.ExtendedProperties
-config.ftv_dwh_database <.. repo_sys.SysColumn
 config.ftv_dwh_database <.. repo_sys.sql_expression_dependencies
+config.ftv_dwh_database <.. repo_sys.SysColumn
+config.ftv_dwh_database <.. repo_sys.ExtendedProperties
 config.join_type <.. sqlparse.RepoObject_SqlModules_41_from
 config.Parameter <.. config.ftv_dwh_database
+docs.fs_cleanStringForAnchorId <.. reference.RepoObjectColumn_ReferencingList
+docs.fs_cleanStringForAnchorId <.. reference.RepoObjectColumn_ReferencedList
+graph.ReferencedObjectColumn <.. reference.RepoObjectColumn_ReferencingReferenced
+graph.RepoObjectColumn <.. reference.RepoObjectColumn_ReferencingReferenced
+graph.RepoObjectColumn_S <.. graph.RepoObjectColumn
+property.fs_get_RepoObjectColumnProperty_nvarchar <.. repo.RepoObjectColumn_gross
+property.RepoObjectColumnProperty <.. property.fs_get_RepoObjectColumnProperty_nvarchar
 reference.RepoObject_reference_persistence <.. reference.RepoObject_reference_union
 reference.RepoObject_reference_SqlExpressionDependencies <.. reference.RepoObject_reference_union
 reference.RepoObject_reference_union <.. reference.RepoObjectColumn_reference_SqlExpressionDependencies
 reference.RepoObject_reference_union <.. repo.IndexReferencedReferencing
+reference.RepoObject_reference_union <.. reference.RepoObjectColumn_reference_virtual
+reference.RepoObject_reference_virtual <.. reference.RepoObject_reference_union
 reference.RepoObjectColumn_reference_Persistence <.. reference.RepoObjectColumn_reference_union
 reference.RepoObjectColumn_reference_SqlExpressionDependencies <.. reference.RepoObjectColumn_reference_union
 reference.RepoObjectColumn_reference_SqlModules <.. reference.RepoObjectColumn_reference_union
 reference.RepoObjectColumn_reference_union <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing
+reference.RepoObjectColumn_reference_virtual <.. reference.RepoObjectColumn_reference_union
+reference.RepoObjectColumn_ReferencedList <.. repo.RepoObjectColumn_gross
+reference.RepoObjectColumn_ReferencingList <.. repo.RepoObjectColumn_gross
+reference.RepoObjectColumn_ReferencingReferenced <.. reference.RepoObjectColumn_ReferencingList
+reference.RepoObjectColumn_ReferencingReferenced <.. reference.RepoObjectColumn_ReferencedList
+reference.RepoObjectColumnSource_virtual <.. reference.RepoObjectColumn_reference_virtual
+reference.RepoObjectSource_virtual <.. reference.RepoObject_reference_virtual
 repo.Index_referencing_IndexPatternColumnGuid <.. repo.IndexReferencedReferencing_HasFullColumnsInReferencing
 repo.Index_union <.. repo.IndexReferencedReferencing
 repo.Index_unique_IndexPatternColumnGuid <.. repo.Index_union
-repo.Index_virtual <.. repo.IndexColumn_virtual_gross
 repo.Index_virtual <.. repo.Index_union
+repo.Index_virtual <.. repo.IndexColumn_virtual_gross
 repo.Index_virtual <.. repo.IndexReferencedReferencing
 repo.Index_virtual <.. repo.Index_virtual_IndexPatternColumnGuid
 repo.Index_virtual_IndexPatternColumnGuid <.. repo.Index_union
@@ -423,30 +504,36 @@ repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing <.. repo.Inde
 repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.Index_referencing_IndexPatternColumnGuid
 repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.IndexReferencedReferencing_HasFullColumnsInReferencing
 repo.IndexColumn_union <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing
+repo.IndexColumn_union <.. repo.RepoObjectColumn_gross
 repo.IndexColumn_virtual <.. repo.Index_virtual_IndexPatternColumnGuid
 repo.IndexColumn_virtual <.. repo.IndexColumn_virtual_gross
 repo.IndexColumn_virtual_gross <.. repo.IndexColumn_union
 repo.IndexReferencedReferencing <.. repo.IndexReferencedReferencing_HasFullColumnsInReferencing
-repo.RepoObject <.. sqlparse.RepoObject_SqlModules_71_reference_ExpliciteTableAlias
-repo.RepoObject <.. sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias
-repo.RepoObject <.. reference.RepoObjectColumn_reference_SqlModules
-repo.RepoObject <.. repo.IndexColumn_virtual_gross
-repo.RepoObject <.. repo_sys.Index_unique
-repo.RepoObject <.. sqlparse.RepoObject_SqlModules_39_object
-repo.RepoObject <.. reference.RepoObjectColumn_reference_Persistence
 repo.RepoObject <.. repo.SysColumn_RepoObjectColumn_via_name
-repo.RepoObject <.. repo.SysObject_RepoObject_via_name
+repo.RepoObject <.. repo.RepoObjectColumn_gross
+repo.RepoObject <.. reference.RepoObjectColumn_reference_SqlModules
+repo.RepoObject <.. sqlparse.RepoObject_SqlModules_71_reference_ExpliciteTableAlias
+repo.RepoObject <.. reference.RepoObject_reference_virtual
+repo.RepoObject <.. sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias
 repo.RepoObject <.. reference.RepoObject_reference_persistence
 repo.RepoObject <.. sqlparse.RepoObject_SqlModules_10_statement
-repo.RepoObject_persistence <.. reference.RepoObject_reference_persistence
+repo.RepoObject <.. repo.IndexColumn_virtual_gross
+repo.RepoObject <.. repo_sys.Index_unique
+repo.RepoObject <.. reference.RepoObjectColumn_reference_Persistence
+repo.RepoObject <.. sqlparse.RepoObject_SqlModules_39_object
+repo.RepoObject <.. repo.SysObject_RepoObject_via_name
 repo.RepoObject_persistence <.. reference.RepoObjectColumn_reference_Persistence
-repo.RepoObjectColumn <.. reference.RepoObjectColumn_reference_Persistence
+repo.RepoObject_persistence <.. reference.RepoObject_reference_persistence
 repo.RepoObjectColumn <.. repo.IndexColumn_virtual_gross
-repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_name
-repo.RepoObjectColumn <.. reference.RepoObjectColumn_reference_SqlModules
+repo.RepoObjectColumn <.. reference.RepoObjectColumn_reference_Persistence
 repo.RepoObjectColumn <.. sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias
 repo.RepoObjectColumn <.. sqlparse.RepoObject_SqlModules_71_reference_ExpliciteTableAlias
+repo.RepoObjectColumn <.. reference.RepoObjectColumn_reference_SqlModules
+repo.RepoObjectColumn <.. repo.RepoObjectColumn_gross
+repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_name
 repo.RepoObjectColumn <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing
+repo.RepoObjectColumn_gross <.. graph.RepoObjectColumn_S
+repo.RepoObjectColumn_gross <.. reference.RepoObjectColumn_reference_virtual
 repo.SysColumn_RepoObjectColumn_via_name <.. repo_sys.IndexColumn_unique
 repo.SysObject_RepoObject_via_name <.. repo_sys.IndexColumn_unique
 repo_sys.ExtendedProperties <.. repo_sys.SysObject
@@ -454,8 +541,8 @@ repo_sys.ExtendedProperties <.. repo_sys.SysColumn
 repo_sys.Index_unique <.. repo.Index_union
 repo_sys.IndexColumn_unique <.. repo.IndexColumn_union
 repo_sys.IndexColumn_unique <.. repo.Index_unique_IndexPatternColumnGuid
-repo_sys.sql_expression_dependencies <.. reference.RepoObject_reference_SqlExpressionDependencies
 repo_sys.sql_expression_dependencies <.. reference.RepoObjectColumn_reference_SqlExpressionDependencies
+repo_sys.sql_expression_dependencies <.. reference.RepoObject_reference_SqlExpressionDependencies
 repo_sys.SysColumn <.. repo_sys.sql_expression_dependencies
 repo_sys.SysColumn <.. repo.SysColumn_RepoObjectColumn_via_name
 repo_sys.SysObject <.. repo_sys.sql_expression_dependencies
@@ -470,12 +557,12 @@ sqlparse.RepoObject_SqlModules <.. sqlparse.RepoObject_SqlModules_39_object
 sqlparse.RepoObject_SqlModules_10_statement <.. sqlparse.RepoObject_SqlModules_20_statement_children
 sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_32_ObjectClass
 sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_33_ObjectNormalized
+sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_29_2_object_is_GroupBy
 sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_21_statement_children_helper
 sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_29_1_object_is_union
-sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_29_2_object_is_GroupBy
 sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_24_IdentifierList_children
-sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_22_identifier_alias_AS
 sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_41_from
+sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_22_identifier_alias_AS
 sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_51_Identitfier
 sqlparse.RepoObject_SqlModules_21_statement_children_helper <.. sqlparse.RepoObject_SqlModules_31_object
 sqlparse.RepoObject_SqlModules_22_identifier_alias_AS <.. sqlparse.RepoObject_SqlModules_41_from

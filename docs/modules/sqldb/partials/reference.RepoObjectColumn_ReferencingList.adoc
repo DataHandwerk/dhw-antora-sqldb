@@ -39,7 +39,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-04-17 13:33:30
+2021-05-12 14:33:58
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -60,7 +60,7 @@ view
 
 .Referencing Columns
 --
-* xref:repo.RepoObjectColumn_gross.adoc#column-AntoraReferencingColumnList[repo.RepoObjectColumn_gross.AntoraReferencingColumnList]
+* xref:repo.RepoObjectColumn_gross.adoc#column-AntoraReferencingColumnList[+repo.RepoObjectColumn_gross.AntoraReferencingColumnList+]
 --
 
 
@@ -107,7 +107,7 @@ view
 
 .Referenced Columns
 --
-* xref:reference.RepoObjectColumn_ReferencingReferenced.adoc#column-Referenced_guid[reference.RepoObjectColumn_ReferencingReferenced.Referenced_guid]
+* xref:reference.RepoObjectColumn_ReferencingReferenced.adoc#column-Referenced_guid[+reference.RepoObjectColumn_ReferencingReferenced.Referenced_guid+]
 --
 
 
@@ -225,8 +225,8 @@ view
 
 // tag::AntoraIndexList[]
 
-[[index-idx_RepoObjectColumn_ReferencingList__1]]
-=== idx_RepoObjectColumn_ReferencingList__1
+[[index-idx_RepoObjectColumn_ReferencingList_1]]
+=== idx_RepoObjectColumn_ReferencingList++__++1
 
 * IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_no_group[no_group]
 +
@@ -253,6 +253,7 @@ view
 == AntoraReferencedList
 
 // tag::antorareferencedlist[]
+* xref:docs.fs_cleanStringForAnchorId.adoc[]
 * xref:reference.RepoObjectColumn_ReferencingReferenced.adoc[]
 // end::antorareferencedlist[]
 
@@ -472,22 +473,25 @@ view
 // tag::sql_modules_definition[]
 [source,sql]
 ----
-CREATE View [reference].RepoObjectColumn_ReferencingList
+
+CREATE View [reference].[RepoObjectColumn_ReferencingList]
 As
 Select
     ror.Referenced_guid
-  , AntoraReferencingColumnList            = String_Agg (
-                                                            Concat (
-                                                                       --* xref:target-page-filename.adoc[link text]
-                                                                       --we need to convert to first argument nvarchar(max) to avoid the limit of 8000 byte
-                                                                       Cast('* xref:' As NVarchar(Max))
-                                                                     , ror.Referencing_fullname2
-                                                                     , '.adoc#column-' + ror.ReferencingColumn_name + '['
-                                                                       + ror.ReferencingColumn_fullname2 + ']'
-                                                                   )
-                                                          , Char ( 13 ) + Char ( 10 )
-                                                        ) Within Group(Order By
-                                                                           ror.Referencing_fullname)
+  , AntoraReferencingColumnList            =
+  --
+  String_Agg (
+                 Concat (
+                            --* xref:target-page-filename.adoc[link text]
+                            --we need to convert to first argument nvarchar(max) to avoid the limit of 8000 byte
+                            Cast('* xref:' As NVarchar(Max))
+                          , ror.Referencing_fullname2
+                          , '.adoc#column-' + docs.fs_cleanStringForAnchorId ( ror.ReferencingColumn_name ) + '[+'
+                            + ror.ReferencingColumn_fullname2 + '+]'
+                        )
+               , Char ( 13 ) + Char ( 10 )
+             ) Within Group(Order By
+                                ror.Referencing_fullname)
   , Max ( ror.Referenced_fullname )        As Referenced_fullname
   , Max ( ror.Referenced_fullname2 )       As Referenced_fullname2
   , Max ( ror.ReferencedColumn_fullname )  As ReferencedColumn_fullname

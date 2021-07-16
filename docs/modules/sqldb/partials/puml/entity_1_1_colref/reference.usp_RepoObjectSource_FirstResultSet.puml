@@ -169,12 +169,12 @@ entity repo.usp_main << P >> {
   --
 }
 
-logs.usp_ExecutionLog_insert <.. repo.usp_main
 logs.usp_ExecutionLog_insert <.. reference.usp_RepoObjectSource_FirstResultSet
+logs.usp_ExecutionLog_insert <.. repo.usp_main
 reference.RepoObjectSource_FirstResultSet <.. reference.usp_RepoObjectSource_FirstResultSet
 reference.usp_RepoObjectSource_FirstResultSet <.. repo.usp_main
-repo.RepoObject <.. reference.usp_RepoObjectSource_FirstResultSet
 repo.RepoObject <.. repo.RepoObject_gross
+repo.RepoObject <.. reference.usp_RepoObjectSource_FirstResultSet
 repo.RepoObject_gross <.. reference.usp_RepoObjectSource_FirstResultSet
 repo.RepoObject::has_different_sys_names <-- repo.RepoObject_gross::has_different_sys_names
 repo.RepoObject::has_execution_plan_issue <-- repo.RepoObject_gross::has_execution_plan_issue
@@ -194,14 +194,19 @@ repo.RepoObject::pk_IndexPatternColumnName_new <-- repo.RepoObject_gross::pk_Ind
 repo.RepoObject::Repo_history_table_guid <-- repo.RepoObject_gross::Repo_history_table_guid
 repo.RepoObject::Repo_temporal_type <-- repo.RepoObject_gross::Repo_temporal_type
 repo.RepoObject::RepoObject_fullname <-- repo.RepoObject_gross::RepoObject_fullname
+repo.RepoObject::RepoObject_fullname <-- repo.RepoObject_gross::persistence_source_RepoObject_fullname
+repo.RepoObject::RepoObject_fullname2 <-- repo.RepoObject_gross::persistence_source_RepoObject_fullname2
 repo.RepoObject::RepoObject_fullname2 <-- repo.RepoObject_gross::RepoObject_fullname2
 repo.RepoObject::RepoObject_guid <-- repo.RepoObject_gross::RepoObject_guid
+repo.RepoObject::RepoObject_guid <-- repo.RepoObject_gross::usp_persistence_RepoObject_guid
 repo.RepoObject::RepoObject_name <-- repo.RepoObject_gross::RepoObject_name
 repo.RepoObject::RepoObject_Referencing_Count <-- repo.RepoObject_gross::RepoObject_Referencing_Count
 repo.RepoObject::RepoObject_schema_name <-- repo.RepoObject_gross::RepoObject_schema_name
 repo.RepoObject::RepoObject_type <-- repo.RepoObject_gross::RepoObject_type
 repo.RepoObject::SysObject_fullname <-- repo.RepoObject_gross::SysObject_fullname
+repo.RepoObject::SysObject_fullname <-- repo.RepoObject_gross::persistence_source_SysObject_fullname
 repo.RepoObject::SysObject_fullname2 <-- repo.RepoObject_gross::SysObject_fullname2
+repo.RepoObject::SysObject_fullname2 <-- repo.RepoObject_gross::persistence_source_SysObject_fullname2
 repo.RepoObject::SysObject_id <-- repo.RepoObject_gross::SysObject_id
 repo.RepoObject::SysObject_modify_date <-- repo.RepoObject_gross::SysObject_modify_date
 repo.RepoObject::SysObject_name <-- repo.RepoObject_gross::SysObject_name

@@ -23,6 +23,10 @@ skinparam class {
 }
 
 
+entity docs.fs_cleanStringForAnchorId << FN >> {
+  --
+}
+
 entity reference.RepoObjectColumn_ReferencingList << V >> {
   --
   AntoraReferencingColumnList : nvarchar(max)
@@ -125,6 +129,7 @@ entity repo.RepoObjectColumn_gross << V >> {
   * SysObjectColumn_name : nvarchar(128)
 }
 
+docs.fs_cleanStringForAnchorId <.. reference.RepoObjectColumn_ReferencingList
 reference.RepoObjectColumn_ReferencingList <.. repo.RepoObjectColumn_gross
 reference.RepoObjectColumn_ReferencingReferenced <.. reference.RepoObjectColumn_ReferencingList
 reference.RepoObjectColumn_ReferencingList::AntoraReferencingColumnList <-- repo.RepoObjectColumn_gross::AntoraReferencingColumnList

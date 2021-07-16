@@ -36,6 +36,8 @@ entity config.Parameter << U >> {
   Parameter_default_value : sql_variant
   Parameter_desciption : nvarchar(1000)
   Parameter_value : sql_variant
+  {abstract} Parameter_value__result_date : date
+  {abstract} Parameter_value__result_datetime : datetime
   {abstract} Parameter_value__result_int : int
   {abstract} Parameter_value__result_nvarchar : nvarchar(4000)
 }
@@ -73,6 +75,18 @@ entity reference.RepoObjectColumn_reference_QueryPlan << V >> {
 
 entity reference.usp_update_Referencing_Count << P >> {
   --
+}
+
+entity repo.RepoObject_SqlCreateTable << V >> {
+  * **RepoObject_guid** : uniqueidentifier
+  --
+  ConList : nvarchar(max)
+  * DbmlTable : nvarchar(max)
+  persistence_source_RepoObject_fullname : nvarchar(261)
+  persistence_source_RepoObject_guid : uniqueidentifier
+  persistence_source_SysObject_fullname : nvarchar(261)
+  * RepoObject_fullname : nvarchar(261)
+  * SqlCreateTable : nvarchar(max)
 }
 
 entity repo.usp_update_Referencing_Count << P >> {
@@ -177,6 +191,8 @@ entity repo_sys.SysColumn << V >> {
   seed_value : sql_variant
   * SysObject_column_id : int
   SysObject_column_name : sysname
+  SysObject_fullname : nvarchar(517)
+  SysObject_fullname2 : nvarchar(257)
   * SysObject_id : int
   SysObject_name : nvarchar(128)
   SysObject_RepoObject_guid : uniqueidentifier
@@ -211,9 +227,10 @@ entity uspgenerator.GeneratorUsp_SqlUsp << V >> {
 
 config.ftv_dwh_database <.. repo_sys.ExtendedProperties
 config.ftv_dwh_database <.. uspgenerator.GeneratorUsp_SqlUsp
+config.ftv_dwh_database <.. reference.usp_update_Referencing_Count
 config.ftv_dwh_database <.. repo_sys.sql_expression_dependencies
 config.ftv_dwh_database <.. reference.RepoObjectColumn_reference_QueryPlan
-config.ftv_dwh_database <.. reference.usp_update_Referencing_Count
+config.ftv_dwh_database <.. repo.RepoObject_SqlCreateTable
 config.ftv_dwh_database <.. repo.usp_update_Referencing_Count
 config.ftv_dwh_database <.. repo_sys.SysColumn
 config.Parameter <.. config.ftv_dwh_database
@@ -221,3 +238,7 @@ repo_sys.ExtendedProperties <.. repo_sys.SysColumn
 repo_sys.SysColumn <.. repo_sys.sql_expression_dependencies
 repo_sys.SysColumn::definition <-- repo_sys.sql_expression_dependencies::definition
 repo_sys.SysColumn::is_computed <-- repo_sys.sql_expression_dependencies::is_computed
+repo_sys.SysColumn::SysObject_column_name <-- repo_sys.sql_expression_dependencies::referenced_column_name
+repo_sys.SysColumn::SysObject_column_name <-- repo_sys.sql_expression_dependencies::referencing_column_name
+repo_sys.SysColumn::SysObject_RepoObjectColumn_guid <-- repo_sys.sql_expression_dependencies::referencing_RepoObjectColumn_guid
+repo_sys.SysColumn::SysObject_RepoObjectColumn_guid <-- repo_sys.sql_expression_dependencies::referenced_RepoObjectColumn_guid

@@ -68,6 +68,7 @@ entity uspgenerator.GeneratorUsp_StepList << V >> {
 entity uspgenerator.GeneratorUspStep << U >> {
   * **id** : int
   --
+  Description : nvarchar(4000)
   * has_logging : tinyint
   info_01 : nvarchar(max)
   info_02 : nvarchar(max)
@@ -113,5 +114,6 @@ uspgenerator.GeneratorUspStep <.. uspgenerator.ftv_GeneratorUspStep_tree
 uspgenerator.GeneratorUspStep <.. uspgenerator.ftv_GeneratorUspStep_sql
 uspgenerator.GeneratorUspStep_Sql <.. uspgenerator.GeneratorUsp_StepList
 uspgenerator.GeneratorUsp::has_logging <-- uspgenerator.GeneratorUspStep_Sql::has_logging
+uspgenerator.GeneratorUsp::id <-- uspgenerator.GeneratorUspStep_Sql::usp_id
 uspgenerator.GeneratorUsp::usp_fullname <-- uspgenerator.GeneratorUspStep_Sql::usp_fullname
 uspgenerator.GeneratorUspStep_Sql::usp_id <-- uspgenerator.GeneratorUsp_StepList::usp_id

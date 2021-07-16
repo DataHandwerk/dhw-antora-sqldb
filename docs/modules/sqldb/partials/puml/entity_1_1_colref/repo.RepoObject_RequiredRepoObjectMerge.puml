@@ -63,12 +63,12 @@ entity repo.RepoObject << U >> {
 
 entity repo.RepoObject_RequiredRepoObjectMerge << V >> {
   * **RepoObject_guid** : uniqueidentifier
-  * **ro2_RepoObject_guid** : uniqueidentifier
   --
   * RepoObject_fullname : nvarchar(261)
   * RepoObject_name : nvarchar(128)
   * RepoObject_schema_name : nvarchar(128)
   * ro2_RepoObject_fullname : nvarchar(261)
+  * ro2_RepoObject_guid : uniqueidentifier
   * ro2_RepoObject_name : nvarchar(128)
   * ro2_RepoObject_schema_name : nvarchar(128)
   * ro2_SysObject_fullname : nvarchar(261)
@@ -86,9 +86,15 @@ repo.RepoObject <.. repo.RepoObject_RequiredRepoObjectMerge
 repo.RepoObject <.. repo.usp_sync_guid_RepoObject
 repo.RepoObject_RequiredRepoObjectMerge <.. repo.usp_sync_guid_RepoObject
 repo.RepoObject::RepoObject_fullname <-- repo.RepoObject_RequiredRepoObjectMerge::RepoObject_fullname
+repo.RepoObject::RepoObject_fullname <-- repo.RepoObject_RequiredRepoObjectMerge::ro2_RepoObject_fullname
+repo.RepoObject::RepoObject_guid <-- repo.RepoObject_RequiredRepoObjectMerge::ro2_RepoObject_guid
 repo.RepoObject::RepoObject_guid <-- repo.RepoObject_RequiredRepoObjectMerge::RepoObject_guid
 repo.RepoObject::RepoObject_name <-- repo.RepoObject_RequiredRepoObjectMerge::RepoObject_name
+repo.RepoObject::RepoObject_name <-- repo.RepoObject_RequiredRepoObjectMerge::ro2_RepoObject_name
+repo.RepoObject::RepoObject_schema_name <-- repo.RepoObject_RequiredRepoObjectMerge::ro2_RepoObject_schema_name
 repo.RepoObject::RepoObject_schema_name <-- repo.RepoObject_RequiredRepoObjectMerge::RepoObject_schema_name
 repo.RepoObject::SysObject_fullname <-- repo.RepoObject_RequiredRepoObjectMerge::SysObject_fullname
+repo.RepoObject::SysObject_fullname <-- repo.RepoObject_RequiredRepoObjectMerge::ro2_SysObject_fullname
+repo.RepoObject::SysObject_name <-- repo.RepoObject_RequiredRepoObjectMerge::ro2_SysObject_name
 repo.RepoObject::SysObject_name <-- repo.RepoObject_RequiredRepoObjectMerge::SysObject_name
 repo.RepoObject::SysObject_schema_name <-- repo.RepoObject_RequiredRepoObjectMerge::SysObject_schema_name

@@ -169,11 +169,45 @@ entity sqlparse.RepoObject_SqlModules_24_IdentifierList_children << V >> {
   * **json_key** : nvarchar(4000)
   * **T2_json_key** : nvarchar(4000)
   --
+  child0_children : nvarchar(max)
+  child0_class : nvarchar(500)
+  child0_is_group : bit
+  child0_is_keyword : bit
+  child0_is_whitespace : bit
+  child0_normalized : nvarchar(max)
+  child1_children : nvarchar(max)
+  child1_class : nvarchar(500)
+  child1_is_group : bit
+  child1_is_keyword : bit
+  child1_is_whitespace : bit
+  child1_normalized : nvarchar(max)
+  child2_children : nvarchar(max)
+  child2_class : nvarchar(500)
+  child2_is_group : bit
+  child2_is_keyword : bit
+  child2_is_whitespace : bit
+  child2_normalized : nvarchar(max)
+  child3_children : nvarchar(max)
+  child3_class : nvarchar(500)
+  child3_is_group : bit
+  child3_is_keyword : bit
+  child3_is_whitespace : bit
+  child3_normalized : nvarchar(max)
+  child4_children : nvarchar(max)
+  child4_class : nvarchar(500)
+  child4_is_group : bit
+  child4_is_keyword : bit
+  child4_is_whitespace : bit
+  child4_normalized : nvarchar(max)
+  children : nvarchar(max)
   class : nvarchar(500)
   Identifier_alias : nvarchar(max)
   Identifier_source : nvarchar(max)
   Identifier_source_children : nvarchar(max)
   Identifier_source_class : nvarchar(500)
+  is_group : bit
+  is_keyword : bit
+  is_whitespace : bit
   normalized : nvarchar(max)
   RowNumber_per_Object : bigint
   SysObject_fullname : nvarchar(261)
@@ -266,18 +300,18 @@ entity sqlparse.RepoObject_SqlModules_Identitfier << V >> {
   SysObject_fullname : nvarchar(261)
 }
 
-sqlparse.ftv_sqlparse_with_some_children <.. sqlparse.RepoObject_SqlModules_20_statement_children
 sqlparse.ftv_sqlparse_with_some_children <.. sqlparse.RepoObject_SqlModules_24_IdentifierList_children
+sqlparse.ftv_sqlparse_with_some_children <.. sqlparse.RepoObject_SqlModules_20_statement_children
 sqlparse.RepoObject_SqlModules_10_statement <.. sqlparse.RepoObject_SqlModules_20_statement_children
-sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_22_identifier_alias_AS
-sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_41_from
+sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_32_ObjectClass
+sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_33_ObjectNormalized
 sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_21_statement_children_helper
 sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_29_1_object_is_union
 sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_29_2_object_is_GroupBy
-sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_32_ObjectClass
-sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_33_ObjectNormalized
+sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_22_identifier_alias_AS
 sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_23_normalized_wo_nolock
 sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_24_IdentifierList_children
+sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_41_from
 sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_51_Identitfier
 sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_Identitfier
 sqlparse.RepoObject_SqlModules_22_identifier_alias_AS <.. sqlparse.RepoObject_SqlModules_41_from
@@ -299,8 +333,8 @@ sqlparse.RepoObject_SqlModules_20_statement_children::is_group <-- sqlparse.Repo
 sqlparse.RepoObject_SqlModules_20_statement_children::is_group <-- sqlparse.RepoObject_SqlModules_41_from::is_group
 sqlparse.RepoObject_SqlModules_20_statement_children::is_keyword <-- sqlparse.RepoObject_SqlModules_41_from::is_keyword
 sqlparse.RepoObject_SqlModules_20_statement_children::is_keyword <-- sqlparse.RepoObject_SqlModules_21_statement_children_helper::is_keyword
-sqlparse.RepoObject_SqlModules_20_statement_children::is_keyword <-- sqlparse.RepoObject_SqlModules_Identitfier::is_keyword
 sqlparse.RepoObject_SqlModules_20_statement_children::is_keyword <-- sqlparse.RepoObject_SqlModules_51_Identitfier::is_keyword
+sqlparse.RepoObject_SqlModules_20_statement_children::is_keyword <-- sqlparse.RepoObject_SqlModules_Identitfier::is_keyword
 sqlparse.RepoObject_SqlModules_20_statement_children::is_whitespace <-- sqlparse.RepoObject_SqlModules_51_Identitfier::is_whitespace
 sqlparse.RepoObject_SqlModules_20_statement_children::is_whitespace <-- sqlparse.RepoObject_SqlModules_Identitfier::is_whitespace
 sqlparse.RepoObject_SqlModules_20_statement_children::is_whitespace <-- sqlparse.RepoObject_SqlModules_21_statement_children_helper::is_whitespace
@@ -321,14 +355,14 @@ sqlparse.RepoObject_SqlModules_20_statement_children::normalized <-- sqlparse.Re
 sqlparse.RepoObject_SqlModules_20_statement_children::normalized <-- sqlparse.RepoObject_SqlModules_24_IdentifierList_children::normalized
 sqlparse.RepoObject_SqlModules_20_statement_children::normalized <-- sqlparse.RepoObject_SqlModules_41_from::normalized
 sqlparse.RepoObject_SqlModules_20_statement_children::RepoObject_guid <-- sqlparse.RepoObject_SqlModules_41_from::RepoObject_guid
-sqlparse.RepoObject_SqlModules_20_statement_children::RepoObject_guid <-- sqlparse.RepoObject_SqlModules_24_IdentifierList_children::RepoObject_guid
 sqlparse.RepoObject_SqlModules_20_statement_children::RepoObject_guid <-- sqlparse.RepoObject_SqlModules_23_normalized_wo_nolock::RepoObject_guid
+sqlparse.RepoObject_SqlModules_20_statement_children::RepoObject_guid <-- sqlparse.RepoObject_SqlModules_24_IdentifierList_children::RepoObject_guid
 sqlparse.RepoObject_SqlModules_20_statement_children::RepoObject_guid <-- sqlparse.RepoObject_SqlModules_22_identifier_alias_AS::RepoObject_guid
-sqlparse.RepoObject_SqlModules_20_statement_children::RepoObject_guid <-- sqlparse.RepoObject_SqlModules_33_ObjectNormalized::RepoObject_guid
-sqlparse.RepoObject_SqlModules_20_statement_children::RepoObject_guid <-- sqlparse.RepoObject_SqlModules_29_2_object_is_GroupBy::RepoObject_guid
 sqlparse.RepoObject_SqlModules_20_statement_children::RepoObject_guid <-- sqlparse.RepoObject_SqlModules_32_ObjectClass::RepoObject_guid
-sqlparse.RepoObject_SqlModules_20_statement_children::RepoObject_guid <-- sqlparse.RepoObject_SqlModules_21_statement_children_helper::RepoObject_guid
 sqlparse.RepoObject_SqlModules_20_statement_children::RepoObject_guid <-- sqlparse.RepoObject_SqlModules_29_1_object_is_union::RepoObject_guid
+sqlparse.RepoObject_SqlModules_20_statement_children::RepoObject_guid <-- sqlparse.RepoObject_SqlModules_29_2_object_is_GroupBy::RepoObject_guid
+sqlparse.RepoObject_SqlModules_20_statement_children::RepoObject_guid <-- sqlparse.RepoObject_SqlModules_33_ObjectNormalized::RepoObject_guid
+sqlparse.RepoObject_SqlModules_20_statement_children::RepoObject_guid <-- sqlparse.RepoObject_SqlModules_21_statement_children_helper::RepoObject_guid
 sqlparse.RepoObject_SqlModules_20_statement_children::RepoObject_guid <-- sqlparse.RepoObject_SqlModules_Identitfier::RepoObject_guid
 sqlparse.RepoObject_SqlModules_20_statement_children::RepoObject_guid <-- sqlparse.RepoObject_SqlModules_51_Identitfier::RepoObject_guid
 sqlparse.RepoObject_SqlModules_20_statement_children::RowNumber_per_Object <-- sqlparse.RepoObject_SqlModules_Identitfier::RowNumber_per_Object

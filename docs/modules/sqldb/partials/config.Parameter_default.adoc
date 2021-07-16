@@ -44,7 +44,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-04-21 11:58:02
+2021-07-16 13:06:04
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -99,7 +99,7 @@ view
 |===
 |
 |Parameter_desciption
-|nvarchar(217)
+|nvarchar(247)
 |NOT NULL
 |
 |
@@ -143,7 +143,7 @@ view
 
 |
 |<<column-Parameter_desciption>>
-|nvarchar(217)
+|nvarchar(247)
 |NOT NULL
 |
 |
@@ -334,8 +334,8 @@ WHERE NOT EXISTS (
 * default parameter values are defined (hard coded) in xref:sqldb:config.Parameter_default.adoc[] and available in xref:sqldb:config.Parameter.adoc#column-Parameter_default_value[config.Parameter.Parameter_default_value]
 * default parameter values can be overwritten by project specific content using xref:sqldb:config.Parameter.adoc#column-Parameter_value[config.Parameter.Parameter_value]
 * resulting content is available in
-** xref:sqldb:config.Parameter.adoc#column-Parameter_value__result_int[config.Parameter.Parameter_value__result_int]
-** xref:sqldb:config.Parameter.adoc#column-Parameter_value__result_nvarchar[config.Parameter.Parameter_value__result_nvarchar]
+** xref:sqldb:config.Parameter.adoc#column-Parameter_value_result_int[+config.Parameter.Parameter_value__result_int+]
+** xref:sqldb:config.Parameter.adoc#column-Parameter_value_result_nvarchar[+config.Parameter.Parameter_value__result_nvarchar+]
 // end::ms_description[]
 
 
@@ -425,13 +425,16 @@ PK_Parameter
 
 
 
+
+
+
 /*
 <<property_start>>MS_Description
 * default parameter values are defined (hard coded) in xref:sqldb:config.Parameter_default.adoc[] and available in xref:sqldb:config.Parameter.adoc#column-Parameter_default_value[config.Parameter.Parameter_default_value]
 * default parameter values can be overwritten by project specific content using xref:sqldb:config.Parameter.adoc#column-Parameter_value[config.Parameter.Parameter_value]
 * resulting content is available in
-** xref:sqldb:config.Parameter.adoc#column-Parameter_value__result_int[config.Parameter.Parameter_value__result_int]
-** xref:sqldb:config.Parameter.adoc#column-Parameter_value__result_nvarchar[config.Parameter.Parameter_value__result_nvarchar]
+** xref:sqldb:config.Parameter.adoc#column-Parameter_value_result_int[+config.Parameter.Parameter_value__result_int+]
+** xref:sqldb:config.Parameter.adoc#column-Parameter_value_result_nvarchar[+config.Parameter.Parameter_value__result_nvarchar+]
 <<property_end>>
 
 <<property_start>>exampleUsage
@@ -469,6 +472,12 @@ Select
   , sub_Parameter           = N''
   , Parameter_desciption    = N'The database name must be the same as the one used in the synonyms'
   , Parameter_default_value = Cast(N'master' As sysname)
+Union All
+Select
+    Parameter_name          = 'dwh_readonly'
+  , sub_Parameter           = N''
+  , Parameter_desciption    = N'when dwh_readonly is 1 then nothing should changed in the dwh database (insert, update, delete). RepoObject synchronization into dwh will not happen. References will not extracted, they use ExtendedProperties, for example in [repo_sys].[SysObject]'
+  , Parameter_default_value = Cast(0 As TinyInt)
 Union All
 Select
     Parameter_name          = 'main enable usp_RepoObjectSource_FirstResultSet'

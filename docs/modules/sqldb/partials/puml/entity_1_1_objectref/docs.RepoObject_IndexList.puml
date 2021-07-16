@@ -23,6 +23,14 @@ skinparam class {
 }
 
 
+entity docs.fs_cleanStringForAnchorId << FN >> {
+  --
+}
+
+entity docs.fs_cleanStringForLabel << FN >> {
+  --
+}
+
 entity docs.RepoObject_IndexList << V >> {
   **RepoObject_guid** : uniqueidentifier
   --
@@ -47,6 +55,9 @@ entity repo.Index_gross << V >> {
   --
 }
 
+docs.fs_cleanStringForAnchorId <.. repo.ForeignKey_gross
+docs.fs_cleanStringForAnchorId <.. docs.RepoObject_IndexList
+docs.fs_cleanStringForLabel <.. docs.RepoObject_IndexList
 docs.RepoObject_IndexList <.. docs.RepoObject_IndexList_T
 docs.RepoObject_IndexList <.. docs.usp_PERSIST_RepoObject_IndexList_T
 docs.RepoObject_IndexList_T <.. docs.usp_PERSIST_RepoObject_IndexList_T

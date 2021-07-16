@@ -50,6 +50,7 @@ entity uspgenerator.ftv_GeneratorUspStep_tree << IF >> {
 entity uspgenerator.GeneratorUspStep << U >> {
   * **id** : int
   --
+  Description : nvarchar(4000)
   * has_logging : tinyint
   info_01 : nvarchar(max)
   info_02 : nvarchar(max)
@@ -94,7 +95,7 @@ entity uspgenerator.usp_GeneratorUsp_insert_update_persistence << P >> {
 uspgenerator.ftv_GeneratorUspStep_sql <.. uspgenerator.GeneratorUspStep_Sql
 uspgenerator.ftv_GeneratorUspStep_tree <.. uspgenerator.GeneratorUspStep_Sql
 uspgenerator.GeneratorUspStep <.. uspgenerator.GeneratorUspStep_Sql
-uspgenerator.GeneratorUspStep <.. uspgenerator.usp_GeneratorUsp_insert_update_persistence
-uspgenerator.GeneratorUspStep <.. uspgenerator.ftv_GeneratorUspStep_sql
 uspgenerator.GeneratorUspStep <.. uspgenerator.ftv_GeneratorUspStep_tree
+uspgenerator.GeneratorUspStep <.. uspgenerator.ftv_GeneratorUspStep_sql
+uspgenerator.GeneratorUspStep <.. uspgenerator.usp_GeneratorUsp_insert_update_persistence
 

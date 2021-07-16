@@ -28,6 +28,10 @@ entity repo.Index_gross << V >> {
   --
 }
 
+entity repo.Index_Settings_ForUpdate << V >> {
+  --
+}
+
 entity repo.Index_SqlConstraint_PkUq << V >> {
   **index_guid** : uniqueidentifier
   --
@@ -69,11 +73,12 @@ repo.Index_gross <.. repo.usp_Index_finish
 repo.Index_union <.. repo.Index_gross
 repo.Index_union <.. repo.Index_SqlConstraint_PkUq
 repo.Index_union <.. repo.IndexReferencedReferencing
+repo.Index_union <.. repo.Index_Settings_ForUpdate
 repo.Index_union <.. repo.usp_Index_finish
 repo.Index_unique_IndexPatternColumnGuid <.. repo.Index_union
-repo.Index_virtual <.. repo.Index_union
+repo.Index_virtual <.. repo.usp_Index_finish
 repo.Index_virtual <.. repo.IndexReferencedReferencing
 repo.Index_virtual <.. repo.Index_virtual_IndexPatternColumnGuid
-repo.Index_virtual <.. repo.usp_Index_finish
+repo.Index_virtual <.. repo.Index_union
 repo.Index_virtual_IndexPatternColumnGuid <.. repo.Index_union
 repo_sys.Index_unique <.. repo.Index_union

@@ -51,11 +51,21 @@ entity reference.RepoObject_reference_union << V >> {
   --
 }
 
+entity reference.RepoObject_reference_virtual << V >> {
+  --
+}
+
 entity reference.RepoObjectColumn_reference_SqlExpressionDependencies << V >> {
   * **referencing_id** : int
   * **referencing_minor_id** : int
   **referenced_id** : int
   * **referenced_minor_id** : int
+  --
+}
+
+entity reference.RepoObjectSource_virtual << U >> {
+  * **RepoObject_guid** : uniqueidentifier
+  * **Source_RepoObject_guid** : uniqueidentifier
   --
 }
 
@@ -137,19 +147,22 @@ entity sys_dwh.types << SN >> {
   --
 }
 
-config.ftv_dwh_database <.. repo_sys.ExtendedProperties
 config.ftv_dwh_database <.. repo_sys.sql_expression_dependencies
+config.ftv_dwh_database <.. repo_sys.ExtendedProperties
 config.ftv_dwh_database <.. repo_sys.SysColumn
 config.Parameter <.. config.ftv_dwh_database
 reference.RepoObject_reference_persistence <.. reference.RepoObject_reference_union
 reference.RepoObject_reference_SqlExpressionDependencies <.. reference.RepoObject_reference_union
 reference.RepoObject_reference_union <.. reference.RepoObjectColumn_reference_SqlExpressionDependencies
+reference.RepoObject_reference_virtual <.. reference.RepoObject_reference_union
+reference.RepoObjectSource_virtual <.. reference.RepoObject_reference_virtual
 repo.RepoObject <.. reference.RepoObject_reference_persistence
+repo.RepoObject <.. reference.RepoObject_reference_virtual
 repo.RepoObject_persistence <.. reference.RepoObject_reference_persistence
 repo_sys.ExtendedProperties <.. repo_sys.SysColumn
 repo_sys.ExtendedProperties <.. repo_sys.SysObject
-repo_sys.sql_expression_dependencies <.. reference.RepoObjectColumn_reference_SqlExpressionDependencies
 repo_sys.sql_expression_dependencies <.. reference.RepoObject_reference_SqlExpressionDependencies
+repo_sys.sql_expression_dependencies <.. reference.RepoObjectColumn_reference_SqlExpressionDependencies
 repo_sys.SysColumn <.. repo_sys.sql_expression_dependencies
 repo_sys.SysObject <.. repo_sys.sql_expression_dependencies
 repo_sys.SysObject <.. repo_sys.SysColumn

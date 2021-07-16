@@ -41,6 +41,10 @@ entity reference.RepoObject_reference_union << V >> {
   --
 }
 
+entity reference.RepoObject_reference_virtual << V >> {
+  --
+}
+
 entity reference.RepoObjectColumn_reference_BySamePredecessors << V >> {
   --
 }
@@ -65,6 +69,10 @@ entity reference.RepoObjectColumn_reference_SqlExpressionDependencies << V >> {
   --
 }
 
+entity reference.RepoObjectColumn_reference_virtual << V >> {
+  --
+}
+
 entity repo.IndexReferencedReferencing << V >> {
   --
 }
@@ -75,10 +83,12 @@ entity repo.usp_main << P >> {
 
 reference.RepoObject_reference_persistence <.. reference.RepoObject_reference_union
 reference.RepoObject_reference_SqlExpressionDependencies <.. reference.RepoObject_reference_union
+reference.RepoObject_reference_union <.. reference.RepoObjectColumn_reference_BySamePredecessors
 reference.RepoObject_reference_union <.. repo.IndexReferencedReferencing
 reference.RepoObject_reference_union <.. reference.RepoObjectColumn_reference_SqlExpressionDependencies
-reference.RepoObject_reference_union <.. reference.RepoObjectColumn_reference_BySamePredecessors
 reference.RepoObject_reference_union <.. reference.RepoObjectColumn_reference_FirstResultSet
 reference.RepoObject_reference_union <.. reference.RepoObjectColumn_reference_QueryPlan
 reference.RepoObject_reference_union <.. repo.usp_main
+reference.RepoObject_reference_union <.. reference.RepoObjectColumn_reference_virtual
+reference.RepoObject_reference_virtual <.. reference.RepoObject_reference_union
 reference.RepoObjectColumn_reference_FirstResultSet <.. reference.RepoObjectColumn_reference_BySamePredecessors

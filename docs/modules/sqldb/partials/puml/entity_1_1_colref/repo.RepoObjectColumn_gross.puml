@@ -54,12 +54,13 @@ entity property.RepoObjectColumnProperty_ForUpdate << V >> {
   * **RepoObjectColumnProperty_id** : int
   --
   inheritance : tinyint
-  property_basetype : sql_variant
   * property_name : nvarchar(128)
   * property_value : sql_variant
   * RepoObject_fullname : nvarchar(261)
   * RepoObject_fullname2 : nvarchar(257)
   * RepoObject_guid : uniqueidentifier
+  * RepoObject_name : nvarchar(128)
+  * RepoObject_schema_name : nvarchar(128)
   * RepoObjectColumn_fullname : nvarchar(520)
   * RepoObjectColumn_fullname2 : nvarchar(386)
   * RepoObjectColumn_guid : uniqueidentifier
@@ -123,6 +124,33 @@ entity reference.RepoObjectColumn_reference_QueryPlan << V >> {
   source_table_name_quoted : nvarchar(128)
 }
 
+entity reference.RepoObjectColumn_reference_virtual << V >> {
+  --
+  definition : nvarchar(max)
+  * InformationSource : varchar(34)
+  is_computed : bit
+  is_referenced_object : bit
+  is_referencing_object_equal_referenced_object : bit
+  * referenced_column_name : nvarchar(128)
+  * referenced_entity_name : nvarchar(128)
+  referenced_id : int
+  referenced_minor_id : int
+  referenced_node_id : bigint
+  * referenced_RepoObject_guid : uniqueidentifier
+  * referenced_RepoObjectColumn_guid : uniqueidentifier
+  * referenced_schema_name : nvarchar(128)
+  referenced_type : char(2)
+  * referencing_column_name : nvarchar(128)
+  * referencing_entity_name : nvarchar(128)
+  referencing_id : int
+  referencing_minor_id : int
+  referencing_node_id : bigint
+  * referencing_RepoObject_guid : uniqueidentifier
+  * referencing_RepoObjectColumn_guid : uniqueidentifier
+  * referencing_schema_name : nvarchar(128)
+  referencing_type : char(2)
+}
+
 entity reference.RepoObjectColumn_ReferencedList << V >> {
   --
   AntoraReferencedColumnList : nvarchar(max)
@@ -143,6 +171,10 @@ entity reference.RepoObjectColumn_ReferencingList << V >> {
   Referenced_type : char(2)
   ReferencedColumn_fullname : nvarchar(520)
   ReferencedColumn_fullname2 : nvarchar(386)
+}
+
+entity reference.usp_RepoObjectColumnSource_virtual_set << P >> {
+  --
 }
 
 entity repo.IndexColumn_union << V >> {
@@ -323,16 +355,19 @@ property.fs_get_RepoObjectColumnProperty_nvarchar <.. repo.RepoObjectColumn_gros
 reference.RepoObjectColumn_ReferencedList <.. repo.RepoObjectColumn_gross
 reference.RepoObjectColumn_ReferencingList <.. repo.RepoObjectColumn_gross
 repo.IndexColumn_union <.. repo.RepoObjectColumn_gross
-repo.RepoObject <.. reference.RepoObjectColumn_reference_QueryPlan
-repo.RepoObject <.. reference.RepoObjectColumn_reference_FirstResultSet
 repo.RepoObject <.. repo.RepoObjectColumn_gross
+repo.RepoObject <.. reference.RepoObjectColumn_reference_FirstResultSet
+repo.RepoObject <.. reference.RepoObjectColumn_reference_QueryPlan
+repo.RepoObjectColumn <.. reference.usp_RepoObjectColumnSource_virtual_set
 repo.RepoObjectColumn <.. repo.RepoObjectColumn_gross
-repo.RepoObjectColumn_gross <.. reference.RepoObjectColumn_reference_FirstResultSet
+repo.RepoObjectColumn_gross <.. repo.RepoObject_ColumnList
+repo.RepoObjectColumn_gross <.. reference.usp_RepoObjectColumnSource_virtual_set
+repo.RepoObjectColumn_gross <.. property.RepoObjectColumnProperty_ForUpdate
 repo.RepoObjectColumn_gross <.. graph.RepoObjectColumn_S
 repo.RepoObjectColumn_gross <.. docs.RepoObject_ColumnList
-repo.RepoObjectColumn_gross <.. property.RepoObjectColumnProperty_ForUpdate
+repo.RepoObjectColumn_gross <.. reference.RepoObjectColumn_reference_FirstResultSet
 repo.RepoObjectColumn_gross <.. reference.RepoObjectColumn_reference_QueryPlan
-repo.RepoObjectColumn_gross <.. repo.RepoObject_ColumnList
+repo.RepoObjectColumn_gross <.. reference.RepoObjectColumn_reference_virtual
 reference.RepoObjectColumn_ReferencedList::AntoraReferencedColumnList <-- repo.RepoObjectColumn_gross::AntoraReferencedColumnList
 reference.RepoObjectColumn_ReferencingList::AntoraReferencingColumnList <-- repo.RepoObjectColumn_gross::AntoraReferencingColumnList
 repo.IndexColumn_union::index_column_id <-- repo.RepoObjectColumn_gross::index_column_id
@@ -355,10 +390,18 @@ repo.RepoObject::RepoObject_type <-- repo.RepoObjectColumn_gross::RepoObject_typ
 repo.RepoObject::SysObject_fullname <-- repo.RepoObjectColumn_gross::SysObject_fullname
 repo.RepoObject::SysObject_fullname2 <-- repo.RepoObjectColumn_gross::SysObject_fullname2
 repo.RepoObject::SysObject_id <-- repo.RepoObjectColumn_gross::SysObject_id
+repo.RepoObject::SysObject_id <-- reference.RepoObjectColumn_reference_FirstResultSet::referencing_id
+repo.RepoObject::SysObject_id <-- reference.RepoObjectColumn_reference_QueryPlan::referencing_id
 repo.RepoObject::SysObject_modify_date <-- repo.RepoObjectColumn_gross::SysObject_modify_date
 repo.RepoObject::SysObject_name <-- repo.RepoObjectColumn_gross::SysObject_name
+repo.RepoObject::SysObject_name <-- reference.RepoObjectColumn_reference_QueryPlan::referencing_entity_name
+repo.RepoObject::SysObject_name <-- reference.RepoObjectColumn_reference_FirstResultSet::referencing_entity_name
 repo.RepoObject::SysObject_parent_object_id <-- repo.RepoObjectColumn_gross::SysObject_parent_object_id
 repo.RepoObject::SysObject_schema_name <-- repo.RepoObjectColumn_gross::SysObject_schema_name
+repo.RepoObject::SysObject_schema_name <-- reference.RepoObjectColumn_reference_FirstResultSet::referencing_schema_name
+repo.RepoObject::SysObject_schema_name <-- reference.RepoObjectColumn_reference_QueryPlan::referencing_schema_name
+repo.RepoObject::SysObject_type <-- reference.RepoObjectColumn_reference_QueryPlan::referencing_type
+repo.RepoObject::SysObject_type <-- reference.RepoObjectColumn_reference_FirstResultSet::referencing_type
 repo.RepoObject::SysObject_type <-- repo.RepoObjectColumn_gross::SysObject_type
 repo.RepoObjectColumn::has_different_sys_names <-- repo.RepoObjectColumn_gross::has_different_sys_names
 repo.RepoObjectColumn::Inheritance_StringAggSeparatorSql <-- repo.RepoObjectColumn_gross::Inheritance_StringAggSeparatorSql
@@ -395,17 +438,53 @@ repo.RepoObjectColumn::RepoObjectColumn_guid <-- repo.RepoObjectColumn_gross::Re
 repo.RepoObjectColumn::RepoObjectColumn_name <-- repo.RepoObjectColumn_gross::RepoObjectColumn_name
 repo.RepoObjectColumn::SysObjectColumn_column_id <-- repo.RepoObjectColumn_gross::SysObjectColumn_column_id
 repo.RepoObjectColumn::SysObjectColumn_name <-- repo.RepoObjectColumn_gross::SysObjectColumn_name
-repo.RepoObjectColumn_gross::RepoObject_fullname <-- graph.RepoObjectColumn_S::RepoObject_fullname
+repo.RepoObjectColumn_gross::node_id <-- reference.RepoObjectColumn_reference_virtual::referencing_node_id
+repo.RepoObjectColumn_gross::node_id <-- reference.RepoObjectColumn_reference_virtual::referenced_node_id
 repo.RepoObjectColumn_gross::RepoObject_fullname <-- property.RepoObjectColumnProperty_ForUpdate::RepoObject_fullname
+repo.RepoObjectColumn_gross::RepoObject_fullname <-- graph.RepoObjectColumn_S::RepoObject_fullname
 repo.RepoObjectColumn_gross::RepoObject_fullname2 <-- property.RepoObjectColumnProperty_ForUpdate::RepoObject_fullname2
 repo.RepoObjectColumn_gross::RepoObject_guid <-- property.RepoObjectColumnProperty_ForUpdate::RepoObject_guid
-repo.RepoObjectColumn_gross::RepoObject_guid <-- docs.RepoObject_ColumnList::RepoObject_guid
+repo.RepoObjectColumn_gross::RepoObject_guid <-- reference.RepoObjectColumn_reference_virtual::referencing_RepoObject_guid
+repo.RepoObjectColumn_gross::RepoObject_guid <-- reference.RepoObjectColumn_reference_virtual::referenced_RepoObject_guid
 repo.RepoObjectColumn_gross::RepoObject_guid <-- graph.RepoObjectColumn_S::RepoObject_guid
+repo.RepoObjectColumn_gross::RepoObject_guid <-- docs.RepoObject_ColumnList::RepoObject_guid
+repo.RepoObjectColumn_gross::RepoObject_guid <-- reference.RepoObjectColumn_reference_FirstResultSet::referenced_RepoObject_guid
+repo.RepoObjectColumn_gross::RepoObject_guid <-- reference.RepoObjectColumn_reference_QueryPlan::referenced_RepoObject_guid
 repo.RepoObjectColumn_gross::RepoObject_guid <-- repo.RepoObject_ColumnList::RepoObject_guid
+repo.RepoObjectColumn_gross::RepoObject_name <-- property.RepoObjectColumnProperty_ForUpdate::RepoObject_name
+repo.RepoObjectColumn_gross::RepoObject_schema_name <-- property.RepoObjectColumnProperty_ForUpdate::RepoObject_schema_name
 repo.RepoObjectColumn_gross::RepoObject_type <-- graph.RepoObjectColumn_S::RepoObject_type
 repo.RepoObjectColumn_gross::RepoObjectColumn_fullname <-- graph.RepoObjectColumn_S::RepoObjectColumn_fullname
 repo.RepoObjectColumn_gross::RepoObjectColumn_fullname <-- property.RepoObjectColumnProperty_ForUpdate::RepoObjectColumn_fullname
 repo.RepoObjectColumn_gross::RepoObjectColumn_fullname2 <-- property.RepoObjectColumnProperty_ForUpdate::RepoObjectColumn_fullname2
+repo.RepoObjectColumn_gross::RepoObjectColumn_guid <-- reference.RepoObjectColumn_reference_virtual::referenced_RepoObjectColumn_guid
+repo.RepoObjectColumn_gross::RepoObjectColumn_guid <-- reference.RepoObjectColumn_reference_virtual::referencing_RepoObjectColumn_guid
 repo.RepoObjectColumn_gross::RepoObjectColumn_guid <-- graph.RepoObjectColumn_S::RepoObjectColumn_guid
+repo.RepoObjectColumn_gross::RepoObjectColumn_guid <-- reference.RepoObjectColumn_reference_QueryPlan::referencing_RepoObjectColumn_guid
+repo.RepoObjectColumn_gross::RepoObjectColumn_guid <-- reference.RepoObjectColumn_reference_QueryPlan::referenced_RepoObjectColumn_guid
+repo.RepoObjectColumn_gross::RepoObjectColumn_guid <-- reference.RepoObjectColumn_reference_FirstResultSet::referencing_RepoObjectColumn_guid
+repo.RepoObjectColumn_gross::RepoObjectColumn_guid <-- reference.RepoObjectColumn_reference_FirstResultSet::referenced_RepoObjectColumn_guid
 repo.RepoObjectColumn_gross::RepoObjectColumn_name <-- graph.RepoObjectColumn_S::RepoObjectColumn_name
 repo.RepoObjectColumn_gross::RepoObjectColumn_name <-- property.RepoObjectColumnProperty_ForUpdate::RepoObjectColumn_name
+repo.RepoObjectColumn_gross::SysObject_id <-- reference.RepoObjectColumn_reference_virtual::referenced_id
+repo.RepoObjectColumn_gross::SysObject_id <-- reference.RepoObjectColumn_reference_virtual::referencing_id
+repo.RepoObjectColumn_gross::SysObject_id <-- reference.RepoObjectColumn_reference_FirstResultSet::referenced_id
+repo.RepoObjectColumn_gross::SysObject_id <-- reference.RepoObjectColumn_reference_QueryPlan::referenced_id
+repo.RepoObjectColumn_gross::SysObject_name <-- reference.RepoObjectColumn_reference_QueryPlan::referenced_entity_name
+repo.RepoObjectColumn_gross::SysObject_name <-- reference.RepoObjectColumn_reference_virtual::referencing_entity_name
+repo.RepoObjectColumn_gross::SysObject_name <-- reference.RepoObjectColumn_reference_virtual::referenced_entity_name
+repo.RepoObjectColumn_gross::SysObject_schema_name <-- reference.RepoObjectColumn_reference_virtual::referencing_schema_name
+repo.RepoObjectColumn_gross::SysObject_schema_name <-- reference.RepoObjectColumn_reference_virtual::referenced_schema_name
+repo.RepoObjectColumn_gross::SysObject_schema_name <-- reference.RepoObjectColumn_reference_QueryPlan::referenced_schema_name
+repo.RepoObjectColumn_gross::SysObject_type <-- reference.RepoObjectColumn_reference_QueryPlan::referenced_type
+repo.RepoObjectColumn_gross::SysObject_type <-- reference.RepoObjectColumn_reference_FirstResultSet::referenced_type
+repo.RepoObjectColumn_gross::SysObject_type <-- reference.RepoObjectColumn_reference_virtual::referenced_type
+repo.RepoObjectColumn_gross::SysObject_type <-- reference.RepoObjectColumn_reference_virtual::referencing_type
+repo.RepoObjectColumn_gross::SysObjectColumn_column_id <-- reference.RepoObjectColumn_reference_virtual::referencing_minor_id
+repo.RepoObjectColumn_gross::SysObjectColumn_column_id <-- reference.RepoObjectColumn_reference_virtual::referenced_minor_id
+repo.RepoObjectColumn_gross::SysObjectColumn_column_id <-- reference.RepoObjectColumn_reference_FirstResultSet::referenced_minor_id
+repo.RepoObjectColumn_gross::SysObjectColumn_column_id <-- reference.RepoObjectColumn_reference_FirstResultSet::referencing_minor_id
+repo.RepoObjectColumn_gross::SysObjectColumn_column_id <-- reference.RepoObjectColumn_reference_QueryPlan::referencing_minor_id
+repo.RepoObjectColumn_gross::SysObjectColumn_column_id <-- reference.RepoObjectColumn_reference_QueryPlan::referenced_minor_id
+repo.RepoObjectColumn_gross::SysObjectColumn_name <-- reference.RepoObjectColumn_reference_virtual::referenced_column_name
+repo.RepoObjectColumn_gross::SysObjectColumn_name <-- reference.RepoObjectColumn_reference_virtual::referencing_column_name

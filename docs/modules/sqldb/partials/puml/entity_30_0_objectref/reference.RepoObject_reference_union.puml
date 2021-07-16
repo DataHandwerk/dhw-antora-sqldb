@@ -51,6 +51,16 @@ entity reference.RepoObject_reference_union << V >> {
   --
 }
 
+entity reference.RepoObject_reference_virtual << V >> {
+  --
+}
+
+entity reference.RepoObjectSource_virtual << U >> {
+  * **RepoObject_guid** : uniqueidentifier
+  * **Source_RepoObject_guid** : uniqueidentifier
+  --
+}
+
 entity repo.RepoObject << U >> {
   * **RepoObject_guid** : uniqueidentifier
   --
@@ -129,12 +139,15 @@ entity sys_dwh.types << SN >> {
   --
 }
 
-config.ftv_dwh_database <.. repo_sys.sql_expression_dependencies
 config.ftv_dwh_database <.. repo_sys.ExtendedProperties
 config.ftv_dwh_database <.. repo_sys.SysColumn
+config.ftv_dwh_database <.. repo_sys.sql_expression_dependencies
 config.Parameter <.. config.ftv_dwh_database
 reference.RepoObject_reference_persistence <.. reference.RepoObject_reference_union
 reference.RepoObject_reference_SqlExpressionDependencies <.. reference.RepoObject_reference_union
+reference.RepoObject_reference_virtual <.. reference.RepoObject_reference_union
+reference.RepoObjectSource_virtual <.. reference.RepoObject_reference_virtual
+repo.RepoObject <.. reference.RepoObject_reference_virtual
 repo.RepoObject <.. reference.RepoObject_reference_persistence
 repo.RepoObject_persistence <.. reference.RepoObject_reference_persistence
 repo_sys.ExtendedProperties <.. repo_sys.SysColumn

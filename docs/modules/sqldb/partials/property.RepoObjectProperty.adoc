@@ -34,13 +34,13 @@ user table
 == SysObject_id
 
 // tag::SysObject_id[]
-581577110
+107863451
 // end::SysObject_id[]
 
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-04-16 19:26:52
+2021-05-16 15:41:51
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -89,8 +89,8 @@ user table
 
 .Referencing Columns
 --
-* xref:property.ExtendedProperty_Repo2Sys_level1.adoc#column-property_name[property.ExtendedProperty_Repo2Sys_level1.property_name]
-* xref:property.ExtendedProperty_Repo2Sys_level2_RepoObject.adoc#column-property_name[property.ExtendedProperty_Repo2Sys_level2_RepoObject.property_name]
+* xref:property.ExtendedProperty_Repo2Sys_level1.adoc#column-property_name[+property.ExtendedProperty_Repo2Sys_level1.property_name+]
+* xref:property.ExtendedProperty_Repo2Sys_level2_RepoObject.adoc#column-property_name[+property.ExtendedProperty_Repo2Sys_level2_RepoObject.property_name+]
 --
 
 
@@ -115,17 +115,17 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 
 .Referencing Columns
 --
-* xref:property.ExtendedProperty_Repo2Sys_level1.adoc#column-property_value[property.ExtendedProperty_Repo2Sys_level1.property_value]
-* xref:property.ExtendedProperty_Repo2Sys_level2_RepoObject.adoc#column-property_value[property.ExtendedProperty_Repo2Sys_level2_RepoObject.property_value]
-* xref:property.RepoObjectProperty.adoc#column-property_basetype[property.RepoObjectProperty.property_basetype]
-* xref:property.RepoObjectProperty.adoc#column-property_bigint[property.RepoObjectProperty.property_bigint]
-* xref:property.RepoObjectProperty.adoc#column-property_float[property.RepoObjectProperty.property_float]
-* xref:property.RepoObjectProperty.adoc#column-property_int[property.RepoObjectProperty.property_int]
-* xref:property.RepoObjectProperty.adoc#column-property_money[property.RepoObjectProperty.property_money]
-* xref:property.RepoObjectProperty.adoc#column-property_nvarchar[property.RepoObjectProperty.property_nvarchar]
-* xref:property.RepoObjectProperty.adoc#column-property_real[property.RepoObjectProperty.property_real]
-* xref:property.RepoObjectProperty.adoc#column-property_varchar[property.RepoObjectProperty.property_varchar]
-* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-property_value[property.RepoObjectProperty_InheritanceType_InheritanceDefinition.property_value]
+* xref:property.ExtendedProperty_Repo2Sys_level1.adoc#column-property_value[+property.ExtendedProperty_Repo2Sys_level1.property_value+]
+* xref:property.ExtendedProperty_Repo2Sys_level2_RepoObject.adoc#column-property_value[+property.ExtendedProperty_Repo2Sys_level2_RepoObject.property_value+]
+* xref:property.RepoObjectProperty.adoc#column-property_basetype[+property.RepoObjectProperty.property_basetype+]
+* xref:property.RepoObjectProperty.adoc#column-property_bigint[+property.RepoObjectProperty.property_bigint+]
+* xref:property.RepoObjectProperty.adoc#column-property_float[+property.RepoObjectProperty.property_float+]
+* xref:property.RepoObjectProperty.adoc#column-property_int[+property.RepoObjectProperty.property_int+]
+* xref:property.RepoObjectProperty.adoc#column-property_money[+property.RepoObjectProperty.property_money+]
+* xref:property.RepoObjectProperty.adoc#column-property_nvarchar[+property.RepoObjectProperty.property_nvarchar+]
+* xref:property.RepoObjectProperty.adoc#column-property_real[+property.RepoObjectProperty.property_real+]
+* xref:property.RepoObjectProperty.adoc#column-property_varchar[+property.RepoObjectProperty.property_varchar+]
+* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-property_value[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.property_value+]
 --
 
 
@@ -144,8 +144,8 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 
 .Referencing Columns
 --
-* xref:property.ExtendedProperty_Repo2Sys_level1.adoc#column-RepoObject_guid[property.ExtendedProperty_Repo2Sys_level1.RepoObject_guid]
-* xref:property.ExtendedProperty_Repo2Sys_level2_RepoObject.adoc#column-RepoObject_guid[property.ExtendedProperty_Repo2Sys_level2_RepoObject.RepoObject_guid]
+* xref:property.ExtendedProperty_Repo2Sys_level1.adoc#column-RepoObject_guid[+property.ExtendedProperty_Repo2Sys_level1.RepoObject_guid+]
+* xref:property.ExtendedProperty_Repo2Sys_level2_RepoObject.adoc#column-RepoObject_guid[+property.ExtendedProperty_Repo2Sys_level2_RepoObject.RepoObject_guid+]
 --
 
 
@@ -174,7 +174,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 
 .Referenced Columns
 --
-* xref:property.RepoObjectProperty.adoc#column-property_value[property.RepoObjectProperty.property_value]
+* xref:property.RepoObjectProperty.adoc#column-property_value[+property.RepoObjectProperty.property_value+]
 --
 
 
@@ -198,12 +198,12 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 
 .Definition
 ....
-(TRY_CAST([property_value] AS [bigint]))
+(case when NOT sql_variant_property([property_value],'BaseType')='uniqueidentifier' then TRY_CAST([property_value] AS [bigint])  end)
 ....
 
 .Referenced Columns
 --
-* xref:property.RepoObjectProperty.adoc#column-property_value[property.RepoObjectProperty.property_value]
+* xref:property.RepoObjectProperty.adoc#column-property_value[+property.RepoObjectProperty.property_value+]
 --
 
 
@@ -227,12 +227,12 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 
 .Definition
 ....
-(TRY_CAST([property_value] AS [float]))
+(case when NOT sql_variant_property([property_value],'BaseType')='uniqueidentifier' then TRY_CAST([property_value] AS [float])  end)
 ....
 
 .Referenced Columns
 --
-* xref:property.RepoObjectProperty.adoc#column-property_value[property.RepoObjectProperty.property_value]
+* xref:property.RepoObjectProperty.adoc#column-property_value[+property.RepoObjectProperty.property_value+]
 --
 
 
@@ -256,12 +256,12 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 
 .Definition
 ....
-(TRY_CAST([property_value] AS [int]))
+(case when NOT sql_variant_property([property_value],'BaseType')='uniqueidentifier' then TRY_CAST([property_value] AS [int])  end)
 ....
 
 .Referenced Columns
 --
-* xref:property.RepoObjectProperty.adoc#column-property_value[property.RepoObjectProperty.property_value]
+* xref:property.RepoObjectProperty.adoc#column-property_value[+property.RepoObjectProperty.property_value+]
 --
 
 
@@ -285,12 +285,12 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 
 .Definition
 ....
-(TRY_CAST([property_value] AS [money]))
+(case when NOT sql_variant_property([property_value],'BaseType')='uniqueidentifier' then TRY_CAST([property_value] AS [money])  end)
 ....
 
 .Referenced Columns
 --
-* xref:property.RepoObjectProperty.adoc#column-property_value[property.RepoObjectProperty.property_value]
+* xref:property.RepoObjectProperty.adoc#column-property_value[+property.RepoObjectProperty.property_value+]
 --
 
 
@@ -319,7 +319,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 
 .Referenced Columns
 --
-* xref:property.RepoObjectProperty.adoc#column-property_value[property.RepoObjectProperty.property_value]
+* xref:property.RepoObjectProperty.adoc#column-property_value[+property.RepoObjectProperty.property_value+]
 --
 
 
@@ -343,12 +343,12 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 
 .Definition
 ....
-(TRY_CAST([property_value] AS [real]))
+(case when NOT sql_variant_property([property_value],'BaseType')='uniqueidentifier' then TRY_CAST([property_value] AS [real])  end)
 ....
 
 .Referenced Columns
 --
-* xref:property.RepoObjectProperty.adoc#column-property_value[property.RepoObjectProperty.property_value]
+* xref:property.RepoObjectProperty.adoc#column-property_value[+property.RepoObjectProperty.property_value+]
 --
 
 
@@ -377,7 +377,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 
 .Referenced Columns
 --
-* xref:property.RepoObjectProperty.adoc#column-property_value[property.RepoObjectProperty.property_value]
+* xref:property.RepoObjectProperty.adoc#column-property_value[+property.RepoObjectProperty.property_value+]
 --
 
 
@@ -524,8 +524,8 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 * PK, Unique, Real: 0, 1, 1
 
 
-[[index-idx_RepoObjectProperty__1]]
-=== idx_RepoObjectProperty__1
+[[index-idx_RepoObjectProperty_1]]
+=== idx_RepoObjectProperty++__++1
 
 * IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_repoobject_guid[RepoObject_guid]
 +
@@ -534,7 +534,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 --
 * PK, Unique, Real: 0, 0, 0
 * ++FK_RepoObjectProperty__RepoObject++ +
-referenced: xref:repo.RepoObject.adoc[], xref:repo.RepoObject.adoc#index-PK_RepoObject[PK_RepoObject]
+referenced: xref:repo.RepoObject.adoc[], xref:repo.RepoObject.adoc#index-PK_RepoObject[+PK_RepoObject+]
 * is disabled
 
 // end::AntoraIndexList[]
@@ -567,6 +567,7 @@ referenced: xref:repo.RepoObject.adoc[], xref:repo.RepoObject.adoc#index-PK_Repo
 * xref:property.ExtendedProperty_Repo2Sys_level2_RepoObject.adoc[]
 * xref:property.fs_get_RepoObjectProperty_nvarchar.adoc[]
 * xref:property.PropertyName_RepoObject.adoc[]
+* xref:property.RepoObjectProperty_ForUpdate.adoc[]
 * xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc[]
 * xref:property.RepoObjectProperty_sys_repo.adoc[]
 * xref:property.usp_RepoObject_Inheritance.adoc[]

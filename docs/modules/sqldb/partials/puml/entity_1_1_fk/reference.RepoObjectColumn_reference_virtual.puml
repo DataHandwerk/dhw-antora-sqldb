@@ -1,0 +1,72 @@
+Left to right direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+}
+
+
+entity reference.RepoObjectColumn_reference_virtual << V >> {
+- idx_RepoObjectColumn_reference_virtual__1
+{schema_name,object_name}
+..
+referencing_schema_name; nvarchar(128)
+referencing_entity_name; nvarchar(128)
+--
+- idx_RepoObjectColumn_reference_virtual__2
+{schema_name,object_name}
+..
+referenced_schema_name; nvarchar(128)
+referenced_entity_name; nvarchar(128)
+--
+- idx_RepoObjectColumn_reference_virtual__3
+{RepoObjectColumn_guid}
+..
+referencing_RepoObjectColumn_guid; uniqueidentifier
+--
+- idx_RepoObjectColumn_reference_virtual__4
+{RepoObjectColumn_guid}
+..
+referenced_RepoObjectColumn_guid; uniqueidentifier
+--
+- idx_RepoObjectColumn_reference_virtual__5
+{RepoObjectColumn_guid,column_name}
+..
+referencing_RepoObjectColumn_guid; uniqueidentifier
+referencing_column_name; nvarchar(128)
+--
+- idx_RepoObjectColumn_reference_virtual__6
+{RepoObjectColumn_guid,column_name}
+..
+referenced_RepoObjectColumn_guid; uniqueidentifier
+referenced_column_name; nvarchar(128)
+--
+- idx_RepoObjectColumn_reference_virtual__7
+
+..
+referencing_RepoObject_guid; uniqueidentifier
+--
+- idx_RepoObjectColumn_reference_virtual__8
+
+..
+referenced_RepoObject_guid; uniqueidentifier
+}
+
+

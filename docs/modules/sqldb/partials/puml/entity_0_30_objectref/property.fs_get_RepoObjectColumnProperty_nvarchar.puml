@@ -290,6 +290,14 @@ entity reference.RepoObjectColumn_reference_QueryPlan << V >> {
   --
 }
 
+entity reference.RepoObjectColumn_reference_union << V >> {
+  --
+}
+
+entity reference.RepoObjectColumn_reference_virtual << V >> {
+  --
+}
+
 entity reference.RepoObjectColumn_ReferencedList << V >> {
   --
 }
@@ -308,6 +316,10 @@ entity reference.RepoObjectColumn_ReferencingReferenced << V >> {
   --
 }
 
+entity reference.RepoObjectColumn_RelationScript << V >> {
+  --
+}
+
 entity reference.SysObjectColumn_QueryPlanExpression << V >> {
   --
 }
@@ -316,11 +328,21 @@ entity reference.usp_RepoObject_update_SysObjectQueryPlan << P >> {
   --
 }
 
+entity reference.usp_RepoObjectColumnSource_virtual_set << P >> {
+  --
+}
+
 entity reference.usp_RepoObjectSource_FirstResultSet << P >> {
   --
 }
 
 entity reference.usp_RepoObjectSource_QueryPlan << P >> {
+  --
+}
+
+entity repo.check_IndexColumn_virtual_referenced_setpoint << V >> {
+  * **index_guid** : uniqueidentifier
+  * **index_column_id** : int
   --
 }
 
@@ -354,8 +376,42 @@ entity repo.Index_gross << V >> {
   --
 }
 
+entity repo.Index_referencing_IndexPatternColumnGuid << V >> {
+  **source_index_guid** : uniqueidentifier
+  **referencing_RepoObject_guid** : uniqueidentifier
+  --
+}
+
 entity repo.Index_virtual_ForUpdate << V >> {
   * **index_guid** : uniqueidentifier
+  --
+}
+
+entity repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing << V >> {
+  **index_guid** : uniqueidentifier
+  * **index_column_id** : int
+  **RowNumberInReferencing** : bigint
+  --
+}
+
+entity repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_check << V >> {
+  --
+}
+
+entity repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T << U >> {
+  **index_guid** : uniqueidentifier
+  * **index_column_id** : int
+  **RowNumberInReferencing** : bigint
+  --
+}
+
+entity repo.IndexColumn_virtual_referenced_setpoint << V >> {
+  * **index_guid** : uniqueidentifier
+  * **index_column_id** : int
+  --
+}
+
+entity repo.IndexReferencedReferencing_HasFullColumnsInReferencing << V >> {
   --
 }
 
@@ -385,6 +441,11 @@ entity repo.RepoObjectColumn_gross << V >> {
   --
 }
 
+entity repo.RepoObjectColumn_MissingSource_TypeV << V >> {
+  * **RepoObjectColumn_guid** : uniqueidentifier
+  --
+}
+
 entity repo.usp_Index_finish << P >> {
   --
 }
@@ -406,6 +467,10 @@ entity repo.usp_main << P >> {
 }
 
 entity repo.usp_PERSIST_ForeignKey_Indexes_union_T << P >> {
+  --
+}
+
+entity repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T << P >> {
   --
 }
 
@@ -448,27 +513,27 @@ docs.RepoObject_Adoc <.. docs.usp_PERSIST_RepoObject_Adoc_T
 docs.RepoObject_Adoc_T <.. docs.usp_PERSIST_RepoObject_Adoc_T
 docs.RepoObject_ColumnList <.. docs.RepoObject_Adoc
 docs.RepoObject_ColumnList <.. docs.RepoObject_Plantuml_Entity
-docs.RepoObject_IndexList <.. docs.RepoObject_IndexList_T
 docs.RepoObject_IndexList <.. docs.usp_PERSIST_RepoObject_IndexList_T
+docs.RepoObject_IndexList <.. docs.RepoObject_IndexList_T
 docs.RepoObject_IndexList_T <.. docs.usp_PERSIST_RepoObject_IndexList_T
 docs.RepoObject_IndexList_T <.. docs.RepoObject_Plantuml_Entity
 docs.RepoObject_IndexList_T <.. docs.RepoObject_Adoc
-docs.RepoObject_OutputFilter <.. docs.usp_AntoraExport_ObjectPartialProperties
-docs.RepoObject_OutputFilter <.. docs.AntoraNavListRepoObject_by_type
-docs.RepoObject_OutputFilter <.. docs.AntoraNavListRepoObject_by_schema
-docs.RepoObject_OutputFilter <.. docs.AntoraNavListRepoObject_by_schema_type
 docs.RepoObject_OutputFilter <.. docs.usp_AntoraExport_ObjectPage
 docs.RepoObject_OutputFilter <.. docs.RepoObject_Plantuml_Entity
+docs.RepoObject_OutputFilter <.. docs.usp_AntoraExport_ObjectPartialProperties
 docs.RepoObject_OutputFilter <.. docs.usp_AntoraExport_ObjectPuml
 docs.RepoObject_OutputFilter <.. docs.AntoraNavListPage_by_type
+docs.RepoObject_OutputFilter <.. docs.AntoraNavListRepoObject_by_schema_type
+docs.RepoObject_OutputFilter <.. docs.AntoraNavListRepoObject_by_type
+docs.RepoObject_OutputFilter <.. docs.AntoraNavListRepoObject_by_schema
 docs.RepoObject_Plantuml <.. docs.RepoObject_Plantuml_T
 docs.RepoObject_Plantuml <.. docs.usp_PERSIST_RepoObject_Plantuml_T
 docs.RepoObject_Plantuml_ColRefList <.. docs.RepoObject_Plantuml
 docs.RepoObject_Plantuml_Entity <.. docs.RepoObject_Plantuml_Entity_T
 docs.RepoObject_Plantuml_Entity <.. docs.usp_PERSIST_RepoObject_Plantuml_Entity_T
 docs.RepoObject_Plantuml_Entity_T <.. docs.usp_PERSIST_RepoObject_Plantuml_Entity_T
-docs.RepoObject_Plantuml_Entity_T <.. docs.ftv_RepoObject_Reference_PlantUml_EntityRefList
 docs.RepoObject_Plantuml_Entity_T <.. docs.RepoObject_PlantUml_PumlEntityFkList
+docs.RepoObject_Plantuml_Entity_T <.. docs.ftv_RepoObject_Reference_PlantUml_EntityRefList
 docs.RepoObject_PlantUml_FkRefList <.. docs.RepoObject_Plantuml
 docs.RepoObject_PlantUml_PumlEntityFkList <.. docs.RepoObject_Plantuml
 docs.RepoObject_Plantuml_T <.. docs.usp_PERSIST_RepoObject_Plantuml_T
@@ -484,13 +549,13 @@ graph.Index <.. graph.usp_PERSIST_Index
 graph.Index_S <.. graph.usp_PERSIST_Index
 graph.Index_S <.. graph.Index
 graph.RepoObjectColumn <.. docs.RepoObject_Plantuml_ColRefList
-graph.RepoObjectColumn <.. repo.usp_sync_guid_RepoObjectColumn
-graph.RepoObjectColumn <.. repo.usp_main
-graph.RepoObjectColumn <.. graph.usp_PERSIST_RepoObjectColumn
 graph.RepoObjectColumn <.. reference.RepoObjectColumn_ReferencingReferenced
+graph.RepoObjectColumn <.. repo.usp_sync_guid_RepoObjectColumn
+graph.RepoObjectColumn <.. graph.usp_PERSIST_RepoObjectColumn
+graph.RepoObjectColumn <.. repo.usp_main
 graph.RepoObjectColumn_S <.. graph.usp_PERSIST_RepoObjectColumn
-graph.RepoObjectColumn_S <.. graph.RepoObjectColumn
 graph.RepoObjectColumn_S <.. repo.usp_sync_guid_RepoObjectColumn
+graph.RepoObjectColumn_S <.. graph.RepoObjectColumn
 graph.usp_PERSIST_Index <.. repo.usp_Index_finish
 graph.usp_PERSIST_RepoObjectColumn <.. repo.usp_sync_guid_RepoObjectColumn
 property.fs_get_RepoObjectColumnProperty_nvarchar <.. repo.RepoObjectColumn_gross
@@ -501,13 +566,19 @@ reference.Match_RepoObject_referenced_UspPersistence <.. reference.Reference_Usp
 reference.Match_RepoObject_referenced_UspPersistence <.. repo.usp_main
 reference.RepoObjectColumn_reference_FirstResultSet <.. reference.RepoObjectColumn_reference_BySamePredecessors
 reference.RepoObjectColumn_reference_QueryPlan <.. reference.SysObjectColumn_QueryPlanExpression
+reference.RepoObjectColumn_reference_union <.. repo.RepoObjectColumn_MissingSource_TypeV
+reference.RepoObjectColumn_reference_union <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing
+reference.RepoObjectColumn_reference_union <.. reference.RepoObjectColumn_RelationScript
+reference.RepoObjectColumn_reference_union <.. repo.usp_main
+reference.RepoObjectColumn_reference_virtual <.. reference.RepoObjectColumn_reference_union
 reference.RepoObjectColumn_ReferencedList <.. repo.RepoObjectColumn_gross
 reference.RepoObjectColumn_ReferenceTree <.. reference.ftv_RepoObject_ColumReferenceRepoObject
 reference.RepoObjectColumn_ReferencingList <.. repo.RepoObjectColumn_gross
 reference.RepoObjectColumn_ReferencingReferenced <.. reference.ftv_RepoObject_DbmlColumnRelation
-reference.RepoObjectColumn_ReferencingReferenced <.. reference.RepoObjectColumn_ReferencedList
-reference.RepoObjectColumn_ReferencingReferenced <.. reference.RepoObjectColumn_ReferencingList
 reference.RepoObjectColumn_ReferencingReferenced <.. reference.ftv_RepoObjectColumn_ReferenceTree
+reference.RepoObjectColumn_ReferencingReferenced <.. reference.RepoObjectColumn_ReferencingList
+reference.RepoObjectColumn_ReferencingReferenced <.. reference.RepoObjectColumn_ReferencedList
+reference.RepoObjectColumn_RelationScript <.. reference.ftv_RepoObject_ColumReferenceRepoObject
 reference.SysObjectColumn_QueryPlanExpression <.. reference.usp_RepoObjectSource_QueryPlan
 reference.usp_RepoObject_update_SysObjectQueryPlan <.. repo.usp_main
 reference.usp_RepoObjectSource_FirstResultSet <.. repo.usp_main
@@ -515,62 +586,76 @@ reference.usp_RepoObjectSource_QueryPlan <.. repo.usp_main
 repo.ForeignKey_gross <.. docs.RepoObject_IndexList
 repo.ForeignKey_Indexes <.. repo.usp_Index_ForeignKey
 repo.ForeignKey_Indexes <.. repo.ForeignKey_Indexes_union
-repo.ForeignKey_Indexes_union <.. repo.ForeignKey_Indexes_union_T
 repo.ForeignKey_Indexes_union <.. repo.usp_PERSIST_ForeignKey_Indexes_union_T
-repo.ForeignKey_Indexes_union_T <.. repo.usp_PERSIST_ForeignKey_Indexes_union_T
+repo.ForeignKey_Indexes_union <.. repo.ForeignKey_Indexes_union_T
 repo.ForeignKey_Indexes_union_T <.. docs.RepoObject_PlantUml_FkRefList
 repo.ForeignKey_Indexes_union_T <.. repo.RepoObject_related_FK_union
 repo.ForeignKey_Indexes_union_T <.. repo.ForeignKey_gross
+repo.ForeignKey_Indexes_union_T <.. repo.usp_PERSIST_ForeignKey_Indexes_union_T
 repo.ForeignKey_Indexes_union_T <.. repo.usp_Index_finish
 repo.ForeignKey_Indexes_union_T <.. docs.ForeignKey_RelationScript
 repo.ForeignKey_virtual_Indexes <.. repo.ForeignKey_Indexes_union
-repo.Index_gross <.. repo.usp_Index_finish
-repo.Index_gross <.. repo.ForeignKey_Indexes
 repo.Index_gross <.. repo.ForeignKey_virtual_Indexes
-repo.Index_gross <.. repo.usp_Index_virtual_set
-repo.Index_gross <.. graph.Index_S
-repo.Index_gross <.. docs.RepoObject_IndexList
-repo.Index_gross <.. repo.ForeignKey_gross
-repo.Index_gross <.. docs.AntoraIndexSemanticgroupPatterndatatype
+repo.Index_gross <.. repo.ForeignKey_Indexes
+repo.Index_gross <.. repo.usp_Index_finish
 repo.Index_gross <.. repo.usp_index_inheritance
 repo.Index_gross <.. repo.RepoObject_SqlCreateTable
+repo.Index_gross <.. repo.ForeignKey_gross
+repo.Index_gross <.. repo.usp_Index_virtual_set
+repo.Index_gross <.. docs.AntoraIndexSemanticgroupPatterndatatype
+repo.Index_gross <.. docs.RepoObject_IndexList
+repo.Index_gross <.. graph.Index_S
+repo.Index_referencing_IndexPatternColumnGuid <.. repo.IndexReferencedReferencing_HasFullColumnsInReferencing
 repo.Index_virtual_ForUpdate <.. repo.usp_index_inheritance
-repo.RepoObject_ColumnList <.. repo.RepoObject_gross
+repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T
+repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing <.. repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T
+repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T
+repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.Index_referencing_IndexPatternColumnGuid
+repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.IndexReferencedReferencing_HasFullColumnsInReferencing
+repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.IndexColumn_virtual_referenced_setpoint
+repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_check
+repo.IndexColumn_virtual_referenced_setpoint <.. repo.usp_index_inheritance
+repo.IndexColumn_virtual_referenced_setpoint <.. repo.check_IndexColumn_virtual_referenced_setpoint
+repo.IndexReferencedReferencing_HasFullColumnsInReferencing <.. repo.usp_index_inheritance
 repo.RepoObject_ColumnList <.. repo.RepoObject_SqlCreateTable
-repo.RepoObject_gross <.. repo.RepoObject_SqlCreateTable
+repo.RepoObject_ColumnList <.. repo.RepoObject_gross
 repo.RepoObject_gross <.. uspgenerator.GeneratorUspStep_Persistence_IsInactive_setpoint
-repo.RepoObject_gross <.. uspgenerator.GeneratorUspStep_Persistence
 repo.RepoObject_gross <.. repo.Index_gross
-repo.RepoObject_gross <.. reference.usp_RepoObjectSource_QueryPlan
+repo.RepoObject_gross <.. uspgenerator.GeneratorUspStep_Persistence
+repo.RepoObject_gross <.. repo.RepoObject_SqlCreateTable
 repo.RepoObject_gross <.. reference.usp_RepoObjectSource_FirstResultSet
-repo.RepoObject_gross <.. reference.usp_RepoObject_update_SysObjectQueryPlan
-repo.RepoObject_gross <.. uspgenerator.usp_GeneratorUsp_insert_update_persistence
+repo.RepoObject_gross <.. reference.usp_RepoObjectSource_QueryPlan
 repo.RepoObject_gross <.. reference.Match_RepoObject_referenced_UspPersistence
+repo.RepoObject_gross <.. uspgenerator.usp_GeneratorUsp_insert_update_persistence
 repo.RepoObject_gross <.. reference.RepoObject_ReferenceTree
-repo.RepoObject_gross <.. docs.RepoObject_Plantuml
-repo.RepoObject_gross <.. docs.RepoObject_Adoc
-repo.RepoObject_gross <.. docs.RepoObject_OutputFilter
-repo.RepoObject_gross <.. repo.Index_virtual_ForUpdate
+repo.RepoObject_gross <.. property.RepoObjectProperty_Collect_source_ROGross
 repo.RepoObject_gross <.. reference.RepoObject_ReferenceTree_referenced
 repo.RepoObject_gross <.. reference.RepoObject_ReferenceTree_referencing
-repo.RepoObject_gross <.. property.RepoObjectProperty_Collect_source_ROGross
-repo.RepoObject_related_FK_union <.. docs.RepoObject_PlantUml_PumlEntityFkList
+repo.RepoObject_gross <.. reference.usp_RepoObject_update_SysObjectQueryPlan
+repo.RepoObject_gross <.. repo.Index_virtual_ForUpdate
+repo.RepoObject_gross <.. docs.RepoObject_Plantuml
+repo.RepoObject_gross <.. docs.RepoObject_OutputFilter
+repo.RepoObject_gross <.. docs.RepoObject_Adoc
 repo.RepoObject_related_FK_union <.. docs.RepoObject_PlantUml_FkRefList
+repo.RepoObject_related_FK_union <.. docs.RepoObject_PlantUml_PumlEntityFkList
 repo.RepoObject_SqlCreateTable <.. reference.ftv_RepoObject_ColumReferenceRepoObject
 repo.RepoObjectColumn_gross <.. docs.RepoObject_ColumnList
-repo.RepoObjectColumn_gross <.. graph.RepoObjectColumn_S
 repo.RepoObjectColumn_gross <.. property.RepoObjectColumnProperty_ForUpdate
+repo.RepoObjectColumn_gross <.. reference.RepoObjectColumn_reference_virtual
+repo.RepoObjectColumn_gross <.. reference.usp_RepoObjectColumnSource_virtual_set
+repo.RepoObjectColumn_gross <.. graph.RepoObjectColumn_S
 repo.RepoObjectColumn_gross <.. repo.RepoObject_ColumnList
-repo.RepoObjectColumn_gross <.. reference.RepoObjectColumn_reference_FirstResultSet
 repo.RepoObjectColumn_gross <.. reference.RepoObjectColumn_reference_QueryPlan
+repo.RepoObjectColumn_gross <.. reference.RepoObjectColumn_reference_FirstResultSet
 repo.usp_Index_finish <.. repo.usp_index_inheritance
 repo.usp_Index_finish <.. repo.usp_Index_ForeignKey
 repo.usp_Index_ForeignKey <.. repo.usp_main
 repo.usp_index_inheritance <.. repo.usp_main
 repo.usp_Index_virtual_set <.. repo.usp_Index_ForeignKey
 repo.usp_PERSIST_ForeignKey_Indexes_union_T <.. repo.usp_Index_ForeignKey
-repo.usp_sync_guid <.. repo.usp_persistence_set
+repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.usp_index_inheritance
 repo.usp_sync_guid <.. repo.usp_main
+repo.usp_sync_guid <.. repo.usp_persistence_set
 repo.usp_sync_guid_RepoObjectColumn <.. repo.usp_sync_guid
 uspgenerator.GeneratorUspStep_Persistence <.. uspgenerator.usp_GeneratorUsp_insert_update_persistence
 uspgenerator.GeneratorUspStep_Persistence_IsInactive_setpoint <.. uspgenerator.usp_GeneratorUsp_insert_update_persistence

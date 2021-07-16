@@ -50,25 +50,25 @@ entity docs.usp_PERSIST_RepoObject_Adoc_T << P >> {
 }
 
 entity property.PropertyName_RepoObject << V >> {
-  * **property_name** : nvarchar(128)
+  **property_name** : nvarchar(128)
   --
 }
 
 entity property.RepoObjectProperty_cross << V >> {
   * **RepoObject_guid** : uniqueidentifier
-  * **property_name** : nvarchar(128)
+  **property_name** : nvarchar(128)
   --
 }
 
 entity property.RepoObjectProperty_InheritanceType_InheritanceDefinition << V >> {
   * **RepoObject_guid** : uniqueidentifier
-  * **property_name** : nvarchar(128)
+  **property_name** : nvarchar(128)
   --
 }
 
 entity property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition << V >> {
   * **RepoObject_guid** : uniqueidentifier
-  * **property_name** : nvarchar(128)
+  **property_name** : nvarchar(128)
   --
 }
 
@@ -85,9 +85,9 @@ docs.RepoObject_Adoc <.. docs.usp_PERSIST_RepoObject_Adoc_T
 docs.RepoObject_Adoc_T <.. docs.usp_PERSIST_RepoObject_Adoc_T
 docs.usp_AntoraExport_ObjectPartialProperties <.. docs.usp_AntoraExport
 docs.usp_PERSIST_RepoObject_Adoc_T <.. docs.usp_AntoraExport_ObjectPartialProperties
+property.PropertyName_RepoObject <.. docs.AntoraTemplate_examples
 property.PropertyName_RepoObject <.. property.RepoObjectProperty_cross
 property.PropertyName_RepoObject <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition
-property.PropertyName_RepoObject <.. docs.AntoraTemplate_examples
 property.RepoObjectProperty_cross <.. docs.RepoObject_Adoc
 property.RepoObjectProperty_InheritanceType_InheritanceDefinition <.. property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition
 property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition <.. property.usp_RepoObject_Inheritance

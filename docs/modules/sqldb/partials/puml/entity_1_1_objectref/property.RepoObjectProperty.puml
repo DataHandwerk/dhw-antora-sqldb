@@ -53,7 +53,7 @@ entity property.fs_get_RepoObjectProperty_nvarchar << FN >> {
 }
 
 entity property.PropertyName_RepoObject << V >> {
-  * **property_name** : nvarchar(128)
+  **property_name** : nvarchar(128)
   --
 }
 
@@ -62,9 +62,13 @@ entity property.RepoObjectProperty << U >> {
   --
 }
 
+entity property.RepoObjectProperty_ForUpdate << V >> {
+  --
+}
+
 entity property.RepoObjectProperty_InheritanceType_InheritanceDefinition << V >> {
   * **RepoObject_guid** : uniqueidentifier
-  * **property_name** : nvarchar(128)
+  **property_name** : nvarchar(128)
   --
 }
 
@@ -91,15 +95,16 @@ entity property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate << P >> {
 }
 
 property.PropertyName_RepoObject <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition
-property.RepoObjectProperty <.. property.usp_RepoObject_Inheritance
+property.RepoObjectProperty <.. property.PropertyName_RepoObject
 property.RepoObjectProperty <.. property.fs_get_RepoObjectProperty_nvarchar
+property.RepoObjectProperty <.. property.usp_RepoObject_Inheritance
+property.RepoObjectProperty <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition
 property.RepoObjectProperty <.. property.RepoObjectProperty_sys_repo
 property.RepoObjectProperty <.. property.usp_RepoObjectProperty_collect
+property.RepoObjectProperty <.. property.RepoObjectProperty_ForUpdate
 property.RepoObjectProperty <.. property.usp_RepoObjectProperty_set
 property.RepoObjectProperty <.. docs.RepoObject_Adoc
 property.RepoObjectProperty <.. property.ExtendedProperty_Repo2Sys_level1
 property.RepoObjectProperty <.. property.ExtendedProperty_Repo2Sys_level2_RepoObject
 property.RepoObjectProperty <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
-property.RepoObjectProperty <.. property.PropertyName_RepoObject
-property.RepoObjectProperty <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition
 property.RepoObjectProperty_sys_repo <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate

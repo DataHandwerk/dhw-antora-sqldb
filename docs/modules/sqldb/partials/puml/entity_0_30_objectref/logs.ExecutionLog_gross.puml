@@ -28,8 +28,13 @@ entity logs.ExecutionLog_gross << V >> {
   --
 }
 
-entity logs.ftv_ExecutionLog_tree << IF >> {
+entity logs.ftv_ExecutionLog_puml_tree << IF >> {
   --
 }
 
-logs.ExecutionLog_gross <.. logs.ftv_ExecutionLog_tree
+entity logs.ftv_ExecutionLog_puml_tree_per_execution << IF >> {
+  --
+}
+
+logs.ExecutionLog_gross <.. logs.ftv_ExecutionLog_puml_tree
+logs.ftv_ExecutionLog_puml_tree <.. logs.ftv_ExecutionLog_puml_tree_per_execution

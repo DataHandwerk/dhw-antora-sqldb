@@ -1,0 +1,63 @@
+left to right direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+}
+
+
+entity reference.RepoObject_reference_virtual << V >> {
+  --
+  * InformationSource : varchar(34)
+  * referenced_entity_name : nvarchar(128)
+  * referenced_fullname : nvarchar(261)
+  referenced_id : int
+  referenced_node_id : bigint
+  * referenced_RepoObject_guid : uniqueidentifier
+  * referenced_schema_name : nvarchar(128)
+  referenced_type : char(2)
+  * referencing_entity_name : nvarchar(128)
+  * referencing_fullname : nvarchar(261)
+  referencing_id : int
+  referencing_node_id : bigint
+  * referencing_RepoObject_guid : uniqueidentifier
+  * referencing_schema_name : nvarchar(128)
+  referencing_type : varchar(2)
+}
+
+entity reference.RepoObjectSource_virtual << U >> {
+  * **RepoObject_guid** : uniqueidentifier
+  * **Source_RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity reference.usp_RepoObjectSource_virtual_set << P >> {
+  --
+}
+
+entity repo.usp_sync_guid_RepoObject << P >> {
+  --
+}
+
+reference.RepoObjectSource_virtual <.. reference.RepoObject_reference_virtual
+reference.RepoObjectSource_virtual <.. reference.usp_RepoObjectSource_virtual_set
+reference.RepoObjectSource_virtual <.. repo.usp_sync_guid_RepoObject
+reference.RepoObjectSource_virtual::RepoObject_guid <-- reference.RepoObject_reference_virtual::referencing_RepoObject_guid
+reference.RepoObjectSource_virtual::Source_RepoObject_guid <-- reference.RepoObject_reference_virtual::referenced_RepoObject_guid

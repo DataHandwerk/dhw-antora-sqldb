@@ -131,7 +131,7 @@ entity reference.RepoObject_reference_union << V >> {
   **referenced_RepoObject_guid** : uniqueidentifier
   **referencing_RepoObject_guid** : uniqueidentifier
   --
-  * InformationSource : varchar(31)
+  * InformationSource : varchar(34)
   * one : int
   referenced_entity_name : nvarchar(128)
   * referenced_fullname : nvarchar(517)
@@ -150,7 +150,7 @@ entity reference.RepoObject_reference_union << V >> {
 entity reference.RepoObjectColumn_reference_union << V >> {
   --
   definition : nvarchar(max)
-  * InformationSource : varchar(31)
+  * InformationSource : varchar(34)
   is_computed : bit
   is_referenced_object : bit
   is_referencing_object_equal_referenced_object : bit
@@ -235,12 +235,12 @@ graph.RepoObject <.. repo.usp_main
 graph.RepoObject <.. reference.Match_RepoObject_referenced_UspPersistence
 graph.RepoObjectColumn <.. repo.usp_main
 logs.usp_ExecutionLog_insert <.. repo.usp_sync_guid
-logs.usp_ExecutionLog_insert <.. uspgenerator.usp_GeneratorUsp_insert_update_persistence
+logs.usp_ExecutionLog_insert <.. reference.usp_update_Referencing_Count
 logs.usp_ExecutionLog_insert <.. reference.usp_RepoObjectSource_FirstResultSet
 logs.usp_ExecutionLog_insert <.. repo.usp_RepoObjectColumn_update_RepoObjectColumn_column_id
+logs.usp_ExecutionLog_insert <.. uspgenerator.usp_GeneratorUsp_insert_update_persistence
 logs.usp_ExecutionLog_insert <.. reference.usp_RepoObject_update_SysObjectQueryPlan
 logs.usp_ExecutionLog_insert <.. repo.usp_index_inheritance
-logs.usp_ExecutionLog_insert <.. reference.usp_update_Referencing_Count
 logs.usp_ExecutionLog_insert <.. reference.usp_RepoObjectSource_QueryPlan
 logs.usp_ExecutionLog_insert <.. property.usp_RepoObjectColumn_Inheritance
 logs.usp_ExecutionLog_insert <.. property.usp_RepoObject_Inheritance

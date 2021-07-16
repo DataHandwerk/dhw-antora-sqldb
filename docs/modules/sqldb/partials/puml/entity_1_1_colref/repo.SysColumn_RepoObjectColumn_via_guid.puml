@@ -205,6 +205,8 @@ entity repo_sys.SysColumn << V >> {
   seed_value : sql_variant
   * SysObject_column_id : int
   SysObject_column_name : sysname
+  SysObject_fullname : nvarchar(517)
+  SysObject_fullname2 : nvarchar(257)
   * SysObject_id : int
   SysObject_name : nvarchar(128)
   SysObject_RepoObject_guid : uniqueidentifier
@@ -220,13 +222,13 @@ entity repo_sys.SysColumn << V >> {
   * xml_collection_id : int
 }
 
-repo.RepoObject <.. repo.usp_sync_guid_RepoObjectColumn
 repo.RepoObject <.. repo.SysColumn_RepoObjectColumn_via_guid
-repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_guid
+repo.RepoObject <.. repo.usp_sync_guid_RepoObjectColumn
 repo.RepoObjectColumn <.. repo.usp_sync_guid_RepoObjectColumn
+repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_guid
 repo.SysColumn_RepoObjectColumn_via_guid <.. repo.usp_sync_guid_RepoObjectColumn
-repo_sys.SysColumn <.. repo.SysColumn_RepoObjectColumn_via_guid
 repo_sys.SysColumn <.. repo.usp_sync_guid_RepoObjectColumn
+repo_sys.SysColumn <.. repo.SysColumn_RepoObjectColumn_via_guid
 repo.RepoObject::is_repo_managed <-- repo.SysColumn_RepoObjectColumn_via_guid::is_repo_managed
 repo.RepoObject::RepoObject_fullname <-- repo.SysColumn_RepoObjectColumn_via_guid::RepoObject_fullname
 repo.RepoObject::SysObject_fullname <-- repo.SysColumn_RepoObjectColumn_via_guid::SysObject_fullname

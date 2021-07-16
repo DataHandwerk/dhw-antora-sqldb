@@ -33,6 +33,10 @@ entity config.Parameter << U >> {
   --
 }
 
+entity docs.fs_cleanStringForAnchorId << FN >> {
+  --
+}
+
 entity graph.ReferencedObjectColumn << U >> {
   --
 }
@@ -185,6 +189,8 @@ entity sys_dwh.types << SN >> {
 config.ftv_dwh_database <.. repo_sys.ExtendedProperties
 config.ftv_dwh_database <.. repo_sys.SysColumn
 config.Parameter <.. config.ftv_dwh_database
+docs.fs_cleanStringForAnchorId <.. reference.RepoObjectColumn_ReferencedList
+docs.fs_cleanStringForAnchorId <.. reference.RepoObjectColumn_ReferencingList
 graph.ReferencedObjectColumn <.. reference.RepoObjectColumn_ReferencingReferenced
 graph.RepoObjectColumn <.. reference.RepoObjectColumn_ReferencingReferenced
 graph.RepoObjectColumn_S <.. graph.RepoObjectColumn
@@ -208,14 +214,14 @@ repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_name
 repo.RepoObjectColumn_gross <.. graph.RepoObjectColumn_S
 repo.SysColumn_RepoObjectColumn_via_name <.. repo_sys.IndexColumn_unique
 repo.SysObject_RepoObject_via_name <.. repo_sys.IndexColumn_unique
-repo_sys.ExtendedProperties <.. repo_sys.SysObject
 repo_sys.ExtendedProperties <.. repo_sys.SysColumn
+repo_sys.ExtendedProperties <.. repo_sys.SysObject
 repo_sys.IndexColumn_unique <.. repo.IndexColumn_union
 repo_sys.SysColumn <.. repo.SysColumn_RepoObjectColumn_via_name
 repo_sys.SysObject <.. repo_sys.SysColumn
 repo_sys.SysObject <.. repo.SysObject_RepoObject_via_name
-sys_dwh.columns <.. repo_sys.ExtendedProperties
 sys_dwh.columns <.. repo_sys.SysColumn
+sys_dwh.columns <.. repo_sys.ExtendedProperties
 sys_dwh.computed_columns <.. repo_sys.SysColumn
 sys_dwh.default_constraints <.. repo_sys.SysColumn
 sys_dwh.extended_properties <.. repo_sys.ExtendedProperties

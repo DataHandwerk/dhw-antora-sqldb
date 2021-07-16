@@ -25,6 +25,9 @@ skinparam class {
 
 entity config.ftv_get_parameter_value << IF >> {
   --
+  Parameter_value__result_date : date
+  Parameter_value__result_datetime : datetime
+  Parameter_value__result_int : int
   Parameter_value__result_nvarchar : nvarchar(4000)
 }
 
@@ -35,6 +38,8 @@ entity config.Parameter << U >> {
   Parameter_default_value : sql_variant
   Parameter_desciption : nvarchar(1000)
   Parameter_value : sql_variant
+  {abstract} Parameter_value__result_date : date
+  {abstract} Parameter_value__result_datetime : datetime
   {abstract} Parameter_value__result_int : int
   {abstract} Parameter_value__result_nvarchar : nvarchar(4000)
 }

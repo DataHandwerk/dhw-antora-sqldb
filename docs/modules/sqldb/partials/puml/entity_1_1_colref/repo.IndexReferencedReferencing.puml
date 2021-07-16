@@ -27,7 +27,7 @@ entity reference.RepoObject_reference_union << V >> {
   **referenced_RepoObject_guid** : uniqueidentifier
   **referencing_RepoObject_guid** : uniqueidentifier
   --
-  * InformationSource : varchar(31)
+  * InformationSource : varchar(34)
   * one : int
   referenced_entity_name : nvarchar(128)
   * referenced_fullname : nvarchar(517)
@@ -100,7 +100,10 @@ repo.Index_virtual <.. repo.Index_union
 repo.IndexReferencedReferencing <.. repo.IndexReferencedReferencing_HasFullColumnsInReferencing
 reference.RepoObject_reference_union::referenced_RepoObject_guid <-- repo.IndexReferencedReferencing::referenced_RepoObject_guid
 reference.RepoObject_reference_union::referencing_RepoObject_guid <-- repo.IndexReferencedReferencing::referencing_RepoObject_guid
+repo.Index_union::index_guid <-- repo.IndexReferencedReferencing::source_index_guid
+repo.Index_union::index_type <-- repo.IndexReferencedReferencing::source_index_type
 repo.Index_virtual::referenced_index_guid <-- repo.IndexReferencedReferencing::referenced_index_guid
+repo.Index_virtual::RowNumberInReferencing <-- repo.IndexReferencedReferencing::RowNumberInReferencing_Target
 repo.IndexReferencedReferencing::referenced_index_guid <-- repo.IndexReferencedReferencing_HasFullColumnsInReferencing::referenced_index_guid
 repo.IndexReferencedReferencing::referenced_RepoObject_guid <-- repo.IndexReferencedReferencing_HasFullColumnsInReferencing::referenced_RepoObject_guid
 repo.IndexReferencedReferencing::referencing_RepoObject_guid <-- repo.IndexReferencedReferencing_HasFullColumnsInReferencing::referencing_RepoObject_guid

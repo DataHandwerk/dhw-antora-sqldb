@@ -44,12 +44,13 @@ entity property.RepoObjectColumnProperty_ForUpdate << V >> {
   * **RepoObjectColumnProperty_id** : int
   --
   inheritance : tinyint
-  property_basetype : sql_variant
   * property_name : nvarchar(128)
   * property_value : sql_variant
   * RepoObject_fullname : nvarchar(261)
   * RepoObject_fullname2 : nvarchar(257)
   * RepoObject_guid : uniqueidentifier
+  * RepoObject_name : nvarchar(128)
+  * RepoObject_schema_name : nvarchar(128)
   * RepoObjectColumn_fullname : nvarchar(520)
   * RepoObjectColumn_fullname2 : nvarchar(386)
   * RepoObjectColumn_guid : uniqueidentifier
@@ -128,7 +129,6 @@ entity repo.RepoObjectColumn_gross << V >> {
 property.RepoObjectColumnProperty <.. property.RepoObjectColumnProperty_ForUpdate
 repo.RepoObjectColumn_gross <.. property.RepoObjectColumnProperty_ForUpdate
 property.RepoObjectColumnProperty::inheritance <-- property.RepoObjectColumnProperty_ForUpdate::inheritance
-property.RepoObjectColumnProperty::property_basetype <-- property.RepoObjectColumnProperty_ForUpdate::property_basetype
 property.RepoObjectColumnProperty::property_name <-- property.RepoObjectColumnProperty_ForUpdate::property_name
 property.RepoObjectColumnProperty::property_value <-- property.RepoObjectColumnProperty_ForUpdate::property_value
 property.RepoObjectColumnProperty::RepoObjectColumn_guid <-- property.RepoObjectColumnProperty_ForUpdate::RepoObjectColumn_guid
@@ -136,6 +136,8 @@ property.RepoObjectColumnProperty::RepoObjectColumnProperty_id <-- property.Repo
 repo.RepoObjectColumn_gross::RepoObject_fullname <-- property.RepoObjectColumnProperty_ForUpdate::RepoObject_fullname
 repo.RepoObjectColumn_gross::RepoObject_fullname2 <-- property.RepoObjectColumnProperty_ForUpdate::RepoObject_fullname2
 repo.RepoObjectColumn_gross::RepoObject_guid <-- property.RepoObjectColumnProperty_ForUpdate::RepoObject_guid
+repo.RepoObjectColumn_gross::RepoObject_name <-- property.RepoObjectColumnProperty_ForUpdate::RepoObject_name
+repo.RepoObjectColumn_gross::RepoObject_schema_name <-- property.RepoObjectColumnProperty_ForUpdate::RepoObject_schema_name
 repo.RepoObjectColumn_gross::RepoObjectColumn_fullname <-- property.RepoObjectColumnProperty_ForUpdate::RepoObjectColumn_fullname
 repo.RepoObjectColumn_gross::RepoObjectColumn_fullname2 <-- property.RepoObjectColumnProperty_ForUpdate::RepoObjectColumn_fullname2
 repo.RepoObjectColumn_gross::RepoObjectColumn_name <-- property.RepoObjectColumnProperty_ForUpdate::RepoObjectColumn_name

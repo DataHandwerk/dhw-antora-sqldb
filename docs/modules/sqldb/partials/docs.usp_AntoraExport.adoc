@@ -39,7 +39,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-04-17 16:35:07
+2021-07-14 19:36:21
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -176,7 +176,20 @@ stored procedure
 == exampleUsage
 
 // tag::exampleusage[]
-EXEC [docs].[usp_AntoraExport]
+--ensure consistent repository before sql parsing:
+Exec repo.usp_main;
+
+--use sqlparser to get the current parsing results
+
+--persist sql parsing results:
+Exec sqlparse.usp_PERSIST_RepoObject_SqlModules_41_from_T;
+Exec sqlparse.usp_PERSIST_RepoObject_SqlModules_61_SelectIdentifier_Union_T;
+
+--ensure consistent repository after sql parsing:
+Exec repo.usp_main;
+
+--export Antora documentation sources
+Exec docs.usp_AntoraExport;
 // end::exampleusage[]
 
 

@@ -27,6 +27,10 @@ entity config.fs_dwh_database_name << FN >> {
   --
 }
 
+entity config.fs_get_parameter_value << FN >> {
+  --
+}
+
 entity config.ftv_dwh_database << IF >> {
   --
 }
@@ -100,20 +104,22 @@ entity sys_dwh.schemas << SN >> {
 }
 
 config.fs_dwh_database_name <.. repo_sys.usp_AddOrUpdateExtendedProperty
+config.fs_get_parameter_value <.. repo.usp_sync_guid_RepoSchema
 config.ftv_dwh_database <.. repo_sys.ExtendedProperties
-config.Parameter <.. config.fs_dwh_database_name
 config.Parameter <.. config.ftv_dwh_database
+config.Parameter <.. config.fs_dwh_database_name
+config.Parameter <.. config.fs_get_parameter_value
 logs.ExecutionLog <.. logs.usp_ExecutionLog_insert
 logs.usp_ExecutionLog_insert <.. repo.usp_sync_guid_RepoSchema
-repo.RepoSchema <.. repo.SysSchema_RepoSchema_via_name
-repo.RepoSchema <.. repo.SysSchema_RepoSchema_via_guid
 repo.RepoSchema <.. repo.usp_sync_guid_RepoSchema
+repo.RepoSchema <.. repo.SysSchema_RepoSchema_via_guid
+repo.RepoSchema <.. repo.SysSchema_RepoSchema_via_name
 repo.SysSchema_RepoSchema_via_guid <.. repo.usp_sync_guid_RepoSchema
 repo.SysSchema_RepoSchema_via_name <.. repo.usp_sync_guid_RepoSchema
 repo_sys.ExtendedProperties <.. repo_sys.SysSchema
 repo_sys.SysSchema <.. repo.usp_sync_guid_RepoSchema
-repo_sys.SysSchema <.. repo.SysSchema_RepoSchema_via_guid
 repo_sys.SysSchema <.. repo.SysSchema_RepoSchema_via_name
+repo_sys.SysSchema <.. repo.SysSchema_RepoSchema_via_guid
 repo_sys.usp_AddOrUpdateExtendedProperty <.. repo.usp_sync_guid_RepoSchema
 sys_dwh.columns <.. repo_sys.ExtendedProperties
 sys_dwh.extended_properties <.. repo_sys.ExtendedProperties

@@ -9,6 +9,7 @@
 :ExistsProperty--pk_index_guid:
 :ExistsProperty--pk_indexpatterncolumndatatype:
 :ExistsProperty--pk_indexpatterncolumnname:
+:ExistsProperty--pk_indexsemanticgroup:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -64,22 +65,8 @@ view
 
 .Referenced Columns
 --
-* xref:repo.RepoObject.adoc#column-RepoObject_guid[repo.RepoObject.RepoObject_guid]
+* xref:repo.RepoObject.adoc#column-RepoObject_guid[+repo.RepoObject.RepoObject_guid+]
 --
-
-
-[[column-ro2_RepoObject_guid]]
-=== ro2_RepoObject_guid
-
-[cols="d,m,m,m,m,d"]
-|===
-|2
-|*ro2_RepoObject_guid*
-|uniqueidentifier
-|NOT NULL
-|
-|
-|===
 
 
 [[column-RepoObject_fullname]]
@@ -102,7 +89,7 @@ view
 
 .Referenced Columns
 --
-* xref:repo.RepoObject.adoc#column-RepoObject_fullname[repo.RepoObject.RepoObject_fullname]
+* xref:repo.RepoObject.adoc#column-RepoObject_fullname[+repo.RepoObject.RepoObject_fullname+]
 --
 
 
@@ -121,7 +108,7 @@ view
 
 .Referenced Columns
 --
-* xref:repo.RepoObject.adoc#column-RepoObject_name[repo.RepoObject.RepoObject_name]
+* xref:repo.RepoObject.adoc#column-RepoObject_name[+repo.RepoObject.RepoObject_name+]
 --
 
 
@@ -140,7 +127,7 @@ view
 
 .Referenced Columns
 --
-* xref:repo.RepoObject.adoc#column-RepoObject_schema_name[repo.RepoObject.RepoObject_schema_name]
+* xref:repo.RepoObject.adoc#column-RepoObject_schema_name[+repo.RepoObject.RepoObject_schema_name+]
 --
 
 
@@ -157,6 +144,35 @@ view
 |
 |===
 
+.Description
+--
+(concat('[',[RepoObject_schema_name],'].[',[RepoObject_name],']'))
+--
+
+.Referenced Columns
+--
+* xref:repo.RepoObject.adoc#column-RepoObject_fullname[+repo.RepoObject.RepoObject_fullname+]
+--
+
+
+[[column-ro2_RepoObject_guid]]
+=== ro2_RepoObject_guid
+
+[cols="d,m,m,m,m,d"]
+|===
+|
+|ro2_RepoObject_guid
+|uniqueidentifier
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo.RepoObject.adoc#column-RepoObject_guid[+repo.RepoObject.RepoObject_guid+]
+--
+
 
 [[column-ro2_RepoObject_name]]
 === ro2_RepoObject_name
@@ -170,6 +186,11 @@ view
 |
 |
 |===
+
+.Referenced Columns
+--
+* xref:repo.RepoObject.adoc#column-RepoObject_name[+repo.RepoObject.RepoObject_name+]
+--
 
 
 [[column-ro2_RepoObject_schema_name]]
@@ -185,6 +206,11 @@ view
 |
 |===
 
+.Referenced Columns
+--
+* xref:repo.RepoObject.adoc#column-RepoObject_schema_name[+repo.RepoObject.RepoObject_schema_name+]
+--
+
 
 [[column-ro2_SysObject_fullname]]
 === ro2_SysObject_fullname
@@ -199,6 +225,16 @@ view
 |
 |===
 
+.Description
+--
+(concat('[',[SysObject_schema_name],'].[',[SysObject_name],']'))
+--
+
+.Referenced Columns
+--
+* xref:repo.RepoObject.adoc#column-SysObject_fullname[+repo.RepoObject.SysObject_fullname+]
+--
+
 
 [[column-ro2_SysObject_name]]
 === ro2_SysObject_name
@@ -212,6 +248,11 @@ view
 |
 |
 |===
+
+.Referenced Columns
+--
+* xref:repo.RepoObject.adoc#column-SysObject_name[+repo.RepoObject.SysObject_name+]
+--
 
 
 [[column-SysObject_fullname]]
@@ -234,7 +275,7 @@ view
 
 .Referenced Columns
 --
-* xref:repo.RepoObject.adoc#column-SysObject_fullname[repo.RepoObject.SysObject_fullname]
+* xref:repo.RepoObject.adoc#column-SysObject_fullname[+repo.RepoObject.SysObject_fullname+]
 --
 
 
@@ -253,7 +294,7 @@ view
 
 .Referenced Columns
 --
-* xref:repo.RepoObject.adoc#column-SysObject_name[repo.RepoObject.SysObject_name]
+* xref:repo.RepoObject.adoc#column-SysObject_name[+repo.RepoObject.SysObject_name+]
 --
 
 
@@ -272,7 +313,7 @@ view
 
 .Referenced Columns
 --
-* xref:repo.RepoObject.adoc#column-SysObject_schema_name[repo.RepoObject.SysObject_schema_name]
+* xref:repo.RepoObject.adoc#column-SysObject_schema_name[+repo.RepoObject.SysObject_schema_name+]
 --
 
 
@@ -288,12 +329,6 @@ view
 |
 |
 
-|2
-|*<<column-ro2_RepoObject_guid>>*
-|uniqueidentifier
-|NOT NULL
-|
-|
 
 
 
@@ -311,7 +346,6 @@ view
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
-
 
 |
 |<<column-RepoObject_fullname>>
@@ -337,6 +371,13 @@ view
 |
 |<<column-ro2_RepoObject_fullname>>
 |nvarchar(261)
+|NOT NULL
+|
+|
+
+|
+|<<column-ro2_RepoObject_guid>>
+|uniqueidentifier
 |NOT NULL
 |
 |
@@ -399,28 +440,16 @@ view
 [[index-PK_RepoObject_RequiredRepoObjectMerge]]
 === PK_RepoObject_RequiredRepoObjectMerge
 
-* IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_no_group[no_group]
-+
---
-* <<column-RepoObject_guid>>; uniqueidentifier
-* <<column-ro2_RepoObject_guid>>; uniqueidentifier
---
-* PK, Unique, Real: 1, 1, 0
-
-
-[[index-UK_RepoObject_RequiredRepoObjectMerge__1]]
-=== UK_RepoObject_RequiredRepoObjectMerge__1
-
 * IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_repoobject_guid[RepoObject_guid]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
 --
-* PK, Unique, Real: 0, 1, 0
+* PK, Unique, Real: 1, 1, 0
 
 
-[[index-idx_RepoObject_RequiredRepoObjectMerge__2]]
-=== idx_RepoObject_RequiredRepoObjectMerge__2
+[[index-idx_RepoObject_RequiredRepoObjectMerge_1]]
+=== idx_RepoObject_RequiredRepoObjectMerge++__++1
 
 * IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_schema_name,object_name[schema_name,object_name]
 +
@@ -431,19 +460,19 @@ view
 * PK, Unique, Real: 0, 0, 0
 
 
-[[index-idx_RepoObject_RequiredRepoObjectMerge__3]]
-=== idx_RepoObject_RequiredRepoObjectMerge__3
+[[index-idx_RepoObject_RequiredRepoObjectMerge_2]]
+=== idx_RepoObject_RequiredRepoObjectMerge++__++2
 
 * IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_object_name[object_name]
 +
 --
-* <<column-SysObject_name>>; nvarchar(128)
+* <<column-ro2_SysObject_name>>; nvarchar(128)
 --
 * PK, Unique, Real: 0, 0, 0
 
 
-[[index-idx_RepoObject_RequiredRepoObjectMerge__4]]
-=== idx_RepoObject_RequiredRepoObjectMerge__4
+[[index-idx_RepoObject_RequiredRepoObjectMerge_3]]
+=== idx_RepoObject_RequiredRepoObjectMerge++__++3
 
 * IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_schema_name,object_name[schema_name,object_name]
 +
@@ -659,21 +688,21 @@ we need to replace roc1.RepoObject_guid by roc2.RepoObject_guid
 == pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-uniqueidentifier,uniqueidentifier
+uniqueidentifier
 // end::pk_indexpatterncolumndatatype[]
 
 
 == pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-RepoObject_guid,ro2_RepoObject_guid
+RepoObject_guid
 // end::pk_indexpatterncolumnname[]
 
 
 == pk_IndexSemanticGroup
 
 // tag::pk_indexsemanticgroup[]
-
+RepoObject_guid
 // end::pk_indexsemanticgroup[]
 
 

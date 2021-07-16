@@ -46,7 +46,7 @@ entity reference.RepoObject_reference_union << V >> {
   **referenced_RepoObject_guid** : uniqueidentifier
   **referencing_RepoObject_guid** : uniqueidentifier
   --
-  * InformationSource : varchar(31)
+  * InformationSource : varchar(34)
   * one : int
   referenced_entity_name : nvarchar(128)
   * referenced_fullname : nvarchar(517)
@@ -124,8 +124,8 @@ repo.RepoObject <.. reference.RepoObject_reference_persistence
 repo.RepoObject_persistence <.. reference.RepoObject_reference_persistence
 repo.RepoObject::node_id <-- reference.RepoObject_reference_persistence::referenced_node_id
 repo.RepoObject::node_id <-- reference.RepoObject_reference_persistence::referencing_node_id
-repo.RepoObject::RepoObject_fullname <-- reference.RepoObject_reference_persistence::referenced_fullname
 repo.RepoObject::RepoObject_fullname <-- reference.RepoObject_reference_persistence::referencing_fullname
+repo.RepoObject::RepoObject_fullname <-- reference.RepoObject_reference_persistence::referenced_fullname
 repo.RepoObject::SysObject_id <-- reference.RepoObject_reference_persistence::referenced_id
 repo.RepoObject::SysObject_id <-- reference.RepoObject_reference_persistence::referencing_id
 repo.RepoObject::SysObject_name <-- reference.RepoObject_reference_persistence::referenced_entity_name

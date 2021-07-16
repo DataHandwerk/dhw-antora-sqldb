@@ -71,6 +71,10 @@ entity reference.RepoObjectColumn_reference_union << V >> {
   --
 }
 
+entity reference.RepoObjectColumn_reference_virtual << V >> {
+  --
+}
+
 entity reference.RepoObjectColumn_RelationScript << V >> {
   --
 }
@@ -99,6 +103,10 @@ entity repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing << V >
   **index_guid** : uniqueidentifier
   * **index_column_id** : int
   **RowNumberInReferencing** : bigint
+  --
+}
+
+entity repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_check << V >> {
   --
 }
 
@@ -145,24 +153,27 @@ reference.RepoObject_reference_SqlExpressionDependencies <.. docs.visjs_EdgeList
 reference.RepoObject_reference_union <.. repo.IndexReferencedReferencing
 reference.RepoObject_reference_union <.. reference.RepoObjectColumn_reference_FirstResultSet
 reference.RepoObject_reference_union <.. reference.RepoObjectColumn_reference_QueryPlan
-reference.RepoObject_reference_union <.. reference.RepoObjectColumn_reference_BySamePredecessors
 reference.RepoObject_reference_union <.. reference.RepoObjectColumn_reference_SqlExpressionDependencies
+reference.RepoObject_reference_union <.. reference.RepoObjectColumn_reference_virtual
 reference.RepoObject_reference_union <.. repo.usp_main
+reference.RepoObject_reference_union <.. reference.RepoObjectColumn_reference_BySamePredecessors
 reference.RepoObjectColumn_reference_FirstResultSet <.. reference.RepoObjectColumn_reference_BySamePredecessors
 reference.RepoObjectColumn_reference_QueryPlan <.. reference.SysObjectColumn_QueryPlanExpression
 reference.RepoObjectColumn_reference_SqlExpressionDependencies <.. reference.RepoObjectColumn_reference_union
-reference.RepoObjectColumn_reference_union <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing
-reference.RepoObjectColumn_reference_union <.. repo.usp_main
-reference.RepoObjectColumn_reference_union <.. reference.RepoObjectColumn_RelationScript
 reference.RepoObjectColumn_reference_union <.. repo.RepoObjectColumn_MissingSource_TypeV
+reference.RepoObjectColumn_reference_union <.. repo.usp_main
+reference.RepoObjectColumn_reference_union <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing
+reference.RepoObjectColumn_reference_union <.. reference.RepoObjectColumn_RelationScript
+reference.RepoObjectColumn_reference_virtual <.. reference.RepoObjectColumn_reference_union
 reference.RepoObjectColumn_RelationScript <.. reference.ftv_RepoObject_ColumReferenceRepoObject
 reference.SysObjectColumn_QueryPlanExpression <.. reference.usp_RepoObjectSource_QueryPlan
 reference.usp_RepoObjectSource_QueryPlan <.. repo.usp_main
 repo.Index_referencing_IndexPatternColumnGuid <.. repo.IndexReferencedReferencing_HasFullColumnsInReferencing
-repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T
 repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing <.. repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T
-repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T
+repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T
 repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.Index_referencing_IndexPatternColumnGuid
+repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T
+repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_check
 repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.IndexReferencedReferencing_HasFullColumnsInReferencing
 repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.IndexColumn_virtual_referenced_setpoint
 repo.IndexColumn_virtual_referenced_setpoint <.. repo.check_IndexColumn_virtual_referenced_setpoint

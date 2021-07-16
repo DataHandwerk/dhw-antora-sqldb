@@ -23,6 +23,14 @@ skinparam class {
 }
 
 
+entity docs.fs_cleanStringForAnchorId << FN >> {
+  --
+}
+
+entity docs.fs_cleanStringForLabel << FN >> {
+  --
+}
+
 entity docs.RepoObject_IndexList << V >> {
   **RepoObject_guid** : uniqueidentifier
   --
@@ -48,7 +56,7 @@ entity repo.ForeignKey_gross << V >> {
   ForeignKey_fullname : nvarchar(517)
   ForeignKey_name : nvarchar(128)
   * is_MatchingDatatypePattern : int
-  * referenced_AntoraXref : nvarchar(951)
+  * referenced_AntoraXref : nvarchar(4000)
   referenced_index_guid : uniqueidentifier
   referenced_index_name : nvarchar(128)
   referenced_IndexPatternColumnDatatype : nvarchar(4000)
@@ -104,6 +112,9 @@ entity repo.Index_gross << V >> {
   SysObject_type : char(2)
 }
 
+docs.fs_cleanStringForAnchorId <.. repo.ForeignKey_gross
+docs.fs_cleanStringForAnchorId <.. docs.RepoObject_IndexList
+docs.fs_cleanStringForLabel <.. docs.RepoObject_IndexList
 docs.RepoObject_IndexList <.. docs.RepoObject_IndexList_T
 docs.RepoObject_IndexList <.. docs.usp_PERSIST_RepoObject_IndexList_T
 docs.RepoObject_IndexList_T <.. docs.usp_PERSIST_RepoObject_IndexList_T
@@ -113,5 +124,6 @@ repo.Index_gross <.. repo.ForeignKey_gross
 docs.RepoObject_IndexList::AntoraIndexList <-- docs.RepoObject_IndexList_T::AntoraIndexList
 docs.RepoObject_IndexList::PumlIndexList <-- docs.RepoObject_IndexList_T::PumlIndexList
 docs.RepoObject_IndexList::RepoObject_guid <-- docs.RepoObject_IndexList_T::RepoObject_guid
-repo.Index_gross::index_name <-- repo.ForeignKey_gross::referenced_index_name
 repo.Index_gross::index_name <-- repo.ForeignKey_gross::referencing_index_name
+repo.Index_gross::index_name <-- repo.ForeignKey_gross::referenced_index_name
+repo.Index_gross::parent_RepoObject_guid <-- docs.RepoObject_IndexList::RepoObject_guid

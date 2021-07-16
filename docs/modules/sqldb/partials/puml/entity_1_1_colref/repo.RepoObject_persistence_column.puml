@@ -149,6 +149,13 @@ entity repo.RepoObjectColumn << U >> {
 repo.RepoObject <.. repo.RepoObject_persistence_column
 repo.RepoObject_persistence <.. repo.RepoObject_persistence_column
 repo.RepoObjectColumn <.. repo.RepoObject_persistence_column
+repo.RepoObject::is_repo_managed <-- repo.RepoObject_persistence_column::is_repo_managed_t
+repo.RepoObject::RepoObject_name <-- repo.RepoObject_persistence_column::RepoObject_name_t
+repo.RepoObject::RepoObject_schema_name <-- repo.RepoObject_persistence_column::RepoObject_schema_name_t
+repo.RepoObject::RepoObject_type <-- repo.RepoObject_persistence_column::RepoObject_type_t
+repo.RepoObject::SysObject_name <-- repo.RepoObject_persistence_column::SysObject_name_s
+repo.RepoObject::SysObject_schema_name <-- repo.RepoObject_persistence_column::SysObject_schema_name_s
+repo.RepoObject::SysObject_type <-- repo.RepoObject_persistence_column::SysObject_type_s
 repo.RepoObject_persistence::has_history <-- repo.RepoObject_persistence_column::has_history
 repo.RepoObject_persistence::has_history_columns <-- repo.RepoObject_persistence_column::has_history_columns
 repo.RepoObject_persistence::history_schema_name <-- repo.RepoObject_persistence_column::history_schema_name
@@ -162,3 +169,6 @@ repo.RepoObject_persistence::is_persistence_truncate <-- repo.RepoObject_persist
 repo.RepoObject_persistence::is_persistence_update_changed <-- repo.RepoObject_persistence_column::is_persistence_update_changed
 repo.RepoObject_persistence::source_RepoObject_guid <-- repo.RepoObject_persistence_column::source_RepoObject_guid
 repo.RepoObject_persistence::target_RepoObject_guid <-- repo.RepoObject_persistence_column::target_RepoObject_guid
+repo.RepoObjectColumn::RepoObjectColumn_guid <-- repo.RepoObject_persistence_column::RepoObjectColumn_guid_s
+repo.RepoObjectColumn::RepoObjectColumn_name <-- repo.RepoObject_persistence_column::RepoObjectColumn_name_t
+repo.RepoObjectColumn::SysObjectColumn_name <-- repo.RepoObject_persistence_column::SysObjectColumn_name_s

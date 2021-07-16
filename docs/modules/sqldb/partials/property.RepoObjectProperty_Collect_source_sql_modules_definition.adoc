@@ -44,7 +44,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-04-16 19:26:52
+2021-07-14 19:36:07
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -65,7 +65,7 @@ view
 
 .Referenced Columns
 --
-* xref:sqlparse.RepoObject_SqlModules_Repo_Sys.adoc#column-RepoObject_guid[sqlparse.RepoObject_SqlModules_Repo_Sys.RepoObject_guid]
+* xref:sqlparse.RepoObject_SqlModules_Repo_Sys.adoc#column-RepoObject_guid[+sqlparse.RepoObject_SqlModules_Repo_Sys.RepoObject_guid+]
 --
 
 
@@ -149,8 +149,8 @@ view
 * PK, Unique, Real: 1, 1, 0
 
 
-[[index-idx_RepoObjectProperty_Collect_source_sql_modules_definition__1]]
-=== idx_RepoObjectProperty_Collect_source_sql_modules_definition__1
+[[index-idx_RepoObjectProperty_Collect_source_sql_modules_definition_1]]
+=== idx_RepoObjectProperty_Collect_source_sql_modules_definition++__++1
 
 * IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_repoobject_guid[RepoObject_guid]
 +
@@ -403,6 +403,7 @@ RepoObject_guid,property_name
 // tag::sql_modules_definition[]
 [source,sql]
 ----
+
 /*
 <<property_start>>MS_Description
 * extracts properties from sql_modules_definition
@@ -412,16 +413,16 @@ RepoObject_guid,property_name
 * The correct sequence must be followed. Nested parsing is not supported.
 <<property_end>>
 */
-CREATE View [property].[RepoObjectProperty_Collect_source_sql_modules_definition]
+CREATE View property.RepoObjectProperty_Collect_source_sql_modules_definition
 As
 Select
     --
     RepoObject_guid
-  , property_name  = Cast(es.substring_netPreEol As NVarchar(128))
+  , property_name  = Trim ( Cast(es.substring_netPreEol As NVarchar(128)))
   , property_value = Cast(String_Agg ( es.substring_netPostEol, Char ( 13 ) + Char ( 10 )) Within Group(Order By
                                                                                                             es.pos1) As NVarchar(4000))
 From
-    [sqlparse].RepoObject_SqlModules_Repo_Sys
+    sqlparse.RepoObject_SqlModules_Repo_Sys
     Cross Apply tool.ftv_extract_substrings (
                                                 sql_modules_definition
                                               , Char ( 13 ) + Char ( 10 ) + '<<property_start>>'
@@ -432,6 +433,7 @@ Where
 Group By
     RepoObject_guid
   , es.substring_netPreEol;
+
 ----
 // end::sql_modules_definition[]
 

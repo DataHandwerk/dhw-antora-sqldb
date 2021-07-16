@@ -25,6 +25,9 @@ skinparam class {
 
 entity config.ftv_get_parameter_value << IF >> {
   --
+  Parameter_value__result_date : date
+  Parameter_value__result_datetime : datetime
+  Parameter_value__result_int : int
   Parameter_value__result_nvarchar : nvarchar(4000)
 }
 
@@ -65,4 +68,4 @@ config.ftv_get_parameter_value <.. repo.RepoObjectColumn_HistValidColums_setpoin
 repo.RepoObject_persistence <.. repo.RepoObjectColumn_HistValidColums_setpoint
 repo.RepoObject_persistence <.. repo.usp_sync_guid_RepoObjectColumn
 repo.RepoObjectColumn_HistValidColums_setpoint <.. repo.usp_sync_guid_RepoObjectColumn
-
+repo.RepoObject_persistence::target_RepoObject_guid <-- repo.RepoObjectColumn_HistValidColums_setpoint::RepoObject_guid

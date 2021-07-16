@@ -44,7 +44,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-04-13 19:59:19
+2021-05-06 14:52:25
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -63,9 +63,14 @@ view
 |
 |===
 
+.Referenced Columns
+--
+* xref:uspgenerator.GeneratorUsp.adoc#column-id[+uspgenerator.GeneratorUsp.id+]
+--
+
 .Referencing Columns
 --
-* xref:uspgenerator.GeneratorUsp_StepList.adoc#column-usp_id[uspgenerator.GeneratorUsp_StepList.usp_id]
+* xref:uspgenerator.GeneratorUsp_StepList.adoc#column-usp_id[+uspgenerator.GeneratorUsp_StepList.usp_id+]
 --
 
 
@@ -112,7 +117,7 @@ view
 
 .Referenced Columns
 --
-* xref:uspgenerator.GeneratorUsp.adoc#column-has_logging[uspgenerator.GeneratorUsp.has_logging]
+* xref:uspgenerator.GeneratorUsp.adoc#column-has_logging[+uspgenerator.GeneratorUsp.has_logging+]
 --
 
 
@@ -206,7 +211,7 @@ view
 
 .Referenced Columns
 --
-* xref:uspgenerator.GeneratorUsp.adoc#column-usp_fullname[uspgenerator.GeneratorUsp.usp_fullname]
+* xref:uspgenerator.GeneratorUsp.adoc#column-usp_fullname[+uspgenerator.GeneratorUsp.usp_fullname+]
 --
 
 
@@ -316,6 +321,17 @@ view
 * <<column-Number>>; int
 --
 * PK, Unique, Real: 1, 1, 0
+
+
+[[index-idx_GeneratorUspStep_Sql_2]]
+=== idx_GeneratorUspStep_Sql++__++2
+
+* IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_usp_id[usp_id]
++
+--
+* <<column-usp_id>>; int
+--
+* PK, Unique, Real: 0, 0, 0
 
 // end::AntoraIndexList[]
 
@@ -561,7 +577,6 @@ usp_id,Number
 [source,sql]
 ----
 
-
 /*
 --usage:
 
@@ -572,7 +587,7 @@ ORDER BY [id]
 
 
 */
-CREATE View [uspgenerator].GeneratorUspStep_Sql
+CREATE View [uspgenerator].[GeneratorUspStep_Sql]
 As
 Select
     u.id     As usp_id
@@ -648,6 +663,7 @@ Select
                               , '* ' + step.log_target_object + Char ( 13 ) + Char ( 10 )
                               , Null)
                         , Char ( 13 ) + Char ( 10 )
+                        , Char ( 13 ) + Char ( 10 ) + step.Description + Char ( 13 ) + Char ( 10 )
                         , '|'
                         , step.Parent_Number
                         , Char ( 13 ) + Char ( 10 )
@@ -671,7 +687,7 @@ From
         Group By
             s.usp_id
           , t.Number
-    )                                           As BeginEnd
+    )                                                     As BeginEnd
         On
         BeginEnd.usp_id = u.id
         And BeginEnd.Number = t.Number
@@ -682,13 +698,13 @@ From
             step.usp_id = u.id
             And step.Number = t.Number
     Cross Apply [uspgenerator].ftv_GeneratorUspStep_sql (
-                                                  u.id
-                                                , t.Number
-                                                , u.has_logging
-                                                , BeginEnd.required_Begin_count
-                                                , BeginEnd.required_End_count
-                                                , BeginEnd.is_required_ELSE
-                                              ) sql;
+                                                            u.id
+                                                          , t.Number
+                                                          , u.has_logging
+                                                          , BeginEnd.required_Begin_count
+                                                          , BeginEnd.required_End_count
+                                                          , BeginEnd.is_required_ELSE
+                                                        ) sql;
 
 ----
 // end::sql_modules_definition[]

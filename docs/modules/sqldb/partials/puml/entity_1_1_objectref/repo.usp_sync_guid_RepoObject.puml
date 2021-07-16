@@ -23,6 +23,10 @@ skinparam class {
 }
 
 
+entity config.fs_get_parameter_value << FN >> {
+  --
+}
+
 entity config.type_level1type_level2type << V >> {
   **type** : nvarchar(128)
   --
@@ -45,6 +49,12 @@ entity logs.usp_ExecutionLog_insert << P >> {
   --
 }
 
+entity reference.RepoObjectSource_virtual << U >> {
+  * **RepoObject_guid** : uniqueidentifier
+  * **Source_RepoObject_guid** : uniqueidentifier
+  --
+}
+
 entity repo.RepoObject << U >> {
   * **RepoObject_guid** : uniqueidentifier
   --
@@ -57,7 +67,6 @@ entity repo.RepoObject_persistence << U >> {
 
 entity repo.RepoObject_RequiredRepoObjectMerge << V >> {
   * **RepoObject_guid** : uniqueidentifier
-  * **ro2_RepoObject_guid** : uniqueidentifier
   --
 }
 
@@ -85,6 +94,7 @@ entity repo_sys.usp_AddOrUpdateExtendedProperty << P >> {
   --
 }
 
+config.fs_get_parameter_value <.. repo.usp_sync_guid_RepoObject
 config.type_level1type_level2type <.. repo.usp_sync_guid_RepoObject
 graph.RepoObject <.. repo.usp_sync_guid_RepoObject
 graph.RepoObject <.. graph.usp_PERSIST_RepoObject
@@ -95,6 +105,7 @@ graph.usp_PERSIST_RepoObject <.. repo.usp_sync_guid_RepoObject
 logs.usp_ExecutionLog_insert <.. repo.usp_sync_guid_RepoObject
 logs.usp_ExecutionLog_insert <.. repo.usp_sync_guid
 logs.usp_ExecutionLog_insert <.. graph.usp_PERSIST_RepoObject
+reference.RepoObjectSource_virtual <.. repo.usp_sync_guid_RepoObject
 repo.RepoObject <.. repo.SysObject_RepoObject_via_guid
 repo.RepoObject <.. repo.SysObject_RepoObject_via_name
 repo.RepoObject <.. repo.usp_sync_guid_RepoObject

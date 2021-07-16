@@ -27,6 +27,10 @@ entity config.fs_dwh_database_name << FN >> {
   --
 }
 
+entity config.fs_get_parameter_value << FN >> {
+  --
+}
+
 entity config.ftv_dwh_database << IF >> {
   --
 }
@@ -73,6 +77,12 @@ entity logs.usp_ExecutionLog_insert << P >> {
   --
 }
 
+entity reference.RepoObjectSource_virtual << U >> {
+  * **RepoObject_guid** : uniqueidentifier
+  * **Source_RepoObject_guid** : uniqueidentifier
+  --
+}
+
 entity repo.RepoObject << U >> {
   * **RepoObject_guid** : uniqueidentifier
   --
@@ -85,7 +95,6 @@ entity repo.RepoObject_persistence << U >> {
 
 entity repo.RepoObject_RequiredRepoObjectMerge << V >> {
   * **RepoObject_guid** : uniqueidentifier
-  * **ro2_RepoObject_guid** : uniqueidentifier
   --
 }
 
@@ -146,24 +155,27 @@ entity sys_dwh.tables << SN >> {
 }
 
 config.fs_dwh_database_name <.. repo_sys.usp_AddOrUpdateExtendedProperty
+config.fs_get_parameter_value <.. repo.usp_sync_guid_RepoObject
 config.ftv_dwh_database <.. repo_sys.ExtendedProperties
 config.Parameter <.. config.fs_dwh_database_name
+config.Parameter <.. config.fs_get_parameter_value
 config.Parameter <.. config.ftv_dwh_database
 config.spt_values <.. config.type
 config.type <.. config.type_level1type_level2type
 config.type_level1type_level2type <.. repo.usp_sync_guid_RepoObject
-graph.RepoObject <.. repo.usp_sync_guid_RepoObject
 graph.RepoObject <.. graph.usp_PERSIST_RepoObject
-graph.RepoObject_S <.. graph.usp_PERSIST_RepoObject
+graph.RepoObject <.. repo.usp_sync_guid_RepoObject
 graph.RepoObject_S <.. repo.usp_sync_guid_RepoObject
+graph.RepoObject_S <.. graph.usp_PERSIST_RepoObject
 graph.RepoObject_S <.. graph.RepoObject
 graph.usp_PERSIST_RepoObject <.. repo.usp_sync_guid_RepoObject
 logs.ExecutionLog <.. logs.usp_ExecutionLog_insert
 logs.usp_ExecutionLog_insert <.. repo.usp_sync_guid_RepoObject
 logs.usp_ExecutionLog_insert <.. graph.usp_PERSIST_RepoObject
+reference.RepoObjectSource_virtual <.. repo.usp_sync_guid_RepoObject
+repo.RepoObject <.. repo.RepoObject_RequiredRepoObjectMerge
 repo.RepoObject <.. graph.RepoObject_S
 repo.RepoObject <.. repo.usp_sync_guid_RepoObject
-repo.RepoObject <.. repo.RepoObject_RequiredRepoObjectMerge
 repo.RepoObject <.. repo.SysObject_RepoObject_via_name
 repo.RepoObject <.. repo.SysObject_RepoObject_via_guid
 repo.RepoObject_persistence <.. repo.usp_sync_guid_RepoObject

@@ -41,7 +41,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-04-17 13:50:57
+2021-07-16 13:07:02
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -158,10 +158,13 @@ stored procedure
 
 |610
 |
-*export FROM [docs].[AntoraPage_ObjectBySchema]*
+*export partial_content FROM [docs].[AntoraPage_ObjectBySchema]*
 
 * u
 * [docs].[AntoraPage_ObjectBySchema]
+
+
+--nav-by-schema.adoc
 
 |
 
@@ -171,6 +174,21 @@ stored procedure
 
 * u
 * [docs].[AntoraPage_ObjectByType]
+
+
+nav-by-type.adoc
+
+|
+
+|710
+|
+*export page_content FROM [docs].[AntoraPage_ObjectBySchema]*
+
+* u
+* [docs].[AntoraPage_ObjectBySchema]
+
+
+--objects-by-schema.adoc
 
 |
 |===
@@ -557,7 +575,7 @@ BEGIN
   --
   + ' -d ' + @databaseName
   --
-  + ' -c'
+  + ' -c -C 65001'
   --
   + @TrustedUserPassword
 
@@ -629,7 +647,7 @@ BEGIN
   --
   + ' -d ' + @databaseName
   --
-  + ' -c'
+  + ' -c -C 65001'
   --
   + @TrustedUserPassword
 
@@ -703,7 +721,7 @@ BEGIN
   --
   + ' -d ' + @databaseName
   --
-  + ' -c'
+  + ' -c -C 65001'
   --
   + @TrustedUserPassword
 
@@ -774,7 +792,7 @@ BEGIN
   --
   + ' -d ' + @databaseName
   --
-  + ' -c'
+  + ' -c -C 65001'
   --
   + @TrustedUserPassword
 
@@ -820,7 +838,6 @@ EXEC logs.usp_ExecutionLog_insert
 
 /*{"ReportUspStep":[{"Number":520,"Name":"export FROM [docs].[AntoraNavListPage_by_type]","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":0,"log_source_object":"[docs].[AntoraNavListPage_by_type]","log_flag_InsertUpdateDelete":"u"}]}*/
 PRINT CONCAT('usp_id;Number;Parent_Number: ',28,';',520,';',NULL);
-
 
 DECLARE page_cursor CURSOR Local Fast_Forward
 FOR
@@ -896,17 +913,20 @@ EXEC logs.usp_ExecutionLog_insert
  , @updated = @rows
 -- Logging END --
 
-/*{"ReportUspStep":[{"Number":610,"Name":"export FROM [docs].[AntoraPage_ObjectBySchema]","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":0,"log_source_object":"[docs].[AntoraPage_ObjectBySchema]","log_flag_InsertUpdateDelete":"u"}]}*/
+/*{"ReportUspStep":[{"Number":610,"Name":"export partial_content FROM [docs].[AntoraPage_ObjectBySchema]","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":0,"log_source_object":"[docs].[AntoraPage_ObjectBySchema]","log_flag_InsertUpdateDelete":"u"}]}*/
 PRINT CONCAT('usp_id;Number;Parent_Number: ',28,';',610,';',NULL);
 
+/*
 --nav-by-schema.adoc
+
+*/
 SET @command = 'bcp "SELECT [partial_content] FROM [docs].[AntoraPage_ObjectBySchema]"  queryout ' + @outputDirPartNav + 'nav-by-schema.adoc'
  --
  + ' -S ' + @instanceName
  --
  + ' -d ' + @databaseName
  --
- + ' -c'
+ + ' -c -C 65001'
  --
  + @TrustedUserPassword
 
@@ -920,7 +940,7 @@ EXEC xp_cmdshell @command
 -- Logging START --
 SET @rows = @@ROWCOUNT
 SET @step_id = @step_id + 1
-SET @step_name = 'export FROM [docs].[AntoraPage_ObjectBySchema]'
+SET @step_name = 'export partial_content FROM [docs].[AntoraPage_ObjectBySchema]'
 SET @source_object = '[docs].[AntoraPage_ObjectBySchema]'
 SET @target_object = NULL
 
@@ -944,14 +964,17 @@ EXEC logs.usp_ExecutionLog_insert
 /*{"ReportUspStep":[{"Number":620,"Name":"export FROM [docs].[AntoraPage_ObjectByType]","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":0,"log_source_object":"[docs].[AntoraPage_ObjectByType]","log_flag_InsertUpdateDelete":"u"}]}*/
 PRINT CONCAT('usp_id;Number;Parent_Number: ',28,';',620,';',NULL);
 
---nav-by-type.adoc
+/*
+nav-by-type.adoc
+
+*/
 SET @command = 'bcp "SELECT [partial_content] FROM [docs].[AntoraPage_ObjectByType]"  queryout ' + @outputDirPartNav + 'nav-by-type.adoc'
  --
  + ' -S ' + @instanceName
  --
  + ' -d ' + @databaseName
  --
- + ' -c'
+ + ' -c -C 65001'
  --
  + @TrustedUserPassword
 
@@ -967,6 +990,54 @@ SET @rows = @@ROWCOUNT
 SET @step_id = @step_id + 1
 SET @step_name = 'export FROM [docs].[AntoraPage_ObjectByType]'
 SET @source_object = '[docs].[AntoraPage_ObjectByType]'
+SET @target_object = NULL
+
+EXEC logs.usp_ExecutionLog_insert 
+ @execution_instance_guid = @execution_instance_guid
+ , @ssis_execution_id = @ssis_execution_id
+ , @sub_execution_id = @sub_execution_id
+ , @parent_execution_log_id = @parent_execution_log_id
+ , @current_execution_guid = @current_execution_guid
+ , @proc_id = @proc_id
+ , @proc_schema_name = @proc_schema_name
+ , @proc_name = @proc_name
+ , @event_info = @event_info
+ , @step_id = @step_id
+ , @step_name = @step_name
+ , @source_object = @source_object
+ , @target_object = @target_object
+ , @updated = @rows
+-- Logging END --
+
+/*{"ReportUspStep":[{"Number":710,"Name":"export page_content FROM [docs].[AntoraPage_ObjectBySchema]","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":0,"log_source_object":"[docs].[AntoraPage_ObjectBySchema]","log_flag_InsertUpdateDelete":"u"}]}*/
+PRINT CONCAT('usp_id;Number;Parent_Number: ',28,';',710,';',NULL);
+
+/*
+--objects-by-schema.adoc
+
+*/
+SET @command = 'bcp "SELECT [page_content] FROM [docs].[AntoraPage_ObjectBySchema]"  queryout ' + @outputDirPageNav + 'objects-by-schema.adoc'
+ --
+ + ' -S ' + @instanceName
+ --
+ + ' -d ' + @databaseName
+ --
+ + ' -c -C 65001'
+ --
+ + @TrustedUserPassword
+
+PRINT @command
+
+--Execute the BCP command
+EXEC xp_cmdshell @command
+ , no_output
+
+
+-- Logging START --
+SET @rows = @@ROWCOUNT
+SET @step_id = @step_id + 1
+SET @step_name = 'export page_content FROM [docs].[AntoraPage_ObjectBySchema]'
+SET @source_object = '[docs].[AntoraPage_ObjectBySchema]'
 SET @target_object = NULL
 
 EXEC logs.usp_ExecutionLog_insert 

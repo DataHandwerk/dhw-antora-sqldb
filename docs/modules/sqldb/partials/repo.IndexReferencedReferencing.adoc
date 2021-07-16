@@ -40,7 +40,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-04-17 13:33:30
+2021-07-14 19:36:08
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -61,12 +61,12 @@ view
 
 .Referenced Columns
 --
-* xref:repo.Index_virtual.adoc#column-referenced_index_guid[repo.Index_virtual.referenced_index_guid]
+* xref:repo.Index_virtual.adoc#column-referenced_index_guid[+repo.Index_virtual.referenced_index_guid+]
 --
 
 .Referencing Columns
 --
-* xref:repo.IndexReferencedReferencing_HasFullColumnsInReferencing.adoc#column-referenced_index_guid[repo.IndexReferencedReferencing_HasFullColumnsInReferencing.referenced_index_guid]
+* xref:repo.IndexReferencedReferencing_HasFullColumnsInReferencing.adoc#column-referenced_index_guid[+repo.IndexReferencedReferencing_HasFullColumnsInReferencing.referenced_index_guid+]
 --
 
 
@@ -85,12 +85,12 @@ view
 
 .Referenced Columns
 --
-* xref:reference.RepoObject_reference_union.adoc#column-referenced_RepoObject_guid[reference.RepoObject_reference_union.referenced_RepoObject_guid]
+* xref:reference.RepoObject_reference_union.adoc#column-referenced_RepoObject_guid[+reference.RepoObject_reference_union.referenced_RepoObject_guid+]
 --
 
 .Referencing Columns
 --
-* xref:repo.IndexReferencedReferencing_HasFullColumnsInReferencing.adoc#column-referenced_RepoObject_guid[repo.IndexReferencedReferencing_HasFullColumnsInReferencing.referenced_RepoObject_guid]
+* xref:repo.IndexReferencedReferencing_HasFullColumnsInReferencing.adoc#column-referenced_RepoObject_guid[+repo.IndexReferencedReferencing_HasFullColumnsInReferencing.referenced_RepoObject_guid+]
 --
 
 
@@ -109,12 +109,12 @@ view
 
 .Referenced Columns
 --
-* xref:reference.RepoObject_reference_union.adoc#column-referencing_RepoObject_guid[reference.RepoObject_reference_union.referencing_RepoObject_guid]
+* xref:reference.RepoObject_reference_union.adoc#column-referencing_RepoObject_guid[+reference.RepoObject_reference_union.referencing_RepoObject_guid+]
 --
 
 .Referencing Columns
 --
-* xref:repo.IndexReferencedReferencing_HasFullColumnsInReferencing.adoc#column-referencing_RepoObject_guid[repo.IndexReferencedReferencing_HasFullColumnsInReferencing.referencing_RepoObject_guid]
+* xref:repo.IndexReferencedReferencing_HasFullColumnsInReferencing.adoc#column-referencing_RepoObject_guid[+repo.IndexReferencedReferencing_HasFullColumnsInReferencing.referencing_RepoObject_guid+]
 --
 
 
@@ -131,9 +131,22 @@ view
 |
 |===
 
+.Description
+--
+the same index can be inherited several times into the same referenced object, if a source is used several times
+for example
+SELECT A_A = A.A, B_A = B.A from source_1 as A LEFT JOIN source_1 as B ON ... 
+normaly these indexes should have different columns
+--
+
+.Referenced Columns
+--
+* xref:repo.Index_virtual.adoc#column-RowNumberInReferencing[+repo.Index_virtual.RowNumberInReferencing+]
+--
+
 .Referencing Columns
 --
-* xref:repo.IndexReferencedReferencing_HasFullColumnsInReferencing.adoc#column-RowNumberInReferencing_Target[repo.IndexReferencedReferencing_HasFullColumnsInReferencing.RowNumberInReferencing_Target]
+* xref:repo.IndexReferencedReferencing_HasFullColumnsInReferencing.adoc#column-RowNumberInReferencing_Target[+repo.IndexReferencedReferencing_HasFullColumnsInReferencing.RowNumberInReferencing_Target+]
 --
 
 
@@ -150,9 +163,14 @@ view
 |
 |===
 
+.Referenced Columns
+--
+* xref:repo.Index_union.adoc#column-index_guid[+repo.Index_union.index_guid+]
+--
+
 .Referencing Columns
 --
-* xref:repo.IndexReferencedReferencing_HasFullColumnsInReferencing.adoc#column-source_index_guid[repo.IndexReferencedReferencing_HasFullColumnsInReferencing.source_index_guid]
+* xref:repo.IndexReferencedReferencing_HasFullColumnsInReferencing.adoc#column-source_index_guid[+repo.IndexReferencedReferencing_HasFullColumnsInReferencing.source_index_guid+]
 --
 
 
@@ -169,9 +187,14 @@ view
 |
 |===
 
+.Referenced Columns
+--
+* xref:repo.Index_union.adoc#column-index_type[+repo.Index_union.index_type+]
+--
+
 .Referencing Columns
 --
-* xref:repo.IndexReferencedReferencing_HasFullColumnsInReferencing.adoc#column-source_index_type[repo.IndexReferencedReferencing_HasFullColumnsInReferencing.source_index_type]
+* xref:repo.IndexReferencedReferencing_HasFullColumnsInReferencing.adoc#column-source_index_type[+repo.IndexReferencedReferencing_HasFullColumnsInReferencing.source_index_type+]
 --
 
 
@@ -239,14 +262,25 @@ view
 
 // tag::AntoraIndexList[]
 
-[[index-idx_IndexReferencedReferencing__1]]
-=== idx_IndexReferencedReferencing__1
+[[index-idx_IndexReferencedReferencing_1]]
+=== idx_IndexReferencedReferencing++__++1
 
 * IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_no_group[no_group]
 +
 --
 * <<column-referenced_RepoObject_guid>>; uniqueidentifier
 * <<column-referencing_RepoObject_guid>>; uniqueidentifier
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[[index-idx_IndexReferencedReferencing_2]]
+=== idx_IndexReferencedReferencing++__++2
+
+* IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_index_guid[index_guid]
++
+--
+* <<column-source_index_guid>>; uniqueidentifier
 --
 * PK, Unique, Real: 0, 0, 0
 
@@ -500,14 +534,14 @@ Es muss bedacht werden, dass der gleiche Quell-Index im Zielobjekt mehrere Verer
 wenn die Quelle mehrfach verwendet wird und der Quell-Index somit auch mehrfach im Ziel vorhanden sein kann
 Das ist so lange OK, wie es im referenced unterschiedliche Spalten sind.
 
-Wir m걌sten noch irgendwo pr갽en, ob die gleiche Spalten-Kombination aus verschiedenen Quellen geerbt wird
-Und dann d걊fte es den Index nur einmal geben, aber m봥licherweise mit mehrfachen Quellen?
+Wir m체ssten noch irgendwo pr체fen, ob die gleiche Spalten-Kombination aus verschiedenen Quellen geerbt wird
+Und dann d체rfte es den Index nur einmal geben, aber m철glicherweise mit mehrfachen Quellen?
 Oder brauchen wir nur eine Quelle und ignorieren einfach weitere Quellen?
 
 repo.RepoObject_reference__union
-fasst aber alle Referenzen zwischen Objekten zusammen, auch wenn es da mehrere Auspr꼏ungen gibt
+fasst aber alle Referenzen zwischen Objekten zusammen, auch wenn es da mehrere Auspr채gungen gibt
 
-Wenn repo.Index__virtual AS i_v richtig gef걄lt wird, dann m걌ste es in folgender Sicht auch eine Eintr꼏e mit Anz > 1 geben 
+Wenn repo.Index__virtual AS i_v richtig gef체llt wird, dann m체sste es in folgender Sicht auch eine Eintr채ge mit Anz > 1 geben 
 
 SELECT
        [source_index_guid]

@@ -1,0 +1,165 @@
+left to right direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+}
+
+
+entity logs.ExecutionLog << U >> {
+  * **id** : bigint
+  --
+  created_dt : datetime
+  current_execution_guid : uniqueidentifier
+  deleted : int
+  event_info : nvarchar(max)
+  * execution_instance_guid : uniqueidentifier
+  info_01 : sql_variant
+  info_02 : sql_variant
+  info_03 : sql_variant
+  info_04 : sql_variant
+  info_05 : sql_variant
+  info_06 : sql_variant
+  info_07 : sql_variant
+  info_08 : sql_variant
+  info_09 : sql_variant
+  inserted : int
+  parameter_01 : sql_variant
+  parameter_02 : sql_variant
+  parameter_03 : sql_variant
+  parameter_04 : sql_variant
+  parameter_05 : sql_variant
+  parameter_06 : sql_variant
+  parameter_07 : sql_variant
+  parameter_08 : sql_variant
+  parameter_09 : sql_variant
+  parameter_10 : sql_variant
+  parameter_11 : sql_variant
+  parameter_12 : sql_variant
+  parameter_13 : sql_variant
+  parameter_14 : sql_variant
+  parameter_15 : sql_variant
+  parameter_16 : sql_variant
+  parameter_17 : sql_variant
+  parameter_18 : sql_variant
+  parameter_19 : sql_variant
+  parameter_20 : sql_variant
+  parent_execution_log_id : bigint
+  proc_id : int
+  proc_name : nvarchar(128)
+  proc_schema_name : nvarchar(128)
+  source_object : nvarchar(261)
+  ssis_execution_id : bigint
+  step_id : int
+  step_name : nvarchar(1000)
+  sub_execution_id : int
+  target_object : nvarchar(261)
+  updated : int
+  * {abstract} proc_fullname : nvarchar(517)
+}
+
+entity logs.ExecutionLog_parent << V >> {
+  * **id** : bigint
+  --
+  parent_created_dt : datetime
+  parent_current_execution_guid : uniqueidentifier
+  parent_execution_log_id : bigint
+  parent_parameter_01 : sql_variant
+  parent_parameter_02 : sql_variant
+  parent_parameter_03 : sql_variant
+  parent_parameter_04 : sql_variant
+  parent_parameter_05 : sql_variant
+  parent_parameter_06 : sql_variant
+  parent_parameter_07 : sql_variant
+  parent_parameter_08 : sql_variant
+  parent_parameter_09 : sql_variant
+  parent_parameter_10 : sql_variant
+  parent_parameter_11 : sql_variant
+  parent_parameter_12 : sql_variant
+  parent_parameter_13 : sql_variant
+  parent_parameter_14 : sql_variant
+  parent_parameter_15 : sql_variant
+  parent_parameter_16 : sql_variant
+  parent_parameter_17 : sql_variant
+  parent_parameter_18 : sql_variant
+  parent_parameter_19 : sql_variant
+  parent_parameter_20 : sql_variant
+  parent_proc_fullname : nvarchar(517)
+  parent_proc_id : int
+  parent_proc_name : nvarchar(128)
+  parent_proc_schema_name : nvarchar(128)
+  parent_step_id : int
+  parent_step_name : nvarchar(1000)
+}
+
+entity logs.ExecutionLog_puml_Sequence_start_stop << V >> {
+  * **id** : bigint
+  --
+  created_dt : datetime
+  * execution_instance_guid : uniqueidentifier
+  parent_proc_fullname : nvarchar(517)
+  * proc_fullname : nvarchar(517)
+  * puml_Sequence_start_stop : nvarchar(1574)
+}
+
+entity logs.ftv_ExecutionLog_puml_sequence_start_stop_per_execution << IF >> {
+  --
+  * puml_Sequence_start_stop : nvarchar(max)
+}
+
+logs.ExecutionLog <.. logs.ExecutionLog_puml_Sequence_start_stop
+logs.ExecutionLog <.. logs.ExecutionLog_parent
+logs.ExecutionLog_parent <.. logs.ExecutionLog_puml_Sequence_start_stop
+logs.ExecutionLog_puml_Sequence_start_stop <.. logs.ftv_ExecutionLog_puml_sequence_start_stop_per_execution
+logs.ExecutionLog::created_dt <-- logs.ExecutionLog_puml_Sequence_start_stop::created_dt
+logs.ExecutionLog::created_dt <-- logs.ExecutionLog_parent::parent_created_dt
+logs.ExecutionLog::current_execution_guid <-- logs.ExecutionLog_parent::parent_current_execution_guid
+logs.ExecutionLog::execution_instance_guid <-- logs.ExecutionLog_puml_Sequence_start_stop::execution_instance_guid
+logs.ExecutionLog::id <-- logs.ExecutionLog_puml_Sequence_start_stop::id
+logs.ExecutionLog::id <-- logs.ExecutionLog_parent::id
+logs.ExecutionLog::parameter_01 <-- logs.ExecutionLog_parent::parent_parameter_01
+logs.ExecutionLog::parameter_02 <-- logs.ExecutionLog_parent::parent_parameter_02
+logs.ExecutionLog::parameter_03 <-- logs.ExecutionLog_parent::parent_parameter_03
+logs.ExecutionLog::parameter_04 <-- logs.ExecutionLog_parent::parent_parameter_04
+logs.ExecutionLog::parameter_05 <-- logs.ExecutionLog_parent::parent_parameter_05
+logs.ExecutionLog::parameter_06 <-- logs.ExecutionLog_parent::parent_parameter_06
+logs.ExecutionLog::parameter_07 <-- logs.ExecutionLog_parent::parent_parameter_07
+logs.ExecutionLog::parameter_08 <-- logs.ExecutionLog_parent::parent_parameter_08
+logs.ExecutionLog::parameter_09 <-- logs.ExecutionLog_parent::parent_parameter_09
+logs.ExecutionLog::parameter_10 <-- logs.ExecutionLog_parent::parent_parameter_10
+logs.ExecutionLog::parameter_11 <-- logs.ExecutionLog_parent::parent_parameter_11
+logs.ExecutionLog::parameter_12 <-- logs.ExecutionLog_parent::parent_parameter_12
+logs.ExecutionLog::parameter_13 <-- logs.ExecutionLog_parent::parent_parameter_13
+logs.ExecutionLog::parameter_14 <-- logs.ExecutionLog_parent::parent_parameter_14
+logs.ExecutionLog::parameter_15 <-- logs.ExecutionLog_parent::parent_parameter_15
+logs.ExecutionLog::parameter_16 <-- logs.ExecutionLog_parent::parent_parameter_16
+logs.ExecutionLog::parameter_17 <-- logs.ExecutionLog_parent::parent_parameter_17
+logs.ExecutionLog::parameter_18 <-- logs.ExecutionLog_parent::parent_parameter_18
+logs.ExecutionLog::parameter_19 <-- logs.ExecutionLog_parent::parent_parameter_19
+logs.ExecutionLog::parameter_20 <-- logs.ExecutionLog_parent::parent_parameter_20
+logs.ExecutionLog::parent_execution_log_id <-- logs.ExecutionLog_parent::parent_execution_log_id
+logs.ExecutionLog::proc_fullname <-- logs.ExecutionLog_parent::parent_proc_fullname
+logs.ExecutionLog::proc_fullname <-- logs.ExecutionLog_puml_Sequence_start_stop::proc_fullname
+logs.ExecutionLog::proc_id <-- logs.ExecutionLog_parent::parent_proc_id
+logs.ExecutionLog::proc_name <-- logs.ExecutionLog_parent::parent_proc_name
+logs.ExecutionLog::proc_schema_name <-- logs.ExecutionLog_parent::parent_proc_schema_name
+logs.ExecutionLog::step_id <-- logs.ExecutionLog_parent::parent_step_id
+logs.ExecutionLog::step_name <-- logs.ExecutionLog_parent::parent_step_name
+logs.ExecutionLog_parent::parent_proc_fullname <-- logs.ExecutionLog_puml_Sequence_start_stop::parent_proc_fullname

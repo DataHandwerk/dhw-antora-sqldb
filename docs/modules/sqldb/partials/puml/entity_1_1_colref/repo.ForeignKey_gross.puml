@@ -23,6 +23,10 @@ skinparam class {
 }
 
 
+entity docs.fs_cleanStringForAnchorId << FN >> {
+  --
+}
+
 entity docs.RepoObject_IndexList << V >> {
   **RepoObject_guid** : uniqueidentifier
   --
@@ -37,7 +41,7 @@ entity repo.ForeignKey_gross << V >> {
   ForeignKey_fullname : nvarchar(517)
   ForeignKey_name : nvarchar(128)
   * is_MatchingDatatypePattern : int
-  * referenced_AntoraXref : nvarchar(951)
+  * referenced_AntoraXref : nvarchar(4000)
   referenced_index_guid : uniqueidentifier
   referenced_index_name : nvarchar(128)
   referenced_IndexPatternColumnDatatype : nvarchar(4000)
@@ -121,6 +125,8 @@ entity repo.Index_gross << V >> {
   SysObject_type : char(2)
 }
 
+docs.fs_cleanStringForAnchorId <.. docs.RepoObject_IndexList
+docs.fs_cleanStringForAnchorId <.. repo.ForeignKey_gross
 repo.ForeignKey_gross <.. docs.RepoObject_IndexList
 repo.ForeignKey_Indexes_union_T <.. repo.ForeignKey_gross
 repo.Index_gross <.. repo.ForeignKey_gross
@@ -147,5 +153,6 @@ repo.ForeignKey_Indexes_union_T::referencing_RepoObject_guid <-- repo.ForeignKey
 repo.ForeignKey_Indexes_union_T::referencing_SysObject_name <-- repo.ForeignKey_gross::referencing_SysObject_name
 repo.ForeignKey_Indexes_union_T::referencing_SysObject_schema_name <-- repo.ForeignKey_gross::referencing_SysObject_schema_name
 repo.ForeignKey_Indexes_union_T::update_referential_action <-- repo.ForeignKey_gross::update_referential_action
-repo.Index_gross::index_name <-- repo.ForeignKey_gross::referenced_index_name
 repo.Index_gross::index_name <-- repo.ForeignKey_gross::referencing_index_name
+repo.Index_gross::index_name <-- repo.ForeignKey_gross::referenced_index_name
+repo.Index_gross::parent_RepoObject_guid <-- docs.RepoObject_IndexList::RepoObject_guid

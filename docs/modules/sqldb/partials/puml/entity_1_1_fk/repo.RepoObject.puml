@@ -68,6 +68,24 @@ entity reference.RepoObjectSource_QueryPlan << U >> {
 RepoObject_guid; uniqueidentifier
 }
 
+entity reference.RepoObjectSource_virtual << U >> {
+**PK_RepoObjectSource_virtual**
+
+..
+RepoObject_guid; uniqueidentifier
+Source_RepoObject_guid; uniqueidentifier
+--
+- idx_RepoObjectSource_virtual__1
+{RepoObject_guid}
+..
+RepoObject_guid; uniqueidentifier
+--
+- idx_RepoObjectSource_virtual__2
+{RepoObject_guid}
+..
+Source_RepoObject_guid; uniqueidentifier
+}
+
 entity repo.Index_Settings << U >> {
 **PK_Index_Settings**
 {index_guid}
@@ -200,10 +218,12 @@ repo.RepoObject::PK_RepoObject <-- property.RepoObjectProperty::idx_RepoObjectPr
 repo.RepoObject::PK_RepoObject <-- reference.RepoObject_QueryPlan::PK_RepoObject_QueryPlan
 repo.RepoObject::PK_RepoObject <-- reference.RepoObjectSource_FirstResultSet::idx_RepoObjectSource_FirstResultSet__1
 repo.RepoObject::PK_RepoObject <-- reference.RepoObjectSource_QueryPlan::idx_RepoObjectSource_QueryPlan__1
+repo.RepoObject::PK_RepoObject <-- reference.RepoObjectSource_virtual::idx_RepoObjectSource_virtual__2
+repo.RepoObject::PK_RepoObject <-- reference.RepoObjectSource_virtual::idx_RepoObjectSource_virtual__1
 repo.RepoObject::PK_RepoObject <-- repo.Index_virtual::idx_Index_virtual__1
 repo.RepoObject::PK_RepoObject <-- repo.RepoObject_persistence::PK_RepoObject_persistence
 repo.RepoObject::PK_RepoObject <-- repo.RepoObjectColumn::idx_RepoObjectColumn__1
 repo.RepoObject::PK_RepoObject <-- sqlparse.RepoObject_SqlModules::PK_RepoObject_SqlModules
-repo.RepoObject::PK_RepoObject <-- workflow.ProcedureDependency::idx_ProcedureDependency__2
 repo.RepoObject::PK_RepoObject <-- workflow.ProcedureDependency::idx_ProcedureDependency__1
+repo.RepoObject::PK_RepoObject <-- workflow.ProcedureDependency::idx_ProcedureDependency__2
 repo.RepoObject::PK_RepoObject <-- workflow.WorkflowStep::idx_WorkflowStep__2

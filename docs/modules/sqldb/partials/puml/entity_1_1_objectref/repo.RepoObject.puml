@@ -100,13 +100,17 @@ entity property.RepoObjectColumnProperty_sys_repo << V >> {
 
 entity property.RepoObjectProperty_cross << V >> {
   * **RepoObject_guid** : uniqueidentifier
-  * **property_name** : nvarchar(128)
+  **property_name** : nvarchar(128)
+  --
+}
+
+entity property.RepoObjectProperty_ForUpdate << V >> {
   --
 }
 
 entity property.RepoObjectProperty_InheritanceType_InheritanceDefinition << V >> {
   * **RepoObject_guid** : uniqueidentifier
-  * **property_name** : nvarchar(128)
+  **property_name** : nvarchar(128)
   --
 }
 
@@ -131,6 +135,10 @@ entity reference.ftv_RepoObject_ReferencedReferencing << IF >> {
 entity reference.RepoObject_reference_persistence << V >> {
   **referenced_RepoObject_guid** : uniqueidentifier
   * **referencing_RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity reference.RepoObject_reference_virtual << V >> {
   --
 }
 
@@ -174,6 +182,10 @@ entity reference.usp_RepoObjectSource_QueryPlan << P >> {
   --
 }
 
+entity reference.usp_RepoObjectSource_virtual_set << P >> {
+  --
+}
+
 entity reference.usp_update_Referencing_Count << P >> {
   --
 }
@@ -184,6 +196,10 @@ entity repo.check_IndexColumn_virtual_referenced_setpoint << V >> {
   --
 }
 
+entity repo.Index_Settings_ForUpdate << V >> {
+  --
+}
+
 entity repo.Index_virtual_ForUpdate << V >> {
   * **index_guid** : uniqueidentifier
   --
@@ -191,6 +207,10 @@ entity repo.Index_virtual_ForUpdate << V >> {
 
 entity repo.Index_virtual_SysObject << V >> {
   * **index_guid** : uniqueidentifier
+  --
+}
+
+entity repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_check << V >> {
   --
 }
 
@@ -238,7 +258,6 @@ entity repo.RepoObject_related_FK_union << V >> {
 
 entity repo.RepoObject_RequiredRepoObjectMerge << V >> {
   * **RepoObject_guid** : uniqueidentifier
-  * **ro2_RepoObject_guid** : uniqueidentifier
   --
 }
 
@@ -345,12 +364,18 @@ entity workflow.ProcedureDependency_gross << V >> {
 }
 
 graph.RepoObject_S <.. repo.usp_sync_guid_RepoObject
-reference.ftv_RepoObject_ReferencedReferencing <.. docs.RepoObject_Plantuml_ObjectRefList_30_0
 reference.ftv_RepoObject_ReferencedReferencing <.. docs.RepoObject_Plantuml_ObjectRefList_0_30
+reference.ftv_RepoObject_ReferencedReferencing <.. docs.RepoObject_Plantuml_ObjectRefList_30_0
 reference.ftv_RepoObject_ReferencedReferencing <.. docs.RepoObject_Plantuml_ColRefList
 reference.ftv_RepoObject_ReferencedReferencing <.. docs.RepoObject_Plantuml_ObjectRefList
+repo.RepoObject <.. reference.ftv_RepoObject_ReferencedReferencing
 repo.RepoObject <.. docs.RepoObject_Plantuml_ColRefList
 repo.RepoObject <.. docs.AntoraNavListPage_by_schema
+repo.RepoObject <.. repo.RepoObject_related_FK_union
+repo.RepoObject <.. property.RepoObjectProperty_cross
+repo.RepoObject <.. property.usp_RepoObjectProperty_set
+repo.RepoObject <.. docs.RepoObject_Plantuml_ObjectRefList
+repo.RepoObject <.. docs.ftv_RepoObject_Reference_PlantUml_EntityRefList
 repo.RepoObject <.. repo_sys.ForeignKey
 repo.RepoObject <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition
 repo.RepoObject <.. repo.usp_Index_finish
@@ -359,35 +384,39 @@ repo.RepoObject <.. property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn
 repo.RepoObject <.. property.ExtendedProperty_Repo2Sys_level1
 repo.RepoObject <.. property.ExtendedProperty_Repo2Sys_level2_RepoObject
 repo.RepoObject <.. repo.RepoObject_RequiredRepoObjectMerge
+repo.RepoObject <.. sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias
 repo.RepoObject <.. graph.RepoObject_S
 repo.RepoObject <.. reference.RepoObjectColumn_reference_SqlModules
-repo.RepoObject <.. docs.ftv_RepoObject_Reference_PlantUml_EntityRefList
-repo.RepoObject <.. property.usp_RepoObjectProperty_set
-repo.RepoObject <.. repo.Index_virtual_ForUpdate
-repo.RepoObject <.. repo.RepoObject_related_FK_union
 repo.RepoObject <.. property.usp_RepoObjectColumnProperty_set
 repo.RepoObject <.. workflow.ProcedureDependency_gross
-repo.RepoObject <.. property.RepoObjectProperty_cross
-repo.RepoObject <.. reference.ftv_RepoObject_ReferencedReferencing
-repo.RepoObject <.. docs.RepoObject_Plantuml_ObjectRefList
-repo.RepoObject <.. docs.RepoObject_Plantuml_ObjectRefList_0_30
+repo.RepoObject <.. repo.Index_virtual_ForUpdate
 repo.RepoObject <.. docs.RepoObject_Plantuml_ObjectRefList_30_0
-repo.RepoObject <.. repo.usp_persistence_set
-repo.RepoObject <.. repo.usp_update_Referencing_Count
-repo.RepoObject <.. repo.usp_sync_guid_RepoObjectColumn
-repo.RepoObject <.. reference.usp_RepoObjectSource_FirstResultSet
-repo.RepoObject <.. repo.usp_Index_virtual_set
+repo.RepoObject <.. docs.RepoObject_Plantuml_ObjectRefList_0_30
 repo.RepoObject <.. repo.usp_sync_guid_RepoObject
+repo.RepoObject <.. repo.usp_Index_virtual_set
+repo.RepoObject <.. repo.usp_sync_guid_RepoObjectColumn
+repo.RepoObject <.. reference.RepoObject_reference_virtual
+repo.RepoObject <.. reference.usp_RepoObjectSource_virtual_set
+repo.RepoObject <.. repo.Index_Settings_ForUpdate
+repo.RepoObject <.. property.RepoObjectProperty_ForUpdate
+repo.RepoObject <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_check
+repo.RepoObject <.. repo.usp_update_Referencing_Count
+repo.RepoObject <.. reference.RepoObjectColumn_reference_QueryPlan
+repo.RepoObject <.. repo.RepoObject_gross
+repo.RepoObject <.. reference.usp_RepoObjectSource_QueryPlan
 repo.RepoObject <.. reference.usp_update_Referencing_Count
-repo.RepoObject <.. repo.RepoObject_SqlCreateTable
 repo.RepoObject <.. repo.RepoObjectColumn_MissingSource_TypeV
-repo.RepoObject <.. repo.check_IndexColumn_virtual_referenced_setpoint
+repo.RepoObject <.. repo.usp_persistence_set
 repo.RepoObject <.. repo.RepoObject_persistence_ForUpdate
 repo.RepoObject <.. sqlparse.RepoObject_SqlModules_71_reference_ExpliciteTableAlias
-repo.RepoObject <.. sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias
+repo.RepoObject <.. reference.usp_RepoObjectSource_FirstResultSet
+repo.RepoObject <.. repo.check_IndexColumn_virtual_referenced_setpoint
+repo.RepoObject <.. repo.RepoObject_SqlCreateTable
 repo.RepoObject <.. reference.usp_RepoObject_update_SysObjectQueryPlan
-repo.RepoObject <.. repo_sys.Index_unique
 repo.RepoObject <.. repo.Index_virtual_SysObject
+repo.RepoObject <.. repo_sys.Index_unique
+repo.RepoObject <.. docs.visjs_nodelist_object_test01
+repo.RepoObject <.. repo.RepoObject_persistence_column
 repo.RepoObject <.. repo.RepoObject_persistence_ObjectNames
 repo.RepoObject <.. repo.IndexColumn_virtual_gross
 repo.RepoObject <.. repo_sys.RepoObjectReferenced
@@ -396,25 +425,20 @@ repo.RepoObject <.. reference.RepoObject_reference_persistence
 repo.RepoObject <.. sqlparse.RepoObject_SqlModules_10_statement
 repo.RepoObject <.. sqlparse.RepoObject_SqlModules_39_object
 repo.RepoObject <.. reference.RepoObjectColumn_reference_Persistence
-repo.RepoObject <.. docs.visjs_nodelist_object_test01
-repo.RepoObject <.. repo.RepoObject_persistence_column
 repo.RepoObject <.. uspgenerator.GeneratorUsp_SqlUsp
-repo.RepoObject <.. repo.SysObject_RepoObject_via_guid
-repo.RepoObject <.. property.RepoObjectProperty_sys_repo
 repo.RepoObject <.. repo.SysObject_RepoObject_via_name
+repo.RepoObject <.. repo.SysObject_RepoObject_via_guid
 repo.RepoObject <.. sqlparse.RepoObject_SqlModules_Repo_Sys
 repo.RepoObject <.. property.RepoObjectColumnProperty_sys_repo
-repo.RepoObject <.. repo.SysColumn_RepoObjectColumn_via_guid
+repo.RepoObject <.. property.RepoObjectProperty_sys_repo
 repo.RepoObject <.. repo.SysColumn_RepoObjectColumn_via_name
+repo.RepoObject <.. repo.SysColumn_RepoObjectColumn_via_guid
 repo.RepoObject <.. repo.RepoObjectColumn_gross
-repo.RepoObject <.. repo.RepoObject_gross
 repo.RepoObject <.. reference.RepoObjectColumn_reference_FirstResultSet
-repo.RepoObject <.. reference.RepoObjectColumn_reference_QueryPlan
-repo.RepoObject <.. reference.usp_RepoObjectSource_QueryPlan
-repo.RepoObject_gross <.. reference.usp_RepoObjectSource_QueryPlan
 repo.RepoObject_gross <.. reference.usp_RepoObject_update_SysObjectQueryPlan
 repo.RepoObject_gross <.. repo.RepoObject_SqlCreateTable
 repo.RepoObject_gross <.. reference.usp_RepoObjectSource_FirstResultSet
+repo.RepoObject_gross <.. reference.usp_RepoObjectSource_QueryPlan
 repo.RepoObject_gross <.. repo.Index_virtual_ForUpdate
 repo.RepoObject_RequiredRepoObjectMerge <.. repo.usp_sync_guid_RepoObject
 repo.RepoObjectColumn_gross <.. reference.RepoObjectColumn_reference_QueryPlan
@@ -423,8 +447,8 @@ repo.SysColumn_RepoObjectColumn_via_guid <.. repo.usp_sync_guid_RepoObjectColumn
 repo.SysColumn_RepoObjectColumn_via_name <.. repo.usp_sync_guid_RepoObjectColumn
 repo.SysObject_RepoObject_via_guid <.. repo.usp_sync_guid_RepoObject
 repo.SysObject_RepoObject_via_name <.. repo.usp_sync_guid_RepoObject
-repo_sys.RepoObjectReferenced <.. reference.usp_update_Referencing_Count
 repo_sys.RepoObjectReferenced <.. repo.usp_update_Referencing_Count
-repo_sys.RepoObjectReferencing <.. repo.usp_update_Referencing_Count
+repo_sys.RepoObjectReferenced <.. reference.usp_update_Referencing_Count
 repo_sys.RepoObjectReferencing <.. reference.usp_update_Referencing_Count
+repo_sys.RepoObjectReferencing <.. repo.usp_update_Referencing_Count
 sqlparse.RepoObject_SqlModules_Repo_Sys <.. repo.RepoObject_gross

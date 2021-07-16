@@ -23,6 +23,10 @@ skinparam class {
 }
 
 
+entity config.fs_get_parameter_value << FN >> {
+  --
+}
+
 entity config.type_level1type_level2type << V >> {
   **type** : nvarchar(128)
   --
@@ -54,6 +58,12 @@ entity graph.usp_PERSIST_RepoObject << P >> {
 }
 
 entity logs.usp_ExecutionLog_insert << P >> {
+  --
+}
+
+entity reference.RepoObjectSource_virtual << U >> {
+  * **RepoObject_guid** : uniqueidentifier
+  * **Source_RepoObject_guid** : uniqueidentifier
   --
 }
 
@@ -116,12 +126,12 @@ entity repo.RepoObject_persistence << U >> {
 
 entity repo.RepoObject_RequiredRepoObjectMerge << V >> {
   * **RepoObject_guid** : uniqueidentifier
-  * **ro2_RepoObject_guid** : uniqueidentifier
   --
   * RepoObject_fullname : nvarchar(261)
   * RepoObject_name : nvarchar(128)
   * RepoObject_schema_name : nvarchar(128)
   * ro2_RepoObject_fullname : nvarchar(261)
+  * ro2_RepoObject_guid : uniqueidentifier
   * ro2_RepoObject_name : nvarchar(128)
   * ro2_RepoObject_schema_name : nvarchar(128)
   * ro2_SysObject_fullname : nvarchar(261)
@@ -228,6 +238,7 @@ entity repo_sys.usp_AddOrUpdateExtendedProperty << P >> {
   --
 }
 
+config.fs_get_parameter_value <.. repo.usp_sync_guid_RepoObject
 config.type_level1type_level2type <.. repo.usp_sync_guid_RepoObject
 graph.RepoObject <.. repo.usp_sync_guid_RepoObject
 graph.RepoObject <.. graph.usp_PERSIST_RepoObject
@@ -238,6 +249,7 @@ graph.usp_PERSIST_RepoObject <.. repo.usp_sync_guid_RepoObject
 logs.usp_ExecutionLog_insert <.. repo.usp_sync_guid_RepoObject
 logs.usp_ExecutionLog_insert <.. repo.usp_sync_guid
 logs.usp_ExecutionLog_insert <.. graph.usp_PERSIST_RepoObject
+reference.RepoObjectSource_virtual <.. repo.usp_sync_guid_RepoObject
 repo.RepoObject <.. repo.SysObject_RepoObject_via_guid
 repo.RepoObject <.. repo.SysObject_RepoObject_via_name
 repo.RepoObject <.. repo.usp_sync_guid_RepoObject
@@ -256,10 +268,12 @@ graph.RepoObject_S::RepoObject_fullname <-- graph.RepoObject::RepoObject_fullnam
 graph.RepoObject_S::RepoObject_fullname2 <-- graph.RepoObject::RepoObject_fullname2
 graph.RepoObject_S::RepoObject_guid <-- graph.RepoObject::RepoObject_guid
 graph.RepoObject_S::RepoObject_type <-- graph.RepoObject::RepoObject_type
-repo.RepoObject::is_repo_managed <-- repo.SysObject_RepoObject_via_name::is_repo_managed
 repo.RepoObject::is_repo_managed <-- repo.SysObject_RepoObject_via_guid::is_repo_managed
-repo.RepoObject::is_RepoObject_name_uniqueidentifier <-- repo.SysObject_RepoObject_via_guid::is_RepoObject_name_uniqueidentifier
+repo.RepoObject::is_repo_managed <-- repo.SysObject_RepoObject_via_name::is_repo_managed
 repo.RepoObject::is_RepoObject_name_uniqueidentifier <-- repo.SysObject_RepoObject_via_name::is_RepoObject_name_uniqueidentifier
+repo.RepoObject::is_RepoObject_name_uniqueidentifier <-- repo.SysObject_RepoObject_via_guid::is_RepoObject_name_uniqueidentifier
+repo.RepoObject::is_SysObject_missing <-- repo.SysObject_RepoObject_via_guid::RepoObject_is_SysObject_missing
+repo.RepoObject::is_SysObject_missing <-- repo.SysObject_RepoObject_via_name::RepoObject_is_SysObject_missing
 repo.RepoObject::is_SysObject_name_uniqueidentifier <-- repo.SysObject_RepoObject_via_name::is_SysObject_name_uniqueidentifier
 repo.RepoObject::is_SysObject_name_uniqueidentifier <-- repo.SysObject_RepoObject_via_guid::is_SysObject_name_uniqueidentifier
 repo.RepoObject::Repo_history_table_guid <-- repo.SysObject_RepoObject_via_guid::Repo_history_table_guid
@@ -268,43 +282,57 @@ repo.RepoObject::Repo_temporal_type <-- repo.SysObject_RepoObject_via_name::Repo
 repo.RepoObject::Repo_temporal_type <-- repo.SysObject_RepoObject_via_guid::Repo_temporal_type
 repo.RepoObject::RepoObject_fullname <-- graph.RepoObject_S::RepoObject_fullname
 repo.RepoObject::RepoObject_fullname <-- repo.RepoObject_RequiredRepoObjectMerge::RepoObject_fullname
+repo.RepoObject::RepoObject_fullname <-- repo.RepoObject_RequiredRepoObjectMerge::ro2_RepoObject_fullname
+repo.RepoObject::RepoObject_guid <-- repo.RepoObject_RequiredRepoObjectMerge::ro2_RepoObject_guid
 repo.RepoObject::RepoObject_guid <-- repo.RepoObject_RequiredRepoObjectMerge::RepoObject_guid
 repo.RepoObject::RepoObject_guid <-- graph.RepoObject_S::RepoObject_guid
-repo.RepoObject::RepoObject_guid <-- repo.SysObject_RepoObject_via_guid::RepoObject_guid
 repo.RepoObject::RepoObject_guid <-- repo.SysObject_RepoObject_via_name::RepoObject_guid
-repo.RepoObject::RepoObject_name <-- repo.SysObject_RepoObject_via_name::RepoObject_name
+repo.RepoObject::RepoObject_guid <-- repo.SysObject_RepoObject_via_name::history_table_guid
+repo.RepoObject::RepoObject_guid <-- repo.SysObject_RepoObject_via_guid::RepoObject_guid
+repo.RepoObject::RepoObject_guid <-- repo.SysObject_RepoObject_via_guid::history_table_guid
 repo.RepoObject::RepoObject_name <-- repo.SysObject_RepoObject_via_guid::RepoObject_name
+repo.RepoObject::RepoObject_name <-- repo.SysObject_RepoObject_via_name::RepoObject_name
 repo.RepoObject::RepoObject_name <-- repo.RepoObject_RequiredRepoObjectMerge::RepoObject_name
+repo.RepoObject::RepoObject_name <-- repo.RepoObject_RequiredRepoObjectMerge::ro2_RepoObject_name
+repo.RepoObject::RepoObject_schema_name <-- repo.RepoObject_RequiredRepoObjectMerge::ro2_RepoObject_schema_name
 repo.RepoObject::RepoObject_schema_name <-- repo.RepoObject_RequiredRepoObjectMerge::RepoObject_schema_name
-repo.RepoObject::RepoObject_schema_name <-- repo.SysObject_RepoObject_via_guid::RepoObject_schema_name
 repo.RepoObject::RepoObject_schema_name <-- repo.SysObject_RepoObject_via_name::RepoObject_schema_name
+repo.RepoObject::RepoObject_schema_name <-- repo.SysObject_RepoObject_via_guid::RepoObject_schema_name
 repo.RepoObject::RepoObject_type <-- repo.SysObject_RepoObject_via_name::RepoObject_type
 repo.RepoObject::RepoObject_type <-- repo.SysObject_RepoObject_via_guid::RepoObject_type
 repo.RepoObject::RepoObject_type <-- graph.RepoObject_S::RepoObject_type
 repo.RepoObject::SysObject_fullname <-- repo.RepoObject_RequiredRepoObjectMerge::SysObject_fullname
-repo.RepoObject::SysObject_id <-- repo.SysObject_RepoObject_via_guid::SysObject_id
-repo.RepoObject::SysObject_id <-- repo.SysObject_RepoObject_via_name::SysObject_id
-repo.RepoObject::SysObject_name <-- repo.SysObject_RepoObject_via_guid::SysObject_name
-repo.RepoObject::SysObject_name <-- repo.SysObject_RepoObject_via_name::SysObject_name
+repo.RepoObject::SysObject_fullname <-- repo.RepoObject_RequiredRepoObjectMerge::ro2_SysObject_fullname
+repo.RepoObject::SysObject_id <-- repo.SysObject_RepoObject_via_name::RepoObject_SysObject_id
+repo.RepoObject::SysObject_id <-- repo.SysObject_RepoObject_via_guid::RepoObject_SysObject_id
+repo.RepoObject::SysObject_modify_date <-- repo.SysObject_RepoObject_via_guid::RepoObject_SysObject_modify_date
+repo.RepoObject::SysObject_modify_date <-- repo.SysObject_RepoObject_via_name::RepoObject_SysObject_modify_date
+repo.RepoObject::SysObject_name <-- repo.SysObject_RepoObject_via_name::RepoObject_SysObject_name
+repo.RepoObject::SysObject_name <-- repo.SysObject_RepoObject_via_guid::RepoObject_SysObject_name
+repo.RepoObject::SysObject_name <-- repo.RepoObject_RequiredRepoObjectMerge::ro2_SysObject_name
 repo.RepoObject::SysObject_name <-- repo.RepoObject_RequiredRepoObjectMerge::SysObject_name
+repo.RepoObject::SysObject_parent_object_id <-- repo.SysObject_RepoObject_via_guid::RepoObject_SysObject_parent_object_id
+repo.RepoObject::SysObject_parent_object_id <-- repo.SysObject_RepoObject_via_name::RepoObject_SysObject_parent_object_id
+repo.RepoObject::SysObject_schema_name <-- repo.SysObject_RepoObject_via_guid::RepoObject_SysObject_schema_name
+repo.RepoObject::SysObject_schema_name <-- repo.SysObject_RepoObject_via_name::RepoObject_SysObject_schema_name
 repo.RepoObject::SysObject_schema_name <-- repo.RepoObject_RequiredRepoObjectMerge::SysObject_schema_name
-repo.RepoObject::SysObject_schema_name <-- repo.SysObject_RepoObject_via_guid::SysObject_schema_name
-repo.RepoObject::SysObject_schema_name <-- repo.SysObject_RepoObject_via_name::SysObject_schema_name
-repo.RepoObject::SysObject_type <-- repo.SysObject_RepoObject_via_guid::SysObject_type
-repo.RepoObject::SysObject_type <-- repo.SysObject_RepoObject_via_name::SysObject_type
+repo.RepoObject::SysObject_type <-- repo.SysObject_RepoObject_via_name::RepoObject_SysObject_type
+repo.RepoObject::SysObject_type <-- repo.SysObject_RepoObject_via_guid::RepoObject_SysObject_type
 repo_sys.SysObject::history_table_id <-- repo.SysObject_RepoObject_via_name::history_table_id
 repo_sys.SysObject::history_table_id <-- repo.SysObject_RepoObject_via_guid::history_table_id
 repo_sys.SysObject::modify_date <-- repo.SysObject_RepoObject_via_guid::modify_date
 repo_sys.SysObject::modify_date <-- repo.SysObject_RepoObject_via_name::modify_date
-repo_sys.SysObject::parent_object_id <-- repo.SysObject_RepoObject_via_guid::parent_object_id
 repo_sys.SysObject::parent_object_id <-- repo.SysObject_RepoObject_via_name::parent_object_id
-repo_sys.SysObject::SysObject_id <-- repo.SysObject_RepoObject_via_name::SysObject_id
+repo_sys.SysObject::parent_object_id <-- repo.SysObject_RepoObject_via_guid::parent_object_id
 repo_sys.SysObject::SysObject_id <-- repo.SysObject_RepoObject_via_guid::SysObject_id
-repo_sys.SysObject::SysObject_name <-- repo.SysObject_RepoObject_via_guid::SysObject_name
+repo_sys.SysObject::SysObject_id <-- repo.SysObject_RepoObject_via_name::SysObject_id
 repo_sys.SysObject::SysObject_name <-- repo.SysObject_RepoObject_via_name::SysObject_name
+repo_sys.SysObject::SysObject_name <-- repo.SysObject_RepoObject_via_guid::SysObject_name
 repo_sys.SysObject::SysObject_RepoObject_guid <-- repo.SysObject_RepoObject_via_name::SysObject_RepoObject_guid
 repo_sys.SysObject::SysObject_RepoObject_guid <-- repo.SysObject_RepoObject_via_guid::SysObject_RepoObject_guid
 repo_sys.SysObject::SysObject_schema_name <-- repo.SysObject_RepoObject_via_guid::SysObject_schema_name
 repo_sys.SysObject::SysObject_schema_name <-- repo.SysObject_RepoObject_via_name::SysObject_schema_name
-repo_sys.SysObject::temporal_type <-- repo.SysObject_RepoObject_via_guid::temporal_type
 repo_sys.SysObject::temporal_type <-- repo.SysObject_RepoObject_via_name::temporal_type
+repo_sys.SysObject::temporal_type <-- repo.SysObject_RepoObject_via_guid::temporal_type
+repo_sys.SysObject::type <-- repo.SysObject_RepoObject_via_guid::SysObject_type
+repo_sys.SysObject::type <-- repo.SysObject_RepoObject_via_name::SysObject_type

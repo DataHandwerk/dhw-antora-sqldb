@@ -43,7 +43,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-04-16 19:26:52
+2021-07-14 19:36:07
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -64,7 +64,7 @@ view
 
 .Referenced Columns
 --
-* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-RepoObject_guid[property.RepoObjectProperty_InheritanceType_InheritanceDefinition.RepoObject_guid]
+* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-RepoObject_guid[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.RepoObject_guid+]
 --
 
 
@@ -76,14 +76,14 @@ view
 |2
 |*property_name*
 |nvarchar(128)
-|NOT NULL
+|NULL
 |
 |
 |===
 
 .Referenced Columns
 --
-* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-property_name[property.RepoObjectProperty_InheritanceType_InheritanceDefinition.property_name]
+* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-property_name[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.property_name+]
 --
 
 
@@ -102,7 +102,7 @@ view
 
 .Referenced Columns
 --
-* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-Inheritance_StringAggSeparatorSql[property.RepoObjectProperty_InheritanceType_InheritanceDefinition.Inheritance_StringAggSeparatorSql]
+* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-Inheritance_StringAggSeparatorSql[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.Inheritance_StringAggSeparatorSql+]
 --
 
 
@@ -121,7 +121,7 @@ view
 
 .Referenced Columns
 --
-* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-InheritanceDefinition[property.RepoObjectProperty_InheritanceType_InheritanceDefinition.InheritanceDefinition]
+* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-InheritanceDefinition[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.InheritanceDefinition+]
 --
 
 
@@ -140,7 +140,7 @@ view
 
 .Referenced Columns
 --
-* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-InheritanceType[property.RepoObjectProperty_InheritanceType_InheritanceDefinition.InheritanceType]
+* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-InheritanceType[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.InheritanceType+]
 --
 
 
@@ -185,9 +185,15 @@ view
 |
 |===
 
+.Description
+--
+datatype of property_value is `sql_variant`, because it should be possible to synchronize the property_value in the repository with property_value in extended properties in the dwh database, which is `sql_variant` +
+therefore the maximum content is nvarchar(4000) or varchar(8000)
+--
+
 .Referenced Columns
 --
-* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-property_value[property.RepoObjectProperty_InheritanceType_InheritanceDefinition.property_value]
+* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-property_value[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.property_value+]
 --
 
 
@@ -211,7 +217,7 @@ view
 
 .Referenced Columns
 --
-* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-RepoObject_fullname[property.RepoObjectProperty_InheritanceType_InheritanceDefinition.RepoObject_fullname]
+* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-RepoObject_fullname[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.RepoObject_fullname+]
 --
 
 
@@ -235,7 +241,7 @@ reference in [repo_sys].[type]
 
 .Referenced Columns
 --
-* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-RepoObject_type[property.RepoObjectProperty_InheritanceType_InheritanceDefinition.RepoObject_type]
+* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-RepoObject_type[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.RepoObject_type+]
 --
 
 
@@ -268,7 +274,7 @@ reference in [repo_sys].[type]
 |2
 |*<<column-property_name>>*
 |nvarchar(128)
-|NOT NULL
+|NULL
 |
 |
 
@@ -369,8 +375,8 @@ reference in [repo_sys].[type]
 * PK, Unique, Real: 1, 1, 0
 
 
-[[index-idx_RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition__2]]
-=== idx_RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition__2
+[[index-idx_RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition_2]]
+=== idx_RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition++__++2
 
 * IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_property_name[property_name]
 +
@@ -380,8 +386,8 @@ reference in [repo_sys].[type]
 * PK, Unique, Real: 0, 0, 0
 
 
-[[index-idx_RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition__3]]
-=== idx_RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition__3
+[[index-idx_RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition_3]]
+=== idx_RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition++__++3
 
 * IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_repoobject_guid[RepoObject_guid]
 +
@@ -629,6 +635,8 @@ RepoObject_guid,property_name
 ----
 
 
+
+
 /*
 --The result must be grouped to determine all required calculation variants of an inheritance
 
@@ -642,7 +650,7 @@ HAVING (NOT (resulting_InheritanceDefinition IS NULL))
 
 */
 
-CREATE View [property].RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition
+CREATE View [property].[RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition]
 As
 Select
     --
@@ -686,7 +694,7 @@ Select
           Then
           IsNull (
                      InheritanceDefinition
-                   , '[property].[fs_get_RepoObjectProperty_nvarchar]([referenced].[RepoObject_guid], [referencing].[property_name])'
+                   , '[property].[fs_get_RepoObjectProperty_nvarchar]([referenced].[RepoObject_guid], ''' + inh.property_name + ''')'
                  )
   End
   --normally the result from [resulting_InheritanceDefinition] should not be empty to be inherited

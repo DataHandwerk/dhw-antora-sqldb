@@ -61,6 +61,15 @@ entity repo.Index_gross << V >> {
   SysObject_type : char(2)
 }
 
+entity repo.Index_Settings << U >> {
+  * **index_guid** : uniqueidentifier
+  --
+  IndexPatternColumnDatatype : nvarchar(4000)
+  IndexPatternColumnName : nvarchar(4000)
+  IndexSemanticGroup : nvarchar(512)
+  * is_create_constraint : bit
+}
+
 entity repo.Index_virtual << U >> {
   * **index_guid** : uniqueidentifier
   --
@@ -171,9 +180,14 @@ entity repo.usp_Index_virtual_set << P >> {
 logs.usp_ExecutionLog_insert <.. repo.usp_Index_virtual_set
 logs.usp_ExecutionLog_insert <.. repo.usp_Index_ForeignKey
 repo.Index_gross <.. repo.usp_Index_virtual_set
+repo.Index_Settings <.. repo.Index_gross
+repo.Index_Settings <.. repo.usp_Index_virtual_set
 repo.Index_virtual <.. repo.usp_Index_virtual_set
 repo.IndexColumn_virtual <.. repo.usp_Index_virtual_set
 repo.RepoObject <.. repo.usp_Index_virtual_set
 repo.RepoObjectColumn <.. repo.usp_Index_virtual_set
 repo.usp_Index_virtual_set <.. repo.usp_Index_ForeignKey
-
+repo.Index_Settings::index_guid <-- repo.Index_gross::index_guid
+repo.Index_Settings::IndexPatternColumnDatatype <-- repo.Index_gross::IndexPatternColumnDatatype
+repo.Index_Settings::IndexPatternColumnName <-- repo.Index_gross::IndexPatternColumnName
+repo.Index_Settings::IndexSemanticGroup <-- repo.Index_gross::IndexSemanticGroup

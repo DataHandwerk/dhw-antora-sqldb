@@ -37,6 +37,14 @@ entity docs.AntoraIndexSemanticgroupPatterndatatype << V >> {
   AntoraIndexSemanticgroupPatterndatatype : nvarchar(max)
 }
 
+entity docs.fs_cleanStringForAnchorId << FN >> {
+  --
+}
+
+entity docs.fs_cleanStringForLabel << FN >> {
+  --
+}
+
 entity repo.Index_gross << V >> {
   * **index_guid** : uniqueidentifier
   --
@@ -72,6 +80,8 @@ entity repo.Index_gross << V >> {
 }
 
 docs.AntoraIndexSemanticgroupPatterndatatype <.. docs.AntoraIndexSemanticgroup
+docs.fs_cleanStringForAnchorId <.. docs.AntoraIndexSemanticgroupPatterndatatype
+docs.fs_cleanStringForLabel <.. docs.AntoraIndexSemanticgroupPatterndatatype
 repo.Index_gross <.. docs.AntoraIndexSemanticgroupPatterndatatype
 docs.AntoraIndexSemanticgroupPatterndatatype::IndexSemanticGroup <-- docs.AntoraIndexSemanticgroup::IndexSemanticGroup
 repo.Index_gross::IndexPatternColumnDatatype <-- docs.AntoraIndexSemanticgroupPatterndatatype::IndexPatternColumnDatatype

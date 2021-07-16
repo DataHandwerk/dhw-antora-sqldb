@@ -224,6 +224,8 @@ entity repo_sys.SysColumn << V >> {
   seed_value : sql_variant
   * SysObject_column_id : int
   SysObject_column_name : sysname
+  SysObject_fullname : nvarchar(517)
+  SysObject_fullname2 : nvarchar(257)
   * SysObject_id : int
   SysObject_name : nvarchar(128)
   SysObject_RepoObject_guid : uniqueidentifier
@@ -243,10 +245,10 @@ repo.RepoObject <.. repo.usp_sync_guid_RepoObjectColumn
 repo.RepoObject <.. repo.SysColumn_RepoObjectColumn_via_name
 repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_name
 repo.RepoObjectColumn <.. repo.usp_sync_guid_RepoObjectColumn
-repo.SysColumn_RepoObjectColumn_via_name <.. repo_sys.IndexColumn_unique
 repo.SysColumn_RepoObjectColumn_via_name <.. repo.usp_sync_guid_RepoObjectColumn
-repo_sys.SysColumn <.. repo.SysColumn_RepoObjectColumn_via_name
+repo.SysColumn_RepoObjectColumn_via_name <.. repo_sys.IndexColumn_unique
 repo_sys.SysColumn <.. repo.usp_sync_guid_RepoObjectColumn
+repo_sys.SysColumn <.. repo.SysColumn_RepoObjectColumn_via_name
 repo.RepoObject::is_repo_managed <-- repo.SysColumn_RepoObjectColumn_via_name::is_repo_managed
 repo.RepoObject::RepoObject_fullname <-- repo.SysColumn_RepoObjectColumn_via_name::RepoObject_fullname
 repo.RepoObject::SysObject_fullname <-- repo.SysColumn_RepoObjectColumn_via_name::SysObject_fullname
@@ -283,6 +285,7 @@ repo.SysColumn_RepoObjectColumn_via_name::SysObject_column_name <-- repo_sys.Ind
 repo.SysColumn_RepoObjectColumn_via_name::SysObject_fullname <-- repo_sys.IndexColumn_unique::parent_SysObject_fullname
 repo.SysColumn_RepoObjectColumn_via_name::SysObject_name <-- repo_sys.IndexColumn_unique::parent_SysObject_name
 repo.SysColumn_RepoObjectColumn_via_name::SysObject_schema_name <-- repo_sys.IndexColumn_unique::parent_schema_name
+repo.SysColumn_RepoObjectColumn_via_name::user_type_fullname <-- repo_sys.IndexColumn_unique::SysObject_column_user_type_fullname
 repo_sys.SysColumn::default_definition <-- repo.SysColumn_RepoObjectColumn_via_name::default_definition
 repo_sys.SysColumn::default_is_system_named <-- repo.SysColumn_RepoObjectColumn_via_name::default_is_system_named
 repo_sys.SysColumn::default_name <-- repo.SysColumn_RepoObjectColumn_via_name::default_name
