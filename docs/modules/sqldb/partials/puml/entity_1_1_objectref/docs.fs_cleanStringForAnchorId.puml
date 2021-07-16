@@ -1,0 +1,65 @@
+left to right direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+}
+
+
+entity docs.AntoraIndexSemanticgroupPatterndatatype << V >> {
+  **IndexSemanticGroup** : nvarchar(512)
+  **IndexPatternColumnDatatype** : nvarchar(4000)
+  --
+}
+
+entity docs.fs_cleanStringForAnchorId << FN >> {
+  --
+}
+
+entity docs.RepoObject_ColumnList << V >> {
+  * **RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity docs.RepoObject_IndexList << V >> {
+  **RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity reference.RepoObjectColumn_ReferencedList << V >> {
+  --
+}
+
+entity reference.RepoObjectColumn_ReferencingList << V >> {
+  --
+}
+
+entity repo.ForeignKey_gross << V >> {
+  **ForeignKey_guid** : uniqueidentifier
+  --
+}
+
+docs.fs_cleanStringForAnchorId <.. docs.RepoObject_IndexList
+docs.fs_cleanStringForAnchorId <.. docs.AntoraIndexSemanticgroupPatterndatatype
+docs.fs_cleanStringForAnchorId <.. docs.RepoObject_ColumnList
+docs.fs_cleanStringForAnchorId <.. reference.RepoObjectColumn_ReferencedList
+docs.fs_cleanStringForAnchorId <.. reference.RepoObjectColumn_ReferencingList
+docs.fs_cleanStringForAnchorId <.. repo.ForeignKey_gross
+repo.ForeignKey_gross <.. docs.RepoObject_IndexList

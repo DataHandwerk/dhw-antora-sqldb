@@ -1,0 +1,182 @@
+left to right direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+}
+
+
+entity reference.RepoObjectColumnSource_virtual << U >> {
+  * **RepoObjectColumn_guid** : uniqueidentifier
+  * **Source_RepoObjectColumn_guid** : uniqueidentifier
+  --
+}
+
+entity reference.usp_RepoObjectColumnSource_virtual_set << P >> {
+  --
+}
+
+entity repo.RepoObjectColumn << U >> {
+  * **RepoObjectColumn_guid** : uniqueidentifier
+  --
+  Inheritance_StringAggSeparatorSql : nvarchar(4000)
+  InheritanceDefinition : nvarchar(4000)
+  InheritanceType : tinyint
+  is_persistence_no_check : bit
+  is_persistence_no_include : bit
+  is_persistence_no_update : bit
+  is_query_plan_expression : bit
+  is_required_ColumnMerge : bit
+  is_SysObjectColumn_missing : bit
+  persistence_source_RepoObjectColumn_guid : uniqueidentifier
+  Referencing_Count : int
+  Repo_default_definition : nvarchar(max)
+  Repo_default_is_system_named : bit
+  Repo_default_name : nvarchar(128)
+  Repo_definition : nvarchar(max)
+  * Repo_generated_always_type : tinyint
+  Repo_graph_type : int
+  Repo_increment_value : sql_variant
+  * Repo_is_computed : bit
+  * Repo_is_identity : bit
+  Repo_is_nullable : bit
+  Repo_is_persisted : bit
+  Repo_seed_value : sql_variant
+  Repo_user_type_fullname : nvarchar(128)
+  Repo_user_type_name : nvarchar(128)
+  Repo_uses_database_collation : bit
+  * RepoObject_guid : uniqueidentifier
+  RepoObjectColumn_column_id : int
+  * RepoObjectColumn_name : nvarchar(128)
+  SysObjectColumn_column_id : int
+  * SysObjectColumn_name : nvarchar(128)
+  {abstract} has_different_sys_names : bit
+  * {static} is_RepoObjectColumn_name_uniqueidentifier : int
+  * {static} is_SysObjectColumn_name_uniqueidentifier : int
+}
+
+entity repo.RepoObjectColumn_gross << V >> {
+  * **RepoObjectColumn_guid** : uniqueidentifier
+  --
+  AntoraReferencedColumnList : nvarchar(max)
+  AntoraReferencingColumnList : nvarchar(max)
+  has_different_sys_names : bit
+  has_get_referenced_issue : bit
+  index_column_id : int
+  index_name : nvarchar(128)
+  Inheritance_StringAggSeparatorSql : nvarchar(4000)
+  InheritanceDefinition : nvarchar(4000)
+  InheritanceType : tinyint
+  is_index_primary_key : bit
+  is_persistence_no_check : bit
+  is_persistence_no_include : bit
+  is_persistence_no_update : bit
+  is_query_plan_expression : bit
+  is_repo_managed : bit
+  * is_RepoObject_name_uniqueidentifier : int
+  * is_RepoObjectColumn_name_uniqueidentifier : int
+  is_required_ColumnMerge : bit
+  is_SysObject_missing : bit
+  * is_SysObject_name_uniqueidentifier : int
+  is_SysObjectColumn_missing : bit
+  * is_SysObjectColumn_name_uniqueidentifier : int
+  * modify_dt : datetime
+  node_id : bigint
+  persistence_source_RepoObjectColumn_guid : uniqueidentifier
+  pk_index_guid : uniqueidentifier
+  Property_ms_description : nvarchar(4000)
+  Referencing_Count : int
+  Repo_default_definition : nvarchar(max)
+  Repo_default_is_system_named : bit
+  Repo_default_name : nvarchar(128)
+  Repo_definition : nvarchar(max)
+  * Repo_generated_always_type : tinyint
+  Repo_graph_type : int
+  Repo_increment_value : sql_variant
+  * Repo_is_computed : bit
+  * Repo_is_identity : bit
+  Repo_is_nullable : bit
+  Repo_is_persisted : bit
+  Repo_seed_value : sql_variant
+  Repo_user_type_fullname : nvarchar(128)
+  Repo_user_type_name : nvarchar(128)
+  Repo_uses_database_collation : bit
+  * RepoObject_fullname : nvarchar(261)
+  * RepoObject_fullname2 : nvarchar(257)
+  * RepoObject_guid : uniqueidentifier
+  * RepoObject_name : nvarchar(128)
+  RepoObject_Referencing_Count : int
+  * RepoObject_schema_name : nvarchar(128)
+  * RepoObject_type : char(2)
+  RepoObjectColumn_column_id : int
+  * RepoObjectColumn_fullname : nvarchar(520)
+  * RepoObjectColumn_fullname2 : nvarchar(386)
+  * RepoObjectColumn_name : nvarchar(128)
+  * SysObject_fullname : nvarchar(261)
+  * SysObject_fullname2 : nvarchar(257)
+  SysObject_id : int
+  SysObject_modify_date : datetime
+  * SysObject_name : nvarchar(128)
+  * SysObject_parent_object_id : int
+  * SysObject_schema_name : nvarchar(128)
+  SysObject_type : char(2)
+  SysObjectColumn_column_id : int
+  * SysObjectColumn_name : nvarchar(128)
+}
+
+reference.RepoObjectColumnSource_virtual <.. reference.usp_RepoObjectColumnSource_virtual_set
+repo.RepoObjectColumn <.. repo.RepoObjectColumn_gross
+repo.RepoObjectColumn <.. reference.usp_RepoObjectColumnSource_virtual_set
+repo.RepoObjectColumn_gross <.. reference.usp_RepoObjectColumnSource_virtual_set
+repo.RepoObjectColumn::has_different_sys_names <-- repo.RepoObjectColumn_gross::has_different_sys_names
+repo.RepoObjectColumn::Inheritance_StringAggSeparatorSql <-- repo.RepoObjectColumn_gross::Inheritance_StringAggSeparatorSql
+repo.RepoObjectColumn::InheritanceDefinition <-- repo.RepoObjectColumn_gross::InheritanceDefinition
+repo.RepoObjectColumn::InheritanceType <-- repo.RepoObjectColumn_gross::InheritanceType
+repo.RepoObjectColumn::is_persistence_no_check <-- repo.RepoObjectColumn_gross::is_persistence_no_check
+repo.RepoObjectColumn::is_persistence_no_include <-- repo.RepoObjectColumn_gross::is_persistence_no_include
+repo.RepoObjectColumn::is_persistence_no_update <-- repo.RepoObjectColumn_gross::is_persistence_no_update
+repo.RepoObjectColumn::is_query_plan_expression <-- repo.RepoObjectColumn_gross::is_query_plan_expression
+repo.RepoObjectColumn::is_RepoObjectColumn_name_uniqueidentifier <-- repo.RepoObjectColumn_gross::is_RepoObjectColumn_name_uniqueidentifier
+repo.RepoObjectColumn::is_required_ColumnMerge <-- repo.RepoObjectColumn_gross::is_required_ColumnMerge
+repo.RepoObjectColumn::is_SysObjectColumn_missing <-- repo.RepoObjectColumn_gross::is_SysObjectColumn_missing
+repo.RepoObjectColumn::is_SysObjectColumn_name_uniqueidentifier <-- repo.RepoObjectColumn_gross::is_SysObjectColumn_name_uniqueidentifier
+repo.RepoObjectColumn::persistence_source_RepoObjectColumn_guid <-- repo.RepoObjectColumn_gross::persistence_source_RepoObjectColumn_guid
+repo.RepoObjectColumn::Referencing_Count <-- repo.RepoObjectColumn_gross::Referencing_Count
+repo.RepoObjectColumn::Repo_default_definition <-- repo.RepoObjectColumn_gross::Repo_default_definition
+repo.RepoObjectColumn::Repo_default_is_system_named <-- repo.RepoObjectColumn_gross::Repo_default_is_system_named
+repo.RepoObjectColumn::Repo_default_name <-- repo.RepoObjectColumn_gross::Repo_default_name
+repo.RepoObjectColumn::Repo_definition <-- repo.RepoObjectColumn_gross::Repo_definition
+repo.RepoObjectColumn::Repo_generated_always_type <-- repo.RepoObjectColumn_gross::Repo_generated_always_type
+repo.RepoObjectColumn::Repo_graph_type <-- repo.RepoObjectColumn_gross::Repo_graph_type
+repo.RepoObjectColumn::Repo_increment_value <-- repo.RepoObjectColumn_gross::Repo_increment_value
+repo.RepoObjectColumn::Repo_is_computed <-- repo.RepoObjectColumn_gross::Repo_is_computed
+repo.RepoObjectColumn::Repo_is_identity <-- repo.RepoObjectColumn_gross::Repo_is_identity
+repo.RepoObjectColumn::Repo_is_nullable <-- repo.RepoObjectColumn_gross::Repo_is_nullable
+repo.RepoObjectColumn::Repo_is_persisted <-- repo.RepoObjectColumn_gross::Repo_is_persisted
+repo.RepoObjectColumn::Repo_seed_value <-- repo.RepoObjectColumn_gross::Repo_seed_value
+repo.RepoObjectColumn::Repo_user_type_fullname <-- repo.RepoObjectColumn_gross::Repo_user_type_fullname
+repo.RepoObjectColumn::Repo_user_type_name <-- repo.RepoObjectColumn_gross::Repo_user_type_name
+repo.RepoObjectColumn::Repo_uses_database_collation <-- repo.RepoObjectColumn_gross::Repo_uses_database_collation
+repo.RepoObjectColumn::RepoObject_guid <-- repo.RepoObjectColumn_gross::RepoObject_guid
+repo.RepoObjectColumn::RepoObjectColumn_column_id <-- repo.RepoObjectColumn_gross::RepoObjectColumn_column_id
+repo.RepoObjectColumn::RepoObjectColumn_guid <-- repo.RepoObjectColumn_gross::RepoObjectColumn_guid
+repo.RepoObjectColumn::RepoObjectColumn_name <-- repo.RepoObjectColumn_gross::RepoObjectColumn_name
+repo.RepoObjectColumn::SysObjectColumn_column_id <-- repo.RepoObjectColumn_gross::SysObjectColumn_column_id
+repo.RepoObjectColumn::SysObjectColumn_name <-- repo.RepoObjectColumn_gross::SysObjectColumn_name
