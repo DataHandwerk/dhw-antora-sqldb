@@ -76,12 +76,14 @@ entity reference.usp_RepoObjectSource_QueryPlan << P >> {
   --
 }
 
-reference.RepoObjectSource_QueryPlan <.. reference.usp_RepoObjectSource_QueryPlan
 reference.RepoObjectSource_QueryPlan <.. reference.RepoObjectColumn_reference_QueryPlan
+reference.RepoObjectSource_QueryPlan <.. reference.usp_RepoObjectSource_QueryPlan
 reference.RepoObjectSource_QueryPlan::is_source_column_name_expression <-- reference.RepoObjectColumn_reference_QueryPlan::is_source_column_name_expression
 reference.RepoObjectSource_QueryPlan::is_target_column_name_expression <-- reference.RepoObjectColumn_reference_QueryPlan::is_target_column_name_expression
 reference.RepoObjectSource_QueryPlan::RepoObject_guid <-- reference.RepoObjectColumn_reference_QueryPlan::referencing_RepoObject_guid
+reference.RepoObjectSource_QueryPlan::source_column_name <-- reference.RepoObjectSource_QueryPlan::is_source_column_name_expression
 reference.RepoObjectSource_QueryPlan::source_column_name <-- reference.RepoObjectColumn_reference_QueryPlan::referenced_column_name
 reference.RepoObjectSource_QueryPlan::source_schema_name <-- reference.RepoObjectColumn_reference_QueryPlan::source_schema_name_quoted
 reference.RepoObjectSource_QueryPlan::source_table_name <-- reference.RepoObjectColumn_reference_QueryPlan::source_table_name_quoted
+reference.RepoObjectSource_QueryPlan::target_column_name <-- reference.RepoObjectSource_QueryPlan::is_target_column_name_expression
 reference.RepoObjectSource_QueryPlan::target_column_name <-- reference.RepoObjectColumn_reference_QueryPlan::referencing_column_name

@@ -43,7 +43,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-07-14 19:36:07
+2021-08-07 17:23:36
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -89,7 +89,7 @@ view
 |===
 |
 |property_value
-|sql_variant
+|nvarchar(max)
 |NULL
 |
 |
@@ -125,7 +125,7 @@ view
 
 |
 |<<column-property_value>>
-|sql_variant
+|nvarchar(max)
 |NULL
 |
 |
@@ -199,6 +199,27 @@ view
 // tag::exampleusage_2[]
 
 // end::exampleusage_2[]
+
+
+== exampleUsage_3
+
+// tag::exampleusage_3[]
+
+// end::exampleusage_3[]
+
+
+== exampleUsage_4
+
+// tag::exampleusage_4[]
+
+// end::exampleusage_4[]
+
+
+== exampleUsage_5
+
+// tag::exampleusage_5[]
+
+// end::exampleusage_5[]
 
 
 == exampleWrong_Usage
@@ -383,6 +404,13 @@ RepoObject_guid,property_name
 // end::usp_persistence_repoobject_guid[]
 
 
+== UspExamples
+
+// tag::uspexamples[]
+
+// end::uspexamples[]
+
+
 == UspParameters
 
 // tag::uspparameters[]
@@ -395,25 +423,25 @@ RepoObject_guid,property_name
 // tag::sql_modules_definition[]
 [source,sql]
 ----
-CREATE View [property].RepoObjectProperty_Collect_source_uspgenerator
-As
 
+CREATE View [property].[RepoObjectProperty_Collect_source_uspgenerator]
+As
 Select
     ro.RepoObject_guid
   , property_name  = p_names.property_name
   , property_value = Case p_names.property_name
                          When 'AdocUspSteps'
                              Then
-                             Cast(Cast(ro.AdocUspSteps As NVarchar(4000)) As Sql_Variant)
+                             Cast(ro.AdocUspSteps As NVarchar(Max))
                          When 'UspParameters'
                              Then
-                             Cast(Cast(ro.UspParameters As NVarchar(4000)) As Sql_Variant)
+                             Cast(ro.UspParameters As NVarchar(Max))
                          When 'ExampleUsage'
                              Then
-                             Cast(ro.UspExamples As Sql_Variant)
+                             Cast(ro.UspExamples As NVarchar(Max))
                          When 'MS_Description'
                              Then
-                             Cast(ro.MS_Description As Sql_Variant)
+                             Cast(ro.MS_Description As NVarchar(Max))
                      End
 From
     uspgenerator.GeneratorUsp_SqlUsp ro
@@ -427,6 +455,7 @@ From
     )                                p_names ( property_name )
 Where
     Not RepoObject_guid Is Null;
+
 ----
 // end::sql_modules_definition[]
 

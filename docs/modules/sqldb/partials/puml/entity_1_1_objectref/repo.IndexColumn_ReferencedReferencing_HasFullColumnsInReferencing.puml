@@ -23,7 +23,9 @@ skinparam class {
 }
 
 
-entity reference.RepoObjectColumn_reference_union << V >> {
+entity reference.RepoObjectColumn_reference_T << U >> {
+  **referenced_RepoObjectColumn_guid** : uniqueidentifier
+  **referencing_RepoObjectColumn_guid** : uniqueidentifier
   --
 }
 
@@ -56,9 +58,8 @@ entity repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInRefere
   --
 }
 
-reference.RepoObjectColumn_reference_union <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing
+reference.RepoObjectColumn_reference_T <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing
 repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T
 repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing <.. repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T
-repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T
 repo.IndexColumn_union <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing
 repo.RepoObjectColumn <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing

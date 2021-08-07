@@ -150,6 +150,7 @@ entity repo.RepoObjectColumn << U >> {
   * RepoObjectColumn_name : nvarchar(128)
   SysObjectColumn_column_id : int
   * SysObjectColumn_name : nvarchar(128)
+  * {static} Column_name : nvarchar(128)
   {abstract} has_different_sys_names : bit
   * {static} is_RepoObjectColumn_name_uniqueidentifier : int
   * {static} is_SysObjectColumn_name_uniqueidentifier : int
@@ -177,16 +178,16 @@ repo.RepoObjectColumn <.. reference.RepoObjectColumn_reference_SqlModules
 sqlparse.RepoObject_SqlModules_79_reference_union <.. reference.RepoObjectColumn_reference_SqlModules
 repo.RepoObject::node_id <-- reference.RepoObjectColumn_reference_SqlModules::referencing_node_id
 repo.RepoObject::node_id <-- reference.RepoObjectColumn_reference_SqlModules::referenced_node_id
-repo.RepoObject::SysObject_id <-- reference.RepoObjectColumn_reference_SqlModules::referenced_id
 repo.RepoObject::SysObject_id <-- reference.RepoObjectColumn_reference_SqlModules::referencing_id
-repo.RepoObject::SysObject_name <-- reference.RepoObjectColumn_reference_SqlModules::referenced_entity_name
+repo.RepoObject::SysObject_id <-- reference.RepoObjectColumn_reference_SqlModules::referenced_id
 repo.RepoObject::SysObject_name <-- reference.RepoObjectColumn_reference_SqlModules::referencing_entity_name
-repo.RepoObject::SysObject_schema_name <-- reference.RepoObjectColumn_reference_SqlModules::referenced_schema_name
+repo.RepoObject::SysObject_name <-- reference.RepoObjectColumn_reference_SqlModules::referenced_entity_name
 repo.RepoObject::SysObject_schema_name <-- reference.RepoObjectColumn_reference_SqlModules::referencing_schema_name
+repo.RepoObject::SysObject_schema_name <-- reference.RepoObjectColumn_reference_SqlModules::referenced_schema_name
 repo.RepoObject::SysObject_type <-- reference.RepoObjectColumn_reference_SqlModules::referencing_type
 repo.RepoObject::SysObject_type <-- reference.RepoObjectColumn_reference_SqlModules::referenced_type
-repo.RepoObjectColumn::SysObjectColumn_column_id <-- reference.RepoObjectColumn_reference_SqlModules::referenced_minor_id
 repo.RepoObjectColumn::SysObjectColumn_column_id <-- reference.RepoObjectColumn_reference_SqlModules::referencing_minor_id
+repo.RepoObjectColumn::SysObjectColumn_column_id <-- reference.RepoObjectColumn_reference_SqlModules::referenced_minor_id
 repo.RepoObjectColumn::SysObjectColumn_name <-- reference.RepoObjectColumn_reference_SqlModules::referencing_column_name
 repo.RepoObjectColumn::SysObjectColumn_name <-- reference.RepoObjectColumn_reference_SqlModules::referenced_column_name
 sqlparse.RepoObject_SqlModules_79_reference_union::normalized <-- reference.RepoObjectColumn_reference_SqlModules::definition

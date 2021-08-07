@@ -158,8 +158,8 @@ entity sys_dwh.types << SN >> {
   --
 }
 
-config.ftv_dwh_database <.. repo_sys.sql_expression_dependencies
 config.ftv_dwh_database <.. repo_sys.ExtendedProperties
+config.ftv_dwh_database <.. repo_sys.sql_expression_dependencies
 config.ftv_dwh_database <.. repo_sys.SysColumn
 config.Parameter <.. config.ftv_dwh_database
 reference.RepoObject_reference_persistence <.. reference.RepoObject_reference_union
@@ -168,28 +168,28 @@ reference.RepoObject_reference_union <.. reference.RepoObject_reference
 reference.RepoObject_reference_virtual <.. reference.RepoObject_reference_union
 reference.RepoObjectSource_virtual <.. reference.RepoObject_reference_virtual
 repo.RepoObject <.. reference.RepoObject_reference_virtual
-repo.RepoObject <.. repo.SysColumn_RepoObjectColumn_via_name
-repo.RepoObject <.. repo.SysObject_RepoObject_via_name
 repo.RepoObject <.. reference.RepoObject_reference_persistence
+repo.RepoObject <.. repo.SysObject_RepoObject_via_name
+repo.RepoObject <.. repo.SysColumn_RepoObjectColumn_via_name
 repo.RepoObject_persistence <.. reference.RepoObject_reference_persistence
 repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_name
 repo.SysColumn_RepoObjectColumn_via_name <.. repo_sys.sql_expression_dependencies
 repo.SysObject_RepoObject_via_name <.. repo_sys.sql_expression_dependencies
-repo_sys.ExtendedProperties <.. repo_sys.SysObject
 repo_sys.ExtendedProperties <.. repo_sys.SysColumn
+repo_sys.ExtendedProperties <.. repo_sys.SysObject
 repo_sys.sql_expression_dependencies <.. reference.RepoObject_reference_SqlExpressionDependencies
 repo_sys.SysColumn <.. repo.SysColumn_RepoObjectColumn_via_name
-repo_sys.SysObject <.. repo_sys.SysColumn
 repo_sys.SysObject <.. repo.SysObject_RepoObject_via_name
-sys_dwh.columns <.. repo_sys.ExtendedProperties
+repo_sys.SysObject <.. repo_sys.SysColumn
 sys_dwh.columns <.. repo_sys.SysColumn
+sys_dwh.columns <.. repo_sys.ExtendedProperties
 sys_dwh.computed_columns <.. repo_sys.SysColumn
 sys_dwh.default_constraints <.. repo_sys.SysColumn
 sys_dwh.extended_properties <.. repo_sys.ExtendedProperties
 sys_dwh.identity_columns <.. repo_sys.SysColumn
 sys_dwh.indexes <.. repo_sys.ExtendedProperties
-sys_dwh.objects <.. repo_sys.ExtendedProperties
 sys_dwh.objects <.. repo_sys.SysObject
+sys_dwh.objects <.. repo_sys.ExtendedProperties
 sys_dwh.parameters <.. repo_sys.ExtendedProperties
 sys_dwh.schemas <.. repo_sys.ExtendedProperties
 sys_dwh.schemas <.. repo_sys.SysObject

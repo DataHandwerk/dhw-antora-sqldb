@@ -69,6 +69,10 @@ entity reference.RepoObjectColumn_reference_Persistence << V >> {
   referencing_type : char(2)
 }
 
+entity repo.RepoObject__after_delete << TR >> {
+  --
+}
+
 entity repo.RepoObject_gross << V >> {
   * **RepoObject_guid** : uniqueidentifier
   --
@@ -94,6 +98,9 @@ entity repo.RepoObject_gross << V >> {
   is_persistence_delete_changed : bit
   is_persistence_delete_missing : bit
   is_persistence_insert : bit
+  is_persistence_merge_delete_missing : bit
+  is_persistence_merge_insert : bit
+  is_persistence_merge_update_changed : bit
   is_persistence_truncate : bit
   is_persistence_update_changed : bit
   is_repo_managed : bit
@@ -128,6 +135,7 @@ entity repo.RepoObject_gross << V >> {
   * RepoObject_schema_name : nvarchar(128)
   * RepoObject_type : char(2)
   RepoObject_type_name : nvarchar(128)
+  source_filter : nvarchar(4000)
   sql_modules_antora : nvarchar(max)
   sql_modules_definition : nvarchar(max)
   sql_modules_formatted : nvarchar(max)
@@ -144,6 +152,7 @@ entity repo.RepoObject_gross << V >> {
   * SysObject_schema_name : nvarchar(128)
   SysObject_type : char(2)
   SysObject_type_name : nvarchar(128)
+  target_filter : nvarchar(4000)
   temporal_type : tinyint
   * usp_persistence_name : nvarchar(140)
   usp_persistence_RepoObject_guid : uniqueidentifier
@@ -161,9 +170,14 @@ entity repo.RepoObject_persistence << U >> {
   * is_persistence_delete_changed : bit
   * is_persistence_delete_missing : bit
   * is_persistence_insert : bit
+  * is_persistence_merge_delete_missing : bit
+  * is_persistence_merge_insert : bit
+  * is_persistence_merge_update_changed : bit
   * is_persistence_truncate : bit
   * is_persistence_update_changed : bit
+  source_filter : nvarchar(4000)
   source_RepoObject_guid : uniqueidentifier
+  target_filter : nvarchar(4000)
   {abstract} is_persistence : bit
   {abstract} temporal_type : tinyint
 }
@@ -265,75 +279,81 @@ entity repo.usp_sync_guid_RepoObjectColumn << P >> {
   --
 }
 
-repo.RepoObject_persistence <.. repo.RepoObjectColumn_HistValidColums_setpoint
-repo.RepoObject_persistence <.. reference.RepoObjectColumn_reference_Persistence
 repo.RepoObject_persistence <.. reference.RepoObject_reference_persistence
 repo.RepoObject_persistence <.. repo.RepoObject_persistence_column
-repo.RepoObject_persistence <.. repo.RepoObject_persistence_ObjectNames
-repo.RepoObject_persistence <.. repo.usp_sync_guid_RepoObjectColumn
-repo.RepoObject_persistence <.. repo.usp_sync_guid_RepoObject
-repo.RepoObject_persistence <.. repo.RepoObject_persistence_ForUpdate
-repo.RepoObject_persistence <.. repo.usp_persistence_set
+repo.RepoObject_persistence <.. reference.RepoObjectColumn_reference_Persistence
+repo.RepoObject_persistence <.. repo.RepoObjectColumn_HistValidColums_setpoint
 repo.RepoObject_persistence <.. repo.RepoObject_gross
+repo.RepoObject_persistence <.. repo.RepoObject__after_delete
+repo.RepoObject_persistence <.. repo.RepoObject_persistence_ObjectNames
+repo.RepoObject_persistence <.. repo.usp_sync_guid_RepoObject
+repo.RepoObject_persistence <.. repo.usp_sync_guid_RepoObjectColumn
+repo.RepoObject_persistence <.. repo.usp_persistence_set
+repo.RepoObject_persistence <.. repo.RepoObject_persistence_ForUpdate
 repo.RepoObject_persistence <.. repo.usp_Index_finish
-repo.RepoObjectColumn_HistValidColums_setpoint <.. repo.usp_sync_guid_RepoObjectColumn
 repo.RepoObject_persistence::has_history <-- repo.RepoObject_persistence_column::has_history
 repo.RepoObject_persistence::has_history <-- repo.RepoObject_persistence_ObjectNames::has_history
+repo.RepoObject_persistence::has_history <-- repo.RepoObject_persistence::temporal_type
 repo.RepoObject_persistence::has_history <-- repo.RepoObject_gross::has_history
 repo.RepoObject_persistence::has_history <-- repo.RepoObject_persistence_ForUpdate::has_history
-repo.RepoObject_persistence::has_history_columns <-- repo.RepoObject_persistence_ForUpdate::has_history_columns
-repo.RepoObject_persistence::has_history_columns <-- repo.RepoObject_gross::has_history_columns
-repo.RepoObject_persistence::has_history_columns <-- repo.RepoObject_persistence_ObjectNames::has_history_columns
 repo.RepoObject_persistence::has_history_columns <-- repo.RepoObject_persistence_column::has_history_columns
+repo.RepoObject_persistence::has_history_columns <-- repo.RepoObject_persistence_ObjectNames::has_history_columns
+repo.RepoObject_persistence::has_history_columns <-- repo.RepoObject_gross::has_history_columns
+repo.RepoObject_persistence::has_history_columns <-- repo.RepoObject_persistence_ForUpdate::has_history_columns
 repo.RepoObject_persistence::history_schema_name <-- repo.RepoObject_persistence_column::history_schema_name
 repo.RepoObject_persistence::history_schema_name <-- repo.RepoObject_persistence_ObjectNames::history_schema_name
 repo.RepoObject_persistence::history_schema_name <-- repo.RepoObject_gross::history_schema_name
 repo.RepoObject_persistence::history_schema_name <-- repo.RepoObject_persistence_ForUpdate::history_schema_name
-repo.RepoObject_persistence::history_table_name <-- repo.RepoObject_persistence_ForUpdate::history_table_name
-repo.RepoObject_persistence::history_table_name <-- repo.RepoObject_gross::history_table_name
-repo.RepoObject_persistence::history_table_name <-- repo.RepoObject_persistence_ObjectNames::history_table_name
 repo.RepoObject_persistence::history_table_name <-- repo.RepoObject_persistence_column::history_table_name
+repo.RepoObject_persistence::history_table_name <-- repo.RepoObject_persistence_ObjectNames::history_table_name
+repo.RepoObject_persistence::history_table_name <-- repo.RepoObject_gross::history_table_name
+repo.RepoObject_persistence::history_table_name <-- repo.RepoObject_persistence_ForUpdate::history_table_name
 repo.RepoObject_persistence::is_persistence <-- repo.RepoObject_persistence_column::is_persistence
 repo.RepoObject_persistence::is_persistence <-- repo.RepoObject_persistence_ObjectNames::is_persistence
 repo.RepoObject_persistence::is_persistence <-- repo.RepoObject_gross::is_persistence
 repo.RepoObject_persistence::is_persistence <-- repo.RepoObject_persistence_ForUpdate::is_persistence
-repo.RepoObject_persistence::is_persistence_check_duplicate_per_pk <-- repo.RepoObject_persistence_ForUpdate::is_persistence_check_duplicate_per_pk
 repo.RepoObject_persistence::is_persistence_check_duplicate_per_pk <-- repo.RepoObject_gross::is_persistence_check_duplicate_per_pk
-repo.RepoObject_persistence::is_persistence_check_for_empty_source <-- repo.RepoObject_gross::is_persistence_check_for_empty_source
-repo.RepoObject_persistence::is_persistence_check_for_empty_source <-- repo.RepoObject_persistence_ObjectNames::is_persistence_check_for_empty_source
+repo.RepoObject_persistence::is_persistence_check_duplicate_per_pk <-- repo.RepoObject_persistence_ForUpdate::is_persistence_check_duplicate_per_pk
 repo.RepoObject_persistence::is_persistence_check_for_empty_source <-- repo.RepoObject_persistence_column::is_persistence_check_for_empty_source
+repo.RepoObject_persistence::is_persistence_check_for_empty_source <-- repo.RepoObject_persistence_ObjectNames::is_persistence_check_for_empty_source
+repo.RepoObject_persistence::is_persistence_check_for_empty_source <-- repo.RepoObject_gross::is_persistence_check_for_empty_source
 repo.RepoObject_persistence::is_persistence_check_for_empty_source <-- repo.RepoObject_persistence_ForUpdate::is_persistence_check_for_empty_source
-repo.RepoObject_persistence::is_persistence_delete_changed <-- repo.RepoObject_persistence_ForUpdate::is_persistence_delete_changed
 repo.RepoObject_persistence::is_persistence_delete_changed <-- repo.RepoObject_persistence_column::is_persistence_delete_changed
 repo.RepoObject_persistence::is_persistence_delete_changed <-- repo.RepoObject_persistence_ObjectNames::is_persistence_delete_changed
 repo.RepoObject_persistence::is_persistence_delete_changed <-- repo.RepoObject_gross::is_persistence_delete_changed
-repo.RepoObject_persistence::is_persistence_delete_missing <-- repo.RepoObject_gross::is_persistence_delete_missing
-repo.RepoObject_persistence::is_persistence_delete_missing <-- repo.RepoObject_persistence_ObjectNames::is_persistence_delete_missing
+repo.RepoObject_persistence::is_persistence_delete_changed <-- repo.RepoObject_persistence_ForUpdate::is_persistence_delete_changed
 repo.RepoObject_persistence::is_persistence_delete_missing <-- repo.RepoObject_persistence_column::is_persistence_delete_missing
+repo.RepoObject_persistence::is_persistence_delete_missing <-- repo.RepoObject_persistence_ObjectNames::is_persistence_delete_missing
+repo.RepoObject_persistence::is_persistence_delete_missing <-- repo.RepoObject_gross::is_persistence_delete_missing
 repo.RepoObject_persistence::is_persistence_delete_missing <-- repo.RepoObject_persistence_ForUpdate::is_persistence_delete_missing
-repo.RepoObject_persistence::is_persistence_insert <-- repo.RepoObject_persistence_ForUpdate::is_persistence_insert
 repo.RepoObject_persistence::is_persistence_insert <-- repo.RepoObject_persistence_column::is_persistence_insert
 repo.RepoObject_persistence::is_persistence_insert <-- repo.RepoObject_persistence_ObjectNames::is_persistence_insert
 repo.RepoObject_persistence::is_persistence_insert <-- repo.RepoObject_gross::is_persistence_insert
-repo.RepoObject_persistence::is_persistence_truncate <-- repo.RepoObject_gross::is_persistence_truncate
-repo.RepoObject_persistence::is_persistence_truncate <-- repo.RepoObject_persistence_ObjectNames::is_persistence_truncate
+repo.RepoObject_persistence::is_persistence_insert <-- repo.RepoObject_persistence_ForUpdate::is_persistence_insert
+repo.RepoObject_persistence::is_persistence_merge_delete_missing <-- repo.RepoObject_gross::is_persistence_merge_delete_missing
+repo.RepoObject_persistence::is_persistence_merge_insert <-- repo.RepoObject_gross::is_persistence_merge_insert
+repo.RepoObject_persistence::is_persistence_merge_update_changed <-- repo.RepoObject_gross::is_persistence_merge_update_changed
 repo.RepoObject_persistence::is_persistence_truncate <-- repo.RepoObject_persistence_column::is_persistence_truncate
+repo.RepoObject_persistence::is_persistence_truncate <-- repo.RepoObject_persistence_ObjectNames::is_persistence_truncate
+repo.RepoObject_persistence::is_persistence_truncate <-- repo.RepoObject_gross::is_persistence_truncate
 repo.RepoObject_persistence::is_persistence_truncate <-- repo.RepoObject_persistence_ForUpdate::is_persistence_truncate
-repo.RepoObject_persistence::is_persistence_update_changed <-- repo.RepoObject_persistence_ForUpdate::is_persistence_update_changed
 repo.RepoObject_persistence::is_persistence_update_changed <-- repo.RepoObject_persistence_column::is_persistence_update_changed
 repo.RepoObject_persistence::is_persistence_update_changed <-- repo.RepoObject_persistence_ObjectNames::is_persistence_update_changed
 repo.RepoObject_persistence::is_persistence_update_changed <-- repo.RepoObject_gross::is_persistence_update_changed
-repo.RepoObject_persistence::source_RepoObject_guid <-- repo.RepoObject_gross::persistence_source_RepoObject_guid
-repo.RepoObject_persistence::source_RepoObject_guid <-- repo.RepoObject_persistence_ObjectNames::source_RepoObject_guid
-repo.RepoObject_persistence::source_RepoObject_guid <-- repo.RepoObject_persistence_column::source_RepoObject_guid
-repo.RepoObject_persistence::source_RepoObject_guid <-- reference.RepoObjectColumn_reference_Persistence::referenced_RepoObject_guid
+repo.RepoObject_persistence::is_persistence_update_changed <-- repo.RepoObject_persistence_ForUpdate::is_persistence_update_changed
+repo.RepoObject_persistence::source_filter <-- repo.RepoObject_gross::source_filter
 repo.RepoObject_persistence::source_RepoObject_guid <-- reference.RepoObject_reference_persistence::referenced_RepoObject_guid
+repo.RepoObject_persistence::source_RepoObject_guid <-- reference.RepoObjectColumn_reference_Persistence::referenced_RepoObject_guid
+repo.RepoObject_persistence::source_RepoObject_guid <-- repo.RepoObject_persistence_column::source_RepoObject_guid
+repo.RepoObject_persistence::source_RepoObject_guid <-- repo.RepoObject_persistence_ObjectNames::source_RepoObject_guid
+repo.RepoObject_persistence::source_RepoObject_guid <-- repo.RepoObject_gross::persistence_source_RepoObject_guid
 repo.RepoObject_persistence::source_RepoObject_guid <-- repo.RepoObject_persistence_ForUpdate::source_RepoObject_guid
-repo.RepoObject_persistence::target_RepoObject_guid <-- repo.RepoObject_persistence_ForUpdate::target_RepoObject_guid
+repo.RepoObject_persistence::target_filter <-- repo.RepoObject_gross::target_filter
 repo.RepoObject_persistence::target_RepoObject_guid <-- reference.RepoObject_reference_persistence::referencing_RepoObject_guid
 repo.RepoObject_persistence::target_RepoObject_guid <-- reference.RepoObjectColumn_reference_Persistence::referencing_RepoObject_guid
 repo.RepoObject_persistence::target_RepoObject_guid <-- repo.RepoObject_persistence_column::target_RepoObject_guid
 repo.RepoObject_persistence::target_RepoObject_guid <-- repo.RepoObject_persistence_ObjectNames::target_RepoObject_guid
 repo.RepoObject_persistence::target_RepoObject_guid <-- repo.RepoObjectColumn_HistValidColums_setpoint::RepoObject_guid
+repo.RepoObject_persistence::target_RepoObject_guid <-- repo.RepoObject_persistence_ForUpdate::target_RepoObject_guid
 repo.RepoObject_persistence::temporal_type <-- repo.RepoObject_gross::temporal_type
 repo.RepoObject_persistence::temporal_type <-- repo.RepoObject_persistence_ForUpdate::temporal_type

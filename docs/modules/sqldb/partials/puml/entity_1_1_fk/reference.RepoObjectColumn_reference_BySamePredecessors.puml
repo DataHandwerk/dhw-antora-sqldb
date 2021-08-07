@@ -25,9 +25,30 @@ skinparam class {
 
 entity reference.RepoObjectColumn_reference_BySamePredecessors << V >> {
 - idx_RepoObjectColumn_reference_BySamePredecessors__1
-{RepoObject_guid}
+{schema_name,object_name}
+..
+referencing_schema_name; nvarchar(128)
+referencing_entity_name; nvarchar(128)
+--
+- idx_RepoObjectColumn_reference_BySamePredecessors__2
+
+..
+referencing_RepoObject_guid; uniqueidentifier
+--
+- idx_RepoObjectColumn_reference_BySamePredecessors__3
+
 ..
 referenced_RepoObject_guid; uniqueidentifier
+--
+- idx_RepoObjectColumn_reference_BySamePredecessors__4
+{RepoObjectColumn_guid}
+..
+referencing_RepoObjectColumn_guid; uniqueidentifier
+--
+- idx_RepoObjectColumn_reference_BySamePredecessors__5
+{RepoObjectColumn_guid}
+..
+referenced_RepoObjectColumn_guid; uniqueidentifier
 }
 
 

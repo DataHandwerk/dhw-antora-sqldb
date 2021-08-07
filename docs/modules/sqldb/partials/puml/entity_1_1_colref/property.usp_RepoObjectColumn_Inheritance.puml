@@ -34,8 +34,8 @@ entity property.RepoObjectColumn_Inheritance_temp << U >> {
   * is_force_inherit_empty_source : int
   * is_StringAggAllSources : int
   * property_name : nvarchar(128)
-  property_value : sql_variant
-  property_value_new : sql_variant
+  property_value : nvarchar(max)
+  property_value_new : nvarchar(max)
   * referenced_RepoObject_fullname : nvarchar(261)
   referenced_RepoObjectColumn_guid : uniqueidentifier
   * referenced_RepoObjectColumn_name : nvarchar(128)
@@ -51,16 +51,13 @@ entity property.RepoObjectColumnProperty << U >> {
   --
   inheritance : tinyint
   * property_name : nvarchar(128)
-  * property_value : sql_variant
+  * property_value : nvarchar(max)
   * RepoObjectColumn_guid : uniqueidentifier
-  {abstract} property_basetype : sql_variant
   {abstract} property_bigint : bigint
   {abstract} property_float : float
   {abstract} property_int : int
   {abstract} property_money : money
-  {abstract} property_nvarchar : nvarchar(4000)
   {abstract} property_real : real
-  {abstract} property_varchar : varchar(8000)
 }
 
 entity property.RepoObjectColumnProperty_InheritanceType_resulting_InheritanceDefinition << V >> {
@@ -72,7 +69,7 @@ entity property.RepoObjectColumnProperty_InheritanceType_resulting_InheritanceDe
   InheritanceType : int
   * is_force_inherit_empty_source : int
   * is_StringAggAllSources : int
-  property_value : sql_variant
+  property_value : nvarchar(max)
   * RepoObjectColumn_name : nvarchar(128)
   resulting_InheritanceDefinition : nvarchar(4000)
 }
@@ -85,7 +82,6 @@ entity repo.usp_main << P >> {
   --
 }
 
-logs.usp_ExecutionLog_insert <.. repo.usp_main
 logs.usp_ExecutionLog_insert <.. property.usp_RepoObjectColumn_Inheritance
 property.RepoObjectColumn_Inheritance_temp <.. property.usp_RepoObjectColumn_Inheritance
 property.RepoObjectColumnProperty <.. property.usp_RepoObjectColumn_Inheritance

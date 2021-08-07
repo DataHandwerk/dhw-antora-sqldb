@@ -38,7 +38,6 @@ entity docs.usp_AntoraExport_ObjectPageTemplate << P >> {
 }
 
 entity logs.ExecutionLog << U >> {
-  * **id** : bigint
   --
 }
 
@@ -47,7 +46,7 @@ entity logs.usp_ExecutionLog_insert << P >> {
 }
 
 config.fs_get_parameter_value <.. docs.usp_AntoraExport_ObjectPageTemplate
-config.Parameter <.. docs.usp_AntoraExport_ObjectPageTemplate
 config.Parameter <.. config.fs_get_parameter_value
+config.Parameter <.. docs.usp_AntoraExport_ObjectPageTemplate
 logs.ExecutionLog <.. logs.usp_ExecutionLog_insert
 logs.usp_ExecutionLog_insert <.. docs.usp_AntoraExport_ObjectPageTemplate

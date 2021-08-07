@@ -42,7 +42,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-04-17 13:33:30
+2021-08-05 02:29:01
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -56,10 +56,15 @@ view
 |1
 |*Referenced_guid*
 |uniqueidentifier
-|NULL
+|NOT NULL
 |
 |
 |===
+
+.Referenced Columns
+--
+* xref:reference.RepoObject_reference_T.adoc#column-referenced_RepoObject_guid[+reference.RepoObject_reference_T.referenced_RepoObject_guid+]
+--
 
 .Referencing Columns
 --
@@ -75,10 +80,15 @@ view
 |2
 |*Referencing_guid*
 |uniqueidentifier
-|NULL
+|NOT NULL
 |
 |
 |===
+
+.Referenced Columns
+--
+* xref:reference.RepoObject_reference_T.adoc#column-referencing_RepoObject_guid[+reference.RepoObject_reference_T.referencing_RepoObject_guid+]
+--
 
 .Referencing Columns
 --
@@ -94,10 +104,20 @@ view
 |
 |Referenced_fullname
 |nvarchar(261)
-|NULL
+|NOT NULL
 |
 |
 |===
+
+.Description
+--
+(concat('[',[referenced_schema_name],'].[',[referenced_entity_name],']'))
+--
+
+.Referenced Columns
+--
+* xref:reference.RepoObject_reference_T.adoc#column-referenced_fullname[+reference.RepoObject_reference_T.referenced_fullname+]
+--
 
 
 [[column-Referenced_fullname2]]
@@ -108,10 +128,20 @@ view
 |
 |Referenced_fullname2
 |nvarchar(257)
-|NULL
+|NOT NULL
 |
 |
 |===
+
+.Description
+--
+(concat([referenced_schema_name],'.',[referenced_entity_name]))
+--
+
+.Referenced Columns
+--
+* xref:reference.RepoObject_reference_T.adoc#column-referenced_fullname2[+reference.RepoObject_reference_T.referenced_fullname2+]
+--
 
 
 [[column-Referenced_type]]
@@ -127,6 +157,11 @@ view
 |
 |===
 
+.Referenced Columns
+--
+* xref:reference.RepoObject_reference_T.adoc#column-referenced_type[+reference.RepoObject_reference_T.referenced_type+]
+--
+
 
 [[column-Referencing_fullname]]
 === Referencing_fullname
@@ -136,10 +171,20 @@ view
 |
 |Referencing_fullname
 |nvarchar(261)
-|NULL
+|NOT NULL
 |
 |
 |===
+
+.Description
+--
+(concat('[',[referencing_schema_name],'].[',[referencing_entity_name],']'))
+--
+
+.Referenced Columns
+--
+* xref:reference.RepoObject_reference_T.adoc#column-referencing_fullname[+reference.RepoObject_reference_T.referencing_fullname+]
+--
 
 
 [[column-Referencing_fullname2]]
@@ -150,10 +195,20 @@ view
 |
 |Referencing_fullname2
 |nvarchar(257)
-|NULL
+|NOT NULL
 |
 |
 |===
+
+.Description
+--
+(concat([referencing_schema_name],'.',[referencing_entity_name]))
+--
+
+.Referenced Columns
+--
+* xref:reference.RepoObject_reference_T.adoc#column-referencing_fullname2[+reference.RepoObject_reference_T.referencing_fullname2+]
+--
 
 
 [[column-Referencing_type]]
@@ -163,11 +218,16 @@ view
 |===
 |
 |Referencing_type
-|char(2)
+|varchar(2)
 |NULL
 |
 |
 |===
+
+.Referenced Columns
+--
+* xref:reference.RepoObject_reference_T.adoc#column-referencing_type[+reference.RepoObject_reference_T.referencing_type+]
+--
 
 
 // end::AntoraColumnDetails[]
@@ -178,14 +238,14 @@ view
 |1
 |*<<column-Referenced_guid>>*
 |uniqueidentifier
-|NULL
+|NOT NULL
 |
 |
 
 |2
 |*<<column-Referencing_guid>>*
 |uniqueidentifier
-|NULL
+|NOT NULL
 |
 |
 
@@ -205,14 +265,14 @@ view
 |
 |<<column-Referenced_fullname>>
 |nvarchar(261)
-|NULL
+|NOT NULL
 |
 |
 
 |
 |<<column-Referenced_fullname2>>
 |nvarchar(257)
-|NULL
+|NOT NULL
 |
 |
 
@@ -226,20 +286,20 @@ view
 |
 |<<column-Referencing_fullname>>
 |nvarchar(261)
-|NULL
+|NOT NULL
 |
 |
 
 |
 |<<column-Referencing_fullname2>>
 |nvarchar(257)
-|NULL
+|NOT NULL
 |
 |
 
 |
 |<<column-Referencing_type>>
-|char(2)
+|varchar(2)
 |NULL
 |
 |
@@ -279,8 +339,7 @@ view
 == AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:graph.ReferencedObject.adoc[]
-* xref:graph.RepoObject.adoc[]
+* xref:reference.RepoObject_reference_T.adoc[]
 // end::antorareferencedlist[]
 
 
@@ -309,6 +368,27 @@ view
 // tag::exampleusage_2[]
 
 // end::exampleusage_2[]
+
+
+== exampleUsage_3
+
+// tag::exampleusage_3[]
+
+// end::exampleusage_3[]
+
+
+== exampleUsage_4
+
+// tag::exampleusage_4[]
+
+// end::exampleusage_4[]
+
+
+== exampleUsage_5
+
+// tag::exampleusage_5[]
+
+// end::exampleusage_5[]
 
 
 == exampleWrong_Usage
@@ -494,6 +574,13 @@ Referenced_guid,Referencing_guid
 // end::usp_persistence_repoobject_guid[]
 
 
+== UspExamples
+
+// tag::uspexamples[]
+
+// end::uspexamples[]
+
+
 == UspParameters
 
 // tag::uspparameters[]
@@ -507,6 +594,7 @@ Referenced_guid,Referencing_guid
 [source,sql]
 ----
 
+
 /*
 per referencing RepoObject all directly referenced RepoOobject are listed
 
@@ -515,15 +603,15 @@ can be used in both directions:
 * get all referenced per referencing
 * get all referencing per referenced
 
+////
+old logic:
 
 uses graph tables
 
 * [graph].[RepoObject]
 * [graph].[ReferencedObject]
 
-*/
-CREATE View [reference].RepoObject_ReferencingReferenced
-As
+----
 Select
     Object1.RepoObject_fullname  As Referencing_fullname
   , Object1.RepoObject_fullname2 As Referencing_fullname2
@@ -539,6 +627,23 @@ From
   , graph.RepoObject As Object2
 Where Match(
     Object1-(referenced)->Object2);
+----
+////
+
+*/
+CREATE View [reference].[RepoObject_ReferencingReferenced]
+As
+Select
+    Referencing_fullname
+  , Referencing_fullname2
+  , Referencing_guid     = referencing_RepoObject_guid
+  , Referencing_type
+  , Referenced_fullname
+  , Referenced_fullname2
+  , Referenced_guid      = referenced_RepoObject_guid
+  , Referenced_type
+From
+    [reference].[RepoObject_reference_T]
 
 ----
 // end::sql_modules_definition[]

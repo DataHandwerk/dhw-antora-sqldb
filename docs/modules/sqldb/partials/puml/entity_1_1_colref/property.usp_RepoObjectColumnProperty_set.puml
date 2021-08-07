@@ -28,16 +28,13 @@ entity property.RepoObjectColumnProperty << U >> {
   --
   inheritance : tinyint
   * property_name : nvarchar(128)
-  * property_value : sql_variant
+  * property_value : nvarchar(max)
   * RepoObjectColumn_guid : uniqueidentifier
-  {abstract} property_basetype : sql_variant
   {abstract} property_bigint : bigint
   {abstract} property_float : float
   {abstract} property_int : int
   {abstract} property_money : money
-  {abstract} property_nvarchar : nvarchar(4000)
   {abstract} property_real : real
-  {abstract} property_varchar : varchar(8000)
 }
 
 entity property.usp_RepoObjectColumnProperty_set << P >> {
@@ -116,6 +113,7 @@ entity repo.RepoObjectColumn << U >> {
   * RepoObjectColumn_name : nvarchar(128)
   SysObjectColumn_column_id : int
   * SysObjectColumn_name : nvarchar(128)
+  * {static} Column_name : nvarchar(128)
   {abstract} has_different_sys_names : bit
   * {static} is_RepoObjectColumn_name_uniqueidentifier : int
   * {static} is_SysObjectColumn_name_uniqueidentifier : int

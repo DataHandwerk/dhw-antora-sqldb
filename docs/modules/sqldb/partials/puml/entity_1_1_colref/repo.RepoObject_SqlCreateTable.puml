@@ -160,6 +160,9 @@ entity repo.RepoObject_gross << V >> {
   is_persistence_delete_changed : bit
   is_persistence_delete_missing : bit
   is_persistence_insert : bit
+  is_persistence_merge_delete_missing : bit
+  is_persistence_merge_insert : bit
+  is_persistence_merge_update_changed : bit
   is_persistence_truncate : bit
   is_persistence_update_changed : bit
   is_repo_managed : bit
@@ -194,6 +197,7 @@ entity repo.RepoObject_gross << V >> {
   * RepoObject_schema_name : nvarchar(128)
   * RepoObject_type : char(2)
   RepoObject_type_name : nvarchar(128)
+  source_filter : nvarchar(4000)
   sql_modules_antora : nvarchar(max)
   sql_modules_definition : nvarchar(max)
   sql_modules_formatted : nvarchar(max)
@@ -210,6 +214,7 @@ entity repo.RepoObject_gross << V >> {
   * SysObject_schema_name : nvarchar(128)
   SysObject_type : char(2)
   SysObject_type_name : nvarchar(128)
+  target_filter : nvarchar(4000)
   temporal_type : tinyint
   * usp_persistence_name : nvarchar(140)
   usp_persistence_RepoObject_guid : uniqueidentifier
@@ -261,6 +266,7 @@ entity repo.RepoObjectColumn << U >> {
   * RepoObjectColumn_name : nvarchar(128)
   SysObjectColumn_column_id : int
   * SysObjectColumn_name : nvarchar(128)
+  * {static} Column_name : nvarchar(128)
   {abstract} has_different_sys_names : bit
   * {static} is_RepoObjectColumn_name_uniqueidentifier : int
   * {static} is_SysObjectColumn_name_uniqueidentifier : int
@@ -271,64 +277,8 @@ config.ftv_get_parameter_value <.. repo.RepoObject_SqlCreateTable
 repo.Index_gross <.. repo.RepoObject_SqlCreateTable
 repo.Index_SqlConstraint_PkUq <.. repo.RepoObject_SqlCreateTable
 repo.RepoObject <.. repo.RepoObject_SqlCreateTable
-repo.RepoObject <.. repo.RepoObject_gross
-repo.RepoObject_ColumnList <.. repo.RepoObject_gross
 repo.RepoObject_ColumnList <.. repo.RepoObject_SqlCreateTable
 repo.RepoObject_gross <.. repo.RepoObject_SqlCreateTable
-repo.RepoObject_gross <.. repo.Index_gross
 repo.RepoObject_SqlCreateTable <.. reference.ftv_RepoObject_ColumReferenceRepoObject
 repo.RepoObjectColumn <.. repo.RepoObject_SqlCreateTable
-repo.RepoObject::has_different_sys_names <-- repo.RepoObject_gross::has_different_sys_names
-repo.RepoObject::has_execution_plan_issue <-- repo.RepoObject_gross::has_execution_plan_issue
-repo.RepoObject::has_get_referenced_issue <-- repo.RepoObject_gross::has_get_referenced_issue
-repo.RepoObject::Inheritance_StringAggSeparatorSql <-- repo.RepoObject_gross::Inheritance_StringAggSeparatorSql
-repo.RepoObject::InheritanceDefinition <-- repo.RepoObject_gross::InheritanceDefinition
-repo.RepoObject::InheritanceType <-- repo.RepoObject_gross::InheritanceType
-repo.RepoObject::is_repo_managed <-- repo.RepoObject_gross::is_repo_managed
-repo.RepoObject::is_RepoObject_name_uniqueidentifier <-- repo.RepoObject_gross::is_RepoObject_name_uniqueidentifier
-repo.RepoObject::is_required_ObjectMerge <-- repo.RepoObject_gross::is_required_ObjectMerge
-repo.RepoObject::is_SysObject_missing <-- repo.RepoObject_gross::is_SysObject_missing
-repo.RepoObject::is_SysObject_name_uniqueidentifier <-- repo.RepoObject_gross::is_SysObject_name_uniqueidentifier
-repo.RepoObject::modify_dt <-- repo.RepoObject_gross::modify_dt
-repo.RepoObject::node_id <-- repo.RepoObject_gross::node_id
-repo.RepoObject::pk_index_guid <-- repo.RepoObject_gross::pk_index_guid
-repo.RepoObject::pk_IndexPatternColumnName_new <-- repo.RepoObject_gross::pk_IndexPatternColumnName_new
-repo.RepoObject::Repo_history_table_guid <-- repo.RepoObject_gross::Repo_history_table_guid
-repo.RepoObject::Repo_temporal_type <-- repo.RepoObject_gross::Repo_temporal_type
-repo.RepoObject::RepoObject_fullname <-- repo.RepoObject_gross::RepoObject_fullname
-repo.RepoObject::RepoObject_fullname <-- repo.RepoObject_gross::persistence_source_RepoObject_fullname
-repo.RepoObject::RepoObject_fullname2 <-- repo.RepoObject_gross::persistence_source_RepoObject_fullname2
-repo.RepoObject::RepoObject_fullname2 <-- repo.RepoObject_gross::RepoObject_fullname2
-repo.RepoObject::RepoObject_guid <-- repo.RepoObject_gross::RepoObject_guid
-repo.RepoObject::RepoObject_guid <-- repo.RepoObject_gross::usp_persistence_RepoObject_guid
-repo.RepoObject::RepoObject_name <-- repo.RepoObject_gross::RepoObject_name
-repo.RepoObject::RepoObject_Referencing_Count <-- repo.RepoObject_gross::RepoObject_Referencing_Count
-repo.RepoObject::RepoObject_schema_name <-- repo.RepoObject_gross::RepoObject_schema_name
-repo.RepoObject::RepoObject_type <-- repo.RepoObject_gross::RepoObject_type
-repo.RepoObject::SysObject_fullname <-- repo.RepoObject_gross::SysObject_fullname
-repo.RepoObject::SysObject_fullname <-- repo.RepoObject_gross::persistence_source_SysObject_fullname
-repo.RepoObject::SysObject_fullname2 <-- repo.RepoObject_gross::SysObject_fullname2
-repo.RepoObject::SysObject_fullname2 <-- repo.RepoObject_gross::persistence_source_SysObject_fullname2
-repo.RepoObject::SysObject_id <-- repo.RepoObject_gross::SysObject_id
-repo.RepoObject::SysObject_modify_date <-- repo.RepoObject_gross::SysObject_modify_date
-repo.RepoObject::SysObject_name <-- repo.RepoObject_gross::SysObject_name
-repo.RepoObject::SysObject_parent_object_id <-- repo.RepoObject_gross::SysObject_parent_object_id
-repo.RepoObject::SysObject_query_sql <-- repo.RepoObject_gross::SysObject_query_sql
-repo.RepoObject::SysObject_schema_name <-- repo.RepoObject_gross::SysObject_schema_name
-repo.RepoObject::SysObject_type <-- repo.RepoObject_gross::SysObject_type
-repo.RepoObject::usp_persistence_name <-- repo.RepoObject_gross::usp_persistence_name
-repo.RepoObject_ColumnList::CreateColumnList <-- repo.RepoObject_gross::CreateColumnList
-repo.RepoObject_ColumnList::DbmlColumnList <-- repo.RepoObject_gross::DbmlColumnList
-repo.RepoObject_ColumnList::PersistenceCompareColumnList <-- repo.RepoObject_gross::PersistenceCompareColumnList
-repo.RepoObject_ColumnList::PersistenceInsertColumnList <-- repo.RepoObject_gross::PersistenceInsertColumnList
-repo.RepoObject_ColumnList::PersistenceUpdateColumnList <-- repo.RepoObject_gross::PersistenceUpdateColumnList
-repo.RepoObject_gross::is_persistence <-- repo.Index_gross::is_persistence
-repo.RepoObject_gross::is_repo_managed <-- repo.Index_gross::is_repo_managed
-repo.RepoObject_gross::RepoObject_fullname <-- repo.Index_gross::RepoObject_fullname
-repo.RepoObject_gross::RepoObject_fullname2 <-- repo.Index_gross::RepoObject_fullname2
-repo.RepoObject_gross::SysObject_fullname <-- repo.Index_gross::SysObject_fullname
-repo.RepoObject_gross::SysObject_fullname2 <-- repo.Index_gross::SysObject_fullname2
-repo.RepoObject_gross::SysObject_id <-- repo.Index_gross::SysObject_id
-repo.RepoObject_gross::SysObject_name <-- repo.Index_gross::SysObject_name
-repo.RepoObject_gross::SysObject_schema_name <-- repo.Index_gross::SysObject_schema_name
-repo.RepoObject_gross::SysObject_type <-- repo.Index_gross::SysObject_type
+

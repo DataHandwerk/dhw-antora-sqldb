@@ -88,6 +88,7 @@ entity repo.SysObject_RepoObject_via_guid << V >> {
   SysObject_RepoObject_guid : uniqueidentifier
   SysObject_schema_name : sysname
   SysObject_type : char(2)
+  SysObject_type_desc : nvarchar(60)
   temporal_type : tinyint
 }
 
@@ -121,9 +122,7 @@ entity repo_sys.SysObject << V >> {
 }
 
 repo.RepoObject <.. repo.SysObject_RepoObject_via_guid
-repo.RepoObject <.. repo.usp_sync_guid_RepoObject
 repo.SysObject_RepoObject_via_guid <.. repo.usp_sync_guid_RepoObject
-repo_sys.SysObject <.. repo.usp_sync_guid_RepoObject
 repo_sys.SysObject <.. repo.SysObject_RepoObject_via_guid
 repo.RepoObject::is_repo_managed <-- repo.SysObject_RepoObject_via_guid::is_repo_managed
 repo.RepoObject::is_RepoObject_name_uniqueidentifier <-- repo.SysObject_RepoObject_via_guid::is_RepoObject_name_uniqueidentifier
@@ -131,8 +130,8 @@ repo.RepoObject::is_SysObject_missing <-- repo.SysObject_RepoObject_via_guid::Re
 repo.RepoObject::is_SysObject_name_uniqueidentifier <-- repo.SysObject_RepoObject_via_guid::is_SysObject_name_uniqueidentifier
 repo.RepoObject::Repo_history_table_guid <-- repo.SysObject_RepoObject_via_guid::Repo_history_table_guid
 repo.RepoObject::Repo_temporal_type <-- repo.SysObject_RepoObject_via_guid::Repo_temporal_type
-repo.RepoObject::RepoObject_guid <-- repo.SysObject_RepoObject_via_guid::RepoObject_guid
 repo.RepoObject::RepoObject_guid <-- repo.SysObject_RepoObject_via_guid::history_table_guid
+repo.RepoObject::RepoObject_guid <-- repo.SysObject_RepoObject_via_guid::RepoObject_guid
 repo.RepoObject::RepoObject_name <-- repo.SysObject_RepoObject_via_guid::RepoObject_name
 repo.RepoObject::RepoObject_schema_name <-- repo.SysObject_RepoObject_via_guid::RepoObject_schema_name
 repo.RepoObject::RepoObject_type <-- repo.SysObject_RepoObject_via_guid::RepoObject_type
@@ -151,3 +150,4 @@ repo_sys.SysObject::SysObject_RepoObject_guid <-- repo.SysObject_RepoObject_via_
 repo_sys.SysObject::SysObject_schema_name <-- repo.SysObject_RepoObject_via_guid::SysObject_schema_name
 repo_sys.SysObject::temporal_type <-- repo.SysObject_RepoObject_via_guid::temporal_type
 repo_sys.SysObject::type <-- repo.SysObject_RepoObject_via_guid::SysObject_type
+repo_sys.SysObject::type_desc <-- repo.SysObject_RepoObject_via_guid::SysObject_type_desc

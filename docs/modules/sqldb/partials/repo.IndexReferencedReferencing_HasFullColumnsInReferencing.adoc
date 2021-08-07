@@ -39,7 +39,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-07-14 19:36:08
+2021-08-03 14:46:32
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -152,6 +152,14 @@ view
 |
 |
 |===
+
+.Description
+--
+the same index can be inherited several times into the same referenced object, if a source is used several times
+for example
+SELECT A_A = A.A, B_A = B.A from source_1 as A LEFT JOIN source_1 as B ON ... 
+normaly these indexes should have different columns
+--
 
 .Referenced Columns
 --
@@ -291,6 +299,17 @@ view
 [[index-idx_IndexReferencedReferencing_HasFullColumnsInReferencing_2]]
 === idx_IndexReferencedReferencing_HasFullColumnsInReferencing++__++2
 
+* IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_index_guid[index_guid]
++
+--
+* <<column-source_index_guid>>; uniqueidentifier
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[[index-idx_IndexReferencedReferencing_HasFullColumnsInReferencing_3]]
+=== idx_IndexReferencedReferencing_HasFullColumnsInReferencing++__++3
+
 * IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_no_group[no_group]
 +
 --
@@ -342,6 +361,27 @@ view
 // tag::exampleusage_2[]
 
 // end::exampleusage_2[]
+
+
+== exampleUsage_3
+
+// tag::exampleusage_3[]
+
+// end::exampleusage_3[]
+
+
+== exampleUsage_4
+
+// tag::exampleusage_4[]
+
+// end::exampleusage_4[]
+
+
+== exampleUsage_5
+
+// tag::exampleusage_5[]
+
+// end::exampleusage_5[]
 
 
 == exampleWrong_Usage
@@ -526,6 +566,13 @@ view
 // tag::usp_persistence_repoobject_guid[]
 
 // end::usp_persistence_repoobject_guid[]
+
+
+== UspExamples
+
+// tag::uspexamples[]
+
+// end::uspexamples[]
 
 
 == UspParameters

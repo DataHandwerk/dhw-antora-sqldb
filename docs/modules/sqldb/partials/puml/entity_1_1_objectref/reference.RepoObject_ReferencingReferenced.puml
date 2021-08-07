@@ -23,14 +23,6 @@ skinparam class {
 }
 
 
-entity graph.ReferencedObject << U >> {
-  --
-}
-
-entity graph.RepoObject << U >> {
-  --
-}
-
 entity reference.ftv_RepoObject_ReferenceTree << IF >> {
   --
 }
@@ -47,6 +39,12 @@ entity reference.ftv_RepoObject_ReferenceTree_via_fullname << IF >> {
   --
 }
 
+entity reference.RepoObject_reference_T << U >> {
+  **referenced_RepoObject_guid** : uniqueidentifier
+  **referencing_RepoObject_guid** : uniqueidentifier
+  --
+}
+
 entity reference.RepoObject_ReferencedList << V >> {
   --
 }
@@ -56,8 +54,8 @@ entity reference.RepoObject_ReferencingList << V >> {
 }
 
 entity reference.RepoObject_ReferencingReferenced << V >> {
-  **Referenced_guid** : uniqueidentifier
-  **Referencing_guid** : uniqueidentifier
+  * **Referenced_guid** : uniqueidentifier
+  * **Referencing_guid** : uniqueidentifier
   --
 }
 
@@ -66,14 +64,11 @@ entity repo.RepoObject_gross << V >> {
   --
 }
 
-graph.ReferencedObject <.. reference.RepoObject_ReferencingReferenced
-graph.RepoObject <.. reference.RepoObject_ReferencingReferenced
-reference.RepoObject_ReferencedList <.. repo.RepoObject_gross
-reference.RepoObject_ReferencingList <.. repo.RepoObject_gross
+reference.RepoObject_reference_T <.. reference.RepoObject_ReferencingReferenced
 reference.RepoObject_ReferencingReferenced <.. repo.RepoObject_gross
-reference.RepoObject_ReferencingReferenced <.. reference.RepoObject_ReferencedList
-reference.RepoObject_ReferencingReferenced <.. reference.RepoObject_ReferencingList
 reference.RepoObject_ReferencingReferenced <.. reference.ftv_RepoObject_ReferenceTree
+reference.RepoObject_ReferencingReferenced <.. reference.RepoObject_ReferencedList
 reference.RepoObject_ReferencingReferenced <.. reference.ftv_RepoObject_ReferenceTree_via_fullname
+reference.RepoObject_ReferencingReferenced <.. reference.RepoObject_ReferencingList
 reference.RepoObject_ReferencingReferenced <.. reference.ftv_RepoObject_ReferenceTree_referenced
 reference.RepoObject_ReferencingReferenced <.. reference.ftv_RepoObject_ReferenceTree_referencing

@@ -23,25 +23,18 @@ skinparam class {
 }
 
 
-entity docs.RepoObject_Plantuml << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  --
-}
-
 entity docs.RepoObject_Plantuml_ColRefList << V >> {
   * **RepoObject_guid** : uniqueidentifier
   --
 }
 
-entity graph.ReferencedObjectColumn << U >> {
-  --
-}
-
-entity graph.RepoObjectColumn << U >> {
-  --
-}
-
 entity reference.ftv_RepoObject_ReferencedReferencing << IF >> {
+  --
+}
+
+entity reference.RepoObjectColumn_reference_T << U >> {
+  **referenced_RepoObjectColumn_guid** : uniqueidentifier
+  **referencing_RepoObjectColumn_guid** : uniqueidentifier
   --
 }
 
@@ -50,9 +43,6 @@ entity repo.RepoObject << U >> {
   --
 }
 
-docs.RepoObject_Plantuml_ColRefList <.. docs.RepoObject_Plantuml
-graph.ReferencedObjectColumn <.. docs.RepoObject_Plantuml_ColRefList
-graph.RepoObjectColumn <.. docs.RepoObject_Plantuml_ColRefList
 reference.ftv_RepoObject_ReferencedReferencing <.. docs.RepoObject_Plantuml_ColRefList
+reference.RepoObjectColumn_reference_T <.. docs.RepoObject_Plantuml_ColRefList
 repo.RepoObject <.. docs.RepoObject_Plantuml_ColRefList
-repo.RepoObject <.. reference.ftv_RepoObject_ReferencedReferencing

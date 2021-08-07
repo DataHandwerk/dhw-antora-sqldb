@@ -23,34 +23,8 @@ skinparam class {
 }
 
 
-entity graph.ReferencingObject << U >> {
-  --
-}
-
-entity graph.RepoObject << U >> {
-  --
-}
-
 entity reference.RepoObject_referencing_level << V >> {
-  **StartingNode_guid** : uniqueidentifier
-  **LastNode_guid** : uniqueidentifier
-  * **referencing_level** : int
   --
 }
 
-entity reference.RepoObject_referencing_level_T << U >> {
-  **StartingNode_guid** : uniqueidentifier
-  **LastNode_guid** : uniqueidentifier
-  * **referencing_level** : int
-  --
-}
 
-entity reference.usp_PERSIST_RepoObject_referencing_level_T << P >> {
-  --
-}
-
-graph.ReferencingObject <.. reference.RepoObject_referencing_level
-graph.RepoObject <.. reference.RepoObject_referencing_level
-reference.RepoObject_referencing_level <.. reference.RepoObject_referencing_level_T
-reference.RepoObject_referencing_level <.. reference.usp_PERSIST_RepoObject_referencing_level_T
-reference.RepoObject_referencing_level_T <.. reference.usp_PERSIST_RepoObject_referencing_level_T

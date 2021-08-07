@@ -41,7 +41,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-07-14 19:36:11
+2021-08-07 17:38:07
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -159,6 +159,27 @@ EXEC [property].[usp_RepoObjectProperty_collect]
 // tag::exampleusage_2[]
 
 // end::exampleusage_2[]
+
+
+== exampleUsage_3
+
+// tag::exampleusage_3[]
+
+// end::exampleusage_3[]
+
+
+== exampleUsage_4
+
+// tag::exampleusage_4[]
+
+// end::exampleusage_4[]
+
+
+== exampleUsage_5
+
+// tag::exampleusage_5[]
+
+// end::exampleusage_5[]
 
 
 == exampleWrong_Usage
@@ -354,6 +375,13 @@ this parses sql_modules_definition for tagged parts defining extended properties
 // end::usp_persistence_repoobject_guid[]
 
 
+== UspExamples
+
+// tag::uspexamples[]
+
+// end::uspexamples[]
+
+
 == UspParameters
 
 // tag::uspparameters[]
@@ -450,7 +478,7 @@ Using
 On t.RepoObject_guid = s.RepoObject_guid
    And t.property_name = s.property_name
 When Matched And (
-                     t.property_nvarchar <> Cast(s.property_value As NVarchar(4000))
+                     t.property_value <> s.property_value
                      Or t.property_value Is Null
                         And Not s.property_value Is Null
                      Or s.property_value Is Null
@@ -519,7 +547,7 @@ Using
 On t.RepoObject_guid = s.RepoObject_guid
    And t.property_name = s.property_name
 When Matched And (
-                     t.property_nvarchar <> Cast(s.property_value As NVarchar(4000))
+                     t.property_value <> s.property_value
                      Or t.property_value Is Null
                         And Not s.property_value Is Null
                      Or s.property_value Is Null
@@ -588,7 +616,7 @@ Using
 On t.RepoObject_guid = s.RepoObject_guid
    And t.property_name = s.property_name
 When Matched And (
-                     t.property_nvarchar <> Cast(s.property_value As NVarchar(4000))
+                     t.property_value <> s.property_value
                      Or t.property_value Is Null
                         And Not s.property_value Is Null
                      Or s.property_value Is Null
@@ -645,7 +673,7 @@ EXEC logs.usp_ExecutionLog_insert
 PRINT CONCAT('usp_id;Number;Parent_Number: ',20,';',3000,';',NULL);
 
 DELETE
-FROM [dhw_self].[property].[RepoObjectProperty]
+FROM [property].[RepoObjectProperty]
 WHERE [property_value] IS NULL
 
 -- Logging START --

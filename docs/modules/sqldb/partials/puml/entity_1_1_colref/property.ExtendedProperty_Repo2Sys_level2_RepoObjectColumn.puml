@@ -23,7 +23,7 @@ skinparam class {
 }
 
 
-entity config.type_level1type_level2type << V >> {
+entity configT.type_level1type_level2type << V >> {
   **type** : nvarchar(128)
   --
   level1type : varchar(9)
@@ -42,7 +42,7 @@ entity property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn << V >> {
   --
   * parent_RepoObject_guid : uniqueidentifier
   * parent_RepoObject_type : char(2)
-  * property_value : sql_variant
+  property_value : nvarchar(4000)
   Repo_user_type_fullname : nvarchar(128)
   * RepoObjectColumn_guid : uniqueidentifier
 }
@@ -56,7 +56,7 @@ entity property.ExtendedProperty_Repo2Sys_level2_Union << V >> {
   * **level2name** : nvarchar(128)
   * **property_name** : nvarchar(128)
   --
-  property_value : sql_variant
+  property_value : nvarchar(4000)
 }
 
 entity property.RepoObjectColumnProperty << U >> {
@@ -64,16 +64,13 @@ entity property.RepoObjectColumnProperty << U >> {
   --
   inheritance : tinyint
   * property_name : nvarchar(128)
-  * property_value : sql_variant
+  * property_value : nvarchar(max)
   * RepoObjectColumn_guid : uniqueidentifier
-  {abstract} property_basetype : sql_variant
   {abstract} property_bigint : bigint
   {abstract} property_float : float
   {abstract} property_int : int
   {abstract} property_money : money
-  {abstract} property_nvarchar : nvarchar(4000)
   {abstract} property_real : real
-  {abstract} property_varchar : varchar(8000)
 }
 
 entity repo.RepoObject << U >> {
@@ -148,19 +145,19 @@ entity repo.RepoObjectColumn << U >> {
   * RepoObjectColumn_name : nvarchar(128)
   SysObjectColumn_column_id : int
   * SysObjectColumn_name : nvarchar(128)
+  * {static} Column_name : nvarchar(128)
   {abstract} has_different_sys_names : bit
   * {static} is_RepoObjectColumn_name_uniqueidentifier : int
   * {static} is_SysObjectColumn_name_uniqueidentifier : int
 }
 
-config.type_level1type_level2type <.. property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn
+configT.type_level1type_level2type <.. property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn
 property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn <.. property.ExtendedProperty_Repo2Sys_level2_Union
 property.RepoObjectColumnProperty <.. property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn
 repo.RepoObject <.. property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn
 repo.RepoObjectColumn <.. property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn
-config.type_level1type_level2type::level1type <-- property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::level1type
+configT.type_level1type_level2type::level1type <-- property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::level1type
 property.RepoObjectColumnProperty::property_name <-- property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::property_name
-property.RepoObjectColumnProperty::property_value <-- property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::property_value
 property.RepoObjectColumnProperty::RepoObjectColumn_guid <-- property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::RepoObjectColumn_guid
 repo.RepoObject::RepoObject_guid <-- property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::parent_RepoObject_guid
 repo.RepoObject::RepoObject_name <-- property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::level1name

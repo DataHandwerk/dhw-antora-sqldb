@@ -33,16 +33,16 @@ entity config.Parameter << U >> {
   --
 }
 
-entity config.spt_values << U >> {
+entity configT.spt_values << U >> {
   --
 }
 
-entity config.type << V >> {
+entity configT.type << V >> {
   **type** : nvarchar(128)
   --
 }
 
-entity config.type_level1type_level2type << V >> {
+entity configT.type_level1type_level2type << V >> {
   **type** : nvarchar(128)
   --
 }
@@ -61,8 +61,8 @@ entity sys_self.ExtendedProperties_ParameterForAddUpdateDrop << V >> {
 
 config.fs_dwh_database_name <.. repo_sys.usp_dropextendedproperty_level_2
 config.Parameter <.. config.fs_dwh_database_name
-config.spt_values <.. config.type
-config.type <.. config.type_level1type_level2type
-config.type_level1type_level2type <.. sys_self.ExtendedProperties_ParameterForAddUpdateDrop
+configT.spt_values <.. configT.type
+configT.type <.. configT.type_level1type_level2type
+configT.type_level1type_level2type <.. sys_self.ExtendedProperties_ParameterForAddUpdateDrop
 sys_self.ExtendedProperties <.. sys_self.ExtendedProperties_ParameterForAddUpdateDrop
 sys_self.ExtendedProperties_ParameterForAddUpdateDrop <.. repo_sys.usp_dropextendedproperty_level_2

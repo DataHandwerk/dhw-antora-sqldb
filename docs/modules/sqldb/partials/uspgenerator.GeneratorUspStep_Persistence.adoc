@@ -5,6 +5,7 @@
 // tag::existing_properties[]
 :ExistsProperty--antorareferencedlist:
 :ExistsProperty--antorareferencinglist:
+:ExistsProperty--ms_description:
 :ExistsProperty--pk_index_guid:
 :ExistsProperty--pk_indexpatterncolumndatatype:
 :ExistsProperty--pk_indexpatterncolumnname:
@@ -43,7 +44,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-07-14 19:36:08
+2021-08-07 15:05:02
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -440,6 +441,27 @@ view
 // end::exampleusage_2[]
 
 
+== exampleUsage_3
+
+// tag::exampleusage_3[]
+
+// end::exampleusage_3[]
+
+
+== exampleUsage_4
+
+// tag::exampleusage_4[]
+
+// end::exampleusage_4[]
+
+
+== exampleUsage_5
+
+// tag::exampleusage_5[]
+
+// end::exampleusage_5[]
+
+
 == exampleWrong_Usage
 
 // tag::examplewrong_usage[]
@@ -549,6 +571,9 @@ view
 
 // tag::ms_description[]
 
+* xref:sqldb:uspgenerator.GeneratorUspStep_Persistence.adoc[] creates all possible steps for GeneratorUspStep
+* xref:sqldb:uspgenerator.GeneratorUspStep_Persistence_IsInactive_setpoint.adoc[] determines which steps should be activated based on settings in xref:sqldb:repo.RepoObject_persistence.adoc[]
+* xref:sqldb:uspgenerator.usp_GeneratorUsp_insert_update_persistence.adoc[] uses these views
 // end::ms_description[]
 
 
@@ -624,6 +649,13 @@ usp_id
 // end::usp_persistence_repoobject_guid[]
 
 
+== UspExamples
+
+// tag::uspexamples[]
+
+// end::uspexamples[]
+
+
 == UspParameters
 
 // tag::uspparameters[]
@@ -638,19 +670,16 @@ usp_id
 ----
 
 
+
 /*
-this view creates possible steps for GeneratorUspStep
-
-[repo].[usp_GeneratorUsp_insert_update_persistence]
-
-The content of the steps and the status [is_inactive] are determined and applied separately.
-
-* first all steps are inserted or updated
-* [is_inactive] will be set for some steps, to make
-
+<<property_start>>MS_Description
+* xref:sqldb:uspgenerator.GeneratorUspStep_Persistence.adoc[] creates all possible steps for GeneratorUspStep
+* xref:sqldb:uspgenerator.GeneratorUspStep_Persistence_IsInactive_setpoint.adoc[] determines which steps should be activated based on settings in xref:sqldb:repo.RepoObject_persistence.adoc[]
+* xref:sqldb:uspgenerator.usp_GeneratorUsp_insert_update_persistence.adoc[] uses these views
+<<property_end>>
 */
 
-CREATE View [uspgenerator].GeneratorUspStep_Persistence
+CREATE View [uspgenerator].[GeneratorUspStep_Persistence]
 As
 Select
     --
@@ -1013,7 +1042,80 @@ From
         [uspgenerator].GeneratorUsp As gu
             On
             ro.RepoObject_schema_name   = gu.usp_schema
+            And ro.usp_persistence_name = gu.usp_name
+Union All
+Select
+    usp_id                      = gu.id
+  , Number                      = 900
+  , Parent_Number               = Null
+  , Name                        = 'merge'
+  , has_logging                 = 1
+  , is_condition                = 0
+  , is_inactive                 = 0
+  , is_SubProcedure             = 0
+  , Statement                   = 'INSERT INTO 
+ ' + ro.RepoObject_fullname + '
+ (
+' + ro.PersistenceInsertColumnList + ')
+SELECT
+' + ro.PersistenceInsertColumnList + '
+FROM ' + ro.persistence_source_SysObject_fullname + ' AS S'
+  , log_source_object           = ro.persistence_source_SysObject_fullname
+  , log_target_object           = ro.RepoObject_fullname
+  , log_flag_InsertUpdateDelete = 'I'
+  --
+  , gu.usp_fullname
+  , ro.RepoObject_guid
+From
+    repo.RepoObject_gross As ro
+    Inner Join
+        [uspgenerator].GeneratorUsp As gu
+            On
+            ro.RepoObject_schema_name   = gu.usp_schema
             And ro.usp_persistence_name = gu.usp_name;
+/*
+MERGE [graph].[ReferencedObject] as T
+USING
+(
+    SELECT
+        [RepoObject_guid] AS [Procedure_RepoObject_guid]
+      , ''                AS [Instance]
+    FROM
+        [repo].[RepoObject]
+    WHERE
+        [RepoObject_type] = 'P'
+) AS S
+ON T.[Procedure_RepoObject_guid] = S.[Procedure_RepoObject_guid]
+   AND T.[Instance] = S.[Instance]
+WHEN MATCHED AND (
+                     t.property_nvarchar <> Cast(s.property_value As NVarchar(4000))
+                     Or t.property_value Is Null
+                        And Not s.property_value Is Null
+                     Or s.property_value Is Null
+                        And Not t.property_value Is Null
+                 )
+    Then Update Set
+             property_value = s.property_value
+WHEN NOT MATCHED BY TARGET
+    THEN INSERT
+         (
+             $FROM_ID
+           , $TO_ID
+         )
+         VALUES
+             (
+                 referencing.$NODE_ID
+               , referenced.$NODE_ID
+             )
+WHEN NOT MATCHED BY SOURCE
+    THEN DELETE
+OUTPUT
+    deleted.*
+  , $ACTION
+  , inserted.*;
+
+*/
+
 
 ----
 // end::sql_modules_definition[]

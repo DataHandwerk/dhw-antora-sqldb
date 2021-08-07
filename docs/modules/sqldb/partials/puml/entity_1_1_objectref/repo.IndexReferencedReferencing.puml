@@ -23,7 +23,7 @@ skinparam class {
 }
 
 
-entity reference.RepoObject_reference_union << V >> {
+entity reference.RepoObject_reference_T << U >> {
   **referenced_RepoObject_guid** : uniqueidentifier
   **referencing_RepoObject_guid** : uniqueidentifier
   --
@@ -47,8 +47,7 @@ entity repo.IndexReferencedReferencing_HasFullColumnsInReferencing << V >> {
   --
 }
 
-reference.RepoObject_reference_union <.. repo.IndexReferencedReferencing
+reference.RepoObject_reference_T <.. repo.IndexReferencedReferencing
 repo.Index_union <.. repo.IndexReferencedReferencing
 repo.Index_virtual <.. repo.IndexReferencedReferencing
-repo.Index_virtual <.. repo.Index_union
 repo.IndexReferencedReferencing <.. repo.IndexReferencedReferencing_HasFullColumnsInReferencing

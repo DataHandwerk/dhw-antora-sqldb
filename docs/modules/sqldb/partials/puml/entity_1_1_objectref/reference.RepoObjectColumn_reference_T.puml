@@ -23,6 +23,10 @@ skinparam class {
 }
 
 
+entity docs.RepoObject_Plantuml_ColRefList_1_1 << V >> {
+  --
+}
+
 entity reference.RepoObjectColumn_reference << V >> {
   **referenced_RepoObjectColumn_guid** : uniqueidentifier
   **referencing_RepoObjectColumn_guid** : uniqueidentifier
@@ -32,6 +36,12 @@ entity reference.RepoObjectColumn_reference << V >> {
 entity reference.RepoObjectColumn_reference_T << U >> {
   **referenced_RepoObjectColumn_guid** : uniqueidentifier
   **referencing_RepoObjectColumn_guid** : uniqueidentifier
+  --
+}
+
+entity reference.RepoObjectColumn_ReferencingReferenced << V >> {
+  * **Referenced_guid** : uniqueidentifier
+  * **Referencing_guid** : uniqueidentifier
   --
 }
 
@@ -55,15 +65,10 @@ entity repo.RepoObjectColumn_MissingSource_TypeV << V >> {
   --
 }
 
-entity repo.usp_main << P >> {
-  --
-}
-
 reference.RepoObjectColumn_reference <.. reference.RepoObjectColumn_reference_T
-reference.RepoObjectColumn_reference <.. reference.usp_PERSIST_RepoObjectColumn_reference_T
-reference.RepoObjectColumn_reference_T <.. reference.usp_PERSIST_RepoObjectColumn_reference_T
 reference.RepoObjectColumn_reference_T <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing
-reference.RepoObjectColumn_reference_T <.. repo.RepoObjectColumn_MissingSource_TypeV
-reference.RepoObjectColumn_reference_T <.. repo.usp_main
 reference.RepoObjectColumn_reference_T <.. reference.RepoObjectColumn_RelationScript
-reference.usp_PERSIST_RepoObjectColumn_reference_T <.. repo.usp_main
+reference.RepoObjectColumn_reference_T <.. repo.RepoObjectColumn_MissingSource_TypeV
+reference.RepoObjectColumn_reference_T <.. reference.RepoObjectColumn_ReferencingReferenced
+reference.RepoObjectColumn_reference_T <.. reference.usp_PERSIST_RepoObjectColumn_reference_T
+reference.RepoObjectColumn_reference_T <.. docs.RepoObject_Plantuml_ColRefList_1_1

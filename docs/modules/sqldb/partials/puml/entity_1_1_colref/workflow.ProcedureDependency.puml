@@ -23,10 +23,6 @@ skinparam class {
 }
 
 
-entity repo.usp_main << P >> {
-  --
-}
-
 entity workflow.ProcedureDependency << U >> {
   * **id** : int
   --
@@ -53,11 +49,21 @@ entity workflow.ProcedureDependency_gross << V >> {
   * referencing_RepoObject_schema_name : nvarchar(128)
 }
 
+entity workflow.ProcedureDependency_input_PersistenceDependency << V >> {
+  **referenced_Procedure_RepoObject_guid** : uniqueidentifier
+  **referencing_Procedure_RepoObject_guid** : uniqueidentifier
+  --
+  * is_PersistenceDependency : int
+}
+
 workflow.ProcedureDependency <.. workflow.ProcedureDependency_gross
-workflow.ProcedureDependency <.. repo.usp_main
+workflow.ProcedureDependency <.. workflow.ProcedureDependency_input_PersistenceDependency
 workflow.ProcedureDependency::Description <-- workflow.ProcedureDependency_gross::Description
 workflow.ProcedureDependency::id <-- workflow.ProcedureDependency_gross::id
 workflow.ProcedureDependency::is_active <-- workflow.ProcedureDependency_gross::is_active
 workflow.ProcedureDependency::is_PersistenceDependency <-- workflow.ProcedureDependency_gross::is_PersistenceDependency
+workflow.ProcedureDependency::is_PersistenceDependency <-- workflow.ProcedureDependency_input_PersistenceDependency::is_PersistenceDependency
 workflow.ProcedureDependency::referenced_Procedure_RepoObject_guid <-- workflow.ProcedureDependency_gross::referenced_Procedure_RepoObject_guid
+workflow.ProcedureDependency::referenced_Procedure_RepoObject_guid <-- workflow.ProcedureDependency_input_PersistenceDependency::referenced_Procedure_RepoObject_guid
 workflow.ProcedureDependency::referencing_Procedure_RepoObject_guid <-- workflow.ProcedureDependency_gross::referencing_Procedure_RepoObject_guid
+workflow.ProcedureDependency::referencing_Procedure_RepoObject_guid <-- workflow.ProcedureDependency_input_PersistenceDependency::referencing_Procedure_RepoObject_guid

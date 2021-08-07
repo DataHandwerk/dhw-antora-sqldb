@@ -33,13 +33,6 @@ entity graph.RepoObject << U >> {
 
 entity reference.Match_RepoObject_referenced_UspPersistence << V >> {
   **FirstNode** : uniqueidentifier
-  **LastNode** : uniqueidentifier
-  --
-}
-
-entity reference.Reference_UspPersistence << V >> {
-  **referenced_usp_RepoObject_guid** : uniqueidentifier
-  **referencing_usp_RepoObject_guid** : uniqueidentifier
   --
 }
 
@@ -48,14 +41,6 @@ entity repo.RepoObject_gross << V >> {
   --
 }
 
-entity repo.usp_main << P >> {
-  --
-}
-
-graph.ReferencedObject <.. repo.usp_main
 graph.ReferencedObject <.. reference.Match_RepoObject_referenced_UspPersistence
 graph.RepoObject <.. reference.Match_RepoObject_referenced_UspPersistence
-graph.RepoObject <.. repo.usp_main
-reference.Match_RepoObject_referenced_UspPersistence <.. repo.usp_main
-reference.Match_RepoObject_referenced_UspPersistence <.. reference.Reference_UspPersistence
 repo.RepoObject_gross <.. reference.Match_RepoObject_referenced_UspPersistence

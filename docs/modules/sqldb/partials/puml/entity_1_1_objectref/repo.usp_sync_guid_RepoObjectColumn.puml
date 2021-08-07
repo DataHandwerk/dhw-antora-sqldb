@@ -27,21 +27,8 @@ entity config.fs_get_parameter_value << FN >> {
   --
 }
 
-entity config.type_level1type_level2type << V >> {
+entity configT.type_level1type_level2type << V >> {
   **type** : nvarchar(128)
-  --
-}
-
-entity graph.RepoObjectColumn << U >> {
-  --
-}
-
-entity graph.RepoObjectColumn_S << V >> {
-  * **RepoObjectColumn_guid** : uniqueidentifier
-  --
-}
-
-entity graph.usp_PERSIST_RepoObjectColumn << P >> {
   --
 }
 
@@ -111,33 +98,17 @@ entity repo_sys.usp_AddOrUpdateExtendedProperty << P >> {
 }
 
 config.fs_get_parameter_value <.. repo.usp_sync_guid_RepoObjectColumn
-config.type_level1type_level2type <.. repo.usp_sync_guid_RepoObjectColumn
-graph.RepoObjectColumn <.. repo.usp_sync_guid_RepoObjectColumn
-graph.RepoObjectColumn <.. graph.usp_PERSIST_RepoObjectColumn
-graph.RepoObjectColumn_S <.. graph.usp_PERSIST_RepoObjectColumn
-graph.RepoObjectColumn_S <.. repo.usp_sync_guid_RepoObjectColumn
-graph.RepoObjectColumn_S <.. graph.RepoObjectColumn
-graph.usp_PERSIST_RepoObjectColumn <.. repo.usp_sync_guid_RepoObjectColumn
+configT.type_level1type_level2type <.. repo.usp_sync_guid_RepoObjectColumn
 logs.usp_ExecutionLog_insert <.. repo.usp_sync_guid_RepoObjectColumn
-logs.usp_ExecutionLog_insert <.. graph.usp_PERSIST_RepoObjectColumn
-logs.usp_ExecutionLog_insert <.. repo.usp_sync_guid
 reference.RepoObjectColumnSource_virtual <.. repo.usp_sync_guid_RepoObjectColumn
 repo.IndexColumn_virtual <.. repo.usp_sync_guid_RepoObjectColumn
 repo.RepoObject <.. repo.usp_sync_guid_RepoObjectColumn
-repo.RepoObject <.. repo.SysColumn_RepoObjectColumn_via_name
-repo.RepoObject <.. repo.SysColumn_RepoObjectColumn_via_guid
 repo.RepoObject_persistence <.. repo.usp_sync_guid_RepoObjectColumn
-repo.RepoObject_persistence <.. repo.RepoObjectColumn_HistValidColums_setpoint
-repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_guid
-repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_name
 repo.RepoObjectColumn <.. repo.usp_sync_guid_RepoObjectColumn
-repo.RepoObjectColumn <.. repo.RepoObjectColumn_RequiredRepoObjectColumnMerge
 repo.RepoObjectColumn_HistValidColums_setpoint <.. repo.usp_sync_guid_RepoObjectColumn
 repo.RepoObjectColumn_RequiredRepoObjectColumnMerge <.. repo.usp_sync_guid_RepoObjectColumn
 repo.SysColumn_RepoObjectColumn_via_guid <.. repo.usp_sync_guid_RepoObjectColumn
 repo.SysColumn_RepoObjectColumn_via_name <.. repo.usp_sync_guid_RepoObjectColumn
 repo.usp_sync_guid_RepoObjectColumn <.. repo.usp_sync_guid
-repo_sys.SysColumn <.. repo.SysColumn_RepoObjectColumn_via_name
-repo_sys.SysColumn <.. repo.SysColumn_RepoObjectColumn_via_guid
 repo_sys.SysColumn <.. repo.usp_sync_guid_RepoObjectColumn
 repo_sys.usp_AddOrUpdateExtendedProperty <.. repo.usp_sync_guid_RepoObjectColumn

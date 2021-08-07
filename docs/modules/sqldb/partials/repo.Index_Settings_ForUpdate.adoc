@@ -6,6 +6,7 @@
 :ExistsProperty--antorareferencedlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
+:ExistsProperty--AntoraIndexList:
 :ExistsProperty--Columns:
 // end::existing_properties[]
 
@@ -36,7 +37,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-07-14 19:36:07
+2021-08-03 14:46:31
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -55,6 +56,11 @@ view
 |
 |===
 
+.Referenced Columns
+--
+* xref:repo.Index_Settings.adoc#column-index_guid[+repo.Index_Settings.index_guid+]
+--
+
 
 [[column-index_name]]
 === index_name
@@ -68,6 +74,11 @@ view
 |
 |
 |===
+
+.Referenced Columns
+--
+* xref:repo.Index_union.adoc#column-index_name[+repo.Index_union.index_name+]
+--
 
 
 [[column-IndexPatternColumnDatatype]]
@@ -83,6 +94,11 @@ view
 |
 |===
 
+.Referenced Columns
+--
+* xref:repo.Index_Settings.adoc#column-IndexPatternColumnDatatype[+repo.Index_Settings.IndexPatternColumnDatatype+]
+--
+
 
 [[column-IndexPatternColumnName]]
 === IndexPatternColumnName
@@ -96,6 +112,11 @@ view
 |
 |
 |===
+
+.Referenced Columns
+--
+* xref:repo.Index_Settings.adoc#column-IndexPatternColumnName[+repo.Index_Settings.IndexPatternColumnName+]
+--
 
 
 [[column-IndexSemanticGroup]]
@@ -111,6 +132,11 @@ view
 |
 |===
 
+.Referenced Columns
+--
+* xref:repo.Index_Settings.adoc#column-IndexSemanticGroup[+repo.Index_Settings.IndexSemanticGroup+]
+--
+
 
 [[column-is_create_constraint]]
 === is_create_constraint
@@ -124,6 +150,11 @@ view
 |
 |
 |===
+
+.Referenced Columns
+--
+* xref:repo.Index_Settings.adoc#column-is_create_constraint[+repo.Index_Settings.is_create_constraint+]
+--
 
 
 [[column-parent_RepoObject_guid]]
@@ -139,6 +170,11 @@ view
 |
 |===
 
+.Referenced Columns
+--
+* xref:repo.Index_union.adoc#column-parent_RepoObject_guid[+repo.Index_union.parent_RepoObject_guid+]
+--
+
 
 [[column-RepoObject_fullname]]
 === RepoObject_fullname
@@ -152,6 +188,16 @@ view
 |
 |
 |===
+
+.Description
+--
+(concat('[',[RepoObject_schema_name],'].[',[RepoObject_name],']'))
+--
+
+.Referenced Columns
+--
+* xref:repo.RepoObject.adoc#column-RepoObject_fullname[+repo.RepoObject.RepoObject_fullname+]
+--
 
 
 // end::AntoraColumnDetails[]
@@ -234,6 +280,16 @@ view
 
 // tag::AntoraIndexList[]
 
+[[index-idx_Index_Settings_ForUpdate_1]]
+=== idx_Index_Settings_ForUpdate++__++1
+
+* IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_index_guid[index_guid]
++
+--
+* <<column-index_guid>>; uniqueidentifier
+--
+* PK, Unique, Real: 0, 0, 0
+
 // end::AntoraIndexList[]
 
 == AntoraParameterList
@@ -277,6 +333,27 @@ view
 // tag::exampleusage_2[]
 
 // end::exampleusage_2[]
+
+
+== exampleUsage_3
+
+// tag::exampleusage_3[]
+
+// end::exampleusage_3[]
+
+
+== exampleUsage_4
+
+// tag::exampleusage_4[]
+
+// end::exampleusage_4[]
+
+
+== exampleUsage_5
+
+// tag::exampleusage_5[]
+
+// end::exampleusage_5[]
 
 
 == exampleWrong_Usage
@@ -459,6 +536,13 @@ view
 // tag::usp_persistence_repoobject_guid[]
 
 // end::usp_persistence_repoobject_guid[]
+
+
+== UspExamples
+
+// tag::uspexamples[]
+
+// end::uspexamples[]
 
 
 == UspParameters

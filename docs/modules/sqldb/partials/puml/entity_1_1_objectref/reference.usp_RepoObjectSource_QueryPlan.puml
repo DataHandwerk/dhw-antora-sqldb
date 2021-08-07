@@ -63,12 +63,10 @@ entity repo.usp_main << P >> {
 }
 
 logs.usp_ExecutionLog_insert <.. reference.usp_RepoObjectSource_QueryPlan
-logs.usp_ExecutionLog_insert <.. repo.usp_main
 reference.ftv_query_plan_extract_source <.. reference.usp_RepoObjectSource_QueryPlan
 reference.RepoObjectSource_QueryPlan <.. reference.usp_RepoObjectSource_QueryPlan
 reference.SysObjectColumn_QueryPlanExpression <.. reference.usp_RepoObjectSource_QueryPlan
 reference.usp_RepoObjectSource_QueryPlan <.. repo.usp_main
-repo.RepoObject <.. repo.RepoObject_gross
 repo.RepoObject <.. reference.usp_RepoObjectSource_QueryPlan
 repo.RepoObject_gross <.. reference.usp_RepoObjectSource_QueryPlan
 repo.RepoObjectColumn <.. reference.usp_RepoObjectSource_QueryPlan

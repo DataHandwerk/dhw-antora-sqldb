@@ -36,7 +36,7 @@ inline function
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-04-17 13:33:31
+2021-08-05 13:06:54
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -321,6 +321,27 @@ inline function
 // end::exampleusage_2[]
 
 
+== exampleUsage_3
+
+// tag::exampleusage_3[]
+
+// end::exampleusage_3[]
+
+
+== exampleUsage_4
+
+// tag::exampleusage_4[]
+
+// end::exampleusage_4[]
+
+
+== exampleUsage_5
+
+// tag::exampleusage_5[]
+
+// end::exampleusage_5[]
+
+
 == exampleWrong_Usage
 
 // tag::examplewrong_usage[]
@@ -503,6 +524,13 @@ inline function
 // end::usp_persistence_repoobject_guid[]
 
 
+== UspExamples
+
+// tag::uspexamples[]
+
+// end::uspexamples[]
+
+
 == UspParameters
 
 // tag::uspparameters[]
@@ -516,6 +544,10 @@ inline function
 [source,sql]
 ----
 /*
+CURRENTLY NOT WORKING
+wrong example 
+Invalid column name 'SysObject_query_plan'.
+
 
 OPTION(MAXRECURSION 100) should be used from outer
 it is not possible to include this into the table valued function
@@ -528,7 +560,7 @@ SELECT TOP 100
 FROM
      repo.RepoObject AS ro
      CROSS APPLY
-     repo_sys.ftv_query_plan_extract_source(SysObject_query_plan) AS source_columns
+     [reference].[ftv_query_plan_extract_source](SysObject_query_plan) AS source_columns
 WHERE  NOT [ro].[SysObject_query_plan] IS NULL OPTION(
                                                       MAXRECURSION 100)
 
@@ -556,7 +588,7 @@ The expression computes from input columns and constant values.
 As mentioned above It's based only on empirical observation and needs to be tested properly.
 
 */
-CREATE Function [reference].ftv_query_plan_extract_source
+CREATE Function [reference].[ftv_query_plan_extract_source]
 (
     @query_plan Xml
 )

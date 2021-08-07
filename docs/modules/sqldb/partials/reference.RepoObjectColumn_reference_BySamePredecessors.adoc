@@ -38,7 +38,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-07-14 19:36:08
+2021-08-05 02:47:05
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -172,7 +172,7 @@ view
 
 .Referenced Columns
 --
-* xref:reference.RepoObject_reference_union.adoc#column-referenced_entity_name[+reference.RepoObject_reference_union.referenced_entity_name+]
+* xref:reference.RepoObject_reference_T.adoc#column-referenced_entity_name[+reference.RepoObject_reference_T.referenced_entity_name+]
 --
 
 
@@ -208,6 +208,12 @@ view
 |
 |===
 
+.Description
+--
+ID of the column. Is unique within the object.
+Column IDs might not be sequential.
+--
+
 .Referenced Columns
 --
 * xref:reference.RepoObjectColumn_reference_FirstResultSet.adoc#column-referencing_minor_id[+reference.RepoObjectColumn_reference_FirstResultSet.referencing_minor_id+]
@@ -241,14 +247,14 @@ view
 |
 |referenced_RepoObject_guid
 |uniqueidentifier
-|NULL
+|NOT NULL
 |
 |
 |===
 
 .Referenced Columns
 --
-* xref:reference.RepoObject_reference_union.adoc#column-referenced_RepoObject_guid[+reference.RepoObject_reference_union.referenced_RepoObject_guid+]
+* xref:reference.RepoObject_reference_T.adoc#column-referenced_RepoObject_guid[+reference.RepoObject_reference_T.referenced_RepoObject_guid+]
 --
 
 
@@ -286,7 +292,7 @@ view
 
 .Referenced Columns
 --
-* xref:reference.RepoObject_reference_union.adoc#column-referenced_schema_name[+reference.RepoObject_reference_union.referenced_schema_name+]
+* xref:reference.RepoObject_reference_T.adoc#column-referenced_schema_name[+reference.RepoObject_reference_T.referenced_schema_name+]
 --
 
 
@@ -305,7 +311,7 @@ view
 
 .Referenced Columns
 --
-* xref:reference.RepoObject_reference_union.adoc#column-referenced_type[+reference.RepoObject_reference_union.referenced_type+]
+* xref:reference.RepoObject_reference_T.adoc#column-referenced_type[+reference.RepoObject_reference_T.referenced_type+]
 --
 
 
@@ -378,6 +384,12 @@ view
 |
 |
 |===
+
+.Description
+--
+ID of the column. Is unique within the object.
+Column IDs might not be sequential.
+--
 
 .Referenced Columns
 --
@@ -473,6 +485,11 @@ view
 |
 |
 |===
+
+.Description
+--
+reference in [repo_sys].[type]
+--
 
 .Referenced Columns
 --
@@ -594,7 +611,7 @@ view
 |
 |<<column-referenced_RepoObject_guid>>
 |uniqueidentifier
-|NULL
+|NOT NULL
 |
 |
 
@@ -691,10 +708,55 @@ view
 [[index-idx_RepoObjectColumn_reference_BySamePredecessors_1]]
 === idx_RepoObjectColumn_reference_BySamePredecessors++__++1
 
-* IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_repoobject_guid[RepoObject_guid]
+* IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_schema_name,object_name[schema_name,object_name]
++
+--
+* <<column-referencing_schema_name>>; nvarchar(128)
+* <<column-referencing_entity_name>>; nvarchar(128)
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[[index-idx_RepoObjectColumn_reference_BySamePredecessors_2]]
+=== idx_RepoObjectColumn_reference_BySamePredecessors++__++2
+
+* IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_no_group[no_group]
++
+--
+* <<column-referencing_RepoObject_guid>>; uniqueidentifier
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[[index-idx_RepoObjectColumn_reference_BySamePredecessors_3]]
+=== idx_RepoObjectColumn_reference_BySamePredecessors++__++3
+
+* IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_no_group[no_group]
 +
 --
 * <<column-referenced_RepoObject_guid>>; uniqueidentifier
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[[index-idx_RepoObjectColumn_reference_BySamePredecessors_4]]
+=== idx_RepoObjectColumn_reference_BySamePredecessors++__++4
+
+* IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_repoobjectcolumn_guid[RepoObjectColumn_guid]
++
+--
+* <<column-referencing_RepoObjectColumn_guid>>; uniqueidentifier
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[[index-idx_RepoObjectColumn_reference_BySamePredecessors_5]]
+=== idx_RepoObjectColumn_reference_BySamePredecessors++__++5
+
+* IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_repoobjectcolumn_guid[RepoObjectColumn_guid]
++
+--
+* <<column-referenced_RepoObjectColumn_guid>>; uniqueidentifier
 --
 * PK, Unique, Real: 0, 0, 0
 
@@ -716,7 +778,7 @@ view
 == AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:reference.RepoObject_reference_union.adoc[]
+* xref:reference.RepoObject_reference_T.adoc[]
 * xref:reference.RepoObjectColumn_reference_FirstResultSet.adoc[]
 // end::antorareferencedlist[]
 
@@ -740,6 +802,27 @@ view
 // tag::exampleusage_2[]
 
 // end::exampleusage_2[]
+
+
+== exampleUsage_3
+
+// tag::exampleusage_3[]
+
+// end::exampleusage_3[]
+
+
+== exampleUsage_4
+
+// tag::exampleusage_4[]
+
+// end::exampleusage_4[]
+
+
+== exampleUsage_5
+
+// tag::exampleusage_5[]
+
+// end::exampleusage_5[]
 
 
 == exampleWrong_Usage
@@ -925,6 +1008,13 @@ view
 // end::usp_persistence_repoobject_guid[]
 
 
+== UspExamples
+
+// tag::uspexamples[]
+
+// end::uspexamples[]
+
+
 == UspParameters
 
 // tag::uspparameters[]
@@ -937,6 +1027,7 @@ view
 // tag::sql_modules_definition[]
 [source,sql]
 ----
+
 /*
 repo.RepoObjectColumn_reference__first_result_set
 for view columns the referenced columns in a predecessor table is shown, not the referenced colum in a predecessor view
@@ -974,7 +1065,7 @@ and we get what we need:
 dbo.view_2.aaa -> dbo.view_1.aaa
 
 */
-CREATE View [reference].RepoObjectColumn_reference_BySamePredecessors
+CREATE View [reference].[RepoObjectColumn_reference_BySamePredecessors]
 As
 --
 Select
@@ -1009,7 +1100,7 @@ Select
                                                          End As Bit)
   , is_referenced_object                          = Cast(1 As Bit)
 From
-    [reference].RepoObject_reference_union                    As ro_r
+    [reference].RepoObject_reference_T                        As ro_r
     Inner Join
         [reference].RepoObjectColumn_reference_FirstResultSet As roc_r_t2
             On

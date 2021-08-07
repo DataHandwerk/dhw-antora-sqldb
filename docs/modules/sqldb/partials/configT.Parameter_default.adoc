@@ -44,7 +44,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-08-03 14:46:31
+2021-08-07 14:06:31
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -227,6 +227,20 @@ WHERE NOT EXISTS (
 // tag::exampleusage_3[]
 
 // end::exampleusage_3[]
+
+
+== exampleUsage_4
+
+// tag::exampleusage_4[]
+
+// end::exampleusage_4[]
+
+
+== exampleUsage_5
+
+// tag::exampleusage_5[]
+
+// end::exampleusage_5[]
 
 
 == exampleWrong_Usage
@@ -435,6 +449,8 @@ PK_Parameter
 // tag::sql_modules_definition[]
 [source,sql]
 ----
+
+
 /*
 <<property_start>>MS_Description
 * default parameter values are defined (hard coded) in xref:sqldb:config.Parameter_default.adoc[] and available in xref:sqldb:config.Parameter.adoc#column-Parameter_default_value[config.Parameter.Parameter_default_value]
@@ -514,13 +530,13 @@ Select
     Parameter_name          = 'Hist_ValidFrom_column_name'
   , sub_Parameter           = N''
   , Parameter_desciption    = N'default column name for column - datetime2 GENERATED ALWAYS AS ROW START'
-  , Parameter_default_value = Cast(N'ValidFrom' As sysname)
+  , Parameter_default_value = Cast(N'SysStartTime' As sysname)
 Union All
 Select
     Parameter_name          = 'Hist_ValidTo_column_name'
   , sub_Parameter           = N''
   , Parameter_desciption    = N'default column name for column - datetime2 GENERATED ALWAYS AS ROW END'
-  , Parameter_default_value = Cast(N'ValidTo' As sysname)
+  , Parameter_default_value = Cast(N'SysEndTime' As sysname)
 Union All
 Select
     Parameter_name          = 'Hist_Table_schema'
@@ -875,21 +891,21 @@ Select
 \include::partial${docname}.adoc[tag=antorareferencinglist]
 \endif::ExistsProperty--antorareferencinglist[]
 
-=== Object Reference Diagram
+=== Object Reference Diagram - 1 1
 
 [plantuml, entity_1_1_objectref-{docname}, svg]
 ....
 \include::partial$puml/entity_1_1_objectref/{docname}.puml[]
 ....
 
-=== Object Reference Diagram - Referenced
+=== Object Reference Diagram - Referenced - 30 0
 
 [plantuml, entity_30_0_objectref-{docname}, svg]
 ....
 \include::partial$puml/entity_30_0_objectref/{docname}.puml[]
 ....
 
-=== Object Reference Diagram - Referencing
+=== Object Reference Diagram - Referencing - 0 30
 
 [plantuml, entity_0_30_objectref-{docname}, svg]
 ....
@@ -1017,6 +1033,7 @@ GO
 ====
 ' As NVarchar(4000))
 ;
+
 ----
 // end::sql_modules_definition[]
 

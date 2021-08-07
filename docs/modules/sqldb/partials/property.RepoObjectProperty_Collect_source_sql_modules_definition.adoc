@@ -44,7 +44,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-07-14 19:36:07
+2021-08-07 17:23:36
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -90,7 +90,7 @@ view
 |===
 |
 |property_value
-|nvarchar(4000)
+|nvarchar(max)
 |NULL
 |
 |
@@ -126,7 +126,7 @@ view
 
 |
 |<<column-property_value>>
-|nvarchar(4000)
+|nvarchar(max)
 |NULL
 |
 |
@@ -201,6 +201,27 @@ view
 // tag::exampleusage_2[]
 
 // end::exampleusage_2[]
+
+
+== exampleUsage_3
+
+// tag::exampleusage_3[]
+
+// end::exampleusage_3[]
+
+
+== exampleUsage_4
+
+// tag::exampleusage_4[]
+
+// end::exampleusage_4[]
+
+
+== exampleUsage_5
+
+// tag::exampleusage_5[]
+
+// end::exampleusage_5[]
 
 
 == exampleWrong_Usage
@@ -391,6 +412,13 @@ RepoObject_guid,property_name
 // end::usp_persistence_repoobject_guid[]
 
 
+== UspExamples
+
+// tag::uspexamples[]
+
+// end::uspexamples[]
+
+
 == UspParameters
 
 // tag::uspparameters[]
@@ -413,14 +441,14 @@ RepoObject_guid,property_name
 * The correct sequence must be followed. Nested parsing is not supported.
 <<property_end>>
 */
-CREATE View property.RepoObjectProperty_Collect_source_sql_modules_definition
+CREATE View [property].[RepoObjectProperty_Collect_source_sql_modules_definition]
 As
 Select
     --
     RepoObject_guid
   , property_name  = Trim ( Cast(es.substring_netPreEol As NVarchar(128)))
   , property_value = Cast(String_Agg ( es.substring_netPostEol, Char ( 13 ) + Char ( 10 )) Within Group(Order By
-                                                                                                            es.pos1) As NVarchar(4000))
+                                                                                                            es.pos1) As NVarchar(Max))
 From
     sqlparse.RepoObject_SqlModules_Repo_Sys
     Cross Apply tool.ftv_extract_substrings (

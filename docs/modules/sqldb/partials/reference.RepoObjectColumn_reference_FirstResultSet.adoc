@@ -39,7 +39,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-07-14 19:36:08
+2021-08-05 02:47:47
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -393,8 +393,8 @@ Column IDs might not be sequential.
 
 .Referencing Columns
 --
-* xref:reference.RepoObjectColumn_reference_BySamePredecessors.adoc#column-referenced_minor_id[+reference.RepoObjectColumn_reference_BySamePredecessors.referenced_minor_id+]
 * xref:reference.RepoObjectColumn_reference_BySamePredecessors.adoc#column-referencing_minor_id[+reference.RepoObjectColumn_reference_BySamePredecessors.referencing_minor_id+]
+* xref:reference.RepoObjectColumn_reference_BySamePredecessors.adoc#column-referenced_minor_id[+reference.RepoObjectColumn_reference_BySamePredecessors.referenced_minor_id+]
 --
 
 
@@ -741,7 +741,7 @@ reference in [repo_sys].[type]
 * IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_repoobjectcolumn_guid[RepoObjectColumn_guid]
 +
 --
-* <<column-referencing_RepoObjectColumn_guid>>; uniqueidentifier
+* <<column-referenced_RepoObjectColumn_guid>>; uniqueidentifier
 --
 * PK, Unique, Real: 0, 0, 0
 
@@ -752,7 +752,7 @@ reference in [repo_sys].[type]
 * IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_repoobjectcolumn_guid[RepoObjectColumn_guid]
 +
 --
-* <<column-referenced_RepoObjectColumn_guid>>; uniqueidentifier
+* <<column-referencing_RepoObjectColumn_guid>>; uniqueidentifier
 --
 * PK, Unique, Real: 0, 0, 0
 
@@ -785,7 +785,7 @@ reference in [repo_sys].[type]
 == AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:reference.RepoObject_reference_union.adoc[]
+* xref:reference.RepoObject_reference_T.adoc[]
 * xref:reference.RepoObjectSource_FirstResultSet.adoc[]
 * xref:repo.RepoObject.adoc[]
 * xref:repo.RepoObjectColumn_gross.adoc[]
@@ -811,6 +811,27 @@ reference in [repo_sys].[type]
 // tag::exampleusage_2[]
 
 // end::exampleusage_2[]
+
+
+== exampleUsage_3
+
+// tag::exampleusage_3[]
+
+// end::exampleusage_3[]
+
+
+== exampleUsage_4
+
+// tag::exampleusage_4[]
+
+// end::exampleusage_4[]
+
+
+== exampleUsage_5
+
+// tag::exampleusage_5[]
+
+// end::exampleusage_5[]
 
 
 == exampleWrong_Usage
@@ -998,6 +1019,13 @@ reference in [repo_sys].[type]
 // end::usp_persistence_repoobject_guid[]
 
 
+== UspExamples
+
+// tag::uspexamples[]
+
+// end::uspexamples[]
+
+
 == UspParameters
 
 // tag::uspparameters[]
@@ -1010,11 +1038,12 @@ reference in [repo_sys].[type]
 // tag::sql_modules_definition[]
 [source,sql]
 ----
+
 --"common" references
 --these should be "common" columns in views, not containing expressions
 --Attention: views on views are "resolved" like views on the underlaying tables!
 --it looks like we don't get references between views here!
-CREATE View [reference].RepoObjectColumn_reference_FirstResultSet
+CREATE View [reference].[RepoObjectColumn_reference_FirstResultSet]
 As
 --
 Select
@@ -1051,7 +1080,7 @@ Select
             Top 1
             Cast(1 As Bit)
         From
-            [reference].RepoObject_reference_union As ro_r
+            [reference].RepoObject_reference_T As ro_r
         Where
             ro_r.referencing_RepoObject_guid    = ros.RepoObject_guid
             And ro_r.referenced_RepoObject_guid = roc2.RepoObject_guid

@@ -33,15 +33,15 @@ entity reference.RepoObject_ReferencingList << V >> {
 }
 
 entity reference.RepoObject_ReferencingReferenced << V >> {
-  **Referenced_guid** : uniqueidentifier
-  **Referencing_guid** : uniqueidentifier
+  * **Referenced_guid** : uniqueidentifier
+  * **Referencing_guid** : uniqueidentifier
   --
-  Referenced_fullname : nvarchar(261)
-  Referenced_fullname2 : nvarchar(257)
+  * Referenced_fullname : nvarchar(261)
+  * Referenced_fullname2 : nvarchar(257)
   Referenced_type : char(2)
-  Referencing_fullname : nvarchar(261)
-  Referencing_fullname2 : nvarchar(257)
-  Referencing_type : char(2)
+  * Referencing_fullname : nvarchar(261)
+  * Referencing_fullname2 : nvarchar(257)
+  Referencing_type : varchar(2)
 }
 
 entity repo.RepoObject_gross << V >> {
@@ -69,6 +69,9 @@ entity repo.RepoObject_gross << V >> {
   is_persistence_delete_changed : bit
   is_persistence_delete_missing : bit
   is_persistence_insert : bit
+  is_persistence_merge_delete_missing : bit
+  is_persistence_merge_insert : bit
+  is_persistence_merge_update_changed : bit
   is_persistence_truncate : bit
   is_persistence_update_changed : bit
   is_repo_managed : bit
@@ -103,6 +106,7 @@ entity repo.RepoObject_gross << V >> {
   * RepoObject_schema_name : nvarchar(128)
   * RepoObject_type : char(2)
   RepoObject_type_name : nvarchar(128)
+  source_filter : nvarchar(4000)
   sql_modules_antora : nvarchar(max)
   sql_modules_definition : nvarchar(max)
   sql_modules_formatted : nvarchar(max)
@@ -119,6 +123,7 @@ entity repo.RepoObject_gross << V >> {
   * SysObject_schema_name : nvarchar(128)
   SysObject_type : char(2)
   SysObject_type_name : nvarchar(128)
+  target_filter : nvarchar(4000)
   temporal_type : tinyint
   * usp_persistence_name : nvarchar(140)
   usp_persistence_RepoObject_guid : uniqueidentifier
@@ -126,6 +131,5 @@ entity repo.RepoObject_gross << V >> {
 
 reference.RepoObject_ReferencingList <.. repo.RepoObject_gross
 reference.RepoObject_ReferencingReferenced <.. reference.RepoObject_ReferencingList
-reference.RepoObject_ReferencingReferenced <.. repo.RepoObject_gross
 reference.RepoObject_ReferencingList::AntoraReferencingList <-- repo.RepoObject_gross::AntoraReferencingList
 reference.RepoObject_ReferencingReferenced::Referenced_guid <-- reference.RepoObject_ReferencingList::Referenced_guid

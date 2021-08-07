@@ -33,16 +33,16 @@ entity config.Parameter << U >> {
   --
 }
 
-entity config.spt_values << U >> {
+entity configT.spt_values << U >> {
   --
 }
 
-entity config.type << V >> {
+entity configT.type << V >> {
   **type** : nvarchar(128)
   --
 }
 
-entity config.type_level1type_level2type << V >> {
+entity configT.type_level1type_level2type << V >> {
   **type** : nvarchar(128)
   --
 }
@@ -81,9 +81,9 @@ entity sys_dwh.schemas << SN >> {
 
 config.ftv_dwh_database <.. repo_sys.ExtendedProperties
 config.Parameter <.. config.ftv_dwh_database
-config.spt_values <.. config.type
-config.type <.. config.type_level1type_level2type
-config.type_level1type_level2type <.. repo_sys.ExtendedProperties_ParameterForAddUpdateDrop
+configT.spt_values <.. configT.type
+configT.type <.. configT.type_level1type_level2type
+configT.type_level1type_level2type <.. repo_sys.ExtendedProperties_ParameterForAddUpdateDrop
 repo_sys.ExtendedProperties <.. repo_sys.ExtendedProperties_ParameterForAddUpdateDrop
 sys_dwh.columns <.. repo_sys.ExtendedProperties
 sys_dwh.extended_properties <.. repo_sys.ExtendedProperties

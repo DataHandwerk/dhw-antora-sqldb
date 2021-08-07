@@ -40,7 +40,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-07-14 19:36:20
+2021-08-07 17:38:06
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -206,7 +206,167 @@ poosible issue
 Msg 2627, Level 14, State 1, Procedure repo.usp_sync_guid_RepoObjectColumn, Line 392 [Batch Start Line 5]
 Violation of UNIQUE KEY constraint 'UK_RepoObjectColumn__RepoNames'. Cannot insert duplicate key in object 'repo.RepoObjectColumn'. The duplicate key value is (e7968530-e846-eb11-84d1-a81e8446d5b0, Repo_default_definition).
 	
-there was an issue in [repo].
+there was an issue in [repo].[SysColumn] with some column duplicating
+
+|
+
+|810
+|
+*other properties, where (ISNULL(is_repo_managed, 0) = 0)*
+
+* u
+* [repo_sys].[SysColumn]
+* [repo].[RepoObjectColumn]
+
+
+update other properties for RepoObject which are not is_repo_managed
+
+|
+
+|1010
+|
+*persistence: update RepoObjectColumn_name and repo attributes from sys attributes of persistence_source_RepoObjectColumn_guid*
+
+* u
+* [repo_sys].[SysColumn]
+* [repo].[RepoObjectColumn]
+
+
+persistence: update RepoObjectColumn_name (and other repo attributes) from SysObjecColumn_name (and other sys attributes) of persistence_source_RepoObjectColumn_guid
+
+|
+
+|1110
+|
+*persistence: [roc_p].[persistence_source_RepoObjectColumn_guid] = [roc_s].[RepoObjectColumn_guid] (matching by column name via [repo].[RepoObject_persistence])*
+
+* u
+* [repo].[RepoObjectColumn]
+* [repo].[RepoObjectColumn]
+
+
+persistence: try to find [persistence_source_RepoObjectColumn_guid] for existing persistence columns by Column name
+
+|
+
+|1210
+|
+*persistence: add missing persistence columns existing in source*
+
+* i
+* [repo].[RepoObjectColumn]
+* [repo].[RepoObjectColumn]
+
+
+persistence: add missing (in target) persistence columns, existing in source
+
+before the persistence sql can be created the [repo].[usp_sync_guid_RepoObjectColumn] needs to be executed again
+
+|
+
+|1310
+|
+*persistence: insert missing HistValidColumns*
+
+* i
+* [repo].[RepoObject_persistence]
+* [repo].[RepoObjectColumn]
+
+
+currently we only insert missing but not delete not required
+
+maybe we should delete them?
+
+|
+
+|1410
+|
+*persistence: SET [persistence_source_RepoObjectColumn_guid] = NULL (missing source column)*
+
+* u
+* [repo].[RepoObjectColumn]
+* [repo].[RepoObjectColumn]
+
+|
+
+|1610
+|
+*merge columns, defined in repo.RepoObjectColumn_RequiredRepoObjectColumnMerge*
+
+* u
+* repo.RepoObjectColumn_RequiredRepoObjectColumnMerge
+* [repo].[RepoObjectColumn]
+
+|
+
+|2000
+|
+*config.fs_get_parameter_value ( 'dwh_readonly', '' ) = 0*
+
+* `IF config.fs_get_parameter_value ( 'dwh_readonly', '' ) = 0`
+
+|
+
+|2010
+|
+*write RepoObjectColumn_guid into extended properties of SysObjectColumn, Level2*
+
+* [repo].[RepoObjectColumn]
+* [repo_sys].[SysColumn]
+
+|2000
+
+|2110
+|
+*SET [is_SysObjectColumn_missing] = 1*
+
+* u
+* [repo_sys].[SysColumn]
+* [repo].[RepoObjectColumn]
+
+
+columns deleted or renamed in database but still referenced in [repo].[RepoObjectColumn] should be marked: [is_SysObjectColumn_missing] = 1
+
+|2010
+
+|2210
+|
+*DELETE where is_SysObjectColumn_missing = 1, but not in objects which are is_repo_managed*
+
+* d
+* [repo_sys].[RepoObjectColumn]
+* [repo].[RepoObjectColumn]
+
+
+delete columns, marked as missing in [repo_sys].SysColumn
+which are not [is_repo_managed]
+
+|2110
+
+|3010
+|
+*DELETE from [reference].[RepoObjectColumnSource_virtual] invalid [Source_RepoObjectColumn_guid]*
+
+* d
+* [repo].[RepoObjectColumn]
+* [reference].[RepoObjectColumnSource_virtual]
+
+|
+
+|3020
+|
+*DELETE from [repo].[IndexColumn_virtual] invalid columns*
+
+* d
+* [repo].[RepoObjectColumn]
+* [repo].[IndexColumn_virtual]
+
+
+can't create FK on DELETE CASCADE, we will delete separately
+
+|
+|===
+
 // end::adocuspsteps[]
 
 
@@ -214,10 +374,7 @@ there was an issue in [repo].
 
 // tag::antorareferencedlist[]
 * xref:config.fs_get_parameter_value.adoc[]
-* xref:config.type_level1type_level2type.adoc[]
-* xref:graph.RepoObjectColumn.adoc[]
-* xref:graph.RepoObjectColumn_S.adoc[]
-* xref:graph.usp_PERSIST_RepoObjectColumn.adoc[]
+* xref:configT.type_level1type_level2type.adoc[]
 * xref:logs.usp_ExecutionLog_insert.adoc[]
 * xref:reference.RepoObjectColumnSource_virtual.adoc[]
 * xref:repo.IndexColumn_virtual.adoc[]
@@ -252,6 +409,27 @@ EXEC [repo].[usp_sync_guid_RepoObjectColumn]
 // tag::exampleusage_2[]
 
 // end::exampleusage_2[]
+
+
+== exampleUsage_3
+
+// tag::exampleusage_3[]
+
+// end::exampleusage_3[]
+
+
+== exampleUsage_4
+
+// tag::exampleusage_4[]
+
+// end::exampleusage_4[]
+
+
+== exampleUsage_5
+
+// tag::exampleusage_5[]
+
+// end::exampleusage_5[]
 
 
 == exampleWrong_Usage
@@ -449,6 +627,13 @@ EXEC [repo].[usp_sync_guid_RepoObjectColumn]
 // tag::usp_persistence_repoobject_guid[]
 
 // end::usp_persistence_repoobject_guid[]
+
+
+== UspExamples
+
+// tag::uspexamples[]
+
+// end::uspexamples[]
 
 
 == UspParameters
@@ -1626,7 +1811,7 @@ SELECT [T1].[RepoObjectColumn_guid]
  , [T1].[SysObject_column_name]
  , [T1].[SysObject_type]
 FROM repo.SysColumn_RepoObjectColumn_via_name AS T1
-INNER JOIN [config].[type_level1type_level2type] AS T2
+INNER JOIN [configT].[type_level1type_level2type] AS T2
  ON T1.SysObject_type = T2.type
 WHERE NOT [T1].[RepoObjectColumn_guid] IS NULL
  AND [T1].[SysObject_RepoObjectColumn_guid] IS NULL
@@ -1883,56 +2068,6 @@ EXEC logs.usp_ExecutionLog_insert
  , @source_object = @source_object
  , @target_object = @target_object
  , @deleted = @rows
--- Logging END --
-
-/*{"ReportUspStep":[{"Number":5200,"Name":"[graph].[usp_PERSIST_RepoObjectColumn]","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
-EXEC [graph].[usp_PERSIST_RepoObjectColumn]
---add your own parameters
---logging parameters
- @execution_instance_guid = @execution_instance_guid
- , @ssis_execution_id = @ssis_execution_id
- , @sub_execution_id = @sub_execution_id
- , @parent_execution_log_id = @current_execution_log_id
-
-
-/*{"ReportUspStep":[{"Number":5210,"Name":"UPDATE [graph].[RepoObjectColumn] - ensure current case","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":0}]}*/
-PRINT CONCAT('usp_id;Number;Parent_Number: ',6,';',5210,';',NULL);
-
-UPDATE T
-SET [RepoObject_fullname] = [S].[RepoObject_fullname]
- , [RepoObject_fullname2] = [S].[RepoObject_fullname2]
- , [RepoObjectColumn_fullname] = [S].[RepoObjectColumn_fullname]
- , [RepoObjectColumn_fullname2] = [S].[RepoObjectColumn_fullname2]
-FROM [graph].[RepoObjectColumn] [T]
-INNER JOIN [graph].[RepoObjectColumn_S] [S]
- ON [S].[RepoObjectColumn_guid] = [T].[RepoObjectColumn_guid]
-WHERE [S].[RepoObject_fullname] COLLATE Latin1_General_CS_AS <> [T].[RepoObject_fullname] COLLATE Latin1_General_CS_AS
- OR [S].[RepoObject_fullname2] COLLATE Latin1_General_CS_AS <> [T].[RepoObject_fullname2] COLLATE Latin1_General_CS_AS
- OR [S].[RepoObjectColumn_fullname] COLLATE Latin1_General_CS_AS <> [T].[RepoObjectColumn_fullname] COLLATE Latin1_General_CS_AS
- OR [S].[RepoObjectColumn_fullname2] COLLATE Latin1_General_CS_AS <> [T].[RepoObjectColumn_fullname2] COLLATE Latin1_General_CS_AS
-
--- Logging START --
-SET @rows = @@ROWCOUNT
-SET @step_id = @step_id + 1
-SET @step_name = 'UPDATE [graph].[RepoObjectColumn] - ensure current case'
-SET @source_object = NULL
-SET @target_object = NULL
-
-EXEC logs.usp_ExecutionLog_insert 
- @execution_instance_guid = @execution_instance_guid
- , @ssis_execution_id = @ssis_execution_id
- , @sub_execution_id = @sub_execution_id
- , @parent_execution_log_id = @parent_execution_log_id
- , @current_execution_guid = @current_execution_guid
- , @proc_id = @proc_id
- , @proc_schema_name = @proc_schema_name
- , @proc_name = @proc_name
- , @event_info = @event_info
- , @step_id = @step_id
- , @step_name = @step_name
- , @source_object = @source_object
- , @target_object = @target_object
-
 -- Logging END --
 
 --

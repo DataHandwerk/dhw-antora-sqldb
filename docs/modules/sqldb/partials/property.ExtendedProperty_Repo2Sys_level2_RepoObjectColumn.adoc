@@ -42,7 +42,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-04-16 19:26:52
+2021-08-07 17:33:41
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -96,7 +96,7 @@ view
 
 .Referenced Columns
 --
-* xref:config.type_level1type_level2type.adoc#column-level1type[+config.type_level1type_level2type.level1type+]
+* xref:configT.type_level1type_level2type.adoc#column-level1type[+configT.type_level1type_level2type.level1type+]
 --
 
 
@@ -226,8 +226,8 @@ reference in [repo_sys].[type]
 |===
 |
 |property_value
-|sql_variant
-|NOT NULL
+|nvarchar(4000)
+|NULL
 |
 |
 |===
@@ -236,11 +236,6 @@ reference in [repo_sys].[type]
 --
 datatype of property_value is `sql_variant`, because it should be possible to synchronize the property_value in the repository with property_value in extended properties in the dwh database, which is `sql_variant` +
 therefore the maximum content is nvarchar(4000) or varchar(8000)
---
-
-.Referenced Columns
---
-* xref:property.RepoObjectColumnProperty.adoc#column-property_value[+property.RepoObjectColumnProperty.property_value+]
 --
 
 
@@ -369,8 +364,8 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 
 |
 |<<column-property_value>>
-|sql_variant
-|NOT NULL
+|nvarchar(4000)
+|NULL
 |
 |
 
@@ -485,7 +480,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 == AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:config.type_level1type_level2type.adoc[]
+* xref:configT.type_level1type_level2type.adoc[]
 * xref:property.RepoObjectColumnProperty.adoc[]
 * xref:repo.RepoObject.adoc[]
 * xref:repo.RepoObjectColumn.adoc[]
@@ -511,6 +506,27 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 // tag::exampleusage_2[]
 
 // end::exampleusage_2[]
+
+
+== exampleUsage_3
+
+// tag::exampleusage_3[]
+
+// end::exampleusage_3[]
+
+
+== exampleUsage_4
+
+// tag::exampleusage_4[]
+
+// end::exampleusage_4[]
+
+
+== exampleUsage_5
+
+// tag::exampleusage_5[]
+
+// end::exampleusage_5[]
 
 
 == exampleWrong_Usage
@@ -698,6 +714,13 @@ level0type,level0name,level1type,level1name,level2type,level2name,property_name
 // end::usp_persistence_repoobject_guid[]
 
 
+== UspExamples
+
+// tag::uspexamples[]
+
+// end::uspexamples[]
+
+
 == UspParameters
 
 // tag::uspparameters[]
@@ -710,11 +733,12 @@ level0type,level0name,level1type,level1name,level2type,level2name,property_name
 // tag::sql_modules_definition[]
 [source,sql]
 ----
-CREATE View [property].ExtendedProperty_Repo2Sys_level2_RepoObjectColumn
+
+CREATE View [property].[ExtendedProperty_Repo2Sys_level2_RepoObjectColumn]
 As
 Select
     prop.property_name
-  , prop.property_value
+  , property_value         = Cast(prop.property_value As NVarchar(4000))
   , level0type             = N'Schema'
   , level0name             = ro_parent.RepoObject_schema_name
   , lev_parent.level1type
@@ -726,25 +750,26 @@ Select
   , parent_RepoObject_guid = ro_parent.RepoObject_guid
   , parent_RepoObject_type = ro_parent.RepoObject_type
 From
-    [property].RepoObjectColumnProperty         As prop
+    [property].RepoObjectColumnProperty      As prop
     Inner Join
-        repo.RepoObjectColumn             As roc
+        repo.RepoObjectColumn                As roc
             On
             roc.RepoObjectColumn_guid = prop.RepoObjectColumn_guid
 
     Inner Join
-        repo.RepoObject                   As ro_parent
+        repo.RepoObject                      As ro_parent
             On
             ro_parent.RepoObject_guid = roc.RepoObject_guid
 
     Inner Join
-        config.type_level1type_level2type As lev_parent
+        [configT].type_level1type_level2type As lev_parent
             On
             lev_parent.type           = ro_parent.RepoObject_type
 Where
     is_RepoObjectColumn_name_uniqueidentifier = 0
     --SchemaCompare has issues comparing extended properties for graph table columns, we need to exclude them
     And roc.Repo_graph_type Is Null;
+
 ----
 // end::sql_modules_definition[]
 

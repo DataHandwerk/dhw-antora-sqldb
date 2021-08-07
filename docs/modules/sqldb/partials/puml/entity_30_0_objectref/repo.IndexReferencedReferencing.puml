@@ -33,6 +33,12 @@ entity config.Parameter << U >> {
   --
 }
 
+entity reference.RepoObject_reference << V >> {
+  **referenced_RepoObject_guid** : uniqueidentifier
+  **referencing_RepoObject_guid** : uniqueidentifier
+  --
+}
+
 entity reference.RepoObject_reference_persistence << V >> {
   **referenced_RepoObject_guid** : uniqueidentifier
   * **referencing_RepoObject_guid** : uniqueidentifier
@@ -40,6 +46,12 @@ entity reference.RepoObject_reference_persistence << V >> {
 }
 
 entity reference.RepoObject_reference_SqlExpressionDependencies << V >> {
+  **referenced_RepoObject_guid** : uniqueidentifier
+  **referencing_RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity reference.RepoObject_reference_T << U >> {
   **referenced_RepoObject_guid** : uniqueidentifier
   **referencing_RepoObject_guid** : uniqueidentifier
   --
@@ -67,7 +79,6 @@ entity repo.Index_union << V >> {
 }
 
 entity repo.Index_unique_IndexPatternColumnGuid << V >> {
-  **index_guid** : uniqueidentifier
   --
 }
 
@@ -194,30 +205,34 @@ entity sys_dwh.types << SN >> {
   --
 }
 
-config.ftv_dwh_database <.. repo_sys.sql_expression_dependencies
 config.ftv_dwh_database <.. repo_sys.ExtendedProperties
 config.ftv_dwh_database <.. repo_sys.SysColumn
+config.ftv_dwh_database <.. repo_sys.sql_expression_dependencies
 config.Parameter <.. config.ftv_dwh_database
+reference.RepoObject_reference <.. reference.RepoObject_reference_T
 reference.RepoObject_reference_persistence <.. reference.RepoObject_reference_union
 reference.RepoObject_reference_SqlExpressionDependencies <.. reference.RepoObject_reference_union
-reference.RepoObject_reference_union <.. repo.IndexReferencedReferencing
+reference.RepoObject_reference_T <.. repo.IndexReferencedReferencing
+reference.RepoObject_reference_union <.. reference.RepoObject_reference
 reference.RepoObject_reference_virtual <.. reference.RepoObject_reference_union
 reference.RepoObjectSource_virtual <.. reference.RepoObject_reference_virtual
 repo.Index_union <.. repo.IndexReferencedReferencing
 repo.Index_unique_IndexPatternColumnGuid <.. repo.Index_union
-repo.Index_virtual <.. repo.Index_union
-repo.Index_virtual <.. repo.IndexReferencedReferencing
 repo.Index_virtual <.. repo.Index_virtual_IndexPatternColumnGuid
+repo.Index_virtual <.. repo.IndexReferencedReferencing
+repo.Index_virtual <.. repo.Index_union
 repo.Index_virtual_IndexPatternColumnGuid <.. repo.Index_union
 repo.IndexColumn_virtual <.. repo.Index_virtual_IndexPatternColumnGuid
 repo.RepoObject <.. reference.RepoObject_reference_virtual
 repo.RepoObject <.. reference.RepoObject_reference_persistence
 repo.RepoObject <.. repo.SysColumn_RepoObjectColumn_via_name
-repo.RepoObject <.. repo_sys.Index_unique
 repo.RepoObject <.. repo.SysObject_RepoObject_via_name
+repo.RepoObject <.. repo_sys.Index_unique
 repo.RepoObject_persistence <.. reference.RepoObject_reference_persistence
 repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_name
+repo.SysColumn_RepoObjectColumn_via_name <.. repo_sys.sql_expression_dependencies
 repo.SysColumn_RepoObjectColumn_via_name <.. repo_sys.IndexColumn_unique
+repo.SysObject_RepoObject_via_name <.. repo_sys.sql_expression_dependencies
 repo.SysObject_RepoObject_via_name <.. repo_sys.IndexColumn_unique
 repo_sys.ExtendedProperties <.. repo_sys.SysColumn
 repo_sys.ExtendedProperties <.. repo_sys.SysObject
@@ -225,10 +240,8 @@ repo_sys.Index_unique <.. repo.Index_union
 repo_sys.IndexColumn_unique <.. repo.Index_unique_IndexPatternColumnGuid
 repo_sys.sql_expression_dependencies <.. reference.RepoObject_reference_SqlExpressionDependencies
 repo_sys.SysColumn <.. repo.SysColumn_RepoObjectColumn_via_name
-repo_sys.SysColumn <.. repo_sys.sql_expression_dependencies
-repo_sys.SysObject <.. repo_sys.sql_expression_dependencies
-repo_sys.SysObject <.. repo_sys.SysColumn
 repo_sys.SysObject <.. repo.SysObject_RepoObject_via_name
+repo_sys.SysObject <.. repo_sys.SysColumn
 sys_dwh.columns <.. repo_sys.SysColumn
 sys_dwh.columns <.. repo_sys.ExtendedProperties
 sys_dwh.computed_columns <.. repo_sys.SysColumn
@@ -237,10 +250,10 @@ sys_dwh.extended_properties <.. repo_sys.ExtendedProperties
 sys_dwh.identity_columns <.. repo_sys.SysColumn
 sys_dwh.index_columns <.. repo_sys.IndexColumn_unique
 sys_dwh.indexes <.. repo_sys.IndexColumn_unique
-sys_dwh.indexes <.. repo_sys.Index_unique
 sys_dwh.indexes <.. repo_sys.ExtendedProperties
-sys_dwh.objects <.. repo_sys.ExtendedProperties
+sys_dwh.indexes <.. repo_sys.Index_unique
 sys_dwh.objects <.. repo_sys.SysObject
+sys_dwh.objects <.. repo_sys.ExtendedProperties
 sys_dwh.parameters <.. repo_sys.ExtendedProperties
 sys_dwh.schemas <.. repo_sys.ExtendedProperties
 sys_dwh.schemas <.. repo_sys.SysObject

@@ -27,28 +27,8 @@ entity logs.usp_ExecutionLog_insert << P >> {
   --
 }
 
-entity reference.Persistence << V >> {
+entity workflow.usp_PERSIST_ProcedureDependency_input_PersistenceDependency << P >> {
   --
-  referenced_fullname : nvarchar(261)
-  referenced_RepoObject_guid : uniqueidentifier
-  referenced_schema_name : nvarchar(128)
-  referenced_usp_persistence_name : nvarchar(140)
-  referenced_usp_persistence_RepoObject_guid : uniqueidentifier
-  referencing_fullname : nvarchar(261)
-  referencing_RepoObject_guid : uniqueidentifier
-  referencing_schema_name : nvarchar(128)
-  referencing_usp_persistence_name : nvarchar(140)
-  referencing_usp_persistence_RepoObject_guid : uniqueidentifier
-}
-
-entity workflow.ProcedureDependency << U >> {
-  * **id** : int
-  --
-  Description : nvarchar(4000)
-  * is_active : bit
-  * is_PersistenceDependency : bit
-  * referenced_Procedure_RepoObject_guid : uniqueidentifier
-  * referencing_Procedure_RepoObject_guid : uniqueidentifier
 }
 
 entity workflow.usp_workflow << P >> {
@@ -56,6 +36,5 @@ entity workflow.usp_workflow << P >> {
 }
 
 logs.usp_ExecutionLog_insert <.. workflow.usp_workflow
-reference.Persistence <.. workflow.usp_workflow
-workflow.ProcedureDependency <.. workflow.usp_workflow
+workflow.usp_PERSIST_ProcedureDependency_input_PersistenceDependency <.. workflow.usp_workflow
 

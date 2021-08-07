@@ -23,16 +23,7 @@ skinparam class {
 }
 
 
-entity docs.ftv_RepoObject_Reference_PlantUml_EntityRefList << IF >> {
-  --
-  PumlEntityList : nvarchar(max)
-  PumlEntityOnlyPkList : nvarchar(max)
-  Referenced_Depth : int
-  Referencing_Depth : int
-  ro_guid : uniqueidentifier
-}
-
-entity reference.ftv_RepoObject_ReferencedReferencing << IF >> {
+entity reference.obsolet_ftv_RepoObject_ReferencedReferencing << IF >> {
   --
   Node_fullname2 : nvarchar(257)
   Node_guid : uniqueidentifier
@@ -70,10 +61,8 @@ entity reference.usp_PERSIST_RepoObject_referencing_level_T << P >> {
 }
 
 reference.RepoObject_referencing_level <.. reference.RepoObject_referencing_level_T
-reference.RepoObject_referencing_level <.. reference.usp_PERSIST_RepoObject_referencing_level_T
+reference.RepoObject_referencing_level_T <.. reference.obsolet_ftv_RepoObject_ReferencedReferencing
 reference.RepoObject_referencing_level_T <.. reference.usp_PERSIST_RepoObject_referencing_level_T
-reference.RepoObject_referencing_level_T <.. docs.ftv_RepoObject_Reference_PlantUml_EntityRefList
-reference.RepoObject_referencing_level_T <.. reference.ftv_RepoObject_ReferencedReferencing
 reference.RepoObject_referencing_level::LastNode_fullname <-- reference.RepoObject_referencing_level_T::LastNode_fullname
 reference.RepoObject_referencing_level::LastNode_fullname2 <-- reference.RepoObject_referencing_level_T::LastNode_fullname2
 reference.RepoObject_referencing_level::LastNode_guid <-- reference.RepoObject_referencing_level_T::LastNode_guid

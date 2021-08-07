@@ -48,7 +48,6 @@ entity repo.Index_union << V >> {
 }
 
 entity repo.Index_unique_IndexPatternColumnGuid << V >> {
-  **index_guid** : uniqueidentifier
   --
 }
 
@@ -164,24 +163,24 @@ config.Parameter <.. config.ftv_dwh_database
 repo.Index_Settings <.. repo.Index_Settings_ForUpdate
 repo.Index_union <.. repo.Index_Settings_ForUpdate
 repo.Index_unique_IndexPatternColumnGuid <.. repo.Index_union
-repo.Index_virtual <.. repo.Index_union
 repo.Index_virtual <.. repo.Index_virtual_IndexPatternColumnGuid
+repo.Index_virtual <.. repo.Index_union
 repo.Index_virtual_IndexPatternColumnGuid <.. repo.Index_union
 repo.IndexColumn_virtual <.. repo.Index_virtual_IndexPatternColumnGuid
-repo.RepoObject <.. repo.SysColumn_RepoObjectColumn_via_name
 repo.RepoObject <.. repo.Index_Settings_ForUpdate
 repo.RepoObject <.. repo.SysObject_RepoObject_via_name
 repo.RepoObject <.. repo_sys.Index_unique
+repo.RepoObject <.. repo.SysColumn_RepoObjectColumn_via_name
 repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_name
 repo.SysColumn_RepoObjectColumn_via_name <.. repo_sys.IndexColumn_unique
 repo.SysObject_RepoObject_via_name <.. repo_sys.IndexColumn_unique
-repo_sys.ExtendedProperties <.. repo_sys.SysObject
 repo_sys.ExtendedProperties <.. repo_sys.SysColumn
+repo_sys.ExtendedProperties <.. repo_sys.SysObject
 repo_sys.Index_unique <.. repo.Index_union
 repo_sys.IndexColumn_unique <.. repo.Index_unique_IndexPatternColumnGuid
 repo_sys.SysColumn <.. repo.SysColumn_RepoObjectColumn_via_name
-repo_sys.SysObject <.. repo_sys.SysColumn
 repo_sys.SysObject <.. repo.SysObject_RepoObject_via_name
+repo_sys.SysObject <.. repo_sys.SysColumn
 sys_dwh.columns <.. repo_sys.SysColumn
 sys_dwh.columns <.. repo_sys.ExtendedProperties
 sys_dwh.computed_columns <.. repo_sys.SysColumn
@@ -189,9 +188,9 @@ sys_dwh.default_constraints <.. repo_sys.SysColumn
 sys_dwh.extended_properties <.. repo_sys.ExtendedProperties
 sys_dwh.identity_columns <.. repo_sys.SysColumn
 sys_dwh.index_columns <.. repo_sys.IndexColumn_unique
-sys_dwh.indexes <.. repo_sys.Index_unique
-sys_dwh.indexes <.. repo_sys.ExtendedProperties
 sys_dwh.indexes <.. repo_sys.IndexColumn_unique
+sys_dwh.indexes <.. repo_sys.ExtendedProperties
+sys_dwh.indexes <.. repo_sys.Index_unique
 sys_dwh.objects <.. repo_sys.ExtendedProperties
 sys_dwh.objects <.. repo_sys.SysObject
 sys_dwh.parameters <.. repo_sys.ExtendedProperties

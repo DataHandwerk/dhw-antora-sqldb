@@ -33,26 +33,19 @@ entity docs.RepoObject_Plantuml_ObjectRefList_0_30 << V >> {
   --
 }
 
-entity graph.ReferencedObject << U >> {
+entity reference.RepoObject_reference_T << U >> {
+  **referenced_RepoObject_guid** : uniqueidentifier
+  **referencing_RepoObject_guid** : uniqueidentifier
   --
 }
 
-entity graph.RepoObject << U >> {
-  --
-}
-
-entity reference.ftv_RepoObject_ReferencedReferencing << IF >> {
-  --
-}
-
-entity repo.RepoObject << U >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity reference.RepoObject_ReferenceTree_0_30_T << U >> {
+  **RepoObject_guid** : uniqueidentifier
+  **Referencing_guid** : uniqueidentifier
+  **Referenced_guid** : uniqueidentifier
   --
 }
 
 docs.RepoObject_Plantuml_ObjectRefList_0_30 <.. docs.RepoObject_Plantuml
-graph.ReferencedObject <.. docs.RepoObject_Plantuml_ObjectRefList_0_30
-graph.RepoObject <.. docs.RepoObject_Plantuml_ObjectRefList_0_30
-reference.ftv_RepoObject_ReferencedReferencing <.. docs.RepoObject_Plantuml_ObjectRefList_0_30
-repo.RepoObject <.. docs.RepoObject_Plantuml_ObjectRefList_0_30
-repo.RepoObject <.. reference.ftv_RepoObject_ReferencedReferencing
+reference.RepoObject_reference_T <.. docs.RepoObject_Plantuml_ObjectRefList_0_30
+reference.RepoObject_ReferenceTree_0_30_T <.. docs.RepoObject_Plantuml_ObjectRefList_0_30

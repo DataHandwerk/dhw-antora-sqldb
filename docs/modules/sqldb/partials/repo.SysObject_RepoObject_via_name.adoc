@@ -39,7 +39,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-07-14 19:36:07
+2021-08-03 14:46:31
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -252,6 +252,8 @@ reference in [repo_sys].[type]
 .Referencing Columns
 --
 * xref:repo_sys.IndexColumn_unique.adoc#column-index_guid[+repo_sys.IndexColumn_unique.index_guid+]
+* xref:repo_sys.sql_expression_dependencies.adoc#column-referencing_RepoObject_guid[+repo_sys.sql_expression_dependencies.referencing_RepoObject_guid+]
+* xref:repo_sys.sql_expression_dependencies.adoc#column-referenced_RepoObject_guid[+repo_sys.sql_expression_dependencies.referenced_RepoObject_guid+]
 --
 
 
@@ -554,6 +556,37 @@ reference in [repo_sys].[type]
 * xref:repo_sys.SysObject.adoc#column-type[+repo_sys.SysObject.type+]
 --
 
+.Referencing Columns
+--
+* xref:repo_sys.sql_expression_dependencies.adoc#column-referencing_type[+repo_sys.sql_expression_dependencies.referencing_type+]
+* xref:repo_sys.sql_expression_dependencies.adoc#column-referenced_type[+repo_sys.sql_expression_dependencies.referenced_type+]
+--
+
+
+[[column-SysObject_type_desc]]
+=== SysObject_type_desc
+
+[cols="d,m,m,m,m,d"]
+|===
+|
+|SysObject_type_desc
+|nvarchar(60)
+|NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo_sys.SysObject.adoc#column-type_desc[+repo_sys.SysObject.type_desc+]
+--
+
+.Referencing Columns
+--
+* xref:repo_sys.sql_expression_dependencies.adoc#column-referencing_type_desciption[+repo_sys.sql_expression_dependencies.referencing_type_desciption+]
+* xref:repo_sys.sql_expression_dependencies.adoc#column-referenced_type_desciption[+repo_sys.sql_expression_dependencies.referenced_type_desciption+]
+--
+
 
 [[column-temporal_type]]
 === temporal_type
@@ -579,6 +612,7 @@ reference in [repo_sys].[type]
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
+
 
 
 
@@ -786,6 +820,13 @@ reference in [repo_sys].[type]
 |
 
 |
+|<<column-SysObject_type_desc>>
+|nvarchar(60)
+|NULL
+|
+|
+
+|
 |<<column-temporal_type>>
 |tinyint
 |NULL
@@ -860,6 +901,7 @@ reference in [repo_sys].[type]
 // tag::antorareferencinglist[]
 * xref:repo.usp_sync_guid_RepoObject.adoc[]
 * xref:repo_sys.IndexColumn_unique.adoc[]
+* xref:repo_sys.sql_expression_dependencies.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -875,6 +917,27 @@ reference in [repo_sys].[type]
 // tag::exampleusage_2[]
 
 // end::exampleusage_2[]
+
+
+== exampleUsage_3
+
+// tag::exampleusage_3[]
+
+// end::exampleusage_3[]
+
+
+== exampleUsage_4
+
+// tag::exampleusage_4[]
+
+// end::exampleusage_4[]
+
+
+== exampleUsage_5
+
+// tag::exampleusage_5[]
+
+// end::exampleusage_5[]
 
 
 == exampleWrong_Usage
@@ -1060,6 +1123,13 @@ reference in [repo_sys].[type]
 // end::usp_persistence_repoobject_guid[]
 
 
+== UspExamples
+
+// tag::uspexamples[]
+
+// end::uspexamples[]
+
+
 == UspParameters
 
 // tag::uspparameters[]
@@ -1072,7 +1142,8 @@ reference in [repo_sys].[type]
 // tag::sql_modules_definition[]
 [source,sql]
 ----
-Create View repo.SysObject_RepoObject_via_name
+
+CREATE View [repo].[SysObject_RepoObject_via_name]
 As
 --
 Select
@@ -1081,6 +1152,7 @@ Select
   , so.SysObject_schema_name
   , so.SysObject_name
   , so.type                       As SysObject_type
+  , so.type_desc                  As SysObject_type_desc
   , so.modify_date                As modify_date
   , so.parent_object_id           As parent_object_id
   , so.SysObject_RepoObject_guid  As SysObject_RepoObject_guid
@@ -1119,7 +1191,6 @@ From
         repo.RepoObject As ro_hist
             On
             so.history_table_id      = ro_hist.SysObject_id;
-
 ----
 // end::sql_modules_definition[]
 

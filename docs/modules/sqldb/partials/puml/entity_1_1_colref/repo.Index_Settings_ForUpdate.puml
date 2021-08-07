@@ -99,4 +99,11 @@ entity repo.RepoObject << U >> {
 repo.Index_Settings <.. repo.Index_Settings_ForUpdate
 repo.Index_union <.. repo.Index_Settings_ForUpdate
 repo.RepoObject <.. repo.Index_Settings_ForUpdate
-
+repo.Index_Settings::index_guid <-- repo.Index_Settings_ForUpdate::index_guid
+repo.Index_Settings::IndexPatternColumnDatatype <-- repo.Index_Settings_ForUpdate::IndexPatternColumnDatatype
+repo.Index_Settings::IndexPatternColumnName <-- repo.Index_Settings_ForUpdate::IndexPatternColumnName
+repo.Index_Settings::IndexSemanticGroup <-- repo.Index_Settings_ForUpdate::IndexSemanticGroup
+repo.Index_Settings::is_create_constraint <-- repo.Index_Settings_ForUpdate::is_create_constraint
+repo.Index_union::index_name <-- repo.Index_Settings_ForUpdate::index_name
+repo.Index_union::parent_RepoObject_guid <-- repo.Index_Settings_ForUpdate::parent_RepoObject_guid
+repo.RepoObject::RepoObject_fullname <-- repo.Index_Settings_ForUpdate::RepoObject_fullname

@@ -28,9 +28,8 @@ entity property.RepoSchemaProperty << U >> {
   --
   inheritance : tinyint
   * property_name : nvarchar(128)
-  property_value : sql_variant
+  property_value : nvarchar(max)
   * RepoSchema_guid : uniqueidentifier
-  {abstract} property_basetype : sql_variant
   {abstract} property_bigint : bigint
   {abstract} property_float : float
   {abstract} property_int : int
@@ -41,4 +40,10 @@ entity property.RepoSchemaProperty << U >> {
 }
 
 
-
+property.RepoSchemaProperty::property_value <-- property.RepoSchemaProperty::property_int
+property.RepoSchemaProperty::property_value <-- property.RepoSchemaProperty::property_bigint
+property.RepoSchemaProperty::property_value <-- property.RepoSchemaProperty::property_varchar
+property.RepoSchemaProperty::property_value <-- property.RepoSchemaProperty::property_nvarchar
+property.RepoSchemaProperty::property_value <-- property.RepoSchemaProperty::property_real
+property.RepoSchemaProperty::property_value <-- property.RepoSchemaProperty::property_float
+property.RepoSchemaProperty::property_value <-- property.RepoSchemaProperty::property_money

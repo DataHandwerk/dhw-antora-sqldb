@@ -137,11 +137,14 @@ entity repo.RepoObject_gross << V >> {
   usp_persistence_RepoObject_guid : uniqueidentifier
 }
 
-entity workflow.usp_workflow << P >> {
+entity workflow.ProcedureDependency_input_PersistenceDependency_S << V >> {
+  **referenced_Procedure_RepoObject_guid** : uniqueidentifier
+  **referencing_Procedure_RepoObject_guid** : uniqueidentifier
   --
+  * is_PersistenceDependency : int
 }
 
-reference.Persistence <.. workflow.usp_workflow
+reference.Persistence <.. workflow.ProcedureDependency_input_PersistenceDependency_S
 reference.RepoObject_ReferenceTree_30_0_T <.. reference.Persistence
 repo.RepoObject_gross <.. reference.Persistence
 repo.RepoObject_gross::RepoObject_fullname <-- reference.Persistence::referenced_fullname

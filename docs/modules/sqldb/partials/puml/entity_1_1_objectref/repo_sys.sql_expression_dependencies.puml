@@ -41,15 +41,15 @@ entity reference.RepoObjectColumn_reference_SqlExpressionDependencies << V >> {
   --
 }
 
+entity repo.SysColumn_RepoObjectColumn_via_name << V >> {
+  --
+}
+
+entity repo.SysObject_RepoObject_via_name << V >> {
+  --
+}
+
 entity repo_sys.sql_expression_dependencies << V >> {
-  --
-}
-
-entity repo_sys.SysColumn << V >> {
-  --
-}
-
-entity repo_sys.SysObject << V >> {
   --
 }
 
@@ -57,11 +57,9 @@ entity sys_dwh.sql_expression_dependencies << SN >> {
   --
 }
 
-config.ftv_dwh_database <.. repo_sys.SysColumn
 config.ftv_dwh_database <.. repo_sys.sql_expression_dependencies
-repo_sys.sql_expression_dependencies <.. reference.RepoObjectColumn_reference_SqlExpressionDependencies
+repo.SysColumn_RepoObjectColumn_via_name <.. repo_sys.sql_expression_dependencies
+repo.SysObject_RepoObject_via_name <.. repo_sys.sql_expression_dependencies
 repo_sys.sql_expression_dependencies <.. reference.RepoObject_reference_SqlExpressionDependencies
-repo_sys.SysColumn <.. repo_sys.sql_expression_dependencies
-repo_sys.SysObject <.. repo_sys.sql_expression_dependencies
-repo_sys.SysObject <.. repo_sys.SysColumn
+repo_sys.sql_expression_dependencies <.. reference.RepoObjectColumn_reference_SqlExpressionDependencies
 sys_dwh.sql_expression_dependencies <.. repo_sys.sql_expression_dependencies

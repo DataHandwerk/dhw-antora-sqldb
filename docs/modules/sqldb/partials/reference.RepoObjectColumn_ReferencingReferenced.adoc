@@ -42,7 +42,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-04-17 13:33:30
+2021-08-05 11:42:53
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -56,7 +56,7 @@ view
 |1
 |*Referenced_guid*
 |uniqueidentifier
-|NULL
+|NOT NULL
 |
 |
 |===
@@ -75,7 +75,7 @@ view
 |2
 |*Referencing_guid*
 |uniqueidentifier
-|NULL
+|NOT NULL
 |
 |
 |===
@@ -94,7 +94,7 @@ view
 |
 |Referenced_fullname
 |nvarchar(261)
-|NULL
+|NOT NULL
 |
 |
 |===
@@ -108,7 +108,7 @@ view
 |
 |Referenced_fullname2
 |nvarchar(257)
-|NULL
+|NOT NULL
 |
 |
 |===
@@ -149,8 +149,8 @@ view
 |===
 |
 |ReferencedColumn_fullname
-|nvarchar(520)
-|NULL
+|nvarchar(392)
+|NOT NULL
 |
 |
 |===
@@ -164,7 +164,7 @@ view
 |
 |ReferencedColumn_fullname2
 |nvarchar(386)
-|NULL
+|NOT NULL
 |
 |
 |===
@@ -184,20 +184,6 @@ view
 |===
 
 
-[[column-ReferencedColumn_type]]
-=== ReferencedColumn_type
-
-[cols="d,m,m,m,m,d"]
-|===
-|
-|ReferencedColumn_type
-|nvarchar(128)
-|NULL
-|
-|
-|===
-
-
 [[column-Referencing_fullname]]
 === Referencing_fullname
 
@@ -206,7 +192,7 @@ view
 |
 |Referencing_fullname
 |nvarchar(261)
-|NULL
+|NOT NULL
 |
 |
 |===
@@ -220,7 +206,7 @@ view
 |
 |Referencing_fullname2
 |nvarchar(257)
-|NULL
+|NOT NULL
 |
 |
 |===
@@ -261,8 +247,8 @@ view
 |===
 |
 |ReferencingColumn_fullname
-|nvarchar(520)
-|NULL
+|nvarchar(392)
+|NOT NULL
 |
 |
 |===
@@ -276,7 +262,7 @@ view
 |
 |ReferencingColumn_fullname2
 |nvarchar(386)
-|NULL
+|NOT NULL
 |
 |
 |===
@@ -296,20 +282,6 @@ view
 |===
 
 
-[[column-ReferencingColumn_type]]
-=== ReferencingColumn_type
-
-[cols="d,m,m,m,m,d"]
-|===
-|
-|ReferencingColumn_type
-|nvarchar(128)
-|NULL
-|
-|
-|===
-
-
 // end::AntoraColumnDetails[]
 
 == AntoraPkColumnTableRows
@@ -318,18 +290,16 @@ view
 |1
 |*<<column-Referenced_guid>>*
 |uniqueidentifier
-|NULL
+|NOT NULL
 |
 |
 
 |2
 |*<<column-Referencing_guid>>*
 |uniqueidentifier
-|NULL
+|NOT NULL
 |
 |
-
-
 
 
 
@@ -355,14 +325,14 @@ view
 |
 |<<column-Referenced_fullname>>
 |nvarchar(261)
-|NULL
+|NOT NULL
 |
 |
 
 |
 |<<column-Referenced_fullname2>>
 |nvarchar(257)
-|NULL
+|NOT NULL
 |
 |
 
@@ -382,15 +352,15 @@ view
 
 |
 |<<column-ReferencedColumn_fullname>>
-|nvarchar(520)
-|NULL
+|nvarchar(392)
+|NOT NULL
 |
 |
 
 |
 |<<column-ReferencedColumn_fullname2>>
 |nvarchar(386)
-|NULL
+|NOT NULL
 |
 |
 
@@ -402,23 +372,16 @@ view
 |
 
 |
-|<<column-ReferencedColumn_type>>
-|nvarchar(128)
-|NULL
-|
-|
-
-|
 |<<column-Referencing_fullname>>
 |nvarchar(261)
-|NULL
+|NOT NULL
 |
 |
 
 |
 |<<column-Referencing_fullname2>>
 |nvarchar(257)
-|NULL
+|NOT NULL
 |
 |
 
@@ -438,27 +401,20 @@ view
 
 |
 |<<column-ReferencingColumn_fullname>>
-|nvarchar(520)
-|NULL
+|nvarchar(392)
+|NOT NULL
 |
 |
 
 |
 |<<column-ReferencingColumn_fullname2>>
 |nvarchar(386)
-|NULL
+|NOT NULL
 |
 |
 
 |
 |<<column-ReferencingColumn_name>>
-|nvarchar(128)
-|NULL
-|
-|
-
-|
-|<<column-ReferencingColumn_type>>
 |nvarchar(128)
 |NULL
 |
@@ -499,8 +455,7 @@ view
 == AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:graph.ReferencedObjectColumn.adoc[]
-* xref:graph.RepoObjectColumn.adoc[]
+* xref:reference.RepoObjectColumn_reference_T.adoc[]
 // end::antorareferencedlist[]
 
 
@@ -526,6 +481,27 @@ view
 // tag::exampleusage_2[]
 
 // end::exampleusage_2[]
+
+
+== exampleUsage_3
+
+// tag::exampleusage_3[]
+
+// end::exampleusage_3[]
+
+
+== exampleUsage_4
+
+// tag::exampleusage_4[]
+
+// end::exampleusage_4[]
+
+
+== exampleUsage_5
+
+// tag::exampleusage_5[]
+
+// end::exampleusage_5[]
 
 
 == exampleWrong_Usage
@@ -711,6 +687,13 @@ Referenced_guid,Referencing_guid
 // end::usp_persistence_repoobject_guid[]
 
 
+== UspExamples
+
+// tag::uspexamples[]
+
+// end::uspexamples[]
+
+
 == UspParameters
 
 // tag::uspparameters[]
@@ -723,34 +706,55 @@ Referenced_guid,Referencing_guid
 // tag::sql_modules_definition[]
 [source,sql]
 ----
-CREATE View [reference].RepoObjectColumn_ReferencingReferenced
+
+CREATE View [reference].[RepoObjectColumn_ReferencingReferenced]
 As
+--Select
+--    Object2.RepoObject_fullname        As Referenced_fullname
+--  , Object2.RepoObject_fullname2       As Referenced_fullname2
+--  , Object2.RepoObject_guid            As Referenced_RepoObject_guid
+--  , Object2.RepoObject_type            As Referenced_type
+--  , Object2.RepoObjectColumn_fullname  As ReferencedColumn_fullname
+--  , Object2.RepoObjectColumn_fullname2 As ReferencedColumn_fullname2
+--  , Object2.RepoObjectColumn_name      As ReferencedColumn_name
+--  , Object2.RepoObjectColumn_type      As ReferencedColumn_type
+--  , Object2.RepoObjectColumn_guid      As Referenced_guid
+--  , Object1.RepoObject_fullname        As Referencing_fullname
+--  , Object1.RepoObject_fullname2       As Referencing_fullname2
+--  , Object1.RepoObject_guid            As Referencing_RepoObject_guid
+--  , Object1.RepoObject_type            As Referencing_type
+--  , Object1.RepoObjectColumn_fullname  As ReferencingColumn_fullname
+--  , Object1.RepoObjectColumn_fullname2 As ReferencingColumn_fullname2
+--  , Object1.RepoObjectColumn_name      As ReferencingColumn_name
+--  , Object1.RepoObjectColumn_type      As ReferencingColumn_type
+--  , Object1.RepoObjectColumn_guid      As Referencing_guid
+--From
+--    graph.RepoObjectColumn As Object1
+--  , graph.ReferencedObjectColumn As referenced
+--  , graph.RepoObjectColumn As Object2
+--Where Match(
+--    Object1-(referenced)->Object2);
 Select
-    --
-    Object2.RepoObject_fullname        As Referenced_fullname
-  , Object2.RepoObject_fullname2       As Referenced_fullname2
-  , Object2.RepoObject_guid            As Referenced_RepoObject_guid
-  , Object2.RepoObject_type            As Referenced_type
-  , Object2.RepoObjectColumn_fullname  As ReferencedColumn_fullname
-  , Object2.RepoObjectColumn_fullname2 As ReferencedColumn_fullname2
-  , Object2.RepoObjectColumn_name      As ReferencedColumn_name
-  , Object2.RepoObjectColumn_type      As ReferencedColumn_type
-  , Object2.RepoObjectColumn_guid      As Referenced_guid
-  , Object1.RepoObject_fullname        As Referencing_fullname
-  , Object1.RepoObject_fullname2       As Referencing_fullname2
-  , Object1.RepoObject_guid            As Referencing_RepoObject_guid
-  , Object1.RepoObject_type            As Referencing_type
-  , Object1.RepoObjectColumn_fullname  As ReferencingColumn_fullname
-  , Object1.RepoObjectColumn_fullname2 As ReferencingColumn_fullname2
-  , Object1.RepoObjectColumn_name      As ReferencingColumn_name
-  , Object1.RepoObjectColumn_type      As ReferencingColumn_type
-  , Object1.RepoObjectColumn_guid      As Referencing_guid
+    [referenced_ro_fullname]            As Referenced_fullname
+  , [referenced_ro_fullname2]           As Referenced_fullname2
+  , [Referenced_RepoObject_guid]        As Referenced_RepoObject_guid
+  , [Referenced_type]                   As Referenced_type
+  , [referenced_roc_fullname]           As ReferencedColumn_fullname
+  , [referenced_roc_fullname2]          As ReferencedColumn_fullname2
+  , [referenced_column_name]            As ReferencedColumn_name
+  --, Object2.RepoObjectColumn_type      As ReferencedColumn_type
+  , [referenced_RepoObjectColumn_guid]  As Referenced_guid
+  , [referencing_ro_fullname]           As Referencing_fullname
+  , [referencing_ro_fullname2]          As Referencing_fullname2
+  , [Referencing_RepoObject_guid]       As Referencing_RepoObject_guid
+  , [Referencing_type]                  As Referencing_type
+  , [referencing_roc_fullname]          As ReferencingColumn_fullname
+  , [referencing_roc_fullname2]         As ReferencingColumn_fullname2
+  , [referencing_column_name]           As ReferencingColumn_name
+  --, Object1.RepoObjectColumn_type      As ReferencingColumn_type
+  , [referencing_RepoObjectColumn_guid] As Referencing_guid
 From
-    graph.RepoObjectColumn As Object1
-  , graph.ReferencedObjectColumn As referenced
-  , graph.RepoObjectColumn As Object2
-Where Match(
-    Object1-(referenced)->Object2);
+    [reference].[RepoObjectColumn_reference_T];
 
 ----
 // end::sql_modules_definition[]

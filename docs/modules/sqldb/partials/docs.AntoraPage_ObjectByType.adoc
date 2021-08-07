@@ -37,7 +37,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-07-14 19:36:08
+2021-08-03 14:46:32
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -99,7 +99,7 @@ view
 == AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:config.type.adoc[]
+* xref:configT.type.adoc[]
 * xref:docs.AntoraNavListRepoObject_by_type.adoc[]
 // end::antorareferencedlist[]
 
@@ -123,6 +123,27 @@ view
 // tag::exampleusage_2[]
 
 // end::exampleusage_2[]
+
+
+== exampleUsage_3
+
+// tag::exampleusage_3[]
+
+// end::exampleusage_3[]
+
+
+== exampleUsage_4
+
+// tag::exampleusage_4[]
+
+// end::exampleusage_4[]
+
+
+== exampleUsage_5
+
+// tag::exampleusage_5[]
+
+// end::exampleusage_5[]
 
 
 == exampleWrong_Usage
@@ -308,6 +329,13 @@ view
 // end::usp_persistence_repoobject_guid[]
 
 
+== UspExamples
+
+// tag::uspexamples[]
+
+// end::uspexamples[]
+
+
 == UspParameters
 
 // tag::uspparameters[]
@@ -333,7 +361,7 @@ output example:
 --
 
 */
-Create View docs.AntoraPage_ObjectByType
+CREATE View docs.AntoraPage_ObjectByType
 As
 Select
     partial_content = Concat (
@@ -357,7 +385,7 @@ Select
                                                                ct.type_desc Desc)
                              )
 From
-    config.type                              ct
+    [configT].type                              ct
     --only existing objects
     Inner Join
         docs.AntoraNavListRepoObject_by_type existing
@@ -367,7 +395,6 @@ Group By
     is_DocsOutput
 Having
     ( is_DocsOutput = 1 );
-
 ----
 // end::sql_modules_definition[]
 

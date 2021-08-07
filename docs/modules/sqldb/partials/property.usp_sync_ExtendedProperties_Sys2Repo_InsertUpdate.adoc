@@ -38,7 +38,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-07-14 19:36:09
+2021-08-07 17:38:06
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -181,6 +181,27 @@ EXEC [property].[usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate]
 // tag::exampleusage_2[]
 
 // end::exampleusage_2[]
+
+
+== exampleUsage_3
+
+// tag::exampleusage_3[]
+
+// end::exampleusage_3[]
+
+
+== exampleUsage_4
+
+// tag::exampleusage_4[]
+
+// end::exampleusage_4[]
+
+
+== exampleUsage_5
+
+// tag::exampleusage_5[]
+
+// end::exampleusage_5[]
 
 
 == exampleWrong_Usage
@@ -371,6 +392,13 @@ EXEC [property].[usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate]
 // end::usp_persistence_repoobject_guid[]
 
 
+== UspExamples
+
+// tag::uspexamples[]
+
+// end::uspexamples[]
+
+
 == UspParameters
 
 // tag::uspparameters[]
@@ -479,7 +507,7 @@ Select
     Distinct
     RepoObject_guid
   , property_name
-  , property_value
+  , CAST(property_value as NVarchar(max))
 From
     property.RepoObjectProperty_sys_repo As T1
 Where
@@ -519,10 +547,10 @@ update table [property].[RepoObjectProperty] via view
 Update
     property.RepoObjectProperty_sys_repo
 Set
-    RepoObjectProperty_property_value = property_value
+    RepoObjectProperty_property_value = CAST(property_value as NVarchar(4000))
 Where
     Not RepoObjectProperty_id Is Null
-    And RepoObjectProperty_property_value <> property_value;
+    And RepoObjectProperty_property_value <> CAST(property_value as NVarchar(4000));
 
 -- Logging START --
 SET @rows = @@ROWCOUNT
@@ -561,7 +589,7 @@ Select
     Distinct
     RepoObjectColumn_guid
   , property_name
-  , property_value
+  , CAST(property_value as NVarchar(max))
 From
     property.RepoObjectColumnProperty_sys_repo As T1
 Where
@@ -601,10 +629,10 @@ update table [property].[RepoObjectColumnProperty] via view
 Update
     property.RepoObjectColumnProperty_sys_repo
 Set
-    RepoObjectColumnProperty_property_value = property_value
+    RepoObjectColumnProperty_property_value = CAST(property_value as NVarchar(4000))
 Where
     Not RepoObjectColumnProperty_id Is Null
-    And RepoObjectColumnProperty_property_value <> property_value;
+    And RepoObjectColumnProperty_property_value <> CAST(property_value as NVarchar(4000));
 
 -- Logging START --
 SET @rows = @@ROWCOUNT

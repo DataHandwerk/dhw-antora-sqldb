@@ -95,8 +95,8 @@ user table
 
 .Referencing Columns
 --
-* xref:config.Parameter.adoc#column-Parameter_value_result_int[+config.Parameter.Parameter_value__result_int+]
 * xref:config.Parameter.adoc#column-Parameter_value_result_nvarchar[+config.Parameter.Parameter_value__result_nvarchar+]
+* xref:config.Parameter.adoc#column-Parameter_value_result_int[+config.Parameter.Parameter_value__result_int+]
 * xref:config.Parameter.adoc#column-Parameter_value_result_date[+config.Parameter.Parameter_value__result_date+]
 * xref:config.Parameter.adoc#column-Parameter_value_result_datetime[+config.Parameter.Parameter_value__result_datetime+]
 --
@@ -131,10 +131,10 @@ user table
 
 .Referencing Columns
 --
-* xref:config.Parameter.adoc#column-Parameter_value_result_datetime[+config.Parameter.Parameter_value__result_datetime+]
-* xref:config.Parameter.adoc#column-Parameter_value_result_date[+config.Parameter.Parameter_value__result_date+]
 * xref:config.Parameter.adoc#column-Parameter_value_result_nvarchar[+config.Parameter.Parameter_value__result_nvarchar+]
 * xref:config.Parameter.adoc#column-Parameter_value_result_int[+config.Parameter.Parameter_value__result_int+]
+* xref:config.Parameter.adoc#column-Parameter_value_result_date[+config.Parameter.Parameter_value__result_date+]
+* xref:config.Parameter.adoc#column-Parameter_value_result_datetime[+config.Parameter.Parameter_value__result_datetime+]
 --
 
 
@@ -163,8 +163,8 @@ user table
 
 .Referenced Columns
 --
-* xref:config.Parameter.adoc#column-Parameter_value[+config.Parameter.Parameter_value+]
 * xref:config.Parameter.adoc#column-Parameter_default_value[+config.Parameter.Parameter_default_value+]
+* xref:config.Parameter.adoc#column-Parameter_value[+config.Parameter.Parameter_value+]
 --
 
 
@@ -193,8 +193,8 @@ user table
 
 .Referenced Columns
 --
-* xref:config.Parameter.adoc#column-Parameter_default_value[+config.Parameter.Parameter_default_value+]
 * xref:config.Parameter.adoc#column-Parameter_value[+config.Parameter.Parameter_value+]
+* xref:config.Parameter.adoc#column-Parameter_default_value[+config.Parameter.Parameter_default_value+]
 --
 
 
@@ -218,13 +218,13 @@ user table
 
 .Definition
 ....
-(TRY_CAST(coalesce([Parameter_value],[Parameter_default_value]) AS [int]))
+(case when NOT sql_variant_property([Parameter_default_value],'BaseType')='uniqueidentifier' AND NOT sql_variant_property([Parameter_value],'BaseType')='uniqueidentifier' then TRY_CAST(coalesce([Parameter_value],[Parameter_default_value]) AS [int])  end)
 ....
 
 .Referenced Columns
 --
-* xref:config.Parameter.adoc#column-Parameter_default_value[+config.Parameter.Parameter_default_value+]
 * xref:config.Parameter.adoc#column-Parameter_value[+config.Parameter.Parameter_value+]
+* xref:config.Parameter.adoc#column-Parameter_default_value[+config.Parameter.Parameter_default_value+]
 --
 
 .Referencing Columns
@@ -267,14 +267,14 @@ user table
 
 .Referencing Columns
 --
-* xref:property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.adoc#column-sub_Inheritance_StringAggSeparatorSql[+property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.sub_Inheritance_StringAggSeparatorSql+]
 * xref:property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.adoc#column-sub_InheritanceDefinition[+property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.sub_InheritanceDefinition+]
-* xref:property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.adoc#column-par_Inheritance_StringAggSeparatorSql[+property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.par_Inheritance_StringAggSeparatorSql+]
 * xref:property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.adoc#column-par_InheritanceDefinition[+property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.par_InheritanceDefinition+]
-* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-sub_Inheritance_StringAggSeparatorSql[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.sub_Inheritance_StringAggSeparatorSql+]
+* xref:property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.adoc#column-sub_Inheritance_StringAggSeparatorSql[+property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.sub_Inheritance_StringAggSeparatorSql+]
+* xref:property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.adoc#column-par_Inheritance_StringAggSeparatorSql[+property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.par_Inheritance_StringAggSeparatorSql+]
 * xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-sub_InheritanceDefintion[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.sub_InheritanceDefintion+]
-* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-par_Inheritance_StringAggSeparatorSql[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.par_Inheritance_StringAggSeparatorSql+]
 * xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-par_InheritanceDefintion[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.par_InheritanceDefintion+]
+* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-sub_Inheritance_StringAggSeparatorSql[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.sub_Inheritance_StringAggSeparatorSql+]
+* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-par_Inheritance_StringAggSeparatorSql[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.par_Inheritance_StringAggSeparatorSql+]
 --
 
 
@@ -430,6 +430,27 @@ user table
 // tag::exampleusage_2[]
 
 // end::exampleusage_2[]
+
+
+== exampleUsage_3
+
+// tag::exampleusage_3[]
+
+// end::exampleusage_3[]
+
+
+== exampleUsage_4
+
+// tag::exampleusage_4[]
+
+// end::exampleusage_4[]
+
+
+== exampleUsage_5
+
+// tag::exampleusage_5[]
+
+// end::exampleusage_5[]
 
 
 == exampleWrong_Usage
@@ -617,6 +638,13 @@ PK_Parameter
 // tag::usp_persistence_repoobject_guid[]
 
 // end::usp_persistence_repoobject_guid[]
+
+
+== UspExamples
+
+// tag::uspexamples[]
+
+// end::uspexamples[]
 
 
 == UspParameters

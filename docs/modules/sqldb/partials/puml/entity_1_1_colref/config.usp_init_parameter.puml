@@ -36,14 +36,6 @@ entity config.Parameter << U >> {
   {abstract} Parameter_value__result_nvarchar : nvarchar(4000)
 }
 
-entity config.Parameter_default << V >> {
-  * **Parameter_name** : varchar(52)
-  * **sub_Parameter** : nvarchar(27)
-  --
-  Parameter_default_value : sql_variant
-  * Parameter_desciption : nvarchar(247)
-}
-
 entity config.usp_connect_database << P >> {
   --
 }
@@ -52,7 +44,15 @@ entity config.usp_init_parameter << P >> {
   --
 }
 
+entity configT.Parameter_default << V >> {
+  * **Parameter_name** : varchar(52)
+  * **sub_Parameter** : nvarchar(27)
+  --
+  Parameter_default_value : sql_variant
+  * Parameter_desciption : nvarchar(247)
+}
+
 config.Parameter <.. config.usp_init_parameter
-config.Parameter_default <.. config.usp_init_parameter
 config.usp_init_parameter <.. config.usp_connect_database
+configT.Parameter_default <.. config.usp_init_parameter
 

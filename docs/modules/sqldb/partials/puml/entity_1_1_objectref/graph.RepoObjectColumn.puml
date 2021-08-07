@@ -23,11 +23,6 @@ skinparam class {
 }
 
 
-entity docs.RepoObject_Plantuml_ColRefList << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  --
-}
-
 entity graph.RepoObjectColumn << U >> {
   --
 }
@@ -41,26 +36,5 @@ entity graph.usp_PERSIST_RepoObjectColumn << P >> {
   --
 }
 
-entity reference.RepoObjectColumn_ReferencingReferenced << V >> {
-  **Referenced_guid** : uniqueidentifier
-  **Referencing_guid** : uniqueidentifier
-  --
-}
-
-entity repo.usp_main << P >> {
-  --
-}
-
-entity repo.usp_sync_guid_RepoObjectColumn << P >> {
-  --
-}
-
-graph.RepoObjectColumn <.. repo.usp_sync_guid_RepoObjectColumn
-graph.RepoObjectColumn <.. repo.usp_main
-graph.RepoObjectColumn <.. docs.RepoObject_Plantuml_ColRefList
-graph.RepoObjectColumn <.. reference.RepoObjectColumn_ReferencingReferenced
 graph.RepoObjectColumn <.. graph.usp_PERSIST_RepoObjectColumn
-graph.RepoObjectColumn_S <.. graph.usp_PERSIST_RepoObjectColumn
 graph.RepoObjectColumn_S <.. graph.RepoObjectColumn
-graph.RepoObjectColumn_S <.. repo.usp_sync_guid_RepoObjectColumn
-graph.usp_PERSIST_RepoObjectColumn <.. repo.usp_sync_guid_RepoObjectColumn

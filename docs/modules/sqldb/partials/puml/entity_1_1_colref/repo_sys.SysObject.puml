@@ -50,6 +50,7 @@ entity repo.SysObject_RepoObject_via_guid << V >> {
   SysObject_RepoObject_guid : uniqueidentifier
   SysObject_schema_name : sysname
   SysObject_type : char(2)
+  SysObject_type_desc : nvarchar(60)
   temporal_type : tinyint
 }
 
@@ -80,6 +81,7 @@ entity repo.SysObject_RepoObject_via_name << V >> {
   SysObject_RepoObject_guid : uniqueidentifier
   SysObject_schema_name : sysname
   SysObject_type : char(2)
+  SysObject_type_desc : nvarchar(60)
   temporal_type : tinyint
 }
 
@@ -163,39 +165,6 @@ entity repo_sys.parameters << V >> {
   * user_type_id : int
   user_type_name : sysname
   * xml_collection_id : int
-}
-
-entity repo_sys.sql_expression_dependencies << V >> {
-  --
-  definition : nvarchar(max)
-  * is_ambiguous : bit
-  * is_caller_dependent : bit
-  is_computed : bit
-  * is_schema_bound_reference : bit
-  referenced_class : tinyint
-  referenced_class_desc : nvarchar(60)
-  referenced_column_name : sysname
-  referenced_database_name : nvarchar(128)
-  referenced_entity_name : nvarchar(128)
-  referenced_id : int
-  * referenced_minor_id : int
-  referenced_RepoObject_guid : uniqueidentifier
-  referenced_RepoObjectColumn_guid : uniqueidentifier
-  referenced_schema_name : nvarchar(128)
-  referenced_server_name : nvarchar(128)
-  referenced_type : char(2)
-  referenced_type_desciption : nvarchar(60)
-  referencing_class : tinyint
-  referencing_class_desc : nvarchar(60)
-  referencing_column_name : sysname
-  referencing_entity_name : nvarchar(128)
-  * referencing_id : int
-  * referencing_minor_id : int
-  referencing_RepoObject_guid : uniqueidentifier
-  referencing_RepoObjectColumn_guid : uniqueidentifier
-  referencing_schema_name : nvarchar(128)
-  referencing_type : char(2)
-  referencing_type_desciption : nvarchar(60)
 }
 
 entity repo_sys.SysColumn << V >> {
@@ -313,63 +282,46 @@ entity sys_dwh.tables << SN >> {
   --
 }
 
-repo.SysObject_RepoObject_via_guid <.. repo.usp_sync_guid_RepoObject
-repo.SysObject_RepoObject_via_name <.. repo.usp_sync_guid_RepoObject
-repo_sys.ExtendedProperties <.. repo_sys.SysColumn
 repo_sys.ExtendedProperties <.. repo_sys.SysObject
-repo_sys.SysColumn <.. repo_sys.sql_expression_dependencies
-repo_sys.SysObject <.. repo_sys.parameters
 repo_sys.SysObject <.. sqlparse.RepoObject_SqlModules_Repo_Sys
-repo_sys.SysObject <.. repo.SysObject_RepoObject_via_guid
 repo_sys.SysObject <.. repo.SysObject_RepoObject_via_name
-repo_sys.SysObject <.. repo_sys.SysColumn
+repo_sys.SysObject <.. repo.SysObject_RepoObject_via_guid
 repo_sys.SysObject <.. repo_sys.ColumnReference
-repo_sys.SysObject <.. repo_sys.sql_expression_dependencies
+repo_sys.SysObject <.. repo_sys.SysColumn
 repo_sys.SysObject <.. repo.usp_sync_guid_RepoObject
-sys_dwh.objects <.. repo_sys.ExtendedProperties
+repo_sys.SysObject <.. repo_sys.parameters
 sys_dwh.objects <.. repo_sys.SysObject
 sys_dwh.schemas <.. repo_sys.SysObject
-sys_dwh.schemas <.. repo_sys.ExtendedProperties
 sys_dwh.sql_modules <.. repo_sys.SysObject
 sys_dwh.tables <.. repo_sys.SysObject
-repo_sys.SysColumn::definition <-- repo_sys.sql_expression_dependencies::definition
-repo_sys.SysColumn::is_computed <-- repo_sys.sql_expression_dependencies::is_computed
-repo_sys.SysColumn::SysObject_column_name <-- repo_sys.sql_expression_dependencies::referenced_column_name
-repo_sys.SysColumn::SysObject_column_name <-- repo_sys.sql_expression_dependencies::referencing_column_name
-repo_sys.SysColumn::SysObject_RepoObjectColumn_guid <-- repo_sys.sql_expression_dependencies::referencing_RepoObjectColumn_guid
-repo_sys.SysColumn::SysObject_RepoObjectColumn_guid <-- repo_sys.sql_expression_dependencies::referenced_RepoObjectColumn_guid
-repo_sys.SysObject::history_table_id <-- repo.SysObject_RepoObject_via_guid::history_table_id
 repo_sys.SysObject::history_table_id <-- repo.SysObject_RepoObject_via_name::history_table_id
-repo_sys.SysObject::modify_date <-- repo.SysObject_RepoObject_via_guid::modify_date
-repo_sys.SysObject::modify_date <-- repo.SysObject_RepoObject_via_name::modify_date
+repo_sys.SysObject::history_table_id <-- repo.SysObject_RepoObject_via_guid::history_table_id
 repo_sys.SysObject::modify_date <-- sqlparse.RepoObject_SqlModules_Repo_Sys::modify_date
-repo_sys.SysObject::parent_object_id <-- repo.SysObject_RepoObject_via_guid::parent_object_id
+repo_sys.SysObject::modify_date <-- repo.SysObject_RepoObject_via_name::modify_date
+repo_sys.SysObject::modify_date <-- repo.SysObject_RepoObject_via_guid::modify_date
 repo_sys.SysObject::parent_object_id <-- repo.SysObject_RepoObject_via_name::parent_object_id
+repo_sys.SysObject::parent_object_id <-- repo.SysObject_RepoObject_via_guid::parent_object_id
 repo_sys.SysObject::sql_modules_definition <-- sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_definition
 repo_sys.SysObject::SysObject_fullname <-- repo_sys.ColumnReference::SysObject_full_name
 repo_sys.SysObject::SysObject_fullname <-- repo_sys.parameters::SysObject_fullname
 repo_sys.SysObject::SysObject_fullname2 <-- repo_sys.parameters::SysObject_fullname2
 repo_sys.SysObject::SysObject_id <-- repo.SysObject_RepoObject_via_name::SysObject_id
 repo_sys.SysObject::SysObject_id <-- repo.SysObject_RepoObject_via_guid::SysObject_id
-repo_sys.SysObject::SysObject_name <-- repo.SysObject_RepoObject_via_guid::SysObject_name
 repo_sys.SysObject::SysObject_name <-- repo.SysObject_RepoObject_via_name::SysObject_name
+repo_sys.SysObject::SysObject_name <-- repo.SysObject_RepoObject_via_guid::SysObject_name
 repo_sys.SysObject::SysObject_name <-- repo_sys.parameters::SysObject_name
-repo_sys.SysObject::SysObject_RepoObject_guid <-- repo_sys.parameters::SysObject_RepoObject_guid
 repo_sys.SysObject::SysObject_RepoObject_guid <-- repo.SysObject_RepoObject_via_name::SysObject_RepoObject_guid
 repo_sys.SysObject::SysObject_RepoObject_guid <-- repo.SysObject_RepoObject_via_guid::SysObject_RepoObject_guid
-repo_sys.SysObject::SysObject_RepoObject_guid <-- repo_sys.sql_expression_dependencies::referencing_RepoObject_guid
-repo_sys.SysObject::SysObject_RepoObject_guid <-- repo_sys.sql_expression_dependencies::referenced_RepoObject_guid
-repo_sys.SysObject::SysObject_schema_name <-- repo.SysObject_RepoObject_via_guid::SysObject_schema_name
+repo_sys.SysObject::SysObject_RepoObject_guid <-- repo_sys.parameters::SysObject_RepoObject_guid
 repo_sys.SysObject::SysObject_schema_name <-- repo.SysObject_RepoObject_via_name::SysObject_schema_name
+repo_sys.SysObject::SysObject_schema_name <-- repo.SysObject_RepoObject_via_guid::SysObject_schema_name
 repo_sys.SysObject::SysObject_schema_name <-- repo_sys.parameters::SysObject_schema_name
 repo_sys.SysObject::temporal_type <-- repo.SysObject_RepoObject_via_name::temporal_type
 repo_sys.SysObject::temporal_type <-- repo.SysObject_RepoObject_via_guid::temporal_type
+repo_sys.SysObject::type <-- repo.SysObject_RepoObject_via_name::SysObject_type
 repo_sys.SysObject::type <-- repo.SysObject_RepoObject_via_guid::SysObject_type
 repo_sys.SysObject::type <-- repo_sys.SysColumn::SysObject_type
-repo_sys.SysObject::type <-- repo.SysObject_RepoObject_via_name::SysObject_type
-repo_sys.SysObject::type <-- repo_sys.sql_expression_dependencies::referenced_type
-repo_sys.SysObject::type <-- repo_sys.sql_expression_dependencies::referencing_type
 repo_sys.SysObject::type <-- repo_sys.parameters::SysObject_type
-repo_sys.SysObject::type_desc <-- repo_sys.sql_expression_dependencies::referencing_type_desciption
-repo_sys.SysObject::type_desc <-- repo_sys.sql_expression_dependencies::referenced_type_desciption
 repo_sys.SysObject::type_desc <-- repo_sys.SysColumn::SysObject_type_desc
+repo_sys.SysObject::type_desc <-- repo.SysObject_RepoObject_via_guid::SysObject_type_desc
+repo_sys.SysObject::type_desc <-- repo.SysObject_RepoObject_via_name::SysObject_type_desc

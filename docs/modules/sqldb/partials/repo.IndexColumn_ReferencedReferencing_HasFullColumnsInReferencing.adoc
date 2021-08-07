@@ -43,7 +43,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-07-14 19:36:09
+2021-08-05 02:57:34
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -167,7 +167,7 @@ view
 |
 |referenced_RepoObjectColumn_guid
 |uniqueidentifier
-|NULL
+|NOT NULL
 |
 |
 |===
@@ -205,7 +205,7 @@ view
 |
 |referencing_RepoObjectColumn_guid
 |uniqueidentifier
-|NULL
+|NOT NULL
 |
 |
 |===
@@ -272,7 +272,7 @@ view
 |
 |<<column-referenced_RepoObjectColumn_guid>>
 |uniqueidentifier
-|NULL
+|NOT NULL
 |
 |
 
@@ -286,7 +286,7 @@ view
 |
 |<<column-referencing_RepoObjectColumn_guid>>
 |uniqueidentifier
-|NULL
+|NOT NULL
 |
 |
 
@@ -338,7 +338,7 @@ view
 == AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:reference.RepoObjectColumn_reference_union.adoc[]
+* xref:reference.RepoObjectColumn_reference_T.adoc[]
 * xref:repo.IndexColumn_union.adoc[]
 * xref:repo.RepoObjectColumn.adoc[]
 // end::antorareferencedlist[]
@@ -364,6 +364,27 @@ view
 // tag::exampleusage_2[]
 
 // end::exampleusage_2[]
+
+
+== exampleUsage_3
+
+// tag::exampleusage_3[]
+
+// end::exampleusage_3[]
+
+
+== exampleUsage_4
+
+// tag::exampleusage_4[]
+
+// end::exampleusage_4[]
+
+
+== exampleUsage_5
+
+// tag::exampleusage_5[]
+
+// end::exampleusage_5[]
 
 
 == exampleWrong_Usage
@@ -550,6 +571,13 @@ index_guid,index_column_id,RowNumberInReferencing
 // end::usp_persistence_repoobject_guid[]
 
 
+== UspExamples
+
+// tag::uspexamples[]
+
+// end::uspexamples[]
+
+
 == UspParameters
 
 // tag::uspparameters[]
@@ -562,6 +590,7 @@ index_guid,index_column_id,RowNumberInReferencing
 // tag::sql_modules_definition[]
 [source,sql]
 ----
+
 
 
 /*
@@ -605,7 +634,7 @@ ORDER BY
 
 
 */
-CREATE View repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing
+CREATE View [repo].[IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing]
 As
 --
 --referencing columns, that inherit an index
@@ -640,7 +669,7 @@ From
     repo.IndexColumn_union                    As ic
     Inner Join --todo: maybe use another source for RepoObject references 
         --repo.[RepoObjectColumn_reference_FirstResultSet] AS ref
-        [reference].RepoObjectColumn_reference_union ref
+        [reference].RepoObjectColumn_reference_T ref
             On
             ref.referenced_RepoObjectColumn_guid = ic.RepoObjectColumn_guid
 Where

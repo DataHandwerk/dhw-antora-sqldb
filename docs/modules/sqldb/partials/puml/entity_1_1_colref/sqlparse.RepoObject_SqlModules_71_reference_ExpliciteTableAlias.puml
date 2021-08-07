@@ -95,6 +95,7 @@ entity repo.RepoObjectColumn << U >> {
   * RepoObjectColumn_name : nvarchar(128)
   SysObjectColumn_column_id : int
   * SysObjectColumn_name : nvarchar(128)
+  * {static} Column_name : nvarchar(128)
   {abstract} has_different_sys_names : bit
   * {static} is_RepoObjectColumn_name_uniqueidentifier : int
   * {static} is_SysObjectColumn_name_uniqueidentifier : int
@@ -170,7 +171,7 @@ sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union_T <.. sqlparse.RepoObje
 sqlparse.RepoObject_SqlModules_71_reference_ExpliciteTableAlias <.. sqlparse.RepoObject_SqlModules_79_reference_union
 repo.RepoObject::RepoObject_guid <-- sqlparse.RepoObject_SqlModules_71_reference_ExpliciteTableAlias::source_RepoObject_guid
 repo.RepoObject::SysObject_fullname <-- sqlparse.RepoObject_SqlModules_71_reference_ExpliciteTableAlias::source_SysObject_fullname
-repo.RepoObjectColumn::RepoObjectColumn_guid <-- sqlparse.RepoObject_SqlModules_71_reference_ExpliciteTableAlias::source_RepoObjectColumn_guid
 repo.RepoObjectColumn::RepoObjectColumn_guid <-- sqlparse.RepoObject_SqlModules_71_reference_ExpliciteTableAlias::RepoObjectColumn_guid
+repo.RepoObjectColumn::RepoObjectColumn_guid <-- sqlparse.RepoObject_SqlModules_71_reference_ExpliciteTableAlias::source_RepoObjectColumn_guid
 repo.RepoObjectColumn::RepoObjectColumn_name <-- sqlparse.RepoObject_SqlModules_71_reference_ExpliciteTableAlias::RepoObjectColumn_name
 repo.RepoObjectColumn::RepoObjectColumn_name <-- sqlparse.RepoObject_SqlModules_71_reference_ExpliciteTableAlias::source_RepoObjectColumn_name

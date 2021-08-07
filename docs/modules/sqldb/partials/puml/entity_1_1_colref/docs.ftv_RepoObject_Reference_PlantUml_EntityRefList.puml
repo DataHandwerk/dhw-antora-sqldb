@@ -58,28 +58,34 @@ entity docs.RepoObject_Plantuml_Entity_T << U >> {
   * RepoObject_PumlOnlyPK : nvarchar(max)
 }
 
-entity reference.RepoObject_referenced_level_T << U >> {
-  **StartingNode_guid** : uniqueidentifier
-  **LastNode_guid** : uniqueidentifier
-  * **referenced_level** : int
+entity reference.RepoObject_ReferenceTree_0_30_T << U >> {
+  **RepoObject_guid** : uniqueidentifier
+  **Referencing_guid** : uniqueidentifier
+  **Referenced_guid** : uniqueidentifier
   --
-  LastNode_fullname : nvarchar(261)
-  LastNode_fullname2 : nvarchar(257)
-  ListNode : nvarchar(4000)
-  StartingNode_fullname : nvarchar(261)
-  StartingNode_fullname2 : nvarchar(257)
+  Referenced_Depth : int
+  Referenced_fullname : nvarchar(261)
+  Referenced_fullname2 : nvarchar(257)
+  Referenced_type : char(2)
+  Referencing_Depth : int
+  Referencing_fullname : nvarchar(261)
+  Referencing_fullname2 : nvarchar(257)
+  Referencing_type : varchar(2)
 }
 
-entity reference.RepoObject_referencing_level_T << U >> {
-  **StartingNode_guid** : uniqueidentifier
-  **LastNode_guid** : uniqueidentifier
-  * **referencing_level** : int
+entity reference.RepoObject_ReferenceTree_30_0_T << U >> {
   --
-  LastNode_fullname : nvarchar(261)
-  LastNode_fullname2 : nvarchar(257)
-  ListNode : nvarchar(4000)
-  StartingNode_fullname : nvarchar(261)
-  StartingNode_fullname2 : nvarchar(257)
+  Referenced_Depth : int
+  Referenced_fullname : nvarchar(261)
+  Referenced_fullname2 : nvarchar(257)
+  Referenced_guid : uniqueidentifier
+  Referenced_type : char(2)
+  Referencing_Depth : int
+  Referencing_fullname : nvarchar(261)
+  Referencing_fullname2 : nvarchar(257)
+  Referencing_guid : uniqueidentifier
+  Referencing_type : varchar(2)
+  RepoObject_guid : uniqueidentifier
 }
 
 entity repo.RepoObject << U >> {
@@ -122,7 +128,7 @@ entity repo.RepoObject << U >> {
 
 docs.ftv_RepoObject_Reference_PlantUml_EntityRefList <.. docs.RepoObject_Plantuml
 docs.RepoObject_Plantuml_Entity_T <.. docs.ftv_RepoObject_Reference_PlantUml_EntityRefList
-reference.RepoObject_referenced_level_T <.. docs.ftv_RepoObject_Reference_PlantUml_EntityRefList
-reference.RepoObject_referencing_level_T <.. docs.ftv_RepoObject_Reference_PlantUml_EntityRefList
+reference.RepoObject_ReferenceTree_0_30_T <.. docs.ftv_RepoObject_Reference_PlantUml_EntityRefList
+reference.RepoObject_ReferenceTree_30_0_T <.. docs.ftv_RepoObject_Reference_PlantUml_EntityRefList
 repo.RepoObject <.. docs.ftv_RepoObject_Reference_PlantUml_EntityRefList
 

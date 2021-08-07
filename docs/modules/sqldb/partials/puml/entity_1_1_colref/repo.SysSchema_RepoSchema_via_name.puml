@@ -62,10 +62,8 @@ entity repo_sys.SysSchema << V >> {
   SysSchema_RepoSchema_guid : uniqueidentifier
 }
 
-repo.RepoSchema <.. repo.usp_sync_guid_RepoSchema
 repo.RepoSchema <.. repo.SysSchema_RepoSchema_via_name
 repo.SysSchema_RepoSchema_via_name <.. repo.usp_sync_guid_RepoSchema
-repo_sys.SysSchema <.. repo.usp_sync_guid_RepoSchema
 repo_sys.SysSchema <.. repo.SysSchema_RepoSchema_via_name
 repo.RepoSchema::is_RepoSchema_name_uniqueidentifier <-- repo.SysSchema_RepoSchema_via_name::is_RepoSchema_name_uniqueidentifier
 repo.RepoSchema::is_SysSchema_missing <-- repo.SysSchema_RepoSchema_via_name::RepoSchema_is_SysSchema_missing

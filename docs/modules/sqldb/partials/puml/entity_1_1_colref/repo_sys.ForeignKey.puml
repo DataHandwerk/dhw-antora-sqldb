@@ -136,14 +136,13 @@ entity sys_dwh.foreign_keys << SN >> {
 }
 
 repo.RepoObject <.. repo_sys.ForeignKey
-repo_sys.ForeignKey <.. repo.ForeignKey_IndexPattern
 repo_sys.ForeignKey <.. repo_sys.ForeignKeyColumn
-repo_sys.ForeignKeyColumn <.. repo.ForeignKey_IndexPattern
+repo_sys.ForeignKey <.. repo.ForeignKey_IndexPattern
 sys_dwh.foreign_keys <.. repo_sys.ForeignKey
-repo.RepoObject::RepoObject_fullname <-- repo_sys.ForeignKey::parent_RepoObject_fullname
 repo.RepoObject::RepoObject_fullname <-- repo_sys.ForeignKey::ForeignKey_fullname
-repo.RepoObject::RepoObject_guid <-- repo_sys.ForeignKey::parent_RepoObject_guid
+repo.RepoObject::RepoObject_fullname <-- repo_sys.ForeignKey::parent_RepoObject_fullname
 repo.RepoObject::RepoObject_guid <-- repo_sys.ForeignKey::ForeignKey_guid
+repo.RepoObject::RepoObject_guid <-- repo_sys.ForeignKey::parent_RepoObject_guid
 repo.RepoObject::SysObject_fullname <-- repo_sys.ForeignKey::parent_SysObject_fullname
 repo_sys.ForeignKey::ForeignKey_fullname <-- repo_sys.ForeignKeyColumn::ForeignKey_fullname
 repo_sys.ForeignKey::ForeignKey_guid <-- repo_sys.ForeignKeyColumn::ForeignKey_guid

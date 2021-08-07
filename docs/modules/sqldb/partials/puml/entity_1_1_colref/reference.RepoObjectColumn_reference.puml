@@ -57,6 +57,14 @@ entity reference.RepoObjectColumn_reference_T << U >> {
   referencing_RepoObject_guid : uniqueidentifier
   referencing_schema_name : nvarchar(128)
   referencing_type : char(2)
+  * {static} referenced_ro_fullname : nvarchar(261)
+  * {static} referenced_ro_fullname2 : nvarchar(257)
+  * {static} referenced_roc_fullname : nvarchar(392)
+  * {static} referenced_roc_fullname2 : nvarchar(386)
+  * {static} referencing_ro_fullname : nvarchar(261)
+  * {static} referencing_ro_fullname2 : nvarchar(257)
+  * {static} referencing_roc_fullname : nvarchar(392)
+  * {static} referencing_roc_fullname2 : nvarchar(386)
 }
 
 entity reference.RepoObjectColumn_reference_union << V >> {
@@ -92,7 +100,6 @@ entity reference.usp_PERSIST_RepoObjectColumn_reference_T << P >> {
 
 reference.RepoObjectColumn_reference <.. reference.RepoObjectColumn_reference_T
 reference.RepoObjectColumn_reference <.. reference.usp_PERSIST_RepoObjectColumn_reference_T
-reference.RepoObjectColumn_reference_T <.. reference.usp_PERSIST_RepoObjectColumn_reference_T
 reference.RepoObjectColumn_reference_union <.. reference.RepoObjectColumn_reference
 reference.RepoObjectColumn_reference::is_referenced_object <-- reference.RepoObjectColumn_reference_T::is_referenced_object
 reference.RepoObjectColumn_reference::is_referencing_object_equal_referenced_object <-- reference.RepoObjectColumn_reference_T::is_referencing_object_equal_referenced_object

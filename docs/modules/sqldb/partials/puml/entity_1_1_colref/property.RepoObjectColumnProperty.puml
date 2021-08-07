@@ -34,7 +34,7 @@ entity property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn << V >> {
   --
   * parent_RepoObject_guid : uniqueidentifier
   * parent_RepoObject_type : char(2)
-  * property_value : sql_variant
+  property_value : nvarchar(4000)
   Repo_user_type_fullname : nvarchar(128)
   * RepoObjectColumn_guid : uniqueidentifier
 }
@@ -53,16 +53,13 @@ entity property.RepoObjectColumnProperty << U >> {
   --
   inheritance : tinyint
   * property_name : nvarchar(128)
-  * property_value : sql_variant
+  * property_value : nvarchar(max)
   * RepoObjectColumn_guid : uniqueidentifier
-  {abstract} property_basetype : sql_variant
   {abstract} property_bigint : bigint
   {abstract} property_float : float
   {abstract} property_int : int
   {abstract} property_money : money
-  {abstract} property_nvarchar : nvarchar(4000)
   {abstract} property_real : real
-  {abstract} property_varchar : varchar(8000)
 }
 
 entity property.RepoObjectColumnProperty_ForUpdate << V >> {
@@ -70,7 +67,7 @@ entity property.RepoObjectColumnProperty_ForUpdate << V >> {
   --
   inheritance : tinyint
   * property_name : nvarchar(128)
-  * property_value : sql_variant
+  * property_value : nvarchar(max)
   * RepoObject_fullname : nvarchar(261)
   * RepoObject_fullname2 : nvarchar(257)
   * RepoObject_guid : uniqueidentifier
@@ -92,7 +89,7 @@ entity property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition <
   par_Inheritance_StringAggSeparatorSql : nvarchar(4000)
   par_InheritanceDefinition : nvarchar(4000)
   par_InheritanceType : int
-  property_value : sql_variant
+  property_value : nvarchar(max)
   * RepoObjectColumn_name : nvarchar(128)
   roc_Inheritance_StringAggSeparatorSql : nvarchar(4000)
   roc_InheritanceDefinition : nvarchar(4000)
@@ -108,7 +105,7 @@ entity property.RepoObjectColumnProperty_sys_repo << V >> {
   --
   property_value : sql_variant
   RepoObjectColumnProperty_id : int
-  RepoObjectColumnProperty_property_value : sql_variant
+  RepoObjectColumnProperty_property_value : nvarchar(max)
   SysObject_name : nvarchar(128)
   SysObject_schema_name : nvarchar(128)
   SysObjectColumn_name : nvarchar(128)
@@ -126,24 +123,25 @@ entity property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate << P >> {
   --
 }
 
-property.PropertyName_RepoObjectColumn <.. property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition
-property.RepoObjectColumnProperty <.. property.fs_get_RepoObjectColumnProperty_nvarchar
-property.RepoObjectColumnProperty <.. property.PropertyName_RepoObjectColumn
-property.RepoObjectColumnProperty <.. property.usp_RepoObjectColumn_Inheritance
+property.RepoObjectColumnProperty <.. property.RepoObjectColumnProperty_sys_repo
 property.RepoObjectColumnProperty <.. property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn
 property.RepoObjectColumnProperty <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
-property.RepoObjectColumnProperty <.. property.RepoObjectColumnProperty_ForUpdate
-property.RepoObjectColumnProperty <.. property.usp_RepoObjectColumnProperty_set
-property.RepoObjectColumnProperty <.. property.RepoObjectColumnProperty_sys_repo
+property.RepoObjectColumnProperty <.. property.PropertyName_RepoObjectColumn
+property.RepoObjectColumnProperty <.. property.usp_RepoObjectColumn_Inheritance
 property.RepoObjectColumnProperty <.. property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition
-property.RepoObjectColumnProperty_sys_repo <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
-property.PropertyName_RepoObjectColumn::property_name <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::property_name
+property.RepoObjectColumnProperty <.. property.fs_get_RepoObjectColumnProperty_nvarchar
+property.RepoObjectColumnProperty <.. property.usp_RepoObjectColumnProperty_set
+property.RepoObjectColumnProperty <.. property.RepoObjectColumnProperty_ForUpdate
 property.RepoObjectColumnProperty::inheritance <-- property.RepoObjectColumnProperty_ForUpdate::inheritance
-property.RepoObjectColumnProperty::property_name <-- property.RepoObjectColumnProperty_ForUpdate::property_name
 property.RepoObjectColumnProperty::property_name <-- property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::property_name
-property.RepoObjectColumnProperty::property_value <-- property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::property_value
+property.RepoObjectColumnProperty::property_name <-- property.RepoObjectColumnProperty_ForUpdate::property_name
+property.RepoObjectColumnProperty::property_value <-- property.RepoObjectColumnProperty::property_int
+property.RepoObjectColumnProperty::property_value <-- property.RepoObjectColumnProperty::property_bigint
+property.RepoObjectColumnProperty::property_value <-- property.RepoObjectColumnProperty::property_real
+property.RepoObjectColumnProperty::property_value <-- property.RepoObjectColumnProperty::property_float
+property.RepoObjectColumnProperty::property_value <-- property.RepoObjectColumnProperty::property_money
 property.RepoObjectColumnProperty::property_value <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::property_value
 property.RepoObjectColumnProperty::property_value <-- property.RepoObjectColumnProperty_ForUpdate::property_value
-property.RepoObjectColumnProperty::RepoObjectColumn_guid <-- property.RepoObjectColumnProperty_ForUpdate::RepoObjectColumn_guid
 property.RepoObjectColumnProperty::RepoObjectColumn_guid <-- property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::RepoObjectColumn_guid
+property.RepoObjectColumnProperty::RepoObjectColumn_guid <-- property.RepoObjectColumnProperty_ForUpdate::RepoObjectColumn_guid
 property.RepoObjectColumnProperty::RepoObjectColumnProperty_id <-- property.RepoObjectColumnProperty_ForUpdate::RepoObjectColumnProperty_id

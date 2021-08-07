@@ -47,7 +47,7 @@ entity property.ExtendedProperty_Repo2Sys_level1 << V >> {
   --
   level2name : varchar(128)
   level2type : varchar(10)
-  property_value : sql_variant
+  property_value : nvarchar(4000)
   * RepoObject_guid : uniqueidentifier
   * RepoObject_type : char(2)
 }
@@ -63,7 +63,7 @@ entity property.ExtendedProperty_Repo2Sys_level2_RepoObject << V >> {
   --
   * parent_RepoObject_guid : uniqueidentifier
   * parent_RepoObject_type : char(2)
-  property_value : sql_variant
+  property_value : nvarchar(4000)
   * RepoObject_guid : uniqueidentifier
   * RepoObject_type : char(2)
 }
@@ -79,7 +79,7 @@ entity property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn << V >> {
   --
   * parent_RepoObject_guid : uniqueidentifier
   * parent_RepoObject_type : char(2)
-  * property_value : sql_variant
+  property_value : nvarchar(4000)
   Repo_user_type_fullname : nvarchar(128)
   * RepoObjectColumn_guid : uniqueidentifier
 }
@@ -139,10 +139,10 @@ configT.type_level1type_level2type <.. property.ExtendedProperty_Repo2Sys_level2
 configT.type::type_desc <-- configT.type_level1type_level2type::type_desc
 configT.type_level1type_level2type::level1type <-- sys_self.ExtendedProperties_ParameterForAddUpdateDrop::type_level1type
 configT.type_level1type_level2type::level1type <-- repo_sys.ExtendedProperties_ParameterForAddUpdateDrop::type_level1type
-configT.type_level1type_level2type::level1type <-- property.ExtendedProperty_Repo2Sys_level2_RepoObject::level1type
 configT.type_level1type_level2type::level1type <-- property.ExtendedProperty_Repo2Sys_level1::level1type
+configT.type_level1type_level2type::level1type <-- property.ExtendedProperty_Repo2Sys_level2_RepoObject::level1type
 configT.type_level1type_level2type::level1type <-- property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::level1type
-configT.type_level1type_level2type::level2type <-- property.ExtendedProperty_Repo2Sys_level2_RepoObject::level2type
-configT.type_level1type_level2type::level2type <-- property.ExtendedProperty_Repo2Sys_level1::level2type
-configT.type_level1type_level2type::level2type <-- repo_sys.ExtendedProperties_ParameterForAddUpdateDrop::type_level2type
 configT.type_level1type_level2type::level2type <-- sys_self.ExtendedProperties_ParameterForAddUpdateDrop::type_level2type
+configT.type_level1type_level2type::level2type <-- repo_sys.ExtendedProperties_ParameterForAddUpdateDrop::type_level2type
+configT.type_level1type_level2type::level2type <-- property.ExtendedProperty_Repo2Sys_level1::level2type
+configT.type_level1type_level2type::level2type <-- property.ExtendedProperty_Repo2Sys_level2_RepoObject::level2type

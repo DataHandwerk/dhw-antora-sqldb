@@ -32,31 +32,30 @@ entity reference.ftv_RepoObject_ColumReferenceRepoObject << IF >> {
   RepoObject_type : char(2)
 }
 
-entity reference.RepoObjectColumn_reference_union << V >> {
+entity reference.RepoObjectColumn_reference_T << U >> {
+  **referenced_RepoObjectColumn_guid** : uniqueidentifier
+  **referencing_RepoObjectColumn_guid** : uniqueidentifier
   --
-  definition : nvarchar(max)
-  * InformationSource : varchar(34)
-  is_computed : bit
-  is_referenced_object : bit
-  is_referencing_object_equal_referenced_object : bit
+  is_referenced_object : tinyint
+  is_referencing_object_equal_referenced_object : tinyint
   referenced_column_name : nvarchar(128)
   referenced_entity_name : nvarchar(128)
-  referenced_id : int
-  referenced_minor_id : int
-  referenced_node_id : bigint
   referenced_RepoObject_guid : uniqueidentifier
-  referenced_RepoObjectColumn_guid : uniqueidentifier
   referenced_schema_name : nvarchar(128)
   referenced_type : char(2)
   referencing_column_name : nvarchar(128)
   referencing_entity_name : nvarchar(128)
-  referencing_id : int
-  referencing_minor_id : int
-  referencing_node_id : bigint
   referencing_RepoObject_guid : uniqueidentifier
-  referencing_RepoObjectColumn_guid : uniqueidentifier
   referencing_schema_name : nvarchar(128)
   referencing_type : char(2)
+  * {static} referenced_ro_fullname : nvarchar(261)
+  * {static} referenced_ro_fullname2 : nvarchar(257)
+  * {static} referenced_roc_fullname : nvarchar(392)
+  * {static} referenced_roc_fullname2 : nvarchar(386)
+  * {static} referencing_ro_fullname : nvarchar(261)
+  * {static} referencing_ro_fullname2 : nvarchar(257)
+  * {static} referencing_roc_fullname : nvarchar(392)
+  * {static} referencing_roc_fullname2 : nvarchar(386)
 }
 
 entity reference.RepoObjectColumn_RelationScript << V >> {
@@ -100,13 +99,14 @@ entity repo.RepoObjectColumn << U >> {
   * RepoObjectColumn_name : nvarchar(128)
   SysObjectColumn_column_id : int
   * SysObjectColumn_name : nvarchar(128)
+  * {static} Column_name : nvarchar(128)
   {abstract} has_different_sys_names : bit
   * {static} is_RepoObjectColumn_name_uniqueidentifier : int
   * {static} is_SysObjectColumn_name_uniqueidentifier : int
 }
 
-reference.RepoObjectColumn_reference_union <.. reference.RepoObjectColumn_RelationScript
+reference.RepoObjectColumn_reference_T <.. reference.RepoObjectColumn_RelationScript
 reference.RepoObjectColumn_RelationScript <.. reference.ftv_RepoObject_ColumReferenceRepoObject
 repo.RepoObjectColumn <.. reference.RepoObjectColumn_RelationScript
-reference.RepoObjectColumn_reference_union::referenced_RepoObject_guid <-- reference.RepoObjectColumn_RelationScript::referenced_RepoObject_guid
-reference.RepoObjectColumn_reference_union::referencing_RepoObject_guid <-- reference.RepoObjectColumn_RelationScript::referencing_RepoObject_guid
+reference.RepoObjectColumn_reference_T::referenced_RepoObject_guid <-- reference.RepoObjectColumn_RelationScript::referenced_RepoObject_guid
+reference.RepoObjectColumn_reference_T::referencing_RepoObject_guid <-- reference.RepoObjectColumn_RelationScript::referencing_RepoObject_guid

@@ -27,7 +27,7 @@ entity config.ftv_dwh_database << IF >> {
   --
 }
 
-entity reference.RepoObject_reference_union << V >> {
+entity reference.RepoObject_reference_T << U >> {
   **referenced_RepoObject_guid** : uniqueidentifier
   **referencing_RepoObject_guid** : uniqueidentifier
   --
@@ -60,9 +60,8 @@ entity repo.RepoObjectColumn_gross << V >> {
 }
 
 config.ftv_dwh_database <.. reference.RepoObjectColumn_reference_QueryPlan
-reference.RepoObject_reference_union <.. reference.RepoObjectColumn_reference_QueryPlan
+reference.RepoObject_reference_T <.. reference.RepoObjectColumn_reference_QueryPlan
 reference.RepoObjectColumn_reference_QueryPlan <.. reference.SysObjectColumn_QueryPlanExpression
 reference.RepoObjectSource_QueryPlan <.. reference.RepoObjectColumn_reference_QueryPlan
-repo.RepoObject <.. repo.RepoObjectColumn_gross
 repo.RepoObject <.. reference.RepoObjectColumn_reference_QueryPlan
 repo.RepoObjectColumn_gross <.. reference.RepoObjectColumn_reference_QueryPlan

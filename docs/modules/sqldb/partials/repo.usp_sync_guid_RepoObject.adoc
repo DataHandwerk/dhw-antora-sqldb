@@ -40,7 +40,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-07-14 19:36:10
+2021-08-07 17:38:06
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -246,7 +246,52 @@ check is required by `schema_name` and `name` but not by SysObject_ID, because S
 
 
 delete objects, missing in SysObjects, if they are not is_repo_managed +
-if they are is_repo_managed we don't want to delete them but there sho
+if they are is_repo_managed we don't want to delete them but there should be some handling
+
+|2110
+
+|2310
+|
+*UPDATE other properties, where not is_repo_managed  = 1*
+
+* u
+* [repo_sys].[SysObject]
+* [repo].[RepoObject]
+
+
+update other properties for RepoObject which are not is_repo_managed
+
+we do this after updating guid in SysObjects to ensure the guid can be used to get [history_table_guid]
+
+|2120
+
+|3010
+|
+*DELETE [reference].[RepoObjectSource_virtual] missing Source_RepoObject_guid*
+
+* d
+* [repo].[RepoObject]
+* [reference].[RepoObjectSource_virtual]
+
+|
+
+|4010
+|
+*SET [Repo_temporal_type]*
+
+* u
+* [repo].[RepoObject_persistence]
+* [repo].[RepoObject]
+
+
+set temporal_type
+
+* 0 = NON_TEMPORAL_TABLE
+* 1 = HISTORY_TABLE
+* 2 = SYSTEM_VERSIONED_TEMPORAL_TABLE
+|
+|===
+
 // end::adocuspsteps[]
 
 
@@ -254,10 +299,7 @@ if they are is_repo_managed we don't want to delete them but there sho
 
 // tag::antorareferencedlist[]
 * xref:config.fs_get_parameter_value.adoc[]
-* xref:config.type_level1type_level2type.adoc[]
-* xref:graph.RepoObject.adoc[]
-* xref:graph.RepoObject_S.adoc[]
-* xref:graph.usp_PERSIST_RepoObject.adoc[]
+* xref:configT.type_level1type_level2type.adoc[]
 * xref:logs.usp_ExecutionLog_insert.adoc[]
 * xref:reference.RepoObjectSource_virtual.adoc[]
 * xref:repo.RepoObject.adoc[]
@@ -289,6 +331,27 @@ EXEC [repo].[usp_sync_guid_RepoObject]
 // tag::exampleusage_2[]
 
 // end::exampleusage_2[]
+
+
+== exampleUsage_3
+
+// tag::exampleusage_3[]
+
+// end::exampleusage_3[]
+
+
+== exampleUsage_4
+
+// tag::exampleusage_4[]
+
+// end::exampleusage_4[]
+
+
+== exampleUsage_5
+
+// tag::exampleusage_5[]
+
+// end::exampleusage_5[]
 
 
 == exampleWrong_Usage
@@ -483,6 +546,13 @@ EXEC [repo].[usp_sync_guid_RepoObject]
 // tag::usp_persistence_repoobject_guid[]
 
 // end::usp_persistence_repoobject_guid[]
+
+
+== UspExamples
+
+// tag::uspexamples[]
+
+// end::uspexamples[]
 
 
 == UspParameters
@@ -1051,7 +1121,7 @@ SELECT [T1].[RepoObject_guid]
  , [level2Name] = NULL
  , [T1].[SysObject_type]
 FROM repo.SysObject_RepoObject_via_name AS T1
-INNER JOIN [config].[type_level1type_level2type] AS T2
+INNER JOIN [configT].[type_level1type_level2type] AS T2
  ON T1.SysObject_type = T2.type
 WHERE NOT [T1].[RepoObject_guid] IS NULL
  AND [T1].[SysObject_RepoObject_guid] IS NULL
@@ -1074,11 +1144,11 @@ SELECT [T1].[RepoObject_guid]
 --, [parent].[SysObject_name]
 --, [parent].[SysObject_type]
 FROM repo.SysObject_RepoObject_via_name AS T1
-INNER JOIN [config].[type_level1type_level2type] AS T2
+INNER JOIN [configT].[type_level1type_level2type] AS T2
  ON T1.SysObject_type = T2.type
 INNER JOIN repo.SysObject_RepoObject_via_name AS parent
  ON T1.parent_object_id = parent.SysObject_id
-INNER JOIN [config].[type_level1type_level2type] AS T4
+INNER JOIN [configT].[type_level1type_level2type] AS T4
  ON parent.SysObject_type = T4.type
 WHERE NOT [T1].[RepoObject_guid] IS NULL
  AND [T1].[SysObject_RepoObject_guid] IS NULL
@@ -1392,53 +1462,6 @@ EXEC logs.usp_ExecutionLog_insert
  , @source_object = @source_object
  , @target_object = @target_object
  , @updated = @rows
--- Logging END --
-
-/*{"ReportUspStep":[{"Number":5200,"Name":"[graph].[usp_PERSIST_RepoObject]","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
-EXEC [graph].[usp_PERSIST_RepoObject]
---add your own parameters
---logging parameters
- @execution_instance_guid = @execution_instance_guid
- , @ssis_execution_id = @ssis_execution_id
- , @sub_execution_id = @sub_execution_id
- , @parent_execution_log_id = @current_execution_log_id
-
-
-/*{"ReportUspStep":[{"Number":5210,"Name":"UPDATE [graph].[RepoObject] - ensure current case","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":0}]}*/
-PRINT CONCAT('usp_id;Number;Parent_Number: ',8,';',5210,';',NULL);
-
-UPDATE T
-SET [RepoObject_fullname] = [S].[RepoObject_fullname]
- , [RepoObject_fullname2] = [S].[RepoObject_fullname2]
-FROM [graph].[RepoObject] [T]
-INNER JOIN [graph].[RepoObject_S] [S]
- ON [S].[RepoObject_guid] = [T].[RepoObject_guid]
-WHERE [S].[RepoObject_fullname] COLLATE Latin1_General_CS_AS <> [T].[RepoObject_fullname] COLLATE Latin1_General_CS_AS
- OR [S].[RepoObject_fullname2] COLLATE Latin1_General_CS_AS <> [T].[RepoObject_fullname2] COLLATE Latin1_General_CS_AS
-
-
--- Logging START --
-SET @rows = @@ROWCOUNT
-SET @step_id = @step_id + 1
-SET @step_name = 'UPDATE [graph].[RepoObject] - ensure current case'
-SET @source_object = NULL
-SET @target_object = NULL
-
-EXEC logs.usp_ExecutionLog_insert 
- @execution_instance_guid = @execution_instance_guid
- , @ssis_execution_id = @ssis_execution_id
- , @sub_execution_id = @sub_execution_id
- , @parent_execution_log_id = @parent_execution_log_id
- , @current_execution_guid = @current_execution_guid
- , @proc_id = @proc_id
- , @proc_schema_name = @proc_schema_name
- , @proc_name = @proc_name
- , @event_info = @event_info
- , @step_id = @step_id
- , @step_name = @step_name
- , @source_object = @source_object
- , @target_object = @target_object
-
 -- Logging END --
 
 --

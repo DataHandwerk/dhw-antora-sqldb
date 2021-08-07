@@ -37,23 +37,6 @@ entity docs.RepoObject_IndexList << V >> {
   PumlIndexList : nvarchar(max)
 }
 
-entity graph.Index_S << V >> {
-  * **Index_guid** : uniqueidentifier
-  --
-  Index_name : nvarchar(128)
-  * index_type : tinyint
-  IndexPatternColumnDatatype : nvarchar(4000)
-  IndexPatternColumnName : nvarchar(4000)
-  IndexSemanticGroup : nvarchar(512)
-  is_index_disabled : bit
-  is_index_primary_key : bit
-  is_index_real : bit
-  is_index_unique : bit
-  * RepoObject_fullname : nvarchar(261)
-  * RepoObject_fullname2 : nvarchar(257)
-  RepoObject_guid : uniqueidentifier
-}
-
 entity repo.ForeignKey_gross << V >> {
   **ForeignKey_guid** : uniqueidentifier
   --
@@ -232,6 +215,9 @@ entity repo.RepoObject_gross << V >> {
   is_persistence_delete_changed : bit
   is_persistence_delete_missing : bit
   is_persistence_insert : bit
+  is_persistence_merge_delete_missing : bit
+  is_persistence_merge_insert : bit
+  is_persistence_merge_update_changed : bit
   is_persistence_truncate : bit
   is_persistence_update_changed : bit
   is_repo_managed : bit
@@ -266,6 +252,7 @@ entity repo.RepoObject_gross << V >> {
   * RepoObject_schema_name : nvarchar(128)
   * RepoObject_type : char(2)
   RepoObject_type_name : nvarchar(128)
+  source_filter : nvarchar(4000)
   sql_modules_antora : nvarchar(max)
   sql_modules_definition : nvarchar(max)
   sql_modules_formatted : nvarchar(max)
@@ -282,6 +269,7 @@ entity repo.RepoObject_gross << V >> {
   * SysObject_schema_name : nvarchar(128)
   SysObject_type : char(2)
   SysObject_type_name : nvarchar(128)
+  target_filter : nvarchar(4000)
   temporal_type : tinyint
   * usp_persistence_name : nvarchar(140)
   usp_persistence_RepoObject_guid : uniqueidentifier
@@ -311,27 +299,19 @@ entity repo.usp_Index_virtual_set << P >> {
   --
 }
 
-repo.ForeignKey_gross <.. docs.RepoObject_IndexList
 repo.Index_ColumList <.. repo.Index_gross
 repo.Index_gross <.. repo.RepoObject_SqlCreateTable
 repo.Index_gross <.. repo.usp_index_inheritance
 repo.Index_gross <.. repo.usp_Index_virtual_set
-repo.Index_gross <.. graph.Index_S
-repo.Index_gross <.. repo.ForeignKey_gross
-repo.Index_gross <.. docs.AntoraIndexSemanticgroupPatterndatatype
-repo.Index_gross <.. docs.RepoObject_IndexList
-repo.Index_gross <.. repo.usp_Index_finish
 repo.Index_gross <.. repo.ForeignKey_Indexes
 repo.Index_gross <.. repo.ForeignKey_virtual_Indexes
-repo.Index_Settings <.. repo.usp_Index_virtual_set
-repo.Index_Settings <.. repo.usp_Index_finish
-repo.Index_Settings <.. repo.RepoObject_gross
+repo.Index_gross <.. repo.usp_Index_finish
+repo.Index_gross <.. docs.RepoObject_IndexList
+repo.Index_gross <.. docs.AntoraIndexSemanticgroupPatterndatatype
+repo.Index_gross <.. repo.ForeignKey_gross
 repo.Index_Settings <.. repo.Index_gross
 repo.Index_union <.. repo.Index_gross
-repo.Index_union <.. repo.usp_Index_finish
 repo.RepoObject_gross <.. repo.Index_gross
-repo.RepoObject_gross <.. repo.RepoObject_SqlCreateTable
-repo.usp_Index_finish <.. repo.usp_index_inheritance
 repo.Index_ColumList::AntoraIndexColumnList <-- repo.Index_gross::AntoraIndexColumnList
 repo.Index_ColumList::ColumnList <-- repo.Index_gross::ColumnList
 repo.Index_ColumList::ConstraintColumnList <-- repo.Index_gross::ConstraintColumnList
@@ -340,59 +320,43 @@ repo.Index_ColumList::PersistenceWhereColumnList <-- repo.Index_gross::Persisten
 repo.Index_ColumList::PumlIndexColumnList <-- repo.Index_gross::PumlIndexColumnList
 repo.Index_gross::index_guid <-- repo.ForeignKey_Indexes::referenced_index_guid
 repo.Index_gross::index_guid <-- repo.ForeignKey_Indexes::referencing_index_guid
-repo.Index_gross::index_guid <-- graph.Index_S::Index_guid
-repo.Index_gross::index_name <-- graph.Index_S::Index_name
-repo.Index_gross::index_name <-- repo.ForeignKey_gross::referencing_index_name
 repo.Index_gross::index_name <-- repo.ForeignKey_gross::referenced_index_name
-repo.Index_gross::index_name <-- repo.ForeignKey_Indexes::referencing_index_name
+repo.Index_gross::index_name <-- repo.ForeignKey_gross::referencing_index_name
 repo.Index_gross::index_name <-- repo.ForeignKey_Indexes::referenced_index_name
+repo.Index_gross::index_name <-- repo.ForeignKey_Indexes::referencing_index_name
 repo.Index_gross::index_name <-- repo.ForeignKey_virtual_Indexes::referenced_index_name
 repo.Index_gross::index_name <-- repo.ForeignKey_virtual_Indexes::referencing_index_name
-repo.Index_gross::index_type <-- graph.Index_S::index_type
-repo.Index_gross::IndexPatternColumnDatatype <-- graph.Index_S::IndexPatternColumnDatatype
-repo.Index_gross::IndexPatternColumnDatatype <-- docs.AntoraIndexSemanticgroupPatterndatatype::IndexPatternColumnDatatype
+repo.Index_gross::IndexPatternColumnDatatype <-- repo.ForeignKey_Indexes::referenced_IndexPatternColumnDatatype
+repo.Index_gross::IndexPatternColumnDatatype <-- repo.ForeignKey_Indexes::referencing_IndexPatternColumnDatatype
 repo.Index_gross::IndexPatternColumnDatatype <-- repo.ForeignKey_virtual_Indexes::referenced_IndexPatternColumnDatatype
 repo.Index_gross::IndexPatternColumnDatatype <-- repo.ForeignKey_virtual_Indexes::referencing_IndexPatternColumnDatatype
-repo.Index_gross::IndexPatternColumnDatatype <-- repo.ForeignKey_Indexes::referencing_IndexPatternColumnDatatype
-repo.Index_gross::IndexPatternColumnDatatype <-- repo.ForeignKey_Indexes::referenced_IndexPatternColumnDatatype
-repo.Index_gross::IndexPatternColumnName <-- repo.ForeignKey_virtual_Indexes::referencing_IndexPatternColumnName
+repo.Index_gross::IndexPatternColumnDatatype <-- docs.AntoraIndexSemanticgroupPatterndatatype::IndexPatternColumnDatatype
 repo.Index_gross::IndexPatternColumnName <-- repo.ForeignKey_virtual_Indexes::referenced_IndexPatternColumnName
-repo.Index_gross::IndexPatternColumnName <-- graph.Index_S::IndexPatternColumnName
-repo.Index_gross::IndexSemanticGroup <-- graph.Index_S::IndexSemanticGroup
+repo.Index_gross::IndexPatternColumnName <-- repo.ForeignKey_virtual_Indexes::referencing_IndexPatternColumnName
 repo.Index_gross::IndexSemanticGroup <-- docs.AntoraIndexSemanticgroupPatterndatatype::IndexSemanticGroup
-repo.Index_gross::is_index_disabled <-- graph.Index_S::is_index_disabled
-repo.Index_gross::is_index_primary_key <-- graph.Index_S::is_index_primary_key
-repo.Index_gross::is_index_real <-- graph.Index_S::is_index_real
-repo.Index_gross::is_index_unique <-- graph.Index_S::is_index_unique
-repo.Index_gross::parent_RepoObject_guid <-- graph.Index_S::RepoObject_guid
-repo.Index_gross::parent_RepoObject_guid <-- docs.RepoObject_IndexList::RepoObject_guid
 repo.Index_gross::parent_RepoObject_guid <-- repo.ForeignKey_virtual_Indexes::referenced_RepoObject_guid
 repo.Index_gross::parent_RepoObject_guid <-- repo.ForeignKey_virtual_Indexes::referencing_RepoObject_guid
-repo.Index_gross::RepoObject_fullname <-- repo.ForeignKey_virtual_Indexes::referencing_RepoObject_fullname
-repo.Index_gross::RepoObject_fullname <-- repo.ForeignKey_virtual_Indexes::referenced_RepoObject_fullname
-repo.Index_gross::RepoObject_fullname <-- repo.ForeignKey_Indexes::referencing_RepoObject_fullname
+repo.Index_gross::parent_RepoObject_guid <-- docs.RepoObject_IndexList::RepoObject_guid
 repo.Index_gross::RepoObject_fullname <-- repo.ForeignKey_Indexes::referenced_RepoObject_fullname
-repo.Index_gross::RepoObject_fullname <-- graph.Index_S::RepoObject_fullname
-repo.Index_gross::RepoObject_fullname2 <-- graph.Index_S::RepoObject_fullname2
+repo.Index_gross::RepoObject_fullname <-- repo.ForeignKey_Indexes::referencing_RepoObject_fullname
+repo.Index_gross::RepoObject_fullname <-- repo.ForeignKey_virtual_Indexes::referenced_RepoObject_fullname
+repo.Index_gross::RepoObject_fullname <-- repo.ForeignKey_virtual_Indexes::referencing_RepoObject_fullname
 repo.Index_gross::RepoObject_fullname2 <-- repo.ForeignKey_Indexes::referenced_RepoObject_fullname2
 repo.Index_gross::RepoObject_fullname2 <-- repo.ForeignKey_Indexes::referencing_RepoObject_fullname2
 repo.Index_gross::RepoObject_fullname2 <-- repo.ForeignKey_virtual_Indexes::referenced_RepoObject_fullname2
 repo.Index_gross::RepoObject_fullname2 <-- repo.ForeignKey_virtual_Indexes::referencing_RepoObject_fullname2
-repo.Index_gross::SysObject_name <-- repo.ForeignKey_virtual_Indexes::referenced_SysObject_name
-repo.Index_gross::SysObject_name <-- repo.ForeignKey_virtual_Indexes::referencing_SysObject_name
 repo.Index_gross::SysObject_name <-- repo.ForeignKey_Indexes::referenced_SysObject_name
 repo.Index_gross::SysObject_name <-- repo.ForeignKey_Indexes::referencing_SysObject_name
-repo.Index_gross::SysObject_schema_name <-- repo.ForeignKey_Indexes::referencing_SysObject_schema_name
+repo.Index_gross::SysObject_name <-- repo.ForeignKey_virtual_Indexes::referenced_SysObject_name
+repo.Index_gross::SysObject_name <-- repo.ForeignKey_virtual_Indexes::referencing_SysObject_name
 repo.Index_gross::SysObject_schema_name <-- repo.ForeignKey_Indexes::referenced_SysObject_schema_name
+repo.Index_gross::SysObject_schema_name <-- repo.ForeignKey_Indexes::referencing_SysObject_schema_name
 repo.Index_gross::SysObject_schema_name <-- repo.ForeignKey_virtual_Indexes::referenced_SysObject_schema_name
 repo.Index_gross::SysObject_schema_name <-- repo.ForeignKey_virtual_Indexes::referencing_SysObject_schema_name
 repo.Index_Settings::index_guid <-- repo.Index_gross::index_guid
 repo.Index_Settings::IndexPatternColumnDatatype <-- repo.Index_gross::IndexPatternColumnDatatype
-repo.Index_Settings::IndexPatternColumnDatatype <-- repo.RepoObject_gross::pk_IndexPatternColumnDatatype
-repo.Index_Settings::IndexPatternColumnName <-- repo.RepoObject_gross::pk_IndexPatternColumnName
 repo.Index_Settings::IndexPatternColumnName <-- repo.Index_gross::IndexPatternColumnName
 repo.Index_Settings::IndexSemanticGroup <-- repo.Index_gross::IndexSemanticGroup
-repo.Index_Settings::IndexSemanticGroup <-- repo.RepoObject_gross::pk_IndexSemanticGroup
 repo.Index_union::index_name <-- repo.Index_gross::index_name
 repo.Index_union::index_type <-- repo.Index_gross::index_type
 repo.Index_union::is_index_disabled <-- repo.Index_gross::is_index_disabled

@@ -87,16 +87,13 @@ entity property.RepoObjectProperty << U >> {
   --
   inheritance : tinyint
   * property_name : nvarchar(128)
-  property_value : sql_variant
+  property_value : nvarchar(max)
   * RepoObject_guid : uniqueidentifier
-  {abstract} property_basetype : sql_variant
   {abstract} property_bigint : bigint
   {abstract} property_float : float
   {abstract} property_int : int
   {abstract} property_money : money
-  {abstract} property_nvarchar : nvarchar(4000)
   {abstract} property_real : real
-  {abstract} property_varchar : varchar(8000)
 }
 
 entity property.RepoObjectProperty_cross << V >> {
@@ -130,6 +127,9 @@ entity repo.RepoObject_gross << V >> {
   is_persistence_delete_changed : bit
   is_persistence_delete_missing : bit
   is_persistence_insert : bit
+  is_persistence_merge_delete_missing : bit
+  is_persistence_merge_insert : bit
+  is_persistence_merge_update_changed : bit
   is_persistence_truncate : bit
   is_persistence_update_changed : bit
   is_repo_managed : bit
@@ -164,6 +164,7 @@ entity repo.RepoObject_gross << V >> {
   * RepoObject_schema_name : nvarchar(128)
   * RepoObject_type : char(2)
   RepoObject_type_name : nvarchar(128)
+  source_filter : nvarchar(4000)
   sql_modules_antora : nvarchar(max)
   sql_modules_definition : nvarchar(max)
   sql_modules_formatted : nvarchar(max)
@@ -180,6 +181,7 @@ entity repo.RepoObject_gross << V >> {
   * SysObject_schema_name : nvarchar(128)
   SysObject_type : char(2)
   SysObject_type_name : nvarchar(128)
+  target_filter : nvarchar(4000)
   temporal_type : tinyint
   * usp_persistence_name : nvarchar(140)
   usp_persistence_RepoObject_guid : uniqueidentifier
@@ -187,7 +189,6 @@ entity repo.RepoObject_gross << V >> {
 
 docs.RepoObject_Adoc <.. docs.RepoObject_Adoc_T
 docs.RepoObject_Adoc <.. docs.usp_PERSIST_RepoObject_Adoc_T
-docs.RepoObject_Adoc_T <.. docs.usp_PERSIST_RepoObject_Adoc_T
 docs.RepoObject_ColumnList <.. docs.RepoObject_Adoc
 docs.RepoObject_IndexList_T <.. docs.RepoObject_Adoc
 docs.RepoObject_ParameterList <.. docs.RepoObject_Adoc

@@ -23,66 +23,10 @@ skinparam class {
 }
 
 
-entity graph.ReferencedObject << U >> {
-  --
-  * $edge_id_25B0DD35E10A49DE8B49228E6802F3EB : nvarchar(1000)
-  $from_id_7B1BEB60463741CAA681054A489A2714 : nvarchar(1000)
-  $to_id_26820C41BE034B00BCBC470518101233 : nvarchar(1000)
-  * from_id_7F3CEF660D794A2A81530928BC4B36F1 : bigint
-  * from_obj_id_A00C6316716D4F9DABE96A189F3A214A : int
-  * graph_id_85ECDD019A4C46AF80CFD8DDFA08F479 : bigint
-  * to_id_45A2D6271B224A08B66CA0CF6A200A54 : bigint
-  * to_obj_id_F1F1771130674EE9A9DAE06330740E13 : int
-}
-
-entity graph.RepoObject << U >> {
-  --
-  * $node_id_FAC3EF4690DB4CD6A98F097DAF0885CC : nvarchar(1000)
-  * graph_id_60367FDA1A70430CA390F8144C223EC4 : bigint
-  * RepoObject_fullname : nvarchar(261)
-  RepoObject_fullname2 : nvarchar(257)
-  * RepoObject_guid : uniqueidentifier
-  * RepoObject_type : char(2)
-}
-
 entity reference.RepoObject_referenced_level << V >> {
-  **StartingNode_guid** : uniqueidentifier
-  **LastNode_guid** : uniqueidentifier
-  * **referenced_level** : int
   --
-  LastNode_fullname : nvarchar(261)
-  LastNode_fullname2 : nvarchar(257)
-  ListNode : nvarchar(4000)
-  StartingNode_fullname : nvarchar(261)
-  StartingNode_fullname2 : nvarchar(257)
+  * a : int
 }
 
-entity reference.RepoObject_referenced_level_T << U >> {
-  **StartingNode_guid** : uniqueidentifier
-  **LastNode_guid** : uniqueidentifier
-  * **referenced_level** : int
-  --
-  LastNode_fullname : nvarchar(261)
-  LastNode_fullname2 : nvarchar(257)
-  ListNode : nvarchar(4000)
-  StartingNode_fullname : nvarchar(261)
-  StartingNode_fullname2 : nvarchar(257)
-}
 
-entity reference.usp_PERSIST_RepoObject_referenced_level_T << P >> {
-  --
-}
 
-graph.ReferencedObject <.. reference.RepoObject_referenced_level
-graph.RepoObject <.. reference.RepoObject_referenced_level
-reference.RepoObject_referenced_level <.. reference.usp_PERSIST_RepoObject_referenced_level_T
-reference.RepoObject_referenced_level <.. reference.RepoObject_referenced_level_T
-reference.RepoObject_referenced_level_T <.. reference.usp_PERSIST_RepoObject_referenced_level_T
-reference.RepoObject_referenced_level::LastNode_fullname <-- reference.RepoObject_referenced_level_T::LastNode_fullname
-reference.RepoObject_referenced_level::LastNode_fullname2 <-- reference.RepoObject_referenced_level_T::LastNode_fullname2
-reference.RepoObject_referenced_level::LastNode_guid <-- reference.RepoObject_referenced_level_T::LastNode_guid
-reference.RepoObject_referenced_level::ListNode <-- reference.RepoObject_referenced_level_T::ListNode
-reference.RepoObject_referenced_level::referenced_level <-- reference.RepoObject_referenced_level_T::referenced_level
-reference.RepoObject_referenced_level::StartingNode_fullname <-- reference.RepoObject_referenced_level_T::StartingNode_fullname
-reference.RepoObject_referenced_level::StartingNode_fullname2 <-- reference.RepoObject_referenced_level_T::StartingNode_fullname2
-reference.RepoObject_referenced_level::StartingNode_guid <-- reference.RepoObject_referenced_level_T::StartingNode_guid

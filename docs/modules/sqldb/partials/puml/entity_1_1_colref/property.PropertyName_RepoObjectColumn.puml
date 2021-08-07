@@ -46,16 +46,13 @@ entity property.RepoObjectColumnProperty << U >> {
   --
   inheritance : tinyint
   * property_name : nvarchar(128)
-  * property_value : sql_variant
+  * property_value : nvarchar(max)
   * RepoObjectColumn_guid : uniqueidentifier
-  {abstract} property_basetype : sql_variant
   {abstract} property_bigint : bigint
   {abstract} property_float : float
   {abstract} property_int : int
   {abstract} property_money : money
-  {abstract} property_nvarchar : nvarchar(4000)
   {abstract} property_real : real
-  {abstract} property_varchar : varchar(8000)
 }
 
 entity property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition << V >> {
@@ -68,7 +65,7 @@ entity property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition <
   par_Inheritance_StringAggSeparatorSql : nvarchar(4000)
   par_InheritanceDefinition : nvarchar(4000)
   par_InheritanceType : int
-  property_value : sql_variant
+  property_value : nvarchar(max)
   * RepoObjectColumn_name : nvarchar(128)
   roc_Inheritance_StringAggSeparatorSql : nvarchar(4000)
   roc_InheritanceDefinition : nvarchar(4000)
@@ -79,15 +76,6 @@ entity property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition <
 }
 
 config.Parameter <.. property.PropertyName_RepoObjectColumn
-config.Parameter <.. property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition
 property.PropertyName_RepoObjectColumn <.. property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition
-property.RepoObjectColumnProperty <.. property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition
 property.RepoObjectColumnProperty <.. property.PropertyName_RepoObjectColumn
-config.Parameter::Parameter_value__result_int <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::par_InheritanceType
-config.Parameter::Parameter_value__result_int <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::sub_InheritanceType
-config.Parameter::Parameter_value__result_nvarchar <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::par_Inheritance_StringAggSeparatorSql
-config.Parameter::Parameter_value__result_nvarchar <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::par_InheritanceDefinition
-config.Parameter::Parameter_value__result_nvarchar <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::sub_Inheritance_StringAggSeparatorSql
-config.Parameter::Parameter_value__result_nvarchar <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::sub_InheritanceDefinition
 property.PropertyName_RepoObjectColumn::property_name <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::property_name
-property.RepoObjectColumnProperty::property_value <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::property_value

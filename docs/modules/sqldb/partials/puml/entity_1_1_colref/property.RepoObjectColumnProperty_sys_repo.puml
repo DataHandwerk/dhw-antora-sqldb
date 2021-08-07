@@ -28,16 +28,13 @@ entity property.RepoObjectColumnProperty << U >> {
   --
   inheritance : tinyint
   * property_name : nvarchar(128)
-  * property_value : sql_variant
+  * property_value : nvarchar(max)
   * RepoObjectColumn_guid : uniqueidentifier
-  {abstract} property_basetype : sql_variant
   {abstract} property_bigint : bigint
   {abstract} property_float : float
   {abstract} property_int : int
   {abstract} property_money : money
-  {abstract} property_nvarchar : nvarchar(4000)
   {abstract} property_real : real
-  {abstract} property_varchar : varchar(8000)
 }
 
 entity property.RepoObjectColumnProperty_sys_repo << V >> {
@@ -46,7 +43,7 @@ entity property.RepoObjectColumnProperty_sys_repo << V >> {
   --
   property_value : sql_variant
   RepoObjectColumnProperty_id : int
-  RepoObjectColumnProperty_property_value : sql_variant
+  RepoObjectColumnProperty_property_value : nvarchar(max)
   SysObject_name : nvarchar(128)
   SysObject_schema_name : nvarchar(128)
   SysObjectColumn_name : nvarchar(128)
@@ -128,6 +125,7 @@ entity repo.RepoObjectColumn << U >> {
   * RepoObjectColumn_name : nvarchar(128)
   SysObjectColumn_column_id : int
   * SysObjectColumn_name : nvarchar(128)
+  * {static} Column_name : nvarchar(128)
   {abstract} has_different_sys_names : bit
   * {static} is_RepoObjectColumn_name_uniqueidentifier : int
   * {static} is_SysObjectColumn_name_uniqueidentifier : int
@@ -156,12 +154,10 @@ entity repo_sys.ExtendedProperties << V >> {
 }
 
 property.RepoObjectColumnProperty <.. property.RepoObjectColumnProperty_sys_repo
-property.RepoObjectColumnProperty <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
 property.RepoObjectColumnProperty_sys_repo <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
 repo.RepoObject <.. property.RepoObjectColumnProperty_sys_repo
 repo.RepoObjectColumn <.. property.RepoObjectColumnProperty_sys_repo
 repo_sys.ExtendedProperties <.. property.RepoObjectColumnProperty_sys_repo
-repo_sys.ExtendedProperties <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
 repo.RepoObjectColumn::RepoObjectColumn_guid <-- property.RepoObjectColumnProperty_sys_repo::RepoObjectColumn_guid
 repo_sys.ExtendedProperties::entity_column_name <-- property.RepoObjectColumnProperty_sys_repo::SysObjectColumn_name
 repo_sys.ExtendedProperties::property_name <-- property.RepoObjectColumnProperty_sys_repo::property_name

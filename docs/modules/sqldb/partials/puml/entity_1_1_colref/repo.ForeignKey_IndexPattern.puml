@@ -123,7 +123,6 @@ entity repo_sys.ForeignKeyColumn << V >> {
 
 repo.ForeignKey_IndexPattern <.. repo.ForeignKey_Indexes
 repo_sys.ForeignKey <.. repo.ForeignKey_IndexPattern
-repo_sys.ForeignKey <.. repo_sys.ForeignKeyColumn
 repo_sys.ForeignKeyColumn <.. repo.ForeignKey_IndexPattern
 repo.ForeignKey_IndexPattern::delete_referential_action <-- repo.ForeignKey_Indexes::delete_referential_action
 repo.ForeignKey_IndexPattern::ForeignKey_fullname <-- repo.ForeignKey_Indexes::ForeignKey_fullname
@@ -134,10 +133,5 @@ repo.ForeignKey_IndexPattern::referenced_RepoObject_guid <-- repo.ForeignKey_Ind
 repo.ForeignKey_IndexPattern::referencing_IndexPatternColumnName <-- repo.ForeignKey_Indexes::referencing_IndexPatternColumnName
 repo.ForeignKey_IndexPattern::referencing_RepoObject_guid <-- repo.ForeignKey_Indexes::referencing_RepoObject_guid
 repo.ForeignKey_IndexPattern::update_referential_action <-- repo.ForeignKey_Indexes::update_referential_action
-repo_sys.ForeignKey::ForeignKey_fullname <-- repo_sys.ForeignKeyColumn::ForeignKey_fullname
-repo_sys.ForeignKey::ForeignKey_guid <-- repo_sys.ForeignKeyColumn::ForeignKey_guid
 repo_sys.ForeignKey::ForeignKey_guid <-- repo.ForeignKey_IndexPattern::ForeignKey_guid
-repo_sys.ForeignKey::name <-- repo_sys.ForeignKeyColumn::ForeignKey_name
 repo_sys.ForeignKey::object_id <-- repo.ForeignKey_IndexPattern::constraint_object_id
-repo_sys.ForeignKey::parent_RepoObject_fullname <-- repo_sys.ForeignKeyColumn::referencing_RepoObject_fullname
-repo_sys.ForeignKey::parent_SysObject_fullname <-- repo_sys.ForeignKeyColumn::referencing_SysObject_fullname

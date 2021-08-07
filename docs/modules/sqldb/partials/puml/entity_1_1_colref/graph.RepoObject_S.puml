@@ -23,26 +23,12 @@ skinparam class {
 }
 
 
-entity graph.RepoObject << U >> {
-  --
-  * $node_id_FAC3EF4690DB4CD6A98F097DAF0885CC : nvarchar(1000)
-  * graph_id_60367FDA1A70430CA390F8144C223EC4 : bigint
-  * RepoObject_fullname : nvarchar(261)
-  RepoObject_fullname2 : nvarchar(257)
-  * RepoObject_guid : uniqueidentifier
-  * RepoObject_type : char(2)
-}
-
 entity graph.RepoObject_S << V >> {
   * **RepoObject_guid** : uniqueidentifier
   --
   * RepoObject_fullname : nvarchar(261)
   RepoObject_fullname2 : nvarchar(257)
   * RepoObject_type : char(2)
-}
-
-entity graph.usp_PERSIST_RepoObject << P >> {
-  --
 }
 
 entity repo.RepoObject << U >> {
@@ -83,22 +69,7 @@ entity repo.RepoObject << U >> {
   * {static} usp_persistence_name : nvarchar(140)
 }
 
-entity repo.usp_sync_guid_RepoObject << P >> {
-  --
-}
-
-graph.RepoObject <.. graph.usp_PERSIST_RepoObject
-graph.RepoObject <.. repo.usp_sync_guid_RepoObject
-graph.RepoObject_S <.. repo.usp_sync_guid_RepoObject
-graph.RepoObject_S <.. graph.usp_PERSIST_RepoObject
-graph.RepoObject_S <.. graph.RepoObject
-graph.usp_PERSIST_RepoObject <.. repo.usp_sync_guid_RepoObject
-repo.RepoObject <.. repo.usp_sync_guid_RepoObject
 repo.RepoObject <.. graph.RepoObject_S
-graph.RepoObject_S::RepoObject_fullname <-- graph.RepoObject::RepoObject_fullname
-graph.RepoObject_S::RepoObject_fullname2 <-- graph.RepoObject::RepoObject_fullname2
-graph.RepoObject_S::RepoObject_guid <-- graph.RepoObject::RepoObject_guid
-graph.RepoObject_S::RepoObject_type <-- graph.RepoObject::RepoObject_type
 repo.RepoObject::RepoObject_fullname <-- graph.RepoObject_S::RepoObject_fullname
 repo.RepoObject::RepoObject_guid <-- graph.RepoObject_S::RepoObject_guid
 repo.RepoObject::RepoObject_type <-- graph.RepoObject_S::RepoObject_type

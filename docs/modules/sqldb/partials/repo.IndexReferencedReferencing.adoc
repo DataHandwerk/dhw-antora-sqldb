@@ -40,7 +40,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-07-14 19:36:08
+2021-08-05 02:42:51
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -78,14 +78,14 @@ view
 |
 |referenced_RepoObject_guid
 |uniqueidentifier
-|NULL
+|NOT NULL
 |
 |
 |===
 
 .Referenced Columns
 --
-* xref:reference.RepoObject_reference_union.adoc#column-referenced_RepoObject_guid[+reference.RepoObject_reference_union.referenced_RepoObject_guid+]
+* xref:reference.RepoObject_reference_T.adoc#column-referenced_RepoObject_guid[+reference.RepoObject_reference_T.referenced_RepoObject_guid+]
 --
 
 .Referencing Columns
@@ -102,14 +102,14 @@ view
 |
 |referencing_RepoObject_guid
 |uniqueidentifier
-|NULL
+|NOT NULL
 |
 |
 |===
 
 .Referenced Columns
 --
-* xref:reference.RepoObject_reference_union.adoc#column-referencing_RepoObject_guid[+reference.RepoObject_reference_union.referencing_RepoObject_guid+]
+* xref:reference.RepoObject_reference_T.adoc#column-referencing_RepoObject_guid[+reference.RepoObject_reference_T.referencing_RepoObject_guid+]
 --
 
 .Referencing Columns
@@ -224,14 +224,14 @@ normaly these indexes should have different columns
 |
 |<<column-referenced_RepoObject_guid>>
 |uniqueidentifier
-|NULL
+|NOT NULL
 |
 |
 
 |
 |<<column-referencing_RepoObject_guid>>
 |uniqueidentifier
-|NULL
+|NOT NULL
 |
 |
 
@@ -265,11 +265,10 @@ normaly these indexes should have different columns
 [[index-idx_IndexReferencedReferencing_1]]
 === idx_IndexReferencedReferencing++__++1
 
-* IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_index_guid[index_guid]
 +
 --
-* <<column-referenced_RepoObject_guid>>; uniqueidentifier
-* <<column-referencing_RepoObject_guid>>; uniqueidentifier
+* <<column-source_index_guid>>; uniqueidentifier
 --
 * PK, Unique, Real: 0, 0, 0
 
@@ -277,10 +276,11 @@ normaly these indexes should have different columns
 [[index-idx_IndexReferencedReferencing_2]]
 === idx_IndexReferencedReferencing++__++2
 
-* IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_index_guid[index_guid]
+* IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_no_group[no_group]
 +
 --
-* <<column-source_index_guid>>; uniqueidentifier
+* <<column-referenced_RepoObject_guid>>; uniqueidentifier
+* <<column-referencing_RepoObject_guid>>; uniqueidentifier
 --
 * PK, Unique, Real: 0, 0, 0
 
@@ -302,7 +302,7 @@ normaly these indexes should have different columns
 == AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:reference.RepoObject_reference_union.adoc[]
+* xref:reference.RepoObject_reference_T.adoc[]
 * xref:repo.Index_union.adoc[]
 * xref:repo.Index_virtual.adoc[]
 // end::antorareferencedlist[]
@@ -327,6 +327,27 @@ normaly these indexes should have different columns
 // tag::exampleusage_2[]
 
 // end::exampleusage_2[]
+
+
+== exampleUsage_3
+
+// tag::exampleusage_3[]
+
+// end::exampleusage_3[]
+
+
+== exampleUsage_4
+
+// tag::exampleusage_4[]
+
+// end::exampleusage_4[]
+
+
+== exampleUsage_5
+
+// tag::exampleusage_5[]
+
+// end::exampleusage_5[]
 
 
 == exampleWrong_Usage
@@ -513,6 +534,13 @@ normaly these indexes should have different columns
 // end::usp_persistence_repoobject_guid[]
 
 
+== UspExamples
+
+// tag::uspexamples[]
+
+// end::uspexamples[]
+
+
 == UspParameters
 
 // tag::uspparameters[]
@@ -525,6 +553,7 @@ normaly these indexes should have different columns
 // tag::sql_modules_definition[]
 [source,sql]
 ----
+
 
 
 /*
@@ -558,7 +587,7 @@ ORDER BY
          [Anz] DESC
 
 */
-CREATE View repo.IndexReferencedReferencing
+CREATE View [repo].[IndexReferencedReferencing]
 As
 --
 Select
@@ -571,7 +600,7 @@ Select
 From
     repo.Index_union                    As i_s --index source: index in referenced source object(s)
     Inner Join
-        [reference].RepoObject_reference_union As ror
+        [reference].RepoObject_reference_T As ror
             On
             ror.referenced_RepoObject_guid = i_s.parent_RepoObject_guid
 

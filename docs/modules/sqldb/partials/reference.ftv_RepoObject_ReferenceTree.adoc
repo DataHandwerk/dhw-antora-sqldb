@@ -7,6 +7,7 @@
 :ExistsProperty--antorareferencinglist:
 :ExistsProperty--exampleusage:
 :ExistsProperty--has_get_referenced_issue:
+:ExistsProperty--ms_description:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--AntoraParameterList:
@@ -40,7 +41,7 @@ inline function
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-04-17 13:33:31
+2021-08-05 13:46:50
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -224,7 +225,7 @@ inline function
 |===
 |
 |Referencing_type
-|char(2)
+|varchar(2)
 |NULL
 |
 |
@@ -341,7 +342,7 @@ inline function
 
 |
 |<<column-Referencing_type>>
-|char(2)
+|varchar(2)
 |NULL
 |
 |
@@ -387,6 +388,8 @@ inline function
 
 // tag::antorareferencinglist[]
 * xref:reference.RepoObject_ReferenceTree.adoc[]
+* xref:reference.RepoObject_ReferenceTree_0_30.adoc[]
+* xref:reference.RepoObject_ReferenceTree_30_0.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -399,22 +402,40 @@ DECLARE @RepoObject_guid uniqueidentifier
 SET @RepoObject_guid = (SELECT RepoObject_guid from [repo].[RepoObject] where RepoObject_fullname = '[repo].[RepoObject_gross]')
 
 SELECT *
-FROM [repo].[ftv_RepoObject_ReferenceTree](@RepoObject_guid, DEFAULT, DEFAULT)
+FROM [reference].[ftv_RepoObject_ReferenceTree](@RepoObject_guid, DEFAULT, DEFAULT)
 ORDER BY [Referenced_Depth]
  , [Referencing_Depth]
 
 SELECT *
-FROM [repo].[ftv_RepoObject_ReferenceTree](@RepoObject_guid, 1, 1)
+FROM [reference].[ftv_RepoObject_ReferenceTree](@RepoObject_guid, 1, 1)
+ORDER BY [Referenced_Depth]
+ , [Referencing_Depth]
+
+-- Starting from @RepoObject_guid the result contains only referencing objects up to a depth of 6
+-- start node is @RepoObject_guid, end node is Referencing_...
+
+SELECT *
+FROM [reference].[ftv_RepoObject_ReferenceTree](@RepoObject_guid, 0, 6)
+ORDER BY [Referenced_Depth]
+ , [Referencing_Depth]
+
+-- Starting from @RepoObject_guid the result contains only referenced objects up to a depth of 30
+-- start node is @RepoObject_guid, end node is Referenced_...
+
+SELECT *
+FROM [reference].[ftv_RepoObject_ReferenceTree](@RepoObject_guid, 30, 0)
 ORDER BY [Referenced_Depth]
  , [Referencing_Depth]
 
 SELECT *
-FROM [repo].[ftv_RepoObject_ReferenceTree](@RepoObject_guid, 0, 6)
+FROM [reference].[ftv_RepoObject_ReferenceTree](@RepoObject_guid, 0, 50)
 ORDER BY [Referenced_Depth]
  , [Referencing_Depth]
 
+--The next query is very slow!
+
 SELECT *
-FROM [repo].[ftv_RepoObject_ReferenceTree](@RepoObject_guid, 100, 100)
+FROM [reference].[ftv_RepoObject_ReferenceTree](@RepoObject_guid, 100, 100)
 ORDER BY [Referenced_Depth]
  , [Referencing_Depth]
 // end::exampleusage[]
@@ -425,6 +446,27 @@ ORDER BY [Referenced_Depth]
 // tag::exampleusage_2[]
 
 // end::exampleusage_2[]
+
+
+== exampleUsage_3
+
+// tag::exampleusage_3[]
+
+// end::exampleusage_3[]
+
+
+== exampleUsage_4
+
+// tag::exampleusage_4[]
+
+// end::exampleusage_4[]
+
+
+== exampleUsage_5
+
+// tag::exampleusage_5[]
+
+// end::exampleusage_5[]
 
 
 == exampleWrong_Usage
@@ -536,6 +578,8 @@ ORDER BY [Referenced_Depth]
 
 // tag::ms_description[]
 
+NOTE: Duplicates are possible, if exists alternative path between objects with different depth +
+to elimenate them, exclude `Referenced_Depth` and `Referencing_Depth` and use `DISTINCT`
 // end::ms_description[]
 
 
@@ -609,6 +653,13 @@ ORDER BY [Referenced_Depth]
 // end::usp_persistence_repoobject_guid[]
 
 
+== UspExamples
+
+// tag::uspexamples[]
+
+// end::uspexamples[]
+
+
 == UspParameters
 
 // tag::uspparameters[]
@@ -623,8 +674,10 @@ ORDER BY [Referenced_Depth]
 ----
 
 /*
---Duplicates are possible, if exists alternative path between objects with different depth
---to elimenate them, exclude Referenced_Depth and Referencing_Depth and use DISTINCT
+<<property_start>>MS_Description
+NOTE: Duplicates are possible, if exists alternative path between objects with different depth +
+to elimenate them, exclude `Referenced_Depth` and `Referencing_Depth` and use `DISTINCT`
+<<property_end>>
 
 <<property_start>>exampleUsage
 DECLARE @RepoObject_guid uniqueidentifier
@@ -632,29 +685,47 @@ DECLARE @RepoObject_guid uniqueidentifier
 SET @RepoObject_guid = (SELECT RepoObject_guid from [repo].[RepoObject] where RepoObject_fullname = '[repo].[RepoObject_gross]')
 
 SELECT *
-FROM [repo].[ftv_RepoObject_ReferenceTree](@RepoObject_guid, DEFAULT, DEFAULT)
+FROM [reference].[ftv_RepoObject_ReferenceTree](@RepoObject_guid, DEFAULT, DEFAULT)
 ORDER BY [Referenced_Depth]
  , [Referencing_Depth]
 
 SELECT *
-FROM [repo].[ftv_RepoObject_ReferenceTree](@RepoObject_guid, 1, 1)
+FROM [reference].[ftv_RepoObject_ReferenceTree](@RepoObject_guid, 1, 1)
+ORDER BY [Referenced_Depth]
+ , [Referencing_Depth]
+
+-- Starting from @RepoObject_guid the result contains only referencing objects up to a depth of 6
+-- start node is @RepoObject_guid, end node is Referencing_...
+
+SELECT *
+FROM [reference].[ftv_RepoObject_ReferenceTree](@RepoObject_guid, 0, 6)
+ORDER BY [Referenced_Depth]
+ , [Referencing_Depth]
+
+-- Starting from @RepoObject_guid the result contains only referenced objects up to a depth of 30
+-- start node is @RepoObject_guid, end node is Referenced_...
+
+SELECT *
+FROM [reference].[ftv_RepoObject_ReferenceTree](@RepoObject_guid, 30, 0)
 ORDER BY [Referenced_Depth]
  , [Referencing_Depth]
 
 SELECT *
-FROM [repo].[ftv_RepoObject_ReferenceTree](@RepoObject_guid, 0, 6)
+FROM [reference].[ftv_RepoObject_ReferenceTree](@RepoObject_guid, 0, 50)
 ORDER BY [Referenced_Depth]
  , [Referencing_Depth]
 
+--The next query is very slow!
+
 SELECT *
-FROM [repo].[ftv_RepoObject_ReferenceTree](@RepoObject_guid, 100, 100)
+FROM [reference].[ftv_RepoObject_ReferenceTree](@RepoObject_guid, 100, 100)
 ORDER BY [Referenced_Depth]
  , [Referencing_Depth]
 <<property_end>>
 
 
 */
-CREATE Function [reference].ftv_RepoObject_ReferenceTree
+CREATE Function [reference].[ftv_RepoObject_ReferenceTree]
 (
     @RepoObject_guid   UniqueIdentifier
   , @Referenced_Depth  Int = 0
@@ -748,7 +819,7 @@ Return
       , @RepoObject_guid As RepoObject_guid
     From
         tree_referenced
-    Union
+    Union ALL
     Select
         *
       , @RepoObject_guid As RepoObject_guid

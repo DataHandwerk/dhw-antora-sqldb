@@ -23,10 +23,6 @@ skinparam class {
 }
 
 
-entity graph.usp_PERSIST_Index << P >> {
-  --
-}
-
 entity logs.usp_ExecutionLog_insert << P >> {
   --
 }
@@ -188,9 +184,14 @@ entity repo.RepoObject_persistence << U >> {
   * is_persistence_delete_changed : bit
   * is_persistence_delete_missing : bit
   * is_persistence_insert : bit
+  * is_persistence_merge_delete_missing : bit
+  * is_persistence_merge_insert : bit
+  * is_persistence_merge_update_changed : bit
   * is_persistence_truncate : bit
   * is_persistence_update_changed : bit
+  source_filter : nvarchar(4000)
   source_RepoObject_guid : uniqueidentifier
+  target_filter : nvarchar(4000)
   {abstract} is_persistence : bit
   {abstract} temporal_type : tinyint
 }
@@ -211,39 +212,16 @@ entity repo.usp_Index_Settings << P >> {
   --
 }
 
-graph.usp_PERSIST_Index <.. repo.usp_Index_finish
-logs.usp_ExecutionLog_insert <.. repo.usp_Index_ForeignKey
 logs.usp_ExecutionLog_insert <.. repo.usp_Index_finish
-logs.usp_ExecutionLog_insert <.. graph.usp_PERSIST_Index
-logs.usp_ExecutionLog_insert <.. repo.usp_index_inheritance
-logs.usp_ExecutionLog_insert <.. repo.usp_Index_Settings
 repo.ForeignKey_Indexes_union_T <.. repo.usp_Index_finish
 repo.Index_gross <.. repo.usp_Index_finish
-repo.Index_gross <.. repo.usp_index_inheritance
-repo.Index_Settings <.. repo.Index_gross
 repo.Index_Settings <.. repo.usp_Index_finish
-repo.Index_Settings <.. repo.usp_Index_Settings
 repo.Index_union <.. repo.usp_Index_finish
-repo.Index_union <.. repo.Index_gross
-repo.Index_virtual <.. repo.usp_index_inheritance
-repo.Index_virtual <.. repo.Index_union
 repo.Index_virtual <.. repo.usp_Index_finish
 repo.IndexColumn_virtual <.. repo.usp_Index_finish
-repo.IndexColumn_virtual <.. repo.usp_index_inheritance
 repo.RepoObject <.. repo.usp_Index_finish
 repo.RepoObject_persistence <.. repo.usp_Index_finish
-repo.usp_Index_finish <.. repo.usp_Index_ForeignKey
 repo.usp_Index_finish <.. repo.usp_index_inheritance
+repo.usp_Index_finish <.. repo.usp_Index_ForeignKey
 repo.usp_Index_Settings <.. repo.usp_Index_finish
-repo.Index_Settings::index_guid <-- repo.Index_gross::index_guid
-repo.Index_Settings::IndexPatternColumnDatatype <-- repo.Index_gross::IndexPatternColumnDatatype
-repo.Index_Settings::IndexPatternColumnName <-- repo.Index_gross::IndexPatternColumnName
-repo.Index_Settings::IndexSemanticGroup <-- repo.Index_gross::IndexSemanticGroup
-repo.Index_union::index_name <-- repo.Index_gross::index_name
-repo.Index_union::index_type <-- repo.Index_gross::index_type
-repo.Index_union::is_index_disabled <-- repo.Index_gross::is_index_disabled
-repo.Index_union::is_index_primary_key <-- repo.Index_gross::is_index_primary_key
-repo.Index_union::is_index_real <-- repo.Index_gross::is_index_real
-repo.Index_union::is_index_unique <-- repo.Index_gross::is_index_unique
-repo.Index_union::parent_RepoObject_guid <-- repo.Index_gross::parent_RepoObject_guid
-repo.Index_union::referenced_index_guid <-- repo.Index_gross::referenced_index_guid
+

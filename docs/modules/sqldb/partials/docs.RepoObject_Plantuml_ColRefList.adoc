@@ -4,7 +4,6 @@
 
 // tag::existing_properties[]
 :ExistsProperty--antorareferencedlist:
-:ExistsProperty--antorareferencinglist:
 :ExistsProperty--pk_index_guid:
 :ExistsProperty--pk_indexpatterncolumndatatype:
 :ExistsProperty--pk_indexpatterncolumnname:
@@ -43,7 +42,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-04-17 13:33:31
+2021-08-05 21:18:59
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -76,25 +75,6 @@ view
 |
 |===
 
-.Referencing Columns
---
-* xref:docs.RepoObject_Plantuml.adoc#column-ColRefList[+docs.RepoObject_Plantuml.ColRefList+]
---
-
-
-[[column-RepoObject_fullname2]]
-=== RepoObject_fullname2
-
-[cols="d,m,m,m,m,d"]
-|===
-|
-|RepoObject_fullname2
-|nvarchar(257)
-|NOT NULL
-|
-|
-|===
-
 
 // end::AntoraColumnDetails[]
 
@@ -109,7 +89,6 @@ view
 |
 
 
-
 // end::AntoraPkColumnTableRows[]
 
 == AntoraNonPkColumnTableRows
@@ -120,13 +99,6 @@ view
 |<<column-ColRefList>>
 |nvarchar(max)
 |NULL
-|
-|
-
-|
-|<<column-RepoObject_fullname2>>
-|nvarchar(257)
-|NOT NULL
 |
 |
 
@@ -164,9 +136,8 @@ view
 == AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:graph.ReferencedObjectColumn.adoc[]
-* xref:graph.RepoObjectColumn.adoc[]
 * xref:reference.ftv_RepoObject_ReferencedReferencing.adoc[]
+* xref:reference.RepoObjectColumn_reference_T.adoc[]
 * xref:repo.RepoObject.adoc[]
 // end::antorareferencedlist[]
 
@@ -174,7 +145,7 @@ view
 == AntoraReferencingList
 
 // tag::antorareferencinglist[]
-* xref:docs.RepoObject_Plantuml.adoc[]
+
 // end::antorareferencinglist[]
 
 
@@ -190,6 +161,27 @@ view
 // tag::exampleusage_2[]
 
 // end::exampleusage_2[]
+
+
+== exampleUsage_3
+
+// tag::exampleusage_3[]
+
+// end::exampleusage_3[]
+
+
+== exampleUsage_4
+
+// tag::exampleusage_4[]
+
+// end::exampleusage_4[]
+
+
+== exampleUsage_5
+
+// tag::exampleusage_5[]
+
+// end::exampleusage_5[]
 
 
 == exampleWrong_Usage
@@ -377,6 +369,13 @@ RepoObject_guid
 // end::usp_persistence_repoobject_guid[]
 
 
+== UspExamples
+
+// tag::uspexamples[]
+
+// end::uspexamples[]
+
+
 == UspParameters
 
 // tag::uspparameters[]
@@ -389,11 +388,12 @@ RepoObject_guid
 // tag::sql_modules_definition[]
 [source,sql]
 ----
-CREATE View docs.RepoObject_Plantuml_ColRefList
+
+CREATE View [docs].[RepoObject_Plantuml_ColRefList]
 As
 Select
     ro.RepoObject_guid
-  , ro.RepoObject_fullname2
+  --, ro.RepoObject_fullname2
   , ColRefList = String_Agg (
                                 Concat (
                                            Cast(N'' As NVarchar(Max))
@@ -415,29 +415,38 @@ From
 (
     Select
         ro.RepoObject_guid
-      , ro.RepoObject_fullname2
+      --, ro.RepoObject_fullname2
       , T1.Node_guid As Node_guid_1
       , T2.Node_guid As Node_guid_2
     From
-        repo.RepoObject                                                                    As ro
+        repo.RepoObject                                                                           As ro
         Cross Apply [reference].ftv_RepoObject_ReferencedReferencing ( ro.RepoObject_guid, 1, 1 ) As T1
         Cross Apply [reference].ftv_RepoObject_ReferencedReferencing ( ro.RepoObject_guid, 1, 1 ) As T2
 )     ro
     Inner Join
     (
+        --Select
+        --    Object1.RepoObject_fullname2  As Referencing_ro_fullname2
+        --  , Object1.RepoObject_guid       As Referencing_ro_guid
+        --  , Object1.RepoObjectColumn_name As Referencing_ro_ColumnName
+        --  , Object2.RepoObject_fullname2  As Referenced_ro_fullname2
+        --  , Object2.RepoObject_guid       As Referenced_ro_guid
+        --  , Object2.RepoObjectColumn_name As Referenced_ro_ColumnName
+        --From
+        --    graph.RepoObjectColumn As Object1
+        --  , graph.ReferencedObjectColumn As referenced
+        --  , graph.RepoObjectColumn As Object2
+        --Where Match(
+        --    Object1-(referenced)->Object2)
         Select
-            Object1.RepoObject_fullname2  As Referencing_ro_fullname2
-          , Object1.RepoObject_guid       As Referencing_ro_guid
-          , Object1.RepoObjectColumn_name As Referencing_ro_ColumnName
-          , Object2.RepoObject_fullname2  As Referenced_ro_fullname2
-          , Object2.RepoObject_guid       As Referenced_ro_guid
-          , Object2.RepoObjectColumn_name As Referenced_ro_ColumnName
+            referencing_ro_fullname2      As Referencing_ro_fullname2
+          , [referencing_RepoObject_guid] As Referencing_ro_guid
+          , [referencing_column_name]     As Referencing_ro_ColumnName
+          , referenced_ro_fullname2       As Referenced_ro_fullname2
+          , [referenced_RepoObject_guid]  As Referenced_ro_guid
+          , [referenced_column_name]      As Referenced_ro_ColumnName
         From
-            graph.RepoObjectColumn As Object1
-          , graph.ReferencedObjectColumn As referenced
-          , graph.RepoObjectColumn As Object2
-        Where Match(
-            Object1-(referenced)->Object2)
+            [reference].[RepoObjectColumn_reference_T]
     ) colref
         On
         colref.Referencing_ro_guid     = ro.Node_guid_1
@@ -446,8 +455,7 @@ From
         And colref.Referencing_ro_guid <> colref.Referenced_ro_guid
 Group By
     ro.RepoObject_guid
-  , ro.RepoObject_fullname2;
---ORDER BY ro.RepoObject_fullname2
+--, ro.RepoObject_fullname2
 
 ----
 // end::sql_modules_definition[]

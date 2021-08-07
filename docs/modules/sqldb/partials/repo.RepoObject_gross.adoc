@@ -43,7 +43,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-07-14 19:36:08
+2021-08-06 10:31:20
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -73,6 +73,10 @@ view
 * xref:docs.RepoObject_OutputFilter.adoc#column-RepoObject_guid[+docs.RepoObject_OutputFilter.RepoObject_guid+]
 * xref:docs.RepoObject_Plantuml.adoc#column-RepoObject_guid[+docs.RepoObject_Plantuml.RepoObject_guid+]
 * xref:property.RepoObjectProperty_Collect_source_ROGross.adoc#column-RepoObject_guid[+property.RepoObjectProperty_Collect_source_ROGross.RepoObject_guid+]
+* xref:reference.Persistence.adoc#column-referenced_RepoObject_guid[+reference.Persistence.referenced_RepoObject_guid+]
+* xref:reference.Persistence.adoc#column-referencing_RepoObject_guid[+reference.Persistence.referencing_RepoObject_guid+]
+* xref:reference.RepoObject_ReferenceTree_referenced_30_0.adoc#column-RepoObject_guid[+reference.RepoObject_ReferenceTree_referenced_30_0.RepoObject_guid+]
+* xref:reference.RepoObject_ReferenceTree_referencing_0_30.adoc#column-RepoObject_guid[+reference.RepoObject_ReferenceTree_referencing_0_30.RepoObject_guid+]
 --
 
 
@@ -384,7 +388,7 @@ it looks like this column here is currently not used and should or could be dele
 
 .Referenced Columns
 --
-* xref:config.type.adoc#column-is_DocsOutput[+config.type.is_DocsOutput+]
+* xref:configT.type.adoc#column-is_DocsOutput[+configT.type.is_DocsOutput+]
 --
 
 .Referencing Columns
@@ -559,6 +563,63 @@ The final result depends on other settings
 .Referenced Columns
 --
 * xref:repo.RepoObject_persistence.adoc#column-is_persistence_insert[+repo.RepoObject_persistence.is_persistence_insert+]
+--
+
+
+[[column-is_persistence_merge_delete_missing]]
+=== is_persistence_merge_delete_missing
+
+[cols="d,m,m,m,m,d"]
+|===
+|
+|is_persistence_merge_delete_missing
+|bit
+|NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo.RepoObject_persistence.adoc#column-is_persistence_merge_delete_missing[+repo.RepoObject_persistence.is_persistence_merge_delete_missing+]
+--
+
+
+[[column-is_persistence_merge_insert]]
+=== is_persistence_merge_insert
+
+[cols="d,m,m,m,m,d"]
+|===
+|
+|is_persistence_merge_insert
+|bit
+|NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo.RepoObject_persistence.adoc#column-is_persistence_merge_insert[+repo.RepoObject_persistence.is_persistence_merge_insert+]
+--
+
+
+[[column-is_persistence_merge_update_changed]]
+=== is_persistence_merge_update_changed
+
+[cols="d,m,m,m,m,d"]
+|===
+|
+|is_persistence_merge_update_changed
+|bit
+|NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo.RepoObject_persistence.adoc#column-is_persistence_merge_update_changed[+repo.RepoObject_persistence.is_persistence_merge_update_changed+]
 --
 
 
@@ -1139,6 +1200,8 @@ reference in [repo_sys].[type]
 .Referencing Columns
 --
 * xref:docs.RepoObject_OutputFilter.adoc#column-RepoObject_fullname[+docs.RepoObject_OutputFilter.RepoObject_fullname+]
+* xref:reference.Persistence.adoc#column-referenced_fullname[+reference.Persistence.referenced_fullname+]
+* xref:reference.Persistence.adoc#column-referencing_fullname[+reference.Persistence.referencing_fullname+]
 * xref:repo.Index_gross.adoc#column-RepoObject_fullname[+repo.Index_gross.RepoObject_fullname+]
 --
 
@@ -1233,8 +1296,8 @@ reference in [repo_sys].[type]
 .Referencing Columns
 --
 * xref:docs.RepoObject_OutputFilter.adoc#column-RepoObject_schema_name[+docs.RepoObject_OutputFilter.RepoObject_schema_name+]
-* xref:reference.Match_RepoObject_referenced_UspPersistence.adoc#column-FirstNode_schema_name[+reference.Match_RepoObject_referenced_UspPersistence.FirstNode_schema_name+]
-* xref:reference.Match_RepoObject_referenced_UspPersistence.adoc#column-LastNode_schema_name[+reference.Match_RepoObject_referenced_UspPersistence.LastNode_schema_name+]
+* xref:reference.Persistence.adoc#column-referenced_schema_name[+reference.Persistence.referenced_schema_name+]
+* xref:reference.Persistence.adoc#column-referencing_schema_name[+reference.Persistence.referencing_schema_name+]
 --
 
 
@@ -1277,7 +1340,26 @@ reference in [repo_sys].[type]
 
 .Referenced Columns
 --
-* xref:config.type.adoc#column-type_desc[+config.type.type_desc+]
+* xref:configT.type.adoc#column-type_desc[+configT.type.type_desc+]
+--
+
+
+[[column-source_filter]]
+=== source_filter
+
+[cols="d,m,m,m,m,d"]
+|===
+|
+|source_filter
+|nvarchar(4000)
+|NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo.RepoObject_persistence.adoc#column-source_filter[+repo.RepoObject_persistence.source_filter+]
 --
 
 
@@ -1627,12 +1709,31 @@ reference in [repo_sys].[type]
 
 .Referenced Columns
 --
-* xref:config.type.adoc#column-type_desc[+config.type.type_desc+]
+* xref:configT.type.adoc#column-type_desc[+configT.type.type_desc+]
 --
 
 .Referencing Columns
 --
 * xref:docs.RepoObject_OutputFilter.adoc#column-SysObject_type_name[+docs.RepoObject_OutputFilter.SysObject_type_name+]
+--
+
+
+[[column-target_filter]]
+=== target_filter
+
+[cols="d,m,m,m,m,d"]
+|===
+|
+|target_filter
+|nvarchar(4000)
+|NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo.RepoObject_persistence.adoc#column-target_filter[+repo.RepoObject_persistence.target_filter+]
 --
 
 
@@ -1685,8 +1786,8 @@ reference in [repo_sys].[type]
 
 .Referencing Columns
 --
-* xref:reference.Match_RepoObject_referenced_UspPersistence.adoc#column-First_usp_persistence_name[+reference.Match_RepoObject_referenced_UspPersistence.First_usp_persistence_name+]
-* xref:reference.Match_RepoObject_referenced_UspPersistence.adoc#column-Last_usp_persistence_name[+reference.Match_RepoObject_referenced_UspPersistence.Last_usp_persistence_name+]
+* xref:reference.Persistence.adoc#column-referenced_usp_persistence_name[+reference.Persistence.referenced_usp_persistence_name+]
+* xref:reference.Persistence.adoc#column-referencing_usp_persistence_name[+reference.Persistence.referencing_usp_persistence_name+]
 --
 
 
@@ -1710,8 +1811,8 @@ reference in [repo_sys].[type]
 
 .Referencing Columns
 --
-* xref:reference.Match_RepoObject_referenced_UspPersistence.adoc#column-Last_usp_persistence_RepoObject_guid[+reference.Match_RepoObject_referenced_UspPersistence.Last_usp_persistence_RepoObject_guid+]
-* xref:reference.Match_RepoObject_referenced_UspPersistence.adoc#column-First_usp_persistence_RepoObject_guid[+reference.Match_RepoObject_referenced_UspPersistence.First_usp_persistence_RepoObject_guid+]
+* xref:reference.Persistence.adoc#column-referenced_usp_persistence_RepoObject_guid[+reference.Persistence.referenced_usp_persistence_RepoObject_guid+]
+* xref:reference.Persistence.adoc#column-referencing_usp_persistence_RepoObject_guid[+reference.Persistence.referencing_usp_persistence_RepoObject_guid+]
 --
 
 
@@ -1726,6 +1827,11 @@ reference in [repo_sys].[type]
 |NOT NULL
 |
 |
+
+
+
+
+
 
 
 
@@ -1957,6 +2063,27 @@ reference in [repo_sys].[type]
 
 |
 |<<column-is_persistence_insert>>
+|bit
+|NULL
+|
+|
+
+|
+|<<column-is_persistence_merge_delete_missing>>
+|bit
+|NULL
+|
+|
+
+|
+|<<column-is_persistence_merge_insert>>
+|bit
+|NULL
+|
+|
+
+|
+|<<column-is_persistence_merge_update_changed>>
 |bit
 |NULL
 |
@@ -2201,6 +2328,13 @@ reference in [repo_sys].[type]
 |
 
 |
+|<<column-source_filter>>
+|nvarchar(4000)
+|NULL
+|
+|
+
+|
 |<<column-sql_modules_antora>>
 |nvarchar(max)
 |NULL
@@ -2313,6 +2447,13 @@ reference in [repo_sys].[type]
 |
 
 |
+|<<column-target_filter>>
+|nvarchar(4000)
+|NULL
+|
+|
+
+|
 |<<column-temporal_type>>
 |tinyint
 |NULL
@@ -2402,7 +2543,7 @@ reference in [repo_sys].[type]
 == AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:config.type.adoc[]
+* xref:configT.type.adoc[]
 * xref:property.fs_get_RepoObjectProperty_nvarchar.adoc[]
 * xref:reference.RepoObject_QueryPlan.adoc[]
 * xref:reference.RepoObject_ReferencedList.adoc[]
@@ -2423,10 +2564,14 @@ reference in [repo_sys].[type]
 * xref:docs.RepoObject_OutputFilter.adoc[]
 * xref:docs.RepoObject_Plantuml.adoc[]
 * xref:property.RepoObjectProperty_Collect_source_ROGross.adoc[]
-* xref:reference.Match_RepoObject_referenced_UspPersistence.adoc[]
+* xref:reference.Persistence.adoc[]
 * xref:reference.RepoObject_ReferenceTree.adoc[]
+* xref:reference.RepoObject_ReferenceTree_0_30.adoc[]
+* xref:reference.RepoObject_ReferenceTree_30_0.adoc[]
 * xref:reference.RepoObject_ReferenceTree_referenced.adoc[]
+* xref:reference.RepoObject_ReferenceTree_referenced_30_0.adoc[]
 * xref:reference.RepoObject_ReferenceTree_referencing.adoc[]
+* xref:reference.RepoObject_ReferenceTree_referencing_0_30.adoc[]
 * xref:reference.usp_RepoObject_update_SysObjectQueryPlan.adoc[]
 * xref:reference.usp_RepoObjectSource_FirstResultSet.adoc[]
 * xref:reference.usp_RepoObjectSource_QueryPlan.adoc[]
@@ -2451,6 +2596,27 @@ reference in [repo_sys].[type]
 // tag::exampleusage_2[]
 
 // end::exampleusage_2[]
+
+
+== exampleUsage_3
+
+// tag::exampleusage_3[]
+
+// end::exampleusage_3[]
+
+
+== exampleUsage_4
+
+// tag::exampleusage_4[]
+
+// end::exampleusage_4[]
+
+
+== exampleUsage_5
+
+// tag::exampleusage_5[]
+
+// end::exampleusage_5[]
 
 
 == exampleWrong_Usage
@@ -2645,6 +2811,13 @@ RepoObject_guid
 // end::usp_persistence_repoobject_guid[]
 
 
+== UspExamples
+
+// tag::uspexamples[]
+
+// end::uspexamples[]
+
+
 == UspParameters
 
 // tag::uspparameters[]
@@ -2657,7 +2830,8 @@ RepoObject_guid
 // tag::sql_modules_definition[]
 [source,sql]
 ----
-CREATE View repo.RepoObject_gross
+
+CREATE View [repo].[RepoObject_gross]
 As
 --
 Select
@@ -2738,8 +2912,13 @@ Select
   , ro_p.is_persistence_insert
   , ro_p.is_persistence_truncate
   , ro_p.is_persistence_update_changed
+  , ro_p.[is_persistence_merge_delete_missing]
+  , ro_p.[is_persistence_merge_insert]
+  , ro_p.[is_persistence_merge_update_changed]
   , ro_p.history_schema_name
   , ro_p.history_table_name
+  , ro_p.[source_filter]
+  , ro_p.[target_filter]
   , ro_p.temporal_type
   , ColumnList.CreateColumnList
   , ColumnList.DbmlColumnList
@@ -2762,30 +2941,30 @@ Select
   , ro_referenced.AntoraReferencedList
   , ro_referencing.AntoraReferencingList
 From
-    repo.RepoObject                         As ro
+    repo.RepoObject                               As ro
     Left Outer Join
-        repo.RepoObject_persistence         As ro_p
+        repo.RepoObject_persistence               As ro_p
             On
             ro_p.target_RepoObject_guid         = ro.RepoObject_guid
 
     Left Outer Join
-        repo.RepoObject                     As ro_p_s
+        repo.RepoObject                           As ro_p_s
             On
             ro_p_s.RepoObject_guid              = ro_p.source_RepoObject_guid
 
     Left Outer Join
-        repo.RepoObject                     As ro_usp_p
+        repo.RepoObject                           As ro_usp_p
             On
             ro_usp_p.RepoObject_name            = ro.usp_persistence_name
             And ro_usp_p.RepoObject_schema_name = ro.RepoObject_schema_name
 
     Left Outer Join
-        repo.RepoObject_ColumnList          As ColumnList
+        repo.RepoObject_ColumnList                As ColumnList
             On
             ColumnList.RepoObject_guid          = ro.RepoObject_guid
 
     Left Outer Join
-        [reference].RepoObject_QueryPlan           As QueryPlan
+        [reference].RepoObject_QueryPlan          As QueryPlan
             On
             QueryPlan.RepoObject_guid           = ro.RepoObject_guid
 
@@ -2795,32 +2974,32 @@ From
             SqlModules.RepoObject_guid          = ro.RepoObject_guid
 
     Left Join
-        repo.Index_Settings                 As ipk
+        repo.Index_Settings                       As ipk
             On
             ipk.index_guid                      = ro.pk_index_guid
 
     Left Join
-        [reference].RepoObject_ReferencedList      As ro_referenced
+        [reference].RepoObject_ReferencedList     As ro_referenced
             On
             ro_referenced.Referencing_guid      = ro.RepoObject_guid
 
     Left Join
-        [reference].RepoObject_ReferencingList     As ro_referencing
+        [reference].RepoObject_ReferencingList    As ro_referencing
             On
             ro_referencing.Referenced_guid      = ro.RepoObject_guid
 
     Left Join
-        config.type                         As repo_type
+        [configT].type                            As repo_type
             On
             repo_type.type                      = ro.RepoObject_type
 
     Left Join
-        config.type                         As sys_type
+        [configT].type                            As sys_type
             On
             sys_type.type                       = ro.SysObject_type
 
     Left Join
-        config.type                         ty
+        [configT].type                            ty
             On
             ty.type                             = ro.RepoObject_type;
 

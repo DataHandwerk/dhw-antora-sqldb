@@ -39,7 +39,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-07-14 19:36:21
+2021-08-07 17:38:07
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -82,6 +82,22 @@ stored procedure
 [cols="d,15a,d"]
 |===
 |Number|Name (Action, Source, Target)|Parent
+
+|210
+|
+*[reference].[usp_PERSIST_RepoObject_ReferenceTree_30_0_T]*
+
+* `EXEC [reference].[usp_PERSIST_RepoObject_ReferenceTree_30_0_T]`
+
+|
+
+|220
+|
+*[reference].[usp_PERSIST_RepoObject_ReferenceTree_0_30_T]*
+
+* `EXEC [reference].[usp_PERSIST_RepoObject_ReferenceTree_0_30_T]`
+
+|
 
 |300
 |
@@ -163,6 +179,8 @@ stored procedure
 * xref:docs.usp_AntoraExport_Page_IndexSemanticGroup.adoc[]
 * xref:logs.usp_ExecutionLog_insert.adoc[]
 * xref:property.usp_RepoObjectProperty_collect.adoc[]
+* xref:reference.usp_PERSIST_RepoObject_ReferenceTree_0_30_T.adoc[]
+* xref:reference.usp_PERSIST_RepoObject_ReferenceTree_30_0_T.adoc[]
 // end::antorareferencedlist[]
 
 
@@ -198,6 +216,27 @@ Exec docs.usp_AntoraExport;
 // tag::exampleusage_2[]
 
 // end::exampleusage_2[]
+
+
+== exampleUsage_3
+
+// tag::exampleusage_3[]
+
+// end::exampleusage_3[]
+
+
+== exampleUsage_4
+
+// tag::exampleusage_4[]
+
+// end::exampleusage_4[]
+
+
+== exampleUsage_5
+
+// tag::exampleusage_5[]
+
+// end::exampleusage_5[]
 
 
 == exampleWrong_Usage
@@ -458,6 +497,13 @@ include::sqldb:partial$docsnippet/antora-export-prerequisites.adoc[]
 // end::usp_persistence_repoobject_guid[]
 
 
+== UspExamples
+
+// tag::uspexamples[]
+
+// end::uspexamples[]
+
+
 == UspParameters
 
 // tag::uspparameters[]
@@ -538,6 +584,26 @@ PRINT '[docs].[usp_AntoraExport]'
 --
 ----- start here with your own code
 --
+/*{"ReportUspStep":[{"Number":210,"Name":"[reference].[usp_PERSIST_RepoObject_ReferenceTree_30_0_T]","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
+EXEC [reference].[usp_PERSIST_RepoObject_ReferenceTree_30_0_T]
+--add your own parameters
+--logging parameters
+ @execution_instance_guid = @execution_instance_guid
+ , @ssis_execution_id = @ssis_execution_id
+ , @sub_execution_id = @sub_execution_id
+ , @parent_execution_log_id = @current_execution_log_id
+
+
+/*{"ReportUspStep":[{"Number":220,"Name":"[reference].[usp_PERSIST_RepoObject_ReferenceTree_0_30_T]","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
+EXEC [reference].[usp_PERSIST_RepoObject_ReferenceTree_0_30_T]
+--add your own parameters
+--logging parameters
+ @execution_instance_guid = @execution_instance_guid
+ , @ssis_execution_id = @ssis_execution_id
+ , @sub_execution_id = @sub_execution_id
+ , @parent_execution_log_id = @current_execution_log_id
+
+
 /*{"ReportUspStep":[{"Number":300,"Name":"[repo].[usp_RepoObjectProperty_collect]","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
 EXEC [property].[usp_RepoObjectProperty_collect]
 --add your own parameters

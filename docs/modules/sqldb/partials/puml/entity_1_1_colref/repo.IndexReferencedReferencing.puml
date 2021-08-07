@@ -23,24 +23,20 @@ skinparam class {
 }
 
 
-entity reference.RepoObject_reference_union << V >> {
+entity reference.RepoObject_reference_T << U >> {
   **referenced_RepoObject_guid** : uniqueidentifier
   **referencing_RepoObject_guid** : uniqueidentifier
   --
-  * InformationSource : varchar(34)
-  * one : int
   referenced_entity_name : nvarchar(128)
-  * referenced_fullname : nvarchar(517)
-  referenced_id : int
-  referenced_node_id : bigint
   referenced_schema_name : nvarchar(128)
   referenced_type : char(2)
   referencing_entity_name : nvarchar(128)
-  * referencing_fullname : nvarchar(517)
-  referencing_id : int
-  referencing_node_id : bigint
   referencing_schema_name : nvarchar(128)
   referencing_type : varchar(2)
+  * {static} referenced_fullname : nvarchar(261)
+  * {static} referenced_fullname2 : nvarchar(257)
+  * {static} referencing_fullname : nvarchar(261)
+  * {static} referencing_fullname2 : nvarchar(257)
 }
 
 entity repo.Index_union << V >> {
@@ -74,8 +70,8 @@ entity repo.Index_virtual << U >> {
 entity repo.IndexReferencedReferencing << V >> {
   --
   referenced_index_guid : uniqueidentifier
-  referenced_RepoObject_guid : uniqueidentifier
-  referencing_RepoObject_guid : uniqueidentifier
+  * referenced_RepoObject_guid : uniqueidentifier
+  * referencing_RepoObject_guid : uniqueidentifier
   RowNumberInReferencing_Target : int
   source_index_guid : uniqueidentifier
   * source_index_type : tinyint
@@ -93,13 +89,12 @@ entity repo.IndexReferencedReferencing_HasFullColumnsInReferencing << V >> {
   * source_index_type : tinyint
 }
 
-reference.RepoObject_reference_union <.. repo.IndexReferencedReferencing
+reference.RepoObject_reference_T <.. repo.IndexReferencedReferencing
 repo.Index_union <.. repo.IndexReferencedReferencing
 repo.Index_virtual <.. repo.IndexReferencedReferencing
-repo.Index_virtual <.. repo.Index_union
 repo.IndexReferencedReferencing <.. repo.IndexReferencedReferencing_HasFullColumnsInReferencing
-reference.RepoObject_reference_union::referenced_RepoObject_guid <-- repo.IndexReferencedReferencing::referenced_RepoObject_guid
-reference.RepoObject_reference_union::referencing_RepoObject_guid <-- repo.IndexReferencedReferencing::referencing_RepoObject_guid
+reference.RepoObject_reference_T::referenced_RepoObject_guid <-- repo.IndexReferencedReferencing::referenced_RepoObject_guid
+reference.RepoObject_reference_T::referencing_RepoObject_guid <-- repo.IndexReferencedReferencing::referencing_RepoObject_guid
 repo.Index_union::index_guid <-- repo.IndexReferencedReferencing::source_index_guid
 repo.Index_union::index_type <-- repo.IndexReferencedReferencing::source_index_type
 repo.Index_virtual::referenced_index_guid <-- repo.IndexReferencedReferencing::referenced_index_guid

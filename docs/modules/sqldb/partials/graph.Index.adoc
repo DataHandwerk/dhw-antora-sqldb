@@ -4,7 +4,6 @@
 
 // tag::existing_properties[]
 :ExistsProperty--antorareferencedlist:
-:ExistsProperty--antorareferencinglist:
 :ExistsProperty--has_history:
 :ExistsProperty--has_history_columns:
 :ExistsProperty--is_persistence:
@@ -20,6 +19,10 @@
 :ExistsProperty--persistence_source_repoobject_fullname2:
 :ExistsProperty--persistence_source_repoobject_guid:
 :ExistsProperty--persistence_source_repoobject_xref:
+:ExistsProperty--pk_index_guid:
+:ExistsProperty--pk_indexpatterncolumndatatype:
+:ExistsProperty--pk_indexpatterncolumnname:
+:ExistsProperty--pk_indexsemanticgroup:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--usp_persistence_repoobject_guid:
 :ExistsProperty--FK:
@@ -60,6 +63,25 @@ user table
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
+[[column-Index_guid]]
+=== Index_guid
+
+[cols="d,m,m,m,m,d"]
+|===
+|1
+|*Index_guid*
+|uniqueidentifier
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:graph.Index_S.adoc#column-Index_guid[+graph.Index_S.Index_guid+]
+--
+
+
 [[column-$node_id_AF6B7830FCB14AF394D0C46FF2CB7197]]
 === $node_id_AF6B7830FCB14AF394D0C46FF2CB7197
 
@@ -86,25 +108,6 @@ user table
 |
 |
 |===
-
-
-[[column-Index_guid]]
-=== Index_guid
-
-[cols="d,m,m,m,m,d"]
-|===
-|
-|Index_guid
-|uniqueidentifier
-|NOT NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:graph.Index_S.adoc#column-Index_guid[+graph.Index_S.Index_guid+]
---
 
 
 [[column-Index_name]]
@@ -350,6 +353,12 @@ user table
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
+|1
+|*<<column-Index_guid>>*
+|uniqueidentifier
+|NOT NULL
+|
+|
 
 
 
@@ -370,6 +379,7 @@ user table
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
+
 |
 |<<column-$node_id_AF6B7830FCB14AF394D0C46FF2CB7197>>
 |nvarchar(1000)
@@ -380,13 +390,6 @@ user table
 |
 |<<column-graph_id_4F2AAAB29B6A47EA9BBA2AC1E8133A49>>
 |bigint
-|NOT NULL
-|
-|
-
-|
-|<<column-Index_guid>>
-|uniqueidentifier
 |NOT NULL
 |
 |
@@ -481,15 +484,15 @@ user table
 
 // tag::AntoraIndexList[]
 
-[[index-UK_Index]]
-=== UK_Index
+[[index-PK_Index]]
+=== PK_Index
 
 * IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_index_guid[index_guid]
 +
 --
 * <<column-Index_guid>>; uniqueidentifier
 --
-* PK, Unique, Real: 0, 1, 1
+* PK, Unique, Real: 1, 1, 0
 
 // end::AntoraIndexList[]
 
@@ -516,7 +519,7 @@ user table
 == AntoraReferencingList
 
 // tag::antorareferencinglist[]
-* xref:graph.usp_PERSIST_Index.adoc[]
+
 // end::antorareferencinglist[]
 
 
@@ -532,6 +535,13 @@ user table
 // tag::exampleusage_2[]
 
 // end::exampleusage_2[]
+
+
+== exampleUsage_3
+
+// tag::exampleusage_3[]
+
+// end::exampleusage_3[]
 
 
 == exampleWrong_Usage
@@ -677,28 +687,28 @@ xref:graph.Index_S.adoc[]
 == pk_index_guid
 
 // tag::pk_index_guid[]
-
+5B68923A-D3F5-EB11-850C-A81E8446D5B0
 // end::pk_index_guid[]
 
 
 == pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-
+uniqueidentifier
 // end::pk_indexpatterncolumndatatype[]
 
 
 == pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-
+Index_guid
 // end::pk_indexpatterncolumnname[]
 
 
 == pk_IndexSemanticGroup
 
 // tag::pk_indexsemanticgroup[]
-
+index_guid
 // end::pk_indexsemanticgroup[]
 
 
@@ -712,8 +722,15 @@ xref:graph.Index_S.adoc[]
 == usp_persistence_RepoObject_guid
 
 // tag::usp_persistence_repoobject_guid[]
-26E90A1E-7495-EB11-84F4-A81E8446D5B0
+EF36738A-D3F5-EB11-850C-A81E8446D5B0
 // end::usp_persistence_repoobject_guid[]
+
+
+== UspExamples
+
+// tag::uspexamples[]
+
+// end::uspexamples[]
 
 
 == UspParameters

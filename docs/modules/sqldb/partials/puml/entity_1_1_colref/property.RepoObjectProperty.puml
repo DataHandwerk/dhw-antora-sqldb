@@ -48,7 +48,7 @@ entity property.ExtendedProperty_Repo2Sys_level1 << V >> {
   --
   level2name : varchar(128)
   level2type : varchar(10)
-  property_value : sql_variant
+  property_value : nvarchar(4000)
   * RepoObject_guid : uniqueidentifier
   * RepoObject_type : char(2)
 }
@@ -64,7 +64,7 @@ entity property.ExtendedProperty_Repo2Sys_level2_RepoObject << V >> {
   --
   * parent_RepoObject_guid : uniqueidentifier
   * parent_RepoObject_type : char(2)
-  property_value : sql_variant
+  property_value : nvarchar(4000)
   * RepoObject_guid : uniqueidentifier
   * RepoObject_type : char(2)
 }
@@ -83,23 +83,20 @@ entity property.RepoObjectProperty << U >> {
   --
   inheritance : tinyint
   * property_name : nvarchar(128)
-  property_value : sql_variant
+  property_value : nvarchar(max)
   * RepoObject_guid : uniqueidentifier
-  {abstract} property_basetype : sql_variant
   {abstract} property_bigint : bigint
   {abstract} property_float : float
   {abstract} property_int : int
   {abstract} property_money : money
-  {abstract} property_nvarchar : nvarchar(4000)
   {abstract} property_real : real
-  {abstract} property_varchar : varchar(8000)
 }
 
 entity property.RepoObjectProperty_ForUpdate << V >> {
   --
   inheritance : tinyint
   * property_name : nvarchar(128)
-  property_value : sql_variant
+  property_value : nvarchar(max)
   * RepoObject_fullname : nvarchar(261)
   * RepoObject_fullname2 : nvarchar(257)
   * RepoObject_guid : uniqueidentifier
@@ -118,7 +115,7 @@ entity property.RepoObjectProperty_InheritanceType_InheritanceDefinition << V >>
   par_Inheritance_StringAggSeparatorSql : nvarchar(4000)
   par_InheritanceDefintion : nvarchar(4000)
   par_InheritanceType : int
-  property_value : sql_variant
+  property_value : nvarchar(max)
   * RepoObject_fullname : nvarchar(261)
   * RepoObject_type : char(2)
   ro_Inheritance_StringAggSeparatorSql : nvarchar(4000)
@@ -135,7 +132,7 @@ entity property.RepoObjectProperty_sys_repo << V >> {
   --
   property_value : sql_variant
   RepoObjectProperty_id : int
-  RepoObjectProperty_property_value : sql_variant
+  RepoObjectProperty_property_value : nvarchar(max)
   SysObject_name : nvarchar(128)
   SysObject_schema_name : nvarchar(128)
 }
@@ -156,25 +153,30 @@ entity property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate << P >> {
   --
 }
 
-property.PropertyName_RepoObject <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition
-property.RepoObjectProperty <.. property.PropertyName_RepoObject
-property.RepoObjectProperty <.. property.fs_get_RepoObjectProperty_nvarchar
-property.RepoObjectProperty <.. property.usp_RepoObject_Inheritance
-property.RepoObjectProperty <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition
 property.RepoObjectProperty <.. property.RepoObjectProperty_sys_repo
-property.RepoObjectProperty <.. property.usp_RepoObjectProperty_collect
-property.RepoObjectProperty <.. property.RepoObjectProperty_ForUpdate
-property.RepoObjectProperty <.. property.usp_RepoObjectProperty_set
-property.RepoObjectProperty <.. docs.RepoObject_Adoc
 property.RepoObjectProperty <.. property.ExtendedProperty_Repo2Sys_level1
 property.RepoObjectProperty <.. property.ExtendedProperty_Repo2Sys_level2_RepoObject
 property.RepoObjectProperty <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
-property.RepoObjectProperty_sys_repo <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
-property.PropertyName_RepoObject::property_name <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::property_name
-property.RepoObjectProperty::property_name <-- property.ExtendedProperty_Repo2Sys_level2_RepoObject::property_name
+property.RepoObjectProperty <.. property.PropertyName_RepoObject
+property.RepoObjectProperty <.. property.usp_RepoObject_Inheritance
+property.RepoObjectProperty <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition
+property.RepoObjectProperty <.. property.fs_get_RepoObjectProperty_nvarchar
+property.RepoObjectProperty <.. docs.RepoObject_Adoc
+property.RepoObjectProperty <.. property.usp_RepoObjectProperty_set
+property.RepoObjectProperty <.. property.usp_RepoObjectProperty_collect
+property.RepoObjectProperty <.. property.RepoObjectProperty_ForUpdate
+property.RepoObjectProperty::inheritance <-- property.RepoObjectProperty_ForUpdate::inheritance
 property.RepoObjectProperty::property_name <-- property.ExtendedProperty_Repo2Sys_level1::property_name
-property.RepoObjectProperty::property_value <-- property.ExtendedProperty_Repo2Sys_level1::property_value
-property.RepoObjectProperty::property_value <-- property.ExtendedProperty_Repo2Sys_level2_RepoObject::property_value
+property.RepoObjectProperty::property_name <-- property.ExtendedProperty_Repo2Sys_level2_RepoObject::property_name
+property.RepoObjectProperty::property_name <-- property.RepoObjectProperty_ForUpdate::property_name
+property.RepoObjectProperty::property_value <-- property.RepoObjectProperty::property_int
+property.RepoObjectProperty::property_value <-- property.RepoObjectProperty::property_bigint
+property.RepoObjectProperty::property_value <-- property.RepoObjectProperty::property_real
+property.RepoObjectProperty::property_value <-- property.RepoObjectProperty::property_float
+property.RepoObjectProperty::property_value <-- property.RepoObjectProperty::property_money
 property.RepoObjectProperty::property_value <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::property_value
-property.RepoObjectProperty::RepoObject_guid <-- property.ExtendedProperty_Repo2Sys_level2_RepoObject::RepoObject_guid
+property.RepoObjectProperty::property_value <-- property.RepoObjectProperty_ForUpdate::property_value
 property.RepoObjectProperty::RepoObject_guid <-- property.ExtendedProperty_Repo2Sys_level1::RepoObject_guid
+property.RepoObjectProperty::RepoObject_guid <-- property.ExtendedProperty_Repo2Sys_level2_RepoObject::RepoObject_guid
+property.RepoObjectProperty::RepoObject_guid <-- property.RepoObjectProperty_ForUpdate::RepoObject_guid
+property.RepoObjectProperty::RepoObjectProperty_id <-- property.RepoObjectProperty_ForUpdate::RepoObjectProperty_id

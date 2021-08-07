@@ -4,11 +4,11 @@
 
 // tag::existing_properties[]
 :ExistsProperty--antorareferencedlist:
-:ExistsProperty--antorareferencinglist:
 :ExistsProperty--ms_description:
 :ExistsProperty--pk_index_guid:
 :ExistsProperty--pk_indexpatterncolumndatatype:
 :ExistsProperty--pk_indexpatterncolumnname:
+:ExistsProperty--pk_indexsemanticgroup:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -43,7 +43,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-07-14 19:36:08
+2021-08-06 11:42:30
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -62,19 +62,10 @@ view
 |
 |===
 
-
-[[column-LastNode]]
-=== LastNode
-
-[cols="d,m,m,m,m,d"]
-|===
-|2
-|*LastNode*
-|uniqueidentifier
-|NULL
-|
-|
-|===
+.Referenced Columns
+--
+* xref:repo.RepoObject_gross.adoc#column-RepoObject_guid[+repo.RepoObject_gross.RepoObject_guid+]
+--
 
 
 [[column-First_usp_persistence_name]]
@@ -152,6 +143,16 @@ view
 |
 |===
 
+.Description
+--
+(concat('[',[RepoObject_schema_name],'].[',[RepoObject_name],']'))
+--
+
+.Referenced Columns
+--
+* xref:repo.RepoObject_gross.adoc#column-RepoObject_fullname[+repo.RepoObject_gross.RepoObject_fullname+]
+--
+
 
 [[column-Last_usp_persistence_name]]
 === Last_usp_persistence_name
@@ -196,6 +197,25 @@ view
 --
 
 
+[[column-LastNode]]
+=== LastNode
+
+[cols="d,m,m,m,m,d"]
+|===
+|
+|LastNode
+|uniqueidentifier
+|NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo.RepoObject_gross.adoc#column-RepoObject_guid[+repo.RepoObject_gross.RepoObject_guid+]
+--
+
+
 [[column-LastNode_schema_name]]
 === LastNode_schema_name
 
@@ -228,19 +248,15 @@ view
 |
 |===
 
+.Description
+--
+(concat('[',[RepoObject_schema_name],'].[',[RepoObject_name],']'))
+--
 
-[[column-ListNodeName]]
-=== ListNodeName
-
-[cols="d,m,m,m,m,d"]
-|===
-|
-|ListNodeName
-|nvarchar(4000)
-|NULL
-|
-|
-|===
+.Referenced Columns
+--
+* xref:repo.RepoObject_gross.adoc#column-RepoObject_fullname[+repo.RepoObject_gross.RepoObject_fullname+]
+--
 
 
 // end::AntoraColumnDetails[]
@@ -250,13 +266,6 @@ view
 // tag::AntoraPkColumnTableRows[]
 |1
 |*<<column-FirstNode>>*
-|uniqueidentifier
-|NULL
-|
-|
-
-|2
-|*<<column-LastNode>>*
 |uniqueidentifier
 |NULL
 |
@@ -276,7 +285,6 @@ view
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
-
 
 |
 |<<column-First_usp_persistence_name>>
@@ -321,6 +329,13 @@ view
 |
 
 |
+|<<column-LastNode>>
+|uniqueidentifier
+|NULL
+|
+|
+
+|
 |<<column-LastNode_schema_name>>
 |nvarchar(128)
 |NULL
@@ -334,13 +349,6 @@ view
 |
 |
 
-|
-|<<column-ListNodeName>>
-|nvarchar(4000)
-|NULL
-|
-|
-
 // end::AntoraNonPkColumnTableRows[]
 
 == AntoraIndexList
@@ -350,11 +358,10 @@ view
 [[index-PK_Match_RepoObject_referenced_UspPersistence]]
 === PK_Match_RepoObject_referenced_UspPersistence
 
-* IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_repoobject_guid[RepoObject_guid]
 +
 --
 * <<column-FirstNode>>; uniqueidentifier
-* <<column-LastNode>>; uniqueidentifier
 --
 * PK, Unique, Real: 1, 1, 0
 
@@ -407,8 +414,7 @@ view
 == AntoraReferencingList
 
 // tag::antorareferencinglist[]
-* xref:reference.Reference_UspPersistence.adoc[]
-* xref:repo.usp_main.adoc[]
+
 // end::antorareferencinglist[]
 
 
@@ -424,6 +430,27 @@ view
 // tag::exampleusage_2[]
 
 // end::exampleusage_2[]
+
+
+== exampleUsage_3
+
+// tag::exampleusage_3[]
+
+// end::exampleusage_3[]
+
+
+== exampleUsage_4
+
+// tag::exampleusage_4[]
+
+// end::exampleusage_4[]
+
+
+== exampleUsage_5
+
+// tag::exampleusage_5[]
+
+// end::exampleusage_5[]
 
 
 == exampleWrong_Usage
@@ -589,21 +616,21 @@ each persistence table has a related persistence procedure
 == pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-uniqueidentifier,uniqueidentifier
+uniqueidentifier
 // end::pk_indexpatterncolumndatatype[]
 
 
 == pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-FirstNode,LastNode
+FirstNode
 // end::pk_indexpatterncolumnname[]
 
 
 == pk_IndexSemanticGroup
 
 // tag::pk_indexsemanticgroup[]
-
+RepoObject_guid
 // end::pk_indexsemanticgroup[]
 
 
@@ -621,6 +648,13 @@ FirstNode,LastNode
 // tag::usp_persistence_repoobject_guid[]
 
 // end::usp_persistence_repoobject_guid[]
+
+
+== UspExamples
+
+// tag::uspexamples[]
+
+// end::uspexamples[]
 
 
 == UspParameters
@@ -654,29 +688,31 @@ each persistence table has a related persistence procedure
 <<property_end>>
 
 */
-CREATE View [reference].Match_RepoObject_referenced_UspPersistence
+CREATE View [reference].[Match_RepoObject_referenced_UspPersistence]
 As
 Select
     ro1.usp_persistence_name            As First_usp_persistence_name
   , ro1.usp_persistence_RepoObject_guid As First_usp_persistence_RepoObject_guid
   , ro2.usp_persistence_name            As Last_usp_persistence_name
   , ro2.usp_persistence_RepoObject_guid As Last_usp_persistence_RepoObject_guid
-  , Q.FirstNode
+  , ro1.RepoObject_guid                 As FirstNode
   , ro1.RepoObject_schema_name          As FirstNode_schema_name
-  , Q.FirstNodeName
-  , Q.LastNode
+  , ro1.RepoObject_fullname             As FirstNodeName
+  --, Q.FirstNodeName
+  , ro2.RepoObject_guid                 As LastNode
   , ro2.RepoObject_schema_name          As LastNode_schema_name
-  , Q.LastNodeName
-  , Q.ListNodeName
+  , ro2.RepoObject_fullname             As LastNodeName
+--, Q.LastNodeName
+--, Q.ListNodeName
 From
 (
     Select
         --
-        Object1.RepoObject_guid                                                   As FirstNode
-      , Object1.RepoObject_fullname                                               As FirstNodeName
-      , String_Agg ( Object2.RepoObject_fullname, '->' ) Within Group(GRAPH Path) As ListNodeName
-      , Last_Value ( Object2.RepoObject_guid ) WITHIN Group(GRAPH Path)           As LastNode
-      , Last_Value ( Object2.RepoObject_fullname ) WITHIN Group(GRAPH Path)       As LastNodeName
+        Object1.RepoObject_guid                                             As FirstNode
+      , Object1.RepoObject_fullname                                         As FirstNodeName
+      --, String_Agg ( Object2.RepoObject_fullname, '->' ) Within Group(GRAPH Path) As ListNodeName
+      , Last_Value ( Object2.RepoObject_guid ) WITHIN Group(GRAPH Path)     As LastNode
+      , Last_Value ( Object2.RepoObject_fullname ) WITHIN Group(GRAPH Path) As LastNodeName
     From
         [graph].[RepoObject] As Object1
       , [graph].[ReferencedObject] For Path As referenced

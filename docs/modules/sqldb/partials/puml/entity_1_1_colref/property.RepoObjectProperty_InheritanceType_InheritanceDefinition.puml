@@ -46,16 +46,13 @@ entity property.RepoObjectProperty << U >> {
   --
   inheritance : tinyint
   * property_name : nvarchar(128)
-  property_value : sql_variant
+  property_value : nvarchar(max)
   * RepoObject_guid : uniqueidentifier
-  {abstract} property_basetype : sql_variant
   {abstract} property_bigint : bigint
   {abstract} property_float : float
   {abstract} property_int : int
   {abstract} property_money : money
-  {abstract} property_nvarchar : nvarchar(4000)
   {abstract} property_real : real
-  {abstract} property_varchar : varchar(8000)
 }
 
 entity property.RepoObjectProperty_InheritanceType_InheritanceDefinition << V >> {
@@ -68,7 +65,7 @@ entity property.RepoObjectProperty_InheritanceType_InheritanceDefinition << V >>
   par_Inheritance_StringAggSeparatorSql : nvarchar(4000)
   par_InheritanceDefintion : nvarchar(4000)
   par_InheritanceType : int
-  property_value : sql_variant
+  property_value : nvarchar(max)
   * RepoObject_fullname : nvarchar(261)
   * RepoObject_type : char(2)
   ro_Inheritance_StringAggSeparatorSql : nvarchar(4000)
@@ -88,7 +85,7 @@ entity property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefiniti
   InheritanceType : int
   * is_force_inherit_empty_source : int
   * is_StringAggAllSources : int
-  property_value : sql_variant
+  property_value : nvarchar(max)
   * RepoObject_fullname : nvarchar(261)
   * RepoObject_type : char(2)
   resulting_InheritanceDefinition : nvarchar(4000)
@@ -133,18 +130,16 @@ entity repo.RepoObject << U >> {
 }
 
 config.Parameter <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition
-config.Parameter <.. property.PropertyName_RepoObject
 property.PropertyName_RepoObject <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition
 property.RepoObjectProperty <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition
-property.RepoObjectProperty <.. property.PropertyName_RepoObject
 property.RepoObjectProperty_InheritanceType_InheritanceDefinition <.. property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition
 repo.RepoObject <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition
-config.Parameter::Parameter_value__result_int <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::par_InheritanceType
 config.Parameter::Parameter_value__result_int <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::sub_InheritanceType
-config.Parameter::Parameter_value__result_nvarchar <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::sub_Inheritance_StringAggSeparatorSql
+config.Parameter::Parameter_value__result_int <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::par_InheritanceType
 config.Parameter::Parameter_value__result_nvarchar <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::sub_InheritanceDefintion
-config.Parameter::Parameter_value__result_nvarchar <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::par_Inheritance_StringAggSeparatorSql
 config.Parameter::Parameter_value__result_nvarchar <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::par_InheritanceDefintion
+config.Parameter::Parameter_value__result_nvarchar <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::sub_Inheritance_StringAggSeparatorSql
+config.Parameter::Parameter_value__result_nvarchar <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::par_Inheritance_StringAggSeparatorSql
 property.PropertyName_RepoObject::property_name <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::property_name
 property.RepoObjectProperty::property_value <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::property_value
 property.RepoObjectProperty_InheritanceType_InheritanceDefinition::Inheritance_StringAggSeparatorSql <-- property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition::Inheritance_StringAggSeparatorSql

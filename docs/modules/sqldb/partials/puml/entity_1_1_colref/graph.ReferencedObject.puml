@@ -23,27 +23,6 @@ skinparam class {
 }
 
 
-entity docs.RepoObject_Plantuml_ObjectRefList << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  --
-  ObjectRefList : nvarchar(max)
-  * RepoObject_fullname2 : nvarchar(257)
-}
-
-entity docs.RepoObject_Plantuml_ObjectRefList_0_30 << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  --
-  ObjectRefList : nvarchar(max)
-  * RepoObject_fullname2 : nvarchar(257)
-}
-
-entity docs.RepoObject_Plantuml_ObjectRefList_30_0 << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  --
-  ObjectRefList : nvarchar(max)
-  * RepoObject_fullname2 : nvarchar(257)
-}
-
 entity graph.ReferencedObject << U >> {
   --
   * $edge_id_25B0DD35E10A49DE8B49228E6802F3EB : nvarchar(1000)
@@ -56,9 +35,8 @@ entity graph.ReferencedObject << U >> {
   * to_obj_id_F1F1771130674EE9A9DAE06330740E13 : int
 }
 
-entity reference.Match_RepoObject_referenced_UspPersistence << V >> {
+entity reference.obsolet_Match_RepoObject_referenced_UspPersistence << V >> {
   **FirstNode** : uniqueidentifier
-  **LastNode** : uniqueidentifier
   --
   First_usp_persistence_name : nvarchar(140)
   First_usp_persistence_RepoObject_guid : uniqueidentifier
@@ -66,9 +44,9 @@ entity reference.Match_RepoObject_referenced_UspPersistence << V >> {
   FirstNodeName : nvarchar(261)
   Last_usp_persistence_name : nvarchar(140)
   Last_usp_persistence_RepoObject_guid : uniqueidentifier
+  LastNode : uniqueidentifier
   LastNode_schema_name : nvarchar(128)
   LastNodeName : nvarchar(261)
-  ListNodeName : nvarchar(4000)
 }
 
 entity reference.RepoObject_referenced_level << V >> {
@@ -83,39 +61,10 @@ entity reference.RepoObject_referenced_level << V >> {
   StartingNode_fullname2 : nvarchar(257)
 }
 
-entity reference.RepoObject_ReferencingReferenced << V >> {
-  **Referenced_guid** : uniqueidentifier
-  **Referencing_guid** : uniqueidentifier
-  --
-  Referenced_fullname : nvarchar(261)
-  Referenced_fullname2 : nvarchar(257)
-  Referenced_type : char(2)
-  Referencing_fullname : nvarchar(261)
-  Referencing_fullname2 : nvarchar(257)
-  Referencing_type : char(2)
-}
-
-entity reference.RepoObject_ReferencingReferenced_u_v << V >> {
-  **Referenced_guid** : uniqueidentifier
-  **Referencing_guid** : uniqueidentifier
-  --
-  Referenced_fullname : nvarchar(261)
-  Referenced_type : char(2)
-  Referencing_fullname : nvarchar(261)
-  Referencing_type : char(2)
-}
-
-entity repo.usp_main << P >> {
-  --
-}
-
-graph.ReferencedObject <.. reference.Match_RepoObject_referenced_UspPersistence
-graph.ReferencedObject <.. reference.RepoObject_ReferencingReferenced_u_v
 graph.ReferencedObject <.. reference.RepoObject_referenced_level
-graph.ReferencedObject <.. docs.RepoObject_Plantuml_ObjectRefList
-graph.ReferencedObject <.. reference.RepoObject_ReferencingReferenced
-graph.ReferencedObject <.. docs.RepoObject_Plantuml_ObjectRefList_0_30
-graph.ReferencedObject <.. docs.RepoObject_Plantuml_ObjectRefList_30_0
-graph.ReferencedObject <.. repo.usp_main
-reference.Match_RepoObject_referenced_UspPersistence <.. repo.usp_main
-
+graph.ReferencedObject <.. reference.obsolet_Match_RepoObject_referenced_UspPersistence
+graph.ReferencedObject::from_id_7F3CEF660D794A2A81530928BC4B36F1 <-- graph.ReferencedObject::$from_id_7B1BEB60463741CAA681054A489A2714
+graph.ReferencedObject::from_obj_id_A00C6316716D4F9DABE96A189F3A214A <-- graph.ReferencedObject::$from_id_7B1BEB60463741CAA681054A489A2714
+graph.ReferencedObject::graph_id_85ECDD019A4C46AF80CFD8DDFA08F479 <-- graph.ReferencedObject::$edge_id_25B0DD35E10A49DE8B49228E6802F3EB
+graph.ReferencedObject::to_id_45A2D6271B224A08B66CA0CF6A200A54 <-- graph.ReferencedObject::$to_id_26820C41BE034B00BCBC470518101233
+graph.ReferencedObject::to_obj_id_F1F1771130674EE9A9DAE06330740E13 <-- graph.ReferencedObject::$to_id_26820C41BE034B00BCBC470518101233

@@ -28,16 +28,13 @@ entity property.RepoObjectProperty << U >> {
   --
   inheritance : tinyint
   * property_name : nvarchar(128)
-  property_value : sql_variant
+  property_value : nvarchar(max)
   * RepoObject_guid : uniqueidentifier
-  {abstract} property_basetype : sql_variant
   {abstract} property_bigint : bigint
   {abstract} property_float : float
   {abstract} property_int : int
   {abstract} property_money : money
-  {abstract} property_nvarchar : nvarchar(4000)
   {abstract} property_real : real
-  {abstract} property_varchar : varchar(8000)
 }
 
 entity property.RepoObjectProperty_sys_repo << V >> {
@@ -46,7 +43,7 @@ entity property.RepoObjectProperty_sys_repo << V >> {
   --
   property_value : sql_variant
   RepoObjectProperty_id : int
-  RepoObjectProperty_property_value : sql_variant
+  RepoObjectProperty_property_value : nvarchar(max)
   SysObject_name : nvarchar(128)
   SysObject_schema_name : nvarchar(128)
 }
@@ -116,10 +113,8 @@ entity repo_sys.ExtendedProperties << V >> {
 }
 
 property.RepoObjectProperty <.. property.RepoObjectProperty_sys_repo
-property.RepoObjectProperty <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
 property.RepoObjectProperty_sys_repo <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
 repo.RepoObject <.. property.RepoObjectProperty_sys_repo
-repo_sys.ExtendedProperties <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
 repo_sys.ExtendedProperties <.. property.RepoObjectProperty_sys_repo
 repo.RepoObject::RepoObject_guid <-- property.RepoObjectProperty_sys_repo::RepoObject_guid
 repo_sys.ExtendedProperties::property_name <-- property.RepoObjectProperty_sys_repo::property_name

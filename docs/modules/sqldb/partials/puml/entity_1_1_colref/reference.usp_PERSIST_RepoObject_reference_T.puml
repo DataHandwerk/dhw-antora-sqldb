@@ -49,10 +49,10 @@ entity reference.RepoObject_reference_T << U >> {
   referencing_entity_name : nvarchar(128)
   referencing_schema_name : nvarchar(128)
   referencing_type : varchar(2)
-  * {static} 553E8252-4389-4FB8-B7D3-AE933335E9BE : nvarchar(261)
-  * {static} 749A5DFB-346D-4141-9B41-A638228D26DB : nvarchar(261)
-  * {static} A46B963E-4A20-453D-8325-F5CD383AFB81 : nvarchar(257)
-  * {static} E2865DAA-830F-4574-B431-8461B44E7992 : nvarchar(257)
+  * {static} referenced_fullname : nvarchar(261)
+  * {static} referenced_fullname2 : nvarchar(257)
+  * {static} referencing_fullname : nvarchar(261)
+  * {static} referencing_fullname2 : nvarchar(257)
 }
 
 entity reference.usp_PERSIST_RepoObject_reference_T << P >> {
@@ -63,18 +63,8 @@ entity repo.usp_main << P >> {
   --
 }
 
-logs.usp_ExecutionLog_insert <.. repo.usp_main
 logs.usp_ExecutionLog_insert <.. reference.usp_PERSIST_RepoObject_reference_T
 reference.RepoObject_reference <.. reference.usp_PERSIST_RepoObject_reference_T
-reference.RepoObject_reference <.. reference.RepoObject_reference_T
 reference.RepoObject_reference_T <.. reference.usp_PERSIST_RepoObject_reference_T
-reference.RepoObject_reference_T <.. repo.usp_main
 reference.usp_PERSIST_RepoObject_reference_T <.. repo.usp_main
-reference.RepoObject_reference::referenced_entity_name <-- reference.RepoObject_reference_T::referenced_entity_name
-reference.RepoObject_reference::referenced_RepoObject_guid <-- reference.RepoObject_reference_T::referenced_RepoObject_guid
-reference.RepoObject_reference::referenced_schema_name <-- reference.RepoObject_reference_T::referenced_schema_name
-reference.RepoObject_reference::referenced_type <-- reference.RepoObject_reference_T::referenced_type
-reference.RepoObject_reference::referencing_entity_name <-- reference.RepoObject_reference_T::referencing_entity_name
-reference.RepoObject_reference::referencing_RepoObject_guid <-- reference.RepoObject_reference_T::referencing_RepoObject_guid
-reference.RepoObject_reference::referencing_schema_name <-- reference.RepoObject_reference_T::referencing_schema_name
-reference.RepoObject_reference::referencing_type <-- reference.RepoObject_reference_T::referencing_type
+

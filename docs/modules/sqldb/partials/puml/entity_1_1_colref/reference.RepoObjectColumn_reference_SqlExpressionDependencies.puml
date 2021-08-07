@@ -23,24 +23,20 @@ skinparam class {
 }
 
 
-entity reference.RepoObject_reference_union << V >> {
+entity reference.RepoObject_reference_T << U >> {
   **referenced_RepoObject_guid** : uniqueidentifier
   **referencing_RepoObject_guid** : uniqueidentifier
   --
-  * InformationSource : varchar(34)
-  * one : int
   referenced_entity_name : nvarchar(128)
-  * referenced_fullname : nvarchar(517)
-  referenced_id : int
-  referenced_node_id : bigint
   referenced_schema_name : nvarchar(128)
   referenced_type : char(2)
   referencing_entity_name : nvarchar(128)
-  * referencing_fullname : nvarchar(517)
-  referencing_id : int
-  referencing_node_id : bigint
   referencing_schema_name : nvarchar(128)
   referencing_type : varchar(2)
+  * {static} referenced_fullname : nvarchar(261)
+  * {static} referenced_fullname2 : nvarchar(257)
+  * {static} referencing_fullname : nvarchar(261)
+  * {static} referencing_fullname2 : nvarchar(257)
 }
 
 entity reference.RepoObjectColumn_reference_SqlExpressionDependencies << V >> {
@@ -130,7 +126,7 @@ entity repo_sys.sql_expression_dependencies << V >> {
   referencing_type_desciption : nvarchar(60)
 }
 
-reference.RepoObject_reference_union <.. reference.RepoObjectColumn_reference_SqlExpressionDependencies
+reference.RepoObject_reference_T <.. reference.RepoObjectColumn_reference_SqlExpressionDependencies
 reference.RepoObjectColumn_reference_SqlExpressionDependencies <.. reference.RepoObjectColumn_reference_union
 repo_sys.sql_expression_dependencies <.. reference.RepoObjectColumn_reference_SqlExpressionDependencies
 repo_sys.sql_expression_dependencies::definition <-- reference.RepoObjectColumn_reference_SqlExpressionDependencies::definition

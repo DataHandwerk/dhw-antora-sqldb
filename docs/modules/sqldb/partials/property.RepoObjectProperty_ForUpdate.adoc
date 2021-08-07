@@ -6,6 +6,7 @@
 :ExistsProperty--antorareferencedlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
+:ExistsProperty--AntoraIndexList:
 :ExistsProperty--Columns:
 // end::existing_properties[]
 
@@ -36,7 +37,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-07-14 19:56:05
+2021-08-07 17:23:36
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -55,6 +56,11 @@ view
 |
 |===
 
+.Referenced Columns
+--
+* xref:property.RepoObjectProperty.adoc#column-inheritance[+property.RepoObjectProperty.inheritance+]
+--
+
 
 [[column-property_name]]
 === property_name
@@ -69,6 +75,11 @@ view
 |
 |===
 
+.Referenced Columns
+--
+* xref:property.RepoObjectProperty.adoc#column-property_name[+property.RepoObjectProperty.property_name+]
+--
+
 
 [[column-property_value]]
 === property_value
@@ -77,11 +88,22 @@ view
 |===
 |
 |property_value
-|sql_variant
+|nvarchar(max)
 |NULL
 |
 |
 |===
+
+.Description
+--
+datatype of property_value is `sql_variant`, because it should be possible to synchronize the property_value in the repository with property_value in extended properties in the dwh database, which is `sql_variant` +
+therefore the maximum content is nvarchar(4000) or varchar(8000)
+--
+
+.Referenced Columns
+--
+* xref:property.RepoObjectProperty.adoc#column-property_value[+property.RepoObjectProperty.property_value+]
+--
 
 
 [[column-RepoObject_fullname]]
@@ -97,6 +119,16 @@ view
 |
 |===
 
+.Description
+--
+(concat('[',[RepoObject_schema_name],'].[',[RepoObject_name],']'))
+--
+
+.Referenced Columns
+--
+* xref:repo.RepoObject.adoc#column-RepoObject_fullname[+repo.RepoObject.RepoObject_fullname+]
+--
+
 
 [[column-RepoObject_fullname2]]
 === RepoObject_fullname2
@@ -110,6 +142,16 @@ view
 |
 |
 |===
+
+.Description
+--
+(concat([RepoObject_schema_name],'.',[RepoObject_name]))
+--
+
+.Referenced Columns
+--
+* xref:repo.RepoObject.adoc#column-RepoObject_fullname2[+repo.RepoObject.RepoObject_fullname2+]
+--
 
 
 [[column-RepoObject_guid]]
@@ -125,6 +167,11 @@ view
 |
 |===
 
+.Referenced Columns
+--
+* xref:property.RepoObjectProperty.adoc#column-RepoObject_guid[+property.RepoObjectProperty.RepoObject_guid+]
+--
+
 
 [[column-RepoObject_name]]
 === RepoObject_name
@@ -138,6 +185,11 @@ view
 |
 |
 |===
+
+.Referenced Columns
+--
+* xref:repo.RepoObject.adoc#column-RepoObject_name[+repo.RepoObject.RepoObject_name+]
+--
 
 
 [[column-RepoObject_schema_name]]
@@ -153,6 +205,11 @@ view
 |
 |===
 
+.Referenced Columns
+--
+* xref:repo.RepoObject.adoc#column-RepoObject_schema_name[+repo.RepoObject.RepoObject_schema_name+]
+--
+
 
 [[column-RepoObjectProperty_id]]
 === RepoObjectProperty_id
@@ -166,6 +223,11 @@ view
 |
 |
 |===
+
+.Referenced Columns
+--
+* xref:property.RepoObjectProperty.adoc#column-RepoObjectProperty_id[+property.RepoObjectProperty.RepoObjectProperty_id+]
+--
 
 
 // end::AntoraColumnDetails[]
@@ -203,7 +265,7 @@ view
 
 |
 |<<column-property_value>>
-|sql_variant
+|nvarchar(max)
 |NULL
 |
 |
@@ -256,6 +318,51 @@ view
 
 // tag::AntoraIndexList[]
 
+[[index-idx_RepoObjectProperty_ForUpdate_1]]
+=== idx_RepoObjectProperty_ForUpdate++__++1
+
+* IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_schema_name,object_name[schema_name,object_name]
++
+--
+* <<column-RepoObject_schema_name>>; nvarchar(128)
+* <<column-RepoObject_name>>; nvarchar(128)
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[[index-idx_RepoObjectProperty_ForUpdate_2]]
+=== idx_RepoObjectProperty_ForUpdate++__++2
+
+* IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_repoobjectproperty_id[RepoObjectProperty_id]
++
+--
+* <<column-RepoObjectProperty_id>>; int
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[[index-idx_RepoObjectProperty_ForUpdate_3]]
+=== idx_RepoObjectProperty_ForUpdate++__++3
+
+* IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_repoobject_guid,property_name[RepoObject_guid,property_name]
++
+--
+* <<column-RepoObject_guid>>; uniqueidentifier
+* <<column-property_name>>; nvarchar(128)
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[[index-idx_RepoObjectProperty_ForUpdate_4]]
+=== idx_RepoObjectProperty_ForUpdate++__++4
+
+* IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_repoobject_guid[RepoObject_guid]
++
+--
+* <<column-RepoObject_guid>>; uniqueidentifier
+--
+* PK, Unique, Real: 0, 0, 0
+
 // end::AntoraIndexList[]
 
 == AntoraParameterList
@@ -298,6 +405,27 @@ view
 // tag::exampleusage_2[]
 
 // end::exampleusage_2[]
+
+
+== exampleUsage_3
+
+// tag::exampleusage_3[]
+
+// end::exampleusage_3[]
+
+
+== exampleUsage_4
+
+// tag::exampleusage_4[]
+
+// end::exampleusage_4[]
+
+
+== exampleUsage_5
+
+// tag::exampleusage_5[]
+
+// end::exampleusage_5[]
 
 
 == exampleWrong_Usage
@@ -480,6 +608,13 @@ view
 // tag::usp_persistence_repoobject_guid[]
 
 // end::usp_persistence_repoobject_guid[]
+
+
+== UspExamples
+
+// tag::uspexamples[]
+
+// end::uspexamples[]
 
 
 == UspParameters

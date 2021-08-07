@@ -23,7 +23,7 @@ skinparam class {
 }
 
 
-entity config.type_level1type_level2type << V >> {
+entity configT.type_level1type_level2type << V >> {
   **type** : nvarchar(128)
   --
   level1type : varchar(9)
@@ -83,13 +83,13 @@ entity sys_self.usp_dropextendedproperty_level_2 << P >> {
   --
 }
 
-config.type_level1type_level2type <.. sys_self.ExtendedProperties_ParameterForAddUpdateDrop
+configT.type_level1type_level2type <.. sys_self.ExtendedProperties_ParameterForAddUpdateDrop
 sys_self.ExtendedProperties <.. sys_self.ExtendedProperties_ParameterForAddUpdateDrop
-sys_self.ExtendedProperties_ParameterForAddUpdateDrop <.. sys_self.usp_dropextendedproperty_level_2
 sys_self.ExtendedProperties_ParameterForAddUpdateDrop <.. repo_sys.usp_dropextendedproperty_level_2
 sys_self.ExtendedProperties_ParameterForAddUpdateDrop <.. sys_self.usp_dropextendedproperty_level_1
-config.type_level1type_level2type::level1type <-- sys_self.ExtendedProperties_ParameterForAddUpdateDrop::type_level1type
-config.type_level1type_level2type::level2type <-- sys_self.ExtendedProperties_ParameterForAddUpdateDrop::type_level2type
+sys_self.ExtendedProperties_ParameterForAddUpdateDrop <.. sys_self.usp_dropextendedproperty_level_2
+configT.type_level1type_level2type::level1type <-- sys_self.ExtendedProperties_ParameterForAddUpdateDrop::type_level1type
+configT.type_level1type_level2type::level2type <-- sys_self.ExtendedProperties_ParameterForAddUpdateDrop::type_level2type
 sys_self.ExtendedProperties::class <-- sys_self.ExtendedProperties_ParameterForAddUpdateDrop::class
 sys_self.ExtendedProperties::class_desc <-- sys_self.ExtendedProperties_ParameterForAddUpdateDrop::class_desc
 sys_self.ExtendedProperties::minor_id <-- sys_self.ExtendedProperties_ParameterForAddUpdateDrop::minor_id

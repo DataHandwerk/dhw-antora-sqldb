@@ -44,7 +44,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-07-14 19:36:07
+2021-08-05 10:51:03
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -71,10 +71,10 @@ view
 .Referencing Columns
 --
 * xref:graph.RepoObjectColumn_S.adoc#column-RepoObjectColumn_guid[+graph.RepoObjectColumn_S.RepoObjectColumn_guid+]
-* xref:reference.RepoObjectColumn_reference_FirstResultSet.adoc#column-referenced_RepoObjectColumn_guid[+reference.RepoObjectColumn_reference_FirstResultSet.referenced_RepoObjectColumn_guid+]
 * xref:reference.RepoObjectColumn_reference_FirstResultSet.adoc#column-referencing_RepoObjectColumn_guid[+reference.RepoObjectColumn_reference_FirstResultSet.referencing_RepoObjectColumn_guid+]
-* xref:reference.RepoObjectColumn_reference_QueryPlan.adoc#column-referenced_RepoObjectColumn_guid[+reference.RepoObjectColumn_reference_QueryPlan.referenced_RepoObjectColumn_guid+]
+* xref:reference.RepoObjectColumn_reference_FirstResultSet.adoc#column-referenced_RepoObjectColumn_guid[+reference.RepoObjectColumn_reference_FirstResultSet.referenced_RepoObjectColumn_guid+]
 * xref:reference.RepoObjectColumn_reference_QueryPlan.adoc#column-referencing_RepoObjectColumn_guid[+reference.RepoObjectColumn_reference_QueryPlan.referencing_RepoObjectColumn_guid+]
+* xref:reference.RepoObjectColumn_reference_QueryPlan.adoc#column-referenced_RepoObjectColumn_guid[+reference.RepoObjectColumn_reference_QueryPlan.referenced_RepoObjectColumn_guid+]
 * xref:reference.RepoObjectColumn_reference_virtual.adoc#column-referencing_RepoObjectColumn_guid[+reference.RepoObjectColumn_reference_virtual.referencing_RepoObjectColumn_guid+]
 * xref:reference.RepoObjectColumn_reference_virtual.adoc#column-referenced_RepoObjectColumn_guid[+reference.RepoObjectColumn_reference_virtual.referenced_RepoObjectColumn_guid+]
 --
@@ -115,6 +115,30 @@ view
 .Referenced Columns
 --
 * xref:reference.RepoObjectColumn_ReferencingList.adoc#column-AntoraReferencingColumnList[+reference.RepoObjectColumn_ReferencingList.AntoraReferencingColumnList+]
+--
+
+
+[[column-Column_name]]
+=== Column_name
+
+[cols="d,m,m,m,m,d"]
+|===
+|
+|Column_name
+|nvarchar(128)
+|NOT NULL
+|
+|
+|===
+
+.Description
+--
+(case when TRY_CAST([RepoObjectColumn_name] AS [uniqueidentifier]) IS NULL then [RepoObjectColumn_name] else [SysObjectColumn_name] end)
+--
+
+.Referenced Columns
+--
+* xref:repo.RepoObjectColumn.adoc#column-Column_name[+repo.RepoObjectColumn.Column_name+]
 --
 
 
@@ -567,8 +591,8 @@ view
 
 .Referencing Columns
 --
-* xref:reference.RepoObjectColumn_reference_virtual.adoc#column-referenced_node_id[+reference.RepoObjectColumn_reference_virtual.referenced_node_id+]
 * xref:reference.RepoObjectColumn_reference_virtual.adoc#column-referencing_node_id[+reference.RepoObjectColumn_reference_virtual.referencing_node_id+]
+* xref:reference.RepoObjectColumn_reference_virtual.adoc#column-referenced_node_id[+reference.RepoObjectColumn_reference_virtual.referenced_node_id+]
 --
 
 
@@ -1047,8 +1071,8 @@ Column Value	Description
 * xref:property.RepoObjectColumnProperty_ForUpdate.adoc#column-RepoObject_guid[+property.RepoObjectColumnProperty_ForUpdate.RepoObject_guid+]
 * xref:reference.RepoObjectColumn_reference_FirstResultSet.adoc#column-referenced_RepoObject_guid[+reference.RepoObjectColumn_reference_FirstResultSet.referenced_RepoObject_guid+]
 * xref:reference.RepoObjectColumn_reference_QueryPlan.adoc#column-referenced_RepoObject_guid[+reference.RepoObjectColumn_reference_QueryPlan.referenced_RepoObject_guid+]
-* xref:reference.RepoObjectColumn_reference_virtual.adoc#column-referenced_RepoObject_guid[+reference.RepoObjectColumn_reference_virtual.referenced_RepoObject_guid+]
 * xref:reference.RepoObjectColumn_reference_virtual.adoc#column-referencing_RepoObject_guid[+reference.RepoObjectColumn_reference_virtual.referencing_RepoObject_guid+]
+* xref:reference.RepoObjectColumn_reference_virtual.adoc#column-referenced_RepoObject_guid[+reference.RepoObjectColumn_reference_virtual.referenced_RepoObject_guid+]
 * xref:repo.RepoObject_ColumnList.adoc#column-RepoObject_guid[+repo.RepoObject_ColumnList.RepoObject_guid+]
 --
 
@@ -1313,8 +1337,8 @@ Name of the column. Is unique within the object.
 --
 * xref:reference.RepoObjectColumn_reference_FirstResultSet.adoc#column-referenced_id[+reference.RepoObjectColumn_reference_FirstResultSet.referenced_id+]
 * xref:reference.RepoObjectColumn_reference_QueryPlan.adoc#column-referenced_id[+reference.RepoObjectColumn_reference_QueryPlan.referenced_id+]
-* xref:reference.RepoObjectColumn_reference_virtual.adoc#column-referenced_id[+reference.RepoObjectColumn_reference_virtual.referenced_id+]
 * xref:reference.RepoObjectColumn_reference_virtual.adoc#column-referencing_id[+reference.RepoObjectColumn_reference_virtual.referencing_id+]
+* xref:reference.RepoObjectColumn_reference_virtual.adoc#column-referenced_id[+reference.RepoObjectColumn_reference_virtual.referenced_id+]
 --
 
 
@@ -1403,8 +1427,8 @@ Name of the column. Is unique within the object.
 .Referencing Columns
 --
 * xref:reference.RepoObjectColumn_reference_QueryPlan.adoc#column-referenced_schema_name[+reference.RepoObjectColumn_reference_QueryPlan.referenced_schema_name+]
-* xref:reference.RepoObjectColumn_reference_virtual.adoc#column-referenced_schema_name[+reference.RepoObjectColumn_reference_virtual.referenced_schema_name+]
 * xref:reference.RepoObjectColumn_reference_virtual.adoc#column-referencing_schema_name[+reference.RepoObjectColumn_reference_virtual.referencing_schema_name+]
+* xref:reference.RepoObjectColumn_reference_virtual.adoc#column-referenced_schema_name[+reference.RepoObjectColumn_reference_virtual.referenced_schema_name+]
 --
 
 
@@ -1468,8 +1492,8 @@ Column IDs might not be sequential.
 --
 * xref:reference.RepoObjectColumn_reference_FirstResultSet.adoc#column-referencing_minor_id[+reference.RepoObjectColumn_reference_FirstResultSet.referencing_minor_id+]
 * xref:reference.RepoObjectColumn_reference_FirstResultSet.adoc#column-referenced_minor_id[+reference.RepoObjectColumn_reference_FirstResultSet.referenced_minor_id+]
-* xref:reference.RepoObjectColumn_reference_QueryPlan.adoc#column-referenced_minor_id[+reference.RepoObjectColumn_reference_QueryPlan.referenced_minor_id+]
 * xref:reference.RepoObjectColumn_reference_QueryPlan.adoc#column-referencing_minor_id[+reference.RepoObjectColumn_reference_QueryPlan.referencing_minor_id+]
+* xref:reference.RepoObjectColumn_reference_QueryPlan.adoc#column-referenced_minor_id[+reference.RepoObjectColumn_reference_QueryPlan.referenced_minor_id+]
 * xref:reference.RepoObjectColumn_reference_virtual.adoc#column-referencing_minor_id[+reference.RepoObjectColumn_reference_virtual.referencing_minor_id+]
 * xref:reference.RepoObjectColumn_reference_virtual.adoc#column-referenced_minor_id[+reference.RepoObjectColumn_reference_virtual.referenced_minor_id+]
 --
@@ -1582,6 +1606,7 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 
 
 
+
 // end::AntoraPkColumnTableRows[]
 
 == AntoraNonPkColumnTableRows
@@ -1599,6 +1624,13 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 |<<column-AntoraReferencingColumnList>>
 |nvarchar(max)
 |NULL
+|
+|
+
+|
+|<<column-Column_name>>
+|nvarchar(128)
+|NOT NULL
 |
 |
 
@@ -2188,6 +2220,27 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 // end::exampleusage_2[]
 
 
+== exampleUsage_3
+
+// tag::exampleusage_3[]
+
+// end::exampleusage_3[]
+
+
+== exampleUsage_4
+
+// tag::exampleusage_4[]
+
+// end::exampleusage_4[]
+
+
+== exampleUsage_5
+
+// tag::exampleusage_5[]
+
+// end::exampleusage_5[]
+
+
 == exampleWrong_Usage
 
 // tag::examplewrong_usage[]
@@ -2375,6 +2428,13 @@ RepoObjectColumn_guid
 // end::usp_persistence_repoobject_guid[]
 
 
+== UspExamples
+
+// tag::uspexamples[]
+
+// end::uspexamples[]
+
+
 == UspParameters
 
 // tag::uspparameters[]
@@ -2387,12 +2447,14 @@ RepoObjectColumn_guid
 // tag::sql_modules_definition[]
 [source,sql]
 ----
-CREATE View repo.RepoObjectColumn_gross
+
+CREATE View [repo].[RepoObjectColumn_gross]
 As
 --
 Select
     --
     roc.RepoObjectColumn_guid
+  , roc.Column_name
   , roc.has_different_sys_names
   , roc.Inheritance_StringAggSeparatorSql
   , roc.InheritanceDefinition

@@ -28,23 +28,20 @@ entity property.RepoObjectProperty << U >> {
   --
   inheritance : tinyint
   * property_name : nvarchar(128)
-  property_value : sql_variant
+  property_value : nvarchar(max)
   * RepoObject_guid : uniqueidentifier
-  {abstract} property_basetype : sql_variant
   {abstract} property_bigint : bigint
   {abstract} property_float : float
   {abstract} property_int : int
   {abstract} property_money : money
-  {abstract} property_nvarchar : nvarchar(4000)
   {abstract} property_real : real
-  {abstract} property_varchar : varchar(8000)
 }
 
 entity property.RepoObjectProperty_ForUpdate << V >> {
   --
   inheritance : tinyint
   * property_name : nvarchar(128)
-  property_value : sql_variant
+  property_value : nvarchar(max)
   * RepoObject_fullname : nvarchar(261)
   * RepoObject_fullname2 : nvarchar(257)
   * RepoObject_guid : uniqueidentifier
@@ -93,4 +90,12 @@ entity repo.RepoObject << U >> {
 
 property.RepoObjectProperty <.. property.RepoObjectProperty_ForUpdate
 repo.RepoObject <.. property.RepoObjectProperty_ForUpdate
-
+property.RepoObjectProperty::inheritance <-- property.RepoObjectProperty_ForUpdate::inheritance
+property.RepoObjectProperty::property_name <-- property.RepoObjectProperty_ForUpdate::property_name
+property.RepoObjectProperty::property_value <-- property.RepoObjectProperty_ForUpdate::property_value
+property.RepoObjectProperty::RepoObject_guid <-- property.RepoObjectProperty_ForUpdate::RepoObject_guid
+property.RepoObjectProperty::RepoObjectProperty_id <-- property.RepoObjectProperty_ForUpdate::RepoObjectProperty_id
+repo.RepoObject::RepoObject_fullname <-- property.RepoObjectProperty_ForUpdate::RepoObject_fullname
+repo.RepoObject::RepoObject_fullname2 <-- property.RepoObjectProperty_ForUpdate::RepoObject_fullname2
+repo.RepoObject::RepoObject_name <-- property.RepoObjectProperty_ForUpdate::RepoObject_name
+repo.RepoObject::RepoObject_schema_name <-- property.RepoObjectProperty_ForUpdate::RepoObject_schema_name

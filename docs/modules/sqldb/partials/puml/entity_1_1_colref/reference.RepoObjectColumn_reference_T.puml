@@ -23,6 +23,12 @@ skinparam class {
 }
 
 
+entity docs.RepoObject_Plantuml_ColRefList_1_1 << V >> {
+  --
+  ColRefList : nvarchar(max)
+  * RepoObject_guid : uniqueidentifier
+}
+
 entity reference.RepoObjectColumn_reference << V >> {
   **referenced_RepoObjectColumn_guid** : uniqueidentifier
   **referencing_RepoObjectColumn_guid** : uniqueidentifier
@@ -57,6 +63,34 @@ entity reference.RepoObjectColumn_reference_T << U >> {
   referencing_RepoObject_guid : uniqueidentifier
   referencing_schema_name : nvarchar(128)
   referencing_type : char(2)
+  * {static} referenced_ro_fullname : nvarchar(261)
+  * {static} referenced_ro_fullname2 : nvarchar(257)
+  * {static} referenced_roc_fullname : nvarchar(392)
+  * {static} referenced_roc_fullname2 : nvarchar(386)
+  * {static} referencing_ro_fullname : nvarchar(261)
+  * {static} referencing_ro_fullname2 : nvarchar(257)
+  * {static} referencing_roc_fullname : nvarchar(392)
+  * {static} referencing_roc_fullname2 : nvarchar(386)
+}
+
+entity reference.RepoObjectColumn_ReferencingReferenced << V >> {
+  * **Referenced_guid** : uniqueidentifier
+  * **Referencing_guid** : uniqueidentifier
+  --
+  * Referenced_fullname : nvarchar(261)
+  * Referenced_fullname2 : nvarchar(257)
+  Referenced_RepoObject_guid : uniqueidentifier
+  Referenced_type : char(2)
+  * ReferencedColumn_fullname : nvarchar(392)
+  * ReferencedColumn_fullname2 : nvarchar(386)
+  ReferencedColumn_name : nvarchar(128)
+  * Referencing_fullname : nvarchar(261)
+  * Referencing_fullname2 : nvarchar(257)
+  Referencing_RepoObject_guid : uniqueidentifier
+  Referencing_type : char(2)
+  * ReferencingColumn_fullname : nvarchar(392)
+  * ReferencingColumn_fullname2 : nvarchar(386)
+  ReferencingColumn_name : nvarchar(128)
 }
 
 entity reference.RepoObjectColumn_RelationScript << V >> {
@@ -115,18 +149,13 @@ entity repo.RepoObjectColumn_MissingSource_TypeV << V >> {
   * SysObjectColumn_name : nvarchar(128)
 }
 
-entity repo.usp_main << P >> {
-  --
-}
-
 reference.RepoObjectColumn_reference <.. reference.RepoObjectColumn_reference_T
-reference.RepoObjectColumn_reference <.. reference.usp_PERSIST_RepoObjectColumn_reference_T
-reference.RepoObjectColumn_reference_T <.. reference.usp_PERSIST_RepoObjectColumn_reference_T
 reference.RepoObjectColumn_reference_T <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing
-reference.RepoObjectColumn_reference_T <.. repo.RepoObjectColumn_MissingSource_TypeV
-reference.RepoObjectColumn_reference_T <.. repo.usp_main
 reference.RepoObjectColumn_reference_T <.. reference.RepoObjectColumn_RelationScript
-reference.usp_PERSIST_RepoObjectColumn_reference_T <.. repo.usp_main
+reference.RepoObjectColumn_reference_T <.. repo.RepoObjectColumn_MissingSource_TypeV
+reference.RepoObjectColumn_reference_T <.. reference.RepoObjectColumn_ReferencingReferenced
+reference.RepoObjectColumn_reference_T <.. reference.usp_PERSIST_RepoObjectColumn_reference_T
+reference.RepoObjectColumn_reference_T <.. docs.RepoObject_Plantuml_ColRefList_1_1
 reference.RepoObjectColumn_reference::is_referenced_object <-- reference.RepoObjectColumn_reference_T::is_referenced_object
 reference.RepoObjectColumn_reference::is_referencing_object_equal_referenced_object <-- reference.RepoObjectColumn_reference_T::is_referencing_object_equal_referenced_object
 reference.RepoObjectColumn_reference::referenced_column_name <-- reference.RepoObjectColumn_reference_T::referenced_column_name
@@ -141,5 +170,25 @@ reference.RepoObjectColumn_reference::referencing_RepoObject_guid <-- reference.
 reference.RepoObjectColumn_reference::referencing_RepoObjectColumn_guid <-- reference.RepoObjectColumn_reference_T::referencing_RepoObjectColumn_guid
 reference.RepoObjectColumn_reference::referencing_schema_name <-- reference.RepoObjectColumn_reference_T::referencing_schema_name
 reference.RepoObjectColumn_reference::referencing_type <-- reference.RepoObjectColumn_reference_T::referencing_type
+reference.RepoObjectColumn_reference_T::referenced_column_name <-- reference.RepoObjectColumn_reference_T::referenced_roc_fullname
+reference.RepoObjectColumn_reference_T::referenced_column_name <-- reference.RepoObjectColumn_reference_T::referenced_roc_fullname2
+reference.RepoObjectColumn_reference_T::referenced_entity_name <-- reference.RepoObjectColumn_reference_T::referenced_ro_fullname
+reference.RepoObjectColumn_reference_T::referenced_entity_name <-- reference.RepoObjectColumn_reference_T::referenced_ro_fullname2
+reference.RepoObjectColumn_reference_T::referenced_entity_name <-- reference.RepoObjectColumn_reference_T::referenced_roc_fullname
+reference.RepoObjectColumn_reference_T::referenced_entity_name <-- reference.RepoObjectColumn_reference_T::referenced_roc_fullname2
 reference.RepoObjectColumn_reference_T::referenced_RepoObject_guid <-- reference.RepoObjectColumn_RelationScript::referenced_RepoObject_guid
+reference.RepoObjectColumn_reference_T::referenced_schema_name <-- reference.RepoObjectColumn_reference_T::referenced_ro_fullname
+reference.RepoObjectColumn_reference_T::referenced_schema_name <-- reference.RepoObjectColumn_reference_T::referenced_ro_fullname2
+reference.RepoObjectColumn_reference_T::referenced_schema_name <-- reference.RepoObjectColumn_reference_T::referenced_roc_fullname
+reference.RepoObjectColumn_reference_T::referenced_schema_name <-- reference.RepoObjectColumn_reference_T::referenced_roc_fullname2
+reference.RepoObjectColumn_reference_T::referencing_column_name <-- reference.RepoObjectColumn_reference_T::referencing_roc_fullname
+reference.RepoObjectColumn_reference_T::referencing_column_name <-- reference.RepoObjectColumn_reference_T::referencing_roc_fullname2
+reference.RepoObjectColumn_reference_T::referencing_entity_name <-- reference.RepoObjectColumn_reference_T::referencing_ro_fullname
+reference.RepoObjectColumn_reference_T::referencing_entity_name <-- reference.RepoObjectColumn_reference_T::referencing_ro_fullname2
+reference.RepoObjectColumn_reference_T::referencing_entity_name <-- reference.RepoObjectColumn_reference_T::referencing_roc_fullname
+reference.RepoObjectColumn_reference_T::referencing_entity_name <-- reference.RepoObjectColumn_reference_T::referencing_roc_fullname2
 reference.RepoObjectColumn_reference_T::referencing_RepoObject_guid <-- reference.RepoObjectColumn_RelationScript::referencing_RepoObject_guid
+reference.RepoObjectColumn_reference_T::referencing_schema_name <-- reference.RepoObjectColumn_reference_T::referencing_ro_fullname
+reference.RepoObjectColumn_reference_T::referencing_schema_name <-- reference.RepoObjectColumn_reference_T::referencing_ro_fullname2
+reference.RepoObjectColumn_reference_T::referencing_schema_name <-- reference.RepoObjectColumn_reference_T::referencing_roc_fullname
+reference.RepoObjectColumn_reference_T::referencing_schema_name <-- reference.RepoObjectColumn_reference_T::referencing_roc_fullname2

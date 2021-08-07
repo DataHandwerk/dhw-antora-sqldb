@@ -32,16 +32,13 @@ entity property.RepoObjectColumnProperty << U >> {
   --
   inheritance : tinyint
   * property_name : nvarchar(128)
-  * property_value : sql_variant
+  * property_value : nvarchar(max)
   * RepoObjectColumn_guid : uniqueidentifier
-  {abstract} property_basetype : sql_variant
   {abstract} property_bigint : bigint
   {abstract} property_float : float
   {abstract} property_int : int
   {abstract} property_money : money
-  {abstract} property_nvarchar : nvarchar(4000)
   {abstract} property_real : real
-  {abstract} property_varchar : varchar(8000)
 }
 
 entity property.RepoObjectColumnProperty_sys_repo << V >> {
@@ -50,7 +47,7 @@ entity property.RepoObjectColumnProperty_sys_repo << V >> {
   --
   property_value : sql_variant
   RepoObjectColumnProperty_id : int
-  RepoObjectColumnProperty_property_value : sql_variant
+  RepoObjectColumnProperty_property_value : nvarchar(max)
   SysObject_name : nvarchar(128)
   SysObject_schema_name : nvarchar(128)
   SysObjectColumn_name : nvarchar(128)
@@ -61,16 +58,13 @@ entity property.RepoObjectProperty << U >> {
   --
   inheritance : tinyint
   * property_name : nvarchar(128)
-  property_value : sql_variant
+  property_value : nvarchar(max)
   * RepoObject_guid : uniqueidentifier
-  {abstract} property_basetype : sql_variant
   {abstract} property_bigint : bigint
   {abstract} property_float : float
   {abstract} property_int : int
   {abstract} property_money : money
-  {abstract} property_nvarchar : nvarchar(4000)
   {abstract} property_real : real
-  {abstract} property_varchar : varchar(8000)
 }
 
 entity property.RepoObjectProperty_sys_repo << V >> {
@@ -79,7 +73,7 @@ entity property.RepoObjectProperty_sys_repo << V >> {
   --
   property_value : sql_variant
   RepoObjectProperty_id : int
-  RepoObjectProperty_property_value : sql_variant
+  RepoObjectProperty_property_value : nvarchar(max)
   SysObject_name : nvarchar(128)
   SysObject_schema_name : nvarchar(128)
 }
@@ -124,22 +118,10 @@ entity repo_sys.ExtendedProperties << V >> {
 }
 
 logs.usp_ExecutionLog_insert <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
-property.RepoObjectColumnProperty <.. property.RepoObjectColumnProperty_sys_repo
 property.RepoObjectColumnProperty <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
 property.RepoObjectColumnProperty_sys_repo <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
 property.RepoObjectProperty <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
-property.RepoObjectProperty <.. property.RepoObjectProperty_sys_repo
 property.RepoObjectProperty_sys_repo <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
 repo.RepoSchema <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
-repo_sys.ExtendedProperties <.. property.RepoObjectProperty_sys_repo
-repo_sys.ExtendedProperties <.. property.RepoObjectColumnProperty_sys_repo
 repo_sys.ExtendedProperties <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
-repo_sys.ExtendedProperties::entity_column_name <-- property.RepoObjectColumnProperty_sys_repo::SysObjectColumn_name
-repo_sys.ExtendedProperties::property_name <-- property.RepoObjectColumnProperty_sys_repo::property_name
-repo_sys.ExtendedProperties::property_name <-- property.RepoObjectProperty_sys_repo::property_name
-repo_sys.ExtendedProperties::property_value <-- property.RepoObjectColumnProperty_sys_repo::property_value
-repo_sys.ExtendedProperties::property_value <-- property.RepoObjectProperty_sys_repo::property_value
-repo_sys.ExtendedProperties::SysObject_name <-- property.RepoObjectProperty_sys_repo::SysObject_name
-repo_sys.ExtendedProperties::SysObject_name <-- property.RepoObjectColumnProperty_sys_repo::SysObject_name
-repo_sys.ExtendedProperties::SysObject_schema_name <-- property.RepoObjectColumnProperty_sys_repo::SysObject_schema_name
-repo_sys.ExtendedProperties::SysObject_schema_name <-- property.RepoObjectProperty_sys_repo::SysObject_schema_name
+

@@ -41,35 +41,21 @@ entity config.Parameter << U >> {
   --
 }
 
-entity config.spt_values << U >> {
+entity configT.spt_values << U >> {
   --
 }
 
-entity config.type << V >> {
+entity configT.type << V >> {
   **type** : nvarchar(128)
   --
 }
 
-entity config.type_level1type_level2type << V >> {
+entity configT.type_level1type_level2type << V >> {
   **type** : nvarchar(128)
-  --
-}
-
-entity graph.RepoObject << U >> {
-  --
-}
-
-entity graph.RepoObject_S << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  --
-}
-
-entity graph.usp_PERSIST_RepoObject << P >> {
   --
 }
 
 entity logs.ExecutionLog << U >> {
-  * **id** : bigint
   --
 }
 
@@ -160,38 +146,30 @@ config.ftv_dwh_database <.. repo_sys.ExtendedProperties
 config.Parameter <.. config.fs_dwh_database_name
 config.Parameter <.. config.fs_get_parameter_value
 config.Parameter <.. config.ftv_dwh_database
-config.spt_values <.. config.type
-config.type <.. config.type_level1type_level2type
-config.type_level1type_level2type <.. repo.usp_sync_guid_RepoObject
-graph.RepoObject <.. graph.usp_PERSIST_RepoObject
-graph.RepoObject <.. repo.usp_sync_guid_RepoObject
-graph.RepoObject_S <.. repo.usp_sync_guid_RepoObject
-graph.RepoObject_S <.. graph.usp_PERSIST_RepoObject
-graph.RepoObject_S <.. graph.RepoObject
-graph.usp_PERSIST_RepoObject <.. repo.usp_sync_guid_RepoObject
+configT.spt_values <.. configT.type
+configT.type <.. configT.type_level1type_level2type
+configT.type_level1type_level2type <.. repo.usp_sync_guid_RepoObject
 logs.ExecutionLog <.. logs.usp_ExecutionLog_insert
 logs.usp_ExecutionLog_insert <.. repo.usp_sync_guid_RepoObject
-logs.usp_ExecutionLog_insert <.. graph.usp_PERSIST_RepoObject
 reference.RepoObjectSource_virtual <.. repo.usp_sync_guid_RepoObject
-repo.RepoObject <.. repo.RepoObject_RequiredRepoObjectMerge
-repo.RepoObject <.. graph.RepoObject_S
-repo.RepoObject <.. repo.usp_sync_guid_RepoObject
-repo.RepoObject <.. repo.SysObject_RepoObject_via_name
 repo.RepoObject <.. repo.SysObject_RepoObject_via_guid
+repo.RepoObject <.. repo.SysObject_RepoObject_via_name
+repo.RepoObject <.. repo.RepoObject_RequiredRepoObjectMerge
+repo.RepoObject <.. repo.usp_sync_guid_RepoObject
 repo.RepoObject_persistence <.. repo.usp_sync_guid_RepoObject
 repo.RepoObject_RequiredRepoObjectMerge <.. repo.usp_sync_guid_RepoObject
 repo.SysObject_RepoObject_via_guid <.. repo.usp_sync_guid_RepoObject
 repo.SysObject_RepoObject_via_name <.. repo.usp_sync_guid_RepoObject
 repo_sys.ExtendedProperties <.. repo_sys.SysObject
-repo_sys.SysObject <.. repo.SysObject_RepoObject_via_guid
 repo_sys.SysObject <.. repo.SysObject_RepoObject_via_name
 repo_sys.SysObject <.. repo.usp_sync_guid_RepoObject
+repo_sys.SysObject <.. repo.SysObject_RepoObject_via_guid
 repo_sys.usp_AddOrUpdateExtendedProperty <.. repo.usp_sync_guid_RepoObject
 sys_dwh.columns <.. repo_sys.ExtendedProperties
 sys_dwh.extended_properties <.. repo_sys.ExtendedProperties
 sys_dwh.indexes <.. repo_sys.ExtendedProperties
-sys_dwh.objects <.. repo_sys.ExtendedProperties
 sys_dwh.objects <.. repo_sys.SysObject
+sys_dwh.objects <.. repo_sys.ExtendedProperties
 sys_dwh.parameters <.. repo_sys.ExtendedProperties
 sys_dwh.schemas <.. repo_sys.ExtendedProperties
 sys_dwh.schemas <.. repo_sys.SysObject

@@ -23,7 +23,9 @@ skinparam class {
 }
 
 
-entity reference.RepoObjectColumn_reference_union << V >> {
+entity reference.RepoObjectColumn_reference_T << U >> {
+  **referenced_RepoObjectColumn_guid** : uniqueidentifier
+  **referencing_RepoObjectColumn_guid** : uniqueidentifier
   --
 }
 
@@ -42,6 +44,6 @@ entity repo.RepoObjectColumn_MissingSource_TypeV << V >> {
   --
 }
 
-reference.RepoObjectColumn_reference_union <.. repo.RepoObjectColumn_MissingSource_TypeV
+reference.RepoObjectColumn_reference_T <.. repo.RepoObjectColumn_MissingSource_TypeV
 repo.RepoObject <.. repo.RepoObjectColumn_MissingSource_TypeV
 repo.RepoObjectColumn <.. repo.RepoObjectColumn_MissingSource_TypeV

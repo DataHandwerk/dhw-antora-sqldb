@@ -34,7 +34,7 @@ entity reference.ftv_RepoObject_ReferenceTree_referenced << IF >> {
   Referencing_fullname : nvarchar(261)
   Referencing_fullname2 : nvarchar(257)
   Referencing_guid : uniqueidentifier
-  Referencing_type : char(2)
+  Referencing_type : varchar(2)
   RepoObject_guid : uniqueidentifier
 }
 
@@ -53,18 +53,30 @@ entity reference.RepoObject_ReferenceTree_referenced << V >> {
   Referencing_type : char(2)
 }
 
-entity reference.RepoObject_ReferencingReferenced << V >> {
+entity reference.RepoObject_ReferenceTree_referenced_30_0 << V >> {
+  * **RepoObject_guid** : uniqueidentifier
   **Referenced_guid** : uniqueidentifier
-  **Referencing_guid** : uniqueidentifier
   --
+  Referenced_Depth : int
   Referenced_fullname : nvarchar(261)
   Referenced_fullname2 : nvarchar(257)
+  RepoObject_fullname : nvarchar(261)
+  RepoObject_fullname2 : nvarchar(257)
+}
+
+entity reference.RepoObject_ReferencingReferenced << V >> {
+  * **Referenced_guid** : uniqueidentifier
+  * **Referencing_guid** : uniqueidentifier
+  --
+  * Referenced_fullname : nvarchar(261)
+  * Referenced_fullname2 : nvarchar(257)
   Referenced_type : char(2)
-  Referencing_fullname : nvarchar(261)
-  Referencing_fullname2 : nvarchar(257)
-  Referencing_type : char(2)
+  * Referencing_fullname : nvarchar(261)
+  * Referencing_fullname2 : nvarchar(257)
+  Referencing_type : varchar(2)
 }
 
 reference.ftv_RepoObject_ReferenceTree_referenced <.. reference.RepoObject_ReferenceTree_referenced
+reference.ftv_RepoObject_ReferenceTree_referenced <.. reference.RepoObject_ReferenceTree_referenced_30_0
 reference.RepoObject_ReferencingReferenced <.. reference.ftv_RepoObject_ReferenceTree_referenced
 

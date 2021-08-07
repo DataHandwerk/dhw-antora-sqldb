@@ -23,13 +23,6 @@ skinparam class {
 }
 
 
-entity docs.RepoObject_Plantuml_ColRefList << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  --
-  ColRefList : nvarchar(max)
-  * RepoObject_fullname2 : nvarchar(257)
-}
-
 entity graph.RepoObjectColumn << U >> {
   --
   * $node_id_347F7C762E2642A98518838371CE6BB1 : nvarchar(1000)
@@ -62,45 +55,9 @@ entity graph.usp_PERSIST_RepoObjectColumn << P >> {
   --
 }
 
-entity reference.RepoObjectColumn_ReferencingReferenced << V >> {
-  **Referenced_guid** : uniqueidentifier
-  **Referencing_guid** : uniqueidentifier
-  --
-  Referenced_fullname : nvarchar(261)
-  Referenced_fullname2 : nvarchar(257)
-  Referenced_RepoObject_guid : uniqueidentifier
-  Referenced_type : char(2)
-  ReferencedColumn_fullname : nvarchar(520)
-  ReferencedColumn_fullname2 : nvarchar(386)
-  ReferencedColumn_name : nvarchar(128)
-  ReferencedColumn_type : nvarchar(128)
-  Referencing_fullname : nvarchar(261)
-  Referencing_fullname2 : nvarchar(257)
-  Referencing_RepoObject_guid : uniqueidentifier
-  Referencing_type : char(2)
-  ReferencingColumn_fullname : nvarchar(520)
-  ReferencingColumn_fullname2 : nvarchar(386)
-  ReferencingColumn_name : nvarchar(128)
-  ReferencingColumn_type : nvarchar(128)
-}
-
-entity repo.usp_main << P >> {
-  --
-}
-
-entity repo.usp_sync_guid_RepoObjectColumn << P >> {
-  --
-}
-
-graph.RepoObjectColumn <.. repo.usp_sync_guid_RepoObjectColumn
-graph.RepoObjectColumn <.. repo.usp_main
-graph.RepoObjectColumn <.. docs.RepoObject_Plantuml_ColRefList
-graph.RepoObjectColumn <.. reference.RepoObjectColumn_ReferencingReferenced
 graph.RepoObjectColumn <.. graph.usp_PERSIST_RepoObjectColumn
-graph.RepoObjectColumn_S <.. graph.usp_PERSIST_RepoObjectColumn
 graph.RepoObjectColumn_S <.. graph.RepoObjectColumn
-graph.RepoObjectColumn_S <.. repo.usp_sync_guid_RepoObjectColumn
-graph.usp_PERSIST_RepoObjectColumn <.. repo.usp_sync_guid_RepoObjectColumn
+graph.RepoObjectColumn::graph_id_58E017E29B684D7FBC6E4E880C609245 <-- graph.RepoObjectColumn::$node_id_347F7C762E2642A98518838371CE6BB1
 graph.RepoObjectColumn_S::RepoObject_fullname <-- graph.RepoObjectColumn::RepoObject_fullname
 graph.RepoObjectColumn_S::RepoObject_fullname2 <-- graph.RepoObjectColumn::RepoObject_fullname2
 graph.RepoObjectColumn_S::RepoObject_guid <-- graph.RepoObjectColumn::RepoObject_guid

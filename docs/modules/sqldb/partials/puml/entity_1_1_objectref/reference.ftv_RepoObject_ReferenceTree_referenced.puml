@@ -36,11 +36,18 @@ entity reference.RepoObject_ReferenceTree_referenced << V >> {
   --
 }
 
-entity reference.RepoObject_ReferencingReferenced << V >> {
+entity reference.RepoObject_ReferenceTree_referenced_30_0 << V >> {
+  * **RepoObject_guid** : uniqueidentifier
   **Referenced_guid** : uniqueidentifier
-  **Referencing_guid** : uniqueidentifier
+  --
+}
+
+entity reference.RepoObject_ReferencingReferenced << V >> {
+  * **Referenced_guid** : uniqueidentifier
+  * **Referencing_guid** : uniqueidentifier
   --
 }
 
 reference.ftv_RepoObject_ReferenceTree_referenced <.. reference.RepoObject_ReferenceTree_referenced
+reference.ftv_RepoObject_ReferenceTree_referenced <.. reference.RepoObject_ReferenceTree_referenced_30_0
 reference.RepoObject_ReferencingReferenced <.. reference.ftv_RepoObject_ReferenceTree_referenced

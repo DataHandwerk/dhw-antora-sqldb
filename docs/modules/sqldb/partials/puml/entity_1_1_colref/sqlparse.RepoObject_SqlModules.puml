@@ -84,14 +84,15 @@ entity sqlparse.RepoObject_SqlModules_Repo_Sys << V >> {
   SysObject_type : char(2)
 }
 
-sqlparse.RepoObject_SqlModules <.. sqlparse.RepoObject_SqlModules_Repo_Sys
 sqlparse.RepoObject_SqlModules <.. sqlparse.RepoObject_SqlModules_39_object
+sqlparse.RepoObject_SqlModules <.. sqlparse.RepoObject_SqlModules_Repo_Sys
 sqlparse.RepoObject_SqlModules <.. sqlparse.RepoObject_SqlModules_10_statement
 sqlparse.RepoObject_SqlModules::is_json_sql_modules_json <-- sqlparse.RepoObject_SqlModules_Repo_Sys::is_json_sql_modules_json
-sqlparse.RepoObject_SqlModules::RepoObject_guid <-- sqlparse.RepoObject_SqlModules_39_object::RepoObject_guid
 sqlparse.RepoObject_SqlModules::RepoObject_guid <-- sqlparse.RepoObject_SqlModules_10_statement::RepoObject_guid
+sqlparse.RepoObject_SqlModules::RepoObject_guid <-- sqlparse.RepoObject_SqlModules_39_object::RepoObject_guid
 sqlparse.RepoObject_SqlModules::sql_modules_dt <-- sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_dt
 sqlparse.RepoObject_SqlModules::sql_modules_formatted <-- sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_formatted
 sqlparse.RepoObject_SqlModules::sql_modules_formatted2 <-- sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_formatted2
-sqlparse.RepoObject_SqlModules::sql_modules_json <-- sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_json
 sqlparse.RepoObject_SqlModules::sql_modules_json <-- sqlparse.RepoObject_SqlModules_10_statement::sql_modules_json
+sqlparse.RepoObject_SqlModules::sql_modules_json <-- sqlparse.RepoObject_SqlModules::is_json_sql_modules_json
+sqlparse.RepoObject_SqlModules::sql_modules_json <-- sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_json

@@ -24,10 +24,10 @@ skinparam class {
 
 
 entity graph.Index << U >> {
+  * **Index_guid** : uniqueidentifier
   --
   * $node_id_AF6B7830FCB14AF394D0C46FF2CB7197 : nvarchar(1000)
   * graph_id_4F2AAAB29B6A47EA9BBA2AC1E8133A49 : bigint
-  * Index_guid : uniqueidentifier
   Index_name : nvarchar(128)
   * index_type : tinyint
   IndexPatternColumnDatatype : nvarchar(4000)
@@ -59,12 +59,6 @@ entity graph.Index_S << V >> {
   RepoObject_guid : uniqueidentifier
 }
 
-entity graph.usp_PERSIST_Index << P >> {
-  --
-}
-
-graph.Index <.. graph.usp_PERSIST_Index
-graph.Index_S <.. graph.usp_PERSIST_Index
 graph.Index_S <.. graph.Index
 graph.Index_S::Index_guid <-- graph.Index::Index_guid
 graph.Index_S::Index_name <-- graph.Index::Index_name

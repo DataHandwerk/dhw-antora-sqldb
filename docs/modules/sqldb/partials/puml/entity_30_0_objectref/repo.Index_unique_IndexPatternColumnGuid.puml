@@ -34,7 +34,6 @@ entity config.Parameter << U >> {
 }
 
 entity repo.Index_unique_IndexPatternColumnGuid << V >> {
-  **index_guid** : uniqueidentifier
   --
 }
 
@@ -124,16 +123,16 @@ entity sys_dwh.types << SN >> {
   --
 }
 
-config.ftv_dwh_database <.. repo_sys.ExtendedProperties
 config.ftv_dwh_database <.. repo_sys.SysColumn
+config.ftv_dwh_database <.. repo_sys.ExtendedProperties
 config.Parameter <.. config.ftv_dwh_database
-repo.RepoObject <.. repo.SysObject_RepoObject_via_name
 repo.RepoObject <.. repo.SysColumn_RepoObjectColumn_via_name
+repo.RepoObject <.. repo.SysObject_RepoObject_via_name
 repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_name
 repo.SysColumn_RepoObjectColumn_via_name <.. repo_sys.IndexColumn_unique
 repo.SysObject_RepoObject_via_name <.. repo_sys.IndexColumn_unique
-repo_sys.ExtendedProperties <.. repo_sys.SysColumn
 repo_sys.ExtendedProperties <.. repo_sys.SysObject
+repo_sys.ExtendedProperties <.. repo_sys.SysColumn
 repo_sys.IndexColumn_unique <.. repo.Index_unique_IndexPatternColumnGuid
 repo_sys.SysColumn <.. repo.SysColumn_RepoObjectColumn_via_name
 repo_sys.SysObject <.. repo.SysObject_RepoObject_via_name

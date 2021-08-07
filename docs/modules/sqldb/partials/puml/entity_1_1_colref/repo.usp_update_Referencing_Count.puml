@@ -105,6 +105,7 @@ entity repo.RepoObjectColumn << U >> {
   * RepoObjectColumn_name : nvarchar(128)
   SysObjectColumn_column_id : int
   * SysObjectColumn_name : nvarchar(128)
+  * {static} Column_name : nvarchar(128)
   {abstract} has_different_sys_names : bit
   * {static} is_RepoObjectColumn_name_uniqueidentifier : int
   * {static} is_SysObjectColumn_name_uniqueidentifier : int
@@ -164,25 +165,8 @@ entity repo_sys.RepoObjectReferencing << V >> {
 
 config.ftv_dwh_database <.. repo.usp_update_Referencing_Count
 logs.usp_ExecutionLog_insert <.. repo.usp_update_Referencing_Count
-repo.RepoObject <.. repo_sys.RepoObjectReferencing
-repo.RepoObject <.. repo_sys.RepoObjectReferenced
 repo.RepoObject <.. repo.usp_update_Referencing_Count
 repo.RepoObjectColumn <.. repo.usp_update_Referencing_Count
 repo_sys.RepoObjectReferenced <.. repo.usp_update_Referencing_Count
 repo_sys.RepoObjectReferencing <.. repo.usp_update_Referencing_Count
-repo.RepoObject::has_different_sys_names <-- repo_sys.RepoObjectReferencing::has_different_sys_names
-repo.RepoObject::has_different_sys_names <-- repo_sys.RepoObjectReferenced::has_different_sys_names
-repo.RepoObject::is_repo_managed <-- repo_sys.RepoObjectReferenced::is_repo_managed
-repo.RepoObject::is_repo_managed <-- repo_sys.RepoObjectReferencing::is_repo_managed
-repo.RepoObject::RepoObject_fullname <-- repo_sys.RepoObjectReferencing::RepoObject_fullname
-repo.RepoObject::RepoObject_fullname <-- repo_sys.RepoObjectReferenced::RepoObject_fullname
-repo.RepoObject::RepoObject_guid <-- repo_sys.RepoObjectReferencing::RepoObject_guid
-repo.RepoObject::RepoObject_guid <-- repo_sys.RepoObjectReferenced::RepoObject_guid
-repo.RepoObject::SysObject_fullname <-- repo_sys.RepoObjectReferenced::SysObject_fullname
-repo.RepoObject::SysObject_fullname <-- repo_sys.RepoObjectReferencing::SysObject_fullname
-repo.RepoObject::SysObject_id <-- repo_sys.RepoObjectReferenced::SysObject_id
-repo.RepoObject::SysObject_id <-- repo_sys.RepoObjectReferencing::SysObject_id
-repo.RepoObject::SysObject_modify_date <-- repo_sys.RepoObjectReferencing::SysObject_modify_date
-repo.RepoObject::SysObject_modify_date <-- repo_sys.RepoObjectReferenced::SysObject_modify_date
-repo.RepoObject::SysObject_type <-- repo_sys.RepoObjectReferenced::SysObject_type
-repo.RepoObject::SysObject_type <-- repo_sys.RepoObjectReferencing::SysObject_type
+

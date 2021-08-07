@@ -23,21 +23,6 @@ skinparam class {
 }
 
 
-entity graph.RepoObjectColumn << U >> {
-  --
-  * $node_id_347F7C762E2642A98518838371CE6BB1 : nvarchar(1000)
-  * graph_id_58E017E29B684D7FBC6E4E880C609245 : bigint
-  * RepoObject_fullname : nvarchar(261)
-  RepoObject_fullname2 : nvarchar(257)
-  * RepoObject_guid : uniqueidentifier
-  * RepoObject_type : char(2)
-  * RepoObjectColumn_fullname : nvarchar(520)
-  RepoObjectColumn_fullname2 : nvarchar(386)
-  * RepoObjectColumn_guid : uniqueidentifier
-  * RepoObjectColumn_name : nvarchar(128)
-  RepoObjectColumn_type : nvarchar(128)
-}
-
 entity graph.RepoObjectColumn_S << V >> {
   * **RepoObjectColumn_guid** : uniqueidentifier
   --
@@ -51,15 +36,12 @@ entity graph.RepoObjectColumn_S << V >> {
   RepoObjectColumn_type : nvarchar(128)
 }
 
-entity graph.usp_PERSIST_RepoObjectColumn << P >> {
-  --
-}
-
 entity repo.RepoObjectColumn_gross << V >> {
   * **RepoObjectColumn_guid** : uniqueidentifier
   --
   AntoraReferencedColumnList : nvarchar(max)
   AntoraReferencingColumnList : nvarchar(max)
+  * Column_name : nvarchar(128)
   has_different_sys_names : bit
   has_get_referenced_issue : bit
   index_column_id : int
@@ -124,26 +106,7 @@ entity repo.RepoObjectColumn_gross << V >> {
   * SysObjectColumn_name : nvarchar(128)
 }
 
-entity repo.usp_sync_guid_RepoObjectColumn << P >> {
-  --
-}
-
-graph.RepoObjectColumn <.. repo.usp_sync_guid_RepoObjectColumn
-graph.RepoObjectColumn <.. graph.usp_PERSIST_RepoObjectColumn
-graph.RepoObjectColumn_S <.. graph.usp_PERSIST_RepoObjectColumn
-graph.RepoObjectColumn_S <.. repo.usp_sync_guid_RepoObjectColumn
-graph.RepoObjectColumn_S <.. graph.RepoObjectColumn
-graph.usp_PERSIST_RepoObjectColumn <.. repo.usp_sync_guid_RepoObjectColumn
 repo.RepoObjectColumn_gross <.. graph.RepoObjectColumn_S
-graph.RepoObjectColumn_S::RepoObject_fullname <-- graph.RepoObjectColumn::RepoObject_fullname
-graph.RepoObjectColumn_S::RepoObject_fullname2 <-- graph.RepoObjectColumn::RepoObject_fullname2
-graph.RepoObjectColumn_S::RepoObject_guid <-- graph.RepoObjectColumn::RepoObject_guid
-graph.RepoObjectColumn_S::RepoObject_type <-- graph.RepoObjectColumn::RepoObject_type
-graph.RepoObjectColumn_S::RepoObjectColumn_fullname <-- graph.RepoObjectColumn::RepoObjectColumn_fullname
-graph.RepoObjectColumn_S::RepoObjectColumn_fullname2 <-- graph.RepoObjectColumn::RepoObjectColumn_fullname2
-graph.RepoObjectColumn_S::RepoObjectColumn_guid <-- graph.RepoObjectColumn::RepoObjectColumn_guid
-graph.RepoObjectColumn_S::RepoObjectColumn_name <-- graph.RepoObjectColumn::RepoObjectColumn_name
-graph.RepoObjectColumn_S::RepoObjectColumn_type <-- graph.RepoObjectColumn::RepoObjectColumn_type
 repo.RepoObjectColumn_gross::RepoObject_fullname <-- graph.RepoObjectColumn_S::RepoObject_fullname
 repo.RepoObjectColumn_gross::RepoObject_guid <-- graph.RepoObjectColumn_S::RepoObject_guid
 repo.RepoObjectColumn_gross::RepoObject_type <-- graph.RepoObjectColumn_S::RepoObject_type

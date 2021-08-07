@@ -23,19 +23,17 @@ skinparam class {
 }
 
 
-entity graph.ReferencedObjectColumn << U >> {
-  --
-}
-
-entity graph.RepoObjectColumn << U >> {
-  --
-}
-
 entity reference.ftv_RepoObject_DbmlColumnRelation << IF >> {
   --
 }
 
 entity reference.ftv_RepoObjectColumn_ReferenceTree << IF >> {
+  --
+}
+
+entity reference.RepoObjectColumn_reference_T << U >> {
+  **referenced_RepoObjectColumn_guid** : uniqueidentifier
+  **referencing_RepoObjectColumn_guid** : uniqueidentifier
   --
 }
 
@@ -48,14 +46,13 @@ entity reference.RepoObjectColumn_ReferencingList << V >> {
 }
 
 entity reference.RepoObjectColumn_ReferencingReferenced << V >> {
-  **Referenced_guid** : uniqueidentifier
-  **Referencing_guid** : uniqueidentifier
+  * **Referenced_guid** : uniqueidentifier
+  * **Referencing_guid** : uniqueidentifier
   --
 }
 
-graph.ReferencedObjectColumn <.. reference.RepoObjectColumn_ReferencingReferenced
-graph.RepoObjectColumn <.. reference.RepoObjectColumn_ReferencingReferenced
+reference.RepoObjectColumn_reference_T <.. reference.RepoObjectColumn_ReferencingReferenced
 reference.RepoObjectColumn_ReferencingReferenced <.. reference.ftv_RepoObjectColumn_ReferenceTree
+reference.RepoObjectColumn_ReferencingReferenced <.. reference.RepoObjectColumn_ReferencingList
 reference.RepoObjectColumn_ReferencingReferenced <.. reference.ftv_RepoObject_DbmlColumnRelation
 reference.RepoObjectColumn_ReferencingReferenced <.. reference.RepoObjectColumn_ReferencedList
-reference.RepoObjectColumn_ReferencingReferenced <.. reference.RepoObjectColumn_ReferencingList

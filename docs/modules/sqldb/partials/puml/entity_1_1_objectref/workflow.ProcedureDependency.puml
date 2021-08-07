@@ -23,10 +23,6 @@ skinparam class {
 }
 
 
-entity repo.usp_main << P >> {
-  --
-}
-
 entity workflow.ProcedureDependency << U >> {
   * **id** : int
   --
@@ -36,5 +32,11 @@ entity workflow.ProcedureDependency_gross << V >> {
   --
 }
 
+entity workflow.ProcedureDependency_input_PersistenceDependency << V >> {
+  **referenced_Procedure_RepoObject_guid** : uniqueidentifier
+  **referencing_Procedure_RepoObject_guid** : uniqueidentifier
+  --
+}
+
 workflow.ProcedureDependency <.. workflow.ProcedureDependency_gross
-workflow.ProcedureDependency <.. repo.usp_main
+workflow.ProcedureDependency <.. workflow.ProcedureDependency_input_PersistenceDependency

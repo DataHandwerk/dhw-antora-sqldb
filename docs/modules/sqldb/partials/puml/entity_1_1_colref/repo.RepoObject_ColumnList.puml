@@ -58,6 +58,9 @@ entity repo.RepoObject_gross << V >> {
   is_persistence_delete_changed : bit
   is_persistence_delete_missing : bit
   is_persistence_insert : bit
+  is_persistence_merge_delete_missing : bit
+  is_persistence_merge_insert : bit
+  is_persistence_merge_update_changed : bit
   is_persistence_truncate : bit
   is_persistence_update_changed : bit
   is_repo_managed : bit
@@ -92,6 +95,7 @@ entity repo.RepoObject_gross << V >> {
   * RepoObject_schema_name : nvarchar(128)
   * RepoObject_type : char(2)
   RepoObject_type_name : nvarchar(128)
+  source_filter : nvarchar(4000)
   sql_modules_antora : nvarchar(max)
   sql_modules_definition : nvarchar(max)
   sql_modules_formatted : nvarchar(max)
@@ -108,6 +112,7 @@ entity repo.RepoObject_gross << V >> {
   * SysObject_schema_name : nvarchar(128)
   SysObject_type : char(2)
   SysObject_type_name : nvarchar(128)
+  target_filter : nvarchar(4000)
   temporal_type : tinyint
   * usp_persistence_name : nvarchar(140)
   usp_persistence_RepoObject_guid : uniqueidentifier
@@ -130,6 +135,7 @@ entity repo.RepoObjectColumn_gross << V >> {
   --
   AntoraReferencedColumnList : nvarchar(max)
   AntoraReferencingColumnList : nvarchar(max)
+  * Column_name : nvarchar(128)
   has_different_sys_names : bit
   has_get_referenced_issue : bit
   index_column_id : int
@@ -194,9 +200,8 @@ entity repo.RepoObjectColumn_gross << V >> {
   * SysObjectColumn_name : nvarchar(128)
 }
 
-repo.RepoObject_ColumnList <.. repo.RepoObject_SqlCreateTable
 repo.RepoObject_ColumnList <.. repo.RepoObject_gross
-repo.RepoObject_gross <.. repo.RepoObject_SqlCreateTable
+repo.RepoObject_ColumnList <.. repo.RepoObject_SqlCreateTable
 repo.RepoObjectColumn_gross <.. repo.RepoObject_ColumnList
 repo.RepoObject_ColumnList::CreateColumnList <-- repo.RepoObject_gross::CreateColumnList
 repo.RepoObject_ColumnList::DbmlColumnList <-- repo.RepoObject_gross::DbmlColumnList

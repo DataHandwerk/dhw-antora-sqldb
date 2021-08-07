@@ -39,7 +39,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-07-14 19:36:20
+2021-08-07 17:38:06
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -260,14 +260,36 @@ only [repo].[Index_virtual] needs to be corrected because the real PK consistenc
 
 only one PK per RepoObject is possible
 
-we use some priority in [RowNumber_PkPe
+we use some priority in [RowNumber_PkPerParentObject] in case that several PK are defined per RepoObject
+
+
+|
+
+|1010
+|
+*SET [index_name] = [T2].[index_name_new]*
+
+* u
+* [repo].[RepoObject]
+* [repo].[Index_virtual]
+
+
+index_name is required, it will be assigned, where it is missing or where [has_managedName] = 1 and it is differenc 
+
+could be problematic, if the ROW_NUMBER() and the assigned name is occupied
+
+maye an attribute is requird, to distinguish between managed named and manually assigned names
+
+
+|
+|===
+
 // end::adocuspsteps[]
 
 
 == AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:graph.usp_PERSIST_Index.adoc[]
 * xref:logs.usp_ExecutionLog_insert.adoc[]
 * xref:repo.ForeignKey_Indexes_union_T.adoc[]
 * xref:repo.Index_gross.adoc[]
@@ -301,6 +323,27 @@ EXEC [repo].[usp_Index_finish]
 // tag::exampleusage_2[]
 
 // end::exampleusage_2[]
+
+
+== exampleUsage_3
+
+// tag::exampleusage_3[]
+
+// end::exampleusage_3[]
+
+
+== exampleUsage_4
+
+// tag::exampleusage_4[]
+
+// end::exampleusage_4[]
+
+
+== exampleUsage_5
+
+// tag::exampleusage_5[]
+
+// end::exampleusage_5[]
 
 
 == exampleWrong_Usage
@@ -493,6 +536,13 @@ EXEC [repo].[usp_Index_finish]
 // tag::usp_persistence_repoobject_guid[]
 
 // end::usp_persistence_repoobject_guid[]
+
+
+== UspExamples
+
+// tag::uspexamples[]
+
+// end::uspexamples[]
 
 
 == UspParameters
@@ -1130,16 +1180,6 @@ EXEC logs.usp_ExecutionLog_insert
  , @target_object = @target_object
  , @updated = @rows
 -- Logging END --
-
-/*{"ReportUspStep":[{"Number":2100,"Name":"[graph].[usp_PERSIST_Index]","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
-EXEC [graph].[usp_PERSIST_Index]
---add your own parameters
---logging parameters
- @execution_instance_guid = @execution_instance_guid
- , @ssis_execution_id = @ssis_execution_id
- , @sub_execution_id = @sub_execution_id
- , @parent_execution_log_id = @current_execution_log_id
-
 
 --
 --finish your own code here

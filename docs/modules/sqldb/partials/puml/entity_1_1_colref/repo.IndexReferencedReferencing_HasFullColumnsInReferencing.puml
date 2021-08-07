@@ -45,8 +45,8 @@ entity repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T << U
 entity repo.IndexReferencedReferencing << V >> {
   --
   referenced_index_guid : uniqueidentifier
-  referenced_RepoObject_guid : uniqueidentifier
-  referencing_RepoObject_guid : uniqueidentifier
+  * referenced_RepoObject_guid : uniqueidentifier
+  * referencing_RepoObject_guid : uniqueidentifier
   RowNumberInReferencing_Target : int
   source_index_guid : uniqueidentifier
   * source_index_type : tinyint
@@ -70,12 +70,9 @@ entity repo.usp_index_inheritance << P >> {
 
 repo.Index_referencing_IndexPatternColumnGuid <.. repo.IndexReferencedReferencing_HasFullColumnsInReferencing
 repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.IndexReferencedReferencing_HasFullColumnsInReferencing
-repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.Index_referencing_IndexPatternColumnGuid
 repo.IndexReferencedReferencing <.. repo.IndexReferencedReferencing_HasFullColumnsInReferencing
 repo.IndexReferencedReferencing_HasFullColumnsInReferencing <.. repo.usp_index_inheritance
 repo.Index_referencing_IndexPatternColumnGuid::referencing_IndexPatternColumnGuid <-- repo.IndexReferencedReferencing_HasFullColumnsInReferencing::referencing_IndexPatternColumnGuid
-repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T::index_guid <-- repo.Index_referencing_IndexPatternColumnGuid::source_index_guid
-repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T::referencing_RepoObject_guid <-- repo.Index_referencing_IndexPatternColumnGuid::referencing_RepoObject_guid
 repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T::RowNumberInReferencing <-- repo.IndexReferencedReferencing_HasFullColumnsInReferencing::RowNumberInReferencing
 repo.IndexReferencedReferencing::referenced_index_guid <-- repo.IndexReferencedReferencing_HasFullColumnsInReferencing::referenced_index_guid
 repo.IndexReferencedReferencing::referenced_RepoObject_guid <-- repo.IndexReferencedReferencing_HasFullColumnsInReferencing::referenced_RepoObject_guid

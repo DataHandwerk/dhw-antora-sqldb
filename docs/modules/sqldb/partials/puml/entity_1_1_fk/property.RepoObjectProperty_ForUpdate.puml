@@ -24,7 +24,27 @@ skinparam class {
 
 
 entity property.RepoObjectProperty_ForUpdate << V >> {
-
+- idx_RepoObjectProperty_ForUpdate__1
+{schema_name,object_name}
+..
+RepoObject_schema_name; nvarchar(128)
+RepoObject_name; nvarchar(128)
+--
+- idx_RepoObjectProperty_ForUpdate__2
+{RepoObjectProperty_id}
+..
+RepoObjectProperty_id; int
+--
+- idx_RepoObjectProperty_ForUpdate__3
+{RepoObject_guid,property_name}
+..
+RepoObject_guid; uniqueidentifier
+property_name; nvarchar(128)
+--
+- idx_RepoObjectProperty_ForUpdate__4
+{RepoObject_guid}
+..
+RepoObject_guid; uniqueidentifier
 }
 
 

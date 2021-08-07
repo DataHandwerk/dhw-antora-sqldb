@@ -95,6 +95,7 @@ entity repo.RepoObjectColumn << U >> {
   * RepoObjectColumn_name : nvarchar(128)
   SysObjectColumn_column_id : int
   * SysObjectColumn_name : nvarchar(128)
+  * {static} Column_name : nvarchar(128)
   {abstract} has_different_sys_names : bit
   * {static} is_RepoObjectColumn_name_uniqueidentifier : int
   * {static} is_SysObjectColumn_name_uniqueidentifier : int
@@ -181,6 +182,39 @@ entity repo_sys.IndexColumn_unique << V >> {
   SysObject_column_user_type_fullname : nvarchar(182)
 }
 
+entity repo_sys.sql_expression_dependencies << V >> {
+  --
+  definition : nvarchar(max)
+  * is_ambiguous : bit
+  * is_caller_dependent : bit
+  is_computed : bit
+  * is_schema_bound_reference : bit
+  referenced_class : tinyint
+  referenced_class_desc : nvarchar(60)
+  referenced_column_name : sysname
+  referenced_database_name : nvarchar(128)
+  referenced_entity_name : nvarchar(128)
+  referenced_id : int
+  * referenced_minor_id : int
+  referenced_RepoObject_guid : uniqueidentifier
+  referenced_RepoObjectColumn_guid : uniqueidentifier
+  referenced_schema_name : nvarchar(128)
+  referenced_server_name : nvarchar(128)
+  referenced_type : char(2)
+  referenced_type_desciption : nvarchar(60)
+  referencing_class : tinyint
+  referencing_class_desc : nvarchar(60)
+  referencing_column_name : sysname
+  referencing_entity_name : nvarchar(128)
+  * referencing_id : int
+  * referencing_minor_id : int
+  referencing_RepoObject_guid : uniqueidentifier
+  referencing_RepoObjectColumn_guid : uniqueidentifier
+  referencing_schema_name : nvarchar(128)
+  referencing_type : char(2)
+  referencing_type_desciption : nvarchar(60)
+}
+
 entity repo_sys.SysColumn << V >> {
   --
   collation_name : sysname
@@ -241,13 +275,11 @@ entity repo_sys.SysColumn << V >> {
   * xml_collection_id : int
 }
 
-repo.RepoObject <.. repo.usp_sync_guid_RepoObjectColumn
 repo.RepoObject <.. repo.SysColumn_RepoObjectColumn_via_name
 repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_name
-repo.RepoObjectColumn <.. repo.usp_sync_guid_RepoObjectColumn
-repo.SysColumn_RepoObjectColumn_via_name <.. repo.usp_sync_guid_RepoObjectColumn
 repo.SysColumn_RepoObjectColumn_via_name <.. repo_sys.IndexColumn_unique
-repo_sys.SysColumn <.. repo.usp_sync_guid_RepoObjectColumn
+repo.SysColumn_RepoObjectColumn_via_name <.. repo_sys.sql_expression_dependencies
+repo.SysColumn_RepoObjectColumn_via_name <.. repo.usp_sync_guid_RepoObjectColumn
 repo_sys.SysColumn <.. repo.SysColumn_RepoObjectColumn_via_name
 repo.RepoObject::is_repo_managed <-- repo.SysColumn_RepoObjectColumn_via_name::is_repo_managed
 repo.RepoObject::RepoObject_fullname <-- repo.SysColumn_RepoObjectColumn_via_name::RepoObject_fullname
@@ -279,9 +311,15 @@ repo.RepoObjectColumn::RepoObjectColumn_guid <-- repo.SysColumn_RepoObjectColumn
 repo.RepoObjectColumn::RepoObjectColumn_name <-- repo.SysColumn_RepoObjectColumn_via_name::RepoObjectColumn_name
 repo.RepoObjectColumn::SysObjectColumn_column_id <-- repo.SysColumn_RepoObjectColumn_via_name::SysObjectColumn_column_id
 repo.RepoObjectColumn::SysObjectColumn_name <-- repo.SysColumn_RepoObjectColumn_via_name::SysObjectColumn_name
+repo.SysColumn_RepoObjectColumn_via_name::definition <-- repo_sys.sql_expression_dependencies::definition
+repo.SysColumn_RepoObjectColumn_via_name::is_computed <-- repo_sys.sql_expression_dependencies::is_computed
 repo.SysColumn_RepoObjectColumn_via_name::RepoObject_guid <-- repo_sys.IndexColumn_unique::parent_RepoObject_guid
 repo.SysColumn_RepoObjectColumn_via_name::RepoObjectColumn_guid <-- repo_sys.IndexColumn_unique::RepoObjectColumn_guid
+repo.SysColumn_RepoObjectColumn_via_name::RepoObjectColumn_guid <-- repo_sys.sql_expression_dependencies::referencing_RepoObjectColumn_guid
+repo.SysColumn_RepoObjectColumn_via_name::RepoObjectColumn_guid <-- repo_sys.sql_expression_dependencies::referenced_RepoObjectColumn_guid
 repo.SysColumn_RepoObjectColumn_via_name::SysObject_column_name <-- repo_sys.IndexColumn_unique::SysObject_column_name
+repo.SysColumn_RepoObjectColumn_via_name::SysObject_column_name <-- repo_sys.sql_expression_dependencies::referencing_column_name
+repo.SysColumn_RepoObjectColumn_via_name::SysObject_column_name <-- repo_sys.sql_expression_dependencies::referenced_column_name
 repo.SysColumn_RepoObjectColumn_via_name::SysObject_fullname <-- repo_sys.IndexColumn_unique::parent_SysObject_fullname
 repo.SysColumn_RepoObjectColumn_via_name::SysObject_name <-- repo_sys.IndexColumn_unique::parent_SysObject_name
 repo.SysColumn_RepoObjectColumn_via_name::SysObject_schema_name <-- repo_sys.IndexColumn_unique::parent_schema_name

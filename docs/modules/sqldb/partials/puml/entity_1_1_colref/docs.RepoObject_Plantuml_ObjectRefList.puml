@@ -48,28 +48,6 @@ entity docs.RepoObject_Plantuml_ObjectRefList << V >> {
   * RepoObject_fullname2 : nvarchar(257)
 }
 
-entity graph.ReferencedObject << U >> {
-  --
-  * $edge_id_25B0DD35E10A49DE8B49228E6802F3EB : nvarchar(1000)
-  $from_id_7B1BEB60463741CAA681054A489A2714 : nvarchar(1000)
-  $to_id_26820C41BE034B00BCBC470518101233 : nvarchar(1000)
-  * from_id_7F3CEF660D794A2A81530928BC4B36F1 : bigint
-  * from_obj_id_A00C6316716D4F9DABE96A189F3A214A : int
-  * graph_id_85ECDD019A4C46AF80CFD8DDFA08F479 : bigint
-  * to_id_45A2D6271B224A08B66CA0CF6A200A54 : bigint
-  * to_obj_id_F1F1771130674EE9A9DAE06330740E13 : int
-}
-
-entity graph.RepoObject << U >> {
-  --
-  * $node_id_FAC3EF4690DB4CD6A98F097DAF0885CC : nvarchar(1000)
-  * graph_id_60367FDA1A70430CA390F8144C223EC4 : bigint
-  * RepoObject_fullname : nvarchar(261)
-  RepoObject_fullname2 : nvarchar(257)
-  * RepoObject_guid : uniqueidentifier
-  * RepoObject_type : char(2)
-}
-
 entity reference.ftv_RepoObject_ReferencedReferencing << IF >> {
   --
   Node_fullname2 : nvarchar(257)
@@ -77,6 +55,22 @@ entity reference.ftv_RepoObject_ReferencedReferencing << IF >> {
   Referenced_Depth : int
   Referencing_Depth : int
   ro_guid : uniqueidentifier
+}
+
+entity reference.RepoObject_reference_T << U >> {
+  **referenced_RepoObject_guid** : uniqueidentifier
+  **referencing_RepoObject_guid** : uniqueidentifier
+  --
+  referenced_entity_name : nvarchar(128)
+  referenced_schema_name : nvarchar(128)
+  referenced_type : char(2)
+  referencing_entity_name : nvarchar(128)
+  referencing_schema_name : nvarchar(128)
+  referencing_type : varchar(2)
+  * {static} referenced_fullname : nvarchar(261)
+  * {static} referenced_fullname2 : nvarchar(257)
+  * {static} referencing_fullname : nvarchar(261)
+  * {static} referencing_fullname2 : nvarchar(257)
 }
 
 entity repo.RepoObject << U >> {
@@ -118,9 +112,8 @@ entity repo.RepoObject << U >> {
 }
 
 docs.RepoObject_Plantuml_ObjectRefList <.. docs.RepoObject_Plantuml
-graph.ReferencedObject <.. docs.RepoObject_Plantuml_ObjectRefList
-graph.RepoObject <.. docs.RepoObject_Plantuml_ObjectRefList
 reference.ftv_RepoObject_ReferencedReferencing <.. docs.RepoObject_Plantuml_ObjectRefList
-repo.RepoObject <.. reference.ftv_RepoObject_ReferencedReferencing
+reference.RepoObject_reference_T <.. docs.RepoObject_Plantuml_ObjectRefList
 repo.RepoObject <.. docs.RepoObject_Plantuml_ObjectRefList
+repo.RepoObject <.. reference.ftv_RepoObject_ReferencedReferencing
 docs.RepoObject_Plantuml_ObjectRefList::ObjectRefList <-- docs.RepoObject_Plantuml::ObjectRefList

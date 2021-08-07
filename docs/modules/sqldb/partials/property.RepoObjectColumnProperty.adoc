@@ -34,13 +34,13 @@ user table
 == SysObject_id
 
 // tag::SysObject_id[]
-171863679
+776389835
 // end::SysObject_id[]
 
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-05-16 15:43:26
+2021-08-07 17:01:38
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -111,7 +111,7 @@ user table
 |===
 |
 |property_value
-|sql_variant
+|nvarchar(max)
 |NOT NULL
 |
 |
@@ -125,15 +125,11 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 
 .Referencing Columns
 --
-* xref:property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn.adoc#column-property_value[+property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn.property_value+]
-* xref:property.RepoObjectColumnProperty.adoc#column-property_basetype[+property.RepoObjectColumnProperty.property_basetype+]
-* xref:property.RepoObjectColumnProperty.adoc#column-property_bigint[+property.RepoObjectColumnProperty.property_bigint+]
-* xref:property.RepoObjectColumnProperty.adoc#column-property_float[+property.RepoObjectColumnProperty.property_float+]
 * xref:property.RepoObjectColumnProperty.adoc#column-property_int[+property.RepoObjectColumnProperty.property_int+]
-* xref:property.RepoObjectColumnProperty.adoc#column-property_money[+property.RepoObjectColumnProperty.property_money+]
-* xref:property.RepoObjectColumnProperty.adoc#column-property_nvarchar[+property.RepoObjectColumnProperty.property_nvarchar+]
+* xref:property.RepoObjectColumnProperty.adoc#column-property_bigint[+property.RepoObjectColumnProperty.property_bigint+]
 * xref:property.RepoObjectColumnProperty.adoc#column-property_real[+property.RepoObjectColumnProperty.property_real+]
-* xref:property.RepoObjectColumnProperty.adoc#column-property_varchar[+property.RepoObjectColumnProperty.property_varchar+]
+* xref:property.RepoObjectColumnProperty.adoc#column-property_float[+property.RepoObjectColumnProperty.property_float+]
+* xref:property.RepoObjectColumnProperty.adoc#column-property_money[+property.RepoObjectColumnProperty.property_money+]
 * xref:property.RepoObjectColumnProperty_ForUpdate.adoc#column-property_value[+property.RepoObjectColumnProperty_ForUpdate.property_value+]
 * xref:property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.adoc#column-property_value[+property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.property_value+]
 --
@@ -159,35 +155,6 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 --
 
 
-[[column-property_basetype]]
-=== property_basetype
-
-[cols="d,m,m,m,m,d"]
-|===
-|
-|property_basetype
-|sql_variant
-|NULL
-|
-|Calc
-|===
-
-.Description
---
-(sql_variant_property([property_value],'BaseType'))
---
-
-.Definition
-....
-(sql_variant_property([property_value],'BaseType'))
-....
-
-.Referenced Columns
---
-* xref:property.RepoObjectColumnProperty.adoc#column-property_value[+property.RepoObjectColumnProperty.property_value+]
---
-
-
 [[column-property_bigint]]
 === property_bigint
 
@@ -208,7 +175,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 
 .Definition
 ....
-(case when NOT sql_variant_property([property_value],'BaseType')='uniqueidentifier' then TRY_CAST([property_value] AS [bigint])  end)
+(TRY_CAST([property_value] AS [bigint]))
 ....
 
 .Referenced Columns
@@ -237,7 +204,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 
 .Definition
 ....
-(case when NOT sql_variant_property([property_value],'BaseType')='uniqueidentifier' then TRY_CAST([property_value] AS [float])  end)
+(TRY_CAST([property_value] AS [float]))
 ....
 
 .Referenced Columns
@@ -266,7 +233,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 
 .Definition
 ....
-(case when NOT sql_variant_property([property_value],'BaseType')='uniqueidentifier' then TRY_CAST([property_value] AS [int])  end)
+(TRY_CAST([property_value] AS [int]))
 ....
 
 .Referenced Columns
@@ -295,36 +262,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 
 .Definition
 ....
-(case when NOT sql_variant_property([property_value],'BaseType')='uniqueidentifier' then TRY_CAST([property_value] AS [money])  end)
-....
-
-.Referenced Columns
---
-* xref:property.RepoObjectColumnProperty.adoc#column-property_value[+property.RepoObjectColumnProperty.property_value+]
---
-
-
-[[column-property_nvarchar]]
-=== property_nvarchar
-
-[cols="d,m,m,m,m,d"]
-|===
-|
-|property_nvarchar
-|nvarchar(4000)
-|NULL
-|
-|Calc
-|===
-
-.Description
---
-(TRY_CAST([property_value] AS [nvarchar](4000)))
---
-
-.Definition
-....
-(TRY_CAST([property_value] AS [nvarchar](4000)))
+(TRY_CAST([property_value] AS [money]))
 ....
 
 .Referenced Columns
@@ -353,36 +291,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 
 .Definition
 ....
-(case when NOT sql_variant_property([property_value],'BaseType')='uniqueidentifier' then TRY_CAST([property_value] AS [real])  end)
-....
-
-.Referenced Columns
---
-* xref:property.RepoObjectColumnProperty.adoc#column-property_value[+property.RepoObjectColumnProperty.property_value+]
---
-
-
-[[column-property_varchar]]
-=== property_varchar
-
-[cols="d,m,m,m,m,d"]
-|===
-|
-|property_varchar
-|varchar(8000)
-|NULL
-|
-|Calc
-|===
-
-.Description
---
-(TRY_CAST([property_value] AS [varchar](8000)))
---
-
-.Definition
-....
-(TRY_CAST([property_value] AS [varchar](8000)))
+(TRY_CAST([property_value] AS [real]))
 ....
 
 .Referenced Columns
@@ -402,9 +311,6 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 |NOT NULL
 |(1,1)
 |
-
-
-
 
 
 
@@ -437,7 +343,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 
 |
 |<<column-property_value>>
-|sql_variant
+|nvarchar(max)
 |NOT NULL
 |
 |
@@ -448,13 +354,6 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 |NOT NULL
 |
 |
-
-|
-|<<column-property_basetype>>
-|sql_variant
-|NULL
-|
-|Calc
 
 |
 |<<column-property_bigint>>
@@ -485,22 +384,8 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 |Calc
 
 |
-|<<column-property_nvarchar>>
-|nvarchar(4000)
-|NULL
-|
-|Calc
-
-|
 |<<column-property_real>>
 |real
-|NULL
-|
-|Calc
-
-|
-|<<column-property_varchar>>
-|varchar(8000)
 |NULL
 |
 |Calc
@@ -596,6 +481,27 @@ referenced: xref:repo.RepoObjectColumn.adoc[], xref:repo.RepoObjectColumn.adoc#i
 // tag::exampleusage_2[]
 
 // end::exampleusage_2[]
+
+
+== exampleUsage_3
+
+// tag::exampleusage_3[]
+
+// end::exampleusage_3[]
+
+
+== exampleUsage_4
+
+// tag::exampleusage_4[]
+
+// end::exampleusage_4[]
+
+
+== exampleUsage_5
+
+// tag::exampleusage_5[]
+
+// end::exampleusage_5[]
 
 
 == exampleWrong_Usage
@@ -778,6 +684,13 @@ RepoObjectColumnProperty_id
 // tag::usp_persistence_repoobject_guid[]
 
 // end::usp_persistence_repoobject_guid[]
+
+
+== UspExamples
+
+// tag::uspexamples[]
+
+// end::uspexamples[]
 
 
 == UspParameters

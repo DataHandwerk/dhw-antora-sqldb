@@ -49,19 +49,7 @@ entity logs.usp_ExecutionLog_insert << P >> {
   --
 }
 
-entity repo.usp_sync_guid_RepoObject << P >> {
-  --
-}
-
 graph.RepoObject <.. graph.usp_PERSIST_RepoObject
-graph.RepoObject <.. repo.usp_sync_guid_RepoObject
-graph.RepoObject_S <.. repo.usp_sync_guid_RepoObject
 graph.RepoObject_S <.. graph.usp_PERSIST_RepoObject
-graph.RepoObject_S <.. graph.RepoObject
-graph.usp_PERSIST_RepoObject <.. repo.usp_sync_guid_RepoObject
-logs.usp_ExecutionLog_insert <.. repo.usp_sync_guid_RepoObject
 logs.usp_ExecutionLog_insert <.. graph.usp_PERSIST_RepoObject
-graph.RepoObject_S::RepoObject_fullname <-- graph.RepoObject::RepoObject_fullname
-graph.RepoObject_S::RepoObject_fullname2 <-- graph.RepoObject::RepoObject_fullname2
-graph.RepoObject_S::RepoObject_guid <-- graph.RepoObject::RepoObject_guid
-graph.RepoObject_S::RepoObject_type <-- graph.RepoObject::RepoObject_type
+

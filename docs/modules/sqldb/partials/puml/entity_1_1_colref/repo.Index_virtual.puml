@@ -134,8 +134,8 @@ entity repo.IndexColumn_virtual_referenced_setpoint << V >> {
 entity repo.IndexReferencedReferencing << V >> {
   --
   referenced_index_guid : uniqueidentifier
-  referenced_RepoObject_guid : uniqueidentifier
-  referencing_RepoObject_guid : uniqueidentifier
+  * referenced_RepoObject_guid : uniqueidentifier
+  * referencing_RepoObject_guid : uniqueidentifier
   RowNumberInReferencing_Target : int
   source_index_guid : uniqueidentifier
   * source_index_type : tinyint
@@ -153,49 +153,40 @@ entity repo.usp_Index_virtual_set << P >> {
   --
 }
 
-repo.Index_union <.. repo.IndexReferencedReferencing
-repo.Index_union <.. repo.usp_Index_finish
+repo.Index_virtual <.. repo.IndexColumn_virtual_gross
+repo.Index_virtual <.. repo.Index_union
+repo.Index_virtual <.. repo.IndexReferencedReferencing
+repo.Index_virtual <.. repo.Index_virtual_SysObject
+repo.Index_virtual <.. repo.IndexColumn_virtual_referenced_setpoint
+repo.Index_virtual <.. repo.usp_index_inheritance
+repo.Index_virtual <.. repo.usp_Index_virtual_set
+repo.Index_virtual <.. repo.Index_virtual_IndexPatternColumnGuid
 repo.Index_virtual <.. repo.usp_Index_finish
 repo.Index_virtual <.. repo.Index_virtual_ForUpdate
-repo.Index_virtual <.. repo.Index_virtual_IndexPatternColumnGuid
-repo.Index_virtual <.. repo.IndexReferencedReferencing
-repo.Index_virtual <.. repo.IndexColumn_virtual_referenced_setpoint
-repo.Index_virtual <.. repo.usp_Index_virtual_set
-repo.Index_virtual <.. repo.usp_index_inheritance
-repo.Index_virtual <.. repo.IndexColumn_virtual_gross
-repo.Index_virtual <.. repo.Index_virtual_SysObject
-repo.Index_virtual <.. repo.Index_union
-repo.Index_virtual_ForUpdate <.. repo.usp_index_inheritance
-repo.Index_virtual_IndexPatternColumnGuid <.. repo.usp_index_inheritance
-repo.Index_virtual_IndexPatternColumnGuid <.. repo.Index_union
-repo.IndexColumn_virtual_referenced_setpoint <.. repo.usp_index_inheritance
-repo.usp_Index_finish <.. repo.usp_index_inheritance
-repo.Index_union::index_guid <-- repo.IndexReferencedReferencing::source_index_guid
-repo.Index_union::index_type <-- repo.IndexReferencedReferencing::source_index_type
 repo.Index_virtual::has_managedName <-- repo.Index_virtual_ForUpdate::has_managedName
-repo.Index_virtual::index_guid <-- repo.Index_virtual_ForUpdate::index_guid
-repo.Index_virtual::index_guid <-- repo.Index_virtual_IndexPatternColumnGuid::index_guid
 repo.Index_virtual::index_guid <-- repo.Index_virtual_SysObject::index_guid
 repo.Index_virtual::index_guid <-- repo.IndexColumn_virtual_referenced_setpoint::index_guid
-repo.Index_virtual::index_name <-- repo.Index_virtual_SysObject::index_name
+repo.Index_virtual::index_guid <-- repo.Index_virtual_IndexPatternColumnGuid::index_guid
+repo.Index_virtual::index_guid <-- repo.Index_virtual_ForUpdate::index_guid
 repo.Index_virtual::index_name <-- repo.IndexColumn_virtual_gross::index_name
+repo.Index_virtual::index_name <-- repo.Index_virtual_SysObject::index_name
 repo.Index_virtual::index_name <-- repo.Index_virtual_ForUpdate::index_name
 repo.Index_virtual::index_type <-- repo.Index_virtual_ForUpdate::index_type
-repo.Index_virtual::is_index_disabled <-- repo.Index_virtual_ForUpdate::is_index_disabled
 repo.Index_virtual::is_index_disabled <-- repo.Index_virtual_SysObject::is_index_disabled
-repo.Index_virtual::is_index_primary_key <-- repo.Index_virtual_SysObject::is_index_primary_key
+repo.Index_virtual::is_index_disabled <-- repo.Index_virtual_ForUpdate::is_index_disabled
 repo.Index_virtual::is_index_primary_key <-- repo.IndexColumn_virtual_gross::is_index_primary_key
+repo.Index_virtual::is_index_primary_key <-- repo.Index_virtual_SysObject::is_index_primary_key
 repo.Index_virtual::is_index_primary_key <-- repo.Index_virtual_ForUpdate::is_index_primary_key
-repo.Index_virtual::is_index_unique <-- repo.Index_virtual_ForUpdate::is_index_unique
 repo.Index_virtual::is_index_unique <-- repo.IndexColumn_virtual_gross::is_index_unique
 repo.Index_virtual::is_index_unique <-- repo.Index_virtual_SysObject::is_index_unique
-repo.Index_virtual::parent_RepoObject_guid <-- repo.Index_virtual_SysObject::parent_RepoObject_guid
+repo.Index_virtual::is_index_unique <-- repo.Index_virtual_ForUpdate::is_index_unique
 repo.Index_virtual::parent_RepoObject_guid <-- repo.IndexColumn_virtual_gross::parent_RepoObject_guid
+repo.Index_virtual::parent_RepoObject_guid <-- repo.Index_virtual_SysObject::parent_RepoObject_guid
 repo.Index_virtual::parent_RepoObject_guid <-- repo.Index_virtual_ForUpdate::parent_RepoObject_guid
-repo.Index_virtual::referenced_index_guid <-- repo.Index_virtual_ForUpdate::referenced_index_guid
 repo.Index_virtual::referenced_index_guid <-- repo.Index_virtual_SysObject::referenced_index_guid
-repo.Index_virtual::referenced_index_guid <-- repo.IndexColumn_virtual_referenced_setpoint::referenced_index_guid
 repo.Index_virtual::referenced_index_guid <-- repo.IndexReferencedReferencing::referenced_index_guid
+repo.Index_virtual::referenced_index_guid <-- repo.IndexColumn_virtual_referenced_setpoint::referenced_index_guid
+repo.Index_virtual::referenced_index_guid <-- repo.Index_virtual_ForUpdate::referenced_index_guid
 repo.Index_virtual::RowNumberInReferencing <-- repo.IndexReferencedReferencing::RowNumberInReferencing_Target
 repo.Index_virtual::RowNumberInReferencing <-- repo.IndexColumn_virtual_referenced_setpoint::RowNumberInReferencing
 repo.Index_virtual::RowNumberInReferencing <-- repo.Index_virtual_ForUpdate::RowNumberInReferencing

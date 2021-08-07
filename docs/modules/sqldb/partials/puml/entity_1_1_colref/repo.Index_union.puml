@@ -91,8 +91,8 @@ entity repo.Index_union << V >> {
 }
 
 entity repo.Index_unique_IndexPatternColumnGuid << V >> {
-  **index_guid** : uniqueidentifier
   --
+  index_guid : uniqueidentifier
   IndexPatternColumnGuid : varchar(8000)
 }
 
@@ -120,8 +120,8 @@ entity repo.Index_virtual_IndexPatternColumnGuid << V >> {
 entity repo.IndexReferencedReferencing << V >> {
   --
   referenced_index_guid : uniqueidentifier
-  referenced_RepoObject_guid : uniqueidentifier
-  referencing_RepoObject_guid : uniqueidentifier
+  * referenced_RepoObject_guid : uniqueidentifier
+  * referencing_RepoObject_guid : uniqueidentifier
   RowNumberInReferencing_Target : int
   source_index_guid : uniqueidentifier
   * source_index_type : tinyint
@@ -148,31 +148,26 @@ entity repo_sys.Index_unique << V >> {
   parent_SysObject_name : nvarchar(128)
 }
 
-repo.Index_gross <.. repo.usp_Index_finish
-repo.Index_union <.. repo.Index_gross
-repo.Index_union <.. repo.Index_SqlConstraint_PkUq
 repo.Index_union <.. repo.IndexReferencedReferencing
-repo.Index_union <.. repo.Index_Settings_ForUpdate
+repo.Index_union <.. repo.Index_SqlConstraint_PkUq
+repo.Index_union <.. repo.Index_gross
 repo.Index_union <.. repo.usp_Index_finish
+repo.Index_union <.. repo.Index_Settings_ForUpdate
 repo.Index_unique_IndexPatternColumnGuid <.. repo.Index_union
-repo.Index_virtual <.. repo.usp_Index_finish
-repo.Index_virtual <.. repo.IndexReferencedReferencing
-repo.Index_virtual <.. repo.Index_virtual_IndexPatternColumnGuid
 repo.Index_virtual <.. repo.Index_union
 repo.Index_virtual_IndexPatternColumnGuid <.. repo.Index_union
 repo_sys.Index_unique <.. repo.Index_union
-repo.Index_union::index_guid <-- repo.Index_SqlConstraint_PkUq::index_guid
 repo.Index_union::index_guid <-- repo.IndexReferencedReferencing::source_index_guid
+repo.Index_union::index_guid <-- repo.Index_SqlConstraint_PkUq::index_guid
 repo.Index_union::index_name <-- repo.Index_gross::index_name
-repo.Index_union::index_type <-- repo.Index_gross::index_type
+repo.Index_union::index_name <-- repo.Index_Settings_ForUpdate::index_name
 repo.Index_union::index_type <-- repo.IndexReferencedReferencing::source_index_type
+repo.Index_union::index_type <-- repo.Index_gross::index_type
 repo.Index_union::is_index_disabled <-- repo.Index_gross::is_index_disabled
 repo.Index_union::is_index_primary_key <-- repo.Index_gross::is_index_primary_key
 repo.Index_union::is_index_real <-- repo.Index_gross::is_index_real
 repo.Index_union::is_index_unique <-- repo.Index_gross::is_index_unique
-repo.Index_union::parent_RepoObject_guid <-- repo.Index_gross::parent_RepoObject_guid
 repo.Index_union::parent_RepoObject_guid <-- repo.Index_SqlConstraint_PkUq::parent_RepoObject_guid
+repo.Index_union::parent_RepoObject_guid <-- repo.Index_gross::parent_RepoObject_guid
+repo.Index_union::parent_RepoObject_guid <-- repo.Index_Settings_ForUpdate::parent_RepoObject_guid
 repo.Index_union::referenced_index_guid <-- repo.Index_gross::referenced_index_guid
-repo.Index_virtual::index_guid <-- repo.Index_virtual_IndexPatternColumnGuid::index_guid
-repo.Index_virtual::referenced_index_guid <-- repo.IndexReferencedReferencing::referenced_index_guid
-repo.Index_virtual::RowNumberInReferencing <-- repo.IndexReferencedReferencing::RowNumberInReferencing_Target
