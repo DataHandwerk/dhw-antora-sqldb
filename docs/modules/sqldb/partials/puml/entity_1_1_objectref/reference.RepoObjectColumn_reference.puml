@@ -1,0 +1,49 @@
+left to right direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+}
+
+
+entity reference.RepoObjectColumn_reference << V >> {
+  **referenced_RepoObjectColumn_guid** : uniqueidentifier
+  **referencing_RepoObjectColumn_guid** : uniqueidentifier
+  --
+}
+
+entity reference.RepoObjectColumn_reference_T << U >> {
+  **referenced_RepoObjectColumn_guid** : uniqueidentifier
+  **referencing_RepoObjectColumn_guid** : uniqueidentifier
+  --
+}
+
+entity reference.RepoObjectColumn_reference_union << V >> {
+  --
+}
+
+entity reference.usp_PERSIST_RepoObjectColumn_reference_T << P >> {
+  --
+}
+
+reference.RepoObjectColumn_reference <.. reference.RepoObjectColumn_reference_T
+reference.RepoObjectColumn_reference <.. reference.usp_PERSIST_RepoObjectColumn_reference_T
+reference.RepoObjectColumn_reference_T <.. reference.usp_PERSIST_RepoObjectColumn_reference_T
+reference.RepoObjectColumn_reference_union <.. reference.RepoObjectColumn_reference
