@@ -1,0 +1,312 @@
+'Left to right direction
+top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+}
+
+
+entity docs.RepoObject_ColumnList_T {
+  * **RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity docs.RepoObject_Adoc << V >> {
+  --
+}
+
+entity docs.RepoObject_Adoc_T << U >> {
+  * **RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity docs.RepoObject_ColumnList << V >> {
+  --
+}
+
+entity docs.RepoObject_Plantuml << V >> {
+  * **RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity docs.RepoObject_Plantuml_ColRefList_1_1 << V >> {
+  --
+}
+
+entity docs.RepoObject_Plantuml_T << U >> {
+  * **RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity docs.usp_AntoraExport << P >> {
+  --
+}
+
+entity docs.usp_AntoraExport_ObjectPartialProperties << P >> {
+  --
+}
+
+entity docs.usp_AntoraExport_ObjectPuml << P >> {
+  --
+}
+
+entity docs.usp_PERSIST_RepoObject_Adoc_T << P >> {
+  --
+}
+
+entity docs.usp_PERSIST_RepoObject_ColumnList_T << P >> {
+  --
+}
+
+entity docs.usp_PERSIST_RepoObject_Plantuml_T << P >> {
+  --
+}
+
+entity property.RepoObjectProperty_Collect_source_ROGross << V >> {
+  * **RepoObject_guid** : uniqueidentifier
+  * **property_name** : varchar(39)
+  --
+}
+
+entity property.usp_RepoObjectProperty_collect << P >> {
+  --
+}
+
+entity reference.ftv_RepoObject_ColumReferenceRepoObject << IF >> {
+  --
+}
+
+entity reference.ftv_RepoObject_DbmlColumnRelation << IF >> {
+  --
+}
+
+entity reference.ftv_RepoObjectColumn_ReferenceTree << IF >> {
+  --
+}
+
+entity reference.RepoObjectColumn_reference << V >> {
+  **referenced_RepoObjectColumn_guid** : uniqueidentifier
+  **referencing_RepoObjectColumn_guid** : uniqueidentifier
+  --
+}
+
+entity reference.RepoObjectColumn_reference_additional_internal << V >> {
+  --
+}
+
+entity reference.RepoObjectColumn_reference_T << U >> {
+  **referenced_RepoObjectColumn_guid** : uniqueidentifier
+  **referencing_RepoObjectColumn_guid** : uniqueidentifier
+  --
+}
+
+entity reference.RepoObjectColumn_reference_union << V >> {
+  --
+}
+
+entity reference.RepoObjectColumn_ReferencedList << V >> {
+  --
+}
+
+entity reference.RepoObjectColumn_ReferenceTree << V >> {
+  --
+}
+
+entity reference.RepoObjectColumn_ReferencingList << V >> {
+  --
+}
+
+entity reference.RepoObjectColumn_ReferencingReferenced << V >> {
+  * **Referenced_guid** : uniqueidentifier
+  * **Referencing_guid** : uniqueidentifier
+  --
+}
+
+entity reference.RepoObjectColumn_RelationScript << V >> {
+  --
+}
+
+entity reference.usp_PERSIST_RepoObjectColumn_reference_T << P >> {
+  --
+}
+
+entity repo.check_IndexColumn_virtual_referenced_setpoint << V >> {
+  * **index_guid** : uniqueidentifier
+  * **index_column_id** : int
+  --
+}
+
+entity repo.Index_referencing_IndexPatternColumnGuid << V >> {
+  **source_index_guid** : uniqueidentifier
+  **referencing_RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing << V >> {
+  **index_guid** : uniqueidentifier
+  * **index_column_id** : int
+  **RowNumberInReferencing** : bigint
+  --
+}
+
+entity repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_check << V >> {
+  --
+}
+
+entity repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T << U >> {
+  **index_guid** : uniqueidentifier
+  * **index_column_id** : int
+  **RowNumberInReferencing** : bigint
+  --
+}
+
+entity repo.IndexColumn_virtual_referenced_setpoint << V >> {
+  * **index_guid** : uniqueidentifier
+  * **index_column_id** : int
+  --
+}
+
+entity repo.IndexReferencedReferencing_HasFullColumnsInReferencing << V >> {
+  --
+}
+
+entity repo.RepoObject_ColumnList << V >> {
+  --
+}
+
+entity repo.RepoObject_gross2 << V >> {
+  --
+}
+
+entity repo.RepoObject_SqlCreateTable << V >> {
+  * **RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity repo.RepoObjectColumn_gross2 << V >> {
+  --
+}
+
+entity repo.RepoObjectColumn_MissingSource_TypeV << V >> {
+  * **RepoObjectColumn_guid** : uniqueidentifier
+  --
+}
+
+entity repo.usp_index_inheritance << P >> {
+  --
+}
+
+entity repo.usp_main << P >> {
+  --
+}
+
+entity repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T << P >> {
+  --
+}
+
+entity uspgenerator.GeneratorUspStep_Persistence << V >> {
+  * **usp_id** : int
+  --
+}
+
+entity uspgenerator.usp_GeneratorUsp_insert_update_persistence << P >> {
+  --
+}
+
+docs.RepoObject_Adoc <.. docs.RepoObject_Adoc_T
+docs.RepoObject_Adoc <.. docs.usp_PERSIST_RepoObject_Adoc_T
+docs.RepoObject_Adoc <.. docs.RepoObject_Adoc_T
+docs.RepoObject_Adoc <.. docs.usp_PERSIST_RepoObject_Adoc_T
+docs.REpoObject_Adoc_T <.. docs.usp_PERSIST_RepoObject_Adoc_T
+docs.REpoObject_Adoc_T <.. docs.usp_PERSIST_RepoObject_Adoc_T
+docs.RepoObject_ColumnList <.. docs.85AC3586-9B83-4474-AF3D-ED54F04062CA
+docs.RepoObject_ColumnList <.. docs.usp_PERSIST_RepoObject_ColumnList_T
+docs.RepoObject_ColumnList <.. docs.85AC3586-9B83-4474-AF3D-ED54F04062CA
+docs.RepoObject_ColumnList <.. docs.usp_PERSIST_RepoObject_ColumnList_T
+docs.RepoObject_Plantuml <.. docs.RepoObject_Plantuml_T
+docs.RepoObject_Plantuml <.. docs.usp_PERSIST_RepoObject_Plantuml_T
+docs.RepoObject_Plantuml_ColRefList_1_1 <.. docs.RepoObject_Plantuml
+docs.RepoObject_Plantuml_T <.. docs.usp_PERSIST_RepoObject_Plantuml_T
+docs.usp_AntoraExport_ObjectPartialProperties <.. docs.usp_AntoraExport
+docs.usp_AntoraExport_ObjectPartialProperties <.. docs.usp_AntoraExport
+docs.usp_AntoraExport_ObjectPuml <.. docs.usp_AntoraExport
+docs.usp_PERSIST_RepoObject_Adoc_T <.. docs.usp_AntoraExport_ObjectPartialProperties
+docs.usp_PERSIST_RepoObject_Adoc_T <.. docs.usp_AntoraExport_ObjectPartialProperties
+docs.usp_PERSIST_RepoObject_ColumnList_T <.. docs.usp_AntoraExport_ObjectPartialProperties
+docs.usp_PERSIST_RepoObject_ColumnList_T <.. docs.usp_AntoraExport_ObjectPartialProperties
+docs.usp_PERSIST_RepoObject_Plantuml_T <.. docs.usp_AntoraExport_ObjectPuml
+property.RepoObjectProperty_Collect_source_ROGross <.. property.usp_RepoObjectProperty_collect
+property.RepoObjectProperty_Collect_source_ROGross <.. property.usp_RepoObjectProperty_collect
+property.usp_RepoObjectProperty_collect <.. docs.usp_AntoraExport
+property.usp_RepoObjectProperty_collect <.. docs.usp_AntoraExport
+reference.ftv_RepoObjectColumn_ReferenceTree <.. reference.RepoObjectColumn_ReferenceTree
+reference.RepoObjectColumn_reference <.. reference.RepoObjectColumn_reference_T
+reference.RepoObjectColumn_reference <.. reference.usp_PERSIST_RepoObjectColumn_reference_T
+reference.RepoObjectColumn_reference_additional_internal <.. reference.RepoObjectColumn_reference_union
+reference.RepoObjectColumn_reference_T <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing
+reference.RepoObjectColumn_reference_T <.. repo.RepoObjectColumn_MissingSource_TypeV
+reference.RepoObjectColumn_reference_T <.. reference.RepoObjectColumn_RelationScript
+reference.RepoObjectColumn_reference_T <.. reference.RepoObjectColumn_ReferencingReferenced
+reference.RepoObjectColumn_reference_T <.. reference.usp_PERSIST_RepoObjectColumn_reference_T
+reference.RepoObjectColumn_reference_T <.. docs.RepoObject_Plantuml_ColRefList_1_1
+reference.RepoObjectColumn_reference_union <.. reference.RepoObjectColumn_reference
+reference.RepoObjectColumn_ReferencedList <.. repo.RepoObjectColumn_gross2
+reference.RepoObjectColumn_ReferenceTree <.. reference.ftv_RepoObject_ColumReferenceRepoObject
+reference.RepoObjectColumn_ReferencingList <.. repo.RepoObjectColumn_gross2
+reference.RepoObjectColumn_ReferencingReferenced <.. reference.ftv_RepoObjectColumn_ReferenceTree
+reference.RepoObjectColumn_ReferencingReferenced <.. reference.ftv_RepoObject_DbmlColumnRelation
+reference.RepoObjectColumn_ReferencingReferenced <.. reference.RepoObjectColumn_ReferencedList
+reference.RepoObjectColumn_ReferencingReferenced <.. reference.RepoObjectColumn_ReferencingList
+reference.RepoObjectColumn_RelationScript <.. reference.ftv_RepoObject_ColumReferenceRepoObject
+reference.usp_PERSIST_RepoObjectColumn_reference_T <.. repo.usp_main
+repo.Index_referencing_IndexPatternColumnGuid <.. repo.IndexReferencedReferencing_HasFullColumnsInReferencing
+repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T
+repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing <.. repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T
+repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.IndexColumn_virtual_referenced_setpoint
+repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.IndexReferencedReferencing_HasFullColumnsInReferencing
+repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.Index_referencing_IndexPatternColumnGuid
+repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T
+repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_check
+repo.IndexColumn_virtual_referenced_setpoint <.. repo.check_IndexColumn_virtual_referenced_setpoint
+repo.IndexColumn_virtual_referenced_setpoint <.. repo.usp_index_inheritance
+repo.IndexReferencedReferencing_HasFullColumnsInReferencing <.. repo.usp_index_inheritance
+repo.RepoObject_ColumnList <.. repo.RepoObject_SqlCreateTable
+repo.RepoObject_ColumnList <.. repo.RepoObject_gross2
+repo.RepoObject_ColumnList <.. repo.RepoObject_SqlCreateTable
+repo.RepoObject_ColumnList <.. repo.RepoObject_gross2
+repo.RepoObject_gross2 <.. uspgenerator.GeneratorUspStep_Persistence
+repo.RepoObject_gross2 <.. docs.RepoObject_Adoc
+repo.RepoObject_gross2 <.. property.RepoObjectProperty_Collect_source_ROGross
+repo.RepoObject_gross2 <.. uspgenerator.GeneratorUspStep_Persistence
+repo.RepoObject_gross2 <.. docs.RepoObject_Adoc
+repo.RepoObject_gross2 <.. property.RepoObjectProperty_Collect_source_ROGross
+repo.RepoObject_SqlCreateTable <.. reference.ftv_RepoObject_ColumReferenceRepoObject
+repo.RepoObject_SqlCreateTable <.. reference.ftv_RepoObject_ColumReferenceRepoObject
+repo.RepoObjectColumn_gross2 <.. repo.RepoObject_ColumnList
+repo.RepoObjectColumn_gross2 <.. docs.RepoObject_ColumnList
+repo.RepoObjectColumn_gross2 <.. repo.RepoObject_ColumnList
+repo.RepoObjectColumn_gross2 <.. docs.RepoObject_ColumnList
+repo.usp_index_inheritance <.. repo.usp_main
+repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.usp_index_inheritance
+uspgenerator.GeneratorUspStep_Persistence <.. uspgenerator.usp_GeneratorUsp_insert_update_persistence
+uspgenerator.GeneratorUspStep_Persistence <.. uspgenerator.usp_GeneratorUsp_insert_update_persistence
+uspgenerator.usp_GeneratorUsp_insert_update_persistence <.. repo.usp_main
+uspgenerator.usp_GeneratorUsp_insert_update_persistence <.. repo.usp_main

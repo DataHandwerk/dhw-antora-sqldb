@@ -1,0 +1,91 @@
+'Left to right direction
+top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+}
+
+
+entity docs.RepoObject_Adoc << V >> {
+  --
+}
+
+entity docs.RepoObject_Adoc_T << U >> {
+  * **RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity docs.usp_AntoraExport << P >> {
+  --
+}
+
+entity docs.usp_AntoraExport_ObjectPartialProperties << P >> {
+  --
+}
+
+entity docs.usp_PERSIST_RepoObject_Adoc_T << P >> {
+  --
+}
+
+entity property.RepoObjectProperty_Collect_source_ROGross << V >> {
+  * **RepoObject_guid** : uniqueidentifier
+  * **property_name** : varchar(39)
+  --
+}
+
+entity property.usp_RepoObjectProperty_collect << P >> {
+  --
+}
+
+entity reference.RepoObject_ExternalReferencedList << V >> {
+  --
+}
+
+entity repo.RepoObject_gross2 << V >> {
+  --
+}
+
+entity repo.usp_main << P >> {
+  --
+}
+
+entity uspgenerator.GeneratorUspStep_Persistence << V >> {
+  * **usp_id** : int
+  --
+}
+
+entity uspgenerator.usp_GeneratorUsp_insert_update_persistence << P >> {
+  --
+}
+
+docs.RepoObject_Adoc <.. docs.RepoObject_Adoc_T
+docs.RepoObject_Adoc <.. docs.usp_PERSIST_RepoObject_Adoc_T
+docs.REpoObject_Adoc_T <.. docs.usp_PERSIST_RepoObject_Adoc_T
+docs.usp_AntoraExport_ObjectPartialProperties <.. docs.usp_AntoraExport
+docs.usp_PERSIST_RepoObject_Adoc_T <.. docs.usp_AntoraExport_ObjectPartialProperties
+property.RepoObjectProperty_Collect_source_ROGross <.. property.usp_RepoObjectProperty_collect
+property.usp_RepoObjectProperty_collect <.. docs.usp_AntoraExport
+reference.RepoObject_ExternalReferencedList <.. repo.RepoObject_gross2
+repo.RepoObject_gross2 <.. uspgenerator.GeneratorUspStep_Persistence
+repo.RepoObject_gross2 <.. docs.RepoObject_Adoc
+repo.RepoObject_gross2 <.. property.RepoObjectProperty_Collect_source_ROGross
+uspgenerator.GeneratorUspStep_Persistence <.. uspgenerator.usp_GeneratorUsp_insert_update_persistence
+uspgenerator.usp_GeneratorUsp_insert_update_persistence <.. repo.usp_main

@@ -1,0 +1,101 @@
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+}
+
+
+entity reference.additional_Reference << U >> {
+  * **Id** : int
+  --
+  * referenced_AntoraComponent : nvarchar(128)
+  * referenced_AntoraModul : nvarchar(128)
+  referenced_Column : nvarchar(128)
+  * referenced_Object : nvarchar(128)
+  * referenced_Schema : nvarchar(128)
+  * referencing_AntoraComponent : nvarchar(128)
+  * referencing_AntoraModul : nvarchar(128)
+  referencing_Column : nvarchar(128)
+  * referencing_Object : nvarchar(128)
+  * referencing_Schema : nvarchar(128)
+  * {static} tik : nvarchar(1311)
+  {static} tik_hash : binary(16)
+  --
+}
+
+entity reference.additional_Reference_guid << V >> {
+  --
+  * is_internal : int
+  * referenced_AntoraComponent : nvarchar(128)
+  * referenced_AntoraModul : nvarchar(128)
+  referenced_Column : nvarchar(128)
+  referenced_fullname : nvarchar(261)
+  referenced_id : int
+  * referenced_Object : nvarchar(128)
+  referenced_RepoObject_guid : uniqueidentifier
+  referenced_RepoObjectColumn_guid : uniqueidentifier
+  * referenced_Schema : nvarchar(128)
+  referenced_type : char(2)
+  * referencing_AntoraComponent : nvarchar(128)
+  * referencing_AntoraModul : nvarchar(128)
+  referencing_Column : nvarchar(128)
+  referencing_fullname : nvarchar(261)
+  referencing_id : int
+  * referencing_Object : nvarchar(128)
+  referencing_RepoObject_guid : uniqueidentifier
+  referencing_RepoObjectColumn_guid : uniqueidentifier
+  * referencing_Schema : nvarchar(128)
+  referencing_type : char(2)
+  --
+}
+
+reference.additional_Reference <.. reference.additional_Reference_guid
+reference.additional_Reference::referenced_AntoraComponent <-- reference.additional_Reference::tik
+reference.additional_Reference::referenced_AntoraComponent <-- reference.additional_Reference::tik_hash
+reference.additional_Reference::referenced_AntoraComponent <-- reference.additional_Reference_guid::referenced_AntoraComponent
+reference.additional_Reference::referenced_AntoraModul <-- reference.additional_Reference::tik
+reference.additional_Reference::referenced_AntoraModul <-- reference.additional_Reference::tik_hash
+reference.additional_Reference::referenced_AntoraModul <-- reference.additional_Reference_guid::referenced_AntoraModul
+reference.additional_Reference::referenced_Column <-- reference.additional_Reference::tik
+reference.additional_Reference::referenced_Column <-- reference.additional_Reference::tik_hash
+reference.additional_Reference::referenced_Column <-- reference.additional_Reference_guid::referenced_Column
+reference.additional_Reference::referenced_Object <-- reference.additional_Reference::tik
+reference.additional_Reference::referenced_Object <-- reference.additional_Reference::tik_hash
+reference.additional_Reference::referenced_Object <-- reference.additional_Reference_guid::referenced_Object
+reference.additional_Reference::referenced_Schema <-- reference.additional_Reference::tik
+reference.additional_Reference::referenced_Schema <-- reference.additional_Reference::tik_hash
+reference.additional_Reference::referenced_Schema <-- reference.additional_Reference_guid::referenced_Schema
+reference.additional_Reference::referencing_AntoraComponent <-- reference.additional_Reference::tik
+reference.additional_Reference::referencing_AntoraComponent <-- reference.additional_Reference::tik_hash
+reference.additional_Reference::referencing_AntoraComponent <-- reference.additional_Reference_guid::referencing_AntoraComponent
+reference.additional_Reference::referencing_AntoraModul <-- reference.additional_Reference::tik
+reference.additional_Reference::referencing_AntoraModul <-- reference.additional_Reference::tik_hash
+reference.additional_Reference::referencing_AntoraModul <-- reference.additional_Reference_guid::referencing_AntoraModul
+reference.additional_Reference::referencing_Column <-- reference.additional_Reference::tik
+reference.additional_Reference::referencing_Column <-- reference.additional_Reference::tik_hash
+reference.additional_Reference::referencing_Column <-- reference.additional_Reference_guid::referencing_Column
+reference.additional_Reference::referencing_Object <-- reference.additional_Reference::tik
+reference.additional_Reference::referencing_Object <-- reference.additional_Reference::tik_hash
+reference.additional_Reference::referencing_Object <-- reference.additional_Reference_guid::referencing_Object
+reference.additional_Reference::referencing_Schema <-- reference.additional_Reference::tik
+reference.additional_Reference::referencing_Schema <-- reference.additional_Reference::tik_hash
+reference.additional_Reference::referencing_Schema <-- reference.additional_Reference_guid::referencing_Schema

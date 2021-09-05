@@ -1,0 +1,71 @@
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+}
+
+
+entity logs.usp_ExecutionLog_insert << P >> {
+  --
+  --
+}
+
+entity repo.RepoSchema_ssas_src << V >> {
+  * **RepoSchema_name** : nvarchar(128)
+  --
+  * is_ssas : int
+  * is_SysSchema_missing : int
+  RepoSchema_ms_description : nvarchar(max)
+  * SysSchema_name : nvarchar(128)
+  --
+}
+
+entity repo.RepoSchema_ssas_tgt << V >> {
+  * **RepoSchema_name** : nvarchar(128)
+  --
+  has_different_sys_names : bit
+  * is_RepoSchema_name_uniqueidentifier : int
+  * is_ssas : int
+  * is_SysSchema_missing : int
+  * is_SysSchema_name_uniqueidentifier : int
+  * RepoSchema_guid : uniqueidentifier
+  RepoSchema_ms_description : nvarchar(max)
+  SysSchema_id : int
+  * SysSchema_name : nvarchar(128)
+  --
+}
+
+entity repo.usp_PERSIST_RepoSchema_ssas_tgt << P >> {
+  --
+  --
+}
+
+entity repo.usp_sync_guid_ssas << P >> {
+  --
+  --
+}
+
+logs.usp_ExecutionLog_insert <.. repo.usp_PERSIST_RepoSchema_ssas_tgt
+repo.RepoSchema_ssas_src <.. repo.usp_PERSIST_RepoSchema_ssas_tgt
+repo.RepoSchema_ssas_tgt <.. repo.usp_PERSIST_RepoSchema_ssas_tgt
+repo.usp_PERSIST_RepoSchema_ssas_tgt <.. repo.usp_sync_guid_ssas
+

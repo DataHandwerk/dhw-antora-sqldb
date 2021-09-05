@@ -1,0 +1,54 @@
+'Left to right direction
+top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+}
+
+
+entity repo.RepoObject_persistence_column << V >> {
+  * **target_RepoObject_guid** : uniqueidentifier
+  **RepoObjectColumn_guid_s** : uniqueidentifier
+  --
+  * has_history : bit
+  * has_history_columns : bit
+  history_schema_name : nvarchar(128)
+  history_table_name : nvarchar(128)
+  is_persistence : bit
+  * is_persistence_check_for_empty_source : bit
+  * is_persistence_delete_changed : bit
+  * is_persistence_delete_missing : bit
+  * is_persistence_insert : bit
+  * is_persistence_truncate : bit
+  * is_persistence_update_changed : bit
+  is_repo_managed_t : bit
+  * RepoObject_name_t : nvarchar(128)
+  * RepoObject_schema_name_t : nvarchar(128)
+  * RepoObject_type_t : char(2)
+  RepoObjectColumn_name_t : nvarchar(128)
+  source_RepoObject_guid : uniqueidentifier
+  SysObject_name_s : nvarchar(128)
+  SysObject_schema_name_s : nvarchar(128)
+  SysObject_type_s : char(2)
+  SysObjectColumn_name_s : nvarchar(128)
+  --
+}
+

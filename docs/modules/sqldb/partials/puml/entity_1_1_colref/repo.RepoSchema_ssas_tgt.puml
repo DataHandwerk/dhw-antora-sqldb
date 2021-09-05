@@ -1,0 +1,90 @@
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+}
+
+
+entity repo.RepoSchema << U >> {
+  * **RepoSchema_guid** : uniqueidentifier
+  --
+  * is_ssas : bit
+  is_SysSchema_missing : bit
+  RepoSchema_ms_description : nvarchar(4000)
+  * RepoSchema_name : nvarchar(128)
+  SysSchema_id : int
+  * SysSchema_name : nvarchar(128)
+  {abstract} has_different_sys_names : bit
+  * {static} is_RepoSchema_name_uniqueidentifier : int
+  * {static} is_SysSchema_name_uniqueidentifier : int
+  --
+}
+
+entity repo.RepoSchema_ssas_src << V >> {
+  * **RepoSchema_name** : nvarchar(128)
+  --
+  * is_ssas : int
+  * is_SysSchema_missing : int
+  RepoSchema_ms_description : nvarchar(max)
+  * SysSchema_name : nvarchar(128)
+  --
+}
+
+entity repo.RepoSchema_ssas_tgt << V >> {
+  * **RepoSchema_name** : nvarchar(128)
+  --
+  has_different_sys_names : bit
+  * is_RepoSchema_name_uniqueidentifier : int
+  * is_ssas : int
+  * is_SysSchema_missing : int
+  * is_SysSchema_name_uniqueidentifier : int
+  * RepoSchema_guid : uniqueidentifier
+  RepoSchema_ms_description : nvarchar(max)
+  SysSchema_id : int
+  * SysSchema_name : nvarchar(128)
+  --
+}
+
+entity repo.usp_PERSIST_RepoSchema_ssas_tgt << P >> {
+  --
+  --
+}
+
+repo.RepoSchema <.. repo.RepoSchema_ssas_tgt
+repo.RepoSchema_ssas_src <.. repo.RepoSchema_ssas_tgt
+repo.RepoSchema_ssas_tgt <.. repo.RepoSchema
+repo.RepoSchema_ssas_tgt <.. repo.usp_PERSIST_RepoSchema_ssas_tgt
+repo.RepoSchema::has_different_sys_names <-- repo.RepoSchema_ssas_tgt::has_different_sys_names
+repo.RepoSchema::is_RepoSchema_name_uniqueidentifier <-- repo.RepoSchema_ssas_tgt::is_RepoSchema_name_uniqueidentifier
+repo.RepoSchema::is_ssas <-- repo.RepoSchema_ssas_tgt::is_ssas
+repo.RepoSchema::is_SysSchema_missing <-- repo.RepoSchema_ssas_tgt::is_SysSchema_missing
+repo.RepoSchema::is_SysSchema_name_uniqueidentifier <-- repo.RepoSchema_ssas_tgt::is_SysSchema_name_uniqueidentifier
+repo.RepoSchema::RepoSchema_guid <-- repo.RepoSchema_ssas_tgt::RepoSchema_guid
+repo.RepoSchema::RepoSchema_ms_description <-- repo.RepoSchema_ssas_tgt::RepoSchema_ms_description
+repo.RepoSchema::RepoSchema_name <-- repo.RepoSchema_ssas_tgt::RepoSchema_name
+repo.RepoSchema::SysSchema_id <-- repo.RepoSchema_ssas_tgt::SysSchema_id
+repo.RepoSchema::SysSchema_name <-- repo.RepoSchema_ssas_tgt::SysSchema_name
+repo.RepoSchema_ssas_src::is_ssas <-- repo.RepoSchema_ssas_tgt::is_ssas
+repo.RepoSchema_ssas_src::is_SysSchema_missing <-- repo.RepoSchema_ssas_tgt::is_SysSchema_missing
+repo.RepoSchema_ssas_src::RepoSchema_ms_description <-- repo.RepoSchema_ssas_tgt::RepoSchema_ms_description
+repo.RepoSchema_ssas_src::RepoSchema_name <-- repo.RepoSchema_ssas_tgt::RepoSchema_name
+repo.RepoSchema_ssas_src::SysSchema_name <-- repo.RepoSchema_ssas_tgt::SysSchema_name

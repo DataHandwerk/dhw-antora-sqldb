@@ -1,0 +1,63 @@
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+}
+
+
+entity docs.RepoObject_ColumnList << V >> {
+  --
+}
+
+entity reference.RepoObjectColumn_ReferencedList << V >> {
+  --
+}
+
+entity reference.RepoObjectColumn_ReferencingList << V >> {
+  --
+}
+
+entity repo.IndexColumn_union << V >> {
+  **index_guid** : uniqueidentifier
+  * **index_column_id** : int
+  --
+}
+
+entity repo.RepoObject_ColumnList << V >> {
+  --
+}
+
+entity repo.RepoObjectColumn_gross << V >> {
+  * **RepoObjectColumn_guid** : uniqueidentifier
+  --
+}
+
+entity repo.RepoObjectColumn_gross2 << V >> {
+  --
+}
+
+reference.RepoObjectColumn_ReferencedList <.. repo.RepoObjectColumn_gross2
+reference.RepoObjectColumn_ReferencingList <.. repo.RepoObjectColumn_gross2
+repo.IndexColumn_union <.. repo.RepoObjectColumn_gross2
+repo.RepoObjectColumn_gross <.. repo.RepoObjectColumn_gross2
+repo.RepoObjectColumn_gross2 <.. docs.RepoObject_ColumnList
+repo.RepoObjectColumn_gross2 <.. repo.RepoObject_ColumnList

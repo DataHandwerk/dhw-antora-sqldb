@@ -1,0 +1,134 @@
+'Left to right direction
+top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+}
+
+
+entity docs.AntoraNavListPage_by_schema << V >> {
+  * **RepoObject_schema_name** : nvarchar(128)
+  --
+}
+
+entity docs.Schema_puml << V >> {
+  --
+}
+
+entity docs.usp_AntoraExport << P >> {
+  --
+}
+
+entity docs.usp_AntoraExport_ObjectPuml << P >> {
+  --
+}
+
+entity property.ExtendedProperty_Repo2Sys_level0 << V >> {
+  --
+}
+
+entity property.usp_sync_ExtendedProperties_Repo2Sys_Delete << P >> {
+  --
+}
+
+entity property.usp_sync_ExtendedProperties_Repo2Sys_InsertUpdate << P >> {
+  --
+}
+
+entity property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate << P >> {
+  --
+}
+
+entity repo.RepoSchema << U >> {
+  * **RepoSchema_guid** : uniqueidentifier
+  --
+}
+
+entity repo.RepoSchema_ssas_src << V >> {
+  * **RepoSchema_name** : nvarchar(128)
+  --
+}
+
+entity repo.RepoSchema_ssas_tgt << V >> {
+  * **RepoSchema_name** : nvarchar(128)
+  --
+}
+
+entity repo.SysSchema_RepoSchema_via_guid << V >> {
+  --
+}
+
+entity repo.SysSchema_RepoSchema_via_name << V >> {
+  --
+}
+
+entity repo.usp_main << P >> {
+  --
+}
+
+entity repo.usp_PERSIST_RepoSchema_ssas_tgt << P >> {
+  --
+}
+
+entity repo.usp_persistence_set << P >> {
+  --
+}
+
+entity repo.usp_sync_guid << P >> {
+  --
+}
+
+entity repo.usp_sync_guid_RepoSchema << P >> {
+  --
+}
+
+entity repo.usp_sync_guid_ssas << P >> {
+  --
+}
+
+entity ssas.model_json_2011_descriptions_StrAgg << V >> {
+  --
+}
+
+docs.usp_AntoraExport_ObjectPuml <.. docs.usp_AntoraExport
+property.ExtendedProperty_Repo2Sys_level0 <.. property.usp_sync_ExtendedProperties_Repo2Sys_InsertUpdate
+property.ExtendedProperty_Repo2Sys_level0 <.. property.usp_sync_ExtendedProperties_Repo2Sys_Delete
+repo.RepoSchema <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
+repo.RepoSchema <.. docs.usp_AntoraExport_ObjectPuml
+repo.RepoSchema <.. docs.AntoraNavListPage_by_schema
+repo.RepoSchema <.. repo.SysSchema_RepoSchema_via_guid
+repo.RepoSchema <.. repo.SysSchema_RepoSchema_via_name
+repo.RepoSchema <.. repo.usp_sync_guid_RepoSchema
+repo.RepoSchema <.. property.ExtendedProperty_Repo2Sys_level0
+repo.RepoSchema <.. repo.RepoSchema_ssas_tgt
+repo.RepoSchema <.. docs.Schema_puml
+repo.RepoSchema_ssas_src <.. repo.RepoSchema_ssas_tgt
+repo.RepoSchema_ssas_src <.. repo.usp_PERSIST_RepoSchema_ssas_tgt
+repo.RepoSchema_ssas_tgt <.. repo.RepoSchema
+repo.RepoSchema_ssas_tgt <.. repo.usp_PERSIST_RepoSchema_ssas_tgt
+repo.SysSchema_RepoSchema_via_guid <.. repo.usp_sync_guid_RepoSchema
+repo.SysSchema_RepoSchema_via_name <.. repo.usp_sync_guid_RepoSchema
+repo.usp_PERSIST_RepoSchema_ssas_tgt <.. repo.usp_sync_guid_ssas
+repo.usp_sync_guid <.. repo.usp_persistence_set
+repo.usp_sync_guid <.. repo.usp_main
+repo.usp_sync_guid_RepoSchema <.. repo.usp_sync_guid
+repo.usp_sync_guid_ssas <.. repo.usp_main
+ssas.model_json_2011_descriptions_StrAgg <.. repo.RepoSchema_ssas_src

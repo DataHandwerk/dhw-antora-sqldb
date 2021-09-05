@@ -1,0 +1,55 @@
+'Left to right direction
+top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+}
+
+
+entity logs.ExecutionLog << U >> {
+  --
+}
+
+entity logs.usp_ExecutionLog_insert << P >> {
+  --
+}
+
+entity ssas.TMSCHEMA_TABLES << U >> {
+  * **databasename** : nvarchar(128)
+  * **ID** : numeric(20, 0)
+  --
+}
+
+entity ssas.TMSCHEMA_TABLES_T << U >> {
+  * **databasename** : nvarchar(128)
+  * **ID** : numeric(20, 0)
+  --
+}
+
+entity ssas.usp_PERSIST_TMSCHEMA_TABLES_T << P >> {
+  --
+}
+
+logs.ExecutionLog <.. logs.usp_ExecutionLog_insert
+logs.usp_ExecutionLog_insert <.. ssas.usp_PERSIST_TMSCHEMA_TABLES_T
+ssas.TMSCHEMA_TABLES <.. ssas.usp_PERSIST_TMSCHEMA_TABLES_T
+ssas.TMSCHEMA_TABLES <.. ssas.TMSCHEMA_TABLES_T
+ssas.TMSCHEMA_TABLES_T <.. ssas.usp_PERSIST_TMSCHEMA_TABLES_T
