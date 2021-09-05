@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -27,16 +28,23 @@ entity reference.RepoObject_reference_T << U >> {
   **referenced_RepoObject_guid** : uniqueidentifier
   **referencing_RepoObject_guid** : uniqueidentifier
   --
+  * is_ReversePersistenceViaView : bit
   referenced_entity_name : nvarchar(128)
+  * referenced_is_PersistenceSource : bit
+  * referenced_is_PersistenceTarget : bit
   referenced_schema_name : nvarchar(128)
   referenced_type : char(2)
   referencing_entity_name : nvarchar(128)
+  * referencing_is_PersistenceTarget : bit
+  * referencing_is_PersistenceUspSourceRef : bit
+  referencing_is_PersistenceUspTargetRef : bit
   referencing_schema_name : nvarchar(128)
   referencing_type : varchar(2)
   * {static} referenced_fullname : nvarchar(261)
   * {static} referenced_fullname2 : nvarchar(257)
   * {static} referencing_fullname : nvarchar(261)
   * {static} referencing_fullname2 : nvarchar(257)
+  --
 }
 
 entity reference.RepoObjectColumn_reference_SqlExpressionDependencies << V >> {
@@ -64,6 +72,7 @@ entity reference.RepoObjectColumn_reference_SqlExpressionDependencies << V >> {
   referencing_RepoObjectColumn_guid : uniqueidentifier
   referencing_schema_name : nvarchar(128)
   referencing_type : char(2)
+  --
 }
 
 entity reference.RepoObjectColumn_reference_union << V >> {
@@ -76,8 +85,6 @@ entity reference.RepoObjectColumn_reference_union << V >> {
   referenced_column_name : nvarchar(128)
   referenced_entity_name : nvarchar(128)
   referenced_id : int
-  referenced_minor_id : int
-  referenced_node_id : bigint
   referenced_RepoObject_guid : uniqueidentifier
   referenced_RepoObjectColumn_guid : uniqueidentifier
   referenced_schema_name : nvarchar(128)
@@ -85,12 +92,11 @@ entity reference.RepoObjectColumn_reference_union << V >> {
   referencing_column_name : nvarchar(128)
   referencing_entity_name : nvarchar(128)
   referencing_id : int
-  referencing_minor_id : int
-  referencing_node_id : bigint
   referencing_RepoObject_guid : uniqueidentifier
   referencing_RepoObjectColumn_guid : uniqueidentifier
   referencing_schema_name : nvarchar(128)
   referencing_type : char(2)
+  --
 }
 
 entity repo_sys.sql_expression_dependencies << V >> {
@@ -124,6 +130,7 @@ entity repo_sys.sql_expression_dependencies << V >> {
   referencing_schema_name : nvarchar(128)
   referencing_type : char(2)
   referencing_type_desciption : nvarchar(60)
+  --
 }
 
 reference.RepoObject_reference_T <.. reference.RepoObjectColumn_reference_SqlExpressionDependencies

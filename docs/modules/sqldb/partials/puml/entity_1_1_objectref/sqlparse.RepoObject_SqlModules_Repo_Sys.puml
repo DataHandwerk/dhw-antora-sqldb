@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -34,8 +35,7 @@ entity repo.RepoObject << U >> {
   --
 }
 
-entity repo.RepoObject_gross << V >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity repo.RepoObject_gross2 << V >> {
   --
 }
 
@@ -55,5 +55,5 @@ entity sqlparse.RepoObject_SqlModules_Repo_Sys << V >> {
 repo.RepoObject <.. sqlparse.RepoObject_SqlModules_Repo_Sys
 repo_sys.SysObject <.. sqlparse.RepoObject_SqlModules_Repo_Sys
 sqlparse.RepoObject_SqlModules <.. sqlparse.RepoObject_SqlModules_Repo_Sys
-sqlparse.RepoObject_SqlModules_Repo_Sys <.. repo.RepoObject_gross
 sqlparse.RepoObject_SqlModules_Repo_Sys <.. property.RepoObjectProperty_Collect_source_sql_modules_definition
+sqlparse.RepoObject_SqlModules_Repo_Sys <.. repo.RepoObject_gross2

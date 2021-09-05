@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -37,10 +38,6 @@ entity docs.RepoObject_Plantuml_ColRefList_1_1 << V >> {
 }
 
 entity docs.RepoObject_Plantuml_ObjectRefList_1_1 << V >> {
-  --
-}
-
-entity docs.visjs_nodelist_object_test01 << V >> {
   --
 }
 
@@ -113,6 +110,10 @@ entity property.usp_RepoObjectColumnProperty_set << P >> {
 }
 
 entity property.usp_RepoObjectProperty_set << P >> {
+  --
+}
+
+entity reference.additional_Reference_guid << V >> {
   --
 }
 
@@ -198,6 +199,10 @@ entity repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_check 
   --
 }
 
+entity repo.IndexColumn_ssas_gross << V >> {
+  --
+}
+
 entity repo.IndexColumn_virtual_gross << V >> {
   * **index_column_id** : int
   --
@@ -254,6 +259,15 @@ entity repo.RepoObject_SqlCreateTable << V >> {
   --
 }
 
+entity repo.RepoObject_SSAS_tgt << V >> {
+  * **RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity repo.RepoObject_wo_referencing << V >> {
+  --
+}
+
 entity repo.RepoObjectColumn_gross << V >> {
   * **RepoObjectColumn_guid** : uniqueidentifier
   --
@@ -285,6 +299,10 @@ entity repo.usp_Index_finish << P >> {
 }
 
 entity repo.usp_Index_virtual_set << P >> {
+  --
+}
+
+entity repo.usp_main << P >> {
   --
 }
 
@@ -347,7 +365,34 @@ entity uspgenerator.GeneratorUsp_SqlUsp << V >> {
   --
 }
 
+entity workflow.Biml_Task << V >> {
+  --
+}
+
 entity workflow.ProcedureDependency_gross << V >> {
+  --
+}
+
+entity workflow.Workflow_ProcedureDependency_T_bidirectional << V >> {
+  * **Workflow_id** : int
+  * **referenced_Procedure_RepoObject_guid** : uniqueidentifier
+  * **referencing_Procedure_RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity workflow.Workflow_ProcedureDependency_T_NotInSortorder_check << V >> {
+  --
+}
+
+entity workflow.Workflow_ProcedureDependency_T_TaskName << V >> {
+  --
+}
+
+entity workflow.Workflow_UspList << V >> {
+  --
+}
+
+entity workflow.WorkflowStep_ForUpdate << V >> {
   --
 }
 
@@ -355,7 +400,6 @@ repo.RepoObject <.. reference.RepoObject_reference_persistence
 repo.RepoObject <.. sqlparse.RepoObject_SqlModules_10_statement
 repo.RepoObject <.. sqlparse.RepoObject_SqlModules_39_object
 repo.RepoObject <.. reference.RepoObjectColumn_reference_Persistence
-repo.RepoObject <.. docs.visjs_nodelist_object_test01
 repo.RepoObject <.. repo.RepoObject_persistence_column
 repo.RepoObject <.. repo.RepoObject_persistence_ObjectNames
 repo.RepoObject <.. repo.IndexColumn_virtual_gross
@@ -387,6 +431,7 @@ repo.RepoObject <.. repo.usp_Index_virtual_set
 repo.RepoObject <.. repo.usp_sync_guid_RepoObject
 repo.RepoObject <.. repo.usp_sync_guid_RepoObjectColumn
 repo.RepoObject <.. repo.usp_persistence_set
+repo.RepoObject <.. repo.usp_main
 repo.RepoObject <.. repo.RepoObject_persistence_ForUpdate
 repo.RepoObject <.. sqlparse.RepoObject_SqlModules_71_reference_ExpliciteTableAlias
 repo.RepoObject <.. sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias
@@ -416,3 +461,14 @@ repo.RepoObject <.. property.RepoObjectProperty_ForUpdate
 repo.RepoObject <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_check
 repo.RepoObject <.. docs.RepoObject_Plantuml_ObjectRefList_1_1
 repo.RepoObject <.. docs.RepoObject_Plantuml_ColRefList_1_1
+repo.RepoObject <.. workflow.WorkflowStep_ForUpdate
+repo.RepoObject <.. workflow.Workflow_ProcedureDependency_T_TaskName
+repo.RepoObject <.. workflow.Biml_Task
+repo.RepoObject <.. workflow.Workflow_ProcedureDependency_T_bidirectional
+repo.RepoObject <.. repo.RepoObject_wo_referencing
+repo.RepoObject <.. workflow.Workflow_ProcedureDependency_T_NotInSortorder_check
+repo.RepoObject <.. workflow.Workflow_UspList
+repo.RepoObject <.. reference.additional_Reference_guid
+repo.RepoObject <.. repo.RepoObject_SSAS_tgt
+repo.RepoObject <.. repo.IndexColumn_ssas_gross
+repo.RepoObject_SSAS_tgt <.. repo.RepoObject

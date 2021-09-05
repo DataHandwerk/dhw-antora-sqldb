@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -27,19 +28,21 @@ entity config.ftv_dwh_database << IF >> {
   --
   dwh_database_id : smallint
   dwh_database_name : nvarchar(128)
+  --
 }
 
 entity config.Parameter << U >> {
   * **Parameter_name** : varchar(100)
   * **sub_Parameter** : nvarchar(128)
   --
-  Parameter_default_value : sql_variant
+  Parameter_default_value : nvarchar(max)
   Parameter_desciption : nvarchar(1000)
-  Parameter_value : sql_variant
-  {abstract} Parameter_value__result_date : date
-  {abstract} Parameter_value__result_datetime : datetime
-  {abstract} Parameter_value__result_int : int
-  {abstract} Parameter_value__result_nvarchar : nvarchar(4000)
+  Parameter_value : nvarchar(max)
+  {abstract} Parameter_value_result : nvarchar(max)
+  {abstract} Parameter_value_result_date : date
+  {abstract} Parameter_value_result_datetime : datetime
+  {abstract} Parameter_value_result_int : int
+  --
 }
 
 entity reference.RepoObjectColumn_reference_QueryPlan << V >> {
@@ -71,9 +74,11 @@ entity reference.RepoObjectColumn_reference_QueryPlan << V >> {
   referencing_type : char(2)
   source_schema_name_quoted : nvarchar(128)
   source_table_name_quoted : nvarchar(128)
+  --
 }
 
 entity reference.usp_update_Referencing_Count << P >> {
+  --
   --
 }
 
@@ -87,9 +92,11 @@ entity repo.RepoObject_SqlCreateTable << V >> {
   persistence_source_SysObject_fullname : nvarchar(261)
   * RepoObject_fullname : nvarchar(261)
   * SqlCreateTable : nvarchar(max)
+  --
 }
 
 entity repo.usp_update_Referencing_Count << P >> {
+  --
   --
 }
 
@@ -113,6 +120,7 @@ entity repo_sys.ExtendedProperties << V >> {
   property_value : sql_variant
   SysObject_name : nvarchar(128)
   SysObject_schema_name : nvarchar(128)
+  --
 }
 
 entity repo_sys.sql_expression_dependencies << V >> {
@@ -146,6 +154,7 @@ entity repo_sys.sql_expression_dependencies << V >> {
   referencing_schema_name : nvarchar(128)
   referencing_type : char(2)
   referencing_type_desciption : nvarchar(60)
+  --
 }
 
 entity repo_sys.SysColumn << V >> {
@@ -206,6 +215,7 @@ entity repo_sys.SysColumn << V >> {
   user_type_name : sysname
   uses_database_collation : bit
   * xml_collection_id : int
+  --
 }
 
 entity uspgenerator.GeneratorUsp_SqlUsp << V >> {
@@ -223,15 +233,26 @@ entity uspgenerator.GeneratorUsp_SqlUsp << V >> {
   * usp_schema : nvarchar(128)
   * UspExamples : nvarchar(4000)
   UspParameters : nvarchar(max)
+  --
 }
 
+entity workflow.Workflow_SqlUsp << V >> {
+  --
+  * SqlUsp : nvarchar(max)
+  UspList : nvarchar(max)
+  * Workflow_id : int
+  Workflow_Name : nvarchar(500)
+  --
+}
+
+config.ftv_dwh_database <.. workflow.Workflow_SqlUsp
+config.ftv_dwh_database <.. reference.usp_update_Referencing_Count
+config.ftv_dwh_database <.. repo.usp_update_Referencing_Count
 config.ftv_dwh_database <.. uspgenerator.GeneratorUsp_SqlUsp
 config.ftv_dwh_database <.. repo_sys.ExtendedProperties
 config.ftv_dwh_database <.. repo_sys.SysColumn
 config.ftv_dwh_database <.. repo_sys.sql_expression_dependencies
 config.ftv_dwh_database <.. reference.RepoObjectColumn_reference_QueryPlan
 config.ftv_dwh_database <.. repo.RepoObject_SqlCreateTable
-config.ftv_dwh_database <.. reference.usp_update_Referencing_Count
-config.ftv_dwh_database <.. repo.usp_update_Referencing_Count
 config.Parameter <.. config.ftv_dwh_database
 

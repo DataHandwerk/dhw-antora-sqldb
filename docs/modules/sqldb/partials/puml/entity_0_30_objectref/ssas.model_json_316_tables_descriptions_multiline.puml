@@ -24,11 +24,6 @@ skinparam class {
 }
 
 
-entity docs.RepoObject_ColumnList_T {
-  * **RepoObject_guid** : uniqueidentifier
-  --
-}
-
 entity docs.AntoraIndexSemanticgroup << V >> {
   **IndexSemanticGroup** : nvarchar(512)
   --
@@ -101,11 +96,15 @@ entity docs.RepoObject_Adoc << V >> {
 }
 
 entity docs.RepoObject_Adoc_T << U >> {
-  * **RepoObject_guid** : uniqueidentifier
   --
 }
 
 entity docs.RepoObject_ColumnList << V >> {
+  --
+}
+
+entity docs.RepoObject_ColumnList_T << U >> {
+  * **RepoObject_guid** : uniqueidentifier
   --
 }
 
@@ -790,18 +789,36 @@ docs.ObjectRefCyclic_ObjectRefList <.. docs.ObjectRefCyclic
 docs.RepoObject_Adoc <.. docs.RepoObject_Adoc_T
 docs.RepoObject_Adoc <.. docs.usp_PERSIST_RepoObject_Adoc_T
 docs.REpoObject_Adoc_T <.. docs.usp_PERSIST_RepoObject_Adoc_T
-docs.RepoObject_ColumnList <.. docs.85AC3586-9B83-4474-AF3D-ED54F04062CA
+docs.RepoObject_ColumnList <.. docs.RepoObject_ColumnList_T
 docs.RepoObject_ColumnList <.. docs.usp_PERSIST_RepoObject_ColumnList_T
-docs.RepoObject_ColumnList <.. docs.85AC3586-9B83-4474-AF3D-ED54F04062CA
+docs.RepoObject_ColumnList <.. docs.RepoObject_ColumnList_T
 docs.RepoObject_ColumnList <.. docs.usp_PERSIST_RepoObject_ColumnList_T
-docs.RepoObject_ColumnList <.. docs.85AC3586-9B83-4474-AF3D-ED54F04062CA
+docs.RepoObject_ColumnList <.. docs.RepoObject_ColumnList_T
 docs.RepoObject_ColumnList <.. docs.usp_PERSIST_RepoObject_ColumnList_T
-docs.RepoObject_ColumnList <.. docs.85AC3586-9B83-4474-AF3D-ED54F04062CA
+docs.RepoObject_ColumnList <.. docs.RepoObject_ColumnList_T
 docs.RepoObject_ColumnList <.. docs.usp_PERSIST_RepoObject_ColumnList_T
-docs.RepoObject_ColumnList <.. docs.85AC3586-9B83-4474-AF3D-ED54F04062CA
+docs.RepoObject_ColumnList <.. docs.RepoObject_ColumnList_T
 docs.RepoObject_ColumnList <.. docs.usp_PERSIST_RepoObject_ColumnList_T
-docs.RepoObject_ColumnList <.. docs.85AC3586-9B83-4474-AF3D-ED54F04062CA
+docs.RepoObject_ColumnList <.. docs.RepoObject_ColumnList_T
 docs.RepoObject_ColumnList <.. docs.usp_PERSIST_RepoObject_ColumnList_T
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Adoc
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Plantuml_Entity
+docs.RepoObject_ColumnList_T <.. docs.usp_PERSIST_RepoObject_ColumnList_T
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Adoc
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Plantuml_Entity
+docs.RepoObject_ColumnList_T <.. docs.usp_PERSIST_RepoObject_ColumnList_T
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Adoc
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Plantuml_Entity
+docs.RepoObject_ColumnList_T <.. docs.usp_PERSIST_RepoObject_ColumnList_T
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Adoc
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Plantuml_Entity
+docs.RepoObject_ColumnList_T <.. docs.usp_PERSIST_RepoObject_ColumnList_T
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Adoc
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Plantuml_Entity
+docs.RepoObject_ColumnList_T <.. docs.usp_PERSIST_RepoObject_ColumnList_T
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Adoc
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Plantuml_Entity
+docs.RepoObject_ColumnList_T <.. docs.usp_PERSIST_RepoObject_ColumnList_T
 docs.RepoObject_IndexList <.. docs.RepoObject_IndexList_T
 docs.RepoObject_IndexList <.. docs.usp_PERSIST_RepoObject_IndexList_T
 docs.RepoObject_IndexList_T <.. docs.RepoObject_Adoc
@@ -810,11 +827,11 @@ docs.RepoObject_IndexList_T <.. docs.usp_PERSIST_RepoObject_IndexList_T
 docs.RepoObject_OutputFilter <.. docs.usp_AntoraExport_ObjectPartialProperties
 docs.RepoObject_OutputFilter <.. docs.usp_AntoraExport_ObjectPage
 docs.RepoObject_OutputFilter <.. docs.AntoraNavListRepoObject_by_type
-docs.RepoObject_OutputFilter <.. docs.AntoraNavListRepoObject_by_schema
 docs.RepoObject_OutputFilter <.. docs.AntoraNavListRepoObject_by_schema_type
 docs.RepoObject_OutputFilter <.. docs.RepoObject_Plantuml_Entity
 docs.RepoObject_OutputFilter <.. docs.usp_AntoraExport_ObjectPuml
 docs.RepoObject_OutputFilter <.. docs.AntoraNavListPage_by_type
+docs.RepoObject_OutputFilter <.. docs.AntoraNavListRepoObject_by_schema
 docs.RepoObject_Plantuml <.. docs.RepoObject_Plantuml_T
 docs.RepoObject_Plantuml <.. docs.usp_PERSIST_RepoObject_Plantuml_T
 docs.RepoObject_Plantuml_ColRefList_1_1 <.. docs.RepoObject_Plantuml
@@ -1039,8 +1056,8 @@ repo.IndexReferencedReferencing <.. repo.IndexReferencedReferencing_HasFullColum
 repo.IndexReferencedReferencing_HasFullColumnsInReferencing <.. repo.usp_index_inheritance
 repo.RepoObject_ColumnList <.. repo.RepoObject_SqlCreateTable
 repo.RepoObject_ColumnList <.. repo.RepoObject_gross2
-repo.RepoObject_ColumnList <.. repo.RepoObject_gross2
 repo.RepoObject_ColumnList <.. repo.RepoObject_SqlCreateTable
+repo.RepoObject_ColumnList <.. repo.RepoObject_gross2
 repo.RepoObject_ColumnList <.. repo.RepoObject_SqlCreateTable
 repo.RepoObject_ColumnList <.. repo.RepoObject_gross2
 repo.RepoObject_ColumnList <.. repo.RepoObject_SqlCreateTable
@@ -1082,10 +1099,10 @@ repo.RepoObjectColumn_gross2 <.. repo.RepoObject_ColumnList
 repo.RepoObjectColumn_gross2 <.. docs.RepoObject_ColumnList
 repo.RepoObjectColumn_gross2 <.. repo.RepoObject_ColumnList
 repo.RepoObjectColumn_gross2 <.. docs.RepoObject_ColumnList
-repo.RepoObjectColumn_gross2 <.. docs.RepoObject_ColumnList
 repo.RepoObjectColumn_gross2 <.. repo.RepoObject_ColumnList
 repo.RepoObjectColumn_gross2 <.. docs.RepoObject_ColumnList
 repo.RepoObjectColumn_gross2 <.. repo.RepoObject_ColumnList
+repo.RepoObjectColumn_gross2 <.. docs.RepoObject_ColumnList
 repo.RepoObjectColumn_gross2 <.. repo.RepoObject_ColumnList
 repo.RepoObjectColumn_gross2 <.. docs.RepoObject_ColumnList
 repo.RepoObjectColumn_gross2 <.. repo.RepoObject_ColumnList
@@ -1142,8 +1159,8 @@ workflow.Workflow_ProcedureDependency_T_redundant <.. workflow.usp_workflow
 workflow.Workflow_ProcedureDependency_T_redundant <.. workflow.Workflow_ProcedureDependency_wo_redundant
 workflow.Workflow_ProcedureDependency_T_TaskName <.. workflow.Biml_PrecedenceConstraints
 workflow.WorkflowStep <.. workflow.WorkflowStep_active
-workflow.WorkflowStep <.. workflow.WorkflowStep_ForUpdate
 workflow.WorkflowStep <.. workflow.usp_PERSIST_WorkflowStep
+workflow.WorkflowStep <.. workflow.WorkflowStep_ForUpdate
 workflow.WorkflowStep_active <.. workflow.usp_workflow
 workflow.WorkflowStep_active <.. workflow.Workflow_ProcedureDependency_all
 workflow.WorkflowStep_active <.. workflow.Biml_Task

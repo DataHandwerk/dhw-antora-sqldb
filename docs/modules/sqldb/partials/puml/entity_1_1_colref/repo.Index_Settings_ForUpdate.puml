@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -30,6 +31,7 @@ entity repo.Index_Settings << U >> {
   IndexPatternColumnName : nvarchar(4000)
   IndexSemanticGroup : nvarchar(512)
   * is_create_constraint : bit
+  --
 }
 
 entity repo.Index_Settings_ForUpdate << V >> {
@@ -42,13 +44,14 @@ entity repo.Index_Settings_ForUpdate << V >> {
   * is_create_constraint : bit
   parent_RepoObject_guid : uniqueidentifier
   RepoObject_fullname : nvarchar(261)
+  --
 }
 
 entity repo.Index_union << V >> {
   **index_guid** : uniqueidentifier
   --
-  index_name : nvarchar(128)
-  * index_type : tinyint
+  index_name : nvarchar(450)
+  index_type : tinyint
   IndexPatternColumnGuid : varchar(8000)
   is_index_disabled : bit
   is_index_primary_key : bit
@@ -56,6 +59,7 @@ entity repo.Index_union << V >> {
   is_index_unique : bit
   parent_RepoObject_guid : uniqueidentifier
   referenced_index_guid : uniqueidentifier
+  --
 }
 
 entity repo.RepoObject << U >> {
@@ -66,8 +70,10 @@ entity repo.RepoObject << U >> {
   Inheritance_StringAggSeparatorSql : nvarchar(4000)
   InheritanceDefinition : nvarchar(4000)
   InheritanceType : tinyint
+  * is_DocsExclude : bit
   is_repo_managed : bit
   is_required_ObjectMerge : bit
+  * is_ssas : bit
   is_SysObject_missing : bit
   * modify_dt : datetime
   pk_index_guid : uniqueidentifier
@@ -93,7 +99,9 @@ entity repo.RepoObject << U >> {
   * {static} SysObject_fullname : nvarchar(261)
   * {static} SysObject_fullname2 : nvarchar(257)
   * {abstract} SysObject_query_sql : nvarchar(406)
+  * {static} usp_persistence_fullname2 : nvarchar(269)
   * {static} usp_persistence_name : nvarchar(140)
+  --
 }
 
 repo.Index_Settings <.. repo.Index_Settings_ForUpdate

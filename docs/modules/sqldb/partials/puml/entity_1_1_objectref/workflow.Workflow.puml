@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -23,9 +24,45 @@ skinparam class {
 }
 
 
+entity workflow.Biml_Package << V >> {
+  --
+}
+
 entity workflow.Workflow << U >> {
   * **id** : int
   --
 }
 
+entity workflow.Workflow_ProcedureDependency << V >> {
+  --
+}
 
+entity workflow.Workflow_ProcedureDependency_all << V >> {
+  --
+}
+
+entity workflow.Workflow_UspList << V >> {
+  --
+}
+
+entity workflow.WorkflowStep_active << V >> {
+  --
+}
+
+entity workflow.WorkflowStep_ForUpdate << V >> {
+  --
+}
+
+entity workflow.WorkflowStep_S << V >> {
+  * **Workflow_id** : int
+  **Procedure_RepoObject_guid** : uniqueidentifier
+  --
+}
+
+workflow.Workflow <.. workflow.WorkflowStep_active
+workflow.Workflow <.. workflow.Workflow_ProcedureDependency
+workflow.Workflow <.. workflow.Workflow_UspList
+workflow.Workflow <.. workflow.WorkflowStep_S
+workflow.Workflow <.. workflow.Workflow_ProcedureDependency_all
+workflow.Workflow <.. workflow.WorkflowStep_ForUpdate
+workflow.Workflow <.. workflow.Biml_Package

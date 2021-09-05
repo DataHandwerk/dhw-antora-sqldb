@@ -24,11 +24,6 @@ skinparam class {
 }
 
 
-entity docs.RepoObject_ColumnList_T {
-  * **RepoObject_guid** : uniqueidentifier
-  --
-}
-
 entity docs.AntoraIndexSemanticgroup << V >> {
   **IndexSemanticGroup** : nvarchar(512)
   --
@@ -101,11 +96,15 @@ entity docs.RepoObject_Adoc << V >> {
 }
 
 entity docs.RepoObject_Adoc_T << U >> {
-  * **RepoObject_guid** : uniqueidentifier
   --
 }
 
 entity docs.RepoObject_ColumnList << V >> {
+  --
+}
+
+entity docs.RepoObject_ColumnList_T << U >> {
+  * **RepoObject_guid** : uniqueidentifier
   --
 }
 
@@ -801,10 +800,16 @@ docs.RepoObject_Adoc <.. docs.usp_PERSIST_RepoObject_Adoc_T
 docs.RepoObject_Adoc <.. docs.usp_PERSIST_RepoObject_Adoc_T
 docs.REpoObject_Adoc_T <.. docs.usp_PERSIST_RepoObject_Adoc_T
 docs.REpoObject_Adoc_T <.. docs.usp_PERSIST_RepoObject_Adoc_T
-docs.RepoObject_ColumnList <.. docs.85AC3586-9B83-4474-AF3D-ED54F04062CA
+docs.RepoObject_ColumnList <.. docs.RepoObject_ColumnList_T
 docs.RepoObject_ColumnList <.. docs.usp_PERSIST_RepoObject_ColumnList_T
-docs.RepoObject_ColumnList <.. docs.85AC3586-9B83-4474-AF3D-ED54F04062CA
+docs.RepoObject_ColumnList <.. docs.RepoObject_ColumnList_T
 docs.RepoObject_ColumnList <.. docs.usp_PERSIST_RepoObject_ColumnList_T
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Adoc
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Plantuml_Entity
+docs.RepoObject_ColumnList_T <.. docs.usp_PERSIST_RepoObject_ColumnList_T
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Adoc
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Plantuml_Entity
+docs.RepoObject_ColumnList_T <.. docs.usp_PERSIST_RepoObject_ColumnList_T
 docs.RepoObject_IndexList <.. docs.RepoObject_IndexList_T
 docs.RepoObject_IndexList <.. docs.usp_PERSIST_RepoObject_IndexList_T
 docs.RepoObject_IndexList_T <.. docs.RepoObject_Adoc
@@ -971,10 +976,10 @@ reference.usp_RepoObjectSource_QueryPlan <.. repo.usp_main
 repo.ForeignKey_gross <.. docs.RepoObject_IndexList
 repo.ForeignKey_Indexes <.. repo.ForeignKey_Indexes_union
 repo.ForeignKey_Indexes <.. repo.usp_Index_ForeignKey
-repo.ForeignKey_Indexes_union <.. repo.ForeignKey_Indexes_union_T
 repo.ForeignKey_Indexes_union <.. repo.usp_PERSIST_ForeignKey_Indexes_union_T
 repo.ForeignKey_Indexes_union <.. repo.ForeignKey_Indexes_union_T
 repo.ForeignKey_Indexes_union <.. repo.usp_PERSIST_ForeignKey_Indexes_union_T
+repo.ForeignKey_Indexes_union <.. repo.ForeignKey_Indexes_union_T
 repo.ForeignKey_Indexes_union_T <.. repo.usp_Index_finish
 repo.ForeignKey_Indexes_union_T <.. docs.ForeignKey_RelationScript
 repo.ForeignKey_Indexes_union_T <.. repo.ForeignKey_gross
@@ -1014,8 +1019,8 @@ repo.IndexReferencedReferencing <.. repo.IndexReferencedReferencing_HasFullColum
 repo.IndexReferencedReferencing_HasFullColumnsInReferencing <.. repo.usp_index_inheritance
 repo.RepoObject_ColumnList <.. repo.RepoObject_SqlCreateTable
 repo.RepoObject_ColumnList <.. repo.RepoObject_gross2
-repo.RepoObject_ColumnList <.. repo.RepoObject_gross2
 repo.RepoObject_ColumnList <.. repo.RepoObject_SqlCreateTable
+repo.RepoObject_ColumnList <.. repo.RepoObject_gross2
 repo.RepoObject_gross <.. repo.RepoObject_SqlCreateTable
 repo.RepoObject_gross <.. uspgenerator.GeneratorUspStep_Persistence_IsInactive_setpoint
 repo.RepoObject_gross <.. uspgenerator.GeneratorUspStep_Persistence

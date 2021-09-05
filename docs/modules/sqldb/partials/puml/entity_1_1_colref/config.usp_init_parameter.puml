@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -27,20 +28,23 @@ entity config.Parameter << U >> {
   * **Parameter_name** : varchar(100)
   * **sub_Parameter** : nvarchar(128)
   --
-  Parameter_default_value : sql_variant
+  Parameter_default_value : nvarchar(max)
   Parameter_desciption : nvarchar(1000)
-  Parameter_value : sql_variant
-  {abstract} Parameter_value__result_date : date
-  {abstract} Parameter_value__result_datetime : datetime
-  {abstract} Parameter_value__result_int : int
-  {abstract} Parameter_value__result_nvarchar : nvarchar(4000)
+  Parameter_value : nvarchar(max)
+  {abstract} Parameter_value_result : nvarchar(max)
+  {abstract} Parameter_value_result_date : date
+  {abstract} Parameter_value_result_datetime : datetime
+  {abstract} Parameter_value_result_int : int
+  --
 }
 
 entity config.usp_connect_database << P >> {
   --
+  --
 }
 
 entity config.usp_init_parameter << P >> {
+  --
   --
 }
 
@@ -48,8 +52,9 @@ entity configT.Parameter_default << V >> {
   * **Parameter_name** : varchar(52)
   * **sub_Parameter** : nvarchar(27)
   --
-  Parameter_default_value : sql_variant
+  Parameter_default_value : nvarchar(max)
   * Parameter_desciption : nvarchar(247)
+  --
 }
 
 config.Parameter <.. config.usp_init_parameter

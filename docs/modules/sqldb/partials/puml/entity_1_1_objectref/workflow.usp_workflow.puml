@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -31,9 +32,54 @@ entity workflow.usp_PERSIST_ProcedureDependency_input_PersistenceDependency << P
   --
 }
 
+entity workflow.usp_PERSIST_Workflow_ProcedureDependency_T << P >> {
+  --
+}
+
+entity workflow.usp_PERSIST_Workflow_ProcedureDependency_T_bidirectional_T << P >> {
+  --
+}
+
+entity workflow.usp_PERSIST_WorkflowStep << P >> {
+  --
+}
+
 entity workflow.usp_workflow << P >> {
+  --
+}
+
+entity workflow.Workflow_ProcedureDependency_T << U >> {
+  * **Workflow_id** : int
+  * **referenced_Procedure_RepoObject_guid** : uniqueidentifier
+  * **referencing_Procedure_RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity workflow.Workflow_ProcedureDependency_T_NotInSortorder << V >> {
+  --
+}
+
+entity workflow.Workflow_ProcedureDependency_T_redundant << V >> {
+  --
+}
+
+entity workflow.WorkflowStep_active << V >> {
+  --
+}
+
+entity workflow.WorkflowStep_Sortorder << U >> {
+  * **Workflow_id** : int
+  * **Procedure_RepoObject_guid** : uniqueidentifier
   --
 }
 
 logs.usp_ExecutionLog_insert <.. workflow.usp_workflow
 workflow.usp_PERSIST_ProcedureDependency_input_PersistenceDependency <.. workflow.usp_workflow
+workflow.usp_PERSIST_Workflow_ProcedureDependency_T <.. workflow.usp_workflow
+workflow.usp_PERSIST_Workflow_ProcedureDependency_T_bidirectional_T <.. workflow.usp_workflow
+workflow.usp_PERSIST_WorkflowStep <.. workflow.usp_workflow
+workflow.Workflow_ProcedureDependency_T <.. workflow.usp_workflow
+workflow.Workflow_ProcedureDependency_T_NotInSortorder <.. workflow.usp_workflow
+workflow.Workflow_ProcedureDependency_T_redundant <.. workflow.usp_workflow
+workflow.WorkflowStep_active <.. workflow.usp_workflow
+workflow.WorkflowStep_Sortorder <.. workflow.usp_workflow

@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -28,6 +29,7 @@ entity configT.type << V >> {
   --
   * is_DocsOutput : int
   type_desc : nvarchar(128)
+  --
 }
 
 entity configT.type_level1type_level2type << V >> {
@@ -36,6 +38,7 @@ entity configT.type_level1type_level2type << V >> {
   level1type : varchar(9)
   level2type : varchar(10)
   type_desc : nvarchar(128)
+  --
 }
 
 entity property.ExtendedProperty_Repo2Sys_level1 << V >> {
@@ -50,6 +53,7 @@ entity property.ExtendedProperty_Repo2Sys_level1 << V >> {
   property_value : nvarchar(4000)
   * RepoObject_guid : uniqueidentifier
   * RepoObject_type : char(2)
+  --
 }
 
 entity property.ExtendedProperty_Repo2Sys_level2_RepoObject << V >> {
@@ -66,6 +70,7 @@ entity property.ExtendedProperty_Repo2Sys_level2_RepoObject << V >> {
   property_value : nvarchar(4000)
   * RepoObject_guid : uniqueidentifier
   * RepoObject_type : char(2)
+  --
 }
 
 entity property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn << V >> {
@@ -82,13 +87,16 @@ entity property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn << V >> {
   property_value : nvarchar(4000)
   Repo_user_type_fullname : nvarchar(128)
   * RepoObjectColumn_guid : uniqueidentifier
+  --
 }
 
 entity repo.usp_sync_guid_RepoObject << P >> {
   --
+  --
 }
 
 entity repo.usp_sync_guid_RepoObjectColumn << P >> {
+  --
   --
 }
 
@@ -108,6 +116,7 @@ entity repo_sys.ExtendedProperties_ParameterForAddUpdateDrop << V >> {
   type : char(2)
   type_level1type : varchar(9)
   type_level2type : varchar(10)
+  --
 }
 
 entity sys_self.ExtendedProperties_ParameterForAddUpdateDrop << V >> {
@@ -126,6 +135,7 @@ entity sys_self.ExtendedProperties_ParameterForAddUpdateDrop << V >> {
   type : char(2)
   type_level1type : varchar(9)
   type_level2type : varchar(10)
+  --
 }
 
 configT.type <.. configT.type_level1type_level2type

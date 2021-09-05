@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -45,6 +46,7 @@ entity sqlparse.RepoObject_SqlModules_21_statement_children_helper << V >> {
   normalized : nvarchar(max)
   RowNumber_per_Object : bigint
   SysObject_fullname : nvarchar(261)
+  --
 }
 
 entity sqlparse.RepoObject_SqlModules_31_object << V >> {
@@ -61,6 +63,7 @@ entity sqlparse.RepoObject_SqlModules_31_object << V >> {
   is_7_IdentifierList : int
   is_8_IdentifierList : int
   SysObject_fullname : nvarchar(261)
+  --
 }
 
 entity sqlparse.RepoObject_SqlModules_39_object << V >> {
@@ -85,11 +88,13 @@ entity sqlparse.RepoObject_SqlModules_39_object << V >> {
   Min_RowNumber_IdentifierList : bigint
   Min_RowNumber_Where : bigint
   SysObject_fullname : nvarchar(261)
+  --
 }
 
 sqlparse.RepoObject_SqlModules_21_statement_children_helper <.. sqlparse.RepoObject_SqlModules_31_object
 sqlparse.RepoObject_SqlModules_31_object <.. sqlparse.RepoObject_SqlModules_39_object
 sqlparse.RepoObject_SqlModules_21_statement_children_helper::RepoObject_guid <-- sqlparse.RepoObject_SqlModules_31_object::RepoObject_guid
+sqlparse.RepoObject_SqlModules_21_statement_children_helper::SysObject_fullname <-- sqlparse.RepoObject_SqlModules_31_object::SysObject_fullname
 sqlparse.RepoObject_SqlModules_31_object::is_1_create <-- sqlparse.RepoObject_SqlModules_39_object::is_1_create
 sqlparse.RepoObject_SqlModules_31_object::is_2_view <-- sqlparse.RepoObject_SqlModules_39_object::is_2_view
 sqlparse.RepoObject_SqlModules_31_object::is_3_Identifier <-- sqlparse.RepoObject_SqlModules_39_object::is_3_Identifier

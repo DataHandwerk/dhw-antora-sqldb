@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -25,6 +26,7 @@ skinparam class {
 
 entity logs.usp_ExecutionLog_insert << P >> {
   --
+  --
 }
 
 entity repo.ForeignKey_Indexes_union_T << U >> {
@@ -32,27 +34,28 @@ entity repo.ForeignKey_Indexes_union_T << U >> {
   --
   delete_referential_action : tinyint
   ForeignKey_fullname : nvarchar(517)
-  ForeignKey_name : nvarchar(128)
+  ForeignKey_name : nvarchar(max)
   * is_MatchingDatatypePattern : int
   referenced_index_guid : uniqueidentifier
-  referenced_index_name : nvarchar(128)
+  referenced_index_name : nvarchar(450)
   referenced_IndexPatternColumnDatatype : nvarchar(4000)
-  referenced_IndexPatternColumnName : nvarchar(4000)
+  referenced_IndexPatternColumnName : nvarchar(max)
   referenced_RepoObject_fullname : nvarchar(261)
   referenced_RepoObject_fullname2 : nvarchar(257)
   referenced_RepoObject_guid : uniqueidentifier
   referenced_SysObject_name : nvarchar(128)
   referenced_SysObject_schema_name : nvarchar(128)
   referencing_index_guid : uniqueidentifier
-  referencing_index_name : nvarchar(128)
+  referencing_index_name : nvarchar(450)
   referencing_IndexPatternColumnDatatype : nvarchar(4000)
-  referencing_IndexPatternColumnName : nvarchar(4000)
+  referencing_IndexPatternColumnName : nvarchar(max)
   referencing_RepoObject_fullname : nvarchar(261)
   referencing_RepoObject_fullname2 : nvarchar(257)
   referencing_RepoObject_guid : uniqueidentifier
   referencing_SysObject_name : nvarchar(128)
   referencing_SysObject_schema_name : nvarchar(128)
   update_referential_action : tinyint
+  --
 }
 
 entity repo.Index_gross << V >> {
@@ -62,8 +65,8 @@ entity repo.Index_gross << V >> {
   ColumnList : nvarchar(max)
   ConstraintColumnList : nvarchar(max)
   DbmlIndexColumnList : nvarchar(max)
-  index_name : nvarchar(128)
-  * index_type : tinyint
+  index_name : nvarchar(450)
+  index_type : tinyint
   IndexPatternColumnDatatype : nvarchar(4000)
   IndexPatternColumnName : nvarchar(4000)
   IndexSemanticGroup : nvarchar(512)
@@ -87,6 +90,7 @@ entity repo.Index_gross << V >> {
   * SysObject_name : nvarchar(128)
   * SysObject_schema_name : nvarchar(128)
   SysObject_type : char(2)
+  --
 }
 
 entity repo.Index_Settings << U >> {
@@ -96,13 +100,14 @@ entity repo.Index_Settings << U >> {
   IndexPatternColumnName : nvarchar(4000)
   IndexSemanticGroup : nvarchar(512)
   * is_create_constraint : bit
+  --
 }
 
 entity repo.Index_union << V >> {
   **index_guid** : uniqueidentifier
   --
-  index_name : nvarchar(128)
-  * index_type : tinyint
+  index_name : nvarchar(450)
+  index_type : tinyint
   IndexPatternColumnGuid : varchar(8000)
   is_index_disabled : bit
   is_index_primary_key : bit
@@ -110,6 +115,7 @@ entity repo.Index_union << V >> {
   is_index_unique : bit
   parent_RepoObject_guid : uniqueidentifier
   referenced_index_guid : uniqueidentifier
+  --
 }
 
 entity repo.Index_virtual << U >> {
@@ -124,6 +130,7 @@ entity repo.Index_virtual << U >> {
   * parent_RepoObject_guid : uniqueidentifier
   referenced_index_guid : uniqueidentifier
   RowNumberInReferencing : int
+  --
 }
 
 entity repo.IndexColumn_virtual << U >> {
@@ -132,6 +139,7 @@ entity repo.IndexColumn_virtual << U >> {
   --
   * is_descending_key : bit
   * RepoObjectColumn_guid : uniqueidentifier
+  --
 }
 
 entity repo.RepoObject << U >> {
@@ -142,8 +150,10 @@ entity repo.RepoObject << U >> {
   Inheritance_StringAggSeparatorSql : nvarchar(4000)
   InheritanceDefinition : nvarchar(4000)
   InheritanceType : tinyint
+  * is_DocsExclude : bit
   is_repo_managed : bit
   is_required_ObjectMerge : bit
+  * is_ssas : bit
   is_SysObject_missing : bit
   * modify_dt : datetime
   pk_index_guid : uniqueidentifier
@@ -169,7 +179,9 @@ entity repo.RepoObject << U >> {
   * {static} SysObject_fullname : nvarchar(261)
   * {static} SysObject_fullname2 : nvarchar(257)
   * {abstract} SysObject_query_sql : nvarchar(406)
+  * {static} usp_persistence_fullname2 : nvarchar(269)
   * {static} usp_persistence_name : nvarchar(140)
+  --
 }
 
 entity repo.RepoObject_persistence << U >> {
@@ -194,21 +206,26 @@ entity repo.RepoObject_persistence << U >> {
   target_filter : nvarchar(4000)
   {abstract} is_persistence : bit
   {abstract} temporal_type : tinyint
+  --
 }
 
 entity repo.usp_Index_finish << P >> {
+  --
   --
 }
 
 entity repo.usp_Index_ForeignKey << P >> {
   --
+  --
 }
 
 entity repo.usp_index_inheritance << P >> {
   --
+  --
 }
 
 entity repo.usp_Index_Settings << P >> {
+  --
   --
 }
 

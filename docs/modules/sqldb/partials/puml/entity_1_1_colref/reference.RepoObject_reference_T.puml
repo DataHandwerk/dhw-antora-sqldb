@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -27,18 +28,34 @@ entity docs.RepoObject_Plantuml_ObjectRefList_0_30 << V >> {
   * **RepoObject_guid** : uniqueidentifier
   --
   ObjectRefList : nvarchar(max)
+  --
 }
 
 entity docs.RepoObject_Plantuml_ObjectRefList_1_1 << V >> {
   --
   ObjectRefList : nvarchar(max)
   * RepoObject_guid : uniqueidentifier
+  --
 }
 
 entity docs.RepoObject_Plantuml_ObjectRefList_30_0 << V >> {
   * **RepoObject_guid** : uniqueidentifier
   --
   ObjectRefList : nvarchar(max)
+  --
+}
+
+entity reference.ReferenceTree_cyclic_ref_PersistenceUsp << V >> {
+  --
+  * referenced_fullname : nvarchar(261)
+  * referenced_fullname2 : nvarchar(257)
+  * Referenced_guid : uniqueidentifier
+  referenced_type : char(2)
+  * referencing_fullname : nvarchar(261)
+  * referencing_fullname2 : nvarchar(257)
+  * Referencing_guid : uniqueidentifier
+  referencing_type : varchar(2)
+  --
 }
 
 entity reference.RepoObject_reference << V >> {
@@ -51,22 +68,51 @@ entity reference.RepoObject_reference << V >> {
   referencing_entity_name : nvarchar(128)
   referencing_schema_name : nvarchar(128)
   referencing_type : varchar(2)
+  --
 }
 
 entity reference.RepoObject_reference_T << U >> {
   **referenced_RepoObject_guid** : uniqueidentifier
   **referencing_RepoObject_guid** : uniqueidentifier
   --
+  * is_ReversePersistenceViaView : bit
   referenced_entity_name : nvarchar(128)
+  * referenced_is_PersistenceSource : bit
+  * referenced_is_PersistenceTarget : bit
   referenced_schema_name : nvarchar(128)
   referenced_type : char(2)
   referencing_entity_name : nvarchar(128)
+  * referencing_is_PersistenceTarget : bit
+  * referencing_is_PersistenceUspSourceRef : bit
+  referencing_is_PersistenceUspTargetRef : bit
   referencing_schema_name : nvarchar(128)
   referencing_type : varchar(2)
   * {static} referenced_fullname : nvarchar(261)
   * {static} referenced_fullname2 : nvarchar(257)
   * {static} referencing_fullname : nvarchar(261)
   * {static} referencing_fullname2 : nvarchar(257)
+  --
+}
+
+entity reference.RepoObject_reference_T_bidirectional << V >> {
+  --
+  referenced_entity_name : nvarchar(128)
+  * referenced_fullname : nvarchar(261)
+  * referenced_fullname2 : nvarchar(257)
+  referenced_is_persistence : bit
+  * referenced_RepoObject_guid : uniqueidentifier
+  referenced_schema_name : nvarchar(128)
+  referenced_source_RepoObject_guid : uniqueidentifier
+  referenced_type : char(2)
+  referencing_entity_name : nvarchar(128)
+  * referencing_fullname : nvarchar(261)
+  * referencing_fullname2 : nvarchar(257)
+  referencing_is_persistence : bit
+  * referencing_RepoObject_guid : uniqueidentifier
+  referencing_schema_name : nvarchar(128)
+  referencing_source_RepoObject_guid : uniqueidentifier
+  referencing_type : varchar(2)
+  --
 }
 
 entity reference.RepoObject_ReferencingReferenced << V >> {
@@ -79,6 +125,31 @@ entity reference.RepoObject_ReferencingReferenced << V >> {
   * Referencing_fullname : nvarchar(261)
   * Referencing_fullname2 : nvarchar(257)
   Referencing_type : varchar(2)
+  --
+}
+
+entity reference.RepoObjectColumn_reference_additional_internal << V >> {
+  --
+  definition : nvarchar(max)
+  * InformationSource : varchar(30)
+  is_computed : bit
+  is_referenced_object : bit
+  is_referencing_object_equal_referenced_object : bit
+  referenced_column_name : nvarchar(128)
+  * referenced_entity_name : nvarchar(128)
+  referenced_id : int
+  referenced_RepoObject_guid : uniqueidentifier
+  referenced_RepoObjectColumn_guid : uniqueidentifier
+  * referenced_schema_name : nvarchar(128)
+  referenced_type : char(2)
+  referencing_column_name : nvarchar(128)
+  * referencing_entity_name : nvarchar(128)
+  referencing_id : int
+  referencing_RepoObject_guid : uniqueidentifier
+  referencing_RepoObjectColumn_guid : uniqueidentifier
+  * referencing_schema_name : nvarchar(128)
+  referencing_type : char(2)
+  --
 }
 
 entity reference.RepoObjectColumn_reference_BySamePredecessors << V >> {
@@ -107,6 +178,7 @@ entity reference.RepoObjectColumn_reference_BySamePredecessors << V >> {
   referencing_RepoObjectColumn_guid : uniqueidentifier
   * referencing_schema_name : nvarchar(128)
   referencing_type : char(2)
+  --
 }
 
 entity reference.RepoObjectColumn_reference_FirstResultSet << V >> {
@@ -133,6 +205,7 @@ entity reference.RepoObjectColumn_reference_FirstResultSet << V >> {
   referencing_RepoObjectColumn_guid : uniqueidentifier
   * referencing_schema_name : nvarchar(128)
   referencing_type : char(2)
+  --
 }
 
 entity reference.RepoObjectColumn_reference_QueryPlan << V >> {
@@ -164,6 +237,7 @@ entity reference.RepoObjectColumn_reference_QueryPlan << V >> {
   referencing_type : char(2)
   source_schema_name_quoted : nvarchar(128)
   source_table_name_quoted : nvarchar(128)
+  --
 }
 
 entity reference.RepoObjectColumn_reference_SqlExpressionDependencies << V >> {
@@ -191,6 +265,7 @@ entity reference.RepoObjectColumn_reference_SqlExpressionDependencies << V >> {
   referencing_RepoObjectColumn_guid : uniqueidentifier
   referencing_schema_name : nvarchar(128)
   referencing_type : char(2)
+  --
 }
 
 entity reference.RepoObjectColumn_reference_virtual << V >> {
@@ -218,9 +293,11 @@ entity reference.RepoObjectColumn_reference_virtual << V >> {
   * referencing_RepoObjectColumn_guid : uniqueidentifier
   * referencing_schema_name : nvarchar(128)
   referencing_type : char(2)
+  --
 }
 
 entity reference.usp_PERSIST_RepoObject_reference_T << P >> {
+  --
   --
 }
 
@@ -232,20 +309,45 @@ entity repo.IndexReferencedReferencing << V >> {
   RowNumberInReferencing_Target : int
   source_index_guid : uniqueidentifier
   * source_index_type : tinyint
+  --
+}
+
+entity repo.RepoObject_wo_referencing << V >> {
+  --
+  is_repo_managed : bit
+  * is_RepoObject_name_uniqueidentifier : int
+  * RepoObject_fullname : nvarchar(261)
+  * RepoObject_fullname2 : nvarchar(257)
+  * RepoObject_guid : uniqueidentifier
+  * RepoObject_name : nvarchar(128)
+  RepoObject_Referencing_Count : int
+  * RepoObject_schema_name : nvarchar(128)
+  * RepoObject_type : char(2)
+  --
+}
+
+entity repo.usp_main << P >> {
+  --
+  --
 }
 
 reference.RepoObject_reference <.. reference.RepoObject_reference_T
 reference.RepoObject_reference_T <.. repo.IndexReferencedReferencing
 reference.RepoObject_reference_T <.. reference.RepoObjectColumn_reference_SqlExpressionDependencies
-reference.RepoObject_reference_T <.. reference.RepoObject_ReferencingReferenced
+reference.RepoObject_reference_T <.. repo.usp_main
 reference.RepoObject_reference_T <.. reference.RepoObjectColumn_reference_BySamePredecessors
 reference.RepoObject_reference_T <.. reference.RepoObjectColumn_reference_QueryPlan
 reference.RepoObject_reference_T <.. reference.RepoObjectColumn_reference_FirstResultSet
 reference.RepoObject_reference_T <.. reference.RepoObjectColumn_reference_virtual
 reference.RepoObject_reference_T <.. reference.usp_PERSIST_RepoObject_reference_T
-reference.RepoObject_reference_T <.. docs.RepoObject_Plantuml_ObjectRefList_30_0
 reference.RepoObject_reference_T <.. docs.RepoObject_Plantuml_ObjectRefList_0_30
+reference.RepoObject_reference_T <.. reference.RepoObject_ReferencingReferenced
+reference.RepoObject_reference_T <.. docs.RepoObject_Plantuml_ObjectRefList_30_0
 reference.RepoObject_reference_T <.. docs.RepoObject_Plantuml_ObjectRefList_1_1
+reference.RepoObject_reference_T <.. reference.RepoObject_reference_T_bidirectional
+reference.RepoObject_reference_T <.. reference.ReferenceTree_cyclic_ref_PersistenceUsp
+reference.RepoObject_reference_T <.. repo.RepoObject_wo_referencing
+reference.RepoObject_reference_T <.. reference.RepoObjectColumn_reference_additional_internal
 reference.RepoObject_reference::referenced_entity_name <-- reference.RepoObject_reference_T::referenced_entity_name
 reference.RepoObject_reference::referenced_RepoObject_guid <-- reference.RepoObject_reference_T::referenced_RepoObject_guid
 reference.RepoObject_reference::referenced_schema_name <-- reference.RepoObject_reference_T::referenced_schema_name
@@ -257,22 +359,42 @@ reference.RepoObject_reference::referencing_type <-- reference.RepoObject_refere
 reference.RepoObject_reference_T::referenced_entity_name <-- reference.RepoObjectColumn_reference_BySamePredecessors::referenced_entity_name
 reference.RepoObject_reference_T::referenced_entity_name <-- reference.RepoObject_reference_T::referenced_fullname
 reference.RepoObject_reference_T::referenced_entity_name <-- reference.RepoObject_reference_T::referenced_fullname2
+reference.RepoObject_reference_T::referenced_entity_name <-- reference.RepoObject_reference_T_bidirectional::referenced_entity_name
 reference.RepoObject_reference_T::referenced_fullname <-- reference.RepoObject_ReferencingReferenced::Referenced_fullname
+reference.RepoObject_reference_T::referenced_fullname <-- reference.RepoObject_reference_T_bidirectional::referenced_fullname
+reference.RepoObject_reference_T::referenced_fullname <-- reference.ReferenceTree_cyclic_ref_PersistenceUsp::referenced_fullname
 reference.RepoObject_reference_T::referenced_fullname2 <-- reference.RepoObject_ReferencingReferenced::Referenced_fullname2
+reference.RepoObject_reference_T::referenced_fullname2 <-- reference.RepoObject_reference_T_bidirectional::referenced_fullname2
+reference.RepoObject_reference_T::referenced_fullname2 <-- reference.ReferenceTree_cyclic_ref_PersistenceUsp::referenced_fullname2
 reference.RepoObject_reference_T::referenced_RepoObject_guid <-- repo.IndexReferencedReferencing::referenced_RepoObject_guid
 reference.RepoObject_reference_T::referenced_RepoObject_guid <-- reference.RepoObjectColumn_reference_BySamePredecessors::referenced_RepoObject_guid
 reference.RepoObject_reference_T::referenced_RepoObject_guid <-- reference.RepoObject_ReferencingReferenced::Referenced_guid
+reference.RepoObject_reference_T::referenced_RepoObject_guid <-- reference.RepoObject_reference_T_bidirectional::referenced_RepoObject_guid
+reference.RepoObject_reference_T::referenced_RepoObject_guid <-- reference.ReferenceTree_cyclic_ref_PersistenceUsp::Referencing_guid
 reference.RepoObject_reference_T::referenced_schema_name <-- reference.RepoObjectColumn_reference_BySamePredecessors::referenced_schema_name
 reference.RepoObject_reference_T::referenced_schema_name <-- reference.RepoObject_reference_T::referenced_fullname
 reference.RepoObject_reference_T::referenced_schema_name <-- reference.RepoObject_reference_T::referenced_fullname2
+reference.RepoObject_reference_T::referenced_schema_name <-- reference.RepoObject_reference_T_bidirectional::referenced_schema_name
 reference.RepoObject_reference_T::referenced_type <-- reference.RepoObjectColumn_reference_BySamePredecessors::referenced_type
 reference.RepoObject_reference_T::referenced_type <-- reference.RepoObject_ReferencingReferenced::Referenced_type
+reference.RepoObject_reference_T::referenced_type <-- reference.RepoObject_reference_T_bidirectional::referenced_type
+reference.RepoObject_reference_T::referenced_type <-- reference.ReferenceTree_cyclic_ref_PersistenceUsp::referenced_type
 reference.RepoObject_reference_T::referencing_entity_name <-- reference.RepoObject_reference_T::referencing_fullname
 reference.RepoObject_reference_T::referencing_entity_name <-- reference.RepoObject_reference_T::referencing_fullname2
+reference.RepoObject_reference_T::referencing_entity_name <-- reference.RepoObject_reference_T_bidirectional::referencing_entity_name
 reference.RepoObject_reference_T::referencing_fullname <-- reference.RepoObject_ReferencingReferenced::Referencing_fullname
+reference.RepoObject_reference_T::referencing_fullname <-- reference.RepoObject_reference_T_bidirectional::referencing_fullname
+reference.RepoObject_reference_T::referencing_fullname <-- reference.ReferenceTree_cyclic_ref_PersistenceUsp::referencing_fullname
 reference.RepoObject_reference_T::referencing_fullname2 <-- reference.RepoObject_ReferencingReferenced::Referencing_fullname2
+reference.RepoObject_reference_T::referencing_fullname2 <-- reference.RepoObject_reference_T_bidirectional::referencing_fullname2
+reference.RepoObject_reference_T::referencing_fullname2 <-- reference.ReferenceTree_cyclic_ref_PersistenceUsp::referencing_fullname2
 reference.RepoObject_reference_T::referencing_RepoObject_guid <-- repo.IndexReferencedReferencing::referencing_RepoObject_guid
 reference.RepoObject_reference_T::referencing_RepoObject_guid <-- reference.RepoObject_ReferencingReferenced::Referencing_guid
+reference.RepoObject_reference_T::referencing_RepoObject_guid <-- reference.RepoObject_reference_T_bidirectional::referencing_RepoObject_guid
+reference.RepoObject_reference_T::referencing_RepoObject_guid <-- reference.ReferenceTree_cyclic_ref_PersistenceUsp::Referenced_guid
 reference.RepoObject_reference_T::referencing_schema_name <-- reference.RepoObject_reference_T::referencing_fullname
 reference.RepoObject_reference_T::referencing_schema_name <-- reference.RepoObject_reference_T::referencing_fullname2
+reference.RepoObject_reference_T::referencing_schema_name <-- reference.RepoObject_reference_T_bidirectional::referencing_schema_name
 reference.RepoObject_reference_T::referencing_type <-- reference.RepoObject_ReferencingReferenced::Referencing_type
+reference.RepoObject_reference_T::referencing_type <-- reference.RepoObject_reference_T_bidirectional::referencing_type
+reference.RepoObject_reference_T::referencing_type <-- reference.ReferenceTree_cyclic_ref_PersistenceUsp::referencing_type

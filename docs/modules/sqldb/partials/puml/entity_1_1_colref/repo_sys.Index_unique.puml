@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -26,8 +27,8 @@ skinparam class {
 entity repo.Index_union << V >> {
   **index_guid** : uniqueidentifier
   --
-  index_name : nvarchar(128)
-  * index_type : tinyint
+  index_name : nvarchar(450)
+  index_type : tinyint
   IndexPatternColumnGuid : varchar(8000)
   is_index_disabled : bit
   is_index_primary_key : bit
@@ -35,6 +36,7 @@ entity repo.Index_union << V >> {
   is_index_unique : bit
   parent_RepoObject_guid : uniqueidentifier
   referenced_index_guid : uniqueidentifier
+  --
 }
 
 entity repo.RepoObject << U >> {
@@ -45,8 +47,10 @@ entity repo.RepoObject << U >> {
   Inheritance_StringAggSeparatorSql : nvarchar(4000)
   InheritanceDefinition : nvarchar(4000)
   InheritanceType : tinyint
+  * is_DocsExclude : bit
   is_repo_managed : bit
   is_required_ObjectMerge : bit
+  * is_ssas : bit
   is_SysObject_missing : bit
   * modify_dt : datetime
   pk_index_guid : uniqueidentifier
@@ -72,7 +76,9 @@ entity repo.RepoObject << U >> {
   * {static} SysObject_fullname : nvarchar(261)
   * {static} SysObject_fullname2 : nvarchar(257)
   * {abstract} SysObject_query_sql : nvarchar(406)
+  * {static} usp_persistence_fullname2 : nvarchar(269)
   * {static} usp_persistence_name : nvarchar(140)
+  --
 }
 
 entity repo_sys.Index_unique << V >> {
@@ -90,9 +96,11 @@ entity repo_sys.Index_unique << V >> {
   parent_schema_name : nvarchar(128)
   parent_SysObject_fullname : nvarchar(261)
   parent_SysObject_name : nvarchar(128)
+  --
 }
 
 entity sys_dwh.indexes << SN >> {
+  --
   --
 }
 

@@ -41,7 +41,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-05 10:54:39
+2021-09-05 13:29:35
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -97,7 +97,18 @@ source: property.RepoObjectProperty_cross As rop_cross
 * D
 * [docs].[RepoObject_ColumnList_T]
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+TRUNCATE TABLE [docs].[RepoObject_ColumnList_T]
+----
+=====
+
 |
+
 
 |800
 |
@@ -107,7 +118,42 @@ source: property.RepoObjectProperty_cross As rop_cross
 * [docs].[RepoObject_ColumnList]
 * [docs].[RepoObject_ColumnList_T]
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+INSERT INTO 
+ [docs].[RepoObject_ColumnList_T]
+ (
+  [RepoObject_guid]
+, [AntoraColumnDetails]
+, [AntoraNonPkColumnTableRows]
+, [AntoraPkColumnTableRows]
+, [PlantumlIndexColumns]
+, [PlantumlNonPkEntityColumns]
+, [PlantumlNonPkHiddenEntityColumns]
+, [PlantumlNonPkIndexColumns]
+, [PlantumlPkEntityColumns]
+)
+SELECT
+  [RepoObject_guid]
+, [AntoraColumnDetails]
+, [AntoraNonPkColumnTableRows]
+, [AntoraPkColumnTableRows]
+, [PlantumlIndexColumns]
+, [PlantumlNonPkEntityColumns]
+, [PlantumlNonPkHiddenEntityColumns]
+, [PlantumlNonPkIndexColumns]
+, [PlantumlPkEntityColumns]
+
+FROM [docs].[RepoObject_ColumnList] AS S
+----
+=====
+
 |
+
 |===
 
 // end::adocuspsteps[]
@@ -342,8 +388,8 @@ EXEC [docs].[usp_PERSIST_RepoObject_ColumnList_T]
 === ReferencedObjectList
 
 // tag::referencedobjectlist[]
-* [docs].[B8E5CA9C-A1BC-41C6-BFFB-02F3F3D964B6]
 * [docs].[RepoObject_ColumnList]
+* [docs].[RepoObject_ColumnList_T]
 * [logs].[usp_ExecutionLog_insert]
 // end::referencedobjectlist[]
 
@@ -380,7 +426,7 @@ source: property.RepoObjectProperty WHERE property_int = 1
 
 // tag::sql_modules_definition[]
 [%collapsible]
-====
+=======
 [source,sql]
 ----
 /*
@@ -490,8 +536,7 @@ PRINT CONCAT('usp_id;Number;Parent_Number: ',87,';',800,';',NULL);
 INSERT INTO 
  [docs].[RepoObject_ColumnList_T]
  (
-  [RepoObject_guid]
-, [AntoraColumnDetails]
+  [AntoraColumnDetails]
 , [AntoraNonPkColumnTableRows]
 , [AntoraPkColumnTableRows]
 , [PlantumlIndexColumns]
@@ -499,10 +544,10 @@ INSERT INTO
 , [PlantumlNonPkHiddenEntityColumns]
 , [PlantumlNonPkIndexColumns]
 , [PlantumlPkEntityColumns]
+, [RepoObject_guid]
 )
 SELECT
-  [RepoObject_guid]
-, [AntoraColumnDetails]
+  [AntoraColumnDetails]
 , [AntoraNonPkColumnTableRows]
 , [AntoraPkColumnTableRows]
 , [PlantumlIndexColumns]
@@ -510,6 +555,7 @@ SELECT
 , [PlantumlNonPkHiddenEntityColumns]
 , [PlantumlNonPkIndexColumns]
 , [PlantumlPkEntityColumns]
+, [RepoObject_guid]
 
 FROM [docs].[RepoObject_ColumnList] AS S
 
@@ -568,7 +614,7 @@ END
 
 
 ----
-====
+=======
 // end::sql_modules_definition[]
 
 

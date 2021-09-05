@@ -41,7 +41,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-01 18:10:23
+2021-09-05 13:14:34
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -422,6 +422,25 @@ it looks like this column here is currently not used and should or could be dele
 .Referenced Columns
 --
 * xref:repo.RepoObject_gross.adoc#column-InheritanceType[+repo.RepoObject_gross.InheritanceType+]
+--
+
+
+[#column-is_DocsExclude]
+=== is_DocsExclude
+
+[cols="d,m,m,m,m,d"]
+|===
+|
+|is_DocsExclude
+|bit
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo.RepoObject_gross.adoc#column-is_DocsExclude[+repo.RepoObject_gross.is_DocsExclude+]
 --
 
 
@@ -2024,6 +2043,7 @@ reference in [repo_sys].[type]
 
 
 
+
 // end::AntoraPkColumnTableRows[]
 
 == AntoraNonPkColumnTableRows
@@ -2159,6 +2179,13 @@ reference in [repo_sys].[type]
 |<<column-InheritanceType>>
 |tinyint
 |NULL
+|
+|
+
+|
+|<<column-is_DocsExclude>>
+|bit
+|NOT NULL
 |
 |
 
@@ -3009,7 +3036,7 @@ source: property.RepoObjectProperty WHERE property_int = 1
 
 // tag::sql_modules_definition[]
 [%collapsible]
-====
+=======
 [source,sql]
 ----
 
@@ -3028,6 +3055,7 @@ Select
   , ro.Inheritance_StringAggSeparatorSql
   , ro.InheritanceDefinition
   , ro.InheritanceType
+  , ro.is_DocsExclude
   , ro.is_DocsOutput
   , ro.is_in_reference
   , ro.is_repo_managed
@@ -3150,7 +3178,7 @@ From
     Cross Join config.ftv_get_parameter_value ( 'AntoraModul', '' ) As AntoraModul
 
 ----
-====
+=======
 // end::sql_modules_definition[]
 
 

@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -39,11 +40,31 @@ entity property.usp_RepoObjectColumn_Inheritance << P >> {
   --
 }
 
+entity reference.RepoObject_reference_persistence << V >> {
+  **referenced_RepoObject_guid** : uniqueidentifier
+  * **referencing_RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity reference.RepoObject_reference_persistence_target_as_source << V >> {
+  --
+}
+
+entity reference.RepoObject_reference_T << U >> {
+  **referenced_RepoObject_guid** : uniqueidentifier
+  **referencing_RepoObject_guid** : uniqueidentifier
+  --
+}
+
 entity reference.usp_PERSIST_RepoObject_reference_T << P >> {
   --
 }
 
 entity reference.usp_PERSIST_RepoObjectColumn_reference_T << P >> {
+  --
+}
+
+entity reference.usp_RepoObject_ReferenceTree_insert << P >> {
   --
 }
 
@@ -60,6 +81,11 @@ entity reference.usp_RepoObjectSource_QueryPlan << P >> {
 }
 
 entity reference.usp_update_Referencing_Count << P >> {
+  --
+}
+
+entity repo.RepoObject << U >> {
+  * **RepoObject_guid** : uniqueidentifier
   --
 }
 
@@ -83,6 +109,10 @@ entity repo.usp_sync_guid << P >> {
   --
 }
 
+entity repo.usp_sync_guid_ssas << P >> {
+  --
+}
+
 entity uspgenerator.usp_GeneratorUsp_insert_update_persistence << P >> {
   --
 }
@@ -91,14 +121,20 @@ config.fs_get_parameter_value <.. repo.usp_main
 logs.usp_ExecutionLog_insert <.. repo.usp_main
 property.usp_RepoObject_Inheritance <.. repo.usp_main
 property.usp_RepoObjectColumn_Inheritance <.. repo.usp_main
+reference.RepoObject_reference_persistence <.. repo.usp_main
+reference.RepoObject_reference_persistence_target_as_source <.. repo.usp_main
+reference.RepoObject_reference_T <.. repo.usp_main
 reference.usp_PERSIST_RepoObject_reference_T <.. repo.usp_main
 reference.usp_PERSIST_RepoObjectColumn_reference_T <.. repo.usp_main
+reference.usp_RepoObject_ReferenceTree_insert <.. repo.usp_main
 reference.usp_RepoObject_update_SysObjectQueryPlan <.. repo.usp_main
 reference.usp_RepoObjectSource_FirstResultSet <.. repo.usp_main
 reference.usp_RepoObjectSource_QueryPlan <.. repo.usp_main
 reference.usp_update_Referencing_Count <.. repo.usp_main
+repo.RepoObject <.. repo.usp_main
 repo.usp_Index_ForeignKey <.. repo.usp_main
 repo.usp_index_inheritance <.. repo.usp_main
 repo.usp_RepoObjectColumn_update_RepoObjectColumn_column_id <.. repo.usp_main
 repo.usp_sync_guid <.. repo.usp_main
+repo.usp_sync_guid_ssas <.. repo.usp_main
 uspgenerator.usp_GeneratorUsp_insert_update_persistence <.. repo.usp_main

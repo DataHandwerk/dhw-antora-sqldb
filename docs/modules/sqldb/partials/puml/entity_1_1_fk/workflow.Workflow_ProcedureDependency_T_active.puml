@@ -1,0 +1,57 @@
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+}
+
+
+entity workflow.Workflow_ProcedureDependency_T_active << V >> {
+- idx_Workflow_ProcedureDependency_T_active__1
+
+..
+Workflow_id; int
+referenced_Procedure_RepoObject_guid; uniqueidentifier
+referencing_Procedure_RepoObject_guid; uniqueidentifier
+--
+- idx_Workflow_ProcedureDependency_T_active__2
+{Workflow_id}
+..
+Workflow_id; int
+--
+- idx_Workflow_ProcedureDependency_T_active__3
+
+..
+referenced_Procedure_RepoObject_guid; uniqueidentifier
+referencing_Procedure_RepoObject_guid; uniqueidentifier
+--
+- idx_Workflow_ProcedureDependency_T_active__4
+{RepoObject_guid}
+..
+referenced_Procedure_RepoObject_guid; uniqueidentifier
+--
+- idx_Workflow_ProcedureDependency_T_active__5
+{RepoObject_guid}
+..
+referencing_Procedure_RepoObject_guid; uniqueidentifier
+}
+
+

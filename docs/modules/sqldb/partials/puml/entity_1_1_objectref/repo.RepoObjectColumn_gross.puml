@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -22,11 +23,6 @@ skinparam class {
   BackgroundColor<<X>> Aqua
 }
 
-
-entity docs.RepoObject_ColumnList << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  --
-}
 
 entity graph.RepoObjectColumn_S << V >> {
   * **RepoObjectColumn_guid** : uniqueidentifier
@@ -58,30 +54,11 @@ entity reference.RepoObjectColumn_reference_virtual << V >> {
   --
 }
 
-entity reference.RepoObjectColumn_ReferencedList << V >> {
-  --
-}
-
-entity reference.RepoObjectColumn_ReferencingList << V >> {
-  --
-}
-
 entity reference.usp_RepoObjectColumnSource_virtual_set << P >> {
   --
 }
 
-entity repo.IndexColumn_union << V >> {
-  **index_guid** : uniqueidentifier
-  * **index_column_id** : int
-  --
-}
-
 entity repo.RepoObject << U >> {
-  * **RepoObject_guid** : uniqueidentifier
-  --
-}
-
-entity repo.RepoObject_ColumnList << V >> {
   * **RepoObject_guid** : uniqueidentifier
   --
 }
@@ -96,17 +73,40 @@ entity repo.RepoObjectColumn_gross << V >> {
   --
 }
 
+entity repo.RepoObjectColumn_gross2 << V >> {
+  --
+}
+
+entity repo.usp_sync_guid_RepoObjectColumn << P >> {
+  --
+}
+
+entity ssas.model_json_311_tables_columns_T << U >> {
+  * **databasename** : nvarchar(128)
+  * **tables_name** : nvarchar(128)
+  **tables_columns_name** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_31111_tables_columns_descriptions_StrAgg << V >> {
+  --
+}
+
+entity ssas.model_json_31121_tables_columns_expressions_StrAgg << V >> {
+  --
+}
+
 property.fs_get_RepoObjectColumnProperty_nvarchar <.. repo.RepoObjectColumn_gross
-reference.RepoObjectColumn_ReferencedList <.. repo.RepoObjectColumn_gross
-reference.RepoObjectColumn_ReferencingList <.. repo.RepoObjectColumn_gross
-repo.IndexColumn_union <.. repo.RepoObjectColumn_gross
 repo.RepoObject <.. repo.RepoObjectColumn_gross
 repo.RepoObjectColumn <.. repo.RepoObjectColumn_gross
 repo.RepoObjectColumn_gross <.. reference.RepoObjectColumn_reference_FirstResultSet
 repo.RepoObjectColumn_gross <.. reference.RepoObjectColumn_reference_QueryPlan
-repo.RepoObjectColumn_gross <.. repo.RepoObject_ColumnList
+repo.RepoObjectColumn_gross <.. repo.usp_sync_guid_RepoObjectColumn
 repo.RepoObjectColumn_gross <.. graph.RepoObjectColumn_S
-repo.RepoObjectColumn_gross <.. docs.RepoObject_ColumnList
 repo.RepoObjectColumn_gross <.. property.RepoObjectColumnProperty_ForUpdate
 repo.RepoObjectColumn_gross <.. reference.RepoObjectColumn_reference_virtual
 repo.RepoObjectColumn_gross <.. reference.usp_RepoObjectColumnSource_virtual_set
+repo.RepoObjectColumn_gross <.. repo.RepoObjectColumn_gross2
+ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_gross
+ssas.model_json_31111_tables_columns_descriptions_StrAgg <.. repo.RepoObjectColumn_gross
+ssas.model_json_31121_tables_columns_expressions_StrAgg <.. repo.RepoObjectColumn_gross

@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -25,10 +26,11 @@ skinparam class {
 
 entity config.ftv_get_parameter_value << IF >> {
   --
-  Parameter_value__result_date : date
-  Parameter_value__result_datetime : datetime
-  Parameter_value__result_int : int
-  Parameter_value__result_nvarchar : nvarchar(4000)
+  Parameter_value_result : nvarchar(max)
+  Parameter_value_result_date : date
+  Parameter_value_result_datetime : datetime
+  Parameter_value_result_int : int
+  --
 }
 
 entity repo.RepoObject_persistence << U >> {
@@ -53,6 +55,7 @@ entity repo.RepoObject_persistence << U >> {
   target_filter : nvarchar(4000)
   {abstract} is_persistence : bit
   {abstract} temporal_type : tinyint
+  --
 }
 
 entity repo.RepoObjectColumn_HistValidColums_setpoint << V >> {
@@ -63,9 +66,11 @@ entity repo.RepoObjectColumn_HistValidColums_setpoint << V >> {
   * Repo_is_nullable : int
   * Repo_user_type_fullname : varchar(12)
   * Repo_user_type_name : varchar(9)
+  --
 }
 
 entity repo.usp_sync_guid_RepoObjectColumn << P >> {
+  --
   --
 }
 

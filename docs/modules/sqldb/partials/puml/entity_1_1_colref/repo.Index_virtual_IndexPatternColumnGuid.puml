@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -26,8 +27,8 @@ skinparam class {
 entity repo.Index_union << V >> {
   **index_guid** : uniqueidentifier
   --
-  index_name : nvarchar(128)
-  * index_type : tinyint
+  index_name : nvarchar(450)
+  index_type : tinyint
   IndexPatternColumnGuid : varchar(8000)
   is_index_disabled : bit
   is_index_primary_key : bit
@@ -35,6 +36,7 @@ entity repo.Index_union << V >> {
   is_index_unique : bit
   parent_RepoObject_guid : uniqueidentifier
   referenced_index_guid : uniqueidentifier
+  --
 }
 
 entity repo.Index_virtual << U >> {
@@ -49,6 +51,7 @@ entity repo.Index_virtual << U >> {
   * parent_RepoObject_guid : uniqueidentifier
   referenced_index_guid : uniqueidentifier
   RowNumberInReferencing : int
+  --
 }
 
 entity repo.Index_virtual_IndexPatternColumnGuid << V >> {
@@ -56,6 +59,7 @@ entity repo.Index_virtual_IndexPatternColumnGuid << V >> {
   --
   IndexPatternColumnGuid : varchar(8000)
   parent_RepoObject_guid : uniqueidentifier
+  --
 }
 
 entity repo.IndexColumn_virtual << U >> {
@@ -64,9 +68,11 @@ entity repo.IndexColumn_virtual << U >> {
   --
   * is_descending_key : bit
   * RepoObjectColumn_guid : uniqueidentifier
+  --
 }
 
 entity repo.usp_index_inheritance << P >> {
+  --
   --
 }
 
@@ -75,3 +81,4 @@ repo.Index_virtual_IndexPatternColumnGuid <.. repo.usp_index_inheritance
 repo.Index_virtual_IndexPatternColumnGuid <.. repo.Index_union
 repo.IndexColumn_virtual <.. repo.Index_virtual_IndexPatternColumnGuid
 repo.Index_virtual::index_guid <-- repo.Index_virtual_IndexPatternColumnGuid::index_guid
+repo.Index_virtual::parent_RepoObject_guid <-- repo.Index_virtual_IndexPatternColumnGuid::parent_RepoObject_guid

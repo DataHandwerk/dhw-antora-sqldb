@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -35,30 +36,44 @@ entity reference.Persistence << V >> {
   referencing_schema_name : nvarchar(128)
   referencing_usp_persistence_name : nvarchar(140)
   referencing_usp_persistence_RepoObject_guid : uniqueidentifier
+  --
 }
 
-entity reference.RepoObject_ReferenceTree_30_0_T << U >> {
+entity reference.Persistence_bidirectional << V >> {
   --
-  Referenced_Depth : int
+  referenced_fullname : nvarchar(261)
+  referenced_RepoObject_guid : uniqueidentifier
+  referenced_schema_name : nvarchar(128)
+  referenced_usp_persistence_name : nvarchar(140)
+  referenced_usp_persistence_RepoObject_guid : uniqueidentifier
+  referencing_fullname : nvarchar(261)
+  referencing_RepoObject_guid : uniqueidentifier
+  referencing_schema_name : nvarchar(128)
+  referencing_usp_persistence_name : nvarchar(140)
+  referencing_usp_persistence_RepoObject_guid : uniqueidentifier
+  --
+}
+
+entity reference.RepoObject_ReferenceTree << U >> {
+  * **RepoObject_guid** : uniqueidentifier
+  **Referenced_Depth** : int
+  **Referencing_Depth** : int
+  * **Referenced_guid** : uniqueidentifier
+  * **Referencing_guid** : uniqueidentifier
+  --
   Referenced_fullname : nvarchar(261)
   Referenced_fullname2 : nvarchar(257)
-  Referenced_guid : uniqueidentifier
   Referenced_type : char(2)
-  Referencing_Depth : int
   Referencing_fullname : nvarchar(261)
   Referencing_fullname2 : nvarchar(257)
-  Referencing_guid : uniqueidentifier
   Referencing_type : varchar(2)
-  RepoObject_guid : uniqueidentifier
+  --
 }
 
 entity repo.RepoObject_gross << V >> {
   * **RepoObject_guid** : uniqueidentifier
   --
-  AntoraReferencedList : nvarchar(max)
-  AntoraReferencingList : nvarchar(max)
-  CreateColumnList : nvarchar(max)
-  DbmlColumnList : nvarchar(max)
+  Description : nvarchar(max)
   has_different_sys_names : bit
   has_execution_plan_issue : bit
   has_get_referenced_issue : bit
@@ -69,6 +84,7 @@ entity repo.RepoObject_gross << V >> {
   Inheritance_StringAggSeparatorSql : nvarchar(4000)
   InheritanceDefinition : nvarchar(4000)
   InheritanceType : tinyint
+  * is_DocsExclude : bit
   is_DocsOutput : int
   * is_in_reference : int
   is_persistence : bit
@@ -85,6 +101,7 @@ entity repo.RepoObject_gross << V >> {
   is_repo_managed : bit
   * is_RepoObject_name_uniqueidentifier : int
   is_required_ObjectMerge : bit
+  * is_ssas : bit
   is_SysObject_missing : bit
   * is_SysObject_name_uniqueidentifier : int
   * modify_dt : datetime
@@ -96,9 +113,6 @@ entity repo.RepoObject_gross << V >> {
   persistence_source_SysObject_fullname : nvarchar(261)
   persistence_source_SysObject_fullname2 : nvarchar(257)
   persistence_source_SysObject_xref : nvarchar(269)
-  PersistenceCompareColumnList : nvarchar(max)
-  PersistenceInsertColumnList : nvarchar(max)
-  PersistenceUpdateColumnList : nvarchar(max)
   pk_index_guid : uniqueidentifier
   pk_IndexPatternColumnDatatype : nvarchar(4000)
   pk_IndexPatternColumnName : nvarchar(4000)
@@ -115,10 +129,6 @@ entity repo.RepoObject_gross << V >> {
   * RepoObject_type : char(2)
   RepoObject_type_name : nvarchar(128)
   source_filter : nvarchar(4000)
-  sql_modules_antora : nvarchar(max)
-  sql_modules_definition : nvarchar(max)
-  sql_modules_formatted : nvarchar(max)
-  sql_modules_formatted2 : nvarchar(max)
   * SysObject_fullname : nvarchar(261)
   * SysObject_fullname2 : nvarchar(257)
   SysObject_id : int
@@ -131,10 +141,14 @@ entity repo.RepoObject_gross << V >> {
   * SysObject_schema_name : nvarchar(128)
   SysObject_type : char(2)
   SysObject_type_name : nvarchar(128)
+  tables_dataCategory : nvarchar(500)
+  tables_description : nvarchar(max)
+  tables_isHidden : nvarchar(500)
   target_filter : nvarchar(4000)
   temporal_type : tinyint
   * usp_persistence_name : nvarchar(140)
   usp_persistence_RepoObject_guid : uniqueidentifier
+  --
 }
 
 entity workflow.ProcedureDependency_input_PersistenceDependency_S << V >> {
@@ -142,11 +156,25 @@ entity workflow.ProcedureDependency_input_PersistenceDependency_S << V >> {
   **referencing_Procedure_RepoObject_guid** : uniqueidentifier
   --
   * is_PersistenceDependency : int
+  --
 }
 
 reference.Persistence <.. workflow.ProcedureDependency_input_PersistenceDependency_S
-reference.RepoObject_ReferenceTree_30_0_T <.. reference.Persistence
+reference.Persistence <.. reference.Persistence_bidirectional
+reference.RepoObject_ReferenceTree <.. reference.Persistence
 repo.RepoObject_gross <.. reference.Persistence
+reference.Persistence::referenced_fullname <-- reference.Persistence_bidirectional::referenced_fullname
+reference.Persistence::referenced_RepoObject_guid <-- reference.Persistence_bidirectional::referenced_RepoObject_guid
+reference.Persistence::referenced_schema_name <-- reference.Persistence_bidirectional::referenced_schema_name
+reference.Persistence::referenced_usp_persistence_name <-- reference.Persistence_bidirectional::referenced_usp_persistence_name
+reference.Persistence::referenced_usp_persistence_RepoObject_guid <-- workflow.ProcedureDependency_input_PersistenceDependency_S::referenced_Procedure_RepoObject_guid
+reference.Persistence::referenced_usp_persistence_RepoObject_guid <-- reference.Persistence_bidirectional::referenced_usp_persistence_RepoObject_guid
+reference.Persistence::referencing_fullname <-- reference.Persistence_bidirectional::referencing_fullname
+reference.Persistence::referencing_RepoObject_guid <-- reference.Persistence_bidirectional::referencing_RepoObject_guid
+reference.Persistence::referencing_schema_name <-- reference.Persistence_bidirectional::referencing_schema_name
+reference.Persistence::referencing_usp_persistence_name <-- reference.Persistence_bidirectional::referencing_usp_persistence_name
+reference.Persistence::referencing_usp_persistence_RepoObject_guid <-- workflow.ProcedureDependency_input_PersistenceDependency_S::referencing_Procedure_RepoObject_guid
+reference.Persistence::referencing_usp_persistence_RepoObject_guid <-- reference.Persistence_bidirectional::referencing_usp_persistence_RepoObject_guid
 repo.RepoObject_gross::RepoObject_fullname <-- reference.Persistence::referenced_fullname
 repo.RepoObject_gross::RepoObject_fullname <-- reference.Persistence::referencing_fullname
 repo.RepoObject_gross::RepoObject_guid <-- reference.Persistence::referenced_RepoObject_guid

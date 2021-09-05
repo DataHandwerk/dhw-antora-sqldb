@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -30,7 +31,10 @@ entity workflow.ProcedureDependency << U >> {
   * is_active : bit
   * is_PersistenceDependency : bit
   * referenced_Procedure_RepoObject_guid : uniqueidentifier
+  referenced_RepoObject_guid : uniqueidentifier
   * referencing_Procedure_RepoObject_guid : uniqueidentifier
+  referencing_RepoObject_guid : uniqueidentifier
+  --
 }
 
 entity workflow.ProcedureDependency_input_PersistenceDependency << V >> {
@@ -38,6 +42,9 @@ entity workflow.ProcedureDependency_input_PersistenceDependency << V >> {
   **referencing_Procedure_RepoObject_guid** : uniqueidentifier
   --
   * is_PersistenceDependency : int
+  referenced_RepoObject_guid : uniqueidentifier
+  referencing_RepoObject_guid : uniqueidentifier
+  --
 }
 
 entity workflow.ProcedureDependency_input_PersistenceDependency_S << V >> {
@@ -45,13 +52,16 @@ entity workflow.ProcedureDependency_input_PersistenceDependency_S << V >> {
   **referencing_Procedure_RepoObject_guid** : uniqueidentifier
   --
   * is_PersistenceDependency : int
+  --
 }
 
 entity workflow.usp_PERSIST_ProcedureDependency_input_PersistenceDependency << P >> {
   --
+  --
 }
 
 workflow.ProcedureDependency <.. workflow.ProcedureDependency_input_PersistenceDependency
+workflow.ProcedureDependency_input_PersistenceDependency <.. workflow.ProcedureDependency
 workflow.ProcedureDependency_input_PersistenceDependency <.. workflow.usp_PERSIST_ProcedureDependency_input_PersistenceDependency
 workflow.ProcedureDependency_input_PersistenceDependency_S <.. workflow.ProcedureDependency_input_PersistenceDependency
 workflow.ProcedureDependency::is_PersistenceDependency <-- workflow.ProcedureDependency_input_PersistenceDependency::is_PersistenceDependency

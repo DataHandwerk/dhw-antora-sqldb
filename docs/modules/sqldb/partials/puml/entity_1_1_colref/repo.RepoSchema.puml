@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -27,6 +28,22 @@ entity docs.AntoraNavListPage_by_schema << V >> {
   * **RepoObject_schema_name** : nvarchar(128)
   --
   * nav_list : nvarchar(4000)
+  --
+}
+
+entity docs.Schema_puml << V >> {
+  --
+  * PumlSchemaEr : nvarchar(max)
+  * PumlSchemaIndexEr : nvarchar(max)
+  PumlSchemaSsasEr : nvarchar(max)
+  * RepoSchema_guid : uniqueidentifier
+  * RepoSchema_name : nvarchar(128)
+  --
+}
+
+entity docs.usp_AntoraExport_ObjectPuml << P >> {
+  --
+  --
 }
 
 entity property.ExtendedProperty_Repo2Sys_level0 << V >> {
@@ -39,15 +56,18 @@ entity property.ExtendedProperty_Repo2Sys_level0 << V >> {
   level2type : nvarchar(128)
   * property_name : varchar(14)
   property_value : nvarchar(4000)
+  --
 }
 
 entity property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate << P >> {
+  --
   --
 }
 
 entity repo.RepoSchema << U >> {
   * **RepoSchema_guid** : uniqueidentifier
   --
+  * is_ssas : bit
   is_SysSchema_missing : bit
   RepoSchema_ms_description : nvarchar(4000)
   * RepoSchema_name : nvarchar(128)
@@ -56,6 +76,22 @@ entity repo.RepoSchema << U >> {
   {abstract} has_different_sys_names : bit
   * {static} is_RepoSchema_name_uniqueidentifier : int
   * {static} is_SysSchema_name_uniqueidentifier : int
+  --
+}
+
+entity repo.RepoSchema_ssas_tgt << V >> {
+  * **RepoSchema_name** : nvarchar(128)
+  --
+  has_different_sys_names : bit
+  * is_RepoSchema_name_uniqueidentifier : int
+  * is_ssas : int
+  * is_SysSchema_missing : int
+  * is_SysSchema_name_uniqueidentifier : int
+  * RepoSchema_guid : uniqueidentifier
+  RepoSchema_ms_description : nvarchar(max)
+  SysSchema_id : int
+  * SysSchema_name : nvarchar(128)
+  --
 }
 
 entity repo.SysSchema_RepoSchema_via_guid << V >> {
@@ -70,6 +106,7 @@ entity repo.SysSchema_RepoSchema_via_guid << V >> {
   * SysSchema_id : int
   * SysSchema_name : sysname
   SysSchema_RepoSchema_guid : uniqueidentifier
+  --
 }
 
 entity repo.SysSchema_RepoSchema_via_name << V >> {
@@ -84,35 +121,53 @@ entity repo.SysSchema_RepoSchema_via_name << V >> {
   * SysSchema_id : int
   * SysSchema_name : sysname
   SysSchema_RepoSchema_guid : uniqueidentifier
+  --
 }
 
 entity repo.usp_sync_guid_RepoSchema << P >> {
   --
+  --
 }
 
-repo.RepoSchema <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
 repo.RepoSchema <.. docs.AntoraNavListPage_by_schema
 repo.RepoSchema <.. repo.SysSchema_RepoSchema_via_guid
+repo.RepoSchema <.. docs.usp_AntoraExport_ObjectPuml
+repo.RepoSchema <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
 repo.RepoSchema <.. repo.SysSchema_RepoSchema_via_name
 repo.RepoSchema <.. repo.usp_sync_guid_RepoSchema
 repo.RepoSchema <.. property.ExtendedProperty_Repo2Sys_level0
+repo.RepoSchema <.. repo.RepoSchema_ssas_tgt
+repo.RepoSchema <.. docs.Schema_puml
+repo.RepoSchema_ssas_tgt <.. repo.RepoSchema
+repo.RepoSchema::has_different_sys_names <-- repo.RepoSchema_ssas_tgt::has_different_sys_names
 repo.RepoSchema::is_RepoSchema_name_uniqueidentifier <-- repo.SysSchema_RepoSchema_via_guid::is_RepoSchema_name_uniqueidentifier
 repo.RepoSchema::is_RepoSchema_name_uniqueidentifier <-- repo.SysSchema_RepoSchema_via_name::is_RepoSchema_name_uniqueidentifier
+repo.RepoSchema::is_RepoSchema_name_uniqueidentifier <-- repo.RepoSchema_ssas_tgt::is_RepoSchema_name_uniqueidentifier
+repo.RepoSchema::is_ssas <-- repo.RepoSchema_ssas_tgt::is_ssas
 repo.RepoSchema::is_SysSchema_missing <-- repo.SysSchema_RepoSchema_via_guid::RepoSchema_is_SysSchema_missing
 repo.RepoSchema::is_SysSchema_missing <-- repo.SysSchema_RepoSchema_via_name::RepoSchema_is_SysSchema_missing
+repo.RepoSchema::is_SysSchema_missing <-- repo.RepoSchema_ssas_tgt::is_SysSchema_missing
 repo.RepoSchema::is_SysSchema_name_uniqueidentifier <-- repo.SysSchema_RepoSchema_via_guid::is_SysSchema_name_uniqueidentifier
 repo.RepoSchema::is_SysSchema_name_uniqueidentifier <-- repo.SysSchema_RepoSchema_via_name::is_SysSchema_name_uniqueidentifier
+repo.RepoSchema::is_SysSchema_name_uniqueidentifier <-- repo.RepoSchema_ssas_tgt::is_SysSchema_name_uniqueidentifier
 repo.RepoSchema::RepoSchema_guid <-- repo.SysSchema_RepoSchema_via_guid::RepoSchema_guid
 repo.RepoSchema::RepoSchema_guid <-- repo.SysSchema_RepoSchema_via_name::RepoSchema_guid
+repo.RepoSchema::RepoSchema_guid <-- repo.RepoSchema_ssas_tgt::RepoSchema_guid
+repo.RepoSchema::RepoSchema_guid <-- docs.Schema_puml::RepoSchema_guid
 repo.RepoSchema::RepoSchema_ms_description <-- property.ExtendedProperty_Repo2Sys_level0::property_value
+repo.RepoSchema::RepoSchema_ms_description <-- repo.RepoSchema_ssas_tgt::RepoSchema_ms_description
 repo.RepoSchema::RepoSchema_name <-- repo.RepoSchema::has_different_sys_names
 repo.RepoSchema::RepoSchema_name <-- repo.RepoSchema::is_RepoSchema_name_uniqueidentifier
 repo.RepoSchema::RepoSchema_name <-- repo.SysSchema_RepoSchema_via_guid::RepoSchema_name
 repo.RepoSchema::RepoSchema_name <-- repo.SysSchema_RepoSchema_via_name::RepoSchema_name
 repo.RepoSchema::RepoSchema_name <-- property.ExtendedProperty_Repo2Sys_level0::level0name
+repo.RepoSchema::RepoSchema_name <-- repo.RepoSchema_ssas_tgt::RepoSchema_name
+repo.RepoSchema::RepoSchema_name <-- docs.Schema_puml::RepoSchema_name
 repo.RepoSchema::SysSchema_id <-- repo.SysSchema_RepoSchema_via_guid::RepoSchema_SysSchema_id
 repo.RepoSchema::SysSchema_id <-- repo.SysSchema_RepoSchema_via_name::RepoSchema_SysSchema_id
+repo.RepoSchema::SysSchema_id <-- repo.RepoSchema_ssas_tgt::SysSchema_id
 repo.RepoSchema::SysSchema_name <-- repo.RepoSchema::has_different_sys_names
 repo.RepoSchema::SysSchema_name <-- repo.RepoSchema::is_SysSchema_name_uniqueidentifier
 repo.RepoSchema::SysSchema_name <-- repo.SysSchema_RepoSchema_via_guid::RepoSchema_SysSchema_name
 repo.RepoSchema::SysSchema_name <-- repo.SysSchema_RepoSchema_via_name::RepoSchema_SysSchema_name
+repo.RepoSchema::SysSchema_name <-- repo.RepoSchema_ssas_tgt::SysSchema_name

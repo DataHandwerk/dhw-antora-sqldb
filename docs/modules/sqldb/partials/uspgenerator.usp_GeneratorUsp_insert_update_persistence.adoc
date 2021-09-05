@@ -7,6 +7,8 @@
 :ExistsProperty--antorareferencedlist:
 :ExistsProperty--antorareferencinglist:
 :ExistsProperty--exampleusage:
+:ExistsProperty--is_repo_managed:
+:ExistsProperty--is_ssas:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--AntoraParameterList:
@@ -39,7 +41,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-08-07 17:38:06
+2021-09-05 13:29:26
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -75,7 +77,12 @@ stored procedure
 * @parent_execution_log_id (bigint)
 // end::AntoraParameterList[]
 
-== AdocUspSteps
+== Other tags
+
+source: property.RepoObjectProperty_cross As rop_cross
+
+
+=== AdocUspSteps
 
 // tag::adocuspsteps[]
 .Steps in [uspgenerator].[usp_GeneratorUsp_insert_update_persistence]
@@ -96,7 +103,26 @@ ATTENTION, destructive!
 
 we should delete only usp definitions for persistence!
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+DELETE u
+FROM [uspgenerator].[GeneratorUsp] [u]
+WHERE LEFT([u].[usp_name], 12) = 'usp_PERSIST_'
+ AND NOT EXISTS (
+  SELECT 1
+  FROM [repo].[RepoObject_gross] AS [ro]
+  WHERE [u].[usp_schema] = [ro].[RepoObject_schema_name]
+   AND [u].[usp_name] = [ro].[usp_persistence_name]
+  )
+----
+=====
+
 |
+
 
 |310
 |
@@ -106,7 +132,33 @@ we should delete only usp definitions for persistence!
 * [repo].[RepoObject_gross]
 * [repo].[GeneratorUsp]
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+INSERT INTO [uspgenerator].[GeneratorUsp] (
+ [usp_schema]
+ , [usp_name]
+ , [has_logging]
+ )
+SELECT [usp_schema] = [RepoObject_schema_name]
+ , [usp_name] = [usp_persistence_name]
+ , 1
+FROM [repo].[RepoObject_gross] AS ro
+WHERE [is_persistence] = 1
+ AND NOT EXISTS (
+  SELECT 1
+  FROM [uspgenerator].[GeneratorUsp] AS [u]
+  WHERE [u].[usp_schema] = [ro].[RepoObject_schema_name]
+   AND [u].[usp_name] = [ro].[usp_persistence_name]
+  )
+----
+=====
+
 |
+
 
 |510
 |
@@ -116,7 +168,86 @@ we should delete only usp definitions for persistence!
 * [repo].[GeneratorUspStep_Persistence]
 * [repo].[GeneratorUspStep]
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+UPDATE T
+SET [Parent_Number] = [S].[Parent_Number]
+ , [Name] = [S].[Name]
+ , [has_logging] = [S].[has_logging]
+ , [is_condition] = [S].[is_condition]
+ , [is_SubProcedure] = [S].[is_SubProcedure]
+ , [Statement] = [S].[Statement]
+ , [log_source_object] = [S].[log_source_object]
+ , [log_target_object] = [S].[log_target_object]
+ , [log_flag_InsertUpdateDelete] = [S].[log_flag_InsertUpdateDelete]
+FROM [uspgenerator].[GeneratorUspStep] [T]
+INNER JOIN [uspgenerator].[GeneratorUspStep_Persistence] AS [S]
+ ON [T].[usp_id] = [S].[usp_id]
+  AND [T].[Number] = [S].[Number]
+WHERE
+ --
+ [T].[Parent_Number] <> [S].[Parent_Number]
+ OR [T].[Parent_Number] IS NULL
+ AND NOT [S].[Parent_Number] IS NULL
+ OR NOT [T].[Parent_Number] IS NULL
+ AND [S].[Parent_Number] IS NULL
+ --
+ OR [T].[Name] <> [S].[Name]
+ OR [T].[Name] IS NULL
+ AND NOT [S].[Name] IS NULL
+ OR NOT [T].[Name] IS NULL
+ AND [S].[Name] IS NULL
+ --
+ OR [T].[has_logging] <> [S].[has_logging]
+ OR [T].[has_logging] IS NULL
+ AND NOT [S].[has_logging] IS NULL
+ OR NOT [T].[has_logging] IS NULL
+ AND [S].[has_logging] IS NULL
+ --
+ OR [T].[is_condition] <> [S].[is_condition]
+ OR [T].[is_condition] IS NULL
+ AND NOT [S].[is_condition] IS NULL
+ OR NOT [T].[is_condition] IS NULL
+ AND [S].[is_condition] IS NULL
+ --
+ OR [T].[is_SubProcedure] <> [S].[is_SubProcedure]
+ OR [T].[is_SubProcedure] IS NULL
+ AND NOT [S].[is_SubProcedure] IS NULL
+ OR NOT [T].[is_SubProcedure] IS NULL
+ AND [S].[is_SubProcedure] IS NULL
+ --
+ OR [T].[Statement] <> [S].[Statement]
+ OR [T].[Statement] IS NULL
+ AND NOT [S].[Statement] IS NULL
+ OR NOT [T].[Statement] IS NULL
+ AND [S].[Statement] IS NULL
+ --
+ OR [T].[log_source_object] <> [S].[log_source_object]
+ OR [T].[log_source_object] IS NULL
+ AND NOT [S].[log_source_object] IS NULL
+ OR NOT [T].[log_source_object] IS NULL
+ AND [S].[log_source_object] IS NULL
+ --
+ OR [T].[log_target_object] <> [S].[log_target_object]
+ OR [T].[log_target_object] IS NULL
+ AND NOT [S].[log_target_object] IS NULL
+ OR NOT [T].[log_target_object] IS NULL
+ AND [S].[log_target_object] IS NULL
+ --
+ OR [T].[log_flag_InsertUpdateDelete] <> [S].[log_flag_InsertUpdateDelete]
+ OR [T].[log_flag_InsertUpdateDelete] IS NULL
+ AND NOT [S].[log_flag_InsertUpdateDelete] IS NULL
+ OR NOT [T].[log_flag_InsertUpdateDelete] IS NULL
+ AND [S].[log_flag_InsertUpdateDelete] IS NULL
+----
+=====
+
 |
+
 
 |610
 |
@@ -126,7 +257,59 @@ we should delete only usp definitions for persistence!
 * [repo].[GeneratorUspStep_Persistence]
 * [repo].[GeneratorUspStep]
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+INSERT INTO [uspgenerator].[GeneratorUspStep] (
+ [usp_id]
+ , [Number]
+ , [Parent_Number]
+ , [Name]
+ , [has_logging]
+ , [is_condition]
+ , [is_inactive]
+ , [is_SubProcedure]
+ , [Statement]
+ , [log_source_object]
+ , [log_target_object]
+ , [log_flag_InsertUpdateDelete]
+ )
+--,[info_01]
+--,[info_02]
+--,[info_03]
+--,[info_04]
+--,[info_05]
+--,[info_06]
+--,[info_07]
+--,[info_08]
+--,[info_09]
+SELECT [usp_id]
+ , [Number]
+ , [Parent_Number]
+ , [Name]
+ , [has_logging]
+ , [is_condition]
+ , [is_inactive]
+ , [is_SubProcedure]
+ , [Statement]
+ , [log_source_object]
+ , [log_target_object]
+ , [log_flag_InsertUpdateDelete]
+FROM [uspgenerator].[GeneratorUspStep_Persistence] AS S
+WHERE NOT EXISTS (
+  SELECT 1
+  FROM [uspgenerator].[GeneratorUspStep] AS [T]
+  WHERE [T].[usp_id] = [S].[usp_id]
+   AND [T].[Number] = [S].[Number]
+  )
+----
+=====
+
 |
+
 
 |710
 |
@@ -136,13 +319,30 @@ we should delete only usp definitions for persistence!
 * [repo].[GeneratorUspStep_Persistence_IsInactive_setpoint]
 * [repo].[GeneratorUspStep]
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+UPDATE step
+SET [is_inactive] = [setpoint].[is_inactive]
+FROM [uspgenerator].[GeneratorUspStep] [step]
+INNER JOIN [uspgenerator].[GeneratorUspStep_Persistence_IsInactive_setpoint] [setpoint]
+ ON [setpoint].[usp_id] = [step].[usp_id]
+  AND [setpoint].[Number] = [step].[Number]
+WHERE [setpoint].[is_inactive] <> [step].[is_inactive]
+----
+=====
+
 |
+
 |===
 
 // end::adocuspsteps[]
 
 
-== AntoraReferencedList
+=== AntoraReferencedList
 
 // tag::antorareferencedlist[]
 * xref:logs.usp_ExecutionLog_insert.adoc[]
@@ -154,217 +354,224 @@ we should delete only usp definitions for persistence!
 // end::antorareferencedlist[]
 
 
-== AntoraReferencingList
+=== AntoraReferencingList
 
 // tag::antorareferencinglist[]
 * xref:repo.usp_main.adoc[]
 // end::antorareferencinglist[]
 
 
-== exampleUsage
+=== exampleUsage
 
 // tag::exampleusage[]
 EXEC [uspgenerator].[usp_GeneratorUsp_insert_update_persistence]
 // end::exampleusage[]
 
 
-== exampleUsage_2
+=== exampleUsage_2
 
 // tag::exampleusage_2[]
 
 // end::exampleusage_2[]
 
 
-== exampleUsage_3
+=== exampleUsage_3
 
 // tag::exampleusage_3[]
 
 // end::exampleusage_3[]
 
 
-== exampleUsage_4
+=== exampleUsage_4
 
 // tag::exampleusage_4[]
 
 // end::exampleusage_4[]
 
 
-== exampleUsage_5
+=== exampleUsage_5
 
 // tag::exampleusage_5[]
 
 // end::exampleusage_5[]
 
 
-== exampleWrong_Usage
+=== exampleWrong_Usage
 
 // tag::examplewrong_usage[]
 
 // end::examplewrong_usage[]
 
 
-== has_execution_plan_issue
+=== has_execution_plan_issue
 
 // tag::has_execution_plan_issue[]
 
 // end::has_execution_plan_issue[]
 
 
-== has_get_referenced_issue
+=== has_get_referenced_issue
 
 // tag::has_get_referenced_issue[]
 
 // end::has_get_referenced_issue[]
 
 
-== has_history
+=== has_history
 
 // tag::has_history[]
 
 // end::has_history[]
 
 
-== has_history_columns
+=== has_history_columns
 
 // tag::has_history_columns[]
 
 // end::has_history_columns[]
 
 
-== is_persistence
+=== is_persistence
 
 // tag::is_persistence[]
 
 // end::is_persistence[]
 
 
-== is_persistence_check_duplicate_per_pk
+=== is_persistence_check_duplicate_per_pk
 
 // tag::is_persistence_check_duplicate_per_pk[]
 
 // end::is_persistence_check_duplicate_per_pk[]
 
 
-== is_persistence_check_for_empty_source
+=== is_persistence_check_for_empty_source
 
 // tag::is_persistence_check_for_empty_source[]
 
 // end::is_persistence_check_for_empty_source[]
 
 
-== is_persistence_delete_changed
+=== is_persistence_delete_changed
 
 // tag::is_persistence_delete_changed[]
 
 // end::is_persistence_delete_changed[]
 
 
-== is_persistence_delete_missing
+=== is_persistence_delete_missing
 
 // tag::is_persistence_delete_missing[]
 
 // end::is_persistence_delete_missing[]
 
 
-== is_persistence_insert
+=== is_persistence_insert
 
 // tag::is_persistence_insert[]
 
 // end::is_persistence_insert[]
 
 
-== is_persistence_truncate
+=== is_persistence_truncate
 
 // tag::is_persistence_truncate[]
 
 // end::is_persistence_truncate[]
 
 
-== is_persistence_update_changed
+=== is_persistence_update_changed
 
 // tag::is_persistence_update_changed[]
 
 // end::is_persistence_update_changed[]
 
 
-== is_repo_managed
+=== is_repo_managed
 
 // tag::is_repo_managed[]
-
+0
 // end::is_repo_managed[]
 
 
-== microsoft_database_tools_support
+=== is_ssas
+
+// tag::is_ssas[]
+0
+// end::is_ssas[]
+
+
+=== microsoft_database_tools_support
 
 // tag::microsoft_database_tools_support[]
 
 // end::microsoft_database_tools_support[]
 
 
-== MS_Description
+=== MS_Description
 
 // tag::ms_description[]
 
 // end::ms_description[]
 
 
-== persistence_source_RepoObject_fullname
+=== persistence_source_RepoObject_fullname
 
 // tag::persistence_source_repoobject_fullname[]
 
 // end::persistence_source_repoobject_fullname[]
 
 
-== persistence_source_RepoObject_fullname2
+=== persistence_source_RepoObject_fullname2
 
 // tag::persistence_source_repoobject_fullname2[]
 
 // end::persistence_source_repoobject_fullname2[]
 
 
-== persistence_source_RepoObject_guid
+=== persistence_source_RepoObject_guid
 
 // tag::persistence_source_repoobject_guid[]
 
 // end::persistence_source_repoobject_guid[]
 
 
-== persistence_source_RepoObject_xref
+=== persistence_source_RepoObject_xref
 
 // tag::persistence_source_repoobject_xref[]
 
 // end::persistence_source_repoobject_xref[]
 
 
-== pk_index_guid
+=== pk_index_guid
 
 // tag::pk_index_guid[]
 
 // end::pk_index_guid[]
 
 
-== pk_IndexPatternColumnDatatype
+=== pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
 
 // end::pk_indexpatterncolumndatatype[]
 
 
-== pk_IndexPatternColumnName
+=== pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
 
 // end::pk_indexpatterncolumnname[]
 
 
-== pk_IndexSemanticGroup
+=== pk_IndexSemanticGroup
 
 // tag::pk_indexsemanticgroup[]
 
 // end::pk_indexsemanticgroup[]
 
 
-== ReferencedObjectList
+=== ReferencedObjectList
 
 // tag::referencedobjectlist[]
 * [logs].[usp_ExecutionLog_insert]
@@ -376,32 +583,45 @@ EXEC [uspgenerator].[usp_GeneratorUsp_insert_update_persistence]
 // end::referencedobjectlist[]
 
 
-== usp_persistence_RepoObject_guid
+=== usp_persistence_RepoObject_guid
 
 // tag::usp_persistence_repoobject_guid[]
 
 // end::usp_persistence_repoobject_guid[]
 
 
-== UspExamples
+=== UspExamples
 
 // tag::uspexamples[]
 
 // end::uspexamples[]
 
 
-== UspParameters
+=== UspParameters
 
 // tag::uspparameters[]
 
 // end::uspparameters[]
 
+== Boolean Attributes
+
+source: property.RepoObjectProperty WHERE property_int = 1
+
+// tag::boolean_attributes[]
+
+// end::boolean_attributes[]
 
 == sql_modules_definition
 
 // tag::sql_modules_definition[]
+[%collapsible]
+=======
 [source,sql]
 ----
+/*
+code of this procedure is managed in the dhw repository. Do not modify manually.
+Use [uspgenerator].[GeneratorUsp], [uspgenerator].[GeneratorUspParameter], [uspgenerator].[GeneratorUspStep], [uspgenerator].[GeneratorUsp_SqlUsp]
+*/
 CREATE   PROCEDURE [uspgenerator].[usp_GeneratorUsp_insert_update_persistence]
 ----keep the code between logging parameters and "START" unchanged!
 ---- parameters, used for logging; you don't need to care about them, but you can use them, wenn calling from SSIS or in your workflow to log the context of the procedure call
@@ -790,6 +1010,7 @@ END
 
 
 ----
+=======
 // end::sql_modules_definition[]
 
 

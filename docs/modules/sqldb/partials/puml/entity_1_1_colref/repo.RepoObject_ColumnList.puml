@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -24,22 +25,28 @@ skinparam class {
 
 
 entity repo.RepoObject_ColumnList << V >> {
-  * **RepoObject_guid** : uniqueidentifier
   --
   CreateColumnList : nvarchar(max)
   DbmlColumnList : nvarchar(max)
   PersistenceCompareColumnList : nvarchar(max)
   PersistenceInsertColumnList : nvarchar(max)
   PersistenceUpdateColumnList : nvarchar(max)
+  * RepoObject_guid : uniqueidentifier
+  RepoObjectColumn_fullname : nvarchar(520)
+  --
 }
 
-entity repo.RepoObject_gross << V >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity repo.RepoObject_gross2 << V >> {
   --
+  AntoraComponent : nvarchar(max)
+  AntoraExternalReferencedList : nvarchar(max)
+  AntoraExternalReferencingList : nvarchar(max)
+  AntoraModul : nvarchar(max)
   AntoraReferencedList : nvarchar(max)
   AntoraReferencingList : nvarchar(max)
   CreateColumnList : nvarchar(max)
   DbmlColumnList : nvarchar(max)
+  Description : nvarchar(max)
   has_different_sys_names : bit
   has_execution_plan_issue : bit
   has_get_referenced_issue : bit
@@ -50,6 +57,7 @@ entity repo.RepoObject_gross << V >> {
   Inheritance_StringAggSeparatorSql : nvarchar(4000)
   InheritanceDefinition : nvarchar(4000)
   InheritanceType : tinyint
+  * is_DocsExclude : bit
   is_DocsOutput : int
   * is_in_reference : int
   is_persistence : bit
@@ -66,6 +74,7 @@ entity repo.RepoObject_gross << V >> {
   is_repo_managed : bit
   * is_RepoObject_name_uniqueidentifier : int
   is_required_ObjectMerge : bit
+  * is_ssas : bit
   is_SysObject_missing : bit
   * is_SysObject_name_uniqueidentifier : int
   * modify_dt : datetime
@@ -90,6 +99,7 @@ entity repo.RepoObject_gross << V >> {
   Repo_temporal_type : tinyint
   * RepoObject_fullname : nvarchar(261)
   * RepoObject_fullname2 : nvarchar(257)
+  * RepoObject_guid : uniqueidentifier
   * RepoObject_name : nvarchar(128)
   RepoObject_Referencing_Count : int
   * RepoObject_schema_name : nvarchar(128)
@@ -112,10 +122,14 @@ entity repo.RepoObject_gross << V >> {
   * SysObject_schema_name : nvarchar(128)
   SysObject_type : char(2)
   SysObject_type_name : nvarchar(128)
+  tables_dataCategory : nvarchar(500)
+  tables_description : nvarchar(max)
+  tables_isHidden : nvarchar(500)
   target_filter : nvarchar(4000)
   temporal_type : tinyint
   * usp_persistence_name : nvarchar(140)
   usp_persistence_RepoObject_guid : uniqueidentifier
+  --
 }
 
 entity repo.RepoObject_SqlCreateTable << V >> {
@@ -128,18 +142,19 @@ entity repo.RepoObject_SqlCreateTable << V >> {
   persistence_source_SysObject_fullname : nvarchar(261)
   * RepoObject_fullname : nvarchar(261)
   * SqlCreateTable : nvarchar(max)
+  --
 }
 
-entity repo.RepoObjectColumn_gross << V >> {
-  * **RepoObjectColumn_guid** : uniqueidentifier
+entity repo.RepoObjectColumn_gross2 << V >> {
   --
   AntoraReferencedColumnList : nvarchar(max)
   AntoraReferencingColumnList : nvarchar(max)
   * Column_name : nvarchar(128)
+  Description : nvarchar(max)
   has_different_sys_names : bit
   has_get_referenced_issue : bit
   index_column_id : int
-  index_name : nvarchar(128)
+  index_name : nvarchar(450)
   Inheritance_StringAggSeparatorSql : nvarchar(4000)
   InheritanceDefinition : nvarchar(4000)
   InheritanceType : tinyint
@@ -152,10 +167,12 @@ entity repo.RepoObjectColumn_gross << V >> {
   * is_RepoObject_name_uniqueidentifier : int
   * is_RepoObjectColumn_name_uniqueidentifier : int
   is_required_ColumnMerge : bit
+  * is_ssas : bit
   is_SysObject_missing : bit
   * is_SysObject_name_uniqueidentifier : int
   is_SysObjectColumn_missing : bit
   * is_SysObjectColumn_name_uniqueidentifier : int
+  isAnyIndexColumn : int
   * modify_dt : datetime
   node_id : bigint
   persistence_source_RepoObjectColumn_guid : uniqueidentifier
@@ -187,6 +204,7 @@ entity repo.RepoObjectColumn_gross << V >> {
   RepoObjectColumn_column_id : int
   * RepoObjectColumn_fullname : nvarchar(520)
   * RepoObjectColumn_fullname2 : nvarchar(386)
+  * RepoObjectColumn_guid : uniqueidentifier
   * RepoObjectColumn_name : nvarchar(128)
   * SysObject_fullname : nvarchar(261)
   * SysObject_fullname2 : nvarchar(257)
@@ -198,14 +216,24 @@ entity repo.RepoObjectColumn_gross << V >> {
   SysObject_type : char(2)
   SysObjectColumn_column_id : int
   * SysObjectColumn_name : nvarchar(128)
+  tabcol_Description : nvarchar(max)
+  tabcol_DisplayFolder : nvarchar(500)
+  tabcol_Expression : nvarchar(max)
+  tabcol_FormatString : nvarchar(500)
+  * tabcol_IsHidden : bit
+  * tabcol_IsKey : bit
+  * tabcol_IsUnique : bit
+  tabcol_SummarizeBy : nvarchar(500)
+  tabcol_Type : nvarchar(500)
+  --
 }
 
-repo.RepoObject_ColumnList <.. repo.RepoObject_gross
 repo.RepoObject_ColumnList <.. repo.RepoObject_SqlCreateTable
-repo.RepoObjectColumn_gross <.. repo.RepoObject_ColumnList
-repo.RepoObject_ColumnList::CreateColumnList <-- repo.RepoObject_gross::CreateColumnList
-repo.RepoObject_ColumnList::DbmlColumnList <-- repo.RepoObject_gross::DbmlColumnList
-repo.RepoObject_ColumnList::PersistenceCompareColumnList <-- repo.RepoObject_gross::PersistenceCompareColumnList
-repo.RepoObject_ColumnList::PersistenceInsertColumnList <-- repo.RepoObject_gross::PersistenceInsertColumnList
-repo.RepoObject_ColumnList::PersistenceUpdateColumnList <-- repo.RepoObject_gross::PersistenceUpdateColumnList
-repo.RepoObjectColumn_gross::RepoObject_guid <-- repo.RepoObject_ColumnList::RepoObject_guid
+repo.RepoObject_ColumnList <.. repo.RepoObject_gross2
+repo.RepoObjectColumn_gross2 <.. repo.RepoObject_ColumnList
+repo.RepoObject_ColumnList::CreateColumnList <-- repo.RepoObject_gross2::CreateColumnList
+repo.RepoObject_ColumnList::DbmlColumnList <-- repo.RepoObject_gross2::DbmlColumnList
+repo.RepoObject_ColumnList::PersistenceCompareColumnList <-- repo.RepoObject_gross2::PersistenceCompareColumnList
+repo.RepoObject_ColumnList::PersistenceInsertColumnList <-- repo.RepoObject_gross2::PersistenceInsertColumnList
+repo.RepoObject_ColumnList::PersistenceUpdateColumnList <-- repo.RepoObject_gross2::PersistenceUpdateColumnList
+repo.RepoObjectColumn_gross2::RepoObject_guid <-- repo.RepoObject_ColumnList::RepoObject_guid

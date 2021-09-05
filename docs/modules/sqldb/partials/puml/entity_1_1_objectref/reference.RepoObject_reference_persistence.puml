@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -45,6 +46,11 @@ entity repo.RepoObject_persistence << U >> {
   --
 }
 
+entity repo.usp_main << P >> {
+  --
+}
+
 reference.RepoObject_reference_persistence <.. reference.RepoObject_reference_union
+reference.RepoObject_reference_persistence <.. repo.usp_main
 repo.RepoObject <.. reference.RepoObject_reference_persistence
 repo.RepoObject_persistence <.. reference.RepoObject_reference_persistence

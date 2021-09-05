@@ -1,4 +1,5 @@
 'Left to right direction
+top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -30,6 +31,31 @@ entity configT.join_type << V >> {
 
 entity repo.RepoObject << U >> {
   * **RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity repo.RepoObject_SSAS_src << V >> {
+  * **RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity repo.RepoObject_SSAS_tgt << V >> {
+  * **RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity repo.RepoObjectColumn << U >> {
+  * **RepoObjectColumn_guid** : uniqueidentifier
+  --
+}
+
+entity repo.RepoObjectColumn_SSAS_src << V >> {
+  * **RepoObjectColumn_guid** : uniqueidentifier
+  --
+}
+
+entity repo.RepoObjectColumn_SSAS_tgt << V >> {
+  * **RepoObjectColumn_guid** : uniqueidentifier
   --
 }
 
@@ -126,25 +152,82 @@ entity sqlparse.RepoObject_SqlModules_44_from_Identifier_QuoteName << V >> {
   --
 }
 
+entity ssas.model_json << U >> {
+  * **databasename** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_10 << V >> {
+  * **databasename** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_20 << V >> {
+  * **databasename** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_31_tables << V >> {
+  * **databasename** : nvarchar(128)
+  **tables_name** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_31_tables_T << U >> {
+  * **databasename** : nvarchar(128)
+  **tables_name** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_311_tables_columns << V >> {
+  * **databasename** : nvarchar(128)
+  * **tables_name** : nvarchar(128)
+  **tables_columns_name** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_311_tables_columns_T << U >> {
+  * **databasename** : nvarchar(128)
+  * **tables_name** : nvarchar(128)
+  **tables_columns_name** : nvarchar(128)
+  --
+}
+
 configT.join_type <.. sqlparse.RepoObject_SqlModules_41_from
-repo.RepoObject <.. sqlparse.RepoObject_SqlModules_39_object
+repo.RepoObject <.. repo.RepoObject_SSAS_tgt
+repo.RepoObject <.. repo.RepoObject_SSAS_tgt
 repo.RepoObject <.. sqlparse.RepoObject_SqlModules_10_statement
+repo.RepoObject <.. sqlparse.RepoObject_SqlModules_39_object
+repo.RepoObject_SSAS_src <.. repo.RepoObject_SSAS_tgt
+repo.RepoObject_SSAS_src <.. repo.RepoObject_SSAS_tgt
+repo.RepoObject_SSAS_tgt <.. repo.RepoObject
+repo.RepoObject_SSAS_tgt <.. repo.RepoObject
+repo.RepoObject_SSAS_tgt <.. repo.RepoObjectColumn_SSAS_tgt
+repo.RepoObject_SSAS_tgt <.. repo.RepoObjectColumn_SSAS_tgt
+repo.RepoObjectColumn <.. repo.RepoObjectColumn_SSAS_tgt
+repo.RepoObjectColumn <.. repo.RepoObjectColumn_SSAS_tgt
+repo.RepoObjectColumn_SSAS_src <.. repo.RepoObjectColumn_SSAS_tgt
+repo.RepoObjectColumn_SSAS_src <.. repo.RepoObjectColumn_SSAS_tgt
+repo.RepoObjectColumn_SSAS_tgt <.. repo.RepoObjectColumn
+repo.RepoObjectColumn_SSAS_tgt <.. repo.RepoObjectColumn
+repo.RepoObjectColumn_SSAS_tgt <.. repo.RepoObject_SSAS_tgt
+repo.RepoObjectColumn_SSAS_tgt <.. repo.RepoObject_SSAS_tgt
 sqlparse.ftv_sqlparse <.. sqlparse.RepoObject_SqlModules_22_identifier_alias_AS
 sqlparse.ftv_sqlparse_with_some_children <.. sqlparse.RepoObject_SqlModules_20_statement_children
 sqlparse.RepoObject_SqlModules <.. sqlparse.RepoObject_SqlModules_39_object
 sqlparse.RepoObject_SqlModules <.. sqlparse.RepoObject_SqlModules_10_statement
 sqlparse.RepoObject_SqlModules_10_statement <.. sqlparse.RepoObject_SqlModules_20_statement_children
-sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_32_ObjectClass
-sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_29_1_object_is_union
-sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_29_2_object_is_GroupBy
 sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_21_statement_children_helper
+sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_29_2_object_is_GroupBy
+sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_32_ObjectClass
 sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_33_ObjectNormalized
-sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_22_identifier_alias_AS
 sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_41_from
+sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_29_1_object_is_union
+sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_22_identifier_alias_AS
 sqlparse.RepoObject_SqlModules_21_statement_children_helper <.. sqlparse.RepoObject_SqlModules_31_object
 sqlparse.RepoObject_SqlModules_22_identifier_alias_AS <.. sqlparse.RepoObject_SqlModules_41_from
-sqlparse.RepoObject_SqlModules_29_1_object_is_union <.. sqlparse.RepoObject_SqlModules_39_object
 sqlparse.RepoObject_SqlModules_29_1_object_is_union <.. sqlparse.RepoObject_SqlModules_42_from_Identifier
+sqlparse.RepoObject_SqlModules_29_1_object_is_union <.. sqlparse.RepoObject_SqlModules_39_object
 sqlparse.RepoObject_SqlModules_29_2_object_is_GroupBy <.. sqlparse.RepoObject_SqlModules_39_object
 sqlparse.RepoObject_SqlModules_31_object <.. sqlparse.RepoObject_SqlModules_39_object
 sqlparse.RepoObject_SqlModules_32_ObjectClass <.. sqlparse.RepoObject_SqlModules_39_object
@@ -154,3 +237,19 @@ sqlparse.RepoObject_SqlModules_41_from <.. sqlparse.RepoObject_SqlModules_41_fro
 sqlparse.RepoObject_SqlModules_41_from_T <.. sqlparse.RepoObject_SqlModules_42_from_Identifier
 sqlparse.RepoObject_SqlModules_42_from_Identifier <.. sqlparse.RepoObject_SqlModules_43_from_Identifier
 sqlparse.RepoObject_SqlModules_43_from_Identifier <.. sqlparse.RepoObject_SqlModules_44_from_Identifier_QuoteName
+ssas.model_json <.. ssas.model_json_10
+ssas.model_json <.. ssas.model_json_10
+ssas.model_json_10 <.. ssas.model_json_20
+ssas.model_json_10 <.. ssas.model_json_20
+ssas.model_json_20 <.. ssas.model_json_31_tables
+ssas.model_json_20 <.. ssas.model_json_31_tables
+ssas.model_json_31_tables <.. ssas.model_json_31_tables_T
+ssas.model_json_31_tables <.. ssas.model_json_31_tables_T
+ssas.model_json_31_tables_T <.. repo.RepoObject_SSAS_src
+ssas.model_json_31_tables_T <.. repo.RepoObject_SSAS_src
+ssas.model_json_31_tables_T <.. ssas.model_json_311_tables_columns
+ssas.model_json_31_tables_T <.. ssas.model_json_311_tables_columns
+ssas.model_json_311_tables_columns <.. ssas.model_json_311_tables_columns_T
+ssas.model_json_311_tables_columns <.. ssas.model_json_311_tables_columns_T
+ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_SSAS_src
+ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_SSAS_src

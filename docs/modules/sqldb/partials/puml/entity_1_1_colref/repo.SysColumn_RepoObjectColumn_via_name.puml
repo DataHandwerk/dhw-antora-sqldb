@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -31,8 +32,10 @@ entity repo.RepoObject << U >> {
   Inheritance_StringAggSeparatorSql : nvarchar(4000)
   InheritanceDefinition : nvarchar(4000)
   InheritanceType : tinyint
+  * is_DocsExclude : bit
   is_repo_managed : bit
   is_required_ObjectMerge : bit
+  * is_ssas : bit
   is_SysObject_missing : bit
   * modify_dt : datetime
   pk_index_guid : uniqueidentifier
@@ -58,7 +61,9 @@ entity repo.RepoObject << U >> {
   * {static} SysObject_fullname : nvarchar(261)
   * {static} SysObject_fullname2 : nvarchar(257)
   * {abstract} SysObject_query_sql : nvarchar(406)
+  * {static} usp_persistence_fullname2 : nvarchar(269)
   * {static} usp_persistence_name : nvarchar(140)
+  --
 }
 
 entity repo.RepoObjectColumn << U >> {
@@ -99,6 +104,7 @@ entity repo.RepoObjectColumn << U >> {
   {abstract} has_different_sys_names : bit
   * {static} is_RepoObjectColumn_name_uniqueidentifier : int
   * {static} is_SysObjectColumn_name_uniqueidentifier : int
+  --
 }
 
 entity repo.SysColumn_RepoObjectColumn_via_name << V >> {
@@ -157,9 +163,11 @@ entity repo.SysColumn_RepoObjectColumn_via_name << V >> {
   user_type_fullname : nvarchar(182)
   user_type_name : sysname
   uses_database_collation : bit
+  --
 }
 
 entity repo.usp_sync_guid_RepoObjectColumn << P >> {
+  --
   --
 }
 
@@ -180,6 +188,7 @@ entity repo_sys.IndexColumn_unique << V >> {
   RepoObjectColumn_guid : uniqueidentifier
   SysObject_column_name : sysname
   SysObject_column_user_type_fullname : nvarchar(182)
+  --
 }
 
 entity repo_sys.sql_expression_dependencies << V >> {
@@ -213,6 +222,7 @@ entity repo_sys.sql_expression_dependencies << V >> {
   referencing_schema_name : nvarchar(128)
   referencing_type : char(2)
   referencing_type_desciption : nvarchar(60)
+  --
 }
 
 entity repo_sys.SysColumn << V >> {
@@ -273,6 +283,7 @@ entity repo_sys.SysColumn << V >> {
   user_type_name : sysname
   uses_database_collation : bit
   * xml_collection_id : int
+  --
 }
 
 repo.RepoObject <.. repo.SysColumn_RepoObjectColumn_via_name

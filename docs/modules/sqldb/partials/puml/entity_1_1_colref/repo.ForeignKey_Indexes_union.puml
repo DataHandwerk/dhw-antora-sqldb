@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -49,6 +50,7 @@ entity repo.ForeignKey_Indexes << V >> {
   referencing_SysObject_name : nvarchar(128)
   referencing_SysObject_schema_name : nvarchar(128)
   update_referential_action : tinyint
+  --
 }
 
 entity repo.ForeignKey_Indexes_union << V >> {
@@ -56,27 +58,28 @@ entity repo.ForeignKey_Indexes_union << V >> {
   --
   delete_referential_action : tinyint
   ForeignKey_fullname : nvarchar(517)
-  ForeignKey_name : nvarchar(128)
+  ForeignKey_name : nvarchar(max)
   * is_MatchingDatatypePattern : int
   referenced_index_guid : uniqueidentifier
-  referenced_index_name : nvarchar(128)
+  referenced_index_name : nvarchar(450)
   referenced_IndexPatternColumnDatatype : nvarchar(4000)
-  referenced_IndexPatternColumnName : nvarchar(4000)
+  referenced_IndexPatternColumnName : nvarchar(max)
   referenced_RepoObject_fullname : nvarchar(261)
   referenced_RepoObject_fullname2 : nvarchar(257)
   referenced_RepoObject_guid : uniqueidentifier
   referenced_SysObject_name : nvarchar(128)
   referenced_SysObject_schema_name : nvarchar(128)
   referencing_index_guid : uniqueidentifier
-  referencing_index_name : nvarchar(128)
+  referencing_index_name : nvarchar(450)
   referencing_IndexPatternColumnDatatype : nvarchar(4000)
-  referencing_IndexPatternColumnName : nvarchar(4000)
+  referencing_IndexPatternColumnName : nvarchar(max)
   referencing_RepoObject_fullname : nvarchar(261)
   referencing_RepoObject_fullname2 : nvarchar(257)
   referencing_RepoObject_guid : uniqueidentifier
   referencing_SysObject_name : nvarchar(128)
   referencing_SysObject_schema_name : nvarchar(128)
   update_referential_action : tinyint
+  --
 }
 
 entity repo.ForeignKey_Indexes_union_T << U >> {
@@ -84,27 +87,57 @@ entity repo.ForeignKey_Indexes_union_T << U >> {
   --
   delete_referential_action : tinyint
   ForeignKey_fullname : nvarchar(517)
-  ForeignKey_name : nvarchar(128)
+  ForeignKey_name : nvarchar(max)
   * is_MatchingDatatypePattern : int
   referenced_index_guid : uniqueidentifier
-  referenced_index_name : nvarchar(128)
+  referenced_index_name : nvarchar(450)
   referenced_IndexPatternColumnDatatype : nvarchar(4000)
-  referenced_IndexPatternColumnName : nvarchar(4000)
+  referenced_IndexPatternColumnName : nvarchar(max)
   referenced_RepoObject_fullname : nvarchar(261)
   referenced_RepoObject_fullname2 : nvarchar(257)
   referenced_RepoObject_guid : uniqueidentifier
   referenced_SysObject_name : nvarchar(128)
   referenced_SysObject_schema_name : nvarchar(128)
   referencing_index_guid : uniqueidentifier
-  referencing_index_name : nvarchar(128)
+  referencing_index_name : nvarchar(450)
   referencing_IndexPatternColumnDatatype : nvarchar(4000)
-  referencing_IndexPatternColumnName : nvarchar(4000)
+  referencing_IndexPatternColumnName : nvarchar(max)
   referencing_RepoObject_fullname : nvarchar(261)
   referencing_RepoObject_fullname2 : nvarchar(257)
   referencing_RepoObject_guid : uniqueidentifier
   referencing_SysObject_name : nvarchar(128)
   referencing_SysObject_schema_name : nvarchar(128)
   update_referential_action : tinyint
+  --
+}
+
+entity repo.ForeignKey_ssas_Indexes << V >> {
+  --
+  delete_referential_action : tinyint
+  ForeignKey_fullname : nvarchar(517)
+  * ForeignKey_guid : uniqueidentifier
+  ForeignKey_name : nvarchar(263)
+  * is_MatchingDatatypePattern : int
+  referenced_index_guid : uniqueidentifier
+  referenced_index_name : nvarchar(450)
+  referenced_IndexPatternColumnDatatype : nvarchar(500)
+  referenced_IndexPatternColumnName : nvarchar(128)
+  referenced_RepoObject_fullname : nvarchar(517)
+  referenced_RepoObject_fullname2 : nvarchar(257)
+  referenced_RepoObject_guid : uniqueidentifier
+  referenced_SysObject_name : nvarchar(128)
+  * referenced_SysObject_schema_name : nvarchar(128)
+  referencing_index_guid : uniqueidentifier
+  referencing_index_name : nvarchar(450)
+  referencing_IndexPatternColumnDatatype : nvarchar(500)
+  referencing_IndexPatternColumnName : nvarchar(128)
+  referencing_RepoObject_fullname : nvarchar(517)
+  referencing_RepoObject_fullname2 : nvarchar(257)
+  referencing_RepoObject_guid : uniqueidentifier
+  referencing_SysObject_name : nvarchar(128)
+  * referencing_SysObject_schema_name : nvarchar(128)
+  update_referential_action : tinyint
+  --
 }
 
 entity repo.ForeignKey_virtual_Indexes << V >> {
@@ -133,15 +166,18 @@ entity repo.ForeignKey_virtual_Indexes << V >> {
   referencing_SysObject_name : nvarchar(128)
   referencing_SysObject_schema_name : nvarchar(128)
   * update_referential_action : tinyint
+  --
 }
 
 entity repo.usp_PERSIST_ForeignKey_Indexes_union_T << P >> {
+  --
   --
 }
 
 repo.ForeignKey_Indexes <.. repo.ForeignKey_Indexes_union
 repo.ForeignKey_Indexes_union <.. repo.ForeignKey_Indexes_union_T
 repo.ForeignKey_Indexes_union <.. repo.usp_PERSIST_ForeignKey_Indexes_union_T
+repo.ForeignKey_ssas_Indexes <.. repo.ForeignKey_Indexes_union
 repo.ForeignKey_virtual_Indexes <.. repo.ForeignKey_Indexes_union
 repo.ForeignKey_Indexes_union::delete_referential_action <-- repo.ForeignKey_Indexes_union_T::delete_referential_action
 repo.ForeignKey_Indexes_union::ForeignKey_fullname <-- repo.ForeignKey_Indexes_union_T::ForeignKey_fullname

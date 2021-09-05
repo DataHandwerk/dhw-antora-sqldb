@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -29,6 +30,7 @@ entity configT.type_level1type_level2type << V >> {
   level1type : varchar(9)
   level2type : varchar(10)
   type_desc : nvarchar(128)
+  --
 }
 
 entity property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn << V >> {
@@ -45,6 +47,7 @@ entity property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn << V >> {
   property_value : nvarchar(4000)
   Repo_user_type_fullname : nvarchar(128)
   * RepoObjectColumn_guid : uniqueidentifier
+  --
 }
 
 entity property.ExtendedProperty_Repo2Sys_level2_Union << V >> {
@@ -57,6 +60,7 @@ entity property.ExtendedProperty_Repo2Sys_level2_Union << V >> {
   * **property_name** : nvarchar(128)
   --
   property_value : nvarchar(4000)
+  --
 }
 
 entity property.RepoObjectColumnProperty << U >> {
@@ -71,6 +75,7 @@ entity property.RepoObjectColumnProperty << U >> {
   {abstract} property_int : int
   {abstract} property_money : money
   {abstract} property_real : real
+  --
 }
 
 entity repo.RepoObject << U >> {
@@ -81,8 +86,10 @@ entity repo.RepoObject << U >> {
   Inheritance_StringAggSeparatorSql : nvarchar(4000)
   InheritanceDefinition : nvarchar(4000)
   InheritanceType : tinyint
+  * is_DocsExclude : bit
   is_repo_managed : bit
   is_required_ObjectMerge : bit
+  * is_ssas : bit
   is_SysObject_missing : bit
   * modify_dt : datetime
   pk_index_guid : uniqueidentifier
@@ -108,7 +115,9 @@ entity repo.RepoObject << U >> {
   * {static} SysObject_fullname : nvarchar(261)
   * {static} SysObject_fullname2 : nvarchar(257)
   * {abstract} SysObject_query_sql : nvarchar(406)
+  * {static} usp_persistence_fullname2 : nvarchar(269)
   * {static} usp_persistence_name : nvarchar(140)
+  --
 }
 
 entity repo.RepoObjectColumn << U >> {
@@ -149,6 +158,7 @@ entity repo.RepoObjectColumn << U >> {
   {abstract} has_different_sys_names : bit
   * {static} is_RepoObjectColumn_name_uniqueidentifier : int
   * {static} is_SysObjectColumn_name_uniqueidentifier : int
+  --
 }
 
 configT.type_level1type_level2type <.. property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn

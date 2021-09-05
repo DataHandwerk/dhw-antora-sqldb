@@ -24,11 +24,6 @@ skinparam class {
 }
 
 
-entity docs.RepoObject_ColumnList_T {
-  * **RepoObject_guid** : uniqueidentifier
-  --
-}
-
 entity docs.AntoraIndexSemanticgroup << V >> {
   **IndexSemanticGroup** : nvarchar(512)
   --
@@ -101,11 +96,15 @@ entity docs.RepoObject_Adoc << V >> {
 }
 
 entity docs.RepoObject_Adoc_T << U >> {
-  * **RepoObject_guid** : uniqueidentifier
   --
 }
 
 entity docs.RepoObject_ColumnList << V >> {
+  --
+}
+
+entity docs.RepoObject_ColumnList_T << U >> {
+  * **RepoObject_guid** : uniqueidentifier
   --
 }
 
@@ -792,18 +791,36 @@ docs.RepoObject_Adoc <.. docs.usp_PERSIST_RepoObject_Adoc_T
 docs.REpoObject_Adoc_T <.. docs.usp_PERSIST_RepoObject_Adoc_T
 docs.REpoObject_Adoc_T <.. docs.usp_PERSIST_RepoObject_Adoc_T
 docs.REpoObject_Adoc_T <.. docs.usp_PERSIST_RepoObject_Adoc_T
-docs.RepoObject_ColumnList <.. docs.85AC3586-9B83-4474-AF3D-ED54F04062CA
+docs.RepoObject_ColumnList <.. docs.RepoObject_ColumnList_T
 docs.RepoObject_ColumnList <.. docs.usp_PERSIST_RepoObject_ColumnList_T
-docs.RepoObject_ColumnList <.. docs.85AC3586-9B83-4474-AF3D-ED54F04062CA
+docs.RepoObject_ColumnList <.. docs.RepoObject_ColumnList_T
 docs.RepoObject_ColumnList <.. docs.usp_PERSIST_RepoObject_ColumnList_T
-docs.RepoObject_ColumnList <.. docs.85AC3586-9B83-4474-AF3D-ED54F04062CA
+docs.RepoObject_ColumnList <.. docs.RepoObject_ColumnList_T
 docs.RepoObject_ColumnList <.. docs.usp_PERSIST_RepoObject_ColumnList_T
-docs.RepoObject_ColumnList <.. docs.85AC3586-9B83-4474-AF3D-ED54F04062CA
+docs.RepoObject_ColumnList <.. docs.RepoObject_ColumnList_T
 docs.RepoObject_ColumnList <.. docs.usp_PERSIST_RepoObject_ColumnList_T
-docs.RepoObject_ColumnList <.. docs.85AC3586-9B83-4474-AF3D-ED54F04062CA
+docs.RepoObject_ColumnList <.. docs.RepoObject_ColumnList_T
 docs.RepoObject_ColumnList <.. docs.usp_PERSIST_RepoObject_ColumnList_T
-docs.RepoObject_ColumnList <.. docs.85AC3586-9B83-4474-AF3D-ED54F04062CA
+docs.RepoObject_ColumnList <.. docs.RepoObject_ColumnList_T
 docs.RepoObject_ColumnList <.. docs.usp_PERSIST_RepoObject_ColumnList_T
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Adoc
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Plantuml_Entity
+docs.RepoObject_ColumnList_T <.. docs.usp_PERSIST_RepoObject_ColumnList_T
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Adoc
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Plantuml_Entity
+docs.RepoObject_ColumnList_T <.. docs.usp_PERSIST_RepoObject_ColumnList_T
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Adoc
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Plantuml_Entity
+docs.RepoObject_ColumnList_T <.. docs.usp_PERSIST_RepoObject_ColumnList_T
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Adoc
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Plantuml_Entity
+docs.RepoObject_ColumnList_T <.. docs.usp_PERSIST_RepoObject_ColumnList_T
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Adoc
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Plantuml_Entity
+docs.RepoObject_ColumnList_T <.. docs.usp_PERSIST_RepoObject_ColumnList_T
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Adoc
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Plantuml_Entity
+docs.RepoObject_ColumnList_T <.. docs.usp_PERSIST_RepoObject_ColumnList_T
 docs.RepoObject_IndexList <.. docs.RepoObject_IndexList_T
 docs.RepoObject_IndexList <.. docs.usp_PERSIST_RepoObject_IndexList_T
 docs.RepoObject_IndexList_T <.. docs.RepoObject_Adoc
@@ -891,8 +908,8 @@ reference.ReferenceTree_cyclic_union <.. docs.ObjectRefCyclic_ObjectRefList
 reference.RepoObject_reference <.. reference.RepoObject_reference_T
 reference.RepoObject_reference <.. reference.usp_PERSIST_RepoObject_reference_T
 reference.RepoObject_reference_additional_internal <.. reference.RepoObject_reference_union
-reference.RepoObject_reference_persistence_target_as_source <.. repo.usp_main
 reference.RepoObject_reference_persistence_target_as_source <.. reference.RepoObject_reference_union
+reference.RepoObject_reference_persistence_target_as_source <.. repo.usp_main
 reference.RepoObject_reference_T <.. reference.RepoObjectColumn_reference_SqlExpressionDependencies
 reference.RepoObject_reference_T <.. repo.IndexReferencedReferencing
 reference.RepoObject_reference_T <.. reference.RepoObjectColumn_reference_FirstResultSet
@@ -942,10 +959,6 @@ reference.RepoObjectColumn_reference_additional_internal <.. reference.RepoObjec
 reference.RepoObjectColumn_reference_FirstResultSet <.. reference.RepoObjectColumn_reference_BySamePredecessors
 reference.RepoObjectColumn_reference_QueryPlan <.. reference.SysObjectColumn_QueryPlanExpression
 reference.RepoObjectColumn_reference_SqlExpressionDependencies <.. reference.RepoObjectColumn_reference_union
-reference.RepoObjectColumn_reference_T <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing
-reference.RepoObjectColumn_reference_T <.. repo.RepoObjectColumn_MissingSource_TypeV
-reference.RepoObjectColumn_reference_T <.. reference.RepoObjectColumn_RelationScript
-reference.RepoObjectColumn_reference_T <.. reference.RepoObjectColumn_ReferencingReferenced
 reference.RepoObjectColumn_reference_T <.. reference.usp_PERSIST_RepoObjectColumn_reference_T
 reference.RepoObjectColumn_reference_T <.. docs.RepoObject_Plantuml_ColRefList_1_1
 reference.RepoObjectColumn_reference_T <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing
@@ -960,6 +973,10 @@ reference.RepoObjectColumn_reference_T <.. reference.RepoObjectColumn_RelationSc
 reference.RepoObjectColumn_reference_T <.. reference.RepoObjectColumn_ReferencingReferenced
 reference.RepoObjectColumn_reference_T <.. reference.usp_PERSIST_RepoObjectColumn_reference_T
 reference.RepoObjectColumn_reference_T <.. docs.RepoObject_Plantuml_ColRefList_1_1
+reference.RepoObjectColumn_reference_T <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing
+reference.RepoObjectColumn_reference_T <.. repo.RepoObjectColumn_MissingSource_TypeV
+reference.RepoObjectColumn_reference_T <.. reference.RepoObjectColumn_RelationScript
+reference.RepoObjectColumn_reference_T <.. reference.RepoObjectColumn_ReferencingReferenced
 reference.RepoObjectColumn_reference_union <.. reference.RepoObjectColumn_reference
 reference.RepoObjectColumn_reference_union <.. reference.RepoObjectColumn_reference
 reference.RepoObjectColumn_reference_union <.. reference.RepoObjectColumn_reference
@@ -1173,8 +1190,8 @@ workflow.Workflow_ProcedureDependency_T_NotInSortorder <.. workflow.Workflow_Pro
 workflow.Workflow_ProcedureDependency_T_redundant <.. workflow.usp_workflow
 workflow.Workflow_ProcedureDependency_T_redundant <.. workflow.Workflow_ProcedureDependency_wo_redundant
 workflow.Workflow_ProcedureDependency_T_TaskName <.. workflow.Biml_PrecedenceConstraints
-workflow.WorkflowStep <.. workflow.usp_PERSIST_WorkflowStep
 workflow.WorkflowStep <.. workflow.WorkflowStep_active
+workflow.WorkflowStep <.. workflow.usp_PERSIST_WorkflowStep
 workflow.WorkflowStep <.. workflow.WorkflowStep_ForUpdate
 workflow.WorkflowStep_active <.. workflow.usp_workflow
 workflow.WorkflowStep_active <.. workflow.Workflow_ProcedureDependency_all

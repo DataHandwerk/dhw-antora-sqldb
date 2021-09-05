@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -33,8 +34,23 @@ entity config.Parameter << U >> {
   --
 }
 
-entity docs.RepoObject_Plantuml << V >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity docs.fs_PumlHeaderLeftToRight << FN >> {
+  --
+}
+
+entity docs.fs_PumlHeaderTopToBottom << FN >> {
+  --
+}
+
+entity docs.ObjectRefCyclic << V >> {
+  --
+}
+
+entity docs.Schema_puml << V >> {
+  --
+}
+
+entity repo.RepoObject_gross2 << V >> {
   --
 }
 
@@ -51,5 +67,9 @@ entity repo.RepoObjectColumn_HistValidColums_setpoint << V >> {
 
 config.ftv_get_parameter_value <.. repo.RepoObjectColumn_HistValidColums_setpoint
 config.ftv_get_parameter_value <.. repo.RepoObject_SqlCreateTable
-config.ftv_get_parameter_value <.. docs.RepoObject_Plantuml
+config.ftv_get_parameter_value <.. docs.ObjectRefCyclic
+config.ftv_get_parameter_value <.. repo.RepoObject_gross2
+config.ftv_get_parameter_value <.. docs.fs_PumlHeaderLeftToRight
+config.ftv_get_parameter_value <.. docs.fs_PumlHeaderTopToBottom
+config.ftv_get_parameter_value <.. docs.Schema_puml
 config.Parameter <.. config.ftv_get_parameter_value

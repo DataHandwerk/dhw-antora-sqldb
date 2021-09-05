@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -24,45 +25,51 @@ skinparam class {
 
 
 entity docs.RepoObject_Adoc << V >> {
-  * **RepoObject_guid** : uniqueidentifier
   --
   * AdocContent : nvarchar(max)
   is_DocsOutput : int
   PropertyCount : int
   RepoObject_fullname : nvarchar(261)
   RepoObject_fullname2 : nvarchar(257)
+  * RepoObject_guid : uniqueidentifier
   RepoObject_schema_name : nvarchar(128)
   SysObject_fullname : nvarchar(261)
   SysObject_fullname2 : nvarchar(257)
   SysObject_schema_name : nvarchar(128)
   SysObject_type : char(2)
   SysObject_type_name : nvarchar(128)
+  --
 }
 
 entity docs.RepoObject_Adoc_T << U >> {
-  * **RepoObject_guid** : uniqueidentifier
   --
   * AdocContent : nvarchar(max)
   is_DocsOutput : int
   PropertyCount : int
   RepoObject_fullname : nvarchar(261)
   RepoObject_fullname2 : nvarchar(257)
+  * RepoObject_guid : uniqueidentifier
   RepoObject_schema_name : nvarchar(128)
   SysObject_fullname : nvarchar(261)
   SysObject_fullname2 : nvarchar(257)
   SysObject_schema_name : nvarchar(128)
   SysObject_type : char(2)
   SysObject_type_name : nvarchar(128)
+  --
 }
 
-entity docs.RepoObject_ColumnList << V >> {
+entity docs.RepoObject_ColumnList_T << U >> {
   * **RepoObject_guid** : uniqueidentifier
   --
   AntoraColumnDetails : nvarchar(max)
   AntoraNonPkColumnTableRows : nvarchar(max)
   AntoraPkColumnTableRows : nvarchar(max)
+  PlantumlIndexColumns : nvarchar(max)
   PlantumlNonPkEntityColumns : nvarchar(max)
+  PlantumlNonPkHiddenEntityColumns : nvarchar(max)
+  PlantumlNonPkIndexColumns : nvarchar(max)
   PlantumlPkEntityColumns : nvarchar(max)
+  --
 }
 
 entity docs.RepoObject_IndexList_T << U >> {
@@ -70,15 +77,18 @@ entity docs.RepoObject_IndexList_T << U >> {
   --
   AntoraIndexList : nvarchar(max)
   PumlIndexList : nvarchar(max)
+  --
 }
 
 entity docs.RepoObject_ParameterList << V >> {
   **RepoObject_guid** : uniqueidentifier
   --
   AntoraParameterList : nvarchar(max)
+  --
 }
 
 entity docs.usp_PERSIST_RepoObject_Adoc_T << P >> {
+  --
   --
 }
 
@@ -94,21 +104,27 @@ entity property.RepoObjectProperty << U >> {
   {abstract} property_int : int
   {abstract} property_money : money
   {abstract} property_real : real
+  --
 }
 
 entity property.RepoObjectProperty_cross << V >> {
   * **RepoObject_guid** : uniqueidentifier
   **property_name** : nvarchar(128)
   --
+  --
 }
 
-entity repo.RepoObject_gross << V >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity repo.RepoObject_gross2 << V >> {
   --
+  AntoraComponent : nvarchar(max)
+  AntoraExternalReferencedList : nvarchar(max)
+  AntoraExternalReferencingList : nvarchar(max)
+  AntoraModul : nvarchar(max)
   AntoraReferencedList : nvarchar(max)
   AntoraReferencingList : nvarchar(max)
   CreateColumnList : nvarchar(max)
   DbmlColumnList : nvarchar(max)
+  Description : nvarchar(max)
   has_different_sys_names : bit
   has_execution_plan_issue : bit
   has_get_referenced_issue : bit
@@ -119,6 +135,7 @@ entity repo.RepoObject_gross << V >> {
   Inheritance_StringAggSeparatorSql : nvarchar(4000)
   InheritanceDefinition : nvarchar(4000)
   InheritanceType : tinyint
+  * is_DocsExclude : bit
   is_DocsOutput : int
   * is_in_reference : int
   is_persistence : bit
@@ -135,6 +152,7 @@ entity repo.RepoObject_gross << V >> {
   is_repo_managed : bit
   * is_RepoObject_name_uniqueidentifier : int
   is_required_ObjectMerge : bit
+  * is_ssas : bit
   is_SysObject_missing : bit
   * is_SysObject_name_uniqueidentifier : int
   * modify_dt : datetime
@@ -159,6 +177,7 @@ entity repo.RepoObject_gross << V >> {
   Repo_temporal_type : tinyint
   * RepoObject_fullname : nvarchar(261)
   * RepoObject_fullname2 : nvarchar(257)
+  * RepoObject_guid : uniqueidentifier
   * RepoObject_name : nvarchar(128)
   RepoObject_Referencing_Count : int
   * RepoObject_schema_name : nvarchar(128)
@@ -181,20 +200,24 @@ entity repo.RepoObject_gross << V >> {
   * SysObject_schema_name : nvarchar(128)
   SysObject_type : char(2)
   SysObject_type_name : nvarchar(128)
+  tables_dataCategory : nvarchar(500)
+  tables_description : nvarchar(max)
+  tables_isHidden : nvarchar(500)
   target_filter : nvarchar(4000)
   temporal_type : tinyint
   * usp_persistence_name : nvarchar(140)
   usp_persistence_RepoObject_guid : uniqueidentifier
+  --
 }
 
 docs.RepoObject_Adoc <.. docs.RepoObject_Adoc_T
 docs.RepoObject_Adoc <.. docs.usp_PERSIST_RepoObject_Adoc_T
-docs.RepoObject_ColumnList <.. docs.RepoObject_Adoc
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Adoc
 docs.RepoObject_IndexList_T <.. docs.RepoObject_Adoc
 docs.RepoObject_ParameterList <.. docs.RepoObject_Adoc
 property.RepoObjectProperty <.. docs.RepoObject_Adoc
 property.RepoObjectProperty_cross <.. docs.RepoObject_Adoc
-repo.RepoObject_gross <.. docs.RepoObject_Adoc
+repo.RepoObject_gross2 <.. docs.RepoObject_Adoc
 docs.RepoObject_Adoc::AdocContent <-- docs.RepoObject_Adoc_T::AdocContent
 docs.RepoObject_Adoc::is_DocsOutput <-- docs.RepoObject_Adoc_T::is_DocsOutput
 docs.RepoObject_Adoc::PropertyCount <-- docs.RepoObject_Adoc_T::PropertyCount
@@ -207,5 +230,5 @@ docs.RepoObject_Adoc::SysObject_fullname2 <-- docs.RepoObject_Adoc_T::SysObject_
 docs.RepoObject_Adoc::SysObject_schema_name <-- docs.RepoObject_Adoc_T::SysObject_schema_name
 docs.RepoObject_Adoc::SysObject_type <-- docs.RepoObject_Adoc_T::SysObject_type
 docs.RepoObject_Adoc::SysObject_type_name <-- docs.RepoObject_Adoc_T::SysObject_type_name
-repo.RepoObject_gross::is_DocsOutput <-- docs.RepoObject_Adoc::is_DocsOutput
-repo.RepoObject_gross::RepoObject_guid <-- docs.RepoObject_Adoc::RepoObject_guid
+repo.RepoObject_gross2::is_DocsOutput <-- docs.RepoObject_Adoc::is_DocsOutput
+repo.RepoObject_gross2::RepoObject_guid <-- docs.RepoObject_Adoc::RepoObject_guid

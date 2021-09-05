@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -55,9 +56,14 @@ entity repo.RepoObject_gross << V >> {
   --
 }
 
+entity repo.RepoObject_wo_referencing << V >> {
+  --
+}
+
 configT.spt_values <.. configT.type
 configT.type <.. configT.type_level1type_level2type
 configT.type <.. repo.RepoObject_gross
 configT.type <.. docs.usp_AntoraExport_navigation
 configT.type <.. docs.AntoraNavListPage_by_type
 configT.type <.. docs.AntoraPage_ObjectByType
+configT.type <.. repo.RepoObject_wo_referencing

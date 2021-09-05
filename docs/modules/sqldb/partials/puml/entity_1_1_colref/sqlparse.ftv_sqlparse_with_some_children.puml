@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -30,6 +31,7 @@ entity sqlparse.ftv_sqlparse_IdentifierList__TestOnly << IF >> {
   Identifier_source_children : nvarchar(max)
   Identifier_source_class : nvarchar(500)
   T2_class : nvarchar(500)
+  --
 }
 
 entity sqlparse.ftv_sqlparse_with_some_children << IF >> {
@@ -71,6 +73,7 @@ entity sqlparse.ftv_sqlparse_with_some_children << IF >> {
   is_whitespace : bit
   * json_key : nvarchar(4000)
   normalized : nvarchar(max)
+  --
 }
 
 entity sqlparse.RepoObject_SqlModules_20_statement_children << V >> {
@@ -115,6 +118,7 @@ entity sqlparse.RepoObject_SqlModules_20_statement_children << V >> {
   normalized : nvarchar(max)
   RowNumber_per_Object : bigint
   SysObject_fullname : nvarchar(261)
+  --
 }
 
 entity sqlparse.RepoObject_SqlModules_24_IdentifierList_children << V >> {
@@ -165,9 +169,10 @@ entity sqlparse.RepoObject_SqlModules_24_IdentifierList_children << V >> {
   RowNumber_per_Object : bigint
   SysObject_fullname : nvarchar(261)
   T2_class : nvarchar(500)
+  --
 }
 
-sqlparse.ftv_sqlparse_with_some_children <.. sqlparse.ftv_sqlparse_IdentifierList__TestOnly
 sqlparse.ftv_sqlparse_with_some_children <.. sqlparse.RepoObject_SqlModules_20_statement_children
 sqlparse.ftv_sqlparse_with_some_children <.. sqlparse.RepoObject_SqlModules_24_IdentifierList_children
+sqlparse.ftv_sqlparse_with_some_children <.. sqlparse.ftv_sqlparse_IdentifierList__TestOnly
 

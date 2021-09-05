@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -37,6 +38,10 @@ entity docs.RepoObject_Plantuml_ObjectRefList_30_0 << V >> {
   --
 }
 
+entity reference.ReferenceTree_cyclic_ref_PersistenceUsp << V >> {
+  --
+}
+
 entity reference.RepoObject_reference << V >> {
   **referenced_RepoObject_guid** : uniqueidentifier
   **referencing_RepoObject_guid** : uniqueidentifier
@@ -49,9 +54,17 @@ entity reference.RepoObject_reference_T << U >> {
   --
 }
 
+entity reference.RepoObject_reference_T_bidirectional << V >> {
+  --
+}
+
 entity reference.RepoObject_ReferencingReferenced << V >> {
   * **Referenced_guid** : uniqueidentifier
   * **Referencing_guid** : uniqueidentifier
+  --
+}
+
+entity reference.RepoObjectColumn_reference_additional_internal << V >> {
   --
 }
 
@@ -91,15 +104,28 @@ entity repo.IndexReferencedReferencing << V >> {
   --
 }
 
+entity repo.RepoObject_wo_referencing << V >> {
+  --
+}
+
+entity repo.usp_main << P >> {
+  --
+}
+
 reference.RepoObject_reference <.. reference.RepoObject_reference_T
 reference.RepoObject_reference_T <.. repo.IndexReferencedReferencing
 reference.RepoObject_reference_T <.. reference.RepoObjectColumn_reference_SqlExpressionDependencies
-reference.RepoObject_reference_T <.. reference.RepoObject_ReferencingReferenced
+reference.RepoObject_reference_T <.. repo.usp_main
 reference.RepoObject_reference_T <.. reference.RepoObjectColumn_reference_BySamePredecessors
 reference.RepoObject_reference_T <.. reference.RepoObjectColumn_reference_QueryPlan
 reference.RepoObject_reference_T <.. reference.RepoObjectColumn_reference_FirstResultSet
 reference.RepoObject_reference_T <.. reference.RepoObjectColumn_reference_virtual
 reference.RepoObject_reference_T <.. reference.usp_PERSIST_RepoObject_reference_T
-reference.RepoObject_reference_T <.. docs.RepoObject_Plantuml_ObjectRefList_30_0
 reference.RepoObject_reference_T <.. docs.RepoObject_Plantuml_ObjectRefList_0_30
+reference.RepoObject_reference_T <.. reference.RepoObject_ReferencingReferenced
+reference.RepoObject_reference_T <.. docs.RepoObject_Plantuml_ObjectRefList_30_0
 reference.RepoObject_reference_T <.. docs.RepoObject_Plantuml_ObjectRefList_1_1
+reference.RepoObject_reference_T <.. reference.RepoObject_reference_T_bidirectional
+reference.RepoObject_reference_T <.. reference.ReferenceTree_cyclic_ref_PersistenceUsp
+reference.RepoObject_reference_T <.. repo.RepoObject_wo_referencing
+reference.RepoObject_reference_T <.. reference.RepoObjectColumn_reference_additional_internal

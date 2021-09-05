@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -24,25 +25,27 @@ skinparam class {
 
 
 entity docs.RepoObject_Adoc << V >> {
-  * **RepoObject_guid** : uniqueidentifier
   --
   * AdocContent : nvarchar(max)
   is_DocsOutput : int
   PropertyCount : int
   RepoObject_fullname : nvarchar(261)
   RepoObject_fullname2 : nvarchar(257)
+  * RepoObject_guid : uniqueidentifier
   RepoObject_schema_name : nvarchar(128)
   SysObject_fullname : nvarchar(261)
   SysObject_fullname2 : nvarchar(257)
   SysObject_schema_name : nvarchar(128)
   SysObject_type : char(2)
   SysObject_type_name : nvarchar(128)
+  --
 }
 
 entity docs.RepoObject_ParameterList << V >> {
   **RepoObject_guid** : uniqueidentifier
   --
   AntoraParameterList : nvarchar(max)
+  --
 }
 
 entity repo_sys.parameters << V >> {
@@ -76,6 +79,7 @@ entity repo_sys.parameters << V >> {
   * user_type_id : int
   user_type_name : sysname
   * xml_collection_id : int
+  --
 }
 
 docs.RepoObject_ParameterList <.. docs.RepoObject_Adoc

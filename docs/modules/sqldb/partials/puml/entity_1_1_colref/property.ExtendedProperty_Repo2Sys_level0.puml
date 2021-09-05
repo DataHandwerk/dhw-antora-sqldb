@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -33,19 +34,23 @@ entity property.ExtendedProperty_Repo2Sys_level0 << V >> {
   level2type : nvarchar(128)
   * property_name : varchar(14)
   property_value : nvarchar(4000)
+  --
 }
 
 entity property.usp_sync_ExtendedProperties_Repo2Sys_Delete << P >> {
   --
+  --
 }
 
 entity property.usp_sync_ExtendedProperties_Repo2Sys_InsertUpdate << P >> {
+  --
   --
 }
 
 entity repo.RepoSchema << U >> {
   * **RepoSchema_guid** : uniqueidentifier
   --
+  * is_ssas : bit
   is_SysSchema_missing : bit
   RepoSchema_ms_description : nvarchar(4000)
   * RepoSchema_name : nvarchar(128)
@@ -54,6 +59,7 @@ entity repo.RepoSchema << U >> {
   {abstract} has_different_sys_names : bit
   * {static} is_RepoSchema_name_uniqueidentifier : int
   * {static} is_SysSchema_name_uniqueidentifier : int
+  --
 }
 
 property.ExtendedProperty_Repo2Sys_level0 <.. property.usp_sync_ExtendedProperties_Repo2Sys_InsertUpdate

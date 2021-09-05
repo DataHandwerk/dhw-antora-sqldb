@@ -41,7 +41,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-05 10:54:39
+2021-09-05 13:29:35
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -98,7 +98,27 @@ source: property.RepoObjectProperty_cross As rop_cross
 * [repo].[IndexColumn_ssas]
 * [repo].[IndexColumn_ssas_T]
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+DELETE T
+FROM [repo].[IndexColumn_ssas_T] AS T
+WHERE
+NOT EXISTS
+(SELECT 1 FROM [repo].[IndexColumn_ssas] AS S
+WHERE
+T.[index_guid] = S.[index_guid]
+AND T.[index_column_id] = S.[index_column_id]
+)
+ 
+----
+=====
+
 |
+
 
 |600
 |
@@ -108,7 +128,38 @@ source: property.RepoObjectProperty_cross As rop_cross
 * [repo].[IndexColumn_ssas]
 * [repo].[IndexColumn_ssas_T]
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+UPDATE T
+SET
+  T.[index_guid] = S.[index_guid]
+, T.[index_column_id] = S.[index_column_id]
+, T.[ColumnName] = S.[ColumnName]
+, T.[databasename] = S.[databasename]
+, T.[RepoObjectColumn_guid] = S.[RepoObjectColumn_guid]
+, T.[TableName] = S.[TableName]
+
+FROM [repo].[IndexColumn_ssas_T] AS T
+INNER JOIN [repo].[IndexColumn_ssas] AS S
+ON
+T.[index_guid] = S.[index_guid]
+AND T.[index_column_id] = S.[index_column_id]
+
+WHERE
+   T.[ColumnName] <> S.[ColumnName]
+OR T.[databasename] <> S.[databasename]
+OR T.[RepoObjectColumn_guid] <> S.[RepoObjectColumn_guid]
+OR T.[TableName] <> S.[TableName]
+
+----
+=====
+
 |
+
 
 |700
 |
@@ -118,7 +169,44 @@ source: property.RepoObjectProperty_cross As rop_cross
 * [repo].[IndexColumn_ssas]
 * [repo].[IndexColumn_ssas_T]
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+INSERT INTO 
+ [repo].[IndexColumn_ssas_T]
+ (
+  [index_guid]
+, [index_column_id]
+, [ColumnName]
+, [databasename]
+, [RepoObjectColumn_guid]
+, [TableName]
+)
+SELECT
+  [index_guid]
+, [index_column_id]
+, [ColumnName]
+, [databasename]
+, [RepoObjectColumn_guid]
+, [TableName]
+
+FROM [repo].[IndexColumn_ssas] AS S
+WHERE
+NOT EXISTS
+(SELECT 1
+FROM [repo].[IndexColumn_ssas_T] AS T
+WHERE
+T.[index_guid] = S.[index_guid]
+AND T.[index_column_id] = S.[index_column_id]
+)
+----
+=====
+
 |
+
 |===
 
 // end::adocuspsteps[]
@@ -391,7 +479,7 @@ source: property.RepoObjectProperty WHERE property_int = 1
 
 // tag::sql_modules_definition[]
 [%collapsible]
-====
+=======
 [source,sql]
 ----
 /*
@@ -639,7 +727,7 @@ END
 
 
 ----
-====
+=======
 // end::sql_modules_definition[]
 
 

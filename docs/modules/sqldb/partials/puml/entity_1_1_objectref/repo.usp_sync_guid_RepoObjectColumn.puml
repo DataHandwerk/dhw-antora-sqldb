@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -63,6 +64,11 @@ entity repo.RepoObjectColumn << U >> {
   --
 }
 
+entity repo.RepoObjectColumn_gross << V >> {
+  * **RepoObjectColumn_guid** : uniqueidentifier
+  --
+}
+
 entity repo.RepoObjectColumn_HistValidColums_setpoint << V >> {
   * **RepoObject_guid** : uniqueidentifier
   **RepoObjectColumn_name** : sysname
@@ -105,6 +111,7 @@ repo.IndexColumn_virtual <.. repo.usp_sync_guid_RepoObjectColumn
 repo.RepoObject <.. repo.usp_sync_guid_RepoObjectColumn
 repo.RepoObject_persistence <.. repo.usp_sync_guid_RepoObjectColumn
 repo.RepoObjectColumn <.. repo.usp_sync_guid_RepoObjectColumn
+repo.RepoObjectColumn_gross <.. repo.usp_sync_guid_RepoObjectColumn
 repo.RepoObjectColumn_HistValidColums_setpoint <.. repo.usp_sync_guid_RepoObjectColumn
 repo.RepoObjectColumn_RequiredRepoObjectColumnMerge <.. repo.usp_sync_guid_RepoObjectColumn
 repo.SysColumn_RepoObjectColumn_via_guid <.. repo.usp_sync_guid_RepoObjectColumn

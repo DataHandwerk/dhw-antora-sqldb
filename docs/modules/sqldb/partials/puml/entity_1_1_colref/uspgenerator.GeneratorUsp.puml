@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -32,6 +33,7 @@ entity uspgenerator.GeneratorUsp << U >> {
   * usp_name : nvarchar(128)
   * usp_schema : nvarchar(128)
   * {static} usp_fullname : nvarchar(261)
+  --
 }
 
 entity uspgenerator.GeneratorUsp_filter_persistence << V >> {
@@ -42,6 +44,7 @@ entity uspgenerator.GeneratorUsp_filter_persistence << V >> {
   * usp_fullname : nvarchar(261)
   * usp_name : nvarchar(128)
   * usp_schema : nvarchar(128)
+  --
 }
 
 entity uspgenerator.GeneratorUsp_SqlUsp << V >> {
@@ -59,6 +62,7 @@ entity uspgenerator.GeneratorUsp_SqlUsp << V >> {
   * usp_schema : nvarchar(128)
   * UspExamples : nvarchar(4000)
   UspParameters : nvarchar(max)
+  --
 }
 
 entity uspgenerator.GeneratorUspStep_Persistence << V >> {
@@ -77,6 +81,7 @@ entity uspgenerator.GeneratorUspStep_Persistence << V >> {
   * RepoObject_guid : uniqueidentifier
   Statement : nvarchar(max)
   * usp_fullname : nvarchar(261)
+  --
 }
 
 entity uspgenerator.GeneratorUspStep_Persistence_IsInactive_setpoint << V >> {
@@ -85,6 +90,7 @@ entity uspgenerator.GeneratorUspStep_Persistence_IsInactive_setpoint << V >> {
   * is_inactive : int
   * Number : int
   source_pk_index_guid : uniqueidentifier
+  --
 }
 
 entity uspgenerator.GeneratorUspStep_Sql << V >> {
@@ -99,18 +105,20 @@ entity uspgenerator.GeneratorUspStep_Sql << V >> {
   RowNumber_PerUsp : bigint
   * SqlStep : nvarchar(max)
   * usp_fullname : nvarchar(261)
+  --
 }
 
 entity uspgenerator.usp_GeneratorUsp_insert_update_persistence << P >> {
   --
+  --
 }
 
-uspgenerator.GeneratorUsp <.. uspgenerator.GeneratorUsp_SqlUsp
 uspgenerator.GeneratorUsp <.. uspgenerator.GeneratorUsp_filter_persistence
 uspgenerator.GeneratorUsp <.. uspgenerator.GeneratorUspStep_Sql
-uspgenerator.GeneratorUsp <.. uspgenerator.usp_GeneratorUsp_insert_update_persistence
+uspgenerator.GeneratorUsp <.. uspgenerator.GeneratorUsp_SqlUsp
 uspgenerator.GeneratorUsp <.. uspgenerator.GeneratorUspStep_Persistence_IsInactive_setpoint
 uspgenerator.GeneratorUsp <.. uspgenerator.GeneratorUspStep_Persistence
+uspgenerator.GeneratorUsp <.. uspgenerator.usp_GeneratorUsp_insert_update_persistence
 uspgenerator.GeneratorUsp::has_logging <-- uspgenerator.GeneratorUsp_filter_persistence::has_logging
 uspgenerator.GeneratorUsp::has_logging <-- uspgenerator.GeneratorUspStep_Sql::has_logging
 uspgenerator.GeneratorUsp::has_logging <-- uspgenerator.GeneratorUsp_SqlUsp::has_logging

@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -23,35 +24,6 @@ skinparam class {
 }
 
 
-entity docs.ftv_RepoObject_Reference_PlantUml_EntityRefList << IF >> {
-  --
-  PumlEntityList : nvarchar(max)
-  PumlEntityOnlyPkList : nvarchar(max)
-  Referenced_Depth : int
-  Referencing_Depth : int
-  ro_guid : uniqueidentifier
-}
-
-entity docs.RepoObject_Plantuml_ObjectRefList_30_0 << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  --
-  ObjectRefList : nvarchar(max)
-}
-
-entity reference.Persistence << V >> {
-  --
-  referenced_fullname : nvarchar(261)
-  referenced_RepoObject_guid : uniqueidentifier
-  referenced_schema_name : nvarchar(128)
-  referenced_usp_persistence_name : nvarchar(140)
-  referenced_usp_persistence_RepoObject_guid : uniqueidentifier
-  referencing_fullname : nvarchar(261)
-  referencing_RepoObject_guid : uniqueidentifier
-  referencing_schema_name : nvarchar(128)
-  referencing_usp_persistence_name : nvarchar(140)
-  referencing_usp_persistence_RepoObject_guid : uniqueidentifier
-}
-
 entity reference.RepoObject_ReferenceTree_30_0 << V >> {
   **RepoObject_guid** : uniqueidentifier
   **Referencing_guid** : uniqueidentifier
@@ -65,6 +37,7 @@ entity reference.RepoObject_ReferenceTree_30_0 << V >> {
   Referencing_fullname : nvarchar(261)
   Referencing_fullname2 : nvarchar(257)
   Referencing_type : varchar(2)
+  --
 }
 
 entity reference.RepoObject_ReferenceTree_30_0_T << U >> {
@@ -80,17 +53,16 @@ entity reference.RepoObject_ReferenceTree_30_0_T << U >> {
   Referencing_guid : uniqueidentifier
   Referencing_type : varchar(2)
   RepoObject_guid : uniqueidentifier
+  --
 }
 
 entity reference.usp_PERSIST_RepoObject_ReferenceTree_30_0_T << P >> {
   --
+  --
 }
 
 reference.RepoObject_ReferenceTree_30_0 <.. reference.RepoObject_ReferenceTree_30_0_T
-reference.RepoObject_ReferenceTree_30_0_T <.. docs.ftv_RepoObject_Reference_PlantUml_EntityRefList
-reference.RepoObject_ReferenceTree_30_0_T <.. docs.RepoObject_Plantuml_ObjectRefList_30_0
 reference.RepoObject_ReferenceTree_30_0_T <.. reference.usp_PERSIST_RepoObject_ReferenceTree_30_0_T
-reference.RepoObject_ReferenceTree_30_0_T <.. reference.Persistence
 reference.RepoObject_ReferenceTree_30_0::Referenced_Depth <-- reference.RepoObject_ReferenceTree_30_0_T::Referenced_Depth
 reference.RepoObject_ReferenceTree_30_0::Referenced_fullname <-- reference.RepoObject_ReferenceTree_30_0_T::Referenced_fullname
 reference.RepoObject_ReferenceTree_30_0::Referenced_fullname2 <-- reference.RepoObject_ReferenceTree_30_0_T::Referenced_fullname2

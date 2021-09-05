@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -27,6 +28,7 @@ entity config.ftv_dwh_database << IF >> {
   --
   dwh_database_id : smallint
   dwh_database_name : nvarchar(128)
+  --
 }
 
 entity reference.RepoObject_reference_SqlExpressionDependencies << V >> {
@@ -37,15 +39,14 @@ entity reference.RepoObject_reference_SqlExpressionDependencies << V >> {
   referenced_entity_name : nvarchar(128)
   * referenced_fullname : nvarchar(517)
   referenced_id : int
-  referenced_node_id : bigint
   referenced_schema_name : nvarchar(128)
   referenced_type : char(2)
   referencing_entity_name : nvarchar(128)
   * referencing_fullname : nvarchar(517)
   * referencing_id : int
-  referencing_node_id : bigint
   referencing_schema_name : nvarchar(128)
   referencing_type : char(2)
+  --
 }
 
 entity reference.RepoObjectColumn_reference_SqlExpressionDependencies << V >> {
@@ -73,6 +74,7 @@ entity reference.RepoObjectColumn_reference_SqlExpressionDependencies << V >> {
   referencing_RepoObjectColumn_guid : uniqueidentifier
   referencing_schema_name : nvarchar(128)
   referencing_type : char(2)
+  --
 }
 
 entity repo.SysColumn_RepoObjectColumn_via_name << V >> {
@@ -131,6 +133,7 @@ entity repo.SysColumn_RepoObjectColumn_via_name << V >> {
   user_type_fullname : nvarchar(182)
   user_type_name : sysname
   uses_database_collation : bit
+  --
 }
 
 entity repo.SysObject_RepoObject_via_name << V >> {
@@ -162,6 +165,7 @@ entity repo.SysObject_RepoObject_via_name << V >> {
   SysObject_type : char(2)
   SysObject_type_desc : nvarchar(60)
   temporal_type : tinyint
+  --
 }
 
 entity repo_sys.sql_expression_dependencies << V >> {
@@ -195,9 +199,11 @@ entity repo_sys.sql_expression_dependencies << V >> {
   referencing_schema_name : nvarchar(128)
   referencing_type : char(2)
   referencing_type_desciption : nvarchar(60)
+  --
 }
 
 entity sys_dwh.sql_expression_dependencies << SN >> {
+  --
   --
 }
 

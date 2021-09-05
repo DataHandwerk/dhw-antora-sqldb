@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -30,6 +31,7 @@ entity repo.Index_Settings << U >> {
   IndexPatternColumnName : nvarchar(4000)
   IndexSemanticGroup : nvarchar(512)
   * is_create_constraint : bit
+  --
 }
 
 entity repo.Index_virtual << U >> {
@@ -44,6 +46,7 @@ entity repo.Index_virtual << U >> {
   * parent_RepoObject_guid : uniqueidentifier
   referenced_index_guid : uniqueidentifier
   RowNumberInReferencing : int
+  --
 }
 
 entity repo.Index_virtual_SysObject << V >> {
@@ -63,6 +66,7 @@ entity repo.Index_virtual_SysObject << V >> {
   * SysObject_name : nvarchar(128)
   * SysObject_schema_name : nvarchar(128)
   SysObject_type : char(2)
+  --
 }
 
 entity repo.RepoObject << U >> {
@@ -73,8 +77,10 @@ entity repo.RepoObject << U >> {
   Inheritance_StringAggSeparatorSql : nvarchar(4000)
   InheritanceDefinition : nvarchar(4000)
   InheritanceType : tinyint
+  * is_DocsExclude : bit
   is_repo_managed : bit
   is_required_ObjectMerge : bit
+  * is_ssas : bit
   is_SysObject_missing : bit
   * modify_dt : datetime
   pk_index_guid : uniqueidentifier
@@ -100,7 +106,9 @@ entity repo.RepoObject << U >> {
   * {static} SysObject_fullname : nvarchar(261)
   * {static} SysObject_fullname2 : nvarchar(257)
   * {abstract} SysObject_query_sql : nvarchar(406)
+  * {static} usp_persistence_fullname2 : nvarchar(269)
   * {static} usp_persistence_name : nvarchar(140)
+  --
 }
 
 repo.Index_Settings <.. repo.Index_virtual_SysObject

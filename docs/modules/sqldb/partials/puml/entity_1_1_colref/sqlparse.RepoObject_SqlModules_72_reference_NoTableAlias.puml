@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -31,8 +32,10 @@ entity repo.RepoObject << U >> {
   Inheritance_StringAggSeparatorSql : nvarchar(4000)
   InheritanceDefinition : nvarchar(4000)
   InheritanceType : tinyint
+  * is_DocsExclude : bit
   is_repo_managed : bit
   is_required_ObjectMerge : bit
+  * is_ssas : bit
   is_SysObject_missing : bit
   * modify_dt : datetime
   pk_index_guid : uniqueidentifier
@@ -58,7 +61,9 @@ entity repo.RepoObject << U >> {
   * {static} SysObject_fullname : nvarchar(261)
   * {static} SysObject_fullname2 : nvarchar(257)
   * {abstract} SysObject_query_sql : nvarchar(406)
+  * {static} usp_persistence_fullname2 : nvarchar(269)
   * {static} usp_persistence_name : nvarchar(140)
+  --
 }
 
 entity repo.RepoObjectColumn << U >> {
@@ -99,6 +104,7 @@ entity repo.RepoObjectColumn << U >> {
   {abstract} has_different_sys_names : bit
   * {static} is_RepoObjectColumn_name_uniqueidentifier : int
   * {static} is_SysObjectColumn_name_uniqueidentifier : int
+  --
 }
 
 entity sqlparse.RepoObject_SqlModules_44_from_Identifier_QuoteName << V >> {
@@ -118,6 +124,7 @@ entity sqlparse.RepoObject_SqlModules_44_from_Identifier_QuoteName << V >> {
   RowNumber_per_Object : bigint
   SysObject_fullname : nvarchar(261)
   T1_identifier_alias : nvarchar(max)
+  --
 }
 
 entity sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union_T << U >> {
@@ -130,6 +137,7 @@ entity sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union_T << U >> {
   source_column_QuoteName : nvarchar(max)
   source_table_QuoteName : nvarchar(max)
   SysObject_fullname : nvarchar(261)
+  --
 }
 
 entity sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias << V >> {
@@ -146,6 +154,7 @@ entity sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias << V >> {
   * source_SysObject_fullname : nvarchar(261)
   source_table_QuoteName : nvarchar(max)
   SysObject_fullname : nvarchar(261)
+  --
 }
 
 entity sqlparse.RepoObject_SqlModules_79_reference_union << V >> {
@@ -162,6 +171,7 @@ entity sqlparse.RepoObject_SqlModules_79_reference_union << V >> {
   * source_SysObject_fullname : nvarchar(261)
   source_table_QuoteName : nvarchar(max)
   SysObject_fullname : nvarchar(261)
+  --
 }
 
 repo.RepoObject <.. sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias

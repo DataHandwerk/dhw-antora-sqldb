@@ -41,7 +41,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-05 10:54:39
+2021-09-05 13:29:35
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -98,7 +98,27 @@ source: property.RepoObjectProperty_cross As rop_cross
 * [repo].[Index_ssas]
 * [repo].[Index_ssas_T]
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+DELETE T
+FROM [repo].[Index_ssas_T] AS T
+WHERE
+NOT EXISTS
+(SELECT 1 FROM [repo].[Index_ssas] AS S
+WHERE
+T.[databasename] = S.[databasename]
+AND T.[index_name] = S.[index_name]
+)
+ 
+----
+=====
+
 |
+
 
 |600
 |
@@ -108,7 +128,40 @@ source: property.RepoObjectProperty_cross As rop_cross
 * [repo].[Index_ssas]
 * [repo].[Index_ssas_T]
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+UPDATE T
+SET
+  T.[databasename] = S.[databasename]
+, T.[index_name] = S.[index_name]
+, T.[ColumnName] = S.[ColumnName]
+, T.[is_index_primary_key] = S.[is_index_primary_key]
+, T.[is_index_unique] = S.[is_index_unique]
+, T.[RepoObject_guid] = S.[RepoObject_guid]
+, T.[TableName] = S.[TableName]
+
+FROM [repo].[Index_ssas_T] AS T
+INNER JOIN [repo].[Index_ssas] AS S
+ON
+T.[databasename] = S.[databasename]
+AND T.[index_name] = S.[index_name]
+
+WHERE
+   T.[ColumnName] <> S.[ColumnName]
+OR T.[is_index_primary_key] <> S.[is_index_primary_key]
+OR T.[is_index_unique] <> S.[is_index_unique]
+OR T.[RepoObject_guid] <> S.[RepoObject_guid]
+OR T.[TableName] <> S.[TableName]
+
+----
+=====
+
 |
+
 
 |700
 |
@@ -118,7 +171,46 @@ source: property.RepoObjectProperty_cross As rop_cross
 * [repo].[Index_ssas]
 * [repo].[Index_ssas_T]
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+INSERT INTO 
+ [repo].[Index_ssas_T]
+ (
+  [databasename]
+, [index_name]
+, [ColumnName]
+, [is_index_primary_key]
+, [is_index_unique]
+, [RepoObject_guid]
+, [TableName]
+)
+SELECT
+  [databasename]
+, [index_name]
+, [ColumnName]
+, [is_index_primary_key]
+, [is_index_unique]
+, [RepoObject_guid]
+, [TableName]
+
+FROM [repo].[Index_ssas] AS S
+WHERE
+NOT EXISTS
+(SELECT 1
+FROM [repo].[Index_ssas_T] AS T
+WHERE
+T.[databasename] = S.[databasename]
+AND T.[index_name] = S.[index_name]
+)
+----
+=====
+
 |
+
 |===
 
 // end::adocuspsteps[]
@@ -391,7 +483,7 @@ source: property.RepoObjectProperty WHERE property_int = 1
 
 // tag::sql_modules_definition[]
 [%collapsible]
-====
+=======
 [source,sql]
 ----
 /*
@@ -643,7 +735,7 @@ END
 
 
 ----
-====
+=======
 // end::sql_modules_definition[]
 
 

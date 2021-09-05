@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -23,12 +24,14 @@ skinparam class {
 }
 
 
-entity config.ftv_get_parameter_value << IF >> {
+entity docs.fs_PumlHeaderLeftToRight << FN >> {
   --
-  Parameter_value__result_date : date
-  Parameter_value__result_datetime : datetime
-  Parameter_value__result_int : int
-  Parameter_value__result_nvarchar : nvarchar(4000)
+  --
+}
+
+entity docs.fs_PumlHeaderTopToBottom << FN >> {
+  --
+  --
 }
 
 entity docs.ftv_RepoObject_Reference_PlantUml_EntityRefList << IF >> {
@@ -38,6 +41,7 @@ entity docs.ftv_RepoObject_Reference_PlantUml_EntityRefList << IF >> {
   Referenced_Depth : int
   Referencing_Depth : int
   ro_guid : uniqueidentifier
+  --
 }
 
 entity docs.RepoObject_Plantuml << V >> {
@@ -56,12 +60,14 @@ entity docs.RepoObject_Plantuml << V >> {
   PumlEntityList_0_30 : nvarchar(max)
   PumlEntityList_30_0 : nvarchar(max)
   * RepoObject_fullname2 : nvarchar(257)
+  --
 }
 
 entity docs.RepoObject_Plantuml_ColRefList_1_1 << V >> {
   --
   ColRefList : nvarchar(max)
   * RepoObject_guid : uniqueidentifier
+  --
 }
 
 entity docs.RepoObject_PlantUml_FkRefList << V >> {
@@ -69,24 +75,28 @@ entity docs.RepoObject_PlantUml_FkRefList << V >> {
   FkRefList : nvarchar(max)
   RepoObject_fullname2 : nvarchar(257)
   RepoObject_guid : uniqueidentifier
+  --
 }
 
 entity docs.RepoObject_Plantuml_ObjectRefList_0_30 << V >> {
   * **RepoObject_guid** : uniqueidentifier
   --
   ObjectRefList : nvarchar(max)
+  --
 }
 
 entity docs.RepoObject_Plantuml_ObjectRefList_1_1 << V >> {
   --
   ObjectRefList : nvarchar(max)
   * RepoObject_guid : uniqueidentifier
+  --
 }
 
 entity docs.RepoObject_Plantuml_ObjectRefList_30_0 << V >> {
   * **RepoObject_guid** : uniqueidentifier
   --
   ObjectRefList : nvarchar(max)
+  --
 }
 
 entity docs.RepoObject_PlantUml_PumlEntityFkList << V >> {
@@ -94,6 +104,7 @@ entity docs.RepoObject_PlantUml_PumlEntityFkList << V >> {
   --
   PumlEntityFkList : nvarchar(max)
   RepoObject_fullname2 : nvarchar(257)
+  --
 }
 
 entity docs.RepoObject_Plantuml_T << U >> {
@@ -112,19 +123,18 @@ entity docs.RepoObject_Plantuml_T << U >> {
   PumlEntityList_0_30 : nvarchar(max)
   PumlEntityList_30_0 : nvarchar(max)
   * RepoObject_fullname2 : nvarchar(257)
+  --
 }
 
 entity docs.usp_PERSIST_RepoObject_Plantuml_T << P >> {
+  --
   --
 }
 
 entity repo.RepoObject_gross << V >> {
   * **RepoObject_guid** : uniqueidentifier
   --
-  AntoraReferencedList : nvarchar(max)
-  AntoraReferencingList : nvarchar(max)
-  CreateColumnList : nvarchar(max)
-  DbmlColumnList : nvarchar(max)
+  Description : nvarchar(max)
   has_different_sys_names : bit
   has_execution_plan_issue : bit
   has_get_referenced_issue : bit
@@ -135,6 +145,7 @@ entity repo.RepoObject_gross << V >> {
   Inheritance_StringAggSeparatorSql : nvarchar(4000)
   InheritanceDefinition : nvarchar(4000)
   InheritanceType : tinyint
+  * is_DocsExclude : bit
   is_DocsOutput : int
   * is_in_reference : int
   is_persistence : bit
@@ -151,6 +162,7 @@ entity repo.RepoObject_gross << V >> {
   is_repo_managed : bit
   * is_RepoObject_name_uniqueidentifier : int
   is_required_ObjectMerge : bit
+  * is_ssas : bit
   is_SysObject_missing : bit
   * is_SysObject_name_uniqueidentifier : int
   * modify_dt : datetime
@@ -162,9 +174,6 @@ entity repo.RepoObject_gross << V >> {
   persistence_source_SysObject_fullname : nvarchar(261)
   persistence_source_SysObject_fullname2 : nvarchar(257)
   persistence_source_SysObject_xref : nvarchar(269)
-  PersistenceCompareColumnList : nvarchar(max)
-  PersistenceInsertColumnList : nvarchar(max)
-  PersistenceUpdateColumnList : nvarchar(max)
   pk_index_guid : uniqueidentifier
   pk_IndexPatternColumnDatatype : nvarchar(4000)
   pk_IndexPatternColumnName : nvarchar(4000)
@@ -181,10 +190,6 @@ entity repo.RepoObject_gross << V >> {
   * RepoObject_type : char(2)
   RepoObject_type_name : nvarchar(128)
   source_filter : nvarchar(4000)
-  sql_modules_antora : nvarchar(max)
-  sql_modules_definition : nvarchar(max)
-  sql_modules_formatted : nvarchar(max)
-  sql_modules_formatted2 : nvarchar(max)
   * SysObject_fullname : nvarchar(261)
   * SysObject_fullname2 : nvarchar(257)
   SysObject_id : int
@@ -197,13 +202,18 @@ entity repo.RepoObject_gross << V >> {
   * SysObject_schema_name : nvarchar(128)
   SysObject_type : char(2)
   SysObject_type_name : nvarchar(128)
+  tables_dataCategory : nvarchar(500)
+  tables_description : nvarchar(max)
+  tables_isHidden : nvarchar(500)
   target_filter : nvarchar(4000)
   temporal_type : tinyint
   * usp_persistence_name : nvarchar(140)
   usp_persistence_RepoObject_guid : uniqueidentifier
+  --
 }
 
-config.ftv_get_parameter_value <.. docs.RepoObject_Plantuml
+docs.fs_PumlHeaderLeftToRight <.. docs.RepoObject_Plantuml
+docs.fs_PumlHeaderTopToBottom <.. docs.RepoObject_Plantuml
 docs.ftv_RepoObject_Reference_PlantUml_EntityRefList <.. docs.RepoObject_Plantuml
 docs.RepoObject_Plantuml <.. docs.RepoObject_Plantuml_T
 docs.RepoObject_Plantuml <.. docs.usp_PERSIST_RepoObject_Plantuml_T

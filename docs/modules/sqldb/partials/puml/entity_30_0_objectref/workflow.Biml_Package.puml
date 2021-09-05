@@ -1,0 +1,489 @@
+'Left to right direction
+top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+}
+
+
+entity config.fs_get_parameter_value << FN >> {
+  --
+}
+
+entity config.ftv_dwh_database << IF >> {
+  --
+}
+
+entity config.Parameter << U >> {
+  * **Parameter_name** : varchar(100)
+  * **sub_Parameter** : nvarchar(128)
+  --
+}
+
+entity configT.spt_values << U >> {
+  --
+}
+
+entity configT.type << V >> {
+  **type** : nvarchar(128)
+  --
+}
+
+entity property.fs_get_RepoObjectProperty_nvarchar << FN >> {
+  --
+}
+
+entity property.RepoObjectProperty << U >> {
+  * **RepoObjectProperty_id** : int
+  --
+}
+
+entity reference.additional_Reference << U >> {
+  * **Id** : int
+  --
+}
+
+entity reference.additional_Reference_guid << V >> {
+  --
+}
+
+entity reference.Persistence << V >> {
+  --
+}
+
+entity reference.RepoObject_QueryPlan << U >> {
+  * **RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity reference.RepoObject_reference << V >> {
+  **referenced_RepoObject_guid** : uniqueidentifier
+  **referencing_RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity reference.RepoObject_reference_additional_internal << V >> {
+  --
+}
+
+entity reference.RepoObject_reference_persistence << V >> {
+  **referenced_RepoObject_guid** : uniqueidentifier
+  * **referencing_RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity reference.RepoObject_reference_persistence_target_as_source << V >> {
+  --
+}
+
+entity reference.RepoObject_reference_SqlExpressionDependencies << V >> {
+  **referenced_RepoObject_guid** : uniqueidentifier
+  **referencing_RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity reference.RepoObject_reference_T << U >> {
+  **referenced_RepoObject_guid** : uniqueidentifier
+  **referencing_RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity reference.RepoObject_reference_union << V >> {
+  **referenced_RepoObject_guid** : uniqueidentifier
+  **referencing_RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity reference.RepoObject_reference_virtual << V >> {
+  --
+}
+
+entity reference.RepoObject_ReferenceTree << U >> {
+  * **RepoObject_guid** : uniqueidentifier
+  **Referenced_Depth** : int
+  **Referencing_Depth** : int
+  * **Referenced_guid** : uniqueidentifier
+  * **Referencing_guid** : uniqueidentifier
+  --
+}
+
+entity reference.RepoObject_ReferencingReferenced << V >> {
+  * **Referenced_guid** : uniqueidentifier
+  * **Referencing_guid** : uniqueidentifier
+  --
+}
+
+entity reference.RepoObjectSource_virtual << U >> {
+  * **RepoObject_guid** : uniqueidentifier
+  * **Source_RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity repo.Index_Settings << U >> {
+  * **index_guid** : uniqueidentifier
+  --
+}
+
+entity repo.RepoObject << U >> {
+  * **RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity repo.RepoObject_gross << V >> {
+  * **RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity repo.RepoObject_persistence << U >> {
+  * **target_RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity repo.RepoObject_SSAS_src << V >> {
+  * **RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity repo.RepoObject_SSAS_tgt << V >> {
+  * **RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity repo.RepoObjectColumn << U >> {
+  * **RepoObjectColumn_guid** : uniqueidentifier
+  --
+}
+
+entity repo.RepoObjectColumn_SSAS_src << V >> {
+  * **RepoObjectColumn_guid** : uniqueidentifier
+  --
+}
+
+entity repo.RepoObjectColumn_SSAS_tgt << V >> {
+  * **RepoObjectColumn_guid** : uniqueidentifier
+  --
+}
+
+entity repo.SysColumn_RepoObjectColumn_via_name << V >> {
+  --
+}
+
+entity repo.SysObject_RepoObject_via_name << V >> {
+  --
+}
+
+entity repo_sys.ExtendedProperties << V >> {
+  --
+}
+
+entity repo_sys.sql_expression_dependencies << V >> {
+  --
+}
+
+entity repo_sys.SysColumn << V >> {
+  --
+}
+
+entity repo_sys.SysObject << V >> {
+  --
+}
+
+entity ssas.model_json << U >> {
+  * **databasename** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_10 << V >> {
+  * **databasename** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_20 << V >> {
+  * **databasename** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_31_tables << V >> {
+  * **databasename** : nvarchar(128)
+  **tables_name** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_31_tables_T << U >> {
+  * **databasename** : nvarchar(128)
+  **tables_name** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_311_tables_columns << V >> {
+  * **databasename** : nvarchar(128)
+  * **tables_name** : nvarchar(128)
+  **tables_columns_name** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_311_tables_columns_T << U >> {
+  * **databasename** : nvarchar(128)
+  * **tables_name** : nvarchar(128)
+  **tables_columns_name** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_316_tables_descriptions_multiline << V >> {
+  --
+}
+
+entity ssas.model_json_3161_tables_descriptions_StrAgg << V >> {
+  --
+}
+
+entity sys_dwh.columns << SN >> {
+  --
+}
+
+entity sys_dwh.computed_columns << SN >> {
+  --
+}
+
+entity sys_dwh.default_constraints << SN >> {
+  --
+}
+
+entity sys_dwh.extended_properties << SN >> {
+  --
+}
+
+entity sys_dwh.identity_columns << SN >> {
+  --
+}
+
+entity sys_dwh.indexes << SN >> {
+  --
+}
+
+entity sys_dwh.objects << SN >> {
+  --
+}
+
+entity sys_dwh.parameters << SN >> {
+  --
+}
+
+entity sys_dwh.schemas << SN >> {
+  --
+}
+
+entity sys_dwh.sql_expression_dependencies << SN >> {
+  --
+}
+
+entity sys_dwh.sql_modules << SN >> {
+  --
+}
+
+entity sys_dwh.tables << SN >> {
+  --
+}
+
+entity sys_dwh.types << SN >> {
+  --
+}
+
+entity workflow.Biml_Package << V >> {
+  --
+}
+
+entity workflow.Biml_PrecedenceConstraints << V >> {
+  --
+}
+
+entity workflow.Biml_Task << V >> {
+  --
+}
+
+entity workflow.ProcedureDependency << U >> {
+  * **id** : int
+  --
+}
+
+entity workflow.ProcedureDependency_input_PersistenceDependency << V >> {
+  **referenced_Procedure_RepoObject_guid** : uniqueidentifier
+  **referencing_Procedure_RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity workflow.ProcedureDependency_input_PersistenceDependency_S << V >> {
+  **referenced_Procedure_RepoObject_guid** : uniqueidentifier
+  **referencing_Procedure_RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity workflow.Workflow << U >> {
+  * **id** : int
+  --
+}
+
+entity workflow.Workflow_ProcedureDependency << V >> {
+  --
+}
+
+entity workflow.Workflow_ProcedureDependency_T << U >> {
+  * **Workflow_id** : int
+  * **referenced_Procedure_RepoObject_guid** : uniqueidentifier
+  * **referencing_Procedure_RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity workflow.Workflow_ProcedureDependency_T_active << V >> {
+  --
+}
+
+entity workflow.Workflow_ProcedureDependency_T_TaskName << V >> {
+  --
+}
+
+entity workflow.WorkflowStep << U >> {
+  * **id** : int
+  --
+}
+
+entity workflow.WorkflowStep_active << V >> {
+  --
+}
+
+entity workflow.WorkflowStep_S << V >> {
+  * **Workflow_id** : int
+  **Procedure_RepoObject_guid** : uniqueidentifier
+  --
+}
+
+config.fs_get_parameter_value <.. reference.additional_Reference_guid
+config.ftv_dwh_database <.. repo_sys.sql_expression_dependencies
+config.ftv_dwh_database <.. repo_sys.SysColumn
+config.ftv_dwh_database <.. repo_sys.ExtendedProperties
+config.ftv_dwh_database <.. repo_sys.ExtendedProperties
+config.Parameter <.. config.fs_get_parameter_value
+config.Parameter <.. config.ftv_dwh_database
+configT.spt_values <.. configT.type
+configT.type <.. repo.RepoObject_gross
+property.fs_get_RepoObjectProperty_nvarchar <.. repo.RepoObject_gross
+property.RepoObjectProperty <.. property.fs_get_RepoObjectProperty_nvarchar
+reference.additional_Reference <.. reference.additional_Reference_guid
+reference.additional_Reference_guid <.. reference.RepoObject_reference_additional_internal
+reference.Persistence <.. workflow.ProcedureDependency_input_PersistenceDependency_S
+reference.RepoObject_QueryPlan <.. repo.RepoObject_gross
+reference.RepoObject_reference <.. reference.RepoObject_reference_T
+reference.RepoObject_reference_additional_internal <.. reference.RepoObject_reference_union
+reference.RepoObject_reference_persistence <.. reference.RepoObject_reference_union
+reference.RepoObject_reference_persistence_target_as_source <.. reference.RepoObject_reference_union
+reference.RepoObject_reference_SqlExpressionDependencies <.. reference.RepoObject_reference_union
+reference.RepoObject_reference_SqlExpressionDependencies <.. reference.RepoObject_reference_persistence_target_as_source
+reference.RepoObject_reference_T <.. reference.RepoObject_ReferencingReferenced
+reference.RepoObject_reference_union <.. reference.RepoObject_reference
+reference.RepoObject_reference_virtual <.. reference.RepoObject_reference_union
+reference.RepoObject_ReferenceTree <.. reference.Persistence
+reference.RepoObject_ReferencingReferenced <.. repo.RepoObject_gross
+reference.RepoObjectSource_virtual <.. reference.RepoObject_reference_virtual
+repo.Index_Settings <.. repo.RepoObject_gross
+repo.RepoObject <.. repo.RepoObject_gross
+repo.RepoObject <.. workflow.Workflow_ProcedureDependency_T_TaskName
+repo.RepoObject <.. repo.RepoObject_SSAS_tgt
+repo.RepoObject <.. workflow.Biml_Task
+repo.RepoObject <.. reference.RepoObject_reference_virtual
+repo.RepoObject <.. reference.RepoObject_reference_persistence
+repo.RepoObject <.. reference.additional_Reference_guid
+repo.RepoObject <.. repo.SysObject_RepoObject_via_name
+repo.RepoObject <.. repo.SysColumn_RepoObjectColumn_via_name
+repo.RepoObject_gross <.. workflow.WorkflowStep_S
+repo.RepoObject_gross <.. reference.Persistence
+repo.RepoObject_gross <.. reference.RepoObject_reference_persistence_target_as_source
+repo.RepoObject_persistence <.. repo.RepoObject_gross
+repo.RepoObject_persistence <.. reference.RepoObject_reference_persistence
+repo.RepoObject_SSAS_src <.. repo.RepoObject_SSAS_tgt
+repo.RepoObject_SSAS_tgt <.. repo.RepoObject
+repo.RepoObject_SSAS_tgt <.. repo.RepoObjectColumn_SSAS_tgt
+repo.RepoObjectColumn <.. repo.RepoObjectColumn_SSAS_tgt
+repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_name
+repo.RepoObjectColumn <.. reference.additional_Reference_guid
+repo.RepoObjectColumn_SSAS_src <.. repo.RepoObjectColumn_SSAS_tgt
+repo.RepoObjectColumn_SSAS_tgt <.. repo.RepoObjectColumn
+repo.RepoObjectColumn_SSAS_tgt <.. repo.RepoObject_SSAS_tgt
+repo.SysColumn_RepoObjectColumn_via_name <.. repo_sys.sql_expression_dependencies
+repo.SysObject_RepoObject_via_name <.. repo_sys.sql_expression_dependencies
+repo_sys.ExtendedProperties <.. repo_sys.SysColumn
+repo_sys.ExtendedProperties <.. repo_sys.SysObject
+repo_sys.sql_expression_dependencies <.. reference.RepoObject_reference_SqlExpressionDependencies
+repo_sys.SysColumn <.. repo.SysColumn_RepoObjectColumn_via_name
+repo_sys.SysObject <.. repo.SysObject_RepoObject_via_name
+repo_sys.SysObject <.. repo_sys.SysColumn
+ssas.model_json <.. ssas.model_json_10
+ssas.model_json_10 <.. ssas.model_json_20
+ssas.model_json_20 <.. ssas.model_json_31_tables
+ssas.model_json_31_tables <.. ssas.model_json_31_tables_T
+ssas.model_json_31_tables_T <.. ssas.model_json_311_tables_columns
+ssas.model_json_31_tables_T <.. ssas.model_json_316_tables_descriptions_multiline
+ssas.model_json_31_tables_T <.. repo.RepoObject_gross
+ssas.model_json_31_tables_T <.. repo.RepoObject_SSAS_src
+ssas.model_json_311_tables_columns <.. ssas.model_json_311_tables_columns_T
+ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_SSAS_src
+ssas.model_json_316_tables_descriptions_multiline <.. ssas.model_json_3161_tables_descriptions_StrAgg
+ssas.model_json_3161_tables_descriptions_StrAgg <.. repo.RepoObject_gross
+sys_dwh.columns <.. repo_sys.SysColumn
+sys_dwh.columns <.. repo_sys.ExtendedProperties
+sys_dwh.columns <.. repo_sys.ExtendedProperties
+sys_dwh.computed_columns <.. repo_sys.SysColumn
+sys_dwh.default_constraints <.. repo_sys.SysColumn
+sys_dwh.extended_properties <.. repo_sys.ExtendedProperties
+sys_dwh.extended_properties <.. repo_sys.ExtendedProperties
+sys_dwh.identity_columns <.. repo_sys.SysColumn
+sys_dwh.indexes <.. repo_sys.ExtendedProperties
+sys_dwh.indexes <.. repo_sys.ExtendedProperties
+sys_dwh.objects <.. repo_sys.ExtendedProperties
+sys_dwh.objects <.. repo_sys.ExtendedProperties
+sys_dwh.objects <.. repo_sys.SysObject
+sys_dwh.parameters <.. repo_sys.ExtendedProperties
+sys_dwh.parameters <.. repo_sys.ExtendedProperties
+sys_dwh.schemas <.. repo_sys.ExtendedProperties
+sys_dwh.schemas <.. repo_sys.ExtendedProperties
+sys_dwh.schemas <.. repo_sys.SysObject
+sys_dwh.sql_expression_dependencies <.. repo_sys.sql_expression_dependencies
+sys_dwh.sql_modules <.. repo_sys.SysObject
+sys_dwh.tables <.. repo_sys.SysObject
+sys_dwh.types <.. repo_sys.SysColumn
+workflow.Biml_PrecedenceConstraints <.. workflow.Biml_Task
+workflow.Biml_Task <.. workflow.Biml_Package
+workflow.ProcedureDependency <.. workflow.Workflow_ProcedureDependency
+workflow.ProcedureDependency <.. workflow.ProcedureDependency_input_PersistenceDependency
+workflow.ProcedureDependency_input_PersistenceDependency <.. workflow.ProcedureDependency
+workflow.ProcedureDependency_input_PersistenceDependency_S <.. workflow.ProcedureDependency_input_PersistenceDependency
+workflow.Workflow <.. workflow.Workflow_ProcedureDependency
+workflow.Workflow <.. workflow.Biml_Package
+workflow.Workflow <.. workflow.WorkflowStep_active
+workflow.Workflow <.. workflow.WorkflowStep_S
+workflow.Workflow_ProcedureDependency <.. workflow.Workflow_ProcedureDependency_T
+workflow.Workflow_ProcedureDependency_T <.. workflow.Workflow_ProcedureDependency_T_active
+workflow.Workflow_ProcedureDependency_T_active <.. workflow.Workflow_ProcedureDependency_T_TaskName
+workflow.Workflow_ProcedureDependency_T_TaskName <.. workflow.Biml_PrecedenceConstraints
+workflow.WorkflowStep <.. workflow.WorkflowStep_active
+workflow.WorkflowStep_active <.. workflow.Workflow_ProcedureDependency
+workflow.WorkflowStep_active <.. workflow.Biml_Task
+workflow.WorkflowStep_active <.. workflow.Workflow_ProcedureDependency_T_active
+workflow.WorkflowStep_S <.. workflow.WorkflowStep

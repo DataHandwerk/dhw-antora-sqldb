@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -48,6 +49,7 @@ entity reference.RepoObjectColumn_reference_Persistence << V >> {
   * referencing_RepoObjectColumn_guid : uniqueidentifier
   * referencing_schema_name : nvarchar(128)
   referencing_type : char(2)
+  --
 }
 
 entity reference.RepoObjectColumn_reference_union << V >> {
@@ -60,8 +62,6 @@ entity reference.RepoObjectColumn_reference_union << V >> {
   referenced_column_name : nvarchar(128)
   referenced_entity_name : nvarchar(128)
   referenced_id : int
-  referenced_minor_id : int
-  referenced_node_id : bigint
   referenced_RepoObject_guid : uniqueidentifier
   referenced_RepoObjectColumn_guid : uniqueidentifier
   referenced_schema_name : nvarchar(128)
@@ -69,12 +69,11 @@ entity reference.RepoObjectColumn_reference_union << V >> {
   referencing_column_name : nvarchar(128)
   referencing_entity_name : nvarchar(128)
   referencing_id : int
-  referencing_minor_id : int
-  referencing_node_id : bigint
   referencing_RepoObject_guid : uniqueidentifier
   referencing_RepoObjectColumn_guid : uniqueidentifier
   referencing_schema_name : nvarchar(128)
   referencing_type : char(2)
+  --
 }
 
 entity repo.RepoObject << U >> {
@@ -85,8 +84,10 @@ entity repo.RepoObject << U >> {
   Inheritance_StringAggSeparatorSql : nvarchar(4000)
   InheritanceDefinition : nvarchar(4000)
   InheritanceType : tinyint
+  * is_DocsExclude : bit
   is_repo_managed : bit
   is_required_ObjectMerge : bit
+  * is_ssas : bit
   is_SysObject_missing : bit
   * modify_dt : datetime
   pk_index_guid : uniqueidentifier
@@ -112,7 +113,9 @@ entity repo.RepoObject << U >> {
   * {static} SysObject_fullname : nvarchar(261)
   * {static} SysObject_fullname2 : nvarchar(257)
   * {abstract} SysObject_query_sql : nvarchar(406)
+  * {static} usp_persistence_fullname2 : nvarchar(269)
   * {static} usp_persistence_name : nvarchar(140)
+  --
 }
 
 entity repo.RepoObject_persistence << U >> {
@@ -137,6 +140,7 @@ entity repo.RepoObject_persistence << U >> {
   target_filter : nvarchar(4000)
   {abstract} is_persistence : bit
   {abstract} temporal_type : tinyint
+  --
 }
 
 entity repo.RepoObjectColumn << U >> {
@@ -177,6 +181,7 @@ entity repo.RepoObjectColumn << U >> {
   {abstract} has_different_sys_names : bit
   * {static} is_RepoObjectColumn_name_uniqueidentifier : int
   * {static} is_SysObjectColumn_name_uniqueidentifier : int
+  --
 }
 
 reference.RepoObjectColumn_reference_Persistence <.. reference.RepoObjectColumn_reference_union

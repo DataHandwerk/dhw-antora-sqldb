@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -32,6 +33,7 @@ entity repo.Index_ColumList << V >> {
   DbmlIndexColumnList : nvarchar(max)
   PersistenceWhereColumnList : nvarchar(max)
   PumlIndexColumnList : nvarchar(max)
+  --
 }
 
 entity repo.Index_gross << V >> {
@@ -41,8 +43,8 @@ entity repo.Index_gross << V >> {
   ColumnList : nvarchar(max)
   ConstraintColumnList : nvarchar(max)
   DbmlIndexColumnList : nvarchar(max)
-  index_name : nvarchar(128)
-  * index_type : tinyint
+  index_name : nvarchar(450)
+  index_type : tinyint
   IndexPatternColumnDatatype : nvarchar(4000)
   IndexPatternColumnName : nvarchar(4000)
   IndexSemanticGroup : nvarchar(512)
@@ -66,6 +68,7 @@ entity repo.Index_gross << V >> {
   * SysObject_name : nvarchar(128)
   * SysObject_schema_name : nvarchar(128)
   SysObject_type : char(2)
+  --
 }
 
 entity repo.Index_SqlConstraint_PkUq << V >> {
@@ -73,13 +76,14 @@ entity repo.Index_SqlConstraint_PkUq << V >> {
   --
   parent_RepoObject_guid : uniqueidentifier
   * SqlConstraint : nvarchar(max)
+  --
 }
 
 entity repo.IndexColumn_union << V >> {
   **index_guid** : uniqueidentifier
   * **index_column_id** : int
   --
-  index_name : nvarchar(128)
+  index_name : nvarchar(450)
   is_descending_key : bit
   is_index_primary_key : bit
   is_index_real : bit
@@ -91,6 +95,7 @@ entity repo.IndexColumn_union << V >> {
   RepoObjectColumn_guid : uniqueidentifier
   SysObject_column_name : nvarchar(128)
   SysObject_column_user_type_fullname : nvarchar(182)
+  --
 }
 
 entity uspgenerator.GeneratorUspStep_Persistence << V >> {
@@ -109,6 +114,7 @@ entity uspgenerator.GeneratorUspStep_Persistence << V >> {
   * RepoObject_guid : uniqueidentifier
   Statement : nvarchar(max)
   * usp_fullname : nvarchar(261)
+  --
 }
 
 repo.Index_ColumList <.. repo.Index_SqlConstraint_PkUq

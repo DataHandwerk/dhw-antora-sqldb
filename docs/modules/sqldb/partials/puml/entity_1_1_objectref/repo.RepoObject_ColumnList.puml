@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -24,12 +25,10 @@ skinparam class {
 
 
 entity repo.RepoObject_ColumnList << V >> {
-  * **RepoObject_guid** : uniqueidentifier
   --
 }
 
-entity repo.RepoObject_gross << V >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity repo.RepoObject_gross2 << V >> {
   --
 }
 
@@ -38,11 +37,10 @@ entity repo.RepoObject_SqlCreateTable << V >> {
   --
 }
 
-entity repo.RepoObjectColumn_gross << V >> {
-  * **RepoObjectColumn_guid** : uniqueidentifier
+entity repo.RepoObjectColumn_gross2 << V >> {
   --
 }
 
-repo.RepoObject_ColumnList <.. repo.RepoObject_gross
 repo.RepoObject_ColumnList <.. repo.RepoObject_SqlCreateTable
-repo.RepoObjectColumn_gross <.. repo.RepoObject_ColumnList
+repo.RepoObject_ColumnList <.. repo.RepoObject_gross2
+repo.RepoObjectColumn_gross2 <.. repo.RepoObject_ColumnList

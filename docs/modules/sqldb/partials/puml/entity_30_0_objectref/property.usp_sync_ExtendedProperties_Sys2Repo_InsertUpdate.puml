@@ -1,4 +1,5 @@
 'Left to right direction
+top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -72,7 +73,27 @@ entity repo.RepoObject << U >> {
   --
 }
 
+entity repo.RepoObject_SSAS_src << V >> {
+  * **RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity repo.RepoObject_SSAS_tgt << V >> {
+  * **RepoObject_guid** : uniqueidentifier
+  --
+}
+
 entity repo.RepoObjectColumn << U >> {
+  * **RepoObjectColumn_guid** : uniqueidentifier
+  --
+}
+
+entity repo.RepoObjectColumn_SSAS_src << V >> {
+  * **RepoObjectColumn_guid** : uniqueidentifier
+  --
+}
+
+entity repo.RepoObjectColumn_SSAS_tgt << V >> {
   * **RepoObjectColumn_guid** : uniqueidentifier
   --
 }
@@ -82,7 +103,66 @@ entity repo.RepoSchema << U >> {
   --
 }
 
+entity repo.RepoSchema_ssas_src << V >> {
+  * **RepoSchema_name** : nvarchar(128)
+  --
+}
+
+entity repo.RepoSchema_ssas_tgt << V >> {
+  * **RepoSchema_name** : nvarchar(128)
+  --
+}
+
 entity repo_sys.ExtendedProperties << V >> {
+  --
+}
+
+entity ssas.model_json << U >> {
+  * **databasename** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_10 << V >> {
+  * **databasename** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_20 << V >> {
+  * **databasename** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_201_descriptions_multiline << V >> {
+  --
+}
+
+entity ssas.model_json_2011_descriptions_StrAgg << V >> {
+  --
+}
+
+entity ssas.model_json_31_tables << V >> {
+  * **databasename** : nvarchar(128)
+  **tables_name** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_31_tables_T << U >> {
+  * **databasename** : nvarchar(128)
+  **tables_name** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_311_tables_columns << V >> {
+  * **databasename** : nvarchar(128)
+  * **tables_name** : nvarchar(128)
+  **tables_columns_name** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_311_tables_columns_T << U >> {
+  * **databasename** : nvarchar(128)
+  * **tables_name** : nvarchar(128)
+  **tables_columns_name** : nvarchar(128)
   --
 }
 
@@ -122,11 +202,41 @@ property.RepoObjectProperty <.. property.RepoObjectProperty_sys_repo
 property.RepoObjectProperty_sys_repo <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
 repo.RepoObject <.. property.RepoObjectColumnProperty_sys_repo
 repo.RepoObject <.. property.RepoObjectProperty_sys_repo
+repo.RepoObject <.. repo.RepoObject_SSAS_tgt
+repo.RepoObject <.. repo.RepoObject_SSAS_tgt
+repo.RepoObject_SSAS_src <.. repo.RepoObject_SSAS_tgt
+repo.RepoObject_SSAS_src <.. repo.RepoObject_SSAS_tgt
+repo.RepoObject_SSAS_tgt <.. repo.RepoObjectColumn_SSAS_tgt
+repo.RepoObject_SSAS_tgt <.. repo.RepoObject
+repo.RepoObject_SSAS_tgt <.. repo.RepoObject
 repo.RepoObjectColumn <.. property.RepoObjectColumnProperty_sys_repo
+repo.RepoObjectColumn <.. repo.RepoObjectColumn_SSAS_tgt
+repo.RepoObjectColumn_SSAS_src <.. repo.RepoObjectColumn_SSAS_tgt
+repo.RepoObjectColumn_SSAS_tgt <.. repo.RepoObject_SSAS_tgt
+repo.RepoObjectColumn_SSAS_tgt <.. repo.RepoObject_SSAS_tgt
+repo.RepoObjectColumn_SSAS_tgt <.. repo.RepoObjectColumn
+repo.RepoSchema <.. repo.RepoSchema_ssas_tgt
 repo.RepoSchema <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
-repo_sys.ExtendedProperties <.. property.RepoObjectProperty_sys_repo
+repo.RepoSchema_ssas_src <.. repo.RepoSchema_ssas_tgt
+repo.RepoSchema_ssas_tgt <.. repo.RepoSchema
 repo_sys.ExtendedProperties <.. property.RepoObjectColumnProperty_sys_repo
+repo_sys.ExtendedProperties <.. property.RepoObjectProperty_sys_repo
 repo_sys.ExtendedProperties <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
+ssas.model_json <.. ssas.model_json_10
+ssas.model_json_10 <.. ssas.model_json_20
+ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
+ssas.model_json_20 <.. ssas.model_json_31_tables
+ssas.model_json_20 <.. ssas.model_json_31_tables
+ssas.model_json_20 <.. repo.RepoSchema_ssas_src
+ssas.model_json_201_descriptions_multiline <.. ssas.model_json_2011_descriptions_StrAgg
+ssas.model_json_2011_descriptions_StrAgg <.. repo.RepoSchema_ssas_src
+ssas.model_json_31_tables <.. ssas.model_json_31_tables_T
+ssas.model_json_31_tables <.. ssas.model_json_31_tables_T
+ssas.model_json_31_tables_T <.. ssas.model_json_311_tables_columns
+ssas.model_json_31_tables_T <.. repo.RepoObject_SSAS_src
+ssas.model_json_31_tables_T <.. repo.RepoObject_SSAS_src
+ssas.model_json_311_tables_columns <.. ssas.model_json_311_tables_columns_T
+ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_SSAS_src
 sys_dwh.columns <.. repo_sys.ExtendedProperties
 sys_dwh.extended_properties <.. repo_sys.ExtendedProperties
 sys_dwh.indexes <.. repo_sys.ExtendedProperties

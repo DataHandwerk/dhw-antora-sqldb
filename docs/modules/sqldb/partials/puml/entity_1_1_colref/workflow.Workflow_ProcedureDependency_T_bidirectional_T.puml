@@ -1,0 +1,59 @@
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+}
+
+
+entity workflow.usp_PERSIST_Workflow_ProcedureDependency_T_bidirectional_T << P >> {
+  --
+  --
+}
+
+entity workflow.Workflow_ProcedureDependency_T_bidirectional << V >> {
+  * **Workflow_id** : int
+  * **referenced_Procedure_RepoObject_guid** : uniqueidentifier
+  * **referencing_Procedure_RepoObject_guid** : uniqueidentifier
+  --
+  * referenced_RepoObject_fullname : nvarchar(261)
+  * referencing_RepoObject_fullname : nvarchar(261)
+  --
+}
+
+entity workflow.Workflow_ProcedureDependency_T_bidirectional_T << U >> {
+  * **Workflow_id** : int
+  * **referenced_Procedure_RepoObject_guid** : uniqueidentifier
+  * **referencing_Procedure_RepoObject_guid** : uniqueidentifier
+  --
+  * is_inactive : bit
+  * referenced_RepoObject_fullname : nvarchar(261)
+  * referencing_RepoObject_fullname : nvarchar(261)
+  --
+}
+
+workflow.Workflow_ProcedureDependency_T_bidirectional <.. workflow.Workflow_ProcedureDependency_T_bidirectional_T
+workflow.Workflow_ProcedureDependency_T_bidirectional_T <.. workflow.usp_PERSIST_Workflow_ProcedureDependency_T_bidirectional_T
+workflow.Workflow_ProcedureDependency_T_bidirectional::referenced_Procedure_RepoObject_guid <-- workflow.Workflow_ProcedureDependency_T_bidirectional_T::referenced_Procedure_RepoObject_guid
+workflow.Workflow_ProcedureDependency_T_bidirectional::referenced_RepoObject_fullname <-- workflow.Workflow_ProcedureDependency_T_bidirectional_T::referenced_RepoObject_fullname
+workflow.Workflow_ProcedureDependency_T_bidirectional::referencing_Procedure_RepoObject_guid <-- workflow.Workflow_ProcedureDependency_T_bidirectional_T::referencing_Procedure_RepoObject_guid
+workflow.Workflow_ProcedureDependency_T_bidirectional::referencing_RepoObject_fullname <-- workflow.Workflow_ProcedureDependency_T_bidirectional_T::referencing_RepoObject_fullname
+workflow.Workflow_ProcedureDependency_T_bidirectional::Workflow_id <-- workflow.Workflow_ProcedureDependency_T_bidirectional_T::Workflow_id

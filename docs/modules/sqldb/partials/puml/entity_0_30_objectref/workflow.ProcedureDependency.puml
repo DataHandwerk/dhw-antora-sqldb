@@ -1,4 +1,5 @@
 'Left to right direction
+top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -23,6 +24,22 @@ skinparam class {
 }
 
 
+entity workflow.Biml_Package << V >> {
+  --
+}
+
+entity workflow.Biml_PrecedenceConstraints << V >> {
+  --
+}
+
+entity workflow.Biml_Project << V >> {
+  --
+}
+
+entity workflow.Biml_Task << V >> {
+  --
+}
+
 entity workflow.ProcedureDependency << U >> {
   * **id** : int
   --
@@ -42,11 +59,98 @@ entity workflow.usp_PERSIST_ProcedureDependency_input_PersistenceDependency << P
   --
 }
 
+entity workflow.usp_PERSIST_Workflow_ProcedureDependency_T << P >> {
+  --
+}
+
+entity workflow.usp_PERSIST_Workflow_ProcedureDependency_T_bidirectional_T << P >> {
+  --
+}
+
 entity workflow.usp_workflow << P >> {
   --
 }
 
+entity workflow.Workflow_ProcedureDependency << V >> {
+  --
+}
+
+entity workflow.Workflow_ProcedureDependency_all << V >> {
+  --
+}
+
+entity workflow.Workflow_ProcedureDependency_T << U >> {
+  * **Workflow_id** : int
+  * **referenced_Procedure_RepoObject_guid** : uniqueidentifier
+  * **referencing_Procedure_RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity workflow.Workflow_ProcedureDependency_T_active << V >> {
+  --
+}
+
+entity workflow.Workflow_ProcedureDependency_T_bidirectional << V >> {
+  * **Workflow_id** : int
+  * **referenced_Procedure_RepoObject_guid** : uniqueidentifier
+  * **referencing_Procedure_RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity workflow.Workflow_ProcedureDependency_T_bidirectional_T << U >> {
+  * **Workflow_id** : int
+  * **referenced_Procedure_RepoObject_guid** : uniqueidentifier
+  * **referencing_Procedure_RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity workflow.Workflow_ProcedureDependency_T_NotInSortorder << V >> {
+  --
+}
+
+entity workflow.Workflow_ProcedureDependency_T_NotInSortorder_check << V >> {
+  --
+}
+
+entity workflow.Workflow_ProcedureDependency_T_redundant << V >> {
+  --
+}
+
+entity workflow.Workflow_ProcedureDependency_T_TaskName << V >> {
+  --
+}
+
+entity workflow.Workflow_ProcedureDependency_wo_redundant << V >> {
+  --
+}
+
+workflow.Biml_Package <.. workflow.Biml_Project
+workflow.Biml_PrecedenceConstraints <.. workflow.Biml_Task
+workflow.Biml_Task <.. workflow.Biml_Package
 workflow.ProcedureDependency <.. workflow.ProcedureDependency_gross
 workflow.ProcedureDependency <.. workflow.ProcedureDependency_input_PersistenceDependency
+workflow.ProcedureDependency <.. workflow.Workflow_ProcedureDependency_all
+workflow.ProcedureDependency <.. workflow.Workflow_ProcedureDependency
+workflow.ProcedureDependency_input_PersistenceDependency <.. workflow.ProcedureDependency
 workflow.ProcedureDependency_input_PersistenceDependency <.. workflow.usp_PERSIST_ProcedureDependency_input_PersistenceDependency
 workflow.usp_PERSIST_ProcedureDependency_input_PersistenceDependency <.. workflow.usp_workflow
+workflow.usp_PERSIST_Workflow_ProcedureDependency_T <.. workflow.usp_workflow
+workflow.usp_PERSIST_Workflow_ProcedureDependency_T_bidirectional_T <.. workflow.usp_workflow
+workflow.Workflow_ProcedureDependency <.. workflow.Workflow_ProcedureDependency_T
+workflow.Workflow_ProcedureDependency <.. workflow.usp_PERSIST_Workflow_ProcedureDependency_T
+workflow.Workflow_ProcedureDependency_all <.. workflow.Workflow_ProcedureDependency_wo_redundant
+workflow.Workflow_ProcedureDependency_T <.. workflow.usp_workflow
+workflow.Workflow_ProcedureDependency_T <.. workflow.usp_PERSIST_Workflow_ProcedureDependency_T
+workflow.Workflow_ProcedureDependency_T <.. workflow.Workflow_ProcedureDependency_T_active
+workflow.Workflow_ProcedureDependency_T <.. workflow.Workflow_ProcedureDependency_T_bidirectional
+workflow.Workflow_ProcedureDependency_T_active <.. workflow.Workflow_ProcedureDependency_T_redundant
+workflow.Workflow_ProcedureDependency_T_active <.. workflow.Workflow_ProcedureDependency_T_TaskName
+workflow.Workflow_ProcedureDependency_T_active <.. workflow.Workflow_ProcedureDependency_T_NotInSortorder
+workflow.Workflow_ProcedureDependency_T_bidirectional <.. workflow.Workflow_ProcedureDependency_T_bidirectional_T
+workflow.Workflow_ProcedureDependency_T_bidirectional <.. workflow.usp_PERSIST_Workflow_ProcedureDependency_T_bidirectional_T
+workflow.Workflow_ProcedureDependency_T_bidirectional_T <.. workflow.usp_PERSIST_Workflow_ProcedureDependency_T_bidirectional_T
+workflow.Workflow_ProcedureDependency_T_NotInSortorder <.. workflow.usp_workflow
+workflow.Workflow_ProcedureDependency_T_NotInSortorder <.. workflow.Workflow_ProcedureDependency_T_NotInSortorder_check
+workflow.Workflow_ProcedureDependency_T_redundant <.. workflow.usp_workflow
+workflow.Workflow_ProcedureDependency_T_redundant <.. workflow.Workflow_ProcedureDependency_wo_redundant
+workflow.Workflow_ProcedureDependency_T_TaskName <.. workflow.Biml_PrecedenceConstraints

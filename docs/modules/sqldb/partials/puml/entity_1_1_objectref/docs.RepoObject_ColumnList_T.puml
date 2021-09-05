@@ -24,13 +24,29 @@ skinparam class {
 }
 
 
+entity docs.RepoObject_Adoc << V >> {
+  --
+}
+
 entity docs.RepoObject_ColumnList << V >> {
   --
 }
 
-entity docs.RepoObject_ColumnList_T {
+entity docs.RepoObject_ColumnList_T << U >> {
   * **RepoObject_guid** : uniqueidentifier
   --
 }
 
-docs.RepoObject_ColumnList <.. docs.85AC3586-9B83-4474-AF3D-ED54F04062CA
+entity docs.RepoObject_Plantuml_Entity << V >> {
+  * **RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity docs.usp_PERSIST_RepoObject_ColumnList_T << P >> {
+  --
+}
+
+docs.RepoObject_ColumnList <.. docs.RepoObject_ColumnList_T
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Adoc
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Plantuml_Entity
+docs.RepoObject_ColumnList_T <.. docs.usp_PERSIST_RepoObject_ColumnList_T

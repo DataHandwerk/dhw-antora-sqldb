@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -39,6 +40,31 @@ entity reference.RepoObjectColumn_reference << V >> {
   referencing_RepoObject_guid : uniqueidentifier
   referencing_schema_name : nvarchar(128)
   referencing_type : char(2)
+  --
+}
+
+entity reference.RepoObjectColumn_reference_additional_internal << V >> {
+  --
+  definition : nvarchar(max)
+  * InformationSource : varchar(30)
+  is_computed : bit
+  is_referenced_object : bit
+  is_referencing_object_equal_referenced_object : bit
+  referenced_column_name : nvarchar(128)
+  * referenced_entity_name : nvarchar(128)
+  referenced_id : int
+  referenced_RepoObject_guid : uniqueidentifier
+  referenced_RepoObjectColumn_guid : uniqueidentifier
+  * referenced_schema_name : nvarchar(128)
+  referenced_type : char(2)
+  referencing_column_name : nvarchar(128)
+  * referencing_entity_name : nvarchar(128)
+  referencing_id : int
+  referencing_RepoObject_guid : uniqueidentifier
+  referencing_RepoObjectColumn_guid : uniqueidentifier
+  * referencing_schema_name : nvarchar(128)
+  referencing_type : char(2)
+  --
 }
 
 entity reference.RepoObjectColumn_reference_Persistence << V >> {
@@ -66,6 +92,7 @@ entity reference.RepoObjectColumn_reference_Persistence << V >> {
   * referencing_RepoObjectColumn_guid : uniqueidentifier
   * referencing_schema_name : nvarchar(128)
   referencing_type : char(2)
+  --
 }
 
 entity reference.RepoObjectColumn_reference_SqlExpressionDependencies << V >> {
@@ -93,6 +120,7 @@ entity reference.RepoObjectColumn_reference_SqlExpressionDependencies << V >> {
   referencing_RepoObjectColumn_guid : uniqueidentifier
   referencing_schema_name : nvarchar(128)
   referencing_type : char(2)
+  --
 }
 
 entity reference.RepoObjectColumn_reference_SqlModules << V >> {
@@ -121,6 +149,7 @@ entity reference.RepoObjectColumn_reference_SqlModules << V >> {
   * referencing_schema_name : nvarchar(128)
   referencing_type : char(2)
   SysObject_fullname : nvarchar(261)
+  --
 }
 
 entity reference.RepoObjectColumn_reference_union << V >> {
@@ -133,8 +162,6 @@ entity reference.RepoObjectColumn_reference_union << V >> {
   referenced_column_name : nvarchar(128)
   referenced_entity_name : nvarchar(128)
   referenced_id : int
-  referenced_minor_id : int
-  referenced_node_id : bigint
   referenced_RepoObject_guid : uniqueidentifier
   referenced_RepoObjectColumn_guid : uniqueidentifier
   referenced_schema_name : nvarchar(128)
@@ -142,12 +169,11 @@ entity reference.RepoObjectColumn_reference_union << V >> {
   referencing_column_name : nvarchar(128)
   referencing_entity_name : nvarchar(128)
   referencing_id : int
-  referencing_minor_id : int
-  referencing_node_id : bigint
   referencing_RepoObject_guid : uniqueidentifier
   referencing_RepoObjectColumn_guid : uniqueidentifier
   referencing_schema_name : nvarchar(128)
   referencing_type : char(2)
+  --
 }
 
 entity reference.RepoObjectColumn_reference_virtual << V >> {
@@ -175,12 +201,15 @@ entity reference.RepoObjectColumn_reference_virtual << V >> {
   * referencing_RepoObjectColumn_guid : uniqueidentifier
   * referencing_schema_name : nvarchar(128)
   referencing_type : char(2)
+  --
 }
 
+reference.RepoObjectColumn_reference_additional_internal <.. reference.RepoObjectColumn_reference_union
 reference.RepoObjectColumn_reference_Persistence <.. reference.RepoObjectColumn_reference_union
 reference.RepoObjectColumn_reference_SqlExpressionDependencies <.. reference.RepoObjectColumn_reference_union
 reference.RepoObjectColumn_reference_SqlModules <.. reference.RepoObjectColumn_reference_union
 reference.RepoObjectColumn_reference_union <.. reference.RepoObjectColumn_reference
 reference.RepoObjectColumn_reference_virtual <.. reference.RepoObjectColumn_reference_union
+reference.RepoObjectColumn_reference_union::referenced_RepoObject_guid <-- reference.RepoObjectColumn_reference::referenced_RepoObject_guid
 reference.RepoObjectColumn_reference_union::referenced_RepoObjectColumn_guid <-- reference.RepoObjectColumn_reference::referenced_RepoObjectColumn_guid
 reference.RepoObjectColumn_reference_union::referencing_RepoObjectColumn_guid <-- reference.RepoObjectColumn_reference::referencing_RepoObjectColumn_guid

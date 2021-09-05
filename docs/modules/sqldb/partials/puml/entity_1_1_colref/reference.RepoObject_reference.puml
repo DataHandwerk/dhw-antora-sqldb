@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -33,22 +34,30 @@ entity reference.RepoObject_reference << V >> {
   referencing_entity_name : nvarchar(128)
   referencing_schema_name : nvarchar(128)
   referencing_type : varchar(2)
+  --
 }
 
 entity reference.RepoObject_reference_T << U >> {
   **referenced_RepoObject_guid** : uniqueidentifier
   **referencing_RepoObject_guid** : uniqueidentifier
   --
+  * is_ReversePersistenceViaView : bit
   referenced_entity_name : nvarchar(128)
+  * referenced_is_PersistenceSource : bit
+  * referenced_is_PersistenceTarget : bit
   referenced_schema_name : nvarchar(128)
   referenced_type : char(2)
   referencing_entity_name : nvarchar(128)
+  * referencing_is_PersistenceTarget : bit
+  * referencing_is_PersistenceUspSourceRef : bit
+  referencing_is_PersistenceUspTargetRef : bit
   referencing_schema_name : nvarchar(128)
   referencing_type : varchar(2)
   * {static} referenced_fullname : nvarchar(261)
   * {static} referenced_fullname2 : nvarchar(257)
   * {static} referencing_fullname : nvarchar(261)
   * {static} referencing_fullname2 : nvarchar(257)
+  --
 }
 
 entity reference.RepoObject_reference_union << V >> {
@@ -58,20 +67,20 @@ entity reference.RepoObject_reference_union << V >> {
   * InformationSource : varchar(34)
   * one : int
   referenced_entity_name : nvarchar(128)
-  * referenced_fullname : nvarchar(517)
+  referenced_fullname : nvarchar(517)
   referenced_id : int
-  referenced_node_id : bigint
   referenced_schema_name : nvarchar(128)
   referenced_type : char(2)
   referencing_entity_name : nvarchar(128)
-  * referencing_fullname : nvarchar(517)
+  referencing_fullname : nvarchar(517)
   referencing_id : int
-  referencing_node_id : bigint
   referencing_schema_name : nvarchar(128)
   referencing_type : varchar(2)
+  --
 }
 
 entity reference.usp_PERSIST_RepoObject_reference_T << P >> {
+  --
   --
 }
 
@@ -86,5 +95,6 @@ reference.RepoObject_reference::referencing_entity_name <-- reference.RepoObject
 reference.RepoObject_reference::referencing_RepoObject_guid <-- reference.RepoObject_reference_T::referencing_RepoObject_guid
 reference.RepoObject_reference::referencing_schema_name <-- reference.RepoObject_reference_T::referencing_schema_name
 reference.RepoObject_reference::referencing_type <-- reference.RepoObject_reference_T::referencing_type
+reference.RepoObject_reference_union::referenced_entity_name <-- reference.RepoObject_reference::referenced_entity_name
 reference.RepoObject_reference_union::referenced_RepoObject_guid <-- reference.RepoObject_reference::referenced_RepoObject_guid
 reference.RepoObject_reference_union::referencing_RepoObject_guid <-- reference.RepoObject_reference::referencing_RepoObject_guid

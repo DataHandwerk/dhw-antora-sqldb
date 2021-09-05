@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -28,6 +29,7 @@ entity docs.RepoObject_PlantUml_FkRefList << V >> {
   FkRefList : nvarchar(max)
   RepoObject_fullname2 : nvarchar(257)
   RepoObject_guid : uniqueidentifier
+  --
 }
 
 entity docs.RepoObject_PlantUml_PumlEntityFkList << V >> {
@@ -35,6 +37,7 @@ entity docs.RepoObject_PlantUml_PumlEntityFkList << V >> {
   --
   PumlEntityFkList : nvarchar(max)
   RepoObject_fullname2 : nvarchar(257)
+  --
 }
 
 entity repo.ForeignKey_Indexes_union_T << U >> {
@@ -42,27 +45,28 @@ entity repo.ForeignKey_Indexes_union_T << U >> {
   --
   delete_referential_action : tinyint
   ForeignKey_fullname : nvarchar(517)
-  ForeignKey_name : nvarchar(128)
+  ForeignKey_name : nvarchar(max)
   * is_MatchingDatatypePattern : int
   referenced_index_guid : uniqueidentifier
-  referenced_index_name : nvarchar(128)
+  referenced_index_name : nvarchar(450)
   referenced_IndexPatternColumnDatatype : nvarchar(4000)
-  referenced_IndexPatternColumnName : nvarchar(4000)
+  referenced_IndexPatternColumnName : nvarchar(max)
   referenced_RepoObject_fullname : nvarchar(261)
   referenced_RepoObject_fullname2 : nvarchar(257)
   referenced_RepoObject_guid : uniqueidentifier
   referenced_SysObject_name : nvarchar(128)
   referenced_SysObject_schema_name : nvarchar(128)
   referencing_index_guid : uniqueidentifier
-  referencing_index_name : nvarchar(128)
+  referencing_index_name : nvarchar(450)
   referencing_IndexPatternColumnDatatype : nvarchar(4000)
-  referencing_IndexPatternColumnName : nvarchar(4000)
+  referencing_IndexPatternColumnName : nvarchar(max)
   referencing_RepoObject_fullname : nvarchar(261)
   referencing_RepoObject_fullname2 : nvarchar(257)
   referencing_RepoObject_guid : uniqueidentifier
   referencing_SysObject_name : nvarchar(128)
   referencing_SysObject_schema_name : nvarchar(128)
   update_referential_action : tinyint
+  --
 }
 
 entity repo.RepoObject << U >> {
@@ -73,8 +77,10 @@ entity repo.RepoObject << U >> {
   Inheritance_StringAggSeparatorSql : nvarchar(4000)
   InheritanceDefinition : nvarchar(4000)
   InheritanceType : tinyint
+  * is_DocsExclude : bit
   is_repo_managed : bit
   is_required_ObjectMerge : bit
+  * is_ssas : bit
   is_SysObject_missing : bit
   * modify_dt : datetime
   pk_index_guid : uniqueidentifier
@@ -100,7 +106,9 @@ entity repo.RepoObject << U >> {
   * {static} SysObject_fullname : nvarchar(261)
   * {static} SysObject_fullname2 : nvarchar(257)
   * {abstract} SysObject_query_sql : nvarchar(406)
+  * {static} usp_persistence_fullname2 : nvarchar(269)
   * {static} usp_persistence_name : nvarchar(140)
+  --
 }
 
 entity repo.RepoObject_related_FK_union << V >> {
@@ -108,12 +116,17 @@ entity repo.RepoObject_related_FK_union << V >> {
   **included_RepoObject_guid** : uniqueidentifier
   --
   included_RepoObject_fullname2 : nvarchar(257)
+  included_SchemaName : nvarchar(128)
   RepoObject_fullname2 : nvarchar(257)
+  SchemaName : nvarchar(128)
+  --
 }
 
 repo.ForeignKey_Indexes_union_T <.. repo.RepoObject_related_FK_union
 repo.RepoObject <.. repo.RepoObject_related_FK_union
 repo.RepoObject_related_FK_union <.. docs.RepoObject_PlantUml_PumlEntityFkList
 repo.RepoObject_related_FK_union <.. docs.RepoObject_PlantUml_FkRefList
+repo.RepoObject_related_FK_union::RepoObject_fullname2 <-- docs.RepoObject_PlantUml_PumlEntityFkList::RepoObject_fullname2
+repo.RepoObject_related_FK_union::RepoObject_fullname2 <-- docs.RepoObject_PlantUml_FkRefList::RepoObject_fullname2
 repo.RepoObject_related_FK_union::RepoObject_guid <-- docs.RepoObject_PlantUml_PumlEntityFkList::RepoObject_guid
 repo.RepoObject_related_FK_union::RepoObject_guid <-- docs.RepoObject_PlantUml_FkRefList::RepoObject_guid

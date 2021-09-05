@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -27,13 +28,14 @@ entity repo.Index_unique_IndexPatternColumnGuid << V >> {
   --
   index_guid : uniqueidentifier
   IndexPatternColumnGuid : varchar(8000)
+  --
 }
 
 entity repo.IndexColumn_union << V >> {
   **index_guid** : uniqueidentifier
   * **index_column_id** : int
   --
-  index_name : nvarchar(128)
+  index_name : nvarchar(450)
   is_descending_key : bit
   is_index_primary_key : bit
   is_index_real : bit
@@ -45,6 +47,7 @@ entity repo.IndexColumn_union << V >> {
   RepoObjectColumn_guid : uniqueidentifier
   SysObject_column_name : nvarchar(128)
   SysObject_column_user_type_fullname : nvarchar(182)
+  --
 }
 
 entity repo.SysColumn_RepoObjectColumn_via_name << V >> {
@@ -103,6 +106,7 @@ entity repo.SysColumn_RepoObjectColumn_via_name << V >> {
   user_type_fullname : nvarchar(182)
   user_type_name : sysname
   uses_database_collation : bit
+  --
 }
 
 entity repo.SysObject_RepoObject_via_name << V >> {
@@ -134,6 +138,7 @@ entity repo.SysObject_RepoObject_via_name << V >> {
   SysObject_type : char(2)
   SysObject_type_desc : nvarchar(60)
   temporal_type : tinyint
+  --
 }
 
 entity repo_sys.IndexColumn_unique << V >> {
@@ -153,13 +158,16 @@ entity repo_sys.IndexColumn_unique << V >> {
   RepoObjectColumn_guid : uniqueidentifier
   SysObject_column_name : sysname
   SysObject_column_user_type_fullname : nvarchar(182)
+  --
 }
 
 entity sys_dwh.index_columns << SN >> {
   --
+  --
 }
 
 entity sys_dwh.indexes << SN >> {
+  --
   --
 }
 

@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -51,11 +52,19 @@ entity docs.usp_AntoraExport_ObjectPuml << P >> {
   --
 }
 
+entity docs.usp_AntoraExport_ObjectRefCyclic << P >> {
+  --
+}
+
 entity docs.usp_AntoraExport_Page_IndexSemanticGroup << P >> {
   --
 }
 
 entity docs.usp_PERSIST_RepoObject_Adoc_T << P >> {
+  --
+}
+
+entity docs.usp_PERSIST_RepoObject_ColumnList_T << P >> {
   --
 }
 
@@ -119,6 +128,14 @@ entity reference.usp_PERSIST_RepoObjectColumn_reference_T << P >> {
   --
 }
 
+entity reference.usp_RepoObject_ReferenceTree << P >> {
+  --
+}
+
+entity reference.usp_RepoObject_ReferenceTree_insert << P >> {
+  --
+}
+
 entity reference.usp_RepoObject_update_SysObjectQueryPlan << P >> {
   --
 }
@@ -163,7 +180,27 @@ entity repo.usp_PERSIST_ForeignKey_Indexes_union_T << P >> {
   --
 }
 
+entity repo.usp_PERSIST_Index_ssas_T << P >> {
+  --
+}
+
 entity repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T << P >> {
+  --
+}
+
+entity repo.usp_PERSIST_IndexColumn_ssas_T << P >> {
+  --
+}
+
+entity repo.usp_PERSIST_RepoObject_SSAS_tgt << P >> {
+  --
+}
+
+entity repo.usp_PERSIST_RepoObjectColumn_SSAS_tgt << P >> {
+  --
+}
+
+entity repo.usp_PERSIST_RepoSchema_ssas_tgt << P >> {
   --
 }
 
@@ -183,11 +220,27 @@ entity repo.usp_sync_guid_RepoObject << P >> {
   --
 }
 
+entity repo.usp_sync_guid_RepoObject_ssas << P >> {
+  --
+}
+
 entity repo.usp_sync_guid_RepoObjectColumn << P >> {
   --
 }
 
+entity repo.usp_sync_guid_RepoObjectColumn_ssas << P >> {
+  --
+}
+
 entity repo.usp_sync_guid_RepoSchema << P >> {
+  --
+}
+
+entity repo.usp_sync_guid_RepoSchema_ssas << P >> {
+  --
+}
+
+entity repo.usp_sync_guid_ssas << P >> {
   --
 }
 
@@ -203,11 +256,51 @@ entity sqlparse.usp_PERSIST_RepoObject_SqlModules_61_SelectIdentifier_Union_T <<
   --
 }
 
+entity sqlparse.usp_sqlparse << P >> {
+  --
+}
+
+entity ssas.usp_PERSIST_model_json_31_tables_T << P >> {
+  --
+}
+
+entity ssas.usp_PERSIST_model_json_311_tables_columns_T << P >> {
+  --
+}
+
+entity ssas.usp_PERSIST_model_json_32_relationships_T << P >> {
+  --
+}
+
+entity ssas.usp_PERSIST_TMSCHEMA_COLUMNS_T << P >> {
+  --
+}
+
+entity ssas.usp_PERSIST_TMSCHEMA_RELATIONSHIPS_T << P >> {
+  --
+}
+
+entity ssas.usp_PERSIST_TMSCHEMA_TABLES_T << P >> {
+  --
+}
+
 entity uspgenerator.usp_GeneratorUsp_insert_update_persistence << P >> {
   --
 }
 
 entity workflow.usp_PERSIST_ProcedureDependency_input_PersistenceDependency << P >> {
+  --
+}
+
+entity workflow.usp_PERSIST_Workflow_ProcedureDependency_T << P >> {
+  --
+}
+
+entity workflow.usp_PERSIST_Workflow_ProcedureDependency_T_bidirectional_T << P >> {
+  --
+}
+
+entity workflow.usp_PERSIST_WorkflowStep << P >> {
   --
 }
 
@@ -262,3 +355,26 @@ logs.usp_ExecutionLog_insert <.. reference.usp_PERSIST_RepoObject_ReferenceTree_
 logs.usp_ExecutionLog_insert <.. reference.usp_PERSIST_RepoObject_ReferenceTree_30_0_T
 logs.usp_ExecutionLog_insert <.. workflow.usp_workflow
 logs.usp_ExecutionLog_insert <.. workflow.usp_PERSIST_ProcedureDependency_input_PersistenceDependency
+logs.usp_ExecutionLog_insert <.. workflow.usp_PERSIST_WorkflowStep
+logs.usp_ExecutionLog_insert <.. sqlparse.usp_sqlparse
+logs.usp_ExecutionLog_insert <.. reference.usp_RepoObject_ReferenceTree
+logs.usp_ExecutionLog_insert <.. workflow.usp_PERSIST_Workflow_ProcedureDependency_T
+logs.usp_ExecutionLog_insert <.. docs.usp_AntoraExport_ObjectRefCyclic
+logs.usp_ExecutionLog_insert <.. workflow.usp_PERSIST_Workflow_ProcedureDependency_T_bidirectional_T
+logs.usp_ExecutionLog_insert <.. ssas.usp_PERSIST_TMSCHEMA_COLUMNS_T
+logs.usp_ExecutionLog_insert <.. ssas.usp_PERSIST_TMSCHEMA_TABLES_T
+logs.usp_ExecutionLog_insert <.. repo.usp_PERSIST_RepoObject_SSAS_tgt
+logs.usp_ExecutionLog_insert <.. repo.usp_PERSIST_RepoObjectColumn_SSAS_tgt
+logs.usp_ExecutionLog_insert <.. repo.usp_PERSIST_RepoSchema_ssas_tgt
+logs.usp_ExecutionLog_insert <.. repo.usp_sync_guid_ssas
+logs.usp_ExecutionLog_insert <.. repo.usp_sync_guid_RepoSchema_ssas
+logs.usp_ExecutionLog_insert <.. repo.usp_sync_guid_RepoObject_ssas
+logs.usp_ExecutionLog_insert <.. repo.usp_sync_guid_RepoObjectColumn_ssas
+logs.usp_ExecutionLog_insert <.. repo.usp_PERSIST_IndexColumn_ssas_T
+logs.usp_ExecutionLog_insert <.. repo.usp_PERSIST_Index_ssas_T
+logs.usp_ExecutionLog_insert <.. ssas.usp_PERSIST_TMSCHEMA_RELATIONSHIPS_T
+logs.usp_ExecutionLog_insert <.. ssas.usp_PERSIST_model_json_31_tables_T
+logs.usp_ExecutionLog_insert <.. ssas.usp_PERSIST_model_json_311_tables_columns_T
+logs.usp_ExecutionLog_insert <.. ssas.usp_PERSIST_model_json_32_relationships_T
+logs.usp_ExecutionLog_insert <.. reference.usp_RepoObject_ReferenceTree_insert
+logs.usp_ExecutionLog_insert <.. docs.usp_PERSIST_RepoObject_ColumnList_T

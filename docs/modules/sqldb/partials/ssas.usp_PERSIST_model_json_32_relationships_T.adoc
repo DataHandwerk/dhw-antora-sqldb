@@ -41,7 +41,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-05 10:54:39
+2021-09-05 13:29:35
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -98,7 +98,27 @@ source: property.RepoObjectProperty_cross As rop_cross
 * [ssas].[model_json_32_relationships]
 * [ssas].[model_json_32_relationships_T]
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+DELETE T
+FROM [ssas].[model_json_32_relationships_T] AS T
+WHERE
+NOT EXISTS
+(SELECT 1 FROM [ssas].[model_json_32_relationships] AS S
+WHERE
+T.[databasename] = S.[databasename]
+AND T.[relationships_name] = S.[relationships_name]
+)
+ 
+----
+=====
+
 |
+
 
 |600
 |
@@ -108,7 +128,48 @@ source: property.RepoObjectProperty_cross As rop_cross
 * [ssas].[model_json_32_relationships]
 * [ssas].[model_json_32_relationships_T]
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+UPDATE T
+SET
+  T.[databasename] = S.[databasename]
+, T.[relationships_crossFilteringBehavior] = S.[relationships_crossFilteringBehavior]
+, T.[relationships_fromCardinality] = S.[relationships_fromCardinality]
+, T.[relationships_fromColumn] = S.[relationships_fromColumn]
+, T.[relationships_fromTable] = S.[relationships_fromTable]
+, T.[relationships_isActive] = S.[relationships_isActive]
+, T.[relationships_name] = S.[relationships_name]
+, T.[relationships_toCardinality] = S.[relationships_toCardinality]
+, T.[relationships_toColumn] = S.[relationships_toColumn]
+, T.[relationships_toTable] = S.[relationships_toTable]
+
+FROM [ssas].[model_json_32_relationships_T] AS T
+INNER JOIN [ssas].[model_json_32_relationships] AS S
+ON
+T.[databasename] = S.[databasename]
+AND T.[relationships_name] = S.[relationships_name]
+
+WHERE
+   T.[databasename] <> S.[databasename]
+OR T.[relationships_crossFilteringBehavior] <> S.[relationships_crossFilteringBehavior] OR (S.[relationships_crossFilteringBehavior] IS NULL AND NOT T.[relationships_crossFilteringBehavior] IS NULL) OR (NOT S.[relationships_crossFilteringBehavior] IS NULL AND T.[relationships_crossFilteringBehavior] IS NULL)
+OR T.[relationships_fromCardinality] <> S.[relationships_fromCardinality] OR (S.[relationships_fromCardinality] IS NULL AND NOT T.[relationships_fromCardinality] IS NULL) OR (NOT S.[relationships_fromCardinality] IS NULL AND T.[relationships_fromCardinality] IS NULL)
+OR T.[relationships_fromColumn] <> S.[relationships_fromColumn] OR (S.[relationships_fromColumn] IS NULL AND NOT T.[relationships_fromColumn] IS NULL) OR (NOT S.[relationships_fromColumn] IS NULL AND T.[relationships_fromColumn] IS NULL)
+OR T.[relationships_fromTable] <> S.[relationships_fromTable] OR (S.[relationships_fromTable] IS NULL AND NOT T.[relationships_fromTable] IS NULL) OR (NOT S.[relationships_fromTable] IS NULL AND T.[relationships_fromTable] IS NULL)
+OR T.[relationships_isActive] <> S.[relationships_isActive] OR (S.[relationships_isActive] IS NULL AND NOT T.[relationships_isActive] IS NULL) OR (NOT S.[relationships_isActive] IS NULL AND T.[relationships_isActive] IS NULL)
+OR T.[relationships_name] <> S.[relationships_name] OR (S.[relationships_name] IS NULL AND NOT T.[relationships_name] IS NULL) OR (NOT S.[relationships_name] IS NULL AND T.[relationships_name] IS NULL)
+OR T.[relationships_toCardinality] <> S.[relationships_toCardinality] OR (S.[relationships_toCardinality] IS NULL AND NOT T.[relationships_toCardinality] IS NULL) OR (NOT S.[relationships_toCardinality] IS NULL AND T.[relationships_toCardinality] IS NULL)
+OR T.[relationships_toColumn] <> S.[relationships_toColumn] OR (S.[relationships_toColumn] IS NULL AND NOT T.[relationships_toColumn] IS NULL) OR (NOT S.[relationships_toColumn] IS NULL AND T.[relationships_toColumn] IS NULL)
+OR T.[relationships_toTable] <> S.[relationships_toTable] OR (S.[relationships_toTable] IS NULL AND NOT T.[relationships_toTable] IS NULL) OR (NOT S.[relationships_toTable] IS NULL AND T.[relationships_toTable] IS NULL)
+
+----
+=====
+
 |
+
 
 |700
 |
@@ -118,7 +179,52 @@ source: property.RepoObjectProperty_cross As rop_cross
 * [ssas].[model_json_32_relationships]
 * [ssas].[model_json_32_relationships_T]
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+INSERT INTO 
+ [ssas].[model_json_32_relationships_T]
+ (
+  [databasename]
+, [relationships_crossFilteringBehavior]
+, [relationships_fromCardinality]
+, [relationships_fromColumn]
+, [relationships_fromTable]
+, [relationships_isActive]
+, [relationships_name]
+, [relationships_toCardinality]
+, [relationships_toColumn]
+, [relationships_toTable]
+)
+SELECT
+  [databasename]
+, [relationships_crossFilteringBehavior]
+, [relationships_fromCardinality]
+, [relationships_fromColumn]
+, [relationships_fromTable]
+, [relationships_isActive]
+, [relationships_name]
+, [relationships_toCardinality]
+, [relationships_toColumn]
+, [relationships_toTable]
+
+FROM [ssas].[model_json_32_relationships] AS S
+WHERE
+NOT EXISTS
+(SELECT 1
+FROM [ssas].[model_json_32_relationships_T] AS T
+WHERE
+T.[databasename] = S.[databasename]
+AND T.[relationships_name] = S.[relationships_name]
+)
+----
+=====
+
 |
+
 |===
 
 // end::adocuspsteps[]
@@ -391,7 +497,7 @@ source: property.RepoObjectProperty WHERE property_int = 1
 
 // tag::sql_modules_definition[]
 [%collapsible]
-====
+=======
 [source,sql]
 ----
 /*
@@ -657,7 +763,7 @@ END
 
 
 ----
-====
+=======
 // end::sql_modules_definition[]
 
 

@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -35,6 +36,7 @@ entity repo.ForeignKey_IndexPattern << V >> {
   referencing_IndexPatternColumnName : nvarchar(4000)
   referencing_RepoObject_guid : uniqueidentifier
   update_referential_action : tinyint
+  --
 }
 
 entity repo_sys.ForeignKey << V >> {
@@ -66,6 +68,7 @@ entity repo_sys.ForeignKey << V >> {
   type_desc : nvarchar(60)
   update_referential_action : tinyint
   update_referential_action_desc : nvarchar(60)
+  --
 }
 
 entity repo_sys.ForeignKeyColumn << V >> {
@@ -91,6 +94,7 @@ entity repo_sys.ForeignKeyColumn << V >> {
   referencing_RepoObjectColumn_guid : uniqueidentifier
   referencing_schema_name : nvarchar(128)
   referencing_SysObject_fullname : nvarchar(261)
+  --
 }
 
 entity repo_sys.SysColumn << V >> {
@@ -151,9 +155,11 @@ entity repo_sys.SysColumn << V >> {
   user_type_name : sysname
   uses_database_collation : bit
   * xml_collection_id : int
+  --
 }
 
 entity sys_dwh.foreign_key_columns << SN >> {
+  --
   --
 }
 
@@ -166,6 +172,7 @@ repo_sys.ForeignKey::ForeignKey_guid <-- repo_sys.ForeignKeyColumn::ForeignKey_g
 repo_sys.ForeignKey::name <-- repo_sys.ForeignKeyColumn::ForeignKey_name
 repo_sys.ForeignKey::parent_RepoObject_fullname <-- repo_sys.ForeignKeyColumn::referencing_RepoObject_fullname
 repo_sys.ForeignKey::parent_SysObject_fullname <-- repo_sys.ForeignKeyColumn::referencing_SysObject_fullname
+repo_sys.ForeignKeyColumn::ForeignKey_name <-- repo.ForeignKey_IndexPattern::ForeignKey_name
 repo_sys.SysColumn::SysObject_column_name <-- repo_sys.ForeignKeyColumn::referencing_column_name
 repo_sys.SysColumn::SysObject_column_name <-- repo_sys.ForeignKeyColumn::referenced_column_name
 repo_sys.SysColumn::SysObject_name <-- repo_sys.ForeignKeyColumn::referencing_name

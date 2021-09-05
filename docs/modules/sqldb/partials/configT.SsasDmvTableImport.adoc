@@ -40,7 +40,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-08-26 15:34:18
+2021-09-05 12:09:09
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -313,7 +313,9 @@ When Not Matched By Target
 
 // tag::ms_description[]
 
-default content for table xref:sqldb:config.SsasDmvTableImport.adoc[] is defined in view xref:sqldb:configT.SsasDmvTableImport.adoc[] 
+obsolet
+
+defines, which SSAS DMV tables should be imported
 // end::ms_description[]
 
 
@@ -412,13 +414,16 @@ source: property.RepoObjectProperty WHERE property_int = 1
 
 // tag::sql_modules_definition[]
 [%collapsible]
-====
+=======
 [source,sql]
 ----
 
+
 /*
 <<property_start>>MS_Description
-default content for table xref:sqldb:config.SsasDmvTableImport.adoc[] is defined in view xref:sqldb:configT.SsasDmvTableImport.adoc[] 
+obsolet
+
+defines, which SSAS DMV tables should be imported
 <<property_end>>
 
 <<property_start>>exampleUsage
@@ -441,7 +446,7 @@ When Not Matched By Target
              );
 <<property_end>>
 */
-Create   View configT.SsasDmvTableImport
+CREATE   View [configT].[SsasDmvTableImport]
 As
 --
 Select
@@ -573,8 +578,9 @@ Union All
 Select
     DmvTableName = Cast('TMSCHEMA_VARIATIONS' As NVarchar(128))
   , isActive     = Cast(1 As Bit)
+
 ----
-====
+=======
 // end::sql_modules_definition[]
 
 

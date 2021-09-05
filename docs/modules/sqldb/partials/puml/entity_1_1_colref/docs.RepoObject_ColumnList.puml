@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -25,56 +26,62 @@ skinparam class {
 
 entity docs.fs_cleanStringForAnchorId << FN >> {
   --
+  --
 }
 
 entity docs.fs_cleanStringForLabel << FN >> {
   --
+  --
 }
 
-entity docs.RepoObject_Adoc << V >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity docs.fs_cleanStringForPuml << FN >> {
   --
-  * AdocContent : nvarchar(max)
-  is_DocsOutput : int
-  PropertyCount : int
-  RepoObject_fullname : nvarchar(261)
-  RepoObject_fullname2 : nvarchar(257)
-  RepoObject_schema_name : nvarchar(128)
-  SysObject_fullname : nvarchar(261)
-  SysObject_fullname2 : nvarchar(257)
-  SysObject_schema_name : nvarchar(128)
-  SysObject_type : char(2)
-  SysObject_type_name : nvarchar(128)
+  --
 }
 
 entity docs.RepoObject_ColumnList << V >> {
+  --
+  AntoraColumnDetails : nvarchar(max)
+  AntoraNonPkColumnTableRows : nvarchar(max)
+  AntoraPkColumnTableRows : nvarchar(max)
+  PlantumlIndexColumns : nvarchar(max)
+  PlantumlNonPkEntityColumns : nvarchar(max)
+  PlantumlNonPkHiddenEntityColumns : nvarchar(max)
+  PlantumlNonPkIndexColumns : nvarchar(max)
+  PlantumlPkEntityColumns : nvarchar(max)
+  * RepoObject_guid : uniqueidentifier
+  --
+}
+
+entity docs.RepoObject_ColumnList_T << U >> {
   * **RepoObject_guid** : uniqueidentifier
   --
   AntoraColumnDetails : nvarchar(max)
   AntoraNonPkColumnTableRows : nvarchar(max)
   AntoraPkColumnTableRows : nvarchar(max)
+  PlantumlIndexColumns : nvarchar(max)
   PlantumlNonPkEntityColumns : nvarchar(max)
+  PlantumlNonPkHiddenEntityColumns : nvarchar(max)
+  PlantumlNonPkIndexColumns : nvarchar(max)
   PlantumlPkEntityColumns : nvarchar(max)
-}
-
-entity docs.RepoObject_Plantuml_Entity << V >> {
-  * **RepoObject_guid** : uniqueidentifier
   --
-  * RepoObject_Puml : nvarchar(max)
-  * RepoObject_PumlOnlyIndex : nvarchar(max)
-  * RepoObject_PumlOnlyPK : nvarchar(max)
 }
 
-entity repo.RepoObjectColumn_gross << V >> {
-  * **RepoObjectColumn_guid** : uniqueidentifier
+entity docs.usp_PERSIST_RepoObject_ColumnList_T << P >> {
+  --
+  --
+}
+
+entity repo.RepoObjectColumn_gross2 << V >> {
   --
   AntoraReferencedColumnList : nvarchar(max)
   AntoraReferencingColumnList : nvarchar(max)
   * Column_name : nvarchar(128)
+  Description : nvarchar(max)
   has_different_sys_names : bit
   has_get_referenced_issue : bit
   index_column_id : int
-  index_name : nvarchar(128)
+  index_name : nvarchar(450)
   Inheritance_StringAggSeparatorSql : nvarchar(4000)
   InheritanceDefinition : nvarchar(4000)
   InheritanceType : tinyint
@@ -87,10 +94,12 @@ entity repo.RepoObjectColumn_gross << V >> {
   * is_RepoObject_name_uniqueidentifier : int
   * is_RepoObjectColumn_name_uniqueidentifier : int
   is_required_ColumnMerge : bit
+  * is_ssas : bit
   is_SysObject_missing : bit
   * is_SysObject_name_uniqueidentifier : int
   is_SysObjectColumn_missing : bit
   * is_SysObjectColumn_name_uniqueidentifier : int
+  isAnyIndexColumn : int
   * modify_dt : datetime
   node_id : bigint
   persistence_source_RepoObjectColumn_guid : uniqueidentifier
@@ -122,6 +131,7 @@ entity repo.RepoObjectColumn_gross << V >> {
   RepoObjectColumn_column_id : int
   * RepoObjectColumn_fullname : nvarchar(520)
   * RepoObjectColumn_fullname2 : nvarchar(386)
+  * RepoObjectColumn_guid : uniqueidentifier
   * RepoObjectColumn_name : nvarchar(128)
   * SysObject_fullname : nvarchar(261)
   * SysObject_fullname2 : nvarchar(257)
@@ -133,11 +143,31 @@ entity repo.RepoObjectColumn_gross << V >> {
   SysObject_type : char(2)
   SysObjectColumn_column_id : int
   * SysObjectColumn_name : nvarchar(128)
+  tabcol_Description : nvarchar(max)
+  tabcol_DisplayFolder : nvarchar(500)
+  tabcol_Expression : nvarchar(max)
+  tabcol_FormatString : nvarchar(500)
+  * tabcol_IsHidden : bit
+  * tabcol_IsKey : bit
+  * tabcol_IsUnique : bit
+  tabcol_SummarizeBy : nvarchar(500)
+  tabcol_Type : nvarchar(500)
+  --
 }
 
 docs.fs_cleanStringForAnchorId <.. docs.RepoObject_ColumnList
 docs.fs_cleanStringForLabel <.. docs.RepoObject_ColumnList
-docs.RepoObject_ColumnList <.. docs.RepoObject_Adoc
-docs.RepoObject_ColumnList <.. docs.RepoObject_Plantuml_Entity
-repo.RepoObjectColumn_gross <.. docs.RepoObject_ColumnList
-repo.RepoObjectColumn_gross::RepoObject_guid <-- docs.RepoObject_ColumnList::RepoObject_guid
+docs.fs_cleanStringForPuml <.. docs.RepoObject_ColumnList
+docs.RepoObject_ColumnList <.. docs.RepoObject_ColumnList_T
+docs.RepoObject_ColumnList <.. docs.usp_PERSIST_RepoObject_ColumnList_T
+repo.RepoObjectColumn_gross2 <.. docs.RepoObject_ColumnList
+docs.RepoObject_ColumnList::AntoraColumnDetails <-- docs.RepoObject_ColumnList_T::AntoraColumnDetails
+docs.RepoObject_ColumnList::AntoraNonPkColumnTableRows <-- docs.RepoObject_ColumnList_T::AntoraNonPkColumnTableRows
+docs.RepoObject_ColumnList::AntoraPkColumnTableRows <-- docs.RepoObject_ColumnList_T::AntoraPkColumnTableRows
+docs.RepoObject_ColumnList::PlantumlIndexColumns <-- docs.RepoObject_ColumnList_T::PlantumlIndexColumns
+docs.RepoObject_ColumnList::PlantumlNonPkEntityColumns <-- docs.RepoObject_ColumnList_T::PlantumlNonPkEntityColumns
+docs.RepoObject_ColumnList::PlantumlNonPkHiddenEntityColumns <-- docs.RepoObject_ColumnList_T::PlantumlNonPkHiddenEntityColumns
+docs.RepoObject_ColumnList::PlantumlNonPkIndexColumns <-- docs.RepoObject_ColumnList_T::PlantumlNonPkIndexColumns
+docs.RepoObject_ColumnList::PlantumlPkEntityColumns <-- docs.RepoObject_ColumnList_T::PlantumlPkEntityColumns
+docs.RepoObject_ColumnList::RepoObject_guid <-- docs.RepoObject_ColumnList_T::RepoObject_guid
+repo.RepoObjectColumn_gross2::RepoObject_guid <-- docs.RepoObject_ColumnList::RepoObject_guid

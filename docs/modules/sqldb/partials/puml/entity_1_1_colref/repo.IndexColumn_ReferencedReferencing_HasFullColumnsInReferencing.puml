@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -47,6 +48,7 @@ entity reference.RepoObjectColumn_reference_T << U >> {
   * {static} referencing_ro_fullname2 : nvarchar(257)
   * {static} referencing_roc_fullname : nvarchar(392)
   * {static} referencing_roc_fullname2 : nvarchar(386)
+  --
 }
 
 entity repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing << V >> {
@@ -59,6 +61,7 @@ entity repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing << V >
   * referenced_RepoObjectColumn_guid : uniqueidentifier
   referencing_RepoObject_guid : uniqueidentifier
   * referencing_RepoObjectColumn_guid : uniqueidentifier
+  --
 }
 
 entity repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T << U >> {
@@ -71,13 +74,14 @@ entity repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T << U
   referenced_RepoObjectColumn_guid : uniqueidentifier
   referencing_RepoObject_guid : uniqueidentifier
   referencing_RepoObjectColumn_guid : uniqueidentifier
+  --
 }
 
 entity repo.IndexColumn_union << V >> {
   **index_guid** : uniqueidentifier
   * **index_column_id** : int
   --
-  index_name : nvarchar(128)
+  index_name : nvarchar(450)
   is_descending_key : bit
   is_index_primary_key : bit
   is_index_real : bit
@@ -89,6 +93,7 @@ entity repo.IndexColumn_union << V >> {
   RepoObjectColumn_guid : uniqueidentifier
   SysObject_column_name : nvarchar(128)
   SysObject_column_user_type_fullname : nvarchar(182)
+  --
 }
 
 entity repo.RepoObjectColumn << U >> {
@@ -129,9 +134,11 @@ entity repo.RepoObjectColumn << U >> {
   {abstract} has_different_sys_names : bit
   * {static} is_RepoObjectColumn_name_uniqueidentifier : int
   * {static} is_SysObjectColumn_name_uniqueidentifier : int
+  --
 }
 
 entity repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T << P >> {
+  --
   --
 }
 

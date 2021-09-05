@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -38,5 +39,16 @@ entity workflow.ProcedureDependency_input_PersistenceDependency << V >> {
   --
 }
 
+entity workflow.Workflow_ProcedureDependency << V >> {
+  --
+}
+
+entity workflow.Workflow_ProcedureDependency_all << V >> {
+  --
+}
+
 workflow.ProcedureDependency <.. workflow.ProcedureDependency_gross
 workflow.ProcedureDependency <.. workflow.ProcedureDependency_input_PersistenceDependency
+workflow.ProcedureDependency <.. workflow.Workflow_ProcedureDependency_all
+workflow.ProcedureDependency <.. workflow.Workflow_ProcedureDependency
+workflow.ProcedureDependency_input_PersistenceDependency <.. workflow.ProcedureDependency

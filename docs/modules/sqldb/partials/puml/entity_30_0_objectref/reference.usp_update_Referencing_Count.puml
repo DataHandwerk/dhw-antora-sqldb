@@ -1,4 +1,5 @@
 'Left to right direction
+top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -50,7 +51,27 @@ entity repo.RepoObject << U >> {
   --
 }
 
+entity repo.RepoObject_SSAS_src << V >> {
+  * **RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity repo.RepoObject_SSAS_tgt << V >> {
+  * **RepoObject_guid** : uniqueidentifier
+  --
+}
+
 entity repo.RepoObjectColumn << U >> {
+  * **RepoObjectColumn_guid** : uniqueidentifier
+  --
+}
+
+entity repo.RepoObjectColumn_SSAS_src << V >> {
+  * **RepoObjectColumn_guid** : uniqueidentifier
+  --
+}
+
+entity repo.RepoObjectColumn_SSAS_tgt << V >> {
   * **RepoObjectColumn_guid** : uniqueidentifier
   --
 }
@@ -60,6 +81,47 @@ entity repo_sys.RepoObjectReferenced << V >> {
 }
 
 entity repo_sys.RepoObjectReferencing << V >> {
+  --
+}
+
+entity ssas.model_json << U >> {
+  * **databasename** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_10 << V >> {
+  * **databasename** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_20 << V >> {
+  * **databasename** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_31_tables << V >> {
+  * **databasename** : nvarchar(128)
+  **tables_name** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_31_tables_T << U >> {
+  * **databasename** : nvarchar(128)
+  **tables_name** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_311_tables_columns << V >> {
+  * **databasename** : nvarchar(128)
+  * **tables_name** : nvarchar(128)
+  **tables_columns_name** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_311_tables_columns_T << U >> {
+  * **databasename** : nvarchar(128)
+  * **tables_name** : nvarchar(128)
+  **tables_columns_name** : nvarchar(128)
   --
 }
 
@@ -74,7 +136,23 @@ logs.usp_ExecutionLog_insert <.. reference.usp_update_Referencing_Count
 repo.RepoObject <.. reference.usp_update_Referencing_Count
 repo.RepoObject <.. repo_sys.RepoObjectReferenced
 repo.RepoObject <.. repo_sys.RepoObjectReferencing
+repo.RepoObject <.. repo.RepoObject_SSAS_tgt
+repo.RepoObject_SSAS_src <.. repo.RepoObject_SSAS_tgt
+repo.RepoObject_SSAS_tgt <.. repo.RepoObjectColumn_SSAS_tgt
+repo.RepoObject_SSAS_tgt <.. repo.RepoObject
 repo.RepoObjectColumn <.. reference.usp_update_Referencing_Count
+repo.RepoObjectColumn <.. repo.RepoObjectColumn_SSAS_tgt
+repo.RepoObjectColumn_SSAS_src <.. repo.RepoObjectColumn_SSAS_tgt
+repo.RepoObjectColumn_SSAS_tgt <.. repo.RepoObject_SSAS_tgt
+repo.RepoObjectColumn_SSAS_tgt <.. repo.RepoObjectColumn
 repo_sys.RepoObjectReferenced <.. reference.usp_update_Referencing_Count
 repo_sys.RepoObjectReferencing <.. reference.usp_update_Referencing_Count
+ssas.model_json <.. ssas.model_json_10
+ssas.model_json_10 <.. ssas.model_json_20
+ssas.model_json_20 <.. ssas.model_json_31_tables
+ssas.model_json_31_tables <.. ssas.model_json_31_tables_T
+ssas.model_json_31_tables_T <.. ssas.model_json_311_tables_columns
+ssas.model_json_31_tables_T <.. repo.RepoObject_SSAS_src
+ssas.model_json_311_tables_columns <.. ssas.model_json_311_tables_columns_T
+ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_SSAS_src
 sys_dwh.dm_sql_referenced_entities <.. repo_sys.RepoObjectReferenced

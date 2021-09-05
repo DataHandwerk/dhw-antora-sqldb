@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -23,12 +24,60 @@ skinparam class {
 }
 
 
+entity workflow.usp_PERSIST_WorkflowStep << P >> {
+  --
+  --
+}
+
 entity workflow.WorkflowStep << U >> {
   * **id** : int
   --
-  * Procedure_RepoObject_guid : uniqueidentifier
+  * is_active : bit
+  * is_PossibleReferenced : bit
+  Procedure_RepoObject_guid : uniqueidentifier
   * Workflow_id : int
+  --
 }
 
+entity workflow.WorkflowStep_active << V >> {
+  --
+  * is_PossibleReferenced : bit
+  * Procedure_RepoObject_guid : uniqueidentifier
+  * Workflow_id : int
+  * Workflow_Name : nvarchar(500)
+  --
+}
 
+entity workflow.WorkflowStep_ForUpdate << V >> {
+  --
+  * id : int
+  * is_active : bit
+  * is_PossibleReferenced : bit
+  * Procedure_RepoObject_guid : uniqueidentifier
+  * RepoObject_fullname : nvarchar(261)
+  * Workflow_id : int
+  * Workflow_Name : nvarchar(500)
+  --
+}
 
+entity workflow.WorkflowStep_S << V >> {
+  * **Workflow_id** : int
+  **Procedure_RepoObject_guid** : uniqueidentifier
+  --
+  --
+}
+
+workflow.WorkflowStep <.. workflow.usp_PERSIST_WorkflowStep
+workflow.WorkflowStep <.. workflow.WorkflowStep_ForUpdate
+workflow.WorkflowStep <.. workflow.WorkflowStep_active
+workflow.WorkflowStep_S <.. workflow.WorkflowStep
+workflow.WorkflowStep::id <-- workflow.WorkflowStep_ForUpdate::id
+workflow.WorkflowStep::is_active <-- workflow.WorkflowStep_ForUpdate::is_active
+workflow.WorkflowStep::is_PossibleReferenced <-- workflow.WorkflowStep_active::is_PossibleReferenced
+workflow.WorkflowStep::is_PossibleReferenced <-- workflow.WorkflowStep_ForUpdate::is_PossibleReferenced
+workflow.WorkflowStep::Procedure_RepoObject_guid <-- workflow.WorkflowStep_active::Procedure_RepoObject_guid
+workflow.WorkflowStep::Procedure_RepoObject_guid <-- workflow.WorkflowStep_ForUpdate::Procedure_RepoObject_guid
+workflow.WorkflowStep::Workflow_id <-- workflow.WorkflowStep_active::Workflow_id
+workflow.WorkflowStep::Workflow_id <-- workflow.WorkflowStep_ForUpdate::Workflow_id
+workflow.WorkflowStep_S::Procedure_RepoObject_guid <-- workflow.WorkflowStep::Procedure_RepoObject_guid
+workflow.WorkflowStep_S::Workflow_id <-- workflow.WorkflowStep::Workflow_id

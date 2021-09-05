@@ -1,4 +1,5 @@
 'Left to right direction
+top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -33,8 +34,36 @@ entity config.Parameter << U >> {
   --
 }
 
+entity repo.Index_ssas << V >> {
+  * **databasename** : nvarchar(128)
+  **index_name** : nvarchar(450)
+  --
+}
+
+entity repo.Index_ssas_T << U >> {
+  * **databasename** : nvarchar(128)
+  **index_name** : nvarchar(450)
+  --
+}
+
 entity repo.Index_virtual << U >> {
   * **index_guid** : uniqueidentifier
+  --
+}
+
+entity repo.IndexColumn_ssas << V >> {
+  * **index_guid** : uniqueidentifier
+  * **index_column_id** : int
+  --
+}
+
+entity repo.IndexColumn_ssas_gross << V >> {
+  --
+}
+
+entity repo.IndexColumn_ssas_T << U >> {
+  * **index_guid** : uniqueidentifier
+  * **index_column_id** : int
   --
 }
 
@@ -60,7 +89,27 @@ entity repo.RepoObject << U >> {
   --
 }
 
+entity repo.RepoObject_SSAS_src << V >> {
+  * **RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity repo.RepoObject_SSAS_tgt << V >> {
+  * **RepoObject_guid** : uniqueidentifier
+  --
+}
+
 entity repo.RepoObjectColumn << U >> {
+  * **RepoObjectColumn_guid** : uniqueidentifier
+  --
+}
+
+entity repo.RepoObjectColumn_SSAS_src << V >> {
+  * **RepoObjectColumn_guid** : uniqueidentifier
+  --
+}
+
+entity repo.RepoObjectColumn_SSAS_tgt << V >> {
   * **RepoObjectColumn_guid** : uniqueidentifier
   --
 }
@@ -86,6 +135,74 @@ entity repo_sys.SysColumn << V >> {
 }
 
 entity repo_sys.SysObject << V >> {
+  --
+}
+
+entity ssas.IndexColumn_from_IsKey << V >> {
+  --
+}
+
+entity ssas.IndexColumn_from_IsUnique << V >> {
+  --
+}
+
+entity ssas.IndexColumn_from_Relationship << V >> {
+  --
+}
+
+entity ssas.IndexColumn_union << V >> {
+  --
+}
+
+entity ssas.model_json << U >> {
+  * **databasename** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_10 << V >> {
+  * **databasename** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_20 << V >> {
+  * **databasename** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_31_tables << V >> {
+  * **databasename** : nvarchar(128)
+  **tables_name** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_31_tables_T << U >> {
+  * **databasename** : nvarchar(128)
+  **tables_name** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_311_tables_columns << V >> {
+  * **databasename** : nvarchar(128)
+  * **tables_name** : nvarchar(128)
+  **tables_columns_name** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_311_tables_columns_T << U >> {
+  * **databasename** : nvarchar(128)
+  * **tables_name** : nvarchar(128)
+  **tables_columns_name** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_32_relationships << V >> {
+  * **databasename** : nvarchar(128)
+  **relationships_name** : nvarchar(500)
+  --
+}
+
+entity ssas.model_json_32_relationships_T << U >> {
+  * **ForeignKey_guid** : uniqueidentifier
   --
 }
 
@@ -143,37 +260,104 @@ entity sys_dwh.types << SN >> {
 
 config.ftv_dwh_database <.. repo_sys.SysColumn
 config.ftv_dwh_database <.. repo_sys.ExtendedProperties
+config.ftv_dwh_database <.. repo_sys.ExtendedProperties
 config.Parameter <.. config.ftv_dwh_database
+repo.Index_ssas <.. repo.Index_ssas_T
+repo.Index_ssas_T <.. repo.IndexColumn_ssas_gross
+repo.Index_ssas_T <.. repo.IndexColumn_ssas
 repo.Index_virtual <.. repo.IndexColumn_virtual_gross
+repo.IndexColumn_ssas <.. repo.IndexColumn_ssas_T
+repo.IndexColumn_ssas_gross <.. repo.IndexColumn_union
+repo.IndexColumn_ssas_T <.. repo.IndexColumn_ssas_gross
 repo.IndexColumn_virtual <.. repo.IndexColumn_virtual_gross
 repo.IndexColumn_virtual_gross <.. repo.IndexColumn_union
+repo.RepoObject <.. repo.IndexColumn_virtual_gross
+repo.RepoObject <.. repo.IndexColumn_ssas_gross
 repo.RepoObject <.. repo.SysObject_RepoObject_via_name
 repo.RepoObject <.. repo.SysColumn_RepoObjectColumn_via_name
-repo.RepoObject <.. repo.IndexColumn_virtual_gross
+repo.RepoObject <.. repo.RepoObject_SSAS_tgt
+repo.RepoObject <.. repo.RepoObject_SSAS_tgt
+repo.RepoObject_SSAS_src <.. repo.RepoObject_SSAS_tgt
+repo.RepoObject_SSAS_src <.. repo.RepoObject_SSAS_tgt
+repo.RepoObject_SSAS_tgt <.. repo.RepoObjectColumn_SSAS_tgt
+repo.RepoObject_SSAS_tgt <.. repo.RepoObjectColumn_SSAS_tgt
+repo.RepoObject_SSAS_tgt <.. repo.RepoObject
+repo.RepoObject_SSAS_tgt <.. repo.RepoObject
 repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_name
 repo.RepoObjectColumn <.. repo.IndexColumn_virtual_gross
+repo.RepoObjectColumn <.. repo.IndexColumn_ssas_gross
+repo.RepoObjectColumn <.. repo.RepoObjectColumn_SSAS_tgt
+repo.RepoObjectColumn <.. repo.RepoObjectColumn_SSAS_tgt
+repo.RepoObjectColumn_SSAS_src <.. repo.RepoObjectColumn_SSAS_tgt
+repo.RepoObjectColumn_SSAS_src <.. repo.RepoObjectColumn_SSAS_tgt
+repo.RepoObjectColumn_SSAS_tgt <.. repo.RepoObject_SSAS_tgt
+repo.RepoObjectColumn_SSAS_tgt <.. repo.RepoObject_SSAS_tgt
+repo.RepoObjectColumn_SSAS_tgt <.. repo.RepoObjectColumn
+repo.RepoObjectColumn_SSAS_tgt <.. repo.RepoObjectColumn
 repo.SysColumn_RepoObjectColumn_via_name <.. repo_sys.IndexColumn_unique
 repo.SysObject_RepoObject_via_name <.. repo_sys.IndexColumn_unique
-repo_sys.ExtendedProperties <.. repo_sys.SysColumn
 repo_sys.ExtendedProperties <.. repo_sys.SysObject
+repo_sys.ExtendedProperties <.. repo_sys.SysColumn
 repo_sys.IndexColumn_unique <.. repo.IndexColumn_union
 repo_sys.SysColumn <.. repo.SysColumn_RepoObjectColumn_via_name
 repo_sys.SysObject <.. repo.SysObject_RepoObject_via_name
 repo_sys.SysObject <.. repo_sys.SysColumn
-sys_dwh.columns <.. repo_sys.ExtendedProperties
+ssas.IndexColumn_from_IsKey <.. ssas.IndexColumn_union
+ssas.IndexColumn_from_IsKey <.. ssas.IndexColumn_union
+ssas.IndexColumn_from_IsUnique <.. ssas.IndexColumn_union
+ssas.IndexColumn_from_IsUnique <.. ssas.IndexColumn_union
+ssas.IndexColumn_from_Relationship <.. ssas.IndexColumn_union
+ssas.IndexColumn_from_Relationship <.. ssas.IndexColumn_union
+ssas.IndexColumn_union <.. repo.Index_ssas
+ssas.IndexColumn_union <.. repo.IndexColumn_ssas
+ssas.model_json <.. ssas.model_json_10
+ssas.model_json <.. ssas.model_json_10
+ssas.model_json_10 <.. ssas.model_json_20
+ssas.model_json_10 <.. ssas.model_json_20
+ssas.model_json_20 <.. ssas.model_json_31_tables
+ssas.model_json_20 <.. ssas.model_json_31_tables
+ssas.model_json_20 <.. ssas.model_json_32_relationships
+ssas.model_json_20 <.. ssas.model_json_32_relationships
+ssas.model_json_31_tables <.. ssas.model_json_31_tables_T
+ssas.model_json_31_tables <.. ssas.model_json_31_tables_T
+ssas.model_json_31_tables_T <.. ssas.model_json_311_tables_columns
+ssas.model_json_31_tables_T <.. ssas.model_json_311_tables_columns
+ssas.model_json_31_tables_T <.. repo.RepoObject_SSAS_src
+ssas.model_json_31_tables_T <.. repo.RepoObject_SSAS_src
+ssas.model_json_311_tables_columns <.. ssas.model_json_311_tables_columns_T
+ssas.model_json_311_tables_columns <.. ssas.model_json_311_tables_columns_T
+ssas.model_json_311_tables_columns_T <.. ssas.IndexColumn_from_Relationship
+ssas.model_json_311_tables_columns_T <.. ssas.IndexColumn_from_Relationship
+ssas.model_json_311_tables_columns_T <.. ssas.IndexColumn_from_IsKey
+ssas.model_json_311_tables_columns_T <.. ssas.IndexColumn_from_IsKey
+ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_SSAS_src
+ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_SSAS_src
+ssas.model_json_311_tables_columns_T <.. ssas.IndexColumn_from_IsUnique
+ssas.model_json_311_tables_columns_T <.. ssas.IndexColumn_from_IsUnique
+ssas.model_json_32_relationships <.. ssas.model_json_32_relationships_T
+ssas.model_json_32_relationships <.. ssas.model_json_32_relationships_T
+ssas.model_json_32_relationships_T <.. ssas.IndexColumn_from_Relationship
+ssas.model_json_32_relationships_T <.. ssas.IndexColumn_from_Relationship
 sys_dwh.columns <.. repo_sys.SysColumn
+sys_dwh.columns <.. repo_sys.ExtendedProperties
+sys_dwh.columns <.. repo_sys.ExtendedProperties
 sys_dwh.computed_columns <.. repo_sys.SysColumn
 sys_dwh.default_constraints <.. repo_sys.SysColumn
+sys_dwh.extended_properties <.. repo_sys.ExtendedProperties
 sys_dwh.extended_properties <.. repo_sys.ExtendedProperties
 sys_dwh.identity_columns <.. repo_sys.SysColumn
 sys_dwh.index_columns <.. repo_sys.IndexColumn_unique
 sys_dwh.indexes <.. repo_sys.IndexColumn_unique
 sys_dwh.indexes <.. repo_sys.ExtendedProperties
-sys_dwh.objects <.. repo_sys.SysObject
+sys_dwh.indexes <.. repo_sys.ExtendedProperties
 sys_dwh.objects <.. repo_sys.ExtendedProperties
+sys_dwh.objects <.. repo_sys.ExtendedProperties
+sys_dwh.objects <.. repo_sys.SysObject
 sys_dwh.parameters <.. repo_sys.ExtendedProperties
-sys_dwh.schemas <.. repo_sys.SysObject
+sys_dwh.parameters <.. repo_sys.ExtendedProperties
 sys_dwh.schemas <.. repo_sys.ExtendedProperties
+sys_dwh.schemas <.. repo_sys.ExtendedProperties
+sys_dwh.schemas <.. repo_sys.SysObject
 sys_dwh.sql_modules <.. repo_sys.SysObject
 sys_dwh.tables <.. repo_sys.SysObject
 sys_dwh.types <.. repo_sys.SysColumn

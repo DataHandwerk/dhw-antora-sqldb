@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -28,6 +29,7 @@ entity docs.AntoraIndexSemanticgroupPatterndatatype << V >> {
   **IndexPatternColumnDatatype** : nvarchar(4000)
   --
   AntoraIndexSemanticgroupPatterndatatype : nvarchar(max)
+  --
 }
 
 entity docs.RepoObject_IndexList << V >> {
@@ -35,6 +37,7 @@ entity docs.RepoObject_IndexList << V >> {
   --
   AntoraIndexList : nvarchar(max)
   PumlIndexList : nvarchar(max)
+  --
 }
 
 entity repo.ForeignKey_gross << V >> {
@@ -64,6 +67,7 @@ entity repo.ForeignKey_gross << V >> {
   referencing_SysObject_name : nvarchar(128)
   referencing_SysObject_schema_name : nvarchar(128)
   update_referential_action : tinyint
+  --
 }
 
 entity repo.ForeignKey_Indexes << V >> {
@@ -92,6 +96,7 @@ entity repo.ForeignKey_Indexes << V >> {
   referencing_SysObject_name : nvarchar(128)
   referencing_SysObject_schema_name : nvarchar(128)
   update_referential_action : tinyint
+  --
 }
 
 entity repo.ForeignKey_virtual_Indexes << V >> {
@@ -120,6 +125,7 @@ entity repo.ForeignKey_virtual_Indexes << V >> {
   referencing_SysObject_name : nvarchar(128)
   referencing_SysObject_schema_name : nvarchar(128)
   * update_referential_action : tinyint
+  --
 }
 
 entity repo.Index_ColumList << V >> {
@@ -131,6 +137,7 @@ entity repo.Index_ColumList << V >> {
   DbmlIndexColumnList : nvarchar(max)
   PersistenceWhereColumnList : nvarchar(max)
   PumlIndexColumnList : nvarchar(max)
+  --
 }
 
 entity repo.Index_gross << V >> {
@@ -140,8 +147,8 @@ entity repo.Index_gross << V >> {
   ColumnList : nvarchar(max)
   ConstraintColumnList : nvarchar(max)
   DbmlIndexColumnList : nvarchar(max)
-  index_name : nvarchar(128)
-  * index_type : tinyint
+  index_name : nvarchar(450)
+  index_type : tinyint
   IndexPatternColumnDatatype : nvarchar(4000)
   IndexPatternColumnName : nvarchar(4000)
   IndexSemanticGroup : nvarchar(512)
@@ -165,6 +172,7 @@ entity repo.Index_gross << V >> {
   * SysObject_name : nvarchar(128)
   * SysObject_schema_name : nvarchar(128)
   SysObject_type : char(2)
+  --
 }
 
 entity repo.Index_Settings << U >> {
@@ -174,13 +182,14 @@ entity repo.Index_Settings << U >> {
   IndexPatternColumnName : nvarchar(4000)
   IndexSemanticGroup : nvarchar(512)
   * is_create_constraint : bit
+  --
 }
 
 entity repo.Index_union << V >> {
   **index_guid** : uniqueidentifier
   --
-  index_name : nvarchar(128)
-  * index_type : tinyint
+  index_name : nvarchar(450)
+  index_type : tinyint
   IndexPatternColumnGuid : varchar(8000)
   is_index_disabled : bit
   is_index_primary_key : bit
@@ -188,15 +197,13 @@ entity repo.Index_union << V >> {
   is_index_unique : bit
   parent_RepoObject_guid : uniqueidentifier
   referenced_index_guid : uniqueidentifier
+  --
 }
 
 entity repo.RepoObject_gross << V >> {
   * **RepoObject_guid** : uniqueidentifier
   --
-  AntoraReferencedList : nvarchar(max)
-  AntoraReferencingList : nvarchar(max)
-  CreateColumnList : nvarchar(max)
-  DbmlColumnList : nvarchar(max)
+  Description : nvarchar(max)
   has_different_sys_names : bit
   has_execution_plan_issue : bit
   has_get_referenced_issue : bit
@@ -207,6 +214,7 @@ entity repo.RepoObject_gross << V >> {
   Inheritance_StringAggSeparatorSql : nvarchar(4000)
   InheritanceDefinition : nvarchar(4000)
   InheritanceType : tinyint
+  * is_DocsExclude : bit
   is_DocsOutput : int
   * is_in_reference : int
   is_persistence : bit
@@ -223,6 +231,7 @@ entity repo.RepoObject_gross << V >> {
   is_repo_managed : bit
   * is_RepoObject_name_uniqueidentifier : int
   is_required_ObjectMerge : bit
+  * is_ssas : bit
   is_SysObject_missing : bit
   * is_SysObject_name_uniqueidentifier : int
   * modify_dt : datetime
@@ -234,9 +243,6 @@ entity repo.RepoObject_gross << V >> {
   persistence_source_SysObject_fullname : nvarchar(261)
   persistence_source_SysObject_fullname2 : nvarchar(257)
   persistence_source_SysObject_xref : nvarchar(269)
-  PersistenceCompareColumnList : nvarchar(max)
-  PersistenceInsertColumnList : nvarchar(max)
-  PersistenceUpdateColumnList : nvarchar(max)
   pk_index_guid : uniqueidentifier
   pk_IndexPatternColumnDatatype : nvarchar(4000)
   pk_IndexPatternColumnName : nvarchar(4000)
@@ -253,10 +259,6 @@ entity repo.RepoObject_gross << V >> {
   * RepoObject_type : char(2)
   RepoObject_type_name : nvarchar(128)
   source_filter : nvarchar(4000)
-  sql_modules_antora : nvarchar(max)
-  sql_modules_definition : nvarchar(max)
-  sql_modules_formatted : nvarchar(max)
-  sql_modules_formatted2 : nvarchar(max)
   * SysObject_fullname : nvarchar(261)
   * SysObject_fullname2 : nvarchar(257)
   SysObject_id : int
@@ -269,10 +271,14 @@ entity repo.RepoObject_gross << V >> {
   * SysObject_schema_name : nvarchar(128)
   SysObject_type : char(2)
   SysObject_type_name : nvarchar(128)
+  tables_dataCategory : nvarchar(500)
+  tables_description : nvarchar(max)
+  tables_isHidden : nvarchar(500)
   target_filter : nvarchar(4000)
   temporal_type : tinyint
   * usp_persistence_name : nvarchar(140)
   usp_persistence_RepoObject_guid : uniqueidentifier
+  --
 }
 
 entity repo.RepoObject_SqlCreateTable << V >> {
@@ -285,26 +291,30 @@ entity repo.RepoObject_SqlCreateTable << V >> {
   persistence_source_SysObject_fullname : nvarchar(261)
   * RepoObject_fullname : nvarchar(261)
   * SqlCreateTable : nvarchar(max)
+  --
 }
 
 entity repo.usp_Index_finish << P >> {
+  --
   --
 }
 
 entity repo.usp_index_inheritance << P >> {
   --
+  --
 }
 
 entity repo.usp_Index_virtual_set << P >> {
   --
+  --
 }
 
 repo.Index_ColumList <.. repo.Index_gross
-repo.Index_gross <.. repo.RepoObject_SqlCreateTable
-repo.Index_gross <.. repo.usp_index_inheritance
 repo.Index_gross <.. repo.usp_Index_virtual_set
 repo.Index_gross <.. repo.ForeignKey_Indexes
 repo.Index_gross <.. repo.ForeignKey_virtual_Indexes
+repo.Index_gross <.. repo.RepoObject_SqlCreateTable
+repo.Index_gross <.. repo.usp_index_inheritance
 repo.Index_gross <.. repo.usp_Index_finish
 repo.Index_gross <.. docs.RepoObject_IndexList
 repo.Index_gross <.. docs.AntoraIndexSemanticgroupPatterndatatype

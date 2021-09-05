@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -31,6 +32,7 @@ entity sqlparse.RepoObject_SqlModules << U >> {
   sql_modules_formatted2 : nvarchar(max)
   sql_modules_json : nvarchar(max)
   {static} is_json_sql_modules_json : int
+  --
 }
 
 entity sqlparse.RepoObject_SqlModules_10_statement << V >> {
@@ -44,6 +46,7 @@ entity sqlparse.RepoObject_SqlModules_10_statement << V >> {
   normalized : nvarchar(max)
   sql_modules_json : nvarchar(max)
   SysObject_fullname : nvarchar(261)
+  --
 }
 
 entity sqlparse.RepoObject_SqlModules_39_object << V >> {
@@ -68,6 +71,7 @@ entity sqlparse.RepoObject_SqlModules_39_object << V >> {
   Min_RowNumber_IdentifierList : bigint
   Min_RowNumber_Where : bigint
   SysObject_fullname : nvarchar(261)
+  --
 }
 
 entity sqlparse.RepoObject_SqlModules_Repo_Sys << V >> {
@@ -82,11 +86,12 @@ entity sqlparse.RepoObject_SqlModules_Repo_Sys << V >> {
   sql_modules_formatted2 : nvarchar(max)
   sql_modules_json : nvarchar(max)
   SysObject_type : char(2)
+  --
 }
 
+sqlparse.RepoObject_SqlModules <.. sqlparse.RepoObject_SqlModules_10_statement
 sqlparse.RepoObject_SqlModules <.. sqlparse.RepoObject_SqlModules_39_object
 sqlparse.RepoObject_SqlModules <.. sqlparse.RepoObject_SqlModules_Repo_Sys
-sqlparse.RepoObject_SqlModules <.. sqlparse.RepoObject_SqlModules_10_statement
 sqlparse.RepoObject_SqlModules::is_json_sql_modules_json <-- sqlparse.RepoObject_SqlModules_Repo_Sys::is_json_sql_modules_json
 sqlparse.RepoObject_SqlModules::RepoObject_guid <-- sqlparse.RepoObject_SqlModules_10_statement::RepoObject_guid
 sqlparse.RepoObject_SqlModules::RepoObject_guid <-- sqlparse.RepoObject_SqlModules_39_object::RepoObject_guid

@@ -10,6 +10,7 @@
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
+:ExistsProperty--AntoraIndexList:
 :ExistsProperty--Columns:
 // end::existing_properties[]
 
@@ -92,6 +93,11 @@ view
 |
 |===
 
+.Description
+--
+(concat('[',[RepoObject_schema_name],'].[',[RepoObject_name],']'))
+--
+
 .Referenced Columns
 --
 * xref:reference.additional_Reference_guid.adoc#column-referenced_fullname[+reference.additional_Reference_guid.referenced_fullname+]
@@ -168,6 +174,11 @@ view
 |
 |===
 
+.Description
+--
+reference in [repo_sys].[type]
+--
+
 .Referenced Columns
 --
 * xref:reference.additional_Reference_guid.adoc#column-referenced_type[+reference.additional_Reference_guid.referenced_type+]
@@ -205,6 +216,11 @@ view
 |
 |
 |===
+
+.Description
+--
+(concat('[',[RepoObject_schema_name],'].[',[RepoObject_name],']'))
+--
 
 .Referenced Columns
 --
@@ -281,6 +297,11 @@ view
 |
 |
 |===
+
+.Description
+--
+reference in [repo_sys].[type]
+--
 
 .Referenced Columns
 --
@@ -407,6 +428,27 @@ view
 == AntoraIndexList
 
 // tag::AntoraIndexList[]
+
+[#index-idx_RepoObject_reference_additional_internal_1]
+=== idx_RepoObject_reference_additional_internal++__++1
+
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_repoobject_guid[RepoObject_guid]
++
+--
+* <<column-referenced_RepoObject_guid>>; uniqueidentifier
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[#index-idx_RepoObject_reference_additional_internal_2]
+=== idx_RepoObject_reference_additional_internal++__++2
+
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_repoobject_guid[RepoObject_guid]
++
+--
+* <<column-referencing_RepoObject_guid>>; uniqueidentifier
+--
+* PK, Unique, Real: 0, 0, 0
 
 // end::AntoraIndexList[]
 
@@ -691,7 +733,7 @@ source: property.RepoObjectProperty WHERE property_int = 1
 
 // tag::sql_modules_definition[]
 [%collapsible]
-====
+=======
 [source,sql]
 ----
 
@@ -723,7 +765,7 @@ Where
     And Not referencing_RepoObject_guid Is Null
 
 ----
-====
+=======
 // end::sql_modules_definition[]
 
 

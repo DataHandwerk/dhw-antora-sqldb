@@ -24,11 +24,6 @@ skinparam class {
 }
 
 
-entity docs.RepoObject_ColumnList_T {
-  * **RepoObject_guid** : uniqueidentifier
-  --
-}
-
 entity docs.AntoraIndexSemanticgroup << V >> {
   **IndexSemanticGroup** : nvarchar(512)
   --
@@ -106,11 +101,15 @@ entity docs.RepoObject_Adoc << V >> {
 }
 
 entity docs.RepoObject_Adoc_T << U >> {
-  * **RepoObject_guid** : uniqueidentifier
   --
 }
 
 entity docs.RepoObject_ColumnList << V >> {
+  --
+}
+
+entity docs.RepoObject_ColumnList_T << U >> {
+  * **RepoObject_guid** : uniqueidentifier
   --
 }
 
@@ -1685,8 +1684,11 @@ docs.ObjectRefCyclic_ObjectRefList <.. docs.ObjectRefCyclic
 docs.RepoObject_Adoc <.. docs.RepoObject_Adoc_T
 docs.RepoObject_Adoc <.. docs.usp_PERSIST_RepoObject_Adoc_T
 docs.REpoObject_Adoc_T <.. docs.usp_PERSIST_RepoObject_Adoc_T
-docs.RepoObject_ColumnList <.. docs.85AC3586-9B83-4474-AF3D-ED54F04062CA
+docs.RepoObject_ColumnList <.. docs.RepoObject_ColumnList_T
 docs.RepoObject_ColumnList <.. docs.usp_PERSIST_RepoObject_ColumnList_T
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Adoc
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Plantuml_Entity
+docs.RepoObject_ColumnList_T <.. docs.usp_PERSIST_RepoObject_ColumnList_T
 docs.RepoObject_IndexList <.. docs.RepoObject_IndexList_T
 docs.RepoObject_IndexList <.. docs.usp_PERSIST_RepoObject_IndexList_T
 docs.RepoObject_IndexList_T <.. docs.RepoObject_Adoc
@@ -1956,7 +1958,6 @@ repo.Index_ssas_T <.. repo.usp_PERSIST_Index_ssas_T
 repo.Index_ssas_T <.. repo.ForeignKey_ssas_Indexes
 repo.Index_ssas_T <.. repo.IndexColumn_ssas_gross
 repo.Index_ssas_T <.. repo.ForeignKey_ssas_Indexes_old
-repo.Index_union <.. repo.usp_Index_finish
 repo.Index_union <.. repo.IndexReferencedReferencing
 repo.Index_union <.. repo.Index_SqlConstraint_PkUq
 repo.Index_union <.. repo.Index_gross
@@ -1965,6 +1966,7 @@ repo.Index_union <.. repo.Index_Settings_ForUpdate
 repo.Index_union <.. repo.IndexReferencedReferencing
 repo.Index_union <.. repo.Index_SqlConstraint_PkUq
 repo.Index_union <.. repo.Index_gross
+repo.Index_union <.. repo.usp_Index_finish
 repo.Index_union <.. repo.Index_Settings_ForUpdate
 repo.Index_unique_IndexPatternColumnGuid <.. repo.Index_union
 repo.Index_unique_IndexPatternColumnGuid <.. repo.Index_union
@@ -2110,7 +2112,6 @@ repo.RepoObject_SSAS_src <.. repo.usp_PERSIST_RepoObject_SSAS_tgt
 repo.RepoObject_SSAS_tgt <.. repo.RepoObject
 repo.RepoObject_SSAS_tgt <.. repo.RepoObjectColumn_SSAS_tgt
 repo.RepoObject_SSAS_tgt <.. repo.usp_PERSIST_RepoObject_SSAS_tgt
-repo.RepoObjectColumn <.. reference.RepoObjectColumn_RelationScript
 repo.RepoObjectColumn <.. reference.RepoObjectColumn_reference_Persistence
 repo.RepoObjectColumn <.. repo.RepoObject_persistence_column
 repo.RepoObjectColumn <.. repo.IndexColumn_virtual_gross
@@ -2131,6 +2132,7 @@ repo.RepoObjectColumn <.. sqlparse.RepoObject_SqlModules_72_reference_NoTableAli
 repo.RepoObjectColumn <.. reference.RepoObjectColumn_reference_SqlModules
 repo.RepoObjectColumn <.. property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn
 repo.RepoObjectColumn <.. property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition
+repo.RepoObjectColumn <.. reference.RepoObjectColumn_RelationScript
 repo.RepoObjectColumn <.. reference.RepoObjectColumn_ReferenceTree
 repo.RepoObjectColumn <.. repo.RepoObjectColumn_RequiredRepoObjectColumnMerge
 repo.RepoObjectColumn <.. property.usp_RepoObjectColumnProperty_set
@@ -2248,8 +2250,8 @@ sqlparse.RepoObject_SqlModules_32_ObjectClass <.. sqlparse.RepoObject_SqlModules
 sqlparse.RepoObject_SqlModules_33_ObjectNormalized <.. sqlparse.RepoObject_SqlModules_39_object
 sqlparse.RepoObject_SqlModules_39_object <.. sqlparse.RepoObject_SqlModules_41_from
 sqlparse.RepoObject_SqlModules_39_object <.. sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union
-sqlparse.RepoObject_SqlModules_41_from <.. sqlparse.usp_PERSIST_RepoObject_SqlModules_41_from_T
 sqlparse.RepoObject_SqlModules_41_from <.. sqlparse.RepoObject_SqlModules_41_from_T
+sqlparse.RepoObject_SqlModules_41_from <.. sqlparse.usp_PERSIST_RepoObject_SqlModules_41_from_T
 sqlparse.RepoObject_SqlModules_41_from_T <.. sqlparse.RepoObject_SqlModules_42_from_Identifier
 sqlparse.RepoObject_SqlModules_41_from_T <.. sqlparse.usp_PERSIST_RepoObject_SqlModules_41_from_T
 sqlparse.RepoObject_SqlModules_42_from_Identifier <.. sqlparse.RepoObject_SqlModules_43_from_Identifier
@@ -2304,6 +2306,7 @@ ssas.model_json_31_tables_T <.. ssas.usp_PERSIST_model_json_31_tables_T
 ssas.model_json_31_tables_T <.. ssas.model_json_316_tables_descriptions_multiline
 ssas.model_json_311_tables_columns <.. ssas.model_json_311_tables_columns_T
 ssas.model_json_311_tables_columns <.. ssas.usp_PERSIST_model_json_311_tables_columns_T
+ssas.model_json_311_tables_columns_T <.. ssas.model_json_3112_tables_columns_expressions_multiline
 ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_gross
 ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_SSAS_src
 ssas.model_json_311_tables_columns_T <.. ssas.IndexColumn_from_IsUnique
@@ -2312,7 +2315,6 @@ ssas.model_json_311_tables_columns_T <.. ssas.IndexColumn_from_IsKey
 ssas.model_json_311_tables_columns_T <.. repo.ForeignKey_ssas_IndexPattern
 ssas.model_json_311_tables_columns_T <.. ssas.usp_PERSIST_model_json_311_tables_columns_T
 ssas.model_json_311_tables_columns_T <.. ssas.model_json_3111_tables_columns_descriptions_multiline
-ssas.model_json_311_tables_columns_T <.. ssas.model_json_3112_tables_columns_expressions_multiline
 ssas.model_json_3111_tables_columns_descriptions_multiline <.. ssas.model_json_31111_tables_columns_descriptions_StrAgg
 ssas.model_json_31111_tables_columns_descriptions_StrAgg <.. repo.RepoObjectColumn_gross
 ssas.model_json_3112_tables_columns_expressions_multiline <.. ssas.model_json_31121_tables_columns_expressions_StrAgg

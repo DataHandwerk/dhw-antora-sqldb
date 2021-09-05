@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -25,6 +26,7 @@ skinparam class {
 
 entity config.fs_get_parameter_value << FN >> {
   --
+  --
 }
 
 entity configT.type_level1type_level2type << V >> {
@@ -33,15 +35,18 @@ entity configT.type_level1type_level2type << V >> {
   level1type : varchar(9)
   level2type : varchar(10)
   type_desc : nvarchar(128)
+  --
 }
 
 entity logs.usp_ExecutionLog_insert << P >> {
+  --
   --
 }
 
 entity reference.RepoObjectSource_virtual << U >> {
   * **RepoObject_guid** : uniqueidentifier
   * **Source_RepoObject_guid** : uniqueidentifier
+  --
   --
 }
 
@@ -53,8 +58,10 @@ entity repo.RepoObject << U >> {
   Inheritance_StringAggSeparatorSql : nvarchar(4000)
   InheritanceDefinition : nvarchar(4000)
   InheritanceType : tinyint
+  * is_DocsExclude : bit
   is_repo_managed : bit
   is_required_ObjectMerge : bit
+  * is_ssas : bit
   is_SysObject_missing : bit
   * modify_dt : datetime
   pk_index_guid : uniqueidentifier
@@ -80,7 +87,9 @@ entity repo.RepoObject << U >> {
   * {static} SysObject_fullname : nvarchar(261)
   * {static} SysObject_fullname2 : nvarchar(257)
   * {abstract} SysObject_query_sql : nvarchar(406)
+  * {static} usp_persistence_fullname2 : nvarchar(269)
   * {static} usp_persistence_name : nvarchar(140)
+  --
 }
 
 entity repo.RepoObject_persistence << U >> {
@@ -105,6 +114,7 @@ entity repo.RepoObject_persistence << U >> {
   target_filter : nvarchar(4000)
   {abstract} is_persistence : bit
   {abstract} temporal_type : tinyint
+  --
 }
 
 entity repo.RepoObject_RequiredRepoObjectMerge << V >> {
@@ -122,6 +132,7 @@ entity repo.RepoObject_RequiredRepoObjectMerge << V >> {
   * SysObject_fullname : nvarchar(261)
   * SysObject_name : nvarchar(128)
   * SysObject_schema_name : nvarchar(128)
+  --
 }
 
 entity repo.SysObject_RepoObject_via_guid << V >> {
@@ -153,6 +164,7 @@ entity repo.SysObject_RepoObject_via_guid << V >> {
   SysObject_type : char(2)
   SysObject_type_desc : nvarchar(60)
   temporal_type : tinyint
+  --
 }
 
 entity repo.SysObject_RepoObject_via_name << V >> {
@@ -184,13 +196,16 @@ entity repo.SysObject_RepoObject_via_name << V >> {
   SysObject_type : char(2)
   SysObject_type_desc : nvarchar(60)
   temporal_type : tinyint
+  --
 }
 
 entity repo.usp_sync_guid << P >> {
   --
+  --
 }
 
 entity repo.usp_sync_guid_RepoObject << P >> {
+  --
   --
 }
 
@@ -217,9 +232,11 @@ entity repo_sys.SysObject << V >> {
   temporal_type_desc : nvarchar(60)
   type : char(2)
   type_desc : nvarchar(60)
+  --
 }
 
 entity repo_sys.usp_AddOrUpdateExtendedProperty << P >> {
+  --
   --
 }
 

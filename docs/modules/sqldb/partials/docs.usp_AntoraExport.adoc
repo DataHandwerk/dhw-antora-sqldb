@@ -6,6 +6,8 @@
 :ExistsProperty--adocuspsteps:
 :ExistsProperty--antorareferencedlist:
 :ExistsProperty--exampleusage:
+:ExistsProperty--is_repo_managed:
+:ExistsProperty--is_ssas:
 :ExistsProperty--ms_description:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
@@ -39,7 +41,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-08-07 17:38:07
+2021-09-05 13:29:30
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -75,7 +77,12 @@ stored procedure
 * @parent_execution_log_id (bigint)
 // end::AntoraParameterList[]
 
-== AdocUspSteps
+== Other tags
+
+source: property.RepoObjectProperty_cross As rop_cross
+
+
+=== AdocUspSteps
 
 // tag::adocuspsteps[]
 .Steps in [docs].[usp_AntoraExport]
@@ -83,29 +90,24 @@ stored procedure
 |===
 |Number|Name (Action, Source, Target)|Parent
 
-|210
-|
-*[reference].[usp_PERSIST_RepoObject_ReferenceTree_30_0_T]*
-
-* `EXEC [reference].[usp_PERSIST_RepoObject_ReferenceTree_30_0_T]`
-
-|
-
-|220
-|
-*[reference].[usp_PERSIST_RepoObject_ReferenceTree_0_30_T]*
-
-* `EXEC [reference].[usp_PERSIST_RepoObject_ReferenceTree_0_30_T]`
-
-|
-
 |300
 |
 *[repo].[usp_RepoObjectProperty_collect]*
 
 * `EXEC [property].[usp_RepoObjectProperty_collect]`
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+[property].[usp_RepoObjectProperty_collect]
+----
+=====
+
 |
+
 
 |400
 |
@@ -113,7 +115,18 @@ stored procedure
 
 * `EXEC [docs].[usp_AntoraExport_navigation]`
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+[docs].[usp_AntoraExport_navigation]
+----
+=====
+
 |
+
 
 |410
 |
@@ -121,7 +134,18 @@ stored procedure
 
 * `EXEC [docs].[usp_AntoraExport_DocSnippet]`
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+[docs].[usp_AntoraExport_DocSnippet]
+----
+=====
+
 |
+
 
 |500
 |
@@ -129,7 +153,18 @@ stored procedure
 
 * `EXEC [docs].[usp_AntoraExport_ObjectPage]`
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+[docs].[usp_AntoraExport_ObjectPage]
+----
+=====
+
 |
+
 
 |600
 |
@@ -137,15 +172,37 @@ stored procedure
 
 * `EXEC [docs].[usp_AntoraExport_ObjectPageTemplate]`
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+[docs].[usp_AntoraExport_ObjectPageTemplate]
+----
+=====
+
 |
 
-|700
+
+|750
 |
 *[docs].[usp_AntoraExport_ObjectPartialProperties]*
 
 * `EXEC [docs].[usp_AntoraExport_ObjectPartialProperties]`
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+[docs].[usp_AntoraExport_ObjectPartialProperties]
+----
+=====
+
 |
+
 
 |800
 |
@@ -153,21 +210,62 @@ stored procedure
 
 * `EXEC [docs].[usp_AntoraExport_ObjectPuml]`
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+[docs].[usp_AntoraExport_ObjectPuml]
+----
+=====
+
 |
 
-|900
+
+|910
 |
 *[docs].[usp_AntoraExport_Page_IndexSemanticGroup]*
 
 * `EXEC [docs].[usp_AntoraExport_Page_IndexSemanticGroup]`
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+[docs].[usp_AntoraExport_Page_IndexSemanticGroup]
+----
+=====
+
 |
+
+
+|920
+|
+*[docs].[usp_AntoraExport_ObjectRefCyclic]*
+
+* `EXEC [docs].[usp_AntoraExport_ObjectRefCyclic]`
+
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+[docs].[usp_AntoraExport_ObjectRefCyclic]
+----
+=====
+
+|
+
 |===
 
 // end::adocuspsteps[]
 
 
-== AntoraReferencedList
+=== AntoraReferencedList
 
 // tag::antorareferencedlist[]
 * xref:docs.usp_AntoraExport_DocSnippet.adoc[]
@@ -176,32 +274,33 @@ stored procedure
 * xref:docs.usp_AntoraExport_ObjectPageTemplate.adoc[]
 * xref:docs.usp_AntoraExport_ObjectPartialProperties.adoc[]
 * xref:docs.usp_AntoraExport_ObjectPuml.adoc[]
+* xref:docs.usp_AntoraExport_ObjectRefCyclic.adoc[]
 * xref:docs.usp_AntoraExport_Page_IndexSemanticGroup.adoc[]
 * xref:logs.usp_ExecutionLog_insert.adoc[]
 * xref:property.usp_RepoObjectProperty_collect.adoc[]
-* xref:reference.usp_PERSIST_RepoObject_ReferenceTree_0_30_T.adoc[]
-* xref:reference.usp_PERSIST_RepoObject_ReferenceTree_30_0_T.adoc[]
 // end::antorareferencedlist[]
 
 
-== AntoraReferencingList
+=== AntoraReferencingList
 
 // tag::antorareferencinglist[]
 
 // end::antorareferencinglist[]
 
 
-== exampleUsage
+=== exampleUsage
 
 // tag::exampleusage[]
---ensure consistent repository before sql parsing:
-Exec repo.usp_main;
+--ensure consistent and existing repository guid before sql parsing:
+--call repo.usp_sync_guid (quick and minimal) or repo.usp_main (takes more time)
+Exec repo.usp_sync_guid;
 
---use sqlparser to get the current parsing results
+--use sqlparser to parse sql definitions for views and import parsing results
+--for example in the folder containing the sqlparser.py call
+--py sqlparser.py --server localhost\sql2019 --database dhw_mydatabase
 
 --persist sql parsing results:
-Exec sqlparse.usp_PERSIST_RepoObject_SqlModules_41_from_T;
-Exec sqlparse.usp_PERSIST_RepoObject_SqlModules_61_SelectIdentifier_Union_T;
+Exec sqlparse.usp_sqlparse
 
 --ensure consistent repository after sql parsing:
 Exec repo.usp_main;
@@ -211,148 +310,155 @@ Exec docs.usp_AntoraExport;
 // end::exampleusage[]
 
 
-== exampleUsage_2
+=== exampleUsage_2
 
 // tag::exampleusage_2[]
 
 // end::exampleusage_2[]
 
 
-== exampleUsage_3
+=== exampleUsage_3
 
 // tag::exampleusage_3[]
 
 // end::exampleusage_3[]
 
 
-== exampleUsage_4
+=== exampleUsage_4
 
 // tag::exampleusage_4[]
 
 // end::exampleusage_4[]
 
 
-== exampleUsage_5
+=== exampleUsage_5
 
 // tag::exampleusage_5[]
 
 // end::exampleusage_5[]
 
 
-== exampleWrong_Usage
+=== exampleWrong_Usage
 
 // tag::examplewrong_usage[]
 
 // end::examplewrong_usage[]
 
 
-== has_execution_plan_issue
+=== has_execution_plan_issue
 
 // tag::has_execution_plan_issue[]
 
 // end::has_execution_plan_issue[]
 
 
-== has_get_referenced_issue
+=== has_get_referenced_issue
 
 // tag::has_get_referenced_issue[]
 
 // end::has_get_referenced_issue[]
 
 
-== has_history
+=== has_history
 
 // tag::has_history[]
 
 // end::has_history[]
 
 
-== has_history_columns
+=== has_history_columns
 
 // tag::has_history_columns[]
 
 // end::has_history_columns[]
 
 
-== is_persistence
+=== is_persistence
 
 // tag::is_persistence[]
 
 // end::is_persistence[]
 
 
-== is_persistence_check_duplicate_per_pk
+=== is_persistence_check_duplicate_per_pk
 
 // tag::is_persistence_check_duplicate_per_pk[]
 
 // end::is_persistence_check_duplicate_per_pk[]
 
 
-== is_persistence_check_for_empty_source
+=== is_persistence_check_for_empty_source
 
 // tag::is_persistence_check_for_empty_source[]
 
 // end::is_persistence_check_for_empty_source[]
 
 
-== is_persistence_delete_changed
+=== is_persistence_delete_changed
 
 // tag::is_persistence_delete_changed[]
 
 // end::is_persistence_delete_changed[]
 
 
-== is_persistence_delete_missing
+=== is_persistence_delete_missing
 
 // tag::is_persistence_delete_missing[]
 
 // end::is_persistence_delete_missing[]
 
 
-== is_persistence_insert
+=== is_persistence_insert
 
 // tag::is_persistence_insert[]
 
 // end::is_persistence_insert[]
 
 
-== is_persistence_truncate
+=== is_persistence_truncate
 
 // tag::is_persistence_truncate[]
 
 // end::is_persistence_truncate[]
 
 
-== is_persistence_update_changed
+=== is_persistence_update_changed
 
 // tag::is_persistence_update_changed[]
 
 // end::is_persistence_update_changed[]
 
 
-== is_repo_managed
+=== is_repo_managed
 
 // tag::is_repo_managed[]
-
+0
 // end::is_repo_managed[]
 
 
-== microsoft_database_tools_support
+=== is_ssas
+
+// tag::is_ssas[]
+0
+// end::is_ssas[]
+
+
+=== microsoft_database_tools_support
 
 // tag::microsoft_database_tools_support[]
 
 // end::microsoft_database_tools_support[]
 
 
-== MS_Description
+=== MS_Description
 
 // tag::ms_description[]
 * Database documentation uses https://antora.org/[Antora] and the markup language https://docs.asciidoctor.org/asciidoc/latest/[AsciiDoc]. One of many advantages of asciidoc over Markdown is the ability to use includes. This allows the *docs-as-code* and *code-as-docs* concepts to be implemented very well.
 * The procedure xref:sqldb:docs.usp_AntoraExport.adoc[] exports required files into the filesystem.
-** check and correct xref:sqldb:config.Parameter.adoc#column-Parameter_value[config.Parameter.Parameter_value] for ('Adoc_AntoraDocModulFolder', ''), a possible parameter is
+** check and correct xref:sqldb:config.Parameter.adoc#column-Parameter_value[config.Parameter.Parameter_value] for ('AntoraModulFolder', ''), a possible parameter is
 +
 ====
-D:\Repos\GitHub\MyOrganisation\MyProject-docs\docs\modules\sqldb\
+D:\Repos\GitHub\MyOrganisation\MyProject-docs\docs\modules
 ====
 
 [discrete]
@@ -360,7 +466,7 @@ D:\Repos\GitHub\MyOrganisation\MyProject-docs\docs\modules\sqldb\
 
 * Antora uses https://docs.antora.org/antora/2.3/navigation/files-and-lists/[Navigation Files and Lists]. Content for these files is exported:
 ** export procedure: xref:sqldb:docs.usp_AntoraExport_navigation.adoc[]
-* exported object types are defined in the view xref:sqldb:config.type.adoc[]
+* exported object types are defined in the view xref:sqldb:configT.type.adoc[]
 +
 ....
 SELECT [type]
@@ -370,9 +476,9 @@ FROM [config].[type]
 WHERE [is_DocsOutput] = 1
 order by [type_desc] desc
 ....
-* source pages per object are exported into (Adoc_AntoraDocModulFolder)``pages/schemaname.objectname.adoc``
+* source pages per object are exported into (AntoraModulFolder)``/``(AntoraModulName)``/pages/schemaname.objectname.adoc``
 ** export procedure: xref:sqldb:docs.usp_AntoraExport_ObjectPage.adoc[]
-** the content of all page files per object is the same, it has only includes. The content is defined in xref:sqldb:config.Parameter.adoc#column-Parameter_value[config.Parameter.Parameter_value] for ('Adoc_AntoraPageTemplate', '') (*empty* `Sub_parameter`)
+** the content of all page files per object is the same, it has only includes. The content is defined in xref:sqldb:config.Parameter.adoc#column-Parameter_value[config.Parameter.Parameter_value] for ('AntoraPageTemplate', '') (*empty* `Sub_parameter`)
  the default content is (real code without leading '/'):
 +
 ====
@@ -383,7 +489,7 @@ order by [type_desc] desc
 /include::partial$template/master-page-5.adoc[]
 ....
 ====
-** the content of these includes is defined in xref:sqldb:config.Parameter.adoc#column-Parameter_value[config.Parameter.Parameter_value] for ('Adoc_AntoraPageTemplate', 'x') (*non empty* `Sub_parameter` 'x'). Avoild blanks, because these `Sub_parameter` values become filname suffix.
+** the content of these includes is defined in xref:sqldb:config.Parameter.adoc#column-Parameter_value[config.Parameter.Parameter_value] for ('AntoraPageTemplate', 'x') (*non empty* `Sub_parameter` 'x'). Avoild blanks, because these `Sub_parameter` values become filname suffix.
 * the template content is the same for all objects. We use +{docname}+ and get the final content from individual 'partials' per object. (real code without leading '/')
 +
 ====
@@ -406,76 +512,76 @@ is_repo_managed:
 ....
 ====
 ** export procedure: xref:sqldb:docs.usp_AntoraExport_ObjectPageTemplate.adoc[]
-* the individual content per object is exported as 'partial' into (Adoc_AntoraDocModulFolder)``partials/schemaname.objectname.adoc``
+* the individual content per object is exported as 'partial' into (AntoraModulFolder)``/``(AntoraModulName)``/partials/schemaname.objectname.adoc``
 ** export procedure: xref:sqldb:docs.usp_AntoraExport_ObjectPartialProperties.adoc[]
 ** all properties from xref:sqldb:property.RepoObjectProperty.adoc[] are exported with a `tag` per property
 ** some additional `tag` are exported
 ** the exported content is defined in xref:sqldb:docs.RepoObject_Adoc.adoc[]
 * the documentation contains diagrams. These diagrams are defined using https://plantuml.com/[plantUML]
 ** export procedure: xref:sqldb:docs.usp_AntoraExport_ObjectPuml.adoc[]
-** individual diagrams per object are exported into (Adoc_AntoraDocModulFolder)``partials/puml/``
+** individual diagrams per object are exported into (AntoraModulFolder)``/``(AntoraModulName)``/partials/puml/``
 
 include::sqldb:partial$docsnippet/antora-export-prerequisites.adoc[]
 // end::ms_description[]
 
 
-== persistence_source_RepoObject_fullname
+=== persistence_source_RepoObject_fullname
 
 // tag::persistence_source_repoobject_fullname[]
 
 // end::persistence_source_repoobject_fullname[]
 
 
-== persistence_source_RepoObject_fullname2
+=== persistence_source_RepoObject_fullname2
 
 // tag::persistence_source_repoobject_fullname2[]
 
 // end::persistence_source_repoobject_fullname2[]
 
 
-== persistence_source_RepoObject_guid
+=== persistence_source_RepoObject_guid
 
 // tag::persistence_source_repoobject_guid[]
 
 // end::persistence_source_repoobject_guid[]
 
 
-== persistence_source_RepoObject_xref
+=== persistence_source_RepoObject_xref
 
 // tag::persistence_source_repoobject_xref[]
 
 // end::persistence_source_repoobject_xref[]
 
 
-== pk_index_guid
+=== pk_index_guid
 
 // tag::pk_index_guid[]
 
 // end::pk_index_guid[]
 
 
-== pk_IndexPatternColumnDatatype
+=== pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
 
 // end::pk_indexpatterncolumndatatype[]
 
 
-== pk_IndexPatternColumnName
+=== pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
 
 // end::pk_indexpatterncolumnname[]
 
 
-== pk_IndexSemanticGroup
+=== pk_IndexSemanticGroup
 
 // tag::pk_indexsemanticgroup[]
 
 // end::pk_indexsemanticgroup[]
 
 
-== ReferencedObjectList
+=== ReferencedObjectList
 
 // tag::referencedobjectlist[]
 * [docs].[usp_AntoraExport_DocSnippet]
@@ -484,38 +590,52 @@ include::sqldb:partial$docsnippet/antora-export-prerequisites.adoc[]
 * [docs].[usp_AntoraExport_ObjectPageTemplate]
 * [docs].[usp_AntoraExport_ObjectPartialProperties]
 * [docs].[usp_AntoraExport_ObjectPuml]
+* [docs].[usp_AntoraExport_ObjectRefCyclic]
 * [docs].[usp_AntoraExport_Page_IndexSemanticGroup]
 * [logs].[usp_ExecutionLog_insert]
 * [property].[usp_RepoObjectProperty_collect]
 // end::referencedobjectlist[]
 
 
-== usp_persistence_RepoObject_guid
+=== usp_persistence_RepoObject_guid
 
 // tag::usp_persistence_repoobject_guid[]
 
 // end::usp_persistence_repoobject_guid[]
 
 
-== UspExamples
+=== UspExamples
 
 // tag::uspexamples[]
 
 // end::uspexamples[]
 
 
-== UspParameters
+=== UspParameters
 
 // tag::uspparameters[]
 
 // end::uspparameters[]
 
+== Boolean Attributes
+
+source: property.RepoObjectProperty WHERE property_int = 1
+
+// tag::boolean_attributes[]
+
+// end::boolean_attributes[]
 
 == sql_modules_definition
 
 // tag::sql_modules_definition[]
+[%collapsible]
+=======
 [source,sql]
 ----
+/*
+code of this procedure is managed in the dhw repository. Do not modify manually.
+Use [uspgenerator].[GeneratorUsp], [uspgenerator].[GeneratorUspParameter], [uspgenerator].[GeneratorUspStep], [uspgenerator].[GeneratorUsp_SqlUsp]
+*/
 CREATE   PROCEDURE [docs].[usp_AntoraExport]
 ----keep the code between logging parameters and "START" unchanged!
 ---- parameters, used for logging; you don't need to care about them, but you can use them, wenn calling from SSIS or in your workflow to log the context of the procedure call
@@ -584,26 +704,6 @@ PRINT '[docs].[usp_AntoraExport]'
 --
 ----- start here with your own code
 --
-/*{"ReportUspStep":[{"Number":210,"Name":"[reference].[usp_PERSIST_RepoObject_ReferenceTree_30_0_T]","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
-EXEC [reference].[usp_PERSIST_RepoObject_ReferenceTree_30_0_T]
---add your own parameters
---logging parameters
- @execution_instance_guid = @execution_instance_guid
- , @ssis_execution_id = @ssis_execution_id
- , @sub_execution_id = @sub_execution_id
- , @parent_execution_log_id = @current_execution_log_id
-
-
-/*{"ReportUspStep":[{"Number":220,"Name":"[reference].[usp_PERSIST_RepoObject_ReferenceTree_0_30_T]","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
-EXEC [reference].[usp_PERSIST_RepoObject_ReferenceTree_0_30_T]
---add your own parameters
---logging parameters
- @execution_instance_guid = @execution_instance_guid
- , @ssis_execution_id = @ssis_execution_id
- , @sub_execution_id = @sub_execution_id
- , @parent_execution_log_id = @current_execution_log_id
-
-
 /*{"ReportUspStep":[{"Number":300,"Name":"[repo].[usp_RepoObjectProperty_collect]","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
 EXEC [property].[usp_RepoObjectProperty_collect]
 --add your own parameters
@@ -654,7 +754,7 @@ EXEC [docs].[usp_AntoraExport_ObjectPageTemplate]
  , @parent_execution_log_id = @current_execution_log_id
 
 
-/*{"ReportUspStep":[{"Number":700,"Name":"[docs].[usp_AntoraExport_ObjectPartialProperties]","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
+/*{"ReportUspStep":[{"Number":750,"Name":"[docs].[usp_AntoraExport_ObjectPartialProperties]","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
 EXEC [docs].[usp_AntoraExport_ObjectPartialProperties]
 --add your own parameters
 --logging parameters
@@ -674,8 +774,18 @@ EXEC [docs].[usp_AntoraExport_ObjectPuml]
  , @parent_execution_log_id = @current_execution_log_id
 
 
-/*{"ReportUspStep":[{"Number":900,"Name":"[docs].[usp_AntoraExport_Page_IndexSemanticGroup]","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
+/*{"ReportUspStep":[{"Number":910,"Name":"[docs].[usp_AntoraExport_Page_IndexSemanticGroup]","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
 EXEC [docs].[usp_AntoraExport_Page_IndexSemanticGroup]
+--add your own parameters
+--logging parameters
+ @execution_instance_guid = @execution_instance_guid
+ , @ssis_execution_id = @ssis_execution_id
+ , @sub_execution_id = @sub_execution_id
+ , @parent_execution_log_id = @current_execution_log_id
+
+
+/*{"ReportUspStep":[{"Number":920,"Name":"[docs].[usp_AntoraExport_ObjectRefCyclic]","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
+EXEC [docs].[usp_AntoraExport_ObjectRefCyclic]
 --add your own parameters
 --logging parameters
  @execution_instance_guid = @execution_instance_guid
@@ -715,6 +825,7 @@ END
 
 
 ----
+=======
 // end::sql_modules_definition[]
 
 

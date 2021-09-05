@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -28,27 +29,28 @@ entity repo.ForeignKey_Indexes_union << V >> {
   --
   delete_referential_action : tinyint
   ForeignKey_fullname : nvarchar(517)
-  ForeignKey_name : nvarchar(128)
+  ForeignKey_name : nvarchar(max)
   * is_MatchingDatatypePattern : int
   referenced_index_guid : uniqueidentifier
-  referenced_index_name : nvarchar(128)
+  referenced_index_name : nvarchar(450)
   referenced_IndexPatternColumnDatatype : nvarchar(4000)
-  referenced_IndexPatternColumnName : nvarchar(4000)
+  referenced_IndexPatternColumnName : nvarchar(max)
   referenced_RepoObject_fullname : nvarchar(261)
   referenced_RepoObject_fullname2 : nvarchar(257)
   referenced_RepoObject_guid : uniqueidentifier
   referenced_SysObject_name : nvarchar(128)
   referenced_SysObject_schema_name : nvarchar(128)
   referencing_index_guid : uniqueidentifier
-  referencing_index_name : nvarchar(128)
+  referencing_index_name : nvarchar(450)
   referencing_IndexPatternColumnDatatype : nvarchar(4000)
-  referencing_IndexPatternColumnName : nvarchar(4000)
+  referencing_IndexPatternColumnName : nvarchar(max)
   referencing_RepoObject_fullname : nvarchar(261)
   referencing_RepoObject_fullname2 : nvarchar(257)
   referencing_RepoObject_guid : uniqueidentifier
   referencing_SysObject_name : nvarchar(128)
   referencing_SysObject_schema_name : nvarchar(128)
   update_referential_action : tinyint
+  --
 }
 
 entity repo.ForeignKey_virtual << U >> {
@@ -60,6 +62,7 @@ entity repo.ForeignKey_virtual << U >> {
   referenced_index_guid : uniqueidentifier
   referencing_index_guid : uniqueidentifier
   * update_referential_action : tinyint
+  --
 }
 
 entity repo.ForeignKey_virtual_Indexes << V >> {
@@ -88,6 +91,7 @@ entity repo.ForeignKey_virtual_Indexes << V >> {
   referencing_SysObject_name : nvarchar(128)
   referencing_SysObject_schema_name : nvarchar(128)
   * update_referential_action : tinyint
+  --
 }
 
 entity repo.Index_gross << V >> {
@@ -97,8 +101,8 @@ entity repo.Index_gross << V >> {
   ColumnList : nvarchar(max)
   ConstraintColumnList : nvarchar(max)
   DbmlIndexColumnList : nvarchar(max)
-  index_name : nvarchar(128)
-  * index_type : tinyint
+  index_name : nvarchar(450)
+  index_type : tinyint
   IndexPatternColumnDatatype : nvarchar(4000)
   IndexPatternColumnName : nvarchar(4000)
   IndexSemanticGroup : nvarchar(512)
@@ -122,6 +126,7 @@ entity repo.Index_gross << V >> {
   * SysObject_name : nvarchar(128)
   * SysObject_schema_name : nvarchar(128)
   SysObject_type : char(2)
+  --
 }
 
 repo.ForeignKey_virtual <.. repo.ForeignKey_virtual_Indexes

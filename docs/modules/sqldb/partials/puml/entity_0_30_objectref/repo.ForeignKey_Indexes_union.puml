@@ -1,4 +1,5 @@
 'Left to right direction
+top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -33,13 +34,19 @@ entity docs.ftv_RepoObject_Reference_PlantUml_EntityRefList << IF >> {
   --
 }
 
+entity docs.ObjectRefCyclic << V >> {
+  --
+}
+
+entity docs.ObjectRefCyclic_EntityList << V >> {
+  --
+}
+
 entity docs.RepoObject_Adoc << V >> {
-  * **RepoObject_guid** : uniqueidentifier
   --
 }
 
 entity docs.RepoObject_Adoc_T << U >> {
-  * **RepoObject_guid** : uniqueidentifier
   --
 }
 
@@ -79,6 +86,18 @@ entity docs.RepoObject_PlantUml_PumlEntityFkList << V >> {
 
 entity docs.RepoObject_Plantuml_T << U >> {
   * **RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity docs.Schema_EntityList << V >> {
+  --
+}
+
+entity docs.Schema_PlantUml_FkRefList << V >> {
+  --
+}
+
+entity docs.Schema_puml << V >> {
   --
 }
 
@@ -152,6 +171,7 @@ entity repo.usp_PERSIST_ForeignKey_Indexes_union_T << P >> {
 }
 
 docs.ftv_RepoObject_Reference_PlantUml_EntityRefList <.. docs.RepoObject_Plantuml
+docs.ObjectRefCyclic_EntityList <.. docs.ObjectRefCyclic
 docs.RepoObject_Adoc <.. docs.RepoObject_Adoc_T
 docs.RepoObject_Adoc <.. docs.usp_PERSIST_RepoObject_Adoc_T
 docs.REpoObject_Adoc_T <.. docs.usp_PERSIST_RepoObject_Adoc_T
@@ -160,16 +180,20 @@ docs.RepoObject_IndexList <.. docs.usp_PERSIST_RepoObject_IndexList_T
 docs.RepoObject_IndexList_T <.. docs.RepoObject_Adoc
 docs.RepoObject_IndexList_T <.. docs.RepoObject_Plantuml_Entity
 docs.RepoObject_IndexList_T <.. docs.usp_PERSIST_RepoObject_IndexList_T
-docs.RepoObject_Plantuml <.. docs.usp_PERSIST_RepoObject_Plantuml_T
 docs.RepoObject_Plantuml <.. docs.RepoObject_Plantuml_T
-docs.RepoObject_Plantuml_Entity <.. docs.usp_PERSIST_RepoObject_Plantuml_Entity_T
+docs.RepoObject_Plantuml <.. docs.usp_PERSIST_RepoObject_Plantuml_T
 docs.RepoObject_Plantuml_Entity <.. docs.RepoObject_Plantuml_Entity_T
+docs.RepoObject_Plantuml_Entity <.. docs.usp_PERSIST_RepoObject_Plantuml_Entity_T
 docs.RepoObject_Plantuml_Entity_T <.. docs.usp_PERSIST_RepoObject_Plantuml_Entity_T
 docs.RepoObject_Plantuml_Entity_T <.. docs.ftv_RepoObject_Reference_PlantUml_EntityRefList
 docs.RepoObject_Plantuml_Entity_T <.. docs.RepoObject_PlantUml_PumlEntityFkList
+docs.RepoObject_Plantuml_Entity_T <.. docs.ObjectRefCyclic_EntityList
+docs.RepoObject_Plantuml_Entity_T <.. docs.Schema_EntityList
 docs.RepoObject_PlantUml_FkRefList <.. docs.RepoObject_Plantuml
 docs.RepoObject_PlantUml_PumlEntityFkList <.. docs.RepoObject_Plantuml
 docs.RepoObject_Plantuml_T <.. docs.usp_PERSIST_RepoObject_Plantuml_T
+docs.Schema_EntityList <.. docs.Schema_puml
+docs.Schema_PlantUml_FkRefList <.. docs.Schema_puml
 docs.usp_AntoraExport_ObjectPartialProperties <.. docs.usp_AntoraExport
 docs.usp_AntoraExport_ObjectPuml <.. docs.usp_AntoraExport
 docs.usp_PERSIST_RepoObject_Adoc_T <.. docs.usp_AntoraExport_ObjectPartialProperties
@@ -177,18 +201,19 @@ docs.usp_PERSIST_RepoObject_IndexList_T <.. docs.usp_AntoraExport_ObjectPartialP
 docs.usp_PERSIST_RepoObject_Plantuml_Entity_T <.. docs.usp_AntoraExport_ObjectPuml
 docs.usp_PERSIST_RepoObject_Plantuml_T <.. docs.usp_AntoraExport_ObjectPuml
 repo.ForeignKey_gross <.. docs.RepoObject_IndexList
-repo.ForeignKey_Indexes_union <.. repo.usp_PERSIST_ForeignKey_Indexes_union_T
 repo.ForeignKey_Indexes_union <.. repo.ForeignKey_Indexes_union_T
+repo.ForeignKey_Indexes_union <.. repo.usp_PERSIST_ForeignKey_Indexes_union_T
 repo.ForeignKey_Indexes_union_T <.. repo.usp_Index_finish
 repo.ForeignKey_Indexes_union_T <.. docs.ForeignKey_RelationScript
 repo.ForeignKey_Indexes_union_T <.. repo.ForeignKey_gross
-repo.ForeignKey_Indexes_union_T <.. repo.usp_PERSIST_ForeignKey_Indexes_union_T
 repo.ForeignKey_Indexes_union_T <.. repo.RepoObject_related_FK_union
 repo.ForeignKey_Indexes_union_T <.. docs.RepoObject_PlantUml_FkRefList
+repo.ForeignKey_Indexes_union_T <.. repo.usp_PERSIST_ForeignKey_Indexes_union_T
+repo.ForeignKey_Indexes_union_T <.. docs.Schema_PlantUml_FkRefList
 repo.RepoObject_related_FK_union <.. docs.RepoObject_PlantUml_PumlEntityFkList
 repo.RepoObject_related_FK_union <.. docs.RepoObject_PlantUml_FkRefList
-repo.usp_Index_finish <.. repo.usp_Index_ForeignKey
 repo.usp_Index_finish <.. repo.usp_index_inheritance
+repo.usp_Index_finish <.. repo.usp_Index_ForeignKey
 repo.usp_Index_ForeignKey <.. repo.usp_main
 repo.usp_index_inheritance <.. repo.usp_main
 repo.usp_PERSIST_ForeignKey_Indexes_union_T <.. repo.usp_Index_ForeignKey

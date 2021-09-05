@@ -4,6 +4,8 @@
 
 // tag::existing_properties[]
 :ExistsProperty--antorareferencinglist:
+:ExistsProperty--is_repo_managed:
+:ExistsProperty--is_ssas:
 :ExistsProperty--ms_description:
 :ExistsProperty--pk_index_guid:
 :ExistsProperty--pk_indexpatterncolumndatatype:
@@ -35,19 +37,19 @@ user table
 == SysObject_id
 
 // tag::SysObject_id[]
-1904725838
+1448392229
 // end::SysObject_id[]
 
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-07-14 19:36:06
+2021-08-11 13:00:06
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[[column-Parameter_name]]
+[#column-Parameter_name]
 === Parameter_name
 
 [cols="d,m,m,m,m,d"]
@@ -61,7 +63,7 @@ user table
 |===
 
 
-[[column-sub_Parameter]]
+[#column-sub_Parameter]
 === sub_Parameter
 
 [cols="d,m,m,m,m,d"]
@@ -80,14 +82,14 @@ user table
 ....
 
 
-[[column-Parameter_default_value]]
+[#column-Parameter_default_value]
 === Parameter_default_value
 
 [cols="d,m,m,m,m,d"]
 |===
 |
 |Parameter_default_value
-|sql_variant
+|nvarchar(max)
 |NULL
 |
 |
@@ -95,14 +97,14 @@ user table
 
 .Referencing Columns
 --
-* xref:config.Parameter.adoc#column-Parameter_value_result_nvarchar[+config.Parameter.Parameter_value__result_nvarchar+]
-* xref:config.Parameter.adoc#column-Parameter_value_result_int[+config.Parameter.Parameter_value__result_int+]
-* xref:config.Parameter.adoc#column-Parameter_value_result_date[+config.Parameter.Parameter_value__result_date+]
-* xref:config.Parameter.adoc#column-Parameter_value_result_datetime[+config.Parameter.Parameter_value__result_datetime+]
+* xref:config.Parameter.adoc#column-Parameter_value_result[+config.Parameter.Parameter_value_result+]
+* xref:config.Parameter.adoc#column-Parameter_value_result_int[+config.Parameter.Parameter_value_result_int+]
+* xref:config.Parameter.adoc#column-Parameter_value_result_date[+config.Parameter.Parameter_value_result_date+]
+* xref:config.Parameter.adoc#column-Parameter_value_result_datetime[+config.Parameter.Parameter_value_result_datetime+]
 --
 
 
-[[column-Parameter_desciption]]
+[#column-Parameter_desciption]
 === Parameter_desciption
 
 [cols="d,m,m,m,m,d"]
@@ -116,14 +118,14 @@ user table
 |===
 
 
-[[column-Parameter_value]]
+[#column-Parameter_value]
 === Parameter_value
 
 [cols="d,m,m,m,m,d"]
 |===
 |
 |Parameter_value
-|sql_variant
+|nvarchar(max)
 |NULL
 |
 |
@@ -131,119 +133,21 @@ user table
 
 .Referencing Columns
 --
-* xref:config.Parameter.adoc#column-Parameter_value_result_nvarchar[+config.Parameter.Parameter_value__result_nvarchar+]
-* xref:config.Parameter.adoc#column-Parameter_value_result_int[+config.Parameter.Parameter_value__result_int+]
-* xref:config.Parameter.adoc#column-Parameter_value_result_date[+config.Parameter.Parameter_value__result_date+]
-* xref:config.Parameter.adoc#column-Parameter_value_result_datetime[+config.Parameter.Parameter_value__result_datetime+]
+* xref:config.Parameter.adoc#column-Parameter_value_result[+config.Parameter.Parameter_value_result+]
+* xref:config.Parameter.adoc#column-Parameter_value_result_int[+config.Parameter.Parameter_value_result_int+]
+* xref:config.Parameter.adoc#column-Parameter_value_result_date[+config.Parameter.Parameter_value_result_date+]
+* xref:config.Parameter.adoc#column-Parameter_value_result_datetime[+config.Parameter.Parameter_value_result_datetime+]
 --
 
 
-[[column-Parameter_value_result_date]]
-=== Parameter_value++__++result_date
+[#column-Parameter_value_result]
+=== Parameter_value_result
 
 [cols="d,m,m,m,m,d"]
 |===
 |
-|Parameter_value__result_date
-|date
-|NULL
-|
-|Calc
-|===
-
-.Description
---
-(case when NOT [Parameter_value] IS NULL AND NOT sql_variant_property([Parameter_value],'BaseType')='uniqueidentifier' then TRY_CAST([Parameter_value] AS [date]) when NOT [Parameter_default_value] IS NULL AND NOT sql_variant_property([Parameter_default_value],'BaseType')='uniqueidentifier' then CONVERT([date],TRY_CAST([Parameter_default_value] AS [datetime]))  end)
---
-
-.Definition
-....
-(case when NOT [Parameter_value] IS NULL AND NOT sql_variant_property([Parameter_value],'BaseType')='uniqueidentifier' then TRY_CAST([Parameter_value] AS [date]) when NOT [Parameter_default_value] IS NULL AND NOT sql_variant_property([Parameter_default_value],'BaseType')='uniqueidentifier' then CONVERT([date],TRY_CAST([Parameter_default_value] AS [datetime]))  end)
-....
-
-.Referenced Columns
---
-* xref:config.Parameter.adoc#column-Parameter_default_value[+config.Parameter.Parameter_default_value+]
-* xref:config.Parameter.adoc#column-Parameter_value[+config.Parameter.Parameter_value+]
---
-
-
-[[column-Parameter_value_result_datetime]]
-=== Parameter_value++__++result_datetime
-
-[cols="d,m,m,m,m,d"]
-|===
-|
-|Parameter_value__result_datetime
-|datetime
-|NULL
-|
-|Calc
-|===
-
-.Description
---
-(case when NOT [Parameter_value] IS NULL AND NOT sql_variant_property([Parameter_value],'BaseType')='uniqueidentifier' then TRY_CAST([Parameter_value] AS [datetime]) when NOT [Parameter_default_value] IS NULL AND NOT sql_variant_property([Parameter_default_value],'BaseType')='uniqueidentifier' then TRY_CAST([Parameter_default_value] AS [datetime])  end)
---
-
-.Definition
-....
-(case when NOT [Parameter_value] IS NULL AND NOT sql_variant_property([Parameter_value],'BaseType')='uniqueidentifier' then TRY_CAST([Parameter_value] AS [datetime]) when NOT [Parameter_default_value] IS NULL AND NOT sql_variant_property([Parameter_default_value],'BaseType')='uniqueidentifier' then TRY_CAST([Parameter_default_value] AS [datetime])  end)
-....
-
-.Referenced Columns
---
-* xref:config.Parameter.adoc#column-Parameter_value[+config.Parameter.Parameter_value+]
-* xref:config.Parameter.adoc#column-Parameter_default_value[+config.Parameter.Parameter_default_value+]
---
-
-
-[[column-Parameter_value_result_int]]
-=== Parameter_value++__++result_int
-
-[cols="d,m,m,m,m,d"]
-|===
-|
-|Parameter_value__result_int
-|int
-|NULL
-|
-|Calc
-|===
-
-.Description
---
-(TRY_CAST(coalesce([Parameter_value],[Parameter_default_value]) AS [int]))
---
-
-.Definition
-....
-(case when NOT sql_variant_property([Parameter_default_value],'BaseType')='uniqueidentifier' AND NOT sql_variant_property([Parameter_value],'BaseType')='uniqueidentifier' then TRY_CAST(coalesce([Parameter_value],[Parameter_default_value]) AS [int])  end)
-....
-
-.Referenced Columns
---
-* xref:config.Parameter.adoc#column-Parameter_value[+config.Parameter.Parameter_value+]
-* xref:config.Parameter.adoc#column-Parameter_default_value[+config.Parameter.Parameter_default_value+]
---
-
-.Referencing Columns
---
-* xref:property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.adoc#column-sub_InheritanceType[+property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.sub_InheritanceType+]
-* xref:property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.adoc#column-par_InheritanceType[+property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.par_InheritanceType+]
-* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-sub_InheritanceType[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.sub_InheritanceType+]
-* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-par_InheritanceType[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.par_InheritanceType+]
---
-
-
-[[column-Parameter_value_result_nvarchar]]
-=== Parameter_value++__++result_nvarchar
-
-[cols="d,m,m,m,m,d"]
-|===
-|
-|Parameter_value__result_nvarchar
-|nvarchar(4000)
+|Parameter_value_result
+|nvarchar(max)
 |NULL
 |
 |Calc
@@ -256,7 +160,7 @@ user table
 
 .Definition
 ....
-(TRY_CAST(coalesce([Parameter_value],[Parameter_default_value]) AS [nvarchar](4000)))
+(coalesce([Parameter_value],[Parameter_default_value]))
 ....
 
 .Referenced Columns
@@ -275,6 +179,104 @@ user table
 * xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-par_InheritanceDefintion[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.par_InheritanceDefintion+]
 * xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-sub_Inheritance_StringAggSeparatorSql[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.sub_Inheritance_StringAggSeparatorSql+]
 * xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-par_Inheritance_StringAggSeparatorSql[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.par_Inheritance_StringAggSeparatorSql+]
+--
+
+
+[#column-Parameter_value_result_date]
+=== Parameter_value_result_date
+
+[cols="d,m,m,m,m,d"]
+|===
+|
+|Parameter_value_result_date
+|date
+|NULL
+|
+|Calc
+|===
+
+.Description
+--
+(case when NOT [Parameter_value] IS NULL AND NOT sql_variant_property([Parameter_value],'BaseType')='uniqueidentifier' then TRY_CAST([Parameter_value] AS [date]) when NOT [Parameter_default_value] IS NULL AND NOT sql_variant_property([Parameter_default_value],'BaseType')='uniqueidentifier' then CONVERT([date],TRY_CAST([Parameter_default_value] AS [datetime]))  end)
+--
+
+.Definition
+....
+(TRY_CAST(left(coalesce([Parameter_value],[Parameter_default_value]),(4000)) AS [date]))
+....
+
+.Referenced Columns
+--
+* xref:config.Parameter.adoc#column-Parameter_default_value[+config.Parameter.Parameter_default_value+]
+* xref:config.Parameter.adoc#column-Parameter_value[+config.Parameter.Parameter_value+]
+--
+
+
+[#column-Parameter_value_result_datetime]
+=== Parameter_value_result_datetime
+
+[cols="d,m,m,m,m,d"]
+|===
+|
+|Parameter_value_result_datetime
+|datetime
+|NULL
+|
+|Calc
+|===
+
+.Description
+--
+(case when NOT [Parameter_value] IS NULL AND NOT sql_variant_property([Parameter_value],'BaseType')='uniqueidentifier' then TRY_CAST([Parameter_value] AS [datetime]) when NOT [Parameter_default_value] IS NULL AND NOT sql_variant_property([Parameter_default_value],'BaseType')='uniqueidentifier' then TRY_CAST([Parameter_default_value] AS [datetime])  end)
+--
+
+.Definition
+....
+(TRY_CAST(left(coalesce([Parameter_value],[Parameter_default_value]),(4000)) AS [datetime]))
+....
+
+.Referenced Columns
+--
+* xref:config.Parameter.adoc#column-Parameter_value[+config.Parameter.Parameter_value+]
+* xref:config.Parameter.adoc#column-Parameter_default_value[+config.Parameter.Parameter_default_value+]
+--
+
+
+[#column-Parameter_value_result_int]
+=== Parameter_value_result_int
+
+[cols="d,m,m,m,m,d"]
+|===
+|
+|Parameter_value_result_int
+|int
+|NULL
+|
+|Calc
+|===
+
+.Description
+--
+(TRY_CAST(coalesce([Parameter_value],[Parameter_default_value]) AS [int]))
+--
+
+.Definition
+....
+(TRY_CAST(left(coalesce([Parameter_value],[Parameter_default_value]),(4000)) AS [int]))
+....
+
+.Referenced Columns
+--
+* xref:config.Parameter.adoc#column-Parameter_value[+config.Parameter.Parameter_value+]
+* xref:config.Parameter.adoc#column-Parameter_default_value[+config.Parameter.Parameter_default_value+]
+--
+
+.Referencing Columns
+--
+* xref:property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.adoc#column-sub_InheritanceType[+property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.sub_InheritanceType+]
+* xref:property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.adoc#column-par_InheritanceType[+property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.par_InheritanceType+]
+* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-sub_InheritanceType[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.sub_InheritanceType+]
+* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-par_InheritanceType[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.par_InheritanceType+]
 --
 
 
@@ -313,7 +315,7 @@ user table
 
 |
 |<<column-Parameter_default_value>>
-|sql_variant
+|nvarchar(max)
 |NULL
 |
 |
@@ -327,10 +329,17 @@ user table
 
 |
 |<<column-Parameter_value>>
-|sql_variant
+|nvarchar(max)
 |NULL
 |
 |
+
+|
+|<<column-Parameter_value_result>>
+|nvarchar(max)
+|NULL
+|
+|Calc
 
 |
 |<<column-Parameter_value_result_date>>
@@ -353,23 +362,16 @@ user table
 |
 |Calc
 
-|
-|<<column-Parameter_value_result_nvarchar>>
-|nvarchar(4000)
-|NULL
-|
-|Calc
-
 // end::AntoraNonPkColumnTableRows[]
 
 == AntoraIndexList
 
 // tag::AntoraIndexList[]
 
-[[index-PK_Parameter]]
+[#index-PK_Parameter]
 === PK_Parameter
 
-* IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_pk_parameter[PK_Parameter]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_pk_parameter[PK_Parameter]
 +
 --
 * <<column-Parameter_name>>; varchar(100)
@@ -385,21 +387,26 @@ user table
 
 // end::AntoraParameterList[]
 
-== AdocUspSteps
+== Other tags
+
+source: property.RepoObjectProperty_cross As rop_cross
+
+
+=== AdocUspSteps
 
 // tag::adocuspsteps[]
 
 // end::adocuspsteps[]
 
 
-== AntoraReferencedList
+=== AntoraReferencedList
 
 // tag::antorareferencedlist[]
 
 // end::antorareferencedlist[]
 
 
-== AntoraReferencingList
+=== AntoraReferencingList
 
 // tag::antorareferencinglist[]
 * xref:config.fs_dwh_database_name.adoc[]
@@ -418,150 +425,157 @@ user table
 // end::antorareferencinglist[]
 
 
-== exampleUsage
+=== exampleUsage
 
 // tag::exampleusage[]
 
 // end::exampleusage[]
 
 
-== exampleUsage_2
+=== exampleUsage_2
 
 // tag::exampleusage_2[]
 
 // end::exampleusage_2[]
 
 
-== exampleUsage_3
+=== exampleUsage_3
 
 // tag::exampleusage_3[]
 
 // end::exampleusage_3[]
 
 
-== exampleUsage_4
+=== exampleUsage_4
 
 // tag::exampleusage_4[]
 
 // end::exampleusage_4[]
 
 
-== exampleUsage_5
+=== exampleUsage_5
 
 // tag::exampleusage_5[]
 
 // end::exampleusage_5[]
 
 
-== exampleWrong_Usage
+=== exampleWrong_Usage
 
 // tag::examplewrong_usage[]
 
 // end::examplewrong_usage[]
 
 
-== has_execution_plan_issue
+=== has_execution_plan_issue
 
 // tag::has_execution_plan_issue[]
 
 // end::has_execution_plan_issue[]
 
 
-== has_get_referenced_issue
+=== has_get_referenced_issue
 
 // tag::has_get_referenced_issue[]
 
 // end::has_get_referenced_issue[]
 
 
-== has_history
+=== has_history
 
 // tag::has_history[]
 
 // end::has_history[]
 
 
-== has_history_columns
+=== has_history_columns
 
 // tag::has_history_columns[]
 
 // end::has_history_columns[]
 
 
-== is_persistence
+=== is_persistence
 
 // tag::is_persistence[]
 
 // end::is_persistence[]
 
 
-== is_persistence_check_duplicate_per_pk
+=== is_persistence_check_duplicate_per_pk
 
 // tag::is_persistence_check_duplicate_per_pk[]
 
 // end::is_persistence_check_duplicate_per_pk[]
 
 
-== is_persistence_check_for_empty_source
+=== is_persistence_check_for_empty_source
 
 // tag::is_persistence_check_for_empty_source[]
 
 // end::is_persistence_check_for_empty_source[]
 
 
-== is_persistence_delete_changed
+=== is_persistence_delete_changed
 
 // tag::is_persistence_delete_changed[]
 
 // end::is_persistence_delete_changed[]
 
 
-== is_persistence_delete_missing
+=== is_persistence_delete_missing
 
 // tag::is_persistence_delete_missing[]
 
 // end::is_persistence_delete_missing[]
 
 
-== is_persistence_insert
+=== is_persistence_insert
 
 // tag::is_persistence_insert[]
 
 // end::is_persistence_insert[]
 
 
-== is_persistence_truncate
+=== is_persistence_truncate
 
 // tag::is_persistence_truncate[]
 
 // end::is_persistence_truncate[]
 
 
-== is_persistence_update_changed
+=== is_persistence_update_changed
 
 // tag::is_persistence_update_changed[]
 
 // end::is_persistence_update_changed[]
 
 
-== is_repo_managed
+=== is_repo_managed
 
 // tag::is_repo_managed[]
-
+0
 // end::is_repo_managed[]
 
 
-== microsoft_database_tools_support
+=== is_ssas
+
+// tag::is_ssas[]
+0
+// end::is_ssas[]
+
+
+=== microsoft_database_tools_support
 
 // tag::microsoft_database_tools_support[]
 
 // end::microsoft_database_tools_support[]
 
 
-== MS_Description
+=== MS_Description
 
 // tag::ms_description[]
-* default parameter values are defined (hard coded) in xref:sqldb:config.Parameter_default.adoc[] and available in xref:sqldb:config.Parameter.adoc#column-Parameter_default_value[config.Parameter.Parameter_default_value]
+* default parameter values are defined (hard coded) in xref:sqldb:configT.Parameter_default.adoc[] and available in xref:sqldb:config.Parameter.adoc#column-Parameter_default_value[config.Parameter.Parameter_default_value]
 * default parameter values can be overwritten by project specific content using xref:sqldb:config.Parameter.adoc#column-Parameter_value[config.Parameter.Parameter_value]
 * resulting content is available in
 ** xref:sqldb:config.Parameter.adoc#column-Parameter_value__result_int[config.Parameter.Parameter_value__result_int]
@@ -570,97 +584,107 @@ user table
 // end::ms_description[]
 
 
-== persistence_source_RepoObject_fullname
+=== persistence_source_RepoObject_fullname
 
 // tag::persistence_source_repoobject_fullname[]
 
 // end::persistence_source_repoobject_fullname[]
 
 
-== persistence_source_RepoObject_fullname2
+=== persistence_source_RepoObject_fullname2
 
 // tag::persistence_source_repoobject_fullname2[]
 
 // end::persistence_source_repoobject_fullname2[]
 
 
-== persistence_source_RepoObject_guid
+=== persistence_source_RepoObject_guid
 
 // tag::persistence_source_repoobject_guid[]
 
 // end::persistence_source_repoobject_guid[]
 
 
-== persistence_source_RepoObject_xref
+=== persistence_source_RepoObject_xref
 
 // tag::persistence_source_repoobject_xref[]
 
 // end::persistence_source_repoobject_xref[]
 
 
-== pk_index_guid
+=== pk_index_guid
 
 // tag::pk_index_guid[]
 2690291C-9D61-EB11-84DC-A81E8446D5B0
 // end::pk_index_guid[]
 
 
-== pk_IndexPatternColumnDatatype
+=== pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
 varchar(100),nvarchar(128)
 // end::pk_indexpatterncolumndatatype[]
 
 
-== pk_IndexPatternColumnName
+=== pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
 Parameter_name,sub_Parameter
 // end::pk_indexpatterncolumnname[]
 
 
-== pk_IndexSemanticGroup
+=== pk_IndexSemanticGroup
 
 // tag::pk_indexsemanticgroup[]
 PK_Parameter
 // end::pk_indexsemanticgroup[]
 
 
-== ReferencedObjectList
+=== ReferencedObjectList
 
 // tag::referencedobjectlist[]
 
 // end::referencedobjectlist[]
 
 
-== usp_persistence_RepoObject_guid
+=== usp_persistence_RepoObject_guid
 
 // tag::usp_persistence_repoobject_guid[]
 
 // end::usp_persistence_repoobject_guid[]
 
 
-== UspExamples
+=== UspExamples
 
 // tag::uspexamples[]
 
 // end::uspexamples[]
 
 
-== UspParameters
+=== UspParameters
 
 // tag::uspparameters[]
 
 // end::uspparameters[]
 
+== Boolean Attributes
+
+source: property.RepoObjectProperty WHERE property_int = 1
+
+// tag::boolean_attributes[]
+
+// end::boolean_attributes[]
 
 == sql_modules_definition
 
 // tag::sql_modules_definition[]
+[%collapsible]
+=======
 [source,sql]
 ----
 
 ----
+=======
 // end::sql_modules_definition[]
 
 

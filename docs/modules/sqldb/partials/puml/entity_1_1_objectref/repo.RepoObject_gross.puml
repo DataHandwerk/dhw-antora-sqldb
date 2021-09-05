@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -28,11 +29,6 @@ entity configT.type << V >> {
   --
 }
 
-entity docs.RepoObject_Adoc << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  --
-}
-
 entity docs.RepoObject_OutputFilter << V >> {
   * **RepoObject_guid** : uniqueidentifier
   --
@@ -47,12 +43,6 @@ entity property.fs_get_RepoObjectProperty_nvarchar << FN >> {
   --
 }
 
-entity property.RepoObjectProperty_Collect_source_ROGross << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  * **property_name** : varchar(39)
-  --
-}
-
 entity reference.Persistence << V >> {
   --
 }
@@ -62,16 +52,7 @@ entity reference.RepoObject_QueryPlan << U >> {
   --
 }
 
-entity reference.RepoObject_ReferencedList << V >> {
-  --
-}
-
-entity reference.RepoObject_ReferenceTree << V >> {
-  **RepoObject_guid** : uniqueidentifier
-  **Referenced_Depth** : int
-  **Referencing_Depth** : int
-  **Referenced_guid** : uniqueidentifier
-  **Referencing_guid** : uniqueidentifier
+entity reference.RepoObject_reference_persistence_target_as_source << V >> {
   --
 }
 
@@ -119,10 +100,6 @@ entity reference.RepoObject_ReferenceTree_referencing_0_30 << V >> {
   --
 }
 
-entity reference.RepoObject_ReferencingList << V >> {
-  --
-}
-
 entity reference.RepoObject_ReferencingReferenced << V >> {
   * **Referenced_guid** : uniqueidentifier
   * **Referencing_guid** : uniqueidentifier
@@ -161,13 +138,12 @@ entity repo.RepoObject << U >> {
   --
 }
 
-entity repo.RepoObject_ColumnList << V >> {
+entity repo.RepoObject_gross << V >> {
   * **RepoObject_guid** : uniqueidentifier
   --
 }
 
-entity repo.RepoObject_gross << V >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity repo.RepoObject_gross2 << V >> {
   --
 }
 
@@ -181,7 +157,13 @@ entity repo.RepoObject_SqlCreateTable << V >> {
   --
 }
 
-entity sqlparse.RepoObject_SqlModules_Repo_Sys << V >> {
+entity ssas.model_json_31_tables_T << U >> {
+  * **databasename** : nvarchar(128)
+  **tables_name** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_3161_tables_descriptions_StrAgg << V >> {
   --
 }
 
@@ -199,15 +181,18 @@ entity uspgenerator.usp_GeneratorUsp_insert_update_persistence << P >> {
   --
 }
 
+entity workflow.WorkflowStep_S << V >> {
+  * **Workflow_id** : int
+  **Procedure_RepoObject_guid** : uniqueidentifier
+  --
+}
+
 configT.type <.. repo.RepoObject_gross
 property.fs_get_RepoObjectProperty_nvarchar <.. repo.RepoObject_gross
 reference.RepoObject_QueryPlan <.. repo.RepoObject_gross
-reference.RepoObject_ReferencedList <.. repo.RepoObject_gross
-reference.RepoObject_ReferencingList <.. repo.RepoObject_gross
 reference.RepoObject_ReferencingReferenced <.. repo.RepoObject_gross
 repo.Index_Settings <.. repo.RepoObject_gross
 repo.RepoObject <.. repo.RepoObject_gross
-repo.RepoObject_ColumnList <.. repo.RepoObject_gross
 repo.RepoObject_gross <.. repo.RepoObject_SqlCreateTable
 repo.RepoObject_gross <.. uspgenerator.GeneratorUspStep_Persistence_IsInactive_setpoint
 repo.RepoObject_gross <.. uspgenerator.GeneratorUspStep_Persistence
@@ -216,18 +201,19 @@ repo.RepoObject_gross <.. reference.usp_RepoObjectSource_QueryPlan
 repo.RepoObject_gross <.. reference.usp_RepoObjectSource_FirstResultSet
 repo.RepoObject_gross <.. reference.usp_RepoObject_update_SysObjectQueryPlan
 repo.RepoObject_gross <.. uspgenerator.usp_GeneratorUsp_insert_update_persistence
-repo.RepoObject_gross <.. reference.RepoObject_ReferenceTree
-repo.RepoObject_gross <.. docs.RepoObject_Adoc
 repo.RepoObject_gross <.. docs.RepoObject_OutputFilter
 repo.RepoObject_gross <.. docs.RepoObject_Plantuml
 repo.RepoObject_gross <.. repo.Index_virtual_ForUpdate
 repo.RepoObject_gross <.. reference.RepoObject_ReferenceTree_referenced
 repo.RepoObject_gross <.. reference.RepoObject_ReferenceTree_referencing
-repo.RepoObject_gross <.. property.RepoObjectProperty_Collect_source_ROGross
 repo.RepoObject_gross <.. reference.RepoObject_ReferenceTree_referenced_30_0
 repo.RepoObject_gross <.. reference.RepoObject_ReferenceTree_referencing_0_30
 repo.RepoObject_gross <.. reference.RepoObject_ReferenceTree_0_30
 repo.RepoObject_gross <.. reference.RepoObject_ReferenceTree_30_0
 repo.RepoObject_gross <.. reference.Persistence
+repo.RepoObject_gross <.. reference.RepoObject_reference_persistence_target_as_source
+repo.RepoObject_gross <.. workflow.WorkflowStep_S
+repo.RepoObject_gross <.. repo.RepoObject_gross2
 repo.RepoObject_persistence <.. repo.RepoObject_gross
-sqlparse.RepoObject_SqlModules_Repo_Sys <.. repo.RepoObject_gross
+ssas.model_json_31_tables_T <.. repo.RepoObject_gross
+ssas.model_json_3161_tables_descriptions_StrAgg <.. repo.RepoObject_gross

@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -40,6 +41,10 @@ entity repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing << V >
   --
 }
 
+entity repo.IndexColumn_ssas_gross << V >> {
+  --
+}
+
 entity repo.IndexColumn_union << V >> {
   **index_guid** : uniqueidentifier
   * **index_column_id** : int
@@ -51,8 +56,7 @@ entity repo.IndexColumn_virtual_gross << V >> {
   --
 }
 
-entity repo.RepoObjectColumn_gross << V >> {
-  * **RepoObjectColumn_guid** : uniqueidentifier
+entity repo.RepoObjectColumn_gross2 << V >> {
   --
 }
 
@@ -60,9 +64,10 @@ entity repo_sys.IndexColumn_unique << V >> {
   --
 }
 
+repo.IndexColumn_ssas_gross <.. repo.IndexColumn_union
 repo.IndexColumn_union <.. repo.Index_ColumList
-repo.IndexColumn_union <.. repo.RepoObjectColumn_gross
 repo.IndexColumn_union <.. repo.Index_IndexPattern
 repo.IndexColumn_union <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing
+repo.IndexColumn_union <.. repo.RepoObjectColumn_gross2
 repo.IndexColumn_virtual_gross <.. repo.IndexColumn_union
 repo_sys.IndexColumn_unique <.. repo.IndexColumn_union

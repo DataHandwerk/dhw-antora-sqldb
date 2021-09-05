@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -34,22 +35,19 @@ entity graph.RepoObjectColumn_S << V >> {
   RepoObjectColumn_fullname2 : nvarchar(386)
   * RepoObjectColumn_name : nvarchar(128)
   RepoObjectColumn_type : nvarchar(128)
+  --
 }
 
 entity repo.RepoObjectColumn_gross << V >> {
   * **RepoObjectColumn_guid** : uniqueidentifier
   --
-  AntoraReferencedColumnList : nvarchar(max)
-  AntoraReferencingColumnList : nvarchar(max)
   * Column_name : nvarchar(128)
+  Description : nvarchar(max)
   has_different_sys_names : bit
   has_get_referenced_issue : bit
-  index_column_id : int
-  index_name : nvarchar(128)
   Inheritance_StringAggSeparatorSql : nvarchar(4000)
   InheritanceDefinition : nvarchar(4000)
   InheritanceType : tinyint
-  is_index_primary_key : bit
   is_persistence_no_check : bit
   is_persistence_no_include : bit
   is_persistence_no_update : bit
@@ -58,6 +56,7 @@ entity repo.RepoObjectColumn_gross << V >> {
   * is_RepoObject_name_uniqueidentifier : int
   * is_RepoObjectColumn_name_uniqueidentifier : int
   is_required_ColumnMerge : bit
+  * is_ssas : bit
   is_SysObject_missing : bit
   * is_SysObject_name_uniqueidentifier : int
   is_SysObjectColumn_missing : bit
@@ -104,9 +103,20 @@ entity repo.RepoObjectColumn_gross << V >> {
   SysObject_type : char(2)
   SysObjectColumn_column_id : int
   * SysObjectColumn_name : nvarchar(128)
+  tabcol_Description : nvarchar(max)
+  tabcol_DisplayFolder : nvarchar(500)
+  tabcol_Expression : nvarchar(max)
+  tabcol_FormatString : nvarchar(500)
+  * tabcol_IsHidden : bit
+  * tabcol_IsKey : bit
+  * tabcol_IsUnique : bit
+  tabcol_SummarizeBy : nvarchar(500)
+  tabcol_Type : nvarchar(500)
+  --
 }
 
 repo.RepoObjectColumn_gross <.. graph.RepoObjectColumn_S
+repo.RepoObjectColumn_gross::Repo_user_type_fullname <-- graph.RepoObjectColumn_S::RepoObjectColumn_type
 repo.RepoObjectColumn_gross::RepoObject_fullname <-- graph.RepoObjectColumn_S::RepoObject_fullname
 repo.RepoObjectColumn_gross::RepoObject_guid <-- graph.RepoObjectColumn_S::RepoObject_guid
 repo.RepoObjectColumn_gross::RepoObject_type <-- graph.RepoObjectColumn_S::RepoObject_type

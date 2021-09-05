@@ -1,0 +1,57 @@
+'Left to right direction
+top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+}
+
+
+entity docs.ObjectRefCyclic << V >> {
+  --
+}
+
+entity docs.ObjectRefCyclic_EntityList << V >> {
+  --
+}
+
+entity docs.ObjectRefCyclic_ObjectRefList << V >> {
+  --
+}
+
+entity reference.ReferenceTree_cyclic_ref_PersistenceUsp << V >> {
+  --
+}
+
+entity reference.ReferenceTree_cyclic_ref_primary << V >> {
+  --
+}
+
+entity reference.ReferenceTree_cyclic_union << V >> {
+  --
+}
+
+docs.ObjectRefCyclic_EntityList <.. docs.ObjectRefCyclic
+docs.ObjectRefCyclic_ObjectRefList <.. docs.ObjectRefCyclic
+reference.ReferenceTree_cyclic_ref_PersistenceUsp <.. reference.ReferenceTree_cyclic_union
+reference.ReferenceTree_cyclic_ref_primary <.. reference.ReferenceTree_cyclic_ref_PersistenceUsp
+reference.ReferenceTree_cyclic_ref_primary <.. reference.ReferenceTree_cyclic_union
+reference.ReferenceTree_cyclic_union <.. docs.ObjectRefCyclic_EntityList
+reference.ReferenceTree_cyclic_union <.. docs.ObjectRefCyclic_ObjectRefList

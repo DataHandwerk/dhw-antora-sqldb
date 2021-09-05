@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -24,29 +25,32 @@ skinparam class {
 
 
 entity docs.RepoObject_Adoc << V >> {
-  * **RepoObject_guid** : uniqueidentifier
   --
   * AdocContent : nvarchar(max)
   is_DocsOutput : int
   PropertyCount : int
   RepoObject_fullname : nvarchar(261)
   RepoObject_fullname2 : nvarchar(257)
+  * RepoObject_guid : uniqueidentifier
   RepoObject_schema_name : nvarchar(128)
   SysObject_fullname : nvarchar(261)
   SysObject_fullname2 : nvarchar(257)
   SysObject_schema_name : nvarchar(128)
   SysObject_type : char(2)
   SysObject_type_name : nvarchar(128)
+  --
 }
 
 entity property.PropertyName_RepoObject << V >> {
   **property_name** : nvarchar(128)
+  --
   --
 }
 
 entity property.RepoObjectProperty_cross << V >> {
   * **RepoObject_guid** : uniqueidentifier
   **property_name** : nvarchar(128)
+  --
   --
 }
 
@@ -58,8 +62,10 @@ entity repo.RepoObject << U >> {
   Inheritance_StringAggSeparatorSql : nvarchar(4000)
   InheritanceDefinition : nvarchar(4000)
   InheritanceType : tinyint
+  * is_DocsExclude : bit
   is_repo_managed : bit
   is_required_ObjectMerge : bit
+  * is_ssas : bit
   is_SysObject_missing : bit
   * modify_dt : datetime
   pk_index_guid : uniqueidentifier
@@ -85,7 +91,9 @@ entity repo.RepoObject << U >> {
   * {static} SysObject_fullname : nvarchar(261)
   * {static} SysObject_fullname2 : nvarchar(257)
   * {abstract} SysObject_query_sql : nvarchar(406)
+  * {static} usp_persistence_fullname2 : nvarchar(269)
   * {static} usp_persistence_name : nvarchar(140)
+  --
 }
 
 property.PropertyName_RepoObject <.. property.RepoObjectProperty_cross

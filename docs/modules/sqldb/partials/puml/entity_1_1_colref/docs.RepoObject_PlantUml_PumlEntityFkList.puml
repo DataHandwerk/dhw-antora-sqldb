@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -39,14 +40,20 @@ entity docs.RepoObject_Plantuml << V >> {
   PumlEntityList_0_30 : nvarchar(max)
   PumlEntityList_30_0 : nvarchar(max)
   * RepoObject_fullname2 : nvarchar(257)
+  --
 }
 
 entity docs.RepoObject_Plantuml_Entity_T << U >> {
   * **RepoObject_guid** : uniqueidentifier
   --
+  * RepoObject_fullname2 : nvarchar(257)
   * RepoObject_Puml : nvarchar(max)
   * RepoObject_PumlOnlyIndex : nvarchar(max)
   * RepoObject_PumlOnlyPK : nvarchar(max)
+  * RepoObject_PumlOnlyPkOrIndex : nvarchar(max)
+  * RepoObject_PumlOnlyPkOrNotHidden : nvarchar(max)
+  * RepoObject_schema_name : nvarchar(128)
+  --
 }
 
 entity docs.RepoObject_PlantUml_PumlEntityFkList << V >> {
@@ -54,6 +61,7 @@ entity docs.RepoObject_PlantUml_PumlEntityFkList << V >> {
   --
   PumlEntityFkList : nvarchar(max)
   RepoObject_fullname2 : nvarchar(257)
+  --
 }
 
 entity repo.RepoObject_related_FK_union << V >> {
@@ -61,10 +69,15 @@ entity repo.RepoObject_related_FK_union << V >> {
   **included_RepoObject_guid** : uniqueidentifier
   --
   included_RepoObject_fullname2 : nvarchar(257)
+  included_SchemaName : nvarchar(128)
   RepoObject_fullname2 : nvarchar(257)
+  SchemaName : nvarchar(128)
+  --
 }
 
 docs.RepoObject_Plantuml_Entity_T <.. docs.RepoObject_PlantUml_PumlEntityFkList
 docs.RepoObject_PlantUml_PumlEntityFkList <.. docs.RepoObject_Plantuml
 repo.RepoObject_related_FK_union <.. docs.RepoObject_PlantUml_PumlEntityFkList
+docs.RepoObject_Plantuml_Entity_T::RepoObject_fullname2 <-- docs.RepoObject_PlantUml_PumlEntityFkList::RepoObject_fullname2
+repo.RepoObject_related_FK_union::RepoObject_fullname2 <-- docs.RepoObject_PlantUml_PumlEntityFkList::RepoObject_fullname2
 repo.RepoObject_related_FK_union::RepoObject_guid <-- docs.RepoObject_PlantUml_PumlEntityFkList::RepoObject_guid

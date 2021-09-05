@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -27,17 +28,19 @@ entity config.Parameter << U >> {
   * **Parameter_name** : varchar(100)
   * **sub_Parameter** : nvarchar(128)
   --
-  Parameter_default_value : sql_variant
+  Parameter_default_value : nvarchar(max)
   Parameter_desciption : nvarchar(1000)
-  Parameter_value : sql_variant
-  {abstract} Parameter_value__result_date : date
-  {abstract} Parameter_value__result_datetime : datetime
-  {abstract} Parameter_value__result_int : int
-  {abstract} Parameter_value__result_nvarchar : nvarchar(4000)
+  Parameter_value : nvarchar(max)
+  {abstract} Parameter_value_result : nvarchar(max)
+  {abstract} Parameter_value_result_date : date
+  {abstract} Parameter_value_result_datetime : datetime
+  {abstract} Parameter_value_result_int : int
+  --
 }
 
 entity property.PropertyName_RepoObjectColumn << V >> {
   * **property_name** : nvarchar(128)
+  --
   --
 }
 
@@ -53,40 +56,43 @@ entity property.RepoObjectColumnProperty << U >> {
   {abstract} property_int : int
   {abstract} property_money : money
   {abstract} property_real : real
+  --
 }
 
 entity property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition << V >> {
   * **RepoObjectColumn_guid** : uniqueidentifier
   * **property_name** : nvarchar(128)
   --
-  Inheritance_StringAggSeparatorSql : nvarchar(4000)
-  InheritanceDefinition : nvarchar(4000)
+  Inheritance_StringAggSeparatorSql : nvarchar(max)
+  InheritanceDefinition : nvarchar(max)
   InheritanceType : int
-  par_Inheritance_StringAggSeparatorSql : nvarchar(4000)
-  par_InheritanceDefinition : nvarchar(4000)
+  par_Inheritance_StringAggSeparatorSql : nvarchar(max)
+  par_InheritanceDefinition : nvarchar(max)
   par_InheritanceType : int
   property_value : nvarchar(max)
   * RepoObjectColumn_name : nvarchar(128)
   roc_Inheritance_StringAggSeparatorSql : nvarchar(4000)
   roc_InheritanceDefinition : nvarchar(4000)
   roc_InheritanceType : tinyint
-  sub_Inheritance_StringAggSeparatorSql : nvarchar(4000)
-  sub_InheritanceDefinition : nvarchar(4000)
+  sub_Inheritance_StringAggSeparatorSql : nvarchar(max)
+  sub_InheritanceDefinition : nvarchar(max)
   sub_InheritanceType : int
+  --
 }
 
 entity property.RepoObjectColumnProperty_InheritanceType_resulting_InheritanceDefinition << V >> {
   * **RepoObjectColumn_guid** : uniqueidentifier
   * **property_name** : nvarchar(128)
   --
-  Inheritance_StringAggSeparatorSql : nvarchar(4000)
-  InheritanceDefinition : nvarchar(4000)
+  Inheritance_StringAggSeparatorSql : nvarchar(max)
+  InheritanceDefinition : nvarchar(max)
   InheritanceType : int
   * is_force_inherit_empty_source : int
   * is_StringAggAllSources : int
   property_value : nvarchar(max)
   * RepoObjectColumn_name : nvarchar(128)
-  resulting_InheritanceDefinition : nvarchar(4000)
+  resulting_InheritanceDefinition : nvarchar(max)
+  --
 }
 
 entity repo.RepoObjectColumn << U >> {
@@ -127,6 +133,7 @@ entity repo.RepoObjectColumn << U >> {
   {abstract} has_different_sys_names : bit
   * {static} is_RepoObjectColumn_name_uniqueidentifier : int
   * {static} is_SysObjectColumn_name_uniqueidentifier : int
+  --
 }
 
 config.Parameter <.. property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition
@@ -134,12 +141,12 @@ property.PropertyName_RepoObjectColumn <.. property.RepoObjectColumnProperty_Inh
 property.RepoObjectColumnProperty <.. property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition
 property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition <.. property.RepoObjectColumnProperty_InheritanceType_resulting_InheritanceDefinition
 repo.RepoObjectColumn <.. property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition
-config.Parameter::Parameter_value__result_int <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::sub_InheritanceType
-config.Parameter::Parameter_value__result_int <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::par_InheritanceType
-config.Parameter::Parameter_value__result_nvarchar <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::sub_InheritanceDefinition
-config.Parameter::Parameter_value__result_nvarchar <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::par_InheritanceDefinition
-config.Parameter::Parameter_value__result_nvarchar <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::sub_Inheritance_StringAggSeparatorSql
-config.Parameter::Parameter_value__result_nvarchar <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::par_Inheritance_StringAggSeparatorSql
+config.Parameter::Parameter_value_result <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::sub_InheritanceDefinition
+config.Parameter::Parameter_value_result <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::par_InheritanceDefinition
+config.Parameter::Parameter_value_result <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::sub_Inheritance_StringAggSeparatorSql
+config.Parameter::Parameter_value_result <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::par_Inheritance_StringAggSeparatorSql
+config.Parameter::Parameter_value_result_int <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::sub_InheritanceType
+config.Parameter::Parameter_value_result_int <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::par_InheritanceType
 property.PropertyName_RepoObjectColumn::property_name <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::property_name
 property.RepoObjectColumnProperty::property_value <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::property_value
 property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::Inheritance_StringAggSeparatorSql <-- property.RepoObjectColumnProperty_InheritanceType_resulting_InheritanceDefinition::Inheritance_StringAggSeparatorSql

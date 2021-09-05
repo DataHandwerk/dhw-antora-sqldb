@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -37,6 +38,16 @@ entity repo.Index_SqlConstraint_PkUq << V >> {
   --
 }
 
+entity repo.Index_ssas_IndexPatternColumnGuid << V >> {
+  --
+}
+
+entity repo.Index_ssas_T << U >> {
+  * **databasename** : nvarchar(128)
+  **index_name** : nvarchar(450)
+  --
+}
+
 entity repo.Index_union << V >> {
   **index_guid** : uniqueidentifier
   --
@@ -68,6 +79,8 @@ entity repo_sys.Index_unique << V >> {
   --
 }
 
+repo.Index_ssas_IndexPatternColumnGuid <.. repo.Index_union
+repo.Index_ssas_T <.. repo.Index_union
 repo.Index_union <.. repo.IndexReferencedReferencing
 repo.Index_union <.. repo.Index_SqlConstraint_PkUq
 repo.Index_union <.. repo.Index_gross

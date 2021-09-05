@@ -1,4 +1,5 @@
 'Left to right direction
+top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -120,7 +121,27 @@ entity repo.RepoObject << U >> {
   --
 }
 
+entity repo.RepoObject_SSAS_src << V >> {
+  * **RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity repo.RepoObject_SSAS_tgt << V >> {
+  * **RepoObject_guid** : uniqueidentifier
+  --
+}
+
 entity repo.RepoObjectColumn << U >> {
+  * **RepoObjectColumn_guid** : uniqueidentifier
+  --
+}
+
+entity repo.RepoObjectColumn_SSAS_src << V >> {
+  * **RepoObjectColumn_guid** : uniqueidentifier
+  --
+}
+
+entity repo.RepoObjectColumn_SSAS_tgt << V >> {
   * **RepoObjectColumn_guid** : uniqueidentifier
   --
 }
@@ -130,11 +151,70 @@ entity repo.RepoSchema << U >> {
   --
 }
 
+entity repo.RepoSchema_ssas_src << V >> {
+  * **RepoSchema_name** : nvarchar(128)
+  --
+}
+
+entity repo.RepoSchema_ssas_tgt << V >> {
+  * **RepoSchema_name** : nvarchar(128)
+  --
+}
+
 entity repo_sys.ExtendedProperties << V >> {
   --
 }
 
 entity repo_sys.ExtendedProperties_ParameterForAddUpdateDrop << V >> {
+  --
+}
+
+entity ssas.model_json << U >> {
+  * **databasename** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_10 << V >> {
+  * **databasename** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_20 << V >> {
+  * **databasename** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_201_descriptions_multiline << V >> {
+  --
+}
+
+entity ssas.model_json_2011_descriptions_StrAgg << V >> {
+  --
+}
+
+entity ssas.model_json_31_tables << V >> {
+  * **databasename** : nvarchar(128)
+  **tables_name** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_31_tables_T << U >> {
+  * **databasename** : nvarchar(128)
+  **tables_name** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_311_tables_columns << V >> {
+  * **databasename** : nvarchar(128)
+  * **tables_name** : nvarchar(128)
+  **tables_columns_name** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_311_tables_columns_T << U >> {
+  * **databasename** : nvarchar(128)
+  * **tables_name** : nvarchar(128)
+  **tables_columns_name** : nvarchar(128)
   --
 }
 
@@ -165,11 +245,13 @@ entity sys_dwh.schemas << SN >> {
 config.ftv_dwh_database <.. repo_sys.ExtendedProperties
 config.Parameter <.. config.ftv_dwh_database
 configT.spt_values <.. configT.type
+configT.spt_values <.. configT.type
+configT.type <.. configT.type_level1type_level2type
 configT.type <.. configT.type_level1type_level2type
 configT.type_level1type_level2type <.. property.ExtendedProperty_Repo2Sys_level2_RepoObject
-configT.type_level1type_level2type <.. property.ExtendedProperty_Repo2Sys_level1
-configT.type_level1type_level2type <.. repo_sys.ExtendedProperties_ParameterForAddUpdateDrop
 configT.type_level1type_level2type <.. property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn
+configT.type_level1type_level2type <.. repo_sys.ExtendedProperties_ParameterForAddUpdateDrop
+configT.type_level1type_level2type <.. property.ExtendedProperty_Repo2Sys_level1
 logs.ExecutionLog <.. logs.usp_ExecutionLog_insert
 logs.usp_ExecutionLog_insert <.. property.usp_sync_ExtendedProperties_Repo2Sys_Delete
 property.ExtendedProperty_Repo2Sys_level0 <.. property.usp_sync_ExtendedProperties_Repo2Sys_Delete
@@ -178,19 +260,48 @@ property.ExtendedProperty_Repo2Sys_level2_RepoObject <.. property.ExtendedProper
 property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn <.. property.ExtendedProperty_Repo2Sys_level2_Union
 property.ExtendedProperty_Repo2Sys_level2_Union <.. property.usp_sync_ExtendedProperties_Repo2Sys_Delete
 property.RepoObjectColumnProperty <.. property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn
-property.RepoObjectProperty <.. property.ExtendedProperty_Repo2Sys_level1
 property.RepoObjectProperty <.. property.ExtendedProperty_Repo2Sys_level2_RepoObject
+property.RepoObjectProperty <.. property.ExtendedProperty_Repo2Sys_level1
 repo.RepoObject <.. property.ExtendedProperty_Repo2Sys_level1
-repo.RepoObject <.. property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn
 repo.RepoObject <.. property.ExtendedProperty_Repo2Sys_level2_RepoObject
+repo.RepoObject <.. property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn
+repo.RepoObject <.. repo.RepoObject_SSAS_tgt
+repo.RepoObject_SSAS_src <.. repo.RepoObject_SSAS_tgt
+repo.RepoObject_SSAS_tgt <.. repo.RepoObject
+repo.RepoObject_SSAS_tgt <.. repo.RepoObjectColumn_SSAS_tgt
+repo.RepoObject_SSAS_tgt <.. repo.RepoObjectColumn_SSAS_tgt
+repo.RepoObjectColumn <.. repo.RepoObjectColumn_SSAS_tgt
+repo.RepoObjectColumn <.. repo.RepoObjectColumn_SSAS_tgt
 repo.RepoObjectColumn <.. property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn
+repo.RepoObjectColumn_SSAS_src <.. repo.RepoObjectColumn_SSAS_tgt
+repo.RepoObjectColumn_SSAS_src <.. repo.RepoObjectColumn_SSAS_tgt
+repo.RepoObjectColumn_SSAS_tgt <.. repo.RepoObjectColumn
+repo.RepoObjectColumn_SSAS_tgt <.. repo.RepoObject_SSAS_tgt
+repo.RepoSchema <.. repo.RepoSchema_ssas_tgt
 repo.RepoSchema <.. property.ExtendedProperty_Repo2Sys_level0
+repo.RepoSchema_ssas_src <.. repo.RepoSchema_ssas_tgt
+repo.RepoSchema_ssas_tgt <.. repo.RepoSchema
 repo_sys.ExtendedProperties <.. repo_sys.ExtendedProperties_ParameterForAddUpdateDrop
 repo_sys.ExtendedProperties_ParameterForAddUpdateDrop <.. property.usp_sync_ExtendedProperties_Repo2Sys_Delete
+ssas.model_json <.. ssas.model_json_10
+ssas.model_json_10 <.. ssas.model_json_20
+ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
+ssas.model_json_20 <.. ssas.model_json_31_tables
+ssas.model_json_20 <.. repo.RepoSchema_ssas_src
+ssas.model_json_201_descriptions_multiline <.. ssas.model_json_2011_descriptions_StrAgg
+ssas.model_json_2011_descriptions_StrAgg <.. repo.RepoSchema_ssas_src
+ssas.model_json_31_tables <.. ssas.model_json_31_tables_T
+ssas.model_json_31_tables_T <.. ssas.model_json_311_tables_columns
+ssas.model_json_31_tables_T <.. ssas.model_json_311_tables_columns
+ssas.model_json_31_tables_T <.. repo.RepoObject_SSAS_src
+ssas.model_json_311_tables_columns <.. ssas.model_json_311_tables_columns_T
+ssas.model_json_311_tables_columns <.. ssas.model_json_311_tables_columns_T
+ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_SSAS_src
+ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_SSAS_src
 sys_dwh.columns <.. repo_sys.ExtendedProperties
 sys_dwh.extended_properties <.. repo_sys.ExtendedProperties
 sys_dwh.indexes <.. repo_sys.ExtendedProperties
-sys_dwh.objects <.. repo_sys.ExtendedProperties_ParameterForAddUpdateDrop
 sys_dwh.objects <.. repo_sys.ExtendedProperties
+sys_dwh.objects <.. repo_sys.ExtendedProperties_ParameterForAddUpdateDrop
 sys_dwh.parameters <.. repo_sys.ExtendedProperties
 sys_dwh.schemas <.. repo_sys.ExtendedProperties

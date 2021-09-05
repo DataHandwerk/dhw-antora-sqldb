@@ -41,7 +41,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-05 10:54:39
+2021-09-05 13:29:35
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -98,7 +98,27 @@ source: property.RepoObjectProperty_cross As rop_cross
 * [ssas].[model_json_31_tables]
 * [ssas].[model_json_31_tables_T]
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+DELETE T
+FROM [ssas].[model_json_31_tables_T] AS T
+WHERE
+NOT EXISTS
+(SELECT 1 FROM [ssas].[model_json_31_tables] AS S
+WHERE
+T.[databasename] = S.[databasename]
+AND T.[tables_name] = S.[tables_name]
+)
+ 
+----
+=====
+
 |
+
 
 |600
 |
@@ -108,7 +128,48 @@ source: property.RepoObjectProperty_cross As rop_cross
 * [ssas].[model_json_31_tables]
 * [ssas].[model_json_31_tables_T]
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+UPDATE T
+SET
+  T.[databasename] = S.[databasename]
+, T.[tables_name] = S.[tables_name]
+, T.[tables_annotations_ja] = S.[tables_annotations_ja]
+, T.[tables_columns_ja] = S.[tables_columns_ja]
+, T.[tables_dataCategory] = S.[tables_dataCategory]
+, T.[tables_description] = S.[tables_description]
+, T.[tables_description_ja] = S.[tables_description_ja]
+, T.[tables_hierarchies_ja] = S.[tables_hierarchies_ja]
+, T.[tables_isHidden] = S.[tables_isHidden]
+, T.[tables_measures_ja] = S.[tables_measures_ja]
+, T.[tables_partitions_ja] = S.[tables_partitions_ja]
+
+FROM [ssas].[model_json_31_tables_T] AS T
+INNER JOIN [ssas].[model_json_31_tables] AS S
+ON
+T.[databasename] = S.[databasename]
+AND T.[tables_name] = S.[tables_name]
+
+WHERE
+   T.[tables_annotations_ja] <> S.[tables_annotations_ja] OR (S.[tables_annotations_ja] IS NULL AND NOT T.[tables_annotations_ja] IS NULL) OR (NOT S.[tables_annotations_ja] IS NULL AND T.[tables_annotations_ja] IS NULL)
+OR T.[tables_columns_ja] <> S.[tables_columns_ja] OR (S.[tables_columns_ja] IS NULL AND NOT T.[tables_columns_ja] IS NULL) OR (NOT S.[tables_columns_ja] IS NULL AND T.[tables_columns_ja] IS NULL)
+OR T.[tables_dataCategory] <> S.[tables_dataCategory] OR (S.[tables_dataCategory] IS NULL AND NOT T.[tables_dataCategory] IS NULL) OR (NOT S.[tables_dataCategory] IS NULL AND T.[tables_dataCategory] IS NULL)
+OR T.[tables_description] <> S.[tables_description] OR (S.[tables_description] IS NULL AND NOT T.[tables_description] IS NULL) OR (NOT S.[tables_description] IS NULL AND T.[tables_description] IS NULL)
+OR T.[tables_description_ja] <> S.[tables_description_ja] OR (S.[tables_description_ja] IS NULL AND NOT T.[tables_description_ja] IS NULL) OR (NOT S.[tables_description_ja] IS NULL AND T.[tables_description_ja] IS NULL)
+OR T.[tables_hierarchies_ja] <> S.[tables_hierarchies_ja] OR (S.[tables_hierarchies_ja] IS NULL AND NOT T.[tables_hierarchies_ja] IS NULL) OR (NOT S.[tables_hierarchies_ja] IS NULL AND T.[tables_hierarchies_ja] IS NULL)
+OR T.[tables_isHidden] <> S.[tables_isHidden] OR (S.[tables_isHidden] IS NULL AND NOT T.[tables_isHidden] IS NULL) OR (NOT S.[tables_isHidden] IS NULL AND T.[tables_isHidden] IS NULL)
+OR T.[tables_measures_ja] <> S.[tables_measures_ja] OR (S.[tables_measures_ja] IS NULL AND NOT T.[tables_measures_ja] IS NULL) OR (NOT S.[tables_measures_ja] IS NULL AND T.[tables_measures_ja] IS NULL)
+OR T.[tables_partitions_ja] <> S.[tables_partitions_ja] OR (S.[tables_partitions_ja] IS NULL AND NOT T.[tables_partitions_ja] IS NULL) OR (NOT S.[tables_partitions_ja] IS NULL AND T.[tables_partitions_ja] IS NULL)
+
+----
+=====
+
 |
+
 
 |700
 |
@@ -118,7 +179,54 @@ source: property.RepoObjectProperty_cross As rop_cross
 * [ssas].[model_json_31_tables]
 * [ssas].[model_json_31_tables_T]
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+INSERT INTO 
+ [ssas].[model_json_31_tables_T]
+ (
+  [databasename]
+, [tables_name]
+, [tables_annotations_ja]
+, [tables_columns_ja]
+, [tables_dataCategory]
+, [tables_description]
+, [tables_description_ja]
+, [tables_hierarchies_ja]
+, [tables_isHidden]
+, [tables_measures_ja]
+, [tables_partitions_ja]
+)
+SELECT
+  [databasename]
+, [tables_name]
+, [tables_annotations_ja]
+, [tables_columns_ja]
+, [tables_dataCategory]
+, [tables_description]
+, [tables_description_ja]
+, [tables_hierarchies_ja]
+, [tables_isHidden]
+, [tables_measures_ja]
+, [tables_partitions_ja]
+
+FROM [ssas].[model_json_31_tables] AS S
+WHERE
+NOT EXISTS
+(SELECT 1
+FROM [ssas].[model_json_31_tables_T] AS T
+WHERE
+T.[databasename] = S.[databasename]
+AND T.[tables_name] = S.[tables_name]
+)
+----
+=====
+
 |
+
 |===
 
 // end::adocuspsteps[]
@@ -391,7 +499,7 @@ source: property.RepoObjectProperty WHERE property_int = 1
 
 // tag::sql_modules_definition[]
 [%collapsible]
-====
+=======
 [source,sql]
 ----
 /*
@@ -659,7 +767,7 @@ END
 
 
 ----
-====
+=======
 // end::sql_modules_definition[]
 
 

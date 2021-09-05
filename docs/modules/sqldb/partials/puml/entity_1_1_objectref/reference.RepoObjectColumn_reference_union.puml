@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -26,6 +27,10 @@ skinparam class {
 entity reference.RepoObjectColumn_reference << V >> {
   **referenced_RepoObjectColumn_guid** : uniqueidentifier
   **referencing_RepoObjectColumn_guid** : uniqueidentifier
+  --
+}
+
+entity reference.RepoObjectColumn_reference_additional_internal << V >> {
   --
 }
 
@@ -61,6 +66,7 @@ entity reference.RepoObjectColumn_reference_virtual << V >> {
   --
 }
 
+reference.RepoObjectColumn_reference_additional_internal <.. reference.RepoObjectColumn_reference_union
 reference.RepoObjectColumn_reference_Persistence <.. reference.RepoObjectColumn_reference_union
 reference.RepoObjectColumn_reference_SqlExpressionDependencies <.. reference.RepoObjectColumn_reference_union
 reference.RepoObjectColumn_reference_SqlModules <.. reference.RepoObjectColumn_reference_union

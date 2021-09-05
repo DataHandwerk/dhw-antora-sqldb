@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -23,6 +24,11 @@ skinparam class {
 }
 
 
+entity docs.fs_cleanStringForPuml << FN >> {
+  --
+  --
+}
+
 entity docs.RepoObject_Plantuml << V >> {
   * **RepoObject_guid** : uniqueidentifier
   --
@@ -39,46 +45,57 @@ entity docs.RepoObject_Plantuml << V >> {
   PumlEntityList_0_30 : nvarchar(max)
   PumlEntityList_30_0 : nvarchar(max)
   * RepoObject_fullname2 : nvarchar(257)
+  --
 }
 
 entity docs.RepoObject_Plantuml_ObjectRefList_30_0 << V >> {
   * **RepoObject_guid** : uniqueidentifier
   --
   ObjectRefList : nvarchar(max)
+  --
 }
 
 entity reference.RepoObject_reference_T << U >> {
   **referenced_RepoObject_guid** : uniqueidentifier
   **referencing_RepoObject_guid** : uniqueidentifier
   --
+  * is_ReversePersistenceViaView : bit
   referenced_entity_name : nvarchar(128)
+  * referenced_is_PersistenceSource : bit
+  * referenced_is_PersistenceTarget : bit
   referenced_schema_name : nvarchar(128)
   referenced_type : char(2)
   referencing_entity_name : nvarchar(128)
+  * referencing_is_PersistenceTarget : bit
+  * referencing_is_PersistenceUspSourceRef : bit
+  referencing_is_PersistenceUspTargetRef : bit
   referencing_schema_name : nvarchar(128)
   referencing_type : varchar(2)
   * {static} referenced_fullname : nvarchar(261)
   * {static} referenced_fullname2 : nvarchar(257)
   * {static} referencing_fullname : nvarchar(261)
   * {static} referencing_fullname2 : nvarchar(257)
+  --
 }
 
-entity reference.RepoObject_ReferenceTree_30_0_T << U >> {
+entity reference.RepoObject_ReferenceTree << U >> {
+  * **RepoObject_guid** : uniqueidentifier
+  **Referenced_Depth** : int
+  **Referencing_Depth** : int
+  * **Referenced_guid** : uniqueidentifier
+  * **Referencing_guid** : uniqueidentifier
   --
-  Referenced_Depth : int
   Referenced_fullname : nvarchar(261)
   Referenced_fullname2 : nvarchar(257)
-  Referenced_guid : uniqueidentifier
   Referenced_type : char(2)
-  Referencing_Depth : int
   Referencing_fullname : nvarchar(261)
   Referencing_fullname2 : nvarchar(257)
-  Referencing_guid : uniqueidentifier
   Referencing_type : varchar(2)
-  RepoObject_guid : uniqueidentifier
+  --
 }
 
+docs.fs_cleanStringForPuml <.. docs.RepoObject_Plantuml_ObjectRefList_30_0
 docs.RepoObject_Plantuml_ObjectRefList_30_0 <.. docs.RepoObject_Plantuml
 reference.RepoObject_reference_T <.. docs.RepoObject_Plantuml_ObjectRefList_30_0
-reference.RepoObject_ReferenceTree_30_0_T <.. docs.RepoObject_Plantuml_ObjectRefList_30_0
+reference.RepoObject_ReferenceTree <.. docs.RepoObject_Plantuml_ObjectRefList_30_0
 docs.RepoObject_Plantuml_ObjectRefList_30_0::ObjectRefList <-- docs.RepoObject_Plantuml::ObjectRefList_30_0

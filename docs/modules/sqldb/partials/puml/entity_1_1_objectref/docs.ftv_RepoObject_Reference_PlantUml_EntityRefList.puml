@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -37,14 +38,12 @@ entity docs.RepoObject_Plantuml_Entity_T << U >> {
   --
 }
 
-entity reference.RepoObject_ReferenceTree_0_30_T << U >> {
-  **RepoObject_guid** : uniqueidentifier
-  **Referencing_guid** : uniqueidentifier
-  **Referenced_guid** : uniqueidentifier
-  --
-}
-
-entity reference.RepoObject_ReferenceTree_30_0_T << U >> {
+entity reference.RepoObject_ReferenceTree << U >> {
+  * **RepoObject_guid** : uniqueidentifier
+  **Referenced_Depth** : int
+  **Referencing_Depth** : int
+  * **Referenced_guid** : uniqueidentifier
+  * **Referencing_guid** : uniqueidentifier
   --
 }
 
@@ -55,6 +54,5 @@ entity repo.RepoObject << U >> {
 
 docs.ftv_RepoObject_Reference_PlantUml_EntityRefList <.. docs.RepoObject_Plantuml
 docs.RepoObject_Plantuml_Entity_T <.. docs.ftv_RepoObject_Reference_PlantUml_EntityRefList
-reference.RepoObject_ReferenceTree_0_30_T <.. docs.ftv_RepoObject_Reference_PlantUml_EntityRefList
-reference.RepoObject_ReferenceTree_30_0_T <.. docs.ftv_RepoObject_Reference_PlantUml_EntityRefList
+reference.RepoObject_ReferenceTree <.. docs.ftv_RepoObject_Reference_PlantUml_EntityRefList
 repo.RepoObject <.. docs.ftv_RepoObject_Reference_PlantUml_EntityRefList

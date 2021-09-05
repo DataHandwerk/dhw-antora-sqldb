@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -32,6 +33,7 @@ entity repo.Index_ColumList << V >> {
   DbmlIndexColumnList : nvarchar(max)
   PersistenceWhereColumnList : nvarchar(max)
   PumlIndexColumnList : nvarchar(max)
+  --
 }
 
 entity repo.Index_IndexPattern << V >> {
@@ -39,6 +41,7 @@ entity repo.Index_IndexPattern << V >> {
   --
   IndexPatternColumnDatatype : nvarchar(4000)
   IndexPatternColumnName : nvarchar(4000)
+  --
 }
 
 entity repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing << V >> {
@@ -51,13 +54,33 @@ entity repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing << V >
   * referenced_RepoObjectColumn_guid : uniqueidentifier
   referencing_RepoObject_guid : uniqueidentifier
   * referencing_RepoObjectColumn_guid : uniqueidentifier
+  --
+}
+
+entity repo.IndexColumn_ssas_gross << V >> {
+  --
+  column_user_type_fullname : nvarchar(128)
+  * index_column_id : int
+  * index_guid : uniqueidentifier
+  * index_name : nvarchar(450)
+  is_descending_key : bit
+  * is_index_primary_key : bit
+  is_index_real : bit
+  * is_index_unique : bit
+  * Object_column_name : nvarchar(128)
+  parent_Object_fullname : nvarchar(261)
+  parent_Object_name : nvarchar(128)
+  * parent_RepoObject_guid : uniqueidentifier
+  parent_schema_name : nvarchar(128)
+  * RepoObjectColumn_guid : uniqueidentifier
+  --
 }
 
 entity repo.IndexColumn_union << V >> {
   **index_guid** : uniqueidentifier
   * **index_column_id** : int
   --
-  index_name : nvarchar(128)
+  index_name : nvarchar(450)
   is_descending_key : bit
   is_index_primary_key : bit
   is_index_real : bit
@@ -69,6 +92,7 @@ entity repo.IndexColumn_union << V >> {
   RepoObjectColumn_guid : uniqueidentifier
   SysObject_column_name : nvarchar(128)
   SysObject_column_user_type_fullname : nvarchar(182)
+  --
 }
 
 entity repo.IndexColumn_virtual_gross << V >> {
@@ -87,18 +111,19 @@ entity repo.IndexColumn_virtual_gross << V >> {
   * parent_RepoObject_guid : uniqueidentifier
   parent_schema_name : nvarchar(128)
   * RepoObjectColumn_guid : uniqueidentifier
+  --
 }
 
-entity repo.RepoObjectColumn_gross << V >> {
-  * **RepoObjectColumn_guid** : uniqueidentifier
+entity repo.RepoObjectColumn_gross2 << V >> {
   --
   AntoraReferencedColumnList : nvarchar(max)
   AntoraReferencingColumnList : nvarchar(max)
   * Column_name : nvarchar(128)
+  Description : nvarchar(max)
   has_different_sys_names : bit
   has_get_referenced_issue : bit
   index_column_id : int
-  index_name : nvarchar(128)
+  index_name : nvarchar(450)
   Inheritance_StringAggSeparatorSql : nvarchar(4000)
   InheritanceDefinition : nvarchar(4000)
   InheritanceType : tinyint
@@ -111,10 +136,12 @@ entity repo.RepoObjectColumn_gross << V >> {
   * is_RepoObject_name_uniqueidentifier : int
   * is_RepoObjectColumn_name_uniqueidentifier : int
   is_required_ColumnMerge : bit
+  * is_ssas : bit
   is_SysObject_missing : bit
   * is_SysObject_name_uniqueidentifier : int
   is_SysObjectColumn_missing : bit
   * is_SysObjectColumn_name_uniqueidentifier : int
+  isAnyIndexColumn : int
   * modify_dt : datetime
   node_id : bigint
   persistence_source_RepoObjectColumn_guid : uniqueidentifier
@@ -146,6 +173,7 @@ entity repo.RepoObjectColumn_gross << V >> {
   RepoObjectColumn_column_id : int
   * RepoObjectColumn_fullname : nvarchar(520)
   * RepoObjectColumn_fullname2 : nvarchar(386)
+  * RepoObjectColumn_guid : uniqueidentifier
   * RepoObjectColumn_name : nvarchar(128)
   * SysObject_fullname : nvarchar(261)
   * SysObject_fullname2 : nvarchar(257)
@@ -157,6 +185,16 @@ entity repo.RepoObjectColumn_gross << V >> {
   SysObject_type : char(2)
   SysObjectColumn_column_id : int
   * SysObjectColumn_name : nvarchar(128)
+  tabcol_Description : nvarchar(max)
+  tabcol_DisplayFolder : nvarchar(500)
+  tabcol_Expression : nvarchar(max)
+  tabcol_FormatString : nvarchar(500)
+  * tabcol_IsHidden : bit
+  * tabcol_IsKey : bit
+  * tabcol_IsUnique : bit
+  tabcol_SummarizeBy : nvarchar(500)
+  tabcol_Type : nvarchar(500)
+  --
 }
 
 entity repo_sys.IndexColumn_unique << V >> {
@@ -176,19 +214,21 @@ entity repo_sys.IndexColumn_unique << V >> {
   RepoObjectColumn_guid : uniqueidentifier
   SysObject_column_name : sysname
   SysObject_column_user_type_fullname : nvarchar(182)
+  --
 }
 
+repo.IndexColumn_ssas_gross <.. repo.IndexColumn_union
 repo.IndexColumn_union <.. repo.Index_ColumList
-repo.IndexColumn_union <.. repo.RepoObjectColumn_gross
 repo.IndexColumn_union <.. repo.Index_IndexPattern
 repo.IndexColumn_union <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing
+repo.IndexColumn_union <.. repo.RepoObjectColumn_gross2
 repo.IndexColumn_virtual_gross <.. repo.IndexColumn_union
 repo_sys.IndexColumn_unique <.. repo.IndexColumn_union
-repo.IndexColumn_union::index_column_id <-- repo.RepoObjectColumn_gross::index_column_id
 repo.IndexColumn_union::index_column_id <-- repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing::index_column_id
+repo.IndexColumn_union::index_column_id <-- repo.RepoObjectColumn_gross2::index_column_id
 repo.IndexColumn_union::index_guid <-- repo.Index_ColumList::index_guid
 repo.IndexColumn_union::index_guid <-- repo.Index_IndexPattern::index_guid
 repo.IndexColumn_union::index_guid <-- repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing::index_guid
-repo.IndexColumn_union::index_name <-- repo.RepoObjectColumn_gross::index_name
+repo.IndexColumn_union::index_name <-- repo.RepoObjectColumn_gross2::index_name
 repo.IndexColumn_union::is_descending_key <-- repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing::is_descending_key
-repo.IndexColumn_union::is_index_primary_key <-- repo.RepoObjectColumn_gross::is_index_primary_key
+repo.IndexColumn_union::is_index_primary_key <-- repo.RepoObjectColumn_gross2::is_index_primary_key

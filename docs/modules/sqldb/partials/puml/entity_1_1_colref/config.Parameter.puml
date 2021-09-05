@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -25,9 +26,11 @@ skinparam class {
 
 entity config.fs_dwh_database_name << FN >> {
   --
+  --
 }
 
 entity config.fs_get_parameter_value << FN >> {
+  --
   --
 }
 
@@ -35,52 +38,61 @@ entity config.ftv_dwh_database << IF >> {
   --
   dwh_database_id : smallint
   dwh_database_name : nvarchar(128)
+  --
 }
 
 entity config.ftv_get_parameter_value << IF >> {
   --
-  Parameter_value__result_date : date
-  Parameter_value__result_datetime : datetime
-  Parameter_value__result_int : int
-  Parameter_value__result_nvarchar : nvarchar(4000)
+  Parameter_value_result : nvarchar(max)
+  Parameter_value_result_date : date
+  Parameter_value_result_datetime : datetime
+  Parameter_value_result_int : int
+  --
 }
 
 entity config.Parameter << U >> {
   * **Parameter_name** : varchar(100)
   * **sub_Parameter** : nvarchar(128)
   --
-  Parameter_default_value : sql_variant
+  Parameter_default_value : nvarchar(max)
   Parameter_desciption : nvarchar(1000)
-  Parameter_value : sql_variant
-  {abstract} Parameter_value__result_date : date
-  {abstract} Parameter_value__result_datetime : datetime
-  {abstract} Parameter_value__result_int : int
-  {abstract} Parameter_value__result_nvarchar : nvarchar(4000)
+  Parameter_value : nvarchar(max)
+  {abstract} Parameter_value_result : nvarchar(max)
+  {abstract} Parameter_value_result_date : date
+  {abstract} Parameter_value_result_datetime : datetime
+  {abstract} Parameter_value_result_int : int
+  --
 }
 
 entity config.usp_init_parameter << P >> {
+  --
   --
 }
 
 entity config.usp_parameter_set << P >> {
   --
+  --
 }
 
 entity docs.usp_AntoraExport_DocSnippet << P >> {
   --
+  --
 }
 
 entity docs.usp_AntoraExport_ObjectPageTemplate << P >> {
+  --
   --
 }
 
 entity property.PropertyName_RepoObject << V >> {
   **property_name** : nvarchar(128)
   --
+  --
 }
 
 entity property.PropertyName_RepoObjectColumn << V >> {
   * **property_name** : nvarchar(128)
+  --
   --
 }
 
@@ -88,31 +100,32 @@ entity property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition <
   * **RepoObjectColumn_guid** : uniqueidentifier
   * **property_name** : nvarchar(128)
   --
-  Inheritance_StringAggSeparatorSql : nvarchar(4000)
-  InheritanceDefinition : nvarchar(4000)
+  Inheritance_StringAggSeparatorSql : nvarchar(max)
+  InheritanceDefinition : nvarchar(max)
   InheritanceType : int
-  par_Inheritance_StringAggSeparatorSql : nvarchar(4000)
-  par_InheritanceDefinition : nvarchar(4000)
+  par_Inheritance_StringAggSeparatorSql : nvarchar(max)
+  par_InheritanceDefinition : nvarchar(max)
   par_InheritanceType : int
   property_value : nvarchar(max)
   * RepoObjectColumn_name : nvarchar(128)
   roc_Inheritance_StringAggSeparatorSql : nvarchar(4000)
   roc_InheritanceDefinition : nvarchar(4000)
   roc_InheritanceType : tinyint
-  sub_Inheritance_StringAggSeparatorSql : nvarchar(4000)
-  sub_InheritanceDefinition : nvarchar(4000)
+  sub_Inheritance_StringAggSeparatorSql : nvarchar(max)
+  sub_InheritanceDefinition : nvarchar(max)
   sub_InheritanceType : int
+  --
 }
 
 entity property.RepoObjectProperty_InheritanceType_InheritanceDefinition << V >> {
   * **RepoObject_guid** : uniqueidentifier
   **property_name** : nvarchar(128)
   --
-  Inheritance_StringAggSeparatorSql : nvarchar(4000)
-  InheritanceDefinition : nvarchar(4000)
+  Inheritance_StringAggSeparatorSql : nvarchar(max)
+  InheritanceDefinition : nvarchar(max)
   InheritanceType : int
-  par_Inheritance_StringAggSeparatorSql : nvarchar(4000)
-  par_InheritanceDefintion : nvarchar(4000)
+  par_Inheritance_StringAggSeparatorSql : nvarchar(max)
+  par_InheritanceDefintion : nvarchar(max)
   par_InheritanceType : int
   property_value : nvarchar(max)
   * RepoObject_fullname : nvarchar(261)
@@ -120,12 +133,14 @@ entity property.RepoObjectProperty_InheritanceType_InheritanceDefinition << V >>
   ro_Inheritance_StringAggSeparatorSql : nvarchar(4000)
   ro_InheritanceDefinition : nvarchar(4000)
   ro_InheritanceType : tinyint
-  sub_Inheritance_StringAggSeparatorSql : nvarchar(4000)
-  sub_InheritanceDefintion : nvarchar(4000)
+  sub_Inheritance_StringAggSeparatorSql : nvarchar(max)
+  sub_InheritanceDefintion : nvarchar(max)
   sub_InheritanceType : int
+  --
 }
 
 entity repo.usp_persistence_set << P >> {
+  --
   --
 }
 
@@ -142,23 +157,23 @@ config.Parameter <.. property.RepoObjectProperty_InheritanceType_InheritanceDefi
 config.Parameter <.. property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition
 config.Parameter <.. docs.usp_AntoraExport_ObjectPageTemplate
 config.Parameter <.. docs.usp_AntoraExport_DocSnippet
-config.Parameter::Parameter_default_value <-- config.Parameter::Parameter_value__result_nvarchar
-config.Parameter::Parameter_default_value <-- config.Parameter::Parameter_value__result_int
-config.Parameter::Parameter_default_value <-- config.Parameter::Parameter_value__result_date
-config.Parameter::Parameter_default_value <-- config.Parameter::Parameter_value__result_datetime
-config.Parameter::Parameter_value <-- config.Parameter::Parameter_value__result_nvarchar
-config.Parameter::Parameter_value <-- config.Parameter::Parameter_value__result_int
-config.Parameter::Parameter_value <-- config.Parameter::Parameter_value__result_date
-config.Parameter::Parameter_value <-- config.Parameter::Parameter_value__result_datetime
-config.Parameter::Parameter_value__result_int <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::sub_InheritanceType
-config.Parameter::Parameter_value__result_int <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::par_InheritanceType
-config.Parameter::Parameter_value__result_int <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::sub_InheritanceType
-config.Parameter::Parameter_value__result_int <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::par_InheritanceType
-config.Parameter::Parameter_value__result_nvarchar <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::sub_InheritanceDefintion
-config.Parameter::Parameter_value__result_nvarchar <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::par_InheritanceDefintion
-config.Parameter::Parameter_value__result_nvarchar <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::sub_Inheritance_StringAggSeparatorSql
-config.Parameter::Parameter_value__result_nvarchar <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::par_Inheritance_StringAggSeparatorSql
-config.Parameter::Parameter_value__result_nvarchar <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::sub_InheritanceDefinition
-config.Parameter::Parameter_value__result_nvarchar <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::par_InheritanceDefinition
-config.Parameter::Parameter_value__result_nvarchar <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::sub_Inheritance_StringAggSeparatorSql
-config.Parameter::Parameter_value__result_nvarchar <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::par_Inheritance_StringAggSeparatorSql
+config.Parameter::Parameter_default_value <-- config.Parameter::Parameter_value_result
+config.Parameter::Parameter_default_value <-- config.Parameter::Parameter_value_result_int
+config.Parameter::Parameter_default_value <-- config.Parameter::Parameter_value_result_date
+config.Parameter::Parameter_default_value <-- config.Parameter::Parameter_value_result_datetime
+config.Parameter::Parameter_value <-- config.Parameter::Parameter_value_result
+config.Parameter::Parameter_value <-- config.Parameter::Parameter_value_result_int
+config.Parameter::Parameter_value <-- config.Parameter::Parameter_value_result_date
+config.Parameter::Parameter_value <-- config.Parameter::Parameter_value_result_datetime
+config.Parameter::Parameter_value_result <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::sub_InheritanceDefintion
+config.Parameter::Parameter_value_result <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::par_InheritanceDefintion
+config.Parameter::Parameter_value_result <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::sub_Inheritance_StringAggSeparatorSql
+config.Parameter::Parameter_value_result <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::par_Inheritance_StringAggSeparatorSql
+config.Parameter::Parameter_value_result <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::sub_InheritanceDefinition
+config.Parameter::Parameter_value_result <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::par_InheritanceDefinition
+config.Parameter::Parameter_value_result <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::sub_Inheritance_StringAggSeparatorSql
+config.Parameter::Parameter_value_result <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::par_Inheritance_StringAggSeparatorSql
+config.Parameter::Parameter_value_result_int <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::sub_InheritanceType
+config.Parameter::Parameter_value_result_int <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::par_InheritanceType
+config.Parameter::Parameter_value_result_int <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::sub_InheritanceType
+config.Parameter::Parameter_value_result_int <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::par_InheritanceType

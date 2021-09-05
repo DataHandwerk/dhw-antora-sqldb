@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -31,8 +32,10 @@ entity repo.RepoObject << U >> {
   Inheritance_StringAggSeparatorSql : nvarchar(4000)
   InheritanceDefinition : nvarchar(4000)
   InheritanceType : tinyint
+  * is_DocsExclude : bit
   is_repo_managed : bit
   is_required_ObjectMerge : bit
+  * is_ssas : bit
   is_SysObject_missing : bit
   * modify_dt : datetime
   pk_index_guid : uniqueidentifier
@@ -58,7 +61,9 @@ entity repo.RepoObject << U >> {
   * {static} SysObject_fullname : nvarchar(261)
   * {static} SysObject_fullname2 : nvarchar(257)
   * {abstract} SysObject_query_sql : nvarchar(406)
+  * {static} usp_persistence_fullname2 : nvarchar(269)
   * {static} usp_persistence_name : nvarchar(140)
+  --
 }
 
 entity workflow.ProcedureDependency << U >> {
@@ -68,7 +73,10 @@ entity workflow.ProcedureDependency << U >> {
   * is_active : bit
   * is_PersistenceDependency : bit
   * referenced_Procedure_RepoObject_guid : uniqueidentifier
+  referenced_RepoObject_guid : uniqueidentifier
   * referencing_Procedure_RepoObject_guid : uniqueidentifier
+  referencing_RepoObject_guid : uniqueidentifier
+  --
 }
 
 entity workflow.ProcedureDependency_gross << V >> {
@@ -85,6 +93,7 @@ entity workflow.ProcedureDependency_gross << V >> {
   * referencing_RepoObject_fullname : nvarchar(261)
   * referencing_RepoObject_fullname2 : nvarchar(257)
   * referencing_RepoObject_schema_name : nvarchar(128)
+  --
 }
 
 repo.RepoObject <.. workflow.ProcedureDependency_gross

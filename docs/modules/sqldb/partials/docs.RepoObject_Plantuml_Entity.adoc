@@ -5,6 +5,8 @@
 // tag::existing_properties[]
 :ExistsProperty--antorareferencedlist:
 :ExistsProperty--antorareferencinglist:
+:ExistsProperty--is_repo_managed:
+:ExistsProperty--is_ssas:
 :ExistsProperty--pk_index_guid:
 :ExistsProperty--pk_indexpatterncolumndatatype:
 :ExistsProperty--pk_indexpatterncolumnname:
@@ -37,19 +39,19 @@ view
 == SysObject_id
 
 // tag::SysObject_id[]
-1682821057
+1684917074
 // end::SysObject_id[]
 
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-08-03 14:46:31
+2021-09-05 10:47:52
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[[column-RepoObject_guid]]
+[#column-RepoObject_guid]
 === RepoObject_guid
 
 [cols="d,m,m,m,m,d"]
@@ -73,7 +75,36 @@ view
 --
 
 
-[[column-RepoObject_Puml]]
+[#column-RepoObject_fullname2]
+=== RepoObject_fullname2
+
+[cols="d,m,m,m,m,d"]
+|===
+|
+|RepoObject_fullname2
+|nvarchar(257)
+|NOT NULL
+|
+|
+|===
+
+.Description
+--
+(concat([RepoObject_schema_name],'.',[RepoObject_name]))
+--
+
+.Referenced Columns
+--
+* xref:docs.RepoObject_OutputFilter.adoc#column-RepoObject_fullname2[+docs.RepoObject_OutputFilter.RepoObject_fullname2+]
+--
+
+.Referencing Columns
+--
+* xref:docs.RepoObject_Plantuml_Entity_T.adoc#column-RepoObject_fullname2[+docs.RepoObject_Plantuml_Entity_T.RepoObject_fullname2+]
+--
+
+
+[#column-RepoObject_Puml]
 === RepoObject_Puml
 
 [cols="d,m,m,m,m,d"]
@@ -92,7 +123,7 @@ view
 --
 
 
-[[column-RepoObject_PumlOnlyIndex]]
+[#column-RepoObject_PumlOnlyIndex]
 === RepoObject_PumlOnlyIndex
 
 [cols="d,m,m,m,m,d"]
@@ -111,7 +142,7 @@ view
 --
 
 
-[[column-RepoObject_PumlOnlyPK]]
+[#column-RepoObject_PumlOnlyPK]
 === RepoObject_PumlOnlyPK
 
 [cols="d,m,m,m,m,d"]
@@ -130,6 +161,68 @@ view
 --
 
 
+[#column-RepoObject_PumlOnlyPkOrIndex]
+=== RepoObject_PumlOnlyPkOrIndex
+
+[cols="d,m,m,m,m,d"]
+|===
+|
+|RepoObject_PumlOnlyPkOrIndex
+|nvarchar(max)
+|NOT NULL
+|
+|
+|===
+
+.Referencing Columns
+--
+* xref:docs.RepoObject_Plantuml_Entity_T.adoc#column-RepoObject_PumlOnlyPkOrIndex[+docs.RepoObject_Plantuml_Entity_T.RepoObject_PumlOnlyPkOrIndex+]
+--
+
+
+[#column-RepoObject_PumlOnlyPkOrNotHidden]
+=== RepoObject_PumlOnlyPkOrNotHidden
+
+[cols="d,m,m,m,m,d"]
+|===
+|
+|RepoObject_PumlOnlyPkOrNotHidden
+|nvarchar(max)
+|NOT NULL
+|
+|
+|===
+
+.Referencing Columns
+--
+* xref:docs.RepoObject_Plantuml_Entity_T.adoc#column-RepoObject_PumlOnlyPkOrNotHidden[+docs.RepoObject_Plantuml_Entity_T.RepoObject_PumlOnlyPkOrNotHidden+]
+--
+
+
+[#column-RepoObject_schema_name]
+=== RepoObject_schema_name
+
+[cols="d,m,m,m,m,d"]
+|===
+|
+|RepoObject_schema_name
+|nvarchar(128)
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:docs.RepoObject_OutputFilter.adoc#column-RepoObject_schema_name[+docs.RepoObject_OutputFilter.RepoObject_schema_name+]
+--
+
+.Referencing Columns
+--
+* xref:docs.RepoObject_Plantuml_Entity_T.adoc#column-RepoObject_schema_name[+docs.RepoObject_Plantuml_Entity_T.RepoObject_schema_name+]
+--
+
+
 // end::AntoraColumnDetails[]
 
 == AntoraPkColumnTableRows
@@ -145,11 +238,22 @@ view
 
 
 
+
+
+
+
 // end::AntoraPkColumnTableRows[]
 
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
+
+|
+|<<column-RepoObject_fullname2>>
+|nvarchar(257)
+|NOT NULL
+|
+|
 
 |
 |<<column-RepoObject_Puml>>
@@ -172,21 +276,53 @@ view
 |
 |
 
+|
+|<<column-RepoObject_PumlOnlyPkOrIndex>>
+|nvarchar(max)
+|NOT NULL
+|
+|
+
+|
+|<<column-RepoObject_PumlOnlyPkOrNotHidden>>
+|nvarchar(max)
+|NOT NULL
+|
+|
+
+|
+|<<column-RepoObject_schema_name>>
+|nvarchar(128)
+|NOT NULL
+|
+|
+
 // end::AntoraNonPkColumnTableRows[]
 
 == AntoraIndexList
 
 // tag::AntoraIndexList[]
 
-[[index-PK_RepoObject_Plantuml_Entity]]
+[#index-PK_RepoObject_Plantuml_Entity]
 === PK_RepoObject_Plantuml_Entity
 
-* IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_repoobject_guid[RepoObject_guid]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_repoobject_guid[RepoObject_guid]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
 --
 * PK, Unique, Real: 1, 1, 0
+
+
+[#index-idx_RepoObject_Plantuml_Entity_2]
+=== idx_RepoObject_Plantuml_Entity++__++2
+
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_schema_name[schema_name]
++
+--
+* <<column-RepoObject_schema_name>>; nvarchar(128)
+--
+* PK, Unique, Real: 0, 0, 0
 
 // end::AntoraIndexList[]
 
@@ -196,23 +332,29 @@ view
 
 // end::AntoraParameterList[]
 
-== AdocUspSteps
+== Other tags
+
+source: property.RepoObjectProperty_cross As rop_cross
+
+
+=== AdocUspSteps
 
 // tag::adocuspsteps[]
 
 // end::adocuspsteps[]
 
 
-== AntoraReferencedList
+=== AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:docs.RepoObject_ColumnList.adoc[]
+* xref:docs.fs_cleanStringForPuml.adoc[]
+* xref:docs.RepoObject_ColumnList_T.adoc[]
 * xref:docs.RepoObject_IndexList_T.adoc[]
 * xref:docs.RepoObject_OutputFilter.adoc[]
 // end::antorareferencedlist[]
 
 
-== AntoraReferencingList
+=== AntoraReferencingList
 
 // tag::antorareferencinglist[]
 * xref:docs.RepoObject_Plantuml_Entity_T.adoc[]
@@ -220,246 +362,261 @@ view
 // end::antorareferencinglist[]
 
 
-== exampleUsage
+=== exampleUsage
 
 // tag::exampleusage[]
 
 // end::exampleusage[]
 
 
-== exampleUsage_2
+=== exampleUsage_2
 
 // tag::exampleusage_2[]
 
 // end::exampleusage_2[]
 
 
-== exampleUsage_3
+=== exampleUsage_3
 
 // tag::exampleusage_3[]
 
 // end::exampleusage_3[]
 
 
-== exampleUsage_4
+=== exampleUsage_4
 
 // tag::exampleusage_4[]
 
 // end::exampleusage_4[]
 
 
-== exampleUsage_5
+=== exampleUsage_5
 
 // tag::exampleusage_5[]
 
 // end::exampleusage_5[]
 
 
-== exampleWrong_Usage
+=== exampleWrong_Usage
 
 // tag::examplewrong_usage[]
 
 // end::examplewrong_usage[]
 
 
-== has_execution_plan_issue
+=== has_execution_plan_issue
 
 // tag::has_execution_plan_issue[]
 
 // end::has_execution_plan_issue[]
 
 
-== has_get_referenced_issue
+=== has_get_referenced_issue
 
 // tag::has_get_referenced_issue[]
 
 // end::has_get_referenced_issue[]
 
 
-== has_history
+=== has_history
 
 // tag::has_history[]
 
 // end::has_history[]
 
 
-== has_history_columns
+=== has_history_columns
 
 // tag::has_history_columns[]
 
 // end::has_history_columns[]
 
 
-== is_persistence
+=== is_persistence
 
 // tag::is_persistence[]
 
 // end::is_persistence[]
 
 
-== is_persistence_check_duplicate_per_pk
+=== is_persistence_check_duplicate_per_pk
 
 // tag::is_persistence_check_duplicate_per_pk[]
 
 // end::is_persistence_check_duplicate_per_pk[]
 
 
-== is_persistence_check_for_empty_source
+=== is_persistence_check_for_empty_source
 
 // tag::is_persistence_check_for_empty_source[]
 
 // end::is_persistence_check_for_empty_source[]
 
 
-== is_persistence_delete_changed
+=== is_persistence_delete_changed
 
 // tag::is_persistence_delete_changed[]
 
 // end::is_persistence_delete_changed[]
 
 
-== is_persistence_delete_missing
+=== is_persistence_delete_missing
 
 // tag::is_persistence_delete_missing[]
 
 // end::is_persistence_delete_missing[]
 
 
-== is_persistence_insert
+=== is_persistence_insert
 
 // tag::is_persistence_insert[]
 
 // end::is_persistence_insert[]
 
 
-== is_persistence_truncate
+=== is_persistence_truncate
 
 // tag::is_persistence_truncate[]
 
 // end::is_persistence_truncate[]
 
 
-== is_persistence_update_changed
+=== is_persistence_update_changed
 
 // tag::is_persistence_update_changed[]
 
 // end::is_persistence_update_changed[]
 
 
-== is_repo_managed
+=== is_repo_managed
 
 // tag::is_repo_managed[]
-
+0
 // end::is_repo_managed[]
 
 
-== microsoft_database_tools_support
+=== is_ssas
+
+// tag::is_ssas[]
+0
+// end::is_ssas[]
+
+
+=== microsoft_database_tools_support
 
 // tag::microsoft_database_tools_support[]
 
 // end::microsoft_database_tools_support[]
 
 
-== MS_Description
+=== MS_Description
 
 // tag::ms_description[]
 
 // end::ms_description[]
 
 
-== persistence_source_RepoObject_fullname
+=== persistence_source_RepoObject_fullname
 
 // tag::persistence_source_repoobject_fullname[]
 
 // end::persistence_source_repoobject_fullname[]
 
 
-== persistence_source_RepoObject_fullname2
+=== persistence_source_RepoObject_fullname2
 
 // tag::persistence_source_repoobject_fullname2[]
 
 // end::persistence_source_repoobject_fullname2[]
 
 
-== persistence_source_RepoObject_guid
+=== persistence_source_RepoObject_guid
 
 // tag::persistence_source_repoobject_guid[]
 
 // end::persistence_source_repoobject_guid[]
 
 
-== persistence_source_RepoObject_xref
+=== persistence_source_RepoObject_xref
 
 // tag::persistence_source_repoobject_xref[]
 
 // end::persistence_source_repoobject_xref[]
 
 
-== pk_index_guid
+=== pk_index_guid
 
 // tag::pk_index_guid[]
 0C899DB0-6298-EB11-84F4-A81E8446D5B0
 // end::pk_index_guid[]
 
 
-== pk_IndexPatternColumnDatatype
+=== pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
 uniqueidentifier
 // end::pk_indexpatterncolumndatatype[]
 
 
-== pk_IndexPatternColumnName
+=== pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
 RepoObject_guid
 // end::pk_indexpatterncolumnname[]
 
 
-== pk_IndexSemanticGroup
+=== pk_IndexSemanticGroup
 
 // tag::pk_indexsemanticgroup[]
 RepoObject_guid
 // end::pk_indexsemanticgroup[]
 
 
-== ReferencedObjectList
+=== ReferencedObjectList
 
 // tag::referencedobjectlist[]
-* [docs].[RepoObject_ColumnList]
+* [docs].[fs_cleanStringForPuml]
+* [docs].[RepoObject_ColumnList_T]
 * [docs].[RepoObject_IndexList_T]
 * [docs].[RepoObject_OutputFilter]
 // end::referencedobjectlist[]
 
 
-== usp_persistence_RepoObject_guid
+=== usp_persistence_RepoObject_guid
 
 // tag::usp_persistence_repoobject_guid[]
 
 // end::usp_persistence_repoobject_guid[]
 
 
-== UspExamples
+=== UspExamples
 
 // tag::uspexamples[]
 
 // end::uspexamples[]
 
 
-== UspParameters
+=== UspParameters
 
 // tag::uspparameters[]
 
 // end::uspparameters[]
 
+== Boolean Attributes
+
+source: property.RepoObjectProperty WHERE property_int = 1
+
+// tag::boolean_attributes[]
+
+// end::boolean_attributes[]
 
 == sql_modules_definition
 
 // tag::sql_modules_definition[]
+[%collapsible]
+=======
 [source,sql]
 ----
-
-
 
 /*
 PlantUML definition per RepoObject
@@ -468,59 +625,105 @@ to be used in composed PlantUML diagrams
 you need to persist:
 EXEC [docs].[usp_PERSIST_RepoObject_Plantuml_Entity_T]
 */
-CREATE View [docs].[RepoObject_Plantuml_Entity]
+CREATE View docs.RepoObject_Plantuml_Entity
 As
 Select
     ro.RepoObject_guid
-  , RepoObject_Puml          = Concat (
-                                          'entity '
-                                        , ro.RepoObject_fullname2
-                                        , ' << ' + Trim ( ro.SysObject_type ) + ' >>'
-                                        , ' {'
-                                        , Char ( 13 ) + Char ( 10 )
-                                        , collist.PlantumlPkEntityColumns
-                                        , '  --'
-                                        , Char ( 13 ) + Char ( 10 )
-                                        , collist.PlantumlNonPkEntityColumns
-                                        , '}'
-                                        , Char ( 13 ) + Char ( 10 )
-                                      )
-  , RepoObject_PumlOnlyPK    = Concat (
-                                          'entity '
-                                        , ro.RepoObject_fullname2
-                                        , ' << ' + Trim ( ro.SysObject_type ) + ' >>'
-                                        , ' {'
-                                        , Char ( 13 ) + Char ( 10 )
-                                        , collist.PlantumlPkEntityColumns
-                                        , '  --'
-                                        , Char ( 13 ) + Char ( 10 )
-                                        , '}'
-                                        , Char ( 13 ) + Char ( 10 )
-                                      )
-  , RepoObject_PumlOnlyIndex = Concat (
-                                          'entity '
-                                        , ro.RepoObject_fullname2
-                                        , ' << ' + Trim ( ro.SysObject_type ) + ' >>'
-                                        , ' {'
-                                        , Char ( 13 ) + Char ( 10 )
-                                        , indexlist.PumlIndexList
-                                        , Char ( 13 ) + Char ( 10 )
-                                        , '}'
-                                        , Char ( 13 ) + Char ( 10 )
-                                      )
+  , RepoObject_Puml                  =
+  --
+  Concat (
+             'entity '
+           , docs.fs_cleanStringForPuml ( ro.RepoObject_fullname2 )
+           , ' << ' + Trim ( ro.SysObject_type ) + ' >>'
+           , ' {'
+           , Char ( 13 ) + Char ( 10 )
+           , collist.PlantumlPkEntityColumns
+           , '  --'
+           , Char ( 13 ) + Char ( 10 )
+           , collist.PlantumlNonPkEntityColumns
+           , '  --'
+           , Char ( 13 ) + Char ( 10 )
+           , collist.PlantumlNonPkHiddenEntityColumns
+           , '}'
+           , Char ( 13 ) + Char ( 10 )
+         )
+  , RepoObject_PumlOnlyPK            =
+  --
+  Concat (
+             'entity '
+           , docs.fs_cleanStringForPuml ( ro.RepoObject_fullname2 )
+           , ' << ' + Trim ( ro.SysObject_type ) + ' >>'
+           , ' {'
+           , Char ( 13 ) + Char ( 10 )
+           , collist.PlantumlPkEntityColumns
+           , '  --'
+           , Char ( 13 ) + Char ( 10 )
+           , '}'
+           , Char ( 13 ) + Char ( 10 )
+         )
+  , RepoObject_PumlOnlyPkOrNotHidden =
+  --
+  Concat (
+             'entity '
+           , docs.fs_cleanStringForPuml ( ro.RepoObject_fullname2 )
+           , ' << ' + Trim ( ro.SysObject_type ) + ' >>'
+           , ' {'
+           , Char ( 13 ) + Char ( 10 )
+           , collist.PlantumlPkEntityColumns
+           , '  --'
+           , Char ( 13 ) + Char ( 10 )
+           , collist.PlantumlNonPkEntityColumns
+           , '  --'
+           , Char ( 13 ) + Char ( 10 )
+           , '}'
+           , Char ( 13 ) + Char ( 10 )
+         )
+  , RepoObject_PumlOnlyPkOrIndex     =
+  --
+  Concat (
+             'entity '
+           , docs.fs_cleanStringForPuml ( ro.RepoObject_fullname2 )
+           , ' << ' + Trim ( ro.SysObject_type ) + ' >>'
+           , ' {'
+           , Char ( 13 ) + Char ( 10 )
+           , collist.PlantumlPkEntityColumns
+           , '  --'
+           , Char ( 13 ) + Char ( 10 )
+           , collist.PlantumlNonPkIndexColumns
+           , '  --'
+           , Char ( 13 ) + Char ( 10 )
+           , '}'
+           , Char ( 13 ) + Char ( 10 )
+         )
+  , RepoObject_PumlOnlyIndex         =
+  --
+  Concat (
+             'entity '
+           , docs.fs_cleanStringForPuml ( ro.RepoObject_fullname2 )
+           , ' << ' + Trim ( ro.SysObject_type ) + ' >>'
+           , ' {'
+           , Char ( 13 ) + Char ( 10 )
+           , indexlist.PumlIndexList
+           , Char ( 13 ) + Char ( 10 )
+           , '}'
+           , Char ( 13 ) + Char ( 10 )
+         )
+  , ro.RepoObject_fullname2
+  , ro.RepoObject_schema_name
 From
-    docs.RepoObject_OutputFilter    As ro
+    docs.RepoObject_OutputFilter     As ro
     Left Join
-        docs.RepoObject_ColumnList  collist
+        docs.RepoObject_ColumnList_T As collist
             On
             collist.RepoObject_guid   = ro.RepoObject_guid
 
     Left Join
-        docs.RepoObject_IndexList_T indexlist
+        docs.RepoObject_IndexList_T  As indexlist
             On
-            indexlist.RepoObject_guid = ro.RepoObject_guid;
+            indexlist.RepoObject_guid = ro.RepoObject_guid
 
 ----
+=======
 // end::sql_modules_definition[]
 
 

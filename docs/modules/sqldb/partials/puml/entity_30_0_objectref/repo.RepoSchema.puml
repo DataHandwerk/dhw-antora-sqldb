@@ -1,4 +1,5 @@
 'Left to right direction
+top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -28,4 +29,45 @@ entity repo.RepoSchema << U >> {
   --
 }
 
+entity repo.RepoSchema_ssas_src << V >> {
+  * **RepoSchema_name** : nvarchar(128)
+  --
+}
 
+entity repo.RepoSchema_ssas_tgt << V >> {
+  * **RepoSchema_name** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json << U >> {
+  * **databasename** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_10 << V >> {
+  * **databasename** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_20 << V >> {
+  * **databasename** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_201_descriptions_multiline << V >> {
+  --
+}
+
+entity ssas.model_json_2011_descriptions_StrAgg << V >> {
+  --
+}
+
+repo.RepoSchema <.. repo.RepoSchema_ssas_tgt
+repo.RepoSchema_ssas_src <.. repo.RepoSchema_ssas_tgt
+repo.RepoSchema_ssas_tgt <.. repo.RepoSchema
+ssas.model_json <.. ssas.model_json_10
+ssas.model_json_10 <.. ssas.model_json_20
+ssas.model_json_20 <.. repo.RepoSchema_ssas_src
+ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
+ssas.model_json_201_descriptions_multiline <.. ssas.model_json_2011_descriptions_StrAgg
+ssas.model_json_2011_descriptions_StrAgg <.. repo.RepoSchema_ssas_src

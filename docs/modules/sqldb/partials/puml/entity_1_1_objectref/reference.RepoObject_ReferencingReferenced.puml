@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -59,16 +60,21 @@ entity reference.RepoObject_ReferencingReferenced << V >> {
   --
 }
 
+entity reference.usp_RepoObject_ReferenceTree_insert << P >> {
+  --
+}
+
 entity repo.RepoObject_gross << V >> {
   * **RepoObject_guid** : uniqueidentifier
   --
 }
 
 reference.RepoObject_reference_T <.. reference.RepoObject_ReferencingReferenced
+reference.RepoObject_ReferencingReferenced <.. reference.ftv_RepoObject_ReferenceTree_via_fullname
 reference.RepoObject_ReferencingReferenced <.. repo.RepoObject_gross
 reference.RepoObject_ReferencingReferenced <.. reference.ftv_RepoObject_ReferenceTree
 reference.RepoObject_ReferencingReferenced <.. reference.RepoObject_ReferencedList
-reference.RepoObject_ReferencingReferenced <.. reference.ftv_RepoObject_ReferenceTree_via_fullname
 reference.RepoObject_ReferencingReferenced <.. reference.RepoObject_ReferencingList
 reference.RepoObject_ReferencingReferenced <.. reference.ftv_RepoObject_ReferenceTree_referenced
 reference.RepoObject_ReferencingReferenced <.. reference.ftv_RepoObject_ReferenceTree_referencing
+reference.RepoObject_ReferencingReferenced <.. reference.usp_RepoObject_ReferenceTree_insert

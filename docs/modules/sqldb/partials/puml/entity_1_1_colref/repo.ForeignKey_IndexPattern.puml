@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -49,6 +50,7 @@ entity repo.ForeignKey_Indexes << V >> {
   referencing_SysObject_name : nvarchar(128)
   referencing_SysObject_schema_name : nvarchar(128)
   update_referential_action : tinyint
+  --
 }
 
 entity repo.ForeignKey_IndexPattern << V >> {
@@ -63,6 +65,7 @@ entity repo.ForeignKey_IndexPattern << V >> {
   referencing_IndexPatternColumnName : nvarchar(4000)
   referencing_RepoObject_guid : uniqueidentifier
   update_referential_action : tinyint
+  --
 }
 
 entity repo_sys.ForeignKey << V >> {
@@ -94,6 +97,7 @@ entity repo_sys.ForeignKey << V >> {
   type_desc : nvarchar(60)
   update_referential_action : tinyint
   update_referential_action_desc : nvarchar(60)
+  --
 }
 
 entity repo_sys.ForeignKeyColumn << V >> {
@@ -119,6 +123,7 @@ entity repo_sys.ForeignKeyColumn << V >> {
   referencing_RepoObjectColumn_guid : uniqueidentifier
   referencing_schema_name : nvarchar(128)
   referencing_SysObject_fullname : nvarchar(261)
+  --
 }
 
 repo.ForeignKey_IndexPattern <.. repo.ForeignKey_Indexes
@@ -133,5 +138,7 @@ repo.ForeignKey_IndexPattern::referenced_RepoObject_guid <-- repo.ForeignKey_Ind
 repo.ForeignKey_IndexPattern::referencing_IndexPatternColumnName <-- repo.ForeignKey_Indexes::referencing_IndexPatternColumnName
 repo.ForeignKey_IndexPattern::referencing_RepoObject_guid <-- repo.ForeignKey_Indexes::referencing_RepoObject_guid
 repo.ForeignKey_IndexPattern::update_referential_action <-- repo.ForeignKey_Indexes::update_referential_action
+repo_sys.ForeignKey::delete_referential_action <-- repo.ForeignKey_IndexPattern::delete_referential_action
 repo_sys.ForeignKey::ForeignKey_guid <-- repo.ForeignKey_IndexPattern::ForeignKey_guid
 repo_sys.ForeignKey::object_id <-- repo.ForeignKey_IndexPattern::constraint_object_id
+repo_sys.ForeignKeyColumn::ForeignKey_name <-- repo.ForeignKey_IndexPattern::ForeignKey_name

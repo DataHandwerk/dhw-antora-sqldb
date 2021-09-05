@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -71,12 +72,17 @@ entity uspgenerator.GeneratorUsp_SqlUsp << V >> {
   --
 }
 
+entity workflow.Workflow_SqlUsp << V >> {
+  --
+}
+
+config.ftv_dwh_database <.. workflow.Workflow_SqlUsp
+config.ftv_dwh_database <.. reference.usp_update_Referencing_Count
+config.ftv_dwh_database <.. repo.usp_update_Referencing_Count
 config.ftv_dwh_database <.. uspgenerator.GeneratorUsp_SqlUsp
 config.ftv_dwh_database <.. repo_sys.ExtendedProperties
 config.ftv_dwh_database <.. repo_sys.SysColumn
 config.ftv_dwh_database <.. repo_sys.sql_expression_dependencies
 config.ftv_dwh_database <.. reference.RepoObjectColumn_reference_QueryPlan
 config.ftv_dwh_database <.. repo.RepoObject_SqlCreateTable
-config.ftv_dwh_database <.. reference.usp_update_Referencing_Count
-config.ftv_dwh_database <.. repo.usp_update_Referencing_Count
 config.Parameter <.. config.ftv_dwh_database

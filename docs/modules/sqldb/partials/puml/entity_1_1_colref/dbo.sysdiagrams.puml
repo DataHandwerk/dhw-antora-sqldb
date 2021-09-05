@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -25,29 +26,36 @@ skinparam class {
 
 entity dbo.sp_alterdiagram << P >> {
   --
+  --
 }
 
 entity dbo.sp_creatediagram << P >> {
+  --
   --
 }
 
 entity dbo.sp_dropdiagram << P >> {
   --
+  --
 }
 
 entity dbo.sp_helpdiagramdefinition << P >> {
+  --
   --
 }
 
 entity dbo.sp_helpdiagrams << P >> {
   --
+  --
 }
 
 entity dbo.sp_renamediagram << P >> {
   --
+  --
 }
 
 entity dbo.sp_upgraddiagrams << P >> {
+  --
   --
 }
 
@@ -58,13 +66,14 @@ entity dbo.sysdiagrams << U >> {
   * name : sysname
   * principal_id : int
   version : int
+  --
 }
 
 .sysdiagrams <.. dbo.sp_helpdiagrams
+dbo.sysdiagrams <.. dbo.sp_upgraddiagrams
 dbo.sysdiagrams <.. dbo.sp_helpdiagramdefinition
 dbo.sysdiagrams <.. dbo.sp_creatediagram
-dbo.sysdiagrams <.. dbo.sp_upgraddiagrams
-dbo.sysdiagrams <.. dbo.sp_dropdiagram
 dbo.sysdiagrams <.. dbo.sp_renamediagram
 dbo.sysdiagrams <.. dbo.sp_alterdiagram
+dbo.sysdiagrams <.. dbo.sp_dropdiagram
 

@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -31,28 +32,30 @@ entity docs.fs_cleanStringForLabel << FN >> {
   --
 }
 
-entity docs.RepoObject_Adoc << V >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity docs.fs_cleanStringForPuml << FN >> {
   --
 }
 
 entity docs.RepoObject_ColumnList << V >> {
+  --
+}
+
+entity docs.RepoObject_ColumnList_T << U >> {
   * **RepoObject_guid** : uniqueidentifier
   --
 }
 
-entity docs.RepoObject_Plantuml_Entity << V >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity docs.usp_PERSIST_RepoObject_ColumnList_T << P >> {
   --
 }
 
-entity repo.RepoObjectColumn_gross << V >> {
-  * **RepoObjectColumn_guid** : uniqueidentifier
+entity repo.RepoObjectColumn_gross2 << V >> {
   --
 }
 
 docs.fs_cleanStringForAnchorId <.. docs.RepoObject_ColumnList
 docs.fs_cleanStringForLabel <.. docs.RepoObject_ColumnList
-docs.RepoObject_ColumnList <.. docs.RepoObject_Adoc
-docs.RepoObject_ColumnList <.. docs.RepoObject_Plantuml_Entity
-repo.RepoObjectColumn_gross <.. docs.RepoObject_ColumnList
+docs.fs_cleanStringForPuml <.. docs.RepoObject_ColumnList
+docs.RepoObject_ColumnList <.. docs.RepoObject_ColumnList_T
+docs.RepoObject_ColumnList <.. docs.usp_PERSIST_RepoObject_ColumnList_T
+repo.RepoObjectColumn_gross2 <.. docs.RepoObject_ColumnList

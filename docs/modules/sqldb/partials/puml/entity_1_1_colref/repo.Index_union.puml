@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -30,8 +31,8 @@ entity repo.Index_gross << V >> {
   ColumnList : nvarchar(max)
   ConstraintColumnList : nvarchar(max)
   DbmlIndexColumnList : nvarchar(max)
-  index_name : nvarchar(128)
-  * index_type : tinyint
+  index_name : nvarchar(450)
+  index_type : tinyint
   IndexPatternColumnDatatype : nvarchar(4000)
   IndexPatternColumnName : nvarchar(4000)
   IndexSemanticGroup : nvarchar(512)
@@ -55,6 +56,7 @@ entity repo.Index_gross << V >> {
   * SysObject_name : nvarchar(128)
   * SysObject_schema_name : nvarchar(128)
   SysObject_type : char(2)
+  --
 }
 
 entity repo.Index_Settings_ForUpdate << V >> {
@@ -67,6 +69,7 @@ entity repo.Index_Settings_ForUpdate << V >> {
   * is_create_constraint : bit
   parent_RepoObject_guid : uniqueidentifier
   RepoObject_fullname : nvarchar(261)
+  --
 }
 
 entity repo.Index_SqlConstraint_PkUq << V >> {
@@ -74,13 +77,36 @@ entity repo.Index_SqlConstraint_PkUq << V >> {
   --
   parent_RepoObject_guid : uniqueidentifier
   * SqlConstraint : nvarchar(max)
+  --
+}
+
+entity repo.Index_ssas_IndexPatternColumnGuid << V >> {
+  --
+  * index_guid : uniqueidentifier
+  IndexPatternColumnGuid : varchar(8000)
+  parent_RepoObject_guid : uniqueidentifier
+  --
+}
+
+entity repo.Index_ssas_T << U >> {
+  * **databasename** : nvarchar(128)
+  **index_name** : nvarchar(450)
+  --
+  * ColumnName : nvarchar(128)
+  * index_guid : uniqueidentifier
+  * is_index_primary_key : bit
+  * is_index_unique : bit
+  * RepoObject_guid : uniqueidentifier
+  * TableID : numeric(20, 0)
+  * TableName : nvarchar(128)
+  --
 }
 
 entity repo.Index_union << V >> {
   **index_guid** : uniqueidentifier
   --
-  index_name : nvarchar(128)
-  * index_type : tinyint
+  index_name : nvarchar(450)
+  index_type : tinyint
   IndexPatternColumnGuid : varchar(8000)
   is_index_disabled : bit
   is_index_primary_key : bit
@@ -88,12 +114,14 @@ entity repo.Index_union << V >> {
   is_index_unique : bit
   parent_RepoObject_guid : uniqueidentifier
   referenced_index_guid : uniqueidentifier
+  --
 }
 
 entity repo.Index_unique_IndexPatternColumnGuid << V >> {
   --
   index_guid : uniqueidentifier
   IndexPatternColumnGuid : varchar(8000)
+  --
 }
 
 entity repo.Index_virtual << U >> {
@@ -108,6 +136,7 @@ entity repo.Index_virtual << U >> {
   * parent_RepoObject_guid : uniqueidentifier
   referenced_index_guid : uniqueidentifier
   RowNumberInReferencing : int
+  --
 }
 
 entity repo.Index_virtual_IndexPatternColumnGuid << V >> {
@@ -115,6 +144,7 @@ entity repo.Index_virtual_IndexPatternColumnGuid << V >> {
   --
   IndexPatternColumnGuid : varchar(8000)
   parent_RepoObject_guid : uniqueidentifier
+  --
 }
 
 entity repo.IndexReferencedReferencing << V >> {
@@ -125,9 +155,11 @@ entity repo.IndexReferencedReferencing << V >> {
   RowNumberInReferencing_Target : int
   source_index_guid : uniqueidentifier
   * source_index_type : tinyint
+  --
 }
 
 entity repo.usp_Index_finish << P >> {
+  --
   --
 }
 
@@ -146,8 +178,11 @@ entity repo_sys.Index_unique << V >> {
   parent_schema_name : nvarchar(128)
   parent_SysObject_fullname : nvarchar(261)
   parent_SysObject_name : nvarchar(128)
+  --
 }
 
+repo.Index_ssas_IndexPatternColumnGuid <.. repo.Index_union
+repo.Index_ssas_T <.. repo.Index_union
 repo.Index_union <.. repo.IndexReferencedReferencing
 repo.Index_union <.. repo.Index_SqlConstraint_PkUq
 repo.Index_union <.. repo.Index_gross

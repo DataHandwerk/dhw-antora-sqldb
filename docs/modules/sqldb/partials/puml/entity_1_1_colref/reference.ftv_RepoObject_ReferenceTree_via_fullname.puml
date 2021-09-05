@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -34,8 +35,9 @@ entity reference.ftv_RepoObject_ReferenceTree_via_fullname << IF >> {
   Referencing_fullname : nvarchar(261)
   Referencing_fullname2 : nvarchar(257)
   Referencing_guid : uniqueidentifier
-  Referencing_type : char(2)
+  Referencing_type : varchar(2)
   RepoObject_fullname : nvarchar(261)
+  --
 }
 
 entity reference.RepoObject_ReferencingReferenced << V >> {
@@ -48,6 +50,7 @@ entity reference.RepoObject_ReferencingReferenced << V >> {
   * Referencing_fullname : nvarchar(261)
   * Referencing_fullname2 : nvarchar(257)
   Referencing_type : varchar(2)
+  --
 }
 
 reference.RepoObject_ReferencingReferenced <.. reference.ftv_RepoObject_ReferenceTree_via_fullname

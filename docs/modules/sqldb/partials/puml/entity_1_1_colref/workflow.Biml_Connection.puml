@@ -1,0 +1,50 @@
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+}
+
+
+entity workflow.Biml_Connection << V >> {
+  --
+  ConnectionName_Biml : nvarchar(4000)
+  ConnectionString_Biml : nvarchar(max)
+  --
+}
+
+entity workflow.Biml_Project << V >> {
+  --
+  * Project_Biml : nvarchar(max)
+  --
+}
+
+entity workflow.Connection << U >> {
+  * **ConnectionName** : nvarchar(250)
+  --
+  ConnectionString : nvarchar(4000)
+  * is_active : bit
+  --
+}
+
+workflow.Biml_Connection <.. workflow.Biml_Project
+workflow.Connection <.. workflow.Biml_Connection
+

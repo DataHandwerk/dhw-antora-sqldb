@@ -24,11 +24,6 @@ skinparam class {
 }
 
 
-entity docs.RepoObject_ColumnList_T {
-  * **RepoObject_guid** : uniqueidentifier
-  --
-}
-
 entity docs.AntoraIndexSemanticgroup << V >> {
   **IndexSemanticGroup** : nvarchar(512)
   --
@@ -106,11 +101,15 @@ entity docs.RepoObject_Adoc << V >> {
 }
 
 entity docs.RepoObject_Adoc_T << U >> {
-  * **RepoObject_guid** : uniqueidentifier
   --
 }
 
 entity docs.RepoObject_ColumnList << V >> {
+  --
+}
+
+entity docs.RepoObject_ColumnList_T << U >> {
+  * **RepoObject_guid** : uniqueidentifier
   --
 }
 
@@ -1462,9 +1461,15 @@ docs.ObjectRefCyclic_ObjectRefList <.. docs.ObjectRefCyclic
 docs.ObjectRefCyclic_ObjectRefList <.. docs.ObjectRefCyclic
 docs.RepoObject_Adoc <.. docs.RepoObject_Adoc_T
 docs.RepoObject_Adoc <.. docs.usp_PERSIST_RepoObject_Adoc_T
+docs.RepoObject_Adoc <.. docs.RepoObject_Adoc_T
+docs.RepoObject_Adoc <.. docs.usp_PERSIST_RepoObject_Adoc_T
 docs.REpoObject_Adoc_T <.. docs.usp_PERSIST_RepoObject_Adoc_T
-docs.RepoObject_ColumnList <.. docs.85AC3586-9B83-4474-AF3D-ED54F04062CA
+docs.REpoObject_Adoc_T <.. docs.usp_PERSIST_RepoObject_Adoc_T
+docs.RepoObject_ColumnList <.. docs.RepoObject_ColumnList_T
 docs.RepoObject_ColumnList <.. docs.usp_PERSIST_RepoObject_ColumnList_T
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Adoc
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Plantuml_Entity
+docs.RepoObject_ColumnList_T <.. docs.usp_PERSIST_RepoObject_ColumnList_T
 docs.RepoObject_IndexList <.. docs.RepoObject_IndexList_T
 docs.RepoObject_IndexList <.. docs.usp_PERSIST_RepoObject_IndexList_T
 docs.RepoObject_IndexList_T <.. docs.RepoObject_Adoc
@@ -1521,6 +1526,8 @@ docs.usp_AntoraExport_navigation <.. docs.usp_AntoraExport
 docs.usp_AntoraExport_ObjectPage <.. docs.usp_AntoraExport
 docs.usp_AntoraExport_ObjectPartialProperties <.. docs.usp_AntoraExport
 docs.usp_AntoraExport_ObjectPuml <.. docs.usp_AntoraExport
+docs.usp_AntoraExport_ObjectPuml <.. docs.usp_AntoraExport
+docs.usp_PERSIST_RepoObject_Adoc_T <.. docs.usp_AntoraExport_ObjectPartialProperties
 docs.usp_PERSIST_RepoObject_Adoc_T <.. docs.usp_AntoraExport_ObjectPartialProperties
 docs.usp_PERSIST_RepoObject_ColumnList_T <.. docs.usp_AntoraExport_ObjectPartialProperties
 docs.usp_PERSIST_RepoObject_IndexList_T <.. docs.usp_AntoraExport_ObjectPartialProperties
@@ -1663,13 +1670,6 @@ reference.RepoObject_ReferencingList <.. repo.RepoObject_gross2
 reference.RepoObject_ReferencingList <.. repo.RepoObject_gross2
 reference.RepoObject_ReferencingList <.. repo.RepoObject_gross2
 reference.RepoObject_ReferencingReferenced <.. repo.RepoObject_gross
-reference.RepoObject_ReferencingReferenced <.. reference.ftv_RepoObject_ReferenceTree_via_fullname
-reference.RepoObject_ReferencingReferenced <.. reference.ftv_RepoObject_ReferenceTree
-reference.RepoObject_ReferencingReferenced <.. reference.RepoObject_ReferencedList
-reference.RepoObject_ReferencingReferenced <.. reference.RepoObject_ReferencingList
-reference.RepoObject_ReferencingReferenced <.. reference.ftv_RepoObject_ReferenceTree_referenced
-reference.RepoObject_ReferencingReferenced <.. reference.ftv_RepoObject_ReferenceTree_referencing
-reference.RepoObject_ReferencingReferenced <.. reference.usp_RepoObject_ReferenceTree_insert
 reference.RepoObject_ReferencingReferenced <.. repo.RepoObject_gross
 reference.RepoObject_ReferencingReferenced <.. reference.ftv_RepoObject_ReferenceTree_via_fullname
 reference.RepoObject_ReferencingReferenced <.. reference.ftv_RepoObject_ReferenceTree
@@ -1679,6 +1679,13 @@ reference.RepoObject_ReferencingReferenced <.. reference.ftv_RepoObject_Referenc
 reference.RepoObject_ReferencingReferenced <.. reference.ftv_RepoObject_ReferenceTree_referencing
 reference.RepoObject_ReferencingReferenced <.. reference.usp_RepoObject_ReferenceTree_insert
 reference.RepoObject_ReferencingReferenced <.. repo.RepoObject_gross
+reference.RepoObject_ReferencingReferenced <.. reference.ftv_RepoObject_ReferenceTree_via_fullname
+reference.RepoObject_ReferencingReferenced <.. reference.ftv_RepoObject_ReferenceTree
+reference.RepoObject_ReferencingReferenced <.. reference.RepoObject_ReferencedList
+reference.RepoObject_ReferencingReferenced <.. reference.RepoObject_ReferencingList
+reference.RepoObject_ReferencingReferenced <.. reference.ftv_RepoObject_ReferenceTree_referenced
+reference.RepoObject_ReferencingReferenced <.. reference.ftv_RepoObject_ReferenceTree_referencing
+reference.RepoObject_ReferencingReferenced <.. reference.usp_RepoObject_ReferenceTree_insert
 reference.RepoObject_ReferencingReferenced <.. reference.ftv_RepoObject_ReferenceTree_via_fullname
 reference.RepoObject_ReferencingReferenced <.. reference.ftv_RepoObject_ReferenceTree
 reference.RepoObject_ReferencingReferenced <.. reference.RepoObject_ReferencedList
@@ -2000,7 +2007,6 @@ repo.RepoObject_SqlCreateTable <.. reference.ftv_RepoObject_ColumReferenceRepoOb
 repo.RepoObject_SSAS_tgt <.. repo.RepoObject
 repo.RepoObject_SSAS_tgt <.. repo.RepoObjectColumn_SSAS_tgt
 repo.RepoObject_SSAS_tgt <.. repo.usp_PERSIST_RepoObject_SSAS_tgt
-repo.RepoObjectColumn <.. repo.RepoObject_SqlCreateTable
 repo.RepoObjectColumn <.. reference.RepoObjectColumn_reference_Persistence
 repo.RepoObjectColumn <.. repo.RepoObject_persistence_column
 repo.RepoObjectColumn <.. repo.IndexColumn_virtual_gross
@@ -2008,6 +2014,7 @@ repo.RepoObjectColumn <.. property.RepoObjectColumnProperty_sys_repo
 repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_guid
 repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_name
 repo.RepoObjectColumn <.. repo.RepoObjectColumn_gross
+repo.RepoObjectColumn <.. repo.RepoObject_SqlCreateTable
 repo.RepoObjectColumn <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing
 repo.RepoObjectColumn <.. repo.RepoObjectColumn_MissingSource_TypeV
 repo.RepoObjectColumn <.. repo.check_IndexColumn_virtual_referenced_setpoint

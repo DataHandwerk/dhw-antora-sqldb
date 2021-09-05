@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -25,6 +26,7 @@ skinparam class {
 
 entity logs.usp_ExecutionLog_insert << P >> {
   --
+  --
 }
 
 entity repo.Index_gross << V >> {
@@ -34,8 +36,8 @@ entity repo.Index_gross << V >> {
   ColumnList : nvarchar(max)
   ConstraintColumnList : nvarchar(max)
   DbmlIndexColumnList : nvarchar(max)
-  index_name : nvarchar(128)
-  * index_type : tinyint
+  index_name : nvarchar(450)
+  index_type : tinyint
   IndexPatternColumnDatatype : nvarchar(4000)
   IndexPatternColumnName : nvarchar(4000)
   IndexSemanticGroup : nvarchar(512)
@@ -59,6 +61,7 @@ entity repo.Index_gross << V >> {
   * SysObject_name : nvarchar(128)
   * SysObject_schema_name : nvarchar(128)
   SysObject_type : char(2)
+  --
 }
 
 entity repo.Index_virtual << U >> {
@@ -73,6 +76,7 @@ entity repo.Index_virtual << U >> {
   * parent_RepoObject_guid : uniqueidentifier
   referenced_index_guid : uniqueidentifier
   RowNumberInReferencing : int
+  --
 }
 
 entity repo.Index_virtual_ForUpdate << V >> {
@@ -96,6 +100,7 @@ entity repo.Index_virtual_ForUpdate << V >> {
   RowNumberInReferencing : int
   * SysObject_fullname : nvarchar(261)
   * SysObject_fullname2 : nvarchar(257)
+  --
 }
 
 entity repo.Index_virtual_IndexPatternColumnGuid << V >> {
@@ -103,6 +108,7 @@ entity repo.Index_virtual_IndexPatternColumnGuid << V >> {
   --
   IndexPatternColumnGuid : varchar(8000)
   parent_RepoObject_guid : uniqueidentifier
+  --
 }
 
 entity repo.IndexColumn_virtual << U >> {
@@ -111,6 +117,7 @@ entity repo.IndexColumn_virtual << U >> {
   --
   * is_descending_key : bit
   * RepoObjectColumn_guid : uniqueidentifier
+  --
 }
 
 entity repo.IndexColumn_virtual_referenced_setpoint << V >> {
@@ -124,33 +131,39 @@ entity repo.IndexColumn_virtual_referenced_setpoint << V >> {
   referencing_RepoObject_guid : uniqueidentifier
   referencing_RepoObjectColumn_guid : uniqueidentifier
   RowNumberInReferencing : int
+  --
 }
 
 entity repo.IndexReferencedReferencing_HasFullColumnsInReferencing << V >> {
   --
   referenced_index_guid : uniqueidentifier
-  referenced_RepoObject_guid : uniqueidentifier
+  * referenced_RepoObject_guid : uniqueidentifier
   referencing_IndexPatternColumnGuid : varchar(8000)
-  referencing_RepoObject_guid : uniqueidentifier
+  * referencing_RepoObject_guid : uniqueidentifier
   RowNumberInReferencing : bigint
   RowNumberInReferencing_Target : int
   source_index_guid : uniqueidentifier
   * source_index_type : tinyint
+  --
 }
 
 entity repo.usp_Index_finish << P >> {
+  --
   --
 }
 
 entity repo.usp_index_inheritance << P >> {
   --
+  --
 }
 
 entity repo.usp_main << P >> {
   --
+  --
 }
 
 entity repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T << P >> {
+  --
   --
 }
 

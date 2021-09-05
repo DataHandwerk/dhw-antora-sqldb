@@ -1,0 +1,63 @@
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+}
+
+
+entity workflow.usp_workflow << P >> {
+  --
+  --
+}
+
+entity workflow.Workflow_ProcedureDependency_T_active << V >> {
+  --
+  * is_redundant : bit
+  * referenced_Procedure_RepoObject_guid : uniqueidentifier
+  * referencing_Procedure_RepoObject_guid : uniqueidentifier
+  * Workflow_id : int
+  --
+}
+
+entity workflow.Workflow_ProcedureDependency_T_redundant << V >> {
+  --
+  * referenced_Procedure_RepoObject_guid : uniqueidentifier
+  * referencing_Procedure_RepoObject_guid : uniqueidentifier
+  RownrPerReferencing : bigint
+  * Workflow_id : int
+  --
+}
+
+entity workflow.Workflow_ProcedureDependency_wo_redundant << V >> {
+  --
+  * referenced_Procedure_RepoObject_guid : uniqueidentifier
+  * referencing_Procedure_RepoObject_guid : uniqueidentifier
+  * Workflow_id : int
+  --
+}
+
+workflow.Workflow_ProcedureDependency_T_active <.. workflow.Workflow_ProcedureDependency_T_redundant
+workflow.Workflow_ProcedureDependency_T_redundant <.. workflow.usp_workflow
+workflow.Workflow_ProcedureDependency_T_redundant <.. workflow.Workflow_ProcedureDependency_wo_redundant
+workflow.Workflow_ProcedureDependency_T_active::referenced_Procedure_RepoObject_guid <-- workflow.Workflow_ProcedureDependency_T_redundant::referenced_Procedure_RepoObject_guid
+workflow.Workflow_ProcedureDependency_T_active::referencing_Procedure_RepoObject_guid <-- workflow.Workflow_ProcedureDependency_T_redundant::referencing_Procedure_RepoObject_guid
+workflow.Workflow_ProcedureDependency_T_active::Workflow_id <-- workflow.Workflow_ProcedureDependency_T_redundant::Workflow_id

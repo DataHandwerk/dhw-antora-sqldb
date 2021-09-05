@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -30,7 +31,10 @@ entity workflow.ProcedureDependency << U >> {
   * is_active : bit
   * is_PersistenceDependency : bit
   * referenced_Procedure_RepoObject_guid : uniqueidentifier
+  referenced_RepoObject_guid : uniqueidentifier
   * referencing_Procedure_RepoObject_guid : uniqueidentifier
+  referencing_RepoObject_guid : uniqueidentifier
+  --
 }
 
 entity workflow.ProcedureDependency_gross << V >> {
@@ -47,6 +51,7 @@ entity workflow.ProcedureDependency_gross << V >> {
   * referencing_RepoObject_fullname : nvarchar(261)
   * referencing_RepoObject_fullname2 : nvarchar(257)
   * referencing_RepoObject_schema_name : nvarchar(128)
+  --
 }
 
 entity workflow.ProcedureDependency_input_PersistenceDependency << V >> {
@@ -54,10 +59,32 @@ entity workflow.ProcedureDependency_input_PersistenceDependency << V >> {
   **referencing_Procedure_RepoObject_guid** : uniqueidentifier
   --
   * is_PersistenceDependency : int
+  referenced_RepoObject_guid : uniqueidentifier
+  referencing_RepoObject_guid : uniqueidentifier
+  --
+}
+
+entity workflow.Workflow_ProcedureDependency << V >> {
+  --
+  * referenced_Procedure_RepoObject_guid : uniqueidentifier
+  * referencing_Procedure_RepoObject_guid : uniqueidentifier
+  * Workflow_id : int
+  --
+}
+
+entity workflow.Workflow_ProcedureDependency_all << V >> {
+  --
+  * referenced_Procedure_RepoObject_guid : uniqueidentifier
+  * referencing_Procedure_RepoObject_guid : uniqueidentifier
+  * Workflow_id : int
+  --
 }
 
 workflow.ProcedureDependency <.. workflow.ProcedureDependency_gross
 workflow.ProcedureDependency <.. workflow.ProcedureDependency_input_PersistenceDependency
+workflow.ProcedureDependency <.. workflow.Workflow_ProcedureDependency_all
+workflow.ProcedureDependency <.. workflow.Workflow_ProcedureDependency
+workflow.ProcedureDependency_input_PersistenceDependency <.. workflow.ProcedureDependency
 workflow.ProcedureDependency::Description <-- workflow.ProcedureDependency_gross::Description
 workflow.ProcedureDependency::id <-- workflow.ProcedureDependency_gross::id
 workflow.ProcedureDependency::is_active <-- workflow.ProcedureDependency_gross::is_active
@@ -65,5 +92,9 @@ workflow.ProcedureDependency::is_PersistenceDependency <-- workflow.ProcedureDep
 workflow.ProcedureDependency::is_PersistenceDependency <-- workflow.ProcedureDependency_input_PersistenceDependency::is_PersistenceDependency
 workflow.ProcedureDependency::referenced_Procedure_RepoObject_guid <-- workflow.ProcedureDependency_gross::referenced_Procedure_RepoObject_guid
 workflow.ProcedureDependency::referenced_Procedure_RepoObject_guid <-- workflow.ProcedureDependency_input_PersistenceDependency::referenced_Procedure_RepoObject_guid
+workflow.ProcedureDependency::referenced_Procedure_RepoObject_guid <-- workflow.Workflow_ProcedureDependency::referenced_Procedure_RepoObject_guid
+workflow.ProcedureDependency::referenced_Procedure_RepoObject_guid <-- workflow.Workflow_ProcedureDependency_all::referenced_Procedure_RepoObject_guid
 workflow.ProcedureDependency::referencing_Procedure_RepoObject_guid <-- workflow.ProcedureDependency_gross::referencing_Procedure_RepoObject_guid
 workflow.ProcedureDependency::referencing_Procedure_RepoObject_guid <-- workflow.ProcedureDependency_input_PersistenceDependency::referencing_Procedure_RepoObject_guid
+workflow.ProcedureDependency::referencing_Procedure_RepoObject_guid <-- workflow.Workflow_ProcedureDependency::referencing_Procedure_RepoObject_guid
+workflow.ProcedureDependency::referencing_Procedure_RepoObject_guid <-- workflow.Workflow_ProcedureDependency_all::referencing_Procedure_RepoObject_guid

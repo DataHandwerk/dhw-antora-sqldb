@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -27,16 +28,18 @@ entity config.Parameter << U >> {
   * **Parameter_name** : varchar(100)
   * **sub_Parameter** : nvarchar(128)
   --
-  Parameter_default_value : sql_variant
+  Parameter_default_value : nvarchar(max)
   Parameter_desciption : nvarchar(1000)
-  Parameter_value : sql_variant
-  {abstract} Parameter_value__result_date : date
-  {abstract} Parameter_value__result_datetime : datetime
-  {abstract} Parameter_value__result_int : int
-  {abstract} Parameter_value__result_nvarchar : nvarchar(4000)
+  Parameter_value : nvarchar(max)
+  {abstract} Parameter_value_result : nvarchar(max)
+  {abstract} Parameter_value_result_date : date
+  {abstract} Parameter_value_result_datetime : datetime
+  {abstract} Parameter_value_result_int : int
+  --
 }
 
 entity logs.usp_ExecutionLog_insert << P >> {
+  --
   --
 }
 
@@ -48,8 +51,10 @@ entity repo.RepoObject << U >> {
   Inheritance_StringAggSeparatorSql : nvarchar(4000)
   InheritanceDefinition : nvarchar(4000)
   InheritanceType : tinyint
+  * is_DocsExclude : bit
   is_repo_managed : bit
   is_required_ObjectMerge : bit
+  * is_ssas : bit
   is_SysObject_missing : bit
   * modify_dt : datetime
   pk_index_guid : uniqueidentifier
@@ -75,7 +80,9 @@ entity repo.RepoObject << U >> {
   * {static} SysObject_fullname : nvarchar(261)
   * {static} SysObject_fullname2 : nvarchar(257)
   * {abstract} SysObject_query_sql : nvarchar(406)
+  * {static} usp_persistence_fullname2 : nvarchar(269)
   * {static} usp_persistence_name : nvarchar(140)
+  --
 }
 
 entity repo.RepoObject_persistence << U >> {
@@ -100,13 +107,16 @@ entity repo.RepoObject_persistence << U >> {
   target_filter : nvarchar(4000)
   {abstract} is_persistence : bit
   {abstract} temporal_type : tinyint
+  --
 }
 
 entity repo.usp_persistence_set << P >> {
   --
+  --
 }
 
 entity repo.usp_sync_guid << P >> {
+  --
   --
 }
 

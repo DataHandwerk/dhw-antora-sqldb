@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -28,6 +29,7 @@ entity docs.AntoraIndexSemanticgroup << V >> {
   --
   AntoraIndexSemanticgroup : nvarchar(max)
   * fixvalue : int
+  --
 }
 
 entity docs.AntoraIndexSemanticgroupPatterndatatype << V >> {
@@ -35,13 +37,16 @@ entity docs.AntoraIndexSemanticgroupPatterndatatype << V >> {
   **IndexPatternColumnDatatype** : nvarchar(4000)
   --
   AntoraIndexSemanticgroupPatterndatatype : nvarchar(max)
+  --
 }
 
 entity docs.fs_cleanStringForAnchorId << FN >> {
   --
+  --
 }
 
 entity docs.fs_cleanStringForLabel << FN >> {
+  --
   --
 }
 
@@ -52,8 +57,8 @@ entity repo.Index_gross << V >> {
   ColumnList : nvarchar(max)
   ConstraintColumnList : nvarchar(max)
   DbmlIndexColumnList : nvarchar(max)
-  index_name : nvarchar(128)
-  * index_type : tinyint
+  index_name : nvarchar(450)
+  index_type : tinyint
   IndexPatternColumnDatatype : nvarchar(4000)
   IndexPatternColumnName : nvarchar(4000)
   IndexSemanticGroup : nvarchar(512)
@@ -77,6 +82,7 @@ entity repo.Index_gross << V >> {
   * SysObject_name : nvarchar(128)
   * SysObject_schema_name : nvarchar(128)
   SysObject_type : char(2)
+  --
 }
 
 docs.AntoraIndexSemanticgroupPatterndatatype <.. docs.AntoraIndexSemanticgroup

@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -25,6 +26,7 @@ skinparam class {
 
 entity docs.fs_cleanStringForAnchorId << FN >> {
   --
+  --
 }
 
 entity reference.RepoObjectColumn_ReferencingList << V >> {
@@ -32,10 +34,11 @@ entity reference.RepoObjectColumn_ReferencingList << V >> {
   AntoraReferencingColumnList : nvarchar(max)
   Referenced_fullname : nvarchar(261)
   Referenced_fullname2 : nvarchar(257)
-  Referenced_guid : uniqueidentifier
+  * Referenced_guid : uniqueidentifier
   Referenced_type : char(2)
-  ReferencedColumn_fullname : nvarchar(520)
+  ReferencedColumn_fullname : nvarchar(392)
   ReferencedColumn_fullname2 : nvarchar(386)
+  --
 }
 
 entity reference.RepoObjectColumn_ReferencingReferenced << V >> {
@@ -56,18 +59,19 @@ entity reference.RepoObjectColumn_ReferencingReferenced << V >> {
   * ReferencingColumn_fullname : nvarchar(392)
   * ReferencingColumn_fullname2 : nvarchar(386)
   ReferencingColumn_name : nvarchar(128)
+  --
 }
 
-entity repo.RepoObjectColumn_gross << V >> {
-  * **RepoObjectColumn_guid** : uniqueidentifier
+entity repo.RepoObjectColumn_gross2 << V >> {
   --
   AntoraReferencedColumnList : nvarchar(max)
   AntoraReferencingColumnList : nvarchar(max)
   * Column_name : nvarchar(128)
+  Description : nvarchar(max)
   has_different_sys_names : bit
   has_get_referenced_issue : bit
   index_column_id : int
-  index_name : nvarchar(128)
+  index_name : nvarchar(450)
   Inheritance_StringAggSeparatorSql : nvarchar(4000)
   InheritanceDefinition : nvarchar(4000)
   InheritanceType : tinyint
@@ -80,10 +84,12 @@ entity repo.RepoObjectColumn_gross << V >> {
   * is_RepoObject_name_uniqueidentifier : int
   * is_RepoObjectColumn_name_uniqueidentifier : int
   is_required_ColumnMerge : bit
+  * is_ssas : bit
   is_SysObject_missing : bit
   * is_SysObject_name_uniqueidentifier : int
   is_SysObjectColumn_missing : bit
   * is_SysObjectColumn_name_uniqueidentifier : int
+  isAnyIndexColumn : int
   * modify_dt : datetime
   node_id : bigint
   persistence_source_RepoObjectColumn_guid : uniqueidentifier
@@ -115,6 +121,7 @@ entity repo.RepoObjectColumn_gross << V >> {
   RepoObjectColumn_column_id : int
   * RepoObjectColumn_fullname : nvarchar(520)
   * RepoObjectColumn_fullname2 : nvarchar(386)
+  * RepoObjectColumn_guid : uniqueidentifier
   * RepoObjectColumn_name : nvarchar(128)
   * SysObject_fullname : nvarchar(261)
   * SysObject_fullname2 : nvarchar(257)
@@ -126,10 +133,21 @@ entity repo.RepoObjectColumn_gross << V >> {
   SysObject_type : char(2)
   SysObjectColumn_column_id : int
   * SysObjectColumn_name : nvarchar(128)
+  tabcol_Description : nvarchar(max)
+  tabcol_DisplayFolder : nvarchar(500)
+  tabcol_Expression : nvarchar(max)
+  tabcol_FormatString : nvarchar(500)
+  * tabcol_IsHidden : bit
+  * tabcol_IsKey : bit
+  * tabcol_IsUnique : bit
+  tabcol_SummarizeBy : nvarchar(500)
+  tabcol_Type : nvarchar(500)
+  --
 }
 
 docs.fs_cleanStringForAnchorId <.. reference.RepoObjectColumn_ReferencingList
-reference.RepoObjectColumn_ReferencingList <.. repo.RepoObjectColumn_gross
+reference.RepoObjectColumn_ReferencingList <.. repo.RepoObjectColumn_gross2
 reference.RepoObjectColumn_ReferencingReferenced <.. reference.RepoObjectColumn_ReferencingList
-reference.RepoObjectColumn_ReferencingList::AntoraReferencingColumnList <-- repo.RepoObjectColumn_gross::AntoraReferencingColumnList
+reference.RepoObjectColumn_ReferencingList::AntoraReferencingColumnList <-- repo.RepoObjectColumn_gross2::AntoraReferencingColumnList
+reference.RepoObjectColumn_ReferencingReferenced::Referenced_fullname <-- reference.RepoObjectColumn_ReferencingList::Referenced_fullname
 reference.RepoObjectColumn_ReferencingReferenced::Referenced_guid <-- reference.RepoObjectColumn_ReferencingList::Referenced_guid

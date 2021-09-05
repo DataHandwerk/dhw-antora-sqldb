@@ -40,7 +40,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-05 10:54:39
+2021-09-05 13:29:35
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -97,7 +97,27 @@ source: property.RepoObjectProperty_cross As rop_cross
 * [ssas].[TMSCHEMA_RELATIONSHIPS]
 * [ssas].[TMSCHEMA_RELATIONSHIPS_T]
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+DELETE T
+FROM [ssas].[TMSCHEMA_RELATIONSHIPS_T] AS T
+WHERE
+NOT EXISTS
+(SELECT 1 FROM [ssas].[TMSCHEMA_RELATIONSHIPS] AS S
+WHERE
+T.[databasename] = S.[databasename]
+AND T.[ID] = S.[ID]
+)
+ 
+----
+=====
+
 |
+
 
 |600
 |
@@ -107,7 +127,68 @@ source: property.RepoObjectProperty_cross As rop_cross
 * [ssas].[TMSCHEMA_RELATIONSHIPS]
 * [ssas].[TMSCHEMA_RELATIONSHIPS_T]
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+UPDATE T
+SET
+  T.[databasename] = S.[databasename]
+, T.[ID] = S.[ID]
+, T.[CrossFilteringBehavior] = S.[CrossFilteringBehavior]
+, T.[FromCardinality] = S.[FromCardinality]
+, T.[FromColumnID] = S.[FromColumnID]
+, T.[FromTableID] = S.[FromTableID]
+, T.[IsActive] = S.[IsActive]
+, T.[JoinOnDateBehavior] = S.[JoinOnDateBehavior]
+, T.[ModelID] = S.[ModelID]
+, T.[ModifiedTime] = S.[ModifiedTime]
+, T.[Name] = S.[Name]
+, T.[RefreshedTime] = S.[RefreshedTime]
+, T.[RelationshipStorage2ID] = S.[RelationshipStorage2ID]
+, T.[RelationshipStorageID] = S.[RelationshipStorageID]
+, T.[RelyOnReferentialIntegrity] = S.[RelyOnReferentialIntegrity]
+, T.[SecurityFilteringBehavior] = S.[SecurityFilteringBehavior]
+, T.[State] = S.[State]
+, T.[ToCardinality] = S.[ToCardinality]
+, T.[ToColumnID] = S.[ToColumnID]
+, T.[ToTableID] = S.[ToTableID]
+, T.[Type] = S.[Type]
+
+FROM [ssas].[TMSCHEMA_RELATIONSHIPS_T] AS T
+INNER JOIN [ssas].[TMSCHEMA_RELATIONSHIPS] AS S
+ON
+T.[databasename] = S.[databasename]
+AND T.[ID] = S.[ID]
+
+WHERE
+   T.[CrossFilteringBehavior] <> S.[CrossFilteringBehavior]
+OR T.[FromCardinality] <> S.[FromCardinality]
+OR T.[FromColumnID] <> S.[FromColumnID]
+OR T.[FromTableID] <> S.[FromTableID]
+OR T.[IsActive] <> S.[IsActive]
+OR T.[JoinOnDateBehavior] <> S.[JoinOnDateBehavior]
+OR T.[ModelID] <> S.[ModelID]
+OR T.[ModifiedTime] <> S.[ModifiedTime]
+OR T.[Name] <> S.[Name]
+OR T.[RefreshedTime] <> S.[RefreshedTime] OR (S.[RefreshedTime] IS NULL AND NOT T.[RefreshedTime] IS NULL) OR (NOT S.[RefreshedTime] IS NULL AND T.[RefreshedTime] IS NULL)
+OR T.[RelationshipStorage2ID] <> S.[RelationshipStorage2ID] OR (S.[RelationshipStorage2ID] IS NULL AND NOT T.[RelationshipStorage2ID] IS NULL) OR (NOT S.[RelationshipStorage2ID] IS NULL AND T.[RelationshipStorage2ID] IS NULL)
+OR T.[RelationshipStorageID] <> S.[RelationshipStorageID] OR (S.[RelationshipStorageID] IS NULL AND NOT T.[RelationshipStorageID] IS NULL) OR (NOT S.[RelationshipStorageID] IS NULL AND T.[RelationshipStorageID] IS NULL)
+OR T.[RelyOnReferentialIntegrity] <> S.[RelyOnReferentialIntegrity]
+OR T.[SecurityFilteringBehavior] <> S.[SecurityFilteringBehavior]
+OR T.[State] <> S.[State]
+OR T.[ToCardinality] <> S.[ToCardinality]
+OR T.[ToColumnID] <> S.[ToColumnID]
+OR T.[ToTableID] <> S.[ToTableID]
+OR T.[Type] <> S.[Type]
+
+----
+=====
+
 |
+
 
 |700
 |
@@ -117,7 +198,74 @@ source: property.RepoObjectProperty_cross As rop_cross
 * [ssas].[TMSCHEMA_RELATIONSHIPS]
 * [ssas].[TMSCHEMA_RELATIONSHIPS_T]
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+INSERT INTO 
+ [ssas].[TMSCHEMA_RELATIONSHIPS_T]
+ (
+  [databasename]
+, [ID]
+, [CrossFilteringBehavior]
+, [FromCardinality]
+, [FromColumnID]
+, [FromTableID]
+, [IsActive]
+, [JoinOnDateBehavior]
+, [ModelID]
+, [ModifiedTime]
+, [Name]
+, [RefreshedTime]
+, [RelationshipStorage2ID]
+, [RelationshipStorageID]
+, [RelyOnReferentialIntegrity]
+, [SecurityFilteringBehavior]
+, [State]
+, [ToCardinality]
+, [ToColumnID]
+, [ToTableID]
+, [Type]
+)
+SELECT
+  [databasename]
+, [ID]
+, [CrossFilteringBehavior]
+, [FromCardinality]
+, [FromColumnID]
+, [FromTableID]
+, [IsActive]
+, [JoinOnDateBehavior]
+, [ModelID]
+, [ModifiedTime]
+, [Name]
+, [RefreshedTime]
+, [RelationshipStorage2ID]
+, [RelationshipStorageID]
+, [RelyOnReferentialIntegrity]
+, [SecurityFilteringBehavior]
+, [State]
+, [ToCardinality]
+, [ToColumnID]
+, [ToTableID]
+, [Type]
+
+FROM [ssas].[TMSCHEMA_RELATIONSHIPS] AS S
+WHERE
+NOT EXISTS
+(SELECT 1
+FROM [ssas].[TMSCHEMA_RELATIONSHIPS_T] AS T
+WHERE
+T.[databasename] = S.[databasename]
+AND T.[ID] = S.[ID]
+)
+----
+=====
+
 |
+
 |===
 
 // end::adocuspsteps[]
@@ -390,7 +538,7 @@ source: property.RepoObjectProperty WHERE property_int = 1
 
 // tag::sql_modules_definition[]
 [%collapsible]
-====
+=======
 [source,sql]
 ----
 /*
@@ -698,7 +846,7 @@ END
 
 
 ----
-====
+=======
 // end::sql_modules_definition[]
 
 

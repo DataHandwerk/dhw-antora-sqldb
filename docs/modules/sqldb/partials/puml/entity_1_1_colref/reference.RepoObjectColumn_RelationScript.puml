@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -30,6 +31,7 @@ entity reference.ftv_RepoObject_ColumReferenceRepoObject << IF >> {
   RepoObject_fullname : nvarchar(261)
   RepoObject_guid : uniqueidentifier
   RepoObject_type : char(2)
+  --
 }
 
 entity reference.RepoObjectColumn_reference_T << U >> {
@@ -56,6 +58,7 @@ entity reference.RepoObjectColumn_reference_T << U >> {
   * {static} referencing_ro_fullname2 : nvarchar(257)
   * {static} referencing_roc_fullname : nvarchar(392)
   * {static} referencing_roc_fullname2 : nvarchar(386)
+  --
 }
 
 entity reference.RepoObjectColumn_RelationScript << V >> {
@@ -63,6 +66,7 @@ entity reference.RepoObjectColumn_RelationScript << V >> {
   * DbmlRelation : nvarchar(786)
   referenced_RepoObject_guid : uniqueidentifier
   referencing_RepoObject_guid : uniqueidentifier
+  --
 }
 
 entity repo.RepoObjectColumn << U >> {
@@ -103,6 +107,7 @@ entity repo.RepoObjectColumn << U >> {
   {abstract} has_different_sys_names : bit
   * {static} is_RepoObjectColumn_name_uniqueidentifier : int
   * {static} is_SysObjectColumn_name_uniqueidentifier : int
+  --
 }
 
 reference.RepoObjectColumn_reference_T <.. reference.RepoObjectColumn_RelationScript

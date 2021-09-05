@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -27,14 +28,16 @@ entity config.ftv_dwh_database << IF >> {
   --
   dwh_database_id : smallint
   dwh_database_name : nvarchar(128)
+  --
 }
 
 entity config.ftv_get_parameter_value << IF >> {
   --
-  Parameter_value__result_date : date
-  Parameter_value__result_datetime : datetime
-  Parameter_value__result_int : int
-  Parameter_value__result_nvarchar : nvarchar(4000)
+  Parameter_value_result : nvarchar(max)
+  Parameter_value_result_date : date
+  Parameter_value_result_datetime : datetime
+  Parameter_value_result_int : int
+  --
 }
 
 entity reference.ftv_RepoObject_ColumReferenceRepoObject << IF >> {
@@ -44,6 +47,7 @@ entity reference.ftv_RepoObject_ColumReferenceRepoObject << IF >> {
   RepoObject_fullname : nvarchar(261)
   RepoObject_guid : uniqueidentifier
   RepoObject_type : char(2)
+  --
 }
 
 entity repo.Index_gross << V >> {
@@ -53,8 +57,8 @@ entity repo.Index_gross << V >> {
   ColumnList : nvarchar(max)
   ConstraintColumnList : nvarchar(max)
   DbmlIndexColumnList : nvarchar(max)
-  index_name : nvarchar(128)
-  * index_type : tinyint
+  index_name : nvarchar(450)
+  index_type : tinyint
   IndexPatternColumnDatatype : nvarchar(4000)
   IndexPatternColumnName : nvarchar(4000)
   IndexSemanticGroup : nvarchar(512)
@@ -78,6 +82,7 @@ entity repo.Index_gross << V >> {
   * SysObject_name : nvarchar(128)
   * SysObject_schema_name : nvarchar(128)
   SysObject_type : char(2)
+  --
 }
 
 entity repo.Index_SqlConstraint_PkUq << V >> {
@@ -85,6 +90,7 @@ entity repo.Index_SqlConstraint_PkUq << V >> {
   --
   parent_RepoObject_guid : uniqueidentifier
   * SqlConstraint : nvarchar(max)
+  --
 }
 
 entity repo.RepoObject << U >> {
@@ -95,8 +101,10 @@ entity repo.RepoObject << U >> {
   Inheritance_StringAggSeparatorSql : nvarchar(4000)
   InheritanceDefinition : nvarchar(4000)
   InheritanceType : tinyint
+  * is_DocsExclude : bit
   is_repo_managed : bit
   is_required_ObjectMerge : bit
+  * is_ssas : bit
   is_SysObject_missing : bit
   * modify_dt : datetime
   pk_index_guid : uniqueidentifier
@@ -122,26 +130,27 @@ entity repo.RepoObject << U >> {
   * {static} SysObject_fullname : nvarchar(261)
   * {static} SysObject_fullname2 : nvarchar(257)
   * {abstract} SysObject_query_sql : nvarchar(406)
+  * {static} usp_persistence_fullname2 : nvarchar(269)
   * {static} usp_persistence_name : nvarchar(140)
+  --
 }
 
 entity repo.RepoObject_ColumnList << V >> {
-  * **RepoObject_guid** : uniqueidentifier
   --
   CreateColumnList : nvarchar(max)
   DbmlColumnList : nvarchar(max)
   PersistenceCompareColumnList : nvarchar(max)
   PersistenceInsertColumnList : nvarchar(max)
   PersistenceUpdateColumnList : nvarchar(max)
+  * RepoObject_guid : uniqueidentifier
+  RepoObjectColumn_fullname : nvarchar(520)
+  --
 }
 
 entity repo.RepoObject_gross << V >> {
   * **RepoObject_guid** : uniqueidentifier
   --
-  AntoraReferencedList : nvarchar(max)
-  AntoraReferencingList : nvarchar(max)
-  CreateColumnList : nvarchar(max)
-  DbmlColumnList : nvarchar(max)
+  Description : nvarchar(max)
   has_different_sys_names : bit
   has_execution_plan_issue : bit
   has_get_referenced_issue : bit
@@ -152,6 +161,7 @@ entity repo.RepoObject_gross << V >> {
   Inheritance_StringAggSeparatorSql : nvarchar(4000)
   InheritanceDefinition : nvarchar(4000)
   InheritanceType : tinyint
+  * is_DocsExclude : bit
   is_DocsOutput : int
   * is_in_reference : int
   is_persistence : bit
@@ -168,6 +178,7 @@ entity repo.RepoObject_gross << V >> {
   is_repo_managed : bit
   * is_RepoObject_name_uniqueidentifier : int
   is_required_ObjectMerge : bit
+  * is_ssas : bit
   is_SysObject_missing : bit
   * is_SysObject_name_uniqueidentifier : int
   * modify_dt : datetime
@@ -179,9 +190,6 @@ entity repo.RepoObject_gross << V >> {
   persistence_source_SysObject_fullname : nvarchar(261)
   persistence_source_SysObject_fullname2 : nvarchar(257)
   persistence_source_SysObject_xref : nvarchar(269)
-  PersistenceCompareColumnList : nvarchar(max)
-  PersistenceInsertColumnList : nvarchar(max)
-  PersistenceUpdateColumnList : nvarchar(max)
   pk_index_guid : uniqueidentifier
   pk_IndexPatternColumnDatatype : nvarchar(4000)
   pk_IndexPatternColumnName : nvarchar(4000)
@@ -198,10 +206,6 @@ entity repo.RepoObject_gross << V >> {
   * RepoObject_type : char(2)
   RepoObject_type_name : nvarchar(128)
   source_filter : nvarchar(4000)
-  sql_modules_antora : nvarchar(max)
-  sql_modules_definition : nvarchar(max)
-  sql_modules_formatted : nvarchar(max)
-  sql_modules_formatted2 : nvarchar(max)
   * SysObject_fullname : nvarchar(261)
   * SysObject_fullname2 : nvarchar(257)
   SysObject_id : int
@@ -214,10 +218,14 @@ entity repo.RepoObject_gross << V >> {
   * SysObject_schema_name : nvarchar(128)
   SysObject_type : char(2)
   SysObject_type_name : nvarchar(128)
+  tables_dataCategory : nvarchar(500)
+  tables_description : nvarchar(max)
+  tables_isHidden : nvarchar(500)
   target_filter : nvarchar(4000)
   temporal_type : tinyint
   * usp_persistence_name : nvarchar(140)
   usp_persistence_RepoObject_guid : uniqueidentifier
+  --
 }
 
 entity repo.RepoObject_SqlCreateTable << V >> {
@@ -230,6 +238,7 @@ entity repo.RepoObject_SqlCreateTable << V >> {
   persistence_source_SysObject_fullname : nvarchar(261)
   * RepoObject_fullname : nvarchar(261)
   * SqlCreateTable : nvarchar(max)
+  --
 }
 
 entity repo.RepoObjectColumn << U >> {
@@ -270,6 +279,7 @@ entity repo.RepoObjectColumn << U >> {
   {abstract} has_different_sys_names : bit
   * {static} is_RepoObjectColumn_name_uniqueidentifier : int
   * {static} is_SysObjectColumn_name_uniqueidentifier : int
+  --
 }
 
 config.ftv_dwh_database <.. repo.RepoObject_SqlCreateTable

@@ -42,7 +42,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-05 10:54:39
+2021-09-05 13:29:35
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -98,7 +98,20 @@ source: property.RepoObjectProperty_cross As rop_cross
 *declare variables*
 
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+Declare @Referenced_current Int = 2
+Declare @Referencing_current Int = 2
+
+----
+=====
+
 |
+
 
 |400
 |
@@ -107,7 +120,18 @@ source: property.RepoObjectProperty_cross As rop_cross
 * D
 * [reference].[RepoObject_ReferenceTree]
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+Truncate Table reference.RepoObject_ReferenceTree
+----
+=====
+
 |
+
 
 |410
 |
@@ -117,7 +141,71 @@ source: property.RepoObjectProperty_cross As rop_cross
 * [reference].[RepoObject_ReferencingReferenced]
 * [reference].[RepoObject_ReferenceTree]
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+--initial data
+Insert Into reference.RepoObject_ReferenceTree
+(
+    RepoObject_guid
+  , Referenced_guid
+  , Referenced_Depth
+  , referenced_fullname
+  , referenced_fullname2
+  , referenced_type
+  , Referencing_guid
+  , Referencing_Depth
+  , referencing_fullname
+  , referencing_fullname2
+  , referencing_type
+)
+--RepoObject_guid = FirstNode.Referencing_guid 
+Select
+    RepoObject_guid   = FirstNode.Referencing_guid
+  , FirstNode.Referenced_guid
+  , Referenced_Depth  = 1
+  , FirstNode.referenced_fullname
+  , FirstNode.referenced_fullname2
+  , FirstNode.referenced_type
+  , FirstNode.Referencing_guid
+  , Referencing_Depth = 0
+  , FirstNode.referencing_fullname
+  , FirstNode.referencing_fullname2
+  , FirstNode.referencing_type
+From
+    reference.RepoObject_ReferencingReferenced As FirstNode
+Where
+    --FirstNode.Referencing_guid = @RepoObject_guid
+    --And 
+    1 <= @Referenced_Depth
+Union All
+--RepoObject_guid   = FirstNode.Referenced_guid
+Select
+    RepoObject_guid   = FirstNode.Referenced_guid
+  , FirstNode.Referenced_guid
+  , Referenced_Depth  = 0
+  , FirstNode.referenced_fullname
+  , FirstNode.referenced_fullname2
+  , FirstNode.referenced_type
+  , FirstNode.Referencing_guid
+  , Referencing_Depth = 1
+  , FirstNode.referencing_fullname
+  , FirstNode.referencing_fullname2
+  , FirstNode.referencing_type
+From
+    reference.RepoObject_ReferencingReferenced As FirstNode
+Where
+    --FirstNode.Referenced_guid = @RepoObject_guid
+    --And 
+    1 <= @Referencing_Depth
+----
+=====
+
 |
+
 
 |510
 |
@@ -127,7 +215,72 @@ source: property.RepoObjectProperty_cross As rop_cross
 * [reference].[RepoObject_ReferencingReferenced]
 * [reference].[RepoObject_ReferenceTree]
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+While @Referenced_current <= @Referenced_Depth
+Begin
+    Print Concat ( '@Referenced_current: ', @Referenced_current )
+
+    Insert Into reference.RepoObject_ReferenceTree
+    (
+        RepoObject_guid
+      , Referenced_guid
+      , Referenced_Depth
+      , referenced_fullname
+      , referenced_fullname2
+      , referenced_type
+      , Referencing_guid
+      , Referencing_Depth
+      , referencing_fullname
+      , referencing_fullname2
+      , referencing_type
+    )
+    Select
+        parent.RepoObject_guid
+      , child.Referenced_guid
+      , Referenced_Depth  = @Referenced_current
+      , child.referenced_fullname
+      , child.referenced_fullname2
+      , child.referenced_type
+      , child.Referencing_guid
+      , Referencing_Depth = 0
+      , child.referencing_fullname
+      , child.referencing_fullname2
+      , child.referencing_type
+    From
+        reference.RepoObject_ReferencingReferenced As child
+        Inner Join
+            reference.RepoObject_ReferenceTree     As parent
+                On
+                parent.Referenced_guid = child.Referencing_guid
+    Where
+        parent.Referenced_Depth      < @Referenced_current
+        And parent.Referencing_Depth = 0
+        --shortest path, don't add any deeper path
+        And Not Exists
+    (
+        Select
+            1
+        From
+            reference.RepoObject_ReferenceTree As tgt
+        Where
+            tgt.RepoObject_guid       = parent.RepoObject_guid
+            And tgt.Referenced_guid   = child.Referenced_guid
+            And tgt.Referencing_guid  = child.Referencing_guid
+            And tgt.Referencing_Depth = 0
+    )
+
+    Set @Referenced_current = @Referenced_current + 1
+End
+----
+=====
+
 |
+
 
 |520
 |
@@ -137,7 +290,72 @@ source: property.RepoObjectProperty_cross As rop_cross
 * [reference].[RepoObject_ReferencingReferenced]
 * [reference].[RepoObject_ReferenceTree]
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+While @Referencing_current <= @Referencing_Depth
+Begin
+    Print Concat ( '@Referencing_current: ', @Referencing_current )
+
+    Insert Into reference.RepoObject_ReferenceTree
+    (
+        RepoObject_guid
+      , Referenced_guid
+      , Referenced_Depth
+      , referenced_fullname
+      , referenced_fullname2
+      , referenced_type
+      , Referencing_guid
+      , Referencing_Depth
+      , referencing_fullname
+      , referencing_fullname2
+      , referencing_type
+    )
+    Select
+        parent.RepoObject_guid
+      , child.Referenced_guid
+      , Referenced_Depth  = 0
+      , child.referenced_fullname
+      , child.referenced_fullname2
+      , child.referenced_type
+      , child.Referencing_guid
+      , Referencing_Depth = @Referencing_current
+      , child.referencing_fullname
+      , child.referencing_fullname2
+      , child.referencing_type
+    From
+        reference.RepoObject_ReferencingReferenced As child
+        Inner Join
+            reference.RepoObject_ReferenceTree     As parent
+                On
+                parent.Referencing_guid = child.Referenced_guid
+    Where
+        parent.Referencing_Depth    < @Referencing_current
+        And parent.Referenced_Depth = 0
+        --shortest path, don't add any deeper path
+        And Not Exists
+    (
+        Select
+            1
+        From
+            reference.RepoObject_ReferenceTree As tgt
+        Where
+            tgt.RepoObject_guid      = parent.RepoObject_guid
+            And tgt.Referenced_guid  = child.Referenced_guid
+            And tgt.Referencing_guid = child.Referencing_guid
+            And tgt.Referenced_Depth = 0
+    )
+
+    Set @Referencing_current = @Referencing_current + 1
+End
+----
+=====
+
 |
+
 |===
 
 // end::adocuspsteps[]
@@ -411,7 +629,7 @@ source: property.RepoObjectProperty WHERE property_int = 1
 
 // tag::sql_modules_definition[]
 [%collapsible]
-====
+=======
 [source,sql]
 ----
 /*
@@ -829,7 +1047,7 @@ END
 
 
 ----
-====
+=======
 // end::sql_modules_definition[]
 
 

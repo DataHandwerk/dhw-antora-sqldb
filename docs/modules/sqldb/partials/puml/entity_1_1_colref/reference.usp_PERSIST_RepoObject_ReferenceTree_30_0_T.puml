@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -23,11 +24,8 @@ skinparam class {
 }
 
 
-entity docs.usp_AntoraExport << P >> {
-  --
-}
-
 entity logs.usp_ExecutionLog_insert << P >> {
+  --
   --
 }
 
@@ -44,6 +42,7 @@ entity reference.RepoObject_ReferenceTree_30_0 << V >> {
   Referencing_fullname : nvarchar(261)
   Referencing_fullname2 : nvarchar(257)
   Referencing_type : varchar(2)
+  --
 }
 
 entity reference.RepoObject_ReferenceTree_30_0_T << U >> {
@@ -59,14 +58,21 @@ entity reference.RepoObject_ReferenceTree_30_0_T << U >> {
   Referencing_guid : uniqueidentifier
   Referencing_type : varchar(2)
   RepoObject_guid : uniqueidentifier
+  --
 }
 
 entity reference.usp_PERSIST_RepoObject_ReferenceTree_30_0_T << P >> {
+  --
+  --
+}
+
+entity reference.usp_RepoObject_ReferenceTree << P >> {
+  --
   --
 }
 
 logs.usp_ExecutionLog_insert <.. reference.usp_PERSIST_RepoObject_ReferenceTree_30_0_T
 reference.RepoObject_ReferenceTree_30_0 <.. reference.usp_PERSIST_RepoObject_ReferenceTree_30_0_T
 reference.RepoObject_ReferenceTree_30_0_T <.. reference.usp_PERSIST_RepoObject_ReferenceTree_30_0_T
-reference.usp_PERSIST_RepoObject_ReferenceTree_30_0_T <.. docs.usp_AntoraExport
+reference.usp_PERSIST_RepoObject_ReferenceTree_30_0_T <.. reference.usp_RepoObject_ReferenceTree
 

@@ -5,6 +5,8 @@
 // tag::existing_properties[]
 :ExistsProperty--antorareferencedlist:
 :ExistsProperty--antorareferencinglist:
+:ExistsProperty--is_repo_managed:
+:ExistsProperty--is_ssas:
 :ExistsProperty--pk_index_guid:
 :ExistsProperty--pk_indexpatterncolumndatatype:
 :ExistsProperty--pk_indexpatterncolumnname:
@@ -36,19 +38,19 @@ view
 == SysObject_id
 
 // tag::SysObject_id[]
-242815927
+1912393882
 // end::SysObject_id[]
 
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-04-13 19:02:37
+2021-08-29 15:40:10
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[[column-RepoObject_guid]]
+[#column-RepoObject_guid]
 === RepoObject_guid
 
 [cols="d,m,m,m,m,d"]
@@ -68,7 +70,7 @@ view
 --
 
 
-[[column-included_RepoObject_guid]]
+[#column-included_RepoObject_guid]
 === included_RepoObject_guid
 
 [cols="d,m,m,m,m,d"]
@@ -82,7 +84,7 @@ view
 |===
 
 
-[[column-included_RepoObject_fullname2]]
+[#column-included_RepoObject_fullname2]
 === included_RepoObject_fullname2
 
 [cols="d,m,m,m,m,d"]
@@ -96,7 +98,21 @@ view
 |===
 
 
-[[column-RepoObject_fullname2]]
+[#column-included_SchemaName]
+=== included_SchemaName
+
+[cols="d,m,m,m,m,d"]
+|===
+|
+|included_SchemaName
+|nvarchar(128)
+|NULL
+|
+|
+|===
+
+
+[#column-RepoObject_fullname2]
 === RepoObject_fullname2
 
 [cols="d,m,m,m,m,d"]
@@ -104,6 +120,26 @@ view
 |
 |RepoObject_fullname2
 |nvarchar(257)
+|NULL
+|
+|
+|===
+
+.Referencing Columns
+--
+* xref:docs.RepoObject_PlantUml_FkRefList.adoc#column-RepoObject_fullname2[+docs.RepoObject_PlantUml_FkRefList.RepoObject_fullname2+]
+* xref:docs.RepoObject_PlantUml_PumlEntityFkList.adoc#column-RepoObject_fullname2[+docs.RepoObject_PlantUml_PumlEntityFkList.RepoObject_fullname2+]
+--
+
+
+[#column-SchemaName]
+=== SchemaName
+
+[cols="d,m,m,m,m,d"]
+|===
+|
+|SchemaName
+|nvarchar(128)
 |NULL
 |
 |
@@ -131,6 +167,8 @@ view
 
 
 
+
+
 // end::AntoraPkColumnTableRows[]
 
 == AntoraNonPkColumnTableRows
@@ -146,8 +184,22 @@ view
 |
 
 |
+|<<column-included_SchemaName>>
+|nvarchar(128)
+|NULL
+|
+|
+
+|
 |<<column-RepoObject_fullname2>>
 |nvarchar(257)
+|NULL
+|
+|
+
+|
+|<<column-SchemaName>>
+|nvarchar(128)
 |NULL
 |
 |
@@ -158,10 +210,10 @@ view
 
 // tag::AntoraIndexList[]
 
-[[index-PK_RepoObject_related_FK_union]]
+[#index-PK_RepoObject_related_FK_union]
 === PK_RepoObject_related_FK_union
 
-* IndexSemanticGroup: xref:index/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -177,14 +229,19 @@ view
 
 // end::AntoraParameterList[]
 
-== AdocUspSteps
+== Other tags
+
+source: property.RepoObjectProperty_cross As rop_cross
+
+
+=== AdocUspSteps
 
 // tag::adocuspsteps[]
 
 // end::adocuspsteps[]
 
 
-== AntoraReferencedList
+=== AntoraReferencedList
 
 // tag::antorareferencedlist[]
 * xref:repo.ForeignKey_Indexes_union_T.adoc[]
@@ -192,7 +249,7 @@ view
 // end::antorareferencedlist[]
 
 
-== AntoraReferencingList
+=== AntoraReferencingList
 
 // tag::antorareferencinglist[]
 * xref:docs.RepoObject_PlantUml_FkRefList.adoc[]
@@ -200,210 +257,217 @@ view
 // end::antorareferencinglist[]
 
 
-== exampleUsage
+=== exampleUsage
 
 // tag::exampleusage[]
 
 // end::exampleusage[]
 
 
-== exampleUsage_2
+=== exampleUsage_2
 
 // tag::exampleusage_2[]
 
 // end::exampleusage_2[]
 
 
-== exampleUsage_3
+=== exampleUsage_3
 
 // tag::exampleusage_3[]
 
 // end::exampleusage_3[]
 
 
-== exampleUsage_4
+=== exampleUsage_4
 
 // tag::exampleusage_4[]
 
 // end::exampleusage_4[]
 
 
-== exampleUsage_5
+=== exampleUsage_5
 
 // tag::exampleusage_5[]
 
 // end::exampleusage_5[]
 
 
-== exampleWrong_Usage
+=== exampleWrong_Usage
 
 // tag::examplewrong_usage[]
 
 // end::examplewrong_usage[]
 
 
-== has_execution_plan_issue
+=== has_execution_plan_issue
 
 // tag::has_execution_plan_issue[]
 
 // end::has_execution_plan_issue[]
 
 
-== has_get_referenced_issue
+=== has_get_referenced_issue
 
 // tag::has_get_referenced_issue[]
 
 // end::has_get_referenced_issue[]
 
 
-== has_history
+=== has_history
 
 // tag::has_history[]
 
 // end::has_history[]
 
 
-== has_history_columns
+=== has_history_columns
 
 // tag::has_history_columns[]
 
 // end::has_history_columns[]
 
 
-== is_persistence
+=== is_persistence
 
 // tag::is_persistence[]
 
 // end::is_persistence[]
 
 
-== is_persistence_check_duplicate_per_pk
+=== is_persistence_check_duplicate_per_pk
 
 // tag::is_persistence_check_duplicate_per_pk[]
 
 // end::is_persistence_check_duplicate_per_pk[]
 
 
-== is_persistence_check_for_empty_source
+=== is_persistence_check_for_empty_source
 
 // tag::is_persistence_check_for_empty_source[]
 
 // end::is_persistence_check_for_empty_source[]
 
 
-== is_persistence_delete_changed
+=== is_persistence_delete_changed
 
 // tag::is_persistence_delete_changed[]
 
 // end::is_persistence_delete_changed[]
 
 
-== is_persistence_delete_missing
+=== is_persistence_delete_missing
 
 // tag::is_persistence_delete_missing[]
 
 // end::is_persistence_delete_missing[]
 
 
-== is_persistence_insert
+=== is_persistence_insert
 
 // tag::is_persistence_insert[]
 
 // end::is_persistence_insert[]
 
 
-== is_persistence_truncate
+=== is_persistence_truncate
 
 // tag::is_persistence_truncate[]
 
 // end::is_persistence_truncate[]
 
 
-== is_persistence_update_changed
+=== is_persistence_update_changed
 
 // tag::is_persistence_update_changed[]
 
 // end::is_persistence_update_changed[]
 
 
-== is_repo_managed
+=== is_repo_managed
 
 // tag::is_repo_managed[]
-
+0
 // end::is_repo_managed[]
 
 
-== microsoft_database_tools_support
+=== is_ssas
+
+// tag::is_ssas[]
+0
+// end::is_ssas[]
+
+
+=== microsoft_database_tools_support
 
 // tag::microsoft_database_tools_support[]
 
 // end::microsoft_database_tools_support[]
 
 
-== MS_Description
+=== MS_Description
 
 // tag::ms_description[]
 
 // end::ms_description[]
 
 
-== persistence_source_RepoObject_fullname
+=== persistence_source_RepoObject_fullname
 
 // tag::persistence_source_repoobject_fullname[]
 
 // end::persistence_source_repoobject_fullname[]
 
 
-== persistence_source_RepoObject_fullname2
+=== persistence_source_RepoObject_fullname2
 
 // tag::persistence_source_repoobject_fullname2[]
 
 // end::persistence_source_repoobject_fullname2[]
 
 
-== persistence_source_RepoObject_guid
+=== persistence_source_RepoObject_guid
 
 // tag::persistence_source_repoobject_guid[]
 
 // end::persistence_source_repoobject_guid[]
 
 
-== persistence_source_RepoObject_xref
+=== persistence_source_RepoObject_xref
 
 // tag::persistence_source_repoobject_xref[]
 
 // end::persistence_source_repoobject_xref[]
 
 
-== pk_index_guid
+=== pk_index_guid
 
 // tag::pk_index_guid[]
 4F5B156F-129E-EB11-84F6-A81E8446D5B0
 // end::pk_index_guid[]
 
 
-== pk_IndexPatternColumnDatatype
+=== pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
 uniqueidentifier,uniqueidentifier
 // end::pk_indexpatterncolumndatatype[]
 
 
-== pk_IndexPatternColumnName
+=== pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
 RepoObject_guid,included_RepoObject_guid
 // end::pk_indexpatterncolumnname[]
 
 
-== pk_IndexSemanticGroup
+=== pk_IndexSemanticGroup
 
 // tag::pk_indexsemanticgroup[]
 
 // end::pk_indexsemanticgroup[]
 
 
-== ReferencedObjectList
+=== ReferencedObjectList
 
 // tag::referencedobjectlist[]
 * [repo].[ForeignKey_Indexes_union_T]
@@ -411,30 +475,39 @@ RepoObject_guid,included_RepoObject_guid
 // end::referencedobjectlist[]
 
 
-== usp_persistence_RepoObject_guid
+=== usp_persistence_RepoObject_guid
 
 // tag::usp_persistence_repoobject_guid[]
 
 // end::usp_persistence_repoobject_guid[]
 
 
-== UspExamples
+=== UspExamples
 
 // tag::uspexamples[]
 
 // end::uspexamples[]
 
 
-== UspParameters
+=== UspParameters
 
 // tag::uspparameters[]
 
 // end::uspparameters[]
 
+== Boolean Attributes
+
+source: property.RepoObjectProperty WHERE property_int = 1
+
+// tag::boolean_attributes[]
+
+// end::boolean_attributes[]
 
 == sql_modules_definition
 
 // tag::sql_modules_definition[]
+[%collapsible]
+=======
 [source,sql]
 ----
 
@@ -446,15 +519,17 @@ Relation to themself to ensure, all RO are included into docs
 * relation PK <- FK
 * relation FK -> PK
 */
-Create View repo.RepoObject_related_FK_union
+CREATE View repo.RepoObject_related_FK_union
 As
 Select
-    RepoObject_guid
-  , RepoObject_fullname2
-  , included_RepoObject_guid      = RepoObject_guid
-  , included_RepoObject_fullname2 = RepoObject_fullname2
+    ro.RepoObject_guid
+  , ro.RepoObject_fullname2
+  , SchemaName                    = ro.RepoObject_schema_name
+  , included_RepoObject_guid      = ro.RepoObject_guid
+  , included_RepoObject_fullname2 = ro.RepoObject_fullname2
+  , included_SchemaName           = ro.RepoObject_schema_name
 From
-    repo.RepoObject ro
+    repo.RepoObject As ro
 Where
     ro.RepoObject_type In
     ( 'u', 'v' )
@@ -462,20 +537,25 @@ Union
 Select
     referenced_RepoObject_guid
   , referenced_RepoObject_fullname2
+  , referenced_SysObject_schema_name
   , referencing_RepoObject_guid
   , referencing_RepoObject_fullname2
+  , referencing_SysObject_schema_name
 From
     repo.ForeignKey_Indexes_union_T
 Union
 Select
     referencing_RepoObject_guid
   , referencing_RepoObject_fullname2
+  , referencing_SysObject_schema_name
   , referenced_RepoObject_guid
   , referenced_RepoObject_fullname2
+  , referenced_SysObject_schema_name
 From
-    repo.ForeignKey_Indexes_union_T;
+    repo.ForeignKey_Indexes_union_T
 
 ----
+=======
 // end::sql_modules_definition[]
 
 

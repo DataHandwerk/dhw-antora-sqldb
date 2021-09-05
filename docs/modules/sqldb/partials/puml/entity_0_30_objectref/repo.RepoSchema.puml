@@ -1,4 +1,5 @@
 'Left to right direction
+top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -28,6 +29,18 @@ entity docs.AntoraNavListPage_by_schema << V >> {
   --
 }
 
+entity docs.Schema_puml << V >> {
+  --
+}
+
+entity docs.usp_AntoraExport << P >> {
+  --
+}
+
+entity docs.usp_AntoraExport_ObjectPuml << P >> {
+  --
+}
+
 entity property.ExtendedProperty_Repo2Sys_level0 << V >> {
   --
 }
@@ -49,6 +62,11 @@ entity repo.RepoSchema << U >> {
   --
 }
 
+entity repo.RepoSchema_ssas_tgt << V >> {
+  * **RepoSchema_name** : nvarchar(128)
+  --
+}
+
 entity repo.SysSchema_RepoSchema_via_guid << V >> {
   --
 }
@@ -58,6 +76,10 @@ entity repo.SysSchema_RepoSchema_via_name << V >> {
 }
 
 entity repo.usp_main << P >> {
+  --
+}
+
+entity repo.usp_PERSIST_RepoSchema_ssas_tgt << P >> {
   --
 }
 
@@ -73,16 +95,28 @@ entity repo.usp_sync_guid_RepoSchema << P >> {
   --
 }
 
+entity repo.usp_sync_guid_ssas << P >> {
+  --
+}
+
+docs.usp_AntoraExport_ObjectPuml <.. docs.usp_AntoraExport
 property.ExtendedProperty_Repo2Sys_level0 <.. property.usp_sync_ExtendedProperties_Repo2Sys_InsertUpdate
 property.ExtendedProperty_Repo2Sys_level0 <.. property.usp_sync_ExtendedProperties_Repo2Sys_Delete
 repo.RepoSchema <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
+repo.RepoSchema <.. docs.usp_AntoraExport_ObjectPuml
 repo.RepoSchema <.. docs.AntoraNavListPage_by_schema
 repo.RepoSchema <.. repo.SysSchema_RepoSchema_via_guid
 repo.RepoSchema <.. repo.SysSchema_RepoSchema_via_name
 repo.RepoSchema <.. repo.usp_sync_guid_RepoSchema
 repo.RepoSchema <.. property.ExtendedProperty_Repo2Sys_level0
+repo.RepoSchema <.. repo.RepoSchema_ssas_tgt
+repo.RepoSchema <.. docs.Schema_puml
+repo.RepoSchema_ssas_tgt <.. repo.RepoSchema
+repo.RepoSchema_ssas_tgt <.. repo.usp_PERSIST_RepoSchema_ssas_tgt
 repo.SysSchema_RepoSchema_via_guid <.. repo.usp_sync_guid_RepoSchema
 repo.SysSchema_RepoSchema_via_name <.. repo.usp_sync_guid_RepoSchema
-repo.usp_sync_guid <.. repo.usp_main
+repo.usp_PERSIST_RepoSchema_ssas_tgt <.. repo.usp_sync_guid_ssas
 repo.usp_sync_guid <.. repo.usp_persistence_set
+repo.usp_sync_guid <.. repo.usp_main
 repo.usp_sync_guid_RepoSchema <.. repo.usp_sync_guid
+repo.usp_sync_guid_ssas <.. repo.usp_main

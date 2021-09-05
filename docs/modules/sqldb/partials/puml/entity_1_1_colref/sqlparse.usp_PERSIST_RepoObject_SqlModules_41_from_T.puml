@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -25,6 +26,7 @@ skinparam class {
 
 entity logs.usp_ExecutionLog_insert << P >> {
   --
+  --
 }
 
 entity sqlparse.RepoObject_SqlModules_41_from << V >> {
@@ -50,6 +52,7 @@ entity sqlparse.RepoObject_SqlModules_41_from << V >> {
   patindex_nolock : bigint
   RowNumber_per_Object : bigint
   SysObject_fullname : nvarchar(261)
+  --
 }
 
 entity sqlparse.RepoObject_SqlModules_41_from_T << U >> {
@@ -75,13 +78,21 @@ entity sqlparse.RepoObject_SqlModules_41_from_T << U >> {
   patindex_nolock : bigint
   RowNumber_per_Object : bigint
   SysObject_fullname : nvarchar(261)
+  --
 }
 
 entity sqlparse.usp_PERSIST_RepoObject_SqlModules_41_from_T << P >> {
+  --
+  --
+}
+
+entity sqlparse.usp_sqlparse << P >> {
+  --
   --
 }
 
 logs.usp_ExecutionLog_insert <.. sqlparse.usp_PERSIST_RepoObject_SqlModules_41_from_T
 sqlparse.RepoObject_SqlModules_41_from <.. sqlparse.usp_PERSIST_RepoObject_SqlModules_41_from_T
 sqlparse.RepoObject_SqlModules_41_from_T <.. sqlparse.usp_PERSIST_RepoObject_SqlModules_41_from_T
+sqlparse.usp_PERSIST_RepoObject_SqlModules_41_from_T <.. sqlparse.usp_sqlparse
 

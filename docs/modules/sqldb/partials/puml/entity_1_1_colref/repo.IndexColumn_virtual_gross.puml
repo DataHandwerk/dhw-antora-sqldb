@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -35,13 +36,14 @@ entity repo.Index_virtual << U >> {
   * parent_RepoObject_guid : uniqueidentifier
   referenced_index_guid : uniqueidentifier
   RowNumberInReferencing : int
+  --
 }
 
 entity repo.IndexColumn_union << V >> {
   **index_guid** : uniqueidentifier
   * **index_column_id** : int
   --
-  index_name : nvarchar(128)
+  index_name : nvarchar(450)
   is_descending_key : bit
   is_index_primary_key : bit
   is_index_real : bit
@@ -53,6 +55,7 @@ entity repo.IndexColumn_union << V >> {
   RepoObjectColumn_guid : uniqueidentifier
   SysObject_column_name : nvarchar(128)
   SysObject_column_user_type_fullname : nvarchar(182)
+  --
 }
 
 entity repo.IndexColumn_virtual << U >> {
@@ -61,6 +64,7 @@ entity repo.IndexColumn_virtual << U >> {
   --
   * is_descending_key : bit
   * RepoObjectColumn_guid : uniqueidentifier
+  --
 }
 
 entity repo.IndexColumn_virtual_gross << V >> {
@@ -79,6 +83,7 @@ entity repo.IndexColumn_virtual_gross << V >> {
   * parent_RepoObject_guid : uniqueidentifier
   parent_schema_name : nvarchar(128)
   * RepoObjectColumn_guid : uniqueidentifier
+  --
 }
 
 entity repo.RepoObject << U >> {
@@ -89,8 +94,10 @@ entity repo.RepoObject << U >> {
   Inheritance_StringAggSeparatorSql : nvarchar(4000)
   InheritanceDefinition : nvarchar(4000)
   InheritanceType : tinyint
+  * is_DocsExclude : bit
   is_repo_managed : bit
   is_required_ObjectMerge : bit
+  * is_ssas : bit
   is_SysObject_missing : bit
   * modify_dt : datetime
   pk_index_guid : uniqueidentifier
@@ -116,7 +123,9 @@ entity repo.RepoObject << U >> {
   * {static} SysObject_fullname : nvarchar(261)
   * {static} SysObject_fullname2 : nvarchar(257)
   * {abstract} SysObject_query_sql : nvarchar(406)
+  * {static} usp_persistence_fullname2 : nvarchar(269)
   * {static} usp_persistence_name : nvarchar(140)
+  --
 }
 
 entity repo.RepoObjectColumn << U >> {
@@ -157,6 +166,7 @@ entity repo.RepoObjectColumn << U >> {
   {abstract} has_different_sys_names : bit
   * {static} is_RepoObjectColumn_name_uniqueidentifier : int
   * {static} is_SysObjectColumn_name_uniqueidentifier : int
+  --
 }
 
 repo.Index_virtual <.. repo.IndexColumn_virtual_gross

@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -25,6 +26,7 @@ skinparam class {
 
 entity logs.usp_ExecutionLog_insert << P >> {
   --
+  --
 }
 
 entity property.RepoObjectColumnProperty << U >> {
@@ -39,6 +41,7 @@ entity property.RepoObjectColumnProperty << U >> {
   {abstract} property_int : int
   {abstract} property_money : money
   {abstract} property_real : real
+  --
 }
 
 entity property.RepoObjectColumnProperty_sys_repo << V >> {
@@ -51,6 +54,7 @@ entity property.RepoObjectColumnProperty_sys_repo << V >> {
   SysObject_name : nvarchar(128)
   SysObject_schema_name : nvarchar(128)
   SysObjectColumn_name : nvarchar(128)
+  --
 }
 
 entity property.RepoObjectProperty << U >> {
@@ -65,6 +69,7 @@ entity property.RepoObjectProperty << U >> {
   {abstract} property_int : int
   {abstract} property_money : money
   {abstract} property_real : real
+  --
 }
 
 entity property.RepoObjectProperty_sys_repo << V >> {
@@ -76,15 +81,18 @@ entity property.RepoObjectProperty_sys_repo << V >> {
   RepoObjectProperty_property_value : nvarchar(max)
   SysObject_name : nvarchar(128)
   SysObject_schema_name : nvarchar(128)
+  --
 }
 
 entity property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate << P >> {
+  --
   --
 }
 
 entity repo.RepoSchema << U >> {
   * **RepoSchema_guid** : uniqueidentifier
   --
+  * is_ssas : bit
   is_SysSchema_missing : bit
   RepoSchema_ms_description : nvarchar(4000)
   * RepoSchema_name : nvarchar(128)
@@ -93,6 +101,7 @@ entity repo.RepoSchema << U >> {
   {abstract} has_different_sys_names : bit
   * {static} is_RepoSchema_name_uniqueidentifier : int
   * {static} is_SysSchema_name_uniqueidentifier : int
+  --
 }
 
 entity repo_sys.ExtendedProperties << V >> {
@@ -115,6 +124,7 @@ entity repo_sys.ExtendedProperties << V >> {
   property_value : sql_variant
   SysObject_name : nvarchar(128)
   SysObject_schema_name : nvarchar(128)
+  --
 }
 
 logs.usp_ExecutionLog_insert <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate

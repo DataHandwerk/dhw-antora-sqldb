@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -27,6 +28,7 @@ entity config.ftv_dwh_database << IF >> {
   --
   dwh_database_id : smallint
   dwh_database_name : nvarchar(128)
+  --
 }
 
 entity property.RepoObjectProperty_Collect_source_uspgenerator << V >> {
@@ -34,6 +36,7 @@ entity property.RepoObjectProperty_Collect_source_uspgenerator << V >> {
   * **property_name** : varchar(14)
   --
   property_value : nvarchar(max)
+  --
 }
 
 entity repo.RepoObject << U >> {
@@ -44,8 +47,10 @@ entity repo.RepoObject << U >> {
   Inheritance_StringAggSeparatorSql : nvarchar(4000)
   InheritanceDefinition : nvarchar(4000)
   InheritanceType : tinyint
+  * is_DocsExclude : bit
   is_repo_managed : bit
   is_required_ObjectMerge : bit
+  * is_ssas : bit
   is_SysObject_missing : bit
   * modify_dt : datetime
   pk_index_guid : uniqueidentifier
@@ -71,7 +76,9 @@ entity repo.RepoObject << U >> {
   * {static} SysObject_fullname : nvarchar(261)
   * {static} SysObject_fullname2 : nvarchar(257)
   * {abstract} SysObject_query_sql : nvarchar(406)
+  * {static} usp_persistence_fullname2 : nvarchar(269)
   * {static} usp_persistence_name : nvarchar(140)
+  --
 }
 
 entity uspgenerator.GeneratorUsp << U >> {
@@ -83,6 +90,7 @@ entity uspgenerator.GeneratorUsp << U >> {
   * usp_name : nvarchar(128)
   * usp_schema : nvarchar(128)
   * {static} usp_fullname : nvarchar(261)
+  --
 }
 
 entity uspgenerator.GeneratorUsp_ParameterList << V >> {
@@ -90,6 +98,7 @@ entity uspgenerator.GeneratorUsp_ParameterList << V >> {
   --
   ParameterList : nvarchar(max)
   ParameterListLogging : nvarchar(max)
+  --
 }
 
 entity uspgenerator.GeneratorUsp_SqlUsp << V >> {
@@ -107,6 +116,7 @@ entity uspgenerator.GeneratorUsp_SqlUsp << V >> {
   * usp_schema : nvarchar(128)
   * UspExamples : nvarchar(4000)
   UspParameters : nvarchar(max)
+  --
 }
 
 entity uspgenerator.GeneratorUsp_StepList << V >> {
@@ -114,6 +124,7 @@ entity uspgenerator.GeneratorUsp_StepList << V >> {
   AdocStepList : nvarchar(max)
   StepList : nvarchar(max)
   * usp_id : int
+  --
 }
 
 config.ftv_dwh_database <.. uspgenerator.GeneratorUsp_SqlUsp

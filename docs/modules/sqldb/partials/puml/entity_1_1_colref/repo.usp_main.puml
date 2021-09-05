@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -25,65 +26,192 @@ skinparam class {
 
 entity config.fs_get_parameter_value << FN >> {
   --
+  --
 }
 
 entity logs.usp_ExecutionLog_insert << P >> {
+  --
   --
 }
 
 entity property.usp_RepoObject_Inheritance << P >> {
   --
+  --
 }
 
 entity property.usp_RepoObjectColumn_Inheritance << P >> {
+  --
+  --
+}
+
+entity reference.RepoObject_reference_persistence << V >> {
+  **referenced_RepoObject_guid** : uniqueidentifier
+  * **referencing_RepoObject_guid** : uniqueidentifier
+  --
+  * InformationSource : varchar(27)
+  * referenced_entity_name : nvarchar(128)
+  * referenced_fullname : nvarchar(261)
+  referenced_id : int
+  * referenced_schema_name : nvarchar(128)
+  referenced_type : char(2)
+  * referencing_entity_name : nvarchar(128)
+  * referencing_fullname : nvarchar(261)
+  referencing_id : int
+  * referencing_schema_name : nvarchar(128)
+  referencing_type : varchar(2)
+  --
+}
+
+entity reference.RepoObject_reference_persistence_target_as_source << V >> {
+  --
+  * InformationSource : varchar(28)
+  referenced_entity_name : nvarchar(128)
+  * referenced_fullname : nvarchar(517)
+  * referenced_id : int
+  referenced_RepoObject_guid : uniqueidentifier
+  referenced_schema_name : nvarchar(128)
+  referenced_type : char(2)
+  referencing_entity_name : nvarchar(128)
+  * referencing_fullname : nvarchar(517)
+  referencing_id : int
+  referencing_RepoObject_guid : uniqueidentifier
+  referencing_schema_name : nvarchar(128)
+  referencing_type : char(2)
+  --
+}
+
+entity reference.RepoObject_reference_T << U >> {
+  **referenced_RepoObject_guid** : uniqueidentifier
+  **referencing_RepoObject_guid** : uniqueidentifier
+  --
+  * is_ReversePersistenceViaView : bit
+  referenced_entity_name : nvarchar(128)
+  * referenced_is_PersistenceSource : bit
+  * referenced_is_PersistenceTarget : bit
+  referenced_schema_name : nvarchar(128)
+  referenced_type : char(2)
+  referencing_entity_name : nvarchar(128)
+  * referencing_is_PersistenceTarget : bit
+  * referencing_is_PersistenceUspSourceRef : bit
+  referencing_is_PersistenceUspTargetRef : bit
+  referencing_schema_name : nvarchar(128)
+  referencing_type : varchar(2)
+  * {static} referenced_fullname : nvarchar(261)
+  * {static} referenced_fullname2 : nvarchar(257)
+  * {static} referencing_fullname : nvarchar(261)
+  * {static} referencing_fullname2 : nvarchar(257)
   --
 }
 
 entity reference.usp_PERSIST_RepoObject_reference_T << P >> {
   --
+  --
 }
 
 entity reference.usp_PERSIST_RepoObjectColumn_reference_T << P >> {
+  --
+  --
+}
+
+entity reference.usp_RepoObject_ReferenceTree_insert << P >> {
+  --
   --
 }
 
 entity reference.usp_RepoObject_update_SysObjectQueryPlan << P >> {
   --
+  --
 }
 
 entity reference.usp_RepoObjectSource_FirstResultSet << P >> {
+  --
   --
 }
 
 entity reference.usp_RepoObjectSource_QueryPlan << P >> {
   --
+  --
 }
 
 entity reference.usp_update_Referencing_Count << P >> {
+  --
+  --
+}
+
+entity repo.RepoObject << U >> {
+  * **RepoObject_guid** : uniqueidentifier
+  --
+  has_execution_plan_issue : bit
+  has_get_referenced_issue : bit
+  Inheritance_StringAggSeparatorSql : nvarchar(4000)
+  InheritanceDefinition : nvarchar(4000)
+  InheritanceType : tinyint
+  * is_DocsExclude : bit
+  is_repo_managed : bit
+  is_required_ObjectMerge : bit
+  * is_ssas : bit
+  is_SysObject_missing : bit
+  * modify_dt : datetime
+  pk_index_guid : uniqueidentifier
+  pk_IndexPatternColumnName_new : nvarchar(4000)
+  Repo_history_table_guid : uniqueidentifier
+  Repo_temporal_type : tinyint
+  * RepoObject_name : nvarchar(128)
+  RepoObject_Referencing_Count : int
+  * RepoObject_schema_name : nvarchar(128)
+  * RepoObject_type : char(2)
+  SysObject_id : int
+  SysObject_modify_date : datetime
+  * SysObject_name : nvarchar(128)
+  * SysObject_parent_object_id : int
+  * SysObject_schema_name : nvarchar(128)
+  SysObject_type : char(2)
+  {abstract} has_different_sys_names : bit
+  * {static} is_RepoObject_name_uniqueidentifier : int
+  * {static} is_SysObject_name_uniqueidentifier : int
+  {abstract} node_id : bigint
+  * {static} RepoObject_fullname : nvarchar(261)
+  * {static} RepoObject_fullname2 : nvarchar(257)
+  * {static} SysObject_fullname : nvarchar(261)
+  * {static} SysObject_fullname2 : nvarchar(257)
+  * {abstract} SysObject_query_sql : nvarchar(406)
+  * {static} usp_persistence_fullname2 : nvarchar(269)
+  * {static} usp_persistence_name : nvarchar(140)
   --
 }
 
 entity repo.usp_Index_ForeignKey << P >> {
   --
+  --
 }
 
 entity repo.usp_index_inheritance << P >> {
+  --
   --
 }
 
 entity repo.usp_main << P >> {
   --
+  --
 }
 
 entity repo.usp_RepoObjectColumn_update_RepoObjectColumn_column_id << P >> {
+  --
   --
 }
 
 entity repo.usp_sync_guid << P >> {
   --
+  --
+}
+
+entity repo.usp_sync_guid_ssas << P >> {
+  --
+  --
 }
 
 entity uspgenerator.usp_GeneratorUsp_insert_update_persistence << P >> {
+  --
   --
 }
 
@@ -91,15 +219,21 @@ config.fs_get_parameter_value <.. repo.usp_main
 logs.usp_ExecutionLog_insert <.. repo.usp_main
 property.usp_RepoObject_Inheritance <.. repo.usp_main
 property.usp_RepoObjectColumn_Inheritance <.. repo.usp_main
+reference.RepoObject_reference_persistence <.. repo.usp_main
+reference.RepoObject_reference_persistence_target_as_source <.. repo.usp_main
+reference.RepoObject_reference_T <.. repo.usp_main
 reference.usp_PERSIST_RepoObject_reference_T <.. repo.usp_main
 reference.usp_PERSIST_RepoObjectColumn_reference_T <.. repo.usp_main
+reference.usp_RepoObject_ReferenceTree_insert <.. repo.usp_main
 reference.usp_RepoObject_update_SysObjectQueryPlan <.. repo.usp_main
 reference.usp_RepoObjectSource_FirstResultSet <.. repo.usp_main
 reference.usp_RepoObjectSource_QueryPlan <.. repo.usp_main
 reference.usp_update_Referencing_Count <.. repo.usp_main
+repo.RepoObject <.. repo.usp_main
 repo.usp_Index_ForeignKey <.. repo.usp_main
 repo.usp_index_inheritance <.. repo.usp_main
 repo.usp_RepoObjectColumn_update_RepoObjectColumn_column_id <.. repo.usp_main
 repo.usp_sync_guid <.. repo.usp_main
+repo.usp_sync_guid_ssas <.. repo.usp_main
 uspgenerator.usp_GeneratorUsp_insert_update_persistence <.. repo.usp_main
 

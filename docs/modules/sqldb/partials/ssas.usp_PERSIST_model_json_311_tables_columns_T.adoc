@@ -41,7 +41,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-05 10:54:39
+2021-09-05 13:29:35
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -98,7 +98,28 @@ source: property.RepoObjectProperty_cross As rop_cross
 * [ssas].[model_json_311_tables_columns]
 * [ssas].[model_json_311_tables_columns_T]
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+DELETE T
+FROM [ssas].[model_json_311_tables_columns_T] AS T
+WHERE
+NOT EXISTS
+(SELECT 1 FROM [ssas].[model_json_311_tables_columns] AS S
+WHERE
+T.[databasename] = S.[databasename]
+AND T.[tables_name] = S.[tables_name]
+AND T.[tables_columns_name] = S.[tables_columns_name]
+)
+ 
+----
+=====
+
 |
+
 
 |600
 |
@@ -108,7 +129,72 @@ source: property.RepoObjectProperty_cross As rop_cross
 * [ssas].[model_json_311_tables_columns]
 * [ssas].[model_json_311_tables_columns_T]
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+UPDATE T
+SET
+  T.[databasename] = S.[databasename]
+, T.[tables_name] = S.[tables_name]
+, T.[tables_columns_name] = S.[tables_columns_name]
+, T.[RepoObject_guid] = S.[RepoObject_guid]
+, T.[tables_columns_dataType] = S.[tables_columns_dataType]
+, T.[tables_columns_description] = S.[tables_columns_description]
+, T.[tables_columns_description_ja] = S.[tables_columns_description_ja]
+, T.[tables_columns_displayFolder] = S.[tables_columns_displayFolder]
+, T.[tables_columns_expression] = S.[tables_columns_expression]
+, T.[tables_columns_expression_ja] = S.[tables_columns_expression_ja]
+, T.[tables_columns_formatString] = S.[tables_columns_formatString]
+, T.[tables_columns_isDataTypeInferred] = S.[tables_columns_isDataTypeInferred]
+, T.[tables_columns_isHidden] = S.[tables_columns_isHidden]
+, T.[tables_columns_isKey] = S.[tables_columns_isKey]
+, T.[tables_columns_isNameInferred] = S.[tables_columns_isNameInferred]
+, T.[tables_columns_isNullable] = S.[tables_columns_isNullable]
+, T.[tables_columns_isUnique] = S.[tables_columns_isUnique]
+, T.[tables_columns_keepUniqueRows] = S.[tables_columns_keepUniqueRows]
+, T.[tables_columns_sortByColumn] = S.[tables_columns_sortByColumn]
+, T.[tables_columns_sourceColumn] = S.[tables_columns_sourceColumn]
+, T.[tables_columns_sourceProviderType] = S.[tables_columns_sourceProviderType]
+, T.[tables_columns_summarizeBy] = S.[tables_columns_summarizeBy]
+, T.[tables_columns_type] = S.[tables_columns_type]
+
+FROM [ssas].[model_json_311_tables_columns_T] AS T
+INNER JOIN [ssas].[model_json_311_tables_columns] AS S
+ON
+T.[databasename] = S.[databasename]
+AND T.[tables_name] = S.[tables_name]
+AND T.[tables_columns_name] = S.[tables_columns_name]
+
+WHERE
+   T.[RepoObject_guid] <> S.[RepoObject_guid]
+OR T.[tables_columns_dataType] <> S.[tables_columns_dataType] OR (S.[tables_columns_dataType] IS NULL AND NOT T.[tables_columns_dataType] IS NULL) OR (NOT S.[tables_columns_dataType] IS NULL AND T.[tables_columns_dataType] IS NULL)
+OR T.[tables_columns_description] <> S.[tables_columns_description] OR (S.[tables_columns_description] IS NULL AND NOT T.[tables_columns_description] IS NULL) OR (NOT S.[tables_columns_description] IS NULL AND T.[tables_columns_description] IS NULL)
+OR T.[tables_columns_description_ja] <> S.[tables_columns_description_ja] OR (S.[tables_columns_description_ja] IS NULL AND NOT T.[tables_columns_description_ja] IS NULL) OR (NOT S.[tables_columns_description_ja] IS NULL AND T.[tables_columns_description_ja] IS NULL)
+OR T.[tables_columns_displayFolder] <> S.[tables_columns_displayFolder] OR (S.[tables_columns_displayFolder] IS NULL AND NOT T.[tables_columns_displayFolder] IS NULL) OR (NOT S.[tables_columns_displayFolder] IS NULL AND T.[tables_columns_displayFolder] IS NULL)
+OR T.[tables_columns_expression] <> S.[tables_columns_expression] OR (S.[tables_columns_expression] IS NULL AND NOT T.[tables_columns_expression] IS NULL) OR (NOT S.[tables_columns_expression] IS NULL AND T.[tables_columns_expression] IS NULL)
+OR T.[tables_columns_expression_ja] <> S.[tables_columns_expression_ja] OR (S.[tables_columns_expression_ja] IS NULL AND NOT T.[tables_columns_expression_ja] IS NULL) OR (NOT S.[tables_columns_expression_ja] IS NULL AND T.[tables_columns_expression_ja] IS NULL)
+OR T.[tables_columns_formatString] <> S.[tables_columns_formatString] OR (S.[tables_columns_formatString] IS NULL AND NOT T.[tables_columns_formatString] IS NULL) OR (NOT S.[tables_columns_formatString] IS NULL AND T.[tables_columns_formatString] IS NULL)
+OR T.[tables_columns_isDataTypeInferred] <> S.[tables_columns_isDataTypeInferred] OR (S.[tables_columns_isDataTypeInferred] IS NULL AND NOT T.[tables_columns_isDataTypeInferred] IS NULL) OR (NOT S.[tables_columns_isDataTypeInferred] IS NULL AND T.[tables_columns_isDataTypeInferred] IS NULL)
+OR T.[tables_columns_isHidden] <> S.[tables_columns_isHidden] OR (S.[tables_columns_isHidden] IS NULL AND NOT T.[tables_columns_isHidden] IS NULL) OR (NOT S.[tables_columns_isHidden] IS NULL AND T.[tables_columns_isHidden] IS NULL)
+OR T.[tables_columns_isKey] <> S.[tables_columns_isKey] OR (S.[tables_columns_isKey] IS NULL AND NOT T.[tables_columns_isKey] IS NULL) OR (NOT S.[tables_columns_isKey] IS NULL AND T.[tables_columns_isKey] IS NULL)
+OR T.[tables_columns_isNameInferred] <> S.[tables_columns_isNameInferred] OR (S.[tables_columns_isNameInferred] IS NULL AND NOT T.[tables_columns_isNameInferred] IS NULL) OR (NOT S.[tables_columns_isNameInferred] IS NULL AND T.[tables_columns_isNameInferred] IS NULL)
+OR T.[tables_columns_isNullable] <> S.[tables_columns_isNullable] OR (S.[tables_columns_isNullable] IS NULL AND NOT T.[tables_columns_isNullable] IS NULL) OR (NOT S.[tables_columns_isNullable] IS NULL AND T.[tables_columns_isNullable] IS NULL)
+OR T.[tables_columns_isUnique] <> S.[tables_columns_isUnique] OR (S.[tables_columns_isUnique] IS NULL AND NOT T.[tables_columns_isUnique] IS NULL) OR (NOT S.[tables_columns_isUnique] IS NULL AND T.[tables_columns_isUnique] IS NULL)
+OR T.[tables_columns_keepUniqueRows] <> S.[tables_columns_keepUniqueRows] OR (S.[tables_columns_keepUniqueRows] IS NULL AND NOT T.[tables_columns_keepUniqueRows] IS NULL) OR (NOT S.[tables_columns_keepUniqueRows] IS NULL AND T.[tables_columns_keepUniqueRows] IS NULL)
+OR T.[tables_columns_sortByColumn] <> S.[tables_columns_sortByColumn] OR (S.[tables_columns_sortByColumn] IS NULL AND NOT T.[tables_columns_sortByColumn] IS NULL) OR (NOT S.[tables_columns_sortByColumn] IS NULL AND T.[tables_columns_sortByColumn] IS NULL)
+OR T.[tables_columns_sourceColumn] <> S.[tables_columns_sourceColumn] OR (S.[tables_columns_sourceColumn] IS NULL AND NOT T.[tables_columns_sourceColumn] IS NULL) OR (NOT S.[tables_columns_sourceColumn] IS NULL AND T.[tables_columns_sourceColumn] IS NULL)
+OR T.[tables_columns_sourceProviderType] <> S.[tables_columns_sourceProviderType] OR (S.[tables_columns_sourceProviderType] IS NULL AND NOT T.[tables_columns_sourceProviderType] IS NULL) OR (NOT S.[tables_columns_sourceProviderType] IS NULL AND T.[tables_columns_sourceProviderType] IS NULL)
+OR T.[tables_columns_summarizeBy] <> S.[tables_columns_summarizeBy] OR (S.[tables_columns_summarizeBy] IS NULL AND NOT T.[tables_columns_summarizeBy] IS NULL) OR (NOT S.[tables_columns_summarizeBy] IS NULL AND T.[tables_columns_summarizeBy] IS NULL)
+OR T.[tables_columns_type] <> S.[tables_columns_type] OR (S.[tables_columns_type] IS NULL AND NOT T.[tables_columns_type] IS NULL) OR (NOT S.[tables_columns_type] IS NULL AND T.[tables_columns_type] IS NULL)
+
+----
+=====
+
 |
+
 
 |700
 |
@@ -118,7 +204,79 @@ source: property.RepoObjectProperty_cross As rop_cross
 * [ssas].[model_json_311_tables_columns]
 * [ssas].[model_json_311_tables_columns_T]
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+INSERT INTO 
+ [ssas].[model_json_311_tables_columns_T]
+ (
+  [databasename]
+, [tables_name]
+, [tables_columns_name]
+, [RepoObject_guid]
+, [tables_columns_dataType]
+, [tables_columns_description]
+, [tables_columns_description_ja]
+, [tables_columns_displayFolder]
+, [tables_columns_expression]
+, [tables_columns_expression_ja]
+, [tables_columns_formatString]
+, [tables_columns_isDataTypeInferred]
+, [tables_columns_isHidden]
+, [tables_columns_isKey]
+, [tables_columns_isNameInferred]
+, [tables_columns_isNullable]
+, [tables_columns_isUnique]
+, [tables_columns_keepUniqueRows]
+, [tables_columns_sortByColumn]
+, [tables_columns_sourceColumn]
+, [tables_columns_sourceProviderType]
+, [tables_columns_summarizeBy]
+, [tables_columns_type]
+)
+SELECT
+  [databasename]
+, [tables_name]
+, [tables_columns_name]
+, [RepoObject_guid]
+, [tables_columns_dataType]
+, [tables_columns_description]
+, [tables_columns_description_ja]
+, [tables_columns_displayFolder]
+, [tables_columns_expression]
+, [tables_columns_expression_ja]
+, [tables_columns_formatString]
+, [tables_columns_isDataTypeInferred]
+, [tables_columns_isHidden]
+, [tables_columns_isKey]
+, [tables_columns_isNameInferred]
+, [tables_columns_isNullable]
+, [tables_columns_isUnique]
+, [tables_columns_keepUniqueRows]
+, [tables_columns_sortByColumn]
+, [tables_columns_sourceColumn]
+, [tables_columns_sourceProviderType]
+, [tables_columns_summarizeBy]
+, [tables_columns_type]
+
+FROM [ssas].[model_json_311_tables_columns] AS S
+WHERE
+NOT EXISTS
+(SELECT 1
+FROM [ssas].[model_json_311_tables_columns_T] AS T
+WHERE
+T.[databasename] = S.[databasename]
+AND T.[tables_name] = S.[tables_name]
+AND T.[tables_columns_name] = S.[tables_columns_name]
+)
+----
+=====
+
 |
+
 |===
 
 // end::adocuspsteps[]
@@ -391,7 +549,7 @@ source: property.RepoObjectProperty WHERE property_int = 1
 
 // tag::sql_modules_definition[]
 [%collapsible]
-====
+=======
 [source,sql]
 ----
 /*
@@ -709,7 +867,7 @@ END
 
 
 ----
-====
+=======
 // end::sql_modules_definition[]
 
 

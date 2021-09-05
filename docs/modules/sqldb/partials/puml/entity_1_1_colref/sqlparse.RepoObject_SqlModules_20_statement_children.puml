@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -62,6 +63,7 @@ entity sqlparse.ftv_sqlparse_with_some_children << IF >> {
   is_whitespace : bit
   * json_key : nvarchar(4000)
   normalized : nvarchar(max)
+  --
 }
 
 entity sqlparse.RepoObject_SqlModules_10_statement << V >> {
@@ -75,6 +77,7 @@ entity sqlparse.RepoObject_SqlModules_10_statement << V >> {
   normalized : nvarchar(max)
   sql_modules_json : nvarchar(max)
   SysObject_fullname : nvarchar(261)
+  --
 }
 
 entity sqlparse.RepoObject_SqlModules_20_statement_children << V >> {
@@ -119,6 +122,7 @@ entity sqlparse.RepoObject_SqlModules_20_statement_children << V >> {
   normalized : nvarchar(max)
   RowNumber_per_Object : bigint
   SysObject_fullname : nvarchar(261)
+  --
 }
 
 entity sqlparse.RepoObject_SqlModules_21_statement_children_helper << V >> {
@@ -143,6 +147,7 @@ entity sqlparse.RepoObject_SqlModules_21_statement_children_helper << V >> {
   normalized : nvarchar(max)
   RowNumber_per_Object : bigint
   SysObject_fullname : nvarchar(261)
+  --
 }
 
 entity sqlparse.RepoObject_SqlModules_22_identifier_alias_AS << V >> {
@@ -153,6 +158,7 @@ entity sqlparse.RepoObject_SqlModules_22_identifier_alias_AS << V >> {
   identifier_alias : nvarchar(max)
   identifier_name : nvarchar(max)
   SysObject_fullname : nvarchar(261)
+  --
 }
 
 entity sqlparse.RepoObject_SqlModules_23_normalized_wo_nolock << V >> {
@@ -162,6 +168,7 @@ entity sqlparse.RepoObject_SqlModules_23_normalized_wo_nolock << V >> {
   normalized : nvarchar(max)
   normalized_wo_nolock : nvarchar(4000)
   SysObject_fullname : nvarchar(261)
+  --
 }
 
 entity sqlparse.RepoObject_SqlModules_24_IdentifierList_children << V >> {
@@ -212,18 +219,21 @@ entity sqlparse.RepoObject_SqlModules_24_IdentifierList_children << V >> {
   RowNumber_per_Object : bigint
   SysObject_fullname : nvarchar(261)
   T2_class : nvarchar(500)
+  --
 }
 
 entity sqlparse.RepoObject_SqlModules_29_1_object_is_union << V >> {
   * **RepoObject_guid** : uniqueidentifier
   --
   * is_union : int
+  --
 }
 
 entity sqlparse.RepoObject_SqlModules_29_2_object_is_GroupBy << V >> {
   * **RepoObject_guid** : uniqueidentifier
   --
   * has_GroupBy : int
+  --
 }
 
 entity sqlparse.RepoObject_SqlModules_32_ObjectClass << V >> {
@@ -232,6 +242,7 @@ entity sqlparse.RepoObject_SqlModules_32_ObjectClass << V >> {
   --
   Min_RowNumber_per_class : bigint
   SysObject_fullname : nvarchar(261)
+  --
 }
 
 entity sqlparse.RepoObject_SqlModules_33_ObjectNormalized << V >> {
@@ -240,6 +251,7 @@ entity sqlparse.RepoObject_SqlModules_33_ObjectNormalized << V >> {
   --
   Min_RowNumber_per_normalized : bigint
   SysObject_fullname : nvarchar(261)
+  --
 }
 
 entity sqlparse.RepoObject_SqlModules_41_from << V >> {
@@ -265,6 +277,7 @@ entity sqlparse.RepoObject_SqlModules_41_from << V >> {
   patindex_nolock : bigint
   RowNumber_per_Object : bigint
   SysObject_fullname : nvarchar(261)
+  --
 }
 
 entity sqlparse.RepoObject_SqlModules_51_Identitfier << V >> {
@@ -282,6 +295,7 @@ entity sqlparse.RepoObject_SqlModules_51_Identitfier << V >> {
   source_column : nvarchar(max)
   source_table : nvarchar(max)
   SysObject_fullname : nvarchar(261)
+  --
 }
 
 entity sqlparse.RepoObject_SqlModules_Identitfier << V >> {
@@ -298,6 +312,7 @@ entity sqlparse.RepoObject_SqlModules_Identitfier << V >> {
   source_column : nvarchar(max)
   source_table : nvarchar(max)
   SysObject_fullname : nvarchar(261)
+  --
 }
 
 sqlparse.ftv_sqlparse_with_some_children <.. sqlparse.RepoObject_SqlModules_20_statement_children
@@ -321,6 +336,7 @@ sqlparse.RepoObject_SqlModules_20_statement_children::children <-- sqlparse.Repo
 sqlparse.RepoObject_SqlModules_20_statement_children::children <-- sqlparse.RepoObject_SqlModules_51_Identitfier::children
 sqlparse.RepoObject_SqlModules_20_statement_children::children <-- sqlparse.RepoObject_SqlModules_Identitfier::children
 sqlparse.RepoObject_SqlModules_20_statement_children::class <-- sqlparse.RepoObject_SqlModules_21_statement_children_helper::class
+sqlparse.RepoObject_SqlModules_20_statement_children::class <-- sqlparse.RepoObject_SqlModules_32_ObjectClass::class
 sqlparse.RepoObject_SqlModules_20_statement_children::class <-- sqlparse.RepoObject_SqlModules_24_IdentifierList_children::class
 sqlparse.RepoObject_SqlModules_20_statement_children::class <-- sqlparse.RepoObject_SqlModules_41_from::class
 sqlparse.RepoObject_SqlModules_20_statement_children::class <-- sqlparse.RepoObject_SqlModules_51_Identitfier::class
@@ -369,6 +385,8 @@ sqlparse.RepoObject_SqlModules_20_statement_children::RowNumber_per_Object <-- s
 sqlparse.RepoObject_SqlModules_20_statement_children::RowNumber_per_Object <-- sqlparse.RepoObject_SqlModules_51_Identitfier::RowNumber_per_Object
 sqlparse.RepoObject_SqlModules_20_statement_children::RowNumber_per_Object <-- sqlparse.RepoObject_SqlModules_Identitfier::RowNumber_per_Object
 sqlparse.RepoObject_SqlModules_20_statement_children::SysObject_fullname <-- sqlparse.RepoObject_SqlModules_21_statement_children_helper::SysObject_fullname
+sqlparse.RepoObject_SqlModules_20_statement_children::SysObject_fullname <-- sqlparse.RepoObject_SqlModules_32_ObjectClass::SysObject_fullname
+sqlparse.RepoObject_SqlModules_20_statement_children::SysObject_fullname <-- sqlparse.RepoObject_SqlModules_33_ObjectNormalized::SysObject_fullname
 sqlparse.RepoObject_SqlModules_20_statement_children::SysObject_fullname <-- sqlparse.RepoObject_SqlModules_22_identifier_alias_AS::SysObject_fullname
 sqlparse.RepoObject_SqlModules_20_statement_children::SysObject_fullname <-- sqlparse.RepoObject_SqlModules_23_normalized_wo_nolock::SysObject_fullname
 sqlparse.RepoObject_SqlModules_20_statement_children::SysObject_fullname <-- sqlparse.RepoObject_SqlModules_24_IdentifierList_children::SysObject_fullname

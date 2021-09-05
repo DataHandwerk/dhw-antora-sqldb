@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -23,11 +24,22 @@ skinparam class {
 }
 
 
-entity docs.visjs_EdgeList_object_test01 << V >> {
+entity reference.RepoObject_reference_persistence_target_as_source << V >> {
   --
-  * EdgeListElement : varchar(64)
-  referenced_node_id : bigint
-  referencing_node_id : bigint
+  * InformationSource : varchar(28)
+  referenced_entity_name : nvarchar(128)
+  * referenced_fullname : nvarchar(517)
+  * referenced_id : int
+  referenced_RepoObject_guid : uniqueidentifier
+  referenced_schema_name : nvarchar(128)
+  referenced_type : char(2)
+  referencing_entity_name : nvarchar(128)
+  * referencing_fullname : nvarchar(517)
+  referencing_id : int
+  referencing_RepoObject_guid : uniqueidentifier
+  referencing_schema_name : nvarchar(128)
+  referencing_type : char(2)
+  --
 }
 
 entity reference.RepoObject_reference_SqlExpressionDependencies << V >> {
@@ -38,15 +50,14 @@ entity reference.RepoObject_reference_SqlExpressionDependencies << V >> {
   referenced_entity_name : nvarchar(128)
   * referenced_fullname : nvarchar(517)
   referenced_id : int
-  referenced_node_id : bigint
   referenced_schema_name : nvarchar(128)
   referenced_type : char(2)
   referencing_entity_name : nvarchar(128)
   * referencing_fullname : nvarchar(517)
   * referencing_id : int
-  referencing_node_id : bigint
   referencing_schema_name : nvarchar(128)
   referencing_type : char(2)
+  --
 }
 
 entity reference.RepoObject_reference_union << V >> {
@@ -56,17 +67,16 @@ entity reference.RepoObject_reference_union << V >> {
   * InformationSource : varchar(34)
   * one : int
   referenced_entity_name : nvarchar(128)
-  * referenced_fullname : nvarchar(517)
+  referenced_fullname : nvarchar(517)
   referenced_id : int
-  referenced_node_id : bigint
   referenced_schema_name : nvarchar(128)
   referenced_type : char(2)
   referencing_entity_name : nvarchar(128)
-  * referencing_fullname : nvarchar(517)
+  referencing_fullname : nvarchar(517)
   referencing_id : int
-  referencing_node_id : bigint
   referencing_schema_name : nvarchar(128)
   referencing_type : varchar(2)
+  --
 }
 
 entity repo_sys.sql_expression_dependencies << V >> {
@@ -100,13 +110,12 @@ entity repo_sys.sql_expression_dependencies << V >> {
   referencing_schema_name : nvarchar(128)
   referencing_type : char(2)
   referencing_type_desciption : nvarchar(60)
+  --
 }
 
 reference.RepoObject_reference_SqlExpressionDependencies <.. reference.RepoObject_reference_union
-reference.RepoObject_reference_SqlExpressionDependencies <.. docs.visjs_EdgeList_object_test01
+reference.RepoObject_reference_SqlExpressionDependencies <.. reference.RepoObject_reference_persistence_target_as_source
 repo_sys.sql_expression_dependencies <.. reference.RepoObject_reference_SqlExpressionDependencies
-reference.RepoObject_reference_SqlExpressionDependencies::referenced_node_id <-- docs.visjs_EdgeList_object_test01::referenced_node_id
-reference.RepoObject_reference_SqlExpressionDependencies::referencing_node_id <-- docs.visjs_EdgeList_object_test01::referencing_node_id
 repo_sys.sql_expression_dependencies::referenced_entity_name <-- reference.RepoObject_reference_SqlExpressionDependencies::referenced_entity_name
 repo_sys.sql_expression_dependencies::referenced_id <-- reference.RepoObject_reference_SqlExpressionDependencies::referenced_id
 repo_sys.sql_expression_dependencies::referenced_RepoObject_guid <-- reference.RepoObject_reference_SqlExpressionDependencies::referenced_RepoObject_guid

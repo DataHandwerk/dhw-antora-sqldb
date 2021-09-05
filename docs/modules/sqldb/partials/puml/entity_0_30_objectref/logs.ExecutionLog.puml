@@ -1,4 +1,5 @@
 'Left to right direction
+top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -51,11 +52,19 @@ entity docs.usp_AntoraExport_ObjectPuml << P >> {
   --
 }
 
+entity docs.usp_AntoraExport_ObjectRefCyclic << P >> {
+  --
+}
+
 entity docs.usp_AntoraExport_Page_IndexSemanticGroup << P >> {
   --
 }
 
 entity docs.usp_PERSIST_RepoObject_Adoc_T << P >> {
+  --
+}
+
+entity docs.usp_PERSIST_RepoObject_ColumnList_T << P >> {
   --
 }
 
@@ -143,6 +152,14 @@ entity reference.usp_PERSIST_RepoObjectColumn_reference_T << P >> {
   --
 }
 
+entity reference.usp_RepoObject_ReferenceTree << P >> {
+  --
+}
+
+entity reference.usp_RepoObject_ReferenceTree_insert << P >> {
+  --
+}
+
 entity reference.usp_RepoObject_update_SysObjectQueryPlan << P >> {
   --
 }
@@ -187,7 +204,27 @@ entity repo.usp_PERSIST_ForeignKey_Indexes_union_T << P >> {
   --
 }
 
+entity repo.usp_PERSIST_Index_ssas_T << P >> {
+  --
+}
+
 entity repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T << P >> {
+  --
+}
+
+entity repo.usp_PERSIST_IndexColumn_ssas_T << P >> {
+  --
+}
+
+entity repo.usp_PERSIST_RepoObject_SSAS_tgt << P >> {
+  --
+}
+
+entity repo.usp_PERSIST_RepoObjectColumn_SSAS_tgt << P >> {
+  --
+}
+
+entity repo.usp_PERSIST_RepoSchema_ssas_tgt << P >> {
   --
 }
 
@@ -207,11 +244,27 @@ entity repo.usp_sync_guid_RepoObject << P >> {
   --
 }
 
+entity repo.usp_sync_guid_RepoObject_ssas << P >> {
+  --
+}
+
 entity repo.usp_sync_guid_RepoObjectColumn << P >> {
   --
 }
 
+entity repo.usp_sync_guid_RepoObjectColumn_ssas << P >> {
+  --
+}
+
 entity repo.usp_sync_guid_RepoSchema << P >> {
+  --
+}
+
+entity repo.usp_sync_guid_RepoSchema_ssas << P >> {
+  --
+}
+
+entity repo.usp_sync_guid_ssas << P >> {
   --
 }
 
@@ -227,11 +280,51 @@ entity sqlparse.usp_PERSIST_RepoObject_SqlModules_61_SelectIdentifier_Union_T <<
   --
 }
 
+entity sqlparse.usp_sqlparse << P >> {
+  --
+}
+
+entity ssas.usp_PERSIST_model_json_31_tables_T << P >> {
+  --
+}
+
+entity ssas.usp_PERSIST_model_json_311_tables_columns_T << P >> {
+  --
+}
+
+entity ssas.usp_PERSIST_model_json_32_relationships_T << P >> {
+  --
+}
+
+entity ssas.usp_PERSIST_TMSCHEMA_COLUMNS_T << P >> {
+  --
+}
+
+entity ssas.usp_PERSIST_TMSCHEMA_RELATIONSHIPS_T << P >> {
+  --
+}
+
+entity ssas.usp_PERSIST_TMSCHEMA_TABLES_T << P >> {
+  --
+}
+
 entity uspgenerator.usp_GeneratorUsp_insert_update_persistence << P >> {
   --
 }
 
 entity workflow.usp_PERSIST_ProcedureDependency_input_PersistenceDependency << P >> {
+  --
+}
+
+entity workflow.usp_PERSIST_Workflow_ProcedureDependency_T << P >> {
+  --
+}
+
+entity workflow.usp_PERSIST_Workflow_ProcedureDependency_T_bidirectional_T << P >> {
+  --
+}
+
+entity workflow.usp_PERSIST_WorkflowStep << P >> {
   --
 }
 
@@ -245,8 +338,10 @@ docs.usp_AntoraExport_ObjectPage <.. docs.usp_AntoraExport
 docs.usp_AntoraExport_ObjectPageTemplate <.. docs.usp_AntoraExport
 docs.usp_AntoraExport_ObjectPartialProperties <.. docs.usp_AntoraExport
 docs.usp_AntoraExport_ObjectPuml <.. docs.usp_AntoraExport
+docs.usp_AntoraExport_ObjectRefCyclic <.. docs.usp_AntoraExport
 docs.usp_AntoraExport_Page_IndexSemanticGroup <.. docs.usp_AntoraExport
 docs.usp_PERSIST_RepoObject_Adoc_T <.. docs.usp_AntoraExport_ObjectPartialProperties
+docs.usp_PERSIST_RepoObject_ColumnList_T <.. docs.usp_AntoraExport_ObjectPartialProperties
 docs.usp_PERSIST_RepoObject_IndexList_T <.. docs.usp_AntoraExport_ObjectPartialProperties
 docs.usp_PERSIST_RepoObject_Plantuml_Entity_T <.. docs.usp_AntoraExport_ObjectPuml
 docs.usp_PERSIST_RepoObject_Plantuml_T <.. docs.usp_AntoraExport_ObjectPuml
@@ -258,26 +353,11 @@ logs.ExecutionLog_gross <.. logs.ftv_ExecutionLog_puml_tree
 logs.ExecutionLog_parent <.. logs.ExecutionLog_puml_Sequence_start_stop
 logs.ExecutionLog_puml_Sequence_start_stop <.. logs.ftv_ExecutionLog_puml_sequence_start_stop_per_execution
 logs.ftv_ExecutionLog_puml_tree <.. logs.ftv_ExecutionLog_puml_tree_per_execution
-logs.usp_ExecutionLog_insert <.. workflow.usp_PERSIST_ProcedureDependency_input_PersistenceDependency
-logs.usp_ExecutionLog_insert <.. reference.usp_PERSIST_RepoObject_ReferenceTree_30_0_T
-logs.usp_ExecutionLog_insert <.. workflow.usp_workflow
-logs.usp_ExecutionLog_insert <.. repo.usp_sync_guid_RepoSchema
-logs.usp_ExecutionLog_insert <.. reference.usp_PERSIST_RepoObject_reference_T
-logs.usp_ExecutionLog_insert <.. reference.usp_PERSIST_RepoObjectColumn_reference_T
-logs.usp_ExecutionLog_insert <.. reference.usp_PERSIST_RepoObject_ReferenceTree_0_30_T
-logs.usp_ExecutionLog_insert <.. docs.usp_AntoraExport
-logs.usp_ExecutionLog_insert <.. docs.usp_PERSIST_RepoObject_IndexList_T
-logs.usp_ExecutionLog_insert <.. property.usp_RepoObjectProperty_collect
-logs.usp_ExecutionLog_insert <.. repo.usp_PERSIST_ForeignKey_Indexes_union_T
-logs.usp_ExecutionLog_insert <.. docs.usp_PERSIST_RepoObject_Plantuml_T
-logs.usp_ExecutionLog_insert <.. sqlparse.usp_PERSIST_RepoObject_SqlModules_41_from_T
-logs.usp_ExecutionLog_insert <.. sqlparse.usp_PERSIST_RepoObject_SqlModules_61_SelectIdentifier_Union_T
-logs.usp_ExecutionLog_insert <.. repo.usp_update_Referencing_Count
-logs.usp_ExecutionLog_insert <.. docs.usp_AntoraExport_DocSnippet
+logs.usp_ExecutionLog_insert <.. docs.usp_AntoraExport_ObjectPageTemplate
 logs.usp_ExecutionLog_insert <.. reference.usp_RepoObjectSource_QueryPlan
+logs.usp_ExecutionLog_insert <.. reference.usp_update_Referencing_Count
 logs.usp_ExecutionLog_insert <.. reference.usp_RepoObjectSource_FirstResultSet
 logs.usp_ExecutionLog_insert <.. repo.usp_Index_Settings
-logs.usp_ExecutionLog_insert <.. reference.usp_update_Referencing_Count
 logs.usp_ExecutionLog_insert <.. repo.usp_RepoObjectColumn_update_RepoObjectColumn_column_id
 logs.usp_ExecutionLog_insert <.. reference.usp_RepoObject_update_SysObjectQueryPlan
 logs.usp_ExecutionLog_insert <.. repo.usp_index_inheritance
@@ -300,17 +380,56 @@ logs.usp_ExecutionLog_insert <.. docs.usp_AntoraExport_ObjectPartialProperties
 logs.usp_ExecutionLog_insert <.. docs.usp_AntoraExport_ObjectPage
 logs.usp_ExecutionLog_insert <.. docs.usp_PERSIST_RepoObject_Adoc_T
 logs.usp_ExecutionLog_insert <.. docs.usp_AntoraExport_navigation
-logs.usp_ExecutionLog_insert <.. docs.usp_AntoraExport_ObjectPageTemplate
 logs.usp_ExecutionLog_insert <.. docs.usp_PERSIST_RepoObject_Plantuml_Entity_T
 logs.usp_ExecutionLog_insert <.. docs.usp_AntoraExport_ObjectPuml
 logs.usp_ExecutionLog_insert <.. docs.usp_AntoraExport_Page_IndexSemanticGroup
+logs.usp_ExecutionLog_insert <.. docs.usp_AntoraExport
+logs.usp_ExecutionLog_insert <.. docs.usp_PERSIST_RepoObject_IndexList_T
+logs.usp_ExecutionLog_insert <.. property.usp_RepoObjectProperty_collect
+logs.usp_ExecutionLog_insert <.. repo.usp_PERSIST_ForeignKey_Indexes_union_T
+logs.usp_ExecutionLog_insert <.. docs.usp_PERSIST_RepoObject_Plantuml_T
+logs.usp_ExecutionLog_insert <.. sqlparse.usp_PERSIST_RepoObject_SqlModules_41_from_T
+logs.usp_ExecutionLog_insert <.. sqlparse.usp_PERSIST_RepoObject_SqlModules_61_SelectIdentifier_Union_T
+logs.usp_ExecutionLog_insert <.. repo.usp_update_Referencing_Count
+logs.usp_ExecutionLog_insert <.. docs.usp_AntoraExport_DocSnippet
+logs.usp_ExecutionLog_insert <.. repo.usp_sync_guid_RepoSchema
+logs.usp_ExecutionLog_insert <.. reference.usp_PERSIST_RepoObject_reference_T
+logs.usp_ExecutionLog_insert <.. reference.usp_PERSIST_RepoObjectColumn_reference_T
+logs.usp_ExecutionLog_insert <.. reference.usp_PERSIST_RepoObject_ReferenceTree_0_30_T
+logs.usp_ExecutionLog_insert <.. reference.usp_PERSIST_RepoObject_ReferenceTree_30_0_T
+logs.usp_ExecutionLog_insert <.. workflow.usp_workflow
+logs.usp_ExecutionLog_insert <.. workflow.usp_PERSIST_ProcedureDependency_input_PersistenceDependency
+logs.usp_ExecutionLog_insert <.. workflow.usp_PERSIST_WorkflowStep
+logs.usp_ExecutionLog_insert <.. sqlparse.usp_sqlparse
+logs.usp_ExecutionLog_insert <.. reference.usp_RepoObject_ReferenceTree
+logs.usp_ExecutionLog_insert <.. workflow.usp_PERSIST_Workflow_ProcedureDependency_T
+logs.usp_ExecutionLog_insert <.. docs.usp_AntoraExport_ObjectRefCyclic
+logs.usp_ExecutionLog_insert <.. workflow.usp_PERSIST_Workflow_ProcedureDependency_T_bidirectional_T
+logs.usp_ExecutionLog_insert <.. ssas.usp_PERSIST_TMSCHEMA_COLUMNS_T
+logs.usp_ExecutionLog_insert <.. ssas.usp_PERSIST_TMSCHEMA_TABLES_T
+logs.usp_ExecutionLog_insert <.. repo.usp_PERSIST_RepoObject_SSAS_tgt
+logs.usp_ExecutionLog_insert <.. repo.usp_PERSIST_RepoObjectColumn_SSAS_tgt
+logs.usp_ExecutionLog_insert <.. repo.usp_PERSIST_RepoSchema_ssas_tgt
+logs.usp_ExecutionLog_insert <.. repo.usp_sync_guid_ssas
+logs.usp_ExecutionLog_insert <.. repo.usp_sync_guid_RepoSchema_ssas
+logs.usp_ExecutionLog_insert <.. repo.usp_sync_guid_RepoObject_ssas
+logs.usp_ExecutionLog_insert <.. repo.usp_sync_guid_RepoObjectColumn_ssas
+logs.usp_ExecutionLog_insert <.. repo.usp_PERSIST_IndexColumn_ssas_T
+logs.usp_ExecutionLog_insert <.. repo.usp_PERSIST_Index_ssas_T
+logs.usp_ExecutionLog_insert <.. ssas.usp_PERSIST_TMSCHEMA_RELATIONSHIPS_T
+logs.usp_ExecutionLog_insert <.. ssas.usp_PERSIST_model_json_31_tables_T
+logs.usp_ExecutionLog_insert <.. ssas.usp_PERSIST_model_json_311_tables_columns_T
+logs.usp_ExecutionLog_insert <.. ssas.usp_PERSIST_model_json_32_relationships_T
+logs.usp_ExecutionLog_insert <.. reference.usp_RepoObject_ReferenceTree_insert
+logs.usp_ExecutionLog_insert <.. docs.usp_PERSIST_RepoObject_ColumnList_T
 property.usp_RepoObject_Inheritance <.. repo.usp_main
 property.usp_RepoObjectColumn_Inheritance <.. repo.usp_main
 property.usp_RepoObjectProperty_collect <.. docs.usp_AntoraExport
 reference.usp_PERSIST_RepoObject_reference_T <.. repo.usp_main
-reference.usp_PERSIST_RepoObject_ReferenceTree_0_30_T <.. docs.usp_AntoraExport
-reference.usp_PERSIST_RepoObject_ReferenceTree_30_0_T <.. docs.usp_AntoraExport
+reference.usp_PERSIST_RepoObject_ReferenceTree_0_30_T <.. reference.usp_RepoObject_ReferenceTree
+reference.usp_PERSIST_RepoObject_ReferenceTree_30_0_T <.. reference.usp_RepoObject_ReferenceTree
 reference.usp_PERSIST_RepoObjectColumn_reference_T <.. repo.usp_main
+reference.usp_RepoObject_ReferenceTree_insert <.. repo.usp_main
 reference.usp_RepoObject_update_SysObjectQueryPlan <.. repo.usp_main
 reference.usp_RepoObjectSource_FirstResultSet <.. repo.usp_main
 reference.usp_RepoObjectSource_QueryPlan <.. repo.usp_main
@@ -322,12 +441,26 @@ repo.usp_index_inheritance <.. repo.usp_main
 repo.usp_Index_Settings <.. repo.usp_Index_finish
 repo.usp_Index_virtual_set <.. repo.usp_Index_ForeignKey
 repo.usp_PERSIST_ForeignKey_Indexes_union_T <.. repo.usp_Index_ForeignKey
+repo.usp_PERSIST_Index_ssas_T <.. repo.usp_sync_guid_ssas
 repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.usp_index_inheritance
+repo.usp_PERSIST_IndexColumn_ssas_T <.. repo.usp_sync_guid_ssas
+repo.usp_PERSIST_RepoObject_SSAS_tgt <.. repo.usp_sync_guid_ssas
+repo.usp_PERSIST_RepoObjectColumn_SSAS_tgt <.. repo.usp_sync_guid_ssas
+repo.usp_PERSIST_RepoSchema_ssas_tgt <.. repo.usp_sync_guid_ssas
 repo.usp_RepoObjectColumn_update_RepoObjectColumn_column_id <.. repo.usp_main
-repo.usp_sync_guid <.. repo.usp_main
 repo.usp_sync_guid <.. repo.usp_persistence_set
+repo.usp_sync_guid <.. repo.usp_main
 repo.usp_sync_guid_RepoObject <.. repo.usp_sync_guid
 repo.usp_sync_guid_RepoObjectColumn <.. repo.usp_sync_guid
 repo.usp_sync_guid_RepoSchema <.. repo.usp_sync_guid
+repo.usp_sync_guid_ssas <.. repo.usp_main
+sqlparse.usp_PERSIST_RepoObject_SqlModules_41_from_T <.. sqlparse.usp_sqlparse
+sqlparse.usp_PERSIST_RepoObject_SqlModules_61_SelectIdentifier_Union_T <.. sqlparse.usp_sqlparse
+ssas.usp_PERSIST_model_json_31_tables_T <.. repo.usp_sync_guid_ssas
+ssas.usp_PERSIST_model_json_311_tables_columns_T <.. repo.usp_sync_guid_ssas
+ssas.usp_PERSIST_model_json_32_relationships_T <.. repo.usp_sync_guid_ssas
 uspgenerator.usp_GeneratorUsp_insert_update_persistence <.. repo.usp_main
 workflow.usp_PERSIST_ProcedureDependency_input_PersistenceDependency <.. workflow.usp_workflow
+workflow.usp_PERSIST_Workflow_ProcedureDependency_T <.. workflow.usp_workflow
+workflow.usp_PERSIST_Workflow_ProcedureDependency_T_bidirectional_T <.. workflow.usp_workflow
+workflow.usp_PERSIST_WorkflowStep <.. workflow.usp_workflow

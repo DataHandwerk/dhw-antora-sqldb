@@ -40,7 +40,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-05 10:54:39
+2021-09-05 13:29:35
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -97,7 +97,27 @@ source: property.RepoObjectProperty_cross As rop_cross
 * [ssas].[TMSCHEMA_COLUMNS]
 * [ssas].[TMSCHEMA_COLUMNS_T]
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+DELETE T
+FROM [ssas].[TMSCHEMA_COLUMNS_T] AS T
+WHERE
+NOT EXISTS
+(SELECT 1 FROM [ssas].[TMSCHEMA_COLUMNS] AS S
+WHERE
+T.[databasename] = S.[databasename]
+AND T.[ID] = S.[ID]
+)
+ 
+----
+=====
+
 |
+
 
 |600
 |
@@ -107,7 +127,100 @@ source: property.RepoObjectProperty_cross As rop_cross
 * [ssas].[TMSCHEMA_COLUMNS]
 * [ssas].[TMSCHEMA_COLUMNS_T]
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+UPDATE T
+SET
+  T.[databasename] = S.[databasename]
+, T.[ID] = S.[ID]
+, T.[Alignment] = S.[Alignment]
+, T.[AttributeHierarchyID] = S.[AttributeHierarchyID]
+, T.[ColumnOriginID] = S.[ColumnOriginID]
+, T.[ColumnStorageID] = S.[ColumnStorageID]
+, T.[DataCategory] = S.[DataCategory]
+, T.[Description] = S.[Description]
+, T.[DisplayFolder] = S.[DisplayFolder]
+, T.[DisplayOrdinal] = S.[DisplayOrdinal]
+, T.[ErrorMessage] = S.[ErrorMessage]
+, T.[ExplicitDataType] = S.[ExplicitDataType]
+, T.[ExplicitName] = S.[ExplicitName]
+, T.[Expression] = S.[Expression]
+, T.[FormatString] = S.[FormatString]
+, T.[InferredDataType] = S.[InferredDataType]
+, T.[InferredName] = S.[InferredName]
+, T.[IsAvailableInMDX] = S.[IsAvailableInMDX]
+, T.[IsDefaultImage] = S.[IsDefaultImage]
+, T.[IsDefaultLabel] = S.[IsDefaultLabel]
+, T.[IsHidden] = S.[IsHidden]
+, T.[IsKey] = S.[IsKey]
+, T.[IsNullable] = S.[IsNullable]
+, T.[IsUnique] = S.[IsUnique]
+, T.[KeepUniqueRows] = S.[KeepUniqueRows]
+, T.[ModifiedTime] = S.[ModifiedTime]
+, T.[RefreshedTime] = S.[RefreshedTime]
+, T.[SortByColumnID] = S.[SortByColumnID]
+, T.[SourceColumn] = S.[SourceColumn]
+, T.[SourceProviderType] = S.[SourceProviderType]
+, T.[State] = S.[State]
+, T.[StructureModifiedTime] = S.[StructureModifiedTime]
+, T.[SummarizeBy] = S.[SummarizeBy]
+, T.[SystemFlags] = S.[SystemFlags]
+, T.[TableDetailPosition] = S.[TableDetailPosition]
+, T.[TableID] = S.[TableID]
+, T.[Type] = S.[Type]
+
+FROM [ssas].[TMSCHEMA_COLUMNS_T] AS T
+INNER JOIN [ssas].[TMSCHEMA_COLUMNS] AS S
+ON
+T.[databasename] = S.[databasename]
+AND T.[ID] = S.[ID]
+
+WHERE
+   T.[Alignment] <> S.[Alignment]
+OR T.[AttributeHierarchyID] <> S.[AttributeHierarchyID]
+OR T.[ColumnOriginID] <> S.[ColumnOriginID] OR (S.[ColumnOriginID] IS NULL AND NOT T.[ColumnOriginID] IS NULL) OR (NOT S.[ColumnOriginID] IS NULL AND T.[ColumnOriginID] IS NULL)
+OR T.[ColumnStorageID] <> S.[ColumnStorageID]
+OR T.[DataCategory] <> S.[DataCategory] OR (S.[DataCategory] IS NULL AND NOT T.[DataCategory] IS NULL) OR (NOT S.[DataCategory] IS NULL AND T.[DataCategory] IS NULL)
+OR T.[Description] <> S.[Description] OR (S.[Description] IS NULL AND NOT T.[Description] IS NULL) OR (NOT S.[Description] IS NULL AND T.[Description] IS NULL)
+OR T.[DisplayFolder] <> S.[DisplayFolder] OR (S.[DisplayFolder] IS NULL AND NOT T.[DisplayFolder] IS NULL) OR (NOT S.[DisplayFolder] IS NULL AND T.[DisplayFolder] IS NULL)
+OR T.[DisplayOrdinal] <> S.[DisplayOrdinal]
+OR T.[ErrorMessage] <> S.[ErrorMessage] OR (S.[ErrorMessage] IS NULL AND NOT T.[ErrorMessage] IS NULL) OR (NOT S.[ErrorMessage] IS NULL AND T.[ErrorMessage] IS NULL)
+OR T.[ExplicitDataType] <> S.[ExplicitDataType]
+OR T.[ExplicitName] <> S.[ExplicitName]
+OR T.[Expression] <> S.[Expression] OR (S.[Expression] IS NULL AND NOT T.[Expression] IS NULL) OR (NOT S.[Expression] IS NULL AND T.[Expression] IS NULL)
+OR T.[FormatString] <> S.[FormatString] OR (S.[FormatString] IS NULL AND NOT T.[FormatString] IS NULL) OR (NOT S.[FormatString] IS NULL AND T.[FormatString] IS NULL)
+OR T.[InferredDataType] <> S.[InferredDataType]
+OR T.[InferredName] <> S.[InferredName] OR (S.[InferredName] IS NULL AND NOT T.[InferredName] IS NULL) OR (NOT S.[InferredName] IS NULL AND T.[InferredName] IS NULL)
+OR T.[IsAvailableInMDX] <> S.[IsAvailableInMDX]
+OR T.[IsDefaultImage] <> S.[IsDefaultImage]
+OR T.[IsDefaultLabel] <> S.[IsDefaultLabel]
+OR T.[IsHidden] <> S.[IsHidden]
+OR T.[IsKey] <> S.[IsKey]
+OR T.[IsNullable] <> S.[IsNullable]
+OR T.[IsUnique] <> S.[IsUnique]
+OR T.[KeepUniqueRows] <> S.[KeepUniqueRows]
+OR T.[ModifiedTime] <> S.[ModifiedTime]
+OR T.[RefreshedTime] <> S.[RefreshedTime] OR (S.[RefreshedTime] IS NULL AND NOT T.[RefreshedTime] IS NULL) OR (NOT S.[RefreshedTime] IS NULL AND T.[RefreshedTime] IS NULL)
+OR T.[SortByColumnID] <> S.[SortByColumnID] OR (S.[SortByColumnID] IS NULL AND NOT T.[SortByColumnID] IS NULL) OR (NOT S.[SortByColumnID] IS NULL AND T.[SortByColumnID] IS NULL)
+OR T.[SourceColumn] <> S.[SourceColumn] OR (S.[SourceColumn] IS NULL AND NOT T.[SourceColumn] IS NULL) OR (NOT S.[SourceColumn] IS NULL AND T.[SourceColumn] IS NULL)
+OR T.[SourceProviderType] <> S.[SourceProviderType] OR (S.[SourceProviderType] IS NULL AND NOT T.[SourceProviderType] IS NULL) OR (NOT S.[SourceProviderType] IS NULL AND T.[SourceProviderType] IS NULL)
+OR T.[State] <> S.[State]
+OR T.[StructureModifiedTime] <> S.[StructureModifiedTime]
+OR T.[SummarizeBy] <> S.[SummarizeBy]
+OR T.[SystemFlags] <> S.[SystemFlags]
+OR T.[TableDetailPosition] <> S.[TableDetailPosition]
+OR T.[TableID] <> S.[TableID]
+OR T.[Type] <> S.[Type]
+
+----
+=====
+
 |
+
 
 |700
 |
@@ -117,7 +230,106 @@ source: property.RepoObjectProperty_cross As rop_cross
 * [ssas].[TMSCHEMA_COLUMNS]
 * [ssas].[TMSCHEMA_COLUMNS_T]
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+INSERT INTO 
+ [ssas].[TMSCHEMA_COLUMNS_T]
+ (
+  [databasename]
+, [ID]
+, [Alignment]
+, [AttributeHierarchyID]
+, [ColumnOriginID]
+, [ColumnStorageID]
+, [DataCategory]
+, [Description]
+, [DisplayFolder]
+, [DisplayOrdinal]
+, [ErrorMessage]
+, [ExplicitDataType]
+, [ExplicitName]
+, [Expression]
+, [FormatString]
+, [InferredDataType]
+, [InferredName]
+, [IsAvailableInMDX]
+, [IsDefaultImage]
+, [IsDefaultLabel]
+, [IsHidden]
+, [IsKey]
+, [IsNullable]
+, [IsUnique]
+, [KeepUniqueRows]
+, [ModifiedTime]
+, [RefreshedTime]
+, [SortByColumnID]
+, [SourceColumn]
+, [SourceProviderType]
+, [State]
+, [StructureModifiedTime]
+, [SummarizeBy]
+, [SystemFlags]
+, [TableDetailPosition]
+, [TableID]
+, [Type]
+)
+SELECT
+  [databasename]
+, [ID]
+, [Alignment]
+, [AttributeHierarchyID]
+, [ColumnOriginID]
+, [ColumnStorageID]
+, [DataCategory]
+, [Description]
+, [DisplayFolder]
+, [DisplayOrdinal]
+, [ErrorMessage]
+, [ExplicitDataType]
+, [ExplicitName]
+, [Expression]
+, [FormatString]
+, [InferredDataType]
+, [InferredName]
+, [IsAvailableInMDX]
+, [IsDefaultImage]
+, [IsDefaultLabel]
+, [IsHidden]
+, [IsKey]
+, [IsNullable]
+, [IsUnique]
+, [KeepUniqueRows]
+, [ModifiedTime]
+, [RefreshedTime]
+, [SortByColumnID]
+, [SourceColumn]
+, [SourceProviderType]
+, [State]
+, [StructureModifiedTime]
+, [SummarizeBy]
+, [SystemFlags]
+, [TableDetailPosition]
+, [TableID]
+, [Type]
+
+FROM [ssas].[TMSCHEMA_COLUMNS] AS S
+WHERE
+NOT EXISTS
+(SELECT 1
+FROM [ssas].[TMSCHEMA_COLUMNS_T] AS T
+WHERE
+T.[databasename] = S.[databasename]
+AND T.[ID] = S.[ID]
+)
+----
+=====
+
 |
+
 |===
 
 // end::adocuspsteps[]
@@ -390,7 +602,7 @@ source: property.RepoObjectProperty WHERE property_int = 1
 
 // tag::sql_modules_definition[]
 [%collapsible]
-====
+=======
 [source,sql]
 ----
 /*
@@ -762,7 +974,7 @@ END
 
 
 ----
-====
+=======
 // end::sql_modules_definition[]
 
 

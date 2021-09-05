@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -28,19 +29,25 @@ entity property.RepoObjectProperty_Collect_source_ROGross << V >> {
   * **property_name** : varchar(39)
   --
   property_value : nvarchar(max)
+  --
 }
 
 entity property.usp_RepoObjectProperty_collect << P >> {
   --
+  --
 }
 
-entity repo.RepoObject_gross << V >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity repo.RepoObject_gross2 << V >> {
   --
+  AntoraComponent : nvarchar(max)
+  AntoraExternalReferencedList : nvarchar(max)
+  AntoraExternalReferencingList : nvarchar(max)
+  AntoraModul : nvarchar(max)
   AntoraReferencedList : nvarchar(max)
   AntoraReferencingList : nvarchar(max)
   CreateColumnList : nvarchar(max)
   DbmlColumnList : nvarchar(max)
+  Description : nvarchar(max)
   has_different_sys_names : bit
   has_execution_plan_issue : bit
   has_get_referenced_issue : bit
@@ -51,6 +58,7 @@ entity repo.RepoObject_gross << V >> {
   Inheritance_StringAggSeparatorSql : nvarchar(4000)
   InheritanceDefinition : nvarchar(4000)
   InheritanceType : tinyint
+  * is_DocsExclude : bit
   is_DocsOutput : int
   * is_in_reference : int
   is_persistence : bit
@@ -67,6 +75,7 @@ entity repo.RepoObject_gross << V >> {
   is_repo_managed : bit
   * is_RepoObject_name_uniqueidentifier : int
   is_required_ObjectMerge : bit
+  * is_ssas : bit
   is_SysObject_missing : bit
   * is_SysObject_name_uniqueidentifier : int
   * modify_dt : datetime
@@ -91,6 +100,7 @@ entity repo.RepoObject_gross << V >> {
   Repo_temporal_type : tinyint
   * RepoObject_fullname : nvarchar(261)
   * RepoObject_fullname2 : nvarchar(257)
+  * RepoObject_guid : uniqueidentifier
   * RepoObject_name : nvarchar(128)
   RepoObject_Referencing_Count : int
   * RepoObject_schema_name : nvarchar(128)
@@ -113,12 +123,16 @@ entity repo.RepoObject_gross << V >> {
   * SysObject_schema_name : nvarchar(128)
   SysObject_type : char(2)
   SysObject_type_name : nvarchar(128)
+  tables_dataCategory : nvarchar(500)
+  tables_description : nvarchar(max)
+  tables_isHidden : nvarchar(500)
   target_filter : nvarchar(4000)
   temporal_type : tinyint
   * usp_persistence_name : nvarchar(140)
   usp_persistence_RepoObject_guid : uniqueidentifier
+  --
 }
 
 property.RepoObjectProperty_Collect_source_ROGross <.. property.usp_RepoObjectProperty_collect
-repo.RepoObject_gross <.. property.RepoObjectProperty_Collect_source_ROGross
-repo.RepoObject_gross::RepoObject_guid <-- property.RepoObjectProperty_Collect_source_ROGross::RepoObject_guid
+repo.RepoObject_gross2 <.. property.RepoObjectProperty_Collect_source_ROGross
+repo.RepoObject_gross2::RepoObject_guid <-- property.RepoObjectProperty_Collect_source_ROGross::RepoObject_guid

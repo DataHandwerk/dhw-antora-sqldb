@@ -1,4 +1,5 @@
 'Left to right direction
+top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -67,6 +68,15 @@ entity logs.usp_ExecutionLog_insert << P >> {
   --
 }
 
+entity property.fs_get_RepoObjectColumnProperty_nvarchar << FN >> {
+  --
+}
+
+entity property.RepoObjectColumnProperty << U >> {
+  * **RepoObjectColumnProperty_id** : int
+  --
+}
+
 entity reference.RepoObjectColumnSource_virtual << U >> {
   * **RepoObjectColumn_guid** : uniqueidentifier
   * **Source_RepoObjectColumn_guid** : uniqueidentifier
@@ -100,7 +110,22 @@ entity repo.RepoObject_RequiredRepoObjectMerge << V >> {
   --
 }
 
+entity repo.RepoObject_SSAS_src << V >> {
+  * **RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity repo.RepoObject_SSAS_tgt << V >> {
+  * **RepoObject_guid** : uniqueidentifier
+  --
+}
+
 entity repo.RepoObjectColumn << U >> {
+  * **RepoObjectColumn_guid** : uniqueidentifier
+  --
+}
+
+entity repo.RepoObjectColumn_gross << V >> {
   * **RepoObjectColumn_guid** : uniqueidentifier
   --
 }
@@ -115,8 +140,28 @@ entity repo.RepoObjectColumn_RequiredRepoObjectColumnMerge << V >> {
   --
 }
 
+entity repo.RepoObjectColumn_SSAS_src << V >> {
+  * **RepoObjectColumn_guid** : uniqueidentifier
+  --
+}
+
+entity repo.RepoObjectColumn_SSAS_tgt << V >> {
+  * **RepoObjectColumn_guid** : uniqueidentifier
+  --
+}
+
 entity repo.RepoSchema << U >> {
   * **RepoSchema_guid** : uniqueidentifier
+  --
+}
+
+entity repo.RepoSchema_ssas_src << V >> {
+  * **RepoSchema_name** : nvarchar(128)
+  --
+}
+
+entity repo.RepoSchema_ssas_tgt << V >> {
+  * **RepoSchema_name** : nvarchar(128)
   --
 }
 
@@ -184,6 +229,71 @@ entity repo_sys.usp_AddOrUpdateExtendedProperty << P >> {
   --
 }
 
+entity ssas.model_json << U >> {
+  * **databasename** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_10 << V >> {
+  * **databasename** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_20 << V >> {
+  * **databasename** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_201_descriptions_multiline << V >> {
+  --
+}
+
+entity ssas.model_json_2011_descriptions_StrAgg << V >> {
+  --
+}
+
+entity ssas.model_json_31_tables << V >> {
+  * **databasename** : nvarchar(128)
+  **tables_name** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_31_tables_T << U >> {
+  * **databasename** : nvarchar(128)
+  **tables_name** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_311_tables_columns << V >> {
+  * **databasename** : nvarchar(128)
+  * **tables_name** : nvarchar(128)
+  **tables_columns_name** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_311_tables_columns_T << U >> {
+  * **databasename** : nvarchar(128)
+  * **tables_name** : nvarchar(128)
+  **tables_columns_name** : nvarchar(128)
+  --
+}
+
+entity ssas.model_json_3111_tables_columns_descriptions_multiline << V >> {
+  --
+}
+
+entity ssas.model_json_31111_tables_columns_descriptions_StrAgg << V >> {
+  --
+}
+
+entity ssas.model_json_3112_tables_columns_expressions_multiline << V >> {
+  --
+}
+
+entity ssas.model_json_31121_tables_columns_expressions_StrAgg << V >> {
+  --
+}
+
 entity sys_dwh.columns << SN >> {
   --
 }
@@ -233,52 +343,78 @@ entity sys_dwh.types << SN >> {
 }
 
 config.fs_dwh_database_name <.. repo_sys.usp_AddOrUpdateExtendedProperty
+config.fs_dwh_database_name <.. repo_sys.usp_AddOrUpdateExtendedProperty
+config.fs_dwh_database_name <.. repo_sys.usp_AddOrUpdateExtendedProperty
 config.fs_get_parameter_value <.. repo.usp_sync_guid_RepoObject
-config.fs_get_parameter_value <.. repo.usp_sync_guid_RepoSchema
 config.fs_get_parameter_value <.. repo.usp_sync_guid_RepoObjectColumn
-config.ftv_dwh_database <.. repo_sys.ExtendedProperties
+config.fs_get_parameter_value <.. repo.usp_sync_guid_RepoSchema
 config.ftv_dwh_database <.. repo_sys.SysColumn
+config.ftv_dwh_database <.. repo_sys.ExtendedProperties
+config.ftv_dwh_database <.. repo_sys.ExtendedProperties
+config.ftv_dwh_database <.. repo_sys.ExtendedProperties
 config.ftv_get_parameter_value <.. repo.RepoObjectColumn_HistValidColums_setpoint
-config.Parameter <.. repo.usp_persistence_set
-config.Parameter <.. config.ftv_get_parameter_value
-config.Parameter <.. config.ftv_dwh_database
-config.Parameter <.. config.fs_dwh_database_name
 config.Parameter <.. config.fs_get_parameter_value
+config.Parameter <.. config.fs_get_parameter_value
+config.Parameter <.. config.fs_get_parameter_value
+config.Parameter <.. config.ftv_dwh_database
+config.Parameter <.. config.ftv_get_parameter_value
+config.Parameter <.. config.fs_dwh_database_name
+config.Parameter <.. config.fs_dwh_database_name
+config.Parameter <.. config.fs_dwh_database_name
+config.Parameter <.. repo.usp_persistence_set
+configT.spt_values <.. configT.type
 configT.spt_values <.. configT.type
 configT.type <.. configT.type_level1type_level2type
-configT.type_level1type_level2type <.. repo.usp_sync_guid_RepoObjectColumn
+configT.type <.. configT.type_level1type_level2type
 configT.type_level1type_level2type <.. repo.usp_sync_guid_RepoObject
+configT.type_level1type_level2type <.. repo.usp_sync_guid_RepoObjectColumn
 logs.ExecutionLog <.. logs.usp_ExecutionLog_insert
-logs.usp_ExecutionLog_insert <.. repo.usp_sync_guid_RepoSchema
 logs.usp_ExecutionLog_insert <.. repo.usp_sync_guid
-logs.usp_ExecutionLog_insert <.. repo.usp_sync_guid_RepoObjectColumn
 logs.usp_ExecutionLog_insert <.. repo.usp_persistence_set
 logs.usp_ExecutionLog_insert <.. repo.usp_sync_guid_RepoObject
+logs.usp_ExecutionLog_insert <.. repo.usp_sync_guid_RepoObjectColumn
+logs.usp_ExecutionLog_insert <.. repo.usp_sync_guid_RepoSchema
+property.fs_get_RepoObjectColumnProperty_nvarchar <.. repo.RepoObjectColumn_gross
+property.RepoObjectColumnProperty <.. property.fs_get_RepoObjectColumnProperty_nvarchar
 reference.RepoObjectColumnSource_virtual <.. repo.usp_sync_guid_RepoObjectColumn
 reference.RepoObjectSource_virtual <.. repo.usp_sync_guid_RepoObject
 repo.IndexColumn_virtual <.. repo.usp_sync_guid_RepoObjectColumn
-repo.RepoObject <.. repo.SysObject_RepoObject_via_guid
+repo.RepoObject <.. repo.usp_sync_guid_RepoObject
+repo.RepoObject <.. repo.usp_sync_guid_RepoObjectColumn
+repo.RepoObject <.. repo.RepoObject_SSAS_tgt
+repo.RepoObject <.. repo.usp_persistence_set
 repo.RepoObject <.. repo.SysObject_RepoObject_via_name
+repo.RepoObject <.. repo.SysObject_RepoObject_via_guid
 repo.RepoObject <.. repo.SysColumn_RepoObjectColumn_via_guid
 repo.RepoObject <.. repo.SysColumn_RepoObjectColumn_via_name
+repo.RepoObject <.. repo.RepoObjectColumn_gross
 repo.RepoObject <.. repo.RepoObject_RequiredRepoObjectMerge
-repo.RepoObject <.. repo.usp_sync_guid_RepoObjectColumn
-repo.RepoObject <.. repo.usp_sync_guid_RepoObject
-repo.RepoObject <.. repo.usp_persistence_set
-repo.RepoObject_persistence <.. repo.usp_sync_guid_RepoObjectColumn
+repo.RepoObject_persistence <.. repo.RepoObjectColumn_HistValidColums_setpoint
 repo.RepoObject_persistence <.. repo.usp_persistence_set
 repo.RepoObject_persistence <.. repo.usp_sync_guid_RepoObject
-repo.RepoObject_persistence <.. repo.RepoObjectColumn_HistValidColums_setpoint
+repo.RepoObject_persistence <.. repo.usp_sync_guid_RepoObjectColumn
 repo.RepoObject_RequiredRepoObjectMerge <.. repo.usp_sync_guid_RepoObject
-repo.RepoObjectColumn <.. repo.RepoObjectColumn_RequiredRepoObjectColumnMerge
-repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_name
+repo.RepoObject_SSAS_src <.. repo.RepoObject_SSAS_tgt
+repo.RepoObject_SSAS_tgt <.. repo.RepoObject
+repo.RepoObject_SSAS_tgt <.. repo.RepoObjectColumn_SSAS_tgt
 repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_guid
+repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_name
+repo.RepoObjectColumn <.. repo.RepoObjectColumn_gross
+repo.RepoObjectColumn <.. repo.RepoObjectColumn_RequiredRepoObjectColumnMerge
+repo.RepoObjectColumn <.. repo.RepoObjectColumn_SSAS_tgt
 repo.RepoObjectColumn <.. repo.usp_sync_guid_RepoObjectColumn
+repo.RepoObjectColumn_gross <.. repo.usp_sync_guid_RepoObjectColumn
 repo.RepoObjectColumn_HistValidColums_setpoint <.. repo.usp_sync_guid_RepoObjectColumn
 repo.RepoObjectColumn_RequiredRepoObjectColumnMerge <.. repo.usp_sync_guid_RepoObjectColumn
+repo.RepoObjectColumn_SSAS_src <.. repo.RepoObjectColumn_SSAS_tgt
+repo.RepoObjectColumn_SSAS_tgt <.. repo.RepoObjectColumn
+repo.RepoObjectColumn_SSAS_tgt <.. repo.RepoObject_SSAS_tgt
 repo.RepoSchema <.. repo.usp_sync_guid_RepoSchema
 repo.RepoSchema <.. repo.SysSchema_RepoSchema_via_guid
 repo.RepoSchema <.. repo.SysSchema_RepoSchema_via_name
+repo.RepoSchema <.. repo.RepoSchema_ssas_tgt
+repo.RepoSchema_ssas_src <.. repo.RepoSchema_ssas_tgt
+repo.RepoSchema_ssas_tgt <.. repo.RepoSchema
 repo.SysColumn_RepoObjectColumn_via_guid <.. repo.usp_sync_guid_RepoObjectColumn
 repo.SysColumn_RepoObjectColumn_via_name <.. repo.usp_sync_guid_RepoObjectColumn
 repo.SysObject_RepoObject_via_guid <.. repo.usp_sync_guid_RepoObject
@@ -289,35 +425,68 @@ repo.usp_sync_guid <.. repo.usp_persistence_set
 repo.usp_sync_guid_RepoObject <.. repo.usp_sync_guid
 repo.usp_sync_guid_RepoObjectColumn <.. repo.usp_sync_guid
 repo.usp_sync_guid_RepoSchema <.. repo.usp_sync_guid
-repo_sys.ExtendedProperties <.. repo_sys.SysSchema
-repo_sys.ExtendedProperties <.. repo_sys.SysColumn
 repo_sys.ExtendedProperties <.. repo_sys.SysObject
+repo_sys.ExtendedProperties <.. repo_sys.SysColumn
+repo_sys.ExtendedProperties <.. repo_sys.SysSchema
 repo_sys.SysColumn <.. repo.SysColumn_RepoObjectColumn_via_guid
-repo_sys.SysColumn <.. repo.usp_sync_guid_RepoObjectColumn
 repo_sys.SysColumn <.. repo.SysColumn_RepoObjectColumn_via_name
-repo_sys.SysObject <.. repo.SysObject_RepoObject_via_name
+repo_sys.SysColumn <.. repo.usp_sync_guid_RepoObjectColumn
 repo_sys.SysObject <.. repo.usp_sync_guid_RepoObject
+repo_sys.SysObject <.. repo.SysObject_RepoObject_via_name
 repo_sys.SysObject <.. repo.SysObject_RepoObject_via_guid
 repo_sys.SysObject <.. repo_sys.SysColumn
-repo_sys.SysSchema <.. repo.usp_sync_guid_RepoSchema
 repo_sys.SysSchema <.. repo.SysSchema_RepoSchema_via_guid
 repo_sys.SysSchema <.. repo.SysSchema_RepoSchema_via_name
-repo_sys.usp_AddOrUpdateExtendedProperty <.. repo.usp_sync_guid_RepoSchema
+repo_sys.SysSchema <.. repo.usp_sync_guid_RepoSchema
 repo_sys.usp_AddOrUpdateExtendedProperty <.. repo.usp_sync_guid_RepoObject
 repo_sys.usp_AddOrUpdateExtendedProperty <.. repo.usp_sync_guid_RepoObjectColumn
-sys_dwh.columns <.. repo_sys.ExtendedProperties
+repo_sys.usp_AddOrUpdateExtendedProperty <.. repo.usp_sync_guid_RepoSchema
+ssas.model_json <.. ssas.model_json_10
+ssas.model_json <.. ssas.model_json_10
+ssas.model_json_10 <.. ssas.model_json_20
+ssas.model_json_10 <.. ssas.model_json_20
+ssas.model_json_20 <.. ssas.model_json_31_tables
+ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
+ssas.model_json_20 <.. repo.RepoSchema_ssas_src
+ssas.model_json_201_descriptions_multiline <.. ssas.model_json_2011_descriptions_StrAgg
+ssas.model_json_2011_descriptions_StrAgg <.. repo.RepoSchema_ssas_src
+ssas.model_json_31_tables <.. ssas.model_json_31_tables_T
+ssas.model_json_31_tables_T <.. ssas.model_json_311_tables_columns
+ssas.model_json_31_tables_T <.. repo.RepoObject_SSAS_src
+ssas.model_json_311_tables_columns <.. ssas.model_json_311_tables_columns_T
+ssas.model_json_311_tables_columns_T <.. ssas.model_json_3111_tables_columns_descriptions_multiline
+ssas.model_json_311_tables_columns_T <.. ssas.model_json_3112_tables_columns_expressions_multiline
+ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_SSAS_src
+ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_gross
+ssas.model_json_3111_tables_columns_descriptions_multiline <.. ssas.model_json_31111_tables_columns_descriptions_StrAgg
+ssas.model_json_31111_tables_columns_descriptions_StrAgg <.. repo.RepoObjectColumn_gross
+ssas.model_json_3112_tables_columns_expressions_multiline <.. ssas.model_json_31121_tables_columns_expressions_StrAgg
+ssas.model_json_31121_tables_columns_expressions_StrAgg <.. repo.RepoObjectColumn_gross
 sys_dwh.columns <.. repo_sys.SysColumn
+sys_dwh.columns <.. repo_sys.ExtendedProperties
+sys_dwh.columns <.. repo_sys.ExtendedProperties
+sys_dwh.columns <.. repo_sys.ExtendedProperties
 sys_dwh.computed_columns <.. repo_sys.SysColumn
 sys_dwh.default_constraints <.. repo_sys.SysColumn
 sys_dwh.extended_properties <.. repo_sys.ExtendedProperties
+sys_dwh.extended_properties <.. repo_sys.ExtendedProperties
+sys_dwh.extended_properties <.. repo_sys.ExtendedProperties
 sys_dwh.identity_columns <.. repo_sys.SysColumn
 sys_dwh.indexes <.. repo_sys.ExtendedProperties
-sys_dwh.objects <.. repo_sys.SysObject
+sys_dwh.indexes <.. repo_sys.ExtendedProperties
+sys_dwh.indexes <.. repo_sys.ExtendedProperties
 sys_dwh.objects <.. repo_sys.ExtendedProperties
+sys_dwh.objects <.. repo_sys.ExtendedProperties
+sys_dwh.objects <.. repo_sys.ExtendedProperties
+sys_dwh.objects <.. repo_sys.SysObject
+sys_dwh.parameters <.. repo_sys.ExtendedProperties
+sys_dwh.parameters <.. repo_sys.ExtendedProperties
 sys_dwh.parameters <.. repo_sys.ExtendedProperties
 sys_dwh.schemas <.. repo_sys.ExtendedProperties
-sys_dwh.schemas <.. repo_sys.SysSchema
+sys_dwh.schemas <.. repo_sys.ExtendedProperties
+sys_dwh.schemas <.. repo_sys.ExtendedProperties
 sys_dwh.schemas <.. repo_sys.SysObject
+sys_dwh.schemas <.. repo_sys.SysSchema
 sys_dwh.sql_modules <.. repo_sys.SysObject
 sys_dwh.tables <.. repo_sys.SysObject
 sys_dwh.types <.. repo_sys.SysColumn

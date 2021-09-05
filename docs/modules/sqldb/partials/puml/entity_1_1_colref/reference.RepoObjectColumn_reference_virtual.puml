@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -27,16 +28,23 @@ entity reference.RepoObject_reference_T << U >> {
   **referenced_RepoObject_guid** : uniqueidentifier
   **referencing_RepoObject_guid** : uniqueidentifier
   --
+  * is_ReversePersistenceViaView : bit
   referenced_entity_name : nvarchar(128)
+  * referenced_is_PersistenceSource : bit
+  * referenced_is_PersistenceTarget : bit
   referenced_schema_name : nvarchar(128)
   referenced_type : char(2)
   referencing_entity_name : nvarchar(128)
+  * referencing_is_PersistenceTarget : bit
+  * referencing_is_PersistenceUspSourceRef : bit
+  referencing_is_PersistenceUspTargetRef : bit
   referencing_schema_name : nvarchar(128)
   referencing_type : varchar(2)
   * {static} referenced_fullname : nvarchar(261)
   * {static} referenced_fullname2 : nvarchar(257)
   * {static} referencing_fullname : nvarchar(261)
   * {static} referencing_fullname2 : nvarchar(257)
+  --
 }
 
 entity reference.RepoObjectColumn_reference_union << V >> {
@@ -49,8 +57,6 @@ entity reference.RepoObjectColumn_reference_union << V >> {
   referenced_column_name : nvarchar(128)
   referenced_entity_name : nvarchar(128)
   referenced_id : int
-  referenced_minor_id : int
-  referenced_node_id : bigint
   referenced_RepoObject_guid : uniqueidentifier
   referenced_RepoObjectColumn_guid : uniqueidentifier
   referenced_schema_name : nvarchar(128)
@@ -58,12 +64,11 @@ entity reference.RepoObjectColumn_reference_union << V >> {
   referencing_column_name : nvarchar(128)
   referencing_entity_name : nvarchar(128)
   referencing_id : int
-  referencing_minor_id : int
-  referencing_node_id : bigint
   referencing_RepoObject_guid : uniqueidentifier
   referencing_RepoObjectColumn_guid : uniqueidentifier
   referencing_schema_name : nvarchar(128)
   referencing_type : char(2)
+  --
 }
 
 entity reference.RepoObjectColumn_reference_virtual << V >> {
@@ -91,28 +96,26 @@ entity reference.RepoObjectColumn_reference_virtual << V >> {
   * referencing_RepoObjectColumn_guid : uniqueidentifier
   * referencing_schema_name : nvarchar(128)
   referencing_type : char(2)
+  --
 }
 
 entity reference.RepoObjectColumnSource_virtual << U >> {
   * **RepoObjectColumn_guid** : uniqueidentifier
   * **Source_RepoObjectColumn_guid** : uniqueidentifier
   --
+  --
 }
 
 entity repo.RepoObjectColumn_gross << V >> {
   * **RepoObjectColumn_guid** : uniqueidentifier
   --
-  AntoraReferencedColumnList : nvarchar(max)
-  AntoraReferencingColumnList : nvarchar(max)
   * Column_name : nvarchar(128)
+  Description : nvarchar(max)
   has_different_sys_names : bit
   has_get_referenced_issue : bit
-  index_column_id : int
-  index_name : nvarchar(128)
   Inheritance_StringAggSeparatorSql : nvarchar(4000)
   InheritanceDefinition : nvarchar(4000)
   InheritanceType : tinyint
-  is_index_primary_key : bit
   is_persistence_no_check : bit
   is_persistence_no_include : bit
   is_persistence_no_update : bit
@@ -121,6 +124,7 @@ entity repo.RepoObjectColumn_gross << V >> {
   * is_RepoObject_name_uniqueidentifier : int
   * is_RepoObjectColumn_name_uniqueidentifier : int
   is_required_ColumnMerge : bit
+  * is_ssas : bit
   is_SysObject_missing : bit
   * is_SysObject_name_uniqueidentifier : int
   is_SysObjectColumn_missing : bit
@@ -167,6 +171,16 @@ entity repo.RepoObjectColumn_gross << V >> {
   SysObject_type : char(2)
   SysObjectColumn_column_id : int
   * SysObjectColumn_name : nvarchar(128)
+  tabcol_Description : nvarchar(max)
+  tabcol_DisplayFolder : nvarchar(500)
+  tabcol_Expression : nvarchar(max)
+  tabcol_FormatString : nvarchar(500)
+  * tabcol_IsHidden : bit
+  * tabcol_IsKey : bit
+  * tabcol_IsUnique : bit
+  tabcol_SummarizeBy : nvarchar(500)
+  tabcol_Type : nvarchar(500)
+  --
 }
 
 reference.RepoObject_reference_T <.. reference.RepoObjectColumn_reference_virtual

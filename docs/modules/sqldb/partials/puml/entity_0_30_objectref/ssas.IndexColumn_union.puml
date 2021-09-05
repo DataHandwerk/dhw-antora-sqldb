@@ -24,11 +24,6 @@ skinparam class {
 }
 
 
-entity docs.RepoObject_ColumnList_T {
-  * **RepoObject_guid** : uniqueidentifier
-  --
-}
-
 entity docs.AntoraIndexSemanticgroup << V >> {
   **IndexSemanticGroup** : nvarchar(512)
   --
@@ -68,11 +63,15 @@ entity docs.RepoObject_Adoc << V >> {
 }
 
 entity docs.RepoObject_Adoc_T << U >> {
-  * **RepoObject_guid** : uniqueidentifier
   --
 }
 
 entity docs.RepoObject_ColumnList << V >> {
+  --
+}
+
+entity docs.RepoObject_ColumnList_T << U >> {
+  * **RepoObject_guid** : uniqueidentifier
   --
 }
 
@@ -404,10 +403,16 @@ docs.ObjectRefCyclic_EntityList <.. docs.ObjectRefCyclic
 docs.RepoObject_Adoc <.. docs.RepoObject_Adoc_T
 docs.RepoObject_Adoc <.. docs.usp_PERSIST_RepoObject_Adoc_T
 docs.REpoObject_Adoc_T <.. docs.usp_PERSIST_RepoObject_Adoc_T
-docs.RepoObject_ColumnList <.. docs.85AC3586-9B83-4474-AF3D-ED54F04062CA
+docs.RepoObject_ColumnList <.. docs.RepoObject_ColumnList_T
 docs.RepoObject_ColumnList <.. docs.usp_PERSIST_RepoObject_ColumnList_T
-docs.RepoObject_ColumnList <.. docs.85AC3586-9B83-4474-AF3D-ED54F04062CA
+docs.RepoObject_ColumnList <.. docs.RepoObject_ColumnList_T
 docs.RepoObject_ColumnList <.. docs.usp_PERSIST_RepoObject_ColumnList_T
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Adoc
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Plantuml_Entity
+docs.RepoObject_ColumnList_T <.. docs.usp_PERSIST_RepoObject_ColumnList_T
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Adoc
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Plantuml_Entity
+docs.RepoObject_ColumnList_T <.. docs.usp_PERSIST_RepoObject_ColumnList_T
 docs.RepoObject_IndexList <.. docs.RepoObject_IndexList_T
 docs.RepoObject_IndexList <.. docs.usp_PERSIST_RepoObject_IndexList_T
 docs.RepoObject_IndexList_T <.. docs.RepoObject_Adoc
@@ -480,11 +485,11 @@ repo.Index_ssas_IndexPatternColumnGuid <.. repo.Index_union
 repo.Index_ssas_IndexPatternColumnGuid <.. repo.Index_union
 repo.Index_ssas_T <.. repo.Index_union
 repo.Index_ssas_T <.. repo.IndexColumn_ssas
-repo.Index_ssas_T <.. repo.Index_ssas_IndexPatternColumnGuid
 repo.Index_ssas_T <.. repo.usp_PERSIST_Index_ssas_T
 repo.Index_ssas_T <.. repo.ForeignKey_ssas_Indexes
 repo.Index_ssas_T <.. repo.IndexColumn_ssas_gross
 repo.Index_ssas_T <.. repo.ForeignKey_ssas_Indexes_old
+repo.Index_ssas_T <.. repo.Index_ssas_IndexPatternColumnGuid
 repo.Index_union <.. repo.IndexReferencedReferencing
 repo.Index_union <.. repo.Index_SqlConstraint_PkUq
 repo.Index_union <.. repo.Index_gross
@@ -526,8 +531,8 @@ repo.IndexColumn_virtual_referenced_setpoint <.. repo.usp_index_inheritance
 repo.IndexReferencedReferencing <.. repo.IndexReferencedReferencing_HasFullColumnsInReferencing
 repo.IndexReferencedReferencing_HasFullColumnsInReferencing <.. repo.usp_index_inheritance
 repo.RepoObject_ColumnList <.. repo.RepoObject_SqlCreateTable
-repo.RepoObject_ColumnList <.. repo.RepoObject_SqlCreateTable
 repo.RepoObject_ColumnList <.. repo.RepoObject_gross2
+repo.RepoObject_ColumnList <.. repo.RepoObject_SqlCreateTable
 repo.RepoObject_ColumnList <.. repo.RepoObject_gross2
 repo.RepoObject_gross2 <.. uspgenerator.GeneratorUspStep_Persistence
 repo.RepoObject_gross2 <.. docs.RepoObject_Adoc

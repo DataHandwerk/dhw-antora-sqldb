@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -37,14 +38,17 @@ entity property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn << V >> {
   property_value : nvarchar(4000)
   Repo_user_type_fullname : nvarchar(128)
   * RepoObjectColumn_guid : uniqueidentifier
+  --
 }
 
 entity property.fs_get_RepoObjectColumnProperty_nvarchar << FN >> {
+  --
   --
 }
 
 entity property.PropertyName_RepoObjectColumn << V >> {
   * **property_name** : nvarchar(128)
+  --
   --
 }
 
@@ -60,6 +64,7 @@ entity property.RepoObjectColumnProperty << U >> {
   {abstract} property_int : int
   {abstract} property_money : money
   {abstract} property_real : real
+  --
 }
 
 entity property.RepoObjectColumnProperty_ForUpdate << V >> {
@@ -77,26 +82,28 @@ entity property.RepoObjectColumnProperty_ForUpdate << V >> {
   * RepoObjectColumn_fullname2 : nvarchar(386)
   * RepoObjectColumn_guid : uniqueidentifier
   * RepoObjectColumn_name : nvarchar(128)
+  --
 }
 
 entity property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition << V >> {
   * **RepoObjectColumn_guid** : uniqueidentifier
   * **property_name** : nvarchar(128)
   --
-  Inheritance_StringAggSeparatorSql : nvarchar(4000)
-  InheritanceDefinition : nvarchar(4000)
+  Inheritance_StringAggSeparatorSql : nvarchar(max)
+  InheritanceDefinition : nvarchar(max)
   InheritanceType : int
-  par_Inheritance_StringAggSeparatorSql : nvarchar(4000)
-  par_InheritanceDefinition : nvarchar(4000)
+  par_Inheritance_StringAggSeparatorSql : nvarchar(max)
+  par_InheritanceDefinition : nvarchar(max)
   par_InheritanceType : int
   property_value : nvarchar(max)
   * RepoObjectColumn_name : nvarchar(128)
   roc_Inheritance_StringAggSeparatorSql : nvarchar(4000)
   roc_InheritanceDefinition : nvarchar(4000)
   roc_InheritanceType : tinyint
-  sub_Inheritance_StringAggSeparatorSql : nvarchar(4000)
-  sub_InheritanceDefinition : nvarchar(4000)
+  sub_Inheritance_StringAggSeparatorSql : nvarchar(max)
+  sub_InheritanceDefinition : nvarchar(max)
   sub_InheritanceType : int
+  --
 }
 
 entity property.RepoObjectColumnProperty_sys_repo << V >> {
@@ -109,17 +116,21 @@ entity property.RepoObjectColumnProperty_sys_repo << V >> {
   SysObject_name : nvarchar(128)
   SysObject_schema_name : nvarchar(128)
   SysObjectColumn_name : nvarchar(128)
+  --
 }
 
 entity property.usp_RepoObjectColumn_Inheritance << P >> {
+  --
   --
 }
 
 entity property.usp_RepoObjectColumnProperty_set << P >> {
   --
+  --
 }
 
 entity property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate << P >> {
+  --
   --
 }
 

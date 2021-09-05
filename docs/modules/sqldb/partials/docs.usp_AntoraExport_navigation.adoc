@@ -7,6 +7,8 @@
 :ExistsProperty--antorareferencedlist:
 :ExistsProperty--antorareferencinglist:
 :ExistsProperty--exampleusage:
+:ExistsProperty--is_repo_managed:
+:ExistsProperty--is_ssas:
 :ExistsProperty--ms_description:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--uspparameters:
@@ -41,7 +43,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-08-07 17:38:07
+2021-09-05 13:29:31
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -82,7 +84,12 @@ stored procedure
 * @parent_execution_log_id (bigint)
 // end::AntoraParameterList[]
 
-== AdocUspSteps
+== Other tags
+
+source: property.RepoObjectProperty_cross As rop_cross
+
+
+=== AdocUspSteps
 
 // tag::adocuspsteps[]
 .Steps in [docs].[usp_AntoraExport_navigation]
@@ -95,21 +102,68 @@ stored procedure
 *configure database connection*
 
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+DECLARE @instanceName NVARCHAR(500) = @@servername --example: 'ACER-F17\SQL2019', '.\SQL2019', localhost\SQL2019
+DECLARE @databaseName NVARCHAR(128) = DB_NAME()
+DECLARE @TrustedUserPassword NVARCHAR(1000)
+
+IF @isTrustedConnection = 1
+ SET @TrustedUserPassword = ' -T'
+ELSE
+ SET @TrustedUserPassword = ' -U ' + @userName + ' -P ' + @password
+----
+=====
+
 |
+
 
 |120
 |
 *configure outputDirs*
 
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+SET @outputDirPartNav = ISNULL(@outputDirPartNav, (
+   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModul', '') + '\'
+   ) + 'partials\navlist\')
+SET @outputDirPageNav = ISNULL(@outputDirPageNav, (
+   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModul', '') + '\'
+   ) + 'pages\nav\')
+----
+=====
+
 |
+
 
 |210
 |
 *declare variables*
 
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+DECLARE @schema_name NVARCHAR(128)
+DECLARE @type varchar(2)
+DECLARE @command NVARCHAR(4000)
+----
+=====
+
 |
+
 
 |410
 |
@@ -118,7 +172,60 @@ stored procedure
 * u
 * [docs].[AntoraNavListRepoObject_by_schema]
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+DECLARE page_cursor CURSOR Local Fast_Forward
+FOR
+SELECT [RepoObject_schema_name]
+FROM [docs].[AntoraNavListRepoObject_by_schema]
+ORDER BY [RepoObject_schema_name]
+
+OPEN page_cursor
+
+FETCH NEXT
+FROM page_cursor
+INTO @schema_name
+
+WHILE @@FETCH_STATUS = 0
+BEGIN
+ --Dynamically construct the BCP command
+ --
+ --bcp "SELECT [nav_list] FROM [docs].[AntoraNavListRepoObject_by_schema] WHERE [RepoObject_schema_name] = 'dbo'" queryout D:\Repos\GitHub\DataHandwerk\DataHandwerk-docs\docs\modules\sqldb\partials\navlist-schema-dbo.adoc -S localhost\sql2019 -d dhw_self -c -T
+ --
+ SET @command = 'bcp "SELECT [nav_list] FROM [docs].[AntoraNavListRepoObject_by_schema] WHERE [RepoObject_schema_name] = ''' + @schema_name + '''"  queryout "' + @outputDirPartNav + 'navlist-schema-' + @schema_name + '.adoc"'
+  --
+  + ' -S ' + @instanceName
+  --
+  + ' -d ' + @databaseName
+  --
+  + ' -c -C 65001'
+  --
+  + @TrustedUserPassword
+
+ PRINT @command
+
+ --Execute the BCP command
+ EXEC xp_cmdshell @command
+  , no_output
+
+ FETCH NEXT
+ FROM page_cursor
+ INTO @schema_name
+END
+
+CLOSE page_cursor
+
+DEALLOCATE page_cursor
+
+----
+=====
+
 |
+
 
 |420
 |
@@ -127,7 +234,61 @@ stored procedure
 * u
 * [docs].[AntoraNavListRepoObject_by_type]
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+DECLARE part2_cursor CURSOR Local Fast_Forward
+FOR
+SELECT TRIM([type])
+--, [nav_list]
+FROM [docs].[AntoraNavListRepoObject_by_type]
+ORDER BY [type]
+
+OPEN part2_cursor
+
+FETCH NEXT
+FROM part2_cursor
+INTO @type
+
+WHILE @@FETCH_STATUS = 0
+BEGIN
+ --Dynamically construct the BCP command
+ --
+ --bcp "SELECT [nav_list] FROM [docs].[AntoraNavListRepoObject_by_type] WHERE [type] = 'u'" queryout D:\Repos\GitHub\DataHandwerk\DataHandwerk-docs\docs\modules\sqldb\partials\navlist-type-u.adoc -S localhost\sql2019 -d dhw_self -c -T
+ --
+ SET @command = 'bcp "SELECT [nav_list] FROM [docs].[AntoraNavListRepoObject_by_type] WHERE [type] = ''' + @type + '''"  queryout "' + @outputDirPartNav + 'navlist-type-' + @type + '.adoc"'
+  --
+  + ' -S ' + @instanceName
+  --
+  + ' -d ' + @databaseName
+  --
+  + ' -c -C 65001'
+  --
+  + @TrustedUserPassword
+
+ PRINT @command
+
+ --Execute the BCP command
+ EXEC xp_cmdshell @command
+  , no_output
+
+ FETCH NEXT
+ FROM part2_cursor
+ INTO @type
+END
+
+CLOSE part2_cursor
+
+DEALLOCATE part2_cursor
+
+----
+=====
+
 |
+
 
 |430
 |
@@ -136,7 +297,64 @@ stored procedure
 * u
 * [docs].[AntoraNavListRepoObject_by_schema_type]
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+DECLARE part3_cursor CURSOR Local Fast_Forward
+FOR
+SELECT [RepoObject_schema_name]
+ , TRIM([type])
+--, [nav_list]
+FROM [docs].[AntoraNavListRepoObject_by_schema_type]
+ORDER BY [type]
+
+OPEN part3_cursor
+
+FETCH NEXT
+FROM part3_cursor
+INTO @schema_name
+ , @type
+
+WHILE @@FETCH_STATUS = 0
+BEGIN
+ --Dynamically construct the BCP command
+ --
+ --bcp "SELECT [nav_list] FROM [docs].[AntoraNavListRepoObject_by_schema_type] WHERE [RepoObject_schema_name] = 'dbo' and [type] = 'u'" queryout D:\Repos\GitHub\DataHandwerk\DataHandwerk-docs\docs\modules\sqldb\partials\navlist-type-u.adoc -S localhost\sql2019 -d dhw_self -c -T
+ --
+ SET @command = 'bcp "SELECT [nav_list] FROM [docs].[AntoraNavListRepoObject_by_schema_type] WHERE [RepoObject_schema_name] = ''' + @schema_name + ''' AND [type] = ''' + @type + '''"  queryout "' + @outputDirPartNav + 'navlist-schema-type-' + @type + '.adoc"'
+  --
+  + ' -S ' + @instanceName
+  --
+  + ' -d ' + @databaseName
+  --
+  + ' -c -C 65001'
+  --
+  + @TrustedUserPassword
+
+ PRINT @command
+
+ --Execute the BCP command
+ EXEC xp_cmdshell @command
+  , no_output
+
+ FETCH NEXT
+ FROM part3_cursor
+ INTO @schema_name
+  , @type
+END
+
+CLOSE part3_cursor
+
+DEALLOCATE part3_cursor
+
+----
+=====
+
 |
+
 
 |510
 |
@@ -145,7 +363,59 @@ stored procedure
 * u
 * [docs].[AntoraNavListPage_by_schema]
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+DECLARE page_cursor CURSOR Local Fast_Forward
+FOR
+SELECT [RepoObject_schema_name]
+FROM [docs].[AntoraNavListRepoObject_by_schema]
+ORDER BY [RepoObject_schema_name]
+
+OPEN page_cursor
+
+FETCH NEXT
+FROM page_cursor
+INTO @schema_name
+
+--, @nav_list
+WHILE @@FETCH_STATUS = 0
+BEGIN
+ --Dynamically construct the BCP command
+ --
+ SET @command = 'bcp "SELECT [nav_list] FROM [docs].[AntoraNavListPage_by_schema] WHERE [RepoObject_schema_name] = ''' + @schema_name + '''"  queryout "' + @outputDirPageNav + 'nav-schema-' + @schema_name + '.adoc"'
+  --
+  + ' -S ' + @instanceName
+  --
+  + ' -d ' + @databaseName
+  --
+  + ' -c -C 65001'
+  --
+  + @TrustedUserPassword
+
+ PRINT @command
+
+ --Execute the BCP command
+ EXEC xp_cmdshell @command
+  , no_output
+
+ FETCH NEXT
+ FROM page_cursor
+ INTO @schema_name
+END
+
+CLOSE page_cursor
+
+DEALLOCATE page_cursor
+
+----
+=====
+
 |
+
 
 |520
 |
@@ -154,7 +424,66 @@ stored procedure
 * u
 * [docs].[AntoraNavListPage_by_type]
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+DECLARE page_cursor CURSOR Local Fast_Forward
+FOR
+SELECT type
+FROM configT.type
+WHERE (is_DocsOutput = 1)
+ORDER BY type
+
+----some entries doesn't exist in [docs].[AntoraNavListPage_by_type]
+----but we will generate empty files to avoid old files with not existing content
+--FROM [docs].[AntoraNavListPage_by_type]
+--ORDER BY type
+
+
+OPEN page_cursor
+
+FETCH NEXT
+FROM page_cursor
+INTO @type
+
+--, @nav_list
+WHILE @@FETCH_STATUS = 0
+BEGIN
+ --Dynamically construct the BCP command
+ --
+ SET @command = 'bcp "SELECT [nav_list] FROM [docs].[AntoraNavListPage_by_type] WHERE [type] = ''' + @type + '''"  queryout "' + @outputDirPageNav + 'nav-type-' + @type + '.adoc"'
+  --
+  + ' -S ' + @instanceName
+  --
+  + ' -d ' + @databaseName
+  --
+  + ' -c'
+  --
+  + @TrustedUserPassword
+
+ PRINT @command
+
+ --Execute the BCP command
+ EXEC xp_cmdshell @command
+  , no_output
+
+ FETCH NEXT
+ FROM page_cursor
+ INTO @type
+END
+
+CLOSE page_cursor
+
+DEALLOCATE page_cursor
+
+----
+=====
+
 |
+
 
 |610
 |
@@ -166,7 +495,33 @@ stored procedure
 
 --nav-by-schema.adoc
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+SET @command = 'bcp "SELECT [partial_content] FROM [docs].[AntoraPage_ObjectBySchema]"  queryout "' + @outputDirPartNav + 'nav-by-schema.adoc"'
+ --
+ + ' -S ' + @instanceName
+ --
+ + ' -d ' + @databaseName
+ --
+ + ' -c -C 65001'
+ --
+ + @TrustedUserPassword
+
+PRINT @command
+
+--Execute the BCP command
+EXEC xp_cmdshell @command
+ , no_output
+
+----
+=====
+
 |
+
 
 |620
 |
@@ -178,7 +533,33 @@ stored procedure
 
 nav-by-type.adoc
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+SET @command = 'bcp "SELECT [partial_content] FROM [docs].[AntoraPage_ObjectByType]"  queryout "' + @outputDirPartNav + 'nav-by-type.adoc"'
+ --
+ + ' -S ' + @instanceName
+ --
+ + ' -d ' + @databaseName
+ --
+ + ' -c -C 65001'
+ --
+ + @TrustedUserPassword
+
+PRINT @command
+
+--Execute the BCP command
+EXEC xp_cmdshell @command
+ , no_output
+
+----
+=====
+
 |
+
 
 |710
 |
@@ -190,13 +571,39 @@ nav-by-type.adoc
 
 --objects-by-schema.adoc
 
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+SET @command = 'bcp "SELECT [page_content] FROM [docs].[AntoraPage_ObjectBySchema]"  queryout "' + @outputDirPageNav + 'objects-by-schema.adoc"'
+ --
+ + ' -S ' + @instanceName
+ --
+ + ' -d ' + @databaseName
+ --
+ + ' -c -C 65001'
+ --
+ + @TrustedUserPassword
+
+PRINT @command
+
+--Execute the BCP command
+EXEC xp_cmdshell @command
+ , no_output
+
+----
+=====
+
 |
+
 |===
 
 // end::adocuspsteps[]
 
 
-== AntoraReferencedList
+=== AntoraReferencedList
 
 // tag::antorareferencedlist[]
 * xref:config.fs_get_parameter_value.adoc[]
@@ -208,162 +615,169 @@ nav-by-type.adoc
 // end::antorareferencedlist[]
 
 
-== AntoraReferencingList
+=== AntoraReferencingList
 
 // tag::antorareferencinglist[]
 * xref:docs.usp_AntoraExport.adoc[]
 // end::antorareferencinglist[]
 
 
-== exampleUsage
+=== exampleUsage
 
 // tag::exampleusage[]
 EXEC [docs].[usp_AntoraExport_navigation]
 // end::exampleusage[]
 
 
-== exampleUsage_2
+=== exampleUsage_2
 
 // tag::exampleusage_2[]
 
 // end::exampleusage_2[]
 
 
-== exampleUsage_3
+=== exampleUsage_3
 
 // tag::exampleusage_3[]
 
 // end::exampleusage_3[]
 
 
-== exampleUsage_4
+=== exampleUsage_4
 
 // tag::exampleusage_4[]
 
 // end::exampleusage_4[]
 
 
-== exampleUsage_5
+=== exampleUsage_5
 
 // tag::exampleusage_5[]
 
 // end::exampleusage_5[]
 
 
-== exampleWrong_Usage
+=== exampleWrong_Usage
 
 // tag::examplewrong_usage[]
 
 // end::examplewrong_usage[]
 
 
-== has_execution_plan_issue
+=== has_execution_plan_issue
 
 // tag::has_execution_plan_issue[]
 
 // end::has_execution_plan_issue[]
 
 
-== has_get_referenced_issue
+=== has_get_referenced_issue
 
 // tag::has_get_referenced_issue[]
 
 // end::has_get_referenced_issue[]
 
 
-== has_history
+=== has_history
 
 // tag::has_history[]
 
 // end::has_history[]
 
 
-== has_history_columns
+=== has_history_columns
 
 // tag::has_history_columns[]
 
 // end::has_history_columns[]
 
 
-== is_persistence
+=== is_persistence
 
 // tag::is_persistence[]
 
 // end::is_persistence[]
 
 
-== is_persistence_check_duplicate_per_pk
+=== is_persistence_check_duplicate_per_pk
 
 // tag::is_persistence_check_duplicate_per_pk[]
 
 // end::is_persistence_check_duplicate_per_pk[]
 
 
-== is_persistence_check_for_empty_source
+=== is_persistence_check_for_empty_source
 
 // tag::is_persistence_check_for_empty_source[]
 
 // end::is_persistence_check_for_empty_source[]
 
 
-== is_persistence_delete_changed
+=== is_persistence_delete_changed
 
 // tag::is_persistence_delete_changed[]
 
 // end::is_persistence_delete_changed[]
 
 
-== is_persistence_delete_missing
+=== is_persistence_delete_missing
 
 // tag::is_persistence_delete_missing[]
 
 // end::is_persistence_delete_missing[]
 
 
-== is_persistence_insert
+=== is_persistence_insert
 
 // tag::is_persistence_insert[]
 
 // end::is_persistence_insert[]
 
 
-== is_persistence_truncate
+=== is_persistence_truncate
 
 // tag::is_persistence_truncate[]
 
 // end::is_persistence_truncate[]
 
 
-== is_persistence_update_changed
+=== is_persistence_update_changed
 
 // tag::is_persistence_update_changed[]
 
 // end::is_persistence_update_changed[]
 
 
-== is_repo_managed
+=== is_repo_managed
 
 // tag::is_repo_managed[]
-
+0
 // end::is_repo_managed[]
 
 
-== microsoft_database_tools_support
+=== is_ssas
+
+// tag::is_ssas[]
+0
+// end::is_ssas[]
+
+
+=== microsoft_database_tools_support
 
 // tag::microsoft_database_tools_support[]
 
 // end::microsoft_database_tools_support[]
 
 
-== MS_Description
+=== MS_Description
 
 // tag::ms_description[]
 https://antora.org/[Antora] uses https://docs.antora.org/antora/2.3/navigation/files-and-lists/[Navigation Files and Lists]. Content for these files is exported
 
-* check and correct xref:config.Parameter.adoc#column-Parameter_value[config.Parameter.Parameter_value] for ('Adoc_AntoraDocModulFolder', ''), a possible parameter is
+* check and correct xref:config.Parameter.adoc#column-Parameter_value[config.Parameter.Parameter_value] for ('AntoraModulFolder', ''), a possible parameter is
 +
 ====
-D:\Repos\GitHub\MyOrganisation\MyProject-docs\docs\modules\sqldb\
+D:\Repos\GitHub\MyOrganisation\MyProject-docs\docs\modules
 ====
 
 include::partial$docsnippet/antora-export-prerequisites.adoc[]
@@ -371,67 +785,67 @@ include::partial$docsnippet/antora-export-prerequisites.adoc[]
 // end::ms_description[]
 
 
-== persistence_source_RepoObject_fullname
+=== persistence_source_RepoObject_fullname
 
 // tag::persistence_source_repoobject_fullname[]
 
 // end::persistence_source_repoobject_fullname[]
 
 
-== persistence_source_RepoObject_fullname2
+=== persistence_source_RepoObject_fullname2
 
 // tag::persistence_source_repoobject_fullname2[]
 
 // end::persistence_source_repoobject_fullname2[]
 
 
-== persistence_source_RepoObject_guid
+=== persistence_source_RepoObject_guid
 
 // tag::persistence_source_repoobject_guid[]
 
 // end::persistence_source_repoobject_guid[]
 
 
-== persistence_source_RepoObject_xref
+=== persistence_source_RepoObject_xref
 
 // tag::persistence_source_repoobject_xref[]
 
 // end::persistence_source_repoobject_xref[]
 
 
-== pk_index_guid
+=== pk_index_guid
 
 // tag::pk_index_guid[]
 
 // end::pk_index_guid[]
 
 
-== pk_IndexPatternColumnDatatype
+=== pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
 
 // end::pk_indexpatterncolumndatatype[]
 
 
-== pk_IndexPatternColumnName
+=== pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
 
 // end::pk_indexpatterncolumnname[]
 
 
-== pk_IndexSemanticGroup
+=== pk_IndexSemanticGroup
 
 // tag::pk_indexsemanticgroup[]
 
 // end::pk_indexsemanticgroup[]
 
 
-== ReferencedObjectList
+=== ReferencedObjectList
 
 // tag::referencedobjectlist[]
 * [config].[fs_get_parameter_value]
-* [config].[type]
+* [configT].[type]
 * [docs].[AntoraNavListRepoObject_by_schema]
 * [docs].[AntoraNavListRepoObject_by_schema_type]
 * [docs].[AntoraNavListRepoObject_by_type]
@@ -439,21 +853,21 @@ include::partial$docsnippet/antora-export-prerequisites.adoc[]
 // end::referencedobjectlist[]
 
 
-== usp_persistence_RepoObject_guid
+=== usp_persistence_RepoObject_guid
 
 // tag::usp_persistence_repoobject_guid[]
 
 // end::usp_persistence_repoobject_guid[]
 
 
-== UspExamples
+=== UspExamples
 
 // tag::uspexamples[]
 
 // end::uspexamples[]
 
 
-== UspParameters
+=== UspParameters
 
 // tag::uspparameters[]
 @outputDirPartNav NVARCHAR(1000) = NULL /* example: 'D:\Repos\GitHub\DataHandwerk\DataHandwerk-docs\docs\modules\sqldb\partials\navlist\' */
@@ -463,12 +877,25 @@ include::partial$docsnippet/antora-export-prerequisites.adoc[]
 ,@password NVARCHAR(250) = 'password'
 // end::uspparameters[]
 
+== Boolean Attributes
+
+source: property.RepoObjectProperty WHERE property_int = 1
+
+// tag::boolean_attributes[]
+
+// end::boolean_attributes[]
 
 == sql_modules_definition
 
 // tag::sql_modules_definition[]
+[%collapsible]
+=======
 [source,sql]
 ----
+/*
+code of this procedure is managed in the dhw repository. Do not modify manually.
+Use [uspgenerator].[GeneratorUsp], [uspgenerator].[GeneratorUspParameter], [uspgenerator].[GeneratorUspStep], [uspgenerator].[GeneratorUsp_SqlUsp]
+*/
 CREATE   PROCEDURE [docs].[usp_AntoraExport_navigation]
 @outputDirPartNav NVARCHAR(1000) = NULL /* example: 'D:\Repos\GitHub\DataHandwerk\DataHandwerk-docs\docs\modules\sqldb\partials\navlist\' */
 ,@outputDirPageNav NVARCHAR(1000) = NULL /* example: 'D:\Repos\GitHub\DataHandwerk\DataHandwerk-docs\docs\modules\sqldb\pages\nav\' */
@@ -563,10 +990,10 @@ ELSE
 PRINT CONCAT('usp_id;Number;Parent_Number: ',28,';',120,';',NULL);
 
 SET @outputDirPartNav = ISNULL(@outputDirPartNav, (
-   SELECT [config].[fs_get_parameter_value]('Adoc_AntoraDocModulFolder', '')
+   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModul', '') + '\'
    ) + 'partials\navlist\')
 SET @outputDirPageNav = ISNULL(@outputDirPageNav, (
-   SELECT [config].[fs_get_parameter_value]('Adoc_AntoraDocModulFolder', '')
+   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModul', '') + '\'
    ) + 'pages\nav\')
 
 /*{"ReportUspStep":[{"Number":210,"Name":"declare variables","has_logging":0,"is_condition":0,"is_inactive":0,"is_SubProcedure":0}]}*/
@@ -597,7 +1024,7 @@ BEGIN
  --
  --bcp "SELECT [nav_list] FROM [docs].[AntoraNavListRepoObject_by_schema] WHERE [RepoObject_schema_name] = 'dbo'" queryout D:\Repos\GitHub\DataHandwerk\DataHandwerk-docs\docs\modules\sqldb\partials\navlist-schema-dbo.adoc -S localhost\sql2019 -d dhw_self -c -T
  --
- SET @command = 'bcp "SELECT [nav_list] FROM [docs].[AntoraNavListRepoObject_by_schema] WHERE [RepoObject_schema_name] = ''' + @schema_name + '''"  queryout ' + @outputDirPartNav + 'navlist-schema-' + @schema_name + '.adoc'
+ SET @command = 'bcp "SELECT [nav_list] FROM [docs].[AntoraNavListRepoObject_by_schema] WHERE [RepoObject_schema_name] = ''' + @schema_name + '''"  queryout "' + @outputDirPartNav + 'navlist-schema-' + @schema_name + '.adoc"'
   --
   + ' -S ' + @instanceName
   --
@@ -669,7 +1096,7 @@ BEGIN
  --
  --bcp "SELECT [nav_list] FROM [docs].[AntoraNavListRepoObject_by_type] WHERE [type] = 'u'" queryout D:\Repos\GitHub\DataHandwerk\DataHandwerk-docs\docs\modules\sqldb\partials\navlist-type-u.adoc -S localhost\sql2019 -d dhw_self -c -T
  --
- SET @command = 'bcp "SELECT [nav_list] FROM [docs].[AntoraNavListRepoObject_by_type] WHERE [type] = ''' + @type + '''"  queryout ' + @outputDirPartNav + 'navlist-type-' + @type + '.adoc'
+ SET @command = 'bcp "SELECT [nav_list] FROM [docs].[AntoraNavListRepoObject_by_type] WHERE [type] = ''' + @type + '''"  queryout "' + @outputDirPartNav + 'navlist-type-' + @type + '.adoc"'
   --
   + ' -S ' + @instanceName
   --
@@ -743,7 +1170,7 @@ BEGIN
  --
  --bcp "SELECT [nav_list] FROM [docs].[AntoraNavListRepoObject_by_schema_type] WHERE [RepoObject_schema_name] = 'dbo' and [type] = 'u'" queryout D:\Repos\GitHub\DataHandwerk\DataHandwerk-docs\docs\modules\sqldb\partials\navlist-type-u.adoc -S localhost\sql2019 -d dhw_self -c -T
  --
- SET @command = 'bcp "SELECT [nav_list] FROM [docs].[AntoraNavListRepoObject_by_schema_type] WHERE [RepoObject_schema_name] = ''' + @schema_name + ''' AND [type] = ''' + @type + '''"  queryout ' + @outputDirPartNav + 'navlist-schema-type-' + @type + '.adoc'
+ SET @command = 'bcp "SELECT [nav_list] FROM [docs].[AntoraNavListRepoObject_by_schema_type] WHERE [RepoObject_schema_name] = ''' + @schema_name + ''' AND [type] = ''' + @type + '''"  queryout "' + @outputDirPartNav + 'navlist-schema-type-' + @type + '.adoc"'
   --
   + ' -S ' + @instanceName
   --
@@ -814,7 +1241,7 @@ WHILE @@FETCH_STATUS = 0
 BEGIN
  --Dynamically construct the BCP command
  --
- SET @command = 'bcp "SELECT [nav_list] FROM [docs].[AntoraNavListPage_by_schema] WHERE [RepoObject_schema_name] = ''' + @schema_name + '''"  queryout ' + @outputDirPageNav + 'nav-schema-' + @schema_name + '.adoc'
+ SET @command = 'bcp "SELECT [nav_list] FROM [docs].[AntoraNavListPage_by_schema] WHERE [RepoObject_schema_name] = ''' + @schema_name + '''"  queryout "' + @outputDirPageNav + 'nav-schema-' + @schema_name + '.adoc"'
   --
   + ' -S ' + @instanceName
   --
@@ -891,7 +1318,7 @@ WHILE @@FETCH_STATUS = 0
 BEGIN
  --Dynamically construct the BCP command
  --
- SET @command = 'bcp "SELECT [nav_list] FROM [docs].[AntoraNavListPage_by_type] WHERE [type] = ''' + @type + '''"  queryout ' + @outputDirPageNav + 'nav-type-' + @type + '.adoc'
+ SET @command = 'bcp "SELECT [nav_list] FROM [docs].[AntoraNavListPage_by_type] WHERE [type] = ''' + @type + '''"  queryout "' + @outputDirPageNav + 'nav-type-' + @type + '.adoc"'
   --
   + ' -S ' + @instanceName
   --
@@ -948,7 +1375,7 @@ PRINT CONCAT('usp_id;Number;Parent_Number: ',28,';',610,';',NULL);
 --nav-by-schema.adoc
 
 */
-SET @command = 'bcp "SELECT [partial_content] FROM [docs].[AntoraPage_ObjectBySchema]"  queryout ' + @outputDirPartNav + 'nav-by-schema.adoc'
+SET @command = 'bcp "SELECT [partial_content] FROM [docs].[AntoraPage_ObjectBySchema]"  queryout "' + @outputDirPartNav + 'nav-by-schema.adoc"'
  --
  + ' -S ' + @instanceName
  --
@@ -996,7 +1423,7 @@ PRINT CONCAT('usp_id;Number;Parent_Number: ',28,';',620,';',NULL);
 nav-by-type.adoc
 
 */
-SET @command = 'bcp "SELECT [partial_content] FROM [docs].[AntoraPage_ObjectByType]"  queryout ' + @outputDirPartNav + 'nav-by-type.adoc'
+SET @command = 'bcp "SELECT [partial_content] FROM [docs].[AntoraPage_ObjectByType]"  queryout "' + @outputDirPartNav + 'nav-by-type.adoc"'
  --
  + ' -S ' + @instanceName
  --
@@ -1044,7 +1471,7 @@ PRINT CONCAT('usp_id;Number;Parent_Number: ',28,';',710,';',NULL);
 --objects-by-schema.adoc
 
 */
-SET @command = 'bcp "SELECT [page_content] FROM [docs].[AntoraPage_ObjectBySchema]"  queryout ' + @outputDirPageNav + 'objects-by-schema.adoc'
+SET @command = 'bcp "SELECT [page_content] FROM [docs].[AntoraPage_ObjectBySchema]"  queryout "' + @outputDirPageNav + 'objects-by-schema.adoc"'
  --
  + ' -S ' + @instanceName
  --
@@ -1116,6 +1543,7 @@ END
 
 
 ----
+=======
 // end::sql_modules_definition[]
 
 

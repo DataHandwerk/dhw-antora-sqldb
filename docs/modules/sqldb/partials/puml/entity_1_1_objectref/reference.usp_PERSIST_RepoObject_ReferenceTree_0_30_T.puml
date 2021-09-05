@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -23,10 +24,6 @@ skinparam class {
 }
 
 
-entity docs.usp_AntoraExport << P >> {
-  --
-}
-
 entity logs.usp_ExecutionLog_insert << P >> {
   --
 }
@@ -49,7 +46,11 @@ entity reference.usp_PERSIST_RepoObject_ReferenceTree_0_30_T << P >> {
   --
 }
 
+entity reference.usp_RepoObject_ReferenceTree << P >> {
+  --
+}
+
 logs.usp_ExecutionLog_insert <.. reference.usp_PERSIST_RepoObject_ReferenceTree_0_30_T
 reference.RepoObject_ReferenceTree_0_30 <.. reference.usp_PERSIST_RepoObject_ReferenceTree_0_30_T
 reference.RepoObject_ReferenceTree_0_30_T <.. reference.usp_PERSIST_RepoObject_ReferenceTree_0_30_T
-reference.usp_PERSIST_RepoObject_ReferenceTree_0_30_T <.. docs.usp_AntoraExport
+reference.usp_PERSIST_RepoObject_ReferenceTree_0_30_T <.. reference.usp_RepoObject_ReferenceTree

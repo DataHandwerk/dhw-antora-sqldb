@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -26,6 +27,10 @@ skinparam class {
 entity reference.RepoObject_reference_persistence << V >> {
   **referenced_RepoObject_guid** : uniqueidentifier
   * **referencing_RepoObject_guid** : uniqueidentifier
+  --
+}
+
+entity reference.RepoObject_reference_T_bidirectional << V >> {
   --
 }
 
@@ -90,14 +95,15 @@ entity repo.usp_sync_guid_RepoObjectColumn << P >> {
 }
 
 repo.RepoObject_persistence <.. reference.RepoObject_reference_persistence
+repo.RepoObject_persistence <.. repo.RepoObject__after_delete
+repo.RepoObject_persistence <.. repo.RepoObject_persistence_ObjectNames
 repo.RepoObject_persistence <.. repo.RepoObject_persistence_column
 repo.RepoObject_persistence <.. reference.RepoObjectColumn_reference_Persistence
 repo.RepoObject_persistence <.. repo.RepoObjectColumn_HistValidColums_setpoint
 repo.RepoObject_persistence <.. repo.RepoObject_gross
-repo.RepoObject_persistence <.. repo.RepoObject__after_delete
-repo.RepoObject_persistence <.. repo.RepoObject_persistence_ObjectNames
 repo.RepoObject_persistence <.. repo.usp_sync_guid_RepoObject
 repo.RepoObject_persistence <.. repo.usp_sync_guid_RepoObjectColumn
 repo.RepoObject_persistence <.. repo.usp_persistence_set
 repo.RepoObject_persistence <.. repo.RepoObject_persistence_ForUpdate
 repo.RepoObject_persistence <.. repo.usp_Index_finish
+repo.RepoObject_persistence <.. reference.RepoObject_reference_T_bidirectional

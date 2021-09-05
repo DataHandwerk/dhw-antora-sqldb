@@ -1,4 +1,5 @@
 left to right direction
+'top to bottom direction
 hide circle
 'avoide "." issues:
 set namespaceSeparator none
@@ -35,6 +36,7 @@ entity property.RepoObjectProperty << U >> {
   {abstract} property_int : int
   {abstract} property_money : money
   {abstract} property_real : real
+  --
 }
 
 entity property.RepoObjectProperty_ForUpdate << V >> {
@@ -48,6 +50,7 @@ entity property.RepoObjectProperty_ForUpdate << V >> {
   * RepoObject_name : nvarchar(128)
   * RepoObject_schema_name : nvarchar(128)
   * RepoObjectProperty_id : int
+  --
 }
 
 entity repo.RepoObject << U >> {
@@ -58,8 +61,10 @@ entity repo.RepoObject << U >> {
   Inheritance_StringAggSeparatorSql : nvarchar(4000)
   InheritanceDefinition : nvarchar(4000)
   InheritanceType : tinyint
+  * is_DocsExclude : bit
   is_repo_managed : bit
   is_required_ObjectMerge : bit
+  * is_ssas : bit
   is_SysObject_missing : bit
   * modify_dt : datetime
   pk_index_guid : uniqueidentifier
@@ -85,7 +90,9 @@ entity repo.RepoObject << U >> {
   * {static} SysObject_fullname : nvarchar(261)
   * {static} SysObject_fullname2 : nvarchar(257)
   * {abstract} SysObject_query_sql : nvarchar(406)
+  * {static} usp_persistence_fullname2 : nvarchar(269)
   * {static} usp_persistence_name : nvarchar(140)
+  --
 }
 
 property.RepoObjectProperty <.. property.RepoObjectProperty_ForUpdate

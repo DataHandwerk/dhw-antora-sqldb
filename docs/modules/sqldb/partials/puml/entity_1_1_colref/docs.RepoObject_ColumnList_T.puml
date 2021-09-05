@@ -24,6 +24,23 @@ skinparam class {
 }
 
 
+entity docs.RepoObject_Adoc << V >> {
+  --
+  * AdocContent : nvarchar(max)
+  is_DocsOutput : int
+  PropertyCount : int
+  RepoObject_fullname : nvarchar(261)
+  RepoObject_fullname2 : nvarchar(257)
+  * RepoObject_guid : uniqueidentifier
+  RepoObject_schema_name : nvarchar(128)
+  SysObject_fullname : nvarchar(261)
+  SysObject_fullname2 : nvarchar(257)
+  SysObject_schema_name : nvarchar(128)
+  SysObject_type : char(2)
+  SysObject_type_name : nvarchar(128)
+  --
+}
+
 entity docs.RepoObject_ColumnList << V >> {
   --
   AntoraColumnDetails : nvarchar(max)
@@ -38,7 +55,7 @@ entity docs.RepoObject_ColumnList << V >> {
   --
 }
 
-entity docs.RepoObject_ColumnList_T {
+entity docs.RepoObject_ColumnList_T << U >> {
   * **RepoObject_guid** : uniqueidentifier
   --
   AntoraColumnDetails : nvarchar(max)
@@ -52,13 +69,34 @@ entity docs.RepoObject_ColumnList_T {
   --
 }
 
-docs.RepoObject_ColumnList <.. docs.85AC3586-9B83-4474-AF3D-ED54F04062CA
-docs.RepoObject_ColumnList::AntoraColumnDetails <-- docs.85AC3586-9B83-4474-AF3D-ED54F04062CA::E40E81A4-06A5-4AF4-A494-3D70700A60A0
-docs.RepoObject_ColumnList::AntoraNonPkColumnTableRows <-- docs.85AC3586-9B83-4474-AF3D-ED54F04062CA::962F4C7B-B0BD-40A8-BFAE-3058D01CA7E0
-docs.RepoObject_ColumnList::AntoraPkColumnTableRows <-- docs.85AC3586-9B83-4474-AF3D-ED54F04062CA::36368006-72A8-4106-94E0-751F4847F150
-docs.RepoObject_ColumnList::PlantumlIndexColumns <-- docs.85AC3586-9B83-4474-AF3D-ED54F04062CA::3886730C-EEE1-457F-A44F-B0074937E841
-docs.RepoObject_ColumnList::PlantumlNonPkEntityColumns <-- docs.85AC3586-9B83-4474-AF3D-ED54F04062CA::EA78BD78-6B58-4F66-ADFC-4C1D76019330
-docs.RepoObject_ColumnList::PlantumlNonPkHiddenEntityColumns <-- docs.85AC3586-9B83-4474-AF3D-ED54F04062CA::46F3ED84-DFD6-4E99-91ED-EA568453818E
-docs.RepoObject_ColumnList::PlantumlNonPkIndexColumns <-- docs.85AC3586-9B83-4474-AF3D-ED54F04062CA::F66081A3-7C2D-42B8-AA42-99ADA2B2386F
-docs.RepoObject_ColumnList::PlantumlPkEntityColumns <-- docs.85AC3586-9B83-4474-AF3D-ED54F04062CA::B1D4D7DC-9BEE-4967-816F-B3FE53924BC1
-docs.RepoObject_ColumnList::RepoObject_guid <-- docs.85AC3586-9B83-4474-AF3D-ED54F04062CA::4899C752-73D6-4439-8429-38508ACC858F
+entity docs.RepoObject_Plantuml_Entity << V >> {
+  * **RepoObject_guid** : uniqueidentifier
+  --
+  * RepoObject_fullname2 : nvarchar(257)
+  * RepoObject_Puml : nvarchar(max)
+  * RepoObject_PumlOnlyIndex : nvarchar(max)
+  * RepoObject_PumlOnlyPK : nvarchar(max)
+  * RepoObject_PumlOnlyPkOrIndex : nvarchar(max)
+  * RepoObject_PumlOnlyPkOrNotHidden : nvarchar(max)
+  * RepoObject_schema_name : nvarchar(128)
+  --
+}
+
+entity docs.usp_PERSIST_RepoObject_ColumnList_T << P >> {
+  --
+  --
+}
+
+docs.RepoObject_ColumnList <.. docs.RepoObject_ColumnList_T
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Adoc
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Plantuml_Entity
+docs.RepoObject_ColumnList_T <.. docs.usp_PERSIST_RepoObject_ColumnList_T
+docs.RepoObject_ColumnList::AntoraColumnDetails <-- docs.RepoObject_ColumnList_T::AntoraColumnDetails
+docs.RepoObject_ColumnList::AntoraNonPkColumnTableRows <-- docs.RepoObject_ColumnList_T::AntoraNonPkColumnTableRows
+docs.RepoObject_ColumnList::AntoraPkColumnTableRows <-- docs.RepoObject_ColumnList_T::AntoraPkColumnTableRows
+docs.RepoObject_ColumnList::PlantumlIndexColumns <-- docs.RepoObject_ColumnList_T::PlantumlIndexColumns
+docs.RepoObject_ColumnList::PlantumlNonPkEntityColumns <-- docs.RepoObject_ColumnList_T::PlantumlNonPkEntityColumns
+docs.RepoObject_ColumnList::PlantumlNonPkHiddenEntityColumns <-- docs.RepoObject_ColumnList_T::PlantumlNonPkHiddenEntityColumns
+docs.RepoObject_ColumnList::PlantumlNonPkIndexColumns <-- docs.RepoObject_ColumnList_T::PlantumlNonPkIndexColumns
+docs.RepoObject_ColumnList::PlantumlPkEntityColumns <-- docs.RepoObject_ColumnList_T::PlantumlPkEntityColumns
+docs.RepoObject_ColumnList::RepoObject_guid <-- docs.RepoObject_ColumnList_T::RepoObject_guid
