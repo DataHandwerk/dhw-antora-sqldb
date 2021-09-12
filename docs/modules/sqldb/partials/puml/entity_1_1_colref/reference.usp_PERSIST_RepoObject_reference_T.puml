@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,53 +25,58 @@ skinparam class {
 }
 
 
-entity logs.usp_ExecutionLog_insert << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/logs.usp_ExecutionLog_insert.html logs.usp_ExecutionLog_insert]]" as logs.usp_ExecutionLog_insert << P >> {
   --
-  --
-}
-
-entity reference.RepoObject_reference << V >> {
-  **referenced_RepoObject_guid** : uniqueidentifier
-  **referencing_RepoObject_guid** : uniqueidentifier
-  --
-  referenced_entity_name : nvarchar(128)
-  referenced_schema_name : nvarchar(128)
-  referenced_type : char(2)
-  referencing_entity_name : nvarchar(128)
-  referencing_schema_name : nvarchar(128)
-  referencing_type : varchar(2)
-  --
-}
-
-entity reference.RepoObject_reference_T << U >> {
-  **referenced_RepoObject_guid** : uniqueidentifier
-  **referencing_RepoObject_guid** : uniqueidentifier
-  --
-  * is_ReversePersistenceViaView : bit
-  referenced_entity_name : nvarchar(128)
-  * referenced_is_PersistenceSource : bit
-  * referenced_is_PersistenceTarget : bit
-  referenced_schema_name : nvarchar(128)
-  referenced_type : char(2)
-  referencing_entity_name : nvarchar(128)
-  * referencing_is_PersistenceTarget : bit
-  * referencing_is_PersistenceUspSourceRef : bit
-  referencing_is_PersistenceUspTargetRef : bit
-  referencing_schema_name : nvarchar(128)
-  referencing_type : varchar(2)
-  * {static} referenced_fullname : nvarchar(261)
-  * {static} referenced_fullname2 : nvarchar(257)
-  * {static} referencing_fullname : nvarchar(261)
-  * {static} referencing_fullname2 : nvarchar(257)
-  --
-}
-
-entity reference.usp_PERSIST_RepoObject_reference_T << P >> {
   --
   --
 }
 
-entity repo.usp_main << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObject_reference.html reference.RepoObject_reference]]" as reference.RepoObject_reference << V >> {
+  **referenced_RepoObject_guid** : (uniqueidentifier)
+  **referencing_RepoObject_guid** : (uniqueidentifier)
+  --
+  referenced_entity_name : (nvarchar(128))
+  referenced_schema_name : (nvarchar(128))
+  referenced_type : (char(2))
+  referencing_entity_name : (nvarchar(128))
+  referencing_schema_name : (nvarchar(128))
+  referencing_type : (varchar(2))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObject_reference_T.html reference.RepoObject_reference_T]]" as reference.RepoObject_reference_T << U >> {
+  **referenced_RepoObject_guid** : (uniqueidentifier)
+  **referencing_RepoObject_guid** : (uniqueidentifier)
+  --
+  - is_ReversePersistenceViaView : (bit)
+  referenced_entity_name : (nvarchar(128))
+  - referenced_is_PersistenceSource : (bit)
+  - referenced_is_PersistenceTarget : (bit)
+  referenced_schema_name : (nvarchar(128))
+  referenced_type : (char(2))
+  referencing_entity_name : (nvarchar(128))
+  - referencing_is_PersistenceTarget : (bit)
+  - referencing_is_PersistenceUspSourceRef : (bit)
+  referencing_is_PersistenceUspTargetRef : (bit)
+  referencing_schema_name : (nvarchar(128))
+  referencing_type : (varchar(2))
+  # referenced_fullname : (nvarchar(261))
+  # referenced_fullname2 : (nvarchar(257))
+  # referencing_fullname : (nvarchar(261))
+  # referencing_fullname2 : (nvarchar(257))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.usp_PERSIST_RepoObject_reference_T.html reference.usp_PERSIST_RepoObject_reference_T]]" as reference.usp_PERSIST_RepoObject_reference_T << P >> {
+  --
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_main.html repo.usp_main]]" as repo.usp_main << P >> {
+  --
   --
   --
 }
@@ -79,4 +85,11 @@ logs.usp_ExecutionLog_insert <.. reference.usp_PERSIST_RepoObject_reference_T
 reference.RepoObject_reference <.. reference.usp_PERSIST_RepoObject_reference_T
 reference.RepoObject_reference_T <.. reference.usp_PERSIST_RepoObject_reference_T
 reference.usp_PERSIST_RepoObject_reference_T <.. repo.usp_main
+
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
 

@@ -1,3 +1,4 @@
+@startuml
 'Left to right direction
 top to bottom direction
 hide circle
@@ -24,58 +25,67 @@ skinparam class {
 }
 
 
-entity docs.AntoraTemplate_examples << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.AntoraTemplate_examples.html docs.AntoraTemplate_examples]]" as docs.AntoraTemplate_examples << V >> {
   --
 }
 
-entity docs.RepoObject_Adoc << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.RepoObject_Adoc.html docs.RepoObject_Adoc]]" as docs.RepoObject_Adoc << V >> {
   --
 }
 
-entity docs.RepoObject_Adoc_T << U >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.RepoObject_Adoc_T.html docs.RepoObject_Adoc_T]]" as docs.RepoObject_Adoc_T << U >> {
   --
 }
 
-entity docs.usp_AntoraExport << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.usp_AntoraExport.html docs.usp_AntoraExport]]" as docs.usp_AntoraExport << P >> {
   --
 }
 
-entity docs.usp_AntoraExport_ObjectPartialProperties << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.usp_AntoraExport_ObjectPartialProperties.html docs.usp_AntoraExport_ObjectPartialProperties]]" as docs.usp_AntoraExport_ObjectPartialProperties << P >> {
   --
 }
 
-entity docs.usp_PERSIST_RepoObject_Adoc_T << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.usp_PERSIST_RepoObject_Adoc_T.html docs.usp_PERSIST_RepoObject_Adoc_T]]" as docs.usp_PERSIST_RepoObject_Adoc_T << P >> {
   --
 }
 
-entity property.PropertyName_RepoObject << V >> {
-  **property_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.PropertyName_RepoObject.html property.PropertyName_RepoObject]]" as property.PropertyName_RepoObject << V >> {
+  **property_name** : (nvarchar(128))
   --
 }
 
-entity property.RepoObjectProperty_cross << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  **property_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.PropertyName_RepoObject_T.html property.PropertyName_RepoObject_T]]" as property.PropertyName_RepoObject_T << U >> {
+  **property_name** : (nvarchar(128))
   --
 }
 
-entity property.RepoObjectProperty_InheritanceType_InheritanceDefinition << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  **property_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObjectProperty_cross.html property.RepoObjectProperty_cross]]" as property.RepoObjectProperty_cross << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  **property_name** : (nvarchar(128))
   --
 }
 
-entity property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  **property_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObjectProperty_InheritanceType_InheritanceDefinition.html property.RepoObjectProperty_InheritanceType_InheritanceDefinition]]" as property.RepoObjectProperty_InheritanceType_InheritanceDefinition << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   --
 }
 
-entity property.usp_RepoObject_Inheritance << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition.html property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition]]" as property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  **property_name** : (nvarchar(128))
   --
 }
 
-entity repo.usp_main << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.usp_PERSIST_PropertyName_RepoObject_T.html property.usp_PERSIST_PropertyName_RepoObject_T]]" as property.usp_PERSIST_PropertyName_RepoObject_T << P >> {
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.usp_RepoObject_Inheritance.html property.usp_RepoObject_Inheritance]]" as property.usp_RepoObject_Inheritance << P >> {
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_main.html repo.usp_main]]" as repo.usp_main << P >> {
   --
 }
 
@@ -84,10 +94,21 @@ docs.RepoObject_Adoc <.. docs.usp_PERSIST_RepoObject_Adoc_T
 docs.REpoObject_Adoc_T <.. docs.usp_PERSIST_RepoObject_Adoc_T
 docs.usp_AntoraExport_ObjectPartialProperties <.. docs.usp_AntoraExport
 docs.usp_PERSIST_RepoObject_Adoc_T <.. docs.usp_AntoraExport_ObjectPartialProperties
-property.PropertyName_RepoObject <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition
 property.PropertyName_RepoObject <.. property.RepoObjectProperty_cross
 property.PropertyName_RepoObject <.. docs.AntoraTemplate_examples
+property.PropertyName_RepoObject <.. property.PropertyName_RepoObject_T
+property.PropertyName_RepoObject <.. property.usp_PERSIST_PropertyName_RepoObject_T
+property.PropertyName_RepoObject_T <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition
+property.PropertyName_RepoObject_T <.. property.usp_PERSIST_PropertyName_RepoObject_T
 property.RepoObjectProperty_cross <.. docs.RepoObject_Adoc
 property.RepoObjectProperty_InheritanceType_InheritanceDefinition <.. property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition
 property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition <.. property.usp_RepoObject_Inheritance
+property.usp_PERSIST_PropertyName_RepoObject_T <.. property.usp_RepoObject_Inheritance
 property.usp_RepoObject_Inheritance <.. repo.usp_main
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

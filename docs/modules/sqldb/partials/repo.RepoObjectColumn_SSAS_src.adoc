@@ -45,7 +45,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-01 13:07:08
+2021-09-10 14:19:09
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -54,7 +54,7 @@ view
 [#column-RepoObjectColumn_guid]
 === RepoObjectColumn_guid
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |1
 |*RepoObjectColumn_guid*
@@ -78,7 +78,7 @@ view
 [#column-is_SysObjectColumn_missing]
 === is_SysObjectColumn_missing
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |is_SysObjectColumn_missing
@@ -97,7 +97,7 @@ view
 [#column-Repo_is_nullable]
 === Repo_is_nullable
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |Repo_is_nullable
@@ -116,7 +116,7 @@ view
 [#column-Repo_user_type_fullname]
 === Repo_user_type_fullname
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |Repo_user_type_fullname
@@ -140,7 +140,7 @@ view
 [#column-Repo_user_type_name]
 === Repo_user_type_name
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |Repo_user_type_name
@@ -164,7 +164,7 @@ view
 [#column-RepoObject_guid]
 === RepoObject_guid
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |RepoObject_guid
@@ -188,7 +188,7 @@ view
 [#column-RepoObjectColumn_name]
 === RepoObjectColumn_name
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |RepoObjectColumn_name
@@ -212,7 +212,7 @@ view
 [#column-SysObjectColumn_name]
 === SysObjectColumn_name
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |SysObjectColumn_name
@@ -234,6 +234,12 @@ view
 
 
 // end::AntoraColumnDetails[]
+
+== AntoraMeasureDetails
+
+// tag::AntoraMeasureDetails[]
+
+// end::AntoraMeasureDetails[]
 
 == AntoraPkColumnTableRows
 
@@ -642,6 +648,7 @@ converts xref:sqldb:ssas.TMSCHEMA_COLUMNS_T.adoc[] into xref:sqldb:repo.RepoObje
 CREATE View repo.RepoObjectColumn_SSAS_src
 As
 Select
+    --PK: RepoObjectColumn_guid
     T2.RepoObjectColumn_guid
   , is_SysObjectColumn_missing = 0
   , Repo_is_nullable           = IsNull ( T2.tables_columns_isNullable, 1 )
@@ -656,6 +663,7 @@ Select
 --, is_ssas                    = 1
 From
     ssas.model_json_311_tables_columns_T As T2
+
 ----
 =======
 // end::sql_modules_definition[]

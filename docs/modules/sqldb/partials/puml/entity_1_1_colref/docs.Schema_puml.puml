@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,67 +25,74 @@ skinparam class {
 }
 
 
-entity config.ftv_get_parameter_value << IF >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/config.ftv_get_parameter_value.html config.ftv_get_parameter_value]]" as config.ftv_get_parameter_value << IF >> {
   --
-  Parameter_value_result : nvarchar(max)
-  Parameter_value_result_date : date
-  Parameter_value_result_datetime : datetime
-  Parameter_value_result_int : int
-  --
-}
-
-entity docs.fs_PumlHeaderLeftToRight << FN >> {
+  Parameter_value_result : (nvarchar(max))
+  Parameter_value_result_date : (date)
+  Parameter_value_result_datetime : (datetime)
+  Parameter_value_result_int : (int)
   --
   --
 }
 
-entity docs.Schema_EntityList << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.fs_PumlHeaderLeftToRight.html docs.fs_PumlHeaderLeftToRight]]" as docs.fs_PumlHeaderLeftToRight << FN >> {
   --
-  EntityList_Puml : nvarchar(max)
-  EntityList_PumlOnlyIndex : nvarchar(max)
-  EntityList_PumlOnlyPK : nvarchar(max)
-  EntityList_PumlOnlyPkOrIndex : nvarchar(max)
-  EntityList_PumlOnlyPkOrNotHidden : nvarchar(max)
-  * RepoObject_schema_name : nvarchar(128)
+  --
   --
 }
 
-entity docs.Schema_PlantUml_FkRefList << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.Schema_EntityList.html docs.Schema_EntityList]]" as docs.Schema_EntityList << V >> {
   --
-  FkRefList : nvarchar(max)
-  SchemaName : nvarchar(128)
+  EntityList_Puml : (nvarchar(max))
+  EntityList_PumlOnlyIndex : (nvarchar(max))
+  EntityList_PumlOnlyPK : (nvarchar(max))
+  EntityList_PumlOnlyPkOrIndex : (nvarchar(max))
+  EntityList_PumlOnlyPkOrNotHidden : (nvarchar(max))
+  - RepoObject_schema_name : (nvarchar(128))
   --
-}
-
-entity docs.Schema_puml << V >> {
-  --
-  * PumlSchemaEr : nvarchar(max)
-  * PumlSchemaIndexEr : nvarchar(max)
-  PumlSchemaSsasEr : nvarchar(max)
-  * RepoSchema_guid : uniqueidentifier
-  * RepoSchema_name : nvarchar(128)
   --
 }
 
-entity docs.Schema_SsasRelationList << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.Schema_PlantUml_FkRefList.html docs.Schema_PlantUml_FkRefList]]" as docs.Schema_PlantUml_FkRefList << V >> {
   --
-  * SchemaName : nvarchar(128)
-  SsasRelationList_PumlRelation : nvarchar(max)
+  FkRefList : (nvarchar(max))
+  SchemaName : (nvarchar(128))
+  --
   --
 }
 
-entity repo.RepoSchema << U >> {
-  * **RepoSchema_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.Schema_puml.html docs.Schema_puml]]" as docs.Schema_puml << V >> {
   --
-  * is_ssas : bit
-  is_SysSchema_missing : bit
-  RepoSchema_ms_description : nvarchar(4000)
-  * RepoSchema_name : nvarchar(128)
-  SysSchema_id : int
-  * SysSchema_name : nvarchar(128)
-  {abstract} has_different_sys_names : bit
-  * {static} is_RepoSchema_name_uniqueidentifier : int
-  * {static} is_SysSchema_name_uniqueidentifier : int
+  - PumlSchemaEr : (nvarchar(max))
+  - PumlSchemaIndexEr : (nvarchar(max))
+  PumlSchemaSsasEr : (nvarchar(max))
+  - RepoSchema_guid : (uniqueidentifier)
+  - RepoSchema_name : (nvarchar(128))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.Schema_SsasRelationList.html docs.Schema_SsasRelationList]]" as docs.Schema_SsasRelationList << V >> {
+  --
+  - SchemaName : (nvarchar(128))
+  SsasRelationList_PumlRelation : (nvarchar(max))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoSchema.html repo.RepoSchema]]" as repo.RepoSchema << U >> {
+  - **RepoSchema_guid** : (uniqueidentifier)
+  --
+  - is_ssas : (bit)
+  is_SysSchema_missing : (bit)
+  RepoSchema_ms_description : (nvarchar(4000))
+  - RepoSchema_name : (nvarchar(128))
+  SysSchema_id : (int)
+  - SysSchema_name : (nvarchar(128))
+  ~ has_different_sys_names : (bit)
+  # is_RepoSchema_name_uniqueidentifier : (int)
+  # is_SysSchema_name_uniqueidentifier : (int)
+  --
   --
 }
 
@@ -96,3 +104,10 @@ docs.Schema_SsasRelationList <.. docs.Schema_puml
 repo.RepoSchema <.. docs.Schema_puml
 repo.RepoSchema::RepoSchema_guid <-- docs.Schema_puml::RepoSchema_guid
 repo.RepoSchema::RepoSchema_name <-- docs.Schema_puml::RepoSchema_name
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

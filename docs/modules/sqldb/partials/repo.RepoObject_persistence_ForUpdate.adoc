@@ -4,12 +4,12 @@
 
 // tag::existing_properties[]
 :ExistsProperty--antorareferencedlist:
+:ExistsProperty--antorareferencinglist:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
 :ExistsProperty--pk_index_guid:
 :ExistsProperty--pk_indexpatterncolumndatatype:
 :ExistsProperty--pk_indexpatterncolumnname:
-:ExistsProperty--pk_indexsemanticgroup:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -44,7 +44,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-08-17 19:50:21
+2021-09-09 17:31:49
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -53,7 +53,7 @@ view
 [#column-target_RepoObject_guid]
 === target_RepoObject_guid
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |1
 |*target_RepoObject_guid*
@@ -68,11 +68,35 @@ view
 * xref:repo.RepoObject_persistence.adoc#column-target_RepoObject_guid[+repo.RepoObject_persistence.target_RepoObject_guid+]
 --
 
+.Referencing Columns
+--
+* xref:repo.RepoObject_persistence_SourceMismatch.adoc#column-target_RepoObject_guid[+repo.RepoObject_persistence_SourceMismatch.target_RepoObject_guid+]
+--
+
+
+[#column-default_source_RepoObject_name]
+=== default_source_RepoObject_name
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|default_source_RepoObject_name
+|nvarchar(128)
+|NULL
+|
+|
+|===
+
+.Referencing Columns
+--
+* xref:repo.RepoObject_persistence_SourceMismatch.adoc#column-default_source_RepoObject_name[+repo.RepoObject_persistence_SourceMismatch.default_source_RepoObject_name+]
+--
+
 
 [#column-has_history]
 === has_history
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |has_history
@@ -86,6 +110,7 @@ view
 --
 temporal table should be created, it will also automatically create the columns required for the history
 --
+{empty} +
 
 .Referenced Columns
 --
@@ -96,7 +121,7 @@ temporal table should be created, it will also automatically create the columns 
 [#column-has_history_columns]
 === has_history_columns
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |has_history_columns
@@ -110,6 +135,7 @@ temporal table should be created, it will also automatically create the columns 
 --
 history columns are created. Can be used if only these columns are required, but not the related history table
 --
+{empty} +
 
 .Referenced Columns
 --
@@ -120,7 +146,7 @@ history columns are created. Can be used if only these columns are required, but
 [#column-history_schema_name]
 === history_schema_name
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |history_schema_name
@@ -135,6 +161,7 @@ history columns are created. Can be used if only these columns are required, but
 the final history_schema_name will be defined in xref:sqldb:repo.RepoObject_SqlCreateTable.adoc[] +
 it looks like this column here is currently not used and should or could be deleted
 --
+{empty} +
 
 .Referenced Columns
 --
@@ -145,7 +172,7 @@ it looks like this column here is currently not used and should or could be dele
 [#column-history_table_name]
 === history_table_name
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |history_table_name
@@ -160,6 +187,7 @@ it looks like this column here is currently not used and should or could be dele
 the final history_table_name will be defined in xref:sqldb:repo.RepoObject_SqlCreateTable.adoc[] +
 it looks like this column here is currently not used and should or could be deleted
 --
+{empty} +
 
 .Referenced Columns
 --
@@ -170,7 +198,7 @@ it looks like this column here is currently not used and should or could be dele
 [#column-is_persistence]
 === is_persistence
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |is_persistence
@@ -189,7 +217,7 @@ it looks like this column here is currently not used and should or could be dele
 [#column-is_persistence_check_duplicate_per_pk]
 === is_persistence_check_duplicate_per_pk
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |is_persistence_check_duplicate_per_pk
@@ -204,6 +232,7 @@ it looks like this column here is currently not used and should or could be dele
 persistence source should be checked for duplicates per entry in the primary key. +
 This requires a (real or virtual) PK defined in the source
 --
+{empty} +
 
 .Referenced Columns
 --
@@ -214,7 +243,7 @@ This requires a (real or virtual) PK defined in the source
 [#column-is_persistence_check_for_empty_source]
 === is_persistence_check_for_empty_source
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |is_persistence_check_for_empty_source
@@ -228,6 +257,7 @@ This requires a (real or virtual) PK defined in the source
 --
 persistence source should be checked empty source, empty source should not be persisted
 --
+{empty} +
 
 .Referenced Columns
 --
@@ -238,7 +268,7 @@ persistence source should be checked empty source, empty source should not be pe
 [#column-is_persistence_delete_changed]
 === is_persistence_delete_changed
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |is_persistence_delete_changed
@@ -254,6 +284,7 @@ changed columns should be deleted in persistence target +
 An alternative option is 'is_persistence_update_changed' +
 This requires a (real or virtual) PK defined in the source
 --
+{empty} +
 
 .Referenced Columns
 --
@@ -264,7 +295,7 @@ This requires a (real or virtual) PK defined in the source
 [#column-is_persistence_delete_missing]
 === is_persistence_delete_missing
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |is_persistence_delete_missing
@@ -279,6 +310,7 @@ This requires a (real or virtual) PK defined in the source
 missing columns should be deleted in persistence target +
 This requires a (real or virtual) PK defined in the source
 --
+{empty} +
 
 .Referenced Columns
 --
@@ -289,7 +321,7 @@ This requires a (real or virtual) PK defined in the source
 [#column-is_persistence_insert]
 === is_persistence_insert
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |is_persistence_insert
@@ -308,6 +340,7 @@ The final result depends on other settings
 * if a (real or virtual) PK is defined in the source, the insert can be combined with delete and update
 
 --
+{empty} +
 
 .Referenced Columns
 --
@@ -318,7 +351,7 @@ The final result depends on other settings
 [#column-is_persistence_truncate]
 === is_persistence_truncate
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |is_persistence_truncate
@@ -337,7 +370,7 @@ The final result depends on other settings
 [#column-is_persistence_update_changed]
 === is_persistence_update_changed
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |is_persistence_update_changed
@@ -353,6 +386,7 @@ changed columns should be updated in persistence target +
 An alternative option is 'is_persistence_delete_changed' +
 This requires a (real or virtual) PK defined in the source
 --
+{empty} +
 
 .Referenced Columns
 --
@@ -363,7 +397,7 @@ This requires a (real or virtual) PK defined in the source
 [#column-source_RepoObject_guid]
 === source_RepoObject_guid
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |source_RepoObject_guid
@@ -378,11 +412,64 @@ This requires a (real or virtual) PK defined in the source
 * xref:repo.RepoObject_persistence.adoc#column-source_RepoObject_guid[+repo.RepoObject_persistence.source_RepoObject_guid+]
 --
 
+.Referencing Columns
+--
+* xref:repo.RepoObject_persistence_SourceMismatch.adoc#column-source_RepoObject_guid[+repo.RepoObject_persistence_SourceMismatch.source_RepoObject_guid+]
+--
+
+
+[#column-source_RepoObject_name]
+=== source_RepoObject_name
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|source_RepoObject_name
+|nvarchar(128)
+|NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo.RepoObject_persistence.adoc#column-source_RepoObject_name[+repo.RepoObject_persistence.source_RepoObject_name+]
+--
+
+.Referencing Columns
+--
+* xref:repo.RepoObject_persistence_SourceMismatch.adoc#column-source_RepoObject_name[+repo.RepoObject_persistence_SourceMismatch.source_RepoObject_name+]
+--
+
+
+[#column-target_name]
+=== target_name
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|target_name
+|nvarchar(128)
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo.RepoObject.adoc#column-RepoObject_name[+repo.RepoObject.RepoObject_name+]
+--
+
+.Referencing Columns
+--
+* xref:repo.RepoObject_persistence_SourceMismatch.adoc#column-target_name[+repo.RepoObject_persistence_SourceMismatch.target_name+]
+--
+
 
 [#column-target_RepoObject_fullname]
 === target_RepoObject_fullname
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |target_RepoObject_fullname
@@ -396,6 +483,7 @@ This requires a (real or virtual) PK defined in the source
 --
 (concat('[',[RepoObject_schema_name],'].[',[RepoObject_name],']'))
 --
+{empty} +
 
 .Referenced Columns
 --
@@ -403,10 +491,64 @@ This requires a (real or virtual) PK defined in the source
 --
 
 
+[#column-target_RepoObject_fullname2]
+=== target_RepoObject_fullname2
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|target_RepoObject_fullname2
+|nvarchar(257)
+|NOT NULL
+|
+|
+|===
+
+.Description
+--
+(concat('[',[RepoObject_schema_name],'].[',[RepoObject_name],']'))
+--
+{empty} +
+
+.Referenced Columns
+--
+* xref:repo.RepoObject.adoc#column-RepoObject_fullname2[+repo.RepoObject.RepoObject_fullname2+]
+--
+
+.Referencing Columns
+--
+* xref:repo.RepoObject_persistence_SourceMismatch.adoc#column-target_RepoObject_fullname2[+repo.RepoObject_persistence_SourceMismatch.target_RepoObject_fullname2+]
+--
+
+
+[#column-target_schema]
+=== target_schema
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|target_schema
+|nvarchar(128)
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo.RepoObject.adoc#column-RepoObject_schema_name[+repo.RepoObject.RepoObject_schema_name+]
+--
+
+.Referencing Columns
+--
+* xref:repo.RepoObject_persistence_SourceMismatch.adoc#column-target_schema[+repo.RepoObject_persistence_SourceMismatch.target_schema+]
+--
+
+
 [#column-temporal_type]
 === temporal_type
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |temporal_type
@@ -420,6 +562,7 @@ This requires a (real or virtual) PK defined in the source
 --
 (CONVERT([tinyint],case [has_history] when (1) then (2) else (0) end))
 --
+{empty} +
 
 .Referenced Columns
 --
@@ -428,6 +571,12 @@ This requires a (real or virtual) PK defined in the source
 
 
 // end::AntoraColumnDetails[]
+
+== AntoraMeasureDetails
+
+// tag::AntoraMeasureDetails[]
+
+// end::AntoraMeasureDetails[]
 
 == AntoraPkColumnTableRows
 
@@ -454,11 +603,23 @@ This requires a (real or virtual) PK defined in the source
 
 
 
+
+
+
+
+
 // end::AntoraPkColumnTableRows[]
 
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
+
+|
+|<<column-default_source_RepoObject_name>>
+|nvarchar(128)
+|NULL
+|
+|
 
 |
 |<<column-has_history>>
@@ -552,8 +713,36 @@ This requires a (real or virtual) PK defined in the source
 |
 
 |
+|<<column-source_RepoObject_name>>
+|nvarchar(128)
+|NULL
+|
+|
+
+|
+|<<column-target_name>>
+|nvarchar(128)
+|NOT NULL
+|
+|
+
+|
 |<<column-target_RepoObject_fullname>>
 |nvarchar(261)
+|NOT NULL
+|
+|
+
+|
+|<<column-target_RepoObject_fullname2>>
+|nvarchar(257)
+|NOT NULL
+|
+|
+
+|
+|<<column-target_schema>>
+|nvarchar(128)
 |NOT NULL
 |
 |
@@ -574,12 +763,24 @@ This requires a (real or virtual) PK defined in the source
 [#index-PK_RepoObject_persistence_ForUpdate]
 === PK_RepoObject_persistence_ForUpdate
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_repoobject_guid[RepoObject_guid]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
 +
 --
 * <<column-target_RepoObject_guid>>; uniqueidentifier
 --
 * PK, Unique, Real: 1, 1, 0
+
+
+[#index-idx_RepoObject_persistence_ForUpdate_2]
+=== idx_RepoObject_persistence_ForUpdate++__++2
+
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
++
+--
+* <<column-target_schema>>; nvarchar(128)
+* <<column-target_name>>; nvarchar(128)
+--
+* PK, Unique, Real: 0, 0, 0
 
 // end::AntoraIndexList[]
 
@@ -612,7 +813,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencingList
 
 // tag::antorareferencinglist[]
-
+* xref:repo.RepoObject_persistence_SourceMismatch.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -822,7 +1023,7 @@ target_RepoObject_guid
 === pk_IndexSemanticGroup
 
 // tag::pk_indexsemanticgroup[]
-RepoObject_guid
+
 // end::pk_indexsemanticgroup[]
 
 
@@ -878,7 +1079,10 @@ CREATE View repo.RepoObject_persistence_ForUpdate
 As
 Select
     ro_p.target_RepoObject_guid
-  , target_RepoObject_fullname = ro.RepoObject_fullname
+  , target_RepoObject_fullname     = ro.RepoObject_fullname
+  , target_RepoObject_fullname2    = ro.RepoObject_fullname2
+  , target_name                    = ro.RepoObject_name
+  , target_schema                  = ro.RepoObject_schema_name
   , ro_p.has_history
   , ro_p.has_history_columns
   , ro_p.history_schema_name
@@ -893,6 +1097,10 @@ Select
   , ro_p.source_RepoObject_guid
   , ro_p.is_persistence
   , ro_p.temporal_type
+  , ro_p.source_RepoObject_name
+  , default_source_RepoObject_name = Iif(Right(ro.RepoObject_name, 2) = '_T'
+                                         , Left(ro.RepoObject_name, Len ( ro.RepoObject_name ) - 2)
+                                         , Null)
 From
     repo.RepoObject_persistence As ro_p
     Inner Join

@@ -41,7 +41,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-05 13:29:35
+2021-09-10 19:21:04
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -49,6 +49,12 @@ stored procedure
 // tag::AntoraColumnDetails[]
 
 // end::AntoraColumnDetails[]
+
+== AntoraMeasureDetails
+
+// tag::AntoraMeasureDetails[]
+
+// end::AntoraMeasureDetails[]
 
 == AntoraPkColumnTableRows
 
@@ -536,7 +542,8 @@ PRINT CONCAT('usp_id;Number;Parent_Number: ',87,';',800,';',NULL);
 INSERT INTO 
  [docs].[RepoObject_ColumnList_T]
  (
-  [AntoraColumnDetails]
+  [RepoObject_guid]
+, [AntoraColumnDetails]
 , [AntoraNonPkColumnTableRows]
 , [AntoraPkColumnTableRows]
 , [PlantumlIndexColumns]
@@ -544,10 +551,10 @@ INSERT INTO
 , [PlantumlNonPkHiddenEntityColumns]
 , [PlantumlNonPkIndexColumns]
 , [PlantumlPkEntityColumns]
-, [RepoObject_guid]
 )
 SELECT
-  [AntoraColumnDetails]
+  [RepoObject_guid]
+, [AntoraColumnDetails]
 , [AntoraNonPkColumnTableRows]
 , [AntoraPkColumnTableRows]
 , [PlantumlIndexColumns]
@@ -555,7 +562,6 @@ SELECT
 , [PlantumlNonPkHiddenEntityColumns]
 , [PlantumlNonPkIndexColumns]
 , [PlantumlPkEntityColumns]
-, [RepoObject_guid]
 
 FROM [docs].[RepoObject_ColumnList] AS S
 

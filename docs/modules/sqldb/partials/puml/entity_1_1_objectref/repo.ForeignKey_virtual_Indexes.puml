@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,26 +25,33 @@ skinparam class {
 }
 
 
-entity repo.ForeignKey_Indexes_union << V >> {
-  **ForeignKey_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.ForeignKey_Indexes_union.html repo.ForeignKey_Indexes_union]]" as repo.ForeignKey_Indexes_union << V >> {
+  **ForeignKey_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.ForeignKey_virtual << U >> {
-  * **ForeignKey_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.ForeignKey_virtual.html repo.ForeignKey_virtual]]" as repo.ForeignKey_virtual << U >> {
+  - **ForeignKey_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.ForeignKey_virtual_Indexes << V >> {
-  * **ForeignKey_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.ForeignKey_virtual_Indexes.html repo.ForeignKey_virtual_Indexes]]" as repo.ForeignKey_virtual_Indexes << V >> {
+  - **ForeignKey_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.Index_gross << V >> {
-  * **index_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_gross.html repo.Index_gross]]" as repo.Index_gross << V >> {
+  - **index_guid** : (uniqueidentifier)
   --
 }
 
 repo.ForeignKey_virtual <.. repo.ForeignKey_virtual_Indexes
 repo.ForeignKey_virtual_Indexes <.. repo.ForeignKey_Indexes_union
 repo.Index_gross <.. repo.ForeignKey_virtual_Indexes
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

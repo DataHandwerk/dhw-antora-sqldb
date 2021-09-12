@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,19 +25,26 @@ skinparam class {
 }
 
 
-entity reference.RepoObject_ReferencingList << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObject_ReferencingList.html reference.RepoObject_ReferencingList]]" as reference.RepoObject_ReferencingList << V >> {
   --
 }
 
-entity reference.RepoObject_ReferencingReferenced << V >> {
-  * **Referenced_guid** : uniqueidentifier
-  * **Referencing_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObject_ReferencingReferenced.html reference.RepoObject_ReferencingReferenced]]" as reference.RepoObject_ReferencingReferenced << V >> {
+  - **Referenced_guid** : (uniqueidentifier)
+  - **Referencing_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.RepoObject_gross2 << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject_gross2.html repo.RepoObject_gross2]]" as repo.RepoObject_gross2 << V >> {
   --
 }
 
 reference.RepoObject_ReferencingList <.. repo.RepoObject_gross2
 reference.RepoObject_ReferencingReferenced <.. reference.RepoObject_ReferencingList
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

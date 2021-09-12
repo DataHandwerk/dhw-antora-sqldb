@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,40 +25,86 @@ skinparam class {
 }
 
 
-entity ssas.model_json_31_tables_T << U >> {
-  * **databasename** : nvarchar(128)
-  **tables_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_31_tables_T.html ssas.model_json_31_tables_T]]" as ssas.model_json_31_tables_T << U >> {
+  - **databasename** : (nvarchar(128))
+  **tables_name** : (nvarchar(128))
   --
-  * RepoObject_guid : uniqueidentifier
-  tables_annotations_ja : nvarchar(max)
-  tables_columns_ja : nvarchar(max)
-  tables_dataCategory : nvarchar(500)
-  tables_description : nvarchar(max)
-  tables_description_ja : nvarchar(max)
-  tables_hierarchies_ja : nvarchar(max)
-  tables_isHidden : nvarchar(500)
-  tables_measures_ja : nvarchar(max)
-  tables_partitions_ja : nvarchar(max)
+  - RepoObject_guid : (uniqueidentifier)
+  tables_annotations_ja : (nvarchar(max))
+  tables_columns_ja : (nvarchar(max))
+  tables_dataCategory : (nvarchar(500))
+  tables_description : (nvarchar(max))
+  tables_description_ja : (nvarchar(max))
+  tables_hierarchies_ja : (nvarchar(max))
+  tables_isHidden : (nvarchar(500))
+  tables_measures_ja : (nvarchar(max))
+  tables_partitions_ja : (nvarchar(max))
+  --
   --
 }
 
-entity ssas.model_json_312_tables_measures << V >> {
-  * **databasename** : nvarchar(128)
-  * **tables_name** : nvarchar(128)
-  **tables_measures_name** : nvarchar(500)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_312_tables_measures.html ssas.model_json_312_tables_measures]]" as ssas.model_json_312_tables_measures << V >> {
+  - **databasename** : (nvarchar(128))
+  - **tables_name** : (nvarchar(128))
+  **tables_measures_name** : (nvarchar(500))
   --
-  * RepoObject_guid : uniqueidentifier
-  tables_measures_description : nvarchar(max)
-  tables_measures_description_ja : nvarchar(max)
-  tables_measures_displayFolder : nvarchar(500)
-  tables_measures_expression : nvarchar(max)
-  tables_measures_expression_ja : nvarchar(max)
-  tables_measures_formatString : nvarchar(500)
-  tables_measures_isHidden : bit
+  - RepoObject_guid : (uniqueidentifier)
+  tables_measures_description : (nvarchar(max))
+  tables_measures_description_ja : (nvarchar(max))
+  tables_measures_displayFolder : (nvarchar(500))
+  tables_measures_expression : (nvarchar(max))
+  tables_measures_expression_ja : (nvarchar(max))
+  tables_measures_formatString : (nvarchar(500))
+  tables_measures_isHidden : (bit)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_312_tables_measures_T.html ssas.model_json_312_tables_measures_T]]" as ssas.model_json_312_tables_measures_T << U >> {
+  - **databasename** : (nvarchar(128))
+  - **tables_name** : (nvarchar(128))
+  **tables_measures_name** : (nvarchar(500))
+  --
+  - Measure_guid : (uniqueidentifier)
+  - RepoObject_guid : (uniqueidentifier)
+  tables_measures_description : (nvarchar(max))
+  tables_measures_description_ja : (nvarchar(max))
+  tables_measures_displayFolder : (nvarchar(500))
+  tables_measures_expression : (nvarchar(max))
+  tables_measures_expression_ja : (nvarchar(max))
+  tables_measures_formatString : (nvarchar(500))
+  tables_measures_isHidden : (bit)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.usp_PERSIST_model_json_312_tables_measures_T.html ssas.usp_PERSIST_model_json_312_tables_measures_T]]" as ssas.usp_PERSIST_model_json_312_tables_measures_T << P >> {
+  --
+  --
   --
 }
 
 ssas.model_json_31_tables_T <.. ssas.model_json_312_tables_measures
+ssas.model_json_312_tables_measures <.. ssas.model_json_312_tables_measures_T
+ssas.model_json_312_tables_measures <.. ssas.usp_PERSIST_model_json_312_tables_measures_T
 ssas.model_json_31_tables_T::databasename <-- ssas.model_json_312_tables_measures::databasename
 ssas.model_json_31_tables_T::RepoObject_guid <-- ssas.model_json_312_tables_measures::RepoObject_guid
 ssas.model_json_31_tables_T::tables_name <-- ssas.model_json_312_tables_measures::tables_name
+ssas.model_json_312_tables_measures::databasename <-- ssas.model_json_312_tables_measures_T::databasename
+ssas.model_json_312_tables_measures::RepoObject_guid <-- ssas.model_json_312_tables_measures_T::RepoObject_guid
+ssas.model_json_312_tables_measures::tables_measures_description <-- ssas.model_json_312_tables_measures_T::tables_measures_description
+ssas.model_json_312_tables_measures::tables_measures_description_ja <-- ssas.model_json_312_tables_measures_T::tables_measures_description_ja
+ssas.model_json_312_tables_measures::tables_measures_displayFolder <-- ssas.model_json_312_tables_measures_T::tables_measures_displayFolder
+ssas.model_json_312_tables_measures::tables_measures_expression <-- ssas.model_json_312_tables_measures_T::tables_measures_expression
+ssas.model_json_312_tables_measures::tables_measures_expression_ja <-- ssas.model_json_312_tables_measures_T::tables_measures_expression_ja
+ssas.model_json_312_tables_measures::tables_measures_formatString <-- ssas.model_json_312_tables_measures_T::tables_measures_formatString
+ssas.model_json_312_tables_measures::tables_measures_isHidden <-- ssas.model_json_312_tables_measures_T::tables_measures_isHidden
+ssas.model_json_312_tables_measures::tables_measures_name <-- ssas.model_json_312_tables_measures_T::tables_measures_name
+ssas.model_json_312_tables_measures::tables_name <-- ssas.model_json_312_tables_measures_T::tables_name
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

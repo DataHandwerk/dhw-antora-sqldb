@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,31 +25,31 @@ skinparam class {
 }
 
 
-entity reference.Persistence << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.Persistence.html reference.Persistence]]" as reference.Persistence << V >> {
   --
 }
 
-entity reference.Persistence_bidirectional << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.Persistence_bidirectional.html reference.Persistence_bidirectional]]" as reference.Persistence_bidirectional << V >> {
   --
 }
 
-entity reference.RepoObject_ReferenceTree << U >> {
-  * **RepoObject_guid** : uniqueidentifier
-  **Referenced_Depth** : int
-  **Referencing_Depth** : int
-  * **Referenced_guid** : uniqueidentifier
-  * **Referencing_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObject_ReferenceTree.html reference.RepoObject_ReferenceTree]]" as reference.RepoObject_ReferenceTree << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  **Referenced_Depth** : (int)
+  **Referencing_Depth** : (int)
+  - **Referenced_guid** : (uniqueidentifier)
+  - **Referencing_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.RepoObject_gross << V >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject_gross.html repo.RepoObject_gross]]" as repo.RepoObject_gross << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity workflow.ProcedureDependency_input_PersistenceDependency_S << V >> {
-  **referenced_Procedure_RepoObject_guid** : uniqueidentifier
-  **referencing_Procedure_RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.ProcedureDependency_input_PersistenceDependency_S.html workflow.ProcedureDependency_input_PersistenceDependency_S]]" as workflow.ProcedureDependency_input_PersistenceDependency_S << V >> {
+  **referenced_Procedure_RepoObject_guid** : (uniqueidentifier)
+  **referencing_Procedure_RepoObject_guid** : (uniqueidentifier)
   --
 }
 
@@ -56,3 +57,10 @@ reference.Persistence <.. workflow.ProcedureDependency_input_PersistenceDependen
 reference.Persistence <.. reference.Persistence_bidirectional
 reference.RepoObject_ReferenceTree <.. reference.Persistence
 repo.RepoObject_gross <.. reference.Persistence
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

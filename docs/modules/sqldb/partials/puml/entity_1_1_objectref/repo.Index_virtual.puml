@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,65 +25,72 @@ skinparam class {
 }
 
 
-entity repo.Index_union << V >> {
-  **index_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_union.html repo.Index_union]]" as repo.Index_union << V >> {
+  **index_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.Index_virtual << U >> {
-  * **index_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_virtual.html repo.Index_virtual]]" as repo.Index_virtual << U >> {
+  - **index_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.Index_virtual_ForUpdate << V >> {
-  * **index_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_virtual_ForUpdate.html repo.Index_virtual_ForUpdate]]" as repo.Index_virtual_ForUpdate << V >> {
+  - **index_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.Index_virtual_IndexPatternColumnGuid << V >> {
-  * **index_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_virtual_IndexPatternColumnGuid.html repo.Index_virtual_IndexPatternColumnGuid]]" as repo.Index_virtual_IndexPatternColumnGuid << V >> {
+  - **index_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.Index_virtual_SysObject << V >> {
-  * **index_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_virtual_SysObject.html repo.Index_virtual_SysObject]]" as repo.Index_virtual_SysObject << V >> {
+  - **index_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.IndexColumn_virtual_gross << V >> {
-  * **index_column_id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.IndexColumn_virtual_gross.html repo.IndexColumn_virtual_gross]]" as repo.IndexColumn_virtual_gross << V >> {
+  - **index_column_id** : (int)
   --
 }
 
-entity repo.IndexColumn_virtual_referenced_setpoint << V >> {
-  * **index_guid** : uniqueidentifier
-  * **index_column_id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.IndexColumn_virtual_referenced_setpoint.html repo.IndexColumn_virtual_referenced_setpoint]]" as repo.IndexColumn_virtual_referenced_setpoint << V >> {
+  - **index_guid** : (uniqueidentifier)
+  - **index_column_id** : (int)
   --
 }
 
-entity repo.IndexReferencedReferencing << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.IndexReferencedReferencing.html repo.IndexReferencedReferencing]]" as repo.IndexReferencedReferencing << V >> {
   --
 }
 
-entity repo.usp_Index_finish << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_Index_finish.html repo.usp_Index_finish]]" as repo.usp_Index_finish << P >> {
   --
 }
 
-entity repo.usp_index_inheritance << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_index_inheritance.html repo.usp_index_inheritance]]" as repo.usp_index_inheritance << P >> {
   --
 }
 
-entity repo.usp_Index_virtual_set << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_Index_virtual_set.html repo.usp_Index_virtual_set]]" as repo.usp_Index_virtual_set << P >> {
   --
 }
 
+repo.Index_virtual <.. repo.Index_union
+repo.Index_virtual <.. repo.IndexReferencedReferencing
+repo.Index_virtual <.. repo.Index_virtual_SysObject
 repo.Index_virtual <.. repo.IndexColumn_virtual_referenced_setpoint
 repo.Index_virtual <.. repo.usp_index_inheritance
 repo.Index_virtual <.. repo.usp_Index_virtual_set
 repo.Index_virtual <.. repo.Index_virtual_IndexPatternColumnGuid
 repo.Index_virtual <.. repo.usp_Index_finish
 repo.Index_virtual <.. repo.Index_virtual_ForUpdate
-repo.Index_virtual <.. repo.Index_union
-repo.Index_virtual <.. repo.IndexReferencedReferencing
-repo.Index_virtual <.. repo.Index_virtual_SysObject
 repo.Index_virtual <.. repo.IndexColumn_virtual_gross
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

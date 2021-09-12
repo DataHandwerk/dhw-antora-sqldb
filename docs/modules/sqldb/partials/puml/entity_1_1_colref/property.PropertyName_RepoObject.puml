@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,80 +25,85 @@ skinparam class {
 }
 
 
-entity config.Parameter << U >> {
-  * **Parameter_name** : varchar(100)
-  * **sub_Parameter** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/config.Parameter.html config.Parameter]]" as config.Parameter << U >> {
+  - **Parameter_name** : (varchar(100))
+  - **sub_Parameter** : (nvarchar(128))
   --
-  Parameter_default_value : nvarchar(max)
-  Parameter_desciption : nvarchar(1000)
-  Parameter_value : nvarchar(max)
-  {abstract} Parameter_value_result : nvarchar(max)
-  {abstract} Parameter_value_result_date : date
-  {abstract} Parameter_value_result_datetime : datetime
-  {abstract} Parameter_value_result_int : int
-  --
-}
-
-entity docs.AntoraTemplate_examples << V >> {
-  --
-  page_content : nvarchar(max)
-  --
-}
-
-entity property.PropertyName_RepoObject << V >> {
-  **property_name** : nvarchar(128)
+  Parameter_default_value : (nvarchar(max))
+  Parameter_desciption : (nvarchar(1000))
+  Parameter_value : (nvarchar(max))
+  ~ Parameter_value_result : (nvarchar(max))
+  ~ Parameter_value_result_date : (date)
+  ~ Parameter_value_result_datetime : (datetime)
+  ~ Parameter_value_result_int : (int)
   --
   --
 }
 
-entity property.RepoObjectProperty << U >> {
-  * **RepoObjectProperty_id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.AntoraTemplate_examples.html docs.AntoraTemplate_examples]]" as docs.AntoraTemplate_examples << V >> {
   --
-  inheritance : tinyint
-  * property_name : nvarchar(128)
-  property_value : nvarchar(max)
-  * RepoObject_guid : uniqueidentifier
-  {abstract} property_bigint : bigint
-  {abstract} property_float : float
-  {abstract} property_int : int
-  {abstract} property_money : money
-  {abstract} property_real : real
-  --
-}
-
-entity property.RepoObjectProperty_cross << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  **property_name** : nvarchar(128)
+  page_content : (nvarchar(max))
   --
   --
 }
 
-entity property.RepoObjectProperty_InheritanceType_InheritanceDefinition << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  **property_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.PropertyName_RepoObject.html property.PropertyName_RepoObject]]" as property.PropertyName_RepoObject << V >> {
+  **property_name** : (nvarchar(128))
   --
-  Inheritance_StringAggSeparatorSql : nvarchar(max)
-  InheritanceDefinition : nvarchar(max)
-  InheritanceType : int
-  par_Inheritance_StringAggSeparatorSql : nvarchar(max)
-  par_InheritanceDefintion : nvarchar(max)
-  par_InheritanceType : int
-  property_value : nvarchar(max)
-  * RepoObject_fullname : nvarchar(261)
-  * RepoObject_type : char(2)
-  ro_Inheritance_StringAggSeparatorSql : nvarchar(4000)
-  ro_InheritanceDefinition : nvarchar(4000)
-  ro_InheritanceType : tinyint
-  sub_Inheritance_StringAggSeparatorSql : nvarchar(max)
-  sub_InheritanceDefintion : nvarchar(max)
-  sub_InheritanceType : int
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.PropertyName_RepoObject_T.html property.PropertyName_RepoObject_T]]" as property.PropertyName_RepoObject_T << U >> {
+  **property_name** : (nvarchar(128))
+  --
+  - has_inheritance : (bit)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObjectProperty.html property.RepoObjectProperty]]" as property.RepoObjectProperty << U >> {
+  - **RepoObjectProperty_id** : (int)
+  --
+  inheritance : (tinyint)
+  - property_name : (nvarchar(128))
+  property_value : (nvarchar(max))
+  - RepoObject_guid : (uniqueidentifier)
+  ~ property_bigint : (bigint)
+  ~ property_float : (float)
+  ~ property_int : (int)
+  ~ property_money : (money)
+  ~ property_real : (real)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObjectProperty_cross.html property.RepoObjectProperty_cross]]" as property.RepoObjectProperty_cross << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  **property_name** : (nvarchar(128))
+  --
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.usp_PERSIST_PropertyName_RepoObject_T.html property.usp_PERSIST_PropertyName_RepoObject_T]]" as property.usp_PERSIST_PropertyName_RepoObject_T << P >> {
+  --
+  --
   --
 }
 
 config.Parameter <.. property.PropertyName_RepoObject
-property.PropertyName_RepoObject <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition
 property.PropertyName_RepoObject <.. property.RepoObjectProperty_cross
 property.PropertyName_RepoObject <.. docs.AntoraTemplate_examples
+property.PropertyName_RepoObject <.. property.PropertyName_RepoObject_T
+property.PropertyName_RepoObject <.. property.usp_PERSIST_PropertyName_RepoObject_T
 property.RepoObjectProperty <.. property.PropertyName_RepoObject
-property.PropertyName_RepoObject::property_name <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::property_name
 property.PropertyName_RepoObject::property_name <-- property.RepoObjectProperty_cross::property_name
+property.PropertyName_RepoObject::property_name <-- property.PropertyName_RepoObject_T::property_name
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

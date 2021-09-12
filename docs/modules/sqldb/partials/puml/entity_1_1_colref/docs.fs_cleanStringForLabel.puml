@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,42 +25,63 @@ skinparam class {
 }
 
 
-entity docs.AntoraIndexSemanticgroupPatterndatatype << V >> {
-  **IndexSemanticGroup** : nvarchar(512)
-  **IndexPatternColumnDatatype** : nvarchar(4000)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.AntoraIndexSemanticgroupPatterndatatype.html docs.AntoraIndexSemanticgroupPatterndatatype]]" as docs.AntoraIndexSemanticgroupPatterndatatype << V >> {
+  **IndexSemanticGroup** : (nvarchar(512))
+  **IndexPatternColumnDatatype** : (nvarchar(4000))
   --
-  AntoraIndexSemanticgroupPatterndatatype : nvarchar(max)
-  --
-}
-
-entity docs.fs_cleanStringForLabel << FN >> {
+  AntoraIndexSemanticgroupPatterndatatype : (nvarchar(max))
   --
   --
 }
 
-entity docs.RepoObject_ColumnList << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.fs_cleanStringForLabel.html docs.fs_cleanStringForLabel]]" as docs.fs_cleanStringForLabel << FN >> {
   --
-  AntoraColumnDetails : nvarchar(max)
-  AntoraNonPkColumnTableRows : nvarchar(max)
-  AntoraPkColumnTableRows : nvarchar(max)
-  PlantumlIndexColumns : nvarchar(max)
-  PlantumlNonPkEntityColumns : nvarchar(max)
-  PlantumlNonPkHiddenEntityColumns : nvarchar(max)
-  PlantumlNonPkIndexColumns : nvarchar(max)
-  PlantumlPkEntityColumns : nvarchar(max)
-  * RepoObject_guid : uniqueidentifier
+  --
   --
 }
 
-entity docs.RepoObject_IndexList << V >> {
-  **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.RepoObject_ColumnList.html docs.RepoObject_ColumnList]]" as docs.RepoObject_ColumnList << V >> {
   --
-  AntoraIndexList : nvarchar(max)
-  PumlIndexList : nvarchar(max)
+  AntoraColumnDetails : (nvarchar(max))
+  AntoraNonPkColumnTableRows : (nvarchar(max))
+  AntoraPkColumnTableRows : (nvarchar(max))
+  PlantumlIndexColumns : (nvarchar(max))
+  PlantumlNonPkEntityColumns : (nvarchar(max))
+  PlantumlNonPkHiddenEntityColumns : (nvarchar(max))
+  PlantumlNonPkIndexColumns : (nvarchar(max))
+  PlantumlPkEntityColumns : (nvarchar(max))
+  - RepoObject_guid : (uniqueidentifier)
+  --
   --
 }
 
-docs.fs_cleanStringForLabel <.. docs.RepoObject_ColumnList
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.RepoObject_IndexList.html docs.RepoObject_IndexList]]" as docs.RepoObject_IndexList << V >> {
+  **RepoObject_guid** : (uniqueidentifier)
+  --
+  AntoraIndexList : (nvarchar(max))
+  PumlIndexList : (nvarchar(max))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.RepoObject_MeasureList.html docs.RepoObject_MeasureList]]" as docs.RepoObject_MeasureList << V >> {
+  --
+  AntoraMeasureDetails : (nvarchar(max))
+  PlantumlMeasures : (nvarchar(max))
+  - RepoObject_guid : (uniqueidentifier)
+  --
+  --
+}
+
 docs.fs_cleanStringForLabel <.. docs.AntoraIndexSemanticgroupPatterndatatype
+docs.fs_cleanStringForLabel <.. docs.RepoObject_MeasureList
 docs.fs_cleanStringForLabel <.. docs.RepoObject_IndexList
+docs.fs_cleanStringForLabel <.. docs.RepoObject_ColumnList
+
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
 

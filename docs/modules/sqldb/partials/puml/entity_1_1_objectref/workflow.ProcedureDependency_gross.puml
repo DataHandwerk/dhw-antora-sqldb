@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,19 +25,26 @@ skinparam class {
 }
 
 
-entity repo.RepoObject << U >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject.html repo.RepoObject]]" as repo.RepoObject << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity workflow.ProcedureDependency << U >> {
-  * **id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.ProcedureDependency.html workflow.ProcedureDependency]]" as workflow.ProcedureDependency << U >> {
+  - **id** : (int)
   --
 }
 
-entity workflow.ProcedureDependency_gross << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.ProcedureDependency_gross.html workflow.ProcedureDependency_gross]]" as workflow.ProcedureDependency_gross << V >> {
   --
 }
 
 repo.RepoObject <.. workflow.ProcedureDependency_gross
 workflow.ProcedureDependency <.. workflow.ProcedureDependency_gross
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

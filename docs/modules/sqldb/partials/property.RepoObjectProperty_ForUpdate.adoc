@@ -40,7 +40,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-08-17 19:03:38
+2021-09-09 11:13:41
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -49,7 +49,7 @@ view
 [#column-inheritance]
 === inheritance
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |inheritance
@@ -68,7 +68,7 @@ view
 [#column-property_name]
 === property_name
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |property_name
@@ -87,7 +87,7 @@ view
 [#column-property_value]
 === property_value
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |property_value
@@ -102,6 +102,7 @@ view
 datatype of property_value is `sql_variant`, because it should be possible to synchronize the property_value in the repository with property_value in extended properties in the dwh database, which is `sql_variant` +
 therefore the maximum content is nvarchar(4000) or varchar(8000)
 --
+{empty} +
 
 .Referenced Columns
 --
@@ -112,7 +113,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 [#column-RepoObject_fullname]
 === RepoObject_fullname
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |RepoObject_fullname
@@ -126,6 +127,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 --
 (concat('[',[RepoObject_schema_name],'].[',[RepoObject_name],']'))
 --
+{empty} +
 
 .Referenced Columns
 --
@@ -136,7 +138,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 [#column-RepoObject_fullname2]
 === RepoObject_fullname2
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |RepoObject_fullname2
@@ -150,6 +152,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 --
 (concat([RepoObject_schema_name],'.',[RepoObject_name]))
 --
+{empty} +
 
 .Referenced Columns
 --
@@ -160,7 +163,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 [#column-RepoObject_guid]
 === RepoObject_guid
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |RepoObject_guid
@@ -179,7 +182,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 [#column-RepoObject_name]
 === RepoObject_name
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |RepoObject_name
@@ -198,7 +201,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 [#column-RepoObject_schema_name]
 === RepoObject_schema_name
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |RepoObject_schema_name
@@ -214,10 +217,35 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 --
 
 
+[#column-RepoObject_type]
+=== RepoObject_type
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|RepoObject_type
+|char(2)
+|NOT NULL
+|
+|
+|===
+
+.Description
+--
+reference in [repo_sys].[type]
+--
+{empty} +
+
+.Referenced Columns
+--
+* xref:repo.RepoObject.adoc#column-RepoObject_type[+repo.RepoObject.RepoObject_type+]
+--
+
+
 [#column-RepoObjectProperty_id]
 === RepoObjectProperty_id
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |RepoObjectProperty_id
@@ -235,9 +263,16 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 
 // end::AntoraColumnDetails[]
 
+== AntoraMeasureDetails
+
+// tag::AntoraMeasureDetails[]
+
+// end::AntoraMeasureDetails[]
+
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
+
 
 
 
@@ -309,6 +344,13 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 |
 
 |
+|<<column-RepoObject_type>>
+|char(2)
+|NOT NULL
+|
+|
+
+|
 |<<column-RepoObjectProperty_id>>
 |int
 |NOT NULL
@@ -324,7 +366,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 [#index-idx_RepoObjectProperty_ForUpdate_1]
 === idx_RepoObjectProperty_ForUpdate++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_schema_name,object_name[schema_name,object_name]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
 +
 --
 * <<column-RepoObject_schema_name>>; nvarchar(128)
@@ -336,7 +378,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 [#index-idx_RepoObjectProperty_ForUpdate_2]
 === idx_RepoObjectProperty_ForUpdate++__++2
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_repoobjectproperty_id[RepoObjectProperty_id]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
 +
 --
 * <<column-RepoObjectProperty_id>>; int
@@ -347,7 +389,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 [#index-idx_RepoObjectProperty_ForUpdate_3]
 === idx_RepoObjectProperty_ForUpdate++__++3
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_repoobject_guid,property_name[RepoObject_guid,property_name]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -359,7 +401,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 [#index-idx_RepoObjectProperty_ForUpdate_4]
 === idx_RepoObjectProperty_ForUpdate++__++4
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_repoobject_guid[RepoObject_guid]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -655,7 +697,6 @@ source: property.RepoObjectProperty WHERE property_int = 1
 [source,sql]
 ----
 
-
 CREATE View property.RepoObjectProperty_ForUpdate
 As
 Select
@@ -676,6 +717,7 @@ Select
   , T2.RepoObject_fullname2
   , T2.RepoObject_schema_name
   , T2.RepoObject_name
+  , T2.RepoObject_type
 From
     property.RepoObjectProperty As T1
     Inner Join

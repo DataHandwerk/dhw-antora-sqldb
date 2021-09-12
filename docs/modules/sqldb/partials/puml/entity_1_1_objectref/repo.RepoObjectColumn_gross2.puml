@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,40 +25,58 @@ skinparam class {
 }
 
 
-entity docs.RepoObject_ColumnList << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.RepoObject_ColumnList.html docs.RepoObject_ColumnList]]" as docs.RepoObject_ColumnList << V >> {
   --
 }
 
-entity reference.RepoObjectColumn_ReferencedList << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObjectColumn_ReferencedList.html reference.RepoObjectColumn_ReferencedList]]" as reference.RepoObjectColumn_ReferencedList << V >> {
   --
 }
 
-entity reference.RepoObjectColumn_ReferencingList << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObjectColumn_ReferencingList.html reference.RepoObjectColumn_ReferencingList]]" as reference.RepoObjectColumn_ReferencingList << V >> {
   --
 }
 
-entity repo.IndexColumn_union << V >> {
-  **index_guid** : uniqueidentifier
-  * **index_column_id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.IndexColumn_union_T.html repo.IndexColumn_union_T]]" as repo.IndexColumn_union_T << U >> {
+  **index_guid** : (uniqueidentifier)
+  - **index_column_id** : (int)
   --
 }
 
-entity repo.RepoObject_ColumnList << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject_ColumnList.html repo.RepoObject_ColumnList]]" as repo.RepoObject_ColumnList << V >> {
   --
 }
 
-entity repo.RepoObjectColumn_gross << V >> {
-  * **RepoObjectColumn_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObjectColumn.html repo.RepoObjectColumn]]" as repo.RepoObjectColumn << U >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.RepoObjectColumn_gross2 << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObjectColumn_gross.html repo.RepoObjectColumn_gross]]" as repo.RepoObjectColumn_gross << V >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObjectColumn_gross2.html repo.RepoObjectColumn_gross2]]" as repo.RepoObjectColumn_gross2 << V >> {
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/uspgenerator.usp_GeneratorUsp_insert_update_persistence.html uspgenerator.usp_GeneratorUsp_insert_update_persistence]]" as uspgenerator.usp_GeneratorUsp_insert_update_persistence << P >> {
   --
 }
 
 reference.RepoObjectColumn_ReferencedList <.. repo.RepoObjectColumn_gross2
 reference.RepoObjectColumn_ReferencingList <.. repo.RepoObjectColumn_gross2
-repo.IndexColumn_union <.. repo.RepoObjectColumn_gross2
+repo.IndexColumn_union_T <.. repo.RepoObjectColumn_gross2
+repo.RepoObjectColumn <.. repo.RepoObjectColumn_gross2
 repo.RepoObjectColumn_gross <.. repo.RepoObjectColumn_gross2
-repo.RepoObjectColumn_gross2 <.. docs.RepoObject_ColumnList
 repo.RepoObjectColumn_gross2 <.. repo.RepoObject_ColumnList
+repo.RepoObjectColumn_gross2 <.. docs.RepoObject_ColumnList
+repo.RepoObjectColumn_gross2 <.. uspgenerator.usp_GeneratorUsp_insert_update_persistence
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

@@ -1,3 +1,4 @@
+@startuml
 'Left to right direction
 top to bottom direction
 hide circle
@@ -24,35 +25,35 @@ skinparam class {
 }
 
 
-entity config.Parameter << U >> {
-  * **Parameter_name** : varchar(100)
-  * **sub_Parameter** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/config.Parameter.html config.Parameter]]" as config.Parameter << U >> {
+  - **Parameter_name** : (varchar(100))
+  - **sub_Parameter** : (nvarchar(128))
   --
 }
 
-entity config.usp_connect_database << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/config.usp_connect_database.html config.usp_connect_database]]" as config.usp_connect_database << P >> {
   --
 }
 
-entity config.usp_init_parameter << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/config.usp_init_parameter.html config.usp_init_parameter]]" as config.usp_init_parameter << P >> {
   --
 }
 
-entity config.usp_parameter_set << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/config.usp_parameter_set.html config.usp_parameter_set]]" as config.usp_parameter_set << P >> {
   --
 }
 
-entity configT.Parameter_default << V >> {
-  * **Parameter_name** : varchar(52)
-  * **sub_Parameter** : nvarchar(27)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/configT.Parameter_default.html configT.Parameter_default]]" as configT.Parameter_default << V >> {
+  - **Parameter_name** : (varchar(52))
+  - **sub_Parameter** : (nvarchar(27))
   --
 }
 
-entity configT.spt_values << U >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/configT.spt_values.html configT.spt_values]]" as configT.spt_values << U >> {
   --
 }
 
-entity configT.usp_init_spt_values << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/configT.usp_init_spt_values.html configT.usp_init_spt_values]]" as configT.usp_init_spt_values << P >> {
   --
 }
 
@@ -63,3 +64,10 @@ config.usp_parameter_set <.. config.usp_connect_database
 configT.Parameter_default <.. config.usp_init_parameter
 configT.spt_values <.. configT.usp_init_spt_values
 configT.usp_init_spt_values <.. config.usp_connect_database
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

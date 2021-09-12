@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,44 +25,47 @@ skinparam class {
 }
 
 
-entity uspgenerator.GeneratorUsp_SqlUsp << V >> {
-  * **usp_id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/uspgenerator.GeneratorUsp_SqlUsp.html uspgenerator.GeneratorUsp_SqlUsp]]" as uspgenerator.GeneratorUsp_SqlUsp << V >> {
+  - **usp_id** : (int)
   --
-  * AdocUspSteps : nvarchar(max)
-  * has_logging : tinyint
-  MS_Description : nvarchar(4000)
-  RepoObject_guid : uniqueidentifier
-  SqlStepList : nvarchar(max)
-  * SqlUsp : nvarchar(max)
-  usp_Description : nvarchar(4000)
-  * usp_fullname : nvarchar(261)
-  * usp_name : nvarchar(128)
-  * usp_schema : nvarchar(128)
-  * UspExamples : nvarchar(4000)
-  UspParameters : nvarchar(max)
+  - AdocUspSteps : (nvarchar(max))
+  - has_logging : (tinyint)
+  MS_Description : (nvarchar(4000))
+  RepoObject_guid : (uniqueidentifier)
+  SqlStepList : (nvarchar(max))
+  - SqlUsp : (nvarchar(max))
+  usp_Description : (nvarchar(4000))
+  - usp_fullname : (nvarchar(261))
+  - usp_name : (nvarchar(128))
+  - usp_schema : (nvarchar(128))
+  - UspExamples : (nvarchar(4000))
+  UspParameters : (nvarchar(max))
   --
-}
-
-entity uspgenerator.GeneratorUsp_StepList << V >> {
-  --
-  AdocStepList : nvarchar(max)
-  StepList : nvarchar(max)
-  * usp_id : int
   --
 }
 
-entity uspgenerator.GeneratorUspStep_Sql << V >> {
-  * **usp_id** : int
-  **Number** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/uspgenerator.GeneratorUsp_StepList.html uspgenerator.GeneratorUsp_StepList]]" as uspgenerator.GeneratorUsp_StepList << V >> {
   --
-  * AdocStep : nvarchar(max)
-  * has_logging : tinyint
-  is_required_ELSE : int
-  required_Begin_count : int
-  required_End_count : int
-  RowNumber_PerUsp : bigint
-  * SqlStep : nvarchar(max)
-  * usp_fullname : nvarchar(261)
+  AdocStepList : (nvarchar(max))
+  StepList : (nvarchar(max))
+  - usp_id : (int)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/uspgenerator.GeneratorUspStep_Sql.html uspgenerator.GeneratorUspStep_Sql]]" as uspgenerator.GeneratorUspStep_Sql << V >> {
+  - **usp_id** : (int)
+  **Number** : (int)
+  --
+  - AdocStep : (nvarchar(max))
+  - has_logging : (tinyint)
+  is_required_ELSE : (int)
+  required_Begin_count : (int)
+  required_End_count : (int)
+  RowNumber_PerUsp : (bigint)
+  - SqlStep : (nvarchar(max))
+  - usp_fullname : (nvarchar(261))
+  --
   --
 }
 
@@ -69,3 +73,10 @@ uspgenerator.GeneratorUsp_StepList <.. uspgenerator.GeneratorUsp_SqlUsp
 uspgenerator.GeneratorUspStep_Sql <.. uspgenerator.GeneratorUsp_StepList
 uspgenerator.GeneratorUsp_StepList::StepList <-- uspgenerator.GeneratorUsp_SqlUsp::SqlStepList
 uspgenerator.GeneratorUspStep_Sql::usp_id <-- uspgenerator.GeneratorUsp_StepList::usp_id
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

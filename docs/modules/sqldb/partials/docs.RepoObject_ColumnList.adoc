@@ -41,7 +41,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-03 10:09:10
+2021-09-09 00:22:01
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -50,7 +50,7 @@ view
 [#column-AntoraColumnDetails]
 === AntoraColumnDetails
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |AntoraColumnDetails
@@ -69,7 +69,7 @@ view
 [#column-AntoraNonPkColumnTableRows]
 === AntoraNonPkColumnTableRows
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |AntoraNonPkColumnTableRows
@@ -88,7 +88,7 @@ view
 [#column-AntoraPkColumnTableRows]
 === AntoraPkColumnTableRows
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |AntoraPkColumnTableRows
@@ -107,7 +107,7 @@ view
 [#column-PlantumlIndexColumns]
 === PlantumlIndexColumns
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |PlantumlIndexColumns
@@ -126,7 +126,7 @@ view
 [#column-PlantumlNonPkEntityColumns]
 === PlantumlNonPkEntityColumns
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |PlantumlNonPkEntityColumns
@@ -145,7 +145,7 @@ view
 [#column-PlantumlNonPkHiddenEntityColumns]
 === PlantumlNonPkHiddenEntityColumns
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |PlantumlNonPkHiddenEntityColumns
@@ -164,7 +164,7 @@ view
 [#column-PlantumlNonPkIndexColumns]
 === PlantumlNonPkIndexColumns
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |PlantumlNonPkIndexColumns
@@ -183,7 +183,7 @@ view
 [#column-PlantumlPkEntityColumns]
 === PlantumlPkEntityColumns
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |PlantumlPkEntityColumns
@@ -202,7 +202,7 @@ view
 [#column-RepoObject_guid]
 === RepoObject_guid
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |RepoObject_guid
@@ -224,6 +224,12 @@ view
 
 
 // end::AntoraColumnDetails[]
+
+== AntoraMeasureDetails
+
+// tag::AntoraMeasureDetails[]
+
+// end::AntoraMeasureDetails[]
 
 == AntoraPkColumnTableRows
 
@@ -642,7 +648,7 @@ Select
                           , docs.fs_cleanStringForLabel ( roc.Column_name )
                           , Char ( 13 ) + Char ( 10 )
                           , Char ( 13 ) + Char ( 10 )
-                          , '[cols="d,m,m,m,m,d"]'
+                          , '[cols="d,8m,m,m,m,d"]'
                           , Char ( 13 ) + Char ( 10 )
                           , '|==='
                           , Char ( 13 ) + Char ( 10 )
@@ -687,6 +693,9 @@ Select
                                              , roc.Description
                                              , Char ( 13 ) + Char ( 10 )
                                              , '--'
+                                             , Char ( 13 ) + Char ( 10 )
+                                             --add additional line to get more space
+                                             , '{empty} +'
                                              , Char ( 13 ) + Char ( 10 )
                                              , Char ( 13 ) + Char ( 10 )
                                            )
@@ -878,20 +887,22 @@ Select
                                     Then
                                     Concat (
                                                '  '
-                                             --* to identify mandatory attributes
-                                             , Iif(roc.Repo_is_nullable = 0, '* ', Null)
-                                             --{static}  => underline, {abstract} => italic
                                              , Case
                                                    When roc.Repo_is_computed = 1
                                                        Then
-                                                       Iif(roc.Repo_is_persisted = 1, '{static} ', '{abstract} ')
+                                                       --rhombus or triangle
+                                                       Iif(roc.Repo_is_persisted = 1, '# ', '~ ')
+                                                   Else
+                                                       -- '- ' to identify mandatory attributes, but not for calculated columns,
+                                                       -- to avoid a mix '- #' or '- ~'
+                                                       Iif(roc.Repo_is_nullable = 0, '- ', Null)
                                                End
                                              --PK in bold
                                              , '**'
                                              , docs.fs_cleanStringForPuml ( roc.Column_name )
                                              , '**'
-                                             , ' : '
-                                             , roc.Repo_user_type_fullname
+                                             --we add () to get a puml "method" to get unique icons
+                                             , ' : (' + roc.Repo_user_type_fullname + ')'
                                              , Iif(roc.tabcol_IsHidden = 1, ' (hidden)', Null)
                                              --, CASE 
                                              -- WHEN roc.[Repo_is_computed] = 1
@@ -919,17 +930,19 @@ Select
                                     Then
                                     Concat (
                                                '  '
-                                             --* to identify mandatory attributes
-                                             , Iif(roc.Repo_is_nullable = 0, '* ', Null)
-                                             --{static}  => underline, {abstract} => italic
                                              , Case
                                                    When roc.Repo_is_computed = 1
                                                        Then
-                                                       Iif(roc.Repo_is_persisted = 1, '{static} ', '{abstract} ')
+                                                       --rhombus or triangle
+                                                       Iif(roc.Repo_is_persisted = 1, '# ', '~ ')
+                                                   Else
+                                                       -- '- ' to identify mandatory attributes, but not for calculated columns,
+                                                       -- to avoid a mix '- #' or '- ~'
+                                                       Iif(roc.Repo_is_nullable = 0, '- ', Null)
                                                End
                                              , docs.fs_cleanStringForPuml ( roc.Column_name )
-                                             , ' : '
-                                             , roc.Repo_user_type_fullname
+                                             --we add () to get a puml "method" to get unique icons
+                                             , ' : (' + roc.Repo_user_type_fullname + ')'
                                              , Iif(roc.tabcol_IsHidden = 1, ' (hidden)', Null)
                                              --, CASE 
                                              -- WHEN roc.[Repo_is_computed] = 1
@@ -957,17 +970,19 @@ Select
                                     Then
                                     Concat (
                                                '  '
-                                             --* to identify mandatory attributes
-                                             , Iif(roc.Repo_is_nullable = 0, '* ', Null)
-                                             --{static}  => underline, {abstract} => italic
                                              , Case
                                                    When roc.Repo_is_computed = 1
                                                        Then
-                                                       Iif(roc.Repo_is_persisted = 1, '{static} ', '{abstract} ')
+                                                       --rhombus or triangle
+                                                       Iif(roc.Repo_is_persisted = 1, '# ', '~ ')
+                                                   Else
+                                                       -- '- ' to identify mandatory attributes, but not for calculated columns,
+                                                       -- to avoid a mix '- #' or '- ~'
+                                                       Iif(roc.Repo_is_nullable = 0, '- ', Null)
                                                End
                                              , docs.fs_cleanStringForPuml ( roc.Column_name )
-                                             , ' : '
-                                             , roc.Repo_user_type_fullname
+                                             --we add () to get a puml "method" to get unique icons
+                                             , ' : (' + roc.Repo_user_type_fullname + ')'
                                              , Iif(roc.tabcol_IsHidden = 1, ' (hidden)', Null)
                                              --, CASE 
                                              -- WHEN roc.[Repo_is_computed] = 1
@@ -995,17 +1010,19 @@ Select
                                     Then
                                     Concat (
                                                '  '
-                                             --* to identify mandatory attributes
-                                             , Iif(roc.Repo_is_nullable = 0, '* ', Null)
-                                             --{static}  => underline, {abstract} => italic
                                              , Case
                                                    When roc.Repo_is_computed = 1
                                                        Then
-                                                       Iif(roc.Repo_is_persisted = 1, '{static} ', '{abstract} ')
+                                                       --rhombus or triangle
+                                                       Iif(roc.Repo_is_persisted = 1, '# ', '~ ')
+                                                   Else
+                                                       -- '- ' to identify mandatory attributes, but not for calculated columns,
+                                                       -- to avoid a mix '- #' or '- ~'
+                                                       Iif(roc.Repo_is_nullable = 0, '- ', Null)
                                                End
                                              , docs.fs_cleanStringForPuml ( roc.Column_name )
-                                             , ' : '
-                                             , roc.Repo_user_type_fullname
+                                             --we add () to get a puml "method" to get unique icons
+                                             , ' : (' + roc.Repo_user_type_fullname + ')'
                                              , Iif(roc.tabcol_IsHidden = 1, ' (hidden)', Null)
                                              --, CASE 
                                              -- WHEN roc.[Repo_is_computed] = 1
@@ -1032,17 +1049,19 @@ Select
                                     Then
                                     Concat (
                                                '  '
-                                             --* to identify mandatory attributes
-                                             , Iif(roc.Repo_is_nullable = 0, '* ', Null)
-                                             --{static}  => underline, {abstract} => italic
                                              , Case
                                                    When roc.Repo_is_computed = 1
                                                        Then
-                                                       Iif(roc.Repo_is_persisted = 1, '{static} ', '{abstract} ')
+                                                       --rhombus or triangle
+                                                       Iif(roc.Repo_is_persisted = 1, '# ', '~ ')
+                                                   Else
+                                                       -- '- ' to identify mandatory attributes, but not for calculated columns,
+                                                       -- to avoid a mix '- #' or '- ~'
+                                                       Iif(roc.Repo_is_nullable = 0, '- ', Null)
                                                End
                                              , docs.fs_cleanStringForPuml ( roc.Column_name )
-                                             , ' : '
-                                             , roc.Repo_user_type_fullname
+                                             --we add () to get a puml "method" to get unique icons
+                                             , ' : (' + roc.Repo_user_type_fullname + ')'
                                              , Iif(roc.tabcol_IsHidden = 1, ' (hidden)', Null)
                                              --, CASE 
                                              -- WHEN roc.[Repo_is_computed] = 1

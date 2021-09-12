@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,24 +25,26 @@ skinparam class {
 }
 
 
-entity config.SsasDatabasename << U >> {
-  * **databasename** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/config.SsasDatabasename.html config.SsasDatabasename]]" as config.SsasDatabasename << U >> {
+  - **databasename** : (nvarchar(128))
   --
-  * isActive : bit
-  * isCurrentImport : bit
-  * LinkedServer : nvarchar(128)
+  - isActive : (bit)
+  - isCurrentImport : (bit)
+  - LinkedServer : (nvarchar(128))
+  --
   --
 }
 
-entity configT.SsasDmvTableImport_ImportSql << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/configT.SsasDmvTableImport_ImportSql.html configT.SsasDmvTableImport_ImportSql]]" as configT.SsasDmvTableImport_ImportSql << V >> {
   --
-  * databasename : nvarchar(128)
-  * DeleteInsertSql : nvarchar(4000)
-  * ExecPersistSql : nvarchar(161)
-  * isActive : bit
-  * isCurrentImport : bit
-  * LinkedServer : nvarchar(128)
-  * truncateSql : nvarchar(156)
+  - databasename : (nvarchar(128))
+  - DeleteInsertSql : (nvarchar(4000))
+  - ExecPersistSql : (nvarchar(161))
+  - isActive : (bit)
+  - isCurrentImport : (bit)
+  - LinkedServer : (nvarchar(128))
+  - truncateSql : (nvarchar(156))
+  --
   --
 }
 
@@ -50,3 +53,10 @@ config.SsasDatabasename::databasename <-- configT.SsasDmvTableImport_ImportSql::
 config.SsasDatabasename::isActive <-- configT.SsasDmvTableImport_ImportSql::isActive
 config.SsasDatabasename::isCurrentImport <-- configT.SsasDmvTableImport_ImportSql::isCurrentImport
 config.SsasDatabasename::LinkedServer <-- configT.SsasDmvTableImport_ImportSql::LinkedServer
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

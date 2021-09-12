@@ -10,7 +10,6 @@
 :ExistsProperty--pk_index_guid:
 :ExistsProperty--pk_indexpatterncolumndatatype:
 :ExistsProperty--pk_indexpatterncolumnname:
-:ExistsProperty--pk_indexsemanticgroup:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--FK:
 :ExistsProperty--AntoraIndexList:
@@ -53,7 +52,7 @@ user table
 [#column-RepoSchema_guid]
 === RepoSchema_guid
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |1
 |*RepoSchema_guid*
@@ -80,7 +79,7 @@ user table
 [#column-is_ssas]
 === is_ssas
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |is_ssas
@@ -104,7 +103,7 @@ user table
 [#column-is_SysSchema_missing]
 === is_SysSchema_missing
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |is_SysSchema_missing
@@ -125,7 +124,7 @@ user table
 [#column-RepoSchema_ms_description]
 === RepoSchema_ms_description
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |RepoSchema_ms_description
@@ -145,7 +144,7 @@ user table
 [#column-RepoSchema_name]
 === RepoSchema_name
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |RepoSchema_name
@@ -175,7 +174,7 @@ user table
 [#column-SysSchema_id]
 === SysSchema_id
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |SysSchema_id
@@ -196,7 +195,7 @@ user table
 [#column-SysSchema_name]
 === SysSchema_name
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |SysSchema_name
@@ -224,7 +223,7 @@ user table
 [#column-has_different_sys_names]
 === has_different_sys_names
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |has_different_sys_names
@@ -238,6 +237,7 @@ user table
 --
 (CONVERT([bit],case when [RepoSchema_name]<>[SysSchema_name] then (1) else (0) end))
 --
+{empty} +
 
 .Definition
 ....
@@ -259,7 +259,7 @@ user table
 [#column-is_RepoSchema_name_uniqueidentifier]
 === is_RepoSchema_name_uniqueidentifier
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |is_RepoSchema_name_uniqueidentifier
@@ -273,6 +273,7 @@ user table
 --
 (case when TRY_CAST([RepoSchema_name] AS [uniqueidentifier]) IS NULL then (0) else (1) end)
 --
+{empty} +
 
 .Definition (PERSISTED)
 ....
@@ -295,7 +296,7 @@ user table
 [#column-is_SysSchema_name_uniqueidentifier]
 === is_SysSchema_name_uniqueidentifier
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |is_SysSchema_name_uniqueidentifier
@@ -309,6 +310,7 @@ user table
 --
 (case when TRY_CAST([SysSchema_name] AS [uniqueidentifier]) IS NULL then (0) else (1) end)
 --
+{empty} +
 
 .Definition (PERSISTED)
 ....
@@ -329,6 +331,12 @@ user table
 
 
 // end::AntoraColumnDetails[]
+
+== AntoraMeasureDetails
+
+// tag::AntoraMeasureDetails[]
+
+// end::AntoraMeasureDetails[]
 
 == AntoraPkColumnTableRows
 
@@ -427,7 +435,7 @@ user table
 [#index-PK_RepoSchema]
 === PK_RepoSchema
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_reposchema_guid[RepoSchema_guid]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
 +
 --
 * <<column-RepoSchema_guid>>; uniqueidentifier
@@ -477,6 +485,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 // tag::antorareferencinglist[]
 * xref:docs.AntoraNavListPage_by_schema.adoc[]
 * xref:docs.Schema_puml.adoc[]
+* xref:docs.Unit_1_union.adoc[]
 * xref:docs.usp_AntoraExport_ObjectPuml.adoc[]
 * xref:property.ExtendedProperty_Repo2Sys_level0.adoc[]
 * xref:property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate.adoc[]
@@ -693,7 +702,7 @@ RepoSchema_guid
 === pk_IndexSemanticGroup
 
 // tag::pk_indexsemanticgroup[]
-RepoSchema_guid
+
 // end::pk_indexsemanticgroup[]
 
 

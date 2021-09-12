@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,47 +25,59 @@ skinparam class {
 }
 
 
-entity logs.usp_ExecutionLog_insert << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/logs.usp_ExecutionLog_insert.html logs.usp_ExecutionLog_insert]]" as logs.usp_ExecutionLog_insert << P >> {
   --
 }
 
-entity repo.RepoObject_gross << V >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject_gross.html repo.RepoObject_gross]]" as repo.RepoObject_gross << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.usp_main << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObjectColumn_gross2.html repo.RepoObjectColumn_gross2]]" as repo.RepoObjectColumn_gross2 << V >> {
   --
 }
 
-entity uspgenerator.GeneratorUsp << U >> {
-  * **id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_main.html repo.usp_main]]" as repo.usp_main << P >> {
   --
 }
 
-entity uspgenerator.GeneratorUspStep << U >> {
-  * **id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/uspgenerator.GeneratorUsp.html uspgenerator.GeneratorUsp]]" as uspgenerator.GeneratorUsp << U >> {
+  - **id** : (int)
   --
 }
 
-entity uspgenerator.GeneratorUspStep_Persistence << V >> {
-  * **usp_id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/uspgenerator.GeneratorUspStep.html uspgenerator.GeneratorUspStep]]" as uspgenerator.GeneratorUspStep << U >> {
+  - **id** : (int)
   --
 }
 
-entity uspgenerator.GeneratorUspStep_Persistence_IsInactive_setpoint << V >> {
-  * **usp_id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/uspgenerator.GeneratorUspStep_Persistence_IsInactive_setpoint.html uspgenerator.GeneratorUspStep_Persistence_IsInactive_setpoint]]" as uspgenerator.GeneratorUspStep_Persistence_IsInactive_setpoint << V >> {
+  - **usp_id** : (int)
   --
 }
 
-entity uspgenerator.usp_GeneratorUsp_insert_update_persistence << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/uspgenerator.GeneratorUspStep_Persistence_src.html uspgenerator.GeneratorUspStep_Persistence_src]]" as uspgenerator.GeneratorUspStep_Persistence_src << V >> {
+  - **usp_id** : (int)
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/uspgenerator.usp_GeneratorUsp_insert_update_persistence.html uspgenerator.usp_GeneratorUsp_insert_update_persistence]]" as uspgenerator.usp_GeneratorUsp_insert_update_persistence << P >> {
   --
 }
 
 logs.usp_ExecutionLog_insert <.. uspgenerator.usp_GeneratorUsp_insert_update_persistence
 repo.RepoObject_gross <.. uspgenerator.usp_GeneratorUsp_insert_update_persistence
+repo.RepoObjectColumn_gross2 <.. uspgenerator.usp_GeneratorUsp_insert_update_persistence
 uspgenerator.GeneratorUsp <.. uspgenerator.usp_GeneratorUsp_insert_update_persistence
 uspgenerator.GeneratorUspStep <.. uspgenerator.usp_GeneratorUsp_insert_update_persistence
-uspgenerator.GeneratorUspStep_Persistence <.. uspgenerator.usp_GeneratorUsp_insert_update_persistence
 uspgenerator.GeneratorUspStep_Persistence_IsInactive_setpoint <.. uspgenerator.usp_GeneratorUsp_insert_update_persistence
+uspgenerator.GeneratorUspStep_Persistence_src <.. uspgenerator.usp_GeneratorUsp_insert_update_persistence
 uspgenerator.usp_GeneratorUsp_insert_update_persistence <.. repo.usp_main
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

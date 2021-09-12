@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,19 +25,28 @@ skinparam class {
 }
 
 
-entity config.usp_init_parameter << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/config.usp_init_parameter.html config.usp_init_parameter]]" as config.usp_init_parameter << P >> {
+  --
   --
   --
 }
 
-entity configT.Parameter_default << V >> {
-  * **Parameter_name** : varchar(52)
-  * **sub_Parameter** : nvarchar(27)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/configT.Parameter_default.html configT.Parameter_default]]" as configT.Parameter_default << V >> {
+  - **Parameter_name** : (varchar(52))
+  - **sub_Parameter** : (nvarchar(27))
   --
-  Parameter_default_value : nvarchar(max)
-  * Parameter_desciption : nvarchar(247)
+  Parameter_default_value : (nvarchar(max))
+  - Parameter_desciption : (nvarchar(247))
+  --
   --
 }
 
 configT.Parameter_default <.. config.usp_init_parameter
+
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
 

@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,46 +25,49 @@ skinparam class {
 }
 
 
-entity ssas.TMSCHEMA_TABLES << U >> {
-  * **databasename** : nvarchar(128)
-  * **ID** : numeric(20, 0)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.TMSCHEMA_TABLES.html ssas.TMSCHEMA_TABLES]]" as ssas.TMSCHEMA_TABLES << U >> {
+  - **databasename** : (nvarchar(128))
+  - **ID** : (numeric(20, 0))
   --
-  DataCategory : nvarchar(max)
-  DefaultDetailRowsDefinitionID : numeric(20, 0)
-  Description : nvarchar(max)
-  * IsHidden : bit
-  * IsPrivate : bit
-  * ModelID : numeric(20, 0)
-  * ModifiedTime : datetime
-  * Name : nvarchar(max)
-  * ShowAsVariationsOnly : bit
-  * StructureModifiedTime : datetime
-  * SystemFlags : bigint
-  * TableStorageID : numeric(20, 0)
+  DataCategory : (nvarchar(max))
+  DefaultDetailRowsDefinitionID : (numeric(20, 0))
+  Description : (nvarchar(max))
+  - IsHidden : (bit)
+  - IsPrivate : (bit)
+  - ModelID : (numeric(20, 0))
+  - ModifiedTime : (datetime)
+  - Name : (nvarchar(max))
+  - ShowAsVariationsOnly : (bit)
+  - StructureModifiedTime : (datetime)
+  - SystemFlags : (bigint)
+  - TableStorageID : (numeric(20, 0))
   --
-}
-
-entity ssas.TMSCHEMA_TABLES_T << U >> {
-  * **databasename** : nvarchar(128)
-  * **ID** : numeric(20, 0)
-  --
-  DataCategory : nvarchar(max)
-  DefaultDetailRowsDefinitionID : numeric(20, 0)
-  Description : nvarchar(max)
-  * IsHidden : bit
-  * IsPrivate : bit
-  * ModelID : numeric(20, 0)
-  * ModifiedTime : datetime
-  * Name : nvarchar(max)
-  * RepoObject_guid : uniqueidentifier
-  * ShowAsVariationsOnly : bit
-  * StructureModifiedTime : datetime
-  * SystemFlags : bigint
-  * TableStorageID : numeric(20, 0)
   --
 }
 
-entity ssas.usp_PERSIST_TMSCHEMA_TABLES_T << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.TMSCHEMA_TABLES_T.html ssas.TMSCHEMA_TABLES_T]]" as ssas.TMSCHEMA_TABLES_T << U >> {
+  - **databasename** : (nvarchar(128))
+  - **ID** : (numeric(20, 0))
+  --
+  DataCategory : (nvarchar(max))
+  DefaultDetailRowsDefinitionID : (numeric(20, 0))
+  Description : (nvarchar(max))
+  - IsHidden : (bit)
+  - IsPrivate : (bit)
+  - ModelID : (numeric(20, 0))
+  - ModifiedTime : (datetime)
+  - Name : (nvarchar(max))
+  - RepoObject_guid : (uniqueidentifier)
+  - ShowAsVariationsOnly : (bit)
+  - StructureModifiedTime : (datetime)
+  - SystemFlags : (bigint)
+  - TableStorageID : (numeric(20, 0))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.usp_PERSIST_TMSCHEMA_TABLES_T.html ssas.usp_PERSIST_TMSCHEMA_TABLES_T]]" as ssas.usp_PERSIST_TMSCHEMA_TABLES_T << P >> {
+  --
   --
   --
 }
@@ -84,3 +88,10 @@ ssas.TMSCHEMA_TABLES::ShowAsVariationsOnly <-- ssas.TMSCHEMA_TABLES_T::ShowAsVar
 ssas.TMSCHEMA_TABLES::StructureModifiedTime <-- ssas.TMSCHEMA_TABLES_T::StructureModifiedTime
 ssas.TMSCHEMA_TABLES::SystemFlags <-- ssas.TMSCHEMA_TABLES_T::SystemFlags
 ssas.TMSCHEMA_TABLES::TableStorageID <-- ssas.TMSCHEMA_TABLES_T::TableStorageID
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

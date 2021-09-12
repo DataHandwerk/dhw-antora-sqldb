@@ -1,3 +1,4 @@
+@startuml
 'Left to right direction
 top to bottom direction
 hide circle
@@ -24,22 +25,29 @@ skinparam class {
 }
 
 
-entity reference.ReferenceTree_cyclic_ref_primary << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.ReferenceTree_cyclic_ref_primary.html reference.ReferenceTree_cyclic_ref_primary]]" as reference.ReferenceTree_cyclic_ref_primary << V >> {
   --
 }
 
-entity reference.RepoObject_ReferenceTree << U >> {
-  * **RepoObject_guid** : uniqueidentifier
-  **Referenced_Depth** : int
-  **Referencing_Depth** : int
-  * **Referenced_guid** : uniqueidentifier
-  * **Referencing_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObject_ReferenceTree.html reference.RepoObject_ReferenceTree]]" as reference.RepoObject_ReferenceTree << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  **Referenced_Depth** : (int)
+  **Referencing_Depth** : (int)
+  - **Referenced_guid** : (uniqueidentifier)
+  - **Referencing_guid** : (uniqueidentifier)
   --
 }
 
-entity reference.RepoObject_ReferenceTree_cyclic << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObject_ReferenceTree_cyclic.html reference.RepoObject_ReferenceTree_cyclic]]" as reference.RepoObject_ReferenceTree_cyclic << V >> {
   --
 }
 
 reference.RepoObject_ReferenceTree <.. reference.RepoObject_ReferenceTree_cyclic
 reference.RepoObject_ReferenceTree_cyclic <.. reference.ReferenceTree_cyclic_ref_primary
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

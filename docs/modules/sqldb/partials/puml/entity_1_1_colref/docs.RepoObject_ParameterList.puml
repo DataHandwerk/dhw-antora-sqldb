@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,64 +25,74 @@ skinparam class {
 }
 
 
-entity docs.RepoObject_Adoc << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.RepoObject_Adoc.html docs.RepoObject_Adoc]]" as docs.RepoObject_Adoc << V >> {
   --
-  * AdocContent : nvarchar(max)
-  is_DocsOutput : int
-  PropertyCount : int
-  RepoObject_fullname : nvarchar(261)
-  RepoObject_fullname2 : nvarchar(257)
-  * RepoObject_guid : uniqueidentifier
-  RepoObject_schema_name : nvarchar(128)
-  SysObject_fullname : nvarchar(261)
-  SysObject_fullname2 : nvarchar(257)
-  SysObject_schema_name : nvarchar(128)
-  SysObject_type : char(2)
-  SysObject_type_name : nvarchar(128)
+  - AdocContent : (nvarchar(max))
+  is_DocsOutput : (int)
+  PropertyCount : (int)
+  RepoObject_fullname : (nvarchar(261))
+  RepoObject_fullname2 : (nvarchar(257))
+  - RepoObject_guid : (uniqueidentifier)
+  RepoObject_schema_name : (nvarchar(128))
+  SysObject_fullname : (nvarchar(261))
+  SysObject_fullname2 : (nvarchar(257))
+  SysObject_schema_name : (nvarchar(128))
+  SysObject_type : (char(2))
+  SysObject_type_name : (nvarchar(128))
   --
-}
-
-entity docs.RepoObject_ParameterList << V >> {
-  **RepoObject_guid** : uniqueidentifier
-  --
-  AntoraParameterList : nvarchar(max)
   --
 }
 
-entity repo_sys.parameters << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.RepoObject_ParameterList.html docs.RepoObject_ParameterList]]" as docs.RepoObject_ParameterList << V >> {
+  **RepoObject_guid** : (uniqueidentifier)
   --
-  column_encryption_key_database_name : sysname
-  column_encryption_key_id : int
-  default_value : sql_variant
-  encryption_algorithm_name : sysname
-  encryption_type : int
-  encryption_type_desc : nvarchar(64)
-  * has_default_value : bit
-  * is_cursor_ref : bit
-  is_nullable : bit
-  * is_output : bit
-  * is_readonly : bit
-  * is_xml_document : bit
-  * max_length : smallint
-  name : sysname
-  * object_id : int
-  * parameter_id : int
-  * precision : tinyint
-  * scale : tinyint
-  SysObject_fullname : nvarchar(517)
-  SysObject_fullname2 : nvarchar(257)
-  SysObject_name : sysname
-  SysObject_RepoObject_guid : uniqueidentifier
-  SysObject_schema_name : sysname
-  SysObject_type : char(2)
-  * system_type_id : tinyint
-  user_type_fullname : nvarchar(182)
-  * user_type_id : int
-  user_type_name : sysname
-  * xml_collection_id : int
+  AntoraParameterList : (nvarchar(max))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.parameters.html repo_sys.parameters]]" as repo_sys.parameters << V >> {
+  --
+  column_encryption_key_database_name : (sysname)
+  column_encryption_key_id : (int)
+  default_value : (sql_variant)
+  encryption_algorithm_name : (sysname)
+  encryption_type : (int)
+  encryption_type_desc : (nvarchar(64))
+  - has_default_value : (bit)
+  - is_cursor_ref : (bit)
+  is_nullable : (bit)
+  - is_output : (bit)
+  - is_readonly : (bit)
+  - is_xml_document : (bit)
+  - max_length : (smallint)
+  name : (sysname)
+  - object_id : (int)
+  - parameter_id : (int)
+  - precision : (tinyint)
+  - scale : (tinyint)
+  SysObject_fullname : (nvarchar(517))
+  SysObject_fullname2 : (nvarchar(257))
+  SysObject_name : (sysname)
+  SysObject_RepoObject_guid : (uniqueidentifier)
+  SysObject_schema_name : (sysname)
+  SysObject_type : (char(2))
+  - system_type_id : (tinyint)
+  user_type_fullname : (nvarchar(182))
+  - user_type_id : (int)
+  user_type_name : (sysname)
+  - xml_collection_id : (int)
+  --
   --
 }
 
 docs.RepoObject_ParameterList <.. docs.RepoObject_Adoc
 repo_sys.parameters <.. docs.RepoObject_ParameterList
 repo_sys.parameters::SysObject_RepoObject_guid <-- docs.RepoObject_ParameterList::RepoObject_guid
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

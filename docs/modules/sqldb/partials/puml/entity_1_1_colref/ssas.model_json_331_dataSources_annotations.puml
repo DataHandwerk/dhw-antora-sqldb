@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,28 +25,37 @@ skinparam class {
 }
 
 
-entity ssas.model_json_33_dataSources << V >> {
-  * **databasename** : nvarchar(128)
-  **dataSources_name** : nvarchar(500)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_33_dataSources.html ssas.model_json_33_dataSources]]" as ssas.model_json_33_dataSources << V >> {
+  - **databasename** : (nvarchar(128))
+  **dataSources_name** : (nvarchar(500))
   --
-  dataSources_account : nvarchar(500)
-  dataSources_annotations_ja : nvarchar(max)
-  dataSources_connectionString : nvarchar(4000)
-  dataSources_impersonationMode : nvarchar(500)
-  dataSources_provider : nvarchar(500)
+  dataSources_account : (nvarchar(500))
+  dataSources_annotations_ja : (nvarchar(max))
+  dataSources_connectionString : (nvarchar(4000))
+  dataSources_impersonationMode : (nvarchar(500))
+  dataSources_provider : (nvarchar(500))
+  --
   --
 }
 
-entity ssas.model_json_331_dataSources_annotations << V >> {
-  * **databasename** : nvarchar(128)
-  **dataSources_name** : nvarchar(500)
-  **dataSources_annotations_name** : nvarchar(500)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_331_dataSources_annotations.html ssas.model_json_331_dataSources_annotations]]" as ssas.model_json_331_dataSources_annotations << V >> {
+  - **databasename** : (nvarchar(128))
+  **dataSources_name** : (nvarchar(500))
+  **dataSources_annotations_name** : (nvarchar(500))
   --
-  dataSources_annotations_value : nvarchar(max)
-  dataSources_annotations_value_ja : nvarchar(max)
+  dataSources_annotations_value : (nvarchar(max))
+  dataSources_annotations_value_ja : (nvarchar(max))
+  --
   --
 }
 
 ssas.model_json_33_dataSources <.. ssas.model_json_331_dataSources_annotations
 ssas.model_json_33_dataSources::databasename <-- ssas.model_json_331_dataSources_annotations::databasename
 ssas.model_json_33_dataSources::dataSources_name <-- ssas.model_json_331_dataSources_annotations::dataSources_name
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

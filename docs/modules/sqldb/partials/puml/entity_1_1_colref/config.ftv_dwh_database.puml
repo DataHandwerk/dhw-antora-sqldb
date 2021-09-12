@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,235 +25,253 @@ skinparam class {
 }
 
 
-entity config.ftv_dwh_database << IF >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/config.ftv_dwh_database.html config.ftv_dwh_database]]" as config.ftv_dwh_database << IF >> {
   --
-  dwh_database_id : smallint
-  dwh_database_name : nvarchar(128)
-  --
-}
-
-entity config.Parameter << U >> {
-  * **Parameter_name** : varchar(100)
-  * **sub_Parameter** : nvarchar(128)
-  --
-  Parameter_default_value : nvarchar(max)
-  Parameter_desciption : nvarchar(1000)
-  Parameter_value : nvarchar(max)
-  {abstract} Parameter_value_result : nvarchar(max)
-  {abstract} Parameter_value_result_date : date
-  {abstract} Parameter_value_result_datetime : datetime
-  {abstract} Parameter_value_result_int : int
-  --
-}
-
-entity reference.RepoObjectColumn_reference_QueryPlan << V >> {
-  **referencing_id** : int
-  **referencing_minor_id** : int
-  **referenced_id** : int
-  **referenced_minor_id** : int
-  --
-  definition : nvarchar(max)
-  * InformationSource : varchar(10)
-  is_computed : bit
-  is_referenced_object : bit
-  is_referencing_object_equal_referenced_object : bit
-  is_source_column_name_expression : bit
-  is_target_column_name_expression : bit
-  referenced_column_name : nvarchar(128)
-  referenced_entity_name : nvarchar(128)
-  referenced_node_id : bigint
-  referenced_RepoObject_guid : uniqueidentifier
-  referenced_RepoObjectColumn_guid : uniqueidentifier
-  referenced_schema_name : nvarchar(128)
-  referenced_type : char(2)
-  referencing_column_name : nvarchar(128)
-  * referencing_entity_name : nvarchar(128)
-  referencing_node_id : bigint
-  * referencing_RepoObject_guid : uniqueidentifier
-  referencing_RepoObjectColumn_guid : uniqueidentifier
-  * referencing_schema_name : nvarchar(128)
-  referencing_type : char(2)
-  source_schema_name_quoted : nvarchar(128)
-  source_table_name_quoted : nvarchar(128)
-  --
-}
-
-entity reference.usp_update_Referencing_Count << P >> {
+  dwh_database_id : (smallint)
+  dwh_database_name : (nvarchar(128))
   --
   --
 }
 
-entity repo.RepoObject_SqlCreateTable << V >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/config.Parameter.html config.Parameter]]" as config.Parameter << U >> {
+  - **Parameter_name** : (varchar(100))
+  - **sub_Parameter** : (nvarchar(128))
   --
-  ConList : nvarchar(max)
-  * DbmlTable : nvarchar(max)
-  persistence_source_RepoObject_fullname : nvarchar(261)
-  persistence_source_RepoObject_guid : uniqueidentifier
-  persistence_source_SysObject_fullname : nvarchar(261)
-  * RepoObject_fullname : nvarchar(261)
-  * SqlCreateTable : nvarchar(max)
-  --
-}
-
-entity repo.usp_update_Referencing_Count << P >> {
+  Parameter_default_value : (nvarchar(max))
+  Parameter_desciption : (nvarchar(1000))
+  Parameter_value : (nvarchar(max))
+  ~ Parameter_value_result : (nvarchar(max))
+  ~ Parameter_value_result_date : (date)
+  ~ Parameter_value_result_datetime : (datetime)
+  ~ Parameter_value_result_int : (int)
   --
   --
 }
 
-entity repo_sys.ExtendedProperties << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObjectColumn_reference_QueryPlan.html reference.RepoObjectColumn_reference_QueryPlan]]" as reference.RepoObjectColumn_reference_QueryPlan << V >> {
+  **referencing_id** : (int)
+  **referencing_minor_id** : (int)
+  **referenced_id** : (int)
+  **referenced_minor_id** : (int)
   --
-  * class : tinyint
-  class_desc : nvarchar(60)
-  entity_column_name : nvarchar(128)
-  entity_index_name : nvarchar(128)
-  entity_parameter_name : nvarchar(128)
-  level2type : varchar(9)
-  * major_id : int
-  * minor_id : int
-  minor_name : nvarchar(128)
-  parent_name : sysname
-  parent_object_id : int
-  parent_type : char(2)
-  property_basetype : sql_variant
-  * property_name : sysname
-  property_nvarchar : nvarchar(4000)
-  property_value : sql_variant
-  SysObject_name : nvarchar(128)
-  SysObject_schema_name : nvarchar(128)
+  definition : (nvarchar(max))
+  - InformationSource : (varchar(10))
+  is_computed : (bit)
+  is_referenced_object : (bit)
+  is_referencing_object_equal_referenced_object : (bit)
+  is_source_column_name_expression : (bit)
+  is_target_column_name_expression : (bit)
+  referenced_column_name : (nvarchar(128))
+  referenced_entity_name : (nvarchar(128))
+  referenced_node_id : (bigint)
+  referenced_RepoObject_guid : (uniqueidentifier)
+  referenced_RepoObjectColumn_guid : (uniqueidentifier)
+  referenced_schema_name : (nvarchar(128))
+  referenced_type : (char(2))
+  referencing_column_name : (nvarchar(128))
+  - referencing_entity_name : (nvarchar(128))
+  referencing_node_id : (bigint)
+  - referencing_RepoObject_guid : (uniqueidentifier)
+  referencing_RepoObjectColumn_guid : (uniqueidentifier)
+  - referencing_schema_name : (nvarchar(128))
+  referencing_type : (char(2))
+  source_schema_name_quoted : (nvarchar(128))
+  source_table_name_quoted : (nvarchar(128))
   --
-}
-
-entity repo_sys.sql_expression_dependencies << V >> {
-  --
-  definition : nvarchar(max)
-  * is_ambiguous : bit
-  * is_caller_dependent : bit
-  is_computed : bit
-  * is_schema_bound_reference : bit
-  referenced_class : tinyint
-  referenced_class_desc : nvarchar(60)
-  referenced_column_name : sysname
-  referenced_database_name : nvarchar(128)
-  referenced_entity_name : nvarchar(128)
-  referenced_id : int
-  * referenced_minor_id : int
-  referenced_RepoObject_guid : uniqueidentifier
-  referenced_RepoObjectColumn_guid : uniqueidentifier
-  referenced_schema_name : nvarchar(128)
-  referenced_server_name : nvarchar(128)
-  referenced_type : char(2)
-  referenced_type_desciption : nvarchar(60)
-  referencing_class : tinyint
-  referencing_class_desc : nvarchar(60)
-  referencing_column_name : sysname
-  referencing_entity_name : nvarchar(128)
-  * referencing_id : int
-  * referencing_minor_id : int
-  referencing_RepoObject_guid : uniqueidentifier
-  referencing_RepoObjectColumn_guid : uniqueidentifier
-  referencing_schema_name : nvarchar(128)
-  referencing_type : char(2)
-  referencing_type_desciption : nvarchar(60)
   --
 }
 
-entity repo_sys.SysColumn << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.usp_update_Referencing_Count.html reference.usp_update_Referencing_Count]]" as reference.usp_update_Referencing_Count << P >> {
   --
-  collation_name : sysname
-  column_encryption_key_database_name : sysname
-  column_encryption_key_id : int
-  default_definition : nvarchar(max)
-  default_is_system_named : bit
-  default_name : sysname
-  * default_object_id : int
-  default_parent_column_id : int
-  definition : nvarchar(max)
-  encryption_algorithm_name : sysname
-  encryption_type : int
-  encryption_type_desc : nvarchar(64)
-  generated_always_type : tinyint
-  generated_always_type_desc : nvarchar(60)
-  graph_type : int
-  graph_type_desc : nvarchar(60)
-  increment_value : sql_variant
-  * is_ansi_padded : bit
-  is_column_set : bit
-  * is_computed : bit
-  is_dts_replicated : bit
-  * is_filestream : bit
-  is_hidden : bit
-  * is_identity : bit
-  * is_masked : bit
-  is_merge_published : bit
-  is_non_sql_subscribed : bit
-  is_nullable : bit
-  is_persisted : bit
-  is_replicated : bit
-  * is_rowguidcol : bit
-  is_sparse : bit
-  * is_xml_document : bit
-  last_value : sql_variant
-  * max_length : smallint
-  * precision : tinyint
-  * rule_object_id : int
-  * scale : tinyint
-  seed_value : sql_variant
-  * SysObject_column_id : int
-  SysObject_column_name : sysname
-  SysObject_fullname : nvarchar(517)
-  SysObject_fullname2 : nvarchar(257)
-  * SysObject_id : int
-  SysObject_name : nvarchar(128)
-  SysObject_RepoObject_guid : uniqueidentifier
-  SysObject_RepoObjectColumn_guid : uniqueidentifier
-  SysObject_schema_name : nvarchar(128)
-  SysObject_type : char(2)
-  SysObject_type_desc : nvarchar(60)
-  * system_type_id : tinyint
-  user_type_fullname : nvarchar(182)
-  * user_type_id : int
-  user_type_name : sysname
-  uses_database_collation : bit
-  * xml_collection_id : int
+  --
   --
 }
 
-entity uspgenerator.GeneratorUsp_SqlUsp << V >> {
-  * **usp_id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject_SqlCreateTable.html repo.RepoObject_SqlCreateTable]]" as repo.RepoObject_SqlCreateTable << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
-  * AdocUspSteps : nvarchar(max)
-  * has_logging : tinyint
-  MS_Description : nvarchar(4000)
-  RepoObject_guid : uniqueidentifier
-  SqlStepList : nvarchar(max)
-  * SqlUsp : nvarchar(max)
-  usp_Description : nvarchar(4000)
-  * usp_fullname : nvarchar(261)
-  * usp_name : nvarchar(128)
-  * usp_schema : nvarchar(128)
-  * UspExamples : nvarchar(4000)
-  UspParameters : nvarchar(max)
+  ConList : (nvarchar(max))
+  - DbmlTable : (nvarchar(max))
+  persistence_source_RepoObject_fullname : (nvarchar(261))
+  persistence_source_RepoObject_guid : (uniqueidentifier)
+  persistence_source_SysObject_fullname : (nvarchar(261))
+  - RepoObject_fullname : (nvarchar(261))
+  - SqlCreateTable : (nvarchar(max))
+  --
   --
 }
 
-entity workflow.Workflow_SqlUsp << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_update_Referencing_Count.html repo.usp_update_Referencing_Count]]" as repo.usp_update_Referencing_Count << P >> {
   --
-  * SqlUsp : nvarchar(max)
-  UspList : nvarchar(max)
-  * Workflow_id : int
-  Workflow_Name : nvarchar(500)
+  --
   --
 }
 
-config.ftv_dwh_database <.. workflow.Workflow_SqlUsp
-config.ftv_dwh_database <.. reference.usp_update_Referencing_Count
-config.ftv_dwh_database <.. repo.usp_update_Referencing_Count
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.ExtendedProperties.html repo_sys.ExtendedProperties]]" as repo_sys.ExtendedProperties << V >> {
+  --
+  - class : (tinyint)
+  class_desc : (nvarchar(60))
+  entity_column_name : (nvarchar(128))
+  entity_index_name : (nvarchar(128))
+  entity_parameter_name : (nvarchar(128))
+  level2type : (varchar(9))
+  - major_id : (int)
+  - minor_id : (int)
+  minor_name : (nvarchar(128))
+  parent_name : (sysname)
+  parent_object_id : (int)
+  parent_type : (char(2))
+  property_basetype : (sql_variant)
+  - property_name : (sysname)
+  property_nvarchar : (nvarchar(4000))
+  property_value : (sql_variant)
+  SysObject_name : (nvarchar(128))
+  SysObject_schema_name : (nvarchar(128))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.sql_expression_dependencies.html repo_sys.sql_expression_dependencies]]" as repo_sys.sql_expression_dependencies << V >> {
+  --
+  definition : (nvarchar(max))
+  - is_ambiguous : (bit)
+  - is_caller_dependent : (bit)
+  is_computed : (bit)
+  - is_schema_bound_reference : (bit)
+  referenced_class : (tinyint)
+  referenced_class_desc : (nvarchar(60))
+  referenced_column_name : (sysname)
+  referenced_database_name : (nvarchar(128))
+  referenced_entity_name : (nvarchar(128))
+  referenced_id : (int)
+  - referenced_minor_id : (int)
+  referenced_RepoObject_guid : (uniqueidentifier)
+  referenced_RepoObjectColumn_guid : (uniqueidentifier)
+  referenced_schema_name : (nvarchar(128))
+  referenced_server_name : (nvarchar(128))
+  referenced_type : (char(2))
+  referenced_type_desciption : (nvarchar(60))
+  referencing_class : (tinyint)
+  referencing_class_desc : (nvarchar(60))
+  referencing_column_name : (sysname)
+  referencing_entity_name : (nvarchar(128))
+  - referencing_id : (int)
+  - referencing_minor_id : (int)
+  referencing_RepoObject_guid : (uniqueidentifier)
+  referencing_RepoObjectColumn_guid : (uniqueidentifier)
+  referencing_schema_name : (nvarchar(128))
+  referencing_type : (char(2))
+  referencing_type_desciption : (nvarchar(60))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.SysColumn.html repo_sys.SysColumn]]" as repo_sys.SysColumn << V >> {
+  --
+  collation_name : (sysname)
+  column_encryption_key_database_name : (sysname)
+  column_encryption_key_id : (int)
+  default_definition : (nvarchar(max))
+  default_is_system_named : (bit)
+  default_name : (sysname)
+  - default_object_id : (int)
+  default_parent_column_id : (int)
+  definition : (nvarchar(max))
+  encryption_algorithm_name : (sysname)
+  encryption_type : (int)
+  encryption_type_desc : (nvarchar(64))
+  generated_always_type : (tinyint)
+  generated_always_type_desc : (nvarchar(60))
+  graph_type : (int)
+  graph_type_desc : (nvarchar(60))
+  increment_value : (sql_variant)
+  - is_ansi_padded : (bit)
+  is_column_set : (bit)
+  - is_computed : (bit)
+  is_dts_replicated : (bit)
+  - is_filestream : (bit)
+  is_hidden : (bit)
+  - is_identity : (bit)
+  - is_masked : (bit)
+  is_merge_published : (bit)
+  is_non_sql_subscribed : (bit)
+  is_nullable : (bit)
+  is_persisted : (bit)
+  is_replicated : (bit)
+  - is_rowguidcol : (bit)
+  is_sparse : (bit)
+  - is_xml_document : (bit)
+  last_value : (sql_variant)
+  - max_length : (smallint)
+  - precision : (tinyint)
+  - rule_object_id : (int)
+  - scale : (tinyint)
+  seed_value : (sql_variant)
+  - SysObject_column_id : (int)
+  SysObject_column_name : (sysname)
+  SysObject_fullname : (nvarchar(517))
+  SysObject_fullname2 : (nvarchar(257))
+  - SysObject_id : (int)
+  SysObject_name : (nvarchar(128))
+  SysObject_RepoObject_guid : (uniqueidentifier)
+  SysObject_RepoObjectColumn_guid : (uniqueidentifier)
+  SysObject_schema_name : (nvarchar(128))
+  SysObject_type : (char(2))
+  SysObject_type_desc : (nvarchar(60))
+  - system_type_id : (tinyint)
+  user_type_fullname : (nvarchar(182))
+  - user_type_id : (int)
+  user_type_name : (sysname)
+  uses_database_collation : (bit)
+  - xml_collection_id : (int)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/uspgenerator.GeneratorUsp_SqlUsp.html uspgenerator.GeneratorUsp_SqlUsp]]" as uspgenerator.GeneratorUsp_SqlUsp << V >> {
+  - **usp_id** : (int)
+  --
+  - AdocUspSteps : (nvarchar(max))
+  - has_logging : (tinyint)
+  MS_Description : (nvarchar(4000))
+  RepoObject_guid : (uniqueidentifier)
+  SqlStepList : (nvarchar(max))
+  - SqlUsp : (nvarchar(max))
+  usp_Description : (nvarchar(4000))
+  - usp_fullname : (nvarchar(261))
+  - usp_name : (nvarchar(128))
+  - usp_schema : (nvarchar(128))
+  - UspExamples : (nvarchar(4000))
+  UspParameters : (nvarchar(max))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow_SqlUsp.html workflow.Workflow_SqlUsp]]" as workflow.Workflow_SqlUsp << V >> {
+  --
+  - SqlUsp : (nvarchar(max))
+  UspList : (nvarchar(max))
+  - Workflow_id : (int)
+  Workflow_Name : (nvarchar(500))
+  --
+  --
+}
+
 config.ftv_dwh_database <.. uspgenerator.GeneratorUsp_SqlUsp
 config.ftv_dwh_database <.. repo_sys.ExtendedProperties
 config.ftv_dwh_database <.. repo_sys.SysColumn
 config.ftv_dwh_database <.. repo_sys.sql_expression_dependencies
 config.ftv_dwh_database <.. reference.RepoObjectColumn_reference_QueryPlan
 config.ftv_dwh_database <.. repo.RepoObject_SqlCreateTable
+config.ftv_dwh_database <.. reference.usp_update_Referencing_Count
+config.ftv_dwh_database <.. repo.usp_update_Referencing_Count
+config.ftv_dwh_database <.. workflow.Workflow_SqlUsp
 config.Parameter <.. config.ftv_dwh_database
+
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
 

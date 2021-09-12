@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,45 +25,50 @@ skinparam class {
 }
 
 
-entity docs.RepoObject_ColumnList << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.RepoObject_ColumnList.html docs.RepoObject_ColumnList]]" as docs.RepoObject_ColumnList << V >> {
   --
-  AntoraColumnDetails : nvarchar(max)
-  AntoraNonPkColumnTableRows : nvarchar(max)
-  AntoraPkColumnTableRows : nvarchar(max)
-  PlantumlIndexColumns : nvarchar(max)
-  PlantumlNonPkEntityColumns : nvarchar(max)
-  PlantumlNonPkHiddenEntityColumns : nvarchar(max)
-  PlantumlNonPkIndexColumns : nvarchar(max)
-  PlantumlPkEntityColumns : nvarchar(max)
-  * RepoObject_guid : uniqueidentifier
-  --
-}
-
-entity docs.RepoObject_ColumnList_T << U >> {
-  * **RepoObject_guid** : uniqueidentifier
-  --
-  AntoraColumnDetails : nvarchar(max)
-  AntoraNonPkColumnTableRows : nvarchar(max)
-  AntoraPkColumnTableRows : nvarchar(max)
-  PlantumlIndexColumns : nvarchar(max)
-  PlantumlNonPkEntityColumns : nvarchar(max)
-  PlantumlNonPkHiddenEntityColumns : nvarchar(max)
-  PlantumlNonPkIndexColumns : nvarchar(max)
-  PlantumlPkEntityColumns : nvarchar(max)
-  --
-}
-
-entity docs.usp_AntoraExport_ObjectPartialProperties << P >> {
+  AntoraColumnDetails : (nvarchar(max))
+  AntoraNonPkColumnTableRows : (nvarchar(max))
+  AntoraPkColumnTableRows : (nvarchar(max))
+  PlantumlIndexColumns : (nvarchar(max))
+  PlantumlNonPkEntityColumns : (nvarchar(max))
+  PlantumlNonPkHiddenEntityColumns : (nvarchar(max))
+  PlantumlNonPkIndexColumns : (nvarchar(max))
+  PlantumlPkEntityColumns : (nvarchar(max))
+  - RepoObject_guid : (uniqueidentifier)
   --
   --
 }
 
-entity docs.usp_PERSIST_RepoObject_ColumnList_T << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.RepoObject_ColumnList_T.html docs.RepoObject_ColumnList_T]]" as docs.RepoObject_ColumnList_T << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+  AntoraColumnDetails : (nvarchar(max))
+  AntoraNonPkColumnTableRows : (nvarchar(max))
+  AntoraPkColumnTableRows : (nvarchar(max))
+  PlantumlIndexColumns : (nvarchar(max))
+  PlantumlNonPkEntityColumns : (nvarchar(max))
+  PlantumlNonPkHiddenEntityColumns : (nvarchar(max))
+  PlantumlNonPkIndexColumns : (nvarchar(max))
+  PlantumlPkEntityColumns : (nvarchar(max))
   --
   --
 }
 
-entity logs.usp_ExecutionLog_insert << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.usp_AntoraExport_ObjectPartialProperties.html docs.usp_AntoraExport_ObjectPartialProperties]]" as docs.usp_AntoraExport_ObjectPartialProperties << P >> {
+  --
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.usp_PERSIST_RepoObject_ColumnList_T.html docs.usp_PERSIST_RepoObject_ColumnList_T]]" as docs.usp_PERSIST_RepoObject_ColumnList_T << P >> {
+  --
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/logs.usp_ExecutionLog_insert.html logs.usp_ExecutionLog_insert]]" as logs.usp_ExecutionLog_insert << P >> {
+  --
   --
   --
 }
@@ -71,4 +77,11 @@ docs.RepoObject_ColumnList <.. docs.usp_PERSIST_RepoObject_ColumnList_T
 docs.RepoObject_ColumnList_T <.. docs.usp_PERSIST_RepoObject_ColumnList_T
 docs.usp_PERSIST_RepoObject_ColumnList_T <.. docs.usp_AntoraExport_ObjectPartialProperties
 logs.usp_ExecutionLog_insert <.. docs.usp_PERSIST_RepoObject_ColumnList_T
+
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
 

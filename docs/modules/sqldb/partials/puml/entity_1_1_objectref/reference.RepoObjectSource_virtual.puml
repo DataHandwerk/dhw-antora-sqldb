@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,24 +25,31 @@ skinparam class {
 }
 
 
-entity reference.RepoObject_reference_virtual << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObject_reference_virtual.html reference.RepoObject_reference_virtual]]" as reference.RepoObject_reference_virtual << V >> {
   --
 }
 
-entity reference.RepoObjectSource_virtual << U >> {
-  * **RepoObject_guid** : uniqueidentifier
-  * **Source_RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObjectSource_virtual.html reference.RepoObjectSource_virtual]]" as reference.RepoObjectSource_virtual << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **Source_RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity reference.usp_RepoObjectSource_virtual_set << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.usp_RepoObjectSource_virtual_set.html reference.usp_RepoObjectSource_virtual_set]]" as reference.usp_RepoObjectSource_virtual_set << P >> {
   --
 }
 
-entity repo.usp_sync_guid_RepoObject << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_sync_guid_RepoObject.html repo.usp_sync_guid_RepoObject]]" as repo.usp_sync_guid_RepoObject << P >> {
   --
 }
 
-reference.RepoObjectSource_virtual <.. reference.usp_RepoObjectSource_virtual_set
 reference.RepoObjectSource_virtual <.. repo.usp_sync_guid_RepoObject
 reference.RepoObjectSource_virtual <.. reference.RepoObject_reference_virtual
+reference.RepoObjectSource_virtual <.. reference.usp_RepoObjectSource_virtual_set
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

@@ -43,7 +43,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-05 13:29:31
+2021-09-10 19:21:02
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -51,6 +51,12 @@ stored procedure
 // tag::AntoraColumnDetails[]
 
 // end::AntoraColumnDetails[]
+
+== AntoraMeasureDetails
+
+// tag::AntoraMeasureDetails[]
+
+// end::AntoraMeasureDetails[]
 
 == AntoraPkColumnTableRows
 
@@ -142,34 +148,34 @@ ELSE
 [source,sql]
 ----
 SET @outputDir = ISNULL(@outputDir, (
-   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModul', '') + '\'
+   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModule', '') + '\'
    ) + 'partials\puml\entity_1_1_colref\')
 SET @outputDir2 = ISNULL(@outputDir2, (
-   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModul', '') + '\'
+   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModule', '') + '\'
    ) + 'partials\puml\entity_1_1_objectref\')
 SET @outputDir3 = ISNULL(@outputDir3, (
-   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModul', '') + '\'
+   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModule', '') + '\'
    ) + 'partials\puml\entity_1_1_fk\')
 SET @outputDir4 = ISNULL(@outputDir4, (
-   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModul', '') + '\'
+   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModule', '') + '\'
    ) + 'partials\puml\entity_0_30_objectref\')
 SET @outputDir5 = ISNULL(@outputDir5, (
-   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModul', '') + '\'
+   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModule', '') + '\'
    ) + 'partials\puml\entity_30_0_objectref\')
 SET @outputDir6 = ISNULL(@outputDir6, (
-   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModul', '') + '\'
+   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModule', '') + '\'
    ) + 'partials\puml\schema_ssas_er\')
 SET @outputDir7 = ISNULL(@outputDir7, (
-   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModul', '') + '\'
+   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModule', '') + '\'
    ) + 'partials\puml\entity\')
 SET @outputDir8 = ISNULL(@outputDir8, (
-   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModul', '') + '\'
+   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModule', '') + '\'
    ) + 'partials\puml\entity_pk\')
 SET @outputDir9 = ISNULL(@outputDir9, (
-   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModul', '') + '\'
+   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModule', '') + '\'
    ) + 'partials\puml\entity_pk_or_index\')
 SET @outputDir10 = ISNULL(@outputDir10, (
-   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModul', '') + '\'
+   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModule', '') + '\'
    ) + 'partials\puml\entity_pk_or_nothidden\')
    
 ----
@@ -1089,7 +1095,7 @@ EXEC [docs].[usp_AntoraExport_ObjectPuml]
 // tag::ms_description[]
 * the documentation contains diagrams. These diagrams are defined using https://plantuml.com/[plantUML]
 ** export procedure: xref:docs.usp_AntoraExport_ObjectPuml.adoc[]
-** individual diagrams per object are exported into (AntoraModulFolder)``/``(AntoraModulName)``/partials/puml/``
+** individual diagrams per object are exported into (AntoraModuleFolder)``/``(AntoraModuleName)``/partials/puml/``
 
 include::partial$docsnippet/antora-export-prerequisites.adoc[]
 // end::ms_description[]
@@ -1324,34 +1330,34 @@ ELSE
 PRINT CONCAT('usp_id;Number;Parent_Number: ',32,';',120,';',NULL);
 
 SET @outputDir = ISNULL(@outputDir, (
-   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModul', '') + '\'
+   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModule', '') + '\'
    ) + 'partials\puml\entity_1_1_colref\')
 SET @outputDir2 = ISNULL(@outputDir2, (
-   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModul', '') + '\'
+   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModule', '') + '\'
    ) + 'partials\puml\entity_1_1_objectref\')
 SET @outputDir3 = ISNULL(@outputDir3, (
-   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModul', '') + '\'
+   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModule', '') + '\'
    ) + 'partials\puml\entity_1_1_fk\')
 SET @outputDir4 = ISNULL(@outputDir4, (
-   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModul', '') + '\'
+   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModule', '') + '\'
    ) + 'partials\puml\entity_0_30_objectref\')
 SET @outputDir5 = ISNULL(@outputDir5, (
-   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModul', '') + '\'
+   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModule', '') + '\'
    ) + 'partials\puml\entity_30_0_objectref\')
 SET @outputDir6 = ISNULL(@outputDir6, (
-   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModul', '') + '\'
+   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModule', '') + '\'
    ) + 'partials\puml\schema_ssas_er\')
 SET @outputDir7 = ISNULL(@outputDir7, (
-   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModul', '') + '\'
+   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModule', '') + '\'
    ) + 'partials\puml\entity\')
 SET @outputDir8 = ISNULL(@outputDir8, (
-   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModul', '') + '\'
+   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModule', '') + '\'
    ) + 'partials\puml\entity_pk\')
 SET @outputDir9 = ISNULL(@outputDir9, (
-   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModul', '') + '\'
+   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModule', '') + '\'
    ) + 'partials\puml\entity_pk_or_index\')
 SET @outputDir10 = ISNULL(@outputDir10, (
-   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModul', '') + '\'
+   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModule', '') + '\'
    ) + 'partials\puml\entity_pk_or_nothidden\')
    
 

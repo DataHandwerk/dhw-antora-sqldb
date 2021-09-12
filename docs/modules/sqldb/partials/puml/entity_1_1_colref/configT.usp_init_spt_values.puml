@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,27 +25,37 @@ skinparam class {
 }
 
 
-entity config.usp_connect_database << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/config.usp_connect_database.html config.usp_connect_database]]" as config.usp_connect_database << P >> {
+  --
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/configT.spt_values.html configT.spt_values]]" as configT.spt_values << U >> {
+  --
+  high : (int)
+  low : (int)
+  name : (nvarchar(35))
+  - number : (int)
+  status : (int)
+  - type : (nchar(3))
   --
   --
 }
 
-entity configT.spt_values << U >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/configT.usp_init_spt_values.html configT.usp_init_spt_values]]" as configT.usp_init_spt_values << P >> {
   --
-  high : int
-  low : int
-  name : nvarchar(35)
-  * number : int
-  status : int
-  * type : nchar(3)
-  --
-}
-
-entity configT.usp_init_spt_values << P >> {
   --
   --
 }
 
 configT.spt_values <.. configT.usp_init_spt_values
 configT.usp_init_spt_values <.. config.usp_connect_database
+
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
 

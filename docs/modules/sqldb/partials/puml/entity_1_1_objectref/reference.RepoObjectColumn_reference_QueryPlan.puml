@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,39 +25,39 @@ skinparam class {
 }
 
 
-entity config.ftv_dwh_database << IF >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/config.ftv_dwh_database.html config.ftv_dwh_database]]" as config.ftv_dwh_database << IF >> {
   --
 }
 
-entity reference.RepoObject_reference_T << U >> {
-  **referenced_RepoObject_guid** : uniqueidentifier
-  **referencing_RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObject_reference_T.html reference.RepoObject_reference_T]]" as reference.RepoObject_reference_T << U >> {
+  **referenced_RepoObject_guid** : (uniqueidentifier)
+  **referencing_RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity reference.RepoObjectColumn_reference_QueryPlan << V >> {
-  **referencing_id** : int
-  **referencing_minor_id** : int
-  **referenced_id** : int
-  **referenced_minor_id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObjectColumn_reference_QueryPlan.html reference.RepoObjectColumn_reference_QueryPlan]]" as reference.RepoObjectColumn_reference_QueryPlan << V >> {
+  **referencing_id** : (int)
+  **referencing_minor_id** : (int)
+  **referenced_id** : (int)
+  **referenced_minor_id** : (int)
   --
 }
 
-entity reference.RepoObjectSource_QueryPlan << U >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObjectSource_QueryPlan.html reference.RepoObjectSource_QueryPlan]]" as reference.RepoObjectSource_QueryPlan << U >> {
   --
 }
 
-entity reference.SysObjectColumn_QueryPlanExpression << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.SysObjectColumn_QueryPlanExpression.html reference.SysObjectColumn_QueryPlanExpression]]" as reference.SysObjectColumn_QueryPlanExpression << V >> {
   --
 }
 
-entity repo.RepoObject << U >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject.html repo.RepoObject]]" as repo.RepoObject << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.RepoObjectColumn_gross << V >> {
-  * **RepoObjectColumn_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObjectColumn_gross.html repo.RepoObjectColumn_gross]]" as repo.RepoObjectColumn_gross << V >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
   --
 }
 
@@ -66,3 +67,10 @@ reference.RepoObjectColumn_reference_QueryPlan <.. reference.SysObjectColumn_Que
 reference.RepoObjectSource_QueryPlan <.. reference.RepoObjectColumn_reference_QueryPlan
 repo.RepoObject <.. reference.RepoObjectColumn_reference_QueryPlan
 repo.RepoObjectColumn_gross <.. reference.RepoObjectColumn_reference_QueryPlan
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,30 +25,30 @@ skinparam class {
 }
 
 
-entity logs.usp_ExecutionLog_insert << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/logs.usp_ExecutionLog_insert.html logs.usp_ExecutionLog_insert]]" as logs.usp_ExecutionLog_insert << P >> {
   --
 }
 
-entity reference.RepoObject_QueryPlan << U >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObject_QueryPlan.html reference.RepoObject_QueryPlan]]" as reference.RepoObject_QueryPlan << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity reference.usp_RepoObject_update_SysObjectQueryPlan << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.usp_RepoObject_update_SysObjectQueryPlan.html reference.usp_RepoObject_update_SysObjectQueryPlan]]" as reference.usp_RepoObject_update_SysObjectQueryPlan << P >> {
   --
 }
 
-entity repo.RepoObject << U >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject.html repo.RepoObject]]" as repo.RepoObject << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.RepoObject_gross << V >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject_gross.html repo.RepoObject_gross]]" as repo.RepoObject_gross << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.usp_main << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_main.html repo.usp_main]]" as repo.usp_main << P >> {
   --
 }
 
@@ -56,3 +57,10 @@ reference.RepoObject_QueryPlan <.. reference.usp_RepoObject_update_SysObjectQuer
 reference.usp_RepoObject_update_SysObjectQueryPlan <.. repo.usp_main
 repo.RepoObject <.. reference.usp_RepoObject_update_SysObjectQueryPlan
 repo.RepoObject_gross <.. reference.usp_RepoObject_update_SysObjectQueryPlan
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

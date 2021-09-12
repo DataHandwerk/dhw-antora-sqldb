@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,25 +25,25 @@ skinparam class {
 }
 
 
-entity repo.RepoObject << U >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject.html repo.RepoObject]]" as repo.RepoObject << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.RepoObjectColumn << U >> {
-  * **RepoObjectColumn_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObjectColumn.html repo.RepoObjectColumn]]" as repo.RepoObjectColumn << U >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.SysColumn_RepoObjectColumn_via_guid << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.SysColumn_RepoObjectColumn_via_guid.html repo.SysColumn_RepoObjectColumn_via_guid]]" as repo.SysColumn_RepoObjectColumn_via_guid << V >> {
   --
 }
 
-entity repo.usp_sync_guid_RepoObjectColumn << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_sync_guid_RepoObjectColumn.html repo.usp_sync_guid_RepoObjectColumn]]" as repo.usp_sync_guid_RepoObjectColumn << P >> {
   --
 }
 
-entity repo_sys.SysColumn << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.SysColumn.html repo_sys.SysColumn]]" as repo_sys.SysColumn << V >> {
   --
 }
 
@@ -50,3 +51,10 @@ repo.RepoObject <.. repo.SysColumn_RepoObjectColumn_via_guid
 repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_guid
 repo.SysColumn_RepoObjectColumn_via_guid <.. repo.usp_sync_guid_RepoObjectColumn
 repo_sys.SysColumn <.. repo.SysColumn_RepoObjectColumn_via_guid
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

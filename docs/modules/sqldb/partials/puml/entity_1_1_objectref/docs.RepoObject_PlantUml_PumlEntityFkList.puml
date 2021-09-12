@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,27 +25,34 @@ skinparam class {
 }
 
 
-entity docs.RepoObject_Plantuml << V >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.RepoObject_Plantuml.html docs.RepoObject_Plantuml]]" as docs.RepoObject_Plantuml << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity docs.RepoObject_Plantuml_Entity_T << U >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.RepoObject_Plantuml_Entity_T.html docs.RepoObject_Plantuml_Entity_T]]" as docs.RepoObject_Plantuml_Entity_T << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity docs.RepoObject_PlantUml_PumlEntityFkList << V >> {
-  **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.RepoObject_PlantUml_PumlEntityFkList.html docs.RepoObject_PlantUml_PumlEntityFkList]]" as docs.RepoObject_PlantUml_PumlEntityFkList << V >> {
+  **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.RepoObject_related_FK_union << V >> {
-  **RepoObject_guid** : uniqueidentifier
-  **included_RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject_related_FK_union.html repo.RepoObject_related_FK_union]]" as repo.RepoObject_related_FK_union << V >> {
+  **RepoObject_guid** : (uniqueidentifier)
+  **included_RepoObject_guid** : (uniqueidentifier)
   --
 }
 
 docs.RepoObject_Plantuml_Entity_T <.. docs.RepoObject_PlantUml_PumlEntityFkList
 docs.RepoObject_PlantUml_PumlEntityFkList <.. docs.RepoObject_Plantuml
 repo.RepoObject_related_FK_union <.. docs.RepoObject_PlantUml_PumlEntityFkList
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

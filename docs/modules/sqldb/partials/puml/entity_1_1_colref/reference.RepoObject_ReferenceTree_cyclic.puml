@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,50 +25,53 @@ skinparam class {
 }
 
 
-entity reference.ReferenceTree_cyclic_ref_primary << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.ReferenceTree_cyclic_ref_primary.html reference.ReferenceTree_cyclic_ref_primary]]" as reference.ReferenceTree_cyclic_ref_primary << V >> {
   --
-  Referenced_fullname : nvarchar(261)
-  Referenced_fullname2 : nvarchar(257)
-  * Referenced_guid : uniqueidentifier
-  Referenced_type : char(2)
-  Referencing_fullname : nvarchar(261)
-  Referencing_fullname2 : nvarchar(257)
-  * Referencing_guid : uniqueidentifier
-  Referencing_type : varchar(2)
+  Referenced_fullname : (nvarchar(261))
+  Referenced_fullname2 : (nvarchar(257))
+  - Referenced_guid : (uniqueidentifier)
+  Referenced_type : (char(2))
+  Referencing_fullname : (nvarchar(261))
+  Referencing_fullname2 : (nvarchar(257))
+  - Referencing_guid : (uniqueidentifier)
+  Referencing_type : (varchar(2))
   --
-}
-
-entity reference.RepoObject_ReferenceTree << U >> {
-  * **RepoObject_guid** : uniqueidentifier
-  **Referenced_Depth** : int
-  **Referencing_Depth** : int
-  * **Referenced_guid** : uniqueidentifier
-  * **Referencing_guid** : uniqueidentifier
-  --
-  Referenced_fullname : nvarchar(261)
-  Referenced_fullname2 : nvarchar(257)
-  Referenced_type : char(2)
-  Referencing_fullname : nvarchar(261)
-  Referencing_fullname2 : nvarchar(257)
-  Referencing_type : varchar(2)
   --
 }
 
-entity reference.RepoObject_ReferenceTree_cyclic << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObject_ReferenceTree.html reference.RepoObject_ReferenceTree]]" as reference.RepoObject_ReferenceTree << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  **Referenced_Depth** : (int)
+  **Referencing_Depth** : (int)
+  - **Referenced_guid** : (uniqueidentifier)
+  - **Referencing_guid** : (uniqueidentifier)
   --
-  Referenced_Depth_0_30 : int
-  Referenced_Depth_30_0 : int
-  Referenced_fullname : nvarchar(261)
-  Referenced_fullname2 : nvarchar(257)
-  * Referenced_guid : uniqueidentifier
-  Referenced_type : char(2)
-  Referencing_Depth_0_30 : int
-  Referencing_Depth_30_0 : int
-  Referencing_fullname : nvarchar(261)
-  Referencing_fullname2 : nvarchar(257)
-  * Referencing_guid : uniqueidentifier
-  Referencing_type : varchar(2)
-  * RepoObject_guid : uniqueidentifier
+  Referenced_fullname : (nvarchar(261))
+  Referenced_fullname2 : (nvarchar(257))
+  Referenced_type : (char(2))
+  Referencing_fullname : (nvarchar(261))
+  Referencing_fullname2 : (nvarchar(257))
+  Referencing_type : (varchar(2))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObject_ReferenceTree_cyclic.html reference.RepoObject_ReferenceTree_cyclic]]" as reference.RepoObject_ReferenceTree_cyclic << V >> {
+  --
+  Referenced_Depth_0_30 : (int)
+  Referenced_Depth_30_0 : (int)
+  Referenced_fullname : (nvarchar(261))
+  Referenced_fullname2 : (nvarchar(257))
+  - Referenced_guid : (uniqueidentifier)
+  Referenced_type : (char(2))
+  Referencing_Depth_0_30 : (int)
+  Referencing_Depth_30_0 : (int)
+  Referencing_fullname : (nvarchar(261))
+  Referencing_fullname2 : (nvarchar(257))
+  - Referencing_guid : (uniqueidentifier)
+  Referencing_type : (varchar(2))
+  - RepoObject_guid : (uniqueidentifier)
+  --
   --
 }
 
@@ -94,3 +98,10 @@ reference.RepoObject_ReferenceTree_cyclic::referencing_fullname <-- reference.Re
 reference.RepoObject_ReferenceTree_cyclic::referencing_fullname2 <-- reference.ReferenceTree_cyclic_ref_primary::Referencing_fullname2
 reference.RepoObject_ReferenceTree_cyclic::Referencing_guid <-- reference.ReferenceTree_cyclic_ref_primary::Referencing_guid
 reference.RepoObject_ReferenceTree_cyclic::referencing_type <-- reference.ReferenceTree_cyclic_ref_primary::Referencing_type
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

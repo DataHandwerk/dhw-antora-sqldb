@@ -41,7 +41,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-05 13:29:28
+2021-09-10 19:21:01
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -49,6 +49,12 @@ stored procedure
 // tag::AntoraColumnDetails[]
 
 // end::AntoraColumnDetails[]
+
+== AntoraMeasureDetails
+
+// tag::AntoraMeasureDetails[]
+
+// end::AntoraMeasureDetails[]
 
 == AntoraPkColumnTableRows
 
@@ -559,6 +565,44 @@ WHERE [iv].[index_name] IS NULL
 
 |
 
+
+|3100
+|
+*[repo].[usp_PERSIST_IndexColumn_union_T]*
+
+* `EXEC [repo].[usp_PERSIST_IndexColumn_union_T]`
+
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+[repo].[usp_PERSIST_IndexColumn_union_T]
+----
+=====
+
+|
+
+
+|3200
+|
+*[repo].[usp_PERSIST_Index_ColumList_T]*
+
+* `EXEC [repo].[usp_PERSIST_Index_ColumList_T]`
+
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+[repo].[usp_PERSIST_Index_ColumList_T]
+----
+=====
+
+|
+
 |===
 
 // end::adocuspsteps[]
@@ -577,6 +621,8 @@ WHERE [iv].[index_name] IS NULL
 * xref:repo.RepoObject.adoc[]
 * xref:repo.RepoObject_persistence.adoc[]
 * xref:repo.usp_Index_Settings.adoc[]
+* xref:repo.usp_PERSIST_Index_ColumList_T.adoc[]
+* xref:repo.usp_PERSIST_IndexColumn_union_T.adoc[]
 // end::antorareferencedlist[]
 
 
@@ -811,6 +857,8 @@ EXEC [repo].[usp_Index_finish]
 * [repo].[RepoObject]
 * [repo].[RepoObject_persistence]
 * [repo].[usp_Index_Settings]
+* [repo].[usp_PERSIST_Index_ColumList_T]
+* [repo].[usp_PERSIST_IndexColumn_union_T]
 // end::referencedobjectlist[]
 
 
@@ -1476,6 +1524,26 @@ EXEC logs.usp_ExecutionLog_insert
  , @target_object = @target_object
  , @updated = @rows
 -- Logging END --
+
+/*{"ReportUspStep":[{"Number":3100,"Name":"[repo].[usp_PERSIST_IndexColumn_union_T]","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
+EXEC [repo].[usp_PERSIST_IndexColumn_union_T]
+--add your own parameters
+--logging parameters
+ @execution_instance_guid = @execution_instance_guid
+ , @ssis_execution_id = @ssis_execution_id
+ , @sub_execution_id = @sub_execution_id
+ , @parent_execution_log_id = @current_execution_log_id
+
+
+/*{"ReportUspStep":[{"Number":3200,"Name":"[repo].[usp_PERSIST_Index_ColumList_T]","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
+EXEC [repo].[usp_PERSIST_Index_ColumList_T]
+--add your own parameters
+--logging parameters
+ @execution_instance_guid = @execution_instance_guid
+ , @ssis_execution_id = @ssis_execution_id
+ , @sub_execution_id = @sub_execution_id
+ , @parent_execution_log_id = @current_execution_log_id
+
 
 --
 --finish your own code here

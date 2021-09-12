@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,30 +25,34 @@ skinparam class {
 }
 
 
-entity logs.usp_ExecutionLog_insert << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/logs.usp_ExecutionLog_insert.html logs.usp_ExecutionLog_insert]]" as logs.usp_ExecutionLog_insert << P >> {
   --
 }
 
-entity property.RepoObject_Inheritance_temp << U >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObject_Inheritance_temp.html property.RepoObject_Inheritance_temp]]" as property.RepoObject_Inheritance_temp << U >> {
   --
 }
 
-entity property.RepoObjectProperty << U >> {
-  * **RepoObjectProperty_id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObjectProperty.html property.RepoObjectProperty]]" as property.RepoObjectProperty << U >> {
+  - **RepoObjectProperty_id** : (int)
   --
 }
 
-entity property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  **property_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition.html property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition]]" as property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  **property_name** : (nvarchar(128))
   --
 }
 
-entity property.usp_RepoObject_Inheritance << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.usp_PERSIST_PropertyName_RepoObject_T.html property.usp_PERSIST_PropertyName_RepoObject_T]]" as property.usp_PERSIST_PropertyName_RepoObject_T << P >> {
   --
 }
 
-entity repo.usp_main << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.usp_RepoObject_Inheritance.html property.usp_RepoObject_Inheritance]]" as property.usp_RepoObject_Inheritance << P >> {
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_main.html repo.usp_main]]" as repo.usp_main << P >> {
   --
 }
 
@@ -55,4 +60,12 @@ logs.usp_ExecutionLog_insert <.. property.usp_RepoObject_Inheritance
 property.RepoObject_Inheritance_temp <.. property.usp_RepoObject_Inheritance
 property.RepoObjectProperty <.. property.usp_RepoObject_Inheritance
 property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition <.. property.usp_RepoObject_Inheritance
+property.usp_PERSIST_PropertyName_RepoObject_T <.. property.usp_RepoObject_Inheritance
 property.usp_RepoObject_Inheritance <.. repo.usp_main
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

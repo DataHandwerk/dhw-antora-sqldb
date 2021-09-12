@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,33 +25,39 @@ skinparam class {
 }
 
 
-entity docs.AntoraNavListRepoObject_by_schema << V >> {
-  * **RepoObject_schema_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.AntoraNavListRepoObject_by_schema.html docs.AntoraNavListRepoObject_by_schema]]" as docs.AntoraNavListRepoObject_by_schema << V >> {
+  - **RepoObject_schema_name** : (nvarchar(128))
   --
-  nav_list : nvarchar(max)
+  nav_list : (nvarchar(max))
   --
-}
-
-entity docs.AntoraPage_ObjectBySchema << V >> {
-  --
-  * page_content : nvarchar(4000)
-  * partial_content : nvarchar(4000)
   --
 }
 
-entity docs.RepoObject_OutputFilter << V >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.AntoraPage_ObjectBySchema.html docs.AntoraPage_ObjectBySchema]]" as docs.AntoraPage_ObjectBySchema << V >> {
   --
-  is_DocsOutput : int
-  * RepoObject_fullname : nvarchar(261)
-  * RepoObject_fullname2 : nvarchar(257)
-  * RepoObject_schema_name : nvarchar(128)
-  SysObject_type : char(2)
-  SysObject_type_name : nvarchar(128)
+  - page_content : (nvarchar(4000))
+  - partial_content : (nvarchar(4000))
+  --
   --
 }
 
-entity docs.usp_AntoraExport_navigation << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.RepoObject_OutputFilter.html docs.RepoObject_OutputFilter]]" as docs.RepoObject_OutputFilter << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+  is_DocsOutput : (int)
+  - is_ssas : (bit)
+  - RepoObject_fullname : (nvarchar(261))
+  - RepoObject_fullname2 : (nvarchar(257))
+  - RepoObject_name : (nvarchar(128))
+  - RepoObject_schema_name : (nvarchar(128))
+  SysObject_type : (char(2))
+  SysObject_type_name : (nvarchar(128))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.usp_AntoraExport_navigation.html docs.usp_AntoraExport_navigation]]" as docs.usp_AntoraExport_navigation << P >> {
+  --
   --
   --
 }
@@ -59,3 +66,10 @@ docs.AntoraNavListRepoObject_by_schema <.. docs.usp_AntoraExport_navigation
 docs.AntoraNavListRepoObject_by_schema <.. docs.AntoraPage_ObjectBySchema
 docs.RepoObject_OutputFilter <.. docs.AntoraNavListRepoObject_by_schema
 docs.RepoObject_OutputFilter::RepoObject_schema_name <-- docs.AntoraNavListRepoObject_by_schema::RepoObject_schema_name
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

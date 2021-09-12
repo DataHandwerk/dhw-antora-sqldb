@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,32 +25,35 @@ skinparam class {
 }
 
 
-entity ssas.model_json << U >> {
-  * **databasename** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json.html ssas.model_json]]" as ssas.model_json << U >> {
+  - **databasename** : (nvarchar(128))
   --
-  * model_filename : nvarchar(4000)
-  model_utf8 : varchar(max)
-  {static} isModelJson : int
+  - model_filename : (nvarchar(4000))
+  model_utf8 : (varchar(max))
+  # isModelJson : (int)
   --
-}
-
-entity ssas.model_json_10 << V >> {
-  * **databasename** : nvarchar(128)
-  --
-  l1_compatibilityLevel : int
-  l1_id : nvarchar(500)
-  l1_model_j : nvarchar(max)
-  l1_name : nvarchar(500)
   --
 }
 
-entity ssas.model_json_ImportModelSql << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_10.html ssas.model_json_10]]" as ssas.model_json_10 << V >> {
+  - **databasename** : (nvarchar(128))
   --
-  * databasename : nvarchar(128)
-  * ImportModelSql : nvarchar(4000)
-  isModelJson : int
-  * model_filename : nvarchar(4000)
-  model_utf8 : varchar(max)
+  l1_compatibilityLevel : (int)
+  l1_id : (nvarchar(500))
+  l1_model_j : (nvarchar(max))
+  l1_name : (nvarchar(500))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_ImportModelSql.html ssas.model_json_ImportModelSql]]" as ssas.model_json_ImportModelSql << V >> {
+  --
+  - databasename : (nvarchar(128))
+  - ImportModelSql : (nvarchar(4000))
+  isModelJson : (int)
+  - model_filename : (nvarchar(4000))
+  model_utf8 : (varchar(max))
+  --
   --
 }
 
@@ -61,3 +65,10 @@ ssas.model_json::isModelJson <-- ssas.model_json_ImportModelSql::isModelJson
 ssas.model_json::model_filename <-- ssas.model_json_ImportModelSql::model_filename
 ssas.model_json::model_utf8 <-- ssas.model_json::isModelJson
 ssas.model_json::model_utf8 <-- ssas.model_json_ImportModelSql::model_utf8
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

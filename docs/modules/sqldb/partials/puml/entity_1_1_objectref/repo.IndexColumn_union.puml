@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,50 +25,44 @@ skinparam class {
 }
 
 
-entity repo.Index_ColumList << V >> {
-  **index_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.IndexColumn_ssas_gross.html repo.IndexColumn_ssas_gross]]" as repo.IndexColumn_ssas_gross << V >> {
   --
 }
 
-entity repo.Index_IndexPattern << V >> {
-  **index_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.IndexColumn_union.html repo.IndexColumn_union]]" as repo.IndexColumn_union << V >> {
+  **index_guid** : (uniqueidentifier)
+  - **index_column_id** : (int)
   --
 }
 
-entity repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing << V >> {
-  **index_guid** : uniqueidentifier
-  * **index_column_id** : int
-  **RowNumberInReferencing** : bigint
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.IndexColumn_union_T.html repo.IndexColumn_union_T]]" as repo.IndexColumn_union_T << U >> {
+  **index_guid** : (uniqueidentifier)
+  - **index_column_id** : (int)
   --
 }
 
-entity repo.IndexColumn_ssas_gross << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.IndexColumn_virtual_gross.html repo.IndexColumn_virtual_gross]]" as repo.IndexColumn_virtual_gross << V >> {
+  - **index_column_id** : (int)
   --
 }
 
-entity repo.IndexColumn_union << V >> {
-  **index_guid** : uniqueidentifier
-  * **index_column_id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_PERSIST_IndexColumn_union_T.html repo.usp_PERSIST_IndexColumn_union_T]]" as repo.usp_PERSIST_IndexColumn_union_T << P >> {
   --
 }
 
-entity repo.IndexColumn_virtual_gross << V >> {
-  * **index_column_id** : int
-  --
-}
-
-entity repo.RepoObjectColumn_gross2 << V >> {
-  --
-}
-
-entity repo_sys.IndexColumn_unique << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.IndexColumn_unique.html repo_sys.IndexColumn_unique]]" as repo_sys.IndexColumn_unique << V >> {
   --
 }
 
 repo.IndexColumn_ssas_gross <.. repo.IndexColumn_union
-repo.IndexColumn_union <.. repo.Index_ColumList
-repo.IndexColumn_union <.. repo.Index_IndexPattern
-repo.IndexColumn_union <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing
-repo.IndexColumn_union <.. repo.RepoObjectColumn_gross2
+repo.IndexColumn_union <.. repo.IndexColumn_union_T
+repo.IndexColumn_union <.. repo.usp_PERSIST_IndexColumn_union_T
 repo.IndexColumn_virtual_gross <.. repo.IndexColumn_union
 repo_sys.IndexColumn_unique <.. repo.IndexColumn_union
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

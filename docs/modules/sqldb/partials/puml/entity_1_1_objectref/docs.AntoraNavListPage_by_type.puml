@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,20 +25,27 @@ skinparam class {
 }
 
 
-entity configT.type << V >> {
-  **type** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/configT.type.html configT.type]]" as configT.type << V >> {
+  **type** : (nvarchar(128))
   --
 }
 
-entity docs.AntoraNavListPage_by_type << V >> {
-  **type** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.AntoraNavListPage_by_type.html docs.AntoraNavListPage_by_type]]" as docs.AntoraNavListPage_by_type << V >> {
+  **type** : (nvarchar(128))
   --
 }
 
-entity docs.RepoObject_OutputFilter << V >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.RepoObject_OutputFilter.html docs.RepoObject_OutputFilter]]" as docs.RepoObject_OutputFilter << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
 configT.type <.. docs.AntoraNavListPage_by_type
 docs.RepoObject_OutputFilter <.. docs.AntoraNavListPage_by_type
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

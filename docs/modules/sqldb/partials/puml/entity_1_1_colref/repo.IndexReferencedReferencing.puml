@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,80 +25,85 @@ skinparam class {
 }
 
 
-entity reference.RepoObject_reference_T << U >> {
-  **referenced_RepoObject_guid** : uniqueidentifier
-  **referencing_RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObject_reference_T.html reference.RepoObject_reference_T]]" as reference.RepoObject_reference_T << U >> {
+  **referenced_RepoObject_guid** : (uniqueidentifier)
+  **referencing_RepoObject_guid** : (uniqueidentifier)
   --
-  * is_ReversePersistenceViaView : bit
-  referenced_entity_name : nvarchar(128)
-  * referenced_is_PersistenceSource : bit
-  * referenced_is_PersistenceTarget : bit
-  referenced_schema_name : nvarchar(128)
-  referenced_type : char(2)
-  referencing_entity_name : nvarchar(128)
-  * referencing_is_PersistenceTarget : bit
-  * referencing_is_PersistenceUspSourceRef : bit
-  referencing_is_PersistenceUspTargetRef : bit
-  referencing_schema_name : nvarchar(128)
-  referencing_type : varchar(2)
-  * {static} referenced_fullname : nvarchar(261)
-  * {static} referenced_fullname2 : nvarchar(257)
-  * {static} referencing_fullname : nvarchar(261)
-  * {static} referencing_fullname2 : nvarchar(257)
+  - is_ReversePersistenceViaView : (bit)
+  referenced_entity_name : (nvarchar(128))
+  - referenced_is_PersistenceSource : (bit)
+  - referenced_is_PersistenceTarget : (bit)
+  referenced_schema_name : (nvarchar(128))
+  referenced_type : (char(2))
+  referencing_entity_name : (nvarchar(128))
+  - referencing_is_PersistenceTarget : (bit)
+  - referencing_is_PersistenceUspSourceRef : (bit)
+  referencing_is_PersistenceUspTargetRef : (bit)
+  referencing_schema_name : (nvarchar(128))
+  referencing_type : (varchar(2))
+  # referenced_fullname : (nvarchar(261))
+  # referenced_fullname2 : (nvarchar(257))
+  # referencing_fullname : (nvarchar(261))
+  # referencing_fullname2 : (nvarchar(257))
   --
-}
-
-entity repo.Index_union << V >> {
-  **index_guid** : uniqueidentifier
-  --
-  index_name : nvarchar(450)
-  index_type : tinyint
-  IndexPatternColumnGuid : varchar(8000)
-  is_index_disabled : bit
-  is_index_primary_key : bit
-  is_index_real : bit
-  is_index_unique : bit
-  parent_RepoObject_guid : uniqueidentifier
-  referenced_index_guid : uniqueidentifier
   --
 }
 
-entity repo.Index_virtual << U >> {
-  * **index_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_union.html repo.Index_union]]" as repo.Index_union << V >> {
+  **index_guid** : (uniqueidentifier)
   --
-  * has_managedName : bit
-  index_name : nvarchar(128)
-  * index_type : tinyint
-  * is_index_disabled : bit
-  * is_index_primary_key : bit
-  * is_index_unique : bit
-  * parent_RepoObject_guid : uniqueidentifier
-  referenced_index_guid : uniqueidentifier
-  RowNumberInReferencing : int
+  index_name : (nvarchar(450))
+  index_type : (tinyint)
+  IndexPatternColumnGuid : (varchar(8000))
+  is_index_disabled : (bit)
+  is_index_primary_key : (bit)
+  is_index_real : (bit)
+  is_index_unique : (bit)
+  parent_RepoObject_guid : (uniqueidentifier)
+  referenced_index_guid : (uniqueidentifier)
   --
-}
-
-entity repo.IndexReferencedReferencing << V >> {
-  --
-  referenced_index_guid : uniqueidentifier
-  * referenced_RepoObject_guid : uniqueidentifier
-  * referencing_RepoObject_guid : uniqueidentifier
-  RowNumberInReferencing_Target : int
-  source_index_guid : uniqueidentifier
-  * source_index_type : tinyint
   --
 }
 
-entity repo.IndexReferencedReferencing_HasFullColumnsInReferencing << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_virtual.html repo.Index_virtual]]" as repo.Index_virtual << U >> {
+  - **index_guid** : (uniqueidentifier)
   --
-  referenced_index_guid : uniqueidentifier
-  * referenced_RepoObject_guid : uniqueidentifier
-  referencing_IndexPatternColumnGuid : varchar(8000)
-  * referencing_RepoObject_guid : uniqueidentifier
-  RowNumberInReferencing : bigint
-  RowNumberInReferencing_Target : int
-  source_index_guid : uniqueidentifier
-  * source_index_type : tinyint
+  - has_managedName : (bit)
+  index_name : (nvarchar(128))
+  - index_type : (tinyint)
+  - is_index_disabled : (bit)
+  - is_index_primary_key : (bit)
+  - is_index_unique : (bit)
+  - parent_RepoObject_guid : (uniqueidentifier)
+  referenced_index_guid : (uniqueidentifier)
+  RowNumberInReferencing : (int)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.IndexReferencedReferencing.html repo.IndexReferencedReferencing]]" as repo.IndexReferencedReferencing << V >> {
+  --
+  referenced_index_guid : (uniqueidentifier)
+  - referenced_RepoObject_guid : (uniqueidentifier)
+  - referencing_RepoObject_guid : (uniqueidentifier)
+  RowNumberInReferencing_Target : (int)
+  source_index_guid : (uniqueidentifier)
+  - source_index_type : (tinyint)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.IndexReferencedReferencing_HasFullColumnsInReferencing.html repo.IndexReferencedReferencing_HasFullColumnsInReferencing]]" as repo.IndexReferencedReferencing_HasFullColumnsInReferencing << V >> {
+  --
+  referenced_index_guid : (uniqueidentifier)
+  - referenced_RepoObject_guid : (uniqueidentifier)
+  referencing_IndexPatternColumnGuid : (varchar(8000))
+  - referencing_RepoObject_guid : (uniqueidentifier)
+  RowNumberInReferencing : (bigint)
+  RowNumberInReferencing_Target : (int)
+  source_index_guid : (uniqueidentifier)
+  - source_index_type : (tinyint)
+  --
   --
 }
 
@@ -117,3 +123,10 @@ repo.IndexReferencedReferencing::referencing_RepoObject_guid <-- repo.IndexRefer
 repo.IndexReferencedReferencing::RowNumberInReferencing_Target <-- repo.IndexReferencedReferencing_HasFullColumnsInReferencing::RowNumberInReferencing_Target
 repo.IndexReferencedReferencing::source_index_guid <-- repo.IndexReferencedReferencing_HasFullColumnsInReferencing::source_index_guid
 repo.IndexReferencedReferencing::source_index_type <-- repo.IndexReferencedReferencing_HasFullColumnsInReferencing::source_index_type
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

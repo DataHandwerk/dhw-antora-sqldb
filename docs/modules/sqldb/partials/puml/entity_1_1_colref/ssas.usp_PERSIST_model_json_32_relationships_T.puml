@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,48 +25,53 @@ skinparam class {
 }
 
 
-entity logs.usp_ExecutionLog_insert << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/logs.usp_ExecutionLog_insert.html logs.usp_ExecutionLog_insert]]" as logs.usp_ExecutionLog_insert << P >> {
   --
-  --
-}
-
-entity repo.usp_sync_guid_ssas << P >> {
   --
   --
 }
 
-entity ssas.model_json_32_relationships << V >> {
-  * **databasename** : nvarchar(128)
-  **relationships_name** : nvarchar(500)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_sync_guid_ssas.html repo.usp_sync_guid_ssas]]" as repo.usp_sync_guid_ssas << P >> {
   --
-  relationships_crossFilteringBehavior : nvarchar(500)
-  relationships_fromCardinality : nvarchar(500)
-  relationships_fromColumn : nvarchar(500)
-  relationships_fromTable : nvarchar(500)
-  relationships_isActive : bit
-  relationships_toCardinality : nvarchar(500)
-  relationships_toColumn : nvarchar(500)
-  relationships_toTable : nvarchar(500)
+  --
   --
 }
 
-entity ssas.model_json_32_relationships_T << U >> {
-  * **ForeignKey_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_32_relationships.html ssas.model_json_32_relationships]]" as ssas.model_json_32_relationships << V >> {
+  - **databasename** : (nvarchar(128))
+  **relationships_name** : (nvarchar(500))
   --
-  * databasename : nvarchar(128)
-  relationships_crossFilteringBehavior : nvarchar(500)
-  relationships_fromCardinality : nvarchar(500)
-  relationships_fromColumn : nvarchar(500)
-  relationships_fromTable : nvarchar(500)
-  relationships_isActive : bit
-  relationships_name : nvarchar(500)
-  relationships_toCardinality : nvarchar(500)
-  relationships_toColumn : nvarchar(500)
-  relationships_toTable : nvarchar(500)
+  relationships_crossFilteringBehavior : (nvarchar(500))
+  relationships_fromCardinality : (nvarchar(500))
+  relationships_fromColumn : (nvarchar(500))
+  relationships_fromTable : (nvarchar(500))
+  relationships_isActive : (bit)
+  relationships_toCardinality : (nvarchar(500))
+  relationships_toColumn : (nvarchar(500))
+  relationships_toTable : (nvarchar(500))
+  --
   --
 }
 
-entity ssas.usp_PERSIST_model_json_32_relationships_T << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_32_relationships_T.html ssas.model_json_32_relationships_T]]" as ssas.model_json_32_relationships_T << U >> {
+  - **ForeignKey_guid** : (uniqueidentifier)
+  --
+  - databasename : (nvarchar(128))
+  relationships_crossFilteringBehavior : (nvarchar(500))
+  relationships_fromCardinality : (nvarchar(500))
+  relationships_fromColumn : (nvarchar(500))
+  relationships_fromTable : (nvarchar(500))
+  relationships_isActive : (bit)
+  relationships_name : (nvarchar(500))
+  relationships_toCardinality : (nvarchar(500))
+  relationships_toColumn : (nvarchar(500))
+  relationships_toTable : (nvarchar(500))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.usp_PERSIST_model_json_32_relationships_T.html ssas.usp_PERSIST_model_json_32_relationships_T]]" as ssas.usp_PERSIST_model_json_32_relationships_T << P >> {
+  --
   --
   --
 }
@@ -74,4 +80,11 @@ logs.usp_ExecutionLog_insert <.. ssas.usp_PERSIST_model_json_32_relationships_T
 ssas.model_json_32_relationships <.. ssas.usp_PERSIST_model_json_32_relationships_T
 ssas.model_json_32_relationships_T <.. ssas.usp_PERSIST_model_json_32_relationships_T
 ssas.usp_PERSIST_model_json_32_relationships_T <.. repo.usp_sync_guid_ssas
+
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
 

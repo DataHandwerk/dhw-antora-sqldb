@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,28 +25,39 @@ skinparam class {
 }
 
 
-entity config.Parameter << U >> {
-  * **Parameter_name** : varchar(100)
-  * **sub_Parameter** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/config.Parameter.html config.Parameter]]" as config.Parameter << U >> {
+  - **Parameter_name** : (varchar(100))
+  - **sub_Parameter** : (nvarchar(128))
   --
 }
 
-entity property.PropertyName_RepoObjectColumn << V >> {
-  * **property_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.PropertyName_RepoObjectColumn.html property.PropertyName_RepoObjectColumn]]" as property.PropertyName_RepoObjectColumn << V >> {
+  - **property_name** : (nvarchar(128))
   --
 }
 
-entity property.RepoObjectColumnProperty << U >> {
-  * **RepoObjectColumnProperty_id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.PropertyName_RepoObjectColumn_T.html property.PropertyName_RepoObjectColumn_T]]" as property.PropertyName_RepoObjectColumn_T << U >> {
+  - **property_name** : (nvarchar(128))
   --
 }
 
-entity property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition << V >> {
-  * **RepoObjectColumn_guid** : uniqueidentifier
-  * **property_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObjectColumnProperty.html property.RepoObjectColumnProperty]]" as property.RepoObjectColumnProperty << U >> {
+  - **RepoObjectColumnProperty_id** : (int)
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.usp_PERSIST_PropertyName_RepoObjectColumn_T.html property.usp_PERSIST_PropertyName_RepoObjectColumn_T]]" as property.usp_PERSIST_PropertyName_RepoObjectColumn_T << P >> {
   --
 }
 
 config.Parameter <.. property.PropertyName_RepoObjectColumn
-property.PropertyName_RepoObjectColumn <.. property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition
+property.PropertyName_RepoObjectColumn <.. property.PropertyName_RepoObjectColumn_T
+property.PropertyName_RepoObjectColumn <.. property.usp_PERSIST_PropertyName_RepoObjectColumn_T
 property.RepoObjectColumnProperty <.. property.PropertyName_RepoObjectColumn
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

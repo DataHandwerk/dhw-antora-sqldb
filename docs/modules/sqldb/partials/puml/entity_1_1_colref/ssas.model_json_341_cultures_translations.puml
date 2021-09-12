@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,30 +25,33 @@ skinparam class {
 }
 
 
-entity ssas.model_json_34_cultures << V >> {
-  * **databasename** : nvarchar(128)
-  **cultures_name** : nvarchar(500)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_34_cultures.html ssas.model_json_34_cultures]]" as ssas.model_json_34_cultures << V >> {
+  - **databasename** : (nvarchar(128))
+  **cultures_name** : (nvarchar(500))
   --
-  cultures_translations_j : nvarchar(max)
+  cultures_translations_j : (nvarchar(max))
   --
-}
-
-entity ssas.model_json_341_cultures_translations << V >> {
-  --
-  cultures_name : nvarchar(500)
-  cultures_translations_model_j : nvarchar(max)
-  * databasename : nvarchar(128)
   --
 }
 
-entity ssas.model_json_3411_cultures_translations_model << V >> {
-  * **databasename** : nvarchar(128)
-  **cultures_name** : nvarchar(500)
-  **cultures_translations_model_name** : nvarchar(500)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_341_cultures_translations.html ssas.model_json_341_cultures_translations]]" as ssas.model_json_341_cultures_translations << V >> {
   --
-  cultures_translations_model_perspectives_ja : nvarchar(max)
-  cultures_translations_model_tables_ja : nvarchar(max)
-  cultures_translations_model_translatedDescription : nvarchar(max)
+  cultures_name : (nvarchar(500))
+  cultures_translations_model_j : (nvarchar(max))
+  - databasename : (nvarchar(128))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_3411_cultures_translations_model.html ssas.model_json_3411_cultures_translations_model]]" as ssas.model_json_3411_cultures_translations_model << V >> {
+  - **databasename** : (nvarchar(128))
+  **cultures_name** : (nvarchar(500))
+  **cultures_translations_model_name** : (nvarchar(500))
+  --
+  cultures_translations_model_perspectives_ja : (nvarchar(max))
+  cultures_translations_model_tables_ja : (nvarchar(max))
+  cultures_translations_model_translatedDescription : (nvarchar(max))
+  --
   --
 }
 
@@ -57,3 +61,10 @@ ssas.model_json_34_cultures::cultures_name <-- ssas.model_json_341_cultures_tran
 ssas.model_json_34_cultures::databasename <-- ssas.model_json_341_cultures_translations::databasename
 ssas.model_json_341_cultures_translations::cultures_name <-- ssas.model_json_3411_cultures_translations_model::cultures_name
 ssas.model_json_341_cultures_translations::databasename <-- ssas.model_json_3411_cultures_translations_model::databasename
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

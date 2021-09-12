@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,65 +25,69 @@ skinparam class {
 }
 
 
-entity logs.usp_ExecutionLog_insert << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/logs.usp_ExecutionLog_insert.html logs.usp_ExecutionLog_insert]]" as logs.usp_ExecutionLog_insert << P >> {
+  --
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.TMSCHEMA_RELATIONSHIPS.html ssas.TMSCHEMA_RELATIONSHIPS]]" as ssas.TMSCHEMA_RELATIONSHIPS << U >> {
+  - **databasename** : (nvarchar(128))
+  - **ID** : (numeric(20, 0))
+  --
+  - CrossFilteringBehavior : (bigint)
+  - FromCardinality : (bigint)
+  - FromColumnID : (numeric(20, 0))
+  - FromTableID : (numeric(20, 0))
+  - IsActive : (bit)
+  - JoinOnDateBehavior : (bigint)
+  - ModelID : (numeric(20, 0))
+  - ModifiedTime : (datetime)
+  - Name : (nvarchar(max))
+  RefreshedTime : (datetime)
+  RelationshipStorage2ID : (numeric(20, 0))
+  RelationshipStorageID : (numeric(20, 0))
+  - RelyOnReferentialIntegrity : (bit)
+  - SecurityFilteringBehavior : (bigint)
+  - State : (bigint)
+  - ToCardinality : (bigint)
+  - ToColumnID : (numeric(20, 0))
+  - ToTableID : (numeric(20, 0))
+  - Type : (bigint)
   --
   --
 }
 
-entity ssas.TMSCHEMA_RELATIONSHIPS << U >> {
-  * **databasename** : nvarchar(128)
-  * **ID** : numeric(20, 0)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.TMSCHEMA_RELATIONSHIPS_T.html ssas.TMSCHEMA_RELATIONSHIPS_T]]" as ssas.TMSCHEMA_RELATIONSHIPS_T << U >> {
+  - **databasename** : (nvarchar(128))
+  - **ID** : (numeric(20, 0))
   --
-  * CrossFilteringBehavior : bigint
-  * FromCardinality : bigint
-  * FromColumnID : numeric(20, 0)
-  * FromTableID : numeric(20, 0)
-  * IsActive : bit
-  * JoinOnDateBehavior : bigint
-  * ModelID : numeric(20, 0)
-  * ModifiedTime : datetime
-  * Name : nvarchar(max)
-  RefreshedTime : datetime
-  RelationshipStorage2ID : numeric(20, 0)
-  RelationshipStorageID : numeric(20, 0)
-  * RelyOnReferentialIntegrity : bit
-  * SecurityFilteringBehavior : bigint
-  * State : bigint
-  * ToCardinality : bigint
-  * ToColumnID : numeric(20, 0)
-  * ToTableID : numeric(20, 0)
-  * Type : bigint
+  - CrossFilteringBehavior : (bigint)
+  - ForeignKey_guid : (uniqueidentifier)
+  - FromCardinality : (bigint)
+  - FromColumnID : (numeric(20, 0))
+  - FromTableID : (numeric(20, 0))
+  - IsActive : (bit)
+  - JoinOnDateBehavior : (bigint)
+  - ModelID : (numeric(20, 0))
+  - ModifiedTime : (datetime)
+  - Name : (nvarchar(max))
+  RefreshedTime : (datetime)
+  RelationshipStorage2ID : (numeric(20, 0))
+  RelationshipStorageID : (numeric(20, 0))
+  - RelyOnReferentialIntegrity : (bit)
+  - SecurityFilteringBehavior : (bigint)
+  - State : (bigint)
+  - ToCardinality : (bigint)
+  - ToColumnID : (numeric(20, 0))
+  - ToTableID : (numeric(20, 0))
+  - Type : (bigint)
   --
-}
-
-entity ssas.TMSCHEMA_RELATIONSHIPS_T << U >> {
-  * **databasename** : nvarchar(128)
-  * **ID** : numeric(20, 0)
-  --
-  * CrossFilteringBehavior : bigint
-  * ForeignKey_guid : uniqueidentifier
-  * FromCardinality : bigint
-  * FromColumnID : numeric(20, 0)
-  * FromTableID : numeric(20, 0)
-  * IsActive : bit
-  * JoinOnDateBehavior : bigint
-  * ModelID : numeric(20, 0)
-  * ModifiedTime : datetime
-  * Name : nvarchar(max)
-  RefreshedTime : datetime
-  RelationshipStorage2ID : numeric(20, 0)
-  RelationshipStorageID : numeric(20, 0)
-  * RelyOnReferentialIntegrity : bit
-  * SecurityFilteringBehavior : bigint
-  * State : bigint
-  * ToCardinality : bigint
-  * ToColumnID : numeric(20, 0)
-  * ToTableID : numeric(20, 0)
-  * Type : bigint
   --
 }
 
-entity ssas.usp_PERSIST_TMSCHEMA_RELATIONSHIPS_T << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.usp_PERSIST_TMSCHEMA_RELATIONSHIPS_T.html ssas.usp_PERSIST_TMSCHEMA_RELATIONSHIPS_T]]" as ssas.usp_PERSIST_TMSCHEMA_RELATIONSHIPS_T << P >> {
+  --
   --
   --
 }
@@ -90,4 +95,11 @@ entity ssas.usp_PERSIST_TMSCHEMA_RELATIONSHIPS_T << P >> {
 logs.usp_ExecutionLog_insert <.. ssas.usp_PERSIST_TMSCHEMA_RELATIONSHIPS_T
 ssas.TMSCHEMA_RELATIONSHIPS <.. ssas.usp_PERSIST_TMSCHEMA_RELATIONSHIPS_T
 ssas.TMSCHEMA_RELATIONSHIPS_T <.. ssas.usp_PERSIST_TMSCHEMA_RELATIONSHIPS_T
+
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
 

@@ -44,7 +44,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-01 13:48:40
+2021-09-10 14:11:02
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -53,7 +53,7 @@ view
 [#column-databasename]
 === databasename
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |1
 |*databasename*
@@ -77,7 +77,7 @@ view
 [#column-index_name]
 === index_name
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |2
 |*index_name*
@@ -101,7 +101,7 @@ view
 [#column-ColumnName]
 === ColumnName
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |ColumnName
@@ -125,7 +125,7 @@ view
 [#column-is_index_primary_key]
 === is_index_primary_key
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |is_index_primary_key
@@ -149,7 +149,7 @@ view
 [#column-is_index_unique]
 === is_index_unique
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |is_index_unique
@@ -173,7 +173,7 @@ view
 [#column-RepoObject_guid]
 === RepoObject_guid
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |RepoObject_guid
@@ -197,7 +197,7 @@ view
 [#column-TableName]
 === TableName
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |TableName
@@ -219,6 +219,12 @@ view
 
 
 // end::AntoraColumnDetails[]
+
+== AntoraMeasureDetails
+
+// tag::AntoraMeasureDetails[]
+
+// end::AntoraMeasureDetails[]
 
 == AntoraPkColumnTableRows
 
@@ -606,11 +612,13 @@ CREATE View repo.Index_ssas
 As
 Select
     Distinct
-    index_name
+    --logical PK: databasename,index_name
+    databasename
+  , index_name
+  --unique attributes per index
   , is_index_primary_key
   , is_index_unique
   , RepoObject_guid
-  , databasename
   --, TableID
   , TableName
   --is unique per Index, because one index connects one pair of columns

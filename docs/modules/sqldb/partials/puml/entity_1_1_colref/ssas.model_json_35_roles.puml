@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,51 +25,55 @@ skinparam class {
 }
 
 
-entity ssas.model_json_20 << V >> {
-  * **databasename** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_20.html ssas.model_json_20]]" as ssas.model_json_20 << V >> {
+  - **databasename** : (nvarchar(128))
   --
-  l1_compatibilityLevel : int
-  l1_id : nvarchar(500)
-  l1_name : nvarchar(500)
-  l2_annotations_ja : nvarchar(max)
-  l2_culture : nvarchar(500)
-  l2_cultures_ja : nvarchar(max)
-  l2_dataSources_ja : nvarchar(max)
-  l2_description : nvarchar(max)
-  l2_description_ja : nvarchar(max)
-  l2_name : nvarchar(500)
-  l2_perspectives_ja : nvarchar(max)
-  l2_relationships_ja : nvarchar(max)
-  l2_roles_ja : nvarchar(max)
-  l2_tables_ja : nvarchar(max)
+  l1_compatibilityLevel : (int)
+  l1_id : (nvarchar(500))
+  l1_name : (nvarchar(500))
+  l2_annotations_ja : (nvarchar(max))
+  l2_culture : (nvarchar(500))
+  l2_cultures_ja : (nvarchar(max))
+  l2_dataSources_ja : (nvarchar(max))
+  l2_description : (nvarchar(max))
+  l2_description_ja : (nvarchar(max))
+  l2_name : (nvarchar(500))
+  l2_perspectives_ja : (nvarchar(max))
+  l2_relationships_ja : (nvarchar(max))
+  l2_roles_ja : (nvarchar(max))
+  l2_tables_ja : (nvarchar(max))
   --
-}
-
-entity ssas.model_json_35_roles << V >> {
-  * **databasename** : nvarchar(128)
-  **roles_name** : nvarchar(500)
-  --
-  roles_members_ja : nvarchar(max)
-  roles_modelPermission : nvarchar(500)
-  roles_tablePermissions_ja : nvarchar(max)
   --
 }
 
-entity ssas.model_json_351_roles_members << V >> {
-  * **databasename** : nvarchar(128)
-  **roles_name** : nvarchar(500)
-  **roles_members_memberId** : nvarchar(500)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_35_roles.html ssas.model_json_35_roles]]" as ssas.model_json_35_roles << V >> {
+  - **databasename** : (nvarchar(128))
+  **roles_name** : (nvarchar(500))
   --
-  roles_members_memberName : nvarchar(500)
+  roles_members_ja : (nvarchar(max))
+  roles_modelPermission : (nvarchar(500))
+  roles_tablePermissions_ja : (nvarchar(max))
+  --
   --
 }
 
-entity ssas.model_json_352_roles_tablePermissions << V >> {
-  * **databasename** : nvarchar(128)
-  **roles_name** : nvarchar(500)
-  **roles_tablePermissions_name** : nvarchar(500)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_351_roles_members.html ssas.model_json_351_roles_members]]" as ssas.model_json_351_roles_members << V >> {
+  - **databasename** : (nvarchar(128))
+  **roles_name** : (nvarchar(500))
+  **roles_members_memberId** : (nvarchar(500))
   --
-  roles_tablePermissions_filterExpression : nvarchar(max)
+  roles_members_memberName : (nvarchar(500))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_352_roles_tablePermissions.html ssas.model_json_352_roles_tablePermissions]]" as ssas.model_json_352_roles_tablePermissions << V >> {
+  - **databasename** : (nvarchar(128))
+  **roles_name** : (nvarchar(500))
+  **roles_tablePermissions_name** : (nvarchar(500))
+  --
+  roles_tablePermissions_filterExpression : (nvarchar(max))
+  --
   --
 }
 
@@ -80,3 +85,10 @@ ssas.model_json_35_roles::databasename <-- ssas.model_json_351_roles_members::da
 ssas.model_json_35_roles::databasename <-- ssas.model_json_352_roles_tablePermissions::databasename
 ssas.model_json_35_roles::roles_name <-- ssas.model_json_351_roles_members::roles_name
 ssas.model_json_35_roles::roles_name <-- ssas.model_json_352_roles_tablePermissions::roles_name
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

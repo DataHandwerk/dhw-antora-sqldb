@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,47 +25,51 @@ skinparam class {
 }
 
 
-entity repo.RepoSchema << U >> {
-  * **RepoSchema_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoSchema.html repo.RepoSchema]]" as repo.RepoSchema << U >> {
+  - **RepoSchema_guid** : (uniqueidentifier)
   --
-  * is_ssas : bit
-  is_SysSchema_missing : bit
-  RepoSchema_ms_description : nvarchar(4000)
-  * RepoSchema_name : nvarchar(128)
-  SysSchema_id : int
-  * SysSchema_name : nvarchar(128)
-  {abstract} has_different_sys_names : bit
-  * {static} is_RepoSchema_name_uniqueidentifier : int
-  * {static} is_SysSchema_name_uniqueidentifier : int
-  --
-}
-
-entity repo.SysSchema_RepoSchema_via_name << V >> {
-  --
-  is_RepoSchema_name_uniqueidentifier : int
-  is_SysSchema_name_uniqueidentifier : int
-  RepoSchema_guid : uniqueidentifier
-  RepoSchema_is_SysSchema_missing : bit
-  RepoSchema_name : nvarchar(128)
-  RepoSchema_SysSchema_id : int
-  RepoSchema_SysSchema_name : nvarchar(128)
-  * SysSchema_id : int
-  * SysSchema_name : sysname
-  SysSchema_RepoSchema_guid : uniqueidentifier
-  --
-}
-
-entity repo.usp_sync_guid_RepoSchema << P >> {
+  - is_ssas : (bit)
+  is_SysSchema_missing : (bit)
+  RepoSchema_ms_description : (nvarchar(4000))
+  - RepoSchema_name : (nvarchar(128))
+  SysSchema_id : (int)
+  - SysSchema_name : (nvarchar(128))
+  ~ has_different_sys_names : (bit)
+  # is_RepoSchema_name_uniqueidentifier : (int)
+  # is_SysSchema_name_uniqueidentifier : (int)
   --
   --
 }
 
-entity repo_sys.SysSchema << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.SysSchema_RepoSchema_via_name.html repo.SysSchema_RepoSchema_via_name]]" as repo.SysSchema_RepoSchema_via_name << V >> {
   --
-  * SysSchema_id : int
-  * SysSchema_name : sysname
-  SysSchema_principal_id : int
-  SysSchema_RepoSchema_guid : uniqueidentifier
+  is_RepoSchema_name_uniqueidentifier : (int)
+  is_SysSchema_name_uniqueidentifier : (int)
+  RepoSchema_guid : (uniqueidentifier)
+  RepoSchema_is_SysSchema_missing : (bit)
+  RepoSchema_name : (nvarchar(128))
+  RepoSchema_SysSchema_id : (int)
+  RepoSchema_SysSchema_name : (nvarchar(128))
+  - SysSchema_id : (int)
+  - SysSchema_name : (sysname)
+  SysSchema_RepoSchema_guid : (uniqueidentifier)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_sync_guid_RepoSchema.html repo.usp_sync_guid_RepoSchema]]" as repo.usp_sync_guid_RepoSchema << P >> {
+  --
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.SysSchema.html repo_sys.SysSchema]]" as repo_sys.SysSchema << V >> {
+  --
+  - SysSchema_id : (int)
+  - SysSchema_name : (sysname)
+  SysSchema_principal_id : (int)
+  SysSchema_RepoSchema_guid : (uniqueidentifier)
+  --
   --
 }
 
@@ -81,3 +86,10 @@ repo.RepoSchema::SysSchema_name <-- repo.SysSchema_RepoSchema_via_name::RepoSche
 repo_sys.SysSchema::SysSchema_id <-- repo.SysSchema_RepoSchema_via_name::SysSchema_id
 repo_sys.SysSchema::SysSchema_name <-- repo.SysSchema_RepoSchema_via_name::SysSchema_name
 repo_sys.SysSchema::SysSchema_RepoSchema_guid <-- repo.SysSchema_RepoSchema_via_name::SysSchema_RepoSchema_guid
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

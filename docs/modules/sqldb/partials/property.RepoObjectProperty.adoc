@@ -9,7 +9,6 @@
 :ExistsProperty--pk_index_guid:
 :ExistsProperty--pk_indexpatterncolumndatatype:
 :ExistsProperty--pk_indexpatterncolumnname:
-:ExistsProperty--pk_indexsemanticgroup:
 :ExistsProperty--FK:
 :ExistsProperty--AntoraIndexList:
 :ExistsProperty--Columns:
@@ -51,7 +50,7 @@ user table
 [#column-RepoObjectProperty_id]
 === RepoObjectProperty_id
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |1
 |*RepoObjectProperty_id*
@@ -70,7 +69,7 @@ user table
 [#column-inheritance]
 === inheritance
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |inheritance
@@ -89,7 +88,7 @@ user table
 [#column-property_name]
 === property_name
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |property_name
@@ -110,7 +109,7 @@ user table
 [#column-property_value]
 === property_value
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |property_value
@@ -125,6 +124,7 @@ user table
 datatype of property_value is `sql_variant`, because it should be possible to synchronize the property_value in the repository with property_value in extended properties in the dwh database, which is `sql_variant` +
 therefore the maximum content is nvarchar(4000) or varchar(8000)
 --
+{empty} +
 
 .Referencing Columns
 --
@@ -141,7 +141,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 [#column-RepoObject_guid]
 === RepoObject_guid
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |RepoObject_guid
@@ -162,7 +162,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 [#column-property_bigint]
 === property_bigint
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |property_bigint
@@ -176,6 +176,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 --
 (TRY_CAST([property_value] AS [bigint]))
 --
+{empty} +
 
 .Definition
 ....
@@ -191,7 +192,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 [#column-property_float]
 === property_float
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |property_float
@@ -205,6 +206,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 --
 (TRY_CAST([property_value] AS [float]))
 --
+{empty} +
 
 .Definition
 ....
@@ -220,7 +222,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 [#column-property_int]
 === property_int
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |property_int
@@ -234,6 +236,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 --
 (TRY_CAST([property_value] AS [int]))
 --
+{empty} +
 
 .Definition
 ....
@@ -249,7 +252,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 [#column-property_money]
 === property_money
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |property_money
@@ -263,6 +266,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 --
 (TRY_CAST([property_value] AS [money]))
 --
+{empty} +
 
 .Definition
 ....
@@ -278,7 +282,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 [#column-property_real]
 === property_real
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |property_real
@@ -292,6 +296,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 --
 (TRY_CAST([property_value] AS [real]))
 --
+{empty} +
 
 .Definition
 ....
@@ -305,6 +310,12 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 
 
 // end::AntoraColumnDetails[]
+
+== AntoraMeasureDetails
+
+// tag::AntoraMeasureDetails[]
+
+// end::AntoraMeasureDetails[]
 
 == AntoraPkColumnTableRows
 
@@ -403,7 +414,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 [#index-PK_RepoObjectProperty]
 === PK_RepoObjectProperty
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_repoobjectproperty_id[RepoObjectProperty_id]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
 +
 --
 * <<column-RepoObjectProperty_id>>; int
@@ -414,7 +425,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 [#index-UK_RepoObjectProperty]
 === UK_RepoObjectProperty
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_repoobject_guid,property_name[RepoObject_guid,property_name]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -426,7 +437,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 [#index-idx_RepoObjectProperty_1]
 === idx_RepoObjectProperty++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_repoobject_guid[RepoObject_guid]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -687,7 +698,7 @@ RepoObjectProperty_id
 === pk_IndexSemanticGroup
 
 // tag::pk_indexsemanticgroup[]
-RepoObjectProperty_id
+
 // end::pk_indexsemanticgroup[]
 
 

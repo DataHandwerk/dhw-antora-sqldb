@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,64 +25,69 @@ skinparam class {
 }
 
 
-entity docs.AntoraIndexSemanticgroup << V >> {
-  **IndexSemanticGroup** : nvarchar(512)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.AntoraIndexSemanticgroup.html docs.AntoraIndexSemanticgroup]]" as docs.AntoraIndexSemanticgroup << V >> {
+  **IndexSemanticGroup** : (nvarchar(512))
   --
-  AntoraIndexSemanticgroup : nvarchar(max)
-  * fixvalue : int
-  --
-}
-
-entity docs.AntoraIndexSemanticgroupPatterndatatype << V >> {
-  **IndexSemanticGroup** : nvarchar(512)
-  **IndexPatternColumnDatatype** : nvarchar(4000)
-  --
-  AntoraIndexSemanticgroupPatterndatatype : nvarchar(max)
-  --
-}
-
-entity docs.fs_cleanStringForAnchorId << FN >> {
+  AntoraIndexSemanticgroup : (nvarchar(max))
+  - fixvalue : (int)
   --
   --
 }
 
-entity docs.fs_cleanStringForLabel << FN >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.AntoraIndexSemanticgroupPatterndatatype.html docs.AntoraIndexSemanticgroupPatterndatatype]]" as docs.AntoraIndexSemanticgroupPatterndatatype << V >> {
+  **IndexSemanticGroup** : (nvarchar(512))
+  **IndexPatternColumnDatatype** : (nvarchar(4000))
+  --
+  AntoraIndexSemanticgroupPatterndatatype : (nvarchar(max))
   --
   --
 }
 
-entity repo.Index_gross << V >> {
-  * **index_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.fs_cleanStringForAnchorId.html docs.fs_cleanStringForAnchorId]]" as docs.fs_cleanStringForAnchorId << FN >> {
   --
-  AntoraIndexColumnList : nvarchar(max)
-  ColumnList : nvarchar(max)
-  ConstraintColumnList : nvarchar(max)
-  DbmlIndexColumnList : nvarchar(max)
-  index_name : nvarchar(450)
-  index_type : tinyint
-  IndexPatternColumnDatatype : nvarchar(4000)
-  IndexPatternColumnName : nvarchar(4000)
-  IndexSemanticGroup : nvarchar(512)
-  is_index_disabled : bit
-  is_index_primary_key : bit
-  is_index_real : bit
-  is_index_unique : bit
-  is_persistence : bit
-  is_repo_managed : bit
-  parent_RepoObject_guid : uniqueidentifier
-  PersistenceWhereColumnList : nvarchar(max)
-  PumlIndexColumnList : nvarchar(max)
-  referenced_index_guid : uniqueidentifier
-  * RepoObject_fullname : nvarchar(261)
-  * RepoObject_fullname2 : nvarchar(257)
-  RowNumber_PatternPerParentObject : bigint
-  RowNumber_PkPerParentObject : bigint
-  * SysObject_fullname : nvarchar(261)
-  * SysObject_fullname2 : nvarchar(257)
-  SysObject_id : int
-  * SysObject_name : nvarchar(128)
-  * SysObject_schema_name : nvarchar(128)
-  SysObject_type : char(2)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.fs_cleanStringForLabel.html docs.fs_cleanStringForLabel]]" as docs.fs_cleanStringForLabel << FN >> {
+  --
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_gross.html repo.Index_gross]]" as repo.Index_gross << V >> {
+  - **index_guid** : (uniqueidentifier)
+  --
+  AntoraIndexColumnList : (nvarchar(max))
+  ColumnList : (nvarchar(max))
+  ConstraintColumnList : (nvarchar(max))
+  DbmlIndexColumnList : (nvarchar(max))
+  index_name : (nvarchar(450))
+  index_type : (tinyint)
+  IndexPatternColumnDatatype : (nvarchar(4000))
+  IndexPatternColumnName : (nvarchar(4000))
+  IndexSemanticGroup : (nvarchar(512))
+  is_index_disabled : (bit)
+  is_index_primary_key : (bit)
+  is_index_real : (bit)
+  is_index_unique : (bit)
+  is_persistence : (bit)
+  is_repo_managed : (bit)
+  parent_RepoObject_guid : (uniqueidentifier)
+  PersistenceWhereColumnList : (nvarchar(max))
+  PumlIndexColumnList : (nvarchar(max))
+  referenced_index_guid : (uniqueidentifier)
+  - RepoObject_fullname : (nvarchar(261))
+  - RepoObject_fullname2 : (nvarchar(257))
+  RowNumber_PatternPerParentObject : (bigint)
+  RowNumber_PkPerParentObject : (bigint)
+  - SysObject_fullname : (nvarchar(261))
+  - SysObject_fullname2 : (nvarchar(257))
+  SysObject_id : (int)
+  - SysObject_name : (nvarchar(128))
+  - SysObject_schema_name : (nvarchar(128))
+  SysObject_type : (char(2))
+  --
   --
 }
 
@@ -92,3 +98,10 @@ repo.Index_gross <.. docs.AntoraIndexSemanticgroupPatterndatatype
 docs.AntoraIndexSemanticgroupPatterndatatype::IndexSemanticGroup <-- docs.AntoraIndexSemanticgroup::IndexSemanticGroup
 repo.Index_gross::IndexPatternColumnDatatype <-- docs.AntoraIndexSemanticgroupPatterndatatype::IndexPatternColumnDatatype
 repo.Index_gross::IndexSemanticGroup <-- docs.AntoraIndexSemanticgroupPatterndatatype::IndexSemanticGroup
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

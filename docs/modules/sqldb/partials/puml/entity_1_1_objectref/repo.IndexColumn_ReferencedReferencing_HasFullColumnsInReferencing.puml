@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,43 +25,50 @@ skinparam class {
 }
 
 
-entity reference.RepoObjectColumn_reference_T << U >> {
-  **referenced_RepoObjectColumn_guid** : uniqueidentifier
-  **referencing_RepoObjectColumn_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObjectColumn_reference_T.html reference.RepoObjectColumn_reference_T]]" as reference.RepoObjectColumn_reference_T << U >> {
+  **referenced_RepoObjectColumn_guid** : (uniqueidentifier)
+  **referencing_RepoObjectColumn_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing << V >> {
-  **index_guid** : uniqueidentifier
-  * **index_column_id** : int
-  **RowNumberInReferencing** : bigint
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing.html repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing]]" as repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing << V >> {
+  - **index_guid** : (uniqueidentifier)
+  - **index_column_id** : (int)
+  **RowNumberInReferencing** : (bigint)
   --
 }
 
-entity repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T << U >> {
-  **index_guid** : uniqueidentifier
-  * **index_column_id** : int
-  **RowNumberInReferencing** : bigint
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T.html repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T]]" as repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T << U >> {
+  **index_guid** : (uniqueidentifier)
+  - **index_column_id** : (int)
+  **RowNumberInReferencing** : (bigint)
   --
 }
 
-entity repo.IndexColumn_union << V >> {
-  **index_guid** : uniqueidentifier
-  * **index_column_id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.IndexColumn_union_T.html repo.IndexColumn_union_T]]" as repo.IndexColumn_union_T << U >> {
+  **index_guid** : (uniqueidentifier)
+  - **index_column_id** : (int)
   --
 }
 
-entity repo.RepoObjectColumn << U >> {
-  * **RepoObjectColumn_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObjectColumn.html repo.RepoObjectColumn]]" as repo.RepoObjectColumn << U >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T.html repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T]]" as repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T << P >> {
   --
 }
 
 reference.RepoObjectColumn_reference_T <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing
 repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T
 repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing <.. repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T
-repo.IndexColumn_union <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing
+repo.IndexColumn_union_T <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing
 repo.RepoObjectColumn <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

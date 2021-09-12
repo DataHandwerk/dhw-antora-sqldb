@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,26 +25,33 @@ skinparam class {
 }
 
 
-entity repo.Index_Settings << U >> {
-  * **index_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_Settings.html repo.Index_Settings]]" as repo.Index_Settings << U >> {
+  - **index_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.Index_virtual << U >> {
-  * **index_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_virtual.html repo.Index_virtual]]" as repo.Index_virtual << U >> {
+  - **index_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.Index_virtual_SysObject << V >> {
-  * **index_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_virtual_SysObject.html repo.Index_virtual_SysObject]]" as repo.Index_virtual_SysObject << V >> {
+  - **index_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.RepoObject << U >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject.html repo.RepoObject]]" as repo.RepoObject << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
 repo.Index_Settings <.. repo.Index_virtual_SysObject
 repo.Index_virtual <.. repo.Index_virtual_SysObject
 repo.RepoObject <.. repo.Index_virtual_SysObject
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,45 +25,49 @@ skinparam class {
 }
 
 
-entity docs.RepoObject_Adoc << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.RepoObject_Adoc.html docs.RepoObject_Adoc]]" as docs.RepoObject_Adoc << V >> {
   --
 }
 
-entity docs.RepoObject_Adoc_T << U >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.RepoObject_Adoc_T.html docs.RepoObject_Adoc_T]]" as docs.RepoObject_Adoc_T << U >> {
   --
 }
 
-entity docs.RepoObject_ColumnList_T << U >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.RepoObject_ColumnList_T.html docs.RepoObject_ColumnList_T]]" as docs.RepoObject_ColumnList_T << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity docs.RepoObject_IndexList_T << U >> {
-  **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.RepoObject_IndexList_T.html docs.RepoObject_IndexList_T]]" as docs.RepoObject_IndexList_T << U >> {
+  **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity docs.RepoObject_ParameterList << V >> {
-  **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.RepoObject_MeasureList.html docs.RepoObject_MeasureList]]" as docs.RepoObject_MeasureList << V >> {
   --
 }
 
-entity docs.usp_PERSIST_RepoObject_Adoc_T << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.RepoObject_ParameterList.html docs.RepoObject_ParameterList]]" as docs.RepoObject_ParameterList << V >> {
+  **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity property.RepoObjectProperty << U >> {
-  * **RepoObjectProperty_id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.usp_PERSIST_RepoObject_Adoc_T.html docs.usp_PERSIST_RepoObject_Adoc_T]]" as docs.usp_PERSIST_RepoObject_Adoc_T << P >> {
   --
 }
 
-entity property.RepoObjectProperty_cross << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  **property_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObjectProperty.html property.RepoObjectProperty]]" as property.RepoObjectProperty << U >> {
+  - **RepoObjectProperty_id** : (int)
   --
 }
 
-entity repo.RepoObject_gross2 << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObjectProperty_cross.html property.RepoObjectProperty_cross]]" as property.RepoObjectProperty_cross << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  **property_name** : (nvarchar(128))
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject_gross2.html repo.RepoObject_gross2]]" as repo.RepoObject_gross2 << V >> {
   --
 }
 
@@ -70,7 +75,15 @@ docs.RepoObject_Adoc <.. docs.RepoObject_Adoc_T
 docs.RepoObject_Adoc <.. docs.usp_PERSIST_RepoObject_Adoc_T
 docs.RepoObject_ColumnList_T <.. docs.RepoObject_Adoc
 docs.RepoObject_IndexList_T <.. docs.RepoObject_Adoc
+docs.RepoObject_MeasureList <.. docs.RepoObject_Adoc
 docs.RepoObject_ParameterList <.. docs.RepoObject_Adoc
 property.RepoObjectProperty <.. docs.RepoObject_Adoc
 property.RepoObjectProperty_cross <.. docs.RepoObject_Adoc
 repo.RepoObject_gross2 <.. docs.RepoObject_Adoc
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

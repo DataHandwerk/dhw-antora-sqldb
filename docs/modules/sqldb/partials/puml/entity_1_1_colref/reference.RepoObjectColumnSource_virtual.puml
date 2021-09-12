@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,52 +25,63 @@ skinparam class {
 }
 
 
-entity reference.RepoObjectColumn_reference_virtual << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObjectColumn_reference_virtual.html reference.RepoObjectColumn_reference_virtual]]" as reference.RepoObjectColumn_reference_virtual << V >> {
   --
-  definition : nvarchar(max)
-  * InformationSource : varchar(34)
-  is_computed : bit
-  is_referenced_object : bit
-  is_referencing_object_equal_referenced_object : bit
-  * referenced_column_name : nvarchar(128)
-  * referenced_entity_name : nvarchar(128)
-  referenced_id : int
-  referenced_minor_id : int
-  referenced_node_id : bigint
-  * referenced_RepoObject_guid : uniqueidentifier
-  * referenced_RepoObjectColumn_guid : uniqueidentifier
-  * referenced_schema_name : nvarchar(128)
-  referenced_type : char(2)
-  * referencing_column_name : nvarchar(128)
-  * referencing_entity_name : nvarchar(128)
-  referencing_id : int
-  referencing_minor_id : int
-  referencing_node_id : bigint
-  * referencing_RepoObject_guid : uniqueidentifier
-  * referencing_RepoObjectColumn_guid : uniqueidentifier
-  * referencing_schema_name : nvarchar(128)
-  referencing_type : char(2)
-  --
-}
-
-entity reference.RepoObjectColumnSource_virtual << U >> {
-  * **RepoObjectColumn_guid** : uniqueidentifier
-  * **Source_RepoObjectColumn_guid** : uniqueidentifier
+  definition : (nvarchar(max))
+  - InformationSource : (varchar(34))
+  is_computed : (bit)
+  is_referenced_object : (bit)
+  is_referencing_object_equal_referenced_object : (bit)
+  - referenced_column_name : (nvarchar(128))
+  - referenced_entity_name : (nvarchar(128))
+  referenced_id : (int)
+  referenced_minor_id : (int)
+  referenced_node_id : (bigint)
+  - referenced_RepoObject_guid : (uniqueidentifier)
+  - referenced_RepoObjectColumn_guid : (uniqueidentifier)
+  - referenced_schema_name : (nvarchar(128))
+  referenced_type : (char(2))
+  - referencing_column_name : (nvarchar(128))
+  - referencing_entity_name : (nvarchar(128))
+  referencing_id : (int)
+  referencing_minor_id : (int)
+  referencing_node_id : (bigint)
+  - referencing_RepoObject_guid : (uniqueidentifier)
+  - referencing_RepoObjectColumn_guid : (uniqueidentifier)
+  - referencing_schema_name : (nvarchar(128))
+  referencing_type : (char(2))
   --
   --
 }
 
-entity reference.usp_RepoObjectColumnSource_virtual_set << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObjectColumnSource_virtual.html reference.RepoObjectColumnSource_virtual]]" as reference.RepoObjectColumnSource_virtual << U >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  - **Source_RepoObjectColumn_guid** : (uniqueidentifier)
   --
-  --
-}
-
-entity repo.usp_sync_guid_RepoObjectColumn << P >> {
   --
   --
 }
 
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.usp_RepoObjectColumnSource_virtual_set.html reference.usp_RepoObjectColumnSource_virtual_set]]" as reference.usp_RepoObjectColumnSource_virtual_set << P >> {
+  --
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_sync_guid_RepoObjectColumn.html repo.usp_sync_guid_RepoObjectColumn]]" as repo.usp_sync_guid_RepoObjectColumn << P >> {
+  --
+  --
+  --
+}
+
+reference.RepoObjectColumnSource_virtual <.. reference.usp_RepoObjectColumnSource_virtual_set
 reference.RepoObjectColumnSource_virtual <.. repo.usp_sync_guid_RepoObjectColumn
 reference.RepoObjectColumnSource_virtual <.. reference.RepoObjectColumn_reference_virtual
-reference.RepoObjectColumnSource_virtual <.. reference.usp_RepoObjectColumnSource_virtual_set
+
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
 

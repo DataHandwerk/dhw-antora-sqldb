@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,183 +25,190 @@ skinparam class {
 }
 
 
-entity reference.RepoObjectColumn_reference << V >> {
-  **referenced_RepoObjectColumn_guid** : uniqueidentifier
-  **referencing_RepoObjectColumn_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObjectColumn_reference.html reference.RepoObjectColumn_reference]]" as reference.RepoObjectColumn_reference << V >> {
+  **referenced_RepoObjectColumn_guid** : (uniqueidentifier)
+  **referencing_RepoObjectColumn_guid** : (uniqueidentifier)
   --
-  is_referenced_object : tinyint
-  is_referencing_object_equal_referenced_object : tinyint
-  referenced_column_name : nvarchar(128)
-  referenced_entity_name : nvarchar(128)
-  referenced_RepoObject_guid : uniqueidentifier
-  referenced_schema_name : nvarchar(128)
-  referenced_type : char(2)
-  referencing_column_name : nvarchar(128)
-  referencing_entity_name : nvarchar(128)
-  referencing_RepoObject_guid : uniqueidentifier
-  referencing_schema_name : nvarchar(128)
-  referencing_type : char(2)
+  is_referenced_object : (tinyint)
+  is_referencing_object_equal_referenced_object : (tinyint)
+  referenced_column_name : (nvarchar(128))
+  referenced_entity_name : (nvarchar(128))
+  referenced_RepoObject_guid : (uniqueidentifier)
+  referenced_schema_name : (nvarchar(128))
+  referenced_type : (char(2))
+  referencing_column_name : (nvarchar(128))
+  referencing_entity_name : (nvarchar(128))
+  referencing_RepoObject_guid : (uniqueidentifier)
+  referencing_schema_name : (nvarchar(128))
+  referencing_type : (char(2))
   --
-}
-
-entity reference.RepoObjectColumn_reference_additional_internal << V >> {
-  --
-  definition : nvarchar(max)
-  * InformationSource : varchar(30)
-  is_computed : bit
-  is_referenced_object : bit
-  is_referencing_object_equal_referenced_object : bit
-  referenced_column_name : nvarchar(128)
-  * referenced_entity_name : nvarchar(128)
-  referenced_id : int
-  referenced_RepoObject_guid : uniqueidentifier
-  referenced_RepoObjectColumn_guid : uniqueidentifier
-  * referenced_schema_name : nvarchar(128)
-  referenced_type : char(2)
-  referencing_column_name : nvarchar(128)
-  * referencing_entity_name : nvarchar(128)
-  referencing_id : int
-  referencing_RepoObject_guid : uniqueidentifier
-  referencing_RepoObjectColumn_guid : uniqueidentifier
-  * referencing_schema_name : nvarchar(128)
-  referencing_type : char(2)
   --
 }
 
-entity reference.RepoObjectColumn_reference_Persistence << V >> {
-  **referencing_id** : int
-  **referencing_minor_id** : int
-  **referenced_id** : int
-  **referenced_minor_id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObjectColumn_reference_additional_internal.html reference.RepoObjectColumn_reference_additional_internal]]" as reference.RepoObjectColumn_reference_additional_internal << V >> {
   --
-  definition : nvarchar(max)
-  * InformationSource : varchar(27)
-  is_computed : bit
-  is_referenced_object : bit
-  is_referencing_object_equal_referenced_object : bit
-  * referenced_column_name : nvarchar(128)
-  * referenced_entity_name : nvarchar(128)
-  referenced_node_id : bigint
-  referenced_RepoObject_guid : uniqueidentifier
-  * referenced_RepoObjectColumn_guid : uniqueidentifier
-  * referenced_schema_name : nvarchar(128)
-  referenced_type : char(2)
-  * referencing_column_name : nvarchar(128)
-  * referencing_entity_name : nvarchar(128)
-  referencing_node_id : bigint
-  * referencing_RepoObject_guid : uniqueidentifier
-  * referencing_RepoObjectColumn_guid : uniqueidentifier
-  * referencing_schema_name : nvarchar(128)
-  referencing_type : char(2)
+  definition : (nvarchar(max))
+  - InformationSource : (varchar(30))
+  is_computed : (bit)
+  is_referenced_object : (bit)
+  is_referencing_object_equal_referenced_object : (bit)
+  referenced_column_name : (nvarchar(128))
+  - referenced_entity_name : (nvarchar(128))
+  referenced_id : (int)
+  referenced_RepoObject_guid : (uniqueidentifier)
+  referenced_RepoObjectColumn_guid : (uniqueidentifier)
+  - referenced_schema_name : (nvarchar(128))
+  referenced_type : (char(2))
+  referencing_column_name : (nvarchar(128))
+  - referencing_entity_name : (nvarchar(128))
+  referencing_id : (int)
+  referencing_RepoObject_guid : (uniqueidentifier)
+  referencing_RepoObjectColumn_guid : (uniqueidentifier)
+  - referencing_schema_name : (nvarchar(128))
+  referencing_type : (char(2))
+  --
   --
 }
 
-entity reference.RepoObjectColumn_reference_SqlExpressionDependencies << V >> {
-  * **referencing_id** : int
-  * **referencing_minor_id** : int
-  **referenced_id** : int
-  * **referenced_minor_id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObjectColumn_reference_Persistence.html reference.RepoObjectColumn_reference_Persistence]]" as reference.RepoObjectColumn_reference_Persistence << V >> {
+  **referencing_id** : (int)
+  **referencing_minor_id** : (int)
+  **referenced_id** : (int)
+  **referenced_minor_id** : (int)
   --
-  definition : nvarchar(max)
-  * InformationSource : varchar(31)
-  is_computed : bit
-  is_referenced_object : bit
-  is_referencing_object_equal_referenced_object : bit
-  referenced_column_name : sysname
-  referenced_entity_name : nvarchar(128)
-  referenced_node_id : bigint
-  referenced_RepoObject_guid : uniqueidentifier
-  referenced_RepoObjectColumn_guid : uniqueidentifier
-  referenced_schema_name : nvarchar(128)
-  referenced_type : char(2)
-  referencing_column_name : sysname
-  referencing_entity_name : nvarchar(128)
-  referencing_node_id : bigint
-  referencing_RepoObject_guid : uniqueidentifier
-  referencing_RepoObjectColumn_guid : uniqueidentifier
-  referencing_schema_name : nvarchar(128)
-  referencing_type : char(2)
+  definition : (nvarchar(max))
+  - InformationSource : (varchar(27))
+  is_computed : (bit)
+  is_referenced_object : (bit)
+  is_referencing_object_equal_referenced_object : (bit)
+  - referenced_column_name : (nvarchar(128))
+  - referenced_entity_name : (nvarchar(128))
+  referenced_node_id : (bigint)
+  referenced_RepoObject_guid : (uniqueidentifier)
+  - referenced_RepoObjectColumn_guid : (uniqueidentifier)
+  - referenced_schema_name : (nvarchar(128))
+  referenced_type : (char(2))
+  - referencing_column_name : (nvarchar(128))
+  - referencing_entity_name : (nvarchar(128))
+  referencing_node_id : (bigint)
+  - referencing_RepoObject_guid : (uniqueidentifier)
+  - referencing_RepoObjectColumn_guid : (uniqueidentifier)
+  - referencing_schema_name : (nvarchar(128))
+  referencing_type : (char(2))
   --
-}
-
-entity reference.RepoObjectColumn_reference_SqlModules << V >> {
-  **referencing_id** : int
-  **referencing_minor_id** : int
-  **referenced_id** : int
-  **referenced_minor_id** : int
-  --
-  definition : nvarchar(max)
-  * InformationSource : varchar(27)
-  is_computed : bit
-  is_referenced_object : bit
-  is_referencing_object_equal_referenced_object : bit
-  * referenced_column_name : nvarchar(128)
-  * referenced_entity_name : nvarchar(128)
-  referenced_node_id : bigint
-  * referenced_RepoObject_guid : uniqueidentifier
-  * referenced_RepoObjectColumn_guid : uniqueidentifier
-  * referenced_schema_name : nvarchar(128)
-  referenced_type : char(2)
-  * referencing_column_name : nvarchar(128)
-  * referencing_entity_name : nvarchar(128)
-  referencing_node_id : bigint
-  * referencing_RepoObject_guid : uniqueidentifier
-  * referencing_RepoObjectColumn_guid : uniqueidentifier
-  * referencing_schema_name : nvarchar(128)
-  referencing_type : char(2)
-  SysObject_fullname : nvarchar(261)
   --
 }
 
-entity reference.RepoObjectColumn_reference_union << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObjectColumn_reference_SqlExpressionDependencies.html reference.RepoObjectColumn_reference_SqlExpressionDependencies]]" as reference.RepoObjectColumn_reference_SqlExpressionDependencies << V >> {
+  - **referencing_id** : (int)
+  - **referencing_minor_id** : (int)
+  **referenced_id** : (int)
+  - **referenced_minor_id** : (int)
   --
-  definition : nvarchar(max)
-  * InformationSource : varchar(34)
-  is_computed : bit
-  is_referenced_object : bit
-  is_referencing_object_equal_referenced_object : bit
-  referenced_column_name : nvarchar(128)
-  referenced_entity_name : nvarchar(128)
-  referenced_id : int
-  referenced_RepoObject_guid : uniqueidentifier
-  referenced_RepoObjectColumn_guid : uniqueidentifier
-  referenced_schema_name : nvarchar(128)
-  referenced_type : char(2)
-  referencing_column_name : nvarchar(128)
-  referencing_entity_name : nvarchar(128)
-  referencing_id : int
-  referencing_RepoObject_guid : uniqueidentifier
-  referencing_RepoObjectColumn_guid : uniqueidentifier
-  referencing_schema_name : nvarchar(128)
-  referencing_type : char(2)
+  definition : (nvarchar(max))
+  - InformationSource : (varchar(31))
+  is_computed : (bit)
+  is_referenced_object : (bit)
+  is_referencing_object_equal_referenced_object : (bit)
+  referenced_column_name : (sysname)
+  referenced_entity_name : (nvarchar(128))
+  referenced_node_id : (bigint)
+  referenced_RepoObject_guid : (uniqueidentifier)
+  referenced_RepoObjectColumn_guid : (uniqueidentifier)
+  referenced_schema_name : (nvarchar(128))
+  referenced_type : (char(2))
+  referencing_column_name : (sysname)
+  referencing_entity_name : (nvarchar(128))
+  referencing_node_id : (bigint)
+  referencing_RepoObject_guid : (uniqueidentifier)
+  referencing_RepoObjectColumn_guid : (uniqueidentifier)
+  referencing_schema_name : (nvarchar(128))
+  referencing_type : (char(2))
+  --
   --
 }
 
-entity reference.RepoObjectColumn_reference_virtual << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObjectColumn_reference_SqlModules.html reference.RepoObjectColumn_reference_SqlModules]]" as reference.RepoObjectColumn_reference_SqlModules << V >> {
+  **referencing_id** : (int)
+  **referencing_minor_id** : (int)
+  **referenced_id** : (int)
+  **referenced_minor_id** : (int)
   --
-  definition : nvarchar(max)
-  * InformationSource : varchar(34)
-  is_computed : bit
-  is_referenced_object : bit
-  is_referencing_object_equal_referenced_object : bit
-  * referenced_column_name : nvarchar(128)
-  * referenced_entity_name : nvarchar(128)
-  referenced_id : int
-  referenced_minor_id : int
-  referenced_node_id : bigint
-  * referenced_RepoObject_guid : uniqueidentifier
-  * referenced_RepoObjectColumn_guid : uniqueidentifier
-  * referenced_schema_name : nvarchar(128)
-  referenced_type : char(2)
-  * referencing_column_name : nvarchar(128)
-  * referencing_entity_name : nvarchar(128)
-  referencing_id : int
-  referencing_minor_id : int
-  referencing_node_id : bigint
-  * referencing_RepoObject_guid : uniqueidentifier
-  * referencing_RepoObjectColumn_guid : uniqueidentifier
-  * referencing_schema_name : nvarchar(128)
-  referencing_type : char(2)
+  definition : (nvarchar(max))
+  - InformationSource : (varchar(27))
+  is_computed : (bit)
+  is_referenced_object : (bit)
+  is_referencing_object_equal_referenced_object : (bit)
+  - referenced_column_name : (nvarchar(128))
+  - referenced_entity_name : (nvarchar(128))
+  referenced_node_id : (bigint)
+  - referenced_RepoObject_guid : (uniqueidentifier)
+  - referenced_RepoObjectColumn_guid : (uniqueidentifier)
+  - referenced_schema_name : (nvarchar(128))
+  referenced_type : (char(2))
+  - referencing_column_name : (nvarchar(128))
+  - referencing_entity_name : (nvarchar(128))
+  referencing_node_id : (bigint)
+  - referencing_RepoObject_guid : (uniqueidentifier)
+  - referencing_RepoObjectColumn_guid : (uniqueidentifier)
+  - referencing_schema_name : (nvarchar(128))
+  referencing_type : (char(2))
+  SysObject_fullname : (nvarchar(261))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObjectColumn_reference_union.html reference.RepoObjectColumn_reference_union]]" as reference.RepoObjectColumn_reference_union << V >> {
+  --
+  definition : (nvarchar(max))
+  - InformationSource : (varchar(34))
+  is_computed : (bit)
+  is_referenced_object : (bit)
+  is_referencing_object_equal_referenced_object : (bit)
+  referenced_column_name : (nvarchar(128))
+  referenced_entity_name : (nvarchar(128))
+  referenced_id : (int)
+  referenced_RepoObject_guid : (uniqueidentifier)
+  referenced_RepoObjectColumn_guid : (uniqueidentifier)
+  referenced_schema_name : (nvarchar(128))
+  referenced_type : (char(2))
+  referencing_column_name : (nvarchar(128))
+  referencing_entity_name : (nvarchar(128))
+  referencing_id : (int)
+  referencing_RepoObject_guid : (uniqueidentifier)
+  referencing_RepoObjectColumn_guid : (uniqueidentifier)
+  referencing_schema_name : (nvarchar(128))
+  referencing_type : (char(2))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObjectColumn_reference_virtual.html reference.RepoObjectColumn_reference_virtual]]" as reference.RepoObjectColumn_reference_virtual << V >> {
+  --
+  definition : (nvarchar(max))
+  - InformationSource : (varchar(34))
+  is_computed : (bit)
+  is_referenced_object : (bit)
+  is_referencing_object_equal_referenced_object : (bit)
+  - referenced_column_name : (nvarchar(128))
+  - referenced_entity_name : (nvarchar(128))
+  referenced_id : (int)
+  referenced_minor_id : (int)
+  referenced_node_id : (bigint)
+  - referenced_RepoObject_guid : (uniqueidentifier)
+  - referenced_RepoObjectColumn_guid : (uniqueidentifier)
+  - referenced_schema_name : (nvarchar(128))
+  referenced_type : (char(2))
+  - referencing_column_name : (nvarchar(128))
+  - referencing_entity_name : (nvarchar(128))
+  referencing_id : (int)
+  referencing_minor_id : (int)
+  referencing_node_id : (bigint)
+  - referencing_RepoObject_guid : (uniqueidentifier)
+  - referencing_RepoObjectColumn_guid : (uniqueidentifier)
+  - referencing_schema_name : (nvarchar(128))
+  referencing_type : (char(2))
+  --
   --
 }
 
@@ -213,3 +221,10 @@ reference.RepoObjectColumn_reference_virtual <.. reference.RepoObjectColumn_refe
 reference.RepoObjectColumn_reference_union::referenced_RepoObject_guid <-- reference.RepoObjectColumn_reference::referenced_RepoObject_guid
 reference.RepoObjectColumn_reference_union::referenced_RepoObjectColumn_guid <-- reference.RepoObjectColumn_reference::referenced_RepoObjectColumn_guid
 reference.RepoObjectColumn_reference_union::referencing_RepoObjectColumn_guid <-- reference.RepoObjectColumn_reference::referencing_RepoObjectColumn_guid
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

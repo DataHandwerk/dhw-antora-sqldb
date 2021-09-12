@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,19 +25,26 @@ skinparam class {
 }
 
 
-entity property.RepoObjectProperty << U >> {
-  * **RepoObjectProperty_id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObjectProperty.html property.RepoObjectProperty]]" as property.RepoObjectProperty << U >> {
+  - **RepoObjectProperty_id** : (int)
   --
 }
 
-entity property.RepoObjectProperty_ForUpdate << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObjectProperty_ForUpdate.html property.RepoObjectProperty_ForUpdate]]" as property.RepoObjectProperty_ForUpdate << V >> {
   --
 }
 
-entity repo.RepoObject << U >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject.html repo.RepoObject]]" as repo.RepoObject << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
 property.RepoObjectProperty <.. property.RepoObjectProperty_ForUpdate
 repo.RepoObject <.. property.RepoObjectProperty_ForUpdate
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

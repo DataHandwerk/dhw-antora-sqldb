@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,48 +25,59 @@ skinparam class {
 }
 
 
-entity docs.ObjectRefCyclic << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.ObjectRefCyclic.html docs.ObjectRefCyclic]]" as docs.ObjectRefCyclic << V >> {
   --
-  * ObjectRefCyclic_Puml : nvarchar(max)
-  * page_content : nvarchar(max)
+  - ObjectRefCyclic_Puml : (nvarchar(max))
+  - page_content : (nvarchar(max))
   --
-}
-
-entity docs.ObjectRefCyclic_EntityList << V >> {
-  --
-  PumlEntityList : nvarchar(max)
-  PumlEntityOnlyPkList : nvarchar(max)
-  XrefEntityList : nvarchar(max)
   --
 }
 
-entity docs.RepoObject_Plantuml_Entity_T << U >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.ObjectRefCyclic_EntityList.html docs.ObjectRefCyclic_EntityList]]" as docs.ObjectRefCyclic_EntityList << V >> {
   --
-  * RepoObject_fullname2 : nvarchar(257)
-  * RepoObject_Puml : nvarchar(max)
-  * RepoObject_PumlOnlyIndex : nvarchar(max)
-  * RepoObject_PumlOnlyPK : nvarchar(max)
-  * RepoObject_PumlOnlyPkOrIndex : nvarchar(max)
-  * RepoObject_PumlOnlyPkOrNotHidden : nvarchar(max)
-  * RepoObject_schema_name : nvarchar(128)
+  PumlEntityList : (nvarchar(max))
+  PumlEntityOnlyPkList : (nvarchar(max))
+  XrefEntityList : (nvarchar(max))
+  --
   --
 }
 
-entity reference.ReferenceTree_cyclic_union << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.RepoObject_Plantuml_Entity_T.html docs.RepoObject_Plantuml_Entity_T]]" as docs.RepoObject_Plantuml_Entity_T << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
-  Referenced_fullname : nvarchar(261)
-  Referenced_fullname2 : nvarchar(257)
-  * Referenced_guid : uniqueidentifier
-  Referenced_type : char(2)
-  Referencing_fullname : nvarchar(261)
-  Referencing_fullname2 : nvarchar(257)
-  * Referencing_guid : uniqueidentifier
-  Referencing_type : varchar(2)
+  - RepoObject_fullname2 : (nvarchar(257))
+  - RepoObject_Puml : (nvarchar(max))
+  - RepoObject_PumlOnlyIndex : (nvarchar(max))
+  - RepoObject_PumlOnlyPK : (nvarchar(max))
+  - RepoObject_PumlOnlyPkOrIndex : (nvarchar(max))
+  - RepoObject_PumlOnlyPkOrNotHidden : (nvarchar(max))
+  - RepoObject_schema_name : (nvarchar(128))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.ReferenceTree_cyclic_union.html reference.ReferenceTree_cyclic_union]]" as reference.ReferenceTree_cyclic_union << V >> {
+  --
+  Referenced_fullname : (nvarchar(261))
+  Referenced_fullname2 : (nvarchar(257))
+  - Referenced_guid : (uniqueidentifier)
+  Referenced_type : (char(2))
+  Referencing_fullname : (nvarchar(261))
+  Referencing_fullname2 : (nvarchar(257))
+  - Referencing_guid : (uniqueidentifier)
+  Referencing_type : (varchar(2))
+  --
   --
 }
 
 docs.ObjectRefCyclic_EntityList <.. docs.ObjectRefCyclic
 docs.RepoObject_Plantuml_Entity_T <.. docs.ObjectRefCyclic_EntityList
 reference.ReferenceTree_cyclic_union <.. docs.ObjectRefCyclic_EntityList
+
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
 

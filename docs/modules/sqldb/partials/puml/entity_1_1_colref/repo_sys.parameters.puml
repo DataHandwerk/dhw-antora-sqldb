@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,79 +25,84 @@ skinparam class {
 }
 
 
-entity docs.RepoObject_ParameterList << V >> {
-  **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.RepoObject_ParameterList.html docs.RepoObject_ParameterList]]" as docs.RepoObject_ParameterList << V >> {
+  **RepoObject_guid** : (uniqueidentifier)
   --
-  AntoraParameterList : nvarchar(max)
-  --
-}
-
-entity repo_sys.parameters << V >> {
-  --
-  column_encryption_key_database_name : sysname
-  column_encryption_key_id : int
-  default_value : sql_variant
-  encryption_algorithm_name : sysname
-  encryption_type : int
-  encryption_type_desc : nvarchar(64)
-  * has_default_value : bit
-  * is_cursor_ref : bit
-  is_nullable : bit
-  * is_output : bit
-  * is_readonly : bit
-  * is_xml_document : bit
-  * max_length : smallint
-  name : sysname
-  * object_id : int
-  * parameter_id : int
-  * precision : tinyint
-  * scale : tinyint
-  SysObject_fullname : nvarchar(517)
-  SysObject_fullname2 : nvarchar(257)
-  SysObject_name : sysname
-  SysObject_RepoObject_guid : uniqueidentifier
-  SysObject_schema_name : sysname
-  SysObject_type : char(2)
-  * system_type_id : tinyint
-  user_type_fullname : nvarchar(182)
-  * user_type_id : int
-  user_type_name : sysname
-  * xml_collection_id : int
-  --
-}
-
-entity repo_sys.SysObject << V >> {
-  --
-  * create_date : datetime
-  history_table_id : int
-  * is_ms_shipped : bit
-  * is_published : bit
-  * is_schema_published : bit
-  max_column_id_used : int
-  * modify_date : datetime
-  * parent_object_id : int
-  principal_id : int
-  * schema_id : int
-  sql_modules_definition : nvarchar(max)
-  * SysObject_fullname : nvarchar(517)
-  * SysObject_fullname2 : nvarchar(257)
-  * SysObject_id : int
-  * SysObject_name : sysname
-  SysObject_RepoObject_guid : uniqueidentifier
-  SysObject_schema_name : sysname
-  temporal_type : tinyint
-  temporal_type_desc : nvarchar(60)
-  type : char(2)
-  type_desc : nvarchar(60)
-  --
-}
-
-entity sys_dwh.parameters << SN >> {
+  AntoraParameterList : (nvarchar(max))
   --
   --
 }
 
-entity sys_dwh.types << SN >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.parameters.html repo_sys.parameters]]" as repo_sys.parameters << V >> {
+  --
+  column_encryption_key_database_name : (sysname)
+  column_encryption_key_id : (int)
+  default_value : (sql_variant)
+  encryption_algorithm_name : (sysname)
+  encryption_type : (int)
+  encryption_type_desc : (nvarchar(64))
+  - has_default_value : (bit)
+  - is_cursor_ref : (bit)
+  is_nullable : (bit)
+  - is_output : (bit)
+  - is_readonly : (bit)
+  - is_xml_document : (bit)
+  - max_length : (smallint)
+  name : (sysname)
+  - object_id : (int)
+  - parameter_id : (int)
+  - precision : (tinyint)
+  - scale : (tinyint)
+  SysObject_fullname : (nvarchar(517))
+  SysObject_fullname2 : (nvarchar(257))
+  SysObject_name : (sysname)
+  SysObject_RepoObject_guid : (uniqueidentifier)
+  SysObject_schema_name : (sysname)
+  SysObject_type : (char(2))
+  - system_type_id : (tinyint)
+  user_type_fullname : (nvarchar(182))
+  - user_type_id : (int)
+  user_type_name : (sysname)
+  - xml_collection_id : (int)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.SysObject.html repo_sys.SysObject]]" as repo_sys.SysObject << V >> {
+  --
+  - create_date : (datetime)
+  history_table_id : (int)
+  - is_ms_shipped : (bit)
+  - is_published : (bit)
+  - is_schema_published : (bit)
+  max_column_id_used : (int)
+  - modify_date : (datetime)
+  - parent_object_id : (int)
+  principal_id : (int)
+  - schema_id : (int)
+  sql_modules_definition : (nvarchar(max))
+  - SysObject_fullname : (nvarchar(517))
+  - SysObject_fullname2 : (nvarchar(257))
+  - SysObject_id : (int)
+  - SysObject_name : (sysname)
+  SysObject_RepoObject_guid : (uniqueidentifier)
+  SysObject_schema_name : (sysname)
+  temporal_type : (tinyint)
+  temporal_type_desc : (nvarchar(60))
+  type : (char(2))
+  type_desc : (nvarchar(60))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/sys_dwh.parameters.html sys_dwh.parameters]]" as sys_dwh.parameters << SN >> {
+  --
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/sys_dwh.types.html sys_dwh.types]]" as sys_dwh.types << SN >> {
+  --
   --
   --
 }
@@ -112,3 +118,10 @@ repo_sys.SysObject::SysObject_name <-- repo_sys.parameters::SysObject_name
 repo_sys.SysObject::SysObject_RepoObject_guid <-- repo_sys.parameters::SysObject_RepoObject_guid
 repo_sys.SysObject::SysObject_schema_name <-- repo_sys.parameters::SysObject_schema_name
 repo_sys.SysObject::type <-- repo_sys.parameters::SysObject_type
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,25 +25,24 @@ skinparam class {
 }
 
 
-entity logs.usp_ExecutionLog_insert << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/logs.usp_ExecutionLog_insert.html logs.usp_ExecutionLog_insert]]" as logs.usp_ExecutionLog_insert << P >> {
   --
 }
 
-entity repo.Index_IndexPattern << V >> {
-  **index_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_IndexPattern.html repo.Index_IndexPattern]]" as repo.Index_IndexPattern << V >> {
   --
 }
 
-entity repo.Index_Settings << U >> {
-  * **index_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_Settings.html repo.Index_Settings]]" as repo.Index_Settings << U >> {
+  - **index_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.usp_Index_finish << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_Index_finish.html repo.usp_Index_finish]]" as repo.usp_Index_finish << P >> {
   --
 }
 
-entity repo.usp_Index_Settings << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_Index_Settings.html repo.usp_Index_Settings]]" as repo.usp_Index_Settings << P >> {
   --
 }
 
@@ -50,3 +50,10 @@ logs.usp_ExecutionLog_insert <.. repo.usp_Index_Settings
 repo.Index_IndexPattern <.. repo.usp_Index_Settings
 repo.Index_Settings <.. repo.usp_Index_Settings
 repo.usp_Index_Settings <.. repo.usp_Index_finish
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

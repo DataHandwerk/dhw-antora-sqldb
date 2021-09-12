@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,42 +25,47 @@ skinparam class {
 }
 
 
-entity logs.usp_ExecutionLog_insert << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/logs.usp_ExecutionLog_insert.html logs.usp_ExecutionLog_insert]]" as logs.usp_ExecutionLog_insert << P >> {
   --
-  --
-}
-
-entity repo.IndexColumn_ssas << V >> {
-  * **index_guid** : uniqueidentifier
-  * **index_column_id** : int
-  --
-  * ColumnName : nvarchar(128)
-  * databasename : nvarchar(128)
-  * RepoObjectColumn_guid : uniqueidentifier
-  * TableName : nvarchar(max)
-  --
-}
-
-entity repo.IndexColumn_ssas_T << U >> {
-  * **index_guid** : uniqueidentifier
-  * **index_column_id** : int
-  --
-  * ColumnName : nvarchar(128)
-  * ColumnType : bigint
-  * databasename : nvarchar(128)
-  * RepoObjectColumn_guid : uniqueidentifier
-  * TableID : numeric(20, 0)
-  * TableName : nvarchar(max)
-  {abstract} is_descending_key : bit
-  --
-}
-
-entity repo.usp_PERSIST_IndexColumn_ssas_T << P >> {
   --
   --
 }
 
-entity repo.usp_sync_guid_ssas << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.IndexColumn_ssas.html repo.IndexColumn_ssas]]" as repo.IndexColumn_ssas << V >> {
+  - **index_guid** : (uniqueidentifier)
+  - **index_column_id** : (int)
+  --
+  - ColumnName : (nvarchar(128))
+  - databasename : (nvarchar(128))
+  - RepoObjectColumn_guid : (uniqueidentifier)
+  - TableName : (nvarchar(max))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.IndexColumn_ssas_T.html repo.IndexColumn_ssas_T]]" as repo.IndexColumn_ssas_T << U >> {
+  - **index_guid** : (uniqueidentifier)
+  - **index_column_id** : (int)
+  --
+  - ColumnName : (nvarchar(128))
+  - ColumnType : (bigint)
+  - databasename : (nvarchar(128))
+  - RepoObjectColumn_guid : (uniqueidentifier)
+  - TableID : (numeric(20, 0))
+  - TableName : (nvarchar(max))
+  ~ is_descending_key : (bit)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_PERSIST_IndexColumn_ssas_T.html repo.usp_PERSIST_IndexColumn_ssas_T]]" as repo.usp_PERSIST_IndexColumn_ssas_T << P >> {
+  --
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_sync_guid_ssas.html repo.usp_sync_guid_ssas]]" as repo.usp_sync_guid_ssas << P >> {
+  --
   --
   --
 }
@@ -68,4 +74,11 @@ logs.usp_ExecutionLog_insert <.. repo.usp_PERSIST_IndexColumn_ssas_T
 repo.IndexColumn_ssas <.. repo.usp_PERSIST_IndexColumn_ssas_T
 repo.IndexColumn_ssas_T <.. repo.usp_PERSIST_IndexColumn_ssas_T
 repo.usp_PERSIST_IndexColumn_ssas_T <.. repo.usp_sync_guid_ssas
+
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
 

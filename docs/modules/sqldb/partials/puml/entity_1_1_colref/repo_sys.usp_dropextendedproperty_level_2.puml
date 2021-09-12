@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,35 +25,45 @@ skinparam class {
 }
 
 
-entity config.fs_dwh_database_name << FN >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/config.fs_dwh_database_name.html config.fs_dwh_database_name]]" as config.fs_dwh_database_name << FN >> {
   --
-  --
-}
-
-entity repo_sys.usp_dropextendedproperty_level_2 << P >> {
   --
   --
 }
 
-entity sys_self.ExtendedProperties_ParameterForAddUpdateDrop << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.usp_dropextendedproperty_level_2.html repo_sys.usp_dropextendedproperty_level_2]]" as repo_sys.usp_dropextendedproperty_level_2 << P >> {
   --
-  * class : tinyint
-  class_desc : nvarchar(60)
-  level0name : nvarchar(128)
-  * level0type : varchar(6)
-  level1name : nvarchar(128)
-  level1type : varchar(9)
-  level2name : nvarchar(128)
-  level2type : varchar(10)
-  * minor_id : int
-  * property_name : sysname
-  property_value : sql_variant
-  type : char(2)
-  type_level1type : varchar(9)
-  type_level2type : varchar(10)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/sys_self.ExtendedProperties_ParameterForAddUpdateDrop.html sys_self.ExtendedProperties_ParameterForAddUpdateDrop]]" as sys_self.ExtendedProperties_ParameterForAddUpdateDrop << V >> {
+  --
+  - class : (tinyint)
+  class_desc : (nvarchar(60))
+  level0name : (nvarchar(128))
+  - level0type : (varchar(6))
+  level1name : (nvarchar(128))
+  level1type : (varchar(9))
+  level2name : (nvarchar(128))
+  level2type : (varchar(10))
+  - minor_id : (int)
+  - property_name : (sysname)
+  property_value : (sql_variant)
+  type : (char(2))
+  type_level1type : (varchar(9))
+  type_level2type : (varchar(10))
+  --
   --
 }
 
 config.fs_dwh_database_name <.. repo_sys.usp_dropextendedproperty_level_2
 sys_self.ExtendedProperties_ParameterForAddUpdateDrop <.. repo_sys.usp_dropextendedproperty_level_2
+
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
 

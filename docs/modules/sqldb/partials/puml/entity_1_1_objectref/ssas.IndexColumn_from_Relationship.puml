@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,26 +25,36 @@ skinparam class {
 }
 
 
-entity ssas.IndexColumn_from_Relationship << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.IndexColumn_from_Relationship.html ssas.IndexColumn_from_Relationship]]" as ssas.IndexColumn_from_Relationship << V >> {
+  - **databasename** : (nvarchar(128))
+  - **TableName** : (nvarchar(128))
+  - **tables_columns_name** : (nvarchar(128))
   --
 }
 
-entity ssas.IndexColumn_union << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.IndexColumn_union.html ssas.IndexColumn_union]]" as ssas.IndexColumn_union << V >> {
   --
 }
 
-entity ssas.model_json_311_tables_columns_T << U >> {
-  * **databasename** : nvarchar(128)
-  * **tables_name** : nvarchar(128)
-  **tables_columns_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_311_tables_columns_T.html ssas.model_json_311_tables_columns_T]]" as ssas.model_json_311_tables_columns_T << U >> {
+  - **databasename** : (nvarchar(128))
+  - **tables_name** : (nvarchar(128))
+  **tables_columns_name** : (nvarchar(128))
   --
 }
 
-entity ssas.model_json_32_relationships_T << U >> {
-  * **ForeignKey_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_32_relationships_T.html ssas.model_json_32_relationships_T]]" as ssas.model_json_32_relationships_T << U >> {
+  - **ForeignKey_guid** : (uniqueidentifier)
   --
 }
 
 ssas.IndexColumn_from_Relationship <.. ssas.IndexColumn_union
 ssas.model_json_311_tables_columns_T <.. ssas.IndexColumn_from_Relationship
 ssas.model_json_32_relationships_T <.. ssas.IndexColumn_from_Relationship
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

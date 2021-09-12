@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,54 +25,58 @@ skinparam class {
 }
 
 
-entity repo.Index_ssas_IndexPatternColumnGuid << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_ssas_IndexPatternColumnGuid.html repo.Index_ssas_IndexPatternColumnGuid]]" as repo.Index_ssas_IndexPatternColumnGuid << V >> {
   --
-  * index_guid : uniqueidentifier
-  IndexPatternColumnGuid : varchar(8000)
-  parent_RepoObject_guid : uniqueidentifier
+  - index_guid : (uniqueidentifier)
+  IndexPatternColumnGuid : (varchar(8000))
+  parent_RepoObject_guid : (uniqueidentifier)
   --
-}
-
-entity repo.Index_ssas_T << U >> {
-  * **databasename** : nvarchar(128)
-  **index_name** : nvarchar(450)
-  --
-  * ColumnName : nvarchar(128)
-  * index_guid : uniqueidentifier
-  * is_index_primary_key : bit
-  * is_index_unique : bit
-  * RepoObject_guid : uniqueidentifier
-  * TableID : numeric(20, 0)
-  * TableName : nvarchar(128)
   --
 }
 
-entity repo.Index_union << V >> {
-  **index_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_ssas_T.html repo.Index_ssas_T]]" as repo.Index_ssas_T << U >> {
+  - **databasename** : (nvarchar(128))
+  **index_name** : (nvarchar(450))
   --
-  index_name : nvarchar(450)
-  index_type : tinyint
-  IndexPatternColumnGuid : varchar(8000)
-  is_index_disabled : bit
-  is_index_primary_key : bit
-  is_index_real : bit
-  is_index_unique : bit
-  parent_RepoObject_guid : uniqueidentifier
-  referenced_index_guid : uniqueidentifier
+  - ColumnName : (nvarchar(128))
+  - index_guid : (uniqueidentifier)
+  - is_index_primary_key : (bit)
+  - is_index_unique : (bit)
+  - RepoObject_guid : (uniqueidentifier)
+  - TableID : (numeric(20, 0))
+  - TableName : (nvarchar(128))
+  --
   --
 }
 
-entity repo.IndexColumn_ssas_T << U >> {
-  * **index_guid** : uniqueidentifier
-  * **index_column_id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_union.html repo.Index_union]]" as repo.Index_union << V >> {
+  **index_guid** : (uniqueidentifier)
   --
-  * ColumnName : nvarchar(128)
-  * ColumnType : bigint
-  * databasename : nvarchar(128)
-  * RepoObjectColumn_guid : uniqueidentifier
-  * TableID : numeric(20, 0)
-  * TableName : nvarchar(max)
-  {abstract} is_descending_key : bit
+  index_name : (nvarchar(450))
+  index_type : (tinyint)
+  IndexPatternColumnGuid : (varchar(8000))
+  is_index_disabled : (bit)
+  is_index_primary_key : (bit)
+  is_index_real : (bit)
+  is_index_unique : (bit)
+  parent_RepoObject_guid : (uniqueidentifier)
+  referenced_index_guid : (uniqueidentifier)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.IndexColumn_ssas_T.html repo.IndexColumn_ssas_T]]" as repo.IndexColumn_ssas_T << U >> {
+  - **index_guid** : (uniqueidentifier)
+  - **index_column_id** : (int)
+  --
+  - ColumnName : (nvarchar(128))
+  - ColumnType : (bigint)
+  - databasename : (nvarchar(128))
+  - RepoObjectColumn_guid : (uniqueidentifier)
+  - TableID : (numeric(20, 0))
+  - TableName : (nvarchar(max))
+  ~ is_descending_key : (bit)
+  --
   --
 }
 
@@ -79,3 +84,10 @@ repo.Index_ssas_IndexPatternColumnGuid <.. repo.Index_union
 repo.Index_ssas_T <.. repo.Index_ssas_IndexPatternColumnGuid
 repo.IndexColumn_ssas_T <.. repo.Index_ssas_IndexPatternColumnGuid
 repo.Index_ssas_T::index_guid <-- repo.Index_ssas_IndexPatternColumnGuid::index_guid
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

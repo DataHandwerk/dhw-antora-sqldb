@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,27 +25,27 @@ skinparam class {
 }
 
 
-entity logs.usp_ExecutionLog_insert << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/logs.usp_ExecutionLog_insert.html logs.usp_ExecutionLog_insert]]" as logs.usp_ExecutionLog_insert << P >> {
   --
 }
 
-entity repo.usp_sync_guid_ssas << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_sync_guid_ssas.html repo.usp_sync_guid_ssas]]" as repo.usp_sync_guid_ssas << P >> {
   --
 }
 
-entity ssas.model_json_31_tables << V >> {
-  * **databasename** : nvarchar(128)
-  **tables_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_31_tables.html ssas.model_json_31_tables]]" as ssas.model_json_31_tables << V >> {
+  - **databasename** : (nvarchar(128))
+  **tables_name** : (nvarchar(128))
   --
 }
 
-entity ssas.model_json_31_tables_T << U >> {
-  * **databasename** : nvarchar(128)
-  **tables_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_31_tables_T.html ssas.model_json_31_tables_T]]" as ssas.model_json_31_tables_T << U >> {
+  - **databasename** : (nvarchar(128))
+  **tables_name** : (nvarchar(128))
   --
 }
 
-entity ssas.usp_PERSIST_model_json_31_tables_T << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.usp_PERSIST_model_json_31_tables_T.html ssas.usp_PERSIST_model_json_31_tables_T]]" as ssas.usp_PERSIST_model_json_31_tables_T << P >> {
   --
 }
 
@@ -52,3 +53,10 @@ logs.usp_ExecutionLog_insert <.. ssas.usp_PERSIST_model_json_31_tables_T
 ssas.model_json_31_tables <.. ssas.usp_PERSIST_model_json_31_tables_T
 ssas.model_json_31_tables_T <.. ssas.usp_PERSIST_model_json_31_tables_T
 ssas.usp_PERSIST_model_json_31_tables_T <.. repo.usp_sync_guid_ssas
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

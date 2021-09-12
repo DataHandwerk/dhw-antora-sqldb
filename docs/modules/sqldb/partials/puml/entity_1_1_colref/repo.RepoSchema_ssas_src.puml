@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,60 +25,65 @@ skinparam class {
 }
 
 
-entity repo.RepoSchema_ssas_src << V >> {
-  * **RepoSchema_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoSchema_ssas_src.html repo.RepoSchema_ssas_src]]" as repo.RepoSchema_ssas_src << V >> {
+  - **RepoSchema_name** : (nvarchar(128))
   --
-  * is_ssas : int
-  * is_SysSchema_missing : int
-  RepoSchema_ms_description : nvarchar(max)
-  * SysSchema_name : nvarchar(128)
-  --
-}
-
-entity repo.RepoSchema_ssas_tgt << V >> {
-  * **RepoSchema_name** : nvarchar(128)
-  --
-  has_different_sys_names : bit
-  * is_RepoSchema_name_uniqueidentifier : int
-  * is_ssas : int
-  * is_SysSchema_missing : int
-  * is_SysSchema_name_uniqueidentifier : int
-  * RepoSchema_guid : uniqueidentifier
-  RepoSchema_ms_description : nvarchar(max)
-  SysSchema_id : int
-  * SysSchema_name : nvarchar(128)
-  --
-}
-
-entity repo.usp_PERSIST_RepoSchema_ssas_tgt << P >> {
+  - is_ssas : (int)
+  - is_SysSchema_missing : (int)
+  RepoSchema_ms_description : (nvarchar(max))
+  - SysSchema_name : (nvarchar(128))
   --
   --
 }
 
-entity ssas.model_json_20 << V >> {
-  * **databasename** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoSchema_ssas_tgt.html repo.RepoSchema_ssas_tgt]]" as repo.RepoSchema_ssas_tgt << V >> {
+  - **RepoSchema_name** : (nvarchar(128))
   --
-  l1_compatibilityLevel : int
-  l1_id : nvarchar(500)
-  l1_name : nvarchar(500)
-  l2_annotations_ja : nvarchar(max)
-  l2_culture : nvarchar(500)
-  l2_cultures_ja : nvarchar(max)
-  l2_dataSources_ja : nvarchar(max)
-  l2_description : nvarchar(max)
-  l2_description_ja : nvarchar(max)
-  l2_name : nvarchar(500)
-  l2_perspectives_ja : nvarchar(max)
-  l2_relationships_ja : nvarchar(max)
-  l2_roles_ja : nvarchar(max)
-  l2_tables_ja : nvarchar(max)
+  has_different_sys_names : (bit)
+  - is_RepoSchema_name_uniqueidentifier : (int)
+  - is_ssas : (int)
+  - is_SysSchema_missing : (int)
+  - is_SysSchema_name_uniqueidentifier : (int)
+  - RepoSchema_guid : (uniqueidentifier)
+  RepoSchema_ms_description : (nvarchar(max))
+  SysSchema_id : (int)
+  - SysSchema_name : (nvarchar(128))
+  --
   --
 }
 
-entity ssas.model_json_2011_descriptions_StrAgg << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_PERSIST_RepoSchema_ssas_tgt.html repo.usp_PERSIST_RepoSchema_ssas_tgt]]" as repo.usp_PERSIST_RepoSchema_ssas_tgt << P >> {
   --
-  * databasename : nvarchar(128)
-  descriptions_StrAgg : nvarchar(max)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_20.html ssas.model_json_20]]" as ssas.model_json_20 << V >> {
+  - **databasename** : (nvarchar(128))
+  --
+  l1_compatibilityLevel : (int)
+  l1_id : (nvarchar(500))
+  l1_name : (nvarchar(500))
+  l2_annotations_ja : (nvarchar(max))
+  l2_culture : (nvarchar(500))
+  l2_cultures_ja : (nvarchar(max))
+  l2_dataSources_ja : (nvarchar(max))
+  l2_description : (nvarchar(max))
+  l2_description_ja : (nvarchar(max))
+  l2_name : (nvarchar(500))
+  l2_perspectives_ja : (nvarchar(max))
+  l2_relationships_ja : (nvarchar(max))
+  l2_roles_ja : (nvarchar(max))
+  l2_tables_ja : (nvarchar(max))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_2011_descriptions_StrAgg.html ssas.model_json_2011_descriptions_StrAgg]]" as ssas.model_json_2011_descriptions_StrAgg << V >> {
+  --
+  - databasename : (nvarchar(128))
+  descriptions_StrAgg : (nvarchar(max))
+  --
   --
 }
 
@@ -91,3 +97,10 @@ repo.RepoSchema_ssas_src::RepoSchema_ms_description <-- repo.RepoSchema_ssas_tgt
 repo.RepoSchema_ssas_src::RepoSchema_name <-- repo.RepoSchema_ssas_tgt::RepoSchema_name
 repo.RepoSchema_ssas_src::SysSchema_name <-- repo.RepoSchema_ssas_tgt::SysSchema_name
 ssas.model_json_20::databasename <-- repo.RepoSchema_ssas_src::RepoSchema_name
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

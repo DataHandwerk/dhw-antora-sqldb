@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,37 +25,47 @@ skinparam class {
 }
 
 
-entity property.RepoObjectProperty_Collect_source_uspgenerator << V >> {
-  **RepoObject_guid** : uniqueidentifier
-  * **property_name** : varchar(14)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObjectProperty_Collect_source_uspgenerator.html property.RepoObjectProperty_Collect_source_uspgenerator]]" as property.RepoObjectProperty_Collect_source_uspgenerator << V >> {
+  **RepoObject_guid** : (uniqueidentifier)
+  - **property_name** : (varchar(14))
   --
-  property_value : nvarchar(max)
-  --
-}
-
-entity property.usp_RepoObjectProperty_collect << P >> {
+  property_value : (nvarchar(max))
   --
   --
 }
 
-entity uspgenerator.GeneratorUsp_SqlUsp << V >> {
-  * **usp_id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.usp_RepoObjectProperty_collect.html property.usp_RepoObjectProperty_collect]]" as property.usp_RepoObjectProperty_collect << P >> {
   --
-  * AdocUspSteps : nvarchar(max)
-  * has_logging : tinyint
-  MS_Description : nvarchar(4000)
-  RepoObject_guid : uniqueidentifier
-  SqlStepList : nvarchar(max)
-  * SqlUsp : nvarchar(max)
-  usp_Description : nvarchar(4000)
-  * usp_fullname : nvarchar(261)
-  * usp_name : nvarchar(128)
-  * usp_schema : nvarchar(128)
-  * UspExamples : nvarchar(4000)
-  UspParameters : nvarchar(max)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/uspgenerator.GeneratorUsp_SqlUsp.html uspgenerator.GeneratorUsp_SqlUsp]]" as uspgenerator.GeneratorUsp_SqlUsp << V >> {
+  - **usp_id** : (int)
+  --
+  - AdocUspSteps : (nvarchar(max))
+  - has_logging : (tinyint)
+  MS_Description : (nvarchar(4000))
+  RepoObject_guid : (uniqueidentifier)
+  SqlStepList : (nvarchar(max))
+  - SqlUsp : (nvarchar(max))
+  usp_Description : (nvarchar(4000))
+  - usp_fullname : (nvarchar(261))
+  - usp_name : (nvarchar(128))
+  - usp_schema : (nvarchar(128))
+  - UspExamples : (nvarchar(4000))
+  UspParameters : (nvarchar(max))
+  --
   --
 }
 
 property.RepoObjectProperty_Collect_source_uspgenerator <.. property.usp_RepoObjectProperty_collect
 uspgenerator.GeneratorUsp_SqlUsp <.. property.RepoObjectProperty_Collect_source_uspgenerator
 uspgenerator.GeneratorUsp_SqlUsp::RepoObject_guid <-- property.RepoObjectProperty_Collect_source_uspgenerator::RepoObject_guid
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

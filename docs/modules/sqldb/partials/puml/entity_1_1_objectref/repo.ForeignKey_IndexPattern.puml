@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,25 +25,32 @@ skinparam class {
 }
 
 
-entity repo.ForeignKey_Indexes << V >> {
-  **ForeignKey_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.ForeignKey_Indexes.html repo.ForeignKey_Indexes]]" as repo.ForeignKey_Indexes << V >> {
+  **ForeignKey_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.ForeignKey_IndexPattern << V >> {
-  * **constraint_object_id** : int
-  **ForeignKey_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.ForeignKey_IndexPattern.html repo.ForeignKey_IndexPattern]]" as repo.ForeignKey_IndexPattern << V >> {
+  - **constraint_object_id** : (int)
+  **ForeignKey_guid** : (uniqueidentifier)
   --
 }
 
-entity repo_sys.ForeignKey << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.ForeignKey.html repo_sys.ForeignKey]]" as repo_sys.ForeignKey << V >> {
   --
 }
 
-entity repo_sys.ForeignKeyColumn << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.ForeignKeyColumn.html repo_sys.ForeignKeyColumn]]" as repo_sys.ForeignKeyColumn << V >> {
   --
 }
 
 repo.ForeignKey_IndexPattern <.. repo.ForeignKey_Indexes
 repo_sys.ForeignKey <.. repo.ForeignKey_IndexPattern
 repo_sys.ForeignKeyColumn <.. repo.ForeignKey_IndexPattern
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

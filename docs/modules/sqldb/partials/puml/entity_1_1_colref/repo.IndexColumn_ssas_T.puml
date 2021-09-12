@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,59 +25,64 @@ skinparam class {
 }
 
 
-entity repo.Index_ssas_IndexPatternColumnGuid << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_ssas_IndexPatternColumnGuid.html repo.Index_ssas_IndexPatternColumnGuid]]" as repo.Index_ssas_IndexPatternColumnGuid << V >> {
   --
-  * index_guid : uniqueidentifier
-  IndexPatternColumnGuid : varchar(8000)
-  parent_RepoObject_guid : uniqueidentifier
+  - index_guid : (uniqueidentifier)
+  IndexPatternColumnGuid : (varchar(8000))
+  parent_RepoObject_guid : (uniqueidentifier)
   --
-}
-
-entity repo.IndexColumn_ssas << V >> {
-  * **index_guid** : uniqueidentifier
-  * **index_column_id** : int
-  --
-  * ColumnName : nvarchar(128)
-  * databasename : nvarchar(128)
-  * RepoObjectColumn_guid : uniqueidentifier
-  * TableName : nvarchar(max)
   --
 }
 
-entity repo.IndexColumn_ssas_gross << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.IndexColumn_ssas.html repo.IndexColumn_ssas]]" as repo.IndexColumn_ssas << V >> {
+  - **index_guid** : (uniqueidentifier)
+  - **index_column_id** : (int)
   --
-  column_user_type_fullname : nvarchar(128)
-  * index_column_id : int
-  * index_guid : uniqueidentifier
-  * index_name : nvarchar(450)
-  is_descending_key : bit
-  * is_index_primary_key : bit
-  is_index_real : bit
-  * is_index_unique : bit
-  * Object_column_name : nvarchar(128)
-  parent_Object_fullname : nvarchar(261)
-  parent_Object_name : nvarchar(128)
-  * parent_RepoObject_guid : uniqueidentifier
-  parent_schema_name : nvarchar(128)
-  * RepoObjectColumn_guid : uniqueidentifier
+  - ColumnName : (nvarchar(128))
+  - databasename : (nvarchar(128))
+  - RepoObjectColumn_guid : (uniqueidentifier)
+  - TableName : (nvarchar(max))
+  --
   --
 }
 
-entity repo.IndexColumn_ssas_T << U >> {
-  * **index_guid** : uniqueidentifier
-  * **index_column_id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.IndexColumn_ssas_gross.html repo.IndexColumn_ssas_gross]]" as repo.IndexColumn_ssas_gross << V >> {
   --
-  * ColumnName : nvarchar(128)
-  * ColumnType : bigint
-  * databasename : nvarchar(128)
-  * RepoObjectColumn_guid : uniqueidentifier
-  * TableID : numeric(20, 0)
-  * TableName : nvarchar(max)
-  {abstract} is_descending_key : bit
+  column_user_type_fullname : (nvarchar(128))
+  - index_column_id : (int)
+  - index_guid : (uniqueidentifier)
+  - index_name : (nvarchar(450))
+  is_descending_key : (bit)
+  - is_index_primary_key : (bit)
+  is_index_real : (bit)
+  - is_index_unique : (bit)
+  - Object_column_name : (nvarchar(128))
+  parent_Object_fullname : (nvarchar(261))
+  parent_Object_name : (nvarchar(128))
+  - parent_RepoObject_guid : (uniqueidentifier)
+  parent_schema_name : (nvarchar(128))
+  - RepoObjectColumn_guid : (uniqueidentifier)
+  --
   --
 }
 
-entity repo.usp_PERSIST_IndexColumn_ssas_T << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.IndexColumn_ssas_T.html repo.IndexColumn_ssas_T]]" as repo.IndexColumn_ssas_T << U >> {
+  - **index_guid** : (uniqueidentifier)
+  - **index_column_id** : (int)
+  --
+  - ColumnName : (nvarchar(128))
+  - ColumnType : (bigint)
+  - databasename : (nvarchar(128))
+  - RepoObjectColumn_guid : (uniqueidentifier)
+  - TableID : (numeric(20, 0))
+  - TableName : (nvarchar(max))
+  ~ is_descending_key : (bit)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_PERSIST_IndexColumn_ssas_T.html repo.usp_PERSIST_IndexColumn_ssas_T]]" as repo.usp_PERSIST_IndexColumn_ssas_T << P >> {
+  --
   --
   --
 }
@@ -95,3 +101,10 @@ repo.IndexColumn_ssas_T::index_column_id <-- repo.IndexColumn_ssas_gross::index_
 repo.IndexColumn_ssas_T::index_guid <-- repo.IndexColumn_ssas_gross::index_guid
 repo.IndexColumn_ssas_T::is_descending_key <-- repo.IndexColumn_ssas_gross::is_descending_key
 repo.IndexColumn_ssas_T::RepoObjectColumn_guid <-- repo.IndexColumn_ssas_gross::RepoObjectColumn_guid
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

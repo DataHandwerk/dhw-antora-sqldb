@@ -43,7 +43,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-05 13:29:31
+2021-09-10 19:21:02
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -51,6 +51,12 @@ stored procedure
 // tag::AntoraColumnDetails[]
 
 // end::AntoraColumnDetails[]
+
+== AntoraMeasureDetails
+
+// tag::AntoraMeasureDetails[]
+
+// end::AntoraMeasureDetails[]
 
 == AntoraPkColumnTableRows
 
@@ -134,10 +140,10 @@ ELSE
 [source,sql]
 ----
 SET @outputDirPartNav = ISNULL(@outputDirPartNav, (
-   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModul', '') + '\'
+   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModule', '') + '\'
    ) + 'partials\navlist\')
 SET @outputDirPageNav = ISNULL(@outputDirPageNav, (
-   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModul', '') + '\'
+   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModule', '') + '\'
    ) + 'pages\nav\')
 ----
 =====
@@ -774,7 +780,7 @@ EXEC [docs].[usp_AntoraExport_navigation]
 // tag::ms_description[]
 https://antora.org/[Antora] uses https://docs.antora.org/antora/2.3/navigation/files-and-lists/[Navigation Files and Lists]. Content for these files is exported
 
-* check and correct xref:config.Parameter.adoc#column-Parameter_value[config.Parameter.Parameter_value] for ('AntoraModulFolder', ''), a possible parameter is
+* check and correct xref:config.Parameter.adoc#column-Parameter_value[config.Parameter.Parameter_value] for ('AntoraModuleFolder', ''), a possible parameter is
 +
 ====
 D:\Repos\GitHub\MyOrganisation\MyProject-docs\docs\modules
@@ -990,10 +996,10 @@ ELSE
 PRINT CONCAT('usp_id;Number;Parent_Number: ',28,';',120,';',NULL);
 
 SET @outputDirPartNav = ISNULL(@outputDirPartNav, (
-   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModul', '') + '\'
+   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModule', '') + '\'
    ) + 'partials\navlist\')
 SET @outputDirPageNav = ISNULL(@outputDirPageNav, (
-   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModul', '') + '\'
+   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModule', '') + '\'
    ) + 'pages\nav\')
 
 /*{"ReportUspStep":[{"Number":210,"Name":"declare variables","has_logging":0,"is_condition":0,"is_inactive":0,"is_SubProcedure":0}]}*/

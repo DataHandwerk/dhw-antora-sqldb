@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,274 +25,287 @@ skinparam class {
 }
 
 
-entity repo.SysObject_RepoObject_via_guid << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.SysObject_RepoObject_via_guid.html repo.SysObject_RepoObject_via_guid]]" as repo.SysObject_RepoObject_via_guid << V >> {
   --
-  history_table_guid : uniqueidentifier
-  history_table_id : int
-  is_repo_managed : bit
-  is_RepoObject_name_uniqueidentifier : int
-  is_SysObject_name_uniqueidentifier : int
-  * modify_date : datetime
-  * parent_object_id : int
-  Repo_history_table_guid : uniqueidentifier
-  Repo_temporal_type : tinyint
-  RepoObject_guid : uniqueidentifier
-  RepoObject_is_SysObject_missing : bit
-  RepoObject_name : nvarchar(128)
-  RepoObject_schema_name : nvarchar(128)
-  RepoObject_SysObject_id : int
-  RepoObject_SysObject_modify_date : datetime
-  RepoObject_SysObject_name : nvarchar(128)
-  RepoObject_SysObject_parent_object_id : int
-  RepoObject_SysObject_schema_name : nvarchar(128)
-  RepoObject_SysObject_type : char(2)
-  RepoObject_type : char(2)
-  * SysObject_id : int
-  * SysObject_name : sysname
-  SysObject_RepoObject_guid : uniqueidentifier
-  SysObject_schema_name : sysname
-  SysObject_type : char(2)
-  SysObject_type_desc : nvarchar(60)
-  temporal_type : tinyint
-  --
-}
-
-entity repo.SysObject_RepoObject_via_name << V >> {
-  --
-  history_table_guid : uniqueidentifier
-  history_table_id : int
-  is_repo_managed : bit
-  is_RepoObject_name_uniqueidentifier : int
-  is_SysObject_name_uniqueidentifier : int
-  * modify_date : datetime
-  * parent_object_id : int
-  Repo_history_table_guid : uniqueidentifier
-  Repo_temporal_type : tinyint
-  RepoObject_guid : uniqueidentifier
-  RepoObject_is_SysObject_missing : bit
-  RepoObject_name : nvarchar(128)
-  RepoObject_schema_name : nvarchar(128)
-  RepoObject_SysObject_id : int
-  RepoObject_SysObject_modify_date : datetime
-  RepoObject_SysObject_name : nvarchar(128)
-  RepoObject_SysObject_parent_object_id : int
-  RepoObject_SysObject_schema_name : nvarchar(128)
-  RepoObject_SysObject_type : char(2)
-  RepoObject_type : char(2)
-  * SysObject_id : int
-  * SysObject_name : sysname
-  SysObject_RepoObject_guid : uniqueidentifier
-  SysObject_schema_name : sysname
-  SysObject_type : char(2)
-  SysObject_type_desc : nvarchar(60)
-  temporal_type : tinyint
-  --
-}
-
-entity repo.usp_sync_guid_RepoObject << P >> {
+  history_table_guid : (uniqueidentifier)
+  history_table_id : (int)
+  is_repo_managed : (bit)
+  is_RepoObject_name_uniqueidentifier : (int)
+  is_SysObject_name_uniqueidentifier : (int)
+  - modify_date : (datetime)
+  - parent_object_id : (int)
+  Repo_history_table_guid : (uniqueidentifier)
+  Repo_temporal_type : (tinyint)
+  RepoObject_guid : (uniqueidentifier)
+  RepoObject_is_SysObject_missing : (bit)
+  RepoObject_name : (nvarchar(128))
+  RepoObject_schema_name : (nvarchar(128))
+  RepoObject_SysObject_id : (int)
+  RepoObject_SysObject_modify_date : (datetime)
+  RepoObject_SysObject_name : (nvarchar(128))
+  RepoObject_SysObject_parent_object_id : (int)
+  RepoObject_SysObject_schema_name : (nvarchar(128))
+  RepoObject_SysObject_type : (char(2))
+  RepoObject_type : (char(2))
+  - SysObject_id : (int)
+  - SysObject_name : (sysname)
+  SysObject_RepoObject_guid : (uniqueidentifier)
+  SysObject_schema_name : (sysname)
+  SysObject_type : (char(2))
+  SysObject_type_desc : (nvarchar(60))
+  temporal_type : (tinyint)
   --
   --
 }
 
-entity repo_sys.ColumnReference << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.SysObject_RepoObject_via_name.html repo.SysObject_RepoObject_via_name]]" as repo.SysObject_RepoObject_via_name << V >> {
   --
-  * is_all_columns_found : bit
-  * is_ambiguous : bit
-  * is_caller_dependent : bit
-  * is_incomplete : bit
-  * is_insert_all : bit
-  * is_select_all : bit
-  * is_selected : bit
-  * is_updated : bit
-  referenced_class : tinyint
-  referenced_class_desc : nvarchar(60)
-  referenced_database_name : nvarchar(128)
-  referenced_entity_name : nvarchar(128)
-  referenced_id : int
-  referenced_minor_id : int
-  referenced_minor_name : nvarchar(128)
-  referenced_schema_name : nvarchar(128)
-  referenced_server_name : nvarchar(128)
-  referencing_minor_id : int
-  * SysObject_full_name : nvarchar(517)
-  --
-}
-
-entity repo_sys.ExtendedProperties << V >> {
-  --
-  * class : tinyint
-  class_desc : nvarchar(60)
-  entity_column_name : nvarchar(128)
-  entity_index_name : nvarchar(128)
-  entity_parameter_name : nvarchar(128)
-  level2type : varchar(9)
-  * major_id : int
-  * minor_id : int
-  minor_name : nvarchar(128)
-  parent_name : sysname
-  parent_object_id : int
-  parent_type : char(2)
-  property_basetype : sql_variant
-  * property_name : sysname
-  property_nvarchar : nvarchar(4000)
-  property_value : sql_variant
-  SysObject_name : nvarchar(128)
-  SysObject_schema_name : nvarchar(128)
-  --
-}
-
-entity repo_sys.parameters << V >> {
-  --
-  column_encryption_key_database_name : sysname
-  column_encryption_key_id : int
-  default_value : sql_variant
-  encryption_algorithm_name : sysname
-  encryption_type : int
-  encryption_type_desc : nvarchar(64)
-  * has_default_value : bit
-  * is_cursor_ref : bit
-  is_nullable : bit
-  * is_output : bit
-  * is_readonly : bit
-  * is_xml_document : bit
-  * max_length : smallint
-  name : sysname
-  * object_id : int
-  * parameter_id : int
-  * precision : tinyint
-  * scale : tinyint
-  SysObject_fullname : nvarchar(517)
-  SysObject_fullname2 : nvarchar(257)
-  SysObject_name : sysname
-  SysObject_RepoObject_guid : uniqueidentifier
-  SysObject_schema_name : sysname
-  SysObject_type : char(2)
-  * system_type_id : tinyint
-  user_type_fullname : nvarchar(182)
-  * user_type_id : int
-  user_type_name : sysname
-  * xml_collection_id : int
-  --
-}
-
-entity repo_sys.SysColumn << V >> {
-  --
-  collation_name : sysname
-  column_encryption_key_database_name : sysname
-  column_encryption_key_id : int
-  default_definition : nvarchar(max)
-  default_is_system_named : bit
-  default_name : sysname
-  * default_object_id : int
-  default_parent_column_id : int
-  definition : nvarchar(max)
-  encryption_algorithm_name : sysname
-  encryption_type : int
-  encryption_type_desc : nvarchar(64)
-  generated_always_type : tinyint
-  generated_always_type_desc : nvarchar(60)
-  graph_type : int
-  graph_type_desc : nvarchar(60)
-  increment_value : sql_variant
-  * is_ansi_padded : bit
-  is_column_set : bit
-  * is_computed : bit
-  is_dts_replicated : bit
-  * is_filestream : bit
-  is_hidden : bit
-  * is_identity : bit
-  * is_masked : bit
-  is_merge_published : bit
-  is_non_sql_subscribed : bit
-  is_nullable : bit
-  is_persisted : bit
-  is_replicated : bit
-  * is_rowguidcol : bit
-  is_sparse : bit
-  * is_xml_document : bit
-  last_value : sql_variant
-  * max_length : smallint
-  * precision : tinyint
-  * rule_object_id : int
-  * scale : tinyint
-  seed_value : sql_variant
-  * SysObject_column_id : int
-  SysObject_column_name : sysname
-  SysObject_fullname : nvarchar(517)
-  SysObject_fullname2 : nvarchar(257)
-  * SysObject_id : int
-  SysObject_name : nvarchar(128)
-  SysObject_RepoObject_guid : uniqueidentifier
-  SysObject_RepoObjectColumn_guid : uniqueidentifier
-  SysObject_schema_name : nvarchar(128)
-  SysObject_type : char(2)
-  SysObject_type_desc : nvarchar(60)
-  * system_type_id : tinyint
-  user_type_fullname : nvarchar(182)
-  * user_type_id : int
-  user_type_name : sysname
-  uses_database_collation : bit
-  * xml_collection_id : int
-  --
-}
-
-entity repo_sys.SysObject << V >> {
-  --
-  * create_date : datetime
-  history_table_id : int
-  * is_ms_shipped : bit
-  * is_published : bit
-  * is_schema_published : bit
-  max_column_id_used : int
-  * modify_date : datetime
-  * parent_object_id : int
-  principal_id : int
-  * schema_id : int
-  sql_modules_definition : nvarchar(max)
-  * SysObject_fullname : nvarchar(517)
-  * SysObject_fullname2 : nvarchar(257)
-  * SysObject_id : int
-  * SysObject_name : sysname
-  SysObject_RepoObject_guid : uniqueidentifier
-  SysObject_schema_name : sysname
-  temporal_type : tinyint
-  temporal_type_desc : nvarchar(60)
-  type : char(2)
-  type_desc : nvarchar(60)
-  --
-}
-
-entity sqlparse.RepoObject_SqlModules_Repo_Sys << V >> {
-  --
-  is_json_sql_modules_json : int
-  is_outdated : bit
-  * modify_date : datetime
-  * RepoObject_guid : uniqueidentifier
-  sql_modules_definition : nvarchar(max)
-  sql_modules_dt : datetime
-  sql_modules_formatted : nvarchar(max)
-  sql_modules_formatted2 : nvarchar(max)
-  sql_modules_json : nvarchar(max)
-  SysObject_type : char(2)
-  --
-}
-
-entity sys_dwh.objects << SN >> {
+  history_table_guid : (uniqueidentifier)
+  history_table_id : (int)
+  is_repo_managed : (bit)
+  is_RepoObject_name_uniqueidentifier : (int)
+  is_SysObject_name_uniqueidentifier : (int)
+  - modify_date : (datetime)
+  - parent_object_id : (int)
+  Repo_history_table_guid : (uniqueidentifier)
+  Repo_temporal_type : (tinyint)
+  RepoObject_guid : (uniqueidentifier)
+  RepoObject_is_SysObject_missing : (bit)
+  RepoObject_name : (nvarchar(128))
+  RepoObject_schema_name : (nvarchar(128))
+  RepoObject_SysObject_id : (int)
+  RepoObject_SysObject_modify_date : (datetime)
+  RepoObject_SysObject_name : (nvarchar(128))
+  RepoObject_SysObject_parent_object_id : (int)
+  RepoObject_SysObject_schema_name : (nvarchar(128))
+  RepoObject_SysObject_type : (char(2))
+  RepoObject_type : (char(2))
+  - SysObject_id : (int)
+  - SysObject_name : (sysname)
+  SysObject_RepoObject_guid : (uniqueidentifier)
+  SysObject_schema_name : (sysname)
+  SysObject_type : (char(2))
+  SysObject_type_desc : (nvarchar(60))
+  temporal_type : (tinyint)
   --
   --
 }
 
-entity sys_dwh.schemas << SN >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_sync_guid_RepoObject.html repo.usp_sync_guid_RepoObject]]" as repo.usp_sync_guid_RepoObject << P >> {
   --
-  --
-}
-
-entity sys_dwh.sql_modules << SN >> {
   --
   --
 }
 
-entity sys_dwh.tables << SN >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.ColumnReference.html repo_sys.ColumnReference]]" as repo_sys.ColumnReference << V >> {
+  --
+  - is_all_columns_found : (bit)
+  - is_ambiguous : (bit)
+  - is_caller_dependent : (bit)
+  - is_incomplete : (bit)
+  - is_insert_all : (bit)
+  - is_select_all : (bit)
+  - is_selected : (bit)
+  - is_updated : (bit)
+  referenced_class : (tinyint)
+  referenced_class_desc : (nvarchar(60))
+  referenced_database_name : (nvarchar(128))
+  referenced_entity_name : (nvarchar(128))
+  referenced_id : (int)
+  referenced_minor_id : (int)
+  referenced_minor_name : (nvarchar(128))
+  referenced_schema_name : (nvarchar(128))
+  referenced_server_name : (nvarchar(128))
+  referencing_minor_id : (int)
+  - SysObject_full_name : (nvarchar(517))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.ExtendedProperties.html repo_sys.ExtendedProperties]]" as repo_sys.ExtendedProperties << V >> {
+  --
+  - class : (tinyint)
+  class_desc : (nvarchar(60))
+  entity_column_name : (nvarchar(128))
+  entity_index_name : (nvarchar(128))
+  entity_parameter_name : (nvarchar(128))
+  level2type : (varchar(9))
+  - major_id : (int)
+  - minor_id : (int)
+  minor_name : (nvarchar(128))
+  parent_name : (sysname)
+  parent_object_id : (int)
+  parent_type : (char(2))
+  property_basetype : (sql_variant)
+  - property_name : (sysname)
+  property_nvarchar : (nvarchar(4000))
+  property_value : (sql_variant)
+  SysObject_name : (nvarchar(128))
+  SysObject_schema_name : (nvarchar(128))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.parameters.html repo_sys.parameters]]" as repo_sys.parameters << V >> {
+  --
+  column_encryption_key_database_name : (sysname)
+  column_encryption_key_id : (int)
+  default_value : (sql_variant)
+  encryption_algorithm_name : (sysname)
+  encryption_type : (int)
+  encryption_type_desc : (nvarchar(64))
+  - has_default_value : (bit)
+  - is_cursor_ref : (bit)
+  is_nullable : (bit)
+  - is_output : (bit)
+  - is_readonly : (bit)
+  - is_xml_document : (bit)
+  - max_length : (smallint)
+  name : (sysname)
+  - object_id : (int)
+  - parameter_id : (int)
+  - precision : (tinyint)
+  - scale : (tinyint)
+  SysObject_fullname : (nvarchar(517))
+  SysObject_fullname2 : (nvarchar(257))
+  SysObject_name : (sysname)
+  SysObject_RepoObject_guid : (uniqueidentifier)
+  SysObject_schema_name : (sysname)
+  SysObject_type : (char(2))
+  - system_type_id : (tinyint)
+  user_type_fullname : (nvarchar(182))
+  - user_type_id : (int)
+  user_type_name : (sysname)
+  - xml_collection_id : (int)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.SysColumn.html repo_sys.SysColumn]]" as repo_sys.SysColumn << V >> {
+  --
+  collation_name : (sysname)
+  column_encryption_key_database_name : (sysname)
+  column_encryption_key_id : (int)
+  default_definition : (nvarchar(max))
+  default_is_system_named : (bit)
+  default_name : (sysname)
+  - default_object_id : (int)
+  default_parent_column_id : (int)
+  definition : (nvarchar(max))
+  encryption_algorithm_name : (sysname)
+  encryption_type : (int)
+  encryption_type_desc : (nvarchar(64))
+  generated_always_type : (tinyint)
+  generated_always_type_desc : (nvarchar(60))
+  graph_type : (int)
+  graph_type_desc : (nvarchar(60))
+  increment_value : (sql_variant)
+  - is_ansi_padded : (bit)
+  is_column_set : (bit)
+  - is_computed : (bit)
+  is_dts_replicated : (bit)
+  - is_filestream : (bit)
+  is_hidden : (bit)
+  - is_identity : (bit)
+  - is_masked : (bit)
+  is_merge_published : (bit)
+  is_non_sql_subscribed : (bit)
+  is_nullable : (bit)
+  is_persisted : (bit)
+  is_replicated : (bit)
+  - is_rowguidcol : (bit)
+  is_sparse : (bit)
+  - is_xml_document : (bit)
+  last_value : (sql_variant)
+  - max_length : (smallint)
+  - precision : (tinyint)
+  - rule_object_id : (int)
+  - scale : (tinyint)
+  seed_value : (sql_variant)
+  - SysObject_column_id : (int)
+  SysObject_column_name : (sysname)
+  SysObject_fullname : (nvarchar(517))
+  SysObject_fullname2 : (nvarchar(257))
+  - SysObject_id : (int)
+  SysObject_name : (nvarchar(128))
+  SysObject_RepoObject_guid : (uniqueidentifier)
+  SysObject_RepoObjectColumn_guid : (uniqueidentifier)
+  SysObject_schema_name : (nvarchar(128))
+  SysObject_type : (char(2))
+  SysObject_type_desc : (nvarchar(60))
+  - system_type_id : (tinyint)
+  user_type_fullname : (nvarchar(182))
+  - user_type_id : (int)
+  user_type_name : (sysname)
+  uses_database_collation : (bit)
+  - xml_collection_id : (int)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.SysObject.html repo_sys.SysObject]]" as repo_sys.SysObject << V >> {
+  --
+  - create_date : (datetime)
+  history_table_id : (int)
+  - is_ms_shipped : (bit)
+  - is_published : (bit)
+  - is_schema_published : (bit)
+  max_column_id_used : (int)
+  - modify_date : (datetime)
+  - parent_object_id : (int)
+  principal_id : (int)
+  - schema_id : (int)
+  sql_modules_definition : (nvarchar(max))
+  - SysObject_fullname : (nvarchar(517))
+  - SysObject_fullname2 : (nvarchar(257))
+  - SysObject_id : (int)
+  - SysObject_name : (sysname)
+  SysObject_RepoObject_guid : (uniqueidentifier)
+  SysObject_schema_name : (sysname)
+  temporal_type : (tinyint)
+  temporal_type_desc : (nvarchar(60))
+  type : (char(2))
+  type_desc : (nvarchar(60))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/sqlparse.RepoObject_SqlModules_Repo_Sys.html sqlparse.RepoObject_SqlModules_Repo_Sys]]" as sqlparse.RepoObject_SqlModules_Repo_Sys << V >> {
+  --
+  is_json_sql_modules_json : (int)
+  is_outdated : (bit)
+  - modify_date : (datetime)
+  - RepoObject_guid : (uniqueidentifier)
+  sql_modules_definition : (nvarchar(max))
+  sql_modules_dt : (datetime)
+  sql_modules_formatted : (nvarchar(max))
+  sql_modules_formatted2 : (nvarchar(max))
+  sql_modules_json : (nvarchar(max))
+  SysObject_type : (char(2))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/sys_dwh.objects.html sys_dwh.objects]]" as sys_dwh.objects << SN >> {
+  --
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/sys_dwh.schemas.html sys_dwh.schemas]]" as sys_dwh.schemas << SN >> {
+  --
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/sys_dwh.sql_modules.html sys_dwh.sql_modules]]" as sys_dwh.sql_modules << SN >> {
+  --
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/sys_dwh.tables.html sys_dwh.tables]]" as sys_dwh.tables << SN >> {
+  --
   --
   --
 }
@@ -339,3 +353,10 @@ repo_sys.SysObject::type <-- repo_sys.parameters::SysObject_type
 repo_sys.SysObject::type_desc <-- repo_sys.SysColumn::SysObject_type_desc
 repo_sys.SysObject::type_desc <-- repo.SysObject_RepoObject_via_guid::SysObject_type_desc
 repo_sys.SysObject::type_desc <-- repo.SysObject_RepoObject_via_name::SysObject_type_desc
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

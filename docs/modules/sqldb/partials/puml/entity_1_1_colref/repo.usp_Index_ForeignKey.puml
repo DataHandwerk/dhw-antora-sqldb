@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,61 +25,68 @@ skinparam class {
 }
 
 
-entity logs.usp_ExecutionLog_insert << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/logs.usp_ExecutionLog_insert.html logs.usp_ExecutionLog_insert]]" as logs.usp_ExecutionLog_insert << P >> {
   --
-  --
-}
-
-entity repo.ForeignKey_Indexes << V >> {
-  **ForeignKey_guid** : uniqueidentifier
-  --
-  delete_referential_action : tinyint
-  ForeignKey_fullname : nvarchar(261)
-  ForeignKey_name : sysname
-  * is_MatchingDatatypePattern : int
-  referenced_index_guid : uniqueidentifier
-  referenced_index_name : nvarchar(128)
-  referenced_IndexPatternColumnDatatype : nvarchar(4000)
-  referenced_IndexPatternColumnName : nvarchar(4000)
-  referenced_RepoObject_fullname : nvarchar(261)
-  referenced_RepoObject_fullname2 : nvarchar(257)
-  referenced_RepoObject_guid : uniqueidentifier
-  referenced_SysObject_name : nvarchar(128)
-  referenced_SysObject_schema_name : nvarchar(128)
-  referencing_index_guid : uniqueidentifier
-  referencing_index_name : nvarchar(128)
-  referencing_IndexPatternColumnDatatype : nvarchar(4000)
-  referencing_IndexPatternColumnName : nvarchar(4000)
-  referencing_RepoObject_fullname : nvarchar(261)
-  referencing_RepoObject_fullname2 : nvarchar(257)
-  referencing_RepoObject_guid : uniqueidentifier
-  referencing_SysObject_name : nvarchar(128)
-  referencing_SysObject_schema_name : nvarchar(128)
-  update_referential_action : tinyint
-  --
-}
-
-entity repo.usp_Index_finish << P >> {
   --
   --
 }
 
-entity repo.usp_Index_ForeignKey << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.ForeignKey_Indexes.html repo.ForeignKey_Indexes]]" as repo.ForeignKey_Indexes << V >> {
+  **ForeignKey_guid** : (uniqueidentifier)
+  --
+  delete_referential_action : (tinyint)
+  ForeignKey_fullname : (nvarchar(261))
+  ForeignKey_name : (sysname)
+  - is_MatchingDatatypePattern : (int)
+  referenced_index_guid : (uniqueidentifier)
+  referenced_index_name : (nvarchar(450))
+  referenced_IndexPatternColumnDatatype : (nvarchar(4000))
+  referenced_IndexPatternColumnName : (nvarchar(4000))
+  referenced_RepoObject_fullname : (nvarchar(261))
+  referenced_RepoObject_fullname2 : (nvarchar(257))
+  referenced_RepoObject_guid : (uniqueidentifier)
+  referenced_SysObject_name : (nvarchar(128))
+  referenced_SysObject_schema_name : (nvarchar(128))
+  referencing_index_guid : (uniqueidentifier)
+  referencing_index_name : (nvarchar(450))
+  referencing_IndexPatternColumnDatatype : (nvarchar(4000))
+  referencing_IndexPatternColumnName : (nvarchar(4000))
+  referencing_RepoObject_fullname : (nvarchar(261))
+  referencing_RepoObject_fullname2 : (nvarchar(257))
+  referencing_RepoObject_guid : (uniqueidentifier)
+  referencing_SysObject_name : (nvarchar(128))
+  referencing_SysObject_schema_name : (nvarchar(128))
+  update_referential_action : (tinyint)
   --
   --
 }
 
-entity repo.usp_Index_virtual_set << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_Index_finish.html repo.usp_Index_finish]]" as repo.usp_Index_finish << P >> {
   --
-  --
-}
-
-entity repo.usp_main << P >> {
   --
   --
 }
 
-entity repo.usp_PERSIST_ForeignKey_Indexes_union_T << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_Index_ForeignKey.html repo.usp_Index_ForeignKey]]" as repo.usp_Index_ForeignKey << P >> {
+  --
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_Index_virtual_set.html repo.usp_Index_virtual_set]]" as repo.usp_Index_virtual_set << P >> {
+  --
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_main.html repo.usp_main]]" as repo.usp_main << P >> {
+  --
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_PERSIST_ForeignKey_Indexes_union_T.html repo.usp_PERSIST_ForeignKey_Indexes_union_T]]" as repo.usp_PERSIST_ForeignKey_Indexes_union_T << P >> {
+  --
   --
   --
 }
@@ -89,4 +97,11 @@ repo.usp_Index_finish <.. repo.usp_Index_ForeignKey
 repo.usp_Index_ForeignKey <.. repo.usp_main
 repo.usp_Index_virtual_set <.. repo.usp_Index_ForeignKey
 repo.usp_PERSIST_ForeignKey_Indexes_union_T <.. repo.usp_Index_ForeignKey
+
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
 

@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,89 +25,93 @@ skinparam class {
 }
 
 
-entity reference.RepoObject_reference_union << V >> {
-  **referenced_RepoObject_guid** : uniqueidentifier
-  **referencing_RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObject_reference_union.html reference.RepoObject_reference_union]]" as reference.RepoObject_reference_union << V >> {
+  **referenced_RepoObject_guid** : (uniqueidentifier)
+  **referencing_RepoObject_guid** : (uniqueidentifier)
   --
-  * InformationSource : varchar(34)
-  * one : int
-  referenced_entity_name : nvarchar(128)
-  referenced_fullname : nvarchar(517)
-  referenced_id : int
-  referenced_schema_name : nvarchar(128)
-  referenced_type : char(2)
-  referencing_entity_name : nvarchar(128)
-  referencing_fullname : nvarchar(517)
-  referencing_id : int
-  referencing_schema_name : nvarchar(128)
-  referencing_type : varchar(2)
-  --
-}
-
-entity reference.RepoObject_reference_virtual << V >> {
-  --
-  * InformationSource : varchar(34)
-  * referenced_entity_name : nvarchar(128)
-  * referenced_fullname : nvarchar(261)
-  referenced_id : int
-  * referenced_RepoObject_guid : uniqueidentifier
-  * referenced_schema_name : nvarchar(128)
-  referenced_type : char(2)
-  * referencing_entity_name : nvarchar(128)
-  * referencing_fullname : nvarchar(261)
-  referencing_id : int
-  * referencing_RepoObject_guid : uniqueidentifier
-  * referencing_schema_name : nvarchar(128)
-  referencing_type : varchar(2)
-  --
-}
-
-entity reference.RepoObjectSource_virtual << U >> {
-  * **RepoObject_guid** : uniqueidentifier
-  * **Source_RepoObject_guid** : uniqueidentifier
+  - InformationSource : (varchar(34))
+  - one : (int)
+  referenced_entity_name : (nvarchar(128))
+  referenced_fullname : (nvarchar(517))
+  referenced_id : (int)
+  referenced_schema_name : (nvarchar(128))
+  referenced_type : (char(2))
+  referencing_entity_name : (nvarchar(128))
+  referencing_fullname : (nvarchar(517))
+  referencing_id : (int)
+  referencing_schema_name : (nvarchar(128))
+  referencing_type : (varchar(2))
   --
   --
 }
 
-entity repo.RepoObject << U >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObject_reference_virtual.html reference.RepoObject_reference_virtual]]" as reference.RepoObject_reference_virtual << V >> {
   --
-  has_execution_plan_issue : bit
-  has_get_referenced_issue : bit
-  Inheritance_StringAggSeparatorSql : nvarchar(4000)
-  InheritanceDefinition : nvarchar(4000)
-  InheritanceType : tinyint
-  * is_DocsExclude : bit
-  is_repo_managed : bit
-  is_required_ObjectMerge : bit
-  * is_ssas : bit
-  is_SysObject_missing : bit
-  * modify_dt : datetime
-  pk_index_guid : uniqueidentifier
-  pk_IndexPatternColumnName_new : nvarchar(4000)
-  Repo_history_table_guid : uniqueidentifier
-  Repo_temporal_type : tinyint
-  * RepoObject_name : nvarchar(128)
-  RepoObject_Referencing_Count : int
-  * RepoObject_schema_name : nvarchar(128)
-  * RepoObject_type : char(2)
-  SysObject_id : int
-  SysObject_modify_date : datetime
-  * SysObject_name : nvarchar(128)
-  * SysObject_parent_object_id : int
-  * SysObject_schema_name : nvarchar(128)
-  SysObject_type : char(2)
-  {abstract} has_different_sys_names : bit
-  * {static} is_RepoObject_name_uniqueidentifier : int
-  * {static} is_SysObject_name_uniqueidentifier : int
-  {abstract} node_id : bigint
-  * {static} RepoObject_fullname : nvarchar(261)
-  * {static} RepoObject_fullname2 : nvarchar(257)
-  * {static} SysObject_fullname : nvarchar(261)
-  * {static} SysObject_fullname2 : nvarchar(257)
-  * {abstract} SysObject_query_sql : nvarchar(406)
-  * {static} usp_persistence_fullname2 : nvarchar(269)
-  * {static} usp_persistence_name : nvarchar(140)
+  - InformationSource : (varchar(34))
+  - referenced_entity_name : (nvarchar(128))
+  - referenced_fullname : (nvarchar(261))
+  referenced_id : (int)
+  - referenced_RepoObject_guid : (uniqueidentifier)
+  - referenced_schema_name : (nvarchar(128))
+  referenced_type : (char(2))
+  - referencing_entity_name : (nvarchar(128))
+  - referencing_fullname : (nvarchar(261))
+  referencing_id : (int)
+  - referencing_RepoObject_guid : (uniqueidentifier)
+  - referencing_schema_name : (nvarchar(128))
+  referencing_type : (varchar(2))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObjectSource_virtual.html reference.RepoObjectSource_virtual]]" as reference.RepoObjectSource_virtual << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **Source_RepoObject_guid** : (uniqueidentifier)
+  --
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject.html repo.RepoObject]]" as repo.RepoObject << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+  has_execution_plan_issue : (bit)
+  has_get_referenced_issue : (bit)
+  Inheritance_StringAggSeparatorSql : (nvarchar(4000))
+  InheritanceDefinition : (nvarchar(4000))
+  InheritanceType : (tinyint)
+  - is_DocsExclude : (bit)
+  is_repo_managed : (bit)
+  is_required_ObjectMerge : (bit)
+  - is_ssas : (bit)
+  is_SysObject_missing : (bit)
+  - modify_dt : (datetime)
+  pk_index_guid : (uniqueidentifier)
+  pk_IndexPatternColumnName_new : (nvarchar(4000))
+  Repo_history_table_guid : (uniqueidentifier)
+  Repo_temporal_type : (tinyint)
+  - RepoObject_name : (nvarchar(128))
+  RepoObject_Referencing_Count : (int)
+  - RepoObject_schema_name : (nvarchar(128))
+  - RepoObject_type : (char(2))
+  SysObject_id : (int)
+  SysObject_modify_date : (datetime)
+  - SysObject_name : (nvarchar(128))
+  - SysObject_parent_object_id : (int)
+  - SysObject_schema_name : (nvarchar(128))
+  SysObject_type : (char(2))
+  ~ has_different_sys_names : (bit)
+  # is_RepoObject_name_uniqueidentifier : (int)
+  # is_SysObject_name_uniqueidentifier : (int)
+  ~ node_id : (bigint)
+  # RepoObject_fullname : (nvarchar(261))
+  # RepoObject_fullname2 : (nvarchar(257))
+  # SysObject_fullname : (nvarchar(261))
+  # SysObject_fullname2 : (nvarchar(257))
+  ~ SysObject_query_sql : (nvarchar(406))
+  # usp_persistence_fullname2 : (nvarchar(269))
+  # usp_persistence_name : (nvarchar(140))
+  --
   --
 }
 
@@ -124,3 +129,10 @@ repo.RepoObject::SysObject_name <-- reference.RepoObject_reference_virtual::refe
 repo.RepoObject::SysObject_schema_name <-- reference.RepoObject_reference_virtual::referenced_schema_name
 repo.RepoObject::SysObject_schema_name <-- reference.RepoObject_reference_virtual::referencing_schema_name
 repo.RepoObject::SysObject_type <-- reference.RepoObject_reference_virtual::referenced_type
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

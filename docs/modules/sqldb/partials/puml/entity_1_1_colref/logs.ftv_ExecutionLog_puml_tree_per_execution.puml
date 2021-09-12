@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,27 +25,36 @@ skinparam class {
 }
 
 
-entity logs.ftv_ExecutionLog_puml_tree << IF >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/logs.ftv_ExecutionLog_puml_tree.html logs.ftv_ExecutionLog_puml_tree]]" as logs.ftv_ExecutionLog_puml_tree << IF >> {
   --
-  Depth : int
-  duration__current_execution_guid : int
-  execution_instance_guid : uniqueidentifier
-  id : bigint
-  parent_execution_log_id : bigint
-  * PlantUmlTree : nvarchar(4000)
-  * PlantUmlTreeTable : nvarchar(4000)
-  proc_name : nvarchar(128)
-  proc_schema_name : nvarchar(128)
-  step_id : int
+  Depth : (int)
+  duration__current_execution_guid : (int)
+  execution_instance_guid : (uniqueidentifier)
+  id : (bigint)
+  parent_execution_log_id : (bigint)
+  - PlantUmlTree : (nvarchar(4000))
+  - PlantUmlTreeTable : (nvarchar(4000))
+  proc_name : (nvarchar(128))
+  proc_schema_name : (nvarchar(128))
+  step_id : (int)
+  --
   --
 }
 
-entity logs.ftv_ExecutionLog_puml_tree_per_execution << IF >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/logs.ftv_ExecutionLog_puml_tree_per_execution.html logs.ftv_ExecutionLog_puml_tree_per_execution]]" as logs.ftv_ExecutionLog_puml_tree_per_execution << IF >> {
   --
-  * ProcedurePumlTree : nvarchar(max)
-  * ProcedurePumlTreeTable : nvarchar(max)
+  - ProcedurePumlTree : (nvarchar(max))
+  - ProcedurePumlTreeTable : (nvarchar(max))
+  --
   --
 }
 
 logs.ftv_ExecutionLog_puml_tree <.. logs.ftv_ExecutionLog_puml_tree_per_execution
+
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
 

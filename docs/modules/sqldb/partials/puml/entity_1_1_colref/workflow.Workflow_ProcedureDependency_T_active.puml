@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,59 +25,65 @@ skinparam class {
 }
 
 
-entity workflow.Workflow_ProcedureDependency_T << U >> {
-  * **Workflow_id** : int
-  * **referenced_Procedure_RepoObject_guid** : uniqueidentifier
-  * **referencing_Procedure_RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow_ProcedureDependency_T.html workflow.Workflow_ProcedureDependency_T]]" as workflow.Workflow_ProcedureDependency_T << U >> {
+  - **Workflow_id** : (int)
+  - **referenced_Procedure_RepoObject_guid** : (uniqueidentifier)
+  - **referencing_Procedure_RepoObject_guid** : (uniqueidentifier)
   --
-  * is_redundant : bit
+  - is_redundant : (bit)
   --
-}
-
-entity workflow.Workflow_ProcedureDependency_T_active << V >> {
-  --
-  * is_redundant : bit
-  * referenced_Procedure_RepoObject_guid : uniqueidentifier
-  * referencing_Procedure_RepoObject_guid : uniqueidentifier
-  * Workflow_id : int
   --
 }
 
-entity workflow.Workflow_ProcedureDependency_T_NotInSortorder << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow_ProcedureDependency_T_active.html workflow.Workflow_ProcedureDependency_T_active]]" as workflow.Workflow_ProcedureDependency_T_active << V >> {
   --
-  * referenced_Procedure_RepoObject_guid : uniqueidentifier
-  * referencing_Procedure_RepoObject_guid : uniqueidentifier
-  * Workflow_id : int
+  - is_redundant : (bit)
+  - referenced_Procedure_RepoObject_guid : (uniqueidentifier)
+  - referencing_Procedure_RepoObject_guid : (uniqueidentifier)
+  - Workflow_id : (int)
   --
-}
-
-entity workflow.Workflow_ProcedureDependency_T_redundant << V >> {
-  --
-  * referenced_Procedure_RepoObject_guid : uniqueidentifier
-  * referencing_Procedure_RepoObject_guid : uniqueidentifier
-  RownrPerReferencing : bigint
-  * Workflow_id : int
   --
 }
 
-entity workflow.Workflow_ProcedureDependency_T_TaskName << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow_ProcedureDependency_T_NotInSortorder.html workflow.Workflow_ProcedureDependency_T_NotInSortorder]]" as workflow.Workflow_ProcedureDependency_T_NotInSortorder << V >> {
   --
-  * referenced_Procedure_RepoObject_guid : uniqueidentifier
-  * referenced_RepoObject_fullname2 : nvarchar(257)
-  referenced_TaskName : nvarchar(4000)
-  * referencing_Procedure_RepoObject_guid : uniqueidentifier
-  * referencing_RepoObject_fullname2 : nvarchar(257)
-  referencing_TaskName : nvarchar(4000)
-  * Workflow_id : int
+  - referenced_Procedure_RepoObject_guid : (uniqueidentifier)
+  - referencing_Procedure_RepoObject_guid : (uniqueidentifier)
+  - Workflow_id : (int)
+  --
   --
 }
 
-entity workflow.WorkflowStep_active << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow_ProcedureDependency_T_redundant.html workflow.Workflow_ProcedureDependency_T_redundant]]" as workflow.Workflow_ProcedureDependency_T_redundant << V >> {
   --
-  * is_PossibleReferenced : bit
-  * Procedure_RepoObject_guid : uniqueidentifier
-  * Workflow_id : int
-  * Workflow_Name : nvarchar(500)
+  - referenced_Procedure_RepoObject_guid : (uniqueidentifier)
+  - referencing_Procedure_RepoObject_guid : (uniqueidentifier)
+  RownrPerReferencing : (bigint)
+  - Workflow_id : (int)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow_ProcedureDependency_T_TaskName.html workflow.Workflow_ProcedureDependency_T_TaskName]]" as workflow.Workflow_ProcedureDependency_T_TaskName << V >> {
+  --
+  - referenced_Procedure_RepoObject_guid : (uniqueidentifier)
+  - referenced_RepoObject_fullname2 : (nvarchar(257))
+  referenced_TaskName : (nvarchar(4000))
+  - referencing_Procedure_RepoObject_guid : (uniqueidentifier)
+  - referencing_RepoObject_fullname2 : (nvarchar(257))
+  referencing_TaskName : (nvarchar(4000))
+  - Workflow_id : (int)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.WorkflowStep_active.html workflow.WorkflowStep_active]]" as workflow.WorkflowStep_active << V >> {
+  --
+  - is_PossibleReferenced : (bit)
+  - Procedure_RepoObject_guid : (uniqueidentifier)
+  - Workflow_id : (int)
+  - Workflow_Name : (nvarchar(500))
+  --
   --
 }
 
@@ -98,3 +105,10 @@ workflow.Workflow_ProcedureDependency_T_active::referencing_Procedure_RepoObject
 workflow.Workflow_ProcedureDependency_T_active::Workflow_id <-- workflow.Workflow_ProcedureDependency_T_redundant::Workflow_id
 workflow.Workflow_ProcedureDependency_T_active::Workflow_id <-- workflow.Workflow_ProcedureDependency_T_TaskName::Workflow_id
 workflow.Workflow_ProcedureDependency_T_active::Workflow_id <-- workflow.Workflow_ProcedureDependency_T_NotInSortorder::Workflow_id
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

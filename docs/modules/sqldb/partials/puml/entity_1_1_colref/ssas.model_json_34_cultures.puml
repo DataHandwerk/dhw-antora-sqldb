@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,39 +25,42 @@ skinparam class {
 }
 
 
-entity ssas.model_json_20 << V >> {
-  * **databasename** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_20.html ssas.model_json_20]]" as ssas.model_json_20 << V >> {
+  - **databasename** : (nvarchar(128))
   --
-  l1_compatibilityLevel : int
-  l1_id : nvarchar(500)
-  l1_name : nvarchar(500)
-  l2_annotations_ja : nvarchar(max)
-  l2_culture : nvarchar(500)
-  l2_cultures_ja : nvarchar(max)
-  l2_dataSources_ja : nvarchar(max)
-  l2_description : nvarchar(max)
-  l2_description_ja : nvarchar(max)
-  l2_name : nvarchar(500)
-  l2_perspectives_ja : nvarchar(max)
-  l2_relationships_ja : nvarchar(max)
-  l2_roles_ja : nvarchar(max)
-  l2_tables_ja : nvarchar(max)
+  l1_compatibilityLevel : (int)
+  l1_id : (nvarchar(500))
+  l1_name : (nvarchar(500))
+  l2_annotations_ja : (nvarchar(max))
+  l2_culture : (nvarchar(500))
+  l2_cultures_ja : (nvarchar(max))
+  l2_dataSources_ja : (nvarchar(max))
+  l2_description : (nvarchar(max))
+  l2_description_ja : (nvarchar(max))
+  l2_name : (nvarchar(500))
+  l2_perspectives_ja : (nvarchar(max))
+  l2_relationships_ja : (nvarchar(max))
+  l2_roles_ja : (nvarchar(max))
+  l2_tables_ja : (nvarchar(max))
   --
-}
-
-entity ssas.model_json_34_cultures << V >> {
-  * **databasename** : nvarchar(128)
-  **cultures_name** : nvarchar(500)
-  --
-  cultures_translations_j : nvarchar(max)
   --
 }
 
-entity ssas.model_json_341_cultures_translations << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_34_cultures.html ssas.model_json_34_cultures]]" as ssas.model_json_34_cultures << V >> {
+  - **databasename** : (nvarchar(128))
+  **cultures_name** : (nvarchar(500))
   --
-  cultures_name : nvarchar(500)
-  cultures_translations_model_j : nvarchar(max)
-  * databasename : nvarchar(128)
+  cultures_translations_j : (nvarchar(max))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_341_cultures_translations.html ssas.model_json_341_cultures_translations]]" as ssas.model_json_341_cultures_translations << V >> {
+  --
+  cultures_name : (nvarchar(500))
+  cultures_translations_model_j : (nvarchar(max))
+  - databasename : (nvarchar(128))
+  --
   --
 }
 
@@ -65,3 +69,10 @@ ssas.model_json_34_cultures <.. ssas.model_json_341_cultures_translations
 ssas.model_json_20::databasename <-- ssas.model_json_34_cultures::databasename
 ssas.model_json_34_cultures::cultures_name <-- ssas.model_json_341_cultures_translations::cultures_name
 ssas.model_json_34_cultures::databasename <-- ssas.model_json_341_cultures_translations::databasename
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

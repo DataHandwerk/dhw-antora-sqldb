@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,23 +25,30 @@ skinparam class {
 }
 
 
-entity repo.RepoObject << U >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject.html repo.RepoObject]]" as repo.RepoObject << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity workflow.Biml_PrecedenceConstraints << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Biml_PrecedenceConstraints.html workflow.Biml_PrecedenceConstraints]]" as workflow.Biml_PrecedenceConstraints << V >> {
   --
 }
 
-entity workflow.Workflow_ProcedureDependency_T_active << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow_ProcedureDependency_T_active.html workflow.Workflow_ProcedureDependency_T_active]]" as workflow.Workflow_ProcedureDependency_T_active << V >> {
   --
 }
 
-entity workflow.Workflow_ProcedureDependency_T_TaskName << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow_ProcedureDependency_T_TaskName.html workflow.Workflow_ProcedureDependency_T_TaskName]]" as workflow.Workflow_ProcedureDependency_T_TaskName << V >> {
   --
 }
 
 repo.RepoObject <.. workflow.Workflow_ProcedureDependency_T_TaskName
 workflow.Workflow_ProcedureDependency_T_active <.. workflow.Workflow_ProcedureDependency_T_TaskName
 workflow.Workflow_ProcedureDependency_T_TaskName <.. workflow.Biml_PrecedenceConstraints
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

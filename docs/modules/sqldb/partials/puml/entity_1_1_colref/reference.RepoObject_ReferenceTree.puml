@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,80 +25,87 @@ skinparam class {
 }
 
 
-entity docs.ftv_RepoObject_Reference_PlantUml_EntityRefList << IF >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.ftv_RepoObject_Reference_PlantUml_EntityRefList.html docs.ftv_RepoObject_Reference_PlantUml_EntityRefList]]" as docs.ftv_RepoObject_Reference_PlantUml_EntityRefList << IF >> {
   --
-  PumlEntityList : nvarchar(max)
-  PumlEntityOnlyPkList : nvarchar(max)
-  Referenced_Depth : int
-  Referencing_Depth : int
-  ro_guid : uniqueidentifier
+  PumlEntityList : (nvarchar(max))
+  PumlEntityOnlyPkList : (nvarchar(max))
+  Referenced_Depth : (int)
+  Referencing_Depth : (int)
+  ro_guid : (uniqueidentifier)
   --
-}
-
-entity docs.RepoObject_Plantuml_ObjectRefList_0_30 << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  --
-  ObjectRefList : nvarchar(max)
   --
 }
 
-entity docs.RepoObject_Plantuml_ObjectRefList_30_0 << V >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.RepoObject_Plantuml_ObjectRefList_0_30.html docs.RepoObject_Plantuml_ObjectRefList_0_30]]" as docs.RepoObject_Plantuml_ObjectRefList_0_30 << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
-  ObjectRefList : nvarchar(max)
+  ObjectRefList : (nvarchar(max))
   --
-}
-
-entity reference.Persistence << V >> {
-  --
-  referenced_fullname : nvarchar(261)
-  referenced_RepoObject_guid : uniqueidentifier
-  referenced_schema_name : nvarchar(128)
-  referenced_usp_persistence_name : nvarchar(140)
-  referenced_usp_persistence_RepoObject_guid : uniqueidentifier
-  referencing_fullname : nvarchar(261)
-  referencing_RepoObject_guid : uniqueidentifier
-  referencing_schema_name : nvarchar(128)
-  referencing_usp_persistence_name : nvarchar(140)
-  referencing_usp_persistence_RepoObject_guid : uniqueidentifier
   --
 }
 
-entity reference.RepoObject_ReferenceTree << U >> {
-  * **RepoObject_guid** : uniqueidentifier
-  **Referenced_Depth** : int
-  **Referencing_Depth** : int
-  * **Referenced_guid** : uniqueidentifier
-  * **Referencing_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.RepoObject_Plantuml_ObjectRefList_30_0.html docs.RepoObject_Plantuml_ObjectRefList_30_0]]" as docs.RepoObject_Plantuml_ObjectRefList_30_0 << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
-  Referenced_fullname : nvarchar(261)
-  Referenced_fullname2 : nvarchar(257)
-  Referenced_type : char(2)
-  Referencing_fullname : nvarchar(261)
-  Referencing_fullname2 : nvarchar(257)
-  Referencing_type : varchar(2)
+  ObjectRefList : (nvarchar(max))
+  --
   --
 }
 
-entity reference.RepoObject_ReferenceTree_cyclic << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.Persistence.html reference.Persistence]]" as reference.Persistence << V >> {
   --
-  Referenced_Depth_0_30 : int
-  Referenced_Depth_30_0 : int
-  Referenced_fullname : nvarchar(261)
-  Referenced_fullname2 : nvarchar(257)
-  * Referenced_guid : uniqueidentifier
-  Referenced_type : char(2)
-  Referencing_Depth_0_30 : int
-  Referencing_Depth_30_0 : int
-  Referencing_fullname : nvarchar(261)
-  Referencing_fullname2 : nvarchar(257)
-  * Referencing_guid : uniqueidentifier
-  Referencing_type : varchar(2)
-  * RepoObject_guid : uniqueidentifier
+  referenced_fullname : (nvarchar(261))
+  referenced_RepoObject_guid : (uniqueidentifier)
+  referenced_schema_name : (nvarchar(128))
+  referenced_usp_persistence_name : (nvarchar(140))
+  referenced_usp_persistence_RepoObject_guid : (uniqueidentifier)
+  referencing_fullname : (nvarchar(261))
+  referencing_RepoObject_guid : (uniqueidentifier)
+  referencing_schema_name : (nvarchar(128))
+  referencing_usp_persistence_name : (nvarchar(140))
+  referencing_usp_persistence_RepoObject_guid : (uniqueidentifier)
+  --
   --
 }
 
-entity reference.usp_RepoObject_ReferenceTree_insert << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObject_ReferenceTree.html reference.RepoObject_ReferenceTree]]" as reference.RepoObject_ReferenceTree << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  **Referenced_Depth** : (int)
+  **Referencing_Depth** : (int)
+  - **Referenced_guid** : (uniqueidentifier)
+  - **Referencing_guid** : (uniqueidentifier)
+  --
+  Referenced_fullname : (nvarchar(261))
+  Referenced_fullname2 : (nvarchar(257))
+  Referenced_type : (char(2))
+  Referencing_fullname : (nvarchar(261))
+  Referencing_fullname2 : (nvarchar(257))
+  Referencing_type : (varchar(2))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObject_ReferenceTree_cyclic.html reference.RepoObject_ReferenceTree_cyclic]]" as reference.RepoObject_ReferenceTree_cyclic << V >> {
+  --
+  Referenced_Depth_0_30 : (int)
+  Referenced_Depth_30_0 : (int)
+  Referenced_fullname : (nvarchar(261))
+  Referenced_fullname2 : (nvarchar(257))
+  - Referenced_guid : (uniqueidentifier)
+  Referenced_type : (char(2))
+  Referencing_Depth_0_30 : (int)
+  Referencing_Depth_30_0 : (int)
+  Referencing_fullname : (nvarchar(261))
+  Referencing_fullname2 : (nvarchar(257))
+  - Referencing_guid : (uniqueidentifier)
+  Referencing_type : (varchar(2))
+  - RepoObject_guid : (uniqueidentifier)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.usp_RepoObject_ReferenceTree_insert.html reference.usp_RepoObject_ReferenceTree_insert]]" as reference.usp_RepoObject_ReferenceTree_insert << P >> {
+  --
   --
   --
 }
@@ -121,3 +129,10 @@ reference.RepoObject_ReferenceTree::Referencing_fullname2 <-- reference.RepoObje
 reference.RepoObject_ReferenceTree::Referencing_guid <-- reference.RepoObject_ReferenceTree_cyclic::Referencing_guid
 reference.RepoObject_ReferenceTree::Referencing_type <-- reference.RepoObject_ReferenceTree_cyclic::referencing_type
 reference.RepoObject_ReferenceTree::RepoObject_guid <-- reference.RepoObject_ReferenceTree_cyclic::RepoObject_guid
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

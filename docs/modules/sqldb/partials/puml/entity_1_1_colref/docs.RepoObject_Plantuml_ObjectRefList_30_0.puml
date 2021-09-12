@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,73 +25,78 @@ skinparam class {
 }
 
 
-entity docs.fs_cleanStringForPuml << FN >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.fs_cleanStringForPuml.html docs.fs_cleanStringForPuml]]" as docs.fs_cleanStringForPuml << FN >> {
+  --
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.RepoObject_Plantuml.html docs.RepoObject_Plantuml]]" as docs.RepoObject_Plantuml << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+  ColRefList : (nvarchar(max))
+  ObjectRefList : (nvarchar(max))
+  ObjectRefList_0_30 : (nvarchar(max))
+  ObjectRefList_30_0 : (nvarchar(max))
+  - PlantumlEntity_0_30_ObjectRef : (nvarchar(max))
+  - PlantumlEntity_1_1_ColRef : (nvarchar(max))
+  - PlantumlEntity_1_1_FkRef : (nvarchar(max))
+  - PlantumlEntity_1_1_ObjectRef : (nvarchar(max))
+  - PlantumlEntity_30_0_ObjectRef : (nvarchar(max))
+  PumlEntityList : (nvarchar(max))
+  PumlEntityList_0_30 : (nvarchar(max))
+  PumlEntityList_30_0 : (nvarchar(max))
+  - RepoObject_fullname2 : (nvarchar(257))
   --
   --
 }
 
-entity docs.RepoObject_Plantuml << V >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.RepoObject_Plantuml_ObjectRefList_30_0.html docs.RepoObject_Plantuml_ObjectRefList_30_0]]" as docs.RepoObject_Plantuml_ObjectRefList_30_0 << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
-  ColRefList : nvarchar(max)
-  ObjectRefList : nvarchar(max)
-  ObjectRefList_0_30 : nvarchar(max)
-  ObjectRefList_30_0 : nvarchar(max)
-  * PlantumlEntity_0_30_ObjectRef : nvarchar(max)
-  * PlantumlEntity_1_1_ColRef : nvarchar(max)
-  * PlantumlEntity_1_1_FkRef : nvarchar(max)
-  * PlantumlEntity_1_1_ObjectRef : nvarchar(max)
-  * PlantumlEntity_30_0_ObjectRef : nvarchar(max)
-  PumlEntityList : nvarchar(max)
-  PumlEntityList_0_30 : nvarchar(max)
-  PumlEntityList_30_0 : nvarchar(max)
-  * RepoObject_fullname2 : nvarchar(257)
+  ObjectRefList : (nvarchar(max))
+  --
   --
 }
 
-entity docs.RepoObject_Plantuml_ObjectRefList_30_0 << V >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObject_reference_T.html reference.RepoObject_reference_T]]" as reference.RepoObject_reference_T << U >> {
+  **referenced_RepoObject_guid** : (uniqueidentifier)
+  **referencing_RepoObject_guid** : (uniqueidentifier)
   --
-  ObjectRefList : nvarchar(max)
+  - is_ReversePersistenceViaView : (bit)
+  referenced_entity_name : (nvarchar(128))
+  - referenced_is_PersistenceSource : (bit)
+  - referenced_is_PersistenceTarget : (bit)
+  referenced_schema_name : (nvarchar(128))
+  referenced_type : (char(2))
+  referencing_entity_name : (nvarchar(128))
+  - referencing_is_PersistenceTarget : (bit)
+  - referencing_is_PersistenceUspSourceRef : (bit)
+  referencing_is_PersistenceUspTargetRef : (bit)
+  referencing_schema_name : (nvarchar(128))
+  referencing_type : (varchar(2))
+  # referenced_fullname : (nvarchar(261))
+  # referenced_fullname2 : (nvarchar(257))
+  # referencing_fullname : (nvarchar(261))
+  # referencing_fullname2 : (nvarchar(257))
   --
-}
-
-entity reference.RepoObject_reference_T << U >> {
-  **referenced_RepoObject_guid** : uniqueidentifier
-  **referencing_RepoObject_guid** : uniqueidentifier
-  --
-  * is_ReversePersistenceViaView : bit
-  referenced_entity_name : nvarchar(128)
-  * referenced_is_PersistenceSource : bit
-  * referenced_is_PersistenceTarget : bit
-  referenced_schema_name : nvarchar(128)
-  referenced_type : char(2)
-  referencing_entity_name : nvarchar(128)
-  * referencing_is_PersistenceTarget : bit
-  * referencing_is_PersistenceUspSourceRef : bit
-  referencing_is_PersistenceUspTargetRef : bit
-  referencing_schema_name : nvarchar(128)
-  referencing_type : varchar(2)
-  * {static} referenced_fullname : nvarchar(261)
-  * {static} referenced_fullname2 : nvarchar(257)
-  * {static} referencing_fullname : nvarchar(261)
-  * {static} referencing_fullname2 : nvarchar(257)
   --
 }
 
-entity reference.RepoObject_ReferenceTree << U >> {
-  * **RepoObject_guid** : uniqueidentifier
-  **Referenced_Depth** : int
-  **Referencing_Depth** : int
-  * **Referenced_guid** : uniqueidentifier
-  * **Referencing_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObject_ReferenceTree.html reference.RepoObject_ReferenceTree]]" as reference.RepoObject_ReferenceTree << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  **Referenced_Depth** : (int)
+  **Referencing_Depth** : (int)
+  - **Referenced_guid** : (uniqueidentifier)
+  - **Referencing_guid** : (uniqueidentifier)
   --
-  Referenced_fullname : nvarchar(261)
-  Referenced_fullname2 : nvarchar(257)
-  Referenced_type : char(2)
-  Referencing_fullname : nvarchar(261)
-  Referencing_fullname2 : nvarchar(257)
-  Referencing_type : varchar(2)
+  Referenced_fullname : (nvarchar(261))
+  Referenced_fullname2 : (nvarchar(257))
+  Referenced_type : (char(2))
+  Referencing_fullname : (nvarchar(261))
+  Referencing_fullname2 : (nvarchar(257))
+  Referencing_type : (varchar(2))
+  --
   --
 }
 
@@ -99,3 +105,10 @@ docs.RepoObject_Plantuml_ObjectRefList_30_0 <.. docs.RepoObject_Plantuml
 reference.RepoObject_reference_T <.. docs.RepoObject_Plantuml_ObjectRefList_30_0
 reference.RepoObject_ReferenceTree <.. docs.RepoObject_Plantuml_ObjectRefList_30_0
 docs.RepoObject_Plantuml_ObjectRefList_30_0::ObjectRefList <-- docs.RepoObject_Plantuml::ObjectRefList_30_0
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

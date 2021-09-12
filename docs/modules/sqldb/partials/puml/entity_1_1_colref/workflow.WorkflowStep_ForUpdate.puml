@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,77 +25,81 @@ skinparam class {
 }
 
 
-entity repo.RepoObject << U >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject.html repo.RepoObject]]" as repo.RepoObject << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
-  has_execution_plan_issue : bit
-  has_get_referenced_issue : bit
-  Inheritance_StringAggSeparatorSql : nvarchar(4000)
-  InheritanceDefinition : nvarchar(4000)
-  InheritanceType : tinyint
-  * is_DocsExclude : bit
-  is_repo_managed : bit
-  is_required_ObjectMerge : bit
-  * is_ssas : bit
-  is_SysObject_missing : bit
-  * modify_dt : datetime
-  pk_index_guid : uniqueidentifier
-  pk_IndexPatternColumnName_new : nvarchar(4000)
-  Repo_history_table_guid : uniqueidentifier
-  Repo_temporal_type : tinyint
-  * RepoObject_name : nvarchar(128)
-  RepoObject_Referencing_Count : int
-  * RepoObject_schema_name : nvarchar(128)
-  * RepoObject_type : char(2)
-  SysObject_id : int
-  SysObject_modify_date : datetime
-  * SysObject_name : nvarchar(128)
-  * SysObject_parent_object_id : int
-  * SysObject_schema_name : nvarchar(128)
-  SysObject_type : char(2)
-  {abstract} has_different_sys_names : bit
-  * {static} is_RepoObject_name_uniqueidentifier : int
-  * {static} is_SysObject_name_uniqueidentifier : int
-  {abstract} node_id : bigint
-  * {static} RepoObject_fullname : nvarchar(261)
-  * {static} RepoObject_fullname2 : nvarchar(257)
-  * {static} SysObject_fullname : nvarchar(261)
-  * {static} SysObject_fullname2 : nvarchar(257)
-  * {abstract} SysObject_query_sql : nvarchar(406)
-  * {static} usp_persistence_fullname2 : nvarchar(269)
-  * {static} usp_persistence_name : nvarchar(140)
+  has_execution_plan_issue : (bit)
+  has_get_referenced_issue : (bit)
+  Inheritance_StringAggSeparatorSql : (nvarchar(4000))
+  InheritanceDefinition : (nvarchar(4000))
+  InheritanceType : (tinyint)
+  - is_DocsExclude : (bit)
+  is_repo_managed : (bit)
+  is_required_ObjectMerge : (bit)
+  - is_ssas : (bit)
+  is_SysObject_missing : (bit)
+  - modify_dt : (datetime)
+  pk_index_guid : (uniqueidentifier)
+  pk_IndexPatternColumnName_new : (nvarchar(4000))
+  Repo_history_table_guid : (uniqueidentifier)
+  Repo_temporal_type : (tinyint)
+  - RepoObject_name : (nvarchar(128))
+  RepoObject_Referencing_Count : (int)
+  - RepoObject_schema_name : (nvarchar(128))
+  - RepoObject_type : (char(2))
+  SysObject_id : (int)
+  SysObject_modify_date : (datetime)
+  - SysObject_name : (nvarchar(128))
+  - SysObject_parent_object_id : (int)
+  - SysObject_schema_name : (nvarchar(128))
+  SysObject_type : (char(2))
+  ~ has_different_sys_names : (bit)
+  # is_RepoObject_name_uniqueidentifier : (int)
+  # is_SysObject_name_uniqueidentifier : (int)
+  ~ node_id : (bigint)
+  # RepoObject_fullname : (nvarchar(261))
+  # RepoObject_fullname2 : (nvarchar(257))
+  # SysObject_fullname : (nvarchar(261))
+  # SysObject_fullname2 : (nvarchar(257))
+  ~ SysObject_query_sql : (nvarchar(406))
+  # usp_persistence_fullname2 : (nvarchar(269))
+  # usp_persistence_name : (nvarchar(140))
   --
-}
-
-entity workflow.Workflow << U >> {
-  * **id** : int
-  --
-  Description : nvarchar(4000)
-  * is_active : bit
-  * Name : nvarchar(500)
-  Package_Biml : nvarchar(max)
   --
 }
 
-entity workflow.WorkflowStep << U >> {
-  * **id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow.html workflow.Workflow]]" as workflow.Workflow << U >> {
+  - **id** : (int)
   --
-  * is_active : bit
-  * is_PossibleReferenced : bit
-  Procedure_RepoObject_guid : uniqueidentifier
-  * Workflow_id : int
+  Description : (nvarchar(4000))
+  - is_active : (bit)
+  - Name : (nvarchar(500))
+  Package_Biml : (nvarchar(max))
+  --
   --
 }
 
-entity workflow.WorkflowStep_ForUpdate << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.WorkflowStep.html workflow.WorkflowStep]]" as workflow.WorkflowStep << U >> {
+  - **id** : (int)
   --
-  * id : int
-  * is_active : bit
-  * is_PossibleReferenced : bit
-  * Procedure_RepoObject_guid : uniqueidentifier
-  * RepoObject_fullname : nvarchar(261)
-  * Workflow_id : int
-  * Workflow_Name : nvarchar(500)
+  - is_active : (bit)
+  - is_PossibleReferenced : (bit)
+  Procedure_RepoObject_guid : (uniqueidentifier)
+  - Workflow_id : (int)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.WorkflowStep_ForUpdate.html workflow.WorkflowStep_ForUpdate]]" as workflow.WorkflowStep_ForUpdate << V >> {
+  --
+  - id : (int)
+  - is_active : (bit)
+  - is_PossibleReferenced : (bit)
+  - Procedure_RepoObject_guid : (uniqueidentifier)
+  - RepoObject_fullname : (nvarchar(261))
+  - Workflow_id : (int)
+  - Workflow_Name : (nvarchar(500))
+  --
   --
 }
 
@@ -108,3 +113,10 @@ workflow.WorkflowStep::is_active <-- workflow.WorkflowStep_ForUpdate::is_active
 workflow.WorkflowStep::is_PossibleReferenced <-- workflow.WorkflowStep_ForUpdate::is_PossibleReferenced
 workflow.WorkflowStep::Procedure_RepoObject_guid <-- workflow.WorkflowStep_ForUpdate::Procedure_RepoObject_guid
 workflow.WorkflowStep::Workflow_id <-- workflow.WorkflowStep_ForUpdate::Workflow_id
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

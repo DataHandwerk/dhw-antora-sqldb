@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,23 +25,30 @@ skinparam class {
 }
 
 
-entity repo.RepoSchema << U >> {
-  * **RepoSchema_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoSchema.html repo.RepoSchema]]" as repo.RepoSchema << U >> {
+  - **RepoSchema_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.SysSchema_RepoSchema_via_guid << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.SysSchema_RepoSchema_via_guid.html repo.SysSchema_RepoSchema_via_guid]]" as repo.SysSchema_RepoSchema_via_guid << V >> {
   --
 }
 
-entity repo.usp_sync_guid_RepoSchema << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_sync_guid_RepoSchema.html repo.usp_sync_guid_RepoSchema]]" as repo.usp_sync_guid_RepoSchema << P >> {
   --
 }
 
-entity repo_sys.SysSchema << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.SysSchema.html repo_sys.SysSchema]]" as repo_sys.SysSchema << V >> {
   --
 }
 
 repo.RepoSchema <.. repo.SysSchema_RepoSchema_via_guid
 repo.SysSchema_RepoSchema_via_guid <.. repo.usp_sync_guid_RepoSchema
 repo_sys.SysSchema <.. repo.SysSchema_RepoSchema_via_guid
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

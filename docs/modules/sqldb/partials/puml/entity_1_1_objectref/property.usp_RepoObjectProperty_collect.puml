@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,38 +25,38 @@ skinparam class {
 }
 
 
-entity docs.usp_AntoraExport << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.usp_AntoraExport.html docs.usp_AntoraExport]]" as docs.usp_AntoraExport << P >> {
   --
 }
 
-entity logs.usp_ExecutionLog_insert << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/logs.usp_ExecutionLog_insert.html logs.usp_ExecutionLog_insert]]" as logs.usp_ExecutionLog_insert << P >> {
   --
 }
 
-entity property.RepoObjectProperty << U >> {
-  * **RepoObjectProperty_id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObjectProperty.html property.RepoObjectProperty]]" as property.RepoObjectProperty << U >> {
+  - **RepoObjectProperty_id** : (int)
   --
 }
 
-entity property.RepoObjectProperty_Collect_source_ROGross << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  * **property_name** : varchar(39)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObjectProperty_Collect_source_ROGross.html property.RepoObjectProperty_Collect_source_ROGross]]" as property.RepoObjectProperty_Collect_source_ROGross << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **property_name** : (varchar(39))
   --
 }
 
-entity property.RepoObjectProperty_Collect_source_sql_modules_definition << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  **property_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObjectProperty_Collect_source_sql_modules_definition.html property.RepoObjectProperty_Collect_source_sql_modules_definition]]" as property.RepoObjectProperty_Collect_source_sql_modules_definition << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  **property_name** : (nvarchar(128))
   --
 }
 
-entity property.RepoObjectProperty_Collect_source_uspgenerator << V >> {
-  **RepoObject_guid** : uniqueidentifier
-  * **property_name** : varchar(14)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObjectProperty_Collect_source_uspgenerator.html property.RepoObjectProperty_Collect_source_uspgenerator]]" as property.RepoObjectProperty_Collect_source_uspgenerator << V >> {
+  **RepoObject_guid** : (uniqueidentifier)
+  - **property_name** : (varchar(14))
   --
 }
 
-entity property.usp_RepoObjectProperty_collect << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.usp_RepoObjectProperty_collect.html property.usp_RepoObjectProperty_collect]]" as property.usp_RepoObjectProperty_collect << P >> {
   --
 }
 
@@ -65,3 +66,10 @@ property.RepoObjectProperty_Collect_source_ROGross <.. property.usp_RepoObjectPr
 property.RepoObjectProperty_Collect_source_sql_modules_definition <.. property.usp_RepoObjectProperty_collect
 property.RepoObjectProperty_Collect_source_uspgenerator <.. property.usp_RepoObjectProperty_collect
 property.usp_RepoObjectProperty_collect <.. docs.usp_AntoraExport
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

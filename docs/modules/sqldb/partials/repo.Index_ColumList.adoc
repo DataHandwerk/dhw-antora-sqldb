@@ -8,10 +8,6 @@
 :ExistsProperty--has_execution_plan_issue:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--pk_index_guid:
-:ExistsProperty--pk_indexpatterncolumndatatype:
-:ExistsProperty--pk_indexpatterncolumnname:
-:ExistsProperty--pk_indexsemanticgroup:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -46,35 +42,16 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-08-17 19:37:47
+2021-09-10 11:15:39
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-index_guid]
-=== index_guid
-
-[cols="d,m,m,m,m,d"]
-|===
-|1
-|*index_guid*
-|uniqueidentifier
-|NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:repo.IndexColumn_union.adoc#column-index_guid[+repo.IndexColumn_union.index_guid+]
---
-
-
 [#column-AntoraIndexColumnList]
 === AntoraIndexColumnList
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |AntoraIndexColumnList
@@ -86,14 +63,14 @@ view
 
 .Referencing Columns
 --
-* xref:repo.Index_gross.adoc#column-AntoraIndexColumnList[+repo.Index_gross.AntoraIndexColumnList+]
+* xref:repo.Index_ColumList_T.adoc#column-AntoraIndexColumnList[+repo.Index_ColumList_T.AntoraIndexColumnList+]
 --
 
 
 [#column-ColumnList]
 === ColumnList
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |ColumnList
@@ -105,14 +82,14 @@ view
 
 .Referencing Columns
 --
-* xref:repo.Index_gross.adoc#column-ColumnList[+repo.Index_gross.ColumnList+]
+* xref:repo.Index_ColumList_T.adoc#column-ColumnList[+repo.Index_ColumList_T.ColumnList+]
 --
 
 
 [#column-ConstraintColumnList]
 === ConstraintColumnList
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |ConstraintColumnList
@@ -124,14 +101,14 @@ view
 
 .Referencing Columns
 --
-* xref:repo.Index_gross.adoc#column-ConstraintColumnList[+repo.Index_gross.ConstraintColumnList+]
+* xref:repo.Index_ColumList_T.adoc#column-ConstraintColumnList[+repo.Index_ColumList_T.ConstraintColumnList+]
 --
 
 
 [#column-DbmlIndexColumnList]
 === DbmlIndexColumnList
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |DbmlIndexColumnList
@@ -143,14 +120,38 @@ view
 
 .Referencing Columns
 --
-* xref:repo.Index_gross.adoc#column-DbmlIndexColumnList[+repo.Index_gross.DbmlIndexColumnList+]
+* xref:repo.Index_ColumList_T.adoc#column-DbmlIndexColumnList[+repo.Index_ColumList_T.DbmlIndexColumnList+]
+--
+
+
+[#column-index_guid]
+=== index_guid
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|index_guid
+|uniqueidentifier
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo.IndexColumn_union_T.adoc#column-index_guid[+repo.IndexColumn_union_T.index_guid+]
+--
+
+.Referencing Columns
+--
+* xref:repo.Index_ColumList_T.adoc#column-index_guid[+repo.Index_ColumList_T.index_guid+]
 --
 
 
 [#column-PersistenceWhereColumnList]
 === PersistenceWhereColumnList
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |PersistenceWhereColumnList
@@ -162,14 +163,14 @@ view
 
 .Referencing Columns
 --
-* xref:repo.Index_gross.adoc#column-PersistenceWhereColumnList[+repo.Index_gross.PersistenceWhereColumnList+]
+* xref:repo.Index_ColumList_T.adoc#column-PersistenceWhereColumnList[+repo.Index_ColumList_T.PersistenceWhereColumnList+]
 --
 
 
 [#column-PumlIndexColumnList]
 === PumlIndexColumnList
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |PumlIndexColumnList
@@ -181,21 +182,21 @@ view
 
 .Referencing Columns
 --
-* xref:repo.Index_gross.adoc#column-PumlIndexColumnList[+repo.Index_gross.PumlIndexColumnList+]
+* xref:repo.Index_ColumList_T.adoc#column-PumlIndexColumnList[+repo.Index_ColumList_T.PumlIndexColumnList+]
 --
 
 
 // end::AntoraColumnDetails[]
 
+== AntoraMeasureDetails
+
+// tag::AntoraMeasureDetails[]
+
+// end::AntoraMeasureDetails[]
+
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
-|1
-|*<<column-index_guid>>*
-|uniqueidentifier
-|NULL
-|
-|
 
 
 
@@ -208,7 +209,6 @@ view
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
-
 |
 |<<column-AntoraIndexColumnList>>
 |nvarchar(max)
@@ -238,6 +238,13 @@ view
 |
 
 |
+|<<column-index_guid>>
+|uniqueidentifier
+|NOT NULL
+|
+|
+
+|
 |<<column-PersistenceWhereColumnList>>
 |nvarchar(max)
 |NULL
@@ -257,15 +264,15 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-PK_Index_ColumList]
-=== PK_Index_ColumList
+[#index-idx_Index_ColumList_1]
+=== idx_Index_ColumList++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_index_guid[index_guid]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
 +
 --
 * <<column-index_guid>>; uniqueidentifier
 --
-* PK, Unique, Real: 1, 1, 0
+* PK, Unique, Real: 0, 0, 0
 
 // end::AntoraIndexList[]
 
@@ -290,16 +297,15 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:repo.IndexColumn_union.adoc[]
+* xref:repo.IndexColumn_union_T.adoc[]
 // end::antorareferencedlist[]
 
 
 === AntoraReferencingList
 
 // tag::antorareferencinglist[]
-* xref:repo.Index_gross.adoc[]
-* xref:repo.Index_SqlConstraint_PkUq.adoc[]
-* xref:uspgenerator.GeneratorUspStep_Persistence.adoc[]
+* xref:repo.Index_ColumList_T.adoc[]
+* xref:repo.usp_PERSIST_Index_ColumList_T.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -488,35 +494,35 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-678AA10A-AB97-EB11-84F4-A81E8446D5B0
+
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-uniqueidentifier
+
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-index_guid
+
 // end::pk_indexpatterncolumnname[]
 
 
 === pk_IndexSemanticGroup
 
 // tag::pk_indexsemanticgroup[]
-index_guid
+
 // end::pk_indexsemanticgroup[]
 
 
 === ReferencedObjectList
 
 // tag::referencedobjectlist[]
-* [repo].[IndexColumn_union]
+* [repo].[IndexColumn_union_T]
 // end::referencedobjectlist[]
 
 
@@ -557,7 +563,8 @@ source: property.RepoObjectProperty WHERE property_int = 1
 [source,sql]
 ----
 
-CREATE View repo.Index_ColumList
+
+CREATE View [repo].[Index_ColumList]
 As
 Select
     col.index_guid
@@ -642,7 +649,7 @@ Select
              ) Within Group(Order By
                                 col.index_column_id)
 From
-    repo.IndexColumn_union As col
+    repo.IndexColumn_union_T As col
 Group By
     col.index_guid
 

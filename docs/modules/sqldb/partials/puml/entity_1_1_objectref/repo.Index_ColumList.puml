@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,33 +25,32 @@ skinparam class {
 }
 
 
-entity repo.Index_ColumList << V >> {
-  **index_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_ColumList.html repo.Index_ColumList]]" as repo.Index_ColumList << V >> {
   --
 }
 
-entity repo.Index_gross << V >> {
-  * **index_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_ColumList_T.html repo.Index_ColumList_T]]" as repo.Index_ColumList_T << U >> {
+  - **index_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.Index_SqlConstraint_PkUq << V >> {
-  **index_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.IndexColumn_union_T.html repo.IndexColumn_union_T]]" as repo.IndexColumn_union_T << U >> {
+  **index_guid** : (uniqueidentifier)
+  - **index_column_id** : (int)
   --
 }
 
-entity repo.IndexColumn_union << V >> {
-  **index_guid** : uniqueidentifier
-  * **index_column_id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_PERSIST_Index_ColumList_T.html repo.usp_PERSIST_Index_ColumList_T]]" as repo.usp_PERSIST_Index_ColumList_T << P >> {
   --
 }
 
-entity uspgenerator.GeneratorUspStep_Persistence << V >> {
-  * **usp_id** : int
-  --
-}
+repo.Index_ColumList <.. repo.Index_ColumList_T
+repo.Index_ColumList <.. repo.usp_PERSIST_Index_ColumList_T
+repo.IndexColumn_union_T <.. repo.Index_ColumList
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
 
-repo.Index_ColumList <.. repo.Index_SqlConstraint_PkUq
-repo.Index_ColumList <.. uspgenerator.GeneratorUspStep_Persistence
-repo.Index_ColumList <.. repo.Index_gross
-repo.IndexColumn_union <.. repo.Index_ColumList
+@enduml
+

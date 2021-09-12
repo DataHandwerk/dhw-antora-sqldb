@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,36 +25,45 @@ skinparam class {
 }
 
 
-entity repo_sys.SysObject << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.SysObject.html repo_sys.SysObject]]" as repo_sys.SysObject << V >> {
   --
-  * create_date : datetime
-  history_table_id : int
-  * is_ms_shipped : bit
-  * is_published : bit
-  * is_schema_published : bit
-  max_column_id_used : int
-  * modify_date : datetime
-  * parent_object_id : int
-  principal_id : int
-  * schema_id : int
-  sql_modules_definition : nvarchar(max)
-  * SysObject_fullname : nvarchar(517)
-  * SysObject_fullname2 : nvarchar(257)
-  * SysObject_id : int
-  * SysObject_name : sysname
-  SysObject_RepoObject_guid : uniqueidentifier
-  SysObject_schema_name : sysname
-  temporal_type : tinyint
-  temporal_type_desc : nvarchar(60)
-  type : char(2)
-  type_desc : nvarchar(60)
+  - create_date : (datetime)
+  history_table_id : (int)
+  - is_ms_shipped : (bit)
+  - is_published : (bit)
+  - is_schema_published : (bit)
+  max_column_id_used : (int)
+  - modify_date : (datetime)
+  - parent_object_id : (int)
+  principal_id : (int)
+  - schema_id : (int)
+  sql_modules_definition : (nvarchar(max))
+  - SysObject_fullname : (nvarchar(517))
+  - SysObject_fullname2 : (nvarchar(257))
+  - SysObject_id : (int)
+  - SysObject_name : (sysname)
+  SysObject_RepoObject_guid : (uniqueidentifier)
+  SysObject_schema_name : (sysname)
+  temporal_type : (tinyint)
+  temporal_type_desc : (nvarchar(60))
+  type : (char(2))
+  type_desc : (nvarchar(60))
+  --
   --
 }
 
-entity sys_dwh.sql_modules << SN >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/sys_dwh.sql_modules.html sys_dwh.sql_modules]]" as sys_dwh.sql_modules << SN >> {
+  --
   --
   --
 }
 
 sys_dwh.sql_modules <.. repo_sys.SysObject
+
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
 

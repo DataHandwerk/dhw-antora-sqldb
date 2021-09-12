@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,24 +25,31 @@ skinparam class {
 }
 
 
-entity repo.Index_union << V >> {
-  **index_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_union.html repo.Index_union]]" as repo.Index_union << V >> {
+  **index_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.RepoObject << U >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject.html repo.RepoObject]]" as repo.RepoObject << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity repo_sys.Index_unique << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.Index_unique.html repo_sys.Index_unique]]" as repo_sys.Index_unique << V >> {
   --
 }
 
-entity sys_dwh.indexes << SN >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/sys_dwh.indexes.html sys_dwh.indexes]]" as sys_dwh.indexes << SN >> {
   --
 }
 
 repo.RepoObject <.. repo_sys.Index_unique
 repo_sys.Index_unique <.. repo.Index_union
 sys_dwh.indexes <.. repo_sys.Index_unique
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

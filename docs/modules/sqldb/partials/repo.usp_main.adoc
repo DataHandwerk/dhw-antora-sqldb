@@ -42,7 +42,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-05 13:29:21
+2021-09-10 19:21:00
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -50,6 +50,12 @@ stored procedure
 // tag::AntoraColumnDetails[]
 
 // end::AntoraColumnDetails[]
+
+== AntoraMeasureDetails
+
+// tag::AntoraMeasureDetails[]
+
+// end::AntoraMeasureDetails[]
 
 == AntoraPkColumnTableRows
 
@@ -542,6 +548,42 @@ RepoObjectColumn_column_id is required and should be updated before
 |
 
 
+|920
+|
+*Persistence Target: update repo.RepoObject set InheritanceType = 13 (if NULL)*
+
+* u
+* [repo].[RepoObject_persistence]
+* [repo].[RepoObject]
+
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+Update
+    repo.RepoObject
+Set
+    InheritanceType = 13
+Where
+    ( RepoObject_type = 'U' )
+    And ( InheritanceType Is Null )
+    And Exists
+(
+    Select
+        1
+    From
+        repo.RepoObject_persistence As rop
+    Where
+        rop.target_RepoObject_guid = repo.RepoObject.RepoObject_guid
+)
+----
+=====
+
+|
+
+
 |4110
 |
 *[property].[usp_RepoObject_Inheritance]*
@@ -602,6 +644,7 @@ RepoObjectColumn_column_id is required and should be updated before
 * xref:reference.usp_RepoObjectSource_QueryPlan.adoc[]
 * xref:reference.usp_update_Referencing_Count.adoc[]
 * xref:repo.RepoObject.adoc[]
+* xref:repo.RepoObject_persistence.adoc[]
 * xref:repo.usp_Index_ForeignKey.adoc[]
 * xref:repo.usp_index_inheritance.adoc[]
 * xref:repo.usp_RepoObjectColumn_update_RepoObjectColumn_column_id.adoc[]
@@ -864,6 +907,7 @@ use links in xref:sqldb:repo.usp_main.adoc#_referenced_objects[Referenced object
 * [reference].[usp_RepoObjectSource_QueryPlan]
 * [reference].[usp_update_Referencing_Count]
 * [repo].[RepoObject]
+* [repo].[RepoObject_persistence]
 * [repo].[usp_Index_ForeignKey]
 * [repo].[usp_index_inheritance]
 * [repo].[usp_RepoObjectColumn_update_RepoObjectColumn_column_id]
@@ -1256,6 +1300,50 @@ EXEC [uspgenerator].[usp_GeneratorUsp_insert_update_persistence]
  , @sub_execution_id = @sub_execution_id
  , @parent_execution_log_id = @current_execution_log_id
 
+
+/*{"ReportUspStep":[{"Number":920,"Name":"Persistence Target: update repo.RepoObject set InheritanceType = 13 (if NULL)","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":0,"log_source_object":"[repo].[RepoObject_persistence]","log_target_object":"[repo].[RepoObject]","log_flag_InsertUpdateDelete":"u"}]}*/
+PRINT CONCAT('usp_id;Number;Parent_Number: ',2,';',920,';',NULL);
+
+Update
+    repo.RepoObject
+Set
+    InheritanceType = 13
+Where
+    ( RepoObject_type = 'U' )
+    And ( InheritanceType Is Null )
+    And Exists
+(
+    Select
+        1
+    From
+        repo.RepoObject_persistence As rop
+    Where
+        rop.target_RepoObject_guid = repo.RepoObject.RepoObject_guid
+)
+
+-- Logging START --
+SET @rows = @@ROWCOUNT
+SET @step_id = @step_id + 1
+SET @step_name = 'Persistence Target: update repo.RepoObject set InheritanceType = 13 (if NULL)'
+SET @source_object = '[repo].[RepoObject_persistence]'
+SET @target_object = '[repo].[RepoObject]'
+
+EXEC logs.usp_ExecutionLog_insert 
+ @execution_instance_guid = @execution_instance_guid
+ , @ssis_execution_id = @ssis_execution_id
+ , @sub_execution_id = @sub_execution_id
+ , @parent_execution_log_id = @parent_execution_log_id
+ , @current_execution_guid = @current_execution_guid
+ , @proc_id = @proc_id
+ , @proc_schema_name = @proc_schema_name
+ , @proc_name = @proc_name
+ , @event_info = @event_info
+ , @step_id = @step_id
+ , @step_name = @step_name
+ , @source_object = @source_object
+ , @target_object = @target_object
+ , @updated = @rows
+-- Logging END --
 
 /*{"ReportUspStep":[{"Number":4110,"Name":"[property].[usp_RepoObject_Inheritance]","has_logging":0,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
 EXEC [property].[usp_RepoObject_Inheritance]

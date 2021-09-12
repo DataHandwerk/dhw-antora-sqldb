@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,31 +25,40 @@ skinparam class {
 }
 
 
-entity repo.Index_ssas << V >> {
-  * **databasename** : nvarchar(128)
-  **index_name** : nvarchar(450)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_ssas.html repo.Index_ssas]]" as repo.Index_ssas << V >> {
+  - **databasename** : (nvarchar(128))
+  **index_name** : (nvarchar(450))
   --
 }
 
-entity repo.IndexColumn_ssas << V >> {
-  * **index_guid** : uniqueidentifier
-  * **index_column_id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.IndexColumn_ssas.html repo.IndexColumn_ssas]]" as repo.IndexColumn_ssas << V >> {
+  - **index_guid** : (uniqueidentifier)
+  - **index_column_id** : (int)
   --
 }
 
-entity ssas.IndexColumn_from_IsKey << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.IndexColumn_from_IsKey.html ssas.IndexColumn_from_IsKey]]" as ssas.IndexColumn_from_IsKey << V >> {
+  - **databasename** : (nvarchar(128))
+  - **TableName** : (nvarchar(128))
+  - **tables_columns_name** : (nvarchar(128))
   --
 }
 
-entity ssas.IndexColumn_from_IsUnique << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.IndexColumn_from_IsUnique.html ssas.IndexColumn_from_IsUnique]]" as ssas.IndexColumn_from_IsUnique << V >> {
+  - **databasename** : (nvarchar(128))
+  - **TableName** : (nvarchar(128))
+  - **tables_columns_name** : (nvarchar(128))
   --
 }
 
-entity ssas.IndexColumn_from_Relationship << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.IndexColumn_from_Relationship.html ssas.IndexColumn_from_Relationship]]" as ssas.IndexColumn_from_Relationship << V >> {
+  - **databasename** : (nvarchar(128))
+  - **TableName** : (nvarchar(128))
+  - **tables_columns_name** : (nvarchar(128))
   --
 }
 
-entity ssas.IndexColumn_union << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.IndexColumn_union.html ssas.IndexColumn_union]]" as ssas.IndexColumn_union << V >> {
   --
 }
 
@@ -57,3 +67,10 @@ ssas.IndexColumn_from_IsUnique <.. ssas.IndexColumn_union
 ssas.IndexColumn_from_Relationship <.. ssas.IndexColumn_union
 ssas.IndexColumn_union <.. repo.Index_ssas
 ssas.IndexColumn_union <.. repo.IndexColumn_ssas
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

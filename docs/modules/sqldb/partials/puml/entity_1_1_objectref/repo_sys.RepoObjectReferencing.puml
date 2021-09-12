@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,23 +25,30 @@ skinparam class {
 }
 
 
-entity reference.usp_update_Referencing_Count << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.usp_update_Referencing_Count.html reference.usp_update_Referencing_Count]]" as reference.usp_update_Referencing_Count << P >> {
   --
 }
 
-entity repo.RepoObject << U >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject.html repo.RepoObject]]" as repo.RepoObject << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.usp_update_Referencing_Count << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_update_Referencing_Count.html repo.usp_update_Referencing_Count]]" as repo.usp_update_Referencing_Count << P >> {
   --
 }
 
-entity repo_sys.RepoObjectReferencing << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.RepoObjectReferencing.html repo_sys.RepoObjectReferencing]]" as repo_sys.RepoObjectReferencing << V >> {
   --
 }
 
 repo.RepoObject <.. repo_sys.RepoObjectReferencing
 repo_sys.RepoObjectReferencing <.. reference.usp_update_Referencing_Count
 repo_sys.RepoObjectReferencing <.. repo.usp_update_Referencing_Count
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

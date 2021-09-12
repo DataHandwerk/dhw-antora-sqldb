@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,41 +25,48 @@ skinparam class {
 }
 
 
-entity reference.RepoObjectSource_FirstResultSet << U >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObjectSource_FirstResultSet.html reference.RepoObjectSource_FirstResultSet]]" as reference.RepoObjectSource_FirstResultSet << U >> {
 **PK_RepoObjectSource_FirstResultSet**
-{RepoObject_guid,column_ordinal}
+
 ..
 RepoObject_guid; uniqueidentifier
 column_ordinal; int
 --
 - idx_RepoObjectSource_FirstResultSet__1
-{RepoObject_guid}
+
 ..
 RepoObject_guid; uniqueidentifier
 }
 
-entity repo.RepoObject << U >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject.html repo.RepoObject]]" as repo.RepoObject << U >> {
 **PK_RepoObject**
-{RepoObject_guid}
+
 ..
 RepoObject_guid; uniqueidentifier
 --
 UK_RepoObject__RepoNames
-{schema_name,object_name}
+
 ..
 RepoObject_schema_name; nvarchar(128)
 RepoObject_name; nvarchar(128)
 --
 UK_RepoObject__SysNames
-{schema_name,object_name}
+
 ..
 SysObject_schema_name; nvarchar(128)
 SysObject_name; nvarchar(128)
 --
 - idx_RepoObject__1
-{index_guid}
+
 ..
 pk_index_guid; uniqueidentifier
 }
 
 repo.RepoObject::PK_RepoObject <-- reference.RepoObjectSource_FirstResultSet::idx_RepoObjectSource_FirstResultSet__1
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

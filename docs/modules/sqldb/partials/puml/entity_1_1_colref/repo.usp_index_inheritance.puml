@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,145 +25,157 @@ skinparam class {
 }
 
 
-entity logs.usp_ExecutionLog_insert << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/logs.usp_ExecutionLog_insert.html logs.usp_ExecutionLog_insert]]" as logs.usp_ExecutionLog_insert << P >> {
   --
-  --
-}
-
-entity repo.Index_gross << V >> {
-  * **index_guid** : uniqueidentifier
-  --
-  AntoraIndexColumnList : nvarchar(max)
-  ColumnList : nvarchar(max)
-  ConstraintColumnList : nvarchar(max)
-  DbmlIndexColumnList : nvarchar(max)
-  index_name : nvarchar(450)
-  index_type : tinyint
-  IndexPatternColumnDatatype : nvarchar(4000)
-  IndexPatternColumnName : nvarchar(4000)
-  IndexSemanticGroup : nvarchar(512)
-  is_index_disabled : bit
-  is_index_primary_key : bit
-  is_index_real : bit
-  is_index_unique : bit
-  is_persistence : bit
-  is_repo_managed : bit
-  parent_RepoObject_guid : uniqueidentifier
-  PersistenceWhereColumnList : nvarchar(max)
-  PumlIndexColumnList : nvarchar(max)
-  referenced_index_guid : uniqueidentifier
-  * RepoObject_fullname : nvarchar(261)
-  * RepoObject_fullname2 : nvarchar(257)
-  RowNumber_PatternPerParentObject : bigint
-  RowNumber_PkPerParentObject : bigint
-  * SysObject_fullname : nvarchar(261)
-  * SysObject_fullname2 : nvarchar(257)
-  SysObject_id : int
-  * SysObject_name : nvarchar(128)
-  * SysObject_schema_name : nvarchar(128)
-  SysObject_type : char(2)
-  --
-}
-
-entity repo.Index_virtual << U >> {
-  * **index_guid** : uniqueidentifier
-  --
-  * has_managedName : bit
-  index_name : nvarchar(128)
-  * index_type : tinyint
-  * is_index_disabled : bit
-  * is_index_primary_key : bit
-  * is_index_unique : bit
-  * parent_RepoObject_guid : uniqueidentifier
-  referenced_index_guid : uniqueidentifier
-  RowNumberInReferencing : int
-  --
-}
-
-entity repo.Index_virtual_ForUpdate << V >> {
-  * **index_guid** : uniqueidentifier
-  --
-  * has_managedName : bit
-  index_name : nvarchar(128)
-  * index_type : tinyint
-  IndexPatternColumnDatatype : nvarchar(4000)
-  IndexPatternColumnName : nvarchar(4000)
-  IndexSemanticGroup : nvarchar(512)
-  * is_index_disabled : bit
-  * is_index_primary_key : bit
-  * is_index_unique : bit
-  is_persistence : bit
-  is_repo_managed : bit
-  * parent_RepoObject_guid : uniqueidentifier
-  referenced_index_guid : uniqueidentifier
-  * RepoObject_fullname : nvarchar(261)
-  * RepoObject_fullname2 : nvarchar(257)
-  RowNumberInReferencing : int
-  * SysObject_fullname : nvarchar(261)
-  * SysObject_fullname2 : nvarchar(257)
-  --
-}
-
-entity repo.Index_virtual_IndexPatternColumnGuid << V >> {
-  * **index_guid** : uniqueidentifier
-  --
-  IndexPatternColumnGuid : varchar(8000)
-  parent_RepoObject_guid : uniqueidentifier
-  --
-}
-
-entity repo.IndexColumn_virtual << U >> {
-  * **index_guid** : uniqueidentifier
-  * **index_column_id** : int
-  --
-  * is_descending_key : bit
-  * RepoObjectColumn_guid : uniqueidentifier
-  --
-}
-
-entity repo.IndexColumn_virtual_referenced_setpoint << V >> {
-  * **index_guid** : uniqueidentifier
-  * **index_column_id** : int
-  --
-  is_descending_key : bit
-  referenced_index_guid : uniqueidentifier
-  referenced_RepoObject_guid : uniqueidentifier
-  referenced_RepoObjectColumn_guid : uniqueidentifier
-  referencing_RepoObject_guid : uniqueidentifier
-  referencing_RepoObjectColumn_guid : uniqueidentifier
-  RowNumberInReferencing : int
-  --
-}
-
-entity repo.IndexReferencedReferencing_HasFullColumnsInReferencing << V >> {
-  --
-  referenced_index_guid : uniqueidentifier
-  * referenced_RepoObject_guid : uniqueidentifier
-  referencing_IndexPatternColumnGuid : varchar(8000)
-  * referencing_RepoObject_guid : uniqueidentifier
-  RowNumberInReferencing : bigint
-  RowNumberInReferencing_Target : int
-  source_index_guid : uniqueidentifier
-  * source_index_type : tinyint
-  --
-}
-
-entity repo.usp_Index_finish << P >> {
   --
   --
 }
 
-entity repo.usp_index_inheritance << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_gross.html repo.Index_gross]]" as repo.Index_gross << V >> {
+  - **index_guid** : (uniqueidentifier)
+  --
+  AntoraIndexColumnList : (nvarchar(max))
+  ColumnList : (nvarchar(max))
+  ConstraintColumnList : (nvarchar(max))
+  DbmlIndexColumnList : (nvarchar(max))
+  index_name : (nvarchar(450))
+  index_type : (tinyint)
+  IndexPatternColumnDatatype : (nvarchar(4000))
+  IndexPatternColumnName : (nvarchar(4000))
+  IndexSemanticGroup : (nvarchar(512))
+  is_index_disabled : (bit)
+  is_index_primary_key : (bit)
+  is_index_real : (bit)
+  is_index_unique : (bit)
+  is_persistence : (bit)
+  is_repo_managed : (bit)
+  parent_RepoObject_guid : (uniqueidentifier)
+  PersistenceWhereColumnList : (nvarchar(max))
+  PumlIndexColumnList : (nvarchar(max))
+  referenced_index_guid : (uniqueidentifier)
+  - RepoObject_fullname : (nvarchar(261))
+  - RepoObject_fullname2 : (nvarchar(257))
+  RowNumber_PatternPerParentObject : (bigint)
+  RowNumber_PkPerParentObject : (bigint)
+  - SysObject_fullname : (nvarchar(261))
+  - SysObject_fullname2 : (nvarchar(257))
+  SysObject_id : (int)
+  - SysObject_name : (nvarchar(128))
+  - SysObject_schema_name : (nvarchar(128))
+  SysObject_type : (char(2))
   --
   --
 }
 
-entity repo.usp_main << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_virtual.html repo.Index_virtual]]" as repo.Index_virtual << U >> {
+  - **index_guid** : (uniqueidentifier)
+  --
+  - has_managedName : (bit)
+  index_name : (nvarchar(128))
+  - index_type : (tinyint)
+  - is_index_disabled : (bit)
+  - is_index_primary_key : (bit)
+  - is_index_unique : (bit)
+  - parent_RepoObject_guid : (uniqueidentifier)
+  referenced_index_guid : (uniqueidentifier)
+  RowNumberInReferencing : (int)
   --
   --
 }
 
-entity repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_virtual_ForUpdate.html repo.Index_virtual_ForUpdate]]" as repo.Index_virtual_ForUpdate << V >> {
+  - **index_guid** : (uniqueidentifier)
+  --
+  - has_managedName : (bit)
+  index_name : (nvarchar(128))
+  - index_type : (tinyint)
+  IndexPatternColumnDatatype : (nvarchar(4000))
+  IndexPatternColumnName : (nvarchar(4000))
+  IndexSemanticGroup : (nvarchar(512))
+  - is_index_disabled : (bit)
+  - is_index_primary_key : (bit)
+  - is_index_unique : (bit)
+  is_persistence : (bit)
+  is_repo_managed : (bit)
+  - parent_RepoObject_guid : (uniqueidentifier)
+  referenced_index_guid : (uniqueidentifier)
+  - RepoObject_fullname : (nvarchar(261))
+  - RepoObject_fullname2 : (nvarchar(257))
+  RowNumberInReferencing : (int)
+  - SysObject_fullname : (nvarchar(261))
+  - SysObject_fullname2 : (nvarchar(257))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_virtual_IndexPatternColumnGuid.html repo.Index_virtual_IndexPatternColumnGuid]]" as repo.Index_virtual_IndexPatternColumnGuid << V >> {
+  - **index_guid** : (uniqueidentifier)
+  --
+  IndexPatternColumnGuid : (varchar(8000))
+  parent_RepoObject_guid : (uniqueidentifier)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.IndexColumn_virtual.html repo.IndexColumn_virtual]]" as repo.IndexColumn_virtual << U >> {
+  - **index_guid** : (uniqueidentifier)
+  - **index_column_id** : (int)
+  --
+  - is_descending_key : (bit)
+  - RepoObjectColumn_guid : (uniqueidentifier)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.IndexColumn_virtual_referenced_setpoint.html repo.IndexColumn_virtual_referenced_setpoint]]" as repo.IndexColumn_virtual_referenced_setpoint << V >> {
+  - **index_guid** : (uniqueidentifier)
+  - **index_column_id** : (int)
+  --
+  is_descending_key : (bit)
+  referenced_index_guid : (uniqueidentifier)
+  referenced_RepoObject_guid : (uniqueidentifier)
+  referenced_RepoObjectColumn_guid : (uniqueidentifier)
+  referencing_RepoObject_guid : (uniqueidentifier)
+  referencing_RepoObjectColumn_guid : (uniqueidentifier)
+  RowNumberInReferencing : (int)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.IndexReferencedReferencing_HasFullColumnsInReferencing.html repo.IndexReferencedReferencing_HasFullColumnsInReferencing]]" as repo.IndexReferencedReferencing_HasFullColumnsInReferencing << V >> {
+  --
+  referenced_index_guid : (uniqueidentifier)
+  - referenced_RepoObject_guid : (uniqueidentifier)
+  referencing_IndexPatternColumnGuid : (varchar(8000))
+  - referencing_RepoObject_guid : (uniqueidentifier)
+  RowNumberInReferencing : (bigint)
+  RowNumberInReferencing_Target : (int)
+  source_index_guid : (uniqueidentifier)
+  - source_index_type : (tinyint)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_Index_finish.html repo.usp_Index_finish]]" as repo.usp_Index_finish << P >> {
+  --
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_index_inheritance.html repo.usp_index_inheritance]]" as repo.usp_index_inheritance << P >> {
+  --
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_main.html repo.usp_main]]" as repo.usp_main << P >> {
+  --
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T.html repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T]]" as repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T << P >> {
+  --
   --
   --
 }
@@ -178,4 +191,11 @@ repo.IndexReferencedReferencing_HasFullColumnsInReferencing <.. repo.usp_index_i
 repo.usp_Index_finish <.. repo.usp_index_inheritance
 repo.usp_index_inheritance <.. repo.usp_main
 repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.usp_index_inheritance
+
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
 

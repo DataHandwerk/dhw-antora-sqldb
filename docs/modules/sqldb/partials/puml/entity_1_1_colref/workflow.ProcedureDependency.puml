@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,59 +25,64 @@ skinparam class {
 }
 
 
-entity workflow.ProcedureDependency << U >> {
-  * **id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.ProcedureDependency.html workflow.ProcedureDependency]]" as workflow.ProcedureDependency << U >> {
+  - **id** : (int)
   --
-  Description : nvarchar(4000)
-  * is_active : bit
-  * is_PersistenceDependency : bit
-  * referenced_Procedure_RepoObject_guid : uniqueidentifier
-  referenced_RepoObject_guid : uniqueidentifier
-  * referencing_Procedure_RepoObject_guid : uniqueidentifier
-  referencing_RepoObject_guid : uniqueidentifier
+  Description : (nvarchar(4000))
+  - is_active : (bit)
+  - is_PersistenceDependency : (bit)
+  - referenced_Procedure_RepoObject_guid : (uniqueidentifier)
+  referenced_RepoObject_guid : (uniqueidentifier)
+  - referencing_Procedure_RepoObject_guid : (uniqueidentifier)
+  referencing_RepoObject_guid : (uniqueidentifier)
   --
-}
-
-entity workflow.ProcedureDependency_gross << V >> {
-  --
-  Description : nvarchar(4000)
-  * id : int
-  * is_active : bit
-  * is_PersistenceDependency : bit
-  * referenced_Procedure_RepoObject_guid : uniqueidentifier
-  * referenced_RepoObject_fullname : nvarchar(261)
-  * referenced_RepoObject_fullname2 : nvarchar(257)
-  * referenced_RepoObject_schema_name : nvarchar(128)
-  * referencing_Procedure_RepoObject_guid : uniqueidentifier
-  * referencing_RepoObject_fullname : nvarchar(261)
-  * referencing_RepoObject_fullname2 : nvarchar(257)
-  * referencing_RepoObject_schema_name : nvarchar(128)
   --
 }
 
-entity workflow.ProcedureDependency_input_PersistenceDependency << V >> {
-  **referenced_Procedure_RepoObject_guid** : uniqueidentifier
-  **referencing_Procedure_RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.ProcedureDependency_gross.html workflow.ProcedureDependency_gross]]" as workflow.ProcedureDependency_gross << V >> {
   --
-  * is_PersistenceDependency : int
-  referenced_RepoObject_guid : uniqueidentifier
-  referencing_RepoObject_guid : uniqueidentifier
+  Description : (nvarchar(4000))
+  - id : (int)
+  - is_active : (bit)
+  - is_PersistenceDependency : (bit)
+  - referenced_Procedure_RepoObject_guid : (uniqueidentifier)
+  - referenced_RepoObject_fullname : (nvarchar(261))
+  - referenced_RepoObject_fullname2 : (nvarchar(257))
+  - referenced_RepoObject_schema_name : (nvarchar(128))
+  - referencing_Procedure_RepoObject_guid : (uniqueidentifier)
+  - referencing_RepoObject_fullname : (nvarchar(261))
+  - referencing_RepoObject_fullname2 : (nvarchar(257))
+  - referencing_RepoObject_schema_name : (nvarchar(128))
+  --
   --
 }
 
-entity workflow.Workflow_ProcedureDependency << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.ProcedureDependency_input_PersistenceDependency.html workflow.ProcedureDependency_input_PersistenceDependency]]" as workflow.ProcedureDependency_input_PersistenceDependency << V >> {
+  **referenced_Procedure_RepoObject_guid** : (uniqueidentifier)
+  **referencing_Procedure_RepoObject_guid** : (uniqueidentifier)
   --
-  * referenced_Procedure_RepoObject_guid : uniqueidentifier
-  * referencing_Procedure_RepoObject_guid : uniqueidentifier
-  * Workflow_id : int
+  - is_PersistenceDependency : (int)
+  referenced_RepoObject_guid : (uniqueidentifier)
+  referencing_RepoObject_guid : (uniqueidentifier)
+  --
   --
 }
 
-entity workflow.Workflow_ProcedureDependency_all << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow_ProcedureDependency.html workflow.Workflow_ProcedureDependency]]" as workflow.Workflow_ProcedureDependency << V >> {
   --
-  * referenced_Procedure_RepoObject_guid : uniqueidentifier
-  * referencing_Procedure_RepoObject_guid : uniqueidentifier
-  * Workflow_id : int
+  - referenced_Procedure_RepoObject_guid : (uniqueidentifier)
+  - referencing_Procedure_RepoObject_guid : (uniqueidentifier)
+  - Workflow_id : (int)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow_ProcedureDependency_all.html workflow.Workflow_ProcedureDependency_all]]" as workflow.Workflow_ProcedureDependency_all << V >> {
+  --
+  - referenced_Procedure_RepoObject_guid : (uniqueidentifier)
+  - referencing_Procedure_RepoObject_guid : (uniqueidentifier)
+  - Workflow_id : (int)
+  --
   --
 }
 
@@ -98,3 +104,10 @@ workflow.ProcedureDependency::referencing_Procedure_RepoObject_guid <-- workflow
 workflow.ProcedureDependency::referencing_Procedure_RepoObject_guid <-- workflow.ProcedureDependency_input_PersistenceDependency::referencing_Procedure_RepoObject_guid
 workflow.ProcedureDependency::referencing_Procedure_RepoObject_guid <-- workflow.Workflow_ProcedureDependency::referencing_Procedure_RepoObject_guid
 workflow.ProcedureDependency::referencing_Procedure_RepoObject_guid <-- workflow.Workflow_ProcedureDependency_all::referencing_Procedure_RepoObject_guid
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

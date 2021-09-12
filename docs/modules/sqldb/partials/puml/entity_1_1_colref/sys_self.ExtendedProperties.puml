@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,45 +25,47 @@ skinparam class {
 }
 
 
-entity sys_self.ExtendedProperties << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/sys_self.ExtendedProperties.html sys_self.ExtendedProperties]]" as sys_self.ExtendedProperties << V >> {
   --
-  * class : tinyint
-  class_desc : nvarchar(60)
-  entity_column_name : nvarchar(128)
-  entity_index_name : nvarchar(128)
-  entity_parameter_name : nvarchar(128)
-  level2type : varchar(9)
-  * major_id : int
-  * minor_id : int
-  minor_name : nvarchar(128)
-  parent_name : sysname
-  parent_object_id : int
-  parent_type : char(2)
-  property_basetype : sql_variant
-  * property_name : sysname
-  property_nvarchar : nvarchar(4000)
-  property_value : sql_variant
-  SysObject_name : nvarchar(128)
-  SysObject_schema_name : nvarchar(128)
+  - class : (tinyint)
+  class_desc : (nvarchar(60))
+  entity_column_name : (nvarchar(128))
+  entity_index_name : (nvarchar(128))
+  entity_parameter_name : (nvarchar(128))
+  level2type : (varchar(9))
+  - major_id : (int)
+  - minor_id : (int)
+  minor_name : (nvarchar(128))
+  parent_name : (sysname)
+  parent_object_id : (int)
+  parent_type : (char(2))
+  property_basetype : (sql_variant)
+  - property_name : (sysname)
+  property_nvarchar : (nvarchar(4000))
+  property_value : (sql_variant)
+  SysObject_name : (nvarchar(128))
+  SysObject_schema_name : (nvarchar(128))
+  --
   --
 }
 
-entity sys_self.ExtendedProperties_ParameterForAddUpdateDrop << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/sys_self.ExtendedProperties_ParameterForAddUpdateDrop.html sys_self.ExtendedProperties_ParameterForAddUpdateDrop]]" as sys_self.ExtendedProperties_ParameterForAddUpdateDrop << V >> {
   --
-  * class : tinyint
-  class_desc : nvarchar(60)
-  level0name : nvarchar(128)
-  * level0type : varchar(6)
-  level1name : nvarchar(128)
-  level1type : varchar(9)
-  level2name : nvarchar(128)
-  level2type : varchar(10)
-  * minor_id : int
-  * property_name : sysname
-  property_value : sql_variant
-  type : char(2)
-  type_level1type : varchar(9)
-  type_level2type : varchar(10)
+  - class : (tinyint)
+  class_desc : (nvarchar(60))
+  level0name : (nvarchar(128))
+  - level0type : (varchar(6))
+  level1name : (nvarchar(128))
+  level1type : (varchar(9))
+  level2name : (nvarchar(128))
+  level2type : (varchar(10))
+  - minor_id : (int)
+  - property_name : (sysname)
+  property_value : (sql_variant)
+  type : (char(2))
+  type_level1type : (varchar(9))
+  type_level2type : (varchar(10))
+  --
   --
 }
 
@@ -73,3 +76,10 @@ sys_self.ExtendedProperties::minor_id <-- sys_self.ExtendedProperties_ParameterF
 sys_self.ExtendedProperties::property_name <-- sys_self.ExtendedProperties_ParameterForAddUpdateDrop::property_name
 sys_self.ExtendedProperties::property_value <-- sys_self.ExtendedProperties_ParameterForAddUpdateDrop::property_value
 sys_self.ExtendedProperties::SysObject_schema_name <-- sys_self.ExtendedProperties_ParameterForAddUpdateDrop::level0name
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

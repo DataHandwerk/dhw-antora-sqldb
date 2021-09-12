@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,25 +25,32 @@ skinparam class {
 }
 
 
-entity repo.ForeignKey_Indexes_union << V >> {
-  **ForeignKey_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.ForeignKey_Indexes_union.html repo.ForeignKey_Indexes_union]]" as repo.ForeignKey_Indexes_union << V >> {
+  **ForeignKey_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.ForeignKey_ssas_Indexes << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.ForeignKey_ssas_Indexes.html repo.ForeignKey_ssas_Indexes]]" as repo.ForeignKey_ssas_Indexes << V >> {
   --
 }
 
-entity repo.ForeignKey_ssas_IndexPattern << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.ForeignKey_ssas_IndexPattern.html repo.ForeignKey_ssas_IndexPattern]]" as repo.ForeignKey_ssas_IndexPattern << V >> {
   --
 }
 
-entity repo.Index_ssas_T << U >> {
-  * **databasename** : nvarchar(128)
-  **index_name** : nvarchar(450)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_ssas_T.html repo.Index_ssas_T]]" as repo.Index_ssas_T << U >> {
+  - **databasename** : (nvarchar(128))
+  **index_name** : (nvarchar(450))
   --
 }
 
 repo.ForeignKey_ssas_Indexes <.. repo.ForeignKey_Indexes_union
 repo.ForeignKey_ssas_IndexPattern <.. repo.ForeignKey_ssas_Indexes
 repo.Index_ssas_T <.. repo.ForeignKey_ssas_Indexes
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

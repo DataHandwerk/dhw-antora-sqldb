@@ -1,3 +1,4 @@
+@startuml
 'Left to right direction
 top to bottom direction
 hide circle
@@ -24,132 +25,146 @@ skinparam class {
 }
 
 
-entity config.Parameter << U >> {
-  * **Parameter_name** : varchar(100)
-  * **sub_Parameter** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/config.Parameter.html config.Parameter]]" as config.Parameter << U >> {
+  - **Parameter_name** : (varchar(100))
+  - **sub_Parameter** : (nvarchar(128))
   --
 }
 
-entity logs.ExecutionLog << U >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/logs.ExecutionLog.html logs.ExecutionLog]]" as logs.ExecutionLog << U >> {
   --
 }
 
-entity logs.usp_ExecutionLog_insert << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/logs.usp_ExecutionLog_insert.html logs.usp_ExecutionLog_insert]]" as logs.usp_ExecutionLog_insert << P >> {
   --
 }
 
-entity property.PropertyName_RepoObject << V >> {
-  **property_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.PropertyName_RepoObject.html property.PropertyName_RepoObject]]" as property.PropertyName_RepoObject << V >> {
+  **property_name** : (nvarchar(128))
   --
 }
 
-entity property.RepoObject_Inheritance_temp << U >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.PropertyName_RepoObject_T.html property.PropertyName_RepoObject_T]]" as property.PropertyName_RepoObject_T << U >> {
+  **property_name** : (nvarchar(128))
   --
 }
 
-entity property.RepoObjectProperty << U >> {
-  * **RepoObjectProperty_id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObject_Inheritance_temp.html property.RepoObject_Inheritance_temp]]" as property.RepoObject_Inheritance_temp << U >> {
   --
 }
 
-entity property.RepoObjectProperty_InheritanceType_InheritanceDefinition << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  **property_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObjectProperty.html property.RepoObjectProperty]]" as property.RepoObjectProperty << U >> {
+  - **RepoObjectProperty_id** : (int)
   --
 }
 
-entity property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  **property_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObjectProperty_InheritanceType_InheritanceDefinition.html property.RepoObjectProperty_InheritanceType_InheritanceDefinition]]" as property.RepoObjectProperty_InheritanceType_InheritanceDefinition << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   --
 }
 
-entity property.usp_RepoObject_Inheritance << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition.html property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition]]" as property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  **property_name** : (nvarchar(128))
   --
 }
 
-entity repo.RepoObject << U >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.usp_PERSIST_PropertyName_RepoObject_T.html property.usp_PERSIST_PropertyName_RepoObject_T]]" as property.usp_PERSIST_PropertyName_RepoObject_T << P >> {
   --
 }
 
-entity repo.RepoObject_SSAS_src << V >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.usp_RepoObject_Inheritance.html property.usp_RepoObject_Inheritance]]" as property.usp_RepoObject_Inheritance << P >> {
   --
 }
 
-entity repo.RepoObject_SSAS_tgt << V >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject.html repo.RepoObject]]" as repo.RepoObject << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.RepoObjectColumn << U >> {
-  * **RepoObjectColumn_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject_SSAS_src.html repo.RepoObject_SSAS_src]]" as repo.RepoObject_SSAS_src << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.RepoObjectColumn_SSAS_src << V >> {
-  * **RepoObjectColumn_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject_SSAS_tgt.html repo.RepoObject_SSAS_tgt]]" as repo.RepoObject_SSAS_tgt << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.RepoObjectColumn_SSAS_tgt << V >> {
-  * **RepoObjectColumn_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObjectColumn.html repo.RepoObjectColumn]]" as repo.RepoObjectColumn << U >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
   --
 }
 
-entity ssas.model_json << U >> {
-  * **databasename** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObjectColumn_SSAS_src.html repo.RepoObjectColumn_SSAS_src]]" as repo.RepoObjectColumn_SSAS_src << V >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
   --
 }
 
-entity ssas.model_json_10 << V >> {
-  * **databasename** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObjectColumn_SSAS_tgt.html repo.RepoObjectColumn_SSAS_tgt]]" as repo.RepoObjectColumn_SSAS_tgt << V >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
   --
 }
 
-entity ssas.model_json_20 << V >> {
-  * **databasename** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json.html ssas.model_json]]" as ssas.model_json << U >> {
+  - **databasename** : (nvarchar(128))
   --
 }
 
-entity ssas.model_json_31_tables << V >> {
-  * **databasename** : nvarchar(128)
-  **tables_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_10.html ssas.model_json_10]]" as ssas.model_json_10 << V >> {
+  - **databasename** : (nvarchar(128))
   --
 }
 
-entity ssas.model_json_31_tables_T << U >> {
-  * **databasename** : nvarchar(128)
-  **tables_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_20.html ssas.model_json_20]]" as ssas.model_json_20 << V >> {
+  - **databasename** : (nvarchar(128))
   --
 }
 
-entity ssas.model_json_311_tables_columns << V >> {
-  * **databasename** : nvarchar(128)
-  * **tables_name** : nvarchar(128)
-  **tables_columns_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_31_tables.html ssas.model_json_31_tables]]" as ssas.model_json_31_tables << V >> {
+  - **databasename** : (nvarchar(128))
+  **tables_name** : (nvarchar(128))
   --
 }
 
-entity ssas.model_json_311_tables_columns_T << U >> {
-  * **databasename** : nvarchar(128)
-  * **tables_name** : nvarchar(128)
-  **tables_columns_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_31_tables_T.html ssas.model_json_31_tables_T]]" as ssas.model_json_31_tables_T << U >> {
+  - **databasename** : (nvarchar(128))
+  **tables_name** : (nvarchar(128))
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_311_tables_columns.html ssas.model_json_311_tables_columns]]" as ssas.model_json_311_tables_columns << V >> {
+  - **databasename** : (nvarchar(128))
+  - **tables_name** : (nvarchar(128))
+  **tables_columns_name** : (nvarchar(128))
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_311_tables_columns_T.html ssas.model_json_311_tables_columns_T]]" as ssas.model_json_311_tables_columns_T << U >> {
+  - **databasename** : (nvarchar(128))
+  - **tables_name** : (nvarchar(128))
+  **tables_columns_name** : (nvarchar(128))
   --
 }
 
 config.Parameter <.. property.PropertyName_RepoObject
 config.Parameter <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition
 logs.ExecutionLog <.. logs.usp_ExecutionLog_insert
+logs.usp_ExecutionLog_insert <.. property.usp_PERSIST_PropertyName_RepoObject_T
 logs.usp_ExecutionLog_insert <.. property.usp_RepoObject_Inheritance
-property.PropertyName_RepoObject <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition
+property.PropertyName_RepoObject <.. property.usp_PERSIST_PropertyName_RepoObject_T
+property.PropertyName_RepoObject <.. property.PropertyName_RepoObject_T
+property.PropertyName_RepoObject_T <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition
+property.PropertyName_RepoObject_T <.. property.usp_PERSIST_PropertyName_RepoObject_T
 property.RepoObject_Inheritance_temp <.. property.usp_RepoObject_Inheritance
 property.RepoObjectProperty <.. property.usp_RepoObject_Inheritance
-property.RepoObjectProperty <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition
 property.RepoObjectProperty <.. property.PropertyName_RepoObject
+property.RepoObjectProperty <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition
 property.RepoObjectProperty_InheritanceType_InheritanceDefinition <.. property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition
 property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition <.. property.usp_RepoObject_Inheritance
+property.usp_PERSIST_PropertyName_RepoObject_T <.. property.usp_RepoObject_Inheritance
 repo.RepoObject <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition
 repo.RepoObject <.. repo.RepoObject_SSAS_tgt
 repo.RepoObject_SSAS_src <.. repo.RepoObject_SSAS_tgt
@@ -167,3 +182,10 @@ ssas.model_json_31_tables_T <.. ssas.model_json_311_tables_columns
 ssas.model_json_31_tables_T <.. repo.RepoObject_SSAS_src
 ssas.model_json_311_tables_columns <.. ssas.model_json_311_tables_columns_T
 ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_SSAS_src
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

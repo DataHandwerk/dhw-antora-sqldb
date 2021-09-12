@@ -10,7 +10,6 @@
 :ExistsProperty--pk_index_guid:
 :ExistsProperty--pk_indexpatterncolumndatatype:
 :ExistsProperty--pk_indexpatterncolumnname:
-:ExistsProperty--pk_indexsemanticgroup:
 :ExistsProperty--FK:
 :ExistsProperty--AntoraIndexList:
 :ExistsProperty--Columns:
@@ -52,7 +51,7 @@ user table
 [#column-Parameter_name]
 === Parameter_name
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |1
 |*Parameter_name*
@@ -66,7 +65,7 @@ user table
 [#column-sub_Parameter]
 === sub_Parameter
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |2
 |*sub_Parameter*
@@ -85,7 +84,7 @@ user table
 [#column-Parameter_default_value]
 === Parameter_default_value
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |Parameter_default_value
@@ -107,7 +106,7 @@ user table
 [#column-Parameter_desciption]
 === Parameter_desciption
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |Parameter_desciption
@@ -121,7 +120,7 @@ user table
 [#column-Parameter_value]
 === Parameter_value
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |Parameter_value
@@ -143,7 +142,7 @@ user table
 [#column-Parameter_value_result]
 === Parameter_value_result
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |Parameter_value_result
@@ -157,6 +156,7 @@ user table
 --
 (TRY_CAST(coalesce([Parameter_value],[Parameter_default_value]) AS [nvarchar](4000)))
 --
+{empty} +
 
 .Definition
 ....
@@ -185,7 +185,7 @@ user table
 [#column-Parameter_value_result_date]
 === Parameter_value_result_date
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |Parameter_value_result_date
@@ -199,6 +199,7 @@ user table
 --
 (case when NOT [Parameter_value] IS NULL AND NOT sql_variant_property([Parameter_value],'BaseType')='uniqueidentifier' then TRY_CAST([Parameter_value] AS [date]) when NOT [Parameter_default_value] IS NULL AND NOT sql_variant_property([Parameter_default_value],'BaseType')='uniqueidentifier' then CONVERT([date],TRY_CAST([Parameter_default_value] AS [datetime]))  end)
 --
+{empty} +
 
 .Definition
 ....
@@ -215,7 +216,7 @@ user table
 [#column-Parameter_value_result_datetime]
 === Parameter_value_result_datetime
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |Parameter_value_result_datetime
@@ -229,6 +230,7 @@ user table
 --
 (case when NOT [Parameter_value] IS NULL AND NOT sql_variant_property([Parameter_value],'BaseType')='uniqueidentifier' then TRY_CAST([Parameter_value] AS [datetime]) when NOT [Parameter_default_value] IS NULL AND NOT sql_variant_property([Parameter_default_value],'BaseType')='uniqueidentifier' then TRY_CAST([Parameter_default_value] AS [datetime])  end)
 --
+{empty} +
 
 .Definition
 ....
@@ -245,7 +247,7 @@ user table
 [#column-Parameter_value_result_int]
 === Parameter_value_result_int
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |Parameter_value_result_int
@@ -259,6 +261,7 @@ user table
 --
 (TRY_CAST(coalesce([Parameter_value],[Parameter_default_value]) AS [int]))
 --
+{empty} +
 
 .Definition
 ....
@@ -281,6 +284,12 @@ user table
 
 
 // end::AntoraColumnDetails[]
+
+== AntoraMeasureDetails
+
+// tag::AntoraMeasureDetails[]
+
+// end::AntoraMeasureDetails[]
 
 == AntoraPkColumnTableRows
 
@@ -371,7 +380,7 @@ user table
 [#index-PK_Parameter]
 === PK_Parameter
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_pk_parameter[PK_Parameter]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
 +
 --
 * <<column-Parameter_name>>; varchar(100)
@@ -636,7 +645,7 @@ Parameter_name,sub_Parameter
 === pk_IndexSemanticGroup
 
 // tag::pk_indexsemanticgroup[]
-PK_Parameter
+
 // end::pk_indexsemanticgroup[]
 
 

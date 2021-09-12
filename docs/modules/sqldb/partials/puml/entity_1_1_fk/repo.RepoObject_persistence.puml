@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,35 +25,42 @@ skinparam class {
 }
 
 
-entity repo.RepoObject << U >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject.html repo.RepoObject]]" as repo.RepoObject << U >> {
 **PK_RepoObject**
-{RepoObject_guid}
+
 ..
 RepoObject_guid; uniqueidentifier
 --
 UK_RepoObject__RepoNames
-{schema_name,object_name}
+
 ..
 RepoObject_schema_name; nvarchar(128)
 RepoObject_name; nvarchar(128)
 --
 UK_RepoObject__SysNames
-{schema_name,object_name}
+
 ..
 SysObject_schema_name; nvarchar(128)
 SysObject_name; nvarchar(128)
 --
 - idx_RepoObject__1
-{index_guid}
+
 ..
 pk_index_guid; uniqueidentifier
 }
 
-entity repo.RepoObject_persistence << U >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject_persistence.html repo.RepoObject_persistence]]" as repo.RepoObject_persistence << U >> {
 **PK_RepoObject_persistence**
-{RepoObject_guid}
+
 ..
 target_RepoObject_guid; uniqueidentifier
 }
 
 repo.RepoObject::PK_RepoObject <-- repo.RepoObject_persistence::PK_RepoObject_persistence
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

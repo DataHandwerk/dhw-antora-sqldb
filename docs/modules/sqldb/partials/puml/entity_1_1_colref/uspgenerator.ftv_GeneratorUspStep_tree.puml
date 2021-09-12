@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,67 +25,77 @@ skinparam class {
 }
 
 
-entity uspgenerator.ftv_GeneratorUspStep_tree << IF >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/uspgenerator.ftv_GeneratorUspStep_tree.html uspgenerator.ftv_GeneratorUspStep_tree]]" as uspgenerator.ftv_GeneratorUspStep_tree << IF >> {
   --
-  Asc_PerParentChild : bigint
-  child_PerParent : bigint
-  Depth : int
-  Desc_PerParentChild : bigint
-  is_condition : tinyint
-  * is_required_ELSE : int
-  Number : int
-  Parent_Number : int
-  Parent_Sort : int
-  Root_Sort : int
-  RowNumber_PerUsp : bigint
-  Sort : int
-  usp_id : int
+  Asc_PerParentChild : (bigint)
+  child_PerParent : (bigint)
+  Depth : (int)
+  Desc_PerParentChild : (bigint)
+  is_condition : (tinyint)
+  - is_required_ELSE : (int)
+  Number : (int)
+  Parent_Number : (int)
+  Parent_Sort : (int)
+  Root_Sort : (int)
+  RowNumber_PerUsp : (bigint)
+  Sort : (int)
+  usp_id : (int)
   --
-}
-
-entity uspgenerator.GeneratorUspStep << U >> {
-  * **id** : int
-  --
-  Description : nvarchar(4000)
-  * has_logging : tinyint
-  info_01 : nvarchar(max)
-  info_02 : nvarchar(max)
-  info_03 : nvarchar(max)
-  info_04 : nvarchar(max)
-  info_05 : nvarchar(max)
-  info_06 : nvarchar(max)
-  info_07 : nvarchar(max)
-  info_08 : nvarchar(max)
-  info_09 : nvarchar(max)
-  * is_condition : tinyint
-  * is_inactive : tinyint
-  * is_SubProcedure : tinyint
-  log_flag_InsertUpdateDelete : char(1)
-  log_source_object : nvarchar(261)
-  log_target_object : nvarchar(261)
-  Name : nvarchar(1000)
-  * Number : int
-  Parent_Number : int
-  Statement : nvarchar(max)
-  * usp_id : int
   --
 }
 
-entity uspgenerator.GeneratorUspStep_Sql << V >> {
-  * **usp_id** : int
-  **Number** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/uspgenerator.GeneratorUspStep.html uspgenerator.GeneratorUspStep]]" as uspgenerator.GeneratorUspStep << U >> {
+  - **id** : (int)
   --
-  * AdocStep : nvarchar(max)
-  * has_logging : tinyint
-  is_required_ELSE : int
-  required_Begin_count : int
-  required_End_count : int
-  RowNumber_PerUsp : bigint
-  * SqlStep : nvarchar(max)
-  * usp_fullname : nvarchar(261)
+  Description : (nvarchar(4000))
+  - has_logging : (tinyint)
+  info_01 : (nvarchar(max))
+  info_02 : (nvarchar(max))
+  info_03 : (nvarchar(max))
+  info_04 : (nvarchar(max))
+  info_05 : (nvarchar(max))
+  info_06 : (nvarchar(max))
+  info_07 : (nvarchar(max))
+  info_08 : (nvarchar(max))
+  info_09 : (nvarchar(max))
+  - is_condition : (tinyint)
+  - is_inactive : (tinyint)
+  - is_SubProcedure : (tinyint)
+  log_flag_InsertUpdateDelete : (char(1))
+  log_source_object : (nvarchar(261))
+  log_target_object : (nvarchar(261))
+  Name : (nvarchar(1000))
+  - Number : (int)
+  Parent_Number : (int)
+  Statement : (nvarchar(max))
+  - usp_id : (int)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/uspgenerator.GeneratorUspStep_Sql.html uspgenerator.GeneratorUspStep_Sql]]" as uspgenerator.GeneratorUspStep_Sql << V >> {
+  - **usp_id** : (int)
+  **Number** : (int)
+  --
+  - AdocStep : (nvarchar(max))
+  - has_logging : (tinyint)
+  is_required_ELSE : (int)
+  required_Begin_count : (int)
+  required_End_count : (int)
+  RowNumber_PerUsp : (bigint)
+  - SqlStep : (nvarchar(max))
+  - usp_fullname : (nvarchar(261))
+  --
   --
 }
 
 uspgenerator.ftv_GeneratorUspStep_tree <.. uspgenerator.GeneratorUspStep_Sql
 uspgenerator.GeneratorUspStep <.. uspgenerator.ftv_GeneratorUspStep_tree
+
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
 

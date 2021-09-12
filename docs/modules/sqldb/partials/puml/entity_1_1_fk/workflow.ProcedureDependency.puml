@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,31 +25,31 @@ skinparam class {
 }
 
 
-entity repo.RepoObject << U >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject.html repo.RepoObject]]" as repo.RepoObject << U >> {
 **PK_RepoObject**
-{RepoObject_guid}
+
 ..
 RepoObject_guid; uniqueidentifier
 --
 UK_RepoObject__RepoNames
-{schema_name,object_name}
+
 ..
 RepoObject_schema_name; nvarchar(128)
 RepoObject_name; nvarchar(128)
 --
 UK_RepoObject__SysNames
-{schema_name,object_name}
+
 ..
 SysObject_schema_name; nvarchar(128)
 SysObject_name; nvarchar(128)
 --
 - idx_RepoObject__1
-{index_guid}
+
 ..
 pk_index_guid; uniqueidentifier
 }
 
-entity workflow.ProcedureDependency << U >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.ProcedureDependency.html workflow.ProcedureDependency]]" as workflow.ProcedureDependency << U >> {
 **PK_ProcedureDependency**
 
 ..
@@ -61,15 +62,22 @@ referenced_Procedure_RepoObject_guid; uniqueidentifier
 referencing_Procedure_RepoObject_guid; uniqueidentifier
 --
 - idx_ProcedureDependency__1
-{RepoObject_guid}
+
 ..
 referenced_Procedure_RepoObject_guid; uniqueidentifier
 --
 - idx_ProcedureDependency__2
-{RepoObject_guid}
+
 ..
 referencing_Procedure_RepoObject_guid; uniqueidentifier
 }
 
 repo.RepoObject::PK_RepoObject <-- workflow.ProcedureDependency::idx_ProcedureDependency__2
 repo.RepoObject::PK_RepoObject <-- workflow.ProcedureDependency::idx_ProcedureDependency__1
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

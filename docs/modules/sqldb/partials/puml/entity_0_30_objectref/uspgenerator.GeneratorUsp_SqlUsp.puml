@@ -1,3 +1,4 @@
+@startuml
 'Left to right direction
 top to bottom direction
 hide circle
@@ -24,25 +25,32 @@ skinparam class {
 }
 
 
-entity docs.usp_AntoraExport << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.usp_AntoraExport.html docs.usp_AntoraExport]]" as docs.usp_AntoraExport << P >> {
   --
 }
 
-entity property.RepoObjectProperty_Collect_source_uspgenerator << V >> {
-  **RepoObject_guid** : uniqueidentifier
-  * **property_name** : varchar(14)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObjectProperty_Collect_source_uspgenerator.html property.RepoObjectProperty_Collect_source_uspgenerator]]" as property.RepoObjectProperty_Collect_source_uspgenerator << V >> {
+  **RepoObject_guid** : (uniqueidentifier)
+  - **property_name** : (varchar(14))
   --
 }
 
-entity property.usp_RepoObjectProperty_collect << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.usp_RepoObjectProperty_collect.html property.usp_RepoObjectProperty_collect]]" as property.usp_RepoObjectProperty_collect << P >> {
   --
 }
 
-entity uspgenerator.GeneratorUsp_SqlUsp << V >> {
-  * **usp_id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/uspgenerator.GeneratorUsp_SqlUsp.html uspgenerator.GeneratorUsp_SqlUsp]]" as uspgenerator.GeneratorUsp_SqlUsp << V >> {
+  - **usp_id** : (int)
   --
 }
 
 property.RepoObjectProperty_Collect_source_uspgenerator <.. property.usp_RepoObjectProperty_collect
 property.usp_RepoObjectProperty_collect <.. docs.usp_AntoraExport
 uspgenerator.GeneratorUsp_SqlUsp <.. property.RepoObjectProperty_Collect_source_uspgenerator
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,65 +25,69 @@ skinparam class {
 }
 
 
-entity repo_sys.ExtendedProperties << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.ExtendedProperties.html repo_sys.ExtendedProperties]]" as repo_sys.ExtendedProperties << V >> {
   --
-  * class : tinyint
-  class_desc : nvarchar(60)
-  entity_column_name : nvarchar(128)
-  entity_index_name : nvarchar(128)
-  entity_parameter_name : nvarchar(128)
-  level2type : varchar(9)
-  * major_id : int
-  * minor_id : int
-  minor_name : nvarchar(128)
-  parent_name : sysname
-  parent_object_id : int
-  parent_type : char(2)
-  property_basetype : sql_variant
-  * property_name : sysname
-  property_nvarchar : nvarchar(4000)
-  property_value : sql_variant
-  SysObject_name : nvarchar(128)
-  SysObject_schema_name : nvarchar(128)
+  - class : (tinyint)
+  class_desc : (nvarchar(60))
+  entity_column_name : (nvarchar(128))
+  entity_index_name : (nvarchar(128))
+  entity_parameter_name : (nvarchar(128))
+  level2type : (varchar(9))
+  - major_id : (int)
+  - minor_id : (int)
+  minor_name : (nvarchar(128))
+  parent_name : (sysname)
+  parent_object_id : (int)
+  parent_type : (char(2))
+  property_basetype : (sql_variant)
+  - property_name : (sysname)
+  property_nvarchar : (nvarchar(4000))
+  property_value : (sql_variant)
+  SysObject_name : (nvarchar(128))
+  SysObject_schema_name : (nvarchar(128))
   --
-}
-
-entity repo_sys.SysObject << V >> {
-  --
-  * create_date : datetime
-  history_table_id : int
-  * is_ms_shipped : bit
-  * is_published : bit
-  * is_schema_published : bit
-  max_column_id_used : int
-  * modify_date : datetime
-  * parent_object_id : int
-  principal_id : int
-  * schema_id : int
-  sql_modules_definition : nvarchar(max)
-  * SysObject_fullname : nvarchar(517)
-  * SysObject_fullname2 : nvarchar(257)
-  * SysObject_id : int
-  * SysObject_name : sysname
-  SysObject_RepoObject_guid : uniqueidentifier
-  SysObject_schema_name : sysname
-  temporal_type : tinyint
-  temporal_type_desc : nvarchar(60)
-  type : char(2)
-  type_desc : nvarchar(60)
   --
 }
 
-entity repo_sys.SysSchema << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.SysObject.html repo_sys.SysObject]]" as repo_sys.SysObject << V >> {
   --
-  * SysSchema_id : int
-  * SysSchema_name : sysname
-  SysSchema_principal_id : int
-  SysSchema_RepoSchema_guid : uniqueidentifier
+  - create_date : (datetime)
+  history_table_id : (int)
+  - is_ms_shipped : (bit)
+  - is_published : (bit)
+  - is_schema_published : (bit)
+  max_column_id_used : (int)
+  - modify_date : (datetime)
+  - parent_object_id : (int)
+  principal_id : (int)
+  - schema_id : (int)
+  sql_modules_definition : (nvarchar(max))
+  - SysObject_fullname : (nvarchar(517))
+  - SysObject_fullname2 : (nvarchar(257))
+  - SysObject_id : (int)
+  - SysObject_name : (sysname)
+  SysObject_RepoObject_guid : (uniqueidentifier)
+  SysObject_schema_name : (sysname)
+  temporal_type : (tinyint)
+  temporal_type_desc : (nvarchar(60))
+  type : (char(2))
+  type_desc : (nvarchar(60))
+  --
   --
 }
 
-entity sys_dwh.schemas << SN >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.SysSchema.html repo_sys.SysSchema]]" as repo_sys.SysSchema << V >> {
+  --
+  - SysSchema_id : (int)
+  - SysSchema_name : (sysname)
+  SysSchema_principal_id : (int)
+  SysSchema_RepoSchema_guid : (uniqueidentifier)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/sys_dwh.schemas.html sys_dwh.schemas]]" as sys_dwh.schemas << SN >> {
+  --
   --
   --
 }
@@ -90,4 +95,11 @@ entity sys_dwh.schemas << SN >> {
 sys_dwh.schemas <.. repo_sys.ExtendedProperties
 sys_dwh.schemas <.. repo_sys.SysObject
 sys_dwh.schemas <.. repo_sys.SysSchema
+
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
 

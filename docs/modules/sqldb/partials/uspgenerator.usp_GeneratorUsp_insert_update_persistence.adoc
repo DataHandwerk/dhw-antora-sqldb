@@ -41,7 +41,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-05 13:29:26
+2021-09-10 19:21:00
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -49,6 +49,12 @@ stored procedure
 // tag::AntoraColumnDetails[]
 
 // end::AntoraColumnDetails[]
+
+== AntoraMeasureDetails
+
+// tag::AntoraMeasureDetails[]
+
+// end::AntoraMeasureDetails[]
 
 == AntoraPkColumnTableRows
 
@@ -124,6 +130,35 @@ WHERE LEFT([u].[usp_name], 12) = 'usp_PERSIST_'
 |
 
 
+|220
+|
+*set invalid persistence_source_RepoObjectColumn_guid = Null*
+
+* u
+* [repo].[RepoObjectColumn_gross2]
+* [repo].[RepoObjectColumn_gross2]
+
+
+if the peristence source for a target changes we need to remove old and invalide source columns
+
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+Update
+    repo.RepoObjectColumn_gross2
+Set
+    persistence_source_RepoObjectColumn_guid = Null
+Where
+    ( persistence_source_RepoObject_guid <> persistence_source_RepoObject_guid_via_Column )
+----
+=====
+
+|
+
+
 |310
 |
 *insert new usp*
@@ -165,7 +200,7 @@ WHERE [is_persistence] = 1
 *update steps, changed*
 
 * u
-* [repo].[GeneratorUspStep_Persistence]
+* [repo].[GeneratorUspStep_Persistence_src]
 * [repo].[GeneratorUspStep]
 
 
@@ -185,7 +220,7 @@ SET [Parent_Number] = [S].[Parent_Number]
  , [log_target_object] = [S].[log_target_object]
  , [log_flag_InsertUpdateDelete] = [S].[log_flag_InsertUpdateDelete]
 FROM [uspgenerator].[GeneratorUspStep] [T]
-INNER JOIN [uspgenerator].[GeneratorUspStep_Persistence] AS [S]
+INNER JOIN [uspgenerator].[GeneratorUspStep_Persistence_src] AS [S]
  ON [T].[usp_id] = [S].[usp_id]
   AND [T].[Number] = [S].[Number]
 WHERE
@@ -254,7 +289,7 @@ WHERE
 *insert steps, not existing*
 
 * i
-* [repo].[GeneratorUspStep_Persistence]
+* [repo].[GeneratorUspStep_Persistence_src]
 * [repo].[GeneratorUspStep]
 
 
@@ -298,7 +333,7 @@ SELECT [usp_id]
  , [log_source_object]
  , [log_target_object]
  , [log_flag_InsertUpdateDelete]
-FROM [uspgenerator].[GeneratorUspStep_Persistence] AS S
+FROM [uspgenerator].[GeneratorUspStep_Persistence_src] AS S
 WHERE NOT EXISTS (
   SELECT 1
   FROM [uspgenerator].[GeneratorUspStep] AS [T]
@@ -347,10 +382,11 @@ WHERE [setpoint].[is_inactive] <> [step].[is_inactive]
 // tag::antorareferencedlist[]
 * xref:logs.usp_ExecutionLog_insert.adoc[]
 * xref:repo.RepoObject_gross.adoc[]
+* xref:repo.RepoObjectColumn_gross2.adoc[]
 * xref:uspgenerator.GeneratorUsp.adoc[]
 * xref:uspgenerator.GeneratorUspStep.adoc[]
-* xref:uspgenerator.GeneratorUspStep_Persistence.adoc[]
 * xref:uspgenerator.GeneratorUspStep_Persistence_IsInactive_setpoint.adoc[]
+* xref:uspgenerator.GeneratorUspStep_Persistence_src.adoc[]
 // end::antorareferencedlist[]
 
 
@@ -576,10 +612,11 @@ EXEC [uspgenerator].[usp_GeneratorUsp_insert_update_persistence]
 // tag::referencedobjectlist[]
 * [logs].[usp_ExecutionLog_insert]
 * [repo].[RepoObject_gross]
+* [repo].[RepoObjectColumn_gross2]
 * [uspgenerator].[GeneratorUsp]
 * [uspgenerator].[GeneratorUspStep]
-* [uspgenerator].[GeneratorUspStep_Persistence]
 * [uspgenerator].[GeneratorUspStep_Persistence_IsInactive_setpoint]
+* [uspgenerator].[GeneratorUspStep_Persistence_src]
 // end::referencedobjectlist[]
 
 
@@ -733,6 +770,44 @@ EXEC logs.usp_ExecutionLog_insert
  , @deleted = @rows
 -- Logging END --
 
+/*{"ReportUspStep":[{"Number":220,"Name":"set invalid persistence_source_RepoObjectColumn_guid = Null","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":0,"log_source_object":"[repo].[RepoObjectColumn_gross2]","log_target_object":"[repo].[RepoObjectColumn_gross2]","log_flag_InsertUpdateDelete":"u"}]}*/
+PRINT CONCAT('usp_id;Number;Parent_Number: ',3,';',220,';',NULL);
+
+/*
+if the peristence source for a target changes we need to remove old and invalide source columns
+
+*/
+Update
+    repo.RepoObjectColumn_gross2
+Set
+    persistence_source_RepoObjectColumn_guid = Null
+Where
+    ( persistence_source_RepoObject_guid <> persistence_source_RepoObject_guid_via_Column )
+
+-- Logging START --
+SET @rows = @@ROWCOUNT
+SET @step_id = @step_id + 1
+SET @step_name = 'set invalid persistence_source_RepoObjectColumn_guid = Null'
+SET @source_object = '[repo].[RepoObjectColumn_gross2]'
+SET @target_object = '[repo].[RepoObjectColumn_gross2]'
+
+EXEC logs.usp_ExecutionLog_insert 
+ @execution_instance_guid = @execution_instance_guid
+ , @ssis_execution_id = @ssis_execution_id
+ , @sub_execution_id = @sub_execution_id
+ , @parent_execution_log_id = @parent_execution_log_id
+ , @current_execution_guid = @current_execution_guid
+ , @proc_id = @proc_id
+ , @proc_schema_name = @proc_schema_name
+ , @proc_name = @proc_name
+ , @event_info = @event_info
+ , @step_id = @step_id
+ , @step_name = @step_name
+ , @source_object = @source_object
+ , @target_object = @target_object
+ , @updated = @rows
+-- Logging END --
+
 /*{"ReportUspStep":[{"Number":310,"Name":"insert new usp","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":0,"log_source_object":"[repo].[RepoObject_gross]","log_target_object":"[repo].[GeneratorUsp]","log_flag_InsertUpdateDelete":"i"}]}*/
 PRINT CONCAT('usp_id;Number;Parent_Number: ',3,';',310,';',NULL);
 
@@ -777,7 +852,7 @@ EXEC logs.usp_ExecutionLog_insert
  , @inserted = @rows
 -- Logging END --
 
-/*{"ReportUspStep":[{"Number":510,"Name":"update steps, changed","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":0,"log_source_object":"[repo].[GeneratorUspStep_Persistence]","log_target_object":"[repo].[GeneratorUspStep]","log_flag_InsertUpdateDelete":"u"}]}*/
+/*{"ReportUspStep":[{"Number":510,"Name":"update steps, changed","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":0,"log_source_object":"[repo].[GeneratorUspStep_Persistence_src]","log_target_object":"[repo].[GeneratorUspStep]","log_flag_InsertUpdateDelete":"u"}]}*/
 PRINT CONCAT('usp_id;Number;Parent_Number: ',3,';',510,';',NULL);
 
 UPDATE T
@@ -791,7 +866,7 @@ SET [Parent_Number] = [S].[Parent_Number]
  , [log_target_object] = [S].[log_target_object]
  , [log_flag_InsertUpdateDelete] = [S].[log_flag_InsertUpdateDelete]
 FROM [uspgenerator].[GeneratorUspStep] [T]
-INNER JOIN [uspgenerator].[GeneratorUspStep_Persistence] AS [S]
+INNER JOIN [uspgenerator].[GeneratorUspStep_Persistence_src] AS [S]
  ON [T].[usp_id] = [S].[usp_id]
   AND [T].[Number] = [S].[Number]
 WHERE
@@ -854,7 +929,7 @@ WHERE
 SET @rows = @@ROWCOUNT
 SET @step_id = @step_id + 1
 SET @step_name = 'update steps, changed'
-SET @source_object = '[repo].[GeneratorUspStep_Persistence]'
+SET @source_object = '[repo].[GeneratorUspStep_Persistence_src]'
 SET @target_object = '[repo].[GeneratorUspStep]'
 
 EXEC logs.usp_ExecutionLog_insert 
@@ -874,7 +949,7 @@ EXEC logs.usp_ExecutionLog_insert
  , @updated = @rows
 -- Logging END --
 
-/*{"ReportUspStep":[{"Number":610,"Name":"insert steps, not existing","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":0,"log_source_object":"[repo].[GeneratorUspStep_Persistence]","log_target_object":"[repo].[GeneratorUspStep]","log_flag_InsertUpdateDelete":"i"}]}*/
+/*{"ReportUspStep":[{"Number":610,"Name":"insert steps, not existing","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":0,"log_source_object":"[repo].[GeneratorUspStep_Persistence_src]","log_target_object":"[repo].[GeneratorUspStep]","log_flag_InsertUpdateDelete":"i"}]}*/
 PRINT CONCAT('usp_id;Number;Parent_Number: ',3,';',610,';',NULL);
 
 INSERT INTO [uspgenerator].[GeneratorUspStep] (
@@ -912,7 +987,7 @@ SELECT [usp_id]
  , [log_source_object]
  , [log_target_object]
  , [log_flag_InsertUpdateDelete]
-FROM [uspgenerator].[GeneratorUspStep_Persistence] AS S
+FROM [uspgenerator].[GeneratorUspStep_Persistence_src] AS S
 WHERE NOT EXISTS (
   SELECT 1
   FROM [uspgenerator].[GeneratorUspStep] AS [T]
@@ -924,7 +999,7 @@ WHERE NOT EXISTS (
 SET @rows = @@ROWCOUNT
 SET @step_id = @step_id + 1
 SET @step_name = 'insert steps, not existing'
-SET @source_object = '[repo].[GeneratorUspStep_Persistence]'
+SET @source_object = '[repo].[GeneratorUspStep_Persistence_src]'
 SET @target_object = '[repo].[GeneratorUspStep]'
 
 EXEC logs.usp_ExecutionLog_insert 

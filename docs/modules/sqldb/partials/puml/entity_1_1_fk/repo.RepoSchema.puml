@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,7 +25,7 @@ skinparam class {
 }
 
 
-entity property.RepoSchemaProperty << U >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoSchemaProperty.html property.RepoSchemaProperty]]" as property.RepoSchemaProperty << U >> {
 **PK_RepoSchemaProperty**
 
 ..
@@ -37,14 +38,14 @@ RepoSchema_guid; uniqueidentifier
 property_name; nvarchar(128)
 --
 - idx_RepoSchemaProperty__1
-{RepoSchema_guid}
+
 ..
 RepoSchema_guid; uniqueidentifier
 }
 
-entity repo.RepoSchema << U >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoSchema.html repo.RepoSchema]]" as repo.RepoSchema << U >> {
 **PK_RepoSchema**
-{RepoSchema_guid}
+
 ..
 RepoSchema_guid; uniqueidentifier
 --
@@ -55,3 +56,10 @@ RepoSchema_name; nvarchar(128)
 }
 
 repo.RepoSchema::PK_RepoSchema <-- property.RepoSchemaProperty::idx_RepoSchemaProperty__1
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

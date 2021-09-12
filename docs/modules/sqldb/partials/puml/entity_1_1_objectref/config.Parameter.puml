@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,73 +25,73 @@ skinparam class {
 }
 
 
-entity config.fs_dwh_database_name << FN >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/config.fs_dwh_database_name.html config.fs_dwh_database_name]]" as config.fs_dwh_database_name << FN >> {
   --
 }
 
-entity config.fs_get_parameter_value << FN >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/config.fs_get_parameter_value.html config.fs_get_parameter_value]]" as config.fs_get_parameter_value << FN >> {
   --
 }
 
-entity config.ftv_dwh_database << IF >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/config.ftv_dwh_database.html config.ftv_dwh_database]]" as config.ftv_dwh_database << IF >> {
   --
 }
 
-entity config.ftv_get_parameter_value << IF >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/config.ftv_get_parameter_value.html config.ftv_get_parameter_value]]" as config.ftv_get_parameter_value << IF >> {
   --
 }
 
-entity config.Parameter << U >> {
-  * **Parameter_name** : varchar(100)
-  * **sub_Parameter** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/config.Parameter.html config.Parameter]]" as config.Parameter << U >> {
+  - **Parameter_name** : (varchar(100))
+  - **sub_Parameter** : (nvarchar(128))
   --
 }
 
-entity config.usp_init_parameter << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/config.usp_init_parameter.html config.usp_init_parameter]]" as config.usp_init_parameter << P >> {
   --
 }
 
-entity config.usp_parameter_set << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/config.usp_parameter_set.html config.usp_parameter_set]]" as config.usp_parameter_set << P >> {
   --
 }
 
-entity docs.usp_AntoraExport_DocSnippet << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.usp_AntoraExport_DocSnippet.html docs.usp_AntoraExport_DocSnippet]]" as docs.usp_AntoraExport_DocSnippet << P >> {
   --
 }
 
-entity docs.usp_AntoraExport_ObjectPageTemplate << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.usp_AntoraExport_ObjectPageTemplate.html docs.usp_AntoraExport_ObjectPageTemplate]]" as docs.usp_AntoraExport_ObjectPageTemplate << P >> {
   --
 }
 
-entity property.PropertyName_RepoObject << V >> {
-  **property_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.PropertyName_RepoObject.html property.PropertyName_RepoObject]]" as property.PropertyName_RepoObject << V >> {
+  **property_name** : (nvarchar(128))
   --
 }
 
-entity property.PropertyName_RepoObjectColumn << V >> {
-  * **property_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.PropertyName_RepoObjectColumn.html property.PropertyName_RepoObjectColumn]]" as property.PropertyName_RepoObjectColumn << V >> {
+  - **property_name** : (nvarchar(128))
   --
 }
 
-entity property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition << V >> {
-  * **RepoObjectColumn_guid** : uniqueidentifier
-  * **property_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.html property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition]]" as property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition << V >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   --
 }
 
-entity property.RepoObjectProperty_InheritanceType_InheritanceDefinition << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  **property_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObjectProperty_InheritanceType_InheritanceDefinition.html property.RepoObjectProperty_InheritanceType_InheritanceDefinition]]" as property.RepoObjectProperty_InheritanceType_InheritanceDefinition << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   --
 }
 
-entity repo.usp_persistence_set << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_persistence_set.html repo.usp_persistence_set]]" as repo.usp_persistence_set << P >> {
   --
 }
 
+config.Parameter <.. config.fs_dwh_database_name
 config.Parameter <.. config.fs_get_parameter_value
 config.Parameter <.. config.ftv_dwh_database
-config.Parameter <.. config.fs_dwh_database_name
 config.Parameter <.. config.ftv_get_parameter_value
 config.Parameter <.. config.usp_init_parameter
 config.Parameter <.. config.usp_parameter_set
@@ -101,3 +102,10 @@ config.Parameter <.. property.RepoObjectProperty_InheritanceType_InheritanceDefi
 config.Parameter <.. property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition
 config.Parameter <.. docs.usp_AntoraExport_ObjectPageTemplate
 config.Parameter <.. docs.usp_AntoraExport_DocSnippet
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

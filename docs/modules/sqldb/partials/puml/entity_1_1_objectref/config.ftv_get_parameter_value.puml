@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,52 +25,70 @@ skinparam class {
 }
 
 
-entity config.ftv_get_parameter_value << IF >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/config.ftv_get_parameter_value.html config.ftv_get_parameter_value]]" as config.ftv_get_parameter_value << IF >> {
   --
 }
 
-entity config.Parameter << U >> {
-  * **Parameter_name** : varchar(100)
-  * **sub_Parameter** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/config.Parameter.html config.Parameter]]" as config.Parameter << U >> {
+  - **Parameter_name** : (varchar(100))
+  - **sub_Parameter** : (nvarchar(128))
   --
 }
 
-entity docs.fs_PumlHeaderLeftToRight << FN >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.fs_PumlHeaderLeftToRight.html docs.fs_PumlHeaderLeftToRight]]" as docs.fs_PumlHeaderLeftToRight << FN >> {
   --
 }
 
-entity docs.fs_PumlHeaderTopToBottom << FN >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.fs_PumlHeaderTopToBottom.html docs.fs_PumlHeaderTopToBottom]]" as docs.fs_PumlHeaderTopToBottom << FN >> {
   --
 }
 
-entity docs.ObjectRefCyclic << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.ObjectRefCyclic.html docs.ObjectRefCyclic]]" as docs.ObjectRefCyclic << V >> {
   --
 }
 
-entity docs.Schema_puml << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.RepoObject_Plantuml_Entity.html docs.RepoObject_Plantuml_Entity]]" as docs.RepoObject_Plantuml_Entity << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.RepoObject_gross2 << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.Schema_puml.html docs.Schema_puml]]" as docs.Schema_puml << V >> {
   --
 }
 
-entity repo.RepoObject_SqlCreateTable << V >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.Unit_2.html docs.Unit_2]]" as docs.Unit_2 << V >> {
   --
 }
 
-entity repo.RepoObjectColumn_HistValidColums_setpoint << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  **RepoObjectColumn_name** : sysname
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject_gross2.html repo.RepoObject_gross2]]" as repo.RepoObject_gross2 << V >> {
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject_SqlCreateTable.html repo.RepoObject_SqlCreateTable]]" as repo.RepoObject_SqlCreateTable << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObjectColumn_HistValidColums_setpoint.html repo.RepoObjectColumn_HistValidColums_setpoint]]" as repo.RepoObjectColumn_HistValidColums_setpoint << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  **RepoObjectColumn_name** : (sysname)
   --
 }
 
 config.ftv_get_parameter_value <.. repo.RepoObjectColumn_HistValidColums_setpoint
 config.ftv_get_parameter_value <.. repo.RepoObject_SqlCreateTable
+config.ftv_get_parameter_value <.. docs.RepoObject_Plantuml_Entity
 config.ftv_get_parameter_value <.. docs.ObjectRefCyclic
 config.ftv_get_parameter_value <.. repo.RepoObject_gross2
 config.ftv_get_parameter_value <.. docs.fs_PumlHeaderLeftToRight
 config.ftv_get_parameter_value <.. docs.fs_PumlHeaderTopToBottom
 config.ftv_get_parameter_value <.. docs.Schema_puml
+config.ftv_get_parameter_value <.. docs.Unit_2
 config.Parameter <.. config.ftv_get_parameter_value
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,65 +25,72 @@ skinparam class {
 }
 
 
-entity config.ftv_dwh_database << IF >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/config.ftv_dwh_database.html config.ftv_dwh_database]]" as config.ftv_dwh_database << IF >> {
   --
 }
 
-entity config.Parameter << U >> {
-  * **Parameter_name** : varchar(100)
-  * **sub_Parameter** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/config.Parameter.html config.Parameter]]" as config.Parameter << U >> {
+  - **Parameter_name** : (varchar(100))
+  - **sub_Parameter** : (nvarchar(128))
   --
 }
 
-entity reference.RepoObjectColumn_reference_QueryPlan << V >> {
-  **referencing_id** : int
-  **referencing_minor_id** : int
-  **referenced_id** : int
-  **referenced_minor_id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObjectColumn_reference_QueryPlan.html reference.RepoObjectColumn_reference_QueryPlan]]" as reference.RepoObjectColumn_reference_QueryPlan << V >> {
+  **referencing_id** : (int)
+  **referencing_minor_id** : (int)
+  **referenced_id** : (int)
+  **referenced_minor_id** : (int)
   --
 }
 
-entity reference.usp_update_Referencing_Count << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.usp_update_Referencing_Count.html reference.usp_update_Referencing_Count]]" as reference.usp_update_Referencing_Count << P >> {
   --
 }
 
-entity repo.RepoObject_SqlCreateTable << V >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject_SqlCreateTable.html repo.RepoObject_SqlCreateTable]]" as repo.RepoObject_SqlCreateTable << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.usp_update_Referencing_Count << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_update_Referencing_Count.html repo.usp_update_Referencing_Count]]" as repo.usp_update_Referencing_Count << P >> {
   --
 }
 
-entity repo_sys.ExtendedProperties << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.ExtendedProperties.html repo_sys.ExtendedProperties]]" as repo_sys.ExtendedProperties << V >> {
   --
 }
 
-entity repo_sys.sql_expression_dependencies << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.sql_expression_dependencies.html repo_sys.sql_expression_dependencies]]" as repo_sys.sql_expression_dependencies << V >> {
   --
 }
 
-entity repo_sys.SysColumn << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.SysColumn.html repo_sys.SysColumn]]" as repo_sys.SysColumn << V >> {
   --
 }
 
-entity uspgenerator.GeneratorUsp_SqlUsp << V >> {
-  * **usp_id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/uspgenerator.GeneratorUsp_SqlUsp.html uspgenerator.GeneratorUsp_SqlUsp]]" as uspgenerator.GeneratorUsp_SqlUsp << V >> {
+  - **usp_id** : (int)
   --
 }
 
-entity workflow.Workflow_SqlUsp << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow_SqlUsp.html workflow.Workflow_SqlUsp]]" as workflow.Workflow_SqlUsp << V >> {
   --
 }
 
-config.ftv_dwh_database <.. workflow.Workflow_SqlUsp
-config.ftv_dwh_database <.. reference.usp_update_Referencing_Count
-config.ftv_dwh_database <.. repo.usp_update_Referencing_Count
 config.ftv_dwh_database <.. uspgenerator.GeneratorUsp_SqlUsp
 config.ftv_dwh_database <.. repo_sys.ExtendedProperties
 config.ftv_dwh_database <.. repo_sys.SysColumn
 config.ftv_dwh_database <.. repo_sys.sql_expression_dependencies
 config.ftv_dwh_database <.. reference.RepoObjectColumn_reference_QueryPlan
 config.ftv_dwh_database <.. repo.RepoObject_SqlCreateTable
+config.ftv_dwh_database <.. reference.usp_update_Referencing_Count
+config.ftv_dwh_database <.. repo.usp_update_Referencing_Count
+config.ftv_dwh_database <.. workflow.Workflow_SqlUsp
 config.Parameter <.. config.ftv_dwh_database
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

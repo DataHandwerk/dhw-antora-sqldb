@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,32 +25,39 @@ skinparam class {
 }
 
 
-entity repo.Index_ColumList << V >> {
-  **index_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_ColumList_T.html repo.Index_ColumList_T]]" as repo.Index_ColumList_T << U >> {
+  - **index_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.Index_Settings << U >> {
-  * **index_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_Settings.html repo.Index_Settings]]" as repo.Index_Settings << U >> {
+  - **index_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.Index_SqlConstraint_PkUq << V >> {
-  **index_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_SqlConstraint_PkUq.html repo.Index_SqlConstraint_PkUq]]" as repo.Index_SqlConstraint_PkUq << V >> {
+  **index_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.Index_union << V >> {
-  **index_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_union.html repo.Index_union]]" as repo.Index_union << V >> {
+  **index_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.RepoObject_SqlCreateTable << V >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject_SqlCreateTable.html repo.RepoObject_SqlCreateTable]]" as repo.RepoObject_SqlCreateTable << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-repo.Index_ColumList <.. repo.Index_SqlConstraint_PkUq
+repo.Index_ColumList_T <.. repo.Index_SqlConstraint_PkUq
 repo.Index_Settings <.. repo.Index_SqlConstraint_PkUq
 repo.Index_SqlConstraint_PkUq <.. repo.RepoObject_SqlCreateTable
 repo.Index_union <.. repo.Index_SqlConstraint_PkUq
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

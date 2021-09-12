@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,24 +25,31 @@ skinparam class {
 }
 
 
-entity reference.additional_Reference_guid << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.additional_Reference_guid.html reference.additional_Reference_guid]]" as reference.additional_Reference_guid << V >> {
   --
 }
 
-entity reference.RepoObject_reference_T << U >> {
-  **referenced_RepoObject_guid** : uniqueidentifier
-  **referencing_RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObject_reference_T.html reference.RepoObject_reference_T]]" as reference.RepoObject_reference_T << U >> {
+  **referenced_RepoObject_guid** : (uniqueidentifier)
+  **referencing_RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity reference.RepoObjectColumn_reference_additional_internal << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObjectColumn_reference_additional_internal.html reference.RepoObjectColumn_reference_additional_internal]]" as reference.RepoObjectColumn_reference_additional_internal << V >> {
   --
 }
 
-entity reference.RepoObjectColumn_reference_union << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObjectColumn_reference_union.html reference.RepoObjectColumn_reference_union]]" as reference.RepoObjectColumn_reference_union << V >> {
   --
 }
 
 reference.additional_Reference_guid <.. reference.RepoObjectColumn_reference_additional_internal
 reference.RepoObject_reference_T <.. reference.RepoObjectColumn_reference_additional_internal
 reference.RepoObjectColumn_reference_additional_internal <.. reference.RepoObjectColumn_reference_union
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

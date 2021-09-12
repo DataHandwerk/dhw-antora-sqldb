@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,44 +25,51 @@ skinparam class {
 }
 
 
-entity workflow.Biml_Task << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Biml_Task.html workflow.Biml_Task]]" as workflow.Biml_Task << V >> {
   --
 }
 
-entity workflow.usp_workflow << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.usp_workflow.html workflow.usp_workflow]]" as workflow.usp_workflow << P >> {
   --
 }
 
-entity workflow.Workflow << U >> {
-  * **id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow.html workflow.Workflow]]" as workflow.Workflow << U >> {
+  - **id** : (int)
   --
 }
 
-entity workflow.Workflow_ProcedureDependency << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow_ProcedureDependency.html workflow.Workflow_ProcedureDependency]]" as workflow.Workflow_ProcedureDependency << V >> {
   --
 }
 
-entity workflow.Workflow_ProcedureDependency_all << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow_ProcedureDependency_all.html workflow.Workflow_ProcedureDependency_all]]" as workflow.Workflow_ProcedureDependency_all << V >> {
   --
 }
 
-entity workflow.Workflow_ProcedureDependency_T_active << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow_ProcedureDependency_T_active.html workflow.Workflow_ProcedureDependency_T_active]]" as workflow.Workflow_ProcedureDependency_T_active << V >> {
   --
 }
 
-entity workflow.WorkflowStep << U >> {
-  * **id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.WorkflowStep.html workflow.WorkflowStep]]" as workflow.WorkflowStep << U >> {
+  - **id** : (int)
   --
 }
 
-entity workflow.WorkflowStep_active << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.WorkflowStep_active.html workflow.WorkflowStep_active]]" as workflow.WorkflowStep_active << V >> {
   --
 }
 
 workflow.Workflow <.. workflow.WorkflowStep_active
 workflow.WorkflowStep <.. workflow.WorkflowStep_active
 workflow.WorkflowStep_active <.. workflow.Biml_Task
-workflow.WorkflowStep_active <.. workflow.usp_workflow
-workflow.WorkflowStep_active <.. workflow.Workflow_ProcedureDependency_all
 workflow.WorkflowStep_active <.. workflow.Workflow_ProcedureDependency
 workflow.WorkflowStep_active <.. workflow.Workflow_ProcedureDependency_T_active
+workflow.WorkflowStep_active <.. workflow.usp_workflow
+workflow.WorkflowStep_active <.. workflow.Workflow_ProcedureDependency_all
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,42 +25,44 @@ skinparam class {
 }
 
 
-entity docs.ForeignKey_RelationScript << V >> {
-  **referenced_RepoObject_guid** : uniqueidentifier
-  **referencing_RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.ForeignKey_RelationScript.html docs.ForeignKey_RelationScript]]" as docs.ForeignKey_RelationScript << V >> {
+  **referenced_RepoObject_guid** : (uniqueidentifier)
+  **referencing_RepoObject_guid** : (uniqueidentifier)
   --
-  * DbmlRelation : nvarchar(4000)
-  referenced_RepoObject_fullname : nvarchar(261)
-  referencing_RepoObject_fullname : nvarchar(261)
+  - DbmlRelation : (nvarchar(4000))
+  referenced_RepoObject_fullname : (nvarchar(261))
+  referencing_RepoObject_fullname : (nvarchar(261))
+  --
   --
 }
 
-entity repo.ForeignKey_Indexes_union_T << U >> {
-  **ForeignKey_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.ForeignKey_Indexes_union_T.html repo.ForeignKey_Indexes_union_T]]" as repo.ForeignKey_Indexes_union_T << U >> {
+  **ForeignKey_guid** : (uniqueidentifier)
   --
-  delete_referential_action : tinyint
-  ForeignKey_fullname : nvarchar(517)
-  ForeignKey_name : nvarchar(max)
-  * is_MatchingDatatypePattern : int
-  referenced_index_guid : uniqueidentifier
-  referenced_index_name : nvarchar(450)
-  referenced_IndexPatternColumnDatatype : nvarchar(4000)
-  referenced_IndexPatternColumnName : nvarchar(max)
-  referenced_RepoObject_fullname : nvarchar(261)
-  referenced_RepoObject_fullname2 : nvarchar(257)
-  referenced_RepoObject_guid : uniqueidentifier
-  referenced_SysObject_name : nvarchar(128)
-  referenced_SysObject_schema_name : nvarchar(128)
-  referencing_index_guid : uniqueidentifier
-  referencing_index_name : nvarchar(450)
-  referencing_IndexPatternColumnDatatype : nvarchar(4000)
-  referencing_IndexPatternColumnName : nvarchar(max)
-  referencing_RepoObject_fullname : nvarchar(261)
-  referencing_RepoObject_fullname2 : nvarchar(257)
-  referencing_RepoObject_guid : uniqueidentifier
-  referencing_SysObject_name : nvarchar(128)
-  referencing_SysObject_schema_name : nvarchar(128)
-  update_referential_action : tinyint
+  delete_referential_action : (tinyint)
+  ForeignKey_fullname : (nvarchar(517))
+  ForeignKey_name : (nvarchar(263))
+  - is_MatchingDatatypePattern : (int)
+  referenced_index_guid : (uniqueidentifier)
+  referenced_index_name : (nvarchar(450))
+  referenced_IndexPatternColumnDatatype : (nvarchar(4000))
+  referenced_IndexPatternColumnName : (nvarchar(4000))
+  referenced_RepoObject_fullname : (nvarchar(517))
+  referenced_RepoObject_fullname2 : (nvarchar(257))
+  referenced_RepoObject_guid : (uniqueidentifier)
+  referenced_SysObject_name : (nvarchar(128))
+  referenced_SysObject_schema_name : (nvarchar(128))
+  referencing_index_guid : (uniqueidentifier)
+  referencing_index_name : (nvarchar(450))
+  referencing_IndexPatternColumnDatatype : (nvarchar(4000))
+  referencing_IndexPatternColumnName : (nvarchar(4000))
+  referencing_RepoObject_fullname : (nvarchar(517))
+  referencing_RepoObject_fullname2 : (nvarchar(257))
+  referencing_RepoObject_guid : (uniqueidentifier)
+  referencing_SysObject_name : (nvarchar(128))
+  referencing_SysObject_schema_name : (nvarchar(128))
+  update_referential_action : (tinyint)
+  --
   --
 }
 
@@ -68,3 +71,10 @@ repo.ForeignKey_Indexes_union_T::referenced_RepoObject_fullname <-- docs.Foreign
 repo.ForeignKey_Indexes_union_T::referenced_RepoObject_guid <-- docs.ForeignKey_RelationScript::referenced_RepoObject_guid
 repo.ForeignKey_Indexes_union_T::referencing_RepoObject_fullname <-- docs.ForeignKey_RelationScript::referencing_RepoObject_fullname
 repo.ForeignKey_Indexes_union_T::referencing_RepoObject_guid <-- docs.ForeignKey_RelationScript::referencing_RepoObject_guid
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

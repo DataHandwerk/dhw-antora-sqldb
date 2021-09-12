@@ -44,7 +44,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-02 12:20:51
+2021-09-10 14:14:27
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -53,7 +53,7 @@ view
 [#column-index_guid]
 === index_guid
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |1
 |*index_guid*
@@ -77,7 +77,7 @@ view
 [#column-index_column_id]
 === index_column_id
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |2
 |*index_column_id*
@@ -101,7 +101,7 @@ view
 [#column-ColumnName]
 === ColumnName
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |ColumnName
@@ -125,7 +125,7 @@ view
 [#column-databasename]
 === databasename
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |databasename
@@ -149,7 +149,7 @@ view
 [#column-RepoObjectColumn_guid]
 === RepoObjectColumn_guid
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |RepoObjectColumn_guid
@@ -173,7 +173,7 @@ view
 [#column-TableName]
 === TableName
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |TableName
@@ -195,6 +195,12 @@ view
 
 
 // end::AntoraColumnDetails[]
+
+== AntoraMeasureDetails
+
+// tag::AntoraMeasureDetails[]
+
+// end::AntoraMeasureDetails[]
 
 == AntoraPkColumnTableRows
 
@@ -584,8 +590,10 @@ source: property.RepoObjectProperty WHERE property_int = 1
 CREATE View repo.IndexColumn_ssas
 As
 Select
+    --PK: index_guid,index_column_id
     i.index_guid
   , col.index_column_id
+  --unique attriutes per IndexColum
   , col.RepoObjectColumn_guid
   , i.databasename
   --, i.TableID

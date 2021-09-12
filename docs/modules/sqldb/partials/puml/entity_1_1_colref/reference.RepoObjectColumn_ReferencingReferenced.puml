@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,123 +25,129 @@ skinparam class {
 }
 
 
-entity reference.ftv_RepoObject_DbmlColumnRelation << IF >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.ftv_RepoObject_DbmlColumnRelation.html reference.ftv_RepoObject_DbmlColumnRelation]]" as reference.ftv_RepoObject_DbmlColumnRelation << IF >> {
   --
-  Referenced_Depth : int
-  Referenced_fullname : nvarchar(261)
-  Referenced_fullname2 : nvarchar(257)
-  Referenced_guid : uniqueidentifier
-  Referenced_RepoObject_guid : uniqueidentifier
-  Referenced_type : char(2)
-  ReferencedColumn_fullname : nvarchar(392)
-  ReferencedColumn_fullname2 : nvarchar(386)
-  ReferencedColumn_name : nvarchar(128)
-  Referencing_Depth : int
-  Referencing_fullname : nvarchar(261)
-  Referencing_fullname2 : nvarchar(257)
-  Referencing_guid : uniqueidentifier
-  Referencing_RepoObject_guid : uniqueidentifier
-  Referencing_type : char(2)
-  ReferencingColumn_fullname : nvarchar(392)
-  ReferencingColumn_fullname2 : nvarchar(386)
-  ReferencingColumn_name : nvarchar(128)
-  RepoObject_guid : uniqueidentifier
+  Referenced_Depth : (int)
+  Referenced_fullname : (nvarchar(261))
+  Referenced_fullname2 : (nvarchar(257))
+  Referenced_guid : (uniqueidentifier)
+  Referenced_RepoObject_guid : (uniqueidentifier)
+  Referenced_type : (char(2))
+  ReferencedColumn_fullname : (nvarchar(392))
+  ReferencedColumn_fullname2 : (nvarchar(386))
+  ReferencedColumn_name : (nvarchar(128))
+  Referencing_Depth : (int)
+  Referencing_fullname : (nvarchar(261))
+  Referencing_fullname2 : (nvarchar(257))
+  Referencing_guid : (uniqueidentifier)
+  Referencing_RepoObject_guid : (uniqueidentifier)
+  Referencing_type : (char(2))
+  ReferencingColumn_fullname : (nvarchar(392))
+  ReferencingColumn_fullname2 : (nvarchar(386))
+  ReferencingColumn_name : (nvarchar(128))
+  RepoObject_guid : (uniqueidentifier)
   --
-}
-
-entity reference.ftv_RepoObjectColumn_ReferenceTree << IF >> {
-  --
-  Referenced_Depth : int
-  Referenced_fullname : nvarchar(261)
-  Referenced_fullname2 : nvarchar(257)
-  Referenced_guid : uniqueidentifier
-  Referenced_RepoObject_guid : uniqueidentifier
-  Referenced_type : char(2)
-  ReferencedColumn_fullname : nvarchar(392)
-  ReferencedColumn_fullname2 : nvarchar(386)
-  ReferencedColumn_name : nvarchar(128)
-  Referencing_Depth : int
-  Referencing_fullname : nvarchar(261)
-  Referencing_fullname2 : nvarchar(257)
-  Referencing_guid : uniqueidentifier
-  Referencing_RepoObject_guid : uniqueidentifier
-  Referencing_type : char(2)
-  ReferencingColumn_fullname : nvarchar(392)
-  ReferencingColumn_fullname2 : nvarchar(386)
-  ReferencingColumn_name : nvarchar(128)
-  RepoObjectColumn_guid : uniqueidentifier
   --
 }
 
-entity reference.RepoObjectColumn_reference_T << U >> {
-  **referenced_RepoObjectColumn_guid** : uniqueidentifier
-  **referencing_RepoObjectColumn_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.ftv_RepoObjectColumn_ReferenceTree.html reference.ftv_RepoObjectColumn_ReferenceTree]]" as reference.ftv_RepoObjectColumn_ReferenceTree << IF >> {
   --
-  is_referenced_object : tinyint
-  is_referencing_object_equal_referenced_object : tinyint
-  referenced_column_name : nvarchar(128)
-  referenced_entity_name : nvarchar(128)
-  referenced_RepoObject_guid : uniqueidentifier
-  referenced_schema_name : nvarchar(128)
-  referenced_type : char(2)
-  referencing_column_name : nvarchar(128)
-  referencing_entity_name : nvarchar(128)
-  referencing_RepoObject_guid : uniqueidentifier
-  referencing_schema_name : nvarchar(128)
-  referencing_type : char(2)
-  * {static} referenced_ro_fullname : nvarchar(261)
-  * {static} referenced_ro_fullname2 : nvarchar(257)
-  * {static} referenced_roc_fullname : nvarchar(392)
-  * {static} referenced_roc_fullname2 : nvarchar(386)
-  * {static} referencing_ro_fullname : nvarchar(261)
-  * {static} referencing_ro_fullname2 : nvarchar(257)
-  * {static} referencing_roc_fullname : nvarchar(392)
-  * {static} referencing_roc_fullname2 : nvarchar(386)
+  Referenced_Depth : (int)
+  Referenced_fullname : (nvarchar(261))
+  Referenced_fullname2 : (nvarchar(257))
+  Referenced_guid : (uniqueidentifier)
+  Referenced_RepoObject_guid : (uniqueidentifier)
+  Referenced_type : (char(2))
+  ReferencedColumn_fullname : (nvarchar(392))
+  ReferencedColumn_fullname2 : (nvarchar(386))
+  ReferencedColumn_name : (nvarchar(128))
+  Referencing_Depth : (int)
+  Referencing_fullname : (nvarchar(261))
+  Referencing_fullname2 : (nvarchar(257))
+  Referencing_guid : (uniqueidentifier)
+  Referencing_RepoObject_guid : (uniqueidentifier)
+  Referencing_type : (char(2))
+  ReferencingColumn_fullname : (nvarchar(392))
+  ReferencingColumn_fullname2 : (nvarchar(386))
+  ReferencingColumn_name : (nvarchar(128))
+  RepoObjectColumn_guid : (uniqueidentifier)
+  --
   --
 }
 
-entity reference.RepoObjectColumn_ReferencedList << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObjectColumn_reference_T.html reference.RepoObjectColumn_reference_T]]" as reference.RepoObjectColumn_reference_T << U >> {
+  **referenced_RepoObjectColumn_guid** : (uniqueidentifier)
+  **referencing_RepoObjectColumn_guid** : (uniqueidentifier)
   --
-  AntoraReferencedColumnList : nvarchar(max)
-  Referencing_fullname : nvarchar(261)
-  Referencing_fullname2 : nvarchar(257)
-  * Referencing_guid : uniqueidentifier
-  Referencing_type : char(2)
-  ReferencingColumn_fullname : nvarchar(392)
-  ReferencingColumn_fullname2 : nvarchar(386)
+  is_referenced_object : (tinyint)
+  is_referencing_object_equal_referenced_object : (tinyint)
+  referenced_column_name : (nvarchar(128))
+  referenced_entity_name : (nvarchar(128))
+  referenced_RepoObject_guid : (uniqueidentifier)
+  referenced_schema_name : (nvarchar(128))
+  referenced_type : (char(2))
+  referencing_column_name : (nvarchar(128))
+  referencing_entity_name : (nvarchar(128))
+  referencing_RepoObject_guid : (uniqueidentifier)
+  referencing_schema_name : (nvarchar(128))
+  referencing_type : (char(2))
+  # referenced_ro_fullname : (nvarchar(261))
+  # referenced_ro_fullname2 : (nvarchar(257))
+  # referenced_roc_fullname : (nvarchar(392))
+  # referenced_roc_fullname2 : (nvarchar(386))
+  # referencing_ro_fullname : (nvarchar(261))
+  # referencing_ro_fullname2 : (nvarchar(257))
+  # referencing_roc_fullname : (nvarchar(392))
+  # referencing_roc_fullname2 : (nvarchar(386))
+  --
   --
 }
 
-entity reference.RepoObjectColumn_ReferencingList << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObjectColumn_ReferencedList.html reference.RepoObjectColumn_ReferencedList]]" as reference.RepoObjectColumn_ReferencedList << V >> {
   --
-  AntoraReferencingColumnList : nvarchar(max)
-  Referenced_fullname : nvarchar(261)
-  Referenced_fullname2 : nvarchar(257)
-  * Referenced_guid : uniqueidentifier
-  Referenced_type : char(2)
-  ReferencedColumn_fullname : nvarchar(392)
-  ReferencedColumn_fullname2 : nvarchar(386)
+  AntoraReferencedColumnList : (nvarchar(max))
+  Referencing_fullname : (nvarchar(261))
+  Referencing_fullname2 : (nvarchar(257))
+  - Referencing_guid : (uniqueidentifier)
+  Referencing_type : (char(2))
+  ReferencingColumn_fullname : (nvarchar(392))
+  ReferencingColumn_fullname2 : (nvarchar(386))
+  --
   --
 }
 
-entity reference.RepoObjectColumn_ReferencingReferenced << V >> {
-  * **Referenced_guid** : uniqueidentifier
-  * **Referencing_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObjectColumn_ReferencingList.html reference.RepoObjectColumn_ReferencingList]]" as reference.RepoObjectColumn_ReferencingList << V >> {
   --
-  * Referenced_fullname : nvarchar(261)
-  * Referenced_fullname2 : nvarchar(257)
-  Referenced_RepoObject_guid : uniqueidentifier
-  Referenced_type : char(2)
-  * ReferencedColumn_fullname : nvarchar(392)
-  * ReferencedColumn_fullname2 : nvarchar(386)
-  ReferencedColumn_name : nvarchar(128)
-  * Referencing_fullname : nvarchar(261)
-  * Referencing_fullname2 : nvarchar(257)
-  Referencing_RepoObject_guid : uniqueidentifier
-  Referencing_type : char(2)
-  * ReferencingColumn_fullname : nvarchar(392)
-  * ReferencingColumn_fullname2 : nvarchar(386)
-  ReferencingColumn_name : nvarchar(128)
+  AntoraReferencingColumnList : (nvarchar(max))
+  Referenced_fullname : (nvarchar(261))
+  Referenced_fullname2 : (nvarchar(257))
+  - Referenced_guid : (uniqueidentifier)
+  Referenced_type : (char(2))
+  ReferencedColumn_fullname : (nvarchar(392))
+  ReferencedColumn_fullname2 : (nvarchar(386))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObjectColumn_ReferencingReferenced.html reference.RepoObjectColumn_ReferencingReferenced]]" as reference.RepoObjectColumn_ReferencingReferenced << V >> {
+  - **Referenced_guid** : (uniqueidentifier)
+  - **Referencing_guid** : (uniqueidentifier)
+  --
+  - Referenced_fullname : (nvarchar(261))
+  - Referenced_fullname2 : (nvarchar(257))
+  Referenced_RepoObject_guid : (uniqueidentifier)
+  Referenced_type : (char(2))
+  - ReferencedColumn_fullname : (nvarchar(392))
+  - ReferencedColumn_fullname2 : (nvarchar(386))
+  ReferencedColumn_name : (nvarchar(128))
+  - Referencing_fullname : (nvarchar(261))
+  - Referencing_fullname2 : (nvarchar(257))
+  Referencing_RepoObject_guid : (uniqueidentifier)
+  Referencing_type : (char(2))
+  - ReferencingColumn_fullname : (nvarchar(392))
+  - ReferencingColumn_fullname2 : (nvarchar(386))
+  ReferencingColumn_name : (nvarchar(128))
+  --
   --
 }
 
@@ -169,3 +176,10 @@ reference.RepoObjectColumn_ReferencingReferenced::Referenced_fullname <-- refere
 reference.RepoObjectColumn_ReferencingReferenced::Referenced_guid <-- reference.RepoObjectColumn_ReferencingList::Referenced_guid
 reference.RepoObjectColumn_ReferencingReferenced::Referencing_fullname <-- reference.RepoObjectColumn_ReferencedList::Referencing_fullname
 reference.RepoObjectColumn_ReferencingReferenced::Referencing_guid <-- reference.RepoObjectColumn_ReferencedList::Referencing_guid
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

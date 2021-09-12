@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,64 +25,67 @@ skinparam class {
 }
 
 
-entity ssas.IndexColumn_from_IsKey << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.IndexColumn_from_IsKey.html ssas.IndexColumn_from_IsKey]]" as ssas.IndexColumn_from_IsKey << V >> {
+  - **databasename** : (nvarchar(128))
+  - **TableName** : (nvarchar(128))
+  - **tables_columns_name** : (nvarchar(128))
   --
-  * databasename : nvarchar(128)
-  * index_column_id : int
-  * index_name : nvarchar(265)
-  * is_descending_key : int
-  * is_index_primary_key : bit
-  * is_index_unique : bit
-  * RepoObject_guid : uniqueidentifier
-  * RepoObjectColumn_guid : uniqueidentifier
-  * TableName : nvarchar(128)
-  * tables_columns_name : nvarchar(128)
-  tables_columns_type : nvarchar(500)
+  - index_column_id : (int)
+  - index_name : (nvarchar(265))
+  - is_descending_key : (int)
+  - is_index_primary_key : (bit)
+  - is_index_unique : (bit)
+  - RepoObject_guid : (uniqueidentifier)
+  - RepoObjectColumn_guid : (uniqueidentifier)
+  tables_columns_type : (nvarchar(500))
   --
-}
-
-entity ssas.IndexColumn_union << V >> {
-  --
-  * ColumnName : nvarchar(128)
-  * databasename : nvarchar(128)
-  * index_column_id : int
-  index_name : nvarchar(450)
-  * is_descending_key : int
-  * is_index_primary_key : bit
-  * is_index_unique : bit
-  * RepoObject_guid : uniqueidentifier
-  * RepoObjectColumn_guid : uniqueidentifier
-  * TableName : nvarchar(128)
-  tables_columns_type : nvarchar(500)
   --
 }
 
-entity ssas.model_json_311_tables_columns_T << U >> {
-  * **databasename** : nvarchar(128)
-  * **tables_name** : nvarchar(128)
-  **tables_columns_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.IndexColumn_union.html ssas.IndexColumn_union]]" as ssas.IndexColumn_union << V >> {
   --
-  * RepoObject_guid : uniqueidentifier
-  * RepoObjectColumn_guid : uniqueidentifier
-  tables_columns_dataType : nvarchar(500)
-  tables_columns_description : nvarchar(max)
-  tables_columns_description_ja : nvarchar(max)
-  tables_columns_displayFolder : nvarchar(500)
-  tables_columns_expression : nvarchar(max)
-  tables_columns_expression_ja : nvarchar(max)
-  tables_columns_formatString : nvarchar(500)
-  tables_columns_isDataTypeInferred : bit
-  tables_columns_isHidden : bit
-  tables_columns_isKey : bit
-  tables_columns_isNameInferred : bit
-  tables_columns_isNullable : bit
-  tables_columns_isUnique : bit
-  tables_columns_keepUniqueRows : bit
-  tables_columns_sortByColumn : nvarchar(500)
-  tables_columns_sourceColumn : nvarchar(500)
-  tables_columns_sourceProviderType : nvarchar(500)
-  tables_columns_summarizeBy : nvarchar(500)
-  tables_columns_type : nvarchar(500)
+  - ColumnName : (nvarchar(128))
+  - databasename : (nvarchar(128))
+  - index_column_id : (int)
+  index_name : (nvarchar(450))
+  - is_descending_key : (int)
+  - is_index_primary_key : (bit)
+  - is_index_unique : (bit)
+  - RepoObject_guid : (uniqueidentifier)
+  - RepoObjectColumn_guid : (uniqueidentifier)
+  - TableName : (nvarchar(128))
+  tables_columns_type : (nvarchar(500))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_311_tables_columns_T.html ssas.model_json_311_tables_columns_T]]" as ssas.model_json_311_tables_columns_T << U >> {
+  - **databasename** : (nvarchar(128))
+  - **tables_name** : (nvarchar(128))
+  **tables_columns_name** : (nvarchar(128))
+  --
+  - RepoObject_guid : (uniqueidentifier)
+  - RepoObjectColumn_guid : (uniqueidentifier)
+  tables_columns_dataType : (nvarchar(500))
+  tables_columns_description : (nvarchar(max))
+  tables_columns_description_ja : (nvarchar(max))
+  tables_columns_displayFolder : (nvarchar(500))
+  tables_columns_expression : (nvarchar(max))
+  tables_columns_expression_ja : (nvarchar(max))
+  tables_columns_formatString : (nvarchar(500))
+  tables_columns_isDataTypeInferred : (bit)
+  tables_columns_isHidden : (bit)
+  tables_columns_isKey : (bit)
+  tables_columns_isNameInferred : (bit)
+  tables_columns_isNullable : (bit)
+  tables_columns_isUnique : (bit)
+  tables_columns_keepUniqueRows : (bit)
+  tables_columns_sortByColumn : (nvarchar(500))
+  tables_columns_sourceColumn : (nvarchar(500))
+  tables_columns_sourceProviderType : (nvarchar(500))
+  tables_columns_summarizeBy : (nvarchar(500))
+  tables_columns_type : (nvarchar(500))
+  --
   --
 }
 
@@ -93,3 +97,10 @@ ssas.model_json_311_tables_columns_T::RepoObjectColumn_guid <-- ssas.IndexColumn
 ssas.model_json_311_tables_columns_T::tables_columns_name <-- ssas.IndexColumn_from_IsKey::tables_columns_name
 ssas.model_json_311_tables_columns_T::tables_columns_type <-- ssas.IndexColumn_from_IsKey::tables_columns_type
 ssas.model_json_311_tables_columns_T::tables_name <-- ssas.IndexColumn_from_IsKey::TableName
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

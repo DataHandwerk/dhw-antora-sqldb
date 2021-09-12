@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,211 +25,219 @@ skinparam class {
 }
 
 
-entity config.ftv_dwh_database << IF >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/config.ftv_dwh_database.html config.ftv_dwh_database]]" as config.ftv_dwh_database << IF >> {
   --
-  dwh_database_id : smallint
-  dwh_database_name : nvarchar(128)
+  dwh_database_id : (smallint)
+  dwh_database_name : (nvarchar(128))
   --
-}
-
-entity reference.RepoObject_reference_T << U >> {
-  **referenced_RepoObject_guid** : uniqueidentifier
-  **referencing_RepoObject_guid** : uniqueidentifier
-  --
-  * is_ReversePersistenceViaView : bit
-  referenced_entity_name : nvarchar(128)
-  * referenced_is_PersistenceSource : bit
-  * referenced_is_PersistenceTarget : bit
-  referenced_schema_name : nvarchar(128)
-  referenced_type : char(2)
-  referencing_entity_name : nvarchar(128)
-  * referencing_is_PersistenceTarget : bit
-  * referencing_is_PersistenceUspSourceRef : bit
-  referencing_is_PersistenceUspTargetRef : bit
-  referencing_schema_name : nvarchar(128)
-  referencing_type : varchar(2)
-  * {static} referenced_fullname : nvarchar(261)
-  * {static} referenced_fullname2 : nvarchar(257)
-  * {static} referencing_fullname : nvarchar(261)
-  * {static} referencing_fullname2 : nvarchar(257)
   --
 }
 
-entity reference.RepoObjectColumn_reference_QueryPlan << V >> {
-  **referencing_id** : int
-  **referencing_minor_id** : int
-  **referenced_id** : int
-  **referenced_minor_id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObject_reference_T.html reference.RepoObject_reference_T]]" as reference.RepoObject_reference_T << U >> {
+  **referenced_RepoObject_guid** : (uniqueidentifier)
+  **referencing_RepoObject_guid** : (uniqueidentifier)
   --
-  definition : nvarchar(max)
-  * InformationSource : varchar(10)
-  is_computed : bit
-  is_referenced_object : bit
-  is_referencing_object_equal_referenced_object : bit
-  is_source_column_name_expression : bit
-  is_target_column_name_expression : bit
-  referenced_column_name : nvarchar(128)
-  referenced_entity_name : nvarchar(128)
-  referenced_node_id : bigint
-  referenced_RepoObject_guid : uniqueidentifier
-  referenced_RepoObjectColumn_guid : uniqueidentifier
-  referenced_schema_name : nvarchar(128)
-  referenced_type : char(2)
-  referencing_column_name : nvarchar(128)
-  * referencing_entity_name : nvarchar(128)
-  referencing_node_id : bigint
-  * referencing_RepoObject_guid : uniqueidentifier
-  referencing_RepoObjectColumn_guid : uniqueidentifier
-  * referencing_schema_name : nvarchar(128)
-  referencing_type : char(2)
-  source_schema_name_quoted : nvarchar(128)
-  source_table_name_quoted : nvarchar(128)
+  - is_ReversePersistenceViaView : (bit)
+  referenced_entity_name : (nvarchar(128))
+  - referenced_is_PersistenceSource : (bit)
+  - referenced_is_PersistenceTarget : (bit)
+  referenced_schema_name : (nvarchar(128))
+  referenced_type : (char(2))
+  referencing_entity_name : (nvarchar(128))
+  - referencing_is_PersistenceTarget : (bit)
+  - referencing_is_PersistenceUspSourceRef : (bit)
+  referencing_is_PersistenceUspTargetRef : (bit)
+  referencing_schema_name : (nvarchar(128))
+  referencing_type : (varchar(2))
+  # referenced_fullname : (nvarchar(261))
+  # referenced_fullname2 : (nvarchar(257))
+  # referencing_fullname : (nvarchar(261))
+  # referencing_fullname2 : (nvarchar(257))
+  --
   --
 }
 
-entity reference.RepoObjectSource_QueryPlan << U >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObjectColumn_reference_QueryPlan.html reference.RepoObjectColumn_reference_QueryPlan]]" as reference.RepoObjectColumn_reference_QueryPlan << V >> {
+  **referencing_id** : (int)
+  **referencing_minor_id** : (int)
+  **referenced_id** : (int)
+  **referenced_minor_id** : (int)
   --
-  const_info : xml
-  const_value : nvarchar(4000)
-  * RepoObject_guid : uniqueidentifier
-  source_column_info : xml
-  source_column_name : nvarchar(128)
-  source_database_name : nvarchar(128)
-  source_schema_name : nvarchar(128)
-  source_server_name : nvarchar(128)
-  source_table_name : nvarchar(128)
-  SysObject_query_executed_dt : datetime
-  target_column_info : xml
-  target_column_name : nvarchar(128)
-  {abstract} is_source_column_name_expression : bit
-  {abstract} is_target_column_name_expression : bit
+  definition : (nvarchar(max))
+  - InformationSource : (varchar(10))
+  is_computed : (bit)
+  is_referenced_object : (bit)
+  is_referencing_object_equal_referenced_object : (bit)
+  is_source_column_name_expression : (bit)
+  is_target_column_name_expression : (bit)
+  referenced_column_name : (nvarchar(128))
+  referenced_entity_name : (nvarchar(128))
+  referenced_node_id : (bigint)
+  referenced_RepoObject_guid : (uniqueidentifier)
+  referenced_RepoObjectColumn_guid : (uniqueidentifier)
+  referenced_schema_name : (nvarchar(128))
+  referenced_type : (char(2))
+  referencing_column_name : (nvarchar(128))
+  - referencing_entity_name : (nvarchar(128))
+  referencing_node_id : (bigint)
+  - referencing_RepoObject_guid : (uniqueidentifier)
+  referencing_RepoObjectColumn_guid : (uniqueidentifier)
+  - referencing_schema_name : (nvarchar(128))
+  referencing_type : (char(2))
+  source_schema_name_quoted : (nvarchar(128))
+  source_table_name_quoted : (nvarchar(128))
   --
-}
-
-entity reference.SysObjectColumn_QueryPlanExpression << V >> {
-  --
-  RepoObject_guid : uniqueidentifier
-  SysObjectColumn_column_id : int
-  SysObjectColumn_name : nvarchar(128)
-  --
-}
-
-entity repo.RepoObject << U >> {
-  * **RepoObject_guid** : uniqueidentifier
-  --
-  has_execution_plan_issue : bit
-  has_get_referenced_issue : bit
-  Inheritance_StringAggSeparatorSql : nvarchar(4000)
-  InheritanceDefinition : nvarchar(4000)
-  InheritanceType : tinyint
-  * is_DocsExclude : bit
-  is_repo_managed : bit
-  is_required_ObjectMerge : bit
-  * is_ssas : bit
-  is_SysObject_missing : bit
-  * modify_dt : datetime
-  pk_index_guid : uniqueidentifier
-  pk_IndexPatternColumnName_new : nvarchar(4000)
-  Repo_history_table_guid : uniqueidentifier
-  Repo_temporal_type : tinyint
-  * RepoObject_name : nvarchar(128)
-  RepoObject_Referencing_Count : int
-  * RepoObject_schema_name : nvarchar(128)
-  * RepoObject_type : char(2)
-  SysObject_id : int
-  SysObject_modify_date : datetime
-  * SysObject_name : nvarchar(128)
-  * SysObject_parent_object_id : int
-  * SysObject_schema_name : nvarchar(128)
-  SysObject_type : char(2)
-  {abstract} has_different_sys_names : bit
-  * {static} is_RepoObject_name_uniqueidentifier : int
-  * {static} is_SysObject_name_uniqueidentifier : int
-  {abstract} node_id : bigint
-  * {static} RepoObject_fullname : nvarchar(261)
-  * {static} RepoObject_fullname2 : nvarchar(257)
-  * {static} SysObject_fullname : nvarchar(261)
-  * {static} SysObject_fullname2 : nvarchar(257)
-  * {abstract} SysObject_query_sql : nvarchar(406)
-  * {static} usp_persistence_fullname2 : nvarchar(269)
-  * {static} usp_persistence_name : nvarchar(140)
   --
 }
 
-entity repo.RepoObjectColumn_gross << V >> {
-  * **RepoObjectColumn_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObjectSource_QueryPlan.html reference.RepoObjectSource_QueryPlan]]" as reference.RepoObjectSource_QueryPlan << U >> {
   --
-  * Column_name : nvarchar(128)
-  Description : nvarchar(max)
-  has_different_sys_names : bit
-  has_get_referenced_issue : bit
-  Inheritance_StringAggSeparatorSql : nvarchar(4000)
-  InheritanceDefinition : nvarchar(4000)
-  InheritanceType : tinyint
-  is_persistence_no_check : bit
-  is_persistence_no_include : bit
-  is_persistence_no_update : bit
-  is_query_plan_expression : bit
-  is_repo_managed : bit
-  * is_RepoObject_name_uniqueidentifier : int
-  * is_RepoObjectColumn_name_uniqueidentifier : int
-  is_required_ColumnMerge : bit
-  * is_ssas : bit
-  is_SysObject_missing : bit
-  * is_SysObject_name_uniqueidentifier : int
-  is_SysObjectColumn_missing : bit
-  * is_SysObjectColumn_name_uniqueidentifier : int
-  * modify_dt : datetime
-  node_id : bigint
-  persistence_source_RepoObjectColumn_guid : uniqueidentifier
-  pk_index_guid : uniqueidentifier
-  Property_ms_description : nvarchar(4000)
-  Referencing_Count : int
-  Repo_default_definition : nvarchar(max)
-  Repo_default_is_system_named : bit
-  Repo_default_name : nvarchar(128)
-  Repo_definition : nvarchar(max)
-  * Repo_generated_always_type : tinyint
-  Repo_graph_type : int
-  Repo_increment_value : sql_variant
-  * Repo_is_computed : bit
-  * Repo_is_identity : bit
-  Repo_is_nullable : bit
-  Repo_is_persisted : bit
-  Repo_seed_value : sql_variant
-  Repo_user_type_fullname : nvarchar(128)
-  Repo_user_type_name : nvarchar(128)
-  Repo_uses_database_collation : bit
-  * RepoObject_fullname : nvarchar(261)
-  * RepoObject_fullname2 : nvarchar(257)
-  * RepoObject_guid : uniqueidentifier
-  * RepoObject_name : nvarchar(128)
-  RepoObject_Referencing_Count : int
-  * RepoObject_schema_name : nvarchar(128)
-  * RepoObject_type : char(2)
-  RepoObjectColumn_column_id : int
-  * RepoObjectColumn_fullname : nvarchar(520)
-  * RepoObjectColumn_fullname2 : nvarchar(386)
-  * RepoObjectColumn_name : nvarchar(128)
-  * SysObject_fullname : nvarchar(261)
-  * SysObject_fullname2 : nvarchar(257)
-  SysObject_id : int
-  SysObject_modify_date : datetime
-  * SysObject_name : nvarchar(128)
-  * SysObject_parent_object_id : int
-  * SysObject_schema_name : nvarchar(128)
-  SysObject_type : char(2)
-  SysObjectColumn_column_id : int
-  * SysObjectColumn_name : nvarchar(128)
-  tabcol_Description : nvarchar(max)
-  tabcol_DisplayFolder : nvarchar(500)
-  tabcol_Expression : nvarchar(max)
-  tabcol_FormatString : nvarchar(500)
-  * tabcol_IsHidden : bit
-  * tabcol_IsKey : bit
-  * tabcol_IsUnique : bit
-  tabcol_SummarizeBy : nvarchar(500)
-  tabcol_Type : nvarchar(500)
+  const_info : (xml)
+  const_value : (nvarchar(4000))
+  - RepoObject_guid : (uniqueidentifier)
+  source_column_info : (xml)
+  source_column_name : (nvarchar(128))
+  source_database_name : (nvarchar(128))
+  source_schema_name : (nvarchar(128))
+  source_server_name : (nvarchar(128))
+  source_table_name : (nvarchar(128))
+  SysObject_query_executed_dt : (datetime)
+  target_column_info : (xml)
+  target_column_name : (nvarchar(128))
+  ~ is_source_column_name_expression : (bit)
+  ~ is_target_column_name_expression : (bit)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.SysObjectColumn_QueryPlanExpression.html reference.SysObjectColumn_QueryPlanExpression]]" as reference.SysObjectColumn_QueryPlanExpression << V >> {
+  --
+  RepoObject_guid : (uniqueidentifier)
+  SysObjectColumn_column_id : (int)
+  SysObjectColumn_name : (nvarchar(128))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject.html repo.RepoObject]]" as repo.RepoObject << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+  has_execution_plan_issue : (bit)
+  has_get_referenced_issue : (bit)
+  Inheritance_StringAggSeparatorSql : (nvarchar(4000))
+  InheritanceDefinition : (nvarchar(4000))
+  InheritanceType : (tinyint)
+  - is_DocsExclude : (bit)
+  is_repo_managed : (bit)
+  is_required_ObjectMerge : (bit)
+  - is_ssas : (bit)
+  is_SysObject_missing : (bit)
+  - modify_dt : (datetime)
+  pk_index_guid : (uniqueidentifier)
+  pk_IndexPatternColumnName_new : (nvarchar(4000))
+  Repo_history_table_guid : (uniqueidentifier)
+  Repo_temporal_type : (tinyint)
+  - RepoObject_name : (nvarchar(128))
+  RepoObject_Referencing_Count : (int)
+  - RepoObject_schema_name : (nvarchar(128))
+  - RepoObject_type : (char(2))
+  SysObject_id : (int)
+  SysObject_modify_date : (datetime)
+  - SysObject_name : (nvarchar(128))
+  - SysObject_parent_object_id : (int)
+  - SysObject_schema_name : (nvarchar(128))
+  SysObject_type : (char(2))
+  ~ has_different_sys_names : (bit)
+  # is_RepoObject_name_uniqueidentifier : (int)
+  # is_SysObject_name_uniqueidentifier : (int)
+  ~ node_id : (bigint)
+  # RepoObject_fullname : (nvarchar(261))
+  # RepoObject_fullname2 : (nvarchar(257))
+  # SysObject_fullname : (nvarchar(261))
+  # SysObject_fullname2 : (nvarchar(257))
+  ~ SysObject_query_sql : (nvarchar(406))
+  # usp_persistence_fullname2 : (nvarchar(269))
+  # usp_persistence_name : (nvarchar(140))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObjectColumn_gross.html repo.RepoObjectColumn_gross]]" as repo.RepoObjectColumn_gross << V >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  --
+  - Column_name : (nvarchar(128))
+  Description : (nvarchar(max))
+  has_different_sys_names : (bit)
+  has_get_referenced_issue : (bit)
+  Inheritance_StringAggSeparatorSql : (nvarchar(4000))
+  InheritanceDefinition : (nvarchar(4000))
+  InheritanceType : (tinyint)
+  is_persistence_no_check : (bit)
+  is_persistence_no_include : (bit)
+  is_persistence_no_update : (bit)
+  is_query_plan_expression : (bit)
+  is_repo_managed : (bit)
+  - is_RepoObject_name_uniqueidentifier : (int)
+  - is_RepoObjectColumn_name_uniqueidentifier : (int)
+  is_required_ColumnMerge : (bit)
+  - is_ssas : (bit)
+  is_SysObject_missing : (bit)
+  - is_SysObject_name_uniqueidentifier : (int)
+  is_SysObjectColumn_missing : (bit)
+  - is_SysObjectColumn_name_uniqueidentifier : (int)
+  - modify_dt : (datetime)
+  node_id : (bigint)
+  persistence_source_RepoObject_guid : (uniqueidentifier)
+  persistence_source_RepoObjectColumn_guid : (uniqueidentifier)
+  pk_index_guid : (uniqueidentifier)
+  Property_ms_description : (nvarchar(4000))
+  Referencing_Count : (int)
+  Repo_default_definition : (nvarchar(max))
+  Repo_default_is_system_named : (bit)
+  Repo_default_name : (nvarchar(128))
+  Repo_definition : (nvarchar(max))
+  - Repo_generated_always_type : (tinyint)
+  Repo_graph_type : (int)
+  Repo_increment_value : (sql_variant)
+  - Repo_is_computed : (bit)
+  - Repo_is_identity : (bit)
+  Repo_is_nullable : (bit)
+  Repo_is_persisted : (bit)
+  Repo_seed_value : (sql_variant)
+  Repo_user_type_fullname : (nvarchar(128))
+  Repo_user_type_name : (nvarchar(128))
+  Repo_uses_database_collation : (bit)
+  - RepoObject_fullname : (nvarchar(261))
+  - RepoObject_fullname2 : (nvarchar(257))
+  - RepoObject_guid : (uniqueidentifier)
+  - RepoObject_name : (nvarchar(128))
+  RepoObject_Referencing_Count : (int)
+  - RepoObject_schema_name : (nvarchar(128))
+  - RepoObject_type : (char(2))
+  RepoObjectColumn_column_id : (int)
+  - RepoObjectColumn_fullname : (nvarchar(520))
+  - RepoObjectColumn_fullname2 : (nvarchar(386))
+  - RepoObjectColumn_name : (nvarchar(128))
+  - SysObject_fullname : (nvarchar(261))
+  - SysObject_fullname2 : (nvarchar(257))
+  SysObject_id : (int)
+  SysObject_modify_date : (datetime)
+  - SysObject_name : (nvarchar(128))
+  - SysObject_parent_object_id : (int)
+  - SysObject_schema_name : (nvarchar(128))
+  SysObject_type : (char(2))
+  SysObjectColumn_column_id : (int)
+  - SysObjectColumn_name : (nvarchar(128))
+  tabcol_Description : (nvarchar(max))
+  tabcol_DisplayFolder : (nvarchar(500))
+  tabcol_Expression : (nvarchar(max))
+  tabcol_FormatString : (nvarchar(500))
+  - tabcol_IsHidden : (bit)
+  - tabcol_IsKey : (bit)
+  - tabcol_IsUnique : (bit)
+  tabcol_SummarizeBy : (nvarchar(500))
+  tabcol_Type : (nvarchar(500))
+  --
   --
 }
 
@@ -258,3 +267,10 @@ repo.RepoObjectColumn_gross::SysObject_schema_name <-- reference.RepoObjectColum
 repo.RepoObjectColumn_gross::SysObject_type <-- reference.RepoObjectColumn_reference_QueryPlan::referenced_type
 repo.RepoObjectColumn_gross::SysObjectColumn_column_id <-- reference.RepoObjectColumn_reference_QueryPlan::referencing_minor_id
 repo.RepoObjectColumn_gross::SysObjectColumn_column_id <-- reference.RepoObjectColumn_reference_QueryPlan::referenced_minor_id
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

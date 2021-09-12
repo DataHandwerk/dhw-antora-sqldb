@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,38 +25,45 @@ skinparam class {
 }
 
 
-entity repo.RepoObject_SSAS_tgt << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject_SSAS_tgt.html repo.RepoObject_SSAS_tgt]]" as repo.RepoObject_SSAS_tgt << V >> {
 - **PK_RepoObject_SSAS_tgt**
 
 ..
 RepoObject_guid; uniqueidentifier
 --
 - UK_RepoObject_SSAS_tgt__2
-{schema_name,object_name}
+
 ..
 SysObject_schema_name; nvarchar(128)
 SysObject_name; nvarchar(128)
 --
 - UK_RepoObject_SSAS_tgt__3
-{schema_name,object_name}
+
 ..
 RepoObject_schema_name; nvarchar(128)
 RepoObject_name; nvarchar(128)
 --
 - idx_RepoObject_SSAS_tgt__4
-{index_guid}
+
 ..
 pk_index_guid; uniqueidentifier
 --
 - idx_RepoObject_SSAS_tgt__5
 
 ..
-SysObject_schema_name; nvarchar(128)
+RepoObject_schema_name; nvarchar(128)
 --
 - idx_RepoObject_SSAS_tgt__6
 
 ..
-RepoObject_schema_name; nvarchar(128)
+SysObject_schema_name; nvarchar(128)
 }
 
+
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
 

@@ -17,6 +17,7 @@
 :ExistsProperty--is_persistence_update_changed:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
+:ExistsProperty--ms_description:
 :ExistsProperty--persistence_source_repoobject_fullname:
 :ExistsProperty--persistence_source_repoobject_fullname2:
 :ExistsProperty--persistence_source_repoobject_guid:
@@ -67,7 +68,7 @@ user table
 [#column-Workflow_id]
 === Workflow_id
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |1
 |*Workflow_id*
@@ -92,7 +93,7 @@ user table
 [#column-referenced_Procedure_RepoObject_guid]
 === referenced_Procedure_RepoObject_guid
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |2
 |*referenced_Procedure_RepoObject_guid*
@@ -117,7 +118,7 @@ user table
 [#column-referencing_Procedure_RepoObject_guid]
 === referencing_Procedure_RepoObject_guid
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |3
 |*referencing_Procedure_RepoObject_guid*
@@ -142,7 +143,7 @@ user table
 [#column-is_redundant]
 === is_redundant
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |is_redundant
@@ -164,6 +165,12 @@ user table
 
 
 // end::AntoraColumnDetails[]
+
+== AntoraMeasureDetails
+
+// tag::AntoraMeasureDetails[]
+
+// end::AntoraMeasureDetails[]
 
 == AntoraPkColumnTableRows
 
@@ -227,7 +234,7 @@ user table
 [#index-idx_Workflow_ProcedureDependency_T_1]
 === idx_Workflow_ProcedureDependency_T++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_workflow_id[Workflow_id]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
 +
 --
 * <<column-Workflow_id>>; int
@@ -250,7 +257,7 @@ user table
 [#index-idx_Workflow_ProcedureDependency_T_3]
 === idx_Workflow_ProcedureDependency_T++__++3
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_repoobject_guid[RepoObject_guid]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
 +
 --
 * <<column-referenced_Procedure_RepoObject_guid>>; uniqueidentifier
@@ -261,7 +268,7 @@ user table
 [#index-idx_Workflow_ProcedureDependency_T_4]
 === idx_Workflow_ProcedureDependency_T++__++4
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_repoobject_guid[RepoObject_guid]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
 +
 --
 * <<column-referencing_Procedure_RepoObject_guid>>; uniqueidentifier
@@ -456,6 +463,22 @@ source: property.RepoObjectProperty_cross As rop_cross
 
 // tag::ms_description[]
 
+per active Workflow all active ProcedureDependency, including redundant references
+
+.redundant references
+====
+are to be preserved:
+
+* A <= B
+* B <= C
+* C <= D
+
+redundant:
+
+* A <= C
+* A <= D
+* B <= C
+====
 // end::ms_description[]
 
 

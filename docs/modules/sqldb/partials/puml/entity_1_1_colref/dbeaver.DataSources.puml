@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,48 +25,58 @@ skinparam class {
 }
 
 
-entity dbeaver.DataSources << U >> {
-  * **id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/dbeaver.DataSources.html dbeaver.DataSources]]" as dbeaver.DataSources << U >> {
+  - **id** : (int)
   --
-  BulkColumn : varchar(max)
-  {abstract} is_json : int
+  BulkColumn : (varchar(max))
+  ~ is_json : (int)
   --
-}
-
-entity dbeaver.DataSources_connection << V >> {
-  --
-  BulkColumn : varchar(max)
-  conection_name : nvarchar(100)
-  connection_driver : nvarchar(100)
-  connection_json : nvarchar(max)
-  * connection_key : nvarchar(4000)
-  connection_provider : nvarchar(100)
-  connections : nvarchar(max)
-  * id : int
-  is_json : int
   --
 }
 
-entity dbeaver.DataSources_DbSchemaTable << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/dbeaver.DataSources_connection.html dbeaver.DataSources_connection]]" as dbeaver.DataSources_connection << V >> {
   --
-  BulkColumn : varchar(max)
-  * id : int
-  is_json : int
-  * VirtualModel_database : nvarchar(4000)
-  VirtualModel_database_json : nvarchar(max)
-  VirtualModel_json : nvarchar(max)
-  * VirtualModel_key : nvarchar(4000)
-  * VirtualModel_schema : nvarchar(4000)
-  VirtualModel_schema_json : nvarchar(max)
-  VirtualModel_table : nvarchar(500)
-  VirtualModel_table_constraints_json : nvarchar(max)
-  VirtualModel_table_FK_json : nvarchar(max)
-  VirtualModel_table_json : nvarchar(max)
-  VirtualModel_table_properties_json : nvarchar(max)
-  VirtualModels : nvarchar(max)
+  BulkColumn : (varchar(max))
+  conection_name : (nvarchar(100))
+  connection_driver : (nvarchar(100))
+  connection_json : (nvarchar(max))
+  - connection_key : (nvarchar(4000))
+  connection_provider : (nvarchar(100))
+  connections : (nvarchar(max))
+  - id : (int)
+  is_json : (int)
+  --
   --
 }
 
-dbeaver.DataSources <.. dbeaver.DataSources_DbSchemaTable
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/dbeaver.DataSources_DbSchemaTable.html dbeaver.DataSources_DbSchemaTable]]" as dbeaver.DataSources_DbSchemaTable << V >> {
+  --
+  BulkColumn : (varchar(max))
+  - id : (int)
+  is_json : (int)
+  - VirtualModel_database : (nvarchar(4000))
+  VirtualModel_database_json : (nvarchar(max))
+  VirtualModel_json : (nvarchar(max))
+  - VirtualModel_key : (nvarchar(4000))
+  - VirtualModel_schema : (nvarchar(4000))
+  VirtualModel_schema_json : (nvarchar(max))
+  VirtualModel_table : (nvarchar(500))
+  VirtualModel_table_constraints_json : (nvarchar(max))
+  VirtualModel_table_FK_json : (nvarchar(max))
+  VirtualModel_table_json : (nvarchar(max))
+  VirtualModel_table_properties_json : (nvarchar(max))
+  VirtualModels : (nvarchar(max))
+  --
+  --
+}
+
 dbeaver.DataSources <.. dbeaver.DataSources_connection
+dbeaver.DataSources <.. dbeaver.DataSources_DbSchemaTable
 dbeaver.DataSources::BulkColumn <-- dbeaver.DataSources::is_json
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

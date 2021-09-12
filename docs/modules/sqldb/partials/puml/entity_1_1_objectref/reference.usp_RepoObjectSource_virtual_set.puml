@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,20 +25,27 @@ skinparam class {
 }
 
 
-entity reference.RepoObjectSource_virtual << U >> {
-  * **RepoObject_guid** : uniqueidentifier
-  * **Source_RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObjectSource_virtual.html reference.RepoObjectSource_virtual]]" as reference.RepoObjectSource_virtual << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **Source_RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity reference.usp_RepoObjectSource_virtual_set << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.usp_RepoObjectSource_virtual_set.html reference.usp_RepoObjectSource_virtual_set]]" as reference.usp_RepoObjectSource_virtual_set << P >> {
   --
 }
 
-entity repo.RepoObject << U >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject.html repo.RepoObject]]" as repo.RepoObject << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
 reference.RepoObjectSource_virtual <.. reference.usp_RepoObjectSource_virtual_set
 repo.RepoObject <.. reference.usp_RepoObjectSource_virtual_set
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,32 +25,32 @@ skinparam class {
 }
 
 
-entity workflow.ProcedureDependency << U >> {
-  * **id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.ProcedureDependency.html workflow.ProcedureDependency]]" as workflow.ProcedureDependency << U >> {
+  - **id** : (int)
   --
 }
 
-entity workflow.usp_PERSIST_Workflow_ProcedureDependency_T << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.usp_PERSIST_Workflow_ProcedureDependency_T.html workflow.usp_PERSIST_Workflow_ProcedureDependency_T]]" as workflow.usp_PERSIST_Workflow_ProcedureDependency_T << P >> {
   --
 }
 
-entity workflow.Workflow << U >> {
-  * **id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow.html workflow.Workflow]]" as workflow.Workflow << U >> {
+  - **id** : (int)
   --
 }
 
-entity workflow.Workflow_ProcedureDependency << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow_ProcedureDependency.html workflow.Workflow_ProcedureDependency]]" as workflow.Workflow_ProcedureDependency << V >> {
   --
 }
 
-entity workflow.Workflow_ProcedureDependency_T << U >> {
-  * **Workflow_id** : int
-  * **referenced_Procedure_RepoObject_guid** : uniqueidentifier
-  * **referencing_Procedure_RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow_ProcedureDependency_T.html workflow.Workflow_ProcedureDependency_T]]" as workflow.Workflow_ProcedureDependency_T << U >> {
+  - **Workflow_id** : (int)
+  - **referenced_Procedure_RepoObject_guid** : (uniqueidentifier)
+  - **referencing_Procedure_RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity workflow.WorkflowStep_active << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.WorkflowStep_active.html workflow.WorkflowStep_active]]" as workflow.WorkflowStep_active << V >> {
   --
 }
 
@@ -58,3 +59,10 @@ workflow.Workflow <.. workflow.Workflow_ProcedureDependency
 workflow.Workflow_ProcedureDependency <.. workflow.Workflow_ProcedureDependency_T
 workflow.Workflow_ProcedureDependency <.. workflow.usp_PERSIST_Workflow_ProcedureDependency_T
 workflow.WorkflowStep_active <.. workflow.Workflow_ProcedureDependency
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

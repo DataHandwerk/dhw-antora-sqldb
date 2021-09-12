@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,64 +25,75 @@ skinparam class {
 }
 
 
-entity reference.ftv_RepoObject_ReferenceTree_referenced << IF >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.ftv_RepoObject_ReferenceTree_referenced.html reference.ftv_RepoObject_ReferenceTree_referenced]]" as reference.ftv_RepoObject_ReferenceTree_referenced << IF >> {
   --
-  Referenced_Depth : int
-  Referenced_fullname : nvarchar(261)
-  Referenced_fullname2 : nvarchar(257)
-  Referenced_guid : uniqueidentifier
-  Referenced_type : char(2)
-  Referencing_Depth : int
-  Referencing_fullname : nvarchar(261)
-  Referencing_fullname2 : nvarchar(257)
-  Referencing_guid : uniqueidentifier
-  Referencing_type : varchar(2)
-  RepoObject_guid : uniqueidentifier
+  Referenced_Depth : (int)
+  Referenced_fullname : (nvarchar(261))
+  Referenced_fullname2 : (nvarchar(257))
+  Referenced_guid : (uniqueidentifier)
+  Referenced_type : (char(2))
+  Referencing_Depth : (int)
+  Referencing_fullname : (nvarchar(261))
+  Referencing_fullname2 : (nvarchar(257))
+  Referencing_guid : (uniqueidentifier)
+  Referencing_type : (varchar(2))
+  RepoObject_guid : (uniqueidentifier)
   --
-}
-
-entity reference.RepoObject_ReferenceTree_referenced << V >> {
-  **RepoObject_guid** : uniqueidentifier
-  **Referenced_Depth** : int
-  **Referencing_Depth** : int
-  **Referenced_guid** : uniqueidentifier
-  **Referencing_guid** : uniqueidentifier
-  --
-  Referenced_fullname : nvarchar(261)
-  Referenced_fullname2 : nvarchar(257)
-  Referenced_type : char(2)
-  Referencing_fullname : nvarchar(261)
-  Referencing_fullname2 : nvarchar(257)
-  Referencing_type : varchar(2)
   --
 }
 
-entity reference.RepoObject_ReferenceTree_referenced_30_0 << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  **Referenced_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObject_ReferenceTree_referenced.html reference.RepoObject_ReferenceTree_referenced]]" as reference.RepoObject_ReferenceTree_referenced << V >> {
+  **RepoObject_guid** : (uniqueidentifier)
+  **Referenced_Depth** : (int)
+  **Referencing_Depth** : (int)
+  **Referenced_guid** : (uniqueidentifier)
+  **Referencing_guid** : (uniqueidentifier)
   --
-  Referenced_Depth : int
-  Referenced_fullname : nvarchar(261)
-  Referenced_fullname2 : nvarchar(257)
-  RepoObject_fullname : nvarchar(261)
-  RepoObject_fullname2 : nvarchar(257)
+  Referenced_fullname : (nvarchar(261))
+  Referenced_fullname2 : (nvarchar(257))
+  Referenced_type : (char(2))
+  Referencing_fullname : (nvarchar(261))
+  Referencing_fullname2 : (nvarchar(257))
+  Referencing_type : (varchar(2))
+  --
   --
 }
 
-entity reference.RepoObject_ReferencingReferenced << V >> {
-  * **Referenced_guid** : uniqueidentifier
-  * **Referencing_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObject_ReferenceTree_referenced_30_0.html reference.RepoObject_ReferenceTree_referenced_30_0]]" as reference.RepoObject_ReferenceTree_referenced_30_0 << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  **Referenced_guid** : (uniqueidentifier)
   --
-  * Referenced_fullname : nvarchar(261)
-  * Referenced_fullname2 : nvarchar(257)
-  Referenced_type : char(2)
-  * Referencing_fullname : nvarchar(261)
-  * Referencing_fullname2 : nvarchar(257)
-  Referencing_type : varchar(2)
+  Referenced_Depth : (int)
+  Referenced_fullname : (nvarchar(261))
+  Referenced_fullname2 : (nvarchar(257))
+  RepoObject_fullname : (nvarchar(261))
+  RepoObject_fullname2 : (nvarchar(257))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObject_ReferencingReferenced.html reference.RepoObject_ReferencingReferenced]]" as reference.RepoObject_ReferencingReferenced << V >> {
+  - **Referenced_guid** : (uniqueidentifier)
+  - **Referencing_guid** : (uniqueidentifier)
+  --
+  - Referenced_fullname : (nvarchar(261))
+  - Referenced_fullname2 : (nvarchar(257))
+  Referenced_type : (char(2))
+  - Referencing_fullname : (nvarchar(261))
+  - Referencing_fullname2 : (nvarchar(257))
+  Referencing_type : (varchar(2))
+  --
   --
 }
 
 reference.ftv_RepoObject_ReferenceTree_referenced <.. reference.RepoObject_ReferenceTree_referenced
 reference.ftv_RepoObject_ReferenceTree_referenced <.. reference.RepoObject_ReferenceTree_referenced_30_0
 reference.RepoObject_ReferencingReferenced <.. reference.ftv_RepoObject_ReferenceTree_referenced
+
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
 

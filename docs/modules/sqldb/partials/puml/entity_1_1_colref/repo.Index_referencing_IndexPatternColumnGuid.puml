@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,37 +25,40 @@ skinparam class {
 }
 
 
-entity repo.Index_referencing_IndexPatternColumnGuid << V >> {
-  **source_index_guid** : uniqueidentifier
-  **referencing_RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_referencing_IndexPatternColumnGuid.html repo.Index_referencing_IndexPatternColumnGuid]]" as repo.Index_referencing_IndexPatternColumnGuid << V >> {
+  **source_index_guid** : (uniqueidentifier)
+  **referencing_RepoObject_guid** : (uniqueidentifier)
   --
-  referencing_IndexPatternColumnGuid : varchar(8000)
+  referencing_IndexPatternColumnGuid : (varchar(8000))
   --
-}
-
-entity repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T << U >> {
-  **index_guid** : uniqueidentifier
-  * **index_column_id** : int
-  **RowNumberInReferencing** : bigint
-  --
-  is_descending_key : bit
-  referenced_RepoObject_guid : uniqueidentifier
-  referenced_RepoObjectColumn_guid : uniqueidentifier
-  referencing_RepoObject_guid : uniqueidentifier
-  referencing_RepoObjectColumn_guid : uniqueidentifier
   --
 }
 
-entity repo.IndexReferencedReferencing_HasFullColumnsInReferencing << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T.html repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T]]" as repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T << U >> {
+  **index_guid** : (uniqueidentifier)
+  - **index_column_id** : (int)
+  **RowNumberInReferencing** : (bigint)
   --
-  referenced_index_guid : uniqueidentifier
-  * referenced_RepoObject_guid : uniqueidentifier
-  referencing_IndexPatternColumnGuid : varchar(8000)
-  * referencing_RepoObject_guid : uniqueidentifier
-  RowNumberInReferencing : bigint
-  RowNumberInReferencing_Target : int
-  source_index_guid : uniqueidentifier
-  * source_index_type : tinyint
+  is_descending_key : (bit)
+  referenced_RepoObject_guid : (uniqueidentifier)
+  referenced_RepoObjectColumn_guid : (uniqueidentifier)
+  referencing_RepoObject_guid : (uniqueidentifier)
+  referencing_RepoObjectColumn_guid : (uniqueidentifier)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.IndexReferencedReferencing_HasFullColumnsInReferencing.html repo.IndexReferencedReferencing_HasFullColumnsInReferencing]]" as repo.IndexReferencedReferencing_HasFullColumnsInReferencing << V >> {
+  --
+  referenced_index_guid : (uniqueidentifier)
+  - referenced_RepoObject_guid : (uniqueidentifier)
+  referencing_IndexPatternColumnGuid : (varchar(8000))
+  - referencing_RepoObject_guid : (uniqueidentifier)
+  RowNumberInReferencing : (bigint)
+  RowNumberInReferencing_Target : (int)
+  source_index_guid : (uniqueidentifier)
+  - source_index_type : (tinyint)
+  --
   --
 }
 
@@ -63,3 +67,10 @@ repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.In
 repo.Index_referencing_IndexPatternColumnGuid::referencing_IndexPatternColumnGuid <-- repo.IndexReferencedReferencing_HasFullColumnsInReferencing::referencing_IndexPatternColumnGuid
 repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T::index_guid <-- repo.Index_referencing_IndexPatternColumnGuid::source_index_guid
 repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T::referencing_RepoObject_guid <-- repo.Index_referencing_IndexPatternColumnGuid::referencing_RepoObject_guid
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,31 +25,36 @@ skinparam class {
 }
 
 
-entity configT.type << V >> {
-  **type** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/configT.type.html configT.type]]" as configT.type << V >> {
+  **type** : (nvarchar(128))
   --
-  * is_DocsOutput : int
-  type_desc : nvarchar(128)
+  - is_DocsOutput : (int)
+  type_desc : (nvarchar(128))
   --
-}
-
-entity docs.AntoraNavListPage_by_type << V >> {
-  **type** : nvarchar(128)
-  --
-  * nav_list : nvarchar(309)
-  type_desc : nvarchar(128)
   --
 }
 
-entity docs.RepoObject_OutputFilter << V >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.AntoraNavListPage_by_type.html docs.AntoraNavListPage_by_type]]" as docs.AntoraNavListPage_by_type << V >> {
+  **type** : (nvarchar(128))
   --
-  is_DocsOutput : int
-  * RepoObject_fullname : nvarchar(261)
-  * RepoObject_fullname2 : nvarchar(257)
-  * RepoObject_schema_name : nvarchar(128)
-  SysObject_type : char(2)
-  SysObject_type_name : nvarchar(128)
+  - nav_list : (nvarchar(309))
+  type_desc : (nvarchar(128))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.RepoObject_OutputFilter.html docs.RepoObject_OutputFilter]]" as docs.RepoObject_OutputFilter << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+  is_DocsOutput : (int)
+  - is_ssas : (bit)
+  - RepoObject_fullname : (nvarchar(261))
+  - RepoObject_fullname2 : (nvarchar(257))
+  - RepoObject_name : (nvarchar(128))
+  - RepoObject_schema_name : (nvarchar(128))
+  SysObject_type : (char(2))
+  SysObject_type_name : (nvarchar(128))
+  --
   --
 }
 
@@ -56,3 +62,10 @@ configT.type <.. docs.AntoraNavListPage_by_type
 docs.RepoObject_OutputFilter <.. docs.AntoraNavListPage_by_type
 configT.type::type <-- docs.AntoraNavListPage_by_type::type
 configT.type::type_desc <-- docs.AntoraNavListPage_by_type::type_desc
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

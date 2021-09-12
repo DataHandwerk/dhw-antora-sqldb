@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,20 +25,30 @@ skinparam class {
 }
 
 
-entity ssas.IndexColumn_from_IsKey << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.IndexColumn_from_IsKey.html ssas.IndexColumn_from_IsKey]]" as ssas.IndexColumn_from_IsKey << V >> {
+  - **databasename** : (nvarchar(128))
+  - **TableName** : (nvarchar(128))
+  - **tables_columns_name** : (nvarchar(128))
   --
 }
 
-entity ssas.IndexColumn_union << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.IndexColumn_union.html ssas.IndexColumn_union]]" as ssas.IndexColumn_union << V >> {
   --
 }
 
-entity ssas.model_json_311_tables_columns_T << U >> {
-  * **databasename** : nvarchar(128)
-  * **tables_name** : nvarchar(128)
-  **tables_columns_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_311_tables_columns_T.html ssas.model_json_311_tables_columns_T]]" as ssas.model_json_311_tables_columns_T << U >> {
+  - **databasename** : (nvarchar(128))
+  - **tables_name** : (nvarchar(128))
+  **tables_columns_name** : (nvarchar(128))
   --
 }
 
 ssas.IndexColumn_from_IsKey <.. ssas.IndexColumn_union
 ssas.model_json_311_tables_columns_T <.. ssas.IndexColumn_from_IsKey
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

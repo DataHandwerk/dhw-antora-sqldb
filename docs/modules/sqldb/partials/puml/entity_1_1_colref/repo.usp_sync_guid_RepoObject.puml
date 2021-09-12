@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,218 +25,232 @@ skinparam class {
 }
 
 
-entity config.fs_get_parameter_value << FN >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/config.fs_get_parameter_value.html config.fs_get_parameter_value]]" as config.fs_get_parameter_value << FN >> {
   --
-  --
-}
-
-entity configT.type_level1type_level2type << V >> {
-  **type** : nvarchar(128)
-  --
-  level1type : varchar(9)
-  level2type : varchar(10)
-  type_desc : nvarchar(128)
-  --
-}
-
-entity logs.usp_ExecutionLog_insert << P >> {
   --
   --
 }
 
-entity reference.RepoObjectSource_virtual << U >> {
-  * **RepoObject_guid** : uniqueidentifier
-  * **Source_RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/configT.type_level1type_level2type.html configT.type_level1type_level2type]]" as configT.type_level1type_level2type << V >> {
+  **type** : (nvarchar(128))
+  --
+  level1type : (varchar(9))
+  level2type : (varchar(10))
+  type_desc : (nvarchar(128))
   --
   --
 }
 
-entity repo.RepoObject << U >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/logs.usp_ExecutionLog_insert.html logs.usp_ExecutionLog_insert]]" as logs.usp_ExecutionLog_insert << P >> {
   --
-  has_execution_plan_issue : bit
-  has_get_referenced_issue : bit
-  Inheritance_StringAggSeparatorSql : nvarchar(4000)
-  InheritanceDefinition : nvarchar(4000)
-  InheritanceType : tinyint
-  * is_DocsExclude : bit
-  is_repo_managed : bit
-  is_required_ObjectMerge : bit
-  * is_ssas : bit
-  is_SysObject_missing : bit
-  * modify_dt : datetime
-  pk_index_guid : uniqueidentifier
-  pk_IndexPatternColumnName_new : nvarchar(4000)
-  Repo_history_table_guid : uniqueidentifier
-  Repo_temporal_type : tinyint
-  * RepoObject_name : nvarchar(128)
-  RepoObject_Referencing_Count : int
-  * RepoObject_schema_name : nvarchar(128)
-  * RepoObject_type : char(2)
-  SysObject_id : int
-  SysObject_modify_date : datetime
-  * SysObject_name : nvarchar(128)
-  * SysObject_parent_object_id : int
-  * SysObject_schema_name : nvarchar(128)
-  SysObject_type : char(2)
-  {abstract} has_different_sys_names : bit
-  * {static} is_RepoObject_name_uniqueidentifier : int
-  * {static} is_SysObject_name_uniqueidentifier : int
-  {abstract} node_id : bigint
-  * {static} RepoObject_fullname : nvarchar(261)
-  * {static} RepoObject_fullname2 : nvarchar(257)
-  * {static} SysObject_fullname : nvarchar(261)
-  * {static} SysObject_fullname2 : nvarchar(257)
-  * {abstract} SysObject_query_sql : nvarchar(406)
-  * {static} usp_persistence_fullname2 : nvarchar(269)
-  * {static} usp_persistence_name : nvarchar(140)
-  --
-}
-
-entity repo.RepoObject_persistence << U >> {
-  * **target_RepoObject_guid** : uniqueidentifier
-  --
-  * has_history : bit
-  * has_history_columns : bit
-  history_schema_name : nvarchar(128)
-  history_table_name : nvarchar(128)
-  * is_persistence_check_duplicate_per_pk : bit
-  * is_persistence_check_for_empty_source : bit
-  * is_persistence_delete_changed : bit
-  * is_persistence_delete_missing : bit
-  * is_persistence_insert : bit
-  * is_persistence_merge_delete_missing : bit
-  * is_persistence_merge_insert : bit
-  * is_persistence_merge_update_changed : bit
-  * is_persistence_truncate : bit
-  * is_persistence_update_changed : bit
-  source_filter : nvarchar(4000)
-  source_RepoObject_guid : uniqueidentifier
-  target_filter : nvarchar(4000)
-  {abstract} is_persistence : bit
-  {abstract} temporal_type : tinyint
-  --
-}
-
-entity repo.RepoObject_RequiredRepoObjectMerge << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  --
-  * RepoObject_fullname : nvarchar(261)
-  * RepoObject_name : nvarchar(128)
-  * RepoObject_schema_name : nvarchar(128)
-  * ro2_RepoObject_fullname : nvarchar(261)
-  * ro2_RepoObject_guid : uniqueidentifier
-  * ro2_RepoObject_name : nvarchar(128)
-  * ro2_RepoObject_schema_name : nvarchar(128)
-  * ro2_SysObject_fullname : nvarchar(261)
-  * ro2_SysObject_name : nvarchar(128)
-  * SysObject_fullname : nvarchar(261)
-  * SysObject_name : nvarchar(128)
-  * SysObject_schema_name : nvarchar(128)
-  --
-}
-
-entity repo.SysObject_RepoObject_via_guid << V >> {
-  --
-  history_table_guid : uniqueidentifier
-  history_table_id : int
-  is_repo_managed : bit
-  is_RepoObject_name_uniqueidentifier : int
-  is_SysObject_name_uniqueidentifier : int
-  * modify_date : datetime
-  * parent_object_id : int
-  Repo_history_table_guid : uniqueidentifier
-  Repo_temporal_type : tinyint
-  RepoObject_guid : uniqueidentifier
-  RepoObject_is_SysObject_missing : bit
-  RepoObject_name : nvarchar(128)
-  RepoObject_schema_name : nvarchar(128)
-  RepoObject_SysObject_id : int
-  RepoObject_SysObject_modify_date : datetime
-  RepoObject_SysObject_name : nvarchar(128)
-  RepoObject_SysObject_parent_object_id : int
-  RepoObject_SysObject_schema_name : nvarchar(128)
-  RepoObject_SysObject_type : char(2)
-  RepoObject_type : char(2)
-  * SysObject_id : int
-  * SysObject_name : sysname
-  SysObject_RepoObject_guid : uniqueidentifier
-  SysObject_schema_name : sysname
-  SysObject_type : char(2)
-  SysObject_type_desc : nvarchar(60)
-  temporal_type : tinyint
-  --
-}
-
-entity repo.SysObject_RepoObject_via_name << V >> {
-  --
-  history_table_guid : uniqueidentifier
-  history_table_id : int
-  is_repo_managed : bit
-  is_RepoObject_name_uniqueidentifier : int
-  is_SysObject_name_uniqueidentifier : int
-  * modify_date : datetime
-  * parent_object_id : int
-  Repo_history_table_guid : uniqueidentifier
-  Repo_temporal_type : tinyint
-  RepoObject_guid : uniqueidentifier
-  RepoObject_is_SysObject_missing : bit
-  RepoObject_name : nvarchar(128)
-  RepoObject_schema_name : nvarchar(128)
-  RepoObject_SysObject_id : int
-  RepoObject_SysObject_modify_date : datetime
-  RepoObject_SysObject_name : nvarchar(128)
-  RepoObject_SysObject_parent_object_id : int
-  RepoObject_SysObject_schema_name : nvarchar(128)
-  RepoObject_SysObject_type : char(2)
-  RepoObject_type : char(2)
-  * SysObject_id : int
-  * SysObject_name : sysname
-  SysObject_RepoObject_guid : uniqueidentifier
-  SysObject_schema_name : sysname
-  SysObject_type : char(2)
-  SysObject_type_desc : nvarchar(60)
-  temporal_type : tinyint
-  --
-}
-
-entity repo.usp_sync_guid << P >> {
   --
   --
 }
 
-entity repo.usp_sync_guid_RepoObject << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObjectSource_virtual.html reference.RepoObjectSource_virtual]]" as reference.RepoObjectSource_virtual << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **Source_RepoObject_guid** : (uniqueidentifier)
+  --
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject.html repo.RepoObject]]" as repo.RepoObject << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+  has_execution_plan_issue : (bit)
+  has_get_referenced_issue : (bit)
+  Inheritance_StringAggSeparatorSql : (nvarchar(4000))
+  InheritanceDefinition : (nvarchar(4000))
+  InheritanceType : (tinyint)
+  - is_DocsExclude : (bit)
+  is_repo_managed : (bit)
+  is_required_ObjectMerge : (bit)
+  - is_ssas : (bit)
+  is_SysObject_missing : (bit)
+  - modify_dt : (datetime)
+  pk_index_guid : (uniqueidentifier)
+  pk_IndexPatternColumnName_new : (nvarchar(4000))
+  Repo_history_table_guid : (uniqueidentifier)
+  Repo_temporal_type : (tinyint)
+  - RepoObject_name : (nvarchar(128))
+  RepoObject_Referencing_Count : (int)
+  - RepoObject_schema_name : (nvarchar(128))
+  - RepoObject_type : (char(2))
+  SysObject_id : (int)
+  SysObject_modify_date : (datetime)
+  - SysObject_name : (nvarchar(128))
+  - SysObject_parent_object_id : (int)
+  - SysObject_schema_name : (nvarchar(128))
+  SysObject_type : (char(2))
+  ~ has_different_sys_names : (bit)
+  # is_RepoObject_name_uniqueidentifier : (int)
+  # is_SysObject_name_uniqueidentifier : (int)
+  ~ node_id : (bigint)
+  # RepoObject_fullname : (nvarchar(261))
+  # RepoObject_fullname2 : (nvarchar(257))
+  # SysObject_fullname : (nvarchar(261))
+  # SysObject_fullname2 : (nvarchar(257))
+  ~ SysObject_query_sql : (nvarchar(406))
+  # usp_persistence_fullname2 : (nvarchar(269))
+  # usp_persistence_name : (nvarchar(140))
   --
   --
 }
 
-entity repo_sys.SysObject << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject_persistence.html repo.RepoObject_persistence]]" as repo.RepoObject_persistence << U >> {
+  - **target_RepoObject_guid** : (uniqueidentifier)
   --
-  * create_date : datetime
-  history_table_id : int
-  * is_ms_shipped : bit
-  * is_published : bit
-  * is_schema_published : bit
-  max_column_id_used : int
-  * modify_date : datetime
-  * parent_object_id : int
-  principal_id : int
-  * schema_id : int
-  sql_modules_definition : nvarchar(max)
-  * SysObject_fullname : nvarchar(517)
-  * SysObject_fullname2 : nvarchar(257)
-  * SysObject_id : int
-  * SysObject_name : sysname
-  SysObject_RepoObject_guid : uniqueidentifier
-  SysObject_schema_name : sysname
-  temporal_type : tinyint
-  temporal_type_desc : nvarchar(60)
-  type : char(2)
-  type_desc : nvarchar(60)
+  - has_history : (bit)
+  - has_history_columns : (bit)
+  history_schema_name : (nvarchar(128))
+  history_table_name : (nvarchar(128))
+  - is_persistence_check_duplicate_per_pk : (bit)
+  - is_persistence_check_for_empty_source : (bit)
+  - is_persistence_delete_changed : (bit)
+  - is_persistence_delete_missing : (bit)
+  - is_persistence_insert : (bit)
+  - is_persistence_merge_delete_missing : (bit)
+  - is_persistence_merge_insert : (bit)
+  - is_persistence_merge_update_changed : (bit)
+  - is_persistence_truncate : (bit)
+  - is_persistence_update_changed : (bit)
+  source_filter : (nvarchar(4000))
+  source_RepoObject_guid : (uniqueidentifier)
+  source_RepoObject_name : (nvarchar(128))
+  target_filter : (nvarchar(4000))
+  ~ is_persistence : (bit)
+  ~ temporal_type : (tinyint)
+  --
   --
 }
 
-entity repo_sys.usp_AddOrUpdateExtendedProperty << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject_RequiredRepoObjectMerge.html repo.RepoObject_RequiredRepoObjectMerge]]" as repo.RepoObject_RequiredRepoObjectMerge << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+  - RepoObject_fullname : (nvarchar(261))
+  - RepoObject_name : (nvarchar(128))
+  - RepoObject_schema_name : (nvarchar(128))
+  - ro2_RepoObject_fullname : (nvarchar(261))
+  - ro2_RepoObject_guid : (uniqueidentifier)
+  - ro2_RepoObject_name : (nvarchar(128))
+  - ro2_RepoObject_schema_name : (nvarchar(128))
+  - ro2_SysObject_fullname : (nvarchar(261))
+  - ro2_SysObject_name : (nvarchar(128))
+  - SysObject_fullname : (nvarchar(261))
+  - SysObject_name : (nvarchar(128))
+  - SysObject_schema_name : (nvarchar(128))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.SysObject_RepoObject_via_guid.html repo.SysObject_RepoObject_via_guid]]" as repo.SysObject_RepoObject_via_guid << V >> {
+  --
+  history_table_guid : (uniqueidentifier)
+  history_table_id : (int)
+  is_repo_managed : (bit)
+  is_RepoObject_name_uniqueidentifier : (int)
+  is_SysObject_name_uniqueidentifier : (int)
+  - modify_date : (datetime)
+  - parent_object_id : (int)
+  Repo_history_table_guid : (uniqueidentifier)
+  Repo_temporal_type : (tinyint)
+  RepoObject_guid : (uniqueidentifier)
+  RepoObject_is_SysObject_missing : (bit)
+  RepoObject_name : (nvarchar(128))
+  RepoObject_schema_name : (nvarchar(128))
+  RepoObject_SysObject_id : (int)
+  RepoObject_SysObject_modify_date : (datetime)
+  RepoObject_SysObject_name : (nvarchar(128))
+  RepoObject_SysObject_parent_object_id : (int)
+  RepoObject_SysObject_schema_name : (nvarchar(128))
+  RepoObject_SysObject_type : (char(2))
+  RepoObject_type : (char(2))
+  - SysObject_id : (int)
+  - SysObject_name : (sysname)
+  SysObject_RepoObject_guid : (uniqueidentifier)
+  SysObject_schema_name : (sysname)
+  SysObject_type : (char(2))
+  SysObject_type_desc : (nvarchar(60))
+  temporal_type : (tinyint)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.SysObject_RepoObject_via_name.html repo.SysObject_RepoObject_via_name]]" as repo.SysObject_RepoObject_via_name << V >> {
+  --
+  history_table_guid : (uniqueidentifier)
+  history_table_id : (int)
+  is_repo_managed : (bit)
+  is_RepoObject_name_uniqueidentifier : (int)
+  is_SysObject_name_uniqueidentifier : (int)
+  - modify_date : (datetime)
+  - parent_object_id : (int)
+  Repo_history_table_guid : (uniqueidentifier)
+  Repo_temporal_type : (tinyint)
+  RepoObject_guid : (uniqueidentifier)
+  RepoObject_is_SysObject_missing : (bit)
+  RepoObject_name : (nvarchar(128))
+  RepoObject_schema_name : (nvarchar(128))
+  RepoObject_SysObject_id : (int)
+  RepoObject_SysObject_modify_date : (datetime)
+  RepoObject_SysObject_name : (nvarchar(128))
+  RepoObject_SysObject_parent_object_id : (int)
+  RepoObject_SysObject_schema_name : (nvarchar(128))
+  RepoObject_SysObject_type : (char(2))
+  RepoObject_type : (char(2))
+  - SysObject_id : (int)
+  - SysObject_name : (sysname)
+  SysObject_RepoObject_guid : (uniqueidentifier)
+  SysObject_schema_name : (sysname)
+  SysObject_type : (char(2))
+  SysObject_type_desc : (nvarchar(60))
+  temporal_type : (tinyint)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_sync_guid.html repo.usp_sync_guid]]" as repo.usp_sync_guid << P >> {
+  --
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_sync_guid_RepoObject.html repo.usp_sync_guid_RepoObject]]" as repo.usp_sync_guid_RepoObject << P >> {
+  --
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.SysObject.html repo_sys.SysObject]]" as repo_sys.SysObject << V >> {
+  --
+  - create_date : (datetime)
+  history_table_id : (int)
+  - is_ms_shipped : (bit)
+  - is_published : (bit)
+  - is_schema_published : (bit)
+  max_column_id_used : (int)
+  - modify_date : (datetime)
+  - parent_object_id : (int)
+  principal_id : (int)
+  - schema_id : (int)
+  sql_modules_definition : (nvarchar(max))
+  - SysObject_fullname : (nvarchar(517))
+  - SysObject_fullname2 : (nvarchar(257))
+  - SysObject_id : (int)
+  - SysObject_name : (sysname)
+  SysObject_RepoObject_guid : (uniqueidentifier)
+  SysObject_schema_name : (sysname)
+  temporal_type : (tinyint)
+  temporal_type_desc : (nvarchar(60))
+  type : (char(2))
+  type_desc : (nvarchar(60))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.usp_AddOrUpdateExtendedProperty.html repo_sys.usp_AddOrUpdateExtendedProperty]]" as repo_sys.usp_AddOrUpdateExtendedProperty << P >> {
+  --
   --
   --
 }
@@ -252,4 +267,11 @@ repo.SysObject_RepoObject_via_name <.. repo.usp_sync_guid_RepoObject
 repo.usp_sync_guid_RepoObject <.. repo.usp_sync_guid
 repo_sys.SysObject <.. repo.usp_sync_guid_RepoObject
 repo_sys.usp_AddOrUpdateExtendedProperty <.. repo.usp_sync_guid_RepoObject
+
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
 

@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,169 +25,179 @@ skinparam class {
 }
 
 
-entity repo.RepoObject << U >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject.html repo.RepoObject]]" as repo.RepoObject << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
-  has_execution_plan_issue : bit
-  has_get_referenced_issue : bit
-  Inheritance_StringAggSeparatorSql : nvarchar(4000)
-  InheritanceDefinition : nvarchar(4000)
-  InheritanceType : tinyint
-  * is_DocsExclude : bit
-  is_repo_managed : bit
-  is_required_ObjectMerge : bit
-  * is_ssas : bit
-  is_SysObject_missing : bit
-  * modify_dt : datetime
-  pk_index_guid : uniqueidentifier
-  pk_IndexPatternColumnName_new : nvarchar(4000)
-  Repo_history_table_guid : uniqueidentifier
-  Repo_temporal_type : tinyint
-  * RepoObject_name : nvarchar(128)
-  RepoObject_Referencing_Count : int
-  * RepoObject_schema_name : nvarchar(128)
-  * RepoObject_type : char(2)
-  SysObject_id : int
-  SysObject_modify_date : datetime
-  * SysObject_name : nvarchar(128)
-  * SysObject_parent_object_id : int
-  * SysObject_schema_name : nvarchar(128)
-  SysObject_type : char(2)
-  {abstract} has_different_sys_names : bit
-  * {static} is_RepoObject_name_uniqueidentifier : int
-  * {static} is_SysObject_name_uniqueidentifier : int
-  {abstract} node_id : bigint
-  * {static} RepoObject_fullname : nvarchar(261)
-  * {static} RepoObject_fullname2 : nvarchar(257)
-  * {static} SysObject_fullname : nvarchar(261)
-  * {static} SysObject_fullname2 : nvarchar(257)
-  * {abstract} SysObject_query_sql : nvarchar(406)
-  * {static} usp_persistence_fullname2 : nvarchar(269)
-  * {static} usp_persistence_name : nvarchar(140)
+  has_execution_plan_issue : (bit)
+  has_get_referenced_issue : (bit)
+  Inheritance_StringAggSeparatorSql : (nvarchar(4000))
+  InheritanceDefinition : (nvarchar(4000))
+  InheritanceType : (tinyint)
+  - is_DocsExclude : (bit)
+  is_repo_managed : (bit)
+  is_required_ObjectMerge : (bit)
+  - is_ssas : (bit)
+  is_SysObject_missing : (bit)
+  - modify_dt : (datetime)
+  pk_index_guid : (uniqueidentifier)
+  pk_IndexPatternColumnName_new : (nvarchar(4000))
+  Repo_history_table_guid : (uniqueidentifier)
+  Repo_temporal_type : (tinyint)
+  - RepoObject_name : (nvarchar(128))
+  RepoObject_Referencing_Count : (int)
+  - RepoObject_schema_name : (nvarchar(128))
+  - RepoObject_type : (char(2))
+  SysObject_id : (int)
+  SysObject_modify_date : (datetime)
+  - SysObject_name : (nvarchar(128))
+  - SysObject_parent_object_id : (int)
+  - SysObject_schema_name : (nvarchar(128))
+  SysObject_type : (char(2))
+  ~ has_different_sys_names : (bit)
+  # is_RepoObject_name_uniqueidentifier : (int)
+  # is_SysObject_name_uniqueidentifier : (int)
+  ~ node_id : (bigint)
+  # RepoObject_fullname : (nvarchar(261))
+  # RepoObject_fullname2 : (nvarchar(257))
+  # SysObject_fullname : (nvarchar(261))
+  # SysObject_fullname2 : (nvarchar(257))
+  ~ SysObject_query_sql : (nvarchar(406))
+  # usp_persistence_fullname2 : (nvarchar(269))
+  # usp_persistence_name : (nvarchar(140))
   --
-}
-
-entity sqlparse.RepoObject_SqlModules << U >> {
-  * **RepoObject_guid** : uniqueidentifier
-  --
-  * sql_modules_dt : datetime
-  sql_modules_formatted : nvarchar(max)
-  sql_modules_formatted2 : nvarchar(max)
-  sql_modules_json : nvarchar(max)
-  {static} is_json_sql_modules_json : int
   --
 }
 
-entity sqlparse.RepoObject_SqlModules_29_1_object_is_union << V >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/sqlparse.RepoObject_SqlModules.html sqlparse.RepoObject_SqlModules]]" as sqlparse.RepoObject_SqlModules << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
-  * is_union : int
+  - sql_modules_dt : (datetime)
+  sql_modules_formatted : (nvarchar(max))
+  sql_modules_formatted2 : (nvarchar(max))
+  sql_modules_json : (nvarchar(max))
+  # is_json_sql_modules_json : (int)
   --
-}
-
-entity sqlparse.RepoObject_SqlModules_29_2_object_is_GroupBy << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  --
-  * has_GroupBy : int
   --
 }
 
-entity sqlparse.RepoObject_SqlModules_31_object << V >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/sqlparse.RepoObject_SqlModules_29_1_object_is_union.html sqlparse.RepoObject_SqlModules_29_1_object_is_union]]" as sqlparse.RepoObject_SqlModules_29_1_object_is_union << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
-  is_1_create : int
-  is_2_view : int
-  is_3_Identifier : int
-  is_4_as : int
-  is_5_select : int
-  is_6_Identifier : int
-  is_6_IdentifierList : int
-  is_7_from : int
-  is_7_IdentifierList : int
-  is_8_IdentifierList : int
-  SysObject_fullname : nvarchar(261)
+  - is_union : (int)
+  --
   --
 }
 
-entity sqlparse.RepoObject_SqlModules_32_ObjectClass << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  **class** : nvarchar(500)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/sqlparse.RepoObject_SqlModules_29_2_object_is_GroupBy.html sqlparse.RepoObject_SqlModules_29_2_object_is_GroupBy]]" as sqlparse.RepoObject_SqlModules_29_2_object_is_GroupBy << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
-  Min_RowNumber_per_class : bigint
-  SysObject_fullname : nvarchar(261)
+  - has_GroupBy : (int)
   --
-}
-
-entity sqlparse.RepoObject_SqlModules_33_ObjectNormalized << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  **normalized** : nvarchar(max)
-  --
-  Min_RowNumber_per_normalized : bigint
-  SysObject_fullname : nvarchar(261)
   --
 }
 
-entity sqlparse.RepoObject_SqlModules_39_object << V >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/sqlparse.RepoObject_SqlModules_31_object.html sqlparse.RepoObject_SqlModules_31_object]]" as sqlparse.RepoObject_SqlModules_31_object << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
-  has_GroupBy : int
-  is_1_create : int
-  is_2_view : int
-  is_3_Identifier : int
-  is_4_as : int
-  is_5_select : int
-  is_6_Identifier : int
-  is_6_IdentifierList : int
-  is_7_from : int
-  is_7_IdentifierList : int
-  is_8_IdentifierList : int
-  is_create_view_Identifier_as_select : int
-  is_select_IdentifierList_from : int
-  is_union : int
-  Min_RowNumber_From : bigint
-  Min_RowNumber_GroupBy : bigint
-  Min_RowNumber_IdentifierList : bigint
-  Min_RowNumber_Where : bigint
-  SysObject_fullname : nvarchar(261)
+  is_1_create : (int)
+  is_2_view : (int)
+  is_3_Identifier : (int)
+  is_4_as : (int)
+  is_5_select : (int)
+  is_6_Identifier : (int)
+  is_6_IdentifierList : (int)
+  is_7_from : (int)
+  is_7_IdentifierList : (int)
+  is_8_IdentifierList : (int)
+  SysObject_fullname : (nvarchar(261))
+  --
   --
 }
 
-entity sqlparse.RepoObject_SqlModules_41_from << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  * **json_key** : nvarchar(4000)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/sqlparse.RepoObject_SqlModules_32_ObjectClass.html sqlparse.RepoObject_SqlModules_32_ObjectClass]]" as sqlparse.RepoObject_SqlModules_32_ObjectClass << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  **class** : (nvarchar(500))
   --
-  children : nvarchar(max)
-  class : nvarchar(500)
-  identifier_alias : nvarchar(max)
-  identifier_name : nvarchar(max)
-  * is_from : int
-  is_group : bit
-  * is_join : int
-  is_keyword : bit
-  is_whitespace : bit
-  join_type : varchar(16)
-  Min_RowNumber_From : bigint
-  Min_RowNumber_GroupBy : bigint
-  Min_RowNumber_Where : bigint
-  normalized : nvarchar(max)
-  normalized_PatIndex_Select : bigint
-  normalized_wo_nolock : nvarchar(max)
-  patindex_nolock : bigint
-  RowNumber_per_Object : bigint
-  SysObject_fullname : nvarchar(261)
+  Min_RowNumber_per_class : (bigint)
+  SysObject_fullname : (nvarchar(261))
+  --
   --
 }
 
-entity sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/sqlparse.RepoObject_SqlModules_33_ObjectNormalized.html sqlparse.RepoObject_SqlModules_33_ObjectNormalized]]" as sqlparse.RepoObject_SqlModules_33_ObjectNormalized << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  **normalized** : (nvarchar(max))
   --
-  alias_QuoteName : nvarchar(max)
-  class : nvarchar(500)
-  normalized : nvarchar(max)
-  * RepoObject_guid : uniqueidentifier
-  RowNumber_per_Object : bigint
-  source_column_QuoteName : nvarchar(max)
-  source_table_QuoteName : nvarchar(max)
-  SysObject_fullname : nvarchar(261)
+  Min_RowNumber_per_normalized : (bigint)
+  SysObject_fullname : (nvarchar(261))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/sqlparse.RepoObject_SqlModules_39_object.html sqlparse.RepoObject_SqlModules_39_object]]" as sqlparse.RepoObject_SqlModules_39_object << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+  has_GroupBy : (int)
+  is_1_create : (int)
+  is_2_view : (int)
+  is_3_Identifier : (int)
+  is_4_as : (int)
+  is_5_select : (int)
+  is_6_Identifier : (int)
+  is_6_IdentifierList : (int)
+  is_7_from : (int)
+  is_7_IdentifierList : (int)
+  is_8_IdentifierList : (int)
+  is_create_view_Identifier_as_select : (int)
+  is_select_IdentifierList_from : (int)
+  is_union : (int)
+  Min_RowNumber_From : (bigint)
+  Min_RowNumber_GroupBy : (bigint)
+  Min_RowNumber_IdentifierList : (bigint)
+  Min_RowNumber_Where : (bigint)
+  SysObject_fullname : (nvarchar(261))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/sqlparse.RepoObject_SqlModules_41_from.html sqlparse.RepoObject_SqlModules_41_from]]" as sqlparse.RepoObject_SqlModules_41_from << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **json_key** : (nvarchar(4000))
+  --
+  children : (nvarchar(max))
+  class : (nvarchar(500))
+  identifier_alias : (nvarchar(max))
+  identifier_name : (nvarchar(max))
+  - is_from : (int)
+  is_group : (bit)
+  - is_join : (int)
+  is_keyword : (bit)
+  is_whitespace : (bit)
+  join_type : (varchar(16))
+  Min_RowNumber_From : (bigint)
+  Min_RowNumber_GroupBy : (bigint)
+  Min_RowNumber_Where : (bigint)
+  normalized : (nvarchar(max))
+  normalized_PatIndex_Select : (bigint)
+  normalized_wo_nolock : (nvarchar(max))
+  patindex_nolock : (bigint)
+  RowNumber_per_Object : (bigint)
+  SysObject_fullname : (nvarchar(261))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union.html sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union]]" as sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union << V >> {
+  --
+  alias_QuoteName : (nvarchar(max))
+  class : (nvarchar(500))
+  normalized : (nvarchar(max))
+  - RepoObject_guid : (uniqueidentifier)
+  RowNumber_per_Object : (bigint)
+  source_column_QuoteName : (nvarchar(max))
+  source_table_QuoteName : (nvarchar(max))
+  SysObject_fullname : (nvarchar(261))
+  --
   --
 }
 
@@ -220,3 +231,10 @@ sqlparse.RepoObject_SqlModules_33_ObjectNormalized::Min_RowNumber_per_normalized
 sqlparse.RepoObject_SqlModules_39_object::Min_RowNumber_From <-- sqlparse.RepoObject_SqlModules_41_from::Min_RowNumber_From
 sqlparse.RepoObject_SqlModules_39_object::Min_RowNumber_GroupBy <-- sqlparse.RepoObject_SqlModules_41_from::Min_RowNumber_GroupBy
 sqlparse.RepoObject_SqlModules_39_object::Min_RowNumber_Where <-- sqlparse.RepoObject_SqlModules_41_from::Min_RowNumber_Where
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

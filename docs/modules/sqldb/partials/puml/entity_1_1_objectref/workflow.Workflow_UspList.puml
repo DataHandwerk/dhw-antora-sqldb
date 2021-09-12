@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,27 +25,27 @@ skinparam class {
 }
 
 
-entity repo.RepoObject << U >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject.html repo.RepoObject]]" as repo.RepoObject << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity workflow.Workflow << U >> {
-  * **id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow.html workflow.Workflow]]" as workflow.Workflow << U >> {
+  - **id** : (int)
   --
 }
 
-entity workflow.Workflow_SqlUsp << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow_SqlUsp.html workflow.Workflow_SqlUsp]]" as workflow.Workflow_SqlUsp << V >> {
   --
 }
 
-entity workflow.Workflow_UspList << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow_UspList.html workflow.Workflow_UspList]]" as workflow.Workflow_UspList << V >> {
   --
 }
 
-entity workflow.WorkflowStep_Sortorder << U >> {
-  * **Workflow_id** : int
-  * **Procedure_RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.WorkflowStep_Sortorder.html workflow.WorkflowStep_Sortorder]]" as workflow.WorkflowStep_Sortorder << U >> {
+  - **Workflow_id** : (int)
+  - **Procedure_RepoObject_guid** : (uniqueidentifier)
   --
 }
 
@@ -52,3 +53,10 @@ repo.RepoObject <.. workflow.Workflow_UspList
 workflow.Workflow <.. workflow.Workflow_UspList
 workflow.Workflow_UspList <.. workflow.Workflow_SqlUsp
 workflow.WorkflowStep_Sortorder <.. workflow.Workflow_UspList
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,66 +25,69 @@ skinparam class {
 }
 
 
-entity reference.additional_Reference_guid << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.additional_Reference_guid.html reference.additional_Reference_guid]]" as reference.additional_Reference_guid << V >> {
   --
-  * is_internal : int
-  * referenced_AntoraComponent : nvarchar(128)
-  * referenced_AntoraModul : nvarchar(128)
-  referenced_Column : nvarchar(128)
-  referenced_fullname : nvarchar(261)
-  referenced_id : int
-  * referenced_Object : nvarchar(128)
-  referenced_RepoObject_guid : uniqueidentifier
-  referenced_RepoObjectColumn_guid : uniqueidentifier
-  * referenced_Schema : nvarchar(128)
-  referenced_type : char(2)
-  * referencing_AntoraComponent : nvarchar(128)
-  * referencing_AntoraModul : nvarchar(128)
-  referencing_Column : nvarchar(128)
-  referencing_fullname : nvarchar(261)
-  referencing_id : int
-  * referencing_Object : nvarchar(128)
-  referencing_RepoObject_guid : uniqueidentifier
-  referencing_RepoObjectColumn_guid : uniqueidentifier
-  * referencing_Schema : nvarchar(128)
-  referencing_type : char(2)
+  - is_internal : (int)
+  - referenced_AntoraComponent : (nvarchar(128))
+  - referenced_AntoraModule : (nvarchar(128))
+  referenced_Column : (nvarchar(128))
+  referenced_fullname : (nvarchar(261))
+  referenced_id : (int)
+  - referenced_Object : (nvarchar(128))
+  referenced_RepoObject_guid : (uniqueidentifier)
+  referenced_RepoObjectColumn_guid : (uniqueidentifier)
+  - referenced_Schema : (nvarchar(128))
+  referenced_type : (char(2))
+  - referencing_AntoraComponent : (nvarchar(128))
+  - referencing_AntoraModule : (nvarchar(128))
+  referencing_Column : (nvarchar(128))
+  referencing_fullname : (nvarchar(261))
+  referencing_id : (int)
+  - referencing_Object : (nvarchar(128))
+  referencing_RepoObject_guid : (uniqueidentifier)
+  referencing_RepoObjectColumn_guid : (uniqueidentifier)
+  - referencing_Schema : (nvarchar(128))
+  referencing_type : (char(2))
   --
-}
-
-entity reference.RepoObject_reference_additional_internal << V >> {
-  --
-  * InformationSource : varchar(30)
-  * referenced_entity_name : nvarchar(128)
-  referenced_fullname : nvarchar(261)
-  referenced_id : int
-  referenced_RepoObject_guid : uniqueidentifier
-  * referenced_schema_name : nvarchar(128)
-  referenced_type : char(2)
-  * referencing_entity_name : nvarchar(128)
-  referencing_fullname : nvarchar(261)
-  referencing_id : int
-  referencing_RepoObject_guid : uniqueidentifier
-  * referencing_schema_name : nvarchar(128)
-  referencing_type : char(2)
   --
 }
 
-entity reference.RepoObject_reference_union << V >> {
-  **referenced_RepoObject_guid** : uniqueidentifier
-  **referencing_RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObject_reference_additional_internal.html reference.RepoObject_reference_additional_internal]]" as reference.RepoObject_reference_additional_internal << V >> {
   --
-  * InformationSource : varchar(34)
-  * one : int
-  referenced_entity_name : nvarchar(128)
-  referenced_fullname : nvarchar(517)
-  referenced_id : int
-  referenced_schema_name : nvarchar(128)
-  referenced_type : char(2)
-  referencing_entity_name : nvarchar(128)
-  referencing_fullname : nvarchar(517)
-  referencing_id : int
-  referencing_schema_name : nvarchar(128)
-  referencing_type : varchar(2)
+  - InformationSource : (varchar(30))
+  - referenced_entity_name : (nvarchar(128))
+  referenced_fullname : (nvarchar(261))
+  referenced_id : (int)
+  referenced_RepoObject_guid : (uniqueidentifier)
+  - referenced_schema_name : (nvarchar(128))
+  referenced_type : (char(2))
+  - referencing_entity_name : (nvarchar(128))
+  referencing_fullname : (nvarchar(261))
+  referencing_id : (int)
+  referencing_RepoObject_guid : (uniqueidentifier)
+  - referencing_schema_name : (nvarchar(128))
+  referencing_type : (char(2))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObject_reference_union.html reference.RepoObject_reference_union]]" as reference.RepoObject_reference_union << V >> {
+  **referenced_RepoObject_guid** : (uniqueidentifier)
+  **referencing_RepoObject_guid** : (uniqueidentifier)
+  --
+  - InformationSource : (varchar(34))
+  - one : (int)
+  referenced_entity_name : (nvarchar(128))
+  referenced_fullname : (nvarchar(517))
+  referenced_id : (int)
+  referenced_schema_name : (nvarchar(128))
+  referenced_type : (char(2))
+  referencing_entity_name : (nvarchar(128))
+  referencing_fullname : (nvarchar(517))
+  referencing_id : (int)
+  referencing_schema_name : (nvarchar(128))
+  referencing_type : (varchar(2))
+  --
   --
 }
 
@@ -101,3 +105,10 @@ reference.additional_Reference_guid::referencing_Object <-- reference.RepoObject
 reference.additional_Reference_guid::referencing_RepoObject_guid <-- reference.RepoObject_reference_additional_internal::referencing_RepoObject_guid
 reference.additional_Reference_guid::referencing_Schema <-- reference.RepoObject_reference_additional_internal::referencing_schema_name
 reference.additional_Reference_guid::referencing_type <-- reference.RepoObject_reference_additional_internal::referencing_type
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

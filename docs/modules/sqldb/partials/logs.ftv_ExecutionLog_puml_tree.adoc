@@ -51,7 +51,7 @@ inline function
 [#column-Depth]
 === Depth
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |Depth
@@ -65,7 +65,7 @@ inline function
 [#column-duration_current_execution_guid]
 === duration++__++current_execution_guid
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |duration__current_execution_guid
@@ -79,7 +79,7 @@ inline function
 [#column-execution_instance_guid]
 === execution_instance_guid
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |execution_instance_guid
@@ -93,7 +93,7 @@ inline function
 [#column-id]
 === id
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |id
@@ -107,7 +107,7 @@ inline function
 [#column-parent_execution_log_id]
 === parent_execution_log_id
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |parent_execution_log_id
@@ -121,7 +121,7 @@ inline function
 [#column-PlantUmlTree]
 === PlantUmlTree
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |PlantUmlTree
@@ -135,7 +135,7 @@ inline function
 [#column-PlantUmlTreeTable]
 === PlantUmlTreeTable
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |PlantUmlTreeTable
@@ -149,7 +149,7 @@ inline function
 [#column-proc_name]
 === proc_name
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |proc_name
@@ -163,7 +163,7 @@ inline function
 [#column-proc_schema_name]
 === proc_schema_name
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |proc_schema_name
@@ -177,7 +177,7 @@ inline function
 [#column-step_id]
 === step_id
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |step_id
@@ -189,6 +189,12 @@ inline function
 
 
 // end::AntoraColumnDetails[]
+
+== AntoraMeasureDetails
+
+// tag::AntoraMeasureDetails[]
+
+// end::AntoraMeasureDetails[]
 
 == AntoraPkColumnTableRows
 
@@ -867,7 +873,7 @@ Return
           , proc_schema_name
           , proc_name
           , step_id
-          , duration__current_execution_guid
+          , duration_current_execution_guid
         From
             logs.ExecutionLog_gross
         Where
@@ -891,7 +897,7 @@ Return
           , child.proc_schema_name
           , child.proc_name
           , child.step_id
-          , child.duration__current_execution_guid
+          , child.duration_current_execution_guid
         From
             logs.ExecutionLog_gross As child
             Inner Join
@@ -919,7 +925,7 @@ Return
                                      , '.'
                                      , QuoteName ( proc_name )
                                      , '  |  '
-                                     , duration__current_execution_guid
+                                     , duration_current_execution_guid
                                    )
     From
         tree

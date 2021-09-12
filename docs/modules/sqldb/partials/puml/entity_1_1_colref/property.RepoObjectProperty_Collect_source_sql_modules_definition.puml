@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,45 +25,49 @@ skinparam class {
 }
 
 
-entity property.RepoObjectProperty_Collect_source_sql_modules_definition << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  **property_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObjectProperty_Collect_source_sql_modules_definition.html property.RepoObjectProperty_Collect_source_sql_modules_definition]]" as property.RepoObjectProperty_Collect_source_sql_modules_definition << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  **property_name** : (nvarchar(128))
   --
-  property_value : nvarchar(max)
-  --
-}
-
-entity property.usp_RepoObjectProperty_collect << P >> {
+  property_value : (nvarchar(max))
   --
   --
 }
 
-entity sqlparse.RepoObject_SqlModules_Repo_Sys << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.usp_RepoObjectProperty_collect.html property.usp_RepoObjectProperty_collect]]" as property.usp_RepoObjectProperty_collect << P >> {
   --
-  is_json_sql_modules_json : int
-  is_outdated : bit
-  * modify_date : datetime
-  * RepoObject_guid : uniqueidentifier
-  sql_modules_definition : nvarchar(max)
-  sql_modules_dt : datetime
-  sql_modules_formatted : nvarchar(max)
-  sql_modules_formatted2 : nvarchar(max)
-  sql_modules_json : nvarchar(max)
-  SysObject_type : char(2)
+  --
   --
 }
 
-entity tool.ftv_extract_substrings << IF >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/sqlparse.RepoObject_SqlModules_Repo_Sys.html sqlparse.RepoObject_SqlModules_Repo_Sys]]" as sqlparse.RepoObject_SqlModules_Repo_Sys << V >> {
   --
-  len1 : int
-  len2 : int
-  pos1 : bigint
-  pos1eol : bigint
-  pos2 : bigint
-  substring_gross : nvarchar(max)
-  substring_net : nvarchar(max)
-  substring_netPostEol : nvarchar(max)
-  substring_netPreEol : nvarchar(max)
+  is_json_sql_modules_json : (int)
+  is_outdated : (bit)
+  - modify_date : (datetime)
+  - RepoObject_guid : (uniqueidentifier)
+  sql_modules_definition : (nvarchar(max))
+  sql_modules_dt : (datetime)
+  sql_modules_formatted : (nvarchar(max))
+  sql_modules_formatted2 : (nvarchar(max))
+  sql_modules_json : (nvarchar(max))
+  SysObject_type : (char(2))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/tool.ftv_extract_substrings.html tool.ftv_extract_substrings]]" as tool.ftv_extract_substrings << IF >> {
+  --
+  len1 : (int)
+  len2 : (int)
+  pos1 : (bigint)
+  pos1eol : (bigint)
+  pos2 : (bigint)
+  substring_gross : (nvarchar(max))
+  substring_net : (nvarchar(max))
+  substring_netPostEol : (nvarchar(max))
+  substring_netPreEol : (nvarchar(max))
+  --
   --
 }
 
@@ -70,3 +75,10 @@ property.RepoObjectProperty_Collect_source_sql_modules_definition <.. property.u
 sqlparse.RepoObject_SqlModules_Repo_Sys <.. property.RepoObjectProperty_Collect_source_sql_modules_definition
 tool.ftv_extract_substrings <.. property.RepoObjectProperty_Collect_source_sql_modules_definition
 sqlparse.RepoObject_SqlModules_Repo_Sys::RepoObject_guid <-- property.RepoObjectProperty_Collect_source_sql_modules_definition::RepoObject_guid
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

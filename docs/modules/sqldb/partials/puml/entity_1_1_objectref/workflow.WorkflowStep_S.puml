@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,28 +25,28 @@ skinparam class {
 }
 
 
-entity repo.RepoObject_gross << V >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject_gross.html repo.RepoObject_gross]]" as repo.RepoObject_gross << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity workflow.usp_PERSIST_WorkflowStep << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.usp_PERSIST_WorkflowStep.html workflow.usp_PERSIST_WorkflowStep]]" as workflow.usp_PERSIST_WorkflowStep << P >> {
   --
 }
 
-entity workflow.Workflow << U >> {
-  * **id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow.html workflow.Workflow]]" as workflow.Workflow << U >> {
+  - **id** : (int)
   --
 }
 
-entity workflow.WorkflowStep << U >> {
-  * **id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.WorkflowStep.html workflow.WorkflowStep]]" as workflow.WorkflowStep << U >> {
+  - **id** : (int)
   --
 }
 
-entity workflow.WorkflowStep_S << V >> {
-  * **Workflow_id** : int
-  **Procedure_RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.WorkflowStep_S.html workflow.WorkflowStep_S]]" as workflow.WorkflowStep_S << V >> {
+  - **Workflow_id** : (int)
+  **Procedure_RepoObject_guid** : (uniqueidentifier)
   --
 }
 
@@ -53,3 +54,10 @@ repo.RepoObject_gross <.. workflow.WorkflowStep_S
 workflow.Workflow <.. workflow.WorkflowStep_S
 workflow.WorkflowStep_S <.. workflow.WorkflowStep
 workflow.WorkflowStep_S <.. workflow.usp_PERSIST_WorkflowStep
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

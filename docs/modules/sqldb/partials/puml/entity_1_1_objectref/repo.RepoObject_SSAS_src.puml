@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,26 +25,33 @@ skinparam class {
 }
 
 
-entity repo.RepoObject_SSAS_src << V >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject_SSAS_src.html repo.RepoObject_SSAS_src]]" as repo.RepoObject_SSAS_src << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.RepoObject_SSAS_tgt << V >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject_SSAS_tgt.html repo.RepoObject_SSAS_tgt]]" as repo.RepoObject_SSAS_tgt << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity repo.usp_PERSIST_RepoObject_SSAS_tgt << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_PERSIST_RepoObject_SSAS_tgt.html repo.usp_PERSIST_RepoObject_SSAS_tgt]]" as repo.usp_PERSIST_RepoObject_SSAS_tgt << P >> {
   --
 }
 
-entity ssas.model_json_31_tables_T << U >> {
-  * **databasename** : nvarchar(128)
-  **tables_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_31_tables_T.html ssas.model_json_31_tables_T]]" as ssas.model_json_31_tables_T << U >> {
+  - **databasename** : (nvarchar(128))
+  **tables_name** : (nvarchar(128))
   --
 }
 
 repo.RepoObject_SSAS_src <.. repo.RepoObject_SSAS_tgt
 repo.RepoObject_SSAS_src <.. repo.usp_PERSIST_RepoObject_SSAS_tgt
 ssas.model_json_31_tables_T <.. repo.RepoObject_SSAS_src
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

@@ -10,7 +10,6 @@
 :ExistsProperty--pk_index_guid:
 :ExistsProperty--pk_indexpatterncolumndatatype:
 :ExistsProperty--pk_indexpatterncolumnname:
-:ExistsProperty--pk_indexsemanticgroup:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -45,7 +44,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-08-17 19:40:46
+2021-09-10 11:26:19
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -54,7 +53,7 @@ view
 [#column-index_guid]
 === index_guid
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |1
 |*index_guid*
@@ -73,7 +72,7 @@ view
 [#column-parent_RepoObject_guid]
 === parent_RepoObject_guid
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |parent_RepoObject_guid
@@ -92,7 +91,7 @@ view
 [#column-SqlConstraint]
 === SqlConstraint
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |SqlConstraint
@@ -104,6 +103,12 @@ view
 
 
 // end::AntoraColumnDetails[]
+
+== AntoraMeasureDetails
+
+// tag::AntoraMeasureDetails[]
+
+// end::AntoraMeasureDetails[]
 
 == AntoraPkColumnTableRows
 
@@ -146,7 +151,7 @@ view
 [#index-PK_Index_SqlConstraint_PkUq]
 === PK_Index_SqlConstraint_PkUq
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_index_guid[index_guid]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
 +
 --
 * <<column-index_guid>>; uniqueidentifier
@@ -176,7 +181,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:repo.Index_ColumList.adoc[]
+* xref:repo.Index_ColumList_T.adoc[]
 * xref:repo.Index_Settings.adoc[]
 * xref:repo.Index_union.adoc[]
 // end::antorareferencedlist[]
@@ -395,14 +400,14 @@ index_guid
 === pk_IndexSemanticGroup
 
 // tag::pk_indexsemanticgroup[]
-index_guid
+
 // end::pk_indexsemanticgroup[]
 
 
 === ReferencedObjectList
 
 // tag::referencedobjectlist[]
-* [repo].[Index_ColumList]
+* [repo].[Index_ColumList_T]
 * [repo].[Index_Settings]
 * [repo].[Index_union]
 // end::referencedobjectlist[]
@@ -444,11 +449,11 @@ source: property.RepoObjectProperty WHERE property_int = 1
 [source,sql]
 ----
 
-
 --contains only PK or UNIQUE
 --requirement:
 -- - repo.Index_Settings.is_create_constraint = 1
 -- - repo.Index_union.is_index_unique = 1
+
 CREATE View repo.Index_SqlConstraint_PkUq
 As
 Select
@@ -487,14 +492,14 @@ Select
 ----, i.is_index_real
 ----, i_s.is_create_constraint
 From
-    repo.Index_union         As i
+    repo.Index_union           As i
     Left Outer Join
-        repo.Index_Settings  As i_s
+        repo.Index_Settings    As i_s
             On
             i_s.index_guid        = i.index_guid
 
     Left Outer Join
-        repo.Index_ColumList As ColumnList
+        repo.Index_ColumList_T As ColumnList
             On
             ColumnList.index_guid = i.index_guid
 Where

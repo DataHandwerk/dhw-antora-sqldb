@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,73 +25,79 @@ skinparam class {
 }
 
 
-entity logs.usp_ExecutionLog_insert << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/logs.usp_ExecutionLog_insert.html logs.usp_ExecutionLog_insert]]" as logs.usp_ExecutionLog_insert << P >> {
   --
-  --
-}
-
-entity property.ExtendedProperty_Repo2Sys_level0 << V >> {
-  --
-  * level0name : nvarchar(128)
-  * level0type : nvarchar(6)
-  level1name : nvarchar(128)
-  level1type : nvarchar(128)
-  level2name : varchar(128)
-  level2type : nvarchar(128)
-  * property_name : varchar(14)
-  property_value : nvarchar(4000)
-  --
-}
-
-entity property.ExtendedProperty_Repo2Sys_level1 << V >> {
-  * **level0type** : nvarchar(6)
-  * **level0name** : nvarchar(128)
-  **level1type** : varchar(9)
-  * **level1name** : nvarchar(128)
-  * **property_name** : nvarchar(128)
-  --
-  level2name : varchar(128)
-  level2type : varchar(10)
-  property_value : nvarchar(4000)
-  * RepoObject_guid : uniqueidentifier
-  * RepoObject_type : char(2)
-  --
-}
-
-entity property.ExtendedProperty_Repo2Sys_level2_Union << V >> {
-  * **level0type** : nvarchar(6)
-  * **level0name** : nvarchar(128)
-  **level1type** : varchar(9)
-  * **level1name** : nvarchar(128)
-  **level2type** : nvarchar(10)
-  * **level2name** : nvarchar(128)
-  * **property_name** : nvarchar(128)
-  --
-  property_value : nvarchar(4000)
-  --
-}
-
-entity property.usp_sync_ExtendedProperties_Repo2Sys_Delete << P >> {
   --
   --
 }
 
-entity repo_sys.ExtendedProperties_ParameterForAddUpdateDrop << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.ExtendedProperty_Repo2Sys_level0.html property.ExtendedProperty_Repo2Sys_level0]]" as property.ExtendedProperty_Repo2Sys_level0 << V >> {
   --
-  * class : tinyint
-  class_desc : nvarchar(60)
-  level0name : nvarchar(128)
-  * level0type : varchar(6)
-  level1name : nvarchar(128)
-  level1type : varchar(9)
-  level2name : nvarchar(128)
-  level2type : varchar(10)
-  * minor_id : int
-  * property_name : sysname
-  property_value : sql_variant
-  type : char(2)
-  type_level1type : varchar(9)
-  type_level2type : varchar(10)
+  - level0name : (nvarchar(128))
+  - level0type : (nvarchar(6))
+  level1name : (nvarchar(128))
+  level1type : (nvarchar(128))
+  level2name : (varchar(128))
+  level2type : (nvarchar(128))
+  - property_name : (varchar(14))
+  property_value : (nvarchar(4000))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.ExtendedProperty_Repo2Sys_level1.html property.ExtendedProperty_Repo2Sys_level1]]" as property.ExtendedProperty_Repo2Sys_level1 << V >> {
+  - **level0type** : (nvarchar(6))
+  - **level0name** : (nvarchar(128))
+  **level1type** : (varchar(9))
+  - **level1name** : (nvarchar(128))
+  - **property_name** : (nvarchar(128))
+  --
+  level2name : (varchar(128))
+  level2type : (varchar(10))
+  property_value : (nvarchar(4000))
+  - RepoObject_guid : (uniqueidentifier)
+  - RepoObject_type : (char(2))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.ExtendedProperty_Repo2Sys_level2_Union.html property.ExtendedProperty_Repo2Sys_level2_Union]]" as property.ExtendedProperty_Repo2Sys_level2_Union << V >> {
+  - **level0type** : (nvarchar(6))
+  - **level0name** : (nvarchar(128))
+  **level1type** : (varchar(9))
+  - **level1name** : (nvarchar(128))
+  **level2type** : (nvarchar(10))
+  - **level2name** : (nvarchar(128))
+  - **property_name** : (nvarchar(128))
+  --
+  property_value : (nvarchar(4000))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.usp_sync_ExtendedProperties_Repo2Sys_Delete.html property.usp_sync_ExtendedProperties_Repo2Sys_Delete]]" as property.usp_sync_ExtendedProperties_Repo2Sys_Delete << P >> {
+  --
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.ExtendedProperties_ParameterForAddUpdateDrop.html repo_sys.ExtendedProperties_ParameterForAddUpdateDrop]]" as repo_sys.ExtendedProperties_ParameterForAddUpdateDrop << V >> {
+  --
+  - class : (tinyint)
+  class_desc : (nvarchar(60))
+  level0name : (nvarchar(128))
+  - level0type : (varchar(6))
+  level1name : (nvarchar(128))
+  level1type : (varchar(9))
+  level2name : (nvarchar(128))
+  level2type : (varchar(10))
+  - minor_id : (int)
+  - property_name : (sysname)
+  property_value : (sql_variant)
+  type : (char(2))
+  type_level1type : (varchar(9))
+  type_level2type : (varchar(10))
+  --
   --
 }
 
@@ -99,4 +106,11 @@ property.ExtendedProperty_Repo2Sys_level0 <.. property.usp_sync_ExtendedProperti
 property.ExtendedProperty_Repo2Sys_level1 <.. property.usp_sync_ExtendedProperties_Repo2Sys_Delete
 property.ExtendedProperty_Repo2Sys_level2_Union <.. property.usp_sync_ExtendedProperties_Repo2Sys_Delete
 repo_sys.ExtendedProperties_ParameterForAddUpdateDrop <.. property.usp_sync_ExtendedProperties_Repo2Sys_Delete
+
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
 

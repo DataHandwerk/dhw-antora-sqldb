@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,59 +25,66 @@ skinparam class {
 }
 
 
-entity repo.Index_virtual << U >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_virtual.html repo.Index_virtual]]" as repo.Index_virtual << U >> {
 **PK_Index_virtual**
-{index_guid}
+
 ..
 index_guid; uniqueidentifier
 --
 - idx_Index_virtual__1
-{RepoObject_guid}
+
 ..
 parent_RepoObject_guid; uniqueidentifier
 }
 
-entity repo.IndexColumn_virtual << U >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.IndexColumn_virtual.html repo.IndexColumn_virtual]]" as repo.IndexColumn_virtual << U >> {
 **PK_IndexColumn_unique**
-{index_guid,index_column_id}
+
 ..
 index_guid; uniqueidentifier
 index_column_id; int
 --
 - idx_IndexColumn_virtual__1
-{index_guid}
+
 ..
 index_guid; uniqueidentifier
 --
 - idx_IndexColumn_virtual__2
-{RepoObjectColumn_guid}
+
 ..
 RepoObjectColumn_guid; uniqueidentifier
 }
 
-entity repo.RepoObjectColumn << U >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObjectColumn.html repo.RepoObjectColumn]]" as repo.RepoObjectColumn << U >> {
 **PK_RepoObjectColumn**
-{RepoObjectColumn_guid}
+
 ..
 RepoObjectColumn_guid; uniqueidentifier
 --
 UK_RepoObjectColumn__RepoNames
-{RepoObject_guid,column_name}
+
 ..
 RepoObject_guid; uniqueidentifier
 RepoObjectColumn_name; nvarchar(128)
 --
 UK_RepoObjectColumn__SysNames
-{RepoObjectColumn_guid,column_name}
+
 ..
 RepoObjectColumn_guid; uniqueidentifier
 SysObjectColumn_name; nvarchar(128)
 --
 - idx_RepoObjectColumn__1
-{RepoObject_guid}
+
 ..
 RepoObject_guid; uniqueidentifier
 }
 
 repo.Index_virtual::PK_Index_virtual <-- repo.IndexColumn_virtual::idx_IndexColumn_virtual__1
 repo.RepoObjectColumn::PK_RepoObjectColumn <-- repo.IndexColumn_virtual::idx_IndexColumn_virtual__2
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,24 +25,31 @@ skinparam class {
 }
 
 
-entity reference.ReferenceTree_cyclic_ref_PersistenceUsp << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.ReferenceTree_cyclic_ref_PersistenceUsp.html reference.ReferenceTree_cyclic_ref_PersistenceUsp]]" as reference.ReferenceTree_cyclic_ref_PersistenceUsp << V >> {
   --
 }
 
-entity reference.ReferenceTree_cyclic_ref_primary << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.ReferenceTree_cyclic_ref_primary.html reference.ReferenceTree_cyclic_ref_primary]]" as reference.ReferenceTree_cyclic_ref_primary << V >> {
   --
 }
 
-entity reference.ReferenceTree_cyclic_union << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.ReferenceTree_cyclic_union.html reference.ReferenceTree_cyclic_union]]" as reference.ReferenceTree_cyclic_union << V >> {
   --
 }
 
-entity reference.RepoObject_reference_T << U >> {
-  **referenced_RepoObject_guid** : uniqueidentifier
-  **referencing_RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObject_reference_T.html reference.RepoObject_reference_T]]" as reference.RepoObject_reference_T << U >> {
+  **referenced_RepoObject_guid** : (uniqueidentifier)
+  **referencing_RepoObject_guid** : (uniqueidentifier)
   --
 }
 
 reference.ReferenceTree_cyclic_ref_PersistenceUsp <.. reference.ReferenceTree_cyclic_union
 reference.ReferenceTree_cyclic_ref_primary <.. reference.ReferenceTree_cyclic_ref_PersistenceUsp
 reference.RepoObject_reference_T <.. reference.ReferenceTree_cyclic_ref_PersistenceUsp
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

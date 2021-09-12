@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,121 +25,131 @@ skinparam class {
 }
 
 
-entity repo.RepoSchema_ssas_src << V >> {
-  * **RepoSchema_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoSchema_ssas_src.html repo.RepoSchema_ssas_src]]" as repo.RepoSchema_ssas_src << V >> {
+  - **RepoSchema_name** : (nvarchar(128))
   --
-  * is_ssas : int
-  * is_SysSchema_missing : int
-  RepoSchema_ms_description : nvarchar(max)
-  * SysSchema_name : nvarchar(128)
+  - is_ssas : (int)
+  - is_SysSchema_missing : (int)
+  RepoSchema_ms_description : (nvarchar(max))
+  - SysSchema_name : (nvarchar(128))
   --
-}
-
-entity ssas.model_json_10 << V >> {
-  * **databasename** : nvarchar(128)
-  --
-  l1_compatibilityLevel : int
-  l1_id : nvarchar(500)
-  l1_model_j : nvarchar(max)
-  l1_name : nvarchar(500)
   --
 }
 
-entity ssas.model_json_20 << V >> {
-  * **databasename** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_10.html ssas.model_json_10]]" as ssas.model_json_10 << V >> {
+  - **databasename** : (nvarchar(128))
   --
-  l1_compatibilityLevel : int
-  l1_id : nvarchar(500)
-  l1_name : nvarchar(500)
-  l2_annotations_ja : nvarchar(max)
-  l2_culture : nvarchar(500)
-  l2_cultures_ja : nvarchar(max)
-  l2_dataSources_ja : nvarchar(max)
-  l2_description : nvarchar(max)
-  l2_description_ja : nvarchar(max)
-  l2_name : nvarchar(500)
-  l2_perspectives_ja : nvarchar(max)
-  l2_relationships_ja : nvarchar(max)
-  l2_roles_ja : nvarchar(max)
-  l2_tables_ja : nvarchar(max)
+  l1_compatibilityLevel : (int)
+  l1_id : (nvarchar(500))
+  l1_model_j : (nvarchar(max))
+  l1_name : (nvarchar(500))
+  --
   --
 }
 
-entity ssas.model_json_201_descriptions_multiline << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_20.html ssas.model_json_20]]" as ssas.model_json_20 << V >> {
+  - **databasename** : (nvarchar(128))
   --
-  * databasename : nvarchar(128)
-  * Key : nvarchar(4000)
-  * Type : tinyint
-  Value : nvarchar(max)
+  l1_compatibilityLevel : (int)
+  l1_id : (nvarchar(500))
+  l1_name : (nvarchar(500))
+  l2_annotations_ja : (nvarchar(max))
+  l2_culture : (nvarchar(500))
+  l2_cultures_ja : (nvarchar(max))
+  l2_dataSources_ja : (nvarchar(max))
+  l2_description : (nvarchar(max))
+  l2_description_ja : (nvarchar(max))
+  l2_name : (nvarchar(500))
+  l2_perspectives_ja : (nvarchar(max))
+  l2_relationships_ja : (nvarchar(max))
+  l2_roles_ja : (nvarchar(max))
+  l2_tables_ja : (nvarchar(max))
   --
-}
-
-entity ssas.model_json_31_tables << V >> {
-  * **databasename** : nvarchar(128)
-  **tables_name** : nvarchar(128)
-  --
-  tables_annotations_ja : nvarchar(max)
-  tables_columns_ja : nvarchar(max)
-  tables_dataCategory : nvarchar(500)
-  tables_description : nvarchar(max)
-  tables_description_ja : nvarchar(max)
-  tables_hierarchies_ja : nvarchar(max)
-  tables_isHidden : nvarchar(500)
-  tables_measures_ja : nvarchar(max)
-  tables_partitions_ja : nvarchar(max)
   --
 }
 
-entity ssas.model_json_32_relationships << V >> {
-  * **databasename** : nvarchar(128)
-  **relationships_name** : nvarchar(500)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_201_descriptions_multiline.html ssas.model_json_201_descriptions_multiline]]" as ssas.model_json_201_descriptions_multiline << V >> {
   --
-  relationships_crossFilteringBehavior : nvarchar(500)
-  relationships_fromCardinality : nvarchar(500)
-  relationships_fromColumn : nvarchar(500)
-  relationships_fromTable : nvarchar(500)
-  relationships_isActive : bit
-  relationships_toCardinality : nvarchar(500)
-  relationships_toColumn : nvarchar(500)
-  relationships_toTable : nvarchar(500)
+  - databasename : (nvarchar(128))
+  - Key : (nvarchar(4000))
+  - Type : (tinyint)
+  Value : (nvarchar(max))
+  --
   --
 }
 
-entity ssas.model_json_33_dataSources << V >> {
-  * **databasename** : nvarchar(128)
-  **dataSources_name** : nvarchar(500)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_31_tables.html ssas.model_json_31_tables]]" as ssas.model_json_31_tables << V >> {
+  - **databasename** : (nvarchar(128))
+  **tables_name** : (nvarchar(128))
   --
-  dataSources_account : nvarchar(500)
-  dataSources_annotations_ja : nvarchar(max)
-  dataSources_connectionString : nvarchar(4000)
-  dataSources_impersonationMode : nvarchar(500)
-  dataSources_provider : nvarchar(500)
+  tables_annotations_ja : (nvarchar(max))
+  tables_columns_ja : (nvarchar(max))
+  tables_dataCategory : (nvarchar(500))
+  tables_description : (nvarchar(max))
+  tables_description_ja : (nvarchar(max))
+  tables_hierarchies_ja : (nvarchar(max))
+  tables_isHidden : (nvarchar(500))
+  tables_measures_ja : (nvarchar(max))
+  tables_partitions_ja : (nvarchar(max))
   --
-}
-
-entity ssas.model_json_34_cultures << V >> {
-  * **databasename** : nvarchar(128)
-  **cultures_name** : nvarchar(500)
-  --
-  cultures_translations_j : nvarchar(max)
   --
 }
 
-entity ssas.model_json_35_roles << V >> {
-  * **databasename** : nvarchar(128)
-  **roles_name** : nvarchar(500)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_32_relationships.html ssas.model_json_32_relationships]]" as ssas.model_json_32_relationships << V >> {
+  - **databasename** : (nvarchar(128))
+  **relationships_name** : (nvarchar(500))
   --
-  roles_members_ja : nvarchar(max)
-  roles_modelPermission : nvarchar(500)
-  roles_tablePermissions_ja : nvarchar(max)
+  relationships_crossFilteringBehavior : (nvarchar(500))
+  relationships_fromCardinality : (nvarchar(500))
+  relationships_fromColumn : (nvarchar(500))
+  relationships_fromTable : (nvarchar(500))
+  relationships_isActive : (bit)
+  relationships_toCardinality : (nvarchar(500))
+  relationships_toColumn : (nvarchar(500))
+  relationships_toTable : (nvarchar(500))
+  --
   --
 }
 
-entity ssas.model_json_36_perspectives << V >> {
-  * **databasename** : nvarchar(128)
-  **perspectives_name** : nvarchar(500)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_33_dataSources.html ssas.model_json_33_dataSources]]" as ssas.model_json_33_dataSources << V >> {
+  - **databasename** : (nvarchar(128))
+  **dataSources_name** : (nvarchar(500))
   --
-  perspectives_tables_ja : nvarchar(max)
+  dataSources_account : (nvarchar(500))
+  dataSources_annotations_ja : (nvarchar(max))
+  dataSources_connectionString : (nvarchar(4000))
+  dataSources_impersonationMode : (nvarchar(500))
+  dataSources_provider : (nvarchar(500))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_34_cultures.html ssas.model_json_34_cultures]]" as ssas.model_json_34_cultures << V >> {
+  - **databasename** : (nvarchar(128))
+  **cultures_name** : (nvarchar(500))
+  --
+  cultures_translations_j : (nvarchar(max))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_35_roles.html ssas.model_json_35_roles]]" as ssas.model_json_35_roles << V >> {
+  - **databasename** : (nvarchar(128))
+  **roles_name** : (nvarchar(500))
+  --
+  roles_members_ja : (nvarchar(max))
+  roles_modelPermission : (nvarchar(500))
+  roles_tablePermissions_ja : (nvarchar(max))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_36_perspectives.html ssas.model_json_36_perspectives]]" as ssas.model_json_36_perspectives << V >> {
+  - **databasename** : (nvarchar(128))
+  **perspectives_name** : (nvarchar(500))
+  --
+  perspectives_tables_ja : (nvarchar(max))
+  --
   --
 }
 
@@ -163,3 +174,10 @@ ssas.model_json_20::databasename <-- ssas.model_json_34_cultures::databasename
 ssas.model_json_20::databasename <-- ssas.model_json_35_roles::databasename
 ssas.model_json_20::databasename <-- ssas.model_json_36_perspectives::databasename
 ssas.model_json_20::databasename <-- ssas.model_json_201_descriptions_multiline::databasename
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,43 +25,54 @@ skinparam class {
 }
 
 
-entity configT.numbers_0_2047 << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/configT.numbers_0_2047.html configT.numbers_0_2047]]" as configT.numbers_0_2047 << V >> {
   --
-  high : int
-  low : int
-  * number : int
-  status : int
-  * type : nchar(3)
-  --
-}
-
-entity configT.spt_values << U >> {
-  --
-  high : int
-  low : int
-  name : nvarchar(35)
-  * number : int
-  status : int
-  * type : nchar(3)
-  --
-}
-
-entity configT.type << V >> {
-  **type** : nvarchar(128)
-  --
-  * is_DocsOutput : int
-  type_desc : nvarchar(128)
-  --
-}
-
-entity configT.usp_init_spt_values << P >> {
+  high : (int)
+  low : (int)
+  - number : (int)
+  status : (int)
+  - type : (nchar(3))
   --
   --
 }
 
-configT.spt_values <.. configT.numbers_0_2047
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/configT.spt_values.html configT.spt_values]]" as configT.spt_values << U >> {
+  --
+  high : (int)
+  low : (int)
+  name : (nvarchar(35))
+  - number : (int)
+  status : (int)
+  - type : (nchar(3))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/configT.type.html configT.type]]" as configT.type << V >> {
+  **type** : (nvarchar(128))
+  --
+  - is_DocsOutput : (int)
+  type_desc : (nvarchar(128))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/configT.usp_init_spt_values.html configT.usp_init_spt_values]]" as configT.usp_init_spt_values << P >> {
+  --
+  --
+  --
+}
+
 configT.spt_values <.. configT.type
 configT.spt_values <.. configT.usp_init_spt_values
+configT.spt_values <.. configT.numbers_0_2047
 configT.spt_values::high <-- configT.numbers_0_2047::high
 configT.spt_values::low <-- configT.numbers_0_2047::low
 configT.spt_values::status <-- configT.numbers_0_2047::status
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

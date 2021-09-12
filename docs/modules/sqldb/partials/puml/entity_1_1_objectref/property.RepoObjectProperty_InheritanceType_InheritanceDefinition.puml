@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,41 +25,48 @@ skinparam class {
 }
 
 
-entity config.Parameter << U >> {
-  * **Parameter_name** : varchar(100)
-  * **sub_Parameter** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/config.Parameter.html config.Parameter]]" as config.Parameter << U >> {
+  - **Parameter_name** : (varchar(100))
+  - **sub_Parameter** : (nvarchar(128))
   --
 }
 
-entity property.PropertyName_RepoObject << V >> {
-  **property_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.PropertyName_RepoObject_T.html property.PropertyName_RepoObject_T]]" as property.PropertyName_RepoObject_T << U >> {
+  **property_name** : (nvarchar(128))
   --
 }
 
-entity property.RepoObjectProperty << U >> {
-  * **RepoObjectProperty_id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObjectProperty.html property.RepoObjectProperty]]" as property.RepoObjectProperty << U >> {
+  - **RepoObjectProperty_id** : (int)
   --
 }
 
-entity property.RepoObjectProperty_InheritanceType_InheritanceDefinition << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  **property_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObjectProperty_InheritanceType_InheritanceDefinition.html property.RepoObjectProperty_InheritanceType_InheritanceDefinition]]" as property.RepoObjectProperty_InheritanceType_InheritanceDefinition << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   --
 }
 
-entity property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  **property_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition.html property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition]]" as property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  **property_name** : (nvarchar(128))
   --
 }
 
-entity repo.RepoObject << U >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject.html repo.RepoObject]]" as repo.RepoObject << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
 config.Parameter <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition
-property.PropertyName_RepoObject <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition
+property.PropertyName_RepoObject_T <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition
 property.RepoObjectProperty <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition
 property.RepoObjectProperty_InheritanceType_InheritanceDefinition <.. property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition
 repo.RepoObject <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

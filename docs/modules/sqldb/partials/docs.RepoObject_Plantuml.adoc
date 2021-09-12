@@ -10,7 +10,6 @@
 :ExistsProperty--pk_index_guid:
 :ExistsProperty--pk_indexpatterncolumndatatype:
 :ExistsProperty--pk_indexpatterncolumnname:
-:ExistsProperty--pk_indexsemanticgroup:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -45,7 +44,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-08-29 22:17:57
+2021-09-06 22:28:40
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -54,7 +53,7 @@ view
 [#column-RepoObject_guid]
 === RepoObject_guid
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |1
 |*RepoObject_guid*
@@ -78,7 +77,7 @@ view
 [#column-ColRefList]
 === ColRefList
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |ColRefList
@@ -102,7 +101,7 @@ view
 [#column-ObjectRefList]
 === ObjectRefList
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |ObjectRefList
@@ -126,7 +125,7 @@ view
 [#column-ObjectRefList_0_30]
 === ObjectRefList_0_30
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |ObjectRefList_0_30
@@ -150,7 +149,7 @@ view
 [#column-ObjectRefList_30_0]
 === ObjectRefList_30_0
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |ObjectRefList_30_0
@@ -174,7 +173,7 @@ view
 [#column-PlantumlEntity_0_30_ObjectRef]
 === PlantumlEntity_0_30_ObjectRef
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |PlantumlEntity_0_30_ObjectRef
@@ -193,7 +192,7 @@ view
 [#column-PlantumlEntity_1_1_ColRef]
 === PlantumlEntity_1_1_ColRef
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |PlantumlEntity_1_1_ColRef
@@ -212,7 +211,7 @@ view
 [#column-PlantumlEntity_1_1_FkRef]
 === PlantumlEntity_1_1_FkRef
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |PlantumlEntity_1_1_FkRef
@@ -231,7 +230,7 @@ view
 [#column-PlantumlEntity_1_1_ObjectRef]
 === PlantumlEntity_1_1_ObjectRef
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |PlantumlEntity_1_1_ObjectRef
@@ -250,7 +249,7 @@ view
 [#column-PlantumlEntity_30_0_ObjectRef]
 === PlantumlEntity_30_0_ObjectRef
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |PlantumlEntity_30_0_ObjectRef
@@ -269,7 +268,7 @@ view
 [#column-PumlEntityList]
 === PumlEntityList
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |PumlEntityList
@@ -288,7 +287,7 @@ view
 [#column-PumlEntityList_0_30]
 === PumlEntityList_0_30
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |PumlEntityList_0_30
@@ -307,7 +306,7 @@ view
 [#column-PumlEntityList_30_0]
 === PumlEntityList_30_0
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |PumlEntityList_30_0
@@ -326,7 +325,7 @@ view
 [#column-RepoObject_fullname2]
 === RepoObject_fullname2
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |RepoObject_fullname2
@@ -340,6 +339,7 @@ view
 --
 (concat([RepoObject_schema_name],'.',[RepoObject_name]))
 --
+{empty} +
 
 .Referenced Columns
 --
@@ -353,6 +353,12 @@ view
 
 
 // end::AntoraColumnDetails[]
+
+== AntoraMeasureDetails
+
+// tag::AntoraMeasureDetails[]
+
+// end::AntoraMeasureDetails[]
 
 == AntoraPkColumnTableRows
 
@@ -483,7 +489,7 @@ view
 [#index-PK_RepoObject_Plantuml]
 === PK_RepoObject_Plantuml
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_repoobject_guid[RepoObject_guid]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -740,7 +746,7 @@ RepoObject_guid
 === pk_IndexSemanticGroup
 
 // tag::pk_indexsemanticgroup[]
-RepoObject_guid
+
 // end::pk_indexsemanticgroup[]
 
 
@@ -811,44 +817,59 @@ Select
   , PlantumlEntity_1_1_ColRef
   --
                         = Concat (
-                                     docs.fs_PumlHeaderLeftToRight ()
+                                     '@startuml' + Char ( 13 ) + Char ( 10 )
+                                   , docs.fs_PumlHeaderLeftToRight ()
                                    , elist_1_1.PumlEntityList
                                    , Char ( 13 ) + Char ( 10 )
                                    , olist_1_1.ObjectRefList
                                    , Char ( 13 ) + Char ( 10 )
                                    , clist.ColRefList
+                                   , puml_footer.Parameter_value_result
+                                   , Char ( 13 ) + Char ( 10 ) + '@enduml' + Char ( 13 ) + Char ( 10 )
                                  )
   , PlantumlEntity_1_1_ObjectRef
   --
                         = Concat (
-                                     docs.fs_PumlHeaderLeftToRight ()
+                                     '@startuml' + Char ( 13 ) + Char ( 10 )
+                                   , docs.fs_PumlHeaderLeftToRight ()
                                    , elist_1_1.PumlEntityOnlyPkList
                                    , Char ( 13 ) + Char ( 10 )
                                    , olist_1_1.ObjectRefList
+                                   , puml_footer.Parameter_value_result
+                                   , Char ( 13 ) + Char ( 10 ) + '@enduml' + Char ( 13 ) + Char ( 10 )
                                  )
   , PlantumlEntity_0_30_ObjectRef
   --
                         = Concat (
-                                     docs.fs_PumlHeaderTopToBottom ()
+                                     '@startuml' + Char ( 13 ) + Char ( 10 )
+                                   , docs.fs_PumlHeaderTopToBottom ()
                                    , elist_0_30.PumlEntityOnlyPkList
                                    , Char ( 13 ) + Char ( 10 )
                                    , olist_0_30.ObjectRefList
+                                   , puml_footer.Parameter_value_result
+                                   , Char ( 13 ) + Char ( 10 ) + '@enduml' + Char ( 13 ) + Char ( 10 )
                                  )
   , PlantumlEntity_30_0_ObjectRef
   --
                         = Concat (
-                                     docs.fs_PumlHeaderTopToBottom ()
+                                     '@startuml' + Char ( 13 ) + Char ( 10 )
+                                   , docs.fs_PumlHeaderTopToBottom ()
                                    , elist_30_0.PumlEntityOnlyPkList
                                    , Char ( 13 ) + Char ( 10 )
                                    , olist_30_0.ObjectRefList
+                                   , puml_footer.Parameter_value_result
+                                   , Char ( 13 ) + Char ( 10 ) + '@enduml' + Char ( 13 ) + Char ( 10 )
                                  )
   , PlantumlEntity_1_1_FkRef
   --
                         = Concat (
-                                     docs.fs_PumlHeaderLeftToRight ()
+                                     '@startuml' + Char ( 13 ) + Char ( 10 )
+                                   , docs.fs_PumlHeaderLeftToRight ()
                                    , EntityFkList.PumlEntityFkList
                                    , Char ( 13 ) + Char ( 10 )
                                    , FkRefList.FkRefList
+                                   , puml_footer.Parameter_value_result
+                                   , Char ( 13 ) + Char ( 10 ) + '@enduml' + Char ( 13 ) + Char ( 10 )
                                  )
 From
     repo.RepoObject_gross                                                                         As ro
@@ -881,14 +902,15 @@ From
     Cross Apply docs.ftv_RepoObject_Reference_PlantUml_EntityRefList ( ro.RepoObject_guid, 0, 30 ) As elist_0_30
     --Cross Apply docs.ftv_RepoObject_Reference_PlantUml_EntityRefList ( ro.RepoObject_guid, 1, 1 ) As elist_cyclic
     Left Join
-        docs.RepoObject_PlantUml_PumlEntityFkList As EntityFkList
+        docs.RepoObject_PlantUml_PumlEntityFkList                   As EntityFkList
             On
             EntityFkList.RepoObject_guid = ro.RepoObject_guid
 
     Left Join
-        docs.RepoObject_PlantUml_FkRefList        As FkRefList
+        docs.RepoObject_PlantUml_FkRefList                          As FkRefList
             On
-            FkRefList.RepoObject_guid    = ro.RepoObject_guid
+            FkRefList.RepoObject_guid = ro.RepoObject_guid
+    Cross Join config.ftv_get_parameter_value ( 'puml_footer', '' ) As puml_footer
 
 ----
 =======

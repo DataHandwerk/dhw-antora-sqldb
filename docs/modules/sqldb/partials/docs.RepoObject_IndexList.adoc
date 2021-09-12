@@ -10,7 +10,6 @@
 :ExistsProperty--pk_index_guid:
 :ExistsProperty--pk_indexpatterncolumndatatype:
 :ExistsProperty--pk_indexpatterncolumnname:
-:ExistsProperty--pk_indexsemanticgroup:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -45,7 +44,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-05 10:29:10
+2021-09-07 08:59:35
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -54,7 +53,7 @@ view
 [#column-RepoObject_guid]
 === RepoObject_guid
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |1
 |*RepoObject_guid*
@@ -78,7 +77,7 @@ view
 [#column-AntoraIndexList]
 === AntoraIndexList
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |AntoraIndexList
@@ -97,7 +96,7 @@ view
 [#column-PumlIndexList]
 === PumlIndexList
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |PumlIndexList
@@ -114,6 +113,12 @@ view
 
 
 // end::AntoraColumnDetails[]
+
+== AntoraMeasureDetails
+
+// tag::AntoraMeasureDetails[]
+
+// end::AntoraMeasureDetails[]
 
 == AntoraPkColumnTableRows
 
@@ -156,7 +161,7 @@ view
 [#index-PK_RepoObject_IndexList]
 === PK_RepoObject_IndexList
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_repoobject_guid[RepoObject_guid]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -408,7 +413,7 @@ RepoObject_guid
 === pk_IndexSemanticGroup
 
 // tag::pk_indexsemanticgroup[]
-RepoObject_guid
+
 // end::pk_indexsemanticgroup[]
 
 
@@ -459,7 +464,8 @@ source: property.RepoObjectProperty WHERE property_int = 1
 [source,sql]
 ----
 
-CREATE View docs.RepoObject_IndexList
+
+CREATE View [docs].[RepoObject_IndexList]
 As
 Select
     RepoObject_guid = ix.parent_RepoObject_guid
@@ -527,7 +533,7 @@ Select
                           , docs.fs_cleanStringForPuml ( ix.index_name )
                           , Iif(ix.is_index_primary_key = 1, '**', Null)
                           , Char ( 13 ) + Char ( 10 )
-                          , '{' + ix.IndexSemanticGroup + '}'
+                          , '"' + ix.IndexSemanticGroup + '"'
                           , Char ( 13 ) + Char ( 10 )
                           , '..'
                           , Char ( 13 ) + Char ( 10 )
@@ -546,6 +552,7 @@ From
             fk.referencing_index_guid = ix.index_guid
 Group By
     ix.parent_RepoObject_guid
+
 ----
 =======
 // end::sql_modules_definition[]

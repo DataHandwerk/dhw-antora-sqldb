@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,65 +25,69 @@ skinparam class {
 }
 
 
-entity reference.ReferenceTree_cyclic_ref_PersistenceUsp << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.ReferenceTree_cyclic_ref_PersistenceUsp.html reference.ReferenceTree_cyclic_ref_PersistenceUsp]]" as reference.ReferenceTree_cyclic_ref_PersistenceUsp << V >> {
   --
-  * referenced_fullname : nvarchar(261)
-  * referenced_fullname2 : nvarchar(257)
-  * Referenced_guid : uniqueidentifier
-  referenced_type : char(2)
-  * referencing_fullname : nvarchar(261)
-  * referencing_fullname2 : nvarchar(257)
-  * Referencing_guid : uniqueidentifier
-  referencing_type : varchar(2)
+  - referenced_fullname : (nvarchar(261))
+  - referenced_fullname2 : (nvarchar(257))
+  - Referenced_guid : (uniqueidentifier)
+  referenced_type : (char(2))
+  - referencing_fullname : (nvarchar(261))
+  - referencing_fullname2 : (nvarchar(257))
+  - Referencing_guid : (uniqueidentifier)
+  referencing_type : (varchar(2))
   --
-}
-
-entity reference.ReferenceTree_cyclic_ref_primary << V >> {
-  --
-  Referenced_fullname : nvarchar(261)
-  Referenced_fullname2 : nvarchar(257)
-  * Referenced_guid : uniqueidentifier
-  Referenced_type : char(2)
-  Referencing_fullname : nvarchar(261)
-  Referencing_fullname2 : nvarchar(257)
-  * Referencing_guid : uniqueidentifier
-  Referencing_type : varchar(2)
   --
 }
 
-entity reference.ReferenceTree_cyclic_union << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.ReferenceTree_cyclic_ref_primary.html reference.ReferenceTree_cyclic_ref_primary]]" as reference.ReferenceTree_cyclic_ref_primary << V >> {
   --
-  Referenced_fullname : nvarchar(261)
-  Referenced_fullname2 : nvarchar(257)
-  * Referenced_guid : uniqueidentifier
-  Referenced_type : char(2)
-  Referencing_fullname : nvarchar(261)
-  Referencing_fullname2 : nvarchar(257)
-  * Referencing_guid : uniqueidentifier
-  Referencing_type : varchar(2)
+  Referenced_fullname : (nvarchar(261))
+  Referenced_fullname2 : (nvarchar(257))
+  - Referenced_guid : (uniqueidentifier)
+  Referenced_type : (char(2))
+  Referencing_fullname : (nvarchar(261))
+  Referencing_fullname2 : (nvarchar(257))
+  - Referencing_guid : (uniqueidentifier)
+  Referencing_type : (varchar(2))
+  --
   --
 }
 
-entity reference.RepoObject_reference_T << U >> {
-  **referenced_RepoObject_guid** : uniqueidentifier
-  **referencing_RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.ReferenceTree_cyclic_union.html reference.ReferenceTree_cyclic_union]]" as reference.ReferenceTree_cyclic_union << V >> {
   --
-  * is_ReversePersistenceViaView : bit
-  referenced_entity_name : nvarchar(128)
-  * referenced_is_PersistenceSource : bit
-  * referenced_is_PersistenceTarget : bit
-  referenced_schema_name : nvarchar(128)
-  referenced_type : char(2)
-  referencing_entity_name : nvarchar(128)
-  * referencing_is_PersistenceTarget : bit
-  * referencing_is_PersistenceUspSourceRef : bit
-  referencing_is_PersistenceUspTargetRef : bit
-  referencing_schema_name : nvarchar(128)
-  referencing_type : varchar(2)
-  * {static} referenced_fullname : nvarchar(261)
-  * {static} referenced_fullname2 : nvarchar(257)
-  * {static} referencing_fullname : nvarchar(261)
-  * {static} referencing_fullname2 : nvarchar(257)
+  Referenced_fullname : (nvarchar(261))
+  Referenced_fullname2 : (nvarchar(257))
+  - Referenced_guid : (uniqueidentifier)
+  Referenced_type : (char(2))
+  Referencing_fullname : (nvarchar(261))
+  Referencing_fullname2 : (nvarchar(257))
+  - Referencing_guid : (uniqueidentifier)
+  Referencing_type : (varchar(2))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObject_reference_T.html reference.RepoObject_reference_T]]" as reference.RepoObject_reference_T << U >> {
+  **referenced_RepoObject_guid** : (uniqueidentifier)
+  **referencing_RepoObject_guid** : (uniqueidentifier)
+  --
+  - is_ReversePersistenceViaView : (bit)
+  referenced_entity_name : (nvarchar(128))
+  - referenced_is_PersistenceSource : (bit)
+  - referenced_is_PersistenceTarget : (bit)
+  referenced_schema_name : (nvarchar(128))
+  referenced_type : (char(2))
+  referencing_entity_name : (nvarchar(128))
+  - referencing_is_PersistenceTarget : (bit)
+  - referencing_is_PersistenceUspSourceRef : (bit)
+  referencing_is_PersistenceUspTargetRef : (bit)
+  referencing_schema_name : (nvarchar(128))
+  referencing_type : (varchar(2))
+  # referenced_fullname : (nvarchar(261))
+  # referenced_fullname2 : (nvarchar(257))
+  # referencing_fullname : (nvarchar(261))
+  # referencing_fullname2 : (nvarchar(257))
+  --
   --
 }
 
@@ -97,3 +102,10 @@ reference.RepoObject_reference_T::referencing_fullname <-- reference.ReferenceTr
 reference.RepoObject_reference_T::referencing_fullname2 <-- reference.ReferenceTree_cyclic_ref_PersistenceUsp::referencing_fullname2
 reference.RepoObject_reference_T::referencing_RepoObject_guid <-- reference.ReferenceTree_cyclic_ref_PersistenceUsp::Referenced_guid
 reference.RepoObject_reference_T::referencing_type <-- reference.ReferenceTree_cyclic_ref_PersistenceUsp::referencing_type
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

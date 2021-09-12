@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,38 +25,47 @@ skinparam class {
 }
 
 
-entity configT.join_type << V >> {
-  * **join_type** : varchar(16)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/configT.join_type.html configT.join_type]]" as configT.join_type << V >> {
+  - **join_type** : (varchar(16))
   --
-  * join_type_variant : varchar(16)
+  - join_type_variant : (varchar(16))
+  --
   --
 }
 
-entity sqlparse.RepoObject_SqlModules_41_from << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  * **json_key** : nvarchar(4000)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/sqlparse.RepoObject_SqlModules_41_from.html sqlparse.RepoObject_SqlModules_41_from]]" as sqlparse.RepoObject_SqlModules_41_from << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **json_key** : (nvarchar(4000))
   --
-  children : nvarchar(max)
-  class : nvarchar(500)
-  identifier_alias : nvarchar(max)
-  identifier_name : nvarchar(max)
-  * is_from : int
-  is_group : bit
-  * is_join : int
-  is_keyword : bit
-  is_whitespace : bit
-  join_type : varchar(16)
-  Min_RowNumber_From : bigint
-  Min_RowNumber_GroupBy : bigint
-  Min_RowNumber_Where : bigint
-  normalized : nvarchar(max)
-  normalized_PatIndex_Select : bigint
-  normalized_wo_nolock : nvarchar(max)
-  patindex_nolock : bigint
-  RowNumber_per_Object : bigint
-  SysObject_fullname : nvarchar(261)
+  children : (nvarchar(max))
+  class : (nvarchar(500))
+  identifier_alias : (nvarchar(max))
+  identifier_name : (nvarchar(max))
+  - is_from : (int)
+  is_group : (bit)
+  - is_join : (int)
+  is_keyword : (bit)
+  is_whitespace : (bit)
+  join_type : (varchar(16))
+  Min_RowNumber_From : (bigint)
+  Min_RowNumber_GroupBy : (bigint)
+  Min_RowNumber_Where : (bigint)
+  normalized : (nvarchar(max))
+  normalized_PatIndex_Select : (bigint)
+  normalized_wo_nolock : (nvarchar(max))
+  patindex_nolock : (bigint)
+  RowNumber_per_Object : (bigint)
+  SysObject_fullname : (nvarchar(261))
+  --
   --
 }
 
 configT.join_type <.. sqlparse.RepoObject_SqlModules_41_from
 configT.join_type::join_type <-- sqlparse.RepoObject_SqlModules_41_from::join_type
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

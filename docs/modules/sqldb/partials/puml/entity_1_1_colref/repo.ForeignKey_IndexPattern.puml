@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,105 +25,109 @@ skinparam class {
 }
 
 
-entity repo.ForeignKey_Indexes << V >> {
-  **ForeignKey_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.ForeignKey_Indexes.html repo.ForeignKey_Indexes]]" as repo.ForeignKey_Indexes << V >> {
+  **ForeignKey_guid** : (uniqueidentifier)
   --
-  delete_referential_action : tinyint
-  ForeignKey_fullname : nvarchar(261)
-  ForeignKey_name : sysname
-  * is_MatchingDatatypePattern : int
-  referenced_index_guid : uniqueidentifier
-  referenced_index_name : nvarchar(128)
-  referenced_IndexPatternColumnDatatype : nvarchar(4000)
-  referenced_IndexPatternColumnName : nvarchar(4000)
-  referenced_RepoObject_fullname : nvarchar(261)
-  referenced_RepoObject_fullname2 : nvarchar(257)
-  referenced_RepoObject_guid : uniqueidentifier
-  referenced_SysObject_name : nvarchar(128)
-  referenced_SysObject_schema_name : nvarchar(128)
-  referencing_index_guid : uniqueidentifier
-  referencing_index_name : nvarchar(128)
-  referencing_IndexPatternColumnDatatype : nvarchar(4000)
-  referencing_IndexPatternColumnName : nvarchar(4000)
-  referencing_RepoObject_fullname : nvarchar(261)
-  referencing_RepoObject_fullname2 : nvarchar(257)
-  referencing_RepoObject_guid : uniqueidentifier
-  referencing_SysObject_name : nvarchar(128)
-  referencing_SysObject_schema_name : nvarchar(128)
-  update_referential_action : tinyint
+  delete_referential_action : (tinyint)
+  ForeignKey_fullname : (nvarchar(261))
+  ForeignKey_name : (sysname)
+  - is_MatchingDatatypePattern : (int)
+  referenced_index_guid : (uniqueidentifier)
+  referenced_index_name : (nvarchar(450))
+  referenced_IndexPatternColumnDatatype : (nvarchar(4000))
+  referenced_IndexPatternColumnName : (nvarchar(4000))
+  referenced_RepoObject_fullname : (nvarchar(261))
+  referenced_RepoObject_fullname2 : (nvarchar(257))
+  referenced_RepoObject_guid : (uniqueidentifier)
+  referenced_SysObject_name : (nvarchar(128))
+  referenced_SysObject_schema_name : (nvarchar(128))
+  referencing_index_guid : (uniqueidentifier)
+  referencing_index_name : (nvarchar(450))
+  referencing_IndexPatternColumnDatatype : (nvarchar(4000))
+  referencing_IndexPatternColumnName : (nvarchar(4000))
+  referencing_RepoObject_fullname : (nvarchar(261))
+  referencing_RepoObject_fullname2 : (nvarchar(257))
+  referencing_RepoObject_guid : (uniqueidentifier)
+  referencing_SysObject_name : (nvarchar(128))
+  referencing_SysObject_schema_name : (nvarchar(128))
+  update_referential_action : (tinyint)
   --
-}
-
-entity repo.ForeignKey_IndexPattern << V >> {
-  * **constraint_object_id** : int
-  **ForeignKey_guid** : uniqueidentifier
-  --
-  delete_referential_action : tinyint
-  ForeignKey_fullname : nvarchar(261)
-  ForeignKey_name : sysname
-  referenced_IndexPatternColumnName : nvarchar(4000)
-  referenced_RepoObject_guid : uniqueidentifier
-  referencing_IndexPatternColumnName : nvarchar(4000)
-  referencing_RepoObject_guid : uniqueidentifier
-  update_referential_action : tinyint
   --
 }
 
-entity repo_sys.ForeignKey << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.ForeignKey_IndexPattern.html repo.ForeignKey_IndexPattern]]" as repo.ForeignKey_IndexPattern << V >> {
+  - **constraint_object_id** : (int)
+  **ForeignKey_guid** : (uniqueidentifier)
   --
-  * create_date : datetime
-  delete_referential_action : tinyint
-  delete_referential_action_desc : nvarchar(60)
-  ForeignKey_fullname : nvarchar(261)
-  ForeignKey_guid : uniqueidentifier
-  * is_disabled : bit
-  * is_ms_shipped : bit
-  * is_not_for_replication : bit
-  * is_not_trusted : bit
-  * is_published : bit
-  * is_schema_published : bit
-  * is_system_named : bit
-  key_index_id : int
-  * modify_date : datetime
-  * name : sysname
-  * object_id : int
-  * parent_object_id : int
-  parent_RepoObject_fullname : nvarchar(261)
-  parent_RepoObject_guid : uniqueidentifier
-  parent_SysObject_fullname : nvarchar(261)
-  principal_id : int
-  referenced_object_id : int
-  * schema_id : int
-  type : char(2)
-  type_desc : nvarchar(60)
-  update_referential_action : tinyint
-  update_referential_action_desc : nvarchar(60)
+  delete_referential_action : (tinyint)
+  ForeignKey_fullname : (nvarchar(261))
+  ForeignKey_name : (sysname)
+  referenced_IndexPatternColumnName : (nvarchar(4000))
+  referenced_RepoObject_guid : (uniqueidentifier)
+  referencing_IndexPatternColumnName : (nvarchar(4000))
+  referencing_RepoObject_guid : (uniqueidentifier)
+  update_referential_action : (tinyint)
+  --
   --
 }
 
-entity repo_sys.ForeignKeyColumn << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.ForeignKey.html repo_sys.ForeignKey]]" as repo_sys.ForeignKey << V >> {
   --
-  * constraint_column_id : int
-  * constraint_object_id : int
-  ForeignKey_fullname : nvarchar(261)
-  ForeignKey_guid : uniqueidentifier
-  ForeignKey_name : sysname
-  * parent_column_id : int
-  * parent_object_id : int
-  * referenced_column_id : int
-  referenced_column_name : sysname
-  referenced_name : nvarchar(128)
-  * referenced_object_id : int
-  referenced_RepoObject_guid : uniqueidentifier
-  referenced_RepoObjectColumn_guid : uniqueidentifier
-  referenced_schema_name : nvarchar(128)
-  referencing_column_name : sysname
-  referencing_name : nvarchar(128)
-  referencing_RepoObject_fullname : nvarchar(261)
-  referencing_RepoObject_guid : uniqueidentifier
-  referencing_RepoObjectColumn_guid : uniqueidentifier
-  referencing_schema_name : nvarchar(128)
-  referencing_SysObject_fullname : nvarchar(261)
+  - create_date : (datetime)
+  delete_referential_action : (tinyint)
+  delete_referential_action_desc : (nvarchar(60))
+  ForeignKey_fullname : (nvarchar(261))
+  ForeignKey_guid : (uniqueidentifier)
+  - is_disabled : (bit)
+  - is_ms_shipped : (bit)
+  - is_not_for_replication : (bit)
+  - is_not_trusted : (bit)
+  - is_published : (bit)
+  - is_schema_published : (bit)
+  - is_system_named : (bit)
+  key_index_id : (int)
+  - modify_date : (datetime)
+  - name : (sysname)
+  - object_id : (int)
+  - parent_object_id : (int)
+  parent_RepoObject_fullname : (nvarchar(261))
+  parent_RepoObject_guid : (uniqueidentifier)
+  parent_SysObject_fullname : (nvarchar(261))
+  principal_id : (int)
+  referenced_object_id : (int)
+  - schema_id : (int)
+  type : (char(2))
+  type_desc : (nvarchar(60))
+  update_referential_action : (tinyint)
+  update_referential_action_desc : (nvarchar(60))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.ForeignKeyColumn.html repo_sys.ForeignKeyColumn]]" as repo_sys.ForeignKeyColumn << V >> {
+  --
+  - constraint_column_id : (int)
+  - constraint_object_id : (int)
+  ForeignKey_fullname : (nvarchar(261))
+  ForeignKey_guid : (uniqueidentifier)
+  ForeignKey_name : (sysname)
+  - parent_column_id : (int)
+  - parent_object_id : (int)
+  - referenced_column_id : (int)
+  referenced_column_name : (sysname)
+  referenced_name : (nvarchar(128))
+  - referenced_object_id : (int)
+  referenced_RepoObject_guid : (uniqueidentifier)
+  referenced_RepoObjectColumn_guid : (uniqueidentifier)
+  referenced_schema_name : (nvarchar(128))
+  referencing_column_name : (sysname)
+  referencing_name : (nvarchar(128))
+  referencing_RepoObject_fullname : (nvarchar(261))
+  referencing_RepoObject_guid : (uniqueidentifier)
+  referencing_RepoObjectColumn_guid : (uniqueidentifier)
+  referencing_schema_name : (nvarchar(128))
+  referencing_SysObject_fullname : (nvarchar(261))
+  --
   --
 }
 
@@ -142,3 +147,10 @@ repo_sys.ForeignKey::delete_referential_action <-- repo.ForeignKey_IndexPattern:
 repo_sys.ForeignKey::ForeignKey_guid <-- repo.ForeignKey_IndexPattern::ForeignKey_guid
 repo_sys.ForeignKey::object_id <-- repo.ForeignKey_IndexPattern::constraint_object_id
 repo_sys.ForeignKeyColumn::ForeignKey_name <-- repo.ForeignKey_IndexPattern::ForeignKey_name
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

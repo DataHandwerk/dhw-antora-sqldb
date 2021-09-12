@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,46 +25,53 @@ skinparam class {
 }
 
 
-entity property.RepoObjectColumnProperty << U >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObjectColumnProperty.html property.RepoObjectColumnProperty]]" as property.RepoObjectColumnProperty << U >> {
 **PK_RepoObjectColumnProperty**
-{RepoObjectColumnProperty_id}
+
 ..
 RepoObjectColumnProperty_id; int
 --
 UK_RepoObjectColumnProperty
-{RepoObjectColumn_guid,property_name}
+
 ..
 RepoObjectColumn_guid; uniqueidentifier
 property_name; nvarchar(128)
 --
 - idx_RepoObjectColumnProperty__1
-{RepoObjectColumn_guid}
+
 ..
 RepoObjectColumn_guid; uniqueidentifier
 }
 
-entity repo.RepoObjectColumn << U >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObjectColumn.html repo.RepoObjectColumn]]" as repo.RepoObjectColumn << U >> {
 **PK_RepoObjectColumn**
-{RepoObjectColumn_guid}
+
 ..
 RepoObjectColumn_guid; uniqueidentifier
 --
 UK_RepoObjectColumn__RepoNames
-{RepoObject_guid,column_name}
+
 ..
 RepoObject_guid; uniqueidentifier
 RepoObjectColumn_name; nvarchar(128)
 --
 UK_RepoObjectColumn__SysNames
-{RepoObjectColumn_guid,column_name}
+
 ..
 RepoObjectColumn_guid; uniqueidentifier
 SysObjectColumn_name; nvarchar(128)
 --
 - idx_RepoObjectColumn__1
-{RepoObject_guid}
+
 ..
 RepoObject_guid; uniqueidentifier
 }
 
 repo.RepoObjectColumn::PK_RepoObjectColumn <-- property.RepoObjectColumnProperty::idx_RepoObjectColumnProperty__1
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

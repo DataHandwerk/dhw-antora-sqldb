@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,36 +25,41 @@ skinparam class {
 }
 
 
-entity config.fs_dwh_database_name << FN >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/config.fs_dwh_database_name.html config.fs_dwh_database_name]]" as config.fs_dwh_database_name << FN >> {
   --
-  --
-}
-
-entity config.Parameter << U >> {
-  * **Parameter_name** : varchar(100)
-  * **sub_Parameter** : nvarchar(128)
-  --
-  Parameter_default_value : nvarchar(max)
-  Parameter_desciption : nvarchar(1000)
-  Parameter_value : nvarchar(max)
-  {abstract} Parameter_value_result : nvarchar(max)
-  {abstract} Parameter_value_result_date : date
-  {abstract} Parameter_value_result_datetime : datetime
-  {abstract} Parameter_value_result_int : int
-  --
-}
-
-entity repo_sys.usp_AddOrUpdateExtendedProperty << P >> {
   --
   --
 }
 
-entity repo_sys.usp_dropextendedproperty_level_1 << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/config.Parameter.html config.Parameter]]" as config.Parameter << U >> {
+  - **Parameter_name** : (varchar(100))
+  - **sub_Parameter** : (nvarchar(128))
+  --
+  Parameter_default_value : (nvarchar(max))
+  Parameter_desciption : (nvarchar(1000))
+  Parameter_value : (nvarchar(max))
+  ~ Parameter_value_result : (nvarchar(max))
+  ~ Parameter_value_result_date : (date)
+  ~ Parameter_value_result_datetime : (datetime)
+  ~ Parameter_value_result_int : (int)
   --
   --
 }
 
-entity repo_sys.usp_dropextendedproperty_level_2 << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.usp_AddOrUpdateExtendedProperty.html repo_sys.usp_AddOrUpdateExtendedProperty]]" as repo_sys.usp_AddOrUpdateExtendedProperty << P >> {
+  --
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.usp_dropextendedproperty_level_1.html repo_sys.usp_dropextendedproperty_level_1]]" as repo_sys.usp_dropextendedproperty_level_1 << P >> {
+  --
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.usp_dropextendedproperty_level_2.html repo_sys.usp_dropextendedproperty_level_2]]" as repo_sys.usp_dropextendedproperty_level_2 << P >> {
+  --
   --
   --
 }
@@ -62,4 +68,11 @@ config.fs_dwh_database_name <.. repo_sys.usp_AddOrUpdateExtendedProperty
 config.fs_dwh_database_name <.. repo_sys.usp_dropextendedproperty_level_1
 config.fs_dwh_database_name <.. repo_sys.usp_dropextendedproperty_level_2
 config.Parameter <.. config.fs_dwh_database_name
+
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
 

@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,83 +25,91 @@ skinparam class {
 }
 
 
-entity workflow.Biml_Task << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Biml_Task.html workflow.Biml_Task]]" as workflow.Biml_Task << V >> {
   --
-  * Procedure_RepoObject_guid : uniqueidentifier
-  * RepoObject_fullname2 : nvarchar(257)
-  * TaskBiml : nvarchar(max)
-  TaskName : nvarchar(4000)
-  * Workflow_id : int
-  * Workflow_Name : nvarchar(500)
-  --
-}
-
-entity workflow.usp_workflow << P >> {
+  - Procedure_RepoObject_guid : (uniqueidentifier)
+  - RepoObject_fullname2 : (nvarchar(257))
+  - TaskBiml : (nvarchar(max))
+  TaskName : (nvarchar(4000))
+  - Workflow_id : (int)
+  - Workflow_Name : (nvarchar(500))
   --
   --
 }
 
-entity workflow.Workflow << U >> {
-  * **id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.usp_workflow.html workflow.usp_workflow]]" as workflow.usp_workflow << P >> {
   --
-  Description : nvarchar(4000)
-  * is_active : bit
-  * Name : nvarchar(500)
-  Package_Biml : nvarchar(max)
+  --
   --
 }
 
-entity workflow.Workflow_ProcedureDependency << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow.html workflow.Workflow]]" as workflow.Workflow << U >> {
+  - **id** : (int)
   --
-  * referenced_Procedure_RepoObject_guid : uniqueidentifier
-  * referencing_Procedure_RepoObject_guid : uniqueidentifier
-  * Workflow_id : int
+  Description : (nvarchar(4000))
+  - is_active : (bit)
+  - Name : (nvarchar(500))
+  Package_Biml : (nvarchar(max))
   --
-}
-
-entity workflow.Workflow_ProcedureDependency_all << V >> {
-  --
-  * referenced_Procedure_RepoObject_guid : uniqueidentifier
-  * referencing_Procedure_RepoObject_guid : uniqueidentifier
-  * Workflow_id : int
   --
 }
 
-entity workflow.Workflow_ProcedureDependency_T_active << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow_ProcedureDependency.html workflow.Workflow_ProcedureDependency]]" as workflow.Workflow_ProcedureDependency << V >> {
   --
-  * is_redundant : bit
-  * referenced_Procedure_RepoObject_guid : uniqueidentifier
-  * referencing_Procedure_RepoObject_guid : uniqueidentifier
-  * Workflow_id : int
+  - referenced_Procedure_RepoObject_guid : (uniqueidentifier)
+  - referencing_Procedure_RepoObject_guid : (uniqueidentifier)
+  - Workflow_id : (int)
   --
-}
-
-entity workflow.WorkflowStep << U >> {
-  * **id** : int
-  --
-  * is_active : bit
-  * is_PossibleReferenced : bit
-  Procedure_RepoObject_guid : uniqueidentifier
-  * Workflow_id : int
   --
 }
 
-entity workflow.WorkflowStep_active << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow_ProcedureDependency_all.html workflow.Workflow_ProcedureDependency_all]]" as workflow.Workflow_ProcedureDependency_all << V >> {
   --
-  * is_PossibleReferenced : bit
-  * Procedure_RepoObject_guid : uniqueidentifier
-  * Workflow_id : int
-  * Workflow_Name : nvarchar(500)
+  - referenced_Procedure_RepoObject_guid : (uniqueidentifier)
+  - referencing_Procedure_RepoObject_guid : (uniqueidentifier)
+  - Workflow_id : (int)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow_ProcedureDependency_T_active.html workflow.Workflow_ProcedureDependency_T_active]]" as workflow.Workflow_ProcedureDependency_T_active << V >> {
+  --
+  - is_redundant : (bit)
+  - referenced_Procedure_RepoObject_guid : (uniqueidentifier)
+  - referencing_Procedure_RepoObject_guid : (uniqueidentifier)
+  - Workflow_id : (int)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.WorkflowStep.html workflow.WorkflowStep]]" as workflow.WorkflowStep << U >> {
+  - **id** : (int)
+  --
+  - is_active : (bit)
+  - is_PossibleReferenced : (bit)
+  Procedure_RepoObject_guid : (uniqueidentifier)
+  - Workflow_id : (int)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.WorkflowStep_active.html workflow.WorkflowStep_active]]" as workflow.WorkflowStep_active << V >> {
+  --
+  - is_PossibleReferenced : (bit)
+  - Procedure_RepoObject_guid : (uniqueidentifier)
+  - Workflow_id : (int)
+  - Workflow_Name : (nvarchar(500))
+  --
   --
 }
 
 workflow.Workflow <.. workflow.WorkflowStep_active
 workflow.WorkflowStep <.. workflow.WorkflowStep_active
 workflow.WorkflowStep_active <.. workflow.Biml_Task
-workflow.WorkflowStep_active <.. workflow.usp_workflow
-workflow.WorkflowStep_active <.. workflow.Workflow_ProcedureDependency_all
 workflow.WorkflowStep_active <.. workflow.Workflow_ProcedureDependency
 workflow.WorkflowStep_active <.. workflow.Workflow_ProcedureDependency_T_active
+workflow.WorkflowStep_active <.. workflow.usp_workflow
+workflow.WorkflowStep_active <.. workflow.Workflow_ProcedureDependency_all
 workflow.Workflow::Name <-- workflow.WorkflowStep_active::Workflow_Name
 workflow.WorkflowStep::is_PossibleReferenced <-- workflow.WorkflowStep_active::is_PossibleReferenced
 workflow.WorkflowStep::Procedure_RepoObject_guid <-- workflow.WorkflowStep_active::Procedure_RepoObject_guid
@@ -108,3 +117,10 @@ workflow.WorkflowStep::Workflow_id <-- workflow.WorkflowStep_active::Workflow_id
 workflow.WorkflowStep_active::Procedure_RepoObject_guid <-- workflow.Biml_Task::Procedure_RepoObject_guid
 workflow.WorkflowStep_active::Workflow_id <-- workflow.Biml_Task::Workflow_id
 workflow.WorkflowStep_active::Workflow_Name <-- workflow.Biml_Task::Workflow_Name
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

@@ -44,7 +44,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-01 16:35:36
+2021-09-10 14:22:15
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -53,7 +53,7 @@ view
 [#column-RepoSchema_name]
 === RepoSchema_name
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |1
 |*RepoSchema_name*
@@ -77,7 +77,7 @@ view
 [#column-is_ssas]
 === is_ssas
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |is_ssas
@@ -96,7 +96,7 @@ view
 [#column-is_SysSchema_missing]
 === is_SysSchema_missing
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |is_SysSchema_missing
@@ -115,7 +115,7 @@ view
 [#column-RepoSchema_ms_description]
 === RepoSchema_ms_description
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |RepoSchema_ms_description
@@ -134,7 +134,7 @@ view
 [#column-SysSchema_name]
 === SysSchema_name
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |SysSchema_name
@@ -151,6 +151,12 @@ view
 
 
 // end::AntoraColumnDetails[]
+
+== AntoraMeasureDetails
+
+// tag::AntoraMeasureDetails[]
+
+// end::AntoraMeasureDetails[]
 
 == AntoraPkColumnTableRows
 
@@ -512,13 +518,14 @@ ssas databasename is used as RepoSchema_name
 CREATE View repo.RepoSchema_ssas_src
 As
 Select
+    --PK: RepoSchema_name
     RepoSchema_name           = T1.databasename
   , is_ssas                   = 1
   , is_SysSchema_missing      = 0
   , RepoSchema_ms_description = Coalesce ( T1.l2_description, T2.descriptions_StrAgg )
   , SysSchema_name            = T1.databasename
 From
-    ssas.model_json_20                          As T1
+    ssas.model_json_20                           As T1
     Left Join
         ssas.model_json_2011_descriptions_StrAgg As T2
             On

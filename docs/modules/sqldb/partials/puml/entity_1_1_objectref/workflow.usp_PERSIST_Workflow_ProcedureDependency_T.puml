@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,26 +25,26 @@ skinparam class {
 }
 
 
-entity logs.usp_ExecutionLog_insert << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/logs.usp_ExecutionLog_insert.html logs.usp_ExecutionLog_insert]]" as logs.usp_ExecutionLog_insert << P >> {
   --
 }
 
-entity workflow.usp_PERSIST_Workflow_ProcedureDependency_T << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.usp_PERSIST_Workflow_ProcedureDependency_T.html workflow.usp_PERSIST_Workflow_ProcedureDependency_T]]" as workflow.usp_PERSIST_Workflow_ProcedureDependency_T << P >> {
   --
 }
 
-entity workflow.usp_workflow << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.usp_workflow.html workflow.usp_workflow]]" as workflow.usp_workflow << P >> {
   --
 }
 
-entity workflow.Workflow_ProcedureDependency << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow_ProcedureDependency.html workflow.Workflow_ProcedureDependency]]" as workflow.Workflow_ProcedureDependency << V >> {
   --
 }
 
-entity workflow.Workflow_ProcedureDependency_T << U >> {
-  * **Workflow_id** : int
-  * **referenced_Procedure_RepoObject_guid** : uniqueidentifier
-  * **referencing_Procedure_RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow_ProcedureDependency_T.html workflow.Workflow_ProcedureDependency_T]]" as workflow.Workflow_ProcedureDependency_T << U >> {
+  - **Workflow_id** : (int)
+  - **referenced_Procedure_RepoObject_guid** : (uniqueidentifier)
+  - **referencing_Procedure_RepoObject_guid** : (uniqueidentifier)
   --
 }
 
@@ -51,3 +52,10 @@ logs.usp_ExecutionLog_insert <.. workflow.usp_PERSIST_Workflow_ProcedureDependen
 workflow.usp_PERSIST_Workflow_ProcedureDependency_T <.. workflow.usp_workflow
 workflow.Workflow_ProcedureDependency <.. workflow.usp_PERSIST_Workflow_ProcedureDependency_T
 workflow.Workflow_ProcedureDependency_T <.. workflow.usp_PERSIST_Workflow_ProcedureDependency_T
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

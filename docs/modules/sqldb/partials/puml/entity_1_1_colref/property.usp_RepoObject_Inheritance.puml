@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,68 +25,80 @@ skinparam class {
 }
 
 
-entity logs.usp_ExecutionLog_insert << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/logs.usp_ExecutionLog_insert.html logs.usp_ExecutionLog_insert]]" as logs.usp_ExecutionLog_insert << P >> {
   --
-  --
-}
-
-entity property.RepoObject_Inheritance_temp << U >> {
-  --
-  Inheritance_StringAggSeparatorSql : nvarchar(4000)
-  InheritanceType : int
-  * is_force_inherit_empty_source : int
-  * is_StringAggAllSources : int
-  * property_name : nvarchar(128)
-  property_value : nvarchar(max)
-  property_value_new : nvarchar(max)
-  * referenced_RepoObject_fullname : nvarchar(261)
-  referenced_RepoObject_guid : uniqueidentifier
-  * referenced_RepoObject_name : nvarchar(128)
-  * referencing_RepoObject_fullname : nvarchar(261)
-  * referencing_RepoObject_name : nvarchar(128)
-  * RepoObject_guid : uniqueidentifier
-  resulting_InheritanceDefinition : nvarchar(4000)
-  RowNumberSource : bigint
-  --
-}
-
-entity property.RepoObjectProperty << U >> {
-  * **RepoObjectProperty_id** : int
-  --
-  inheritance : tinyint
-  * property_name : nvarchar(128)
-  property_value : nvarchar(max)
-  * RepoObject_guid : uniqueidentifier
-  {abstract} property_bigint : bigint
-  {abstract} property_float : float
-  {abstract} property_int : int
-  {abstract} property_money : money
-  {abstract} property_real : real
-  --
-}
-
-entity property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  **property_name** : nvarchar(128)
-  --
-  Inheritance_StringAggSeparatorSql : nvarchar(max)
-  InheritanceDefinition : nvarchar(max)
-  InheritanceType : int
-  * is_force_inherit_empty_source : int
-  * is_StringAggAllSources : int
-  property_value : nvarchar(max)
-  * RepoObject_fullname : nvarchar(261)
-  * RepoObject_type : char(2)
-  resulting_InheritanceDefinition : nvarchar(max)
-  --
-}
-
-entity property.usp_RepoObject_Inheritance << P >> {
   --
   --
 }
 
-entity repo.usp_main << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObject_Inheritance_temp.html property.RepoObject_Inheritance_temp]]" as property.RepoObject_Inheritance_temp << U >> {
+  --
+  Inheritance_StringAggSeparatorSql : (nvarchar(4000))
+  InheritanceType : (int)
+  - is_force_inherit_empty_source : (int)
+  - is_StringAggAllSources : (int)
+  - property_name : (nvarchar(128))
+  property_value : (nvarchar(max))
+  property_value_new : (nvarchar(max))
+  - referenced_RepoObject_fullname : (nvarchar(261))
+  referenced_RepoObject_guid : (uniqueidentifier)
+  - referenced_RepoObject_name : (nvarchar(128))
+  - referencing_RepoObject_fullname : (nvarchar(261))
+  - referencing_RepoObject_name : (nvarchar(128))
+  - RepoObject_guid : (uniqueidentifier)
+  resulting_InheritanceDefinition : (nvarchar(4000))
+  RowNumberSource : (bigint)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObjectProperty.html property.RepoObjectProperty]]" as property.RepoObjectProperty << U >> {
+  - **RepoObjectProperty_id** : (int)
+  --
+  inheritance : (tinyint)
+  - property_name : (nvarchar(128))
+  property_value : (nvarchar(max))
+  - RepoObject_guid : (uniqueidentifier)
+  ~ property_bigint : (bigint)
+  ~ property_float : (float)
+  ~ property_int : (int)
+  ~ property_money : (money)
+  ~ property_real : (real)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition.html property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition]]" as property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  **property_name** : (nvarchar(128))
+  --
+  Inheritance_StringAggSeparatorSql : (nvarchar(max))
+  InheritanceDefinition : (nvarchar(max))
+  InheritanceType : (int)
+  - is_force_inherit_empty_source : (int)
+  - is_StringAggAllSources : (int)
+  property_value : (nvarchar(max))
+  - RepoObject_fullname : (nvarchar(261))
+  - RepoObject_type : (char(2))
+  resulting_InheritanceDefinition : (nvarchar(max))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.usp_PERSIST_PropertyName_RepoObject_T.html property.usp_PERSIST_PropertyName_RepoObject_T]]" as property.usp_PERSIST_PropertyName_RepoObject_T << P >> {
+  --
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.usp_RepoObject_Inheritance.html property.usp_RepoObject_Inheritance]]" as property.usp_RepoObject_Inheritance << P >> {
+  --
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_main.html repo.usp_main]]" as repo.usp_main << P >> {
+  --
   --
   --
 }
@@ -94,5 +107,13 @@ logs.usp_ExecutionLog_insert <.. property.usp_RepoObject_Inheritance
 property.RepoObject_Inheritance_temp <.. property.usp_RepoObject_Inheritance
 property.RepoObjectProperty <.. property.usp_RepoObject_Inheritance
 property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition <.. property.usp_RepoObject_Inheritance
+property.usp_PERSIST_PropertyName_RepoObject_T <.. property.usp_RepoObject_Inheritance
 property.usp_RepoObject_Inheritance <.. repo.usp_main
+
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
 

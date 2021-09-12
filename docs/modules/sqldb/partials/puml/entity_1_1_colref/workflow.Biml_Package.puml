@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,39 +25,43 @@ skinparam class {
 }
 
 
-entity workflow.Biml_Package << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Biml_Package.html workflow.Biml_Package]]" as workflow.Biml_Package << V >> {
   --
-  * id : int
-  Package_Biml : nvarchar(max)
-  Package_Description : nvarchar(4000)
-  Package_Name : nvarchar(500)
+  - id : (int)
+  Package_Biml : (nvarchar(max))
+  Package_Description : (nvarchar(4000))
+  Package_Name : (nvarchar(500))
   --
-}
-
-entity workflow.Biml_Project << V >> {
-  --
-  * Project_Biml : nvarchar(max)
   --
 }
 
-entity workflow.Biml_Task << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Biml_Project.html workflow.Biml_Project]]" as workflow.Biml_Project << V >> {
   --
-  * Procedure_RepoObject_guid : uniqueidentifier
-  * RepoObject_fullname2 : nvarchar(257)
-  * TaskBiml : nvarchar(max)
-  TaskName : nvarchar(4000)
-  * Workflow_id : int
-  * Workflow_Name : nvarchar(500)
+  - Project_Biml : (nvarchar(max))
+  --
   --
 }
 
-entity workflow.Workflow << U >> {
-  * **id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Biml_Task.html workflow.Biml_Task]]" as workflow.Biml_Task << V >> {
   --
-  Description : nvarchar(4000)
-  * is_active : bit
-  * Name : nvarchar(500)
-  Package_Biml : nvarchar(max)
+  - Procedure_RepoObject_guid : (uniqueidentifier)
+  - RepoObject_fullname2 : (nvarchar(257))
+  - TaskBiml : (nvarchar(max))
+  TaskName : (nvarchar(4000))
+  - Workflow_id : (int)
+  - Workflow_Name : (nvarchar(500))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow.html workflow.Workflow]]" as workflow.Workflow << U >> {
+  - **id** : (int)
+  --
+  Description : (nvarchar(4000))
+  - is_active : (bit)
+  - Name : (nvarchar(500))
+  Package_Biml : (nvarchar(max))
+  --
   --
 }
 
@@ -64,3 +69,10 @@ workflow.Biml_Package <.. workflow.Biml_Project
 workflow.Biml_Task <.. workflow.Biml_Package
 workflow.Workflow <.. workflow.Biml_Package
 workflow.Workflow::id <-- workflow.Biml_Package::id
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

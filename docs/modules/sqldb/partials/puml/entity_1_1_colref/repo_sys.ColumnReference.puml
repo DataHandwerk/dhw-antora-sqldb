@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,57 +25,60 @@ skinparam class {
 }
 
 
-entity repo_sys.ColumnReference << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.ColumnReference.html repo_sys.ColumnReference]]" as repo_sys.ColumnReference << V >> {
   --
-  * is_all_columns_found : bit
-  * is_ambiguous : bit
-  * is_caller_dependent : bit
-  * is_incomplete : bit
-  * is_insert_all : bit
-  * is_select_all : bit
-  * is_selected : bit
-  * is_updated : bit
-  referenced_class : tinyint
-  referenced_class_desc : nvarchar(60)
-  referenced_database_name : nvarchar(128)
-  referenced_entity_name : nvarchar(128)
-  referenced_id : int
-  referenced_minor_id : int
-  referenced_minor_name : nvarchar(128)
-  referenced_schema_name : nvarchar(128)
-  referenced_server_name : nvarchar(128)
-  referencing_minor_id : int
-  * SysObject_full_name : nvarchar(517)
+  - is_all_columns_found : (bit)
+  - is_ambiguous : (bit)
+  - is_caller_dependent : (bit)
+  - is_incomplete : (bit)
+  - is_insert_all : (bit)
+  - is_select_all : (bit)
+  - is_selected : (bit)
+  - is_updated : (bit)
+  referenced_class : (tinyint)
+  referenced_class_desc : (nvarchar(60))
+  referenced_database_name : (nvarchar(128))
+  referenced_entity_name : (nvarchar(128))
+  referenced_id : (int)
+  referenced_minor_id : (int)
+  referenced_minor_name : (nvarchar(128))
+  referenced_schema_name : (nvarchar(128))
+  referenced_server_name : (nvarchar(128))
+  referencing_minor_id : (int)
+  - SysObject_full_name : (nvarchar(517))
   --
-}
-
-entity repo_sys.SysObject << V >> {
-  --
-  * create_date : datetime
-  history_table_id : int
-  * is_ms_shipped : bit
-  * is_published : bit
-  * is_schema_published : bit
-  max_column_id_used : int
-  * modify_date : datetime
-  * parent_object_id : int
-  principal_id : int
-  * schema_id : int
-  sql_modules_definition : nvarchar(max)
-  * SysObject_fullname : nvarchar(517)
-  * SysObject_fullname2 : nvarchar(257)
-  * SysObject_id : int
-  * SysObject_name : sysname
-  SysObject_RepoObject_guid : uniqueidentifier
-  SysObject_schema_name : sysname
-  temporal_type : tinyint
-  temporal_type_desc : nvarchar(60)
-  type : char(2)
-  type_desc : nvarchar(60)
   --
 }
 
-entity sys_dwh.dm_sql_referenced_entities << SN >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.SysObject.html repo_sys.SysObject]]" as repo_sys.SysObject << V >> {
+  --
+  - create_date : (datetime)
+  history_table_id : (int)
+  - is_ms_shipped : (bit)
+  - is_published : (bit)
+  - is_schema_published : (bit)
+  max_column_id_used : (int)
+  - modify_date : (datetime)
+  - parent_object_id : (int)
+  principal_id : (int)
+  - schema_id : (int)
+  sql_modules_definition : (nvarchar(max))
+  - SysObject_fullname : (nvarchar(517))
+  - SysObject_fullname2 : (nvarchar(257))
+  - SysObject_id : (int)
+  - SysObject_name : (sysname)
+  SysObject_RepoObject_guid : (uniqueidentifier)
+  SysObject_schema_name : (sysname)
+  temporal_type : (tinyint)
+  temporal_type_desc : (nvarchar(60))
+  type : (char(2))
+  type_desc : (nvarchar(60))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/sys_dwh.dm_sql_referenced_entities.html sys_dwh.dm_sql_referenced_entities]]" as sys_dwh.dm_sql_referenced_entities << SN >> {
+  --
   --
   --
 }
@@ -82,3 +86,10 @@ entity sys_dwh.dm_sql_referenced_entities << SN >> {
 repo_sys.SysObject <.. repo_sys.ColumnReference
 sys_dwh.dm_sql_referenced_entities <.. repo_sys.ColumnReference
 repo_sys.SysObject::SysObject_fullname <-- repo_sys.ColumnReference::SysObject_full_name
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

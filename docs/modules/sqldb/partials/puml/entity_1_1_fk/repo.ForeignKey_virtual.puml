@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,29 +25,36 @@ skinparam class {
 }
 
 
-entity repo.ForeignKey_virtual << U >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.ForeignKey_virtual.html repo.ForeignKey_virtual]]" as repo.ForeignKey_virtual << U >> {
 **PK_ForeignKey_virtual**
-{ForeignKey_guid}
+
 ..
 ForeignKey_guid; uniqueidentifier
 --
 - UK_ForeignKey_virtual__1
-{index_guid}
+
 ..
 referenced_index_guid; uniqueidentifier
 --
 - idx_ForeignKey_virtual__2
-{index_guid}
+
 ..
 referencing_index_guid; uniqueidentifier
 }
 
-entity repo.Index_Settings << U >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_Settings.html repo.Index_Settings]]" as repo.Index_Settings << U >> {
 **PK_Index_Settings**
-{index_guid}
+
 ..
 index_guid; uniqueidentifier
 }
 
 repo.Index_Settings::PK_Index_Settings <-- repo.ForeignKey_virtual::idx_ForeignKey_virtual__2
 repo.Index_Settings::PK_Index_Settings <-- repo.ForeignKey_virtual::UK_ForeignKey_virtual__1
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

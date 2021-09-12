@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,45 +25,52 @@ skinparam class {
 }
 
 
-entity workflow.Biml_Package << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Biml_Package.html workflow.Biml_Package]]" as workflow.Biml_Package << V >> {
   --
 }
 
-entity workflow.Workflow << U >> {
-  * **id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow.html workflow.Workflow]]" as workflow.Workflow << U >> {
+  - **id** : (int)
   --
 }
 
-entity workflow.Workflow_ProcedureDependency << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow_ProcedureDependency.html workflow.Workflow_ProcedureDependency]]" as workflow.Workflow_ProcedureDependency << V >> {
   --
 }
 
-entity workflow.Workflow_ProcedureDependency_all << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow_ProcedureDependency_all.html workflow.Workflow_ProcedureDependency_all]]" as workflow.Workflow_ProcedureDependency_all << V >> {
   --
 }
 
-entity workflow.Workflow_UspList << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow_UspList.html workflow.Workflow_UspList]]" as workflow.Workflow_UspList << V >> {
   --
 }
 
-entity workflow.WorkflowStep_active << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.WorkflowStep_active.html workflow.WorkflowStep_active]]" as workflow.WorkflowStep_active << V >> {
   --
 }
 
-entity workflow.WorkflowStep_ForUpdate << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.WorkflowStep_ForUpdate.html workflow.WorkflowStep_ForUpdate]]" as workflow.WorkflowStep_ForUpdate << V >> {
   --
 }
 
-entity workflow.WorkflowStep_S << V >> {
-  * **Workflow_id** : int
-  **Procedure_RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.WorkflowStep_S.html workflow.WorkflowStep_S]]" as workflow.WorkflowStep_S << V >> {
+  - **Workflow_id** : (int)
+  **Procedure_RepoObject_guid** : (uniqueidentifier)
   --
 }
 
 workflow.Workflow <.. workflow.WorkflowStep_active
-workflow.Workflow <.. workflow.Workflow_ProcedureDependency
-workflow.Workflow <.. workflow.Workflow_UspList
 workflow.Workflow <.. workflow.WorkflowStep_S
 workflow.Workflow <.. workflow.Workflow_ProcedureDependency_all
 workflow.Workflow <.. workflow.WorkflowStep_ForUpdate
 workflow.Workflow <.. workflow.Biml_Package
+workflow.Workflow <.. workflow.Workflow_ProcedureDependency
+workflow.Workflow <.. workflow.Workflow_UspList
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

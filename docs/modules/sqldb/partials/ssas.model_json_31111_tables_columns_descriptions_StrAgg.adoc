@@ -7,6 +7,9 @@
 :ExistsProperty--antorareferencinglist:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
+:ExistsProperty--pk_index_guid:
+:ExistsProperty--pk_indexpatterncolumndatatype:
+:ExistsProperty--pk_indexpatterncolumnname:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -50,10 +53,10 @@ view
 [#column-databasename]
 === databasename
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
-|
-|databasename
+|1
+|*databasename*
 |nvarchar(128)
 |NOT NULL
 |
@@ -66,10 +69,48 @@ view
 --
 
 
+[#column-tables_name]
+=== tables_name
+
+[cols="d,8m,m,m,m,d"]
+|===
+|2
+|*tables_name*
+|nvarchar(128)
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:ssas.model_json_3111_tables_columns_descriptions_multiline.adoc#column-tables_name[+ssas.model_json_3111_tables_columns_descriptions_multiline.tables_name+]
+--
+
+
+[#column-tables_columns_name]
+=== tables_columns_name
+
+[cols="d,8m,m,m,m,d"]
+|===
+|3
+|*tables_columns_name*
+|nvarchar(128)
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:ssas.model_json_3111_tables_columns_descriptions_multiline.adoc#column-tables_columns_name[+ssas.model_json_3111_tables_columns_descriptions_multiline.tables_columns_name+]
+--
+
+
 [#column-descriptions_StrAgg]
 === descriptions_StrAgg
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |descriptions_StrAgg
@@ -83,7 +124,7 @@ view
 [#column-RepoObject_guid]
 === RepoObject_guid
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |RepoObject_guid
@@ -102,7 +143,7 @@ view
 [#column-RepoObjectColumn_guid]
 === RepoObjectColumn_guid
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |RepoObjectColumn_guid
@@ -118,51 +159,37 @@ view
 --
 
 
-[#column-tables_columns_name]
-=== tables_columns_name
-
-[cols="d,m,m,m,m,d"]
-|===
-|
-|tables_columns_name
-|nvarchar(128)
-|NOT NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:ssas.model_json_3111_tables_columns_descriptions_multiline.adoc#column-tables_columns_name[+ssas.model_json_3111_tables_columns_descriptions_multiline.tables_columns_name+]
---
-
-
-[#column-tables_name]
-=== tables_name
-
-[cols="d,m,m,m,m,d"]
-|===
-|
-|tables_name
-|nvarchar(128)
-|NOT NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:ssas.model_json_3111_tables_columns_descriptions_multiline.adoc#column-tables_name[+ssas.model_json_3111_tables_columns_descriptions_multiline.tables_name+]
---
-
-
 // end::AntoraColumnDetails[]
+
+== AntoraMeasureDetails
+
+// tag::AntoraMeasureDetails[]
+
+// end::AntoraMeasureDetails[]
 
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
+|1
+|*<<column-databasename>>*
+|nvarchar(128)
+|NOT NULL
+|
+|
 
+|2
+|*<<column-tables_name>>*
+|nvarchar(128)
+|NOT NULL
+|
+|
 
+|3
+|*<<column-tables_columns_name>>*
+|nvarchar(128)
+|NOT NULL
+|
+|
 
 
 
@@ -172,12 +199,8 @@ view
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
-|
-|<<column-databasename>>
-|nvarchar(128)
-|NOT NULL
-|
-|
+
+
 
 |
 |<<column-descriptions_StrAgg>>
@@ -200,28 +223,14 @@ view
 |
 |
 
-|
-|<<column-tables_columns_name>>
-|nvarchar(128)
-|NOT NULL
-|
-|
-
-|
-|<<column-tables_name>>
-|nvarchar(128)
-|NOT NULL
-|
-|
-
 // end::AntoraNonPkColumnTableRows[]
 
 == AntoraIndexList
 
 // tag::AntoraIndexList[]
 
-[#index-idx_model_json_31111_tables_columns_descriptions_StrAgg_1]
-=== idx_model_json_31111_tables_columns_descriptions_StrAgg++__++1
+[#index-PK_model_json_31111_tables_columns_descriptions_StrAgg]
+=== PK_model_json_31111_tables_columns_descriptions_StrAgg
 
 * IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
 +
@@ -230,7 +239,7 @@ view
 * <<column-tables_name>>; nvarchar(128)
 * <<column-tables_columns_name>>; nvarchar(128)
 --
-* PK, Unique, Real: 0, 0, 0
+* PK, Unique, Real: 1, 1, 0
 
 
 [#index-idx_model_json_31111_tables_columns_descriptions_StrAgg_2]
@@ -241,6 +250,17 @@ view
 --
 * <<column-databasename>>; nvarchar(128)
 * <<column-tables_name>>; nvarchar(128)
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[#index-idx_model_json_31111_tables_columns_descriptions_StrAgg_3]
+=== idx_model_json_31111_tables_columns_descriptions_StrAgg++__++3
+
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
++
+--
+* <<column-databasename>>; nvarchar(128)
 --
 * PK, Unique, Real: 0, 0, 0
 
@@ -463,21 +483,21 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-
+15A8670C-340E-EC11-8518-A81E8446D5B0
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-
+nvarchar(128),nvarchar(128),nvarchar(128)
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-
+databasename,tables_name,tables_columns_name
 // end::pk_indexpatterncolumnname[]
 
 

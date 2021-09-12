@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,51 +25,56 @@ skinparam class {
 }
 
 
-entity workflow.ProcedureDependency << U >> {
-  * **id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.ProcedureDependency.html workflow.ProcedureDependency]]" as workflow.ProcedureDependency << U >> {
+  - **id** : (int)
   --
-  Description : nvarchar(4000)
-  * is_active : bit
-  * is_PersistenceDependency : bit
-  * referenced_Procedure_RepoObject_guid : uniqueidentifier
-  referenced_RepoObject_guid : uniqueidentifier
-  * referencing_Procedure_RepoObject_guid : uniqueidentifier
-  referencing_RepoObject_guid : uniqueidentifier
+  Description : (nvarchar(4000))
+  - is_active : (bit)
+  - is_PersistenceDependency : (bit)
+  - referenced_Procedure_RepoObject_guid : (uniqueidentifier)
+  referenced_RepoObject_guid : (uniqueidentifier)
+  - referencing_Procedure_RepoObject_guid : (uniqueidentifier)
+  referencing_RepoObject_guid : (uniqueidentifier)
   --
-}
-
-entity workflow.Workflow << U >> {
-  * **id** : int
-  --
-  Description : nvarchar(4000)
-  * is_active : bit
-  * Name : nvarchar(500)
-  Package_Biml : nvarchar(max)
   --
 }
 
-entity workflow.Workflow_ProcedureDependency_all << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow.html workflow.Workflow]]" as workflow.Workflow << U >> {
+  - **id** : (int)
   --
-  * referenced_Procedure_RepoObject_guid : uniqueidentifier
-  * referencing_Procedure_RepoObject_guid : uniqueidentifier
-  * Workflow_id : int
+  Description : (nvarchar(4000))
+  - is_active : (bit)
+  - Name : (nvarchar(500))
+  Package_Biml : (nvarchar(max))
   --
-}
-
-entity workflow.Workflow_ProcedureDependency_wo_redundant << V >> {
-  --
-  * referenced_Procedure_RepoObject_guid : uniqueidentifier
-  * referencing_Procedure_RepoObject_guid : uniqueidentifier
-  * Workflow_id : int
   --
 }
 
-entity workflow.WorkflowStep_active << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow_ProcedureDependency_all.html workflow.Workflow_ProcedureDependency_all]]" as workflow.Workflow_ProcedureDependency_all << V >> {
   --
-  * is_PossibleReferenced : bit
-  * Procedure_RepoObject_guid : uniqueidentifier
-  * Workflow_id : int
-  * Workflow_Name : nvarchar(500)
+  - referenced_Procedure_RepoObject_guid : (uniqueidentifier)
+  - referencing_Procedure_RepoObject_guid : (uniqueidentifier)
+  - Workflow_id : (int)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow_ProcedureDependency_wo_redundant.html workflow.Workflow_ProcedureDependency_wo_redundant]]" as workflow.Workflow_ProcedureDependency_wo_redundant << V >> {
+  --
+  - referenced_Procedure_RepoObject_guid : (uniqueidentifier)
+  - referencing_Procedure_RepoObject_guid : (uniqueidentifier)
+  - Workflow_id : (int)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.WorkflowStep_active.html workflow.WorkflowStep_active]]" as workflow.WorkflowStep_active << V >> {
+  --
+  - is_PossibleReferenced : (bit)
+  - Procedure_RepoObject_guid : (uniqueidentifier)
+  - Workflow_id : (int)
+  - Workflow_Name : (nvarchar(500))
+  --
   --
 }
 
@@ -82,3 +88,10 @@ workflow.Workflow::id <-- workflow.Workflow_ProcedureDependency_all::Workflow_id
 workflow.Workflow_ProcedureDependency_all::referenced_Procedure_RepoObject_guid <-- workflow.Workflow_ProcedureDependency_wo_redundant::referenced_Procedure_RepoObject_guid
 workflow.Workflow_ProcedureDependency_all::referencing_Procedure_RepoObject_guid <-- workflow.Workflow_ProcedureDependency_wo_redundant::referencing_Procedure_RepoObject_guid
 workflow.Workflow_ProcedureDependency_all::Workflow_id <-- workflow.Workflow_ProcedureDependency_wo_redundant::Workflow_id
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

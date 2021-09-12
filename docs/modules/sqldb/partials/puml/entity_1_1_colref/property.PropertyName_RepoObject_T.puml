@@ -1,0 +1,83 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+}
+
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.PropertyName_RepoObject.html property.PropertyName_RepoObject]]" as property.PropertyName_RepoObject << V >> {
+  **property_name** : (nvarchar(128))
+  --
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.PropertyName_RepoObject_T.html property.PropertyName_RepoObject_T]]" as property.PropertyName_RepoObject_T << U >> {
+  **property_name** : (nvarchar(128))
+  --
+  - has_inheritance : (bit)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObjectProperty_InheritanceType_InheritanceDefinition.html property.RepoObjectProperty_InheritanceType_InheritanceDefinition]]" as property.RepoObjectProperty_InheritanceType_InheritanceDefinition << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
+  --
+  Inheritance_StringAggSeparatorSql : (nvarchar(max))
+  InheritanceDefinition : (nvarchar(max))
+  InheritanceType : (int)
+  par_Inheritance_StringAggSeparatorSql : (nvarchar(max))
+  par_InheritanceDefintion : (nvarchar(max))
+  par_InheritanceType : (int)
+  property_value : (nvarchar(max))
+  - RepoObject_fullname : (nvarchar(261))
+  - RepoObject_type : (char(2))
+  ro_Inheritance_StringAggSeparatorSql : (nvarchar(4000))
+  ro_InheritanceDefinition : (nvarchar(4000))
+  ro_InheritanceType : (tinyint)
+  sub_Inheritance_StringAggSeparatorSql : (nvarchar(max))
+  sub_InheritanceDefintion : (nvarchar(max))
+  sub_InheritanceType : (int)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.usp_PERSIST_PropertyName_RepoObject_T.html property.usp_PERSIST_PropertyName_RepoObject_T]]" as property.usp_PERSIST_PropertyName_RepoObject_T << P >> {
+  --
+  --
+  --
+}
+
+property.PropertyName_RepoObject <.. property.PropertyName_RepoObject_T
+property.PropertyName_RepoObject_T <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition
+property.PropertyName_RepoObject_T <.. property.usp_PERSIST_PropertyName_RepoObject_T
+property.PropertyName_RepoObject::property_name <-- property.PropertyName_RepoObject_T::property_name
+property.PropertyName_RepoObject_T::property_name <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::property_name
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

@@ -10,7 +10,6 @@
 :ExistsProperty--pk_index_guid:
 :ExistsProperty--pk_indexpatterncolumndatatype:
 :ExistsProperty--pk_indexpatterncolumnname:
-:ExistsProperty--pk_indexsemanticgroup:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -45,7 +44,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-05 10:47:52
+2021-09-10 13:30:26
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -54,7 +53,7 @@ view
 [#column-RepoObject_guid]
 === RepoObject_guid
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |1
 |*RepoObject_guid*
@@ -78,7 +77,7 @@ view
 [#column-RepoObject_fullname2]
 === RepoObject_fullname2
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |RepoObject_fullname2
@@ -92,6 +91,7 @@ view
 --
 (concat([RepoObject_schema_name],'.',[RepoObject_name]))
 --
+{empty} +
 
 .Referenced Columns
 --
@@ -107,7 +107,7 @@ view
 [#column-RepoObject_Puml]
 === RepoObject_Puml
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |RepoObject_Puml
@@ -126,7 +126,7 @@ view
 [#column-RepoObject_PumlOnlyIndex]
 === RepoObject_PumlOnlyIndex
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |RepoObject_PumlOnlyIndex
@@ -145,7 +145,7 @@ view
 [#column-RepoObject_PumlOnlyPK]
 === RepoObject_PumlOnlyPK
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |RepoObject_PumlOnlyPK
@@ -164,7 +164,7 @@ view
 [#column-RepoObject_PumlOnlyPkOrIndex]
 === RepoObject_PumlOnlyPkOrIndex
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |RepoObject_PumlOnlyPkOrIndex
@@ -183,7 +183,7 @@ view
 [#column-RepoObject_PumlOnlyPkOrNotHidden]
 === RepoObject_PumlOnlyPkOrNotHidden
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |RepoObject_PumlOnlyPkOrNotHidden
@@ -202,7 +202,7 @@ view
 [#column-RepoObject_schema_name]
 === RepoObject_schema_name
 
-[cols="d,m,m,m,m,d"]
+[cols="d,8m,m,m,m,d"]
 |===
 |
 |RepoObject_schema_name
@@ -224,6 +224,12 @@ view
 
 
 // end::AntoraColumnDetails[]
+
+== AntoraMeasureDetails
+
+// tag::AntoraMeasureDetails[]
+
+// end::AntoraMeasureDetails[]
 
 == AntoraPkColumnTableRows
 
@@ -306,7 +312,7 @@ view
 [#index-PK_RepoObject_Plantuml_Entity]
 === PK_RepoObject_Plantuml_Entity
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_repoobject_guid[RepoObject_guid]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -317,7 +323,7 @@ view
 [#index-idx_RepoObject_Plantuml_Entity_2]
 === idx_RepoObject_Plantuml_Entity++__++2
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_schema_name[schema_name]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
 +
 --
 * <<column-RepoObject_schema_name>>; nvarchar(128)
@@ -347,9 +353,11 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
+* xref:config.ftv_get_parameter_value.adoc[]
 * xref:docs.fs_cleanStringForPuml.adoc[]
 * xref:docs.RepoObject_ColumnList_T.adoc[]
 * xref:docs.RepoObject_IndexList_T.adoc[]
+* xref:docs.RepoObject_MeasureList.adoc[]
 * xref:docs.RepoObject_OutputFilter.adoc[]
 // end::antorareferencedlist[]
 
@@ -568,16 +576,18 @@ RepoObject_guid
 === pk_IndexSemanticGroup
 
 // tag::pk_indexsemanticgroup[]
-RepoObject_guid
+
 // end::pk_indexsemanticgroup[]
 
 
 === ReferencedObjectList
 
 // tag::referencedobjectlist[]
+* [config].[ftv_get_parameter_value]
 * [docs].[fs_cleanStringForPuml]
 * [docs].[RepoObject_ColumnList_T]
 * [docs].[RepoObject_IndexList_T]
+* [docs].[RepoObject_MeasureList]
 * [docs].[RepoObject_OutputFilter]
 // end::referencedobjectlist[]
 
@@ -618,14 +628,30 @@ source: property.RepoObjectProperty WHERE property_int = 1
 [source,sql]
 ----
 
+
+
 /*
 PlantUML definition per RepoObject
 to be used in composed PlantUML diagrams
 
 you need to persist:
 EXEC [docs].[usp_PERSIST_RepoObject_Plantuml_Entity_T]
+
+it is possible to create interactive SVG diagrams.
+But they need to be inline, and big diagrams will not match and it will not be possible to open them in a separate window
+
+Code should be like
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/config.Parameter.html config.Parameter]]" as config.Parameter << U >> {
+
+But maybe this could be hard coded instead of using inline and parameters? At least to use the "current" version?
+page-component-name and page-module could also be hard coded,
+but what about the {site-url}?
+
+entity "[[{site-url}/{page-component-name}/current/{page-module}/config.Parameter.html config.Parameter]]" as config.Parameter << U >> {
+
+
 */
-CREATE View docs.RepoObject_Plantuml_Entity
+CREATE View [docs].[RepoObject_Plantuml_Entity]
 As
 Select
     ro.RepoObject_guid
@@ -633,6 +659,16 @@ Select
   --
   Concat (
              'entity '
+           , '"[['
+           ----dynamic definition for svg:
+           , '{site-url}/{page-component-name}/{page-component-version}/{page-module}' + '/'
+           ----hard coded definition: 
+           --, AntoraSiteUrl.Parameter_value_result + '/' + AntoraComponent.Parameter_value_result + '/'
+           --  + AntoraVersion.Parameter_value_result + '/' + AntoraModule.Parameter_value_result + '/'
+           , docs.fs_cleanStringForPuml ( ro.RepoObject_fullname2 )
+           , '.html '
+           , docs.fs_cleanStringForPuml ( ro.RepoObject_fullname2 )
+           , ']]" as '
            , docs.fs_cleanStringForPuml ( ro.RepoObject_fullname2 )
            , ' << ' + Trim ( ro.SysObject_type ) + ' >>'
            , ' {'
@@ -644,6 +680,9 @@ Select
            , '  --'
            , Char ( 13 ) + Char ( 10 )
            , collist.PlantumlNonPkHiddenEntityColumns
+           , '  --'
+           , Char ( 13 ) + Char ( 10 )
+           , mlist.PlantumlMeasures
            , '}'
            , Char ( 13 ) + Char ( 10 )
          )
@@ -651,6 +690,16 @@ Select
   --
   Concat (
              'entity '
+           , '"[['
+           ----dynamic definition for svg:
+           , '{site-url}/{page-component-name}/{page-component-version}/{page-module}' + '/'
+           ----hard coded definition: 
+           --, AntoraSiteUrl.Parameter_value_result + '/' + AntoraComponent.Parameter_value_result + '/'
+           --  + AntoraVersion.Parameter_value_result + '/' + AntoraModule.Parameter_value_result + '/'
+           , docs.fs_cleanStringForPuml ( ro.RepoObject_fullname2 )
+           , '.html '
+           , docs.fs_cleanStringForPuml ( ro.RepoObject_fullname2 )
+           , ']]" as '
            , docs.fs_cleanStringForPuml ( ro.RepoObject_fullname2 )
            , ' << ' + Trim ( ro.SysObject_type ) + ' >>'
            , ' {'
@@ -682,6 +731,16 @@ Select
   --
   Concat (
              'entity '
+           , '"[['
+           ----dynamic definition for svg:
+           , '{site-url}/{page-component-name}/{page-component-version}/{page-module}' + '/'
+           ----hard coded definition: 
+           --, AntoraSiteUrl.Parameter_value_result + '/' + AntoraComponent.Parameter_value_result + '/'
+           --  + AntoraVersion.Parameter_value_result + '/' + AntoraModule.Parameter_value_result + '/'
+           , docs.fs_cleanStringForPuml ( ro.RepoObject_fullname2 )
+           , '.html '
+           , docs.fs_cleanStringForPuml ( ro.RepoObject_fullname2 )
+           , ']]" as '
            , docs.fs_cleanStringForPuml ( ro.RepoObject_fullname2 )
            , ' << ' + Trim ( ro.SysObject_type ) + ' >>'
            , ' {'
@@ -699,6 +758,16 @@ Select
   --
   Concat (
              'entity '
+           , '"[['
+           ----dynamic definition for svg:
+           , '{site-url}/{page-component-name}/{page-component-version}/{page-module}' + '/'
+           ----hard coded definition: 
+           --, AntoraSiteUrl.Parameter_value_result + '/' + AntoraComponent.Parameter_value_result + '/'
+           --  + AntoraVersion.Parameter_value_result + '/' + AntoraModule.Parameter_value_result + '/'
+           , docs.fs_cleanStringForPuml ( ro.RepoObject_fullname2 )
+           , '.html '
+           , docs.fs_cleanStringForPuml ( ro.RepoObject_fullname2 )
+           , ']]" as '
            , docs.fs_cleanStringForPuml ( ro.RepoObject_fullname2 )
            , ' << ' + Trim ( ro.SysObject_type ) + ' >>'
            , ' {'
@@ -711,16 +780,25 @@ Select
   , ro.RepoObject_fullname2
   , ro.RepoObject_schema_name
 From
-    docs.RepoObject_OutputFilter     As ro
+    docs.RepoObject_OutputFilter                                      As ro
     Left Join
-        docs.RepoObject_ColumnList_T As collist
+        docs.RepoObject_ColumnList_T                                  As collist
             On
-            collist.RepoObject_guid   = ro.RepoObject_guid
+            collist.RepoObject_guid = ro.RepoObject_guid
 
     Left Join
-        docs.RepoObject_IndexList_T  As indexlist
+        docs.RepoObject_IndexList_T                                   As indexlist
             On
             indexlist.RepoObject_guid = ro.RepoObject_guid
+
+    Left Join
+        docs.RepoObject_MeasureList                                   As mlist
+            On
+            mlist.RepoObject_guid = ro.RepoObject_guid
+    Cross Join config.ftv_get_parameter_value ( 'AntoraSiteUrl', '' ) As AntoraSiteUrl
+    Cross Join config.ftv_get_parameter_value ( 'AntoraVersion', '' ) As AntoraVersion
+    Cross Join config.ftv_get_parameter_value ( 'AntoraComponent', '' ) As AntoraComponent
+    Cross Join config.ftv_get_parameter_value ( 'AntoraModule', '' ) As AntoraModule
 
 ----
 =======

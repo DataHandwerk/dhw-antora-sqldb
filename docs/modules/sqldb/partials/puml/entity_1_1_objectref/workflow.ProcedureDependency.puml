@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,26 +25,26 @@ skinparam class {
 }
 
 
-entity workflow.ProcedureDependency << U >> {
-  * **id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.ProcedureDependency.html workflow.ProcedureDependency]]" as workflow.ProcedureDependency << U >> {
+  - **id** : (int)
   --
 }
 
-entity workflow.ProcedureDependency_gross << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.ProcedureDependency_gross.html workflow.ProcedureDependency_gross]]" as workflow.ProcedureDependency_gross << V >> {
   --
 }
 
-entity workflow.ProcedureDependency_input_PersistenceDependency << V >> {
-  **referenced_Procedure_RepoObject_guid** : uniqueidentifier
-  **referencing_Procedure_RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.ProcedureDependency_input_PersistenceDependency.html workflow.ProcedureDependency_input_PersistenceDependency]]" as workflow.ProcedureDependency_input_PersistenceDependency << V >> {
+  **referenced_Procedure_RepoObject_guid** : (uniqueidentifier)
+  **referencing_Procedure_RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity workflow.Workflow_ProcedureDependency << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow_ProcedureDependency.html workflow.Workflow_ProcedureDependency]]" as workflow.Workflow_ProcedureDependency << V >> {
   --
 }
 
-entity workflow.Workflow_ProcedureDependency_all << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow_ProcedureDependency_all.html workflow.Workflow_ProcedureDependency_all]]" as workflow.Workflow_ProcedureDependency_all << V >> {
   --
 }
 
@@ -52,3 +53,10 @@ workflow.ProcedureDependency <.. workflow.ProcedureDependency_input_PersistenceD
 workflow.ProcedureDependency <.. workflow.Workflow_ProcedureDependency_all
 workflow.ProcedureDependency <.. workflow.Workflow_ProcedureDependency
 workflow.ProcedureDependency_input_PersistenceDependency <.. workflow.ProcedureDependency
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

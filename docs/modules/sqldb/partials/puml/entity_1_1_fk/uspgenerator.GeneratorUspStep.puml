@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,35 +25,42 @@ skinparam class {
 }
 
 
-entity uspgenerator.GeneratorUsp << U >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/uspgenerator.GeneratorUsp.html uspgenerator.GeneratorUsp]]" as uspgenerator.GeneratorUsp << U >> {
 **PK_GeneratorUsp**
-{usp_id}
+
 ..
 id; int
 --
 UK_GeneratorUsp_Schema_Name
-{usp_schema,usp_name}
+
 ..
 usp_schema; nvarchar(128)
 usp_name; nvarchar(128)
 }
 
-entity uspgenerator.GeneratorUspStep << U >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/uspgenerator.GeneratorUspStep.html uspgenerator.GeneratorUspStep]]" as uspgenerator.GeneratorUspStep << U >> {
 **PK_GeneratorUspStep**
-{UspStep_id}
+
 ..
 id; int
 --
 UK_GeneratorUspStep_Number
-{UK_GeneratorUspStep_Number}
+
 ..
 usp_id; int
 Number; int
 --
 - idx_GeneratorUspStep__1
-{usp_id}
+
 ..
 usp_id; int
 }
 
 uspgenerator.GeneratorUsp::PK_GeneratorUsp <-- uspgenerator.GeneratorUspStep::idx_GeneratorUspStep__1
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

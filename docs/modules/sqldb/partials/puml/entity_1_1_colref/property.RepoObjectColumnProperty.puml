@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,112 +25,124 @@ skinparam class {
 }
 
 
-entity property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn << V >> {
-  * **level0type** : nvarchar(6)
-  * **level0name** : nvarchar(128)
-  **level1type** : varchar(9)
-  * **level1name** : nvarchar(128)
-  * **level2type** : nvarchar(6)
-  * **level2name** : nvarchar(128)
-  * **property_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn.html property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn]]" as property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn << V >> {
+  - **level0type** : (nvarchar(6))
+  - **level0name** : (nvarchar(128))
+  **level1type** : (varchar(9))
+  - **level1name** : (nvarchar(128))
+  - **level2type** : (nvarchar(6))
+  - **level2name** : (nvarchar(128))
+  - **property_name** : (nvarchar(128))
   --
-  * parent_RepoObject_guid : uniqueidentifier
-  * parent_RepoObject_type : char(2)
-  property_value : nvarchar(4000)
-  Repo_user_type_fullname : nvarchar(128)
-  * RepoObjectColumn_guid : uniqueidentifier
-  --
-}
-
-entity property.fs_get_RepoObjectColumnProperty_nvarchar << FN >> {
+  - parent_RepoObject_guid : (uniqueidentifier)
+  - parent_RepoObject_type : (char(2))
+  property_value : (nvarchar(4000))
+  Repo_user_type_fullname : (nvarchar(128))
+  - RepoObjectColumn_guid : (uniqueidentifier)
   --
   --
 }
 
-entity property.PropertyName_RepoObjectColumn << V >> {
-  * **property_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.fs_get_RepoObjectColumnProperty_nvarchar.html property.fs_get_RepoObjectColumnProperty_nvarchar]]" as property.fs_get_RepoObjectColumnProperty_nvarchar << FN >> {
   --
-  --
-}
-
-entity property.RepoObjectColumnProperty << U >> {
-  * **RepoObjectColumnProperty_id** : int
-  --
-  inheritance : tinyint
-  * property_name : nvarchar(128)
-  * property_value : nvarchar(max)
-  * RepoObjectColumn_guid : uniqueidentifier
-  {abstract} property_bigint : bigint
-  {abstract} property_float : float
-  {abstract} property_int : int
-  {abstract} property_money : money
-  {abstract} property_real : real
-  --
-}
-
-entity property.RepoObjectColumnProperty_ForUpdate << V >> {
-  * **RepoObjectColumnProperty_id** : int
-  --
-  inheritance : tinyint
-  * property_name : nvarchar(128)
-  * property_value : nvarchar(max)
-  * RepoObject_fullname : nvarchar(261)
-  * RepoObject_fullname2 : nvarchar(257)
-  * RepoObject_guid : uniqueidentifier
-  * RepoObject_name : nvarchar(128)
-  * RepoObject_schema_name : nvarchar(128)
-  * RepoObjectColumn_fullname : nvarchar(520)
-  * RepoObjectColumn_fullname2 : nvarchar(386)
-  * RepoObjectColumn_guid : uniqueidentifier
-  * RepoObjectColumn_name : nvarchar(128)
-  --
-}
-
-entity property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition << V >> {
-  * **RepoObjectColumn_guid** : uniqueidentifier
-  * **property_name** : nvarchar(128)
-  --
-  Inheritance_StringAggSeparatorSql : nvarchar(max)
-  InheritanceDefinition : nvarchar(max)
-  InheritanceType : int
-  par_Inheritance_StringAggSeparatorSql : nvarchar(max)
-  par_InheritanceDefinition : nvarchar(max)
-  par_InheritanceType : int
-  property_value : nvarchar(max)
-  * RepoObjectColumn_name : nvarchar(128)
-  roc_Inheritance_StringAggSeparatorSql : nvarchar(4000)
-  roc_InheritanceDefinition : nvarchar(4000)
-  roc_InheritanceType : tinyint
-  sub_Inheritance_StringAggSeparatorSql : nvarchar(max)
-  sub_InheritanceDefinition : nvarchar(max)
-  sub_InheritanceType : int
-  --
-}
-
-entity property.RepoObjectColumnProperty_sys_repo << V >> {
-  * **RepoObjectColumn_guid** : uniqueidentifier
-  * **property_name** : sysname
-  --
-  property_value : sql_variant
-  RepoObjectColumnProperty_id : int
-  RepoObjectColumnProperty_property_value : nvarchar(max)
-  SysObject_name : nvarchar(128)
-  SysObject_schema_name : nvarchar(128)
-  SysObjectColumn_name : nvarchar(128)
-  --
-}
-
-entity property.usp_RepoObjectColumn_Inheritance << P >> {
   --
   --
 }
 
-entity property.usp_RepoObjectColumnProperty_set << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.PropertyName_RepoObjectColumn.html property.PropertyName_RepoObjectColumn]]" as property.PropertyName_RepoObjectColumn << V >> {
+  - **property_name** : (nvarchar(128))
+  --
   --
   --
 }
 
-entity property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate << P >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObjectColumnProperty.html property.RepoObjectColumnProperty]]" as property.RepoObjectColumnProperty << U >> {
+  - **RepoObjectColumnProperty_id** : (int)
+  --
+  inheritance : (tinyint)
+  - property_name : (nvarchar(128))
+  - property_value : (nvarchar(max))
+  - RepoObjectColumn_guid : (uniqueidentifier)
+  ~ property_bigint : (bigint)
+  ~ property_float : (float)
+  ~ property_int : (int)
+  ~ property_money : (money)
+  ~ property_real : (real)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObjectColumnProperty_ForUpdate.html property.RepoObjectColumnProperty_ForUpdate]]" as property.RepoObjectColumnProperty_ForUpdate << V >> {
+  - **RepoObjectColumnProperty_id** : (int)
+  --
+  inheritance : (tinyint)
+  - property_name : (nvarchar(128))
+  - property_value : (nvarchar(max))
+  Repo_user_type_fullname : (nvarchar(128))
+  - RepoObject_fullname : (nvarchar(261))
+  - RepoObject_fullname2 : (nvarchar(257))
+  - RepoObject_guid : (uniqueidentifier)
+  - RepoObject_name : (nvarchar(128))
+  - RepoObject_schema_name : (nvarchar(128))
+  - RepoObject_type : (char(2))
+  - RepoObjectColumn_fullname : (nvarchar(520))
+  - RepoObjectColumn_fullname2 : (nvarchar(386))
+  - RepoObjectColumn_guid : (uniqueidentifier)
+  - RepoObjectColumn_name : (nvarchar(128))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.html property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition]]" as property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition << V >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
+  --
+  Inheritance_StringAggSeparatorSql : (nvarchar(max))
+  InheritanceDefinition : (nvarchar(max))
+  InheritanceType : (int)
+  par_Inheritance_StringAggSeparatorSql : (nvarchar(max))
+  par_InheritanceDefinition : (nvarchar(max))
+  par_InheritanceType : (int)
+  property_value : (nvarchar(max))
+  - RepoObjectColumn_name : (nvarchar(128))
+  roc_Inheritance_StringAggSeparatorSql : (nvarchar(4000))
+  roc_InheritanceDefinition : (nvarchar(4000))
+  roc_InheritanceType : (tinyint)
+  sub_Inheritance_StringAggSeparatorSql : (nvarchar(max))
+  sub_InheritanceDefinition : (nvarchar(max))
+  sub_InheritanceType : (int)
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.RepoObjectColumnProperty_sys_repo.html property.RepoObjectColumnProperty_sys_repo]]" as property.RepoObjectColumnProperty_sys_repo << V >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  - **property_name** : (sysname)
+  --
+  property_value : (sql_variant)
+  RepoObjectColumnProperty_id : (int)
+  RepoObjectColumnProperty_property_value : (nvarchar(max))
+  SysObject_name : (nvarchar(128))
+  SysObject_schema_name : (nvarchar(128))
+  SysObjectColumn_name : (nvarchar(128))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.usp_RepoObjectColumn_Inheritance.html property.usp_RepoObjectColumn_Inheritance]]" as property.usp_RepoObjectColumn_Inheritance << P >> {
+  --
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.usp_RepoObjectColumnProperty_set.html property.usp_RepoObjectColumnProperty_set]]" as property.usp_RepoObjectColumnProperty_set << P >> {
+  --
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate.html property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate]]" as property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate << P >> {
+  --
   --
   --
 }
@@ -156,3 +169,10 @@ property.RepoObjectColumnProperty::property_value <-- property.RepoObjectColumnP
 property.RepoObjectColumnProperty::RepoObjectColumn_guid <-- property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::RepoObjectColumn_guid
 property.RepoObjectColumnProperty::RepoObjectColumn_guid <-- property.RepoObjectColumnProperty_ForUpdate::RepoObjectColumn_guid
 property.RepoObjectColumnProperty::RepoObjectColumnProperty_id <-- property.RepoObjectColumnProperty_ForUpdate::RepoObjectColumnProperty_id
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

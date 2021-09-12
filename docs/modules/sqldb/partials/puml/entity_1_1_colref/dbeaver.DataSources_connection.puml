@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,27 +25,36 @@ skinparam class {
 }
 
 
-entity dbeaver.DataSources << U >> {
-  * **id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/dbeaver.DataSources.html dbeaver.DataSources]]" as dbeaver.DataSources << U >> {
+  - **id** : (int)
   --
-  BulkColumn : varchar(max)
-  {abstract} is_json : int
+  BulkColumn : (varchar(max))
+  ~ is_json : (int)
+  --
   --
 }
 
-entity dbeaver.DataSources_connection << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/dbeaver.DataSources_connection.html dbeaver.DataSources_connection]]" as dbeaver.DataSources_connection << V >> {
   --
-  BulkColumn : varchar(max)
-  conection_name : nvarchar(100)
-  connection_driver : nvarchar(100)
-  connection_json : nvarchar(max)
-  * connection_key : nvarchar(4000)
-  connection_provider : nvarchar(100)
-  connections : nvarchar(max)
-  * id : int
-  is_json : int
+  BulkColumn : (varchar(max))
+  conection_name : (nvarchar(100))
+  connection_driver : (nvarchar(100))
+  connection_json : (nvarchar(max))
+  - connection_key : (nvarchar(4000))
+  connection_provider : (nvarchar(100))
+  connections : (nvarchar(max))
+  - id : (int)
+  is_json : (int)
+  --
   --
 }
 
 dbeaver.DataSources <.. dbeaver.DataSources_connection
+
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
 

@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,69 +25,73 @@ skinparam class {
 }
 
 
-entity repo.RepoObject_SSAS_src << V >> {
-  * **RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject_SSAS_src.html repo.RepoObject_SSAS_src]]" as repo.RepoObject_SSAS_src << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
-  * is_repo_managed : int
-  * is_ssas : int
-  * RepoObject_name : nvarchar(128)
-  * RepoObject_schema_name : nvarchar(128)
-  * RepoObject_type : varchar(1)
-  * SysObject_name : nvarchar(128)
-  * SysObject_schema_name : nvarchar(128)
-  * SysObject_type : varchar(1)
-  --
-}
-
-entity repo.RepoObject_SSAS_tgt << V >> {
-  * **RepoObject_guid** : uniqueidentifier
-  --
-  has_execution_plan_issue : bit
-  has_get_referenced_issue : bit
-  Inheritance_StringAggSeparatorSql : nvarchar(4000)
-  InheritanceDefinition : nvarchar(4000)
-  InheritanceType : tinyint
-  * is_repo_managed : int
-  is_required_ObjectMerge : bit
-  * is_ssas : int
-  is_SysObject_missing : bit
-  * modify_dt : datetime
-  pk_index_guid : uniqueidentifier
-  pk_IndexPatternColumnName_new : nvarchar(4000)
-  Repo_history_table_guid : uniqueidentifier
-  Repo_temporal_type : tinyint
-  * RepoObject_name : nvarchar(128)
-  RepoObject_Referencing_Count : int
-  * RepoObject_schema_name : nvarchar(128)
-  * RepoObject_type : varchar(1)
-  SysObject_id : int
-  * SysObject_modify_date : datetime
-  * SysObject_name : nvarchar(128)
-  * SysObject_parent_object_id : int
-  * SysObject_schema_name : nvarchar(128)
-  * SysObject_type : varchar(1)
-  --
-}
-
-entity repo.usp_PERSIST_RepoObject_SSAS_tgt << P >> {
+  - is_repo_managed : (int)
+  - is_ssas : (int)
+  - RepoObject_name : (nvarchar(128))
+  - RepoObject_schema_name : (nvarchar(128))
+  - RepoObject_type : (varchar(1))
+  - SysObject_name : (nvarchar(128))
+  - SysObject_schema_name : (nvarchar(128))
+  - SysObject_type : (varchar(1))
   --
   --
 }
 
-entity ssas.model_json_31_tables_T << U >> {
-  * **databasename** : nvarchar(128)
-  **tables_name** : nvarchar(128)
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject_SSAS_tgt.html repo.RepoObject_SSAS_tgt]]" as repo.RepoObject_SSAS_tgt << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
-  * RepoObject_guid : uniqueidentifier
-  tables_annotations_ja : nvarchar(max)
-  tables_columns_ja : nvarchar(max)
-  tables_dataCategory : nvarchar(500)
-  tables_description : nvarchar(max)
-  tables_description_ja : nvarchar(max)
-  tables_hierarchies_ja : nvarchar(max)
-  tables_isHidden : nvarchar(500)
-  tables_measures_ja : nvarchar(max)
-  tables_partitions_ja : nvarchar(max)
+  has_execution_plan_issue : (bit)
+  has_get_referenced_issue : (bit)
+  Inheritance_StringAggSeparatorSql : (nvarchar(4000))
+  InheritanceDefinition : (nvarchar(4000))
+  InheritanceType : (tinyint)
+  - is_repo_managed : (int)
+  is_required_ObjectMerge : (bit)
+  - is_ssas : (int)
+  is_SysObject_missing : (bit)
+  - modify_dt : (datetime)
+  pk_index_guid : (uniqueidentifier)
+  pk_IndexPatternColumnName_new : (nvarchar(4000))
+  Repo_history_table_guid : (uniqueidentifier)
+  Repo_temporal_type : (tinyint)
+  - RepoObject_name : (nvarchar(128))
+  RepoObject_Referencing_Count : (int)
+  - RepoObject_schema_name : (nvarchar(128))
+  - RepoObject_type : (varchar(1))
+  SysObject_id : (int)
+  - SysObject_modify_date : (datetime)
+  - SysObject_name : (nvarchar(128))
+  - SysObject_parent_object_id : (int)
+  - SysObject_schema_name : (nvarchar(128))
+  - SysObject_type : (varchar(1))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_PERSIST_RepoObject_SSAS_tgt.html repo.usp_PERSIST_RepoObject_SSAS_tgt]]" as repo.usp_PERSIST_RepoObject_SSAS_tgt << P >> {
+  --
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/ssas.model_json_31_tables_T.html ssas.model_json_31_tables_T]]" as ssas.model_json_31_tables_T << U >> {
+  - **databasename** : (nvarchar(128))
+  **tables_name** : (nvarchar(128))
+  --
+  - RepoObject_guid : (uniqueidentifier)
+  tables_annotations_ja : (nvarchar(max))
+  tables_columns_ja : (nvarchar(max))
+  tables_dataCategory : (nvarchar(500))
+  tables_description : (nvarchar(max))
+  tables_description_ja : (nvarchar(max))
+  tables_hierarchies_ja : (nvarchar(max))
+  tables_isHidden : (nvarchar(500))
+  tables_measures_ja : (nvarchar(max))
+  tables_partitions_ja : (nvarchar(max))
+  --
   --
 }
 
@@ -107,3 +112,10 @@ ssas.model_json_31_tables_T::databasename <-- repo.RepoObject_SSAS_src::SysObjec
 ssas.model_json_31_tables_T::RepoObject_guid <-- repo.RepoObject_SSAS_src::RepoObject_guid
 ssas.model_json_31_tables_T::tables_name <-- repo.RepoObject_SSAS_src::RepoObject_name
 ssas.model_json_31_tables_T::tables_name <-- repo.RepoObject_SSAS_src::SysObject_name
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

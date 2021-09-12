@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,32 +25,42 @@ skinparam class {
 }
 
 
-entity configT.SsasDmvTableImport << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/configT.SsasDmvTableImport.html configT.SsasDmvTableImport]]" as configT.SsasDmvTableImport << V >> {
   --
-  DmvTableName : nvarchar(128)
-  isActive : bit
+  DmvTableName : (nvarchar(128))
+  isActive : (bit)
   --
-}
-
-entity configT.SsasDmvTableImport_DmvColumnList << V >> {
-  --
-  DmvColumnList : nvarchar(4000)
-  DmvTableName : nvarchar(128)
   --
 }
 
-entity configT.SsasDmvTableImport_ImportSql << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/configT.SsasDmvTableImport_DmvColumnList.html configT.SsasDmvTableImport_DmvColumnList]]" as configT.SsasDmvTableImport_DmvColumnList << V >> {
   --
-  * databasename : nvarchar(128)
-  * DeleteInsertSql : nvarchar(4000)
-  * ExecPersistSql : nvarchar(161)
-  * isActive : bit
-  * isCurrentImport : bit
-  * LinkedServer : nvarchar(128)
-  * truncateSql : nvarchar(156)
+  DmvColumnList : (nvarchar(4000))
+  DmvTableName : (nvarchar(128))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/configT.SsasDmvTableImport_ImportSql.html configT.SsasDmvTableImport_ImportSql]]" as configT.SsasDmvTableImport_ImportSql << V >> {
+  --
+  - databasename : (nvarchar(128))
+  - DeleteInsertSql : (nvarchar(4000))
+  - ExecPersistSql : (nvarchar(161))
+  - isActive : (bit)
+  - isCurrentImport : (bit)
+  - LinkedServer : (nvarchar(128))
+  - truncateSql : (nvarchar(156))
+  --
   --
 }
 
 configT.SsasDmvTableImport <.. configT.SsasDmvTableImport_DmvColumnList
 configT.SsasDmvTableImport_DmvColumnList <.. configT.SsasDmvTableImport_ImportSql
 configT.SsasDmvTableImport::DmvTableName <-- configT.SsasDmvTableImport_DmvColumnList::DmvTableName
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+

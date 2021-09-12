@@ -1,3 +1,4 @@
+@startuml
 left to right direction
 'top to bottom direction
 hide circle
@@ -24,37 +25,37 @@ skinparam class {
 }
 
 
-entity config.ftv_dwh_database << IF >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/config.ftv_dwh_database.html config.ftv_dwh_database]]" as config.ftv_dwh_database << IF >> {
   --
 }
 
-entity reference.RepoObject_reference_SqlExpressionDependencies << V >> {
-  **referenced_RepoObject_guid** : uniqueidentifier
-  **referencing_RepoObject_guid** : uniqueidentifier
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObject_reference_SqlExpressionDependencies.html reference.RepoObject_reference_SqlExpressionDependencies]]" as reference.RepoObject_reference_SqlExpressionDependencies << V >> {
+  **referenced_RepoObject_guid** : (uniqueidentifier)
+  **referencing_RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity reference.RepoObjectColumn_reference_SqlExpressionDependencies << V >> {
-  * **referencing_id** : int
-  * **referencing_minor_id** : int
-  **referenced_id** : int
-  * **referenced_minor_id** : int
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObjectColumn_reference_SqlExpressionDependencies.html reference.RepoObjectColumn_reference_SqlExpressionDependencies]]" as reference.RepoObjectColumn_reference_SqlExpressionDependencies << V >> {
+  - **referencing_id** : (int)
+  - **referencing_minor_id** : (int)
+  **referenced_id** : (int)
+  - **referenced_minor_id** : (int)
   --
 }
 
-entity repo.SysColumn_RepoObjectColumn_via_name << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.SysColumn_RepoObjectColumn_via_name.html repo.SysColumn_RepoObjectColumn_via_name]]" as repo.SysColumn_RepoObjectColumn_via_name << V >> {
   --
 }
 
-entity repo.SysObject_RepoObject_via_name << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.SysObject_RepoObject_via_name.html repo.SysObject_RepoObject_via_name]]" as repo.SysObject_RepoObject_via_name << V >> {
   --
 }
 
-entity repo_sys.sql_expression_dependencies << V >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo_sys.sql_expression_dependencies.html repo_sys.sql_expression_dependencies]]" as repo_sys.sql_expression_dependencies << V >> {
   --
 }
 
-entity sys_dwh.sql_expression_dependencies << SN >> {
+entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/sys_dwh.sql_expression_dependencies.html sys_dwh.sql_expression_dependencies]]" as sys_dwh.sql_expression_dependencies << SN >> {
   --
 }
 
@@ -64,3 +65,10 @@ repo.SysObject_RepoObject_via_name <.. repo_sys.sql_expression_dependencies
 repo_sys.sql_expression_dependencies <.. reference.RepoObject_reference_SqlExpressionDependencies
 repo_sys.sql_expression_dependencies <.. reference.RepoObjectColumn_reference_SqlExpressionDependencies
 sys_dwh.sql_expression_dependencies <.. repo_sys.sql_expression_dependencies
+footer
+to view a reduced diagram in original size and to be able to click on the links:
+open the diagram in a new tab via the Context menu.
+end footer
+
+@enduml
+
