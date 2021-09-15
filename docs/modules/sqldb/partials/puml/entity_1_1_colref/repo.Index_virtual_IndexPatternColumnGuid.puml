@@ -25,7 +25,7 @@ skinparam class {
 }
 
 
-entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_union.html repo.Index_union]]" as repo.Index_union << V >> {
+entity "[[{site-url}/{page-component-name}/current/{page-module}/repo.Index_union.html repo.Index_union]]" as repo.Index_union << V >> {
   **index_guid** : (uniqueidentifier)
   --
   index_name : (nvarchar(450))
@@ -41,7 +41,7 @@ entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module
   --
 }
 
-entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_virtual.html repo.Index_virtual]]" as repo.Index_virtual << U >> {
+entity "[[{site-url}/{page-component-name}/current/{page-module}/repo.Index_virtual.html repo.Index_virtual]]" as repo.Index_virtual << U >> {
   - **index_guid** : (uniqueidentifier)
   --
   - has_managedName : (bit)
@@ -57,7 +57,7 @@ entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module
   --
 }
 
-entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.Index_virtual_IndexPatternColumnGuid.html repo.Index_virtual_IndexPatternColumnGuid]]" as repo.Index_virtual_IndexPatternColumnGuid << V >> {
+entity "[[{site-url}/{page-component-name}/current/{page-module}/repo.Index_virtual_IndexPatternColumnGuid.html repo.Index_virtual_IndexPatternColumnGuid]]" as repo.Index_virtual_IndexPatternColumnGuid << V >> {
   - **index_guid** : (uniqueidentifier)
   --
   IndexPatternColumnGuid : (varchar(8000))
@@ -66,7 +66,7 @@ entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module
   --
 }
 
-entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.IndexColumn_virtual.html repo.IndexColumn_virtual]]" as repo.IndexColumn_virtual << U >> {
+entity "[[{site-url}/{page-component-name}/current/{page-module}/repo.IndexColumn_virtual.html repo.IndexColumn_virtual]]" as repo.IndexColumn_virtual << U >> {
   - **index_guid** : (uniqueidentifier)
   - **index_column_id** : (int)
   --
@@ -76,15 +76,15 @@ entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module
   --
 }
 
-entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.usp_index_inheritance.html repo.usp_index_inheritance]]" as repo.usp_index_inheritance << P >> {
+entity "[[{site-url}/{page-component-name}/current/{page-module}/repo.usp_index_inheritance.html repo.usp_index_inheritance]]" as repo.usp_index_inheritance << P >> {
   --
   --
   --
 }
 
 repo.Index_virtual <.. repo.Index_virtual_IndexPatternColumnGuid
-repo.Index_virtual_IndexPatternColumnGuid <.. repo.usp_index_inheritance
 repo.Index_virtual_IndexPatternColumnGuid <.. repo.Index_union
+repo.Index_virtual_IndexPatternColumnGuid <.. repo.usp_index_inheritance
 repo.IndexColumn_virtual <.. repo.Index_virtual_IndexPatternColumnGuid
 repo.Index_virtual::index_guid <-- repo.Index_virtual_IndexPatternColumnGuid::index_guid
 repo.Index_virtual::parent_RepoObject_guid <-- repo.Index_virtual_IndexPatternColumnGuid::parent_RepoObject_guid

@@ -25,7 +25,7 @@ skinparam class {
 }
 
 
-entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/config.ftv_get_parameter_value.html config.ftv_get_parameter_value]]" as config.ftv_get_parameter_value << IF >> {
+entity "[[{site-url}/{page-component-name}/current/{page-module}/config.ftv_get_parameter_value.html config.ftv_get_parameter_value]]" as config.ftv_get_parameter_value << IF >> {
   --
   Parameter_value_result : (nvarchar(max))
   Parameter_value_result_date : (date)
@@ -35,13 +35,21 @@ entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module
   --
 }
 
-entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.fs_PumlHeaderTopToBottom.html docs.fs_PumlHeaderTopToBottom]]" as docs.fs_PumlHeaderTopToBottom << FN >> {
+entity "[[{site-url}/{page-component-name}/current/{page-module}/docs.fs_PumlHeaderTopToBottom.html docs.fs_PumlHeaderTopToBottom]]" as docs.fs_PumlHeaderTopToBottom << FN >> {
   --
   --
   --
 }
 
-entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/docs.RepoObject_Plantuml.html docs.RepoObject_Plantuml]]" as docs.RepoObject_Plantuml << V >> {
+entity "[[{site-url}/{page-component-name}/current/{page-module}/docs.ObjectRefCyclic.html docs.ObjectRefCyclic]]" as docs.ObjectRefCyclic << V >> {
+  --
+  - ObjectRefCyclic_Puml : (nvarchar(max))
+  - page_content : (nvarchar(max))
+  --
+  --
+}
+
+entity "[[{site-url}/{page-component-name}/current/{page-module}/docs.RepoObject_Plantuml.html docs.RepoObject_Plantuml]]" as docs.RepoObject_Plantuml << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
   ColRefList : (nvarchar(max))
@@ -63,6 +71,7 @@ entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module
 
 config.ftv_get_parameter_value <.. docs.fs_PumlHeaderTopToBottom
 docs.fs_PumlHeaderTopToBottom <.. docs.RepoObject_Plantuml
+docs.fs_PumlHeaderTopToBottom <.. docs.ObjectRefCyclic
 
 footer
 to view a reduced diagram in original size and to be able to click on the links:

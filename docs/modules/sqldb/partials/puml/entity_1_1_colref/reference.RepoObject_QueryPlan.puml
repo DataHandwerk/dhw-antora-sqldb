@@ -25,7 +25,7 @@ skinparam class {
 }
 
 
-entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.RepoObject_QueryPlan.html reference.RepoObject_QueryPlan]]" as reference.RepoObject_QueryPlan << U >> {
+entity "[[{site-url}/{page-component-name}/current/{page-module}/reference.RepoObject_QueryPlan.html reference.RepoObject_QueryPlan]]" as reference.RepoObject_QueryPlan << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
   SysObject_query_executed_dt : (datetime)
@@ -34,13 +34,13 @@ entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module
   --
 }
 
-entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/reference.usp_RepoObject_update_SysObjectQueryPlan.html reference.usp_RepoObject_update_SysObjectQueryPlan]]" as reference.usp_RepoObject_update_SysObjectQueryPlan << P >> {
+entity "[[{site-url}/{page-component-name}/current/{page-module}/reference.usp_RepoObject_update_SysObjectQueryPlan.html reference.usp_RepoObject_update_SysObjectQueryPlan]]" as reference.usp_RepoObject_update_SysObjectQueryPlan << P >> {
   --
   --
   --
 }
 
-entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/repo.RepoObject_gross.html repo.RepoObject_gross]]" as repo.RepoObject_gross << V >> {
+entity "[[{site-url}/{page-component-name}/current/{page-module}/repo.RepoObject_gross.html repo.RepoObject_gross]]" as repo.RepoObject_gross << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
   Description : (nvarchar(max))
@@ -122,8 +122,8 @@ entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module
   --
 }
 
-reference.RepoObject_QueryPlan <.. reference.usp_RepoObject_update_SysObjectQueryPlan
 reference.RepoObject_QueryPlan <.. repo.RepoObject_gross
+reference.RepoObject_QueryPlan <.. reference.usp_RepoObject_update_SysObjectQueryPlan
 reference.RepoObject_QueryPlan::SysObject_query_executed_dt <-- repo.RepoObject_gross::SysObject_query_executed_dt
 reference.RepoObject_QueryPlan::SysObject_query_plan <-- repo.RepoObject_gross::SysObject_query_plan
 footer

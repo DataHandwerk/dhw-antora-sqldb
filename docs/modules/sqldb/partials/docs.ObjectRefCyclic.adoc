@@ -39,7 +39,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-08-17 18:49:49
+2021-09-12 10:22:52
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -135,6 +135,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 
 // tag::antorareferencedlist[]
 * xref:config.ftv_get_parameter_value.adoc[]
+* xref:docs.fs_PumlHeaderTopToBottom.adoc[]
 * xref:docs.ObjectRefCyclic_EntityList.adoc[]
 * xref:docs.ObjectRefCyclic_ObjectRefList.adoc[]
 // end::antorareferencedlist[]
@@ -361,6 +362,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 
 // tag::referencedobjectlist[]
 * [config].[ftv_get_parameter_value]
+* [docs].[fs_PumlHeaderTopToBottom]
 * [docs].[ObjectRefCyclic_EntityList]
 * [docs].[ObjectRefCyclic_ObjectRefList]
 // end::referencedobjectlist[]
@@ -402,11 +404,6 @@ source: property.RepoObjectProperty WHERE property_int = 1
 [source,sql]
 ----
 
-
-
-
-
-
 CREATE View docs.ObjectRefCyclic
 As
 Select
@@ -425,7 +422,7 @@ Select
              , '== Object Reference Diagram - Cyclic'
              , Char ( 13 ) + Char ( 10 )
              , '
-[plantuml, ObjectRefCyclic, svg]
+[plantuml, ObjectRefCyclic, svg, subs=attributes]
 ....
 \include::partial$puml/ObjectRefCyclic.puml[]
 ....
@@ -434,27 +431,19 @@ Select
   , ObjectRefCyclic_Puml =
   --
   Concat (
-             --'left to right direction'
-             'top to bottom direction'
-           , Char ( 13 ) + Char ( 10 )
-           , 'hide circle'
-           , Char ( 13 ) + Char ( 10 )
-           , '''avoide "." issues:'
-           , Char ( 13 ) + Char ( 10 )
-           , 'set namespaceSeparator none'
-           , Char ( 13 ) + Char ( 10 )
-           , Char ( 13 ) + Char ( 10 )
-           , skin.Parameter_value_result
-           , Char ( 13 ) + Char ( 10 )
-           , Char ( 13 ) + Char ( 10 )
+             '@startuml' + Char ( 13 ) + Char ( 10 )
+           , docs.fs_PumlHeaderTopToBottom ()
            , elist.PumlEntityOnlyPkList
            , Char ( 13 ) + Char ( 10 )
            , olist.PumlObjectRefList
+           , puml_footer.Parameter_value_result
+           , Char ( 13 ) + Char ( 10 ) + '@enduml' + Char ( 13 ) + Char ( 10 )
          )
 From
     docs.ObjectRefCyclic_EntityList               As elist
     Cross Join docs.ObjectRefCyclic_ObjectRefList As olist
-    Cross Join config.ftv_get_parameter_value ( 'puml_skinparam_class', '' ) As skin
+    Cross Join config.ftv_get_parameter_value ( 'puml_footer', '' ) As puml_footer
+
 ----
 =======
 // end::sql_modules_definition[]

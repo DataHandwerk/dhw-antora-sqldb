@@ -25,7 +25,7 @@ skinparam class {
 }
 
 
-entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow_ProcedureDependency_T.html workflow.Workflow_ProcedureDependency_T]]" as workflow.Workflow_ProcedureDependency_T << U >> {
+entity "[[{site-url}/{page-component-name}/current/{page-module}/workflow.Workflow_ProcedureDependency_T.html workflow.Workflow_ProcedureDependency_T]]" as workflow.Workflow_ProcedureDependency_T << U >> {
   - **Workflow_id** : (int)
   - **referenced_Procedure_RepoObject_guid** : (uniqueidentifier)
   - **referencing_Procedure_RepoObject_guid** : (uniqueidentifier)
@@ -35,7 +35,7 @@ entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module
   --
 }
 
-entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow_ProcedureDependency_T_active.html workflow.Workflow_ProcedureDependency_T_active]]" as workflow.Workflow_ProcedureDependency_T_active << V >> {
+entity "[[{site-url}/{page-component-name}/current/{page-module}/workflow.Workflow_ProcedureDependency_T_active.html workflow.Workflow_ProcedureDependency_T_active]]" as workflow.Workflow_ProcedureDependency_T_active << V >> {
   --
   - is_redundant : (bit)
   - referenced_Procedure_RepoObject_guid : (uniqueidentifier)
@@ -45,7 +45,7 @@ entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module
   --
 }
 
-entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow_ProcedureDependency_T_NotInSortorder.html workflow.Workflow_ProcedureDependency_T_NotInSortorder]]" as workflow.Workflow_ProcedureDependency_T_NotInSortorder << V >> {
+entity "[[{site-url}/{page-component-name}/current/{page-module}/workflow.Workflow_ProcedureDependency_T_NotInSortorder.html workflow.Workflow_ProcedureDependency_T_NotInSortorder]]" as workflow.Workflow_ProcedureDependency_T_NotInSortorder << V >> {
   --
   - referenced_Procedure_RepoObject_guid : (uniqueidentifier)
   - referencing_Procedure_RepoObject_guid : (uniqueidentifier)
@@ -54,7 +54,7 @@ entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module
   --
 }
 
-entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow_ProcedureDependency_T_redundant.html workflow.Workflow_ProcedureDependency_T_redundant]]" as workflow.Workflow_ProcedureDependency_T_redundant << V >> {
+entity "[[{site-url}/{page-component-name}/current/{page-module}/workflow.Workflow_ProcedureDependency_T_redundant.html workflow.Workflow_ProcedureDependency_T_redundant]]" as workflow.Workflow_ProcedureDependency_T_redundant << V >> {
   --
   - referenced_Procedure_RepoObject_guid : (uniqueidentifier)
   - referencing_Procedure_RepoObject_guid : (uniqueidentifier)
@@ -64,7 +64,7 @@ entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module
   --
 }
 
-entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.Workflow_ProcedureDependency_T_TaskName.html workflow.Workflow_ProcedureDependency_T_TaskName]]" as workflow.Workflow_ProcedureDependency_T_TaskName << V >> {
+entity "[[{site-url}/{page-component-name}/current/{page-module}/workflow.Workflow_ProcedureDependency_T_TaskName.html workflow.Workflow_ProcedureDependency_T_TaskName]]" as workflow.Workflow_ProcedureDependency_T_TaskName << V >> {
   --
   - referenced_Procedure_RepoObject_guid : (uniqueidentifier)
   - referenced_RepoObject_fullname2 : (nvarchar(257))
@@ -77,7 +77,7 @@ entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module
   --
 }
 
-entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module}/workflow.WorkflowStep_active.html workflow.WorkflowStep_active]]" as workflow.WorkflowStep_active << V >> {
+entity "[[{site-url}/{page-component-name}/current/{page-module}/workflow.WorkflowStep_active.html workflow.WorkflowStep_active]]" as workflow.WorkflowStep_active << V >> {
   --
   - is_PossibleReferenced : (bit)
   - Procedure_RepoObject_guid : (uniqueidentifier)
@@ -88,9 +88,9 @@ entity "[[{site-url}/{page-component-name}/{page-component-version}/{page-module
 }
 
 workflow.Workflow_ProcedureDependency_T <.. workflow.Workflow_ProcedureDependency_T_active
-workflow.Workflow_ProcedureDependency_T_active <.. workflow.Workflow_ProcedureDependency_T_redundant
 workflow.Workflow_ProcedureDependency_T_active <.. workflow.Workflow_ProcedureDependency_T_TaskName
 workflow.Workflow_ProcedureDependency_T_active <.. workflow.Workflow_ProcedureDependency_T_NotInSortorder
+workflow.Workflow_ProcedureDependency_T_active <.. workflow.Workflow_ProcedureDependency_T_redundant
 workflow.WorkflowStep_active <.. workflow.Workflow_ProcedureDependency_T_active
 workflow.Workflow_ProcedureDependency_T::is_redundant <-- workflow.Workflow_ProcedureDependency_T_active::is_redundant
 workflow.Workflow_ProcedureDependency_T::referenced_Procedure_RepoObject_guid <-- workflow.Workflow_ProcedureDependency_T_active::referenced_Procedure_RepoObject_guid
