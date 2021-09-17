@@ -6,6 +6,7 @@
 :ExistsProperty--adocuspsteps:
 :ExistsProperty--antorareferencedlist:
 :ExistsProperty--antorareferencinglist:
+:ExistsProperty--description:
 :ExistsProperty--exampleusage:
 :ExistsProperty--has_get_referenced_issue:
 :ExistsProperty--is_repo_managed:
@@ -326,6 +327,23 @@ WHERE [property_value] IS NULL
 // end::antorareferencinglist[]
 
 
+=== Description
+
+// tag::description[]
+collects the content for RepoObjectProperty from several sources:
+
+* xref:uspgenerator.GeneratorUsp.adoc[] +
+via xref:property.RepoObjectProperty_Collect_source_uspgenerator.adoc[]
+* xref:repo.RepoObject_gross.adoc[] +
+via xref:property.RepoObjectProperty_Collect_source_ROGross.adoc[]
+** Persistence attributes
+** AntoraReferenceLists
+** some common properties
+* xref:property.RepoObjectProperty_Collect_source_sql_modules_definition.adoc[] +
+this parses sql_modules_definition for tagged parts defining extended properties
+// end::description[]
+
+
 === exampleUsage
 
 // tag::exampleusage[]
@@ -394,6 +412,13 @@ EXEC [property].[usp_RepoObjectProperty_collect]
 // tag::has_history_columns[]
 
 // end::has_history_columns[]
+
+
+=== InheritanceType
+
+// tag::inheritancetype[]
+
+// end::inheritancetype[]
 
 
 === is_persistence

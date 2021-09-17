@@ -5,6 +5,7 @@
 // tag::existing_properties[]
 :ExistsProperty--antorareferencedlist:
 :ExistsProperty--antorareferencinglist:
+:ExistsProperty--description:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
 :ExistsProperty--ms_description:
@@ -527,6 +528,26 @@ source: property.RepoObjectProperty_cross As rop_cross
 // end::antorareferencinglist[]
 
 
+=== Description
+
+// tag::description[]
+
+list of conflicting entries which needs to be merged
+
+mismatch of RepoObject_guid can create 2 entries per one RepoObject +
+this can happen, if the guid exists in the database extended properties and a new guid will be created in the repo
+
+* `RepoObject_guid` roc1 has the right RepoObject_fullname
+* `ro2_RepoObject_guid` roc2 got a guid from database, but roc2 can't propagate the fullname into RepoObject because the RepoObject_fullname is occupied
+
+now we have 2 entries, but we need to merge them
+
+merge is done in `[repo].[usp_sync_guid_RepoObject]`
+
+`'usp_id;Number;Parent_Number: ',8,';',710,';',700`
+// end::description[]
+
+
 === exampleUsage
 
 // tag::exampleusage[]
@@ -595,6 +616,13 @@ source: property.RepoObjectProperty_cross As rop_cross
 // tag::has_history_columns[]
 
 // end::has_history_columns[]
+
+
+=== InheritanceType
+
+// tag::inheritancetype[]
+
+// end::inheritancetype[]
 
 
 === is_persistence

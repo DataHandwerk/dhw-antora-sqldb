@@ -5,6 +5,7 @@
 // tag::existing_properties[]
 :ExistsProperty--antorareferencedlist:
 :ExistsProperty--antorareferencinglist:
+:ExistsProperty--description:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
 :ExistsProperty--ms_description:
@@ -495,6 +496,30 @@ source: property.RepoObjectProperty_cross As rop_cross
 // end::antorareferencinglist[]
 
 
+=== Description
+
+// tag::description[]
+
+list of conflicting entries which needs to be merged
+
+mismatch of RepoObjectColumn_guid can create 2 entries per one RepoObjectColumn +
+this can happen, if the guid exists in the database extended properties and a new guid will be created in the repo
+
+* roc1 has the right RepoObjectColumn_fullname, but the guid was new created
+* roc2 got the "right" guid from database, but roc2 can't propagate the fullname into RepoObjectColumn because the RepoObjectColumn_fullname is occupied
+now we have 2 entries, but we need to merge them
+
+what we need to do in xref:sqldb:repo.usp_sync_guid_RepoObjectColumn.adoc[]
+
+* keep roc1 (which has the right RepoObjectColumn_name)
+** mark them set is_required_ColumnMerge = 1
+* delete columns with RepoObjectColumn_guid in roc2_RepoObjectColumn_guid
+* set SysObjectColumn_name = RepoObjectColumn_name (for roc1, for marked columns)
+* remove marker where SysObjectColumn_name = RepoObjectColumn_name
+
+// end::description[]
+
+
 === exampleUsage
 
 // tag::exampleusage[]
@@ -563,6 +588,13 @@ source: property.RepoObjectProperty_cross As rop_cross
 // tag::has_history_columns[]
 
 // end::has_history_columns[]
+
+
+=== InheritanceType
+
+// tag::inheritancetype[]
+
+// end::inheritancetype[]
 
 
 === is_persistence

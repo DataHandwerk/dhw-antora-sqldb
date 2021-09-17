@@ -5,6 +5,7 @@
 // tag::existing_properties[]
 :ExistsProperty--adocuspsteps:
 :ExistsProperty--antorareferencedlist:
+:ExistsProperty--description:
 :ExistsProperty--exampleusage:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
@@ -661,6 +662,31 @@ Where
 // end::antorareferencinglist[]
 
 
+=== Description
+
+// tag::description[]
+main procedure
+
+this central procedure must be executed regularly, try to get e feeling, when it is required +
+It does:
+
+* `EXEC repo.usp_sync_guid` to synchronize repository database and dwh database
+** some dwh database extended properties (ep) are synchronized with repository database
+*** ep RepoObject_guid for each database object
+*** ep RepoObjectColumn_guid for each database object column
+* index processing
+** combination of real and virtual indexes
+** virtual and real foreign key
+** code generation and updates for persistence procedures
+* process references and data lineage
+* inheritance of properties
+
+see xref:sqldb:repo.usp_main.adoc#_procdure_steps[Procedure steps] for details.
+
+use links in xref:sqldb:repo.usp_main.adoc#_referenced_objects[Referenced objects] to get details of called sub procedures
+// end::description[]
+
+
 === exampleUsage
 
 // tag::exampleusage[]
@@ -729,6 +755,13 @@ EXEC [repo].[usp_main]
 // tag::has_history_columns[]
 
 // end::has_history_columns[]
+
+
+=== InheritanceType
+
+// tag::inheritancetype[]
+
+// end::inheritancetype[]
 
 
 === is_persistence

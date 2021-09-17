@@ -151,6 +151,13 @@ source: property.RepoObjectProperty_cross As rop_cross
 // end::antorareferencinglist[]
 
 
+=== Description
+
+// tag::description[]
+
+// end::description[]
+
+
 === exampleUsage
 
 // tag::exampleusage[]
@@ -219,6 +226,13 @@ source: property.RepoObjectProperty_cross As rop_cross
 // tag::has_history_columns[]
 
 // end::has_history_columns[]
+
+
+=== InheritanceType
+
+// tag::inheritancetype[]
+
+// end::inheritancetype[]
 
 
 === is_persistence
@@ -403,7 +417,9 @@ source: property.RepoObjectProperty WHERE property_int = 1
 =======
 [source,sql]
 ----
-CREATE View reference.RepoObject_ExternalReferencedList
+
+
+CREATE View [reference].[RepoObject_ExternalReferencedList]
 As
 Select
     T1.RepoObject_guid
@@ -422,9 +438,9 @@ Select
                           , '.'
                           , T1.referenced_Object
                           , '.adoc[]'
-                          , ' xref:'
-                          , T1.referenced_AntoraModule
-                          , ':other/index.adoc[]'
+                          , ' in xref:'
+                          , T1.referenced_AntoraComponent
+                          , ':ROOT:index.adoc[]'
                         )
                , Char ( 13 ) + Char ( 10 )
              ) Within Group(Order By
@@ -449,6 +465,7 @@ From
 ) As T1
 Group By
     T1.RepoObject_guid
+
 ----
 =======
 // end::sql_modules_definition[]

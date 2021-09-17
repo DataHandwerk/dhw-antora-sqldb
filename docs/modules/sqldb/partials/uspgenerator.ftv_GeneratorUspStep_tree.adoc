@@ -5,6 +5,7 @@
 // tag::existing_properties[]
 :ExistsProperty--antorareferencedlist:
 :ExistsProperty--antorareferencinglist:
+:ExistsProperty--description:
 :ExistsProperty--exampleusage:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
@@ -391,6 +392,23 @@ source: property.RepoObjectProperty_cross As rop_cross
 // end::antorareferencinglist[]
 
 
+=== Description
+
+// tag::description[]
+
+* xref:sqldb:uspgenerator.GeneratorUspStep.adoc[] has a parent child structure.
+Here in this function we try to get the numbers in the right order.
+* It is not perfect if the tree is to deep and some "deep" numbers are lower.
+** check the result per [usp_id]
+** and if it not fits try to use better sorted numbers
+* one goal is to solve steps which are conditions
+** is_condition = 1
+** we need to encapsulate condition THEN and ELSE statement in BEGIN...END blocks
+** and this should work recursively
+** see the comment on top of the code for more details and testing
+// end::description[]
+
+
 === exampleUsage
 
 // tag::exampleusage[]
@@ -467,6 +485,13 @@ ORDER BY [u].id
 // tag::has_history_columns[]
 
 // end::has_history_columns[]
+
+
+=== InheritanceType
+
+// tag::inheritancetype[]
+
+// end::inheritancetype[]
 
 
 === is_persistence

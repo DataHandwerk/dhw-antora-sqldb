@@ -5,6 +5,7 @@
 // tag::existing_properties[]
 :ExistsProperty--adocuspsteps:
 :ExistsProperty--antorareferencedlist:
+:ExistsProperty--description:
 :ExistsProperty--exampleusage:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
@@ -96,7 +97,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 |===
 |Number|Name (Action, Source, Target)|Parent
 
-|300
+|200
 |
 *[repo].[usp_RepoObjectProperty_collect]*
 
@@ -113,6 +114,113 @@ source: property.RepoObjectProperty_cross As rop_cross
 =====
 
 |
+
+
+|210
+|
+*declare variables*
+
+
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+DECLARE @command NVARCHAR(4000)
+DECLARE @outputDir NVARCHAR(1000)
+DECLARE @outputDir2 NVARCHAR(1000)
+
+----
+=====
+
+|
+
+
+|220
+|
+*configure outputDirs*
+
+
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+SET @outputDir = ISNULL(@outputDir, (
+   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModule', '') + '\'
+   ) + 'partials')
+SET @outputDir2 = ISNULL(@outputDir2, (
+   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModule', '') + '\'
+   ) + 'pages')
+   
+----
+=====
+
+|
+
+
+|300
+|
+*check Parameter AntoraDeleteFilesInModuleFolders*
+
+* `IF [config].[fs_get_parameter_value]('AntoraDeleteFilesInModuleFolders','') = 1`
+* [config].[Parameter]
+
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+[config].[fs_get_parameter_value]('AntoraDeleteFilesInModuleFolders','') = 1
+----
+=====
+
+|
+
+
+|310
+|
+*Delete Files but not folder in AntoraModule pages and partials*
+
+* I
+
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+/*
+FORFILES /p "D:\Repos\GitHub\DataHandwerk\dhw-antora-sqldb\docs\modules\sqldb\partials" /s /m *.* /c "cmd /c if @isdir==FALSE del @path"
+*/
+Set @command = N'FORFILES /p "'
+               --
+               + @outputDir
+               --
+               + N'" /s /m *.* /c "cmd /c if @isdir==FALSE del @path"'
+
+Print @command
+
+--Execute the BCP command
+Exec sys.xp_cmdshell @command
+
+Set @command = N'FORFILES /p "'
+               --
+               + @outputDir2
+               --
+               + N'" /s /m *.* /c "cmd /c if @isdir==FALSE del @path"'
+
+Print @command
+
+--Execute the BCP command
+Exec sys.xp_cmdshell @command
+----
+=====
+
+|300
 
 
 |400
@@ -294,6 +402,81 @@ source: property.RepoObjectProperty_cross As rop_cross
 // end::antorareferencinglist[]
 
 
+=== Description
+
+// tag::description[]
+* Database documentation uses https://antora.org/[Antora] and the markup language https://docs.asciidoctor.org/asciidoc/latest/[AsciiDoc]. One of many advantages of asciidoc over Markdown is the ability to use includes. This allows the *docs-as-code* and *code-as-docs* concepts to be implemented very well.
+* The procedure xref:sqldb:docs.usp_AntoraExport.adoc[] exports required files into the filesystem.
+** check and correct xref:sqldb:config.Parameter.adoc#column-Parameter_value[config.Parameter.Parameter_value] for ('AntoraModuleFolder', ''), a possible parameter is
++
+====
+D:\Repos\GitHub\MyOrganisation\MyProject-docs\docs\modules
+====
+
+[discrete]
+=== How does it work?
+
+* Antora uses https://docs.antora.org/antora/2.3/navigation/files-and-lists/[Navigation Files and Lists]. Content for these files is exported:
+** export procedure: xref:sqldb:docs.usp_AntoraExport_navigation.adoc[]
+* exported object types are defined in the view xref:sqldb:configT.type.adoc[]
++
+....
+SELECT [type]
+ , [type_desc]
+ , [is_DocsOutput]
+FROM [config].[type]
+WHERE [is_DocsOutput] = 1
+order by [type_desc] desc
+....
+* source pages per object are exported into (AntoraModuleFolder)``/``(AntoraModuleName)``/pages/schemaname.objectname.adoc``
+** export procedure: xref:sqldb:docs.usp_AntoraExport_ObjectPage.adoc[]
+** the content of all page files per object is the same, it has only includes. The content is defined in xref:sqldb:config.Parameter.adoc#column-Parameter_value[config.Parameter.Parameter_value] for ('AntoraPageTemplate', '') (*empty* `Sub_parameter`)
+ the default content is (real code without leading '/'):
++
+====
+....
+/include::partial$template/master-page-1.adoc[]
+/include::partial$template/master-page-examples.adoc[]
+/include::partial$template/master-page-4.adoc[]
+/include::partial$template/master-page-5.adoc[]
+....
+====
+** the content of these includes is defined in xref:sqldb:config.Parameter.adoc#column-Parameter_value[config.Parameter.Parameter_value] for ('AntoraPageTemplate', 'x') (*non empty* `Sub_parameter` 'x'). Avoild blanks, because these `Sub_parameter` values become filname suffix.
+* the template content is the same for all objects. We use +{docname}+ and get the final content from individual 'partials' per object. (real code without leading '/')
++
+====
+....
+= {docname}
+
+/include::partial${docname}.adoc[tag=existing_properties]
+
+type:
+/include::partial${docname}.adoc[tag=SysObject_type]
+(
+/include::partial${docname}.adoc[tag=SysObject_type_name]
+), modify_date:
+/include::partial${docname}.adoc[tag=SysObject_modify_date]
+
+/ifdef::ExistsProperty--is_repo_managed[]
+is_repo_managed:
+/include::partial${docname}.adoc[tag=is_repo_managed]
+/endif::ExistsProperty--is_repo_managed[]
+....
+====
+** export procedure: xref:sqldb:docs.usp_AntoraExport_ObjectPageTemplate.adoc[]
+* the individual content per object is exported as 'partial' into (AntoraModuleFolder)``/``(AntoraModuleName)``/partials/schemaname.objectname.adoc``
+** export procedure: xref:sqldb:docs.usp_AntoraExport_ObjectPartialProperties.adoc[]
+** all properties from xref:sqldb:property.RepoObjectProperty.adoc[] are exported with a `tag` per property
+** some additional `tag` are exported
+** the exported content is defined in xref:sqldb:docs.RepoObject_Adoc.adoc[]
+* the documentation contains diagrams. These diagrams are defined using https://plantuml.com/[plantUML]
+** export procedure: xref:sqldb:docs.usp_AntoraExport_ObjectPuml.adoc[]
+** individual diagrams per object are exported into (AntoraModuleFolder)``/``(AntoraModuleName)``/partials/puml/``
+
+include::sqldb:partial$docsnippet/antora-export-prerequisites.adoc[]
+// end::description[]
+
+
 === exampleUsage
 
 // tag::exampleusage[]
@@ -377,6 +560,13 @@ Exec docs.usp_AntoraExport;
 // tag::has_history_columns[]
 
 // end::has_history_columns[]
+
+
+=== InheritanceType
+
+// tag::inheritancetype[]
+
+// end::inheritancetype[]
 
 
 === is_persistence
@@ -710,7 +900,7 @@ PRINT '[docs].[usp_AntoraExport]'
 --
 ----- start here with your own code
 --
-/*{"ReportUspStep":[{"Number":300,"Name":"[repo].[usp_RepoObjectProperty_collect]","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
+/*{"ReportUspStep":[{"Number":200,"Name":"[repo].[usp_RepoObjectProperty_collect]","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
 EXEC [property].[usp_RepoObjectProperty_collect]
 --add your own parameters
 --logging parameters
@@ -719,6 +909,82 @@ EXEC [property].[usp_RepoObjectProperty_collect]
  , @sub_execution_id = @sub_execution_id
  , @parent_execution_log_id = @current_execution_log_id
 
+
+/*{"ReportUspStep":[{"Number":210,"Name":"declare variables","has_logging":0,"is_condition":0,"is_inactive":0,"is_SubProcedure":0}]}*/
+PRINT CONCAT('usp_id;Number;Parent_Number: ',27,';',210,';',NULL);
+
+DECLARE @command NVARCHAR(4000)
+DECLARE @outputDir NVARCHAR(1000)
+DECLARE @outputDir2 NVARCHAR(1000)
+
+
+/*{"ReportUspStep":[{"Number":220,"Name":"configure outputDirs","has_logging":0,"is_condition":0,"is_inactive":0,"is_SubProcedure":0}]}*/
+PRINT CONCAT('usp_id;Number;Parent_Number: ',27,';',220,';',NULL);
+
+SET @outputDir = ISNULL(@outputDir, (
+   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModule', '') + '\'
+   ) + 'partials')
+SET @outputDir2 = ISNULL(@outputDir2, (
+   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModule', '') + '\'
+   ) + 'pages')
+   
+
+/*{"ReportUspStep":[{"Number":300,"Name":"check Parameter AntoraDeleteFilesInModuleFolders","has_logging":0,"is_condition":1,"is_inactive":0,"is_SubProcedure":0,"log_source_object":"[config].[Parameter]"}]}*/
+IF [config].[fs_get_parameter_value]('AntoraDeleteFilesInModuleFolders','') = 1
+
+/*{"ReportUspStep":[{"Number":310,"Parent_Number":300,"Name":"Delete Files but not folder in AntoraModule pages and partials","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":0,"log_flag_InsertUpdateDelete":"I"}]}*/
+BEGIN
+PRINT CONCAT('usp_id;Number;Parent_Number: ',27,';',310,';',300);
+
+/*
+FORFILES /p "D:\Repos\GitHub\DataHandwerk\dhw-antora-sqldb\docs\modules\sqldb\partials" /s /m *.* /c "cmd /c if @isdir==FALSE del @path"
+*/
+Set @command = N'FORFILES /p "'
+               --
+               + @outputDir
+               --
+               + N'" /s /m *.* /c "cmd /c if @isdir==FALSE del @path"'
+
+Print @command
+
+--Execute the BCP command
+Exec sys.xp_cmdshell @command
+
+Set @command = N'FORFILES /p "'
+               --
+               + @outputDir2
+               --
+               + N'" /s /m *.* /c "cmd /c if @isdir==FALSE del @path"'
+
+Print @command
+
+--Execute the BCP command
+Exec sys.xp_cmdshell @command
+
+-- Logging START --
+SET @rows = @@ROWCOUNT
+SET @step_id = @step_id + 1
+SET @step_name = 'Delete Files but not folder in AntoraModule pages and partials'
+SET @source_object = NULL
+SET @target_object = NULL
+
+EXEC logs.usp_ExecutionLog_insert 
+ @execution_instance_guid = @execution_instance_guid
+ , @ssis_execution_id = @ssis_execution_id
+ , @sub_execution_id = @sub_execution_id
+ , @parent_execution_log_id = @parent_execution_log_id
+ , @current_execution_guid = @current_execution_guid
+ , @proc_id = @proc_id
+ , @proc_schema_name = @proc_schema_name
+ , @proc_name = @proc_name
+ , @event_info = @event_info
+ , @step_id = @step_id
+ , @step_name = @step_name
+ , @source_object = @source_object
+ , @target_object = @target_object
+ , @inserted = @rows
+-- Logging END --
+END;
 
 /*{"ReportUspStep":[{"Number":400,"Name":"[docs].[usp_AntoraExport_navigation]","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
 EXEC [docs].[usp_AntoraExport_navigation]

@@ -4,6 +4,7 @@
 
 // tag::existing_properties[]
 :ExistsProperty--antorareferencinglist:
+:ExistsProperty--description:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
 :ExistsProperty--ms_description:
@@ -454,7 +455,7 @@ user table
 --
 * PK, Unique, Real: 0, 0, 0
 * ++FK_RepoObjectSource_QueryPlan__RepoObject++ +
-referenced: xref:repo.RepoObject.adoc[], xref:repo.RepoObject.adoc#index-PK_RepoObject[+PK_RepoObject+]
+
 * is disabled
 
 // end::AntoraIndexList[]
@@ -490,6 +491,26 @@ source: property.RepoObjectProperty_cross As rop_cross
 * xref:reference.RepoObjectColumn_reference_QueryPlan.adoc[]
 * xref:reference.usp_RepoObjectSource_QueryPlan.adoc[]
 // end::antorareferencinglist[]
+
+
+=== Description
+
+// tag::description[]
+references on column level
+target: repo.RepoObjectSource_from_query_plan
+source: query plan analysis of the execution of a query like
+`Vselect top (1) * into #foo from (SELECT * FROM sss.aaa)`
+
+First update query plan and write them into repo.RepoObject
+then analyse the query plans and update results into 
+
+EXEC [repo].[usp_RepoObject__update_SysObject_query_plan]
+EXEC [repo].[usp_RepoObjectSource_from_query_plan__update]
+
+some query plans can't be extracted, some can be extracted but not analyzed
+in this case mark the RepoObject in repo.RepoObject
+SET [has_execution_plan_issue] = 1
+// end::description[]
 
 
 === exampleUsage
@@ -560,6 +581,13 @@ source: property.RepoObjectProperty_cross As rop_cross
 // tag::has_history_columns[]
 
 // end::has_history_columns[]
+
+
+=== InheritanceType
+
+// tag::inheritancetype[]
+
+// end::inheritancetype[]
 
 
 === is_persistence
