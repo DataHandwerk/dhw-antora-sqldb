@@ -41,7 +41,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-09 00:22:01
+2021-09-25 09:37:03
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -317,10 +317,10 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-idx_RepoObject_ColumnList_1]
+[#index-idx_RepoObject_ColumnList2x_1]
 === idx_RepoObject_ColumnList++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -911,6 +911,7 @@ Select
                                                        -- to avoid a mix '- #' or '- ~'
                                                        Iif(roc.Repo_is_nullable = 0, '- ', Null)
                                                End
+                                             , Iif(roc.tabcol_IsHidden = 1, '<color:gray>', Null)
                                              --PK in bold
                                              , '**'
                                              , docs.fs_cleanStringForPuml ( roc.Column_name )
@@ -922,6 +923,7 @@ Select
                                              -- WHEN roc.[Repo_is_computed] = 1
                                              --  THEN ' <<calc' + IIF(roc.[Repo_is_persisted] = 1, ' (Persisted)', '') + '>>'
                                              -- END
+                                             , Iif(roc.tabcol_IsHidden = 1, '</color>', Null)
                                              , Char ( 13 ) + Char ( 10 )
                                            )
                             End
@@ -954,6 +956,7 @@ Select
                                                        -- to avoid a mix '- #' or '- ~'
                                                        Iif(roc.Repo_is_nullable = 0, '- ', Null)
                                                End
+                                             , Iif(roc.tabcol_IsHidden = 1, '<color:gray>', Null)
                                              , docs.fs_cleanStringForPuml ( roc.Column_name )
                                              --we add () to get a puml "method" to get unique icons
                                              , ' : (' + roc.Repo_user_type_fullname + ')'
@@ -962,6 +965,7 @@ Select
                                              -- WHEN roc.[Repo_is_computed] = 1
                                              --  THEN ' <<calc' + IIF(roc.[Repo_is_persisted] = 1, ' (Persisted)', '') + '>>'
                                              -- END
+                                             , Iif(roc.tabcol_IsHidden = 1, '</color>', Null)
                                              , Char ( 13 ) + Char ( 10 )
                                            )
                             End
@@ -994,6 +998,7 @@ Select
                                                        -- to avoid a mix '- #' or '- ~'
                                                        Iif(roc.Repo_is_nullable = 0, '- ', Null)
                                                End
+                                             , Iif(roc.tabcol_IsHidden = 1, '<color:gray>', Null)
                                              , docs.fs_cleanStringForPuml ( roc.Column_name )
                                              --we add () to get a puml "method" to get unique icons
                                              , ' : (' + roc.Repo_user_type_fullname + ')'
@@ -1002,6 +1007,7 @@ Select
                                              -- WHEN roc.[Repo_is_computed] = 1
                                              --  THEN ' <<calc' + IIF(roc.[Repo_is_persisted] = 1, ' (Persisted)', '') + '>>'
                                              -- END
+                                             , Iif(roc.tabcol_IsHidden = 1, '</color>', Null)
                                              , Char ( 13 ) + Char ( 10 )
                                            )
                             End
@@ -1034,6 +1040,7 @@ Select
                                                        -- to avoid a mix '- #' or '- ~'
                                                        Iif(roc.Repo_is_nullable = 0, '- ', Null)
                                                End
+                                             , Iif(roc.tabcol_IsHidden = 1, '<color:gray>', Null)
                                              , docs.fs_cleanStringForPuml ( roc.Column_name )
                                              --we add () to get a puml "method" to get unique icons
                                              , ' : (' + roc.Repo_user_type_fullname + ')'
@@ -1042,6 +1049,7 @@ Select
                                              -- WHEN roc.[Repo_is_computed] = 1
                                              --  THEN ' <<calc' + IIF(roc.[Repo_is_persisted] = 1, ' (Persisted)', '') + '>>'
                                              -- END
+                                             , Iif(roc.tabcol_IsHidden = 1, '</color>', Null)
                                              , Char ( 13 ) + Char ( 10 )
                                            )
                             End
@@ -1073,6 +1081,7 @@ Select
                                                        -- to avoid a mix '- #' or '- ~'
                                                        Iif(roc.Repo_is_nullable = 0, '- ', Null)
                                                End
+                                             , Iif(roc.tabcol_IsHidden = 1, '<color:gray>', Null)
                                              , docs.fs_cleanStringForPuml ( roc.Column_name )
                                              --we add () to get a puml "method" to get unique icons
                                              , ' : (' + roc.Repo_user_type_fullname + ')'
@@ -1081,6 +1090,7 @@ Select
                                              -- WHEN roc.[Repo_is_computed] = 1
                                              --  THEN ' <<calc' + IIF(roc.[Repo_is_persisted] = 1, ' (Persisted)', '') + '>>'
                                              -- END
+                                             , Iif(roc.tabcol_IsHidden = 1, '</color>', Null)
                                              , Char ( 13 ) + Char ( 10 )
                                            )
                             End
@@ -1097,11 +1107,13 @@ From
 Where
     --not [is_query_plan_expression], these are not real columms
     roc.is_query_plan_expression Is Null
+    --And roc.is_external         = 0
     --we need the datatype, or it should be computed
     And
     (
         Not roc.Repo_user_type_fullname Is Null
         Or roc.Repo_is_computed = 1
+        Or roc.is_external      = 1
     )
 ----exclude system columns like 'RowNumber-2662979B-1795-4F74-8F37-6A1BA8059B61'
 ----all they have ssas_Type = 3

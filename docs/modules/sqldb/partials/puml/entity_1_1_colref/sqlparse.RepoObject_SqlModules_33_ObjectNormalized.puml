@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:sqlparse.RepoObject_SqlModules_20_statement_children.adoc[prefix=..]" as sqlparse.RepoObject_SqlModules_20_statement_children << V >> {
+entity "puml-link:dhw:sqldb:sqlparse.RepoObject_SqlModules_20_statement_children.adoc[]" as sqlparse.RepoObject_SqlModules_20_statement_children << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   - **json_key** : (nvarchar(4000))
   --
@@ -71,7 +72,7 @@ entity "puml-link:sqlparse.RepoObject_SqlModules_20_statement_children.adoc[pref
   --
 }
 
-entity "puml-link:sqlparse.RepoObject_SqlModules_33_ObjectNormalized.adoc[prefix=..]" as sqlparse.RepoObject_SqlModules_33_ObjectNormalized << V >> {
+entity "puml-link:dhw:sqldb:sqlparse.RepoObject_SqlModules_33_ObjectNormalized.adoc[]" as sqlparse.RepoObject_SqlModules_33_ObjectNormalized << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   **normalized** : (nvarchar(max))
   --
@@ -81,8 +82,7 @@ entity "puml-link:sqlparse.RepoObject_SqlModules_33_ObjectNormalized.adoc[prefix
   --
 }
 
-entity "puml-link:sqlparse.RepoObject_SqlModules_39_object.adoc[prefix=..]" as sqlparse.RepoObject_SqlModules_39_object << V >> {
-  - **RepoObject_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:sqlparse.RepoObject_SqlModules_39_object.adoc[]" as sqlparse.RepoObject_SqlModules_39_object << V >> {
   --
   has_GroupBy : (int)
   is_1_create : (int)
@@ -102,6 +102,7 @@ entity "puml-link:sqlparse.RepoObject_SqlModules_39_object.adoc[prefix=..]" as s
   Min_RowNumber_GroupBy : (bigint)
   Min_RowNumber_IdentifierList : (bigint)
   Min_RowNumber_Where : (bigint)
+  - RepoObject_guid : (uniqueidentifier)
   SysObject_fullname : (nvarchar(261))
   --
   --
@@ -109,15 +110,10 @@ entity "puml-link:sqlparse.RepoObject_SqlModules_39_object.adoc[prefix=..]" as s
 
 sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_33_ObjectNormalized
 sqlparse.RepoObject_SqlModules_33_ObjectNormalized <.. sqlparse.RepoObject_SqlModules_39_object
-sqlparse.RepoObject_SqlModules_20_statement_children::normalized <-- sqlparse.RepoObject_SqlModules_33_ObjectNormalized::normalized
-sqlparse.RepoObject_SqlModules_20_statement_children::RepoObject_guid <-- sqlparse.RepoObject_SqlModules_33_ObjectNormalized::RepoObject_guid
-sqlparse.RepoObject_SqlModules_20_statement_children::SysObject_fullname <-- sqlparse.RepoObject_SqlModules_33_ObjectNormalized::SysObject_fullname
-sqlparse.RepoObject_SqlModules_33_ObjectNormalized::Min_RowNumber_per_normalized <-- sqlparse.RepoObject_SqlModules_39_object::Min_RowNumber_From
-sqlparse.RepoObject_SqlModules_33_ObjectNormalized::Min_RowNumber_per_normalized <-- sqlparse.RepoObject_SqlModules_39_object::Min_RowNumber_GroupBy
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"sqlparse.RepoObject_SqlModules_20_statement_children::normalized" <-- "sqlparse.RepoObject_SqlModules_33_ObjectNormalized::normalized"
+"sqlparse.RepoObject_SqlModules_20_statement_children::RepoObject_guid" <-- "sqlparse.RepoObject_SqlModules_33_ObjectNormalized::RepoObject_guid"
+"sqlparse.RepoObject_SqlModules_20_statement_children::SysObject_fullname" <-- "sqlparse.RepoObject_SqlModules_33_ObjectNormalized::SysObject_fullname"
+"sqlparse.RepoObject_SqlModules_33_ObjectNormalized::Min_RowNumber_per_normalized" <-- "sqlparse.RepoObject_SqlModules_39_object::Min_RowNumber_From"
+"sqlparse.RepoObject_SqlModules_33_ObjectNormalized::Min_RowNumber_per_normalized" <-- "sqlparse.RepoObject_SqlModules_39_object::Min_RowNumber_GroupBy"
 @enduml
 

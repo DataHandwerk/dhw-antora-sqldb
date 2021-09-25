@@ -22,59 +22,57 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:repo.Index_gross.adoc[prefix=..]" as repo.Index_gross << V >> {
+entity "puml-link:dhw:sqldb:repo.Index_gross.adoc[]" as repo.Index_gross << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.Index_Settings.adoc[]" as repo.Index_Settings << U >> {
   - **index_guid** : (uniqueidentifier)
   --
 }
 
-entity "puml-link:repo.Index_Settings.adoc[prefix=..]" as repo.Index_Settings << U >> {
-  - **index_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:repo.Index_Settings_ForUpdate.adoc[]" as repo.Index_Settings_ForUpdate << V >> {
   --
 }
 
-entity "puml-link:repo.Index_Settings_ForUpdate.adoc[prefix=..]" as repo.Index_Settings_ForUpdate << V >> {
+entity "puml-link:dhw:sqldb:repo.Index_SqlConstraint_PkUq.adoc[]" as repo.Index_SqlConstraint_PkUq << V >> {
   --
 }
 
-entity "puml-link:repo.Index_SqlConstraint_PkUq.adoc[prefix=..]" as repo.Index_SqlConstraint_PkUq << V >> {
-  **index_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:repo.Index_virtual_ForUpdate.adoc[]" as repo.Index_virtual_ForUpdate << V >> {
   --
 }
 
-entity "puml-link:repo.Index_virtual_ForUpdate.adoc[prefix=..]" as repo.Index_virtual_ForUpdate << V >> {
-  - **index_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:repo.Index_virtual_SysObject.adoc[]" as repo.Index_virtual_SysObject << V >> {
   --
 }
 
-entity "puml-link:repo.Index_virtual_SysObject.adoc[prefix=..]" as repo.Index_virtual_SysObject << V >> {
-  - **index_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_check.adoc[]" as repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_check << V >> {
   --
 }
 
-entity "puml-link:repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_check.adoc[prefix=..]" as repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_check << V >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject_gross.adoc[]" as repo.RepoObject_gross << V >> {
   --
 }
 
-entity "puml-link:repo.RepoObject_gross.adoc[prefix=..]" as repo.RepoObject_gross << V >> {
-  - **RepoObject_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:repo.usp_Index_finish.adoc[]" as repo.usp_Index_finish << P >> {
   --
 }
 
-entity "puml-link:repo.usp_Index_finish.adoc[prefix=..]" as repo.usp_Index_finish << P >> {
+entity "puml-link:dhw:sqldb:repo.usp_Index_Settings.adoc[]" as repo.usp_Index_Settings << P >> {
   --
 }
 
-entity "puml-link:repo.usp_Index_Settings.adoc[prefix=..]" as repo.usp_Index_Settings << P >> {
+entity "puml-link:dhw:sqldb:repo.usp_Index_virtual_set.adoc[]" as repo.usp_Index_virtual_set << P >> {
   --
 }
 
-entity "puml-link:repo.usp_Index_virtual_set.adoc[prefix=..]" as repo.usp_Index_virtual_set << P >> {
-  --
-}
-
+repo.Index_Settings <.. repo.Index_virtual_SysObject
+repo.Index_Settings <.. repo.Index_SqlConstraint_PkUq
 repo.Index_Settings <.. repo.RepoObject_gross
 repo.Index_Settings <.. repo.Index_gross
 repo.Index_Settings <.. repo.usp_Index_Settings
@@ -83,12 +81,5 @@ repo.Index_Settings <.. repo.usp_Index_finish
 repo.Index_Settings <.. repo.Index_virtual_ForUpdate
 repo.Index_Settings <.. repo.Index_Settings_ForUpdate
 repo.Index_Settings <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_check
-repo.Index_Settings <.. repo.Index_virtual_SysObject
-repo.Index_Settings <.. repo.Index_SqlConstraint_PkUq
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
 @enduml
 

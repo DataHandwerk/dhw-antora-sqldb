@@ -40,7 +40,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-06 22:28:39
+2021-09-22 07:41:40
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -144,6 +144,34 @@ view
 |===
 
 
+[#column-referenced_external_AntoraComponent]
+=== referenced_external_AntoraComponent
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|referenced_external_AntoraComponent
+|nvarchar(128)
+|NULL
+|
+|
+|===
+
+
+[#column-referenced_external_AntoraModule]
+=== referenced_external_AntoraModule
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|referenced_external_AntoraModule
+|nvarchar(128)
+|NULL
+|
+|
+|===
+
+
 [#column-referenced_id]
 === referenced_id
 
@@ -152,6 +180,20 @@ view
 |
 |referenced_id
 |int
+|NULL
+|
+|
+|===
+
+
+[#column-referenced_is_external]
+=== referenced_is_external
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|referenced_is_external
+|tinyint
 |NULL
 |
 |
@@ -252,6 +294,34 @@ view
 |===
 
 
+[#column-referencing_external_AntoraComponent]
+=== referencing_external_AntoraComponent
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|referencing_external_AntoraComponent
+|nvarchar(128)
+|NULL
+|
+|
+|===
+
+
+[#column-referencing_external_AntoraModule]
+=== referencing_external_AntoraModule
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|referencing_external_AntoraModule
+|nvarchar(128)
+|NULL
+|
+|
+|===
+
+
 [#column-referencing_id]
 === referencing_id
 
@@ -260,6 +330,20 @@ view
 |
 |referencing_id
 |int
+|NULL
+|
+|
+|===
+
+
+[#column-referencing_is_external]
+=== referencing_is_external
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|referencing_is_external
+|tinyint
 |NULL
 |
 |
@@ -357,6 +441,12 @@ view
 
 
 
+
+
+
+
+
+
 // end::AntoraPkColumnTableRows[]
 
 == AntoraNonPkColumnTableRows
@@ -412,8 +502,29 @@ view
 |
 
 |
+|<<column-referenced_external_AntoraComponent>>
+|nvarchar(128)
+|NULL
+|
+|
+
+|
+|<<column-referenced_external_AntoraModule>>
+|nvarchar(128)
+|NULL
+|
+|
+
+|
 |<<column-referenced_id>>
 |int
+|NULL
+|
+|
+
+|
+|<<column-referenced_is_external>>
+|tinyint
 |NULL
 |
 |
@@ -461,8 +572,29 @@ view
 |
 
 |
+|<<column-referencing_external_AntoraComponent>>
+|nvarchar(128)
+|NULL
+|
+|
+
+|
+|<<column-referencing_external_AntoraModule>>
+|nvarchar(128)
+|NULL
+|
+|
+
+|
 |<<column-referencing_id>>
 |int
+|NULL
+|
+|
+
+|
+|<<column-referencing_is_external>>
+|tinyint
 |NULL
 |
 |
@@ -524,7 +656,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:reference.RepoObjectColumn_reference_additional_internal.adoc[]
+* xref:reference.RepoObjectColumn_reference_additional.adoc[]
 * xref:reference.RepoObjectColumn_reference_Persistence.adoc[]
 * xref:reference.RepoObjectColumn_reference_SqlExpressionDependencies.adoc[]
 * xref:reference.RepoObjectColumn_reference_SqlModules.adoc[]
@@ -766,7 +898,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 === ReferencedObjectList
 
 // tag::referencedobjectlist[]
-* [reference].[RepoObjectColumn_reference_additional_internal]
+* [reference].[RepoObjectColumn_reference_additional]
 * [reference].[RepoObjectColumn_reference_Persistence]
 * [reference].[RepoObjectColumn_reference_SqlExpressionDependencies]
 * [reference].[RepoObjectColumn_reference_SqlModules]
@@ -875,6 +1007,12 @@ Select
   , definition
   , is_referencing_object_equal_referenced_object
   , is_referenced_object
+  , referenced_external_AntoraComponent  = Null
+  , referenced_external_AntoraModule     = Null
+  , referenced_is_external               = Cast(Null As TinyInt)
+  , referencing_external_AntoraComponent = Null
+  , referencing_external_AntoraModule    = Null
+  , referencing_is_external              = Cast(Null As TinyInt)
 From
     reference.RepoObjectColumn_reference_SqlExpressionDependencies
 --[repo].[RepoObjectColumn_reference__persistence]
@@ -906,6 +1044,12 @@ Select
   , definition
   , is_referencing_object_equal_referenced_object
   , is_referenced_object
+  , referenced_external_AntoraComponent  = Null
+  , referenced_external_AntoraModule     = Null
+  , referenced_is_external               = Null
+  , referencing_external_AntoraComponent = Null
+  , referencing_external_AntoraModule    = Null
+  , referencing_is_external              = Null
 From
     reference.RepoObjectColumn_reference_Persistence
 Union All
@@ -934,6 +1078,12 @@ Select
   , definition
   , is_referencing_object_equal_referenced_object
   , is_referenced_object
+  , referenced_external_AntoraComponent  = Null
+  , referenced_external_AntoraModule     = Null
+  , referenced_is_external               = Null
+  , referencing_external_AntoraComponent = Null
+  , referencing_external_AntoraModule    = Null
+  , referencing_is_external              = Null
 From
     reference.RepoObjectColumn_reference_SqlModules
 Union All
@@ -962,6 +1112,12 @@ Select
   , definition
   , is_referencing_object_equal_referenced_object
   , is_referenced_object
+  , referenced_external_AntoraComponent  = Null
+  , referenced_external_AntoraModule     = Null
+  , referenced_is_external               = Null
+  , referencing_external_AntoraComponent = Null
+  , referencing_external_AntoraModule    = Null
+  , referencing_is_external              = Null
 From
     reference.RepoObjectColumn_reference_virtual
 Union All
@@ -990,8 +1146,14 @@ Select
   , definition
   , is_referencing_object_equal_referenced_object
   , is_referenced_object
+  , referenced_external_AntoraComponent
+  , referenced_external_AntoraModule
+  , referenced_is_external
+  , referencing_external_AntoraComponent
+  , referencing_external_AntoraModule
+  , referencing_is_external
 From
-    reference.RepoObjectColumn_reference_additional_internal
+    reference.RepoObjectColumn_reference_additional
 
 --UNION ALL
 ----repo.RepoObjectColumn_reference__first_result_set

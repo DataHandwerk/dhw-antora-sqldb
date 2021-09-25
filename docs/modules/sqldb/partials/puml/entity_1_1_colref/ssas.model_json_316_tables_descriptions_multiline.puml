@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:ssas.model_json_31_tables_T.adoc[prefix=..]" as ssas.model_json_31_tables_T << U >> {
+entity "puml-link:dhw:sqldb:ssas.model_json_31_tables_T.adoc[]" as ssas.model_json_31_tables_T << U >> {
   - **databasename** : (nvarchar(128))
   **tables_name** : (nvarchar(128))
   --
@@ -36,47 +37,42 @@ entity "puml-link:ssas.model_json_31_tables_T.adoc[prefix=..]" as ssas.model_jso
   tables_description : (nvarchar(max))
   tables_description_ja : (nvarchar(max))
   tables_hierarchies_ja : (nvarchar(max))
-  tables_isHidden : (nvarchar(500))
+  tables_isHidden : (bit)
   tables_measures_ja : (nvarchar(max))
   tables_partitions_ja : (nvarchar(max))
   --
   --
 }
 
-entity "puml-link:ssas.model_json_316_tables_descriptions_multiline.adoc[prefix=..]" as ssas.model_json_316_tables_descriptions_multiline << V >> {
-  - **databasename** : (nvarchar(128))
-  - **tables_name** : (nvarchar(128))
+entity "puml-link:dhw:sqldb:ssas.model_json_316_tables_descriptions_multiline.adoc[]" as ssas.model_json_316_tables_descriptions_multiline << V >> {
   --
+  - databasename : (nvarchar(128))
   - Key : (nvarchar(4000))
   - RepoObject_guid : (uniqueidentifier)
+  - tables_name : (nvarchar(128))
   - Type : (tinyint)
   Value : (nvarchar(max))
   --
   --
 }
 
-entity "puml-link:ssas.model_json_3161_tables_descriptions_StrAgg.adoc[prefix=..]" as ssas.model_json_3161_tables_descriptions_StrAgg << V >> {
-  - **databasename** : (nvarchar(128))
-  - **tables_name** : (nvarchar(128))
+entity "puml-link:dhw:sqldb:ssas.model_json_3161_tables_descriptions_StrAgg.adoc[]" as ssas.model_json_3161_tables_descriptions_StrAgg << V >> {
   --
+  - databasename : (nvarchar(128))
   descriptions_StrAgg : (nvarchar(max))
   - RepoObject_guid : (uniqueidentifier)
+  - tables_name : (nvarchar(128))
   --
   --
 }
 
 ssas.model_json_31_tables_T <.. ssas.model_json_316_tables_descriptions_multiline
 ssas.model_json_316_tables_descriptions_multiline <.. ssas.model_json_3161_tables_descriptions_StrAgg
-ssas.model_json_31_tables_T::databasename <-- ssas.model_json_316_tables_descriptions_multiline::databasename
-ssas.model_json_31_tables_T::RepoObject_guid <-- ssas.model_json_316_tables_descriptions_multiline::RepoObject_guid
-ssas.model_json_31_tables_T::tables_name <-- ssas.model_json_316_tables_descriptions_multiline::tables_name
-ssas.model_json_316_tables_descriptions_multiline::databasename <-- ssas.model_json_3161_tables_descriptions_StrAgg::databasename
-ssas.model_json_316_tables_descriptions_multiline::RepoObject_guid <-- ssas.model_json_3161_tables_descriptions_StrAgg::RepoObject_guid
-ssas.model_json_316_tables_descriptions_multiline::tables_name <-- ssas.model_json_3161_tables_descriptions_StrAgg::tables_name
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"ssas.model_json_31_tables_T::databasename" <-- "ssas.model_json_316_tables_descriptions_multiline::databasename"
+"ssas.model_json_31_tables_T::RepoObject_guid" <-- "ssas.model_json_316_tables_descriptions_multiline::RepoObject_guid"
+"ssas.model_json_31_tables_T::tables_name" <-- "ssas.model_json_316_tables_descriptions_multiline::tables_name"
+"ssas.model_json_316_tables_descriptions_multiline::databasename" <-- "ssas.model_json_3161_tables_descriptions_StrAgg::databasename"
+"ssas.model_json_316_tables_descriptions_multiline::RepoObject_guid" <-- "ssas.model_json_3161_tables_descriptions_StrAgg::RepoObject_guid"
+"ssas.model_json_316_tables_descriptions_multiline::tables_name" <-- "ssas.model_json_3161_tables_descriptions_StrAgg::tables_name"
 @enduml
 

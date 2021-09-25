@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:config.ftv_dwh_database.adoc[prefix=..]" as config.ftv_dwh_database << IF >> {
+entity "puml-link:dhw:sqldb:config.ftv_dwh_database.adoc[]" as config.ftv_dwh_database << IF >> {
   --
   dwh_database_id : (smallint)
   dwh_database_name : (nvarchar(128))
@@ -33,7 +34,7 @@ entity "puml-link:config.ftv_dwh_database.adoc[prefix=..]" as config.ftv_dwh_dat
   --
 }
 
-entity "puml-link:workflow.Workflow_SqlUsp.adoc[prefix=..]" as workflow.Workflow_SqlUsp << V >> {
+entity "puml-link:dhw:sqldb:workflow.Workflow_SqlUsp.adoc[]" as workflow.Workflow_SqlUsp << V >> {
   --
   - SqlUsp : (nvarchar(max))
   UspList : (nvarchar(max))
@@ -43,7 +44,7 @@ entity "puml-link:workflow.Workflow_SqlUsp.adoc[prefix=..]" as workflow.Workflow
   --
 }
 
-entity "puml-link:workflow.Workflow_UspList.adoc[prefix=..]" as workflow.Workflow_UspList << V >> {
+entity "puml-link:dhw:sqldb:workflow.Workflow_UspList.adoc[]" as workflow.Workflow_UspList << V >> {
   --
   UspList : (nvarchar(max))
   - Workflow_id : (int)
@@ -54,13 +55,8 @@ entity "puml-link:workflow.Workflow_UspList.adoc[prefix=..]" as workflow.Workflo
 
 config.ftv_dwh_database <.. workflow.Workflow_SqlUsp
 workflow.Workflow_UspList <.. workflow.Workflow_SqlUsp
-workflow.Workflow_UspList::UspList <-- workflow.Workflow_SqlUsp::UspList
-workflow.Workflow_UspList::Workflow_id <-- workflow.Workflow_SqlUsp::Workflow_id
-workflow.Workflow_UspList::Workflow_Name <-- workflow.Workflow_SqlUsp::Workflow_Name
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"workflow.Workflow_UspList::UspList" <-- "workflow.Workflow_SqlUsp::UspList"
+"workflow.Workflow_UspList::Workflow_id" <-- "workflow.Workflow_SqlUsp::Workflow_id"
+"workflow.Workflow_UspList::Workflow_Name" <-- "workflow.Workflow_SqlUsp::Workflow_Name"
 @enduml
 

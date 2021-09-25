@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:property.RepoObjectProperty.adoc[prefix=..]" as property.RepoObjectProperty << U >> {
+entity "puml-link:dhw:sqldb:property.RepoObjectProperty.adoc[]" as property.RepoObjectProperty << U >> {
   - **RepoObjectProperty_id** : (int)
   --
   inheritance : (tinyint)
@@ -41,21 +42,25 @@ entity "puml-link:property.RepoObjectProperty.adoc[prefix=..]" as property.RepoO
   --
 }
 
-entity "puml-link:property.usp_RepoObjectProperty_set.adoc[prefix=..]" as property.usp_RepoObjectProperty_set << P >> {
+entity "puml-link:dhw:sqldb:property.usp_RepoObjectProperty_set.adoc[]" as property.usp_RepoObjectProperty_set << P >> {
   --
   --
   --
 }
 
-entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
   has_execution_plan_issue : (bit)
   has_get_referenced_issue : (bit)
+  Inheritance_Source_fullname : (nvarchar(261))
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
   InheritanceDefinition : (nvarchar(4000))
   InheritanceType : (tinyint)
   - is_DocsExclude : (bit)
+  - is_external : (bit)
   is_repo_managed : (bit)
   is_required_ObjectMerge : (bit)
   - is_ssas : (bit)
@@ -92,11 +97,6 @@ entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
 
 property.RepoObjectProperty <.. property.usp_RepoObjectProperty_set
 repo.RepoObject <.. property.usp_RepoObjectProperty_set
-
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
 
 @enduml
 

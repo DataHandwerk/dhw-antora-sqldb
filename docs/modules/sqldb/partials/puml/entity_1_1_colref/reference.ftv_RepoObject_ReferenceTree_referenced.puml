@@ -22,27 +22,54 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:reference.ftv_RepoObject_ReferenceTree_referenced.adoc[prefix=..]" as reference.ftv_RepoObject_ReferenceTree_referenced << IF >> {
+entity "puml-link:dhw:sqldb:reference.ftv_RepoObject_ReferenceTree_referenced.adoc[]" as reference.ftv_RepoObject_ReferenceTree_referenced << IF >> {
   --
   Referenced_Depth : (int)
   Referenced_fullname : (nvarchar(261))
   Referenced_fullname2 : (nvarchar(257))
   Referenced_guid : (uniqueidentifier)
+  referenced_is_DocsOutput : (int)
   Referenced_type : (char(2))
   Referencing_Depth : (int)
   Referencing_fullname : (nvarchar(261))
   Referencing_fullname2 : (nvarchar(257))
   Referencing_guid : (uniqueidentifier)
+  referencing_is_DocsOutput : (int)
   Referencing_type : (varchar(2))
   RepoObject_guid : (uniqueidentifier)
   --
   --
 }
 
-entity "puml-link:reference.RepoObject_ReferenceTree_referenced.adoc[prefix=..]" as reference.RepoObject_ReferenceTree_referenced << V >> {
+entity "puml-link:dhw:sqldb:reference.RepoObject_ReferencedReferencing.adoc[]" as reference.RepoObject_ReferencedReferencing << V >> {
+  --
+  - referenced_AntoraXref : (nvarchar(max))
+  referenced_external_AntoraComponent : (nvarchar(128))
+  referenced_external_AntoraModule : (nvarchar(128))
+  - Referenced_fullname : (nvarchar(261))
+  - Referenced_fullname2 : (nvarchar(257))
+  - Referenced_guid : (uniqueidentifier)
+  referenced_is_DocsOutput : (int)
+  - referenced_is_external : (bit)
+  Referenced_type : (char(2))
+  - referencing_AntoraXref : (nvarchar(max))
+  referencing_external_AntoraComponent : (nvarchar(128))
+  referencing_external_AntoraModule : (nvarchar(128))
+  - Referencing_fullname : (nvarchar(261))
+  - Referencing_fullname2 : (nvarchar(257))
+  - Referencing_guid : (uniqueidentifier)
+  referencing_is_DocsOutput : (int)
+  - referencing_is_external : (bit)
+  Referencing_type : (varchar(2))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.RepoObject_ReferenceTree_referenced.adoc[]" as reference.RepoObject_ReferenceTree_referenced << V >> {
   **RepoObject_guid** : (uniqueidentifier)
   **Referenced_Depth** : (int)
   **Referencing_Depth** : (int)
@@ -51,15 +78,17 @@ entity "puml-link:reference.RepoObject_ReferenceTree_referenced.adoc[prefix=..]"
   --
   Referenced_fullname : (nvarchar(261))
   Referenced_fullname2 : (nvarchar(257))
+  referenced_is_DocsOutput : (int)
   Referenced_type : (char(2))
   Referencing_fullname : (nvarchar(261))
   Referencing_fullname2 : (nvarchar(257))
+  referencing_is_DocsOutput : (int)
   Referencing_type : (varchar(2))
   --
   --
 }
 
-entity "puml-link:reference.RepoObject_ReferenceTree_referenced_30_0.adoc[prefix=..]" as reference.RepoObject_ReferenceTree_referenced_30_0 << V >> {
+entity "puml-link:dhw:sqldb:reference.RepoObject_ReferenceTree_referenced_30_0.adoc[]" as reference.RepoObject_ReferenceTree_referenced_30_0 << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   **Referenced_guid** : (uniqueidentifier)
   --
@@ -72,28 +101,9 @@ entity "puml-link:reference.RepoObject_ReferenceTree_referenced_30_0.adoc[prefix
   --
 }
 
-entity "puml-link:reference.RepoObject_ReferencingReferenced.adoc[prefix=..]" as reference.RepoObject_ReferencingReferenced << V >> {
-  - **Referenced_guid** : (uniqueidentifier)
-  - **Referencing_guid** : (uniqueidentifier)
-  --
-  - Referenced_fullname : (nvarchar(261))
-  - Referenced_fullname2 : (nvarchar(257))
-  Referenced_type : (char(2))
-  - Referencing_fullname : (nvarchar(261))
-  - Referencing_fullname2 : (nvarchar(257))
-  Referencing_type : (varchar(2))
-  --
-  --
-}
-
 reference.ftv_RepoObject_ReferenceTree_referenced <.. reference.RepoObject_ReferenceTree_referenced
 reference.ftv_RepoObject_ReferenceTree_referenced <.. reference.RepoObject_ReferenceTree_referenced_30_0
-reference.RepoObject_ReferencingReferenced <.. reference.ftv_RepoObject_ReferenceTree_referenced
-
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
+reference.RepoObject_ReferencedReferencing <.. reference.ftv_RepoObject_ReferenceTree_referenced
 
 @enduml
 

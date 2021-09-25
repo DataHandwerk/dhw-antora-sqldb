@@ -43,7 +43,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-09 11:10:25
+2021-09-21 19:32:34
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -405,10 +405,10 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-idx_RepoObject_Adoc_1]
+[#index-idx_RepoObject_Adoc2x_1]
 === idx_RepoObject_Adoc++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -838,8 +838,9 @@ Select
                      ':ExistsProperty--AntoraParameterList:' + Char ( 13 ) + Char ( 10 )
              End
            , Case
-                 When Max ( ro.SysObject_type ) In
-                 ( 'U', 'V', 'IF' )
+                 --When Max ( ro.SysObject_type ) In
+                 --( 'U', 'V', 'IF' )
+                 When Max ( clist.AntoraColumnDetails ) <> ''
                      Then
                      ':ExistsProperty--Columns:' + Char ( 13 ) + Char ( 10 )
              End
@@ -1089,7 +1090,9 @@ From
 Group By
     ro.RepoObject_guid
 Having
-    ( Max ( is_DocsOutput ) = 1 )
+    Max ( is_DocsOutput )               = 1
+    And Max ( Cast(is_external As Int)) = 0
+
 ----
 =======
 // end::sql_modules_definition[]

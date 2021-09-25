@@ -22,18 +22,23 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
   has_execution_plan_issue : (bit)
   has_get_referenced_issue : (bit)
+  Inheritance_Source_fullname : (nvarchar(261))
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
   InheritanceDefinition : (nvarchar(4000))
   InheritanceType : (tinyint)
   - is_DocsExclude : (bit)
+  - is_external : (bit)
   is_repo_managed : (bit)
   is_required_ObjectMerge : (bit)
   - is_ssas : (bit)
@@ -68,7 +73,7 @@ entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
   --
 }
 
-entity "puml-link:repo.RepoObjectColumn.adoc[prefix=..]" as repo.RepoObjectColumn << U >> {
+entity "puml-link:dhw:sqldb:repo.RepoObjectColumn.adoc[]" as repo.RepoObjectColumn << U >> {
   - **RepoObjectColumn_guid** : (uniqueidentifier)
   --
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
@@ -110,7 +115,7 @@ entity "puml-link:repo.RepoObjectColumn.adoc[prefix=..]" as repo.RepoObjectColum
   --
 }
 
-entity "puml-link:repo.SysColumn_RepoObjectColumn_via_guid.adoc[prefix=..]" as repo.SysColumn_RepoObjectColumn_via_guid << V >> {
+entity "puml-link:dhw:sqldb:repo.SysColumn_RepoObjectColumn_via_guid.adoc[]" as repo.SysColumn_RepoObjectColumn_via_guid << V >> {
   --
   default_definition : (nvarchar(max))
   default_is_system_named : (bit)
@@ -146,7 +151,7 @@ entity "puml-link:repo.SysColumn_RepoObjectColumn_via_guid.adoc[prefix=..]" as r
   Repo_user_type_fullname : (nvarchar(128))
   Repo_user_type_name : (nvarchar(128))
   Repo_uses_database_collation : (bit)
-  RepoObject_fullname : (nvarchar(261))
+  - RepoObject_fullname : (nvarchar(261))
   RepoObject_guid : (uniqueidentifier)
   RepoObjectColumn_guid : (uniqueidentifier)
   RepoObjectColumn_name : (nvarchar(128))
@@ -154,7 +159,7 @@ entity "puml-link:repo.SysColumn_RepoObjectColumn_via_guid.adoc[prefix=..]" as r
   seed_value : (sql_variant)
   - SysObject_column_id : (int)
   SysObject_column_name : (sysname)
-  SysObject_fullname : (nvarchar(261))
+  - SysObject_fullname : (nvarchar(261))
   - SysObject_id : (int)
   SysObject_name : (nvarchar(128))
   SysObject_RepoObject_guid : (uniqueidentifier)
@@ -170,13 +175,13 @@ entity "puml-link:repo.SysColumn_RepoObjectColumn_via_guid.adoc[prefix=..]" as r
   --
 }
 
-entity "puml-link:repo.usp_sync_guid_RepoObjectColumn.adoc[prefix=..]" as repo.usp_sync_guid_RepoObjectColumn << P >> {
+entity "puml-link:dhw:sqldb:repo.usp_sync_guid_RepoObjectColumn.adoc[]" as repo.usp_sync_guid_RepoObjectColumn << P >> {
   --
   --
   --
 }
 
-entity "puml-link:repo_sys.SysColumn.adoc[prefix=..]" as repo_sys.SysColumn << V >> {
+entity "puml-link:dhw:sqldb:repo_sys.SysColumn.adoc[]" as repo_sys.SysColumn << V >> {
   --
   collation_name : (sysname)
   column_encryption_key_database_name : (sysname)
@@ -242,63 +247,58 @@ repo.RepoObject <.. repo.SysColumn_RepoObjectColumn_via_guid
 repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_guid
 repo.SysColumn_RepoObjectColumn_via_guid <.. repo.usp_sync_guid_RepoObjectColumn
 repo_sys.SysColumn <.. repo.SysColumn_RepoObjectColumn_via_guid
-repo.RepoObject::is_repo_managed <-- repo.SysColumn_RepoObjectColumn_via_guid::is_repo_managed
-repo.RepoObject::RepoObject_fullname <-- repo.SysColumn_RepoObjectColumn_via_guid::RepoObject_fullname
-repo.RepoObject::SysObject_fullname <-- repo.SysColumn_RepoObjectColumn_via_guid::SysObject_fullname
-repo.RepoObjectColumn::has_different_sys_names <-- repo.SysColumn_RepoObjectColumn_via_guid::has_different_sys_names
-repo.RepoObjectColumn::is_query_plan_expression <-- repo.SysColumn_RepoObjectColumn_via_guid::is_query_plan_expression
-repo.RepoObjectColumn::is_RepoObjectColumn_name_uniqueidentifier <-- repo.SysColumn_RepoObjectColumn_via_guid::is_RepoObjectColumn_name_uniqueidentifier
-repo.RepoObjectColumn::is_SysObjectColumn_missing <-- repo.SysColumn_RepoObjectColumn_via_guid::is_SysObjectColumn_missing
-repo.RepoObjectColumn::is_SysObjectColumn_name_uniqueidentifier <-- repo.SysColumn_RepoObjectColumn_via_guid::is_SysObjectColumn_name_uniqueidentifier
-repo.RepoObjectColumn::persistence_source_RepoObjectColumn_guid <-- repo.SysColumn_RepoObjectColumn_via_guid::persistence_source_RepoObjectColumn_guid
-repo.RepoObjectColumn::Referencing_Count <-- repo.SysColumn_RepoObjectColumn_via_guid::Referencing_Count
-repo.RepoObjectColumn::Repo_default_definition <-- repo.SysColumn_RepoObjectColumn_via_guid::Repo_default_definition
-repo.RepoObjectColumn::Repo_default_is_system_named <-- repo.SysColumn_RepoObjectColumn_via_guid::Repo_default_is_system_named
-repo.RepoObjectColumn::Repo_default_name <-- repo.SysColumn_RepoObjectColumn_via_guid::Repo_default_name
-repo.RepoObjectColumn::Repo_definition <-- repo.SysColumn_RepoObjectColumn_via_guid::Repo_definition
-repo.RepoObjectColumn::Repo_generated_always_type <-- repo.SysColumn_RepoObjectColumn_via_guid::Repo_generated_always_type
-repo.RepoObjectColumn::Repo_graph_type <-- repo.SysColumn_RepoObjectColumn_via_guid::Repo_graph_type
-repo.RepoObjectColumn::Repo_increment_value <-- repo.SysColumn_RepoObjectColumn_via_guid::Repo_increment_value
-repo.RepoObjectColumn::Repo_is_computed <-- repo.SysColumn_RepoObjectColumn_via_guid::Repo_is_computed
-repo.RepoObjectColumn::Repo_is_identity <-- repo.SysColumn_RepoObjectColumn_via_guid::Repo_is_identity
-repo.RepoObjectColumn::Repo_is_nullable <-- repo.SysColumn_RepoObjectColumn_via_guid::Repo_is_nullable
-repo.RepoObjectColumn::Repo_is_persisted <-- repo.SysColumn_RepoObjectColumn_via_guid::Repo_is_persisted
-repo.RepoObjectColumn::Repo_seed_value <-- repo.SysColumn_RepoObjectColumn_via_guid::Repo_seed_value
-repo.RepoObjectColumn::Repo_user_type_fullname <-- repo.SysColumn_RepoObjectColumn_via_guid::Repo_user_type_fullname
-repo.RepoObjectColumn::Repo_user_type_name <-- repo.SysColumn_RepoObjectColumn_via_guid::Repo_user_type_name
-repo.RepoObjectColumn::Repo_uses_database_collation <-- repo.SysColumn_RepoObjectColumn_via_guid::Repo_uses_database_collation
-repo.RepoObjectColumn::RepoObject_guid <-- repo.SysColumn_RepoObjectColumn_via_guid::RepoObject_guid
-repo.RepoObjectColumn::RepoObjectColumn_guid <-- repo.SysColumn_RepoObjectColumn_via_guid::RepoObjectColumn_guid
-repo.RepoObjectColumn::RepoObjectColumn_name <-- repo.SysColumn_RepoObjectColumn_via_guid::RepoObjectColumn_name
-repo.RepoObjectColumn::SysObjectColumn_column_id <-- repo.SysColumn_RepoObjectColumn_via_guid::SysObjectColumn_column_id
-repo.RepoObjectColumn::SysObjectColumn_name <-- repo.SysColumn_RepoObjectColumn_via_guid::SysObjectColumn_name
-repo_sys.SysColumn::default_definition <-- repo.SysColumn_RepoObjectColumn_via_guid::default_definition
-repo_sys.SysColumn::default_is_system_named <-- repo.SysColumn_RepoObjectColumn_via_guid::default_is_system_named
-repo_sys.SysColumn::default_name <-- repo.SysColumn_RepoObjectColumn_via_guid::default_name
-repo_sys.SysColumn::definition <-- repo.SysColumn_RepoObjectColumn_via_guid::definition
-repo_sys.SysColumn::generated_always_type <-- repo.SysColumn_RepoObjectColumn_via_guid::generated_always_type
-repo_sys.SysColumn::graph_type <-- repo.SysColumn_RepoObjectColumn_via_guid::graph_type
-repo_sys.SysColumn::increment_value <-- repo.SysColumn_RepoObjectColumn_via_guid::increment_value
-repo_sys.SysColumn::is_computed <-- repo.SysColumn_RepoObjectColumn_via_guid::is_computed
-repo_sys.SysColumn::is_identity <-- repo.SysColumn_RepoObjectColumn_via_guid::is_identity
-repo_sys.SysColumn::is_nullable <-- repo.SysColumn_RepoObjectColumn_via_guid::is_nullable
-repo_sys.SysColumn::is_persisted <-- repo.SysColumn_RepoObjectColumn_via_guid::is_persisted
-repo_sys.SysColumn::seed_value <-- repo.SysColumn_RepoObjectColumn_via_guid::seed_value
-repo_sys.SysColumn::SysObject_column_id <-- repo.SysColumn_RepoObjectColumn_via_guid::SysObject_column_id
-repo_sys.SysColumn::SysObject_column_name <-- repo.SysColumn_RepoObjectColumn_via_guid::SysObject_column_name
-repo_sys.SysColumn::SysObject_id <-- repo.SysColumn_RepoObjectColumn_via_guid::SysObject_id
-repo_sys.SysColumn::SysObject_name <-- repo.SysColumn_RepoObjectColumn_via_guid::SysObject_name
-repo_sys.SysColumn::SysObject_RepoObject_guid <-- repo.SysColumn_RepoObjectColumn_via_guid::SysObject_RepoObject_guid
-repo_sys.SysColumn::SysObject_RepoObjectColumn_guid <-- repo.SysColumn_RepoObjectColumn_via_guid::SysObject_RepoObjectColumn_guid
-repo_sys.SysColumn::SysObject_schema_name <-- repo.SysColumn_RepoObjectColumn_via_guid::SysObject_schema_name
-repo_sys.SysColumn::SysObject_type <-- repo.SysColumn_RepoObjectColumn_via_guid::SysObject_type
-repo_sys.SysColumn::user_type_fullname <-- repo.SysColumn_RepoObjectColumn_via_guid::user_type_fullname
-repo_sys.SysColumn::user_type_name <-- repo.SysColumn_RepoObjectColumn_via_guid::user_type_name
-repo_sys.SysColumn::uses_database_collation <-- repo.SysColumn_RepoObjectColumn_via_guid::uses_database_collation
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"repo.RepoObject::is_repo_managed" <-- "repo.SysColumn_RepoObjectColumn_via_guid::is_repo_managed"
+"repo.RepoObject::RepoObject_fullname" <-- "repo.SysColumn_RepoObjectColumn_via_guid::RepoObject_fullname"
+"repo.RepoObject::SysObject_fullname" <-- "repo.SysColumn_RepoObjectColumn_via_guid::SysObject_fullname"
+"repo.RepoObjectColumn::has_different_sys_names" <-- "repo.SysColumn_RepoObjectColumn_via_guid::has_different_sys_names"
+"repo.RepoObjectColumn::is_query_plan_expression" <-- "repo.SysColumn_RepoObjectColumn_via_guid::is_query_plan_expression"
+"repo.RepoObjectColumn::is_RepoObjectColumn_name_uniqueidentifier" <-- "repo.SysColumn_RepoObjectColumn_via_guid::is_RepoObjectColumn_name_uniqueidentifier"
+"repo.RepoObjectColumn::is_SysObjectColumn_missing" <-- "repo.SysColumn_RepoObjectColumn_via_guid::is_SysObjectColumn_missing"
+"repo.RepoObjectColumn::is_SysObjectColumn_name_uniqueidentifier" <-- "repo.SysColumn_RepoObjectColumn_via_guid::is_SysObjectColumn_name_uniqueidentifier"
+"repo.RepoObjectColumn::persistence_source_RepoObjectColumn_guid" <-- "repo.SysColumn_RepoObjectColumn_via_guid::persistence_source_RepoObjectColumn_guid"
+"repo.RepoObjectColumn::Referencing_Count" <-- "repo.SysColumn_RepoObjectColumn_via_guid::Referencing_Count"
+"repo.RepoObjectColumn::Repo_default_definition" <-- "repo.SysColumn_RepoObjectColumn_via_guid::Repo_default_definition"
+"repo.RepoObjectColumn::Repo_default_is_system_named" <-- "repo.SysColumn_RepoObjectColumn_via_guid::Repo_default_is_system_named"
+"repo.RepoObjectColumn::Repo_default_name" <-- "repo.SysColumn_RepoObjectColumn_via_guid::Repo_default_name"
+"repo.RepoObjectColumn::Repo_definition" <-- "repo.SysColumn_RepoObjectColumn_via_guid::Repo_definition"
+"repo.RepoObjectColumn::Repo_generated_always_type" <-- "repo.SysColumn_RepoObjectColumn_via_guid::Repo_generated_always_type"
+"repo.RepoObjectColumn::Repo_graph_type" <-- "repo.SysColumn_RepoObjectColumn_via_guid::Repo_graph_type"
+"repo.RepoObjectColumn::Repo_increment_value" <-- "repo.SysColumn_RepoObjectColumn_via_guid::Repo_increment_value"
+"repo.RepoObjectColumn::Repo_is_computed" <-- "repo.SysColumn_RepoObjectColumn_via_guid::Repo_is_computed"
+"repo.RepoObjectColumn::Repo_is_identity" <-- "repo.SysColumn_RepoObjectColumn_via_guid::Repo_is_identity"
+"repo.RepoObjectColumn::Repo_is_nullable" <-- "repo.SysColumn_RepoObjectColumn_via_guid::Repo_is_nullable"
+"repo.RepoObjectColumn::Repo_is_persisted" <-- "repo.SysColumn_RepoObjectColumn_via_guid::Repo_is_persisted"
+"repo.RepoObjectColumn::Repo_seed_value" <-- "repo.SysColumn_RepoObjectColumn_via_guid::Repo_seed_value"
+"repo.RepoObjectColumn::Repo_user_type_fullname" <-- "repo.SysColumn_RepoObjectColumn_via_guid::Repo_user_type_fullname"
+"repo.RepoObjectColumn::Repo_user_type_name" <-- "repo.SysColumn_RepoObjectColumn_via_guid::Repo_user_type_name"
+"repo.RepoObjectColumn::Repo_uses_database_collation" <-- "repo.SysColumn_RepoObjectColumn_via_guid::Repo_uses_database_collation"
+"repo.RepoObjectColumn::RepoObject_guid" <-- "repo.SysColumn_RepoObjectColumn_via_guid::RepoObject_guid"
+"repo.RepoObjectColumn::RepoObjectColumn_guid" <-- "repo.SysColumn_RepoObjectColumn_via_guid::RepoObjectColumn_guid"
+"repo.RepoObjectColumn::RepoObjectColumn_name" <-- "repo.SysColumn_RepoObjectColumn_via_guid::RepoObjectColumn_name"
+"repo.RepoObjectColumn::SysObjectColumn_column_id" <-- "repo.SysColumn_RepoObjectColumn_via_guid::SysObjectColumn_column_id"
+"repo.RepoObjectColumn::SysObjectColumn_name" <-- "repo.SysColumn_RepoObjectColumn_via_guid::SysObjectColumn_name"
+"repo_sys.SysColumn::default_definition" <-- "repo.SysColumn_RepoObjectColumn_via_guid::default_definition"
+"repo_sys.SysColumn::default_is_system_named" <-- "repo.SysColumn_RepoObjectColumn_via_guid::default_is_system_named"
+"repo_sys.SysColumn::default_name" <-- "repo.SysColumn_RepoObjectColumn_via_guid::default_name"
+"repo_sys.SysColumn::definition" <-- "repo.SysColumn_RepoObjectColumn_via_guid::definition"
+"repo_sys.SysColumn::generated_always_type" <-- "repo.SysColumn_RepoObjectColumn_via_guid::generated_always_type"
+"repo_sys.SysColumn::graph_type" <-- "repo.SysColumn_RepoObjectColumn_via_guid::graph_type"
+"repo_sys.SysColumn::increment_value" <-- "repo.SysColumn_RepoObjectColumn_via_guid::increment_value"
+"repo_sys.SysColumn::is_computed" <-- "repo.SysColumn_RepoObjectColumn_via_guid::is_computed"
+"repo_sys.SysColumn::is_identity" <-- "repo.SysColumn_RepoObjectColumn_via_guid::is_identity"
+"repo_sys.SysColumn::is_nullable" <-- "repo.SysColumn_RepoObjectColumn_via_guid::is_nullable"
+"repo_sys.SysColumn::is_persisted" <-- "repo.SysColumn_RepoObjectColumn_via_guid::is_persisted"
+"repo_sys.SysColumn::seed_value" <-- "repo.SysColumn_RepoObjectColumn_via_guid::seed_value"
+"repo_sys.SysColumn::SysObject_column_id" <-- "repo.SysColumn_RepoObjectColumn_via_guid::SysObject_column_id"
+"repo_sys.SysColumn::SysObject_column_name" <-- "repo.SysColumn_RepoObjectColumn_via_guid::SysObject_column_name"
+"repo_sys.SysColumn::SysObject_id" <-- "repo.SysColumn_RepoObjectColumn_via_guid::SysObject_id"
+"repo_sys.SysColumn::SysObject_name" <-- "repo.SysColumn_RepoObjectColumn_via_guid::SysObject_name"
+"repo_sys.SysColumn::SysObject_RepoObject_guid" <-- "repo.SysColumn_RepoObjectColumn_via_guid::SysObject_RepoObject_guid"
+"repo_sys.SysColumn::SysObject_RepoObjectColumn_guid" <-- "repo.SysColumn_RepoObjectColumn_via_guid::SysObject_RepoObjectColumn_guid"
+"repo_sys.SysColumn::SysObject_schema_name" <-- "repo.SysColumn_RepoObjectColumn_via_guid::SysObject_schema_name"
+"repo_sys.SysColumn::SysObject_type" <-- "repo.SysColumn_RepoObjectColumn_via_guid::SysObject_type"
+"repo_sys.SysColumn::user_type_fullname" <-- "repo.SysColumn_RepoObjectColumn_via_guid::user_type_fullname"
+"repo_sys.SysColumn::user_type_name" <-- "repo.SysColumn_RepoObjectColumn_via_guid::user_type_name"
+"repo_sys.SysColumn::uses_database_collation" <-- "repo.SysColumn_RepoObjectColumn_via_guid::uses_database_collation"
 @enduml
 

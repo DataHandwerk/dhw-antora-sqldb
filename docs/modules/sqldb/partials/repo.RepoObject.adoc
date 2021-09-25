@@ -37,13 +37,13 @@ user table
 == SysObject_id
 
 // tag::SysObject_id[]
-259532008
+316580216
 // end::SysObject_id[]
 
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-08 20:58:45
+2021-09-21 10:37:14
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -104,6 +104,34 @@ user table
 --
 
 
+[#column-external_AntoraComponent]
+=== external_AntoraComponent
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|external_AntoraComponent
+|nvarchar(128)
+|NULL
+|
+|
+|===
+
+
+[#column-external_AntoraModule]
+=== external_AntoraModule
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|external_AntoraModule
+|nvarchar(128)
+|NULL
+|
+|
+|===
+
+
 [#column-has_execution_plan_issue]
 === has_execution_plan_issue
 
@@ -142,6 +170,25 @@ user table
 * xref:repo.RepoObject_gross.adoc#column-has_get_referenced_issue[+repo.RepoObject_gross.has_get_referenced_issue+]
 * xref:repo.RepoObject_SSAS_tgt.adoc#column-has_get_referenced_issue[+repo.RepoObject_SSAS_tgt.has_get_referenced_issue+]
 * xref:repo.RepoObjectColumn_gross.adoc#column-has_get_referenced_issue[+repo.RepoObjectColumn_gross.has_get_referenced_issue+]
+--
+
+
+[#column-Inheritance_Source_fullname]
+=== Inheritance_Source_fullname
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|Inheritance_Source_fullname
+|nvarchar(261)
+|NULL
+|
+|
+|===
+
+.Referencing Columns
+--
+* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-Inheritance_Source_fullname[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.Inheritance_Source_fullname+]
 --
 
 
@@ -203,6 +250,7 @@ user table
 
 .Referencing Columns
 --
+* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-InheritanceType[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.InheritanceType+]
 * xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-ro_InheritanceType[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.ro_InheritanceType+]
 * xref:repo.RepoObject_gross.adoc#column-InheritanceType[+repo.RepoObject_gross.InheritanceType+]
 * xref:repo.RepoObject_SSAS_tgt.adoc#column-InheritanceType[+repo.RepoObject_SSAS_tgt.InheritanceType+]
@@ -231,6 +279,25 @@ user table
 --
 * xref:repo.RepoObject_gross.adoc#column-is_DocsExclude[+repo.RepoObject_gross.is_DocsExclude+]
 --
+
+
+[#column-is_external]
+=== is_external
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|is_external
+|bit
+|NOT NULL
+|
+|
+|===
+
+.Default: DF_RepoObject_is_external
+....
+((0))
+....
 
 
 [#column-is_repo_managed]
@@ -1355,11 +1422,29 @@ reference in [repo_sys].[type]
 
 
 
+
+
+
+
 // end::AntoraPkColumnTableRows[]
 
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
+
+|
+|<<column-external_AntoraComponent>>
+|nvarchar(128)
+|NULL
+|
+|
+
+|
+|<<column-external_AntoraModule>>
+|nvarchar(128)
+|NULL
+|
+|
 
 |
 |<<column-has_execution_plan_issue>>
@@ -1371,6 +1456,13 @@ reference in [repo_sys].[type]
 |
 |<<column-has_get_referenced_issue>>
 |bit
+|NULL
+|
+|
+
+|
+|<<column-Inheritance_Source_fullname>>
+|nvarchar(261)
 |NULL
 |
 |
@@ -1398,6 +1490,13 @@ reference in [repo_sys].[type]
 
 |
 |<<column-is_DocsExclude>>
+|bit
+|NOT NULL
+|
+|
+
+|
+|<<column-is_external>>
 |bit
 |NOT NULL
 |
@@ -1619,10 +1718,45 @@ reference in [repo_sys].[type]
 
 // tag::AntoraIndexList[]
 
-[#index-idx_RepoObject_1]
+[#index-PK_RepoObject]
+=== PK_RepoObject
+
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-RepoObject_guid>>; uniqueidentifier
+--
+* PK, Unique, Real: 1, 1, 1
+
+
+[#index-UK_RepoObject2x_RepoNames]
+=== UK_RepoObject++__++RepoNames
+
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-RepoObject_schema_name>>; nvarchar(128)
+* <<column-RepoObject_name>>; nvarchar(128)
+--
+* PK, Unique, Real: 0, 1, 1
+
+
+[#index-UK_RepoObject2x_SysNames]
+=== UK_RepoObject++__++SysNames
+
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-SysObject_schema_name>>; nvarchar(128)
+* <<column-SysObject_name>>; nvarchar(128)
+--
+* PK, Unique, Real: 0, 1, 1
+
+
+[#index-idx_RepoObject2x_1]
 === idx_RepoObject++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-pk_index_guid>>; uniqueidentifier
@@ -1655,6 +1789,9 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
+* xref:property.RepoObjectColumnProperty_external_tgt.adoc[]
+* xref:property.RepoObjectProperty_external_tgt.adoc[]
+* xref:repo.RepoObject_external_tgt.adoc[]
 * xref:repo.RepoObject_SSAS_tgt.adoc[]
 // end::antorareferencedlist[]
 
@@ -1670,8 +1807,10 @@ source: property.RepoObjectProperty_cross As rop_cross
 * xref:property.ExtendedProperty_Repo2Sys_level1.adoc[]
 * xref:property.ExtendedProperty_Repo2Sys_level2_RepoObject.adoc[]
 * xref:property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn.adoc[]
+* xref:property.RepoObjectColumnProperty_external_tgt.adoc[]
 * xref:property.RepoObjectColumnProperty_sys_repo.adoc[]
 * xref:property.RepoObjectProperty_cross.adoc[]
+* xref:property.RepoObjectProperty_external_tgt.adoc[]
 * xref:property.RepoObjectProperty_ForUpdate.adoc[]
 * xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc[]
 * xref:property.RepoObjectProperty_sys_repo.adoc[]
@@ -1697,6 +1836,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 * xref:repo.IndexColumn_ssas_gross.adoc[]
 * xref:repo.IndexColumn_virtual_gross.adoc[]
 * xref:repo.RepoObject__after_update.adoc[]
+* xref:repo.RepoObject_external_tgt.adoc[]
 * xref:repo.RepoObject_fullname_u_v.adoc[]
 * xref:repo.RepoObject_gross.adoc[]
 * xref:repo.RepoObject_persistence_column.adoc[]
@@ -1968,6 +2108,9 @@ RepoObject_guid
 === ReferencedObjectList
 
 // tag::referencedobjectlist[]
+* [property].[RepoObjectColumnProperty_external_tgt]
+* [property].[RepoObjectProperty_external_tgt]
+* [repo].[RepoObject_external_tgt]
 * [repo].[RepoObject_SSAS_tgt]
 // end::referencedobjectlist[]
 

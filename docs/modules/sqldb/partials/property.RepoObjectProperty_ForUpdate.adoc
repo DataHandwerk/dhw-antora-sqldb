@@ -40,12 +40,54 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-09 11:13:41
+2021-09-22 20:01:46
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
+[#column-AntoraComponent]
+=== AntoraComponent
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|AntoraComponent
+|nvarchar(max)
+|NULL
+|
+|
+|===
+
+
+[#column-AntoraModule]
+=== AntoraModule
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|AntoraModule
+|nvarchar(max)
+|NULL
+|
+|
+|===
+
+
+[#column-dwh_database]
+=== dwh_database
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|dwh_database
+|nvarchar(128)
+|NULL
+|
+|
+|===
+
+
 [#column-inheritance]
 === inheritance
 
@@ -108,6 +150,20 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 --
 * xref:property.RepoObjectProperty.adoc#column-property_value[+property.RepoObjectProperty.property_value+]
 --
+
+
+[#column-repo_database]
+=== repo_database
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|repo_database
+|nvarchar(128)
+|NULL
+|
+|
+|===
 
 
 [#column-RepoObject_fullname]
@@ -261,6 +317,20 @@ reference in [repo_sys].[type]
 --
 
 
+[#column-tsql_comment_tag]
+=== tsql_comment_tag
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|tsql_comment_tag
+|nvarchar(max)
+|NOT NULL
+|
+|
+|===
+
+
 // end::AntoraColumnDetails[]
 
 == AntoraMeasureDetails
@@ -282,11 +352,37 @@ reference in [repo_sys].[type]
 
 
 
+
+
+
+
+
 // end::AntoraPkColumnTableRows[]
 
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
+|
+|<<column-AntoraComponent>>
+|nvarchar(max)
+|NULL
+|
+|
+
+|
+|<<column-AntoraModule>>
+|nvarchar(max)
+|NULL
+|
+|
+
+|
+|<<column-dwh_database>>
+|nvarchar(128)
+|NULL
+|
+|
+
 |
 |<<column-inheritance>>
 |tinyint
@@ -304,6 +400,13 @@ reference in [repo_sys].[type]
 |
 |<<column-property_value>>
 |nvarchar(max)
+|NULL
+|
+|
+
+|
+|<<column-repo_database>>
+|nvarchar(128)
 |NULL
 |
 |
@@ -357,16 +460,23 @@ reference in [repo_sys].[type]
 |
 |
 
+|
+|<<column-tsql_comment_tag>>
+|nvarchar(max)
+|NOT NULL
+|
+|
+
 // end::AntoraNonPkColumnTableRows[]
 
 == AntoraIndexList
 
 // tag::AntoraIndexList[]
 
-[#index-idx_RepoObjectProperty_ForUpdate_1]
+[#index-idx_RepoObjectProperty_ForUpdate2x_1]
 === idx_RepoObjectProperty_ForUpdate++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_schema_name>>; nvarchar(128)
@@ -375,10 +485,10 @@ reference in [repo_sys].[type]
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObjectProperty_ForUpdate_2]
+[#index-idx_RepoObjectProperty_ForUpdate2x_2]
 === idx_RepoObjectProperty_ForUpdate++__++2
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObjectProperty_id>>; int
@@ -386,10 +496,10 @@ reference in [repo_sys].[type]
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObjectProperty_ForUpdate_3]
+[#index-idx_RepoObjectProperty_ForUpdate2x_3]
 === idx_RepoObjectProperty_ForUpdate++__++3
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -398,10 +508,10 @@ reference in [repo_sys].[type]
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObjectProperty_ForUpdate_4]
+[#index-idx_RepoObjectProperty_ForUpdate2x_4]
 === idx_RepoObjectProperty_ForUpdate++__++4
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -431,6 +541,8 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
+* xref:config.fs_dwh_database_name.adoc[]
+* xref:config.fs_get_parameter_value.adoc[]
 * xref:property.RepoObjectProperty.adoc[]
 * xref:repo.RepoObject.adoc[]
 // end::antorareferencedlist[]
@@ -670,6 +782,8 @@ source: property.RepoObjectProperty_cross As rop_cross
 === ReferencedObjectList
 
 // tag::referencedobjectlist[]
+* [config].[fs_dwh_database_name]
+* [config].[fs_get_parameter_value]
 * [property].[RepoObjectProperty]
 * [repo].[RepoObject]
 // end::referencedobjectlist[]
@@ -740,13 +854,16 @@ Select
                                 , '<<property_end>>'
                                 , Char ( 13 ) + Char ( 10 )
                               )
+  , repo_database    = Db_Name ()
+  , dwh_database     = config.fs_dwh_database_name ()
+  , AntoraComponent  = config.fs_get_parameter_value ( 'AntoraComponent', '' )
+  , AntoraModule     = config.fs_get_parameter_value ( 'AntoraModule', '' )
 From
     property.RepoObjectProperty As T1
     Inner Join
         repo.RepoObject         As T2
             On
             T2.RepoObject_guid = T1.RepoObject_guid
-
 ----
 =======
 // end::sql_modules_definition[]

@@ -44,7 +44,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-06 22:28:39
+2021-09-22 20:58:48
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -174,6 +174,63 @@ view
 --
 
 
+[#column-referenced_external_AntoraComponent]
+=== referenced_external_AntoraComponent
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|referenced_external_AntoraComponent
+|nvarchar(128)
+|NULL
+|
+|
+|===
+
+.Referencing Columns
+--
+* xref:reference.RepoObjectColumn_reference_T.adoc#column-referenced_external_AntoraComponent[+reference.RepoObjectColumn_reference_T.referenced_external_AntoraComponent+]
+--
+
+
+[#column-referenced_external_AntoraModule]
+=== referenced_external_AntoraModule
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|referenced_external_AntoraModule
+|nvarchar(128)
+|NULL
+|
+|
+|===
+
+.Referencing Columns
+--
+* xref:reference.RepoObjectColumn_reference_T.adoc#column-referenced_external_AntoraModule[+reference.RepoObjectColumn_reference_T.referenced_external_AntoraModule+]
+--
+
+
+[#column-referenced_is_external]
+=== referenced_is_external
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|referenced_is_external
+|tinyint
+|NULL
+|
+|
+|===
+
+.Referencing Columns
+--
+* xref:reference.RepoObjectColumn_reference_T.adoc#column-referenced_is_external[+reference.RepoObjectColumn_reference_T.referenced_is_external+]
+--
+
+
 [#column-referenced_RepoObject_guid]
 === referenced_RepoObject_guid
 
@@ -274,6 +331,63 @@ view
 --
 
 
+[#column-referencing_external_AntoraComponent]
+=== referencing_external_AntoraComponent
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|referencing_external_AntoraComponent
+|nvarchar(128)
+|NULL
+|
+|
+|===
+
+.Referencing Columns
+--
+* xref:reference.RepoObjectColumn_reference_T.adoc#column-referencing_external_AntoraComponent[+reference.RepoObjectColumn_reference_T.referencing_external_AntoraComponent+]
+--
+
+
+[#column-referencing_external_AntoraModule]
+=== referencing_external_AntoraModule
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|referencing_external_AntoraModule
+|nvarchar(128)
+|NULL
+|
+|
+|===
+
+.Referencing Columns
+--
+* xref:reference.RepoObjectColumn_reference_T.adoc#column-referencing_external_AntoraModule[+reference.RepoObjectColumn_reference_T.referencing_external_AntoraModule+]
+--
+
+
+[#column-referencing_is_external]
+=== referencing_is_external
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|referencing_is_external
+|tinyint
+|NULL
+|
+|
+|===
+
+.Referencing Columns
+--
+* xref:reference.RepoObjectColumn_reference_T.adoc#column-referencing_is_external[+reference.RepoObjectColumn_reference_T.referencing_is_external+]
+--
+
+
 [#column-referencing_RepoObject_guid]
 === referencing_RepoObject_guid
 
@@ -368,6 +482,12 @@ view
 
 
 
+
+
+
+
+
+
 // end::AntoraPkColumnTableRows[]
 
 == AntoraNonPkColumnTableRows
@@ -399,6 +519,27 @@ view
 |
 |<<column-referenced_entity_name>>
 |nvarchar(128)
+|NULL
+|
+|
+
+|
+|<<column-referenced_external_AntoraComponent>>
+|nvarchar(128)
+|NULL
+|
+|
+
+|
+|<<column-referenced_external_AntoraModule>>
+|nvarchar(128)
+|NULL
+|
+|
+
+|
+|<<column-referenced_is_external>>
+|tinyint
 |NULL
 |
 |
@@ -439,6 +580,27 @@ view
 |
 
 |
+|<<column-referencing_external_AntoraComponent>>
+|nvarchar(128)
+|NULL
+|
+|
+
+|
+|<<column-referencing_external_AntoraModule>>
+|nvarchar(128)
+|NULL
+|
+|
+
+|
+|<<column-referencing_is_external>>
+|tinyint
+|NULL
+|
+|
+
+|
 |<<column-referencing_RepoObject_guid>>
 |uniqueidentifier
 |NULL
@@ -468,7 +630,7 @@ view
 [#index-PK_RepoObjectColumn_reference]
 === PK_RepoObjectColumn_reference
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-referenced_RepoObjectColumn_guid>>; uniqueidentifier
@@ -778,7 +940,6 @@ source: property.RepoObjectProperty WHERE property_int = 1
 [source,sql]
 ----
 
-
 CREATE View reference.RepoObjectColumn_reference
 As
 Select
@@ -789,11 +950,17 @@ Select
   , referenced_entity_name                        = Max ( referenced_entity_name )
   , referenced_column_name                        = Max ( referenced_column_name )
   , referenced_type                               = Max ( referenced_type )
+  , referenced_external_AntoraComponent           = Max ( referenced_external_AntoraComponent )
+  , referenced_external_AntoraModule              = Max ( referenced_external_AntoraModule )
+  , referenced_is_external                        = Max ( IsNull ( referenced_is_external, 0 ))
   , referencing_RepoObject_guid                   = Max ( referencing_RepoObject_guid )
   , referencing_schema_name                       = Max ( referencing_schema_name )
   , referencing_entity_name                       = Max ( referencing_entity_name )
   , referencing_column_name                       = Max ( referencing_column_name )
   , referencing_type                              = Max ( referencing_type )
+  , referencing_external_AntoraComponent          = Max ( referencing_external_AntoraComponent )
+  , referencing_external_AntoraModule             = Max ( referencing_external_AntoraModule )
+  , referencing_is_external                       = Max ( IsNull ( referencing_is_external, 0 ))
   , is_referencing_object_equal_referenced_object = Max ( Cast(is_referencing_object_equal_referenced_object As TinyInt))
   , is_referenced_object                          = Max ( Cast(is_referenced_object As TinyInt))
 From

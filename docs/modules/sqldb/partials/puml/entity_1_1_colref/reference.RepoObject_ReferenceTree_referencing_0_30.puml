@@ -22,27 +22,30 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:reference.ftv_RepoObject_ReferenceTree_referencing.adoc[prefix=..]" as reference.ftv_RepoObject_ReferenceTree_referencing << IF >> {
+entity "puml-link:dhw:sqldb:reference.ftv_RepoObject_ReferenceTree_referencing.adoc[]" as reference.ftv_RepoObject_ReferenceTree_referencing << IF >> {
   --
   Referenced_Depth : (int)
   Referenced_fullname : (nvarchar(261))
   Referenced_fullname2 : (nvarchar(257))
   Referenced_guid : (uniqueidentifier)
+  referenced_is_DocsOutput : (int)
   Referenced_type : (char(2))
   Referencing_Depth : (int)
   Referencing_fullname : (nvarchar(261))
   Referencing_fullname2 : (nvarchar(257))
   Referencing_guid : (uniqueidentifier)
+  referencing_is_DocsOutput : (int)
   Referencing_type : (varchar(2))
   RepoObject_guid : (uniqueidentifier)
   --
   --
 }
 
-entity "puml-link:reference.RepoObject_ReferenceTree_referencing_0_30.adoc[prefix=..]" as reference.RepoObject_ReferenceTree_referencing_0_30 << V >> {
+entity "puml-link:dhw:sqldb:reference.RepoObject_ReferenceTree_referencing_0_30.adoc[]" as reference.RepoObject_ReferenceTree_referencing_0_30 << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   **Referencing_guid** : (uniqueidentifier)
   --
@@ -55,10 +58,15 @@ entity "puml-link:reference.RepoObject_ReferenceTree_referencing_0_30.adoc[prefi
   --
 }
 
-entity "puml-link:repo.RepoObject_gross.adoc[prefix=..]" as repo.RepoObject_gross << V >> {
-  - **RepoObject_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:repo.RepoObject_gross.adoc[]" as repo.RepoObject_gross << V >> {
   --
+  AntoraComponent : (nvarchar(max))
+  AntoraModule : (nvarchar(max))
   Description : (nvarchar(max))
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
+  external_DatabaseName : (nvarchar(128))
+  external_RepoDatabaseName : (nvarchar(128))
   has_different_sys_names : (bit)
   has_execution_plan_issue : (bit)
   has_get_referenced_issue : (bit)
@@ -71,6 +79,7 @@ entity "puml-link:repo.RepoObject_gross.adoc[prefix=..]" as repo.RepoObject_gros
   InheritanceType : (tinyint)
   - is_DocsExclude : (bit)
   is_DocsOutput : (int)
+  - is_external : (bit)
   - is_in_reference : (int)
   is_persistence : (bit)
   is_persistence_check_duplicate_per_pk : (bit)
@@ -108,6 +117,7 @@ entity "puml-link:repo.RepoObject_gross.adoc[prefix=..]" as repo.RepoObject_gros
   Repo_temporal_type : (tinyint)
   - RepoObject_fullname : (nvarchar(261))
   - RepoObject_fullname2 : (nvarchar(257))
+  - RepoObject_guid : (uniqueidentifier)
   - RepoObject_name : (nvarchar(128))
   RepoObject_Referencing_Count : (int)
   - RepoObject_schema_name : (nvarchar(128))
@@ -128,23 +138,19 @@ entity "puml-link:repo.RepoObject_gross.adoc[prefix=..]" as repo.RepoObject_gros
   SysObject_type_name : (nvarchar(128))
   tables_dataCategory : (nvarchar(500))
   tables_description : (nvarchar(max))
-  tables_isHidden : (nvarchar(500))
+  tables_isHidden : (bit)
   target_filter : (nvarchar(4000))
   temporal_type : (tinyint)
   - usp_persistence_name : (nvarchar(140))
   usp_persistence_RepoObject_guid : (uniqueidentifier)
+  uspgenerator_usp_id : (int)
   --
   --
 }
 
 reference.ftv_RepoObject_ReferenceTree_referencing <.. reference.RepoObject_ReferenceTree_referencing_0_30
 repo.RepoObject_gross <.. reference.RepoObject_ReferenceTree_referencing_0_30
-repo.RepoObject_gross::RepoObject_fullname <-- reference.RepoObject_ReferenceTree_referencing_0_30::RepoObject_fullname
-repo.RepoObject_gross::RepoObject_guid <-- reference.RepoObject_ReferenceTree_referencing_0_30::RepoObject_guid
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"repo.RepoObject_gross::RepoObject_fullname" <-- "reference.RepoObject_ReferenceTree_referencing_0_30::RepoObject_fullname"
+"repo.RepoObject_gross::RepoObject_guid" <-- "reference.RepoObject_ReferenceTree_referencing_0_30::RepoObject_guid"
 @enduml
 

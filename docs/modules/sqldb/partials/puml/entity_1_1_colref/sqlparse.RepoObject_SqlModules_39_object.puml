@@ -22,18 +22,23 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
   has_execution_plan_issue : (bit)
   has_get_referenced_issue : (bit)
+  Inheritance_Source_fullname : (nvarchar(261))
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
   InheritanceDefinition : (nvarchar(4000))
   InheritanceType : (tinyint)
   - is_DocsExclude : (bit)
+  - is_external : (bit)
   is_repo_managed : (bit)
   is_required_ObjectMerge : (bit)
   - is_ssas : (bit)
@@ -68,7 +73,7 @@ entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
   --
 }
 
-entity "puml-link:sqlparse.RepoObject_SqlModules.adoc[prefix=..]" as sqlparse.RepoObject_SqlModules << U >> {
+entity "puml-link:dhw:sqldb:sqlparse.RepoObject_SqlModules.adoc[]" as sqlparse.RepoObject_SqlModules << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
   - sql_modules_dt : (datetime)
@@ -80,24 +85,23 @@ entity "puml-link:sqlparse.RepoObject_SqlModules.adoc[prefix=..]" as sqlparse.Re
   --
 }
 
-entity "puml-link:sqlparse.RepoObject_SqlModules_29_1_object_is_union.adoc[prefix=..]" as sqlparse.RepoObject_SqlModules_29_1_object_is_union << V >> {
-  - **RepoObject_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:sqlparse.RepoObject_SqlModules_29_1_object_is_union.adoc[]" as sqlparse.RepoObject_SqlModules_29_1_object_is_union << V >> {
   --
   - is_union : (int)
+  - RepoObject_guid : (uniqueidentifier)
   --
   --
 }
 
-entity "puml-link:sqlparse.RepoObject_SqlModules_29_2_object_is_GroupBy.adoc[prefix=..]" as sqlparse.RepoObject_SqlModules_29_2_object_is_GroupBy << V >> {
-  - **RepoObject_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:sqlparse.RepoObject_SqlModules_29_2_object_is_GroupBy.adoc[]" as sqlparse.RepoObject_SqlModules_29_2_object_is_GroupBy << V >> {
   --
   - has_GroupBy : (int)
+  - RepoObject_guid : (uniqueidentifier)
   --
   --
 }
 
-entity "puml-link:sqlparse.RepoObject_SqlModules_31_object.adoc[prefix=..]" as sqlparse.RepoObject_SqlModules_31_object << V >> {
-  - **RepoObject_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:sqlparse.RepoObject_SqlModules_31_object.adoc[]" as sqlparse.RepoObject_SqlModules_31_object << V >> {
   --
   is_1_create : (int)
   is_2_view : (int)
@@ -109,12 +113,13 @@ entity "puml-link:sqlparse.RepoObject_SqlModules_31_object.adoc[prefix=..]" as s
   is_7_from : (int)
   is_7_IdentifierList : (int)
   is_8_IdentifierList : (int)
+  - RepoObject_guid : (uniqueidentifier)
   SysObject_fullname : (nvarchar(261))
   --
   --
 }
 
-entity "puml-link:sqlparse.RepoObject_SqlModules_32_ObjectClass.adoc[prefix=..]" as sqlparse.RepoObject_SqlModules_32_ObjectClass << V >> {
+entity "puml-link:dhw:sqldb:sqlparse.RepoObject_SqlModules_32_ObjectClass.adoc[]" as sqlparse.RepoObject_SqlModules_32_ObjectClass << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   **class** : (nvarchar(500))
   --
@@ -124,7 +129,7 @@ entity "puml-link:sqlparse.RepoObject_SqlModules_32_ObjectClass.adoc[prefix=..]"
   --
 }
 
-entity "puml-link:sqlparse.RepoObject_SqlModules_33_ObjectNormalized.adoc[prefix=..]" as sqlparse.RepoObject_SqlModules_33_ObjectNormalized << V >> {
+entity "puml-link:dhw:sqldb:sqlparse.RepoObject_SqlModules_33_ObjectNormalized.adoc[]" as sqlparse.RepoObject_SqlModules_33_ObjectNormalized << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   **normalized** : (nvarchar(max))
   --
@@ -134,8 +139,7 @@ entity "puml-link:sqlparse.RepoObject_SqlModules_33_ObjectNormalized.adoc[prefix
   --
 }
 
-entity "puml-link:sqlparse.RepoObject_SqlModules_39_object.adoc[prefix=..]" as sqlparse.RepoObject_SqlModules_39_object << V >> {
-  - **RepoObject_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:sqlparse.RepoObject_SqlModules_39_object.adoc[]" as sqlparse.RepoObject_SqlModules_39_object << V >> {
   --
   has_GroupBy : (int)
   is_1_create : (int)
@@ -155,14 +159,13 @@ entity "puml-link:sqlparse.RepoObject_SqlModules_39_object.adoc[prefix=..]" as s
   Min_RowNumber_GroupBy : (bigint)
   Min_RowNumber_IdentifierList : (bigint)
   Min_RowNumber_Where : (bigint)
+  - RepoObject_guid : (uniqueidentifier)
   SysObject_fullname : (nvarchar(261))
   --
   --
 }
 
-entity "puml-link:sqlparse.RepoObject_SqlModules_41_from.adoc[prefix=..]" as sqlparse.RepoObject_SqlModules_41_from << V >> {
-  - **RepoObject_guid** : (uniqueidentifier)
-  - **json_key** : (nvarchar(4000))
+entity "puml-link:dhw:sqldb:sqlparse.RepoObject_SqlModules_41_from.adoc[]" as sqlparse.RepoObject_SqlModules_41_from << V >> {
   --
   children : (nvarchar(max))
   class : (nvarchar(500))
@@ -174,6 +177,7 @@ entity "puml-link:sqlparse.RepoObject_SqlModules_41_from.adoc[prefix=..]" as sql
   is_keyword : (bit)
   is_whitespace : (bit)
   join_type : (varchar(16))
+  - json_key : (nvarchar(4000))
   Min_RowNumber_From : (bigint)
   Min_RowNumber_GroupBy : (bigint)
   Min_RowNumber_Where : (bigint)
@@ -181,13 +185,14 @@ entity "puml-link:sqlparse.RepoObject_SqlModules_41_from.adoc[prefix=..]" as sql
   normalized_PatIndex_Select : (bigint)
   normalized_wo_nolock : (nvarchar(max))
   patindex_nolock : (bigint)
+  - RepoObject_guid : (uniqueidentifier)
   RowNumber_per_Object : (bigint)
   SysObject_fullname : (nvarchar(261))
   --
   --
 }
 
-entity "puml-link:sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union.adoc[prefix=..]" as sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union << V >> {
+entity "puml-link:dhw:sqldb:sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union.adoc[]" as sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union << V >> {
   --
   alias_QuoteName : (nvarchar(max))
   class : (nvarchar(500))
@@ -210,31 +215,26 @@ sqlparse.RepoObject_SqlModules_32_ObjectClass <.. sqlparse.RepoObject_SqlModules
 sqlparse.RepoObject_SqlModules_33_ObjectNormalized <.. sqlparse.RepoObject_SqlModules_39_object
 sqlparse.RepoObject_SqlModules_39_object <.. sqlparse.RepoObject_SqlModules_41_from
 sqlparse.RepoObject_SqlModules_39_object <.. sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union
-repo.RepoObject::SysObject_fullname <-- sqlparse.RepoObject_SqlModules_39_object::SysObject_fullname
-sqlparse.RepoObject_SqlModules::RepoObject_guid <-- sqlparse.RepoObject_SqlModules_39_object::RepoObject_guid
-sqlparse.RepoObject_SqlModules_29_1_object_is_union::is_union <-- sqlparse.RepoObject_SqlModules_39_object::is_union
-sqlparse.RepoObject_SqlModules_29_2_object_is_GroupBy::has_GroupBy <-- sqlparse.RepoObject_SqlModules_39_object::has_GroupBy
-sqlparse.RepoObject_SqlModules_31_object::is_1_create <-- sqlparse.RepoObject_SqlModules_39_object::is_1_create
-sqlparse.RepoObject_SqlModules_31_object::is_2_view <-- sqlparse.RepoObject_SqlModules_39_object::is_2_view
-sqlparse.RepoObject_SqlModules_31_object::is_3_Identifier <-- sqlparse.RepoObject_SqlModules_39_object::is_3_Identifier
-sqlparse.RepoObject_SqlModules_31_object::is_4_as <-- sqlparse.RepoObject_SqlModules_39_object::is_4_as
-sqlparse.RepoObject_SqlModules_31_object::is_5_select <-- sqlparse.RepoObject_SqlModules_39_object::is_5_select
-sqlparse.RepoObject_SqlModules_31_object::is_6_Identifier <-- sqlparse.RepoObject_SqlModules_39_object::is_6_Identifier
-sqlparse.RepoObject_SqlModules_31_object::is_6_IdentifierList <-- sqlparse.RepoObject_SqlModules_39_object::is_6_IdentifierList
-sqlparse.RepoObject_SqlModules_31_object::is_7_from <-- sqlparse.RepoObject_SqlModules_39_object::is_7_from
-sqlparse.RepoObject_SqlModules_31_object::is_7_IdentifierList <-- sqlparse.RepoObject_SqlModules_39_object::is_7_IdentifierList
-sqlparse.RepoObject_SqlModules_31_object::is_8_IdentifierList <-- sqlparse.RepoObject_SqlModules_39_object::is_8_IdentifierList
-sqlparse.RepoObject_SqlModules_32_ObjectClass::Min_RowNumber_per_class <-- sqlparse.RepoObject_SqlModules_39_object::Min_RowNumber_IdentifierList
-sqlparse.RepoObject_SqlModules_32_ObjectClass::Min_RowNumber_per_class <-- sqlparse.RepoObject_SqlModules_39_object::Min_RowNumber_Where
-sqlparse.RepoObject_SqlModules_33_ObjectNormalized::Min_RowNumber_per_normalized <-- sqlparse.RepoObject_SqlModules_39_object::Min_RowNumber_From
-sqlparse.RepoObject_SqlModules_33_ObjectNormalized::Min_RowNumber_per_normalized <-- sqlparse.RepoObject_SqlModules_39_object::Min_RowNumber_GroupBy
-sqlparse.RepoObject_SqlModules_39_object::Min_RowNumber_From <-- sqlparse.RepoObject_SqlModules_41_from::Min_RowNumber_From
-sqlparse.RepoObject_SqlModules_39_object::Min_RowNumber_GroupBy <-- sqlparse.RepoObject_SqlModules_41_from::Min_RowNumber_GroupBy
-sqlparse.RepoObject_SqlModules_39_object::Min_RowNumber_Where <-- sqlparse.RepoObject_SqlModules_41_from::Min_RowNumber_Where
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"repo.RepoObject::SysObject_fullname" <-- "sqlparse.RepoObject_SqlModules_39_object::SysObject_fullname"
+"sqlparse.RepoObject_SqlModules::RepoObject_guid" <-- "sqlparse.RepoObject_SqlModules_39_object::RepoObject_guid"
+"sqlparse.RepoObject_SqlModules_29_1_object_is_union::is_union" <-- "sqlparse.RepoObject_SqlModules_39_object::is_union"
+"sqlparse.RepoObject_SqlModules_29_2_object_is_GroupBy::has_GroupBy" <-- "sqlparse.RepoObject_SqlModules_39_object::has_GroupBy"
+"sqlparse.RepoObject_SqlModules_31_object::is_1_create" <-- "sqlparse.RepoObject_SqlModules_39_object::is_1_create"
+"sqlparse.RepoObject_SqlModules_31_object::is_2_view" <-- "sqlparse.RepoObject_SqlModules_39_object::is_2_view"
+"sqlparse.RepoObject_SqlModules_31_object::is_3_Identifier" <-- "sqlparse.RepoObject_SqlModules_39_object::is_3_Identifier"
+"sqlparse.RepoObject_SqlModules_31_object::is_4_as" <-- "sqlparse.RepoObject_SqlModules_39_object::is_4_as"
+"sqlparse.RepoObject_SqlModules_31_object::is_5_select" <-- "sqlparse.RepoObject_SqlModules_39_object::is_5_select"
+"sqlparse.RepoObject_SqlModules_31_object::is_6_Identifier" <-- "sqlparse.RepoObject_SqlModules_39_object::is_6_Identifier"
+"sqlparse.RepoObject_SqlModules_31_object::is_6_IdentifierList" <-- "sqlparse.RepoObject_SqlModules_39_object::is_6_IdentifierList"
+"sqlparse.RepoObject_SqlModules_31_object::is_7_from" <-- "sqlparse.RepoObject_SqlModules_39_object::is_7_from"
+"sqlparse.RepoObject_SqlModules_31_object::is_7_IdentifierList" <-- "sqlparse.RepoObject_SqlModules_39_object::is_7_IdentifierList"
+"sqlparse.RepoObject_SqlModules_31_object::is_8_IdentifierList" <-- "sqlparse.RepoObject_SqlModules_39_object::is_8_IdentifierList"
+"sqlparse.RepoObject_SqlModules_32_ObjectClass::Min_RowNumber_per_class" <-- "sqlparse.RepoObject_SqlModules_39_object::Min_RowNumber_IdentifierList"
+"sqlparse.RepoObject_SqlModules_32_ObjectClass::Min_RowNumber_per_class" <-- "sqlparse.RepoObject_SqlModules_39_object::Min_RowNumber_Where"
+"sqlparse.RepoObject_SqlModules_33_ObjectNormalized::Min_RowNumber_per_normalized" <-- "sqlparse.RepoObject_SqlModules_39_object::Min_RowNumber_From"
+"sqlparse.RepoObject_SqlModules_33_ObjectNormalized::Min_RowNumber_per_normalized" <-- "sqlparse.RepoObject_SqlModules_39_object::Min_RowNumber_GroupBy"
+"sqlparse.RepoObject_SqlModules_39_object::Min_RowNumber_From" <-- "sqlparse.RepoObject_SqlModules_41_from::Min_RowNumber_From"
+"sqlparse.RepoObject_SqlModules_39_object::Min_RowNumber_GroupBy" <-- "sqlparse.RepoObject_SqlModules_41_from::Min_RowNumber_GroupBy"
+"sqlparse.RepoObject_SqlModules_39_object::Min_RowNumber_Where" <-- "sqlparse.RepoObject_SqlModules_41_from::Min_RowNumber_Where"
 @enduml
 

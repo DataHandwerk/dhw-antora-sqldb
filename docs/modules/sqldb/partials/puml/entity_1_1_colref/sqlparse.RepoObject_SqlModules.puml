@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:sqlparse.RepoObject_SqlModules.adoc[prefix=..]" as sqlparse.RepoObject_SqlModules << U >> {
+entity "puml-link:dhw:sqldb:sqlparse.RepoObject_SqlModules.adoc[]" as sqlparse.RepoObject_SqlModules << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
   - sql_modules_dt : (datetime)
@@ -37,8 +38,7 @@ entity "puml-link:sqlparse.RepoObject_SqlModules.adoc[prefix=..]" as sqlparse.Re
   --
 }
 
-entity "puml-link:sqlparse.RepoObject_SqlModules_10_statement.adoc[prefix=..]" as sqlparse.RepoObject_SqlModules_10_statement << V >> {
-  - **RepoObject_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:sqlparse.RepoObject_SqlModules_10_statement.adoc[]" as sqlparse.RepoObject_SqlModules_10_statement << V >> {
   --
   children : (nvarchar(max))
   class : (nvarchar(500))
@@ -46,14 +46,14 @@ entity "puml-link:sqlparse.RepoObject_SqlModules_10_statement.adoc[prefix=..]" a
   is_keyword : (bit)
   is_whitespace : (bit)
   normalized : (nvarchar(max))
+  - RepoObject_guid : (uniqueidentifier)
   sql_modules_json : (nvarchar(max))
   SysObject_fullname : (nvarchar(261))
   --
   --
 }
 
-entity "puml-link:sqlparse.RepoObject_SqlModules_39_object.adoc[prefix=..]" as sqlparse.RepoObject_SqlModules_39_object << V >> {
-  - **RepoObject_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:sqlparse.RepoObject_SqlModules_39_object.adoc[]" as sqlparse.RepoObject_SqlModules_39_object << V >> {
   --
   has_GroupBy : (int)
   is_1_create : (int)
@@ -73,12 +73,13 @@ entity "puml-link:sqlparse.RepoObject_SqlModules_39_object.adoc[prefix=..]" as s
   Min_RowNumber_GroupBy : (bigint)
   Min_RowNumber_IdentifierList : (bigint)
   Min_RowNumber_Where : (bigint)
+  - RepoObject_guid : (uniqueidentifier)
   SysObject_fullname : (nvarchar(261))
   --
   --
 }
 
-entity "puml-link:sqlparse.RepoObject_SqlModules_Repo_Sys.adoc[prefix=..]" as sqlparse.RepoObject_SqlModules_Repo_Sys << V >> {
+entity "puml-link:dhw:sqldb:sqlparse.RepoObject_SqlModules_Repo_Sys.adoc[]" as sqlparse.RepoObject_SqlModules_Repo_Sys << V >> {
   --
   is_json_sql_modules_json : (int)
   is_outdated : (bit)
@@ -94,22 +95,17 @@ entity "puml-link:sqlparse.RepoObject_SqlModules_Repo_Sys.adoc[prefix=..]" as sq
   --
 }
 
+sqlparse.RepoObject_SqlModules <.. sqlparse.RepoObject_SqlModules_10_statement
 sqlparse.RepoObject_SqlModules <.. sqlparse.RepoObject_SqlModules_39_object
 sqlparse.RepoObject_SqlModules <.. sqlparse.RepoObject_SqlModules_Repo_Sys
-sqlparse.RepoObject_SqlModules <.. sqlparse.RepoObject_SqlModules_10_statement
-sqlparse.RepoObject_SqlModules::is_json_sql_modules_json <-- sqlparse.RepoObject_SqlModules_Repo_Sys::is_json_sql_modules_json
-sqlparse.RepoObject_SqlModules::RepoObject_guid <-- sqlparse.RepoObject_SqlModules_10_statement::RepoObject_guid
-sqlparse.RepoObject_SqlModules::RepoObject_guid <-- sqlparse.RepoObject_SqlModules_39_object::RepoObject_guid
-sqlparse.RepoObject_SqlModules::sql_modules_dt <-- sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_dt
-sqlparse.RepoObject_SqlModules::sql_modules_formatted <-- sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_formatted
-sqlparse.RepoObject_SqlModules::sql_modules_formatted2 <-- sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_formatted2
-sqlparse.RepoObject_SqlModules::sql_modules_json <-- sqlparse.RepoObject_SqlModules_10_statement::sql_modules_json
-sqlparse.RepoObject_SqlModules::sql_modules_json <-- sqlparse.RepoObject_SqlModules::is_json_sql_modules_json
-sqlparse.RepoObject_SqlModules::sql_modules_json <-- sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_json
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"sqlparse.RepoObject_SqlModules::is_json_sql_modules_json" <-- "sqlparse.RepoObject_SqlModules_Repo_Sys::is_json_sql_modules_json"
+"sqlparse.RepoObject_SqlModules::RepoObject_guid" <-- "sqlparse.RepoObject_SqlModules_10_statement::RepoObject_guid"
+"sqlparse.RepoObject_SqlModules::RepoObject_guid" <-- "sqlparse.RepoObject_SqlModules_39_object::RepoObject_guid"
+"sqlparse.RepoObject_SqlModules::sql_modules_dt" <-- "sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_dt"
+"sqlparse.RepoObject_SqlModules::sql_modules_formatted" <-- "sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_formatted"
+"sqlparse.RepoObject_SqlModules::sql_modules_formatted2" <-- "sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_formatted2"
+"sqlparse.RepoObject_SqlModules::sql_modules_json" <-- "sqlparse.RepoObject_SqlModules_10_statement::sql_modules_json"
+"sqlparse.RepoObject_SqlModules::sql_modules_json" <-- "sqlparse.RepoObject_SqlModules::is_json_sql_modules_json"
+"sqlparse.RepoObject_SqlModules::sql_modules_json" <-- "sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_json"
 @enduml
 

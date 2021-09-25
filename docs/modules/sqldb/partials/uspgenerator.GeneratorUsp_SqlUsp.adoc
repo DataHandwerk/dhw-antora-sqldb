@@ -8,9 +8,6 @@
 :ExistsProperty--has_execution_plan_issue:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--pk_index_guid:
-:ExistsProperty--pk_indexpatterncolumndatatype:
-:ExistsProperty--pk_indexpatterncolumnname:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -51,25 +48,6 @@ view
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-usp_id]
-=== usp_id
-
-[cols="d,8m,m,m,m,d"]
-|===
-|1
-|*usp_id*
-|int
-|NOT NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:uspgenerator.GeneratorUsp.adoc#column-id[+uspgenerator.GeneratorUsp.id+]
---
-
-
 [#column-AdocUspSteps]
 === AdocUspSteps
 
@@ -223,6 +201,25 @@ view
 --
 
 
+[#column-usp_id]
+=== usp_id
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|usp_id
+|int
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:uspgenerator.GeneratorUsp.adoc#column-id[+uspgenerator.GeneratorUsp.id+]
+--
+
+
 [#column-usp_name]
 === usp_name
 
@@ -305,12 +302,6 @@ view
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
-|1
-|*<<column-usp_id>>*
-|int
-|NOT NULL
-|
-|
 
 
 
@@ -329,7 +320,6 @@ view
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
-
 |
 |<<column-AdocUspSteps>>
 |nvarchar(max)
@@ -387,6 +377,13 @@ view
 |
 
 |
+|<<column-usp_id>>
+|int
+|NOT NULL
+|
+|
+
+|
 |<<column-usp_name>>
 |nvarchar(128)
 |NOT NULL
@@ -420,21 +417,10 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-PK_GeneratorUsp_SqlUsp]
-=== PK_GeneratorUsp_SqlUsp
+[#index-idx_GeneratorUsp_SqlUsp2x_1]
+=== idx_GeneratorUsp_SqlUsp++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
-+
---
-* <<column-usp_id>>; int
---
-* PK, Unique, Real: 1, 1, 0
-
-
-[#index-idx_GeneratorUsp_SqlUsp_2]
-=== idx_GeneratorUsp_SqlUsp++__++2
-
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -442,10 +428,21 @@ view
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_GeneratorUsp_SqlUsp_3]
+[#index-idx_GeneratorUsp_SqlUsp2x_2]
+=== idx_GeneratorUsp_SqlUsp++__++2
+
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-usp_id>>; int
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[#index-idx_GeneratorUsp_SqlUsp2x_3]
 === idx_GeneratorUsp_SqlUsp++__++3
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-usp_schema>>; nvarchar(128)
@@ -690,21 +687,21 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-43DA56F1-0696-EB11-84F4-A81E8446D5B0
+
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-int
+
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-usp_id
+
 // end::pk_indexpatterncolumnname[]
 
 

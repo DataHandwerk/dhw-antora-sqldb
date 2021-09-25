@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:repo.RepoObject_ColumnList.adoc[prefix=..]" as repo.RepoObject_ColumnList << V >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject_ColumnList.adoc[]" as repo.RepoObject_ColumnList << V >> {
   --
   CreateColumnList : (nvarchar(max))
   DbmlColumnList : (nvarchar(max))
@@ -38,17 +39,19 @@ entity "puml-link:repo.RepoObject_ColumnList.adoc[prefix=..]" as repo.RepoObject
   --
 }
 
-entity "puml-link:repo.RepoObject_gross2.adoc[prefix=..]" as repo.RepoObject_gross2 << V >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject_gross2.adoc[]" as repo.RepoObject_gross2 << V >> {
   --
   AntoraComponent : (nvarchar(max))
-  AntoraExternalReferencedList : (nvarchar(max))
-  AntoraExternalReferencingList : (nvarchar(max))
   AntoraModule : (nvarchar(max))
   AntoraReferencedList : (nvarchar(max))
   AntoraReferencingList : (nvarchar(max))
   CreateColumnList : (nvarchar(max))
   DbmlColumnList : (nvarchar(max))
   Description : (nvarchar(max))
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
+  external_DatabaseName : (nvarchar(128))
+  external_RepoDatabaseName : (nvarchar(128))
   has_different_sys_names : (bit)
   has_execution_plan_issue : (bit)
   has_get_referenced_issue : (bit)
@@ -61,6 +64,7 @@ entity "puml-link:repo.RepoObject_gross2.adoc[prefix=..]" as repo.RepoObject_gro
   InheritanceType : (tinyint)
   - is_DocsExclude : (bit)
   is_DocsOutput : (int)
+  - is_external : (bit)
   - is_in_reference : (int)
   is_persistence : (bit)
   is_persistence_check_duplicate_per_pk : (bit)
@@ -126,16 +130,17 @@ entity "puml-link:repo.RepoObject_gross2.adoc[prefix=..]" as repo.RepoObject_gro
   SysObject_type_name : (nvarchar(128))
   tables_dataCategory : (nvarchar(500))
   tables_description : (nvarchar(max))
-  tables_isHidden : (nvarchar(500))
+  tables_isHidden : (bit)
   target_filter : (nvarchar(4000))
   temporal_type : (tinyint)
   - usp_persistence_name : (nvarchar(140))
   usp_persistence_RepoObject_guid : (uniqueidentifier)
+  uspgenerator_usp_id : (int)
   --
   --
 }
 
-entity "puml-link:repo.RepoObject_SqlCreateTable.adoc[prefix=..]" as repo.RepoObject_SqlCreateTable << V >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject_SqlCreateTable.adoc[]" as repo.RepoObject_SqlCreateTable << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
   ConList : (nvarchar(max))
@@ -149,7 +154,7 @@ entity "puml-link:repo.RepoObject_SqlCreateTable.adoc[prefix=..]" as repo.RepoOb
   --
 }
 
-entity "puml-link:repo.RepoObjectColumn_gross2.adoc[prefix=..]" as repo.RepoObjectColumn_gross2 << V >> {
+entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_gross2.adoc[]" as repo.RepoObjectColumn_gross2 << V >> {
   --
   AntoraReferencedColumnList : (nvarchar(max))
   AntoraReferencingColumnList : (nvarchar(max))
@@ -162,6 +167,7 @@ entity "puml-link:repo.RepoObjectColumn_gross2.adoc[prefix=..]" as repo.RepoObje
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
   InheritanceDefinition : (nvarchar(4000))
   InheritanceType : (tinyint)
+  - is_external : (bit)
   is_index_primary_key : (bit)
   is_persistence_no_check : (bit)
   is_persistence_no_include : (bit)
@@ -238,16 +244,11 @@ entity "puml-link:repo.RepoObjectColumn_gross2.adoc[prefix=..]" as repo.RepoObje
 repo.RepoObject_ColumnList <.. repo.RepoObject_SqlCreateTable
 repo.RepoObject_ColumnList <.. repo.RepoObject_gross2
 repo.RepoObjectColumn_gross2 <.. repo.RepoObject_ColumnList
-repo.RepoObject_ColumnList::CreateColumnList <-- repo.RepoObject_gross2::CreateColumnList
-repo.RepoObject_ColumnList::DbmlColumnList <-- repo.RepoObject_gross2::DbmlColumnList
-repo.RepoObject_ColumnList::PersistenceCompareColumnList <-- repo.RepoObject_gross2::PersistenceCompareColumnList
-repo.RepoObject_ColumnList::PersistenceInsertColumnList <-- repo.RepoObject_gross2::PersistenceInsertColumnList
-repo.RepoObject_ColumnList::PersistenceUpdateColumnList <-- repo.RepoObject_gross2::PersistenceUpdateColumnList
-repo.RepoObjectColumn_gross2::RepoObject_guid <-- repo.RepoObject_ColumnList::RepoObject_guid
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"repo.RepoObject_ColumnList::CreateColumnList" <-- "repo.RepoObject_gross2::CreateColumnList"
+"repo.RepoObject_ColumnList::DbmlColumnList" <-- "repo.RepoObject_gross2::DbmlColumnList"
+"repo.RepoObject_ColumnList::PersistenceCompareColumnList" <-- "repo.RepoObject_gross2::PersistenceCompareColumnList"
+"repo.RepoObject_ColumnList::PersistenceInsertColumnList" <-- "repo.RepoObject_gross2::PersistenceInsertColumnList"
+"repo.RepoObject_ColumnList::PersistenceUpdateColumnList" <-- "repo.RepoObject_gross2::PersistenceUpdateColumnList"
+"repo.RepoObjectColumn_gross2::RepoObject_guid" <-- "repo.RepoObject_ColumnList::RepoObject_guid"
 @enduml
 

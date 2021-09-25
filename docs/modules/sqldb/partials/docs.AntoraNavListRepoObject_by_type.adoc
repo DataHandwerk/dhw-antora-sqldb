@@ -44,7 +44,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-06 22:28:40
+2021-09-24 21:51:47
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -146,7 +146,7 @@ view
 [#index-PK_AntoraNavListRepoObject_by_type]
 === PK_AntoraNavListRepoObject_by_type
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-type>>; char(2)
@@ -473,9 +473,13 @@ Select
                                 ro.RepoObject_fullname2)
 From
     docs.RepoObject_OutputFilter As ro
+Where
+    ro.is_DocsOutput   = 1
+    And ro.is_external = 0
 Group By
     ro.SysObject_type
   , ro.SysObject_type_name
+
 ----
 =======
 // end::sql_modules_definition[]

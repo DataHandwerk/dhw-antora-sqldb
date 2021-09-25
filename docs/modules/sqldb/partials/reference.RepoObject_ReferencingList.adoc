@@ -41,7 +41,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-08-17 19:23:09
+2021-09-24 22:38:30
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -87,7 +87,7 @@ view
 
 .Referenced Columns
 --
-* xref:reference.RepoObject_ReferencingReferenced.adoc#column-Referenced_fullname[+reference.RepoObject_ReferencingReferenced.Referenced_fullname+]
+* xref:reference.RepoObject_ReferencedReferencing.adoc#column-referenced_fullname[+reference.RepoObject_ReferencedReferencing.referenced_fullname+]
 --
 
 
@@ -120,7 +120,7 @@ view
 
 .Referenced Columns
 --
-* xref:reference.RepoObject_ReferencingReferenced.adoc#column-Referenced_guid[+reference.RepoObject_ReferencingReferenced.Referenced_guid+]
+* xref:reference.RepoObject_ReferencedReferencing.adoc#column-Referenced_guid[+reference.RepoObject_ReferencedReferencing.Referenced_guid+]
 --
 
 
@@ -200,10 +200,10 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-idx_RepoObject_ReferencingList_1]
+[#index-idx_RepoObject_ReferencingList2x_1]
 === idx_RepoObject_ReferencingList++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-Referenced_guid>>; uniqueidentifier
@@ -233,7 +233,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:reference.RepoObject_ReferencingReferenced.adoc[]
+* xref:reference.RepoObject_ReferencedReferencing.adoc[]
 // end::antorareferencedlist[]
 
 
@@ -471,7 +471,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 === ReferencedObjectList
 
 // tag::referencedobjectlist[]
-* [reference].[RepoObject_ReferencingReferenced]
+* [reference].[RepoObject_ReferencedReferencing]
 // end::referencedobjectlist[]
 
 
@@ -517,23 +517,16 @@ Select
     ror.Referenced_guid
   , AntoraReferencingList =
   --
-  String_Agg ( Concat (
-                          --* xref:target-page-filename.adoc[link text]
-                          --we need to convert to first argument nvarchar(max) to avoid the limit of 8000 byte
-                          Cast('* xref:' As NVarchar(Max)), ror.Referencing_fullname2, '.adoc[]'
-                      --, QuoteName(ror.[Referencing_fullname])
-                      --, ' '
-                      --, CHAR(13)
-                      --, CHAR(10)
-                      )
-             , Char ( 13 ) + Char ( 10 )
-             ) Within Group(Order By
-                                ror.Referencing_fullname)
-  , Referenced_fullname   = Max ( ror.Referenced_fullname )
-  , Referenced_fullname2  = Max ( ror.Referenced_fullname2 )
-  , Referenced_type       = Max ( ror.Referenced_type )
+  String_Agg ( ror.referencing_AntoraXref, Char ( 13 ) + Char ( 10 )) Within Group(Order By
+                                                                                       ror.referencing_is_external
+                                                                                     , ror.referencing_fullname)
+  , Referenced_fullname   = Max ( ror.referenced_fullname )
+  , Referenced_fullname2  = Max ( ror.referenced_fullname2 )
+  , Referenced_type       = Max ( ror.referenced_type )
 From
-    reference.RepoObject_ReferencingReferenced As ror
+    reference.RepoObject_ReferencedReferencing As ror
+Where
+    ror.referencing_is_DocsOutput = 1
 Group By
     ror.Referenced_guid
 

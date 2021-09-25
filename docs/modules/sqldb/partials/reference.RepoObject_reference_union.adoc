@@ -45,7 +45,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-06 22:28:41
+2021-09-22 06:27:12
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -136,6 +136,34 @@ view
 --
 
 
+[#column-referenced_external_AntoraComponent]
+=== referenced_external_AntoraComponent
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|referenced_external_AntoraComponent
+|nvarchar(128)
+|NULL
+|
+|
+|===
+
+
+[#column-referenced_external_AntoraModule]
+=== referenced_external_AntoraModule
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|referenced_external_AntoraModule
+|nvarchar(128)
+|NULL
+|
+|
+|===
+
+
 [#column-referenced_fullname]
 === referenced_fullname
 
@@ -157,6 +185,20 @@ view
 |===
 |
 |referenced_id
+|int
+|NULL
+|
+|
+|===
+
+
+[#column-referenced_is_external]
+=== referenced_is_external
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|referenced_is_external
 |int
 |NULL
 |
@@ -206,6 +248,34 @@ view
 |===
 
 
+[#column-referencing_external_AntoraComponent]
+=== referencing_external_AntoraComponent
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|referencing_external_AntoraComponent
+|nvarchar(128)
+|NULL
+|
+|
+|===
+
+
+[#column-referencing_external_AntoraModule]
+=== referencing_external_AntoraModule
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|referencing_external_AntoraModule
+|nvarchar(128)
+|NULL
+|
+|
+|===
+
+
 [#column-referencing_fullname]
 === referencing_fullname
 
@@ -227,6 +297,20 @@ view
 |===
 |
 |referencing_id
+|int
+|NULL
+|
+|
+|===
+
+
+[#column-referencing_is_external]
+=== referencing_is_external
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|referencing_is_external
 |int
 |NULL
 |
@@ -299,6 +383,12 @@ view
 
 
 
+
+
+
+
+
+
 // end::AntoraPkColumnTableRows[]
 
 == AntoraNonPkColumnTableRows
@@ -328,6 +418,20 @@ view
 |
 
 |
+|<<column-referenced_external_AntoraComponent>>
+|nvarchar(128)
+|NULL
+|
+|
+
+|
+|<<column-referenced_external_AntoraModule>>
+|nvarchar(128)
+|NULL
+|
+|
+
+|
 |<<column-referenced_fullname>>
 |nvarchar(517)
 |NULL
@@ -336,6 +440,13 @@ view
 
 |
 |<<column-referenced_id>>
+|int
+|NULL
+|
+|
+
+|
+|<<column-referenced_is_external>>
 |int
 |NULL
 |
@@ -363,6 +474,20 @@ view
 |
 
 |
+|<<column-referencing_external_AntoraComponent>>
+|nvarchar(128)
+|NULL
+|
+|
+
+|
+|<<column-referencing_external_AntoraModule>>
+|nvarchar(128)
+|NULL
+|
+|
+
+|
 |<<column-referencing_fullname>>
 |nvarchar(517)
 |NULL
@@ -371,6 +496,13 @@ view
 
 |
 |<<column-referencing_id>>
+|int
+|NULL
+|
+|
+
+|
+|<<column-referencing_is_external>>
 |int
 |NULL
 |
@@ -399,7 +531,7 @@ view
 [#index-PK_RepoObject_reference_union]
 === PK_RepoObject_reference_union
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-referenced_RepoObject_guid>>; uniqueidentifier
@@ -430,7 +562,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:reference.RepoObject_reference_additional_internal.adoc[]
+* xref:reference.RepoObject_reference_additional.adoc[]
 * xref:reference.RepoObject_reference_persistence.adoc[]
 * xref:reference.RepoObject_reference_persistence_target_as_source.adoc[]
 * xref:reference.RepoObject_reference_SqlExpressionDependencies.adoc[]
@@ -672,7 +804,7 @@ referenced_RepoObject_guid,referencing_RepoObject_guid
 === ReferencedObjectList
 
 // tag::referencedobjectlist[]
-* [reference].[RepoObject_reference_additional_internal]
+* [reference].[RepoObject_reference_additional]
 * [reference].[RepoObject_reference_persistence]
 * [reference].[RepoObject_reference_persistence_target_as_source]
 * [reference].[RepoObject_reference_SqlExpressionDependencies]
@@ -725,17 +857,21 @@ Select
   , T1.referenced_entity_name
   , T1.referenced_fullname
   , T1.referenced_id
-  --, T1.referenced_node_id
   , T1.referenced_schema_name
   , T1.referenced_type
+  , referenced_external_AntoraComponent  = Null
+  , referenced_external_AntoraModule     = Null
+  , referenced_is_external               = 0
   , T1.referencing_entity_name
   , T1.referencing_fullname
   , T1.referencing_id
-  --, T1.referencing_node_id
   , T1.referencing_schema_name
   , T1.referencing_type
+  , referencing_external_AntoraComponent = Null
+  , referencing_external_AntoraModule    = Null
+  , referencing_is_external              = 0
   , T1.InformationSource
-  , one = 1
+  , one                                  = 1
 From
     reference.RepoObject_reference_SqlExpressionDependencies As T1
 Union All
@@ -745,17 +881,21 @@ Select
   , T1.referenced_entity_name
   , T1.referenced_fullname
   , T1.referenced_id
-  --, T1.referenced_node_id
   , T1.referenced_schema_name
   , T1.referenced_type
+  , referenced_external_AntoraComponent  = Null
+  , referenced_external_AntoraModule     = Null
+  , referenced_is_external               = 0
   , T1.referencing_entity_name
   , T1.referencing_fullname
   , T1.referencing_id
-  --, T1.referencing_node_id
   , T1.referencing_schema_name
   , T1.referencing_type
+  , referencing_external_AntoraComponent = Null
+  , referencing_external_AntoraModule    = Null
+  , referencing_is_external              = 0
   , T1.InformationSource
-  , one = 1
+  , one                                  = 1
 From
     reference.RepoObject_reference_persistence As T1
 Union All
@@ -765,17 +905,21 @@ Select
   , T1.referenced_entity_name
   , T1.referenced_fullname
   , T1.referenced_id
-  --, T1.referenced_node_id
   , T1.referenced_schema_name
   , T1.referenced_type
+  , referenced_external_AntoraComponent  = Null
+  , referenced_external_AntoraModule     = Null
+  , referenced_is_external               = 0
   , T1.referencing_entity_name
   , T1.referencing_fullname
   , T1.referencing_id
-  --, T1.referencing_node_id
   , T1.referencing_schema_name
   , T1.referencing_type
+  , referencing_external_AntoraComponent = Null
+  , referencing_external_AntoraModule    = Null
+  , referencing_is_external              = 0
   , T1.InformationSource
-  , one = 1
+  , one                                  = 1
 From
     reference.RepoObject_reference_virtual As T1
 Union All
@@ -785,17 +929,21 @@ Select
   , T1.referenced_entity_name
   , T1.referenced_fullname
   , T1.referenced_id
-  --, T1.referenced_node_id
   , T1.referenced_schema_name
   , T1.referenced_type
+  , referenced_external_AntoraComponent  = Null
+  , referenced_external_AntoraModule     = Null
+  , referenced_is_external               = 0
   , T1.referencing_entity_name
   , T1.referencing_fullname
   , T1.referencing_id
-  --, T1.referencing_node_id
   , T1.referencing_schema_name
   , T1.referencing_type
+  , referencing_external_AntoraComponent = Null
+  , referencing_external_AntoraModule    = Null
+  , referencing_is_external              = 0
   , T1.InformationSource
-  , one = 1
+  , one                                  = 1
 From
     reference.RepoObject_reference_persistence_target_as_source As T1
 Union All
@@ -805,19 +953,24 @@ Select
   , T1.referenced_entity_name
   , T1.referenced_fullname
   , T1.referenced_id
-  --, T1.referenced_node_id
   , T1.referenced_schema_name
   , T1.referenced_type
+  , T1.referenced_external_AntoraComponent
+  , T1.referenced_external_AntoraModule
+  , referenced_is_external
   , T1.referencing_entity_name
   , T1.referencing_fullname
   , T1.referencing_id
-  --, T1.referencing_node_id
   , T1.referencing_schema_name
   , T1.referencing_type
+  , T1.referencing_external_AntoraComponent
+  , T1.referencing_external_AntoraModule
+  , referencing_is_external
   , T1.InformationSource
   , one = 1
 From
-    reference.RepoObject_reference_additional_internal As T1
+    reference.RepoObject_reference_additional As T1
+
 ----
 =======
 // end::sql_modules_definition[]

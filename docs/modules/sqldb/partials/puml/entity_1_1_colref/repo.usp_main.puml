@@ -22,34 +22,47 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:config.fs_get_parameter_value.adoc[prefix=..]" as config.fs_get_parameter_value << FN >> {
-  --
-  --
-  --
-}
-
-entity "puml-link:logs.usp_ExecutionLog_insert.adoc[prefix=..]" as logs.usp_ExecutionLog_insert << P >> {
+entity "puml-link:dhw:sqldb:config.fs_get_parameter_value.adoc[]" as config.fs_get_parameter_value << FN >> {
   --
   --
   --
 }
 
-entity "puml-link:property.usp_RepoObject_Inheritance.adoc[prefix=..]" as property.usp_RepoObject_Inheritance << P >> {
+entity "puml-link:dhw:sqldb:logs.usp_ExecutionLog_insert.adoc[]" as logs.usp_ExecutionLog_insert << P >> {
   --
   --
   --
 }
 
-entity "puml-link:property.usp_RepoObjectColumn_Inheritance.adoc[prefix=..]" as property.usp_RepoObjectColumn_Inheritance << P >> {
+entity "puml-link:dhw:sqldb:property.usp_external_property_import.adoc[]" as property.usp_external_property_import << P >> {
   --
   --
   --
 }
 
-entity "puml-link:reference.RepoObject_reference_persistence.adoc[prefix=..]" as reference.RepoObject_reference_persistence << V >> {
+entity "puml-link:dhw:sqldb:property.usp_RepoObject_Inheritance.adoc[]" as property.usp_RepoObject_Inheritance << P >> {
+  --
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.usp_RepoObjectColumn_Inheritance.adoc[]" as property.usp_RepoObjectColumn_Inheritance << P >> {
+  --
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.usp_RepoObjectProperty_collect.adoc[]" as property.usp_RepoObjectProperty_collect << P >> {
+  --
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.RepoObject_reference_persistence.adoc[]" as reference.RepoObject_reference_persistence << V >> {
   **referenced_RepoObject_guid** : (uniqueidentifier)
   - **referencing_RepoObject_guid** : (uniqueidentifier)
   --
@@ -68,7 +81,7 @@ entity "puml-link:reference.RepoObject_reference_persistence.adoc[prefix=..]" as
   --
 }
 
-entity "puml-link:reference.RepoObject_reference_persistence_target_as_source.adoc[prefix=..]" as reference.RepoObject_reference_persistence_target_as_source << V >> {
+entity "puml-link:dhw:sqldb:reference.RepoObject_reference_persistence_target_as_source.adoc[]" as reference.RepoObject_reference_persistence_target_as_source << V >> {
   --
   - InformationSource : (varchar(28))
   referenced_entity_name : (nvarchar(128))
@@ -87,17 +100,23 @@ entity "puml-link:reference.RepoObject_reference_persistence_target_as_source.ad
   --
 }
 
-entity "puml-link:reference.RepoObject_reference_T.adoc[prefix=..]" as reference.RepoObject_reference_T << U >> {
+entity "puml-link:dhw:sqldb:reference.RepoObject_reference_T.adoc[]" as reference.RepoObject_reference_T << U >> {
   **referenced_RepoObject_guid** : (uniqueidentifier)
   **referencing_RepoObject_guid** : (uniqueidentifier)
   --
   - is_ReversePersistenceViaView : (bit)
   referenced_entity_name : (nvarchar(128))
+  referenced_external_AntoraComponent : (nvarchar(128))
+  referenced_external_AntoraModule : (nvarchar(128))
+  referenced_is_external : (int)
   - referenced_is_PersistenceSource : (bit)
   - referenced_is_PersistenceTarget : (bit)
   referenced_schema_name : (nvarchar(128))
   referenced_type : (char(2))
   referencing_entity_name : (nvarchar(128))
+  referencing_external_AntoraComponent : (nvarchar(128))
+  referencing_external_AntoraModule : (nvarchar(128))
+  referencing_is_external : (int)
   - referencing_is_PersistenceTarget : (bit)
   - referencing_is_PersistenceUspSourceRef : (bit)
   referencing_is_PersistenceUspTargetRef : (bit)
@@ -105,63 +124,75 @@ entity "puml-link:reference.RepoObject_reference_T.adoc[prefix=..]" as reference
   referencing_type : (varchar(2))
   # referenced_fullname : (nvarchar(261))
   # referenced_fullname2 : (nvarchar(257))
+  ~ referenced_puml_entity : (nvarchar(4000))
   # referencing_fullname : (nvarchar(261))
   # referencing_fullname2 : (nvarchar(257))
+  ~ referencing_puml_entity : (nvarchar(4000))
   --
   --
 }
 
-entity "puml-link:reference.usp_PERSIST_RepoObject_reference_T.adoc[prefix=..]" as reference.usp_PERSIST_RepoObject_reference_T << P >> {
-  --
-  --
-  --
-}
-
-entity "puml-link:reference.usp_PERSIST_RepoObjectColumn_reference_T.adoc[prefix=..]" as reference.usp_PERSIST_RepoObjectColumn_reference_T << P >> {
+entity "puml-link:dhw:sqldb:reference.usp_additional_Reference.adoc[]" as reference.usp_additional_Reference << P >> {
   --
   --
   --
 }
 
-entity "puml-link:reference.usp_RepoObject_ReferenceTree_insert.adoc[prefix=..]" as reference.usp_RepoObject_ReferenceTree_insert << P >> {
+entity "puml-link:dhw:sqldb:reference.usp_PERSIST_RepoObject_reference_T.adoc[]" as reference.usp_PERSIST_RepoObject_reference_T << P >> {
   --
   --
   --
 }
 
-entity "puml-link:reference.usp_RepoObject_update_SysObjectQueryPlan.adoc[prefix=..]" as reference.usp_RepoObject_update_SysObjectQueryPlan << P >> {
+entity "puml-link:dhw:sqldb:reference.usp_PERSIST_RepoObjectColumn_reference_T.adoc[]" as reference.usp_PERSIST_RepoObjectColumn_reference_T << P >> {
   --
   --
   --
 }
 
-entity "puml-link:reference.usp_RepoObjectSource_FirstResultSet.adoc[prefix=..]" as reference.usp_RepoObjectSource_FirstResultSet << P >> {
+entity "puml-link:dhw:sqldb:reference.usp_RepoObject_ReferenceTree_insert.adoc[]" as reference.usp_RepoObject_ReferenceTree_insert << P >> {
   --
   --
   --
 }
 
-entity "puml-link:reference.usp_RepoObjectSource_QueryPlan.adoc[prefix=..]" as reference.usp_RepoObjectSource_QueryPlan << P >> {
+entity "puml-link:dhw:sqldb:reference.usp_RepoObject_update_SysObjectQueryPlan.adoc[]" as reference.usp_RepoObject_update_SysObjectQueryPlan << P >> {
   --
   --
   --
 }
 
-entity "puml-link:reference.usp_update_Referencing_Count.adoc[prefix=..]" as reference.usp_update_Referencing_Count << P >> {
+entity "puml-link:dhw:sqldb:reference.usp_RepoObjectSource_FirstResultSet.adoc[]" as reference.usp_RepoObjectSource_FirstResultSet << P >> {
   --
   --
   --
 }
 
-entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
+entity "puml-link:dhw:sqldb:reference.usp_RepoObjectSource_QueryPlan.adoc[]" as reference.usp_RepoObjectSource_QueryPlan << P >> {
+  --
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.usp_update_Referencing_Count.adoc[]" as reference.usp_update_Referencing_Count << P >> {
+  --
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
   has_execution_plan_issue : (bit)
   has_get_referenced_issue : (bit)
+  Inheritance_Source_fullname : (nvarchar(261))
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
   InheritanceDefinition : (nvarchar(4000))
   InheritanceType : (tinyint)
   - is_DocsExclude : (bit)
+  - is_external : (bit)
   is_repo_managed : (bit)
   is_required_ObjectMerge : (bit)
   - is_ssas : (bit)
@@ -196,7 +227,7 @@ entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
   --
 }
 
-entity "puml-link:repo.RepoObject_persistence.adoc[prefix=..]" as repo.RepoObject_persistence << U >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject_persistence.adoc[]" as repo.RepoObject_persistence << U >> {
   - **target_RepoObject_guid** : (uniqueidentifier)
   --
   - has_history : (bit)
@@ -223,43 +254,43 @@ entity "puml-link:repo.RepoObject_persistence.adoc[prefix=..]" as repo.RepoObjec
   --
 }
 
-entity "puml-link:repo.usp_Index_ForeignKey.adoc[prefix=..]" as repo.usp_Index_ForeignKey << P >> {
+entity "puml-link:dhw:sqldb:repo.usp_Index_ForeignKey.adoc[]" as repo.usp_Index_ForeignKey << P >> {
   --
   --
   --
 }
 
-entity "puml-link:repo.usp_index_inheritance.adoc[prefix=..]" as repo.usp_index_inheritance << P >> {
+entity "puml-link:dhw:sqldb:repo.usp_index_inheritance.adoc[]" as repo.usp_index_inheritance << P >> {
   --
   --
   --
 }
 
-entity "puml-link:repo.usp_main.adoc[prefix=..]" as repo.usp_main << P >> {
+entity "puml-link:dhw:sqldb:repo.usp_main.adoc[]" as repo.usp_main << P >> {
   --
   --
   --
 }
 
-entity "puml-link:repo.usp_RepoObjectColumn_update_RepoObjectColumn_column_id.adoc[prefix=..]" as repo.usp_RepoObjectColumn_update_RepoObjectColumn_column_id << P >> {
+entity "puml-link:dhw:sqldb:repo.usp_RepoObjectColumn_update_RepoObjectColumn_column_id.adoc[]" as repo.usp_RepoObjectColumn_update_RepoObjectColumn_column_id << P >> {
   --
   --
   --
 }
 
-entity "puml-link:repo.usp_sync_guid.adoc[prefix=..]" as repo.usp_sync_guid << P >> {
+entity "puml-link:dhw:sqldb:repo.usp_sync_guid.adoc[]" as repo.usp_sync_guid << P >> {
   --
   --
   --
 }
 
-entity "puml-link:repo.usp_sync_guid_ssas.adoc[prefix=..]" as repo.usp_sync_guid_ssas << P >> {
+entity "puml-link:dhw:sqldb:repo.usp_sync_guid_ssas.adoc[]" as repo.usp_sync_guid_ssas << P >> {
   --
   --
   --
 }
 
-entity "puml-link:uspgenerator.usp_GeneratorUsp_insert_update_persistence.adoc[prefix=..]" as uspgenerator.usp_GeneratorUsp_insert_update_persistence << P >> {
+entity "puml-link:dhw:sqldb:uspgenerator.usp_GeneratorUsp_insert_update_persistence.adoc[]" as uspgenerator.usp_GeneratorUsp_insert_update_persistence << P >> {
   --
   --
   --
@@ -267,11 +298,14 @@ entity "puml-link:uspgenerator.usp_GeneratorUsp_insert_update_persistence.adoc[p
 
 config.fs_get_parameter_value <.. repo.usp_main
 logs.usp_ExecutionLog_insert <.. repo.usp_main
+property.usp_external_property_import <.. repo.usp_main
 property.usp_RepoObject_Inheritance <.. repo.usp_main
 property.usp_RepoObjectColumn_Inheritance <.. repo.usp_main
+property.usp_RepoObjectProperty_collect <.. repo.usp_main
 reference.RepoObject_reference_persistence <.. repo.usp_main
 reference.RepoObject_reference_persistence_target_as_source <.. repo.usp_main
 reference.RepoObject_reference_T <.. repo.usp_main
+reference.usp_additional_Reference <.. repo.usp_main
 reference.usp_PERSIST_RepoObject_reference_T <.. repo.usp_main
 reference.usp_PERSIST_RepoObjectColumn_reference_T <.. repo.usp_main
 reference.usp_RepoObject_ReferenceTree_insert <.. repo.usp_main
@@ -287,11 +321,6 @@ repo.usp_RepoObjectColumn_update_RepoObjectColumn_column_id <.. repo.usp_main
 repo.usp_sync_guid <.. repo.usp_main
 repo.usp_sync_guid_ssas <.. repo.usp_main
 uspgenerator.usp_GeneratorUsp_insert_update_persistence <.. repo.usp_main
-
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
 
 @enduml
 

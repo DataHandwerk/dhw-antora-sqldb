@@ -22,9 +22,6 @@
 :ExistsProperty--persistence_source_repoobject_fullname2:
 :ExistsProperty--persistence_source_repoobject_guid:
 :ExistsProperty--persistence_source_repoobject_xref:
-:ExistsProperty--pk_index_guid:
-:ExistsProperty--pk_indexpatterncolumndatatype:
-:ExistsProperty--pk_indexpatterncolumnname:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--usp_persistence_repoobject_guid:
 :ExistsProperty--FK:
@@ -65,54 +62,6 @@ user table
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-RepoObject_guid]
-=== RepoObject_guid
-
-[cols="d,8m,m,m,m,d"]
-|===
-|1
-|*RepoObject_guid*
-|uniqueidentifier
-|NOT NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:sqlparse.RepoObject_SqlModules_41_from.adoc#column-RepoObject_guid[+sqlparse.RepoObject_SqlModules_41_from.RepoObject_guid+]
---
-
-.Referencing Columns
---
-* xref:sqlparse.RepoObject_SqlModules_42_from_Identifier.adoc#column-RepoObject_guid[+sqlparse.RepoObject_SqlModules_42_from_Identifier.RepoObject_guid+]
---
-
-
-[#column-json_key]
-=== json_key
-
-[cols="d,8m,m,m,m,d"]
-|===
-|2
-|*json_key*
-|nvarchar(4000)
-|NOT NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:sqlparse.RepoObject_SqlModules_41_from.adoc#column-json_key[+sqlparse.RepoObject_SqlModules_41_from.json_key+]
---
-
-.Referencing Columns
---
-* xref:sqlparse.RepoObject_SqlModules_42_from_Identifier.adoc#column-json_key[+sqlparse.RepoObject_SqlModules_42_from_Identifier.json_key+]
---
-
-
 [#column-children]
 === children
 
@@ -313,6 +262,30 @@ user table
 --
 
 
+[#column-json_key]
+=== json_key
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|json_key
+|nvarchar(4000)
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:sqlparse.RepoObject_SqlModules_41_from.adoc#column-json_key[+sqlparse.RepoObject_SqlModules_41_from.json_key+]
+--
+
+.Referencing Columns
+--
+* xref:sqlparse.RepoObject_SqlModules_42_from_Identifier.adoc#column-json_key[+sqlparse.RepoObject_SqlModules_42_from_Identifier.json_key+]
+--
+
+
 [#column-Min_RowNumber_From]
 === Min_RowNumber_From
 
@@ -446,6 +419,30 @@ user table
 --
 
 
+[#column-RepoObject_guid]
+=== RepoObject_guid
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|RepoObject_guid
+|uniqueidentifier
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:sqlparse.RepoObject_SqlModules_41_from.adoc#column-RepoObject_guid[+sqlparse.RepoObject_SqlModules_41_from.RepoObject_guid+]
+--
+
+.Referencing Columns
+--
+* xref:sqlparse.RepoObject_SqlModules_42_from_Identifier.adoc#column-RepoObject_guid[+sqlparse.RepoObject_SqlModules_42_from_Identifier.RepoObject_guid+]
+--
+
+
 [#column-RowNumber_per_Object]
 === RowNumber_per_Object
 
@@ -511,19 +508,7 @@ user table
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
-|1
-|*<<column-RepoObject_guid>>*
-|uniqueidentifier
-|NOT NULL
-|
-|
 
-|2
-|*<<column-json_key>>*
-|nvarchar(4000)
-|NOT NULL
-|
-|
 
 
 
@@ -549,8 +534,6 @@ user table
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
-
-
 |
 |<<column-children>>
 |nvarchar(max)
@@ -622,6 +605,13 @@ user table
 |
 
 |
+|<<column-json_key>>
+|nvarchar(4000)
+|NOT NULL
+|
+|
+
+|
 |<<column-Min_RowNumber_From>>
 |bigint
 |NULL
@@ -671,6 +661,13 @@ user table
 |
 
 |
+|<<column-RepoObject_guid>>
+|uniqueidentifier
+|NOT NULL
+|
+|
+
+|
 |<<column-RowNumber_per_Object>>
 |bigint
 |NULL
@@ -690,36 +687,36 @@ user table
 
 // tag::AntoraIndexList[]
 
-[#index-PK_RepoObject_SqlModules_41_from_T]
-=== PK_RepoObject_SqlModules_41_from_T
+[#index-idx_RepoObject_SqlModules_41_from_T2x_1]
+=== idx_RepoObject_SqlModules_41_from_T++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-join_type>>; varchar(16)
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[#index-idx_RepoObject_SqlModules_41_from_T2x_2]
+=== idx_RepoObject_SqlModules_41_from_T++__++2
+
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
 * <<column-json_key>>; nvarchar(4000)
 --
-* PK, Unique, Real: 1, 1, 0
-
-
-[#index-idx_RepoObject_SqlModules_41_from_T_2]
-=== idx_RepoObject_SqlModules_41_from_T++__++2
-
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
-+
---
-* <<column-RepoObject_guid>>; uniqueidentifier
---
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObject_SqlModules_41_from_T_3]
+[#index-idx_RepoObject_SqlModules_41_from_T2x_3]
 === idx_RepoObject_SqlModules_41_from_T++__++3
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
-* <<column-join_type>>; varchar(16)
+* <<column-RepoObject_guid>>; uniqueidentifier
 --
 * PK, Unique, Real: 0, 0, 0
 
@@ -957,21 +954,21 @@ xref:sqlparse.RepoObject_SqlModules_41_from.adoc[]
 === pk_index_guid
 
 // tag::pk_index_guid[]
-EB8818B0-CA97-EB11-84F4-A81E8446D5B0
+
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-uniqueidentifier,nvarchar(4000)
+
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-RepoObject_guid,json_key
+
 // end::pk_indexpatterncolumnname[]
 
 

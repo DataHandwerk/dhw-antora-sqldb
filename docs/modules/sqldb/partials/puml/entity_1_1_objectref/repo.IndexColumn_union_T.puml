@@ -22,54 +22,50 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:repo.Index_ColumList.adoc[prefix=..]" as repo.Index_ColumList << V >> {
+entity "puml-link:dhw:sqldb:repo.Index_ColumList.adoc[]" as repo.Index_ColumList << V >> {
   --
 }
 
-entity "puml-link:repo.Index_IndexPattern.adoc[prefix=..]" as repo.Index_IndexPattern << V >> {
+entity "puml-link:dhw:sqldb:repo.Index_IndexPattern.adoc[]" as repo.Index_IndexPattern << V >> {
   --
 }
 
-entity "puml-link:repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing.adoc[prefix=..]" as repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing << V >> {
+entity "puml-link:dhw:sqldb:repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing.adoc[]" as repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing << V >> {
   - **index_guid** : (uniqueidentifier)
   - **index_column_id** : (int)
   **RowNumberInReferencing** : (bigint)
   --
 }
 
-entity "puml-link:repo.IndexColumn_union.adoc[prefix=..]" as repo.IndexColumn_union << V >> {
+entity "puml-link:dhw:sqldb:repo.IndexColumn_union.adoc[]" as repo.IndexColumn_union << V >> {
   **index_guid** : (uniqueidentifier)
   - **index_column_id** : (int)
   --
 }
 
-entity "puml-link:repo.IndexColumn_union_T.adoc[prefix=..]" as repo.IndexColumn_union_T << U >> {
+entity "puml-link:dhw:sqldb:repo.IndexColumn_union_T.adoc[]" as repo.IndexColumn_union_T << U >> {
   **index_guid** : (uniqueidentifier)
   - **index_column_id** : (int)
   --
 }
 
-entity "puml-link:repo.RepoObjectColumn_gross2.adoc[prefix=..]" as repo.RepoObjectColumn_gross2 << V >> {
+entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_gross2.adoc[]" as repo.RepoObjectColumn_gross2 << V >> {
   --
 }
 
-entity "puml-link:repo.usp_PERSIST_IndexColumn_union_T.adoc[prefix=..]" as repo.usp_PERSIST_IndexColumn_union_T << P >> {
+entity "puml-link:dhw:sqldb:repo.usp_PERSIST_IndexColumn_union_T.adoc[]" as repo.usp_PERSIST_IndexColumn_union_T << P >> {
   --
 }
 
 repo.IndexColumn_union <.. repo.IndexColumn_union_T
-repo.IndexColumn_union_T <.. repo.Index_ColumList
 repo.IndexColumn_union_T <.. repo.RepoObjectColumn_gross2
 repo.IndexColumn_union_T <.. repo.usp_PERSIST_IndexColumn_union_T
-repo.IndexColumn_union_T <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing
 repo.IndexColumn_union_T <.. repo.Index_IndexPattern
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+repo.IndexColumn_union_T <.. repo.Index_ColumList
+repo.IndexColumn_union_T <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing
 @enduml
 

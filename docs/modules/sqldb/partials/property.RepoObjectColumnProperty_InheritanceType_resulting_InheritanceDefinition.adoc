@@ -7,9 +7,6 @@
 :ExistsProperty--antorareferencinglist:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--pk_index_guid:
-:ExistsProperty--pk_indexpatterncolumndatatype:
-:ExistsProperty--pk_indexpatterncolumnname:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -50,44 +47,6 @@ view
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-RepoObjectColumn_guid]
-=== RepoObjectColumn_guid
-
-[cols="d,8m,m,m,m,d"]
-|===
-|1
-|*RepoObjectColumn_guid*
-|uniqueidentifier
-|NOT NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.adoc#column-RepoObjectColumn_guid[+property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.RepoObjectColumn_guid+]
---
-
-
-[#column-property_name]
-=== property_name
-
-[cols="d,8m,m,m,m,d"]
-|===
-|2
-|*property_name*
-|nvarchar(128)
-|NOT NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.adoc#column-property_name[+property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.property_name+]
---
-
-
 [#column-Inheritance_StringAggSeparatorSql]
 === Inheritance_StringAggSeparatorSql
 
@@ -173,6 +132,25 @@ view
 |===
 
 
+[#column-property_name]
+=== property_name
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|property_name
+|nvarchar(128)
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.adoc#column-property_name[+property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.property_name+]
+--
+
+
 [#column-property_value]
 === property_value
 
@@ -196,6 +174,25 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 .Referenced Columns
 --
 * xref:property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.adoc#column-property_value[+property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.property_value+]
+--
+
+
+[#column-RepoObjectColumn_guid]
+=== RepoObjectColumn_guid
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|RepoObjectColumn_guid
+|uniqueidentifier
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.adoc#column-RepoObjectColumn_guid[+property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.RepoObjectColumn_guid+]
 --
 
 
@@ -249,19 +246,7 @@ Name of the column. Is unique within the object.
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
-|1
-|*<<column-RepoObjectColumn_guid>>*
-|uniqueidentifier
-|NOT NULL
-|
-|
 
-|2
-|*<<column-property_name>>*
-|nvarchar(128)
-|NOT NULL
-|
-|
 
 
 
@@ -276,8 +261,6 @@ Name of the column. Is unique within the object.
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
-
-
 |
 |<<column-Inheritance_StringAggSeparatorSql>>
 |nvarchar(max)
@@ -314,9 +297,23 @@ Name of the column. Is unique within the object.
 |
 
 |
+|<<column-property_name>>
+|nvarchar(128)
+|NOT NULL
+|
+|
+
+|
 |<<column-property_value>>
 |nvarchar(max)
 |NULL
+|
+|
+
+|
+|<<column-RepoObjectColumn_guid>>
+|uniqueidentifier
+|NOT NULL
 |
 |
 
@@ -340,22 +337,22 @@ Name of the column. Is unique within the object.
 
 // tag::AntoraIndexList[]
 
-[#index-PK_RepoObjectColumnProperty_InheritanceType_resulting_InheritanceDefinition]
-=== PK_RepoObjectColumnProperty_InheritanceType_resulting_InheritanceDefinition
+[#index-idx_RepoObjectColumnProperty_InheritanceType_resulting_InheritanceDefinition2x_1]
+=== idx_RepoObjectColumnProperty_InheritanceType_resulting_InheritanceDefinition++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObjectColumn_guid>>; uniqueidentifier
 * <<column-property_name>>; nvarchar(128)
 --
-* PK, Unique, Real: 1, 1, 0
+* PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObjectColumnProperty_InheritanceType_resulting_InheritanceDefinition_1]
-=== idx_RepoObjectColumnProperty_InheritanceType_resulting_InheritanceDefinition++__++1
+[#index-idx_RepoObjectColumnProperty_InheritanceType_resulting_InheritanceDefinition2x_2]
+=== idx_RepoObjectColumnProperty_InheritanceType_resulting_InheritanceDefinition++__++2
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObjectColumn_guid>>; uniqueidentifier
@@ -363,10 +360,10 @@ Name of the column. Is unique within the object.
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObjectColumnProperty_InheritanceType_resulting_InheritanceDefinition_2]
-=== idx_RepoObjectColumnProperty_InheritanceType_resulting_InheritanceDefinition++__++2
+[#index-idx_RepoObjectColumnProperty_InheritanceType_resulting_InheritanceDefinition2x_3]
+=== idx_RepoObjectColumnProperty_InheritanceType_resulting_InheritanceDefinition++__++3
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObjectColumn_name>>; nvarchar(128)
@@ -374,10 +371,10 @@ Name of the column. Is unique within the object.
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObjectColumnProperty_InheritanceType_resulting_InheritanceDefinition_4]
+[#index-idx_RepoObjectColumnProperty_InheritanceType_resulting_InheritanceDefinition2x_4]
 === idx_RepoObjectColumnProperty_InheritanceType_resulting_InheritanceDefinition++__++4
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-property_name>>; nvarchar(128)
@@ -617,21 +614,21 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-9085ACCF-5E9F-EB11-84F8-A81E8446D5B0
+
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-uniqueidentifier,nvarchar(128)
+
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-RepoObjectColumn_guid,property_name
+
 // end::pk_indexpatterncolumnname[]
 
 

@@ -22,35 +22,48 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:reference.RepoObject_reference.adoc[prefix=..]" as reference.RepoObject_reference << V >> {
-  **referenced_RepoObject_guid** : (uniqueidentifier)
-  **referencing_RepoObject_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:reference.RepoObject_reference.adoc[]" as reference.RepoObject_reference << V >> {
   --
   referenced_entity_name : (nvarchar(128))
+  referenced_external_AntoraComponent : (nvarchar(128))
+  referenced_external_AntoraModule : (nvarchar(128))
+  referenced_is_external : (int)
+  referenced_RepoObject_guid : (uniqueidentifier)
   referenced_schema_name : (nvarchar(128))
   referenced_type : (char(2))
   referencing_entity_name : (nvarchar(128))
+  referencing_external_AntoraComponent : (nvarchar(128))
+  referencing_external_AntoraModule : (nvarchar(128))
+  referencing_is_external : (int)
+  referencing_RepoObject_guid : (uniqueidentifier)
   referencing_schema_name : (nvarchar(128))
   referencing_type : (varchar(2))
   --
   --
 }
 
-entity "puml-link:reference.RepoObject_reference_additional_internal.adoc[prefix=..]" as reference.RepoObject_reference_additional_internal << V >> {
+entity "puml-link:dhw:sqldb:reference.RepoObject_reference_additional.adoc[]" as reference.RepoObject_reference_additional << V >> {
   --
   - InformationSource : (varchar(30))
   - referenced_entity_name : (nvarchar(128))
+  referenced_external_AntoraComponent : (nvarchar(128))
+  referenced_external_AntoraModule : (nvarchar(128))
   referenced_fullname : (nvarchar(261))
   referenced_id : (int)
+  referenced_is_external : (bit)
   referenced_RepoObject_guid : (uniqueidentifier)
   - referenced_schema_name : (nvarchar(128))
   referenced_type : (char(2))
   - referencing_entity_name : (nvarchar(128))
+  referencing_external_AntoraComponent : (nvarchar(128))
+  referencing_external_AntoraModule : (nvarchar(128))
   referencing_fullname : (nvarchar(261))
   referencing_id : (int)
+  referencing_is_external : (bit)
   referencing_RepoObject_guid : (uniqueidentifier)
   - referencing_schema_name : (nvarchar(128))
   referencing_type : (char(2))
@@ -58,7 +71,7 @@ entity "puml-link:reference.RepoObject_reference_additional_internal.adoc[prefix
   --
 }
 
-entity "puml-link:reference.RepoObject_reference_persistence.adoc[prefix=..]" as reference.RepoObject_reference_persistence << V >> {
+entity "puml-link:dhw:sqldb:reference.RepoObject_reference_persistence.adoc[]" as reference.RepoObject_reference_persistence << V >> {
   **referenced_RepoObject_guid** : (uniqueidentifier)
   - **referencing_RepoObject_guid** : (uniqueidentifier)
   --
@@ -77,7 +90,7 @@ entity "puml-link:reference.RepoObject_reference_persistence.adoc[prefix=..]" as
   --
 }
 
-entity "puml-link:reference.RepoObject_reference_persistence_target_as_source.adoc[prefix=..]" as reference.RepoObject_reference_persistence_target_as_source << V >> {
+entity "puml-link:dhw:sqldb:reference.RepoObject_reference_persistence_target_as_source.adoc[]" as reference.RepoObject_reference_persistence_target_as_source << V >> {
   --
   - InformationSource : (varchar(28))
   referenced_entity_name : (nvarchar(128))
@@ -96,7 +109,7 @@ entity "puml-link:reference.RepoObject_reference_persistence_target_as_source.ad
   --
 }
 
-entity "puml-link:reference.RepoObject_reference_SqlExpressionDependencies.adoc[prefix=..]" as reference.RepoObject_reference_SqlExpressionDependencies << V >> {
+entity "puml-link:dhw:sqldb:reference.RepoObject_reference_SqlExpressionDependencies.adoc[]" as reference.RepoObject_reference_SqlExpressionDependencies << V >> {
   **referenced_RepoObject_guid** : (uniqueidentifier)
   **referencing_RepoObject_guid** : (uniqueidentifier)
   --
@@ -115,27 +128,33 @@ entity "puml-link:reference.RepoObject_reference_SqlExpressionDependencies.adoc[
   --
 }
 
-entity "puml-link:reference.RepoObject_reference_union.adoc[prefix=..]" as reference.RepoObject_reference_union << V >> {
+entity "puml-link:dhw:sqldb:reference.RepoObject_reference_union.adoc[]" as reference.RepoObject_reference_union << V >> {
   **referenced_RepoObject_guid** : (uniqueidentifier)
   **referencing_RepoObject_guid** : (uniqueidentifier)
   --
   - InformationSource : (varchar(34))
   - one : (int)
   referenced_entity_name : (nvarchar(128))
+  referenced_external_AntoraComponent : (nvarchar(128))
+  referenced_external_AntoraModule : (nvarchar(128))
   referenced_fullname : (nvarchar(517))
   referenced_id : (int)
+  referenced_is_external : (int)
   referenced_schema_name : (nvarchar(128))
   referenced_type : (char(2))
   referencing_entity_name : (nvarchar(128))
+  referencing_external_AntoraComponent : (nvarchar(128))
+  referencing_external_AntoraModule : (nvarchar(128))
   referencing_fullname : (nvarchar(517))
   referencing_id : (int)
+  referencing_is_external : (int)
   referencing_schema_name : (nvarchar(128))
   referencing_type : (varchar(2))
   --
   --
 }
 
-entity "puml-link:reference.RepoObject_reference_virtual.adoc[prefix=..]" as reference.RepoObject_reference_virtual << V >> {
+entity "puml-link:dhw:sqldb:reference.RepoObject_reference_virtual.adoc[]" as reference.RepoObject_reference_virtual << V >> {
   --
   - InformationSource : (varchar(34))
   - referenced_entity_name : (nvarchar(128))
@@ -154,19 +173,14 @@ entity "puml-link:reference.RepoObject_reference_virtual.adoc[prefix=..]" as ref
   --
 }
 
-reference.RepoObject_reference_additional_internal <.. reference.RepoObject_reference_union
+reference.RepoObject_reference_additional <.. reference.RepoObject_reference_union
 reference.RepoObject_reference_persistence <.. reference.RepoObject_reference_union
 reference.RepoObject_reference_persistence_target_as_source <.. reference.RepoObject_reference_union
 reference.RepoObject_reference_SqlExpressionDependencies <.. reference.RepoObject_reference_union
 reference.RepoObject_reference_union <.. reference.RepoObject_reference
 reference.RepoObject_reference_virtual <.. reference.RepoObject_reference_union
-reference.RepoObject_reference_union::referenced_entity_name <-- reference.RepoObject_reference::referenced_entity_name
-reference.RepoObject_reference_union::referenced_RepoObject_guid <-- reference.RepoObject_reference::referenced_RepoObject_guid
-reference.RepoObject_reference_union::referencing_RepoObject_guid <-- reference.RepoObject_reference::referencing_RepoObject_guid
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"reference.RepoObject_reference_union::referenced_entity_name" <-- "reference.RepoObject_reference::referenced_entity_name"
+"reference.RepoObject_reference_union::referenced_RepoObject_guid" <-- "reference.RepoObject_reference::referenced_RepoObject_guid"
+"reference.RepoObject_reference_union::referencing_RepoObject_guid" <-- "reference.RepoObject_reference::referencing_RepoObject_guid"
 @enduml
 

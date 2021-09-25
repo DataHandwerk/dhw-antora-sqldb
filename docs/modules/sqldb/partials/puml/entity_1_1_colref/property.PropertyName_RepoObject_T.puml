@@ -22,17 +22,18 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:property.PropertyName_RepoObject.adoc[prefix=..]" as property.PropertyName_RepoObject << V >> {
+entity "puml-link:dhw:sqldb:property.PropertyName_RepoObject.adoc[]" as property.PropertyName_RepoObject << V >> {
   **property_name** : (nvarchar(128))
   --
   --
   --
 }
 
-entity "puml-link:property.PropertyName_RepoObject_T.adoc[prefix=..]" as property.PropertyName_RepoObject_T << U >> {
+entity "puml-link:dhw:sqldb:property.PropertyName_RepoObject_T.adoc[]" as property.PropertyName_RepoObject_T << U >> {
   **property_name** : (nvarchar(128))
   --
   - has_inheritance : (bit)
@@ -40,10 +41,33 @@ entity "puml-link:property.PropertyName_RepoObject_T.adoc[prefix=..]" as propert
   --
 }
 
-entity "puml-link:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc[prefix=..]" as property.RepoObjectProperty_InheritanceType_InheritanceDefinition << V >> {
+entity "puml-link:dhw:sqldb:property.RepoObjectColumnProperty_external_tgt.adoc[]" as property.RepoObjectColumnProperty_external_tgt << V >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
+  --
+  inheritance : (tinyint)
+  property_value : (nvarchar(max))
+  - RepoObjectColumnProperty_id : (int)
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.RepoObjectProperty_external_tgt.adoc[]" as property.RepoObjectProperty_external_tgt << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   - **property_name** : (nvarchar(128))
   --
+  inheritance : (tinyint)
+  property_value : (nvarchar(max))
+  - RepoObjectProperty_id : (int)
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc[]" as property.RepoObjectProperty_InheritanceType_InheritanceDefinition << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
+  --
+  Inheritance_Source_fullname : (nvarchar(261))
   Inheritance_StringAggSeparatorSql : (nvarchar(max))
   InheritanceDefinition : (nvarchar(max))
   InheritanceType : (int)
@@ -63,21 +87,20 @@ entity "puml-link:property.RepoObjectProperty_InheritanceType_InheritanceDefinit
   --
 }
 
-entity "puml-link:property.usp_PERSIST_PropertyName_RepoObject_T.adoc[prefix=..]" as property.usp_PERSIST_PropertyName_RepoObject_T << P >> {
+entity "puml-link:dhw:sqldb:property.usp_PERSIST_PropertyName_RepoObject_T.adoc[]" as property.usp_PERSIST_PropertyName_RepoObject_T << P >> {
   --
   --
   --
 }
 
 property.PropertyName_RepoObject <.. property.PropertyName_RepoObject_T
+property.PropertyName_RepoObject_T <.. property.RepoObjectProperty_external_tgt
+property.PropertyName_RepoObject_T <.. property.RepoObjectColumnProperty_external_tgt
 property.PropertyName_RepoObject_T <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition
 property.PropertyName_RepoObject_T <.. property.usp_PERSIST_PropertyName_RepoObject_T
-property.PropertyName_RepoObject::property_name <-- property.PropertyName_RepoObject_T::property_name
-property.PropertyName_RepoObject_T::property_name <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::property_name
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+property.RepoObjectColumnProperty_external_tgt <.. property.PropertyName_RepoObject_T
+property.RepoObjectProperty_external_tgt <.. property.PropertyName_RepoObject_T
+"property.PropertyName_RepoObject::property_name" <-- "property.PropertyName_RepoObject_T::property_name"
+"property.PropertyName_RepoObject_T::property_name" <-- "property.RepoObjectProperty_InheritanceType_InheritanceDefinition::property_name"
 @enduml
 

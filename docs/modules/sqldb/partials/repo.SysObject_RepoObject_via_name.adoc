@@ -41,7 +41,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-08-17 19:57:04
+2021-09-21 18:26:34
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -83,6 +83,20 @@ view
 --
 * xref:repo_sys.SysObject.adoc#column-history_table_id[+repo_sys.SysObject.history_table_id+]
 --
+
+
+[#column-is_external]
+=== is_external
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|is_external
+|bit
+|NULL
+|
+|
+|===
 
 
 [#column-is_repo_managed]
@@ -127,6 +141,20 @@ view
 --
 * xref:repo.RepoObject.adoc#column-is_RepoObject_name_uniqueidentifier[+repo.RepoObject.is_RepoObject_name_uniqueidentifier+]
 --
+
+
+[#column-is_ssas]
+=== is_ssas
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|is_ssas
+|bit
+|NULL
+|
+|
+|===
 
 
 [#column-is_SysObject_name_uniqueidentifier]
@@ -653,6 +681,8 @@ reference in [repo_sys].[type]
 
 
 
+
+
 // end::AntoraPkColumnTableRows[]
 
 == AntoraNonPkColumnTableRows
@@ -673,6 +703,13 @@ reference in [repo_sys].[type]
 |
 
 |
+|<<column-is_external>>
+|bit
+|NULL
+|
+|
+
+|
 |<<column-is_repo_managed>>
 |bit
 |NULL
@@ -682,6 +719,13 @@ reference in [repo_sys].[type]
 |
 |<<column-is_RepoObject_name_uniqueidentifier>>
 |int
+|NULL
+|
+|
+
+|
+|<<column-is_ssas>>
+|bit
 |NULL
 |
 |
@@ -853,10 +897,10 @@ reference in [repo_sys].[type]
 
 // tag::AntoraIndexList[]
 
-[#index-idx_SysObject_RepoObject_via_name_1]
+[#index-idx_SysObject_RepoObject_via_name2x_1]
 === idx_SysObject_RepoObject_via_name++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-history_table_guid>>; uniqueidentifier
@@ -864,10 +908,21 @@ reference in [repo_sys].[type]
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_SysObject_RepoObject_via_name_2]
+[#index-idx_SysObject_RepoObject_via_name2x_2]
 === idx_SysObject_RepoObject_via_name++__++2
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-RepoObject_guid>>; uniqueidentifier
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[#index-idx_SysObject_RepoObject_via_name2x_3]
+=== idx_SysObject_RepoObject_via_name++__++3
+
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_SysObject_schema_name>>; nvarchar(128)
@@ -876,10 +931,10 @@ reference in [repo_sys].[type]
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_SysObject_RepoObject_via_name_3]
-=== idx_SysObject_RepoObject_via_name++__++3
+[#index-idx_SysObject_RepoObject_via_name2x_4]
+=== idx_SysObject_RepoObject_via_name++__++4
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_schema_name>>; nvarchar(128)
@@ -1193,7 +1248,7 @@ source: property.RepoObjectProperty WHERE property_int = 1
 ----
 
 
-CREATE View repo.SysObject_RepoObject_via_name
+CREATE View [repo].[SysObject_RepoObject_via_name]
 As
 --
 Select
@@ -1225,6 +1280,8 @@ Select
   , RepoObject_is_SysObject_missing       = ro.is_SysObject_missing
   , ro.is_RepoObject_name_uniqueidentifier
   , ro.is_SysObject_name_uniqueidentifier
+  , ro.is_ssas
+  , ro.is_external
 --, [ro].SysObject_parent_object_id AS          [RepoObject_parent_SysObject_id]
 --, [ro].[SysObject_temporal_type] AS      [RepoObject_SysObject_temporal_type]
 --, [ro].[SysObject_history_table_id] AS   [RepoObject_SysObject_history_table_id]
@@ -1234,13 +1291,17 @@ From
     Left Outer Join
         repo.RepoObject As ro
             On
-            so.SysObject_schema_name = ro.SysObject_schema_name
-            And so.SysObject_name    = ro.SysObject_name
+            ro.SysObject_schema_name = so.SysObject_schema_name
+            And ro.SysObject_name    = so.SysObject_name
+            And ro.is_ssas           = 0
+            And ro.is_external       = 0
 
     Left Outer Join
         repo.RepoObject As ro_hist
             On
-            so.history_table_id      = ro_hist.SysObject_id
+            ro_hist.SysObject_id     = so.history_table_id
+            And ro_hist.is_ssas      = 0
+            And ro_hist.is_external  = 0
 
 ----
 =======

@@ -22,16 +22,17 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:logs.usp_ExecutionLog_insert.adoc[prefix=..]" as logs.usp_ExecutionLog_insert << P >> {
+entity "puml-link:dhw:sqldb:logs.usp_ExecutionLog_insert.adoc[]" as logs.usp_ExecutionLog_insert << P >> {
   --
   --
   --
 }
 
-entity "puml-link:property.RepoObjectColumn_Inheritance_temp.adoc[prefix=..]" as property.RepoObjectColumn_Inheritance_temp << U >> {
+entity "puml-link:dhw:sqldb:property.RepoObjectColumn_Inheritance_temp.adoc[]" as property.RepoObjectColumn_Inheritance_temp << U >> {
   --
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
   InheritanceType : (int)
@@ -52,7 +53,7 @@ entity "puml-link:property.RepoObjectColumn_Inheritance_temp.adoc[prefix=..]" as
   --
 }
 
-entity "puml-link:property.RepoObjectColumnProperty.adoc[prefix=..]" as property.RepoObjectColumnProperty << U >> {
+entity "puml-link:dhw:sqldb:property.RepoObjectColumnProperty.adoc[]" as property.RepoObjectColumnProperty << U >> {
   - **RepoObjectColumnProperty_id** : (int)
   --
   inheritance : (tinyint)
@@ -68,35 +69,35 @@ entity "puml-link:property.RepoObjectColumnProperty.adoc[prefix=..]" as property
   --
 }
 
-entity "puml-link:property.RepoObjectColumnProperty_InheritanceType_resulting_InheritanceDefinition.adoc[prefix=..]" as property.RepoObjectColumnProperty_InheritanceType_resulting_InheritanceDefinition << V >> {
-  - **RepoObjectColumn_guid** : (uniqueidentifier)
-  - **property_name** : (nvarchar(128))
+entity "puml-link:dhw:sqldb:property.RepoObjectColumnProperty_InheritanceType_resulting_InheritanceDefinition.adoc[]" as property.RepoObjectColumnProperty_InheritanceType_resulting_InheritanceDefinition << V >> {
   --
   Inheritance_StringAggSeparatorSql : (nvarchar(max))
   InheritanceDefinition : (nvarchar(max))
   InheritanceType : (int)
   - is_force_inherit_empty_source : (int)
   - is_StringAggAllSources : (int)
+  - property_name : (nvarchar(128))
   property_value : (nvarchar(max))
+  - RepoObjectColumn_guid : (uniqueidentifier)
   - RepoObjectColumn_name : (nvarchar(128))
   resulting_InheritanceDefinition : (nvarchar(max))
   --
   --
 }
 
-entity "puml-link:property.usp_PERSIST_PropertyName_RepoObjectColumn_T.adoc[prefix=..]" as property.usp_PERSIST_PropertyName_RepoObjectColumn_T << P >> {
+entity "puml-link:dhw:sqldb:property.usp_PERSIST_PropertyName_RepoObjectColumn_T.adoc[]" as property.usp_PERSIST_PropertyName_RepoObjectColumn_T << P >> {
   --
   --
   --
 }
 
-entity "puml-link:property.usp_RepoObjectColumn_Inheritance.adoc[prefix=..]" as property.usp_RepoObjectColumn_Inheritance << P >> {
+entity "puml-link:dhw:sqldb:property.usp_RepoObjectColumn_Inheritance.adoc[]" as property.usp_RepoObjectColumn_Inheritance << P >> {
   --
   --
   --
 }
 
-entity "puml-link:repo.usp_main.adoc[prefix=..]" as repo.usp_main << P >> {
+entity "puml-link:dhw:sqldb:repo.usp_main.adoc[]" as repo.usp_main << P >> {
   --
   --
   --
@@ -108,11 +109,6 @@ property.RepoObjectColumnProperty <.. property.usp_RepoObjectColumn_Inheritance
 property.RepoObjectColumnProperty_InheritanceType_resulting_InheritanceDefinition <.. property.usp_RepoObjectColumn_Inheritance
 property.usp_PERSIST_PropertyName_RepoObjectColumn_T <.. property.usp_RepoObjectColumn_Inheritance
 property.usp_RepoObjectColumn_Inheritance <.. repo.usp_main
-
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
 
 @enduml
 

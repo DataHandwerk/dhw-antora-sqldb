@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:reference.ReferenceTree_cyclic_ref_PersistenceUsp.adoc[prefix=..]" as reference.ReferenceTree_cyclic_ref_PersistenceUsp << V >> {
+entity "puml-link:dhw:sqldb:reference.ReferenceTree_cyclic_ref_PersistenceUsp.adoc[]" as reference.ReferenceTree_cyclic_ref_PersistenceUsp << V >> {
   --
   - referenced_fullname : (nvarchar(261))
   - referenced_fullname2 : (nvarchar(257))
@@ -39,7 +40,7 @@ entity "puml-link:reference.ReferenceTree_cyclic_ref_PersistenceUsp.adoc[prefix=
   --
 }
 
-entity "puml-link:reference.ReferenceTree_cyclic_ref_primary.adoc[prefix=..]" as reference.ReferenceTree_cyclic_ref_primary << V >> {
+entity "puml-link:dhw:sqldb:reference.ReferenceTree_cyclic_ref_primary.adoc[]" as reference.ReferenceTree_cyclic_ref_primary << V >> {
   --
   Referenced_fullname : (nvarchar(261))
   Referenced_fullname2 : (nvarchar(257))
@@ -53,7 +54,7 @@ entity "puml-link:reference.ReferenceTree_cyclic_ref_primary.adoc[prefix=..]" as
   --
 }
 
-entity "puml-link:reference.ReferenceTree_cyclic_union.adoc[prefix=..]" as reference.ReferenceTree_cyclic_union << V >> {
+entity "puml-link:dhw:sqldb:reference.ReferenceTree_cyclic_union.adoc[]" as reference.ReferenceTree_cyclic_union << V >> {
   --
   Referenced_fullname : (nvarchar(261))
   Referenced_fullname2 : (nvarchar(257))
@@ -67,7 +68,7 @@ entity "puml-link:reference.ReferenceTree_cyclic_union.adoc[prefix=..]" as refer
   --
 }
 
-entity "puml-link:reference.RepoObject_ReferenceTree_cyclic.adoc[prefix=..]" as reference.RepoObject_ReferenceTree_cyclic << V >> {
+entity "puml-link:dhw:sqldb:reference.RepoObject_ReferenceTree_cyclic.adoc[]" as reference.RepoObject_ReferenceTree_cyclic << V >> {
   --
   Referenced_Depth_0_30 : (int)
   Referenced_Depth_30_0 : (int)
@@ -89,18 +90,13 @@ entity "puml-link:reference.RepoObject_ReferenceTree_cyclic.adoc[prefix=..]" as 
 reference.ReferenceTree_cyclic_ref_primary <.. reference.ReferenceTree_cyclic_ref_PersistenceUsp
 reference.ReferenceTree_cyclic_ref_primary <.. reference.ReferenceTree_cyclic_union
 reference.RepoObject_ReferenceTree_cyclic <.. reference.ReferenceTree_cyclic_ref_primary
-reference.RepoObject_ReferenceTree_cyclic::Referenced_fullname <-- reference.ReferenceTree_cyclic_ref_primary::Referenced_fullname
-reference.RepoObject_ReferenceTree_cyclic::Referenced_fullname2 <-- reference.ReferenceTree_cyclic_ref_primary::Referenced_fullname2
-reference.RepoObject_ReferenceTree_cyclic::Referenced_guid <-- reference.ReferenceTree_cyclic_ref_primary::Referenced_guid
-reference.RepoObject_ReferenceTree_cyclic::Referenced_type <-- reference.ReferenceTree_cyclic_ref_primary::Referenced_type
-reference.RepoObject_ReferenceTree_cyclic::referencing_fullname <-- reference.ReferenceTree_cyclic_ref_primary::Referencing_fullname
-reference.RepoObject_ReferenceTree_cyclic::referencing_fullname2 <-- reference.ReferenceTree_cyclic_ref_primary::Referencing_fullname2
-reference.RepoObject_ReferenceTree_cyclic::Referencing_guid <-- reference.ReferenceTree_cyclic_ref_primary::Referencing_guid
-reference.RepoObject_ReferenceTree_cyclic::referencing_type <-- reference.ReferenceTree_cyclic_ref_primary::Referencing_type
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"reference.RepoObject_ReferenceTree_cyclic::Referenced_fullname" <-- "reference.ReferenceTree_cyclic_ref_primary::Referenced_fullname"
+"reference.RepoObject_ReferenceTree_cyclic::Referenced_fullname2" <-- "reference.ReferenceTree_cyclic_ref_primary::Referenced_fullname2"
+"reference.RepoObject_ReferenceTree_cyclic::Referenced_guid" <-- "reference.ReferenceTree_cyclic_ref_primary::Referenced_guid"
+"reference.RepoObject_ReferenceTree_cyclic::Referenced_type" <-- "reference.ReferenceTree_cyclic_ref_primary::Referenced_type"
+"reference.RepoObject_ReferenceTree_cyclic::referencing_fullname" <-- "reference.ReferenceTree_cyclic_ref_primary::Referencing_fullname"
+"reference.RepoObject_ReferenceTree_cyclic::referencing_fullname2" <-- "reference.ReferenceTree_cyclic_ref_primary::Referencing_fullname2"
+"reference.RepoObject_ReferenceTree_cyclic::Referencing_guid" <-- "reference.ReferenceTree_cyclic_ref_primary::Referencing_guid"
+"reference.RepoObject_ReferenceTree_cyclic::referencing_type" <-- "reference.ReferenceTree_cyclic_ref_primary::Referencing_type"
 @enduml
 

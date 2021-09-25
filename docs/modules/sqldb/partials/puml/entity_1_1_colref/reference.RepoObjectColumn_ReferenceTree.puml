@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:reference.ftv_RepoObject_ColumReferenceRepoObject.adoc[prefix=..]" as reference.ftv_RepoObject_ColumReferenceRepoObject << IF >> {
+entity "puml-link:dhw:sqldb:reference.ftv_RepoObject_ColumReferenceRepoObject.adoc[]" as reference.ftv_RepoObject_ColumReferenceRepoObject << IF >> {
   --
   Dbml : (nvarchar(max))
   Parameter_RepoObject_guid : (uniqueidentifier)
@@ -36,7 +37,7 @@ entity "puml-link:reference.ftv_RepoObject_ColumReferenceRepoObject.adoc[prefix=
   --
 }
 
-entity "puml-link:reference.ftv_RepoObjectColumn_ReferenceTree.adoc[prefix=..]" as reference.ftv_RepoObjectColumn_ReferenceTree << IF >> {
+entity "puml-link:dhw:sqldb:reference.ftv_RepoObjectColumn_ReferenceTree.adoc[]" as reference.ftv_RepoObjectColumn_ReferenceTree << IF >> {
   --
   Referenced_Depth : (int)
   Referenced_fullname : (nvarchar(261))
@@ -61,7 +62,7 @@ entity "puml-link:reference.ftv_RepoObjectColumn_ReferenceTree.adoc[prefix=..]" 
   --
 }
 
-entity "puml-link:reference.RepoObjectColumn_ReferenceTree.adoc[prefix=..]" as reference.RepoObjectColumn_ReferenceTree << V >> {
+entity "puml-link:dhw:sqldb:reference.RepoObjectColumn_ReferenceTree.adoc[]" as reference.RepoObjectColumn_ReferenceTree << V >> {
   --
   Referenced_Depth : (int)
   Referenced_fullname : (nvarchar(261))
@@ -86,7 +87,7 @@ entity "puml-link:reference.RepoObjectColumn_ReferenceTree.adoc[prefix=..]" as r
   --
 }
 
-entity "puml-link:repo.RepoObjectColumn.adoc[prefix=..]" as repo.RepoObjectColumn << U >> {
+entity "puml-link:dhw:sqldb:repo.RepoObjectColumn.adoc[]" as repo.RepoObjectColumn << U >> {
   - **RepoObjectColumn_guid** : (uniqueidentifier)
   --
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
@@ -131,11 +132,6 @@ entity "puml-link:repo.RepoObjectColumn.adoc[prefix=..]" as repo.RepoObjectColum
 reference.ftv_RepoObjectColumn_ReferenceTree <.. reference.RepoObjectColumn_ReferenceTree
 reference.RepoObjectColumn_ReferenceTree <.. reference.ftv_RepoObject_ColumReferenceRepoObject
 repo.RepoObjectColumn <.. reference.RepoObjectColumn_ReferenceTree
-
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
 
 @enduml
 

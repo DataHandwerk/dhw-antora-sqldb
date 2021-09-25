@@ -7,9 +7,6 @@
 :ExistsProperty--antorareferencinglist:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--pk_index_guid:
-:ExistsProperty--pk_indexpatterncolumndatatype:
-:ExistsProperty--pk_indexpatterncolumnname:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -44,40 +41,38 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-06 22:28:39
+2021-09-23 08:26:07
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-RepoObject_guid]
-=== RepoObject_guid
+[#column-AntoraComponent]
+=== AntoraComponent
 
 [cols="d,8m,m,m,m,d"]
 |===
-|1
-|*RepoObject_guid*
-|uniqueidentifier
-|NOT NULL
+|
+|AntoraComponent
+|nvarchar(max)
+|NULL
 |
 |
 |===
 
-.Referenced Columns
---
-* xref:repo.RepoObject.adoc#column-RepoObject_guid[+repo.RepoObject.RepoObject_guid+]
---
 
-.Referencing Columns
---
-* xref:docs.RepoObject_OutputFilter.adoc#column-RepoObject_guid[+docs.RepoObject_OutputFilter.RepoObject_guid+]
-* xref:docs.RepoObject_Plantuml.adoc#column-RepoObject_guid[+docs.RepoObject_Plantuml.RepoObject_guid+]
-* xref:reference.Persistence.adoc#column-referenced_RepoObject_guid[+reference.Persistence.referenced_RepoObject_guid+]
-* xref:reference.Persistence.adoc#column-referencing_RepoObject_guid[+reference.Persistence.referencing_RepoObject_guid+]
-* xref:reference.RepoObject_ReferenceTree_referenced_30_0.adoc#column-RepoObject_guid[+reference.RepoObject_ReferenceTree_referenced_30_0.RepoObject_guid+]
-* xref:reference.RepoObject_ReferenceTree_referencing_0_30.adoc#column-RepoObject_guid[+reference.RepoObject_ReferenceTree_referencing_0_30.RepoObject_guid+]
-* xref:repo.RepoObject_gross2.adoc#column-RepoObject_guid[+repo.RepoObject_gross2.RepoObject_guid+]
---
+[#column-AntoraModule]
+=== AntoraModule
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|AntoraModule
+|nvarchar(max)
+|NULL
+|
+|
+|===
 
 
 [#column-Description]
@@ -97,6 +92,62 @@ view
 --
 * xref:repo.RepoObject_gross2.adoc#column-Description[+repo.RepoObject_gross2.Description+]
 --
+
+
+[#column-external_AntoraComponent]
+=== external_AntoraComponent
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|external_AntoraComponent
+|nvarchar(128)
+|NULL
+|
+|
+|===
+
+
+[#column-external_AntoraModule]
+=== external_AntoraModule
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|external_AntoraModule
+|nvarchar(128)
+|NULL
+|
+|
+|===
+
+
+[#column-external_DatabaseName]
+=== external_DatabaseName
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|external_DatabaseName
+|nvarchar(128)
+|NULL
+|
+|
+|===
+
+
+[#column-external_RepoDatabaseName]
+=== external_RepoDatabaseName
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|external_RepoDatabaseName
+|nvarchar(128)
+|NULL
+|
+|
+|===
 
 
 [#column-has_different_sys_names]
@@ -418,6 +469,20 @@ it looks like this column here is currently not used and should or could be dele
 * xref:docs.RepoObject_OutputFilter.adoc#column-is_DocsOutput[+docs.RepoObject_OutputFilter.is_DocsOutput+]
 * xref:repo.RepoObject_gross2.adoc#column-is_DocsOutput[+repo.RepoObject_gross2.is_DocsOutput+]
 --
+
+
+[#column-is_external]
+=== is_external
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|is_external
+|bit
+|NOT NULL
+|
+|
+|===
 
 
 [#column-is_in_reference]
@@ -1435,6 +1500,36 @@ reference in [repo_sys].[type]
 --
 
 
+[#column-RepoObject_guid]
+=== RepoObject_guid
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|RepoObject_guid
+|uniqueidentifier
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo.RepoObject.adoc#column-RepoObject_guid[+repo.RepoObject.RepoObject_guid+]
+--
+
+.Referencing Columns
+--
+* xref:docs.RepoObject_OutputFilter.adoc#column-RepoObject_guid[+docs.RepoObject_OutputFilter.RepoObject_guid+]
+* xref:docs.RepoObject_Plantuml.adoc#column-RepoObject_guid[+docs.RepoObject_Plantuml.RepoObject_guid+]
+* xref:reference.Persistence.adoc#column-referenced_RepoObject_guid[+reference.Persistence.referenced_RepoObject_guid+]
+* xref:reference.Persistence.adoc#column-referencing_RepoObject_guid[+reference.Persistence.referencing_RepoObject_guid+]
+* xref:reference.RepoObject_ReferenceTree_referenced_30_0.adoc#column-RepoObject_guid[+reference.RepoObject_ReferenceTree_referenced_30_0.RepoObject_guid+]
+* xref:reference.RepoObject_ReferenceTree_referencing_0_30.adoc#column-RepoObject_guid[+reference.RepoObject_ReferenceTree_referencing_0_30.RepoObject_guid+]
+* xref:repo.RepoObject_gross2.adoc#column-RepoObject_guid[+repo.RepoObject_gross2.RepoObject_guid+]
+--
+
+
 [#column-RepoObject_name]
 === RepoObject_name
 
@@ -1964,7 +2059,7 @@ reference in [repo_sys].[type]
 |===
 |
 |tables_isHidden
-|nvarchar(500)
+|bit
 |NULL
 |
 |
@@ -2093,6 +2188,30 @@ reference in [repo_sys].[type]
 --
 
 
+[#column-uspgenerator_usp_id]
+=== uspgenerator_usp_id
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|uspgenerator_usp_id
+|int
+|NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:uspgenerator.GeneratorUsp.adoc#column-id[+uspgenerator.GeneratorUsp.id+]
+--
+
+.Referencing Columns
+--
+* xref:repo.RepoObject_gross2.adoc#column-uspgenerator_usp_id[+repo.RepoObject_gross2.uspgenerator_usp_id+]
+--
+
+
 // end::AntoraColumnDetails[]
 
 == AntoraMeasureDetails
@@ -2104,12 +2223,14 @@ reference in [repo_sys].[type]
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
-|1
-|*<<column-RepoObject_guid>>*
-|uniqueidentifier
-|NOT NULL
-|
-|
+
+
+
+
+
+
+
+
 
 
 
@@ -2191,10 +2312,51 @@ reference in [repo_sys].[type]
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
+|
+|<<column-AntoraComponent>>
+|nvarchar(max)
+|NULL
+|
+|
+
+|
+|<<column-AntoraModule>>
+|nvarchar(max)
+|NULL
+|
+|
 
 |
 |<<column-Description>>
 |nvarchar(max)
+|NULL
+|
+|
+
+|
+|<<column-external_AntoraComponent>>
+|nvarchar(128)
+|NULL
+|
+|
+
+|
+|<<column-external_AntoraModule>>
+|nvarchar(128)
+|NULL
+|
+|
+
+|
+|<<column-external_DatabaseName>>
+|nvarchar(128)
+|NULL
+|
+|
+
+|
+|<<column-external_RepoDatabaseName>>
+|nvarchar(128)
 |NULL
 |
 |
@@ -2280,6 +2442,13 @@ reference in [repo_sys].[type]
 |<<column-is_DocsOutput>>
 |int
 |NULL
+|
+|
+
+|
+|<<column-is_external>>
+|bit
+|NOT NULL
 |
 |
 
@@ -2543,6 +2712,13 @@ reference in [repo_sys].[type]
 |
 
 |
+|<<column-RepoObject_guid>>
+|uniqueidentifier
+|NOT NULL
+|
+|
+
+|
 |<<column-RepoObject_name>>
 |nvarchar(128)
 |NOT NULL
@@ -2684,7 +2860,7 @@ reference in [repo_sys].[type]
 
 |
 |<<column-tables_isHidden>>
-|nvarchar(500)
+|bit
 |NULL
 |
 |
@@ -2717,27 +2893,45 @@ reference in [repo_sys].[type]
 |
 |
 
+|
+|<<column-uspgenerator_usp_id>>
+|int
+|NULL
+|
+|
+
 // end::AntoraNonPkColumnTableRows[]
 
 == AntoraIndexList
 
 // tag::AntoraIndexList[]
 
-[#index-PK_RepoObject_gross]
-=== PK_RepoObject_gross
+[#index-idx_RepoObject_gross2x_1]
+=== idx_RepoObject_gross++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
 --
-* PK, Unique, Real: 1, 1, 0
+* PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObject_gross_2]
+[#index-idx_RepoObject_gross2x_2]
 === idx_RepoObject_gross++__++2
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-usp_persistence_RepoObject_guid>>; uniqueidentifier
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[#index-idx_RepoObject_gross2x_3]
+=== idx_RepoObject_gross++__++3
+
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-SysObject_schema_name>>; nvarchar(128)
@@ -2746,10 +2940,10 @@ reference in [repo_sys].[type]
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObject_gross_3]
-=== idx_RepoObject_gross++__++3
+[#index-idx_RepoObject_gross2x_4]
+=== idx_RepoObject_gross++__++4
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_schema_name>>; nvarchar(128)
@@ -2758,10 +2952,21 @@ reference in [repo_sys].[type]
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObject_gross_4]
-=== idx_RepoObject_gross++__++4
+[#index-idx_RepoObject_gross2x_5]
+=== idx_RepoObject_gross++__++5
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-uspgenerator_usp_id>>; int
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[#index-idx_RepoObject_gross2x_6]
+=== idx_RepoObject_gross++__++6
+
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-pk_index_guid>>; uniqueidentifier
@@ -2791,15 +2996,18 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
+* xref:config.ftv_get_parameter_value.adoc[]
 * xref:configT.type.adoc[]
 * xref:property.fs_get_RepoObjectProperty_nvarchar.adoc[]
+* xref:reference.additional_Reference_database_T.adoc[]
 * xref:reference.RepoObject_QueryPlan.adoc[]
-* xref:reference.RepoObject_ReferencingReferenced.adoc[]
+* xref:reference.RepoObject_ReferencedReferencing.adoc[]
 * xref:repo.Index_Settings.adoc[]
 * xref:repo.RepoObject.adoc[]
 * xref:repo.RepoObject_persistence.adoc[]
 * xref:ssas.model_json_31_tables_T.adoc[]
 * xref:ssas.model_json_3161_tables_descriptions_StrAgg.adoc[]
+* xref:uspgenerator.GeneratorUsp.adoc[]
 // end::antorareferencedlist[]
 
 
@@ -3030,21 +3238,21 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-798AA10A-AB97-EB11-84F4-A81E8446D5B0
+
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-uniqueidentifier
+
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-RepoObject_guid
+
 // end::pk_indexpatterncolumnname[]
 
 
@@ -3058,15 +3266,18 @@ RepoObject_guid
 === ReferencedObjectList
 
 // tag::referencedobjectlist[]
+* [config].[ftv_get_parameter_value]
 * [configT].[type]
 * [property].[fs_get_RepoObjectProperty_nvarchar]
+* [reference].[additional_Reference_database_T]
 * [reference].[RepoObject_QueryPlan]
-* [reference].[RepoObject_ReferencingReferenced]
+* [reference].[RepoObject_ReferencedReferencing]
 * [repo].[Index_Settings]
 * [repo].[RepoObject]
 * [repo].[RepoObject_persistence]
 * [ssas].[model_json_31_tables_T]
 * [ssas].[model_json_3161_tables_descriptions_StrAgg]
+* [uspgenerator].[GeneratorUsp]
 // end::referencedobjectlist[]
 
 
@@ -3106,7 +3317,8 @@ source: property.RepoObjectProperty WHERE property_int = 1
 [source,sql]
 ----
 
-CREATE View repo.RepoObject_gross
+
+CREATE View [repo].[RepoObject_gross]
 As
 Select
     --
@@ -3129,7 +3341,7 @@ Select
                                                            Select
                                                                1
                                                            From
-                                                               reference.RepoObject_ReferencingReferenced As ref
+                                                               reference.RepoObject_ReferencedReferencing As ref
                                                            Where
                                                                ref.Referenced_guid     = ro.RepoObject_guid
                                                                Or ref.Referencing_guid = ro.RepoObject_guid
@@ -3168,6 +3380,13 @@ Select
   , ro.SysObject_query_sql
   , ro.SysObject_schema_name
   , ro.SysObject_type
+  , ro.external_AntoraComponent
+  , ro.external_AntoraModule
+  , external_DatabaseName                   = ard.DatabaseName
+  , external_RepoDatabaseName               = ard.RepoDatabaseName
+  , ro.is_external
+  , AntoraComponent                         = Coalesce ( ro.external_AntoraComponent, AntoraComponent.Parameter_value_result )
+  , AntoraModule                            = Coalesce ( ro.external_AntoraModule, AntoraModule.Parameter_value_result )
   , SysObject_type_name                     = sys_type.type_desc
   , ro.usp_persistence_name
   , usp_persistence_RepoObject_guid         = ro_usp_p.RepoObject_guid
@@ -3197,8 +3416,12 @@ Select
   , ro_p.source_filter
   , ro_p.target_filter
   , ro_p.temporal_type
+  --Attention, this will be written back into Property 'Description'
+  --this could be an issue, if it will be changed in differen places, which should be the primary?
   , Description                             = Coalesce (
-                                                           modeltab.tables_description
+                                                           --keep existing Description
+                                                           property.fs_get_RepoObjectProperty_nvarchar ( ro.RepoObject_guid, 'Description' )
+                                                         , modeltab.tables_description
                                                          , modeltab2.descriptions_StrAgg
                                                          , property.fs_get_RepoObjectProperty_nvarchar ( ro.RepoObject_guid, 'ms_description' )
                                                        )
@@ -3235,63 +3458,71 @@ Select
 --, AntoraModule                             = AntoraModule.Parameter_value_result
 --, AntoraComponent                         = AntoraComponent.Parameter_value_result
 From
-    repo.RepoObject                                     As ro
+    repo.RepoObject                                                     As ro
     Left Outer Join
-        repo.RepoObject_persistence                     As ro_p
+        repo.RepoObject_persistence                                     As ro_p
             On
-            ro_p.target_RepoObject_guid         = ro.RepoObject_guid
+            ro_p.target_RepoObject_guid = ro.RepoObject_guid
 
     Left Outer Join
-        repo.RepoObject                                 As ro_p_s
+        repo.RepoObject                                                 As ro_p_s
             On
-            ro_p_s.RepoObject_guid              = ro_p.source_RepoObject_guid
+            ro_p_s.RepoObject_guid = ro_p.source_RepoObject_guid
 
     Left Outer Join
-        repo.RepoObject                                 As ro_usp_p
+        repo.RepoObject                                                 As ro_usp_p
             On
-            ro_usp_p.RepoObject_name            = ro.usp_persistence_name
+            ro_usp_p.RepoObject_name = ro.usp_persistence_name
             And ro_usp_p.RepoObject_schema_name = ro.RepoObject_schema_name
 
     Left Outer Join
-        reference.RepoObject_QueryPlan                  As QueryPlan
+        reference.RepoObject_QueryPlan                                  As QueryPlan
             On
-            QueryPlan.RepoObject_guid           = ro.RepoObject_guid
+            QueryPlan.RepoObject_guid = ro.RepoObject_guid
 
     Left Join
-        repo.Index_Settings                             As ipk
+        repo.Index_Settings                                             As ipk
             On
-            ipk.index_guid                      = ro.pk_index_guid
+            ipk.index_guid = ro.pk_index_guid
 
     Left Join
-        configT.type                                    As repo_type
+        configT.type                                                    As repo_type
             On
-            repo_type.type                      = ro.RepoObject_type
+            repo_type.type = ro.RepoObject_type
 
     Left Join
-        configT.type                                    As sys_type
+        configT.type                                                    As sys_type
             On
-            sys_type.type                       = ro.SysObject_type
+            sys_type.type = ro.SysObject_type
 
     Left Join
-        configT.type                                    As ty
+        configT.type                                                    As ty
             On
-            ty.type                             = ro.RepoObject_type
+            ty.type = ro.RepoObject_type
 
     Left Outer Join
-        ssas.model_json_31_tables_T                     As modeltab
+        ssas.model_json_31_tables_T                                     As modeltab
             On
-            modeltab.RepoObject_guid            = ro.RepoObject_guid
+            modeltab.RepoObject_guid = ro.RepoObject_guid
 
     Left Outer Join
-        ssas.model_json_3161_tables_descriptions_StrAgg As modeltab2
+        ssas.model_json_3161_tables_descriptions_StrAgg                 As modeltab2
             On
-            modeltab2.RepoObject_guid           = ro.RepoObject_guid
+            modeltab2.RepoObject_guid = ro.RepoObject_guid
 
     Left Join
-        uspgenerator.GeneratorUsp                       As gusp
+        uspgenerator.GeneratorUsp                                       As gusp
             On
-            gusp.usp_fullname                   = ro.RepoObject_fullname
+            gusp.usp_fullname = ro.RepoObject_fullname
 
+    Left Join
+        reference.additional_Reference_database_T                       As ard
+            On
+            ard.AntoraComponent = ro.external_AntoraComponent
+            And ard.AntoraModule = ro.external_AntoraModule
+
+    Cross Join config.ftv_get_parameter_value ( 'AntoraComponent', '' ) As AntoraComponent
+    Cross Join config.ftv_get_parameter_value ( 'AntoraModule', '' ) As AntoraModule
 --Left Outer Join
 --    ssas.TMSCHEMA_TABLES_T                          As ssastab
 --        On

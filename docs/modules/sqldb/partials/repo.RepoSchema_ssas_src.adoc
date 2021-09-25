@@ -7,9 +7,6 @@
 :ExistsProperty--antorareferencinglist:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--pk_index_guid:
-:ExistsProperty--pk_indexpatterncolumndatatype:
-:ExistsProperty--pk_indexpatterncolumnname:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -50,30 +47,6 @@ view
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-RepoSchema_name]
-=== RepoSchema_name
-
-[cols="d,8m,m,m,m,d"]
-|===
-|1
-|*RepoSchema_name*
-|nvarchar(128)
-|NOT NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:ssas.model_json_20.adoc#column-databasename[+ssas.model_json_20.databasename+]
---
-
-.Referencing Columns
---
-* xref:repo.RepoSchema_ssas_tgt.adoc#column-RepoSchema_name[+repo.RepoSchema_ssas_tgt.RepoSchema_name+]
---
-
-
 [#column-is_ssas]
 === is_ssas
 
@@ -131,6 +104,30 @@ view
 --
 
 
+[#column-RepoSchema_name]
+=== RepoSchema_name
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|RepoSchema_name
+|nvarchar(128)
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:ssas.model_json_20.adoc#column-databasename[+ssas.model_json_20.databasename+]
+--
+
+.Referencing Columns
+--
+* xref:repo.RepoSchema_ssas_tgt.adoc#column-RepoSchema_name[+repo.RepoSchema_ssas_tgt.RepoSchema_name+]
+--
+
+
 [#column-SysSchema_name]
 === SysSchema_name
 
@@ -161,12 +158,6 @@ view
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
-|1
-|*<<column-RepoSchema_name>>*
-|nvarchar(128)
-|NOT NULL
-|
-|
 
 
 
@@ -177,7 +168,6 @@ view
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
-
 |
 |<<column-is_ssas>>
 |int
@@ -200,6 +190,13 @@ view
 |
 
 |
+|<<column-RepoSchema_name>>
+|nvarchar(128)
+|NOT NULL
+|
+|
+
+|
 |<<column-SysSchema_name>>
 |nvarchar(128)
 |NOT NULL
@@ -212,15 +209,15 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-PK_RepoSchema_ssas_src]
-=== PK_RepoSchema_ssas_src
+[#index-idx_RepoSchema_ssas_src2x_1]
+=== idx_RepoSchema_ssas_src++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoSchema_name>>; nvarchar(128)
 --
-* PK, Unique, Real: 1, 1, 0
+* PK, Unique, Real: 0, 0, 0
 
 // end::AntoraIndexList[]
 
@@ -254,7 +251,6 @@ source: property.RepoObjectProperty_cross As rop_cross
 
 // tag::antorareferencinglist[]
 * xref:repo.RepoSchema_ssas_tgt.adoc[]
-* xref:repo.usp_PERSIST_RepoSchema_ssas_tgt.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -457,21 +453,21 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-DE9E1E69-2007-EC11-8515-A81E8446D5B0
+
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-nvarchar(128)
+
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-RepoSchema_name
+
 // end::pk_indexpatterncolumnname[]
 
 

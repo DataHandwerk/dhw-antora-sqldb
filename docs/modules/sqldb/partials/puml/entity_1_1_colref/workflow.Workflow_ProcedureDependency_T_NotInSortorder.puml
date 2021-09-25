@@ -22,16 +22,17 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:workflow.usp_workflow.adoc[prefix=..]" as workflow.usp_workflow << P >> {
+entity "puml-link:dhw:sqldb:workflow.usp_workflow.adoc[]" as workflow.usp_workflow << P >> {
   --
   --
   --
 }
 
-entity "puml-link:workflow.Workflow_ProcedureDependency_T_active.adoc[prefix=..]" as workflow.Workflow_ProcedureDependency_T_active << V >> {
+entity "puml-link:dhw:sqldb:workflow.Workflow_ProcedureDependency_T_active.adoc[]" as workflow.Workflow_ProcedureDependency_T_active << V >> {
   --
   - is_redundant : (bit)
   - referenced_Procedure_RepoObject_guid : (uniqueidentifier)
@@ -41,7 +42,7 @@ entity "puml-link:workflow.Workflow_ProcedureDependency_T_active.adoc[prefix=..]
   --
 }
 
-entity "puml-link:workflow.Workflow_ProcedureDependency_T_NotInSortorder.adoc[prefix=..]" as workflow.Workflow_ProcedureDependency_T_NotInSortorder << V >> {
+entity "puml-link:dhw:sqldb:workflow.Workflow_ProcedureDependency_T_NotInSortorder.adoc[]" as workflow.Workflow_ProcedureDependency_T_NotInSortorder << V >> {
   --
   - referenced_Procedure_RepoObject_guid : (uniqueidentifier)
   - referencing_Procedure_RepoObject_guid : (uniqueidentifier)
@@ -50,7 +51,7 @@ entity "puml-link:workflow.Workflow_ProcedureDependency_T_NotInSortorder.adoc[pr
   --
 }
 
-entity "puml-link:workflow.Workflow_ProcedureDependency_T_NotInSortorder_check.adoc[prefix=..]" as workflow.Workflow_ProcedureDependency_T_NotInSortorder_check << V >> {
+entity "puml-link:dhw:sqldb:workflow.Workflow_ProcedureDependency_T_NotInSortorder_check.adoc[]" as workflow.Workflow_ProcedureDependency_T_NotInSortorder_check << V >> {
   --
   - referenced_Procedure_RepoObject_guid : (uniqueidentifier)
   - referencing_Procedure_RepoObject_guid : (uniqueidentifier)
@@ -61,7 +62,7 @@ entity "puml-link:workflow.Workflow_ProcedureDependency_T_NotInSortorder_check.a
   --
 }
 
-entity "puml-link:workflow.WorkflowStep_Sortorder.adoc[prefix=..]" as workflow.WorkflowStep_Sortorder << U >> {
+entity "puml-link:dhw:sqldb:workflow.WorkflowStep_Sortorder.adoc[]" as workflow.WorkflowStep_Sortorder << U >> {
   - **Workflow_id** : (int)
   - **Procedure_RepoObject_guid** : (uniqueidentifier)
   --
@@ -74,16 +75,11 @@ workflow.Workflow_ProcedureDependency_T_active <.. workflow.Workflow_ProcedureDe
 workflow.Workflow_ProcedureDependency_T_NotInSortorder <.. workflow.usp_workflow
 workflow.Workflow_ProcedureDependency_T_NotInSortorder <.. workflow.Workflow_ProcedureDependency_T_NotInSortorder_check
 workflow.WorkflowStep_Sortorder <.. workflow.Workflow_ProcedureDependency_T_NotInSortorder
-workflow.Workflow_ProcedureDependency_T_active::referenced_Procedure_RepoObject_guid <-- workflow.Workflow_ProcedureDependency_T_NotInSortorder::referenced_Procedure_RepoObject_guid
-workflow.Workflow_ProcedureDependency_T_active::referencing_Procedure_RepoObject_guid <-- workflow.Workflow_ProcedureDependency_T_NotInSortorder::referencing_Procedure_RepoObject_guid
-workflow.Workflow_ProcedureDependency_T_active::Workflow_id <-- workflow.Workflow_ProcedureDependency_T_NotInSortorder::Workflow_id
-workflow.Workflow_ProcedureDependency_T_NotInSortorder::referenced_Procedure_RepoObject_guid <-- workflow.Workflow_ProcedureDependency_T_NotInSortorder_check::referenced_Procedure_RepoObject_guid
-workflow.Workflow_ProcedureDependency_T_NotInSortorder::referencing_Procedure_RepoObject_guid <-- workflow.Workflow_ProcedureDependency_T_NotInSortorder_check::referencing_Procedure_RepoObject_guid
-workflow.Workflow_ProcedureDependency_T_NotInSortorder::Workflow_id <-- workflow.Workflow_ProcedureDependency_T_NotInSortorder_check::Workflow_id
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"workflow.Workflow_ProcedureDependency_T_active::referenced_Procedure_RepoObject_guid" <-- "workflow.Workflow_ProcedureDependency_T_NotInSortorder::referenced_Procedure_RepoObject_guid"
+"workflow.Workflow_ProcedureDependency_T_active::referencing_Procedure_RepoObject_guid" <-- "workflow.Workflow_ProcedureDependency_T_NotInSortorder::referencing_Procedure_RepoObject_guid"
+"workflow.Workflow_ProcedureDependency_T_active::Workflow_id" <-- "workflow.Workflow_ProcedureDependency_T_NotInSortorder::Workflow_id"
+"workflow.Workflow_ProcedureDependency_T_NotInSortorder::referenced_Procedure_RepoObject_guid" <-- "workflow.Workflow_ProcedureDependency_T_NotInSortorder_check::referenced_Procedure_RepoObject_guid"
+"workflow.Workflow_ProcedureDependency_T_NotInSortorder::referencing_Procedure_RepoObject_guid" <-- "workflow.Workflow_ProcedureDependency_T_NotInSortorder_check::referencing_Procedure_RepoObject_guid"
+"workflow.Workflow_ProcedureDependency_T_NotInSortorder::Workflow_id" <-- "workflow.Workflow_ProcedureDependency_T_NotInSortorder_check::Workflow_id"
 @enduml
 

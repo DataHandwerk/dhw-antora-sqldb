@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:logs.ExecutionLog.adoc[prefix=..]" as logs.ExecutionLog << U >> {
+entity "puml-link:dhw:sqldb:logs.ExecutionLog.adoc[]" as logs.ExecutionLog << U >> {
   --
   created_dt : (datetime)
   current_execution_guid : (uniqueidentifier)
@@ -79,7 +80,7 @@ entity "puml-link:logs.ExecutionLog.adoc[prefix=..]" as logs.ExecutionLog << U >
   --
 }
 
-entity "puml-link:logs.ExecutionLog_gross.adoc[prefix=..]" as logs.ExecutionLog_gross << V >> {
+entity "puml-link:dhw:sqldb:logs.ExecutionLog_gross.adoc[]" as logs.ExecutionLog_gross << V >> {
   --
   created_dt : (datetime)
   created_dt_max_execution_instance_guid : (datetime)
@@ -138,7 +139,7 @@ entity "puml-link:logs.ExecutionLog_gross.adoc[prefix=..]" as logs.ExecutionLog_
   --
 }
 
-entity "puml-link:logs.ftv_ExecutionLog_puml_tree.adoc[prefix=..]" as logs.ftv_ExecutionLog_puml_tree << IF >> {
+entity "puml-link:dhw:sqldb:logs.ftv_ExecutionLog_puml_tree.adoc[]" as logs.ftv_ExecutionLog_puml_tree << IF >> {
   --
   Depth : (int)
   duration_current_execution_guid : (int)
@@ -156,57 +157,52 @@ entity "puml-link:logs.ftv_ExecutionLog_puml_tree.adoc[prefix=..]" as logs.ftv_E
 
 logs.ExecutionLog <.. logs.ExecutionLog_gross
 logs.ExecutionLog_gross <.. logs.ftv_ExecutionLog_puml_tree
-logs.ExecutionLog::created_dt <-- logs.ExecutionLog_gross::created_dt
-logs.ExecutionLog::current_execution_guid <-- logs.ExecutionLog_gross::current_execution_guid
-logs.ExecutionLog::deleted <-- logs.ExecutionLog_gross::deleted
-logs.ExecutionLog::event_info <-- logs.ExecutionLog_gross::event_info
-logs.ExecutionLog::execution_instance_guid <-- logs.ExecutionLog_gross::execution_instance_guid
-logs.ExecutionLog::id <-- logs.ExecutionLog_gross::id
-logs.ExecutionLog::info_01 <-- logs.ExecutionLog_gross::info_01
-logs.ExecutionLog::info_02 <-- logs.ExecutionLog_gross::info_02
-logs.ExecutionLog::info_03 <-- logs.ExecutionLog_gross::info_03
-logs.ExecutionLog::info_04 <-- logs.ExecutionLog_gross::info_04
-logs.ExecutionLog::info_05 <-- logs.ExecutionLog_gross::info_05
-logs.ExecutionLog::info_06 <-- logs.ExecutionLog_gross::info_06
-logs.ExecutionLog::info_07 <-- logs.ExecutionLog_gross::info_07
-logs.ExecutionLog::info_08 <-- logs.ExecutionLog_gross::info_08
-logs.ExecutionLog::info_09 <-- logs.ExecutionLog_gross::info_09
-logs.ExecutionLog::inserted <-- logs.ExecutionLog_gross::inserted
-logs.ExecutionLog::parameter_01 <-- logs.ExecutionLog_gross::parameter_01
-logs.ExecutionLog::parameter_02 <-- logs.ExecutionLog_gross::parameter_02
-logs.ExecutionLog::parameter_03 <-- logs.ExecutionLog_gross::parameter_03
-logs.ExecutionLog::parameter_04 <-- logs.ExecutionLog_gross::parameter_04
-logs.ExecutionLog::parameter_05 <-- logs.ExecutionLog_gross::parameter_05
-logs.ExecutionLog::parameter_06 <-- logs.ExecutionLog_gross::parameter_06
-logs.ExecutionLog::parameter_07 <-- logs.ExecutionLog_gross::parameter_07
-logs.ExecutionLog::parameter_08 <-- logs.ExecutionLog_gross::parameter_08
-logs.ExecutionLog::parameter_09 <-- logs.ExecutionLog_gross::parameter_09
-logs.ExecutionLog::parameter_10 <-- logs.ExecutionLog_gross::parameter_10
-logs.ExecutionLog::parameter_11 <-- logs.ExecutionLog_gross::parameter_11
-logs.ExecutionLog::parameter_12 <-- logs.ExecutionLog_gross::parameter_12
-logs.ExecutionLog::parameter_13 <-- logs.ExecutionLog_gross::parameter_13
-logs.ExecutionLog::parameter_14 <-- logs.ExecutionLog_gross::parameter_14
-logs.ExecutionLog::parameter_15 <-- logs.ExecutionLog_gross::parameter_15
-logs.ExecutionLog::parameter_16 <-- logs.ExecutionLog_gross::parameter_16
-logs.ExecutionLog::parameter_17 <-- logs.ExecutionLog_gross::parameter_17
-logs.ExecutionLog::parameter_18 <-- logs.ExecutionLog_gross::parameter_18
-logs.ExecutionLog::parameter_19 <-- logs.ExecutionLog_gross::parameter_19
-logs.ExecutionLog::parameter_20 <-- logs.ExecutionLog_gross::parameter_20
-logs.ExecutionLog::parent_execution_log_id <-- logs.ExecutionLog_gross::parent_execution_log_id
-logs.ExecutionLog::proc_id <-- logs.ExecutionLog_gross::proc_id
-logs.ExecutionLog::proc_name <-- logs.ExecutionLog_gross::proc_name
-logs.ExecutionLog::proc_schema_name <-- logs.ExecutionLog_gross::proc_schema_name
-logs.ExecutionLog::source_object <-- logs.ExecutionLog_gross::source_object
-logs.ExecutionLog::ssis_execution_id <-- logs.ExecutionLog_gross::ssis_execution_id
-logs.ExecutionLog::step_id <-- logs.ExecutionLog_gross::step_id
-logs.ExecutionLog::step_name <-- logs.ExecutionLog_gross::step_name
-logs.ExecutionLog::sub_execution_id <-- logs.ExecutionLog_gross::sub_execution_id
-logs.ExecutionLog::target_object <-- logs.ExecutionLog_gross::target_object
-logs.ExecutionLog::updated <-- logs.ExecutionLog_gross::updated
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"logs.ExecutionLog::created_dt" <-- "logs.ExecutionLog_gross::created_dt"
+"logs.ExecutionLog::current_execution_guid" <-- "logs.ExecutionLog_gross::current_execution_guid"
+"logs.ExecutionLog::deleted" <-- "logs.ExecutionLog_gross::deleted"
+"logs.ExecutionLog::event_info" <-- "logs.ExecutionLog_gross::event_info"
+"logs.ExecutionLog::execution_instance_guid" <-- "logs.ExecutionLog_gross::execution_instance_guid"
+"logs.ExecutionLog::id" <-- "logs.ExecutionLog_gross::id"
+"logs.ExecutionLog::info_01" <-- "logs.ExecutionLog_gross::info_01"
+"logs.ExecutionLog::info_02" <-- "logs.ExecutionLog_gross::info_02"
+"logs.ExecutionLog::info_03" <-- "logs.ExecutionLog_gross::info_03"
+"logs.ExecutionLog::info_04" <-- "logs.ExecutionLog_gross::info_04"
+"logs.ExecutionLog::info_05" <-- "logs.ExecutionLog_gross::info_05"
+"logs.ExecutionLog::info_06" <-- "logs.ExecutionLog_gross::info_06"
+"logs.ExecutionLog::info_07" <-- "logs.ExecutionLog_gross::info_07"
+"logs.ExecutionLog::info_08" <-- "logs.ExecutionLog_gross::info_08"
+"logs.ExecutionLog::info_09" <-- "logs.ExecutionLog_gross::info_09"
+"logs.ExecutionLog::inserted" <-- "logs.ExecutionLog_gross::inserted"
+"logs.ExecutionLog::parameter_01" <-- "logs.ExecutionLog_gross::parameter_01"
+"logs.ExecutionLog::parameter_02" <-- "logs.ExecutionLog_gross::parameter_02"
+"logs.ExecutionLog::parameter_03" <-- "logs.ExecutionLog_gross::parameter_03"
+"logs.ExecutionLog::parameter_04" <-- "logs.ExecutionLog_gross::parameter_04"
+"logs.ExecutionLog::parameter_05" <-- "logs.ExecutionLog_gross::parameter_05"
+"logs.ExecutionLog::parameter_06" <-- "logs.ExecutionLog_gross::parameter_06"
+"logs.ExecutionLog::parameter_07" <-- "logs.ExecutionLog_gross::parameter_07"
+"logs.ExecutionLog::parameter_08" <-- "logs.ExecutionLog_gross::parameter_08"
+"logs.ExecutionLog::parameter_09" <-- "logs.ExecutionLog_gross::parameter_09"
+"logs.ExecutionLog::parameter_10" <-- "logs.ExecutionLog_gross::parameter_10"
+"logs.ExecutionLog::parameter_11" <-- "logs.ExecutionLog_gross::parameter_11"
+"logs.ExecutionLog::parameter_12" <-- "logs.ExecutionLog_gross::parameter_12"
+"logs.ExecutionLog::parameter_13" <-- "logs.ExecutionLog_gross::parameter_13"
+"logs.ExecutionLog::parameter_14" <-- "logs.ExecutionLog_gross::parameter_14"
+"logs.ExecutionLog::parameter_15" <-- "logs.ExecutionLog_gross::parameter_15"
+"logs.ExecutionLog::parameter_16" <-- "logs.ExecutionLog_gross::parameter_16"
+"logs.ExecutionLog::parameter_17" <-- "logs.ExecutionLog_gross::parameter_17"
+"logs.ExecutionLog::parameter_18" <-- "logs.ExecutionLog_gross::parameter_18"
+"logs.ExecutionLog::parameter_19" <-- "logs.ExecutionLog_gross::parameter_19"
+"logs.ExecutionLog::parameter_20" <-- "logs.ExecutionLog_gross::parameter_20"
+"logs.ExecutionLog::parent_execution_log_id" <-- "logs.ExecutionLog_gross::parent_execution_log_id"
+"logs.ExecutionLog::proc_id" <-- "logs.ExecutionLog_gross::proc_id"
+"logs.ExecutionLog::proc_name" <-- "logs.ExecutionLog_gross::proc_name"
+"logs.ExecutionLog::proc_schema_name" <-- "logs.ExecutionLog_gross::proc_schema_name"
+"logs.ExecutionLog::source_object" <-- "logs.ExecutionLog_gross::source_object"
+"logs.ExecutionLog::ssis_execution_id" <-- "logs.ExecutionLog_gross::ssis_execution_id"
+"logs.ExecutionLog::step_id" <-- "logs.ExecutionLog_gross::step_id"
+"logs.ExecutionLog::step_name" <-- "logs.ExecutionLog_gross::step_name"
+"logs.ExecutionLog::sub_execution_id" <-- "logs.ExecutionLog_gross::sub_execution_id"
+"logs.ExecutionLog::target_object" <-- "logs.ExecutionLog_gross::target_object"
+"logs.ExecutionLog::updated" <-- "logs.ExecutionLog_gross::updated"
 @enduml
 

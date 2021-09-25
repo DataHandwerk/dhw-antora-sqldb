@@ -22,18 +22,23 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
   has_execution_plan_issue : (bit)
   has_get_referenced_issue : (bit)
+  Inheritance_Source_fullname : (nvarchar(261))
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
   InheritanceDefinition : (nvarchar(4000))
   InheritanceType : (tinyint)
   - is_DocsExclude : (bit)
+  - is_external : (bit)
   is_repo_managed : (bit)
   is_required_ObjectMerge : (bit)
   - is_ssas : (bit)
@@ -68,10 +73,10 @@ entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
   --
 }
 
-entity "puml-link:repo.RepoObject_RequiredRepoObjectMerge.adoc[prefix=..]" as repo.RepoObject_RequiredRepoObjectMerge << V >> {
-  - **RepoObject_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:repo.RepoObject_RequiredRepoObjectMerge.adoc[]" as repo.RepoObject_RequiredRepoObjectMerge << V >> {
   --
   - RepoObject_fullname : (nvarchar(261))
+  - RepoObject_guid : (uniqueidentifier)
   - RepoObject_name : (nvarchar(128))
   - RepoObject_schema_name : (nvarchar(128))
   - ro2_RepoObject_fullname : (nvarchar(261))
@@ -87,7 +92,7 @@ entity "puml-link:repo.RepoObject_RequiredRepoObjectMerge.adoc[prefix=..]" as re
   --
 }
 
-entity "puml-link:repo.usp_sync_guid_RepoObject.adoc[prefix=..]" as repo.usp_sync_guid_RepoObject << P >> {
+entity "puml-link:dhw:sqldb:repo.usp_sync_guid_RepoObject.adoc[]" as repo.usp_sync_guid_RepoObject << P >> {
   --
   --
   --
@@ -95,23 +100,18 @@ entity "puml-link:repo.usp_sync_guid_RepoObject.adoc[prefix=..]" as repo.usp_syn
 
 repo.RepoObject <.. repo.RepoObject_RequiredRepoObjectMerge
 repo.RepoObject_RequiredRepoObjectMerge <.. repo.usp_sync_guid_RepoObject
-repo.RepoObject::RepoObject_fullname <-- repo.RepoObject_RequiredRepoObjectMerge::RepoObject_fullname
-repo.RepoObject::RepoObject_fullname <-- repo.RepoObject_RequiredRepoObjectMerge::ro2_RepoObject_fullname
-repo.RepoObject::RepoObject_guid <-- repo.RepoObject_RequiredRepoObjectMerge::RepoObject_guid
-repo.RepoObject::RepoObject_guid <-- repo.RepoObject_RequiredRepoObjectMerge::ro2_RepoObject_guid
-repo.RepoObject::RepoObject_name <-- repo.RepoObject_RequiredRepoObjectMerge::RepoObject_name
-repo.RepoObject::RepoObject_name <-- repo.RepoObject_RequiredRepoObjectMerge::ro2_RepoObject_name
-repo.RepoObject::RepoObject_schema_name <-- repo.RepoObject_RequiredRepoObjectMerge::RepoObject_schema_name
-repo.RepoObject::RepoObject_schema_name <-- repo.RepoObject_RequiredRepoObjectMerge::ro2_RepoObject_schema_name
-repo.RepoObject::SysObject_fullname <-- repo.RepoObject_RequiredRepoObjectMerge::SysObject_fullname
-repo.RepoObject::SysObject_fullname <-- repo.RepoObject_RequiredRepoObjectMerge::ro2_SysObject_fullname
-repo.RepoObject::SysObject_name <-- repo.RepoObject_RequiredRepoObjectMerge::SysObject_name
-repo.RepoObject::SysObject_name <-- repo.RepoObject_RequiredRepoObjectMerge::ro2_SysObject_name
-repo.RepoObject::SysObject_schema_name <-- repo.RepoObject_RequiredRepoObjectMerge::SysObject_schema_name
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"repo.RepoObject::RepoObject_fullname" <-- "repo.RepoObject_RequiredRepoObjectMerge::RepoObject_fullname"
+"repo.RepoObject::RepoObject_fullname" <-- "repo.RepoObject_RequiredRepoObjectMerge::ro2_RepoObject_fullname"
+"repo.RepoObject::RepoObject_guid" <-- "repo.RepoObject_RequiredRepoObjectMerge::RepoObject_guid"
+"repo.RepoObject::RepoObject_guid" <-- "repo.RepoObject_RequiredRepoObjectMerge::ro2_RepoObject_guid"
+"repo.RepoObject::RepoObject_name" <-- "repo.RepoObject_RequiredRepoObjectMerge::RepoObject_name"
+"repo.RepoObject::RepoObject_name" <-- "repo.RepoObject_RequiredRepoObjectMerge::ro2_RepoObject_name"
+"repo.RepoObject::RepoObject_schema_name" <-- "repo.RepoObject_RequiredRepoObjectMerge::RepoObject_schema_name"
+"repo.RepoObject::RepoObject_schema_name" <-- "repo.RepoObject_RequiredRepoObjectMerge::ro2_RepoObject_schema_name"
+"repo.RepoObject::SysObject_fullname" <-- "repo.RepoObject_RequiredRepoObjectMerge::SysObject_fullname"
+"repo.RepoObject::SysObject_fullname" <-- "repo.RepoObject_RequiredRepoObjectMerge::ro2_SysObject_fullname"
+"repo.RepoObject::SysObject_name" <-- "repo.RepoObject_RequiredRepoObjectMerge::SysObject_name"
+"repo.RepoObject::SysObject_name" <-- "repo.RepoObject_RequiredRepoObjectMerge::ro2_SysObject_name"
+"repo.RepoObject::SysObject_schema_name" <-- "repo.RepoObject_RequiredRepoObjectMerge::SysObject_schema_name"
 @enduml
 

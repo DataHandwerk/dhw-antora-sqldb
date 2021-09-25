@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:config.Parameter.adoc[prefix=..]" as config.Parameter << U >> {
+entity "puml-link:dhw:sqldb:config.Parameter.adoc[]" as config.Parameter << U >> {
   - **Parameter_name** : (varchar(100))
   - **sub_Parameter** : (nvarchar(128))
   --
@@ -40,7 +41,7 @@ entity "puml-link:config.Parameter.adoc[prefix=..]" as config.Parameter << U >> 
   --
 }
 
-entity "puml-link:property.PropertyName_RepoObject_T.adoc[prefix=..]" as property.PropertyName_RepoObject_T << U >> {
+entity "puml-link:dhw:sqldb:property.PropertyName_RepoObject_T.adoc[]" as property.PropertyName_RepoObject_T << U >> {
   **property_name** : (nvarchar(128))
   --
   - has_inheritance : (bit)
@@ -48,7 +49,7 @@ entity "puml-link:property.PropertyName_RepoObject_T.adoc[prefix=..]" as propert
   --
 }
 
-entity "puml-link:property.RepoObjectProperty.adoc[prefix=..]" as property.RepoObjectProperty << U >> {
+entity "puml-link:dhw:sqldb:property.RepoObjectProperty.adoc[]" as property.RepoObjectProperty << U >> {
   - **RepoObjectProperty_id** : (int)
   --
   inheritance : (tinyint)
@@ -64,10 +65,11 @@ entity "puml-link:property.RepoObjectProperty.adoc[prefix=..]" as property.RepoO
   --
 }
 
-entity "puml-link:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc[prefix=..]" as property.RepoObjectProperty_InheritanceType_InheritanceDefinition << V >> {
+entity "puml-link:dhw:sqldb:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc[]" as property.RepoObjectProperty_InheritanceType_InheritanceDefinition << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   - **property_name** : (nvarchar(128))
   --
+  Inheritance_Source_fullname : (nvarchar(261))
   Inheritance_StringAggSeparatorSql : (nvarchar(max))
   InheritanceDefinition : (nvarchar(max))
   InheritanceType : (int)
@@ -87,32 +89,37 @@ entity "puml-link:property.RepoObjectProperty_InheritanceType_InheritanceDefinit
   --
 }
 
-entity "puml-link:property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition.adoc[prefix=..]" as property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition << V >> {
-  - **RepoObject_guid** : (uniqueidentifier)
-  **property_name** : (nvarchar(128))
+entity "puml-link:dhw:sqldb:property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition.adoc[]" as property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition << V >> {
   --
+  Inheritance_Source_fullname : (nvarchar(261))
   Inheritance_StringAggSeparatorSql : (nvarchar(max))
   InheritanceDefinition : (nvarchar(max))
   InheritanceType : (int)
   - is_force_inherit_empty_source : (int)
   - is_StringAggAllSources : (int)
+  - property_name : (nvarchar(128))
   property_value : (nvarchar(max))
   - RepoObject_fullname : (nvarchar(261))
+  - RepoObject_guid : (uniqueidentifier)
   - RepoObject_type : (char(2))
   resulting_InheritanceDefinition : (nvarchar(max))
   --
   --
 }
 
-entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
   has_execution_plan_issue : (bit)
   has_get_referenced_issue : (bit)
+  Inheritance_Source_fullname : (nvarchar(261))
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
   InheritanceDefinition : (nvarchar(4000))
   InheritanceType : (tinyint)
   - is_DocsExclude : (bit)
+  - is_external : (bit)
   is_repo_managed : (bit)
   is_required_ObjectMerge : (bit)
   - is_ssas : (bit)
@@ -152,33 +159,31 @@ property.PropertyName_RepoObject_T <.. property.RepoObjectProperty_InheritanceTy
 property.RepoObjectProperty <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition
 property.RepoObjectProperty_InheritanceType_InheritanceDefinition <.. property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition
 repo.RepoObject <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition
-config.Parameter::Parameter_value_result <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::sub_InheritanceDefintion
-config.Parameter::Parameter_value_result <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::par_InheritanceDefintion
-config.Parameter::Parameter_value_result <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::sub_Inheritance_StringAggSeparatorSql
-config.Parameter::Parameter_value_result <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::par_Inheritance_StringAggSeparatorSql
-config.Parameter::Parameter_value_result_int <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::sub_InheritanceType
-config.Parameter::Parameter_value_result_int <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::par_InheritanceType
-property.PropertyName_RepoObject_T::property_name <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::property_name
-property.RepoObjectProperty::property_value <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::property_value
-property.RepoObjectProperty_InheritanceType_InheritanceDefinition::Inheritance_StringAggSeparatorSql <-- property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition::Inheritance_StringAggSeparatorSql
-property.RepoObjectProperty_InheritanceType_InheritanceDefinition::InheritanceDefinition <-- property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition::InheritanceDefinition
-property.RepoObjectProperty_InheritanceType_InheritanceDefinition::InheritanceType <-- property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition::InheritanceType
-property.RepoObjectProperty_InheritanceType_InheritanceDefinition::property_name <-- property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition::property_name
-property.RepoObjectProperty_InheritanceType_InheritanceDefinition::property_value <-- property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition::property_value
-property.RepoObjectProperty_InheritanceType_InheritanceDefinition::RepoObject_fullname <-- property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition::RepoObject_fullname
-property.RepoObjectProperty_InheritanceType_InheritanceDefinition::RepoObject_guid <-- property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition::RepoObject_guid
-property.RepoObjectProperty_InheritanceType_InheritanceDefinition::RepoObject_type <-- property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition::RepoObject_type
-repo.RepoObject::Inheritance_StringAggSeparatorSql <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::Inheritance_StringAggSeparatorSql
-repo.RepoObject::Inheritance_StringAggSeparatorSql <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::ro_Inheritance_StringAggSeparatorSql
-repo.RepoObject::InheritanceDefinition <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::ro_InheritanceDefinition
-repo.RepoObject::InheritanceType <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::ro_InheritanceType
-repo.RepoObject::RepoObject_fullname <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::RepoObject_fullname
-repo.RepoObject::RepoObject_guid <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::RepoObject_guid
-repo.RepoObject::RepoObject_type <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::RepoObject_type
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"config.Parameter::Parameter_value_result" <-- "property.RepoObjectProperty_InheritanceType_InheritanceDefinition::sub_InheritanceDefintion"
+"config.Parameter::Parameter_value_result" <-- "property.RepoObjectProperty_InheritanceType_InheritanceDefinition::par_InheritanceDefintion"
+"config.Parameter::Parameter_value_result" <-- "property.RepoObjectProperty_InheritanceType_InheritanceDefinition::sub_Inheritance_StringAggSeparatorSql"
+"config.Parameter::Parameter_value_result" <-- "property.RepoObjectProperty_InheritanceType_InheritanceDefinition::par_Inheritance_StringAggSeparatorSql"
+"config.Parameter::Parameter_value_result_int" <-- "property.RepoObjectProperty_InheritanceType_InheritanceDefinition::sub_InheritanceType"
+"config.Parameter::Parameter_value_result_int" <-- "property.RepoObjectProperty_InheritanceType_InheritanceDefinition::par_InheritanceType"
+"property.PropertyName_RepoObject_T::property_name" <-- "property.RepoObjectProperty_InheritanceType_InheritanceDefinition::property_name"
+"property.RepoObjectProperty::property_value" <-- "property.RepoObjectProperty_InheritanceType_InheritanceDefinition::property_value"
+"property.RepoObjectProperty_InheritanceType_InheritanceDefinition::Inheritance_Source_fullname" <-- "property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition::Inheritance_Source_fullname"
+"property.RepoObjectProperty_InheritanceType_InheritanceDefinition::Inheritance_StringAggSeparatorSql" <-- "property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition::Inheritance_StringAggSeparatorSql"
+"property.RepoObjectProperty_InheritanceType_InheritanceDefinition::InheritanceDefinition" <-- "property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition::InheritanceDefinition"
+"property.RepoObjectProperty_InheritanceType_InheritanceDefinition::InheritanceType" <-- "property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition::InheritanceType"
+"property.RepoObjectProperty_InheritanceType_InheritanceDefinition::property_name" <-- "property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition::property_name"
+"property.RepoObjectProperty_InheritanceType_InheritanceDefinition::property_value" <-- "property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition::property_value"
+"property.RepoObjectProperty_InheritanceType_InheritanceDefinition::RepoObject_fullname" <-- "property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition::RepoObject_fullname"
+"property.RepoObjectProperty_InheritanceType_InheritanceDefinition::RepoObject_guid" <-- "property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition::RepoObject_guid"
+"property.RepoObjectProperty_InheritanceType_InheritanceDefinition::RepoObject_type" <-- "property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition::RepoObject_type"
+"repo.RepoObject::Inheritance_Source_fullname" <-- "property.RepoObjectProperty_InheritanceType_InheritanceDefinition::Inheritance_Source_fullname"
+"repo.RepoObject::Inheritance_StringAggSeparatorSql" <-- "property.RepoObjectProperty_InheritanceType_InheritanceDefinition::Inheritance_StringAggSeparatorSql"
+"repo.RepoObject::Inheritance_StringAggSeparatorSql" <-- "property.RepoObjectProperty_InheritanceType_InheritanceDefinition::ro_Inheritance_StringAggSeparatorSql"
+"repo.RepoObject::InheritanceDefinition" <-- "property.RepoObjectProperty_InheritanceType_InheritanceDefinition::ro_InheritanceDefinition"
+"repo.RepoObject::InheritanceType" <-- "property.RepoObjectProperty_InheritanceType_InheritanceDefinition::InheritanceType"
+"repo.RepoObject::InheritanceType" <-- "property.RepoObjectProperty_InheritanceType_InheritanceDefinition::ro_InheritanceType"
+"repo.RepoObject::RepoObject_fullname" <-- "property.RepoObjectProperty_InheritanceType_InheritanceDefinition::RepoObject_fullname"
+"repo.RepoObject::RepoObject_guid" <-- "property.RepoObjectProperty_InheritanceType_InheritanceDefinition::RepoObject_guid"
+"repo.RepoObject::RepoObject_type" <-- "property.RepoObjectProperty_InheritanceType_InheritanceDefinition::RepoObject_type"
 @enduml
 

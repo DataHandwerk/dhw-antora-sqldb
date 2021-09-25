@@ -42,7 +42,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-10 19:21:04
+2021-09-25 19:58:59
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -159,14 +159,14 @@ Insert Into reference.RepoObject_ReferenceTree
     RepoObject_guid
   , Referenced_guid
   , Referenced_Depth
-  , referenced_fullname
-  , referenced_fullname2
-  , referenced_type
+  , Referenced_fullname
+  , Referenced_fullname2
+  , Referenced_type
   , Referencing_guid
   , Referencing_Depth
-  , referencing_fullname
-  , referencing_fullname2
-  , referencing_type
+  , Referencing_fullname
+  , Referencing_fullname2
+  , Referencing_type
 )
 --RepoObject_guid = FirstNode.Referencing_guid 
 Select
@@ -182,7 +182,7 @@ Select
   , FirstNode.referencing_fullname2
   , FirstNode.referencing_type
 From
-    reference.RepoObject_ReferencingReferenced As FirstNode
+    reference.RepoObject_ReferencedReferencing As FirstNode
 Where
     --FirstNode.Referencing_guid = @RepoObject_guid
     --And 
@@ -202,7 +202,7 @@ Select
   , FirstNode.referencing_fullname2
   , FirstNode.referencing_type
 From
-    reference.RepoObject_ReferencingReferenced As FirstNode
+    reference.RepoObject_ReferencedReferencing As FirstNode
 Where
     --FirstNode.Referenced_guid = @RepoObject_guid
     --And 
@@ -258,7 +258,7 @@ Begin
       , child.referencing_fullname2
       , child.referencing_type
     From
-        reference.RepoObject_ReferencingReferenced As child
+        reference.RepoObject_ReferencedReferencing As child
         Inner Join
             reference.RepoObject_ReferenceTree     As parent
                 On
@@ -311,14 +311,14 @@ Begin
         RepoObject_guid
       , Referenced_guid
       , Referenced_Depth
-      , referenced_fullname
-      , referenced_fullname2
-      , referenced_type
+      , Referenced_fullname
+      , Referenced_fullname2
+      , Referenced_type
       , Referencing_guid
       , Referencing_Depth
-      , referencing_fullname
-      , referencing_fullname2
-      , referencing_type
+      , Referencing_fullname
+      , Referencing_fullname2
+      , Referencing_type
     )
     Select
         parent.RepoObject_guid
@@ -333,7 +333,7 @@ Begin
       , child.referencing_fullname2
       , child.referencing_type
     From
-        reference.RepoObject_ReferencingReferenced As child
+        reference.RepoObject_ReferencedReferencing As child
         Inner Join
             reference.RepoObject_ReferenceTree     As parent
                 On
@@ -371,8 +371,8 @@ End
 
 // tag::antorareferencedlist[]
 * xref:logs.usp_ExecutionLog_insert.adoc[]
+* xref:reference.RepoObject_ReferencedReferencing.adoc[]
 * xref:reference.RepoObject_ReferenceTree.adoc[]
-* xref:reference.RepoObject_ReferencingReferenced.adoc[]
 // end::antorareferencedlist[]
 
 
@@ -611,8 +611,8 @@ EXEC [reference].[usp_RepoObject_ReferenceTree_insert]
 
 // tag::referencedobjectlist[]
 * [logs].[usp_ExecutionLog_insert]
+* [reference].[RepoObject_ReferencedReferencing]
 * [reference].[RepoObject_ReferenceTree]
-* [reference].[RepoObject_ReferencingReferenced]
 // end::referencedobjectlist[]
 
 
@@ -797,14 +797,14 @@ Insert Into reference.RepoObject_ReferenceTree
     RepoObject_guid
   , Referenced_guid
   , Referenced_Depth
-  , referenced_fullname
-  , referenced_fullname2
-  , referenced_type
+  , Referenced_fullname
+  , Referenced_fullname2
+  , Referenced_type
   , Referencing_guid
   , Referencing_Depth
-  , referencing_fullname
-  , referencing_fullname2
-  , referencing_type
+  , Referencing_fullname
+  , Referencing_fullname2
+  , Referencing_type
 )
 --RepoObject_guid = FirstNode.Referencing_guid 
 Select
@@ -820,7 +820,7 @@ Select
   , FirstNode.referencing_fullname2
   , FirstNode.referencing_type
 From
-    reference.RepoObject_ReferencingReferenced As FirstNode
+    reference.RepoObject_ReferencedReferencing As FirstNode
 Where
     --FirstNode.Referencing_guid = @RepoObject_guid
     --And 
@@ -840,7 +840,7 @@ Select
   , FirstNode.referencing_fullname2
   , FirstNode.referencing_type
 From
-    reference.RepoObject_ReferencingReferenced As FirstNode
+    reference.RepoObject_ReferencedReferencing As FirstNode
 Where
     --FirstNode.Referenced_guid = @RepoObject_guid
     --And 
@@ -904,7 +904,7 @@ Begin
       , child.referencing_fullname2
       , child.referencing_type
     From
-        reference.RepoObject_ReferencingReferenced As child
+        reference.RepoObject_ReferencedReferencing As child
         Inner Join
             reference.RepoObject_ReferenceTree     As parent
                 On
@@ -965,14 +965,14 @@ Begin
         RepoObject_guid
       , Referenced_guid
       , Referenced_Depth
-      , referenced_fullname
-      , referenced_fullname2
-      , referenced_type
+      , Referenced_fullname
+      , Referenced_fullname2
+      , Referenced_type
       , Referencing_guid
       , Referencing_Depth
-      , referencing_fullname
-      , referencing_fullname2
-      , referencing_type
+      , Referencing_fullname
+      , Referencing_fullname2
+      , Referencing_type
     )
     Select
         parent.RepoObject_guid
@@ -987,7 +987,7 @@ Begin
       , child.referencing_fullname2
       , child.referencing_type
     From
-        reference.RepoObject_ReferencingReferenced As child
+        reference.RepoObject_ReferencedReferencing As child
         Inner Join
             reference.RepoObject_ReferenceTree     As parent
                 On

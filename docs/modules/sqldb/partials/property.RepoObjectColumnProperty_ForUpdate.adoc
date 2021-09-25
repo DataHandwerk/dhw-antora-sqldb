@@ -6,9 +6,6 @@
 :ExistsProperty--antorareferencedlist:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--pk_index_guid:
-:ExistsProperty--pk_indexpatterncolumndatatype:
-:ExistsProperty--pk_indexpatterncolumnname:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -43,29 +40,52 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-09 11:17:02
+2021-09-23 09:02:28
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-RepoObjectColumnProperty_id]
-=== RepoObjectColumnProperty_id
+[#column-AntoraComponent]
+=== AntoraComponent
 
 [cols="d,8m,m,m,m,d"]
 |===
-|1
-|*RepoObjectColumnProperty_id*
-|int
-|NOT NULL
+|
+|AntoraComponent
+|nvarchar(max)
+|NULL
 |
 |
 |===
 
-.Referenced Columns
---
-* xref:property.RepoObjectColumnProperty.adoc#column-RepoObjectColumnProperty_id[+property.RepoObjectColumnProperty.RepoObjectColumnProperty_id+]
---
+
+[#column-AntoraModule]
+=== AntoraModule
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|AntoraModule
+|nvarchar(max)
+|NULL
+|
+|
+|===
+
+
+[#column-dwh_database]
+=== dwh_database
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|dwh_database
+|nvarchar(128)
+|NULL
+|
+|
+|===
 
 
 [#column-inheritance]
@@ -130,6 +150,20 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 --
 * xref:property.RepoObjectColumnProperty.adoc#column-property_value[+property.RepoObjectColumnProperty.property_value+]
 --
+
+
+[#column-repo_database]
+=== repo_database
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|repo_database
+|nvarchar(128)
+|NULL
+|
+|
+|===
 
 
 [#column-Repo_user_type_fullname]
@@ -365,6 +399,25 @@ Name of the column. Is unique within the object.
 --
 
 
+[#column-RepoObjectColumnProperty_id]
+=== RepoObjectColumnProperty_id
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|RepoObjectColumnProperty_id
+|int
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:property.RepoObjectColumnProperty.adoc#column-RepoObjectColumnProperty_id[+property.RepoObjectColumnProperty.RepoObjectColumnProperty_id+]
+--
+
+
 // end::AntoraColumnDetails[]
 
 == AntoraMeasureDetails
@@ -376,12 +429,10 @@ Name of the column. Is unique within the object.
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
-|1
-|*<<column-RepoObjectColumnProperty_id>>*
-|int
-|NOT NULL
-|
-|
+
+
+
+
 
 
 
@@ -402,6 +453,26 @@ Name of the column. Is unique within the object.
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
+|
+|<<column-AntoraComponent>>
+|nvarchar(max)
+|NULL
+|
+|
+
+|
+|<<column-AntoraModule>>
+|nvarchar(max)
+|NULL
+|
+|
+
+|
+|<<column-dwh_database>>
+|nvarchar(128)
+|NULL
+|
+|
 
 |
 |<<column-inheritance>>
@@ -421,6 +492,13 @@ Name of the column. Is unique within the object.
 |<<column-property_value>>
 |nvarchar(max)
 |NOT NULL
+|
+|
+
+|
+|<<column-repo_database>>
+|nvarchar(128)
+|NULL
 |
 |
 
@@ -501,27 +579,34 @@ Name of the column. Is unique within the object.
 |
 |
 
+|
+|<<column-RepoObjectColumnProperty_id>>
+|int
+|NOT NULL
+|
+|
+
 // end::AntoraNonPkColumnTableRows[]
 
 == AntoraIndexList
 
 // tag::AntoraIndexList[]
 
-[#index-PK_RepoObjectColumnProperty_ForUpdate]
-=== PK_RepoObjectColumnProperty_ForUpdate
+[#index-idx_RepoObjectColumnProperty_ForUpdate2x_1]
+=== idx_RepoObjectColumnProperty_ForUpdate++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObjectColumnProperty_id>>; int
 --
-* PK, Unique, Real: 1, 1, 0
+* PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObjectColumnProperty_ForUpdate_2]
+[#index-idx_RepoObjectColumnProperty_ForUpdate2x_2]
 === idx_RepoObjectColumnProperty_ForUpdate++__++2
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObjectColumn_guid>>; uniqueidentifier
@@ -530,10 +615,10 @@ Name of the column. Is unique within the object.
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObjectColumnProperty_ForUpdate_3]
+[#index-idx_RepoObjectColumnProperty_ForUpdate2x_3]
 === idx_RepoObjectColumnProperty_ForUpdate++__++3
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObjectColumn_guid>>; uniqueidentifier
@@ -541,10 +626,22 @@ Name of the column. Is unique within the object.
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObjectColumnProperty_ForUpdate_4]
+[#index-idx_RepoObjectColumnProperty_ForUpdate2x_4]
 === idx_RepoObjectColumnProperty_ForUpdate++__++4
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-RepoObject_schema_name>>; nvarchar(128)
+* <<column-RepoObject_name>>; nvarchar(128)
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[#index-idx_RepoObjectColumnProperty_ForUpdate2x_5]
+=== idx_RepoObjectColumnProperty_ForUpdate++__++5
+
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -553,25 +650,13 @@ Name of the column. Is unique within the object.
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObjectColumnProperty_ForUpdate_5]
-=== idx_RepoObjectColumnProperty_ForUpdate++__++5
+[#index-idx_RepoObjectColumnProperty_ForUpdate2x_6]
+=== idx_RepoObjectColumnProperty_ForUpdate++__++6
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
---
-* PK, Unique, Real: 0, 0, 0
-
-
-[#index-idx_RepoObjectColumnProperty_ForUpdate_6]
-=== idx_RepoObjectColumnProperty_ForUpdate++__++6
-
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
-+
---
-* <<column-RepoObject_schema_name>>; nvarchar(128)
-* <<column-RepoObject_name>>; nvarchar(128)
 --
 * PK, Unique, Real: 0, 0, 0
 
@@ -598,6 +683,8 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
+* xref:config.fs_dwh_database_name.adoc[]
+* xref:config.fs_get_parameter_value.adoc[]
 * xref:property.RepoObjectColumnProperty.adoc[]
 * xref:repo.RepoObjectColumn_gross.adoc[]
 // end::antorareferencedlist[]
@@ -809,21 +896,21 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-BFFB2D18-119D-EB11-84F6-A81E8446D5B0
+
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-int
+
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-RepoObjectColumnProperty_id
+
 // end::pk_indexpatterncolumnname[]
 
 
@@ -837,6 +924,8 @@ RepoObjectColumnProperty_id
 === ReferencedObjectList
 
 // tag::referencedobjectlist[]
+* [config].[fs_dwh_database_name]
+* [config].[fs_get_parameter_value]
 * [property].[RepoObjectColumnProperty]
 * [repo].[RepoObjectColumn_gross]
 // end::referencedobjectlist[]
@@ -897,6 +986,10 @@ Select
   , rocg.RepoObject_name
   , rocg.RepoObject_type
   , rocg.Repo_user_type_fullname
+  , repo_database   = Db_Name ()
+  , dwh_database    = config.fs_dwh_database_name ()
+  , AntoraComponent = config.fs_get_parameter_value ( 'AntoraComponent', '' )
+  , AntoraModule    = config.fs_get_parameter_value ( 'AntoraModule', '' )
 From
     property.RepoObjectColumnProperty As rocp
     Inner Join

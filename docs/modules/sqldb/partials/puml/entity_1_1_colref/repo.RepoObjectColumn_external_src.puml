@@ -1,0 +1,119 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:reference.additional_Reference_Object_T.adoc[]" as reference.additional_Reference_Object_T << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+  - AntoraComponent : (nvarchar(128))
+  - AntoraModule : (nvarchar(128))
+  Description : (nvarchar(max))
+  - ObjectName : (nvarchar(128))
+  - SchemaName : (nvarchar(128))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.additional_Reference_ObjectColumn_T.adoc[]" as reference.additional_Reference_ObjectColumn_T << U >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  --
+  - AntoraComponent : (nvarchar(128))
+  - AntoraModule : (nvarchar(128))
+  ColumnName : (nvarchar(128))
+  Description : (nvarchar(max))
+  - ObjectName : (nvarchar(128))
+  - SchemaName : (nvarchar(128))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_external_src.adoc[]" as repo.RepoObjectColumn_external_src << V >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  --
+  - is_SysObjectColumn_missing : (int)
+  RepoObject_guid : (uniqueidentifier)
+  - RepoObjectColumn_name : (nvarchar(128))
+  - SysObjectColumn_name : (nvarchar(128))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_external_tgt.adoc[]" as repo.RepoObjectColumn_external_tgt << V >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  --
+  Inheritance_StringAggSeparatorSql : (nvarchar(4000))
+  InheritanceDefinition : (nvarchar(4000))
+  InheritanceType : (tinyint)
+  is_persistence_no_check : (bit)
+  is_persistence_no_include : (bit)
+  is_persistence_no_update : (bit)
+  is_query_plan_expression : (bit)
+  is_required_ColumnMerge : (bit)
+  - is_SysObjectColumn_missing : (int)
+  persistence_source_RepoObjectColumn_guid : (uniqueidentifier)
+  Referencing_Count : (int)
+  Repo_default_definition : (nvarchar(max))
+  Repo_default_is_system_named : (bit)
+  Repo_default_name : (nvarchar(128))
+  Repo_definition : (nvarchar(max))
+  - Repo_generated_always_type : (tinyint)
+  Repo_graph_type : (int)
+  Repo_increment_value : (sql_variant)
+  - Repo_is_computed : (bit)
+  - Repo_is_identity : (bit)
+  Repo_is_nullable : (bit)
+  Repo_is_persisted : (bit)
+  Repo_seed_value : (sql_variant)
+  Repo_user_type_fullname : (nvarchar(128))
+  Repo_user_type_name : (nvarchar(128))
+  Repo_uses_database_collation : (bit)
+  RepoObject_guid : (uniqueidentifier)
+  RepoObjectColumn_column_id : (int)
+  - RepoObjectColumn_name : (nvarchar(128))
+  SysObjectColumn_column_id : (int)
+  - SysObjectColumn_name : (nvarchar(128))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.usp_PERSIST_RepoObjectColumn_external_tgt.adoc[]" as repo.usp_PERSIST_RepoObjectColumn_external_tgt << P >> {
+  --
+  --
+  --
+}
+
+reference.additional_Reference_Object_T <.. repo.RepoObjectColumn_external_src
+reference.additional_Reference_ObjectColumn_T <.. repo.RepoObjectColumn_external_src
+repo.RepoObjectColumn_external_src <.. repo.usp_PERSIST_RepoObjectColumn_external_tgt
+repo.RepoObjectColumn_external_src <.. repo.RepoObjectColumn_external_tgt
+"repo.RepoObjectColumn_external_src::is_SysObjectColumn_missing" <-- "repo.RepoObjectColumn_external_tgt::is_SysObjectColumn_missing"
+"repo.RepoObjectColumn_external_src::RepoObject_guid" <-- "repo.RepoObjectColumn_external_tgt::RepoObject_guid"
+"repo.RepoObjectColumn_external_src::RepoObjectColumn_guid" <-- "repo.RepoObjectColumn_external_tgt::RepoObjectColumn_guid"
+"repo.RepoObjectColumn_external_src::RepoObjectColumn_name" <-- "repo.RepoObjectColumn_external_tgt::RepoObjectColumn_name"
+"repo.RepoObjectColumn_external_src::SysObjectColumn_name" <-- "repo.RepoObjectColumn_external_tgt::SysObjectColumn_name"
+@enduml
+

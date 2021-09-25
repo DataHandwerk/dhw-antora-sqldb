@@ -7,9 +7,6 @@
 :ExistsProperty--antorareferencinglist:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--pk_index_guid:
-:ExistsProperty--pk_indexpatterncolumndatatype:
-:ExistsProperty--pk_indexpatterncolumnname:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -44,36 +41,12 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-11 14:05:57
+2021-09-19 22:00:47
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-RepoObject_guid]
-=== RepoObject_guid
-
-[cols="d,8m,m,m,m,d"]
-|===
-|1
-|*RepoObject_guid*
-|uniqueidentifier
-|NOT NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:repo.RepoObject_gross.adoc#column-RepoObject_guid[+repo.RepoObject_gross.RepoObject_guid+]
---
-
-.Referencing Columns
---
-* xref:docs.RepoObject_Plantuml_T.adoc#column-RepoObject_guid[+docs.RepoObject_Plantuml_T.RepoObject_guid+]
---
-
-
 [#column-ColRefList]
 === ColRefList
 
@@ -352,6 +325,30 @@ view
 --
 
 
+[#column-RepoObject_guid]
+=== RepoObject_guid
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|RepoObject_guid
+|uniqueidentifier
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo.RepoObject_gross.adoc#column-RepoObject_guid[+repo.RepoObject_gross.RepoObject_guid+]
+--
+
+.Referencing Columns
+--
+* xref:docs.RepoObject_Plantuml_T.adoc#column-RepoObject_guid[+docs.RepoObject_Plantuml_T.RepoObject_guid+]
+--
+
+
 // end::AntoraColumnDetails[]
 
 == AntoraMeasureDetails
@@ -363,12 +360,6 @@ view
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
-|1
-|*<<column-RepoObject_guid>>*
-|uniqueidentifier
-|NOT NULL
-|
-|
 
 
 
@@ -388,7 +379,6 @@ view
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
-
 |
 |<<column-ColRefList>>
 |nvarchar(max)
@@ -480,21 +470,28 @@ view
 |
 |
 
+|
+|<<column-RepoObject_guid>>
+|uniqueidentifier
+|NOT NULL
+|
+|
+
 // end::AntoraNonPkColumnTableRows[]
 
 == AntoraIndexList
 
 // tag::AntoraIndexList[]
 
-[#index-PK_RepoObject_Plantuml]
-=== PK_RepoObject_Plantuml
+[#index-idx_RepoObject_Plantuml2x_1]
+=== idx_RepoObject_Plantuml++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
 --
-* PK, Unique, Real: 1, 1, 0
+* PK, Unique, Real: 0, 0, 0
 
 // end::AntoraIndexList[]
 
@@ -740,21 +737,21 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-C18818B0-CA97-EB11-84F4-A81E8446D5B0
+
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-uniqueidentifier
+
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-RepoObject_guid
+
 // end::pk_indexpatterncolumnname[]
 
 

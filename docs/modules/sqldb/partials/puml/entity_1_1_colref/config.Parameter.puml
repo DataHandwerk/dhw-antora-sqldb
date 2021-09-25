@@ -22,22 +22,23 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:config.fs_dwh_database_name.adoc[prefix=..]" as config.fs_dwh_database_name << FN >> {
-  --
-  --
-  --
-}
-
-entity "puml-link:config.fs_get_parameter_value.adoc[prefix=..]" as config.fs_get_parameter_value << FN >> {
+entity "puml-link:dhw:sqldb:config.fs_dwh_database_name.adoc[]" as config.fs_dwh_database_name << FN >> {
   --
   --
   --
 }
 
-entity "puml-link:config.ftv_dwh_database.adoc[prefix=..]" as config.ftv_dwh_database << IF >> {
+entity "puml-link:dhw:sqldb:config.fs_get_parameter_value.adoc[]" as config.fs_get_parameter_value << FN >> {
+  --
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:config.ftv_dwh_database.adoc[]" as config.ftv_dwh_database << IF >> {
   --
   dwh_database_id : (smallint)
   dwh_database_name : (nvarchar(128))
@@ -45,7 +46,7 @@ entity "puml-link:config.ftv_dwh_database.adoc[prefix=..]" as config.ftv_dwh_dat
   --
 }
 
-entity "puml-link:config.ftv_get_parameter_value.adoc[prefix=..]" as config.ftv_get_parameter_value << IF >> {
+entity "puml-link:dhw:sqldb:config.ftv_get_parameter_value.adoc[]" as config.ftv_get_parameter_value << IF >> {
   --
   Parameter_value_result : (nvarchar(max))
   Parameter_value_result_date : (date)
@@ -55,7 +56,7 @@ entity "puml-link:config.ftv_get_parameter_value.adoc[prefix=..]" as config.ftv_
   --
 }
 
-entity "puml-link:config.Parameter.adoc[prefix=..]" as config.Parameter << U >> {
+entity "puml-link:dhw:sqldb:config.Parameter.adoc[]" as config.Parameter << U >> {
   - **Parameter_name** : (varchar(100))
   - **sub_Parameter** : (nvarchar(128))
   --
@@ -70,45 +71,45 @@ entity "puml-link:config.Parameter.adoc[prefix=..]" as config.Parameter << U >> 
   --
 }
 
-entity "puml-link:config.usp_init_parameter.adoc[prefix=..]" as config.usp_init_parameter << P >> {
+entity "puml-link:dhw:sqldb:config.usp_init_parameter.adoc[]" as config.usp_init_parameter << P >> {
   --
   --
   --
 }
 
-entity "puml-link:config.usp_parameter_set.adoc[prefix=..]" as config.usp_parameter_set << P >> {
+entity "puml-link:dhw:sqldb:config.usp_parameter_set.adoc[]" as config.usp_parameter_set << P >> {
   --
   --
   --
 }
 
-entity "puml-link:docs.usp_AntoraExport_DocSnippet.adoc[prefix=..]" as docs.usp_AntoraExport_DocSnippet << P >> {
+entity "puml-link:dhw:sqldb:docs.usp_AntoraExport_DocSnippet.adoc[]" as docs.usp_AntoraExport_DocSnippet << P >> {
   --
   --
   --
 }
 
-entity "puml-link:docs.usp_AntoraExport_ObjectPageTemplate.adoc[prefix=..]" as docs.usp_AntoraExport_ObjectPageTemplate << P >> {
+entity "puml-link:dhw:sqldb:docs.usp_AntoraExport_ObjectPageTemplate.adoc[]" as docs.usp_AntoraExport_ObjectPageTemplate << P >> {
   --
   --
   --
 }
 
-entity "puml-link:property.PropertyName_RepoObject.adoc[prefix=..]" as property.PropertyName_RepoObject << V >> {
+entity "puml-link:dhw:sqldb:property.PropertyName_RepoObject.adoc[]" as property.PropertyName_RepoObject << V >> {
   **property_name** : (nvarchar(128))
   --
   --
   --
 }
 
-entity "puml-link:property.PropertyName_RepoObjectColumn.adoc[prefix=..]" as property.PropertyName_RepoObjectColumn << V >> {
+entity "puml-link:dhw:sqldb:property.PropertyName_RepoObjectColumn.adoc[]" as property.PropertyName_RepoObjectColumn << V >> {
   - **property_name** : (nvarchar(128))
   --
   --
   --
 }
 
-entity "puml-link:property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.adoc[prefix=..]" as property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition << V >> {
+entity "puml-link:dhw:sqldb:property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.adoc[]" as property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition << V >> {
   - **RepoObjectColumn_guid** : (uniqueidentifier)
   - **property_name** : (nvarchar(128))
   --
@@ -130,10 +131,11 @@ entity "puml-link:property.RepoObjectColumnProperty_InheritanceType_InheritanceD
   --
 }
 
-entity "puml-link:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc[prefix=..]" as property.RepoObjectProperty_InheritanceType_InheritanceDefinition << V >> {
+entity "puml-link:dhw:sqldb:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc[]" as property.RepoObjectProperty_InheritanceType_InheritanceDefinition << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   - **property_name** : (nvarchar(128))
   --
+  Inheritance_Source_fullname : (nvarchar(261))
   Inheritance_StringAggSeparatorSql : (nvarchar(max))
   InheritanceDefinition : (nvarchar(max))
   InheritanceType : (int)
@@ -153,15 +155,15 @@ entity "puml-link:property.RepoObjectProperty_InheritanceType_InheritanceDefinit
   --
 }
 
-entity "puml-link:repo.usp_persistence_set.adoc[prefix=..]" as repo.usp_persistence_set << P >> {
+entity "puml-link:dhw:sqldb:repo.usp_persistence_set.adoc[]" as repo.usp_persistence_set << P >> {
   --
   --
   --
 }
 
-config.Parameter <.. config.fs_dwh_database_name
 config.Parameter <.. config.fs_get_parameter_value
 config.Parameter <.. config.ftv_dwh_database
+config.Parameter <.. config.fs_dwh_database_name
 config.Parameter <.. config.ftv_get_parameter_value
 config.Parameter <.. config.usp_init_parameter
 config.Parameter <.. config.usp_parameter_set
@@ -172,30 +174,25 @@ config.Parameter <.. property.RepoObjectProperty_InheritanceType_InheritanceDefi
 config.Parameter <.. property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition
 config.Parameter <.. docs.usp_AntoraExport_ObjectPageTemplate
 config.Parameter <.. docs.usp_AntoraExport_DocSnippet
-config.Parameter::Parameter_default_value <-- config.Parameter::Parameter_value_result
-config.Parameter::Parameter_default_value <-- config.Parameter::Parameter_value_result_int
-config.Parameter::Parameter_default_value <-- config.Parameter::Parameter_value_result_date
-config.Parameter::Parameter_default_value <-- config.Parameter::Parameter_value_result_datetime
-config.Parameter::Parameter_value <-- config.Parameter::Parameter_value_result
-config.Parameter::Parameter_value <-- config.Parameter::Parameter_value_result_int
-config.Parameter::Parameter_value <-- config.Parameter::Parameter_value_result_date
-config.Parameter::Parameter_value <-- config.Parameter::Parameter_value_result_datetime
-config.Parameter::Parameter_value_result <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::sub_InheritanceDefintion
-config.Parameter::Parameter_value_result <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::par_InheritanceDefintion
-config.Parameter::Parameter_value_result <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::sub_Inheritance_StringAggSeparatorSql
-config.Parameter::Parameter_value_result <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::par_Inheritance_StringAggSeparatorSql
-config.Parameter::Parameter_value_result <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::sub_InheritanceDefinition
-config.Parameter::Parameter_value_result <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::par_InheritanceDefinition
-config.Parameter::Parameter_value_result <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::sub_Inheritance_StringAggSeparatorSql
-config.Parameter::Parameter_value_result <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::par_Inheritance_StringAggSeparatorSql
-config.Parameter::Parameter_value_result_int <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::sub_InheritanceType
-config.Parameter::Parameter_value_result_int <-- property.RepoObjectProperty_InheritanceType_InheritanceDefinition::par_InheritanceType
-config.Parameter::Parameter_value_result_int <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::sub_InheritanceType
-config.Parameter::Parameter_value_result_int <-- property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::par_InheritanceType
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"config.Parameter::Parameter_default_value" <-- "config.Parameter::Parameter_value_result"
+"config.Parameter::Parameter_default_value" <-- "config.Parameter::Parameter_value_result_int"
+"config.Parameter::Parameter_default_value" <-- "config.Parameter::Parameter_value_result_date"
+"config.Parameter::Parameter_default_value" <-- "config.Parameter::Parameter_value_result_datetime"
+"config.Parameter::Parameter_value" <-- "config.Parameter::Parameter_value_result"
+"config.Parameter::Parameter_value" <-- "config.Parameter::Parameter_value_result_int"
+"config.Parameter::Parameter_value" <-- "config.Parameter::Parameter_value_result_date"
+"config.Parameter::Parameter_value" <-- "config.Parameter::Parameter_value_result_datetime"
+"config.Parameter::Parameter_value_result" <-- "property.RepoObjectProperty_InheritanceType_InheritanceDefinition::sub_InheritanceDefintion"
+"config.Parameter::Parameter_value_result" <-- "property.RepoObjectProperty_InheritanceType_InheritanceDefinition::par_InheritanceDefintion"
+"config.Parameter::Parameter_value_result" <-- "property.RepoObjectProperty_InheritanceType_InheritanceDefinition::sub_Inheritance_StringAggSeparatorSql"
+"config.Parameter::Parameter_value_result" <-- "property.RepoObjectProperty_InheritanceType_InheritanceDefinition::par_Inheritance_StringAggSeparatorSql"
+"config.Parameter::Parameter_value_result" <-- "property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::sub_InheritanceDefinition"
+"config.Parameter::Parameter_value_result" <-- "property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::par_InheritanceDefinition"
+"config.Parameter::Parameter_value_result" <-- "property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::sub_Inheritance_StringAggSeparatorSql"
+"config.Parameter::Parameter_value_result" <-- "property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::par_Inheritance_StringAggSeparatorSql"
+"config.Parameter::Parameter_value_result_int" <-- "property.RepoObjectProperty_InheritanceType_InheritanceDefinition::sub_InheritanceType"
+"config.Parameter::Parameter_value_result_int" <-- "property.RepoObjectProperty_InheritanceType_InheritanceDefinition::par_InheritanceType"
+"config.Parameter::Parameter_value_result_int" <-- "property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::sub_InheritanceType"
+"config.Parameter::Parameter_value_result_int" <-- "property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition::par_InheritanceType"
 @enduml
 

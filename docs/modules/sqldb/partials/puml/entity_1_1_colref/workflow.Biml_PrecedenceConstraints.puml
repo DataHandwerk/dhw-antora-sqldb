@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:workflow.Biml_PrecedenceConstraints.adoc[prefix=..]" as workflow.Biml_PrecedenceConstraints << V >> {
+entity "puml-link:dhw:sqldb:workflow.Biml_PrecedenceConstraints.adoc[]" as workflow.Biml_PrecedenceConstraints << V >> {
   --
   PrecedenceConstraints : (nvarchar(4000))
   - referencing_Procedure_RepoObject_guid : (uniqueidentifier)
@@ -35,7 +36,7 @@ entity "puml-link:workflow.Biml_PrecedenceConstraints.adoc[prefix=..]" as workfl
   --
 }
 
-entity "puml-link:workflow.Biml_Task.adoc[prefix=..]" as workflow.Biml_Task << V >> {
+entity "puml-link:dhw:sqldb:workflow.Biml_Task.adoc[]" as workflow.Biml_Task << V >> {
   --
   - Procedure_RepoObject_guid : (uniqueidentifier)
   - RepoObject_fullname2 : (nvarchar(257))
@@ -47,7 +48,7 @@ entity "puml-link:workflow.Biml_Task.adoc[prefix=..]" as workflow.Biml_Task << V
   --
 }
 
-entity "puml-link:workflow.Workflow_ProcedureDependency_T_TaskName.adoc[prefix=..]" as workflow.Workflow_ProcedureDependency_T_TaskName << V >> {
+entity "puml-link:dhw:sqldb:workflow.Workflow_ProcedureDependency_T_TaskName.adoc[]" as workflow.Workflow_ProcedureDependency_T_TaskName << V >> {
   --
   - referenced_Procedure_RepoObject_guid : (uniqueidentifier)
   - referenced_RepoObject_fullname2 : (nvarchar(257))
@@ -62,13 +63,8 @@ entity "puml-link:workflow.Workflow_ProcedureDependency_T_TaskName.adoc[prefix=.
 
 workflow.Biml_PrecedenceConstraints <.. workflow.Biml_Task
 workflow.Workflow_ProcedureDependency_T_TaskName <.. workflow.Biml_PrecedenceConstraints
-workflow.Workflow_ProcedureDependency_T_TaskName::referencing_Procedure_RepoObject_guid <-- workflow.Biml_PrecedenceConstraints::referencing_Procedure_RepoObject_guid
-workflow.Workflow_ProcedureDependency_T_TaskName::referencing_TaskName <-- workflow.Biml_PrecedenceConstraints::referencing_TaskName
-workflow.Workflow_ProcedureDependency_T_TaskName::Workflow_id <-- workflow.Biml_PrecedenceConstraints::Workflow_id
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"workflow.Workflow_ProcedureDependency_T_TaskName::referencing_Procedure_RepoObject_guid" <-- "workflow.Biml_PrecedenceConstraints::referencing_Procedure_RepoObject_guid"
+"workflow.Workflow_ProcedureDependency_T_TaskName::referencing_TaskName" <-- "workflow.Biml_PrecedenceConstraints::referencing_TaskName"
+"workflow.Workflow_ProcedureDependency_T_TaskName::Workflow_id" <-- "workflow.Biml_PrecedenceConstraints::Workflow_id"
 @enduml
 

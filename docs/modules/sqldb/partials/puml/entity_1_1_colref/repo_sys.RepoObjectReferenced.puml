@@ -22,24 +22,29 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:reference.usp_update_Referencing_Count.adoc[prefix=..]" as reference.usp_update_Referencing_Count << P >> {
+entity "puml-link:dhw:sqldb:reference.usp_update_Referencing_Count.adoc[]" as reference.usp_update_Referencing_Count << P >> {
   --
   --
   --
 }
 
-entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
   has_execution_plan_issue : (bit)
   has_get_referenced_issue : (bit)
+  Inheritance_Source_fullname : (nvarchar(261))
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
   InheritanceDefinition : (nvarchar(4000))
   InheritanceType : (tinyint)
   - is_DocsExclude : (bit)
+  - is_external : (bit)
   is_repo_managed : (bit)
   is_required_ObjectMerge : (bit)
   - is_ssas : (bit)
@@ -74,13 +79,13 @@ entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
   --
 }
 
-entity "puml-link:repo.usp_update_Referencing_Count.adoc[prefix=..]" as repo.usp_update_Referencing_Count << P >> {
+entity "puml-link:dhw:sqldb:repo.usp_update_Referencing_Count.adoc[]" as repo.usp_update_Referencing_Count << P >> {
   --
   --
   --
 }
 
-entity "puml-link:repo_sys.RepoObjectReferenced.adoc[prefix=..]" as repo_sys.RepoObjectReferenced << V >> {
+entity "puml-link:dhw:sqldb:repo_sys.RepoObjectReferenced.adoc[]" as repo_sys.RepoObjectReferenced << V >> {
   --
   has_different_sys_names : (bit)
   - is_all_columns_found : (bit)
@@ -112,7 +117,7 @@ entity "puml-link:repo_sys.RepoObjectReferenced.adoc[prefix=..]" as repo_sys.Rep
   --
 }
 
-entity "puml-link:sys_dwh.dm_sql_referenced_entities.adoc[prefix=..]" as sys_dwh.dm_sql_referenced_entities << SN >> {
+entity "puml-link:dhw:sqldb:sys_dwh.dm_sql_referenced_entities.adoc[]" as sys_dwh.dm_sql_referenced_entities << SN >> {
   --
   --
   --
@@ -122,18 +127,13 @@ repo.RepoObject <.. repo_sys.RepoObjectReferenced
 repo_sys.RepoObjectReferenced <.. reference.usp_update_Referencing_Count
 repo_sys.RepoObjectReferenced <.. repo.usp_update_Referencing_Count
 sys_dwh.dm_sql_referenced_entities <.. repo_sys.RepoObjectReferenced
-repo.RepoObject::has_different_sys_names <-- repo_sys.RepoObjectReferenced::has_different_sys_names
-repo.RepoObject::is_repo_managed <-- repo_sys.RepoObjectReferenced::is_repo_managed
-repo.RepoObject::RepoObject_fullname <-- repo_sys.RepoObjectReferenced::RepoObject_fullname
-repo.RepoObject::RepoObject_guid <-- repo_sys.RepoObjectReferenced::RepoObject_guid
-repo.RepoObject::SysObject_fullname <-- repo_sys.RepoObjectReferenced::SysObject_fullname
-repo.RepoObject::SysObject_id <-- repo_sys.RepoObjectReferenced::SysObject_id
-repo.RepoObject::SysObject_modify_date <-- repo_sys.RepoObjectReferenced::SysObject_modify_date
-repo.RepoObject::SysObject_type <-- repo_sys.RepoObjectReferenced::SysObject_type
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"repo.RepoObject::has_different_sys_names" <-- "repo_sys.RepoObjectReferenced::has_different_sys_names"
+"repo.RepoObject::is_repo_managed" <-- "repo_sys.RepoObjectReferenced::is_repo_managed"
+"repo.RepoObject::RepoObject_fullname" <-- "repo_sys.RepoObjectReferenced::RepoObject_fullname"
+"repo.RepoObject::RepoObject_guid" <-- "repo_sys.RepoObjectReferenced::RepoObject_guid"
+"repo.RepoObject::SysObject_fullname" <-- "repo_sys.RepoObjectReferenced::SysObject_fullname"
+"repo.RepoObject::SysObject_id" <-- "repo_sys.RepoObjectReferenced::SysObject_id"
+"repo.RepoObject::SysObject_modify_date" <-- "repo_sys.RepoObjectReferenced::SysObject_modify_date"
+"repo.RepoObject::SysObject_type" <-- "repo_sys.RepoObjectReferenced::SysObject_type"
 @enduml
 

@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:property.RepoSchemaProperty.adoc[prefix=..]" as property.RepoSchemaProperty << U >> {
+entity "puml-link:dhw:sqldb:property.RepoSchemaProperty.adoc[]" as property.RepoSchemaProperty << U >> {
 **PK_RepoSchemaProperty**
 
 ..
@@ -43,7 +44,7 @@ property_name; nvarchar(128)
 RepoSchema_guid; uniqueidentifier
 }
 
-entity "puml-link:repo.RepoSchema.adoc[prefix=..]" as repo.RepoSchema << U >> {
+entity "puml-link:dhw:sqldb:repo.RepoSchema.adoc[]" as repo.RepoSchema << U >> {
 **PK_RepoSchema**
 
 ..
@@ -55,11 +56,6 @@ UK_RepoSchema
 RepoSchema_name; nvarchar(128)
 }
 
-repo.RepoSchema::PK_RepoSchema <-- property.RepoSchemaProperty::idx_RepoSchemaProperty__1
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"repo.RepoSchema::PK_RepoSchema" <-- "property.RepoSchemaProperty::idx_RepoSchemaProperty__1"
 @enduml
 

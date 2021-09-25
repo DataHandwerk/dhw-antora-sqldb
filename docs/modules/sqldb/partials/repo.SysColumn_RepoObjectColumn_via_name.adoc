@@ -41,7 +41,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-08-21 12:16:58
+2021-09-21 10:49:19
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -1658,10 +1658,10 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 
 // tag::AntoraIndexList[]
 
-[#index-idx_SysColumn_RepoObjectColumn_via_name_1]
+[#index-idx_SysColumn_RepoObjectColumn_via_name2x_1]
 === idx_SysColumn_RepoObjectColumn_via_name++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObjectColumn_guid>>; uniqueidentifier
@@ -1669,10 +1669,10 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_SysColumn_RepoObjectColumn_via_name_2]
+[#index-idx_SysColumn_RepoObjectColumn_via_name2x_2]
 === idx_SysColumn_RepoObjectColumn_via_name++__++2
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObjectColumn_guid>>; uniqueidentifier
@@ -1681,10 +1681,10 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_SysColumn_RepoObjectColumn_via_name_3]
+[#index-idx_SysColumn_RepoObjectColumn_via_name2x_3]
 === idx_SysColumn_RepoObjectColumn_via_name++__++3
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -1693,10 +1693,10 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_SysColumn_RepoObjectColumn_via_name_4]
+[#index-idx_SysColumn_RepoObjectColumn_via_name2x_4]
 === idx_SysColumn_RepoObjectColumn_via_name++__++4
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -2010,7 +2010,7 @@ source: property.RepoObjectProperty WHERE property_int = 1
 [source,sql]
 ----
 
-CREATE VIEW [repo].[SysColumn_RepoObjectColumn_via_name]
+CREATE View repo.SysColumn_RepoObjectColumn_via_name
 As
 --
 Select
@@ -2082,14 +2082,16 @@ From
     Left Join
         repo.RepoObject       As ro
             On
-            --roc.RepoObject_guid          = ro.RepoObject_guid;
             ro.SysObject_fullname2   = sc.SysObject_fullname2
+            And ro.is_ssas           = 0
+            And ro.is_external       = 0
 
     Left Join
         repo.RepoObjectColumn As roc
             On
             roc.SysObjectColumn_name = sc.SysObject_column_name
             And roc.RepoObject_guid  = ro.RepoObject_guid
+
 ----
 =======
 // end::sql_modules_definition[]

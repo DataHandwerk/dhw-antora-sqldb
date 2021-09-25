@@ -22,16 +22,17 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:docs.fs_cleanStringForPuml.adoc[prefix=..]" as docs.fs_cleanStringForPuml << FN >> {
+entity "puml-link:dhw:sqldb:docs.fs_cleanStringForPuml.adoc[]" as docs.fs_cleanStringForPuml << FN >> {
   --
   --
   --
 }
 
-entity "puml-link:docs.Schema_PlantUml_FkRefList.adoc[prefix=..]" as docs.Schema_PlantUml_FkRefList << V >> {
+entity "puml-link:dhw:sqldb:docs.Schema_PlantUml_FkRefList.adoc[]" as docs.Schema_PlantUml_FkRefList << V >> {
   --
   FkRefList : (nvarchar(max))
   SchemaName : (nvarchar(128))
@@ -39,7 +40,7 @@ entity "puml-link:docs.Schema_PlantUml_FkRefList.adoc[prefix=..]" as docs.Schema
   --
 }
 
-entity "puml-link:docs.Schema_puml.adoc[prefix=..]" as docs.Schema_puml << V >> {
+entity "puml-link:dhw:sqldb:docs.Schema_puml.adoc[]" as docs.Schema_puml << V >> {
   --
   - PumlSchemaEr : (nvarchar(max))
   - PumlSchemaIndexEr : (nvarchar(max))
@@ -50,7 +51,7 @@ entity "puml-link:docs.Schema_puml.adoc[prefix=..]" as docs.Schema_puml << V >> 
   --
 }
 
-entity "puml-link:repo.ForeignKey_Indexes_union_T.adoc[prefix=..]" as repo.ForeignKey_Indexes_union_T << U >> {
+entity "puml-link:dhw:sqldb:repo.ForeignKey_Indexes_union_T.adoc[]" as repo.ForeignKey_Indexes_union_T << U >> {
   **ForeignKey_guid** : (uniqueidentifier)
   --
   delete_referential_action : (tinyint)
@@ -83,11 +84,6 @@ entity "puml-link:repo.ForeignKey_Indexes_union_T.adoc[prefix=..]" as repo.Forei
 docs.fs_cleanStringForPuml <.. docs.Schema_PlantUml_FkRefList
 docs.Schema_PlantUml_FkRefList <.. docs.Schema_puml
 repo.ForeignKey_Indexes_union_T <.. docs.Schema_PlantUml_FkRefList
-repo.ForeignKey_Indexes_union_T::referencing_SysObject_schema_name <-- docs.Schema_PlantUml_FkRefList::SchemaName
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"repo.ForeignKey_Indexes_union_T::referencing_SysObject_schema_name" <-- "docs.Schema_PlantUml_FkRefList::SchemaName"
 @enduml
 

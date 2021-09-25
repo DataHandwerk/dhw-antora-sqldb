@@ -22,16 +22,17 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:config.fs_get_parameter_value.adoc[prefix=..]" as config.fs_get_parameter_value << FN >> {
+entity "puml-link:dhw:sqldb:config.fs_get_parameter_value.adoc[]" as config.fs_get_parameter_value << FN >> {
   --
   --
   --
 }
 
-entity "puml-link:configT.type.adoc[prefix=..]" as configT.type << V >> {
+entity "puml-link:dhw:sqldb:configT.type.adoc[]" as configT.type << V >> {
   **type** : (nvarchar(128))
   --
   - is_DocsOutput : (int)
@@ -40,15 +41,16 @@ entity "puml-link:configT.type.adoc[prefix=..]" as configT.type << V >> {
   --
 }
 
-entity "puml-link:docs.AntoraNavListRepoObject_by_schema.adoc[prefix=..]" as docs.AntoraNavListRepoObject_by_schema << V >> {
-  - **RepoObject_schema_name** : (nvarchar(128))
+entity "puml-link:dhw:sqldb:docs.AntoraNavListRepoObject_by_schema.adoc[]" as docs.AntoraNavListRepoObject_by_schema << V >> {
   --
+  is_ssas : (tinyint)
   nav_list : (nvarchar(max))
+  - RepoObject_schema_name : (nvarchar(128))
   --
   --
 }
 
-entity "puml-link:docs.AntoraNavListRepoObject_by_schema_type.adoc[prefix=..]" as docs.AntoraNavListRepoObject_by_schema_type << V >> {
+entity "puml-link:dhw:sqldb:docs.AntoraNavListRepoObject_by_schema_type.adoc[]" as docs.AntoraNavListRepoObject_by_schema_type << V >> {
   - **RepoObject_schema_name** : (nvarchar(128))
   **type** : (char(2))
   --
@@ -58,7 +60,7 @@ entity "puml-link:docs.AntoraNavListRepoObject_by_schema_type.adoc[prefix=..]" a
   --
 }
 
-entity "puml-link:docs.AntoraNavListRepoObject_by_type.adoc[prefix=..]" as docs.AntoraNavListRepoObject_by_type << V >> {
+entity "puml-link:dhw:sqldb:docs.AntoraNavListRepoObject_by_type.adoc[]" as docs.AntoraNavListRepoObject_by_type << V >> {
   **type** : (char(2))
   --
   nav_list : (nvarchar(max))
@@ -67,19 +69,19 @@ entity "puml-link:docs.AntoraNavListRepoObject_by_type.adoc[prefix=..]" as docs.
   --
 }
 
-entity "puml-link:docs.usp_AntoraExport.adoc[prefix=..]" as docs.usp_AntoraExport << P >> {
+entity "puml-link:dhw:sqldb:docs.usp_AntoraExport.adoc[]" as docs.usp_AntoraExport << P >> {
   --
   --
   --
 }
 
-entity "puml-link:docs.usp_AntoraExport_navigation.adoc[prefix=..]" as docs.usp_AntoraExport_navigation << P >> {
+entity "puml-link:dhw:sqldb:docs.usp_AntoraExport_navigation.adoc[]" as docs.usp_AntoraExport_navigation << P >> {
   --
   --
   --
 }
 
-entity "puml-link:logs.usp_ExecutionLog_insert.adoc[prefix=..]" as logs.usp_ExecutionLog_insert << P >> {
+entity "puml-link:dhw:sqldb:logs.usp_ExecutionLog_insert.adoc[]" as logs.usp_ExecutionLog_insert << P >> {
   --
   --
   --
@@ -92,11 +94,6 @@ docs.AntoraNavListRepoObject_by_schema_type <.. docs.usp_AntoraExport_navigation
 docs.AntoraNavListRepoObject_by_type <.. docs.usp_AntoraExport_navigation
 docs.usp_AntoraExport_navigation <.. docs.usp_AntoraExport
 logs.usp_ExecutionLog_insert <.. docs.usp_AntoraExport_navigation
-
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
 
 @enduml
 

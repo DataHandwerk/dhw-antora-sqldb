@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:repo.RepoObjectColumn_SSAS_src.adoc[prefix=..]" as repo.RepoObjectColumn_SSAS_src << V >> {
+entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_SSAS_src.adoc[]" as repo.RepoObjectColumn_SSAS_src << V >> {
   - **RepoObjectColumn_guid** : (uniqueidentifier)
   --
   - is_SysObjectColumn_missing : (int)
@@ -39,7 +40,7 @@ entity "puml-link:repo.RepoObjectColumn_SSAS_src.adoc[prefix=..]" as repo.RepoOb
   --
 }
 
-entity "puml-link:repo.RepoObjectColumn_SSAS_tgt.adoc[prefix=..]" as repo.RepoObjectColumn_SSAS_tgt << V >> {
+entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_SSAS_tgt.adoc[]" as repo.RepoObjectColumn_SSAS_tgt << V >> {
   - **RepoObjectColumn_guid** : (uniqueidentifier)
   --
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
@@ -77,13 +78,13 @@ entity "puml-link:repo.RepoObjectColumn_SSAS_tgt.adoc[prefix=..]" as repo.RepoOb
   --
 }
 
-entity "puml-link:repo.usp_PERSIST_RepoObjectColumn_SSAS_tgt.adoc[prefix=..]" as repo.usp_PERSIST_RepoObjectColumn_SSAS_tgt << P >> {
+entity "puml-link:dhw:sqldb:repo.usp_PERSIST_RepoObjectColumn_SSAS_tgt.adoc[]" as repo.usp_PERSIST_RepoObjectColumn_SSAS_tgt << P >> {
   --
   --
   --
 }
 
-entity "puml-link:ssas.model_json_311_tables_columns_T.adoc[prefix=..]" as ssas.model_json_311_tables_columns_T << U >> {
+entity "puml-link:dhw:sqldb:ssas.model_json_311_tables_columns_T.adoc[]" as ssas.model_json_311_tables_columns_T << U >> {
   - **databasename** : (nvarchar(128))
   - **tables_name** : (nvarchar(128))
   **tables_columns_name** : (nvarchar(128))
@@ -116,24 +117,19 @@ entity "puml-link:ssas.model_json_311_tables_columns_T.adoc[prefix=..]" as ssas.
 repo.RepoObjectColumn_SSAS_src <.. repo.RepoObjectColumn_SSAS_tgt
 repo.RepoObjectColumn_SSAS_src <.. repo.usp_PERSIST_RepoObjectColumn_SSAS_tgt
 ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_SSAS_src
-repo.RepoObjectColumn_SSAS_src::is_SysObjectColumn_missing <-- repo.RepoObjectColumn_SSAS_tgt::is_SysObjectColumn_missing
-repo.RepoObjectColumn_SSAS_src::Repo_is_nullable <-- repo.RepoObjectColumn_SSAS_tgt::Repo_is_nullable
-repo.RepoObjectColumn_SSAS_src::Repo_user_type_fullname <-- repo.RepoObjectColumn_SSAS_tgt::Repo_user_type_fullname
-repo.RepoObjectColumn_SSAS_src::Repo_user_type_name <-- repo.RepoObjectColumn_SSAS_tgt::Repo_user_type_name
-repo.RepoObjectColumn_SSAS_src::RepoObject_guid <-- repo.RepoObjectColumn_SSAS_tgt::RepoObject_guid
-repo.RepoObjectColumn_SSAS_src::RepoObjectColumn_guid <-- repo.RepoObjectColumn_SSAS_tgt::RepoObjectColumn_guid
-repo.RepoObjectColumn_SSAS_src::RepoObjectColumn_name <-- repo.RepoObjectColumn_SSAS_tgt::RepoObjectColumn_name
-repo.RepoObjectColumn_SSAS_src::SysObjectColumn_name <-- repo.RepoObjectColumn_SSAS_tgt::SysObjectColumn_name
-ssas.model_json_311_tables_columns_T::RepoObject_guid <-- repo.RepoObjectColumn_SSAS_src::RepoObject_guid
-ssas.model_json_311_tables_columns_T::RepoObjectColumn_guid <-- repo.RepoObjectColumn_SSAS_src::RepoObjectColumn_guid
-ssas.model_json_311_tables_columns_T::tables_columns_dataType <-- repo.RepoObjectColumn_SSAS_src::Repo_user_type_name
-ssas.model_json_311_tables_columns_T::tables_columns_dataType <-- repo.RepoObjectColumn_SSAS_src::Repo_user_type_fullname
-ssas.model_json_311_tables_columns_T::tables_columns_name <-- repo.RepoObjectColumn_SSAS_src::RepoObjectColumn_name
-ssas.model_json_311_tables_columns_T::tables_columns_name <-- repo.RepoObjectColumn_SSAS_src::SysObjectColumn_name
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"repo.RepoObjectColumn_SSAS_src::is_SysObjectColumn_missing" <-- "repo.RepoObjectColumn_SSAS_tgt::is_SysObjectColumn_missing"
+"repo.RepoObjectColumn_SSAS_src::Repo_is_nullable" <-- "repo.RepoObjectColumn_SSAS_tgt::Repo_is_nullable"
+"repo.RepoObjectColumn_SSAS_src::Repo_user_type_fullname" <-- "repo.RepoObjectColumn_SSAS_tgt::Repo_user_type_fullname"
+"repo.RepoObjectColumn_SSAS_src::Repo_user_type_name" <-- "repo.RepoObjectColumn_SSAS_tgt::Repo_user_type_name"
+"repo.RepoObjectColumn_SSAS_src::RepoObject_guid" <-- "repo.RepoObjectColumn_SSAS_tgt::RepoObject_guid"
+"repo.RepoObjectColumn_SSAS_src::RepoObjectColumn_guid" <-- "repo.RepoObjectColumn_SSAS_tgt::RepoObjectColumn_guid"
+"repo.RepoObjectColumn_SSAS_src::RepoObjectColumn_name" <-- "repo.RepoObjectColumn_SSAS_tgt::RepoObjectColumn_name"
+"repo.RepoObjectColumn_SSAS_src::SysObjectColumn_name" <-- "repo.RepoObjectColumn_SSAS_tgt::SysObjectColumn_name"
+"ssas.model_json_311_tables_columns_T::RepoObject_guid" <-- "repo.RepoObjectColumn_SSAS_src::RepoObject_guid"
+"ssas.model_json_311_tables_columns_T::RepoObjectColumn_guid" <-- "repo.RepoObjectColumn_SSAS_src::RepoObjectColumn_guid"
+"ssas.model_json_311_tables_columns_T::tables_columns_dataType" <-- "repo.RepoObjectColumn_SSAS_src::Repo_user_type_name"
+"ssas.model_json_311_tables_columns_T::tables_columns_dataType" <-- "repo.RepoObjectColumn_SSAS_src::Repo_user_type_fullname"
+"ssas.model_json_311_tables_columns_T::tables_columns_name" <-- "repo.RepoObjectColumn_SSAS_src::RepoObjectColumn_name"
+"ssas.model_json_311_tables_columns_T::tables_columns_name" <-- "repo.RepoObjectColumn_SSAS_src::SysObjectColumn_name"
 @enduml
 

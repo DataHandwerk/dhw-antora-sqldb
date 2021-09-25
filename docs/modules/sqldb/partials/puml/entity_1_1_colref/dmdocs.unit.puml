@@ -22,40 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:dmdocs.unit.adoc[prefix=..]" as dmdocs.unit << V >> {
-  --
-  AntoraComponent : (nvarchar(max))
-  AntoraModule : (nvarchar(max))
-  AntoraPage : (nvarchar(257))
-  AntoraSectionId : (nvarchar(508))
-  AntoraSiteUrl : (nvarchar(max))
-  AntoraVersion : (nvarchar(max))
-  Object_fullname2 : (nvarchar(257))
-  Object_Type : (varchar(2))
-  Unit_Description : (nvarchar(max))
-  Unit_DisplayFolder : (nvarchar(500))
-  Unit_Expression : (nvarchar(max))
-  Unit_FormatString : (nvarchar(500))
-  - Unit_fullname2 : (nvarchar(638))
-  - Unit_guid : (uniqueidentifier)
-  Unit_isHidden : (bit)
-  Unit_IsKey : (bit)
-  Unit_IsSsas : (bit)
-  Unit_IsUnique : (bit)
-  - Unit_Metatype : (varchar(7))
-  - Unit_Name : (nvarchar(500))
-  - Unit_Schema : (nvarchar(128))
-  Unit_SummarizeBy : (nvarchar(500))
-  Unit_TypeName : (nvarchar(128))
-  - Unit_Url : (nvarchar(max))
-  --
-  --
-}
-
-entity "puml-link:docs.Unit_3.adoc[prefix=..]" as docs.Unit_3 << V >> {
+entity "puml-link:dhw:sqldb:dmdocs.unit.adoc[]" as dmdocs.unit << V >> {
   --
   AntoraComponent : (nvarchar(max))
   AntoraModule : (nvarchar(max))
@@ -65,6 +36,7 @@ entity "puml-link:docs.Unit_3.adoc[prefix=..]" as docs.Unit_3 << V >> {
   AntoraVersion : (nvarchar(max))
   Object_fullname2 : (nvarchar(257))
   Object_Type : (varchar(2))
+  Unit_ColummName : (nvarchar(128))
   Unit_Description : (nvarchar(max))
   Unit_DisplayFolder : (nvarchar(500))
   Unit_Expression : (nvarchar(max))
@@ -77,6 +49,39 @@ entity "puml-link:docs.Unit_3.adoc[prefix=..]" as docs.Unit_3 << V >> {
   Unit_IsUnique : (bit)
   - Unit_Metatype : (varchar(7))
   - Unit_Name : (nvarchar(500))
+  Unit_ObjectName : (nvarchar(128))
+  - Unit_Schema : (nvarchar(128))
+  Unit_SummarizeBy : (nvarchar(500))
+  Unit_TypeName : (nvarchar(128))
+  - Unit_Url : (nvarchar(max))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.Unit_3.adoc[]" as docs.Unit_3 << V >> {
+  --
+  AntoraComponent : (nvarchar(max))
+  AntoraModule : (nvarchar(max))
+  AntoraPage : (nvarchar(4000))
+  AntoraSectionId : (nvarchar(4000))
+  AntoraSiteUrl : (nvarchar(max))
+  AntoraVersion : (nvarchar(max))
+  Object_fullname2 : (nvarchar(257))
+  Object_Type : (varchar(2))
+  Unit_ColummName : (nvarchar(128))
+  Unit_Description : (nvarchar(max))
+  Unit_DisplayFolder : (nvarchar(500))
+  Unit_Expression : (nvarchar(max))
+  Unit_FormatString : (nvarchar(500))
+  - Unit_fullname2 : (nvarchar(638))
+  - Unit_guid : (uniqueidentifier)
+  Unit_isHidden : (bit)
+  Unit_IsKey : (bit)
+  Unit_IsSsas : (bit)
+  Unit_IsUnique : (bit)
+  - Unit_Metatype : (varchar(7))
+  - Unit_Name : (nvarchar(500))
+  Unit_ObjectName : (nvarchar(128))
   - Unit_Schema : (nvarchar(128))
   Unit_SummarizeBy : (nvarchar(500))
   Unit_TypeName : (nvarchar(128))
@@ -86,34 +91,31 @@ entity "puml-link:docs.Unit_3.adoc[prefix=..]" as docs.Unit_3 << V >> {
 }
 
 docs.Unit_3 <.. dmdocs.unit
-docs.Unit_3::AntoraComponent <-- dmdocs.unit::AntoraComponent
-docs.Unit_3::AntoraModule <-- dmdocs.unit::AntoraModule
-docs.Unit_3::AntoraPage <-- dmdocs.unit::AntoraPage
-docs.Unit_3::AntoraSectionId <-- dmdocs.unit::AntoraSectionId
-docs.Unit_3::AntoraSiteUrl <-- dmdocs.unit::AntoraSiteUrl
-docs.Unit_3::AntoraVersion <-- dmdocs.unit::AntoraVersion
-docs.Unit_3::Object_fullname2 <-- dmdocs.unit::Object_fullname2
-docs.Unit_3::Object_Type <-- dmdocs.unit::Object_Type
-docs.Unit_3::Unit_Description <-- dmdocs.unit::Unit_Description
-docs.Unit_3::Unit_DisplayFolder <-- dmdocs.unit::Unit_DisplayFolder
-docs.Unit_3::Unit_Expression <-- dmdocs.unit::Unit_Expression
-docs.Unit_3::Unit_FormatString <-- dmdocs.unit::Unit_FormatString
-docs.Unit_3::Unit_fullname2 <-- dmdocs.unit::Unit_fullname2
-docs.Unit_3::Unit_guid <-- dmdocs.unit::Unit_guid
-docs.Unit_3::Unit_isHidden <-- dmdocs.unit::Unit_isHidden
-docs.Unit_3::Unit_IsKey <-- dmdocs.unit::Unit_IsKey
-docs.Unit_3::Unit_IsSsas <-- dmdocs.unit::Unit_IsSsas
-docs.Unit_3::Unit_IsUnique <-- dmdocs.unit::Unit_IsUnique
-docs.Unit_3::Unit_Metatype <-- dmdocs.unit::Unit_Metatype
-docs.Unit_3::Unit_Name <-- dmdocs.unit::Unit_Name
-docs.Unit_3::Unit_Schema <-- dmdocs.unit::Unit_Schema
-docs.Unit_3::Unit_SummarizeBy <-- dmdocs.unit::Unit_SummarizeBy
-docs.Unit_3::Unit_TypeName <-- dmdocs.unit::Unit_TypeName
-docs.Unit_3::Unit_Url <-- dmdocs.unit::Unit_Url
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"docs.Unit_3::AntoraComponent" <-- "dmdocs.unit::AntoraComponent"
+"docs.Unit_3::AntoraModule" <-- "dmdocs.unit::AntoraModule"
+"docs.Unit_3::AntoraPage" <-- "dmdocs.unit::AntoraPage"
+"docs.Unit_3::AntoraSectionId" <-- "dmdocs.unit::AntoraSectionId"
+"docs.Unit_3::AntoraSiteUrl" <-- "dmdocs.unit::AntoraSiteUrl"
+"docs.Unit_3::AntoraVersion" <-- "dmdocs.unit::AntoraVersion"
+"docs.Unit_3::Object_fullname2" <-- "dmdocs.unit::Object_fullname2"
+"docs.Unit_3::Object_Type" <-- "dmdocs.unit::Object_Type"
+"docs.Unit_3::Unit_ColummName" <-- "dmdocs.unit::Unit_ColummName"
+"docs.Unit_3::Unit_Description" <-- "dmdocs.unit::Unit_Description"
+"docs.Unit_3::Unit_DisplayFolder" <-- "dmdocs.unit::Unit_DisplayFolder"
+"docs.Unit_3::Unit_Expression" <-- "dmdocs.unit::Unit_Expression"
+"docs.Unit_3::Unit_FormatString" <-- "dmdocs.unit::Unit_FormatString"
+"docs.Unit_3::Unit_fullname2" <-- "dmdocs.unit::Unit_fullname2"
+"docs.Unit_3::Unit_guid" <-- "dmdocs.unit::Unit_guid"
+"docs.Unit_3::Unit_isHidden" <-- "dmdocs.unit::Unit_isHidden"
+"docs.Unit_3::Unit_IsKey" <-- "dmdocs.unit::Unit_IsKey"
+"docs.Unit_3::Unit_IsSsas" <-- "dmdocs.unit::Unit_IsSsas"
+"docs.Unit_3::Unit_IsUnique" <-- "dmdocs.unit::Unit_IsUnique"
+"docs.Unit_3::Unit_Metatype" <-- "dmdocs.unit::Unit_Metatype"
+"docs.Unit_3::Unit_Name" <-- "dmdocs.unit::Unit_Name"
+"docs.Unit_3::Unit_ObjectName" <-- "dmdocs.unit::Unit_ObjectName"
+"docs.Unit_3::Unit_Schema" <-- "dmdocs.unit::Unit_Schema"
+"docs.Unit_3::Unit_SummarizeBy" <-- "dmdocs.unit::Unit_SummarizeBy"
+"docs.Unit_3::Unit_TypeName" <-- "dmdocs.unit::Unit_TypeName"
+"docs.Unit_3::Unit_Url" <-- "dmdocs.unit::Unit_Url"
 @enduml
 

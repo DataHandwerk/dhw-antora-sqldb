@@ -22,20 +22,27 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:reference.RepoObject_reference_T.adoc[prefix=..]" as reference.RepoObject_reference_T << U >> {
+entity "puml-link:dhw:sqldb:reference.RepoObject_reference_T.adoc[]" as reference.RepoObject_reference_T << U >> {
   **referenced_RepoObject_guid** : (uniqueidentifier)
   **referencing_RepoObject_guid** : (uniqueidentifier)
   --
   - is_ReversePersistenceViaView : (bit)
   referenced_entity_name : (nvarchar(128))
+  referenced_external_AntoraComponent : (nvarchar(128))
+  referenced_external_AntoraModule : (nvarchar(128))
+  referenced_is_external : (int)
   - referenced_is_PersistenceSource : (bit)
   - referenced_is_PersistenceTarget : (bit)
   referenced_schema_name : (nvarchar(128))
   referenced_type : (char(2))
   referencing_entity_name : (nvarchar(128))
+  referencing_external_AntoraComponent : (nvarchar(128))
+  referencing_external_AntoraModule : (nvarchar(128))
+  referencing_is_external : (int)
   - referencing_is_PersistenceTarget : (bit)
   - referencing_is_PersistenceUspSourceRef : (bit)
   referencing_is_PersistenceUspTargetRef : (bit)
@@ -43,13 +50,15 @@ entity "puml-link:reference.RepoObject_reference_T.adoc[prefix=..]" as reference
   referencing_type : (varchar(2))
   # referenced_fullname : (nvarchar(261))
   # referenced_fullname2 : (nvarchar(257))
+  ~ referenced_puml_entity : (nvarchar(4000))
   # referencing_fullname : (nvarchar(261))
   # referencing_fullname2 : (nvarchar(257))
+  ~ referencing_puml_entity : (nvarchar(4000))
   --
   --
 }
 
-entity "puml-link:reference.RepoObjectColumn_reference_union.adoc[prefix=..]" as reference.RepoObjectColumn_reference_union << V >> {
+entity "puml-link:dhw:sqldb:reference.RepoObjectColumn_reference_union.adoc[]" as reference.RepoObjectColumn_reference_union << V >> {
   --
   definition : (nvarchar(max))
   - InformationSource : (varchar(34))
@@ -58,14 +67,20 @@ entity "puml-link:reference.RepoObjectColumn_reference_union.adoc[prefix=..]" as
   is_referencing_object_equal_referenced_object : (bit)
   referenced_column_name : (nvarchar(128))
   referenced_entity_name : (nvarchar(128))
+  referenced_external_AntoraComponent : (nvarchar(128))
+  referenced_external_AntoraModule : (nvarchar(128))
   referenced_id : (int)
+  referenced_is_external : (tinyint)
   referenced_RepoObject_guid : (uniqueidentifier)
   referenced_RepoObjectColumn_guid : (uniqueidentifier)
   referenced_schema_name : (nvarchar(128))
   referenced_type : (char(2))
   referencing_column_name : (nvarchar(128))
   referencing_entity_name : (nvarchar(128))
+  referencing_external_AntoraComponent : (nvarchar(128))
+  referencing_external_AntoraModule : (nvarchar(128))
   referencing_id : (int)
+  referencing_is_external : (tinyint)
   referencing_RepoObject_guid : (uniqueidentifier)
   referencing_RepoObjectColumn_guid : (uniqueidentifier)
   referencing_schema_name : (nvarchar(128))
@@ -74,7 +89,7 @@ entity "puml-link:reference.RepoObjectColumn_reference_union.adoc[prefix=..]" as
   --
 }
 
-entity "puml-link:reference.RepoObjectColumn_reference_virtual.adoc[prefix=..]" as reference.RepoObjectColumn_reference_virtual << V >> {
+entity "puml-link:dhw:sqldb:reference.RepoObjectColumn_reference_virtual.adoc[]" as reference.RepoObjectColumn_reference_virtual << V >> {
   --
   definition : (nvarchar(max))
   - InformationSource : (varchar(34))
@@ -103,7 +118,7 @@ entity "puml-link:reference.RepoObjectColumn_reference_virtual.adoc[prefix=..]" 
   --
 }
 
-entity "puml-link:reference.RepoObjectColumnSource_virtual.adoc[prefix=..]" as reference.RepoObjectColumnSource_virtual << U >> {
+entity "puml-link:dhw:sqldb:reference.RepoObjectColumnSource_virtual.adoc[]" as reference.RepoObjectColumnSource_virtual << U >> {
   - **RepoObjectColumn_guid** : (uniqueidentifier)
   - **Source_RepoObjectColumn_guid** : (uniqueidentifier)
   --
@@ -111,8 +126,7 @@ entity "puml-link:reference.RepoObjectColumnSource_virtual.adoc[prefix=..]" as r
   --
 }
 
-entity "puml-link:repo.RepoObjectColumn_gross.adoc[prefix=..]" as repo.RepoObjectColumn_gross << V >> {
-  - **RepoObjectColumn_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_gross.adoc[]" as repo.RepoObjectColumn_gross << V >> {
   --
   - Column_name : (nvarchar(128))
   Description : (nvarchar(max))
@@ -121,6 +135,7 @@ entity "puml-link:repo.RepoObjectColumn_gross.adoc[prefix=..]" as repo.RepoObjec
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
   InheritanceDefinition : (nvarchar(4000))
   InheritanceType : (tinyint)
+  - is_external : (bit)
   is_persistence_no_check : (bit)
   is_persistence_no_include : (bit)
   is_persistence_no_update : (bit)
@@ -166,6 +181,7 @@ entity "puml-link:repo.RepoObjectColumn_gross.adoc[prefix=..]" as repo.RepoObjec
   RepoObjectColumn_column_id : (int)
   - RepoObjectColumn_fullname : (nvarchar(520))
   - RepoObjectColumn_fullname2 : (nvarchar(386))
+  - RepoObjectColumn_guid : (uniqueidentifier)
   - RepoObjectColumn_name : (nvarchar(128))
   - SysObject_fullname : (nvarchar(261))
   - SysObject_fullname2 : (nvarchar(257))
@@ -194,28 +210,23 @@ reference.RepoObject_reference_T <.. reference.RepoObjectColumn_reference_virtua
 reference.RepoObjectColumn_reference_virtual <.. reference.RepoObjectColumn_reference_union
 reference.RepoObjectColumnSource_virtual <.. reference.RepoObjectColumn_reference_virtual
 repo.RepoObjectColumn_gross <.. reference.RepoObjectColumn_reference_virtual
-repo.RepoObjectColumn_gross::node_id <-- reference.RepoObjectColumn_reference_virtual::referencing_node_id
-repo.RepoObjectColumn_gross::node_id <-- reference.RepoObjectColumn_reference_virtual::referenced_node_id
-repo.RepoObjectColumn_gross::RepoObject_guid <-- reference.RepoObjectColumn_reference_virtual::referencing_RepoObject_guid
-repo.RepoObjectColumn_gross::RepoObject_guid <-- reference.RepoObjectColumn_reference_virtual::referenced_RepoObject_guid
-repo.RepoObjectColumn_gross::RepoObjectColumn_guid <-- reference.RepoObjectColumn_reference_virtual::referencing_RepoObjectColumn_guid
-repo.RepoObjectColumn_gross::RepoObjectColumn_guid <-- reference.RepoObjectColumn_reference_virtual::referenced_RepoObjectColumn_guid
-repo.RepoObjectColumn_gross::SysObject_id <-- reference.RepoObjectColumn_reference_virtual::referencing_id
-repo.RepoObjectColumn_gross::SysObject_id <-- reference.RepoObjectColumn_reference_virtual::referenced_id
-repo.RepoObjectColumn_gross::SysObject_name <-- reference.RepoObjectColumn_reference_virtual::referencing_entity_name
-repo.RepoObjectColumn_gross::SysObject_name <-- reference.RepoObjectColumn_reference_virtual::referenced_entity_name
-repo.RepoObjectColumn_gross::SysObject_schema_name <-- reference.RepoObjectColumn_reference_virtual::referencing_schema_name
-repo.RepoObjectColumn_gross::SysObject_schema_name <-- reference.RepoObjectColumn_reference_virtual::referenced_schema_name
-repo.RepoObjectColumn_gross::SysObject_type <-- reference.RepoObjectColumn_reference_virtual::referencing_type
-repo.RepoObjectColumn_gross::SysObject_type <-- reference.RepoObjectColumn_reference_virtual::referenced_type
-repo.RepoObjectColumn_gross::SysObjectColumn_column_id <-- reference.RepoObjectColumn_reference_virtual::referencing_minor_id
-repo.RepoObjectColumn_gross::SysObjectColumn_column_id <-- reference.RepoObjectColumn_reference_virtual::referenced_minor_id
-repo.RepoObjectColumn_gross::SysObjectColumn_name <-- reference.RepoObjectColumn_reference_virtual::referencing_column_name
-repo.RepoObjectColumn_gross::SysObjectColumn_name <-- reference.RepoObjectColumn_reference_virtual::referenced_column_name
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"repo.RepoObjectColumn_gross::node_id" <-- "reference.RepoObjectColumn_reference_virtual::referencing_node_id"
+"repo.RepoObjectColumn_gross::node_id" <-- "reference.RepoObjectColumn_reference_virtual::referenced_node_id"
+"repo.RepoObjectColumn_gross::RepoObject_guid" <-- "reference.RepoObjectColumn_reference_virtual::referencing_RepoObject_guid"
+"repo.RepoObjectColumn_gross::RepoObject_guid" <-- "reference.RepoObjectColumn_reference_virtual::referenced_RepoObject_guid"
+"repo.RepoObjectColumn_gross::RepoObjectColumn_guid" <-- "reference.RepoObjectColumn_reference_virtual::referencing_RepoObjectColumn_guid"
+"repo.RepoObjectColumn_gross::RepoObjectColumn_guid" <-- "reference.RepoObjectColumn_reference_virtual::referenced_RepoObjectColumn_guid"
+"repo.RepoObjectColumn_gross::SysObject_id" <-- "reference.RepoObjectColumn_reference_virtual::referencing_id"
+"repo.RepoObjectColumn_gross::SysObject_id" <-- "reference.RepoObjectColumn_reference_virtual::referenced_id"
+"repo.RepoObjectColumn_gross::SysObject_name" <-- "reference.RepoObjectColumn_reference_virtual::referencing_entity_name"
+"repo.RepoObjectColumn_gross::SysObject_name" <-- "reference.RepoObjectColumn_reference_virtual::referenced_entity_name"
+"repo.RepoObjectColumn_gross::SysObject_schema_name" <-- "reference.RepoObjectColumn_reference_virtual::referencing_schema_name"
+"repo.RepoObjectColumn_gross::SysObject_schema_name" <-- "reference.RepoObjectColumn_reference_virtual::referenced_schema_name"
+"repo.RepoObjectColumn_gross::SysObject_type" <-- "reference.RepoObjectColumn_reference_virtual::referencing_type"
+"repo.RepoObjectColumn_gross::SysObject_type" <-- "reference.RepoObjectColumn_reference_virtual::referenced_type"
+"repo.RepoObjectColumn_gross::SysObjectColumn_column_id" <-- "reference.RepoObjectColumn_reference_virtual::referencing_minor_id"
+"repo.RepoObjectColumn_gross::SysObjectColumn_column_id" <-- "reference.RepoObjectColumn_reference_virtual::referenced_minor_id"
+"repo.RepoObjectColumn_gross::SysObjectColumn_name" <-- "reference.RepoObjectColumn_reference_virtual::referencing_column_name"
+"repo.RepoObjectColumn_gross::SysObjectColumn_name" <-- "reference.RepoObjectColumn_reference_virtual::referenced_column_name"
 @enduml
 

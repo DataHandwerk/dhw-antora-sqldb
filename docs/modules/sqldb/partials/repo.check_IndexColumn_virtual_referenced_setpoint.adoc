@@ -6,9 +6,6 @@
 :ExistsProperty--antorareferencedlist:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--pk_index_guid:
-:ExistsProperty--pk_indexpatterncolumndatatype:
-:ExistsProperty--pk_indexpatterncolumnname:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -49,32 +46,13 @@ view
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-index_guid]
-=== index_guid
-
-[cols="d,8m,m,m,m,d"]
-|===
-|1
-|*index_guid*
-|uniqueidentifier
-|NOT NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:repo.IndexColumn_virtual_referenced_setpoint.adoc#column-index_guid[+repo.IndexColumn_virtual_referenced_setpoint.index_guid+]
---
-
-
 [#column-index_column_id]
 === index_column_id
 
 [cols="d,8m,m,m,m,d"]
 |===
-|2
-|*index_column_id*
+|
+|index_column_id
 |int
 |NOT NULL
 |
@@ -84,6 +62,25 @@ view
 .Referenced Columns
 --
 * xref:repo.IndexColumn_virtual_referenced_setpoint.adoc#column-index_column_id[+repo.IndexColumn_virtual_referenced_setpoint.index_column_id+]
+--
+
+
+[#column-index_guid]
+=== index_guid
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|index_guid
+|uniqueidentifier
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo.IndexColumn_virtual_referenced_setpoint.adoc#column-index_guid[+repo.IndexColumn_virtual_referenced_setpoint.index_guid+]
 --
 
 
@@ -352,19 +349,7 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
-|1
-|*<<column-index_guid>>*
-|uniqueidentifier
-|NOT NULL
-|
-|
 
-|2
-|*<<column-index_column_id>>*
-|int
-|NOT NULL
-|
-|
 
 
 
@@ -383,7 +368,19 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
+|
+|<<column-index_column_id>>
+|int
+|NOT NULL
+|
+|
 
+|
+|<<column-index_guid>>
+|uniqueidentifier
+|NOT NULL
+|
+|
 
 |
 |<<column-referenced_index_guid>>
@@ -475,44 +472,10 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 
 // tag::AntoraIndexList[]
 
-[#index-PK_check_IndexColumn_virtual_referenced_setpoint]
-=== PK_check_IndexColumn_virtual_referenced_setpoint
+[#index-idx_check_IndexColumn_virtual_referenced_setpoint2x_1]
+=== idx_check_IndexColumn_virtual_referenced_setpoint++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
-+
---
-* <<column-index_guid>>; uniqueidentifier
-* <<column-index_column_id>>; int
---
-* PK, Unique, Real: 1, 1, 0
-
-
-[#index-idx_check_IndexColumn_virtual_referenced_setpoint_2]
-=== idx_check_IndexColumn_virtual_referenced_setpoint++__++2
-
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
-+
---
-* <<column-index_guid>>; uniqueidentifier
---
-* PK, Unique, Real: 0, 0, 0
-
-
-[#index-idx_check_IndexColumn_virtual_referenced_setpoint_3]
-=== idx_check_IndexColumn_virtual_referenced_setpoint++__++3
-
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
-+
---
-* <<column-index_column_id>>; int
---
-* PK, Unique, Real: 0, 0, 0
-
-
-[#index-idx_check_IndexColumn_virtual_referenced_setpoint_4]
-=== idx_check_IndexColumn_virtual_referenced_setpoint++__++4
-
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObjectColumn_guid_t>>; uniqueidentifier
@@ -520,10 +483,10 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_check_IndexColumn_virtual_referenced_setpoint_5]
-=== idx_check_IndexColumn_virtual_referenced_setpoint++__++5
+[#index-idx_check_IndexColumn_virtual_referenced_setpoint2x_2]
+=== idx_check_IndexColumn_virtual_referenced_setpoint++__++2
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObjectColumn_guid_t>>; uniqueidentifier
@@ -532,10 +495,10 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_check_IndexColumn_virtual_referenced_setpoint_6]
-=== idx_check_IndexColumn_virtual_referenced_setpoint++__++6
+[#index-idx_check_IndexColumn_virtual_referenced_setpoint2x_3]
+=== idx_check_IndexColumn_virtual_referenced_setpoint++__++3
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-SysObjectColumn_name_t>>; nvarchar(128)
@@ -543,10 +506,10 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_check_IndexColumn_virtual_referenced_setpoint_7]
-=== idx_check_IndexColumn_virtual_referenced_setpoint++__++7
+[#index-idx_check_IndexColumn_virtual_referenced_setpoint2x_4]
+=== idx_check_IndexColumn_virtual_referenced_setpoint++__++4
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid_s>>; uniqueidentifier
@@ -554,13 +517,47 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_check_IndexColumn_virtual_referenced_setpoint_8]
-=== idx_check_IndexColumn_virtual_referenced_setpoint++__++8
+[#index-idx_check_IndexColumn_virtual_referenced_setpoint2x_5]
+=== idx_check_IndexColumn_virtual_referenced_setpoint++__++5
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid_t>>; uniqueidentifier
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[#index-idx_check_IndexColumn_virtual_referenced_setpoint2x_6]
+=== idx_check_IndexColumn_virtual_referenced_setpoint++__++6
+
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-index_guid>>; uniqueidentifier
+* <<column-index_column_id>>; int
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[#index-idx_check_IndexColumn_virtual_referenced_setpoint2x_7]
+=== idx_check_IndexColumn_virtual_referenced_setpoint++__++7
+
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-index_guid>>; uniqueidentifier
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[#index-idx_check_IndexColumn_virtual_referenced_setpoint2x_8]
+=== idx_check_IndexColumn_virtual_referenced_setpoint++__++8
+
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-index_column_id>>; int
 --
 * PK, Unique, Real: 0, 0, 0
 
@@ -799,21 +796,21 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-938AA10A-AB97-EB11-84F4-A81E8446D5B0
+
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-uniqueidentifier,int
+
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-index_guid,index_column_id
+
 // end::pk_indexpatterncolumnname[]
 
 

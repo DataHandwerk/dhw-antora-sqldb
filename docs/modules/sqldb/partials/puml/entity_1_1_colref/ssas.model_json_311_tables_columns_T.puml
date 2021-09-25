@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:repo.ForeignKey_ssas_IndexPattern.adoc[prefix=..]" as repo.ForeignKey_ssas_IndexPattern << V >> {
+entity "puml-link:dhw:sqldb:repo.ForeignKey_ssas_IndexPattern.adoc[]" as repo.ForeignKey_ssas_IndexPattern << V >> {
   --
   - databasename : (nvarchar(128))
   delete_referential_action : (tinyint)
@@ -62,8 +63,7 @@ entity "puml-link:repo.ForeignKey_ssas_IndexPattern.adoc[prefix=..]" as repo.For
   --
 }
 
-entity "puml-link:repo.RepoObjectColumn_gross.adoc[prefix=..]" as repo.RepoObjectColumn_gross << V >> {
-  - **RepoObjectColumn_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_gross.adoc[]" as repo.RepoObjectColumn_gross << V >> {
   --
   - Column_name : (nvarchar(128))
   Description : (nvarchar(max))
@@ -72,6 +72,7 @@ entity "puml-link:repo.RepoObjectColumn_gross.adoc[prefix=..]" as repo.RepoObjec
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
   InheritanceDefinition : (nvarchar(4000))
   InheritanceType : (tinyint)
+  - is_external : (bit)
   is_persistence_no_check : (bit)
   is_persistence_no_include : (bit)
   is_persistence_no_update : (bit)
@@ -117,6 +118,7 @@ entity "puml-link:repo.RepoObjectColumn_gross.adoc[prefix=..]" as repo.RepoObjec
   RepoObjectColumn_column_id : (int)
   - RepoObjectColumn_fullname : (nvarchar(520))
   - RepoObjectColumn_fullname2 : (nvarchar(386))
+  - RepoObjectColumn_guid : (uniqueidentifier)
   - RepoObjectColumn_name : (nvarchar(128))
   - SysObject_fullname : (nvarchar(261))
   - SysObject_fullname2 : (nvarchar(257))
@@ -141,7 +143,7 @@ entity "puml-link:repo.RepoObjectColumn_gross.adoc[prefix=..]" as repo.RepoObjec
   --
 }
 
-entity "puml-link:repo.RepoObjectColumn_SSAS_src.adoc[prefix=..]" as repo.RepoObjectColumn_SSAS_src << V >> {
+entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_SSAS_src.adoc[]" as repo.RepoObjectColumn_SSAS_src << V >> {
   - **RepoObjectColumn_guid** : (uniqueidentifier)
   --
   - is_SysObjectColumn_missing : (int)
@@ -155,11 +157,9 @@ entity "puml-link:repo.RepoObjectColumn_SSAS_src.adoc[prefix=..]" as repo.RepoOb
   --
 }
 
-entity "puml-link:ssas.IndexColumn_from_IsKey.adoc[prefix=..]" as ssas.IndexColumn_from_IsKey << V >> {
-  - **databasename** : (nvarchar(128))
-  - **TableName** : (nvarchar(128))
-  - **tables_columns_name** : (nvarchar(128))
+entity "puml-link:dhw:sqldb:ssas.IndexColumn_from_IsKey.adoc[]" as ssas.IndexColumn_from_IsKey << V >> {
   --
+  - databasename : (nvarchar(128))
   - index_column_id : (int)
   - index_name : (nvarchar(265))
   - is_descending_key : (int)
@@ -167,16 +167,16 @@ entity "puml-link:ssas.IndexColumn_from_IsKey.adoc[prefix=..]" as ssas.IndexColu
   - is_index_unique : (bit)
   - RepoObject_guid : (uniqueidentifier)
   - RepoObjectColumn_guid : (uniqueidentifier)
+  - TableName : (nvarchar(128))
+  - tables_columns_name : (nvarchar(128))
   tables_columns_type : (nvarchar(500))
   --
   --
 }
 
-entity "puml-link:ssas.IndexColumn_from_IsUnique.adoc[prefix=..]" as ssas.IndexColumn_from_IsUnique << V >> {
-  - **databasename** : (nvarchar(128))
-  - **TableName** : (nvarchar(128))
-  - **tables_columns_name** : (nvarchar(128))
+entity "puml-link:dhw:sqldb:ssas.IndexColumn_from_IsUnique.adoc[]" as ssas.IndexColumn_from_IsUnique << V >> {
   --
+  - databasename : (nvarchar(128))
   - index_column_id : (int)
   - index_name : (nvarchar(264))
   - is_descending_key : (int)
@@ -184,16 +184,16 @@ entity "puml-link:ssas.IndexColumn_from_IsUnique.adoc[prefix=..]" as ssas.IndexC
   - is_index_unique : (bit)
   - RepoObject_guid : (uniqueidentifier)
   - RepoObjectColumn_guid : (uniqueidentifier)
+  - TableName : (nvarchar(128))
+  - tables_columns_name : (nvarchar(128))
   tables_columns_type : (nvarchar(500))
   --
   --
 }
 
-entity "puml-link:ssas.IndexColumn_from_Relationship.adoc[prefix=..]" as ssas.IndexColumn_from_Relationship << V >> {
-  - **databasename** : (nvarchar(128))
-  - **TableName** : (nvarchar(128))
-  - **tables_columns_name** : (nvarchar(128))
+entity "puml-link:dhw:sqldb:ssas.IndexColumn_from_Relationship.adoc[]" as ssas.IndexColumn_from_Relationship << V >> {
   --
+  - databasename : (nvarchar(128))
   - index_column_id : (int)
   - index_name : (nvarchar(264))
   - is_descending_key : (int)
@@ -201,12 +201,14 @@ entity "puml-link:ssas.IndexColumn_from_Relationship.adoc[prefix=..]" as ssas.In
   - is_index_unique : (bit)
   - RepoObject_guid : (uniqueidentifier)
   - RepoObjectColumn_guid : (uniqueidentifier)
+  - TableName : (nvarchar(128))
+  - tables_columns_name : (nvarchar(128))
   tables_columns_type : (nvarchar(500))
   --
   --
 }
 
-entity "puml-link:ssas.model_json_311_tables_columns.adoc[prefix=..]" as ssas.model_json_311_tables_columns << V >> {
+entity "puml-link:dhw:sqldb:ssas.model_json_311_tables_columns.adoc[]" as ssas.model_json_311_tables_columns << V >> {
   - **databasename** : (nvarchar(128))
   - **tables_name** : (nvarchar(128))
   **tables_columns_name** : (nvarchar(128))
@@ -235,7 +237,7 @@ entity "puml-link:ssas.model_json_311_tables_columns.adoc[prefix=..]" as ssas.mo
   --
 }
 
-entity "puml-link:ssas.model_json_311_tables_columns_T.adoc[prefix=..]" as ssas.model_json_311_tables_columns_T << U >> {
+entity "puml-link:dhw:sqldb:ssas.model_json_311_tables_columns_T.adoc[]" as ssas.model_json_311_tables_columns_T << U >> {
   - **databasename** : (nvarchar(128))
   - **tables_name** : (nvarchar(128))
   **tables_columns_name** : (nvarchar(128))
@@ -265,41 +267,42 @@ entity "puml-link:ssas.model_json_311_tables_columns_T.adoc[prefix=..]" as ssas.
   --
 }
 
-entity "puml-link:ssas.model_json_3111_tables_columns_descriptions_multiline.adoc[prefix=..]" as ssas.model_json_3111_tables_columns_descriptions_multiline << V >> {
-  - **databasename** : (nvarchar(128))
-  - **tables_name** : (nvarchar(128))
-  - **tables_columns_name** : (nvarchar(128))
+entity "puml-link:dhw:sqldb:ssas.model_json_3111_tables_columns_descriptions_multiline.adoc[]" as ssas.model_json_3111_tables_columns_descriptions_multiline << V >> {
   --
+  - databasename : (nvarchar(128))
   - Key : (nvarchar(4000))
   - RepoObject_guid : (uniqueidentifier)
   - RepoObjectColumn_guid : (uniqueidentifier)
+  - tables_columns_name : (nvarchar(128))
+  - tables_name : (nvarchar(128))
   - Type : (tinyint)
   Value : (nvarchar(max))
   --
   --
 }
 
-entity "puml-link:ssas.model_json_3112_tables_columns_expressions_multiline.adoc[prefix=..]" as ssas.model_json_3112_tables_columns_expressions_multiline << V >> {
-  - **databasename** : (nvarchar(128))
-  - **tables_name** : (nvarchar(128))
-  - **tables_columns_name** : (nvarchar(128))
+entity "puml-link:dhw:sqldb:ssas.model_json_3112_tables_columns_expressions_multiline.adoc[]" as ssas.model_json_3112_tables_columns_expressions_multiline << V >> {
   --
+  - databasename : (nvarchar(128))
   - Key : (nvarchar(4000))
   - RepoObject_guid : (uniqueidentifier)
   - RepoObjectColumn_guid : (uniqueidentifier)
+  - tables_columns_name : (nvarchar(128))
+  - tables_name : (nvarchar(128))
   - Type : (tinyint)
   Value : (nvarchar(max))
   --
   --
 }
 
-entity "puml-link:ssas.usp_PERSIST_model_json_311_tables_columns_T.adoc[prefix=..]" as ssas.usp_PERSIST_model_json_311_tables_columns_T << P >> {
+entity "puml-link:dhw:sqldb:ssas.usp_PERSIST_model_json_311_tables_columns_T.adoc[]" as ssas.usp_PERSIST_model_json_311_tables_columns_T << P >> {
   --
   --
   --
 }
 
 ssas.model_json_311_tables_columns <.. ssas.model_json_311_tables_columns_T
+ssas.model_json_311_tables_columns_T <.. ssas.model_json_3112_tables_columns_expressions_multiline
 ssas.model_json_311_tables_columns_T <.. repo.ForeignKey_ssas_IndexPattern
 ssas.model_json_311_tables_columns_T <.. ssas.usp_PERSIST_model_json_311_tables_columns_T
 ssas.model_json_311_tables_columns_T <.. ssas.IndexColumn_from_IsKey
@@ -308,78 +311,72 @@ ssas.model_json_311_tables_columns_T <.. ssas.IndexColumn_from_Relationship
 ssas.model_json_311_tables_columns_T <.. ssas.IndexColumn_from_IsUnique
 ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_SSAS_src
 ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_gross
-ssas.model_json_311_tables_columns_T <.. ssas.model_json_3112_tables_columns_expressions_multiline
-ssas.model_json_311_tables_columns::databasename <-- ssas.model_json_311_tables_columns_T::databasename
-ssas.model_json_311_tables_columns::RepoObject_guid <-- ssas.model_json_311_tables_columns_T::RepoObject_guid
-ssas.model_json_311_tables_columns::tables_columns_dataType <-- ssas.model_json_311_tables_columns_T::tables_columns_dataType
-ssas.model_json_311_tables_columns::tables_columns_description <-- ssas.model_json_311_tables_columns_T::tables_columns_description
-ssas.model_json_311_tables_columns::tables_columns_description_ja <-- ssas.model_json_311_tables_columns_T::tables_columns_description_ja
-ssas.model_json_311_tables_columns::tables_columns_displayFolder <-- ssas.model_json_311_tables_columns_T::tables_columns_displayFolder
-ssas.model_json_311_tables_columns::tables_columns_expression <-- ssas.model_json_311_tables_columns_T::tables_columns_expression
-ssas.model_json_311_tables_columns::tables_columns_expression_ja <-- ssas.model_json_311_tables_columns_T::tables_columns_expression_ja
-ssas.model_json_311_tables_columns::tables_columns_formatString <-- ssas.model_json_311_tables_columns_T::tables_columns_formatString
-ssas.model_json_311_tables_columns::tables_columns_isDataTypeInferred <-- ssas.model_json_311_tables_columns_T::tables_columns_isDataTypeInferred
-ssas.model_json_311_tables_columns::tables_columns_isHidden <-- ssas.model_json_311_tables_columns_T::tables_columns_isHidden
-ssas.model_json_311_tables_columns::tables_columns_isKey <-- ssas.model_json_311_tables_columns_T::tables_columns_isKey
-ssas.model_json_311_tables_columns::tables_columns_isNameInferred <-- ssas.model_json_311_tables_columns_T::tables_columns_isNameInferred
-ssas.model_json_311_tables_columns::tables_columns_isNullable <-- ssas.model_json_311_tables_columns_T::tables_columns_isNullable
-ssas.model_json_311_tables_columns::tables_columns_isUnique <-- ssas.model_json_311_tables_columns_T::tables_columns_isUnique
-ssas.model_json_311_tables_columns::tables_columns_keepUniqueRows <-- ssas.model_json_311_tables_columns_T::tables_columns_keepUniqueRows
-ssas.model_json_311_tables_columns::tables_columns_name <-- ssas.model_json_311_tables_columns_T::tables_columns_name
-ssas.model_json_311_tables_columns::tables_columns_sortByColumn <-- ssas.model_json_311_tables_columns_T::tables_columns_sortByColumn
-ssas.model_json_311_tables_columns::tables_columns_sourceColumn <-- ssas.model_json_311_tables_columns_T::tables_columns_sourceColumn
-ssas.model_json_311_tables_columns::tables_columns_sourceProviderType <-- ssas.model_json_311_tables_columns_T::tables_columns_sourceProviderType
-ssas.model_json_311_tables_columns::tables_columns_summarizeBy <-- ssas.model_json_311_tables_columns_T::tables_columns_summarizeBy
-ssas.model_json_311_tables_columns::tables_columns_type <-- ssas.model_json_311_tables_columns_T::tables_columns_type
-ssas.model_json_311_tables_columns::tables_name <-- ssas.model_json_311_tables_columns_T::tables_name
-ssas.model_json_311_tables_columns_T::databasename <-- ssas.IndexColumn_from_IsUnique::databasename
-ssas.model_json_311_tables_columns_T::databasename <-- ssas.IndexColumn_from_Relationship::databasename
-ssas.model_json_311_tables_columns_T::databasename <-- ssas.IndexColumn_from_IsKey::databasename
-ssas.model_json_311_tables_columns_T::databasename <-- ssas.model_json_3111_tables_columns_descriptions_multiline::databasename
-ssas.model_json_311_tables_columns_T::databasename <-- ssas.model_json_3112_tables_columns_expressions_multiline::databasename
-ssas.model_json_311_tables_columns_T::RepoObject_guid <-- repo.RepoObjectColumn_SSAS_src::RepoObject_guid
-ssas.model_json_311_tables_columns_T::RepoObject_guid <-- ssas.IndexColumn_from_IsUnique::RepoObject_guid
-ssas.model_json_311_tables_columns_T::RepoObject_guid <-- ssas.IndexColumn_from_Relationship::RepoObject_guid
-ssas.model_json_311_tables_columns_T::RepoObject_guid <-- ssas.IndexColumn_from_IsKey::RepoObject_guid
-ssas.model_json_311_tables_columns_T::RepoObject_guid <-- ssas.model_json_3111_tables_columns_descriptions_multiline::RepoObject_guid
-ssas.model_json_311_tables_columns_T::RepoObject_guid <-- ssas.model_json_3112_tables_columns_expressions_multiline::RepoObject_guid
-ssas.model_json_311_tables_columns_T::RepoObjectColumn_guid <-- repo.RepoObjectColumn_SSAS_src::RepoObjectColumn_guid
-ssas.model_json_311_tables_columns_T::RepoObjectColumn_guid <-- ssas.IndexColumn_from_IsUnique::RepoObjectColumn_guid
-ssas.model_json_311_tables_columns_T::RepoObjectColumn_guid <-- ssas.IndexColumn_from_Relationship::RepoObjectColumn_guid
-ssas.model_json_311_tables_columns_T::RepoObjectColumn_guid <-- ssas.IndexColumn_from_IsKey::RepoObjectColumn_guid
-ssas.model_json_311_tables_columns_T::RepoObjectColumn_guid <-- ssas.model_json_3111_tables_columns_descriptions_multiline::RepoObjectColumn_guid
-ssas.model_json_311_tables_columns_T::RepoObjectColumn_guid <-- ssas.model_json_3112_tables_columns_expressions_multiline::RepoObjectColumn_guid
-ssas.model_json_311_tables_columns_T::tables_columns_dataType <-- repo.RepoObjectColumn_SSAS_src::Repo_user_type_name
-ssas.model_json_311_tables_columns_T::tables_columns_dataType <-- repo.RepoObjectColumn_SSAS_src::Repo_user_type_fullname
-ssas.model_json_311_tables_columns_T::tables_columns_dataType <-- repo.ForeignKey_ssas_IndexPattern::referenced_IndexPatternColumnDatatype
-ssas.model_json_311_tables_columns_T::tables_columns_dataType <-- repo.ForeignKey_ssas_IndexPattern::referencing_IndexPatternColumnDatatype
-ssas.model_json_311_tables_columns_T::tables_columns_displayFolder <-- repo.RepoObjectColumn_gross::tabcol_DisplayFolder
-ssas.model_json_311_tables_columns_T::tables_columns_formatString <-- repo.RepoObjectColumn_gross::tabcol_FormatString
-ssas.model_json_311_tables_columns_T::tables_columns_name <-- repo.RepoObjectColumn_SSAS_src::RepoObjectColumn_name
-ssas.model_json_311_tables_columns_T::tables_columns_name <-- repo.RepoObjectColumn_SSAS_src::SysObjectColumn_name
-ssas.model_json_311_tables_columns_T::tables_columns_name <-- repo.ForeignKey_ssas_IndexPattern::referenced_IndexPatternColumnName
-ssas.model_json_311_tables_columns_T::tables_columns_name <-- repo.ForeignKey_ssas_IndexPattern::referencing_IndexPatternColumnName
-ssas.model_json_311_tables_columns_T::tables_columns_name <-- repo.ForeignKey_ssas_IndexPattern::referenced_ColumnName
-ssas.model_json_311_tables_columns_T::tables_columns_name <-- repo.ForeignKey_ssas_IndexPattern::referencing_ColumnName
-ssas.model_json_311_tables_columns_T::tables_columns_name <-- ssas.IndexColumn_from_IsUnique::tables_columns_name
-ssas.model_json_311_tables_columns_T::tables_columns_name <-- ssas.IndexColumn_from_Relationship::tables_columns_name
-ssas.model_json_311_tables_columns_T::tables_columns_name <-- ssas.IndexColumn_from_IsKey::tables_columns_name
-ssas.model_json_311_tables_columns_T::tables_columns_name <-- ssas.model_json_3111_tables_columns_descriptions_multiline::tables_columns_name
-ssas.model_json_311_tables_columns_T::tables_columns_name <-- ssas.model_json_3112_tables_columns_expressions_multiline::tables_columns_name
-ssas.model_json_311_tables_columns_T::tables_columns_summarizeBy <-- repo.RepoObjectColumn_gross::tabcol_SummarizeBy
-ssas.model_json_311_tables_columns_T::tables_columns_type <-- ssas.IndexColumn_from_IsUnique::tables_columns_type
-ssas.model_json_311_tables_columns_T::tables_columns_type <-- ssas.IndexColumn_from_Relationship::tables_columns_type
-ssas.model_json_311_tables_columns_T::tables_columns_type <-- ssas.IndexColumn_from_IsKey::tables_columns_type
-ssas.model_json_311_tables_columns_T::tables_columns_type <-- repo.RepoObjectColumn_gross::tabcol_Type
-ssas.model_json_311_tables_columns_T::tables_name <-- ssas.IndexColumn_from_IsUnique::TableName
-ssas.model_json_311_tables_columns_T::tables_name <-- ssas.IndexColumn_from_Relationship::TableName
-ssas.model_json_311_tables_columns_T::tables_name <-- ssas.IndexColumn_from_IsKey::TableName
-ssas.model_json_311_tables_columns_T::tables_name <-- ssas.model_json_3111_tables_columns_descriptions_multiline::tables_name
-ssas.model_json_311_tables_columns_T::tables_name <-- ssas.model_json_3112_tables_columns_expressions_multiline::tables_name
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"ssas.model_json_311_tables_columns::databasename" <-- "ssas.model_json_311_tables_columns_T::databasename"
+"ssas.model_json_311_tables_columns::RepoObject_guid" <-- "ssas.model_json_311_tables_columns_T::RepoObject_guid"
+"ssas.model_json_311_tables_columns::tables_columns_dataType" <-- "ssas.model_json_311_tables_columns_T::tables_columns_dataType"
+"ssas.model_json_311_tables_columns::tables_columns_description" <-- "ssas.model_json_311_tables_columns_T::tables_columns_description"
+"ssas.model_json_311_tables_columns::tables_columns_description_ja" <-- "ssas.model_json_311_tables_columns_T::tables_columns_description_ja"
+"ssas.model_json_311_tables_columns::tables_columns_displayFolder" <-- "ssas.model_json_311_tables_columns_T::tables_columns_displayFolder"
+"ssas.model_json_311_tables_columns::tables_columns_expression" <-- "ssas.model_json_311_tables_columns_T::tables_columns_expression"
+"ssas.model_json_311_tables_columns::tables_columns_expression_ja" <-- "ssas.model_json_311_tables_columns_T::tables_columns_expression_ja"
+"ssas.model_json_311_tables_columns::tables_columns_formatString" <-- "ssas.model_json_311_tables_columns_T::tables_columns_formatString"
+"ssas.model_json_311_tables_columns::tables_columns_isDataTypeInferred" <-- "ssas.model_json_311_tables_columns_T::tables_columns_isDataTypeInferred"
+"ssas.model_json_311_tables_columns::tables_columns_isHidden" <-- "ssas.model_json_311_tables_columns_T::tables_columns_isHidden"
+"ssas.model_json_311_tables_columns::tables_columns_isKey" <-- "ssas.model_json_311_tables_columns_T::tables_columns_isKey"
+"ssas.model_json_311_tables_columns::tables_columns_isNameInferred" <-- "ssas.model_json_311_tables_columns_T::tables_columns_isNameInferred"
+"ssas.model_json_311_tables_columns::tables_columns_isNullable" <-- "ssas.model_json_311_tables_columns_T::tables_columns_isNullable"
+"ssas.model_json_311_tables_columns::tables_columns_isUnique" <-- "ssas.model_json_311_tables_columns_T::tables_columns_isUnique"
+"ssas.model_json_311_tables_columns::tables_columns_keepUniqueRows" <-- "ssas.model_json_311_tables_columns_T::tables_columns_keepUniqueRows"
+"ssas.model_json_311_tables_columns::tables_columns_name" <-- "ssas.model_json_311_tables_columns_T::tables_columns_name"
+"ssas.model_json_311_tables_columns::tables_columns_sortByColumn" <-- "ssas.model_json_311_tables_columns_T::tables_columns_sortByColumn"
+"ssas.model_json_311_tables_columns::tables_columns_sourceColumn" <-- "ssas.model_json_311_tables_columns_T::tables_columns_sourceColumn"
+"ssas.model_json_311_tables_columns::tables_columns_sourceProviderType" <-- "ssas.model_json_311_tables_columns_T::tables_columns_sourceProviderType"
+"ssas.model_json_311_tables_columns::tables_columns_summarizeBy" <-- "ssas.model_json_311_tables_columns_T::tables_columns_summarizeBy"
+"ssas.model_json_311_tables_columns::tables_columns_type" <-- "ssas.model_json_311_tables_columns_T::tables_columns_type"
+"ssas.model_json_311_tables_columns::tables_name" <-- "ssas.model_json_311_tables_columns_T::tables_name"
+"ssas.model_json_311_tables_columns_T::databasename" <-- "ssas.IndexColumn_from_IsUnique::databasename"
+"ssas.model_json_311_tables_columns_T::databasename" <-- "ssas.IndexColumn_from_Relationship::databasename"
+"ssas.model_json_311_tables_columns_T::databasename" <-- "ssas.IndexColumn_from_IsKey::databasename"
+"ssas.model_json_311_tables_columns_T::databasename" <-- "ssas.model_json_3111_tables_columns_descriptions_multiline::databasename"
+"ssas.model_json_311_tables_columns_T::databasename" <-- "ssas.model_json_3112_tables_columns_expressions_multiline::databasename"
+"ssas.model_json_311_tables_columns_T::RepoObject_guid" <-- "repo.RepoObjectColumn_SSAS_src::RepoObject_guid"
+"ssas.model_json_311_tables_columns_T::RepoObject_guid" <-- "ssas.IndexColumn_from_IsUnique::RepoObject_guid"
+"ssas.model_json_311_tables_columns_T::RepoObject_guid" <-- "ssas.IndexColumn_from_Relationship::RepoObject_guid"
+"ssas.model_json_311_tables_columns_T::RepoObject_guid" <-- "ssas.IndexColumn_from_IsKey::RepoObject_guid"
+"ssas.model_json_311_tables_columns_T::RepoObject_guid" <-- "ssas.model_json_3111_tables_columns_descriptions_multiline::RepoObject_guid"
+"ssas.model_json_311_tables_columns_T::RepoObject_guid" <-- "ssas.model_json_3112_tables_columns_expressions_multiline::RepoObject_guid"
+"ssas.model_json_311_tables_columns_T::RepoObjectColumn_guid" <-- "repo.RepoObjectColumn_SSAS_src::RepoObjectColumn_guid"
+"ssas.model_json_311_tables_columns_T::RepoObjectColumn_guid" <-- "ssas.IndexColumn_from_IsUnique::RepoObjectColumn_guid"
+"ssas.model_json_311_tables_columns_T::RepoObjectColumn_guid" <-- "ssas.IndexColumn_from_Relationship::RepoObjectColumn_guid"
+"ssas.model_json_311_tables_columns_T::RepoObjectColumn_guid" <-- "ssas.IndexColumn_from_IsKey::RepoObjectColumn_guid"
+"ssas.model_json_311_tables_columns_T::RepoObjectColumn_guid" <-- "ssas.model_json_3111_tables_columns_descriptions_multiline::RepoObjectColumn_guid"
+"ssas.model_json_311_tables_columns_T::RepoObjectColumn_guid" <-- "ssas.model_json_3112_tables_columns_expressions_multiline::RepoObjectColumn_guid"
+"ssas.model_json_311_tables_columns_T::tables_columns_dataType" <-- "repo.RepoObjectColumn_SSAS_src::Repo_user_type_name"
+"ssas.model_json_311_tables_columns_T::tables_columns_dataType" <-- "repo.RepoObjectColumn_SSAS_src::Repo_user_type_fullname"
+"ssas.model_json_311_tables_columns_T::tables_columns_dataType" <-- "repo.ForeignKey_ssas_IndexPattern::referenced_IndexPatternColumnDatatype"
+"ssas.model_json_311_tables_columns_T::tables_columns_dataType" <-- "repo.ForeignKey_ssas_IndexPattern::referencing_IndexPatternColumnDatatype"
+"ssas.model_json_311_tables_columns_T::tables_columns_displayFolder" <-- "repo.RepoObjectColumn_gross::tabcol_DisplayFolder"
+"ssas.model_json_311_tables_columns_T::tables_columns_formatString" <-- "repo.RepoObjectColumn_gross::tabcol_FormatString"
+"ssas.model_json_311_tables_columns_T::tables_columns_name" <-- "repo.RepoObjectColumn_SSAS_src::RepoObjectColumn_name"
+"ssas.model_json_311_tables_columns_T::tables_columns_name" <-- "repo.RepoObjectColumn_SSAS_src::SysObjectColumn_name"
+"ssas.model_json_311_tables_columns_T::tables_columns_name" <-- "repo.ForeignKey_ssas_IndexPattern::referenced_IndexPatternColumnName"
+"ssas.model_json_311_tables_columns_T::tables_columns_name" <-- "repo.ForeignKey_ssas_IndexPattern::referencing_IndexPatternColumnName"
+"ssas.model_json_311_tables_columns_T::tables_columns_name" <-- "repo.ForeignKey_ssas_IndexPattern::referenced_ColumnName"
+"ssas.model_json_311_tables_columns_T::tables_columns_name" <-- "repo.ForeignKey_ssas_IndexPattern::referencing_ColumnName"
+"ssas.model_json_311_tables_columns_T::tables_columns_name" <-- "ssas.IndexColumn_from_IsUnique::tables_columns_name"
+"ssas.model_json_311_tables_columns_T::tables_columns_name" <-- "ssas.IndexColumn_from_Relationship::tables_columns_name"
+"ssas.model_json_311_tables_columns_T::tables_columns_name" <-- "ssas.IndexColumn_from_IsKey::tables_columns_name"
+"ssas.model_json_311_tables_columns_T::tables_columns_name" <-- "ssas.model_json_3111_tables_columns_descriptions_multiline::tables_columns_name"
+"ssas.model_json_311_tables_columns_T::tables_columns_name" <-- "ssas.model_json_3112_tables_columns_expressions_multiline::tables_columns_name"
+"ssas.model_json_311_tables_columns_T::tables_columns_summarizeBy" <-- "repo.RepoObjectColumn_gross::tabcol_SummarizeBy"
+"ssas.model_json_311_tables_columns_T::tables_columns_type" <-- "ssas.IndexColumn_from_IsUnique::tables_columns_type"
+"ssas.model_json_311_tables_columns_T::tables_columns_type" <-- "ssas.IndexColumn_from_Relationship::tables_columns_type"
+"ssas.model_json_311_tables_columns_T::tables_columns_type" <-- "ssas.IndexColumn_from_IsKey::tables_columns_type"
+"ssas.model_json_311_tables_columns_T::tables_columns_type" <-- "repo.RepoObjectColumn_gross::tabcol_Type"
+"ssas.model_json_311_tables_columns_T::tables_name" <-- "ssas.IndexColumn_from_IsUnique::TableName"
+"ssas.model_json_311_tables_columns_T::tables_name" <-- "ssas.IndexColumn_from_Relationship::TableName"
+"ssas.model_json_311_tables_columns_T::tables_name" <-- "ssas.IndexColumn_from_IsKey::TableName"
+"ssas.model_json_311_tables_columns_T::tables_name" <-- "ssas.model_json_3111_tables_columns_descriptions_multiline::tables_name"
+"ssas.model_json_311_tables_columns_T::tables_name" <-- "ssas.model_json_3112_tables_columns_expressions_multiline::tables_name"
 @enduml
 

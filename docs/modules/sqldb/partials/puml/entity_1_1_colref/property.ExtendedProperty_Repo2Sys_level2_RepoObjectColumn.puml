@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:configT.type_level1type_level2type.adoc[prefix=..]" as configT.type_level1type_level2type << V >> {
+entity "puml-link:dhw:sqldb:configT.type_level1type_level2type.adoc[]" as configT.type_level1type_level2type << V >> {
   **type** : (nvarchar(128))
   --
   level1type : (varchar(9))
@@ -35,7 +36,7 @@ entity "puml-link:configT.type_level1type_level2type.adoc[prefix=..]" as configT
   --
 }
 
-entity "puml-link:property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn.adoc[prefix=..]" as property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn << V >> {
+entity "puml-link:dhw:sqldb:property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn.adoc[]" as property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn << V >> {
   - **level0type** : (nvarchar(6))
   - **level0name** : (nvarchar(128))
   **level1type** : (varchar(9))
@@ -53,7 +54,7 @@ entity "puml-link:property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn.ado
   --
 }
 
-entity "puml-link:property.ExtendedProperty_Repo2Sys_level2_Union.adoc[prefix=..]" as property.ExtendedProperty_Repo2Sys_level2_Union << V >> {
+entity "puml-link:dhw:sqldb:property.ExtendedProperty_Repo2Sys_level2_Union.adoc[]" as property.ExtendedProperty_Repo2Sys_level2_Union << V >> {
   - **level0type** : (nvarchar(6))
   - **level0name** : (nvarchar(128))
   **level1type** : (varchar(9))
@@ -67,7 +68,7 @@ entity "puml-link:property.ExtendedProperty_Repo2Sys_level2_Union.adoc[prefix=..
   --
 }
 
-entity "puml-link:property.RepoObjectColumnProperty.adoc[prefix=..]" as property.RepoObjectColumnProperty << U >> {
+entity "puml-link:dhw:sqldb:property.RepoObjectColumnProperty.adoc[]" as property.RepoObjectColumnProperty << U >> {
   - **RepoObjectColumnProperty_id** : (int)
   --
   inheritance : (tinyint)
@@ -83,15 +84,19 @@ entity "puml-link:property.RepoObjectColumnProperty.adoc[prefix=..]" as property
   --
 }
 
-entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
   has_execution_plan_issue : (bit)
   has_get_referenced_issue : (bit)
+  Inheritance_Source_fullname : (nvarchar(261))
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
   InheritanceDefinition : (nvarchar(4000))
   InheritanceType : (tinyint)
   - is_DocsExclude : (bit)
+  - is_external : (bit)
   is_repo_managed : (bit)
   is_required_ObjectMerge : (bit)
   - is_ssas : (bit)
@@ -126,7 +131,7 @@ entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
   --
 }
 
-entity "puml-link:repo.RepoObjectColumn.adoc[prefix=..]" as repo.RepoObjectColumn << U >> {
+entity "puml-link:dhw:sqldb:repo.RepoObjectColumn.adoc[]" as repo.RepoObjectColumn << U >> {
   - **RepoObjectColumn_guid** : (uniqueidentifier)
   --
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
@@ -173,19 +178,14 @@ property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn <.. property.Extended
 property.RepoObjectColumnProperty <.. property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn
 repo.RepoObject <.. property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn
 repo.RepoObjectColumn <.. property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn
-configT.type_level1type_level2type::level1type <-- property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::level1type
-property.RepoObjectColumnProperty::property_name <-- property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::property_name
-property.RepoObjectColumnProperty::RepoObjectColumn_guid <-- property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::RepoObjectColumn_guid
-repo.RepoObject::RepoObject_guid <-- property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::parent_RepoObject_guid
-repo.RepoObject::RepoObject_name <-- property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::level1name
-repo.RepoObject::RepoObject_schema_name <-- property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::level0name
-repo.RepoObject::RepoObject_type <-- property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::parent_RepoObject_type
-repo.RepoObjectColumn::Repo_user_type_fullname <-- property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::Repo_user_type_fullname
-repo.RepoObjectColumn::RepoObjectColumn_name <-- property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::level2name
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"configT.type_level1type_level2type::level1type" <-- "property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::level1type"
+"property.RepoObjectColumnProperty::property_name" <-- "property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::property_name"
+"property.RepoObjectColumnProperty::RepoObjectColumn_guid" <-- "property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::RepoObjectColumn_guid"
+"repo.RepoObject::RepoObject_guid" <-- "property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::parent_RepoObject_guid"
+"repo.RepoObject::RepoObject_name" <-- "property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::level1name"
+"repo.RepoObject::RepoObject_schema_name" <-- "property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::level0name"
+"repo.RepoObject::RepoObject_type" <-- "property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::parent_RepoObject_type"
+"repo.RepoObjectColumn::Repo_user_type_fullname" <-- "property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::Repo_user_type_fullname"
+"repo.RepoObjectColumn::RepoObjectColumn_name" <-- "property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::level2name"
 @enduml
 

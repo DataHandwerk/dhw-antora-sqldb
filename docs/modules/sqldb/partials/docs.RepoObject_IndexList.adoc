@@ -44,7 +44,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-07 08:59:35
+2021-09-24 20:39:04
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -161,7 +161,7 @@ view
 [#index-PK_RepoObject_IndexList]
 === PK_RepoObject_IndexList
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -478,8 +478,7 @@ source: property.RepoObjectProperty WHERE property_int = 1
 [source,sql]
 ----
 
-
-CREATE View [docs].[RepoObject_IndexList]
+CREATE View docs.RepoObject_IndexList
 As
 Select
     RepoObject_guid = ix.parent_RepoObject_guid
@@ -502,20 +501,9 @@ Select
                           , docs.fs_cleanStringForLabel ( ix.index_name )
                           , Char ( 13 ) + Char ( 10 )
                           , Char ( 13 ) + Char ( 10 )
-                          , '* IndexSemanticGroup: ' + 'xref:other/IndexSemanticGroup.adoc#_'
-                            + Replace (
-                                          Replace (
-                                                      Replace (
-                                                                  Lower ( IsNull ( ix.IndexSemanticGroup, 'no_group' ))
-                                                                , ' '
-                                                                , '_'
-                                                              )
-                                                    , '__'
-                                                    , '_'
-                                                  )
-                                        , '__'
-                                        , '_'
-                                      ) + '[' + IsNull ( ix.IndexSemanticGroup, 'no_group' ) + ']'
+                          , '* IndexSemanticGroup: ' + 'xref:other/IndexSemanticGroup.adoc#'
+                            + docs.fs_cleanStringForAnchorId ( IsNull ( ix.IndexSemanticGroup, '(no group)' )) + '['
+                            + IsNull ( ix.IndexSemanticGroup, 'no_group' ) + ']'
                           , Char ( 13 ) + Char ( 10 )
                           , '+' + Char ( 13 ) + Char ( 10 )
                           , '--' + Char ( 13 ) + Char ( 10 )

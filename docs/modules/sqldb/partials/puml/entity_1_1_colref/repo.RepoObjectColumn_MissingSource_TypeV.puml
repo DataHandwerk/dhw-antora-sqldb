@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:reference.RepoObjectColumn_reference_T.adoc[prefix=..]" as reference.RepoObjectColumn_reference_T << U >> {
+entity "puml-link:dhw:sqldb:reference.RepoObjectColumn_reference_T.adoc[]" as reference.RepoObjectColumn_reference_T << U >> {
   **referenced_RepoObjectColumn_guid** : (uniqueidentifier)
   **referencing_RepoObjectColumn_guid** : (uniqueidentifier)
   --
@@ -33,11 +34,17 @@ entity "puml-link:reference.RepoObjectColumn_reference_T.adoc[prefix=..]" as ref
   is_referencing_object_equal_referenced_object : (tinyint)
   referenced_column_name : (nvarchar(128))
   referenced_entity_name : (nvarchar(128))
+  referenced_external_AntoraComponent : (nvarchar(128))
+  referenced_external_AntoraModule : (nvarchar(128))
+  referenced_is_external : (tinyint)
   referenced_RepoObject_guid : (uniqueidentifier)
   referenced_schema_name : (nvarchar(128))
   referenced_type : (char(2))
   referencing_column_name : (nvarchar(128))
   referencing_entity_name : (nvarchar(128))
+  referencing_external_AntoraComponent : (nvarchar(128))
+  referencing_external_AntoraModule : (nvarchar(128))
+  referencing_is_external : (tinyint)
   referencing_RepoObject_guid : (uniqueidentifier)
   referencing_schema_name : (nvarchar(128))
   referencing_type : (char(2))
@@ -53,15 +60,19 @@ entity "puml-link:reference.RepoObjectColumn_reference_T.adoc[prefix=..]" as ref
   --
 }
 
-entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
   has_execution_plan_issue : (bit)
   has_get_referenced_issue : (bit)
+  Inheritance_Source_fullname : (nvarchar(261))
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
   InheritanceDefinition : (nvarchar(4000))
   InheritanceType : (tinyint)
   - is_DocsExclude : (bit)
+  - is_external : (bit)
   is_repo_managed : (bit)
   is_required_ObjectMerge : (bit)
   - is_ssas : (bit)
@@ -96,7 +107,7 @@ entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
   --
 }
 
-entity "puml-link:repo.RepoObjectColumn.adoc[prefix=..]" as repo.RepoObjectColumn << U >> {
+entity "puml-link:dhw:sqldb:repo.RepoObjectColumn.adoc[]" as repo.RepoObjectColumn << U >> {
   - **RepoObjectColumn_guid** : (uniqueidentifier)
   --
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
@@ -138,8 +149,7 @@ entity "puml-link:repo.RepoObjectColumn.adoc[prefix=..]" as repo.RepoObjectColum
   --
 }
 
-entity "puml-link:repo.RepoObjectColumn_MissingSource_TypeV.adoc[prefix=..]" as repo.RepoObjectColumn_MissingSource_TypeV << V >> {
-  - **RepoObjectColumn_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_MissingSource_TypeV.adoc[]" as repo.RepoObjectColumn_MissingSource_TypeV << V >> {
   --
   has_different_sys_names : (bit)
   is_query_plan_expression : (bit)
@@ -165,6 +175,7 @@ entity "puml-link:repo.RepoObjectColumn_MissingSource_TypeV.adoc[prefix=..]" as 
   Repo_uses_database_collation : (bit)
   - RepoObject_fullname : (nvarchar(261))
   - RepoObject_guid : (uniqueidentifier)
+  - RepoObjectColumn_guid : (uniqueidentifier)
   - RepoObjectColumn_name : (nvarchar(128))
   - SysObject_fullname : (nvarchar(261))
   SysObjectColumn_column_id : (int)
@@ -176,39 +187,34 @@ entity "puml-link:repo.RepoObjectColumn_MissingSource_TypeV.adoc[prefix=..]" as 
 reference.RepoObjectColumn_reference_T <.. repo.RepoObjectColumn_MissingSource_TypeV
 repo.RepoObject <.. repo.RepoObjectColumn_MissingSource_TypeV
 repo.RepoObjectColumn <.. repo.RepoObjectColumn_MissingSource_TypeV
-repo.RepoObject::RepoObject_fullname <-- repo.RepoObjectColumn_MissingSource_TypeV::RepoObject_fullname
-repo.RepoObject::SysObject_fullname <-- repo.RepoObjectColumn_MissingSource_TypeV::SysObject_fullname
-repo.RepoObjectColumn::has_different_sys_names <-- repo.RepoObjectColumn_MissingSource_TypeV::has_different_sys_names
-repo.RepoObjectColumn::is_query_plan_expression <-- repo.RepoObjectColumn_MissingSource_TypeV::is_query_plan_expression
-repo.RepoObjectColumn::is_RepoObjectColumn_name_uniqueidentifier <-- repo.RepoObjectColumn_MissingSource_TypeV::is_RepoObjectColumn_name_uniqueidentifier
-repo.RepoObjectColumn::is_SysObjectColumn_missing <-- repo.RepoObjectColumn_MissingSource_TypeV::is_SysObjectColumn_missing
-repo.RepoObjectColumn::is_SysObjectColumn_name_uniqueidentifier <-- repo.RepoObjectColumn_MissingSource_TypeV::is_SysObjectColumn_name_uniqueidentifier
-repo.RepoObjectColumn::persistence_source_RepoObjectColumn_guid <-- repo.RepoObjectColumn_MissingSource_TypeV::persistence_source_RepoObjectColumn_guid
-repo.RepoObjectColumn::Referencing_Count <-- repo.RepoObjectColumn_MissingSource_TypeV::Referencing_Count
-repo.RepoObjectColumn::Repo_default_definition <-- repo.RepoObjectColumn_MissingSource_TypeV::Repo_default_definition
-repo.RepoObjectColumn::Repo_default_is_system_named <-- repo.RepoObjectColumn_MissingSource_TypeV::Repo_default_is_system_named
-repo.RepoObjectColumn::Repo_default_name <-- repo.RepoObjectColumn_MissingSource_TypeV::Repo_default_name
-repo.RepoObjectColumn::Repo_definition <-- repo.RepoObjectColumn_MissingSource_TypeV::Repo_definition
-repo.RepoObjectColumn::Repo_generated_always_type <-- repo.RepoObjectColumn_MissingSource_TypeV::Repo_generated_always_type
-repo.RepoObjectColumn::Repo_graph_type <-- repo.RepoObjectColumn_MissingSource_TypeV::Repo_graph_type
-repo.RepoObjectColumn::Repo_increment_value <-- repo.RepoObjectColumn_MissingSource_TypeV::Repo_increment_value
-repo.RepoObjectColumn::Repo_is_computed <-- repo.RepoObjectColumn_MissingSource_TypeV::Repo_is_computed
-repo.RepoObjectColumn::Repo_is_identity <-- repo.RepoObjectColumn_MissingSource_TypeV::Repo_is_identity
-repo.RepoObjectColumn::Repo_is_nullable <-- repo.RepoObjectColumn_MissingSource_TypeV::Repo_is_nullable
-repo.RepoObjectColumn::Repo_is_persisted <-- repo.RepoObjectColumn_MissingSource_TypeV::Repo_is_persisted
-repo.RepoObjectColumn::Repo_seed_value <-- repo.RepoObjectColumn_MissingSource_TypeV::Repo_seed_value
-repo.RepoObjectColumn::Repo_user_type_fullname <-- repo.RepoObjectColumn_MissingSource_TypeV::Repo_user_type_fullname
-repo.RepoObjectColumn::Repo_user_type_name <-- repo.RepoObjectColumn_MissingSource_TypeV::Repo_user_type_name
-repo.RepoObjectColumn::Repo_uses_database_collation <-- repo.RepoObjectColumn_MissingSource_TypeV::Repo_uses_database_collation
-repo.RepoObjectColumn::RepoObject_guid <-- repo.RepoObjectColumn_MissingSource_TypeV::RepoObject_guid
-repo.RepoObjectColumn::RepoObjectColumn_guid <-- repo.RepoObjectColumn_MissingSource_TypeV::RepoObjectColumn_guid
-repo.RepoObjectColumn::RepoObjectColumn_name <-- repo.RepoObjectColumn_MissingSource_TypeV::RepoObjectColumn_name
-repo.RepoObjectColumn::SysObjectColumn_column_id <-- repo.RepoObjectColumn_MissingSource_TypeV::SysObjectColumn_column_id
-repo.RepoObjectColumn::SysObjectColumn_name <-- repo.RepoObjectColumn_MissingSource_TypeV::SysObjectColumn_name
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"repo.RepoObject::RepoObject_fullname" <-- "repo.RepoObjectColumn_MissingSource_TypeV::RepoObject_fullname"
+"repo.RepoObject::SysObject_fullname" <-- "repo.RepoObjectColumn_MissingSource_TypeV::SysObject_fullname"
+"repo.RepoObjectColumn::has_different_sys_names" <-- "repo.RepoObjectColumn_MissingSource_TypeV::has_different_sys_names"
+"repo.RepoObjectColumn::is_query_plan_expression" <-- "repo.RepoObjectColumn_MissingSource_TypeV::is_query_plan_expression"
+"repo.RepoObjectColumn::is_RepoObjectColumn_name_uniqueidentifier" <-- "repo.RepoObjectColumn_MissingSource_TypeV::is_RepoObjectColumn_name_uniqueidentifier"
+"repo.RepoObjectColumn::is_SysObjectColumn_missing" <-- "repo.RepoObjectColumn_MissingSource_TypeV::is_SysObjectColumn_missing"
+"repo.RepoObjectColumn::is_SysObjectColumn_name_uniqueidentifier" <-- "repo.RepoObjectColumn_MissingSource_TypeV::is_SysObjectColumn_name_uniqueidentifier"
+"repo.RepoObjectColumn::persistence_source_RepoObjectColumn_guid" <-- "repo.RepoObjectColumn_MissingSource_TypeV::persistence_source_RepoObjectColumn_guid"
+"repo.RepoObjectColumn::Referencing_Count" <-- "repo.RepoObjectColumn_MissingSource_TypeV::Referencing_Count"
+"repo.RepoObjectColumn::Repo_default_definition" <-- "repo.RepoObjectColumn_MissingSource_TypeV::Repo_default_definition"
+"repo.RepoObjectColumn::Repo_default_is_system_named" <-- "repo.RepoObjectColumn_MissingSource_TypeV::Repo_default_is_system_named"
+"repo.RepoObjectColumn::Repo_default_name" <-- "repo.RepoObjectColumn_MissingSource_TypeV::Repo_default_name"
+"repo.RepoObjectColumn::Repo_definition" <-- "repo.RepoObjectColumn_MissingSource_TypeV::Repo_definition"
+"repo.RepoObjectColumn::Repo_generated_always_type" <-- "repo.RepoObjectColumn_MissingSource_TypeV::Repo_generated_always_type"
+"repo.RepoObjectColumn::Repo_graph_type" <-- "repo.RepoObjectColumn_MissingSource_TypeV::Repo_graph_type"
+"repo.RepoObjectColumn::Repo_increment_value" <-- "repo.RepoObjectColumn_MissingSource_TypeV::Repo_increment_value"
+"repo.RepoObjectColumn::Repo_is_computed" <-- "repo.RepoObjectColumn_MissingSource_TypeV::Repo_is_computed"
+"repo.RepoObjectColumn::Repo_is_identity" <-- "repo.RepoObjectColumn_MissingSource_TypeV::Repo_is_identity"
+"repo.RepoObjectColumn::Repo_is_nullable" <-- "repo.RepoObjectColumn_MissingSource_TypeV::Repo_is_nullable"
+"repo.RepoObjectColumn::Repo_is_persisted" <-- "repo.RepoObjectColumn_MissingSource_TypeV::Repo_is_persisted"
+"repo.RepoObjectColumn::Repo_seed_value" <-- "repo.RepoObjectColumn_MissingSource_TypeV::Repo_seed_value"
+"repo.RepoObjectColumn::Repo_user_type_fullname" <-- "repo.RepoObjectColumn_MissingSource_TypeV::Repo_user_type_fullname"
+"repo.RepoObjectColumn::Repo_user_type_name" <-- "repo.RepoObjectColumn_MissingSource_TypeV::Repo_user_type_name"
+"repo.RepoObjectColumn::Repo_uses_database_collation" <-- "repo.RepoObjectColumn_MissingSource_TypeV::Repo_uses_database_collation"
+"repo.RepoObjectColumn::RepoObject_guid" <-- "repo.RepoObjectColumn_MissingSource_TypeV::RepoObject_guid"
+"repo.RepoObjectColumn::RepoObjectColumn_guid" <-- "repo.RepoObjectColumn_MissingSource_TypeV::RepoObjectColumn_guid"
+"repo.RepoObjectColumn::RepoObjectColumn_name" <-- "repo.RepoObjectColumn_MissingSource_TypeV::RepoObjectColumn_name"
+"repo.RepoObjectColumn::SysObjectColumn_column_id" <-- "repo.RepoObjectColumn_MissingSource_TypeV::SysObjectColumn_column_id"
+"repo.RepoObjectColumn::SysObjectColumn_name" <-- "repo.RepoObjectColumn_MissingSource_TypeV::SysObjectColumn_name"
 @enduml
 

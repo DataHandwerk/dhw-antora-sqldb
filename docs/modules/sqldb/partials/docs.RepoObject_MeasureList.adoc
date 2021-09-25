@@ -40,7 +40,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-07 21:07:18
+2021-09-20 15:21:47
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -82,14 +82,14 @@ view
 |
 |RepoObject_guid
 |uniqueidentifier
-|NOT NULL
+|NULL
 |
 |
 |===
 
 .Referenced Columns
 --
-* xref:repo.Measures.adoc#column-RepoObject_guid[+repo.Measures.RepoObject_guid+]
+* xref:repo.Measures_union.adoc#column-RepoObject_guid[+repo.Measures_union.RepoObject_guid+]
 --
 
 
@@ -129,7 +129,7 @@ view
 |
 |<<column-RepoObject_guid>>
 |uniqueidentifier
-|NOT NULL
+|NULL
 |
 |
 
@@ -165,7 +165,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 * xref:docs.fs_cleanStringForAnchorId.adoc[]
 * xref:docs.fs_cleanStringForLabel.adoc[]
 * xref:docs.fs_cleanStringForPuml.adoc[]
-* xref:repo.Measures.adoc[]
+* xref:repo.Measures_union.adoc[]
 // end::antorareferencedlist[]
 
 
@@ -407,7 +407,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 * [docs].[fs_cleanStringForAnchorId]
 * [docs].[fs_cleanStringForLabel]
 * [docs].[fs_cleanStringForPuml]
-* [repo].[Measures]
+* [repo].[Measures_union]
 // end::referencedobjectlist[]
 
 
@@ -524,8 +524,10 @@ Select
                             Cast('' As NVarchar(Max))
                           , Concat (
                                        '  ~ '
+                                     , Iif(rom.measures_isHidden = 1, '<color:gray>', Null)
                                      , docs.fs_cleanStringForPuml ( rom.measures_name )
                                      , Iif(rom.measures_isHidden = 1, ' (hidden)', Null)
+                                     , Iif(rom.measures_isHidden = 1, '</color>', Null)
                                      , Char ( 13 ) + Char ( 10 )
                                    )
                         )
@@ -533,7 +535,7 @@ Select
              ) Within Group(Order By
                                 rom.measures_name)
 From
-    repo.Measures As rom
+    repo.Measures_union As rom
 Group By
     rom.RepoObject_guid
 

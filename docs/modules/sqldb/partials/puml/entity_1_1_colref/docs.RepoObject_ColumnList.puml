@@ -22,28 +22,29 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:docs.fs_cleanStringForAnchorId.adoc[prefix=..]" as docs.fs_cleanStringForAnchorId << FN >> {
-  --
-  --
-  --
-}
-
-entity "puml-link:docs.fs_cleanStringForLabel.adoc[prefix=..]" as docs.fs_cleanStringForLabel << FN >> {
+entity "puml-link:dhw:sqldb:docs.fs_cleanStringForAnchorId.adoc[]" as docs.fs_cleanStringForAnchorId << FN >> {
   --
   --
   --
 }
 
-entity "puml-link:docs.fs_cleanStringForPuml.adoc[prefix=..]" as docs.fs_cleanStringForPuml << FN >> {
+entity "puml-link:dhw:sqldb:docs.fs_cleanStringForLabel.adoc[]" as docs.fs_cleanStringForLabel << FN >> {
   --
   --
   --
 }
 
-entity "puml-link:docs.RepoObject_ColumnList.adoc[prefix=..]" as docs.RepoObject_ColumnList << V >> {
+entity "puml-link:dhw:sqldb:docs.fs_cleanStringForPuml.adoc[]" as docs.fs_cleanStringForPuml << FN >> {
+  --
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.RepoObject_ColumnList.adoc[]" as docs.RepoObject_ColumnList << V >> {
   --
   AntoraColumnDetails : (nvarchar(max))
   AntoraNonPkColumnTableRows : (nvarchar(max))
@@ -58,7 +59,7 @@ entity "puml-link:docs.RepoObject_ColumnList.adoc[prefix=..]" as docs.RepoObject
   --
 }
 
-entity "puml-link:docs.RepoObject_ColumnList_T.adoc[prefix=..]" as docs.RepoObject_ColumnList_T << U >> {
+entity "puml-link:dhw:sqldb:docs.RepoObject_ColumnList_T.adoc[]" as docs.RepoObject_ColumnList_T << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
   AntoraColumnDetails : (nvarchar(max))
@@ -73,13 +74,13 @@ entity "puml-link:docs.RepoObject_ColumnList_T.adoc[prefix=..]" as docs.RepoObje
   --
 }
 
-entity "puml-link:docs.usp_PERSIST_RepoObject_ColumnList_T.adoc[prefix=..]" as docs.usp_PERSIST_RepoObject_ColumnList_T << P >> {
+entity "puml-link:dhw:sqldb:docs.usp_PERSIST_RepoObject_ColumnList_T.adoc[]" as docs.usp_PERSIST_RepoObject_ColumnList_T << P >> {
   --
   --
   --
 }
 
-entity "puml-link:repo.RepoObjectColumn_gross2.adoc[prefix=..]" as repo.RepoObjectColumn_gross2 << V >> {
+entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_gross2.adoc[]" as repo.RepoObjectColumn_gross2 << V >> {
   --
   AntoraReferencedColumnList : (nvarchar(max))
   AntoraReferencingColumnList : (nvarchar(max))
@@ -92,6 +93,7 @@ entity "puml-link:repo.RepoObjectColumn_gross2.adoc[prefix=..]" as repo.RepoObje
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
   InheritanceDefinition : (nvarchar(4000))
   InheritanceType : (tinyint)
+  - is_external : (bit)
   is_index_primary_key : (bit)
   is_persistence_no_check : (bit)
   is_persistence_no_include : (bit)
@@ -171,20 +173,15 @@ docs.fs_cleanStringForPuml <.. docs.RepoObject_ColumnList
 docs.RepoObject_ColumnList <.. docs.RepoObject_ColumnList_T
 docs.RepoObject_ColumnList <.. docs.usp_PERSIST_RepoObject_ColumnList_T
 repo.RepoObjectColumn_gross2 <.. docs.RepoObject_ColumnList
-docs.RepoObject_ColumnList::AntoraColumnDetails <-- docs.RepoObject_ColumnList_T::AntoraColumnDetails
-docs.RepoObject_ColumnList::AntoraNonPkColumnTableRows <-- docs.RepoObject_ColumnList_T::AntoraNonPkColumnTableRows
-docs.RepoObject_ColumnList::AntoraPkColumnTableRows <-- docs.RepoObject_ColumnList_T::AntoraPkColumnTableRows
-docs.RepoObject_ColumnList::PlantumlIndexColumns <-- docs.RepoObject_ColumnList_T::PlantumlIndexColumns
-docs.RepoObject_ColumnList::PlantumlNonPkEntityColumns <-- docs.RepoObject_ColumnList_T::PlantumlNonPkEntityColumns
-docs.RepoObject_ColumnList::PlantumlNonPkHiddenEntityColumns <-- docs.RepoObject_ColumnList_T::PlantumlNonPkHiddenEntityColumns
-docs.RepoObject_ColumnList::PlantumlNonPkIndexColumns <-- docs.RepoObject_ColumnList_T::PlantumlNonPkIndexColumns
-docs.RepoObject_ColumnList::PlantumlPkEntityColumns <-- docs.RepoObject_ColumnList_T::PlantumlPkEntityColumns
-docs.RepoObject_ColumnList::RepoObject_guid <-- docs.RepoObject_ColumnList_T::RepoObject_guid
-repo.RepoObjectColumn_gross2::RepoObject_guid <-- docs.RepoObject_ColumnList::RepoObject_guid
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"docs.RepoObject_ColumnList::AntoraColumnDetails" <-- "docs.RepoObject_ColumnList_T::AntoraColumnDetails"
+"docs.RepoObject_ColumnList::AntoraNonPkColumnTableRows" <-- "docs.RepoObject_ColumnList_T::AntoraNonPkColumnTableRows"
+"docs.RepoObject_ColumnList::AntoraPkColumnTableRows" <-- "docs.RepoObject_ColumnList_T::AntoraPkColumnTableRows"
+"docs.RepoObject_ColumnList::PlantumlIndexColumns" <-- "docs.RepoObject_ColumnList_T::PlantumlIndexColumns"
+"docs.RepoObject_ColumnList::PlantumlNonPkEntityColumns" <-- "docs.RepoObject_ColumnList_T::PlantumlNonPkEntityColumns"
+"docs.RepoObject_ColumnList::PlantumlNonPkHiddenEntityColumns" <-- "docs.RepoObject_ColumnList_T::PlantumlNonPkHiddenEntityColumns"
+"docs.RepoObject_ColumnList::PlantumlNonPkIndexColumns" <-- "docs.RepoObject_ColumnList_T::PlantumlNonPkIndexColumns"
+"docs.RepoObject_ColumnList::PlantumlPkEntityColumns" <-- "docs.RepoObject_ColumnList_T::PlantumlPkEntityColumns"
+"docs.RepoObject_ColumnList::RepoObject_guid" <-- "docs.RepoObject_ColumnList_T::RepoObject_guid"
+"repo.RepoObjectColumn_gross2::RepoObject_guid" <-- "docs.RepoObject_ColumnList::RepoObject_guid"
 @enduml
 

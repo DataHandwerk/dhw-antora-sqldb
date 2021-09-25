@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:docs.RepoObject_Adoc.adoc[prefix=..]" as docs.RepoObject_Adoc << V >> {
+entity "puml-link:dhw:sqldb:docs.RepoObject_Adoc.adoc[]" as docs.RepoObject_Adoc << V >> {
   --
   - AdocContent : (nvarchar(max))
   is_DocsOutput : (int)
@@ -43,7 +44,7 @@ entity "puml-link:docs.RepoObject_Adoc.adoc[prefix=..]" as docs.RepoObject_Adoc 
   --
 }
 
-entity "puml-link:docs.RepoObject_Adoc_T.adoc[prefix=..]" as docs.RepoObject_Adoc_T << U >> {
+entity "puml-link:dhw:sqldb:docs.RepoObject_Adoc_T.adoc[]" as docs.RepoObject_Adoc_T << U >> {
   --
   - AdocContent : (nvarchar(max))
   is_DocsOutput : (int)
@@ -61,7 +62,7 @@ entity "puml-link:docs.RepoObject_Adoc_T.adoc[prefix=..]" as docs.RepoObject_Ado
   --
 }
 
-entity "puml-link:docs.RepoObject_ColumnList_T.adoc[prefix=..]" as docs.RepoObject_ColumnList_T << U >> {
+entity "puml-link:dhw:sqldb:docs.RepoObject_ColumnList_T.adoc[]" as docs.RepoObject_ColumnList_T << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
   AntoraColumnDetails : (nvarchar(max))
@@ -76,7 +77,7 @@ entity "puml-link:docs.RepoObject_ColumnList_T.adoc[prefix=..]" as docs.RepoObje
   --
 }
 
-entity "puml-link:docs.RepoObject_IndexList_T.adoc[prefix=..]" as docs.RepoObject_IndexList_T << U >> {
+entity "puml-link:dhw:sqldb:docs.RepoObject_IndexList_T.adoc[]" as docs.RepoObject_IndexList_T << U >> {
   **RepoObject_guid** : (uniqueidentifier)
   --
   AntoraIndexList : (nvarchar(max))
@@ -85,16 +86,16 @@ entity "puml-link:docs.RepoObject_IndexList_T.adoc[prefix=..]" as docs.RepoObjec
   --
 }
 
-entity "puml-link:docs.RepoObject_MeasureList.adoc[prefix=..]" as docs.RepoObject_MeasureList << V >> {
+entity "puml-link:dhw:sqldb:docs.RepoObject_MeasureList.adoc[]" as docs.RepoObject_MeasureList << V >> {
   --
   AntoraMeasureDetails : (nvarchar(max))
   PlantumlMeasures : (nvarchar(max))
-  - RepoObject_guid : (uniqueidentifier)
+  RepoObject_guid : (uniqueidentifier)
   --
   --
 }
 
-entity "puml-link:docs.RepoObject_ParameterList.adoc[prefix=..]" as docs.RepoObject_ParameterList << V >> {
+entity "puml-link:dhw:sqldb:docs.RepoObject_ParameterList.adoc[]" as docs.RepoObject_ParameterList << V >> {
   **RepoObject_guid** : (uniqueidentifier)
   --
   AntoraParameterList : (nvarchar(max))
@@ -102,13 +103,13 @@ entity "puml-link:docs.RepoObject_ParameterList.adoc[prefix=..]" as docs.RepoObj
   --
 }
 
-entity "puml-link:docs.usp_PERSIST_RepoObject_Adoc_T.adoc[prefix=..]" as docs.usp_PERSIST_RepoObject_Adoc_T << P >> {
+entity "puml-link:dhw:sqldb:docs.usp_PERSIST_RepoObject_Adoc_T.adoc[]" as docs.usp_PERSIST_RepoObject_Adoc_T << P >> {
   --
   --
   --
 }
 
-entity "puml-link:property.RepoObjectProperty.adoc[prefix=..]" as property.RepoObjectProperty << U >> {
+entity "puml-link:dhw:sqldb:property.RepoObjectProperty.adoc[]" as property.RepoObjectProperty << U >> {
   - **RepoObjectProperty_id** : (int)
   --
   inheritance : (tinyint)
@@ -124,7 +125,7 @@ entity "puml-link:property.RepoObjectProperty.adoc[prefix=..]" as property.RepoO
   --
 }
 
-entity "puml-link:property.RepoObjectProperty_cross.adoc[prefix=..]" as property.RepoObjectProperty_cross << V >> {
+entity "puml-link:dhw:sqldb:property.RepoObjectProperty_cross.adoc[]" as property.RepoObjectProperty_cross << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   **property_name** : (nvarchar(128))
   --
@@ -132,17 +133,19 @@ entity "puml-link:property.RepoObjectProperty_cross.adoc[prefix=..]" as property
   --
 }
 
-entity "puml-link:repo.RepoObject_gross2.adoc[prefix=..]" as repo.RepoObject_gross2 << V >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject_gross2.adoc[]" as repo.RepoObject_gross2 << V >> {
   --
   AntoraComponent : (nvarchar(max))
-  AntoraExternalReferencedList : (nvarchar(max))
-  AntoraExternalReferencingList : (nvarchar(max))
   AntoraModule : (nvarchar(max))
   AntoraReferencedList : (nvarchar(max))
   AntoraReferencingList : (nvarchar(max))
   CreateColumnList : (nvarchar(max))
   DbmlColumnList : (nvarchar(max))
   Description : (nvarchar(max))
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
+  external_DatabaseName : (nvarchar(128))
+  external_RepoDatabaseName : (nvarchar(128))
   has_different_sys_names : (bit)
   has_execution_plan_issue : (bit)
   has_get_referenced_issue : (bit)
@@ -155,6 +158,7 @@ entity "puml-link:repo.RepoObject_gross2.adoc[prefix=..]" as repo.RepoObject_gro
   InheritanceType : (tinyint)
   - is_DocsExclude : (bit)
   is_DocsOutput : (int)
+  - is_external : (bit)
   - is_in_reference : (int)
   is_persistence : (bit)
   is_persistence_check_duplicate_per_pk : (bit)
@@ -220,11 +224,12 @@ entity "puml-link:repo.RepoObject_gross2.adoc[prefix=..]" as repo.RepoObject_gro
   SysObject_type_name : (nvarchar(128))
   tables_dataCategory : (nvarchar(500))
   tables_description : (nvarchar(max))
-  tables_isHidden : (nvarchar(500))
+  tables_isHidden : (bit)
   target_filter : (nvarchar(4000))
   temporal_type : (tinyint)
   - usp_persistence_name : (nvarchar(140))
   usp_persistence_RepoObject_guid : (uniqueidentifier)
+  uspgenerator_usp_id : (int)
   --
   --
 }
@@ -238,24 +243,19 @@ docs.RepoObject_ParameterList <.. docs.RepoObject_Adoc
 property.RepoObjectProperty <.. docs.RepoObject_Adoc
 property.RepoObjectProperty_cross <.. docs.RepoObject_Adoc
 repo.RepoObject_gross2 <.. docs.RepoObject_Adoc
-docs.RepoObject_Adoc::AdocContent <-- docs.RepoObject_Adoc_T::AdocContent
-docs.RepoObject_Adoc::is_DocsOutput <-- docs.RepoObject_Adoc_T::is_DocsOutput
-docs.RepoObject_Adoc::PropertyCount <-- docs.RepoObject_Adoc_T::PropertyCount
-docs.RepoObject_Adoc::RepoObject_fullname <-- docs.RepoObject_Adoc_T::RepoObject_fullname
-docs.RepoObject_Adoc::RepoObject_fullname2 <-- docs.RepoObject_Adoc_T::RepoObject_fullname2
-docs.RepoObject_Adoc::RepoObject_guid <-- docs.RepoObject_Adoc_T::RepoObject_guid
-docs.RepoObject_Adoc::RepoObject_schema_name <-- docs.RepoObject_Adoc_T::RepoObject_schema_name
-docs.RepoObject_Adoc::SysObject_fullname <-- docs.RepoObject_Adoc_T::SysObject_fullname
-docs.RepoObject_Adoc::SysObject_fullname2 <-- docs.RepoObject_Adoc_T::SysObject_fullname2
-docs.RepoObject_Adoc::SysObject_schema_name <-- docs.RepoObject_Adoc_T::SysObject_schema_name
-docs.RepoObject_Adoc::SysObject_type <-- docs.RepoObject_Adoc_T::SysObject_type
-docs.RepoObject_Adoc::SysObject_type_name <-- docs.RepoObject_Adoc_T::SysObject_type_name
-repo.RepoObject_gross2::is_DocsOutput <-- docs.RepoObject_Adoc::is_DocsOutput
-repo.RepoObject_gross2::RepoObject_guid <-- docs.RepoObject_Adoc::RepoObject_guid
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"docs.RepoObject_Adoc::AdocContent" <-- "docs.RepoObject_Adoc_T::AdocContent"
+"docs.RepoObject_Adoc::is_DocsOutput" <-- "docs.RepoObject_Adoc_T::is_DocsOutput"
+"docs.RepoObject_Adoc::PropertyCount" <-- "docs.RepoObject_Adoc_T::PropertyCount"
+"docs.RepoObject_Adoc::RepoObject_fullname" <-- "docs.RepoObject_Adoc_T::RepoObject_fullname"
+"docs.RepoObject_Adoc::RepoObject_fullname2" <-- "docs.RepoObject_Adoc_T::RepoObject_fullname2"
+"docs.RepoObject_Adoc::RepoObject_guid" <-- "docs.RepoObject_Adoc_T::RepoObject_guid"
+"docs.RepoObject_Adoc::RepoObject_schema_name" <-- "docs.RepoObject_Adoc_T::RepoObject_schema_name"
+"docs.RepoObject_Adoc::SysObject_fullname" <-- "docs.RepoObject_Adoc_T::SysObject_fullname"
+"docs.RepoObject_Adoc::SysObject_fullname2" <-- "docs.RepoObject_Adoc_T::SysObject_fullname2"
+"docs.RepoObject_Adoc::SysObject_schema_name" <-- "docs.RepoObject_Adoc_T::SysObject_schema_name"
+"docs.RepoObject_Adoc::SysObject_type" <-- "docs.RepoObject_Adoc_T::SysObject_type"
+"docs.RepoObject_Adoc::SysObject_type_name" <-- "docs.RepoObject_Adoc_T::SysObject_type_name"
+"repo.RepoObject_gross2::is_DocsOutput" <-- "docs.RepoObject_Adoc::is_DocsOutput"
+"repo.RepoObject_gross2::RepoObject_guid" <-- "docs.RepoObject_Adoc::RepoObject_guid"
 @enduml
 

@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:repo.ForeignKey_ssas_IndexPattern.adoc[prefix=..]" as repo.ForeignKey_ssas_IndexPattern << V >> {
+entity "puml-link:dhw:sqldb:repo.ForeignKey_ssas_IndexPattern.adoc[]" as repo.ForeignKey_ssas_IndexPattern << V >> {
   --
   - databasename : (nvarchar(128))
   delete_referential_action : (tinyint)
@@ -62,11 +63,9 @@ entity "puml-link:repo.ForeignKey_ssas_IndexPattern.adoc[prefix=..]" as repo.For
   --
 }
 
-entity "puml-link:ssas.IndexColumn_from_Relationship.adoc[prefix=..]" as ssas.IndexColumn_from_Relationship << V >> {
-  - **databasename** : (nvarchar(128))
-  - **TableName** : (nvarchar(128))
-  - **tables_columns_name** : (nvarchar(128))
+entity "puml-link:dhw:sqldb:ssas.IndexColumn_from_Relationship.adoc[]" as ssas.IndexColumn_from_Relationship << V >> {
   --
+  - databasename : (nvarchar(128))
   - index_column_id : (int)
   - index_name : (nvarchar(264))
   - is_descending_key : (int)
@@ -74,12 +73,14 @@ entity "puml-link:ssas.IndexColumn_from_Relationship.adoc[prefix=..]" as ssas.In
   - is_index_unique : (bit)
   - RepoObject_guid : (uniqueidentifier)
   - RepoObjectColumn_guid : (uniqueidentifier)
+  - TableName : (nvarchar(128))
+  - tables_columns_name : (nvarchar(128))
   tables_columns_type : (nvarchar(500))
   --
   --
 }
 
-entity "puml-link:ssas.model_json_32_relationships.adoc[prefix=..]" as ssas.model_json_32_relationships << V >> {
+entity "puml-link:dhw:sqldb:ssas.model_json_32_relationships.adoc[]" as ssas.model_json_32_relationships << V >> {
   - **databasename** : (nvarchar(128))
   **relationships_name** : (nvarchar(500))
   --
@@ -95,7 +96,7 @@ entity "puml-link:ssas.model_json_32_relationships.adoc[prefix=..]" as ssas.mode
   --
 }
 
-entity "puml-link:ssas.model_json_32_relationships_T.adoc[prefix=..]" as ssas.model_json_32_relationships_T << U >> {
+entity "puml-link:dhw:sqldb:ssas.model_json_32_relationships_T.adoc[]" as ssas.model_json_32_relationships_T << U >> {
   - **ForeignKey_guid** : (uniqueidentifier)
   --
   - databasename : (nvarchar(128))
@@ -112,7 +113,7 @@ entity "puml-link:ssas.model_json_32_relationships_T.adoc[prefix=..]" as ssas.mo
   --
 }
 
-entity "puml-link:ssas.usp_PERSIST_model_json_32_relationships_T.adoc[prefix=..]" as ssas.usp_PERSIST_model_json_32_relationships_T << P >> {
+entity "puml-link:dhw:sqldb:ssas.usp_PERSIST_model_json_32_relationships_T.adoc[]" as ssas.usp_PERSIST_model_json_32_relationships_T << P >> {
   --
   --
   --
@@ -122,27 +123,22 @@ ssas.model_json_32_relationships <.. ssas.model_json_32_relationships_T
 ssas.model_json_32_relationships_T <.. ssas.IndexColumn_from_Relationship
 ssas.model_json_32_relationships_T <.. repo.ForeignKey_ssas_IndexPattern
 ssas.model_json_32_relationships_T <.. ssas.usp_PERSIST_model_json_32_relationships_T
-ssas.model_json_32_relationships::databasename <-- ssas.model_json_32_relationships_T::databasename
-ssas.model_json_32_relationships::relationships_crossFilteringBehavior <-- ssas.model_json_32_relationships_T::relationships_crossFilteringBehavior
-ssas.model_json_32_relationships::relationships_fromCardinality <-- ssas.model_json_32_relationships_T::relationships_fromCardinality
-ssas.model_json_32_relationships::relationships_fromColumn <-- ssas.model_json_32_relationships_T::relationships_fromColumn
-ssas.model_json_32_relationships::relationships_fromTable <-- ssas.model_json_32_relationships_T::relationships_fromTable
-ssas.model_json_32_relationships::relationships_isActive <-- ssas.model_json_32_relationships_T::relationships_isActive
-ssas.model_json_32_relationships::relationships_name <-- ssas.model_json_32_relationships_T::relationships_name
-ssas.model_json_32_relationships::relationships_toCardinality <-- ssas.model_json_32_relationships_T::relationships_toCardinality
-ssas.model_json_32_relationships::relationships_toColumn <-- ssas.model_json_32_relationships_T::relationships_toColumn
-ssas.model_json_32_relationships::relationships_toTable <-- ssas.model_json_32_relationships_T::relationships_toTable
-ssas.model_json_32_relationships_T::databasename <-- repo.ForeignKey_ssas_IndexPattern::databasename
-ssas.model_json_32_relationships_T::ForeignKey_guid <-- repo.ForeignKey_ssas_IndexPattern::ForeignKey_guid
-ssas.model_json_32_relationships_T::relationships_crossFilteringBehavior <-- repo.ForeignKey_ssas_IndexPattern::relationships_crossFilteringBehavior
-ssas.model_json_32_relationships_T::relationships_fromCardinality <-- repo.ForeignKey_ssas_IndexPattern::relationships_fromCardinality
-ssas.model_json_32_relationships_T::relationships_isActive <-- repo.ForeignKey_ssas_IndexPattern::relationships_isActive
-ssas.model_json_32_relationships_T::relationships_name <-- repo.ForeignKey_ssas_IndexPattern::relationships_name
-ssas.model_json_32_relationships_T::relationships_toCardinality <-- repo.ForeignKey_ssas_IndexPattern::relationships_toCardinality
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"ssas.model_json_32_relationships::databasename" <-- "ssas.model_json_32_relationships_T::databasename"
+"ssas.model_json_32_relationships::relationships_crossFilteringBehavior" <-- "ssas.model_json_32_relationships_T::relationships_crossFilteringBehavior"
+"ssas.model_json_32_relationships::relationships_fromCardinality" <-- "ssas.model_json_32_relationships_T::relationships_fromCardinality"
+"ssas.model_json_32_relationships::relationships_fromColumn" <-- "ssas.model_json_32_relationships_T::relationships_fromColumn"
+"ssas.model_json_32_relationships::relationships_fromTable" <-- "ssas.model_json_32_relationships_T::relationships_fromTable"
+"ssas.model_json_32_relationships::relationships_isActive" <-- "ssas.model_json_32_relationships_T::relationships_isActive"
+"ssas.model_json_32_relationships::relationships_name" <-- "ssas.model_json_32_relationships_T::relationships_name"
+"ssas.model_json_32_relationships::relationships_toCardinality" <-- "ssas.model_json_32_relationships_T::relationships_toCardinality"
+"ssas.model_json_32_relationships::relationships_toColumn" <-- "ssas.model_json_32_relationships_T::relationships_toColumn"
+"ssas.model_json_32_relationships::relationships_toTable" <-- "ssas.model_json_32_relationships_T::relationships_toTable"
+"ssas.model_json_32_relationships_T::databasename" <-- "repo.ForeignKey_ssas_IndexPattern::databasename"
+"ssas.model_json_32_relationships_T::ForeignKey_guid" <-- "repo.ForeignKey_ssas_IndexPattern::ForeignKey_guid"
+"ssas.model_json_32_relationships_T::relationships_crossFilteringBehavior" <-- "repo.ForeignKey_ssas_IndexPattern::relationships_crossFilteringBehavior"
+"ssas.model_json_32_relationships_T::relationships_fromCardinality" <-- "repo.ForeignKey_ssas_IndexPattern::relationships_fromCardinality"
+"ssas.model_json_32_relationships_T::relationships_isActive" <-- "repo.ForeignKey_ssas_IndexPattern::relationships_isActive"
+"ssas.model_json_32_relationships_T::relationships_name" <-- "repo.ForeignKey_ssas_IndexPattern::relationships_name"
+"ssas.model_json_32_relationships_T::relationships_toCardinality" <-- "repo.ForeignKey_ssas_IndexPattern::relationships_toCardinality"
 @enduml
 

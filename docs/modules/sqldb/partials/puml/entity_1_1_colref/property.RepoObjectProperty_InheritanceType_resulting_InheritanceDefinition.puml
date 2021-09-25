@@ -22,13 +22,15 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc[prefix=..]" as property.RepoObjectProperty_InheritanceType_InheritanceDefinition << V >> {
+entity "puml-link:dhw:sqldb:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc[]" as property.RepoObjectProperty_InheritanceType_InheritanceDefinition << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   - **property_name** : (nvarchar(128))
   --
+  Inheritance_Source_fullname : (nvarchar(261))
   Inheritance_StringAggSeparatorSql : (nvarchar(max))
   InheritanceDefinition : (nvarchar(max))
   InheritanceType : (int)
@@ -48,24 +50,25 @@ entity "puml-link:property.RepoObjectProperty_InheritanceType_InheritanceDefinit
   --
 }
 
-entity "puml-link:property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition.adoc[prefix=..]" as property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition << V >> {
-  - **RepoObject_guid** : (uniqueidentifier)
-  **property_name** : (nvarchar(128))
+entity "puml-link:dhw:sqldb:property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition.adoc[]" as property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition << V >> {
   --
+  Inheritance_Source_fullname : (nvarchar(261))
   Inheritance_StringAggSeparatorSql : (nvarchar(max))
   InheritanceDefinition : (nvarchar(max))
   InheritanceType : (int)
   - is_force_inherit_empty_source : (int)
   - is_StringAggAllSources : (int)
+  - property_name : (nvarchar(128))
   property_value : (nvarchar(max))
   - RepoObject_fullname : (nvarchar(261))
+  - RepoObject_guid : (uniqueidentifier)
   - RepoObject_type : (char(2))
   resulting_InheritanceDefinition : (nvarchar(max))
   --
   --
 }
 
-entity "puml-link:property.usp_RepoObject_Inheritance.adoc[prefix=..]" as property.usp_RepoObject_Inheritance << P >> {
+entity "puml-link:dhw:sqldb:property.usp_RepoObject_Inheritance.adoc[]" as property.usp_RepoObject_Inheritance << P >> {
   --
   --
   --
@@ -73,18 +76,14 @@ entity "puml-link:property.usp_RepoObject_Inheritance.adoc[prefix=..]" as proper
 
 property.RepoObjectProperty_InheritanceType_InheritanceDefinition <.. property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition
 property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition <.. property.usp_RepoObject_Inheritance
-property.RepoObjectProperty_InheritanceType_InheritanceDefinition::Inheritance_StringAggSeparatorSql <-- property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition::Inheritance_StringAggSeparatorSql
-property.RepoObjectProperty_InheritanceType_InheritanceDefinition::InheritanceDefinition <-- property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition::InheritanceDefinition
-property.RepoObjectProperty_InheritanceType_InheritanceDefinition::InheritanceType <-- property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition::InheritanceType
-property.RepoObjectProperty_InheritanceType_InheritanceDefinition::property_name <-- property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition::property_name
-property.RepoObjectProperty_InheritanceType_InheritanceDefinition::property_value <-- property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition::property_value
-property.RepoObjectProperty_InheritanceType_InheritanceDefinition::RepoObject_fullname <-- property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition::RepoObject_fullname
-property.RepoObjectProperty_InheritanceType_InheritanceDefinition::RepoObject_guid <-- property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition::RepoObject_guid
-property.RepoObjectProperty_InheritanceType_InheritanceDefinition::RepoObject_type <-- property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition::RepoObject_type
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"property.RepoObjectProperty_InheritanceType_InheritanceDefinition::Inheritance_Source_fullname" <-- "property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition::Inheritance_Source_fullname"
+"property.RepoObjectProperty_InheritanceType_InheritanceDefinition::Inheritance_StringAggSeparatorSql" <-- "property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition::Inheritance_StringAggSeparatorSql"
+"property.RepoObjectProperty_InheritanceType_InheritanceDefinition::InheritanceDefinition" <-- "property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition::InheritanceDefinition"
+"property.RepoObjectProperty_InheritanceType_InheritanceDefinition::InheritanceType" <-- "property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition::InheritanceType"
+"property.RepoObjectProperty_InheritanceType_InheritanceDefinition::property_name" <-- "property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition::property_name"
+"property.RepoObjectProperty_InheritanceType_InheritanceDefinition::property_value" <-- "property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition::property_value"
+"property.RepoObjectProperty_InheritanceType_InheritanceDefinition::RepoObject_fullname" <-- "property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition::RepoObject_fullname"
+"property.RepoObjectProperty_InheritanceType_InheritanceDefinition::RepoObject_guid" <-- "property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition::RepoObject_guid"
+"property.RepoObjectProperty_InheritanceType_InheritanceDefinition::RepoObject_type" <-- "property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition::RepoObject_type"
 @enduml
 

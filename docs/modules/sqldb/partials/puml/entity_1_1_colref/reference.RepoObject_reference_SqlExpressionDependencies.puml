@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:reference.RepoObject_reference_persistence_target_as_source.adoc[prefix=..]" as reference.RepoObject_reference_persistence_target_as_source << V >> {
+entity "puml-link:dhw:sqldb:reference.RepoObject_reference_persistence_target_as_source.adoc[]" as reference.RepoObject_reference_persistence_target_as_source << V >> {
   --
   - InformationSource : (varchar(28))
   referenced_entity_name : (nvarchar(128))
@@ -44,7 +45,7 @@ entity "puml-link:reference.RepoObject_reference_persistence_target_as_source.ad
   --
 }
 
-entity "puml-link:reference.RepoObject_reference_SqlExpressionDependencies.adoc[prefix=..]" as reference.RepoObject_reference_SqlExpressionDependencies << V >> {
+entity "puml-link:dhw:sqldb:reference.RepoObject_reference_SqlExpressionDependencies.adoc[]" as reference.RepoObject_reference_SqlExpressionDependencies << V >> {
   **referenced_RepoObject_guid** : (uniqueidentifier)
   **referencing_RepoObject_guid** : (uniqueidentifier)
   --
@@ -63,27 +64,33 @@ entity "puml-link:reference.RepoObject_reference_SqlExpressionDependencies.adoc[
   --
 }
 
-entity "puml-link:reference.RepoObject_reference_union.adoc[prefix=..]" as reference.RepoObject_reference_union << V >> {
+entity "puml-link:dhw:sqldb:reference.RepoObject_reference_union.adoc[]" as reference.RepoObject_reference_union << V >> {
   **referenced_RepoObject_guid** : (uniqueidentifier)
   **referencing_RepoObject_guid** : (uniqueidentifier)
   --
   - InformationSource : (varchar(34))
   - one : (int)
   referenced_entity_name : (nvarchar(128))
+  referenced_external_AntoraComponent : (nvarchar(128))
+  referenced_external_AntoraModule : (nvarchar(128))
   referenced_fullname : (nvarchar(517))
   referenced_id : (int)
+  referenced_is_external : (int)
   referenced_schema_name : (nvarchar(128))
   referenced_type : (char(2))
   referencing_entity_name : (nvarchar(128))
+  referencing_external_AntoraComponent : (nvarchar(128))
+  referencing_external_AntoraModule : (nvarchar(128))
   referencing_fullname : (nvarchar(517))
   referencing_id : (int)
+  referencing_is_external : (int)
   referencing_schema_name : (nvarchar(128))
   referencing_type : (varchar(2))
   --
   --
 }
 
-entity "puml-link:repo_sys.sql_expression_dependencies.adoc[prefix=..]" as repo_sys.sql_expression_dependencies << V >> {
+entity "puml-link:dhw:sqldb:repo_sys.sql_expression_dependencies.adoc[]" as repo_sys.sql_expression_dependencies << V >> {
   --
   definition : (nvarchar(max))
   - is_ambiguous : (bit)
@@ -121,20 +128,15 @@ entity "puml-link:repo_sys.sql_expression_dependencies.adoc[prefix=..]" as repo_
 reference.RepoObject_reference_SqlExpressionDependencies <.. reference.RepoObject_reference_union
 reference.RepoObject_reference_SqlExpressionDependencies <.. reference.RepoObject_reference_persistence_target_as_source
 repo_sys.sql_expression_dependencies <.. reference.RepoObject_reference_SqlExpressionDependencies
-repo_sys.sql_expression_dependencies::referenced_entity_name <-- reference.RepoObject_reference_SqlExpressionDependencies::referenced_entity_name
-repo_sys.sql_expression_dependencies::referenced_id <-- reference.RepoObject_reference_SqlExpressionDependencies::referenced_id
-repo_sys.sql_expression_dependencies::referenced_RepoObject_guid <-- reference.RepoObject_reference_SqlExpressionDependencies::referenced_RepoObject_guid
-repo_sys.sql_expression_dependencies::referenced_schema_name <-- reference.RepoObject_reference_SqlExpressionDependencies::referenced_schema_name
-repo_sys.sql_expression_dependencies::referenced_type <-- reference.RepoObject_reference_SqlExpressionDependencies::referenced_type
-repo_sys.sql_expression_dependencies::referencing_entity_name <-- reference.RepoObject_reference_SqlExpressionDependencies::referencing_entity_name
-repo_sys.sql_expression_dependencies::referencing_id <-- reference.RepoObject_reference_SqlExpressionDependencies::referencing_id
-repo_sys.sql_expression_dependencies::referencing_RepoObject_guid <-- reference.RepoObject_reference_SqlExpressionDependencies::referencing_RepoObject_guid
-repo_sys.sql_expression_dependencies::referencing_schema_name <-- reference.RepoObject_reference_SqlExpressionDependencies::referencing_schema_name
-repo_sys.sql_expression_dependencies::referencing_type <-- reference.RepoObject_reference_SqlExpressionDependencies::referencing_type
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"repo_sys.sql_expression_dependencies::referenced_entity_name" <-- "reference.RepoObject_reference_SqlExpressionDependencies::referenced_entity_name"
+"repo_sys.sql_expression_dependencies::referenced_id" <-- "reference.RepoObject_reference_SqlExpressionDependencies::referenced_id"
+"repo_sys.sql_expression_dependencies::referenced_RepoObject_guid" <-- "reference.RepoObject_reference_SqlExpressionDependencies::referenced_RepoObject_guid"
+"repo_sys.sql_expression_dependencies::referenced_schema_name" <-- "reference.RepoObject_reference_SqlExpressionDependencies::referenced_schema_name"
+"repo_sys.sql_expression_dependencies::referenced_type" <-- "reference.RepoObject_reference_SqlExpressionDependencies::referenced_type"
+"repo_sys.sql_expression_dependencies::referencing_entity_name" <-- "reference.RepoObject_reference_SqlExpressionDependencies::referencing_entity_name"
+"repo_sys.sql_expression_dependencies::referencing_id" <-- "reference.RepoObject_reference_SqlExpressionDependencies::referencing_id"
+"repo_sys.sql_expression_dependencies::referencing_RepoObject_guid" <-- "reference.RepoObject_reference_SqlExpressionDependencies::referencing_RepoObject_guid"
+"repo_sys.sql_expression_dependencies::referencing_schema_name" <-- "reference.RepoObject_reference_SqlExpressionDependencies::referencing_schema_name"
+"repo_sys.sql_expression_dependencies::referencing_type" <-- "reference.RepoObject_reference_SqlExpressionDependencies::referencing_type"
 @enduml
 

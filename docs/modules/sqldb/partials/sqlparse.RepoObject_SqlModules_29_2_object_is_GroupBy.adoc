@@ -7,9 +7,6 @@
 :ExistsProperty--antorareferencinglist:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--pk_index_guid:
-:ExistsProperty--pk_indexpatterncolumndatatype:
-:ExistsProperty--pk_indexpatterncolumnname:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -50,25 +47,6 @@ view
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-RepoObject_guid]
-=== RepoObject_guid
-
-[cols="d,8m,m,m,m,d"]
-|===
-|1
-|*RepoObject_guid*
-|uniqueidentifier
-|NOT NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:sqlparse.RepoObject_SqlModules_20_statement_children.adoc#column-RepoObject_guid[+sqlparse.RepoObject_SqlModules_20_statement_children.RepoObject_guid+]
---
-
-
 [#column-has_GroupBy]
 === has_GroupBy
 
@@ -88,6 +66,25 @@ view
 --
 
 
+[#column-RepoObject_guid]
+=== RepoObject_guid
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|RepoObject_guid
+|uniqueidentifier
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:sqlparse.RepoObject_SqlModules_20_statement_children.adoc#column-RepoObject_guid[+sqlparse.RepoObject_SqlModules_20_statement_children.RepoObject_guid+]
+--
+
+
 // end::AntoraColumnDetails[]
 
 == AntoraMeasureDetails
@@ -99,12 +96,6 @@ view
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
-|1
-|*<<column-RepoObject_guid>>*
-|uniqueidentifier
-|NOT NULL
-|
-|
 
 
 // end::AntoraPkColumnTableRows[]
@@ -112,10 +103,16 @@ view
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
-
 |
 |<<column-has_GroupBy>>
 |int
+|NOT NULL
+|
+|
+
+|
+|<<column-RepoObject_guid>>
+|uniqueidentifier
 |NOT NULL
 |
 |
@@ -126,15 +123,15 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-PK_RepoObject_SqlModules_29_2_object_is_GroupBy]
-=== PK_RepoObject_SqlModules_29_2_object_is_GroupBy
+[#index-idx_RepoObject_SqlModules_29_2_object_is_GroupBy2x_1]
+=== idx_RepoObject_SqlModules_29_2_object_is_GroupBy++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
 --
-* PK, Unique, Real: 1, 1, 0
+* PK, Unique, Real: 0, 0, 0
 
 // end::AntoraIndexList[]
 
@@ -369,21 +366,21 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-E989A10A-AB97-EB11-84F4-A81E8446D5B0
+
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-uniqueidentifier
+
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-RepoObject_guid
+
 // end::pk_indexpatterncolumnname[]
 
 

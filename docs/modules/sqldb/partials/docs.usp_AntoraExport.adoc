@@ -42,7 +42,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-10 19:21:02
+2021-09-25 19:58:54
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -96,25 +96,6 @@ source: property.RepoObjectProperty_cross As rop_cross
 [cols="d,15a,d"]
 |===
 |Number|Name (Action, Source, Target)|Parent
-
-|200
-|
-*[repo].[usp_RepoObjectProperty_collect]*
-
-* `EXEC [property].[usp_RepoObjectProperty_collect]`
-
-
-.Statement
-[%collapsible]
-=====
-[source,sql]
-----
-[property].[usp_RepoObjectProperty_collect]
-----
-=====
-
-|
-
 
 |210
 |
@@ -382,6 +363,7 @@ Exec sys.xp_cmdshell @command
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
+* xref:config.fs_get_parameter_value.adoc[]
 * xref:docs.usp_AntoraExport_DocSnippet.adoc[]
 * xref:docs.usp_AntoraExport_navigation.adoc[]
 * xref:docs.usp_AntoraExport_ObjectPage.adoc[]
@@ -391,7 +373,6 @@ Exec sys.xp_cmdshell @command
 * xref:docs.usp_AntoraExport_ObjectRefCyclic.adoc[]
 * xref:docs.usp_AntoraExport_Page_IndexSemanticGroup.adoc[]
 * xref:logs.usp_ExecutionLog_insert.adoc[]
-* xref:property.usp_RepoObjectProperty_collect.adoc[]
 // end::antorareferencedlist[]
 
 
@@ -780,6 +761,7 @@ include::sqldb:partial$docsnippet/antora-export-prerequisites.adoc[]
 === ReferencedObjectList
 
 // tag::referencedobjectlist[]
+* [config].[fs_get_parameter_value]
 * [docs].[usp_AntoraExport_DocSnippet]
 * [docs].[usp_AntoraExport_navigation]
 * [docs].[usp_AntoraExport_ObjectPage]
@@ -789,7 +771,6 @@ include::sqldb:partial$docsnippet/antora-export-prerequisites.adoc[]
 * [docs].[usp_AntoraExport_ObjectRefCyclic]
 * [docs].[usp_AntoraExport_Page_IndexSemanticGroup]
 * [logs].[usp_ExecutionLog_insert]
-* [property].[usp_RepoObjectProperty_collect]
 // end::referencedobjectlist[]
 
 
@@ -900,16 +881,6 @@ PRINT '[docs].[usp_AntoraExport]'
 --
 ----- start here with your own code
 --
-/*{"ReportUspStep":[{"Number":200,"Name":"[repo].[usp_RepoObjectProperty_collect]","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
-EXEC [property].[usp_RepoObjectProperty_collect]
---add your own parameters
---logging parameters
- @execution_instance_guid = @execution_instance_guid
- , @ssis_execution_id = @ssis_execution_id
- , @sub_execution_id = @sub_execution_id
- , @parent_execution_log_id = @current_execution_log_id
-
-
 /*{"ReportUspStep":[{"Number":210,"Name":"declare variables","has_logging":0,"is_condition":0,"is_inactive":0,"is_SubProcedure":0}]}*/
 PRINT CONCAT('usp_id;Number;Parent_Number: ',27,';',210,';',NULL);
 

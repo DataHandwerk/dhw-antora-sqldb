@@ -8,9 +8,6 @@
 :ExistsProperty--has_execution_plan_issue:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--pk_index_guid:
-:ExistsProperty--pk_indexpatterncolumndatatype:
-:ExistsProperty--pk_indexpatterncolumnname:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -45,43 +42,12 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-10 18:57:36
+2021-09-23 08:27:17
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-RepoObjectColumn_guid]
-=== RepoObjectColumn_guid
-
-[cols="d,8m,m,m,m,d"]
-|===
-|1
-|*RepoObjectColumn_guid*
-|uniqueidentifier
-|NOT NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:repo.RepoObjectColumn.adoc#column-RepoObjectColumn_guid[+repo.RepoObjectColumn.RepoObjectColumn_guid+]
---
-
-.Referencing Columns
---
-* xref:graph.RepoObjectColumn_S.adoc#column-RepoObjectColumn_guid[+graph.RepoObjectColumn_S.RepoObjectColumn_guid+]
-* xref:reference.RepoObjectColumn_reference_FirstResultSet.adoc#column-referencing_RepoObjectColumn_guid[+reference.RepoObjectColumn_reference_FirstResultSet.referencing_RepoObjectColumn_guid+]
-* xref:reference.RepoObjectColumn_reference_FirstResultSet.adoc#column-referenced_RepoObjectColumn_guid[+reference.RepoObjectColumn_reference_FirstResultSet.referenced_RepoObjectColumn_guid+]
-* xref:reference.RepoObjectColumn_reference_QueryPlan.adoc#column-referencing_RepoObjectColumn_guid[+reference.RepoObjectColumn_reference_QueryPlan.referencing_RepoObjectColumn_guid+]
-* xref:reference.RepoObjectColumn_reference_QueryPlan.adoc#column-referenced_RepoObjectColumn_guid[+reference.RepoObjectColumn_reference_QueryPlan.referenced_RepoObjectColumn_guid+]
-* xref:reference.RepoObjectColumn_reference_virtual.adoc#column-referencing_RepoObjectColumn_guid[+reference.RepoObjectColumn_reference_virtual.referencing_RepoObjectColumn_guid+]
-* xref:reference.RepoObjectColumn_reference_virtual.adoc#column-referenced_RepoObjectColumn_guid[+reference.RepoObjectColumn_reference_virtual.referenced_RepoObjectColumn_guid+]
-* xref:repo.RepoObjectColumn_gross2.adoc#column-RepoObjectColumn_guid[+repo.RepoObjectColumn_gross2.RepoObjectColumn_guid+]
---
-
-
 [#column-Column_name]
 === Column_name
 
@@ -255,6 +221,20 @@ view
 --
 * xref:repo.RepoObjectColumn_gross2.adoc#column-InheritanceType[+repo.RepoObjectColumn_gross2.InheritanceType+]
 --
+
+
+[#column-is_external]
+=== is_external
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|is_external
+|bit
+|NOT NULL
+|
+|
+|===
 
 
 [#column-is_persistence_no_check]
@@ -1434,6 +1414,37 @@ Column IDs might not be sequential.
 --
 
 
+[#column-RepoObjectColumn_guid]
+=== RepoObjectColumn_guid
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|RepoObjectColumn_guid
+|uniqueidentifier
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo.RepoObjectColumn.adoc#column-RepoObjectColumn_guid[+repo.RepoObjectColumn.RepoObjectColumn_guid+]
+--
+
+.Referencing Columns
+--
+* xref:graph.RepoObjectColumn_S.adoc#column-RepoObjectColumn_guid[+graph.RepoObjectColumn_S.RepoObjectColumn_guid+]
+* xref:reference.RepoObjectColumn_reference_FirstResultSet.adoc#column-referencing_RepoObjectColumn_guid[+reference.RepoObjectColumn_reference_FirstResultSet.referencing_RepoObjectColumn_guid+]
+* xref:reference.RepoObjectColumn_reference_FirstResultSet.adoc#column-referenced_RepoObjectColumn_guid[+reference.RepoObjectColumn_reference_FirstResultSet.referenced_RepoObjectColumn_guid+]
+* xref:reference.RepoObjectColumn_reference_QueryPlan.adoc#column-referencing_RepoObjectColumn_guid[+reference.RepoObjectColumn_reference_QueryPlan.referencing_RepoObjectColumn_guid+]
+* xref:reference.RepoObjectColumn_reference_QueryPlan.adoc#column-referenced_RepoObjectColumn_guid[+reference.RepoObjectColumn_reference_QueryPlan.referenced_RepoObjectColumn_guid+]
+* xref:reference.RepoObjectColumn_reference_virtual.adoc#column-referencing_RepoObjectColumn_guid[+reference.RepoObjectColumn_reference_virtual.referencing_RepoObjectColumn_guid+]
+* xref:reference.RepoObjectColumn_reference_virtual.adoc#column-referenced_RepoObjectColumn_guid[+reference.RepoObjectColumn_reference_virtual.referenced_RepoObjectColumn_guid+]
+* xref:repo.RepoObjectColumn_gross2.adoc#column-RepoObjectColumn_guid[+repo.RepoObjectColumn_gross2.RepoObjectColumn_guid+]
+--
+
+
 [#column-RepoObjectColumn_name]
 === RepoObjectColumn_name
 
@@ -1962,12 +1973,7 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
-|1
-|*<<column-RepoObjectColumn_guid>>*
-|uniqueidentifier
-|NOT NULL
-|
-|
+
 
 
 
@@ -2046,7 +2052,6 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
-
 |
 |<<column-Column_name>>
 |nvarchar(128)
@@ -2093,6 +2098,13 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 |<<column-InheritanceType>>
 |tinyint
 |NULL
+|
+|
+
+|
+|<<column-is_external>>
+|bit
+|NOT NULL
 |
 |
 
@@ -2412,6 +2424,13 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 |
 
 |
+|<<column-RepoObjectColumn_guid>>
+|uniqueidentifier
+|NOT NULL
+|
+|
+
+|
 |<<column-RepoObjectColumn_name>>
 |nvarchar(128)
 |NOT NULL
@@ -2557,21 +2576,10 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 
 // tag::AntoraIndexList[]
 
-[#index-PK_RepoObjectColumn_gross]
-=== PK_RepoObjectColumn_gross
-
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
-+
---
-* <<column-RepoObjectColumn_guid>>; uniqueidentifier
---
-* PK, Unique, Real: 1, 1, 0
-
-
-[#index-idx_RepoObjectColumn_gross_1]
+[#index-idx_RepoObjectColumn_gross2x_1]
 === idx_RepoObjectColumn_gross++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-SysObject_schema_name>>; nvarchar(128)
@@ -2580,10 +2588,10 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObjectColumn_gross_2]
+[#index-idx_RepoObjectColumn_gross2x_2]
 === idx_RepoObjectColumn_gross++__++2
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_schema_name>>; nvarchar(128)
@@ -2592,21 +2600,21 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObjectColumn_gross_3]
+[#index-idx_RepoObjectColumn_gross2x_3]
 === idx_RepoObjectColumn_gross++__++3
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
-* <<column-pk_index_guid>>; uniqueidentifier
+* <<column-RepoObjectColumn_guid>>; uniqueidentifier
 --
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObjectColumn_gross_5]
-=== idx_RepoObjectColumn_gross++__++5
+[#index-idx_RepoObjectColumn_gross2x_4]
+=== idx_RepoObjectColumn_gross++__++4
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObjectColumn_guid>>; uniqueidentifier
@@ -2615,10 +2623,10 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObjectColumn_gross_6]
-=== idx_RepoObjectColumn_gross++__++6
+[#index-idx_RepoObjectColumn_gross2x_5]
+=== idx_RepoObjectColumn_gross++__++5
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -2627,10 +2635,21 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObjectColumn_gross_7]
+[#index-idx_RepoObjectColumn_gross2x_6]
+=== idx_RepoObjectColumn_gross++__++6
+
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-pk_index_guid>>; uniqueidentifier
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[#index-idx_RepoObjectColumn_gross2x_7]
 === idx_RepoObjectColumn_gross++__++7
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -2884,21 +2903,21 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-6E8AA10A-AB97-EB11-84F4-A81E8446D5B0
+
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-uniqueidentifier
+
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-RepoObjectColumn_guid
+
 // end::pk_indexpatterncolumnname[]
 
 
@@ -3004,6 +3023,7 @@ Select
   , ro.has_get_referenced_issue
   , ro.is_repo_managed
   , ro.is_ssas
+  , ro.is_external
   , ro.is_RepoObject_name_uniqueidentifier
   , ro.is_SysObject_missing
   , ro.is_SysObject_name_uniqueidentifier
@@ -3030,8 +3050,15 @@ Select
                                                                                                roc.RepoObjectColumn_guid
                                                                                              , 'ms_description'
                                                                                            )
+  --Attention, this will be written back into Property 'Description'
+  --this could be an issue, if it will be changed in differen places, which should be the primary?
   , Description                        = Coalesce (
-                                                      tabcol.tables_columns_description
+                                                      --keep existing Description
+                                                      property.fs_get_RepoObjectColumnProperty_nvarchar (
+                                                                                                            roc.RepoObjectColumn_guid
+                                                                                                          , 'Description'
+                                                                                                        )
+                                                    , tabcol.tables_columns_description
                                                     , tabcol2.descriptions_StrAgg
                                                     , property.fs_get_RepoObjectColumnProperty_nvarchar (
                                                                                                             roc.RepoObjectColumn_guid

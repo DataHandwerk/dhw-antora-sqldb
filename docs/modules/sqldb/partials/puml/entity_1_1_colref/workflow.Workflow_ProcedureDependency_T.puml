@@ -22,22 +22,23 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:workflow.usp_PERSIST_Workflow_ProcedureDependency_T.adoc[prefix=..]" as workflow.usp_PERSIST_Workflow_ProcedureDependency_T << P >> {
-  --
-  --
-  --
-}
-
-entity "puml-link:workflow.usp_workflow.adoc[prefix=..]" as workflow.usp_workflow << P >> {
+entity "puml-link:dhw:sqldb:workflow.usp_PERSIST_Workflow_ProcedureDependency_T.adoc[]" as workflow.usp_PERSIST_Workflow_ProcedureDependency_T << P >> {
   --
   --
   --
 }
 
-entity "puml-link:workflow.Workflow_ProcedureDependency.adoc[prefix=..]" as workflow.Workflow_ProcedureDependency << V >> {
+entity "puml-link:dhw:sqldb:workflow.usp_workflow.adoc[]" as workflow.usp_workflow << P >> {
+  --
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:workflow.Workflow_ProcedureDependency.adoc[]" as workflow.Workflow_ProcedureDependency << V >> {
   --
   - referenced_Procedure_RepoObject_guid : (uniqueidentifier)
   - referencing_Procedure_RepoObject_guid : (uniqueidentifier)
@@ -46,7 +47,7 @@ entity "puml-link:workflow.Workflow_ProcedureDependency.adoc[prefix=..]" as work
   --
 }
 
-entity "puml-link:workflow.Workflow_ProcedureDependency_T.adoc[prefix=..]" as workflow.Workflow_ProcedureDependency_T << U >> {
+entity "puml-link:dhw:sqldb:workflow.Workflow_ProcedureDependency_T.adoc[]" as workflow.Workflow_ProcedureDependency_T << U >> {
   - **Workflow_id** : (int)
   - **referenced_Procedure_RepoObject_guid** : (uniqueidentifier)
   - **referencing_Procedure_RepoObject_guid** : (uniqueidentifier)
@@ -56,7 +57,7 @@ entity "puml-link:workflow.Workflow_ProcedureDependency_T.adoc[prefix=..]" as wo
   --
 }
 
-entity "puml-link:workflow.Workflow_ProcedureDependency_T_active.adoc[prefix=..]" as workflow.Workflow_ProcedureDependency_T_active << V >> {
+entity "puml-link:dhw:sqldb:workflow.Workflow_ProcedureDependency_T_active.adoc[]" as workflow.Workflow_ProcedureDependency_T_active << V >> {
   --
   - is_redundant : (bit)
   - referenced_Procedure_RepoObject_guid : (uniqueidentifier)
@@ -66,36 +67,31 @@ entity "puml-link:workflow.Workflow_ProcedureDependency_T_active.adoc[prefix=..]
   --
 }
 
-entity "puml-link:workflow.Workflow_ProcedureDependency_T_bidirectional.adoc[prefix=..]" as workflow.Workflow_ProcedureDependency_T_bidirectional << V >> {
-  - **Workflow_id** : (int)
-  - **referenced_Procedure_RepoObject_guid** : (uniqueidentifier)
-  - **referencing_Procedure_RepoObject_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:workflow.Workflow_ProcedureDependency_T_bidirectional.adoc[]" as workflow.Workflow_ProcedureDependency_T_bidirectional << V >> {
   --
+  - referenced_Procedure_RepoObject_guid : (uniqueidentifier)
   - referenced_RepoObject_fullname : (nvarchar(261))
+  - referencing_Procedure_RepoObject_guid : (uniqueidentifier)
   - referencing_RepoObject_fullname : (nvarchar(261))
+  - Workflow_id : (int)
   --
   --
 }
 
 workflow.Workflow_ProcedureDependency <.. workflow.Workflow_ProcedureDependency_T
-workflow.Workflow_ProcedureDependency_T <.. workflow.usp_workflow
-workflow.Workflow_ProcedureDependency_T <.. workflow.usp_PERSIST_Workflow_ProcedureDependency_T
 workflow.Workflow_ProcedureDependency_T <.. workflow.Workflow_ProcedureDependency_T_active
 workflow.Workflow_ProcedureDependency_T <.. workflow.Workflow_ProcedureDependency_T_bidirectional
-workflow.Workflow_ProcedureDependency::referenced_Procedure_RepoObject_guid <-- workflow.Workflow_ProcedureDependency_T::referenced_Procedure_RepoObject_guid
-workflow.Workflow_ProcedureDependency::referencing_Procedure_RepoObject_guid <-- workflow.Workflow_ProcedureDependency_T::referencing_Procedure_RepoObject_guid
-workflow.Workflow_ProcedureDependency::Workflow_id <-- workflow.Workflow_ProcedureDependency_T::Workflow_id
-workflow.Workflow_ProcedureDependency_T::is_redundant <-- workflow.Workflow_ProcedureDependency_T_active::is_redundant
-workflow.Workflow_ProcedureDependency_T::referenced_Procedure_RepoObject_guid <-- workflow.Workflow_ProcedureDependency_T_active::referenced_Procedure_RepoObject_guid
-workflow.Workflow_ProcedureDependency_T::referenced_Procedure_RepoObject_guid <-- workflow.Workflow_ProcedureDependency_T_bidirectional::referenced_Procedure_RepoObject_guid
-workflow.Workflow_ProcedureDependency_T::referencing_Procedure_RepoObject_guid <-- workflow.Workflow_ProcedureDependency_T_active::referencing_Procedure_RepoObject_guid
-workflow.Workflow_ProcedureDependency_T::referencing_Procedure_RepoObject_guid <-- workflow.Workflow_ProcedureDependency_T_bidirectional::referencing_Procedure_RepoObject_guid
-workflow.Workflow_ProcedureDependency_T::Workflow_id <-- workflow.Workflow_ProcedureDependency_T_active::Workflow_id
-workflow.Workflow_ProcedureDependency_T::Workflow_id <-- workflow.Workflow_ProcedureDependency_T_bidirectional::Workflow_id
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+workflow.Workflow_ProcedureDependency_T <.. workflow.usp_workflow
+workflow.Workflow_ProcedureDependency_T <.. workflow.usp_PERSIST_Workflow_ProcedureDependency_T
+"workflow.Workflow_ProcedureDependency::referenced_Procedure_RepoObject_guid" <-- "workflow.Workflow_ProcedureDependency_T::referenced_Procedure_RepoObject_guid"
+"workflow.Workflow_ProcedureDependency::referencing_Procedure_RepoObject_guid" <-- "workflow.Workflow_ProcedureDependency_T::referencing_Procedure_RepoObject_guid"
+"workflow.Workflow_ProcedureDependency::Workflow_id" <-- "workflow.Workflow_ProcedureDependency_T::Workflow_id"
+"workflow.Workflow_ProcedureDependency_T::is_redundant" <-- "workflow.Workflow_ProcedureDependency_T_active::is_redundant"
+"workflow.Workflow_ProcedureDependency_T::referenced_Procedure_RepoObject_guid" <-- "workflow.Workflow_ProcedureDependency_T_active::referenced_Procedure_RepoObject_guid"
+"workflow.Workflow_ProcedureDependency_T::referenced_Procedure_RepoObject_guid" <-- "workflow.Workflow_ProcedureDependency_T_bidirectional::referenced_Procedure_RepoObject_guid"
+"workflow.Workflow_ProcedureDependency_T::referencing_Procedure_RepoObject_guid" <-- "workflow.Workflow_ProcedureDependency_T_active::referencing_Procedure_RepoObject_guid"
+"workflow.Workflow_ProcedureDependency_T::referencing_Procedure_RepoObject_guid" <-- "workflow.Workflow_ProcedureDependency_T_bidirectional::referencing_Procedure_RepoObject_guid"
+"workflow.Workflow_ProcedureDependency_T::Workflow_id" <-- "workflow.Workflow_ProcedureDependency_T_active::Workflow_id"
+"workflow.Workflow_ProcedureDependency_T::Workflow_id" <-- "workflow.Workflow_ProcedureDependency_T_bidirectional::Workflow_id"
 @enduml
 

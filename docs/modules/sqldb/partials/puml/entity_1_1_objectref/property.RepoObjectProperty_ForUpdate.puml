@@ -22,29 +22,35 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:property.RepoObjectProperty.adoc[prefix=..]" as property.RepoObjectProperty << U >> {
+entity "puml-link:dhw:sqldb:config.fs_dwh_database_name.adoc[]" as config.fs_dwh_database_name << FN >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:config.fs_get_parameter_value.adoc[]" as config.fs_get_parameter_value << FN >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.RepoObjectProperty.adoc[]" as property.RepoObjectProperty << U >> {
   - **RepoObjectProperty_id** : (int)
   --
 }
 
-entity "puml-link:property.RepoObjectProperty_ForUpdate.adoc[prefix=..]" as property.RepoObjectProperty_ForUpdate << V >> {
+entity "puml-link:dhw:sqldb:property.RepoObjectProperty_ForUpdate.adoc[]" as property.RepoObjectProperty_ForUpdate << V >> {
   --
 }
 
-entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
+config.fs_dwh_database_name <.. property.RepoObjectProperty_ForUpdate
+config.fs_get_parameter_value <.. property.RepoObjectProperty_ForUpdate
 property.RepoObjectProperty <.. property.RepoObjectProperty_ForUpdate
 repo.RepoObject <.. property.RepoObjectProperty_ForUpdate
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
 @enduml
 

@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:property.RepoObjectProperty_Collect_source_ROGross.adoc[prefix=..]" as property.RepoObjectProperty_Collect_source_ROGross << V >> {
+entity "puml-link:dhw:sqldb:property.RepoObjectProperty_Collect_source_ROGross.adoc[]" as property.RepoObjectProperty_Collect_source_ROGross << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   - **property_name** : (varchar(39))
   --
@@ -34,23 +35,25 @@ entity "puml-link:property.RepoObjectProperty_Collect_source_ROGross.adoc[prefix
   --
 }
 
-entity "puml-link:property.usp_RepoObjectProperty_collect.adoc[prefix=..]" as property.usp_RepoObjectProperty_collect << P >> {
+entity "puml-link:dhw:sqldb:property.usp_RepoObjectProperty_collect.adoc[]" as property.usp_RepoObjectProperty_collect << P >> {
   --
   --
   --
 }
 
-entity "puml-link:repo.RepoObject_gross2.adoc[prefix=..]" as repo.RepoObject_gross2 << V >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject_gross2.adoc[]" as repo.RepoObject_gross2 << V >> {
   --
   AntoraComponent : (nvarchar(max))
-  AntoraExternalReferencedList : (nvarchar(max))
-  AntoraExternalReferencingList : (nvarchar(max))
   AntoraModule : (nvarchar(max))
   AntoraReferencedList : (nvarchar(max))
   AntoraReferencingList : (nvarchar(max))
   CreateColumnList : (nvarchar(max))
   DbmlColumnList : (nvarchar(max))
   Description : (nvarchar(max))
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
+  external_DatabaseName : (nvarchar(128))
+  external_RepoDatabaseName : (nvarchar(128))
   has_different_sys_names : (bit)
   has_execution_plan_issue : (bit)
   has_get_referenced_issue : (bit)
@@ -63,6 +66,7 @@ entity "puml-link:repo.RepoObject_gross2.adoc[prefix=..]" as repo.RepoObject_gro
   InheritanceType : (tinyint)
   - is_DocsExclude : (bit)
   is_DocsOutput : (int)
+  - is_external : (bit)
   - is_in_reference : (int)
   is_persistence : (bit)
   is_persistence_check_duplicate_per_pk : (bit)
@@ -128,22 +132,18 @@ entity "puml-link:repo.RepoObject_gross2.adoc[prefix=..]" as repo.RepoObject_gro
   SysObject_type_name : (nvarchar(128))
   tables_dataCategory : (nvarchar(500))
   tables_description : (nvarchar(max))
-  tables_isHidden : (nvarchar(500))
+  tables_isHidden : (bit)
   target_filter : (nvarchar(4000))
   temporal_type : (tinyint)
   - usp_persistence_name : (nvarchar(140))
   usp_persistence_RepoObject_guid : (uniqueidentifier)
+  uspgenerator_usp_id : (int)
   --
   --
 }
 
 property.RepoObjectProperty_Collect_source_ROGross <.. property.usp_RepoObjectProperty_collect
 repo.RepoObject_gross2 <.. property.RepoObjectProperty_Collect_source_ROGross
-repo.RepoObject_gross2::RepoObject_guid <-- property.RepoObjectProperty_Collect_source_ROGross::RepoObject_guid
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"repo.RepoObject_gross2::RepoObject_guid" <-- "property.RepoObjectProperty_Collect_source_ROGross::RepoObject_guid"
 @enduml
 

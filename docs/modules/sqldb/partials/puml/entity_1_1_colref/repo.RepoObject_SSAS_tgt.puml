@@ -22,18 +22,23 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
   has_execution_plan_issue : (bit)
   has_get_referenced_issue : (bit)
+  Inheritance_Source_fullname : (nvarchar(261))
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
   InheritanceDefinition : (nvarchar(4000))
   InheritanceType : (tinyint)
   - is_DocsExclude : (bit)
+  - is_external : (bit)
   is_repo_managed : (bit)
   is_required_ObjectMerge : (bit)
   - is_ssas : (bit)
@@ -68,7 +73,7 @@ entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
   --
 }
 
-entity "puml-link:repo.RepoObject_SSAS_src.adoc[prefix=..]" as repo.RepoObject_SSAS_src << V >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject_SSAS_src.adoc[]" as repo.RepoObject_SSAS_src << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
   - is_repo_managed : (int)
@@ -83,14 +88,17 @@ entity "puml-link:repo.RepoObject_SSAS_src.adoc[prefix=..]" as repo.RepoObject_S
   --
 }
 
-entity "puml-link:repo.RepoObject_SSAS_tgt.adoc[prefix=..]" as repo.RepoObject_SSAS_tgt << V >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject_SSAS_tgt.adoc[]" as repo.RepoObject_SSAS_tgt << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
   has_execution_plan_issue : (bit)
   has_get_referenced_issue : (bit)
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
   InheritanceDefinition : (nvarchar(4000))
   InheritanceType : (tinyint)
+  is_external : (bit)
   - is_repo_managed : (int)
   is_required_ObjectMerge : (bit)
   - is_ssas : (int)
@@ -114,7 +122,7 @@ entity "puml-link:repo.RepoObject_SSAS_tgt.adoc[prefix=..]" as repo.RepoObject_S
   --
 }
 
-entity "puml-link:repo.RepoObjectColumn_SSAS_tgt.adoc[prefix=..]" as repo.RepoObjectColumn_SSAS_tgt << V >> {
+entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_SSAS_tgt.adoc[]" as repo.RepoObjectColumn_SSAS_tgt << V >> {
   - **RepoObjectColumn_guid** : (uniqueidentifier)
   --
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
@@ -152,7 +160,7 @@ entity "puml-link:repo.RepoObjectColumn_SSAS_tgt.adoc[prefix=..]" as repo.RepoOb
   --
 }
 
-entity "puml-link:repo.usp_PERSIST_RepoObject_SSAS_tgt.adoc[prefix=..]" as repo.usp_PERSIST_RepoObject_SSAS_tgt << P >> {
+entity "puml-link:dhw:sqldb:repo.usp_PERSIST_RepoObject_SSAS_tgt.adoc[]" as repo.usp_PERSIST_RepoObject_SSAS_tgt << P >> {
   --
   --
   --
@@ -164,44 +172,39 @@ repo.RepoObject_SSAS_tgt <.. repo.RepoObject
 repo.RepoObject_SSAS_tgt <.. repo.RepoObjectColumn_SSAS_tgt
 repo.RepoObject_SSAS_tgt <.. repo.usp_PERSIST_RepoObject_SSAS_tgt
 repo.RepoObjectColumn_SSAS_tgt <.. repo.RepoObject_SSAS_tgt
-repo.RepoObject::has_execution_plan_issue <-- repo.RepoObject_SSAS_tgt::has_execution_plan_issue
-repo.RepoObject::has_get_referenced_issue <-- repo.RepoObject_SSAS_tgt::has_get_referenced_issue
-repo.RepoObject::Inheritance_StringAggSeparatorSql <-- repo.RepoObject_SSAS_tgt::Inheritance_StringAggSeparatorSql
-repo.RepoObject::InheritanceDefinition <-- repo.RepoObject_SSAS_tgt::InheritanceDefinition
-repo.RepoObject::InheritanceType <-- repo.RepoObject_SSAS_tgt::InheritanceType
-repo.RepoObject::is_repo_managed <-- repo.RepoObject_SSAS_tgt::is_repo_managed
-repo.RepoObject::is_required_ObjectMerge <-- repo.RepoObject_SSAS_tgt::is_required_ObjectMerge
-repo.RepoObject::is_ssas <-- repo.RepoObject_SSAS_tgt::is_ssas
-repo.RepoObject::is_SysObject_missing <-- repo.RepoObject_SSAS_tgt::is_SysObject_missing
-repo.RepoObject::modify_dt <-- repo.RepoObject_SSAS_tgt::modify_dt
-repo.RepoObject::pk_index_guid <-- repo.RepoObject_SSAS_tgt::pk_index_guid
-repo.RepoObject::pk_IndexPatternColumnName_new <-- repo.RepoObject_SSAS_tgt::pk_IndexPatternColumnName_new
-repo.RepoObject::Repo_history_table_guid <-- repo.RepoObject_SSAS_tgt::Repo_history_table_guid
-repo.RepoObject::Repo_temporal_type <-- repo.RepoObject_SSAS_tgt::Repo_temporal_type
-repo.RepoObject::RepoObject_guid <-- repo.RepoObject_SSAS_tgt::RepoObject_guid
-repo.RepoObject::RepoObject_name <-- repo.RepoObject_SSAS_tgt::RepoObject_name
-repo.RepoObject::RepoObject_Referencing_Count <-- repo.RepoObject_SSAS_tgt::RepoObject_Referencing_Count
-repo.RepoObject::RepoObject_schema_name <-- repo.RepoObject_SSAS_tgt::RepoObject_schema_name
-repo.RepoObject::RepoObject_type <-- repo.RepoObject_SSAS_tgt::RepoObject_type
-repo.RepoObject::SysObject_id <-- repo.RepoObject_SSAS_tgt::SysObject_id
-repo.RepoObject::SysObject_modify_date <-- repo.RepoObject_SSAS_tgt::SysObject_modify_date
-repo.RepoObject::SysObject_name <-- repo.RepoObject_SSAS_tgt::SysObject_name
-repo.RepoObject::SysObject_parent_object_id <-- repo.RepoObject_SSAS_tgt::SysObject_parent_object_id
-repo.RepoObject::SysObject_schema_name <-- repo.RepoObject_SSAS_tgt::SysObject_schema_name
-repo.RepoObject::SysObject_type <-- repo.RepoObject_SSAS_tgt::SysObject_type
-repo.RepoObject_SSAS_src::is_repo_managed <-- repo.RepoObject_SSAS_tgt::is_repo_managed
-repo.RepoObject_SSAS_src::is_ssas <-- repo.RepoObject_SSAS_tgt::is_ssas
-repo.RepoObject_SSAS_src::RepoObject_guid <-- repo.RepoObject_SSAS_tgt::RepoObject_guid
-repo.RepoObject_SSAS_src::RepoObject_name <-- repo.RepoObject_SSAS_tgt::RepoObject_name
-repo.RepoObject_SSAS_src::RepoObject_schema_name <-- repo.RepoObject_SSAS_tgt::RepoObject_schema_name
-repo.RepoObject_SSAS_src::RepoObject_type <-- repo.RepoObject_SSAS_tgt::RepoObject_type
-repo.RepoObject_SSAS_src::SysObject_name <-- repo.RepoObject_SSAS_tgt::SysObject_name
-repo.RepoObject_SSAS_src::SysObject_schema_name <-- repo.RepoObject_SSAS_tgt::SysObject_schema_name
-repo.RepoObject_SSAS_src::SysObject_type <-- repo.RepoObject_SSAS_tgt::SysObject_type
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"repo.RepoObject::has_execution_plan_issue" <-- "repo.RepoObject_SSAS_tgt::has_execution_plan_issue"
+"repo.RepoObject::has_get_referenced_issue" <-- "repo.RepoObject_SSAS_tgt::has_get_referenced_issue"
+"repo.RepoObject::Inheritance_StringAggSeparatorSql" <-- "repo.RepoObject_SSAS_tgt::Inheritance_StringAggSeparatorSql"
+"repo.RepoObject::InheritanceDefinition" <-- "repo.RepoObject_SSAS_tgt::InheritanceDefinition"
+"repo.RepoObject::InheritanceType" <-- "repo.RepoObject_SSAS_tgt::InheritanceType"
+"repo.RepoObject::is_repo_managed" <-- "repo.RepoObject_SSAS_tgt::is_repo_managed"
+"repo.RepoObject::is_required_ObjectMerge" <-- "repo.RepoObject_SSAS_tgt::is_required_ObjectMerge"
+"repo.RepoObject::is_ssas" <-- "repo.RepoObject_SSAS_tgt::is_ssas"
+"repo.RepoObject::is_SysObject_missing" <-- "repo.RepoObject_SSAS_tgt::is_SysObject_missing"
+"repo.RepoObject::modify_dt" <-- "repo.RepoObject_SSAS_tgt::modify_dt"
+"repo.RepoObject::pk_index_guid" <-- "repo.RepoObject_SSAS_tgt::pk_index_guid"
+"repo.RepoObject::pk_IndexPatternColumnName_new" <-- "repo.RepoObject_SSAS_tgt::pk_IndexPatternColumnName_new"
+"repo.RepoObject::Repo_history_table_guid" <-- "repo.RepoObject_SSAS_tgt::Repo_history_table_guid"
+"repo.RepoObject::Repo_temporal_type" <-- "repo.RepoObject_SSAS_tgt::Repo_temporal_type"
+"repo.RepoObject::RepoObject_guid" <-- "repo.RepoObject_SSAS_tgt::RepoObject_guid"
+"repo.RepoObject::RepoObject_name" <-- "repo.RepoObject_SSAS_tgt::RepoObject_name"
+"repo.RepoObject::RepoObject_Referencing_Count" <-- "repo.RepoObject_SSAS_tgt::RepoObject_Referencing_Count"
+"repo.RepoObject::RepoObject_schema_name" <-- "repo.RepoObject_SSAS_tgt::RepoObject_schema_name"
+"repo.RepoObject::RepoObject_type" <-- "repo.RepoObject_SSAS_tgt::RepoObject_type"
+"repo.RepoObject::SysObject_id" <-- "repo.RepoObject_SSAS_tgt::SysObject_id"
+"repo.RepoObject::SysObject_modify_date" <-- "repo.RepoObject_SSAS_tgt::SysObject_modify_date"
+"repo.RepoObject::SysObject_name" <-- "repo.RepoObject_SSAS_tgt::SysObject_name"
+"repo.RepoObject::SysObject_parent_object_id" <-- "repo.RepoObject_SSAS_tgt::SysObject_parent_object_id"
+"repo.RepoObject::SysObject_schema_name" <-- "repo.RepoObject_SSAS_tgt::SysObject_schema_name"
+"repo.RepoObject::SysObject_type" <-- "repo.RepoObject_SSAS_tgt::SysObject_type"
+"repo.RepoObject_SSAS_src::is_repo_managed" <-- "repo.RepoObject_SSAS_tgt::is_repo_managed"
+"repo.RepoObject_SSAS_src::is_ssas" <-- "repo.RepoObject_SSAS_tgt::is_ssas"
+"repo.RepoObject_SSAS_src::RepoObject_guid" <-- "repo.RepoObject_SSAS_tgt::RepoObject_guid"
+"repo.RepoObject_SSAS_src::RepoObject_name" <-- "repo.RepoObject_SSAS_tgt::RepoObject_name"
+"repo.RepoObject_SSAS_src::RepoObject_schema_name" <-- "repo.RepoObject_SSAS_tgt::RepoObject_schema_name"
+"repo.RepoObject_SSAS_src::RepoObject_type" <-- "repo.RepoObject_SSAS_tgt::RepoObject_type"
+"repo.RepoObject_SSAS_src::SysObject_name" <-- "repo.RepoObject_SSAS_tgt::SysObject_name"
+"repo.RepoObject_SSAS_src::SysObject_schema_name" <-- "repo.RepoObject_SSAS_tgt::SysObject_schema_name"
+"repo.RepoObject_SSAS_src::SysObject_type" <-- "repo.RepoObject_SSAS_tgt::SysObject_type"
 @enduml
 

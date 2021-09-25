@@ -7,9 +7,6 @@
 :ExistsProperty--antorareferencinglist:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--pk_index_guid:
-:ExistsProperty--pk_indexpatterncolumndatatype:
-:ExistsProperty--pk_indexpatterncolumnname:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -44,31 +41,12 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-06 22:28:40
+2021-09-24 20:08:56
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-IndexSemanticGroup]
-=== IndexSemanticGroup
-
-[cols="d,8m,m,m,m,d"]
-|===
-|1
-|*IndexSemanticGroup*
-|nvarchar(512)
-|NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:docs.AntoraIndexSemanticgroupPatterndatatype.adoc#column-IndexSemanticGroup[+docs.AntoraIndexSemanticgroupPatterndatatype.IndexSemanticGroup+]
---
-
-
 [#column-AntoraIndexSemanticgroup]
 === AntoraIndexSemanticgroup
 
@@ -97,6 +75,25 @@ view
 |===
 
 
+[#column-IndexSemanticGroup]
+=== IndexSemanticGroup
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|IndexSemanticGroup
+|nvarchar(512)
+|NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:docs.AntoraIndexSemanticgroupPatterndatatype.adoc#column-IndexSemanticGroup[+docs.AntoraIndexSemanticgroupPatterndatatype.IndexSemanticGroup+]
+--
+
+
 // end::AntoraColumnDetails[]
 
 == AntoraMeasureDetails
@@ -108,12 +105,6 @@ view
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
-|1
-|*<<column-IndexSemanticGroup>>*
-|nvarchar(512)
-|NULL
-|
-|
 
 
 
@@ -122,7 +113,6 @@ view
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
-
 |
 |<<column-AntoraIndexSemanticgroup>>
 |nvarchar(max)
@@ -137,21 +127,28 @@ view
 |
 |
 
+|
+|<<column-IndexSemanticGroup>>
+|nvarchar(512)
+|NULL
+|
+|
+
 // end::AntoraNonPkColumnTableRows[]
 
 == AntoraIndexList
 
 // tag::AntoraIndexList[]
 
-[#index-PK_AntoraIndexSemanticgroup]
-=== PK_AntoraIndexSemanticgroup
+[#index-idx_AntoraIndexSemanticgroup2x_1]
+=== idx_AntoraIndexSemanticgroup++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-IndexSemanticGroup>>; nvarchar(512)
 --
-* PK, Unique, Real: 1, 1, 0
+* PK, Unique, Real: 0, 0, 0
 
 // end::AntoraIndexList[]
 
@@ -177,6 +174,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 
 // tag::antorareferencedlist[]
 * xref:docs.AntoraIndexSemanticgroupPatterndatatype.adoc[]
+* xref:docs.fs_cleanStringForAnchorId.adoc[]
 // end::antorareferencedlist[]
 
 
@@ -386,21 +384,21 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-4BFEE794-1599-EB11-84F4-A81E8446D5B0
+
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-nvarchar(512)
+
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-IndexSemanticGroup
+
 // end::pk_indexpatterncolumnname[]
 
 
@@ -415,6 +413,7 @@ IndexSemanticGroup
 
 // tag::referencedobjectlist[]
 * [docs].[AntoraIndexSemanticgroupPatterndatatype]
+* [docs].[fs_cleanStringForAnchorId]
 // end::referencedobjectlist[]
 
 
@@ -462,8 +461,13 @@ CREATE View docs.AntoraIndexSemanticgroup
 As
 Select
     IndexSemanticGroup
-  , AntoraIndexSemanticgroup = Char ( 13 ) + Char ( 10 ) + '== ' + IsNull ( IndexSemanticGroup, '(no group)' )
-                               + Char ( 13 ) + Char ( 10 ) + Char ( 13 ) + Char ( 10 )
+  , AntoraIndexSemanticgroup = Char ( 13 ) + Char ( 10 )
+                               --
+                               + '[#' + docs.fs_cleanStringForAnchorId ( IsNull ( IndexSemanticGroup, '(no group)' ))
+                               + ']' + Char ( 13 ) + Char ( 10 )
+                               --
+                               + '== ' + IsNull ( IndexSemanticGroup, '(no group)' ) + Char ( 13 ) + Char ( 10 )
+                               + Char ( 13 ) + Char ( 10 )
                                --
                                + String_Agg ( AntoraIndexSemanticgroupPatterndatatype, Char ( 13 ) + Char ( 10 )) Within Group(Order By
                                                                                                                                    IndexPatternColumnDatatype)

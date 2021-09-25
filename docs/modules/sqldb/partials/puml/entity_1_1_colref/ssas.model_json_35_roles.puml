@@ -22,12 +22,13 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:ssas.model_json_20.adoc[prefix=..]" as ssas.model_json_20 << V >> {
-  - **databasename** : (nvarchar(128))
+entity "puml-link:dhw:sqldb:ssas.model_json_20.adoc[]" as ssas.model_json_20 << V >> {
   --
+  - databasename : (nvarchar(128))
   l1_compatibilityLevel : (int)
   l1_id : (nvarchar(500))
   l1_name : (nvarchar(500))
@@ -46,7 +47,7 @@ entity "puml-link:ssas.model_json_20.adoc[prefix=..]" as ssas.model_json_20 << V
   --
 }
 
-entity "puml-link:ssas.model_json_35_roles.adoc[prefix=..]" as ssas.model_json_35_roles << V >> {
+entity "puml-link:dhw:sqldb:ssas.model_json_35_roles.adoc[]" as ssas.model_json_35_roles << V >> {
   - **databasename** : (nvarchar(128))
   **roles_name** : (nvarchar(500))
   --
@@ -57,7 +58,7 @@ entity "puml-link:ssas.model_json_35_roles.adoc[prefix=..]" as ssas.model_json_3
   --
 }
 
-entity "puml-link:ssas.model_json_351_roles_members.adoc[prefix=..]" as ssas.model_json_351_roles_members << V >> {
+entity "puml-link:dhw:sqldb:ssas.model_json_351_roles_members.adoc[]" as ssas.model_json_351_roles_members << V >> {
   - **databasename** : (nvarchar(128))
   **roles_name** : (nvarchar(500))
   **roles_members_memberId** : (nvarchar(500))
@@ -67,7 +68,7 @@ entity "puml-link:ssas.model_json_351_roles_members.adoc[prefix=..]" as ssas.mod
   --
 }
 
-entity "puml-link:ssas.model_json_352_roles_tablePermissions.adoc[prefix=..]" as ssas.model_json_352_roles_tablePermissions << V >> {
+entity "puml-link:dhw:sqldb:ssas.model_json_352_roles_tablePermissions.adoc[]" as ssas.model_json_352_roles_tablePermissions << V >> {
   - **databasename** : (nvarchar(128))
   **roles_name** : (nvarchar(500))
   **roles_tablePermissions_name** : (nvarchar(500))
@@ -80,15 +81,10 @@ entity "puml-link:ssas.model_json_352_roles_tablePermissions.adoc[prefix=..]" as
 ssas.model_json_20 <.. ssas.model_json_35_roles
 ssas.model_json_35_roles <.. ssas.model_json_351_roles_members
 ssas.model_json_35_roles <.. ssas.model_json_352_roles_tablePermissions
-ssas.model_json_20::databasename <-- ssas.model_json_35_roles::databasename
-ssas.model_json_35_roles::databasename <-- ssas.model_json_351_roles_members::databasename
-ssas.model_json_35_roles::databasename <-- ssas.model_json_352_roles_tablePermissions::databasename
-ssas.model_json_35_roles::roles_name <-- ssas.model_json_351_roles_members::roles_name
-ssas.model_json_35_roles::roles_name <-- ssas.model_json_352_roles_tablePermissions::roles_name
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"ssas.model_json_20::databasename" <-- "ssas.model_json_35_roles::databasename"
+"ssas.model_json_35_roles::databasename" <-- "ssas.model_json_351_roles_members::databasename"
+"ssas.model_json_35_roles::databasename" <-- "ssas.model_json_352_roles_tablePermissions::databasename"
+"ssas.model_json_35_roles::roles_name" <-- "ssas.model_json_351_roles_members::roles_name"
+"ssas.model_json_35_roles::roles_name" <-- "ssas.model_json_352_roles_tablePermissions::roles_name"
 @enduml
 

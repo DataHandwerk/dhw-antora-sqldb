@@ -22,9 +22,6 @@
 :ExistsProperty--persistence_source_repoobject_fullname2:
 :ExistsProperty--persistence_source_repoobject_guid:
 :ExistsProperty--persistence_source_repoobject_xref:
-:ExistsProperty--pk_index_guid:
-:ExistsProperty--pk_indexpatterncolumndatatype:
-:ExistsProperty--pk_indexpatterncolumnname:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--usp_persistence_repoobject_guid:
 :ExistsProperty--FK:
@@ -53,37 +50,18 @@ user table
 == SysObject_id
 
 // tag::SysObject_id[]
-423008588
+1900585859
 // end::SysObject_id[]
 
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-08-29 12:36:15
+2021-09-24 18:25:35
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-RepoObject_guid]
-=== RepoObject_guid
-
-[cols="d,8m,m,m,m,d"]
-|===
-|1
-|*RepoObject_guid*
-|uniqueidentifier
-|NOT NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:docs.RepoObject_Plantuml_Entity.adoc#column-RepoObject_guid[+docs.RepoObject_Plantuml_Entity.RepoObject_guid+]
---
-
-
 [#column-RepoObject_fullname2]
 === RepoObject_fullname2
 
@@ -111,6 +89,25 @@ user table
 .Referencing Columns
 --
 * xref:docs.RepoObject_PlantUml_PumlEntityFkList.adoc#column-RepoObject_fullname2[+docs.RepoObject_PlantUml_PumlEntityFkList.RepoObject_fullname2+]
+--
+
+
+[#column-RepoObject_guid]
+=== RepoObject_guid
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|RepoObject_guid
+|uniqueidentifier
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:docs.RepoObject_Plantuml_Entity.adoc#column-RepoObject_guid[+docs.RepoObject_Plantuml_Entity.RepoObject_guid+]
 --
 
 
@@ -190,6 +187,25 @@ user table
 --
 
 
+[#column-RepoObject_PumlOnlyPkOrIndexOrMeasure]
+=== RepoObject_PumlOnlyPkOrIndexOrMeasure
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|RepoObject_PumlOnlyPkOrIndexOrMeasure
+|nvarchar(max)
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:docs.RepoObject_Plantuml_Entity.adoc#column-RepoObject_PumlOnlyPkOrIndexOrMeasure[+docs.RepoObject_Plantuml_Entity.RepoObject_PumlOnlyPkOrIndexOrMeasure+]
+--
+
+
 [#column-RepoObject_PumlOnlyPkOrNotHidden]
 === RepoObject_PumlOnlyPkOrNotHidden
 
@@ -244,12 +260,7 @@ user table
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
-|1
-|*<<column-RepoObject_guid>>*
-|uniqueidentifier
-|NOT NULL
-|
-|
+
 
 
 
@@ -263,10 +274,16 @@ user table
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
-
 |
 |<<column-RepoObject_fullname2>>
 |nvarchar(257)
+|NOT NULL
+|
+|
+
+|
+|<<column-RepoObject_guid>>
+|uniqueidentifier
 |NOT NULL
 |
 |
@@ -300,6 +317,13 @@ user table
 |
 
 |
+|<<column-RepoObject_PumlOnlyPkOrIndexOrMeasure>>
+|nvarchar(max)
+|NOT NULL
+|
+|
+
+|
 |<<column-RepoObject_PumlOnlyPkOrNotHidden>>
 |nvarchar(max)
 |NOT NULL
@@ -319,24 +343,24 @@ user table
 
 // tag::AntoraIndexList[]
 
-[#index-PK_RepoObject_Plantuml_Entity_T]
-=== PK_RepoObject_Plantuml_Entity_T
+[#index-idx_RepoObject_Plantuml_Entity_T2x_1]
+=== idx_RepoObject_Plantuml_Entity_T++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
-+
---
-* <<column-RepoObject_guid>>; uniqueidentifier
---
-* PK, Unique, Real: 1, 1, 0
-
-
-[#index-idx_RepoObject_Plantuml_Entity_T_2]
-=== idx_RepoObject_Plantuml_Entity_T++__++2
-
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_schema_name>>; nvarchar(128)
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[#index-idx_RepoObject_Plantuml_Entity_T2x_2]
+=== idx_RepoObject_Plantuml_Entity_T++__++2
+
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-RepoObject_guid>>; uniqueidentifier
 --
 * PK, Unique, Real: 0, 0, 0
 
@@ -577,21 +601,21 @@ xref:docs.RepoObject_Plantuml_Entity.adoc[]
 === pk_index_guid
 
 // tag::pk_index_guid[]
-B4686D3C-6598-EB11-84F4-A81E8446D5B0
+
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-uniqueidentifier
+
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-RepoObject_guid
+
 // end::pk_indexpatterncolumnname[]
 
 

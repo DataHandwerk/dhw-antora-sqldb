@@ -7,9 +7,6 @@
 :ExistsProperty--antorareferencinglist:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--pk_index_guid:
-:ExistsProperty--pk_indexpatterncolumndatatype:
-:ExistsProperty--pk_indexpatterncolumnname:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -44,31 +41,12 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-06 22:28:40
+2021-09-19 22:00:47
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-index_guid]
-=== index_guid
-
-[cols="d,8m,m,m,m,d"]
-|===
-|1
-|*index_guid*
-|uniqueidentifier
-|NOT NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:repo.Index_virtual.adoc#column-index_guid[+repo.Index_virtual.index_guid+]
---
-
-
 [#column-has_managedName]
 === has_managedName
 
@@ -85,6 +63,25 @@ view
 .Referenced Columns
 --
 * xref:repo.Index_virtual.adoc#column-has_managedName[+repo.Index_virtual.has_managedName+]
+--
+
+
+[#column-index_guid]
+=== index_guid
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|index_guid
+|uniqueidentifier
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo.Index_virtual.adoc#column-index_guid[+repo.Index_virtual.index_guid+]
 --
 
 
@@ -469,12 +466,6 @@ normaly these indexes should have different columns
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
-|1
-|*<<column-index_guid>>*
-|uniqueidentifier
-|NOT NULL
-|
-|
 
 
 
@@ -499,10 +490,16 @@ normaly these indexes should have different columns
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
-
 |
 |<<column-has_managedName>>
 |bit
+|NOT NULL
+|
+|
+
+|
+|<<column-index_guid>>
+|uniqueidentifier
 |NOT NULL
 |
 |
@@ -632,21 +629,21 @@ normaly these indexes should have different columns
 
 // tag::AntoraIndexList[]
 
-[#index-PK_Index_virtual_ForUpdate]
-=== PK_Index_virtual_ForUpdate
+[#index-idx_Index_virtual_ForUpdate2x_1]
+=== idx_Index_virtual_ForUpdate++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-index_guid>>; uniqueidentifier
 --
-* PK, Unique, Real: 1, 1, 0
+* PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_Index_virtual_ForUpdate_2]
+[#index-idx_Index_virtual_ForUpdate2x_2]
 === idx_Index_virtual_ForUpdate++__++2
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-parent_RepoObject_guid>>; uniqueidentifier
@@ -889,21 +886,21 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-F2384BF6-3799-EB11-84F5-A81E8446D5B0
+
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-uniqueidentifier
+
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-index_guid
+
 // end::pk_indexpatterncolumnname[]
 
 

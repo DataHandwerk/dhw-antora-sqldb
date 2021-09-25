@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:ssas.model_json.adoc[prefix=..]" as ssas.model_json << U >> {
+entity "puml-link:dhw:sqldb:ssas.model_json.adoc[]" as ssas.model_json << U >> {
   - **databasename** : (nvarchar(128))
   --
   - model_filename : (nvarchar(4000))
@@ -35,7 +36,7 @@ entity "puml-link:ssas.model_json.adoc[prefix=..]" as ssas.model_json << U >> {
   --
 }
 
-entity "puml-link:ssas.model_json_ImportModelSql.adoc[prefix=..]" as ssas.model_json_ImportModelSql << V >> {
+entity "puml-link:dhw:sqldb:ssas.model_json_ImportModelSql.adoc[]" as ssas.model_json_ImportModelSql << V >> {
   --
   - databasename : (nvarchar(128))
   - ImportModelSql : (nvarchar(4000))
@@ -47,14 +48,9 @@ entity "puml-link:ssas.model_json_ImportModelSql.adoc[prefix=..]" as ssas.model_
 }
 
 ssas.model_json <.. ssas.model_json_ImportModelSql
-ssas.model_json::databasename <-- ssas.model_json_ImportModelSql::databasename
-ssas.model_json::isModelJson <-- ssas.model_json_ImportModelSql::isModelJson
-ssas.model_json::model_filename <-- ssas.model_json_ImportModelSql::model_filename
-ssas.model_json::model_utf8 <-- ssas.model_json_ImportModelSql::model_utf8
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"ssas.model_json::databasename" <-- "ssas.model_json_ImportModelSql::databasename"
+"ssas.model_json::isModelJson" <-- "ssas.model_json_ImportModelSql::isModelJson"
+"ssas.model_json::model_filename" <-- "ssas.model_json_ImportModelSql::model_filename"
+"ssas.model_json::model_utf8" <-- "ssas.model_json_ImportModelSql::model_utf8"
 @enduml
 

@@ -7,9 +7,6 @@
 :ExistsProperty--antorareferencinglist:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--pk_index_guid:
-:ExistsProperty--pk_indexpatterncolumndatatype:
-:ExistsProperty--pk_indexpatterncolumnname:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -44,34 +41,80 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-06 22:28:40
+2021-09-21 22:56:12
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-RepoObject_guid]
-=== RepoObject_guid
+[#column-AntoraComponent]
+=== AntoraComponent
 
 [cols="d,8m,m,m,m,d"]
 |===
-|1
-|*RepoObject_guid*
-|uniqueidentifier
-|NOT NULL
+|
+|AntoraComponent
+|nvarchar(max)
+|NULL
 |
 |
 |===
 
-.Referenced Columns
---
-* xref:repo.RepoObject_gross.adoc#column-RepoObject_guid[+repo.RepoObject_gross.RepoObject_guid+]
---
 
-.Referencing Columns
---
-* xref:docs.RepoObject_Plantuml_Entity.adoc#column-RepoObject_guid[+docs.RepoObject_Plantuml_Entity.RepoObject_guid+]
---
+[#column-AntoraModule]
+=== AntoraModule
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|AntoraModule
+|nvarchar(max)
+|NULL
+|
+|
+|===
+
+
+[#column-external_AntoraComponent]
+=== external_AntoraComponent
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|external_AntoraComponent
+|nvarchar(128)
+|NULL
+|
+|
+|===
+
+
+[#column-external_AntoraModule]
+=== external_AntoraModule
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|external_AntoraModule
+|nvarchar(128)
+|NULL
+|
+|
+|===
+
+
+[#column-external_DatabaseName]
+=== external_DatabaseName
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|external_DatabaseName
+|nvarchar(128)
+|NULL
+|
+|
+|===
 
 
 [#column-is_DocsOutput]
@@ -91,6 +134,20 @@ view
 --
 * xref:repo.RepoObject_gross.adoc#column-is_DocsOutput[+repo.RepoObject_gross.is_DocsOutput+]
 --
+
+
+[#column-is_external]
+=== is_external
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|is_external
+|bit
+|NOT NULL
+|
+|
+|===
 
 
 [#column-is_ssas]
@@ -164,6 +221,30 @@ view
 .Referencing Columns
 --
 * xref:docs.RepoObject_Plantuml_Entity.adoc#column-RepoObject_fullname2[+docs.RepoObject_Plantuml_Entity.RepoObject_fullname2+]
+--
+
+
+[#column-RepoObject_guid]
+=== RepoObject_guid
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|RepoObject_guid
+|uniqueidentifier
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo.RepoObject_gross.adoc#column-RepoObject_guid[+repo.RepoObject_gross.RepoObject_guid+]
+--
+
+.Referencing Columns
+--
+* xref:docs.RepoObject_Plantuml_Entity.adoc#column-RepoObject_guid[+docs.RepoObject_Plantuml_Entity.RepoObject_guid+]
 --
 
 
@@ -262,6 +343,20 @@ reference in [repo_sys].[type]
 --
 
 
+[#column-tables_isHidden]
+=== tables_isHidden
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|tables_isHidden
+|bit
+|NULL
+|
+|
+|===
+
+
 // end::AntoraColumnDetails[]
 
 == AntoraMeasureDetails
@@ -273,12 +368,13 @@ reference in [repo_sys].[type]
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
-|1
-|*<<column-RepoObject_guid>>*
-|uniqueidentifier
-|NOT NULL
-|
-|
+
+
+
+
+
+
+
 
 
 
@@ -293,11 +389,52 @@ reference in [repo_sys].[type]
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
+|
+|<<column-AntoraComponent>>
+|nvarchar(max)
+|NULL
+|
+|
+
+|
+|<<column-AntoraModule>>
+|nvarchar(max)
+|NULL
+|
+|
+
+|
+|<<column-external_AntoraComponent>>
+|nvarchar(128)
+|NULL
+|
+|
+
+|
+|<<column-external_AntoraModule>>
+|nvarchar(128)
+|NULL
+|
+|
+
+|
+|<<column-external_DatabaseName>>
+|nvarchar(128)
+|NULL
+|
+|
 
 |
 |<<column-is_DocsOutput>>
 |int
 |NULL
+|
+|
+
+|
+|<<column-is_external>>
+|bit
+|NOT NULL
 |
 |
 
@@ -318,6 +455,13 @@ reference in [repo_sys].[type]
 |
 |<<column-RepoObject_fullname2>>
 |nvarchar(257)
+|NOT NULL
+|
+|
+
+|
+|<<column-RepoObject_guid>>
+|uniqueidentifier
 |NOT NULL
 |
 |
@@ -350,33 +494,40 @@ reference in [repo_sys].[type]
 |
 |
 
+|
+|<<column-tables_isHidden>>
+|bit
+|NULL
+|
+|
+
 // end::AntoraNonPkColumnTableRows[]
 
 == AntoraIndexList
 
 // tag::AntoraIndexList[]
 
-[#index-PK_RepoObject_OutputFilter]
-=== PK_RepoObject_OutputFilter
+[#index-idx_RepoObject_OutputFilter2x_1]
+=== idx_RepoObject_OutputFilter++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
-+
---
-* <<column-RepoObject_guid>>; uniqueidentifier
---
-* PK, Unique, Real: 1, 1, 0
-
-
-[#index-UK_RepoObject_OutputFilter_2]
-=== UK_RepoObject_OutputFilter++__++2
-
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_schema_name>>; nvarchar(128)
 * <<column-RepoObject_name>>; nvarchar(128)
 --
-* PK, Unique, Real: 0, 1, 0
+* PK, Unique, Real: 0, 0, 0
+
+
+[#index-idx_RepoObject_OutputFilter2x_2]
+=== idx_RepoObject_OutputFilter++__++2
+
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-RepoObject_guid>>; uniqueidentifier
+--
+* PK, Unique, Real: 0, 0, 0
 
 // end::AntoraIndexList[]
 
@@ -408,6 +559,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencingList
 
 // tag::antorareferencinglist[]
+* xref:docs.AntoraNavListPage_by_schema.adoc[]
 * xref:docs.AntoraNavListPage_by_type.adoc[]
 * xref:docs.AntoraNavListRepoObject_by_schema.adoc[]
 * xref:docs.AntoraNavListRepoObject_by_schema_type.adoc[]
@@ -619,21 +771,21 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-E38818B0-CA97-EB11-84F4-A81E8446D5B0
+
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-uniqueidentifier
+
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-RepoObject_guid
+
 // end::pk_indexpatterncolumnname[]
 
 
@@ -690,20 +842,28 @@ source: property.RepoObjectProperty WHERE property_int = 1
 CREATE View docs.RepoObject_OutputFilter
 As
 Select
-    roa.RepoObject_guid
-  , roa.SysObject_type
-  , roa.SysObject_type_name
-  , roa.RepoObject_fullname
-  , roa.RepoObject_fullname2
-  , roa.RepoObject_schema_name
-  , roa.is_DocsOutput
-  , roa.RepoObject_name
-  , roa.is_ssas
+    ro.RepoObject_guid
+  , ro.SysObject_type
+  , ro.SysObject_type_name
+  , ro.RepoObject_fullname
+  , ro.RepoObject_fullname2
+  , ro.RepoObject_schema_name
+  , ro.is_DocsOutput
+  , ro.RepoObject_name
+  , ro.is_external
+  , ro.is_ssas
+  , ro.tables_isHidden
+  , ro.external_AntoraComponent
+  , ro.external_AntoraModule
+  , ro.external_DatabaseName
+  , ro.AntoraComponent
+  , ro.AntoraModule
 From
-    repo.RepoObject_gross As roa
+    repo.RepoObject_gross As ro
 Where
-    roa.is_DocsOutput      = 1
-    And roa.is_DocsExclude = 0
+    ro.is_DocsOutput      = 1
+    And ro.is_DocsExclude = 0
+--And ro.is_external    = 0
 
 ----
 =======

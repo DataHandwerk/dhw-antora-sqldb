@@ -6,9 +6,6 @@
 :ExistsProperty--antorareferencedlist:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--pk_index_guid:
-:ExistsProperty--pk_indexpatterncolumndatatype:
-:ExistsProperty--pk_indexpatterncolumnname:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -43,31 +40,12 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-08-29 16:59:40
+2021-09-24 21:50:15
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-RepoObject_schema_name]
-=== RepoObject_schema_name
-
-[cols="d,8m,m,m,m,d"]
-|===
-|1
-|*RepoObject_schema_name*
-|nvarchar(128)
-|NOT NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:repo.RepoObject.adoc#column-RepoObject_schema_name[+repo.RepoObject.RepoObject_schema_name+]
---
-
-
 [#column-nav_list]
 === nav_list
 
@@ -82,6 +60,25 @@ view
 |===
 
 
+[#column-RepoObject_schema_name]
+=== RepoObject_schema_name
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|RepoObject_schema_name
+|nvarchar(128)
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo.RepoObject.adoc#column-RepoObject_schema_name[+repo.RepoObject.RepoObject_schema_name+]
+--
+
+
 // end::AntoraColumnDetails[]
 
 == AntoraMeasureDetails
@@ -93,12 +90,6 @@ view
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
-|1
-|*<<column-RepoObject_schema_name>>*
-|nvarchar(128)
-|NOT NULL
-|
-|
 
 
 // end::AntoraPkColumnTableRows[]
@@ -106,10 +97,16 @@ view
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
-
 |
 |<<column-nav_list>>
 |nvarchar(4000)
+|NOT NULL
+|
+|
+
+|
+|<<column-RepoObject_schema_name>>
+|nvarchar(128)
 |NOT NULL
 |
 |
@@ -120,15 +117,15 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-PK_AntoraNavListPage_by_schema]
-=== PK_AntoraNavListPage_by_schema
+[#index-idx_AntoraNavListPage_by_schema2x_1]
+=== idx_AntoraNavListPage_by_schema++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_schema_name>>; nvarchar(128)
 --
-* PK, Unique, Real: 1, 1, 0
+* PK, Unique, Real: 0, 0, 0
 
 // end::AntoraIndexList[]
 
@@ -153,6 +150,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
+* xref:docs.RepoObject_OutputFilter.adoc[]
 * xref:repo.RepoObject.adoc[]
 * xref:repo.RepoSchema.adoc[]
 // end::antorareferencedlist[]
@@ -364,21 +362,21 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-5A47B240-E299-EB11-84F5-A81E8446D5B0
+
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-nvarchar(128)
+
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-RepoObject_schema_name
+
 // end::pk_indexpatterncolumnname[]
 
 
@@ -392,6 +390,7 @@ RepoObject_schema_name
 === ReferencedObjectList
 
 // tag::referencedobjectlist[]
+* [docs].[RepoObject_OutputFilter]
 * [repo].[RepoObject]
 * [repo].[RepoSchema]
 // end::referencedobjectlist[]
@@ -433,8 +432,7 @@ source: property.RepoObjectProperty WHERE property_int = 1
 [source,sql]
 ----
 
-
-CREATE View [docs].[AntoraNavListPage_by_schema]
+CREATE View docs.AntoraNavListPage_by_schema
 As
 Select
     ro.RepoObject_schema_name
@@ -462,7 +460,7 @@ Select
                           , '== SSAS Relations Diagram'
                           , Char ( 13 ) + Char ( 10 )
                           , Char ( 13 ) + Char ( 10 )
-                          , '[plantuml, schema_ssas_er-' + ro.RepoObject_schema_name + ', svg, subs=attributes]'
+                          , '[plantuml, schema_ssas_er-' + ro.RepoObject_schema_name + ', svg, subs=macros]'
                           , Char ( 13 ) + Char ( 10 )
                           , '....'
                           , Char ( 13 ) + Char ( 10 )
@@ -474,11 +472,19 @@ Select
                , Null)
          )
 From
-    repo.RepoObject     As ro
+    repo.RepoObject                  As ro
     Left Join
-        repo.RepoSchema As rs
+        repo.RepoSchema              As rs
             On
-            rs.RepoSchema_name = ro.RepoObject_schema_name
+            rs.RepoSchema_name  = ro.RepoObject_schema_name
+
+    Left Join
+        docs.RepoObject_OutputFilter As rof
+            On
+            rof.RepoObject_guid = ro.RepoObject_guid
+Where
+    rof.is_external       = 0
+    And rof.is_DocsOutput = 1
 Group By
     ro.RepoObject_schema_name
 

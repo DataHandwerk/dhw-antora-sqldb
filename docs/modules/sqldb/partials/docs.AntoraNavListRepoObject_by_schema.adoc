@@ -7,9 +7,6 @@
 :ExistsProperty--antorareferencinglist:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--pk_index_guid:
-:ExistsProperty--pk_indexpatterncolumndatatype:
-:ExistsProperty--pk_indexpatterncolumnname:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -44,29 +41,24 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-06 22:28:40
+2021-09-25 12:39:58
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-RepoObject_schema_name]
-=== RepoObject_schema_name
+[#column-is_ssas]
+=== is_ssas
 
 [cols="d,8m,m,m,m,d"]
 |===
-|1
-|*RepoObject_schema_name*
-|nvarchar(128)
-|NOT NULL
+|
+|is_ssas
+|tinyint
+|NULL
 |
 |
 |===
-
-.Referenced Columns
---
-* xref:docs.RepoObject_OutputFilter.adoc#column-RepoObject_schema_name[+docs.RepoObject_OutputFilter.RepoObject_schema_name+]
---
 
 
 [#column-nav_list]
@@ -83,6 +75,25 @@ view
 |===
 
 
+[#column-RepoObject_schema_name]
+=== RepoObject_schema_name
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|RepoObject_schema_name
+|nvarchar(128)
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:docs.RepoObject_OutputFilter.adoc#column-RepoObject_schema_name[+docs.RepoObject_OutputFilter.RepoObject_schema_name+]
+--
+
+
 // end::AntoraColumnDetails[]
 
 == AntoraMeasureDetails
@@ -94,12 +105,7 @@ view
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
-|1
-|*<<column-RepoObject_schema_name>>*
-|nvarchar(128)
-|NOT NULL
-|
-|
+
 
 
 // end::AntoraPkColumnTableRows[]
@@ -107,11 +113,24 @@ view
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
+|
+|<<column-is_ssas>>
+|tinyint
+|NULL
+|
+|
 
 |
 |<<column-nav_list>>
 |nvarchar(max)
 |NULL
+|
+|
+
+|
+|<<column-RepoObject_schema_name>>
+|nvarchar(128)
+|NOT NULL
 |
 |
 
@@ -121,15 +140,15 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-PK_AntoraNavListRepoObject_by_schema]
-=== PK_AntoraNavListRepoObject_by_schema
+[#index-idx_AntoraNavListRepoObject_by_schema2x_1]
+=== idx_AntoraNavListRepoObject_by_schema++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_schema_name>>; nvarchar(128)
 --
-* PK, Unique, Real: 1, 1, 0
+* PK, Unique, Real: 0, 0, 0
 
 // end::AntoraIndexList[]
 
@@ -365,21 +384,21 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-D6FC445C-FD95-EB11-84F4-A81E8446D5B0
+
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-nvarchar(128)
+
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-RepoObject_schema_name
+
 // end::pk_indexpatterncolumnname[]
 
 
@@ -448,10 +467,14 @@ Select
                , Char ( 13 ) + Char ( 10 )
              ) Within Group(Order By
                                 ro.RepoObject_fullname2)
+  , is_ssas  = Max ( Cast(ro.is_ssas As TinyInt))
 From
     docs.RepoObject_OutputFilter As ro
+Where
+    ro.is_external = 0
 Group By
     ro.RepoObject_schema_name
+
 ----
 =======
 // end::sql_modules_definition[]

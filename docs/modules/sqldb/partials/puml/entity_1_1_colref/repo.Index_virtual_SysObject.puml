@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:repo.Index_Settings.adoc[prefix=..]" as repo.Index_Settings << U >> {
+entity "puml-link:dhw:sqldb:repo.Index_Settings.adoc[]" as repo.Index_Settings << U >> {
   - **index_guid** : (uniqueidentifier)
   --
   IndexPatternColumnDatatype : (nvarchar(4000))
@@ -36,7 +37,7 @@ entity "puml-link:repo.Index_Settings.adoc[prefix=..]" as repo.Index_Settings <<
   --
 }
 
-entity "puml-link:repo.Index_virtual.adoc[prefix=..]" as repo.Index_virtual << U >> {
+entity "puml-link:dhw:sqldb:repo.Index_virtual.adoc[]" as repo.Index_virtual << U >> {
   - **index_guid** : (uniqueidentifier)
   --
   - has_managedName : (bit)
@@ -52,9 +53,9 @@ entity "puml-link:repo.Index_virtual.adoc[prefix=..]" as repo.Index_virtual << U
   --
 }
 
-entity "puml-link:repo.Index_virtual_SysObject.adoc[prefix=..]" as repo.Index_virtual_SysObject << V >> {
-  - **index_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:repo.Index_virtual_SysObject.adoc[]" as repo.Index_virtual_SysObject << V >> {
   --
+  - index_guid : (uniqueidentifier)
   index_name : (nvarchar(128))
   IndexPatternColumnDatatype : (nvarchar(4000))
   IndexPatternColumnName : (nvarchar(4000))
@@ -73,15 +74,19 @@ entity "puml-link:repo.Index_virtual_SysObject.adoc[prefix=..]" as repo.Index_vi
   --
 }
 
-entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
   has_execution_plan_issue : (bit)
   has_get_referenced_issue : (bit)
+  Inheritance_Source_fullname : (nvarchar(261))
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
   InheritanceDefinition : (nvarchar(4000))
   InheritanceType : (tinyint)
   - is_DocsExclude : (bit)
+  - is_external : (bit)
   is_repo_managed : (bit)
   is_required_ObjectMerge : (bit)
   - is_ssas : (bit)
@@ -119,25 +124,20 @@ entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
 repo.Index_Settings <.. repo.Index_virtual_SysObject
 repo.Index_virtual <.. repo.Index_virtual_SysObject
 repo.RepoObject <.. repo.Index_virtual_SysObject
-repo.Index_Settings::IndexPatternColumnDatatype <-- repo.Index_virtual_SysObject::IndexPatternColumnDatatype
-repo.Index_Settings::IndexPatternColumnName <-- repo.Index_virtual_SysObject::IndexPatternColumnName
-repo.Index_Settings::IndexSemanticGroup <-- repo.Index_virtual_SysObject::IndexSemanticGroup
-repo.Index_virtual::index_guid <-- repo.Index_virtual_SysObject::index_guid
-repo.Index_virtual::index_name <-- repo.Index_virtual_SysObject::index_name
-repo.Index_virtual::is_index_disabled <-- repo.Index_virtual_SysObject::is_index_disabled
-repo.Index_virtual::is_index_primary_key <-- repo.Index_virtual_SysObject::is_index_primary_key
-repo.Index_virtual::is_index_unique <-- repo.Index_virtual_SysObject::is_index_unique
-repo.Index_virtual::parent_RepoObject_guid <-- repo.Index_virtual_SysObject::parent_RepoObject_guid
-repo.Index_virtual::referenced_index_guid <-- repo.Index_virtual_SysObject::referenced_index_guid
-repo.RepoObject::pk_index_guid <-- repo.Index_virtual_SysObject::pk_index_guid
-repo.RepoObject::SysObject_id <-- repo.Index_virtual_SysObject::SysObject_id
-repo.RepoObject::SysObject_name <-- repo.Index_virtual_SysObject::SysObject_name
-repo.RepoObject::SysObject_schema_name <-- repo.Index_virtual_SysObject::SysObject_schema_name
-repo.RepoObject::SysObject_type <-- repo.Index_virtual_SysObject::SysObject_type
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"repo.Index_Settings::IndexPatternColumnDatatype" <-- "repo.Index_virtual_SysObject::IndexPatternColumnDatatype"
+"repo.Index_Settings::IndexPatternColumnName" <-- "repo.Index_virtual_SysObject::IndexPatternColumnName"
+"repo.Index_Settings::IndexSemanticGroup" <-- "repo.Index_virtual_SysObject::IndexSemanticGroup"
+"repo.Index_virtual::index_guid" <-- "repo.Index_virtual_SysObject::index_guid"
+"repo.Index_virtual::index_name" <-- "repo.Index_virtual_SysObject::index_name"
+"repo.Index_virtual::is_index_disabled" <-- "repo.Index_virtual_SysObject::is_index_disabled"
+"repo.Index_virtual::is_index_primary_key" <-- "repo.Index_virtual_SysObject::is_index_primary_key"
+"repo.Index_virtual::is_index_unique" <-- "repo.Index_virtual_SysObject::is_index_unique"
+"repo.Index_virtual::parent_RepoObject_guid" <-- "repo.Index_virtual_SysObject::parent_RepoObject_guid"
+"repo.Index_virtual::referenced_index_guid" <-- "repo.Index_virtual_SysObject::referenced_index_guid"
+"repo.RepoObject::pk_index_guid" <-- "repo.Index_virtual_SysObject::pk_index_guid"
+"repo.RepoObject::SysObject_id" <-- "repo.Index_virtual_SysObject::SysObject_id"
+"repo.RepoObject::SysObject_name" <-- "repo.Index_virtual_SysObject::SysObject_name"
+"repo.RepoObject::SysObject_schema_name" <-- "repo.Index_virtual_SysObject::SysObject_schema_name"
+"repo.RepoObject::SysObject_type" <-- "repo.Index_virtual_SysObject::SysObject_type"
 @enduml
 

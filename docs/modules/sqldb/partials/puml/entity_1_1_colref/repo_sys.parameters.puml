@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:docs.RepoObject_ParameterList.adoc[prefix=..]" as docs.RepoObject_ParameterList << V >> {
+entity "puml-link:dhw:sqldb:docs.RepoObject_ParameterList.adoc[]" as docs.RepoObject_ParameterList << V >> {
   **RepoObject_guid** : (uniqueidentifier)
   --
   AntoraParameterList : (nvarchar(max))
@@ -33,7 +34,7 @@ entity "puml-link:docs.RepoObject_ParameterList.adoc[prefix=..]" as docs.RepoObj
   --
 }
 
-entity "puml-link:repo_sys.parameters.adoc[prefix=..]" as repo_sys.parameters << V >> {
+entity "puml-link:dhw:sqldb:repo_sys.parameters.adoc[]" as repo_sys.parameters << V >> {
   --
   column_encryption_key_database_name : (sysname)
   column_encryption_key_id : (int)
@@ -68,7 +69,7 @@ entity "puml-link:repo_sys.parameters.adoc[prefix=..]" as repo_sys.parameters <<
   --
 }
 
-entity "puml-link:repo_sys.SysObject.adoc[prefix=..]" as repo_sys.SysObject << V >> {
+entity "puml-link:dhw:sqldb:repo_sys.SysObject.adoc[]" as repo_sys.SysObject << V >> {
   --
   - create_date : (datetime)
   history_table_id : (int)
@@ -95,13 +96,13 @@ entity "puml-link:repo_sys.SysObject.adoc[prefix=..]" as repo_sys.SysObject << V
   --
 }
 
-entity "puml-link:sys_dwh.parameters.adoc[prefix=..]" as sys_dwh.parameters << SN >> {
+entity "puml-link:dhw:sqldb:sys_dwh.parameters.adoc[]" as sys_dwh.parameters << SN >> {
   --
   --
   --
 }
 
-entity "puml-link:sys_dwh.types.adoc[prefix=..]" as sys_dwh.types << SN >> {
+entity "puml-link:dhw:sqldb:sys_dwh.types.adoc[]" as sys_dwh.types << SN >> {
   --
   --
   --
@@ -111,17 +112,12 @@ repo_sys.parameters <.. docs.RepoObject_ParameterList
 repo_sys.SysObject <.. repo_sys.parameters
 sys_dwh.parameters <.. repo_sys.parameters
 sys_dwh.types <.. repo_sys.parameters
-repo_sys.parameters::SysObject_RepoObject_guid <-- docs.RepoObject_ParameterList::RepoObject_guid
-repo_sys.SysObject::SysObject_fullname <-- repo_sys.parameters::SysObject_fullname
-repo_sys.SysObject::SysObject_fullname2 <-- repo_sys.parameters::SysObject_fullname2
-repo_sys.SysObject::SysObject_name <-- repo_sys.parameters::SysObject_name
-repo_sys.SysObject::SysObject_RepoObject_guid <-- repo_sys.parameters::SysObject_RepoObject_guid
-repo_sys.SysObject::SysObject_schema_name <-- repo_sys.parameters::SysObject_schema_name
-repo_sys.SysObject::type <-- repo_sys.parameters::SysObject_type
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"repo_sys.parameters::SysObject_RepoObject_guid" <-- "docs.RepoObject_ParameterList::RepoObject_guid"
+"repo_sys.SysObject::SysObject_fullname" <-- "repo_sys.parameters::SysObject_fullname"
+"repo_sys.SysObject::SysObject_fullname2" <-- "repo_sys.parameters::SysObject_fullname2"
+"repo_sys.SysObject::SysObject_name" <-- "repo_sys.parameters::SysObject_name"
+"repo_sys.SysObject::SysObject_RepoObject_guid" <-- "repo_sys.parameters::SysObject_RepoObject_guid"
+"repo_sys.SysObject::SysObject_schema_name" <-- "repo_sys.parameters::SysObject_schema_name"
+"repo_sys.SysObject::type" <-- "repo_sys.parameters::SysObject_type"
 @enduml
 

@@ -22,18 +22,23 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
   has_execution_plan_issue : (bit)
   has_get_referenced_issue : (bit)
+  Inheritance_Source_fullname : (nvarchar(261))
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
   InheritanceDefinition : (nvarchar(4000))
   InheritanceType : (tinyint)
   - is_DocsExclude : (bit)
+  - is_external : (bit)
   is_repo_managed : (bit)
   is_required_ObjectMerge : (bit)
   - is_ssas : (bit)
@@ -68,12 +73,14 @@ entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
   --
 }
 
-entity "puml-link:repo.SysObject_RepoObject_via_name.adoc[prefix=..]" as repo.SysObject_RepoObject_via_name << V >> {
+entity "puml-link:dhw:sqldb:repo.SysObject_RepoObject_via_name.adoc[]" as repo.SysObject_RepoObject_via_name << V >> {
   --
   history_table_guid : (uniqueidentifier)
   history_table_id : (int)
+  is_external : (bit)
   is_repo_managed : (bit)
   is_RepoObject_name_uniqueidentifier : (int)
+  is_ssas : (bit)
   is_SysObject_name_uniqueidentifier : (int)
   - modify_date : (datetime)
   - parent_object_id : (int)
@@ -101,13 +108,13 @@ entity "puml-link:repo.SysObject_RepoObject_via_name.adoc[prefix=..]" as repo.Sy
   --
 }
 
-entity "puml-link:repo.usp_sync_guid_RepoObject.adoc[prefix=..]" as repo.usp_sync_guid_RepoObject << P >> {
+entity "puml-link:dhw:sqldb:repo.usp_sync_guid_RepoObject.adoc[]" as repo.usp_sync_guid_RepoObject << P >> {
   --
   --
   --
 }
 
-entity "puml-link:repo_sys.IndexColumn_unique.adoc[prefix=..]" as repo_sys.IndexColumn_unique << V >> {
+entity "puml-link:dhw:sqldb:repo_sys.IndexColumn_unique.adoc[]" as repo_sys.IndexColumn_unique << V >> {
   --
   - index_column_id : (int)
   index_guid : (uniqueidentifier)
@@ -128,7 +135,7 @@ entity "puml-link:repo_sys.IndexColumn_unique.adoc[prefix=..]" as repo_sys.Index
   --
 }
 
-entity "puml-link:repo_sys.sql_expression_dependencies.adoc[prefix=..]" as repo_sys.sql_expression_dependencies << V >> {
+entity "puml-link:dhw:sqldb:repo_sys.sql_expression_dependencies.adoc[]" as repo_sys.sql_expression_dependencies << V >> {
   --
   definition : (nvarchar(max))
   - is_ambiguous : (bit)
@@ -163,7 +170,7 @@ entity "puml-link:repo_sys.sql_expression_dependencies.adoc[prefix=..]" as repo_
   --
 }
 
-entity "puml-link:repo_sys.SysObject.adoc[prefix=..]" as repo_sys.SysObject << V >> {
+entity "puml-link:dhw:sqldb:repo_sys.SysObject.adoc[]" as repo_sys.SysObject << V >> {
   --
   - create_date : (datetime)
   history_table_id : (int)
@@ -195,44 +202,39 @@ repo.SysObject_RepoObject_via_name <.. repo_sys.IndexColumn_unique
 repo.SysObject_RepoObject_via_name <.. repo_sys.sql_expression_dependencies
 repo.SysObject_RepoObject_via_name <.. repo.usp_sync_guid_RepoObject
 repo_sys.SysObject <.. repo.SysObject_RepoObject_via_name
-repo.RepoObject::is_repo_managed <-- repo.SysObject_RepoObject_via_name::is_repo_managed
-repo.RepoObject::is_RepoObject_name_uniqueidentifier <-- repo.SysObject_RepoObject_via_name::is_RepoObject_name_uniqueidentifier
-repo.RepoObject::is_SysObject_missing <-- repo.SysObject_RepoObject_via_name::RepoObject_is_SysObject_missing
-repo.RepoObject::is_SysObject_name_uniqueidentifier <-- repo.SysObject_RepoObject_via_name::is_SysObject_name_uniqueidentifier
-repo.RepoObject::Repo_history_table_guid <-- repo.SysObject_RepoObject_via_name::Repo_history_table_guid
-repo.RepoObject::Repo_temporal_type <-- repo.SysObject_RepoObject_via_name::Repo_temporal_type
-repo.RepoObject::RepoObject_guid <-- repo.SysObject_RepoObject_via_name::history_table_guid
-repo.RepoObject::RepoObject_guid <-- repo.SysObject_RepoObject_via_name::RepoObject_guid
-repo.RepoObject::RepoObject_name <-- repo.SysObject_RepoObject_via_name::RepoObject_name
-repo.RepoObject::RepoObject_schema_name <-- repo.SysObject_RepoObject_via_name::RepoObject_schema_name
-repo.RepoObject::RepoObject_type <-- repo.SysObject_RepoObject_via_name::RepoObject_type
-repo.RepoObject::SysObject_id <-- repo.SysObject_RepoObject_via_name::RepoObject_SysObject_id
-repo.RepoObject::SysObject_modify_date <-- repo.SysObject_RepoObject_via_name::RepoObject_SysObject_modify_date
-repo.RepoObject::SysObject_name <-- repo.SysObject_RepoObject_via_name::RepoObject_SysObject_name
-repo.RepoObject::SysObject_parent_object_id <-- repo.SysObject_RepoObject_via_name::RepoObject_SysObject_parent_object_id
-repo.RepoObject::SysObject_schema_name <-- repo.SysObject_RepoObject_via_name::RepoObject_SysObject_schema_name
-repo.RepoObject::SysObject_type <-- repo.SysObject_RepoObject_via_name::RepoObject_SysObject_type
-repo.SysObject_RepoObject_via_name::RepoObject_guid <-- repo_sys.IndexColumn_unique::index_guid
-repo.SysObject_RepoObject_via_name::RepoObject_guid <-- repo_sys.sql_expression_dependencies::referencing_RepoObject_guid
-repo.SysObject_RepoObject_via_name::RepoObject_guid <-- repo_sys.sql_expression_dependencies::referenced_RepoObject_guid
-repo.SysObject_RepoObject_via_name::SysObject_type <-- repo_sys.sql_expression_dependencies::referencing_type
-repo.SysObject_RepoObject_via_name::SysObject_type <-- repo_sys.sql_expression_dependencies::referenced_type
-repo.SysObject_RepoObject_via_name::SysObject_type_desc <-- repo_sys.sql_expression_dependencies::referencing_type_desciption
-repo.SysObject_RepoObject_via_name::SysObject_type_desc <-- repo_sys.sql_expression_dependencies::referenced_type_desciption
-repo_sys.SysObject::history_table_id <-- repo.SysObject_RepoObject_via_name::history_table_id
-repo_sys.SysObject::modify_date <-- repo.SysObject_RepoObject_via_name::modify_date
-repo_sys.SysObject::parent_object_id <-- repo.SysObject_RepoObject_via_name::parent_object_id
-repo_sys.SysObject::SysObject_id <-- repo.SysObject_RepoObject_via_name::SysObject_id
-repo_sys.SysObject::SysObject_name <-- repo.SysObject_RepoObject_via_name::SysObject_name
-repo_sys.SysObject::SysObject_RepoObject_guid <-- repo.SysObject_RepoObject_via_name::SysObject_RepoObject_guid
-repo_sys.SysObject::SysObject_schema_name <-- repo.SysObject_RepoObject_via_name::SysObject_schema_name
-repo_sys.SysObject::temporal_type <-- repo.SysObject_RepoObject_via_name::temporal_type
-repo_sys.SysObject::type <-- repo.SysObject_RepoObject_via_name::SysObject_type
-repo_sys.SysObject::type_desc <-- repo.SysObject_RepoObject_via_name::SysObject_type_desc
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"repo.RepoObject::is_repo_managed" <-- "repo.SysObject_RepoObject_via_name::is_repo_managed"
+"repo.RepoObject::is_RepoObject_name_uniqueidentifier" <-- "repo.SysObject_RepoObject_via_name::is_RepoObject_name_uniqueidentifier"
+"repo.RepoObject::is_SysObject_missing" <-- "repo.SysObject_RepoObject_via_name::RepoObject_is_SysObject_missing"
+"repo.RepoObject::is_SysObject_name_uniqueidentifier" <-- "repo.SysObject_RepoObject_via_name::is_SysObject_name_uniqueidentifier"
+"repo.RepoObject::Repo_history_table_guid" <-- "repo.SysObject_RepoObject_via_name::Repo_history_table_guid"
+"repo.RepoObject::Repo_temporal_type" <-- "repo.SysObject_RepoObject_via_name::Repo_temporal_type"
+"repo.RepoObject::RepoObject_guid" <-- "repo.SysObject_RepoObject_via_name::history_table_guid"
+"repo.RepoObject::RepoObject_guid" <-- "repo.SysObject_RepoObject_via_name::RepoObject_guid"
+"repo.RepoObject::RepoObject_name" <-- "repo.SysObject_RepoObject_via_name::RepoObject_name"
+"repo.RepoObject::RepoObject_schema_name" <-- "repo.SysObject_RepoObject_via_name::RepoObject_schema_name"
+"repo.RepoObject::RepoObject_type" <-- "repo.SysObject_RepoObject_via_name::RepoObject_type"
+"repo.RepoObject::SysObject_id" <-- "repo.SysObject_RepoObject_via_name::RepoObject_SysObject_id"
+"repo.RepoObject::SysObject_modify_date" <-- "repo.SysObject_RepoObject_via_name::RepoObject_SysObject_modify_date"
+"repo.RepoObject::SysObject_name" <-- "repo.SysObject_RepoObject_via_name::RepoObject_SysObject_name"
+"repo.RepoObject::SysObject_parent_object_id" <-- "repo.SysObject_RepoObject_via_name::RepoObject_SysObject_parent_object_id"
+"repo.RepoObject::SysObject_schema_name" <-- "repo.SysObject_RepoObject_via_name::RepoObject_SysObject_schema_name"
+"repo.RepoObject::SysObject_type" <-- "repo.SysObject_RepoObject_via_name::RepoObject_SysObject_type"
+"repo.SysObject_RepoObject_via_name::RepoObject_guid" <-- "repo_sys.IndexColumn_unique::index_guid"
+"repo.SysObject_RepoObject_via_name::RepoObject_guid" <-- "repo_sys.sql_expression_dependencies::referencing_RepoObject_guid"
+"repo.SysObject_RepoObject_via_name::RepoObject_guid" <-- "repo_sys.sql_expression_dependencies::referenced_RepoObject_guid"
+"repo.SysObject_RepoObject_via_name::SysObject_type" <-- "repo_sys.sql_expression_dependencies::referencing_type"
+"repo.SysObject_RepoObject_via_name::SysObject_type" <-- "repo_sys.sql_expression_dependencies::referenced_type"
+"repo.SysObject_RepoObject_via_name::SysObject_type_desc" <-- "repo_sys.sql_expression_dependencies::referencing_type_desciption"
+"repo.SysObject_RepoObject_via_name::SysObject_type_desc" <-- "repo_sys.sql_expression_dependencies::referenced_type_desciption"
+"repo_sys.SysObject::history_table_id" <-- "repo.SysObject_RepoObject_via_name::history_table_id"
+"repo_sys.SysObject::modify_date" <-- "repo.SysObject_RepoObject_via_name::modify_date"
+"repo_sys.SysObject::parent_object_id" <-- "repo.SysObject_RepoObject_via_name::parent_object_id"
+"repo_sys.SysObject::SysObject_id" <-- "repo.SysObject_RepoObject_via_name::SysObject_id"
+"repo_sys.SysObject::SysObject_name" <-- "repo.SysObject_RepoObject_via_name::SysObject_name"
+"repo_sys.SysObject::SysObject_RepoObject_guid" <-- "repo.SysObject_RepoObject_via_name::SysObject_RepoObject_guid"
+"repo_sys.SysObject::SysObject_schema_name" <-- "repo.SysObject_RepoObject_via_name::SysObject_schema_name"
+"repo_sys.SysObject::temporal_type" <-- "repo.SysObject_RepoObject_via_name::temporal_type"
+"repo_sys.SysObject::type" <-- "repo.SysObject_RepoObject_via_name::SysObject_type"
+"repo_sys.SysObject::type_desc" <-- "repo.SysObject_RepoObject_via_name::SysObject_type_desc"
 @enduml
 

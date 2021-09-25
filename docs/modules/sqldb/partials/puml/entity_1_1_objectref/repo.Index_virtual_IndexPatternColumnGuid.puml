@@ -22,42 +22,37 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:repo.Index_union.adoc[prefix=..]" as repo.Index_union << V >> {
+entity "puml-link:dhw:sqldb:repo.Index_union.adoc[]" as repo.Index_union << V >> {
   **index_guid** : (uniqueidentifier)
   --
 }
 
-entity "puml-link:repo.Index_virtual.adoc[prefix=..]" as repo.Index_virtual << U >> {
+entity "puml-link:dhw:sqldb:repo.Index_virtual.adoc[]" as repo.Index_virtual << U >> {
   - **index_guid** : (uniqueidentifier)
   --
 }
 
-entity "puml-link:repo.Index_virtual_IndexPatternColumnGuid.adoc[prefix=..]" as repo.Index_virtual_IndexPatternColumnGuid << V >> {
-  - **index_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:repo.Index_virtual_IndexPatternColumnGuid.adoc[]" as repo.Index_virtual_IndexPatternColumnGuid << V >> {
   --
 }
 
-entity "puml-link:repo.IndexColumn_virtual.adoc[prefix=..]" as repo.IndexColumn_virtual << U >> {
+entity "puml-link:dhw:sqldb:repo.IndexColumn_virtual.adoc[]" as repo.IndexColumn_virtual << U >> {
   - **index_guid** : (uniqueidentifier)
   - **index_column_id** : (int)
   --
 }
 
-entity "puml-link:repo.usp_index_inheritance.adoc[prefix=..]" as repo.usp_index_inheritance << P >> {
+entity "puml-link:dhw:sqldb:repo.usp_index_inheritance.adoc[]" as repo.usp_index_inheritance << P >> {
   --
 }
 
 repo.Index_virtual <.. repo.Index_virtual_IndexPatternColumnGuid
-repo.Index_virtual_IndexPatternColumnGuid <.. repo.Index_union
 repo.Index_virtual_IndexPatternColumnGuid <.. repo.usp_index_inheritance
+repo.Index_virtual_IndexPatternColumnGuid <.. repo.Index_union
 repo.IndexColumn_virtual <.. repo.Index_virtual_IndexPatternColumnGuid
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
 @enduml
 

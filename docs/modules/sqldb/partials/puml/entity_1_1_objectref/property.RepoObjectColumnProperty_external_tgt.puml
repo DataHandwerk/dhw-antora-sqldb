@@ -1,0 +1,76 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:property.PropertyName_RepoObject_T.adoc[]" as property.PropertyName_RepoObject_T << U >> {
+  **property_name** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.RepoObjectColumnProperty.adoc[]" as property.RepoObjectColumnProperty << U >> {
+  - **RepoObjectColumnProperty_id** : (int)
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.RepoObjectColumnProperty_external_src.adoc[]" as property.RepoObjectColumnProperty_external_src << V >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.RepoObjectColumnProperty_external_tgt.adoc[]" as property.RepoObjectColumnProperty_external_tgt << V >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.usp_PERSIST_RepoObjectColumnProperty_external_tgt.adoc[]" as property.usp_PERSIST_RepoObjectColumnProperty_external_tgt << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.RepoObjectColumn.adoc[]" as repo.RepoObjectColumn << U >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  --
+}
+
+property.PropertyName_RepoObject_T <.. property.RepoObjectColumnProperty_external_tgt
+property.RepoObjectColumnProperty <.. property.RepoObjectColumnProperty_external_tgt
+property.RepoObjectColumnProperty_external_src <.. property.RepoObjectColumnProperty_external_tgt
+property.RepoObjectColumnProperty_external_tgt <.. repo.RepoObject
+property.RepoObjectColumnProperty_external_tgt <.. property.PropertyName_RepoObject_T
+property.RepoObjectColumnProperty_external_tgt <.. property.usp_PERSIST_RepoObjectColumnProperty_external_tgt
+property.RepoObjectColumnProperty_external_tgt <.. repo.RepoObjectColumn
+property.RepoObjectColumnProperty_external_tgt <.. property.RepoObjectColumnProperty
+repo.RepoObject <.. property.RepoObjectColumnProperty_external_tgt
+repo.RepoObjectColumn <.. property.RepoObjectColumnProperty_external_tgt
+@enduml
+

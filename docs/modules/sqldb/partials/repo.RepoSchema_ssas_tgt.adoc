@@ -65,14 +65,14 @@ view
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-RepoSchema_name]
-=== RepoSchema_name
+[#column-RepoSchema_guid]
+=== RepoSchema_guid
 
 [cols="d,8m,m,m,m,d"]
 |===
 |1
-|*RepoSchema_name*
-|nvarchar(128)
+|*RepoSchema_guid*
+|uniqueidentifier
 |NOT NULL
 |
 |
@@ -80,8 +80,7 @@ view
 
 .Referenced Columns
 --
-* xref:repo.RepoSchema.adoc#column-RepoSchema_name[+repo.RepoSchema.RepoSchema_name+]
-* xref:repo.RepoSchema_ssas_src.adoc#column-RepoSchema_name[+repo.RepoSchema_ssas_src.RepoSchema_name+]
+* xref:repo.RepoSchema.adoc#column-RepoSchema_guid[+repo.RepoSchema.RepoSchema_guid+]
 --
 
 
@@ -200,25 +199,6 @@ view
 --
 
 
-[#column-RepoSchema_guid]
-=== RepoSchema_guid
-
-[cols="d,8m,m,m,m,d"]
-|===
-|
-|RepoSchema_guid
-|uniqueidentifier
-|NOT NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:repo.RepoSchema.adoc#column-RepoSchema_guid[+repo.RepoSchema.RepoSchema_guid+]
---
-
-
 [#column-RepoSchema_ms_description]
 === RepoSchema_ms_description
 
@@ -236,6 +216,26 @@ view
 --
 * xref:repo.RepoSchema.adoc#column-RepoSchema_ms_description[+repo.RepoSchema.RepoSchema_ms_description+]
 * xref:repo.RepoSchema_ssas_src.adoc#column-RepoSchema_ms_description[+repo.RepoSchema_ssas_src.RepoSchema_ms_description+]
+--
+
+
+[#column-RepoSchema_name]
+=== RepoSchema_name
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|RepoSchema_name
+|nvarchar(128)
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo.RepoSchema.adoc#column-RepoSchema_name[+repo.RepoSchema.RepoSchema_name+]
+* xref:repo.RepoSchema_ssas_src.adoc#column-RepoSchema_name[+repo.RepoSchema_ssas_src.RepoSchema_name+]
 --
 
 
@@ -290,8 +290,8 @@ view
 
 // tag::AntoraPkColumnTableRows[]
 |1
-|*<<column-RepoSchema_name>>*
-|nvarchar(128)
+|*<<column-RepoSchema_guid>>*
+|uniqueidentifier
 |NOT NULL
 |
 |
@@ -347,16 +347,16 @@ view
 |
 
 |
-|<<column-RepoSchema_guid>>
-|uniqueidentifier
-|NOT NULL
+|<<column-RepoSchema_ms_description>>
+|nvarchar(max)
+|NULL
 |
 |
 
 |
-|<<column-RepoSchema_ms_description>>
-|nvarchar(max)
-|NULL
+|<<column-RepoSchema_name>>
+|nvarchar(128)
+|NOT NULL
 |
 |
 
@@ -383,21 +383,21 @@ view
 [#index-PK_RepoSchema_ssas_tgt]
 === PK_RepoSchema_ssas_tgt
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
-* <<column-RepoSchema_name>>; nvarchar(128)
+* <<column-RepoSchema_guid>>; uniqueidentifier
 --
 * PK, Unique, Real: 1, 1, 0
 
 
-[#index-UK_RepoSchema_ssas_tgt_2]
+[#index-UK_RepoSchema_ssas_tgt2x_2]
 === UK_RepoSchema_ssas_tgt++__++2
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
-* <<column-RepoSchema_guid>>; uniqueidentifier
+* <<column-RepoSchema_name>>; nvarchar(128)
 --
 * PK, Unique, Real: 0, 1, 0
 
@@ -433,7 +433,6 @@ source: property.RepoObjectProperty_cross As rop_cross
 
 // tag::antorareferencinglist[]
 * xref:repo.RepoSchema.adoc[]
-* xref:repo.usp_PERSIST_RepoSchema_ssas_tgt.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -636,21 +635,21 @@ xref:repo.RepoSchema_ssas_src.adoc[]
 === pk_index_guid
 
 // tag::pk_index_guid[]
-C4B00DAD-2007-EC11-8515-A81E8446D5B0
+D704BF8F-471C-EC11-8521-A81E8446D5B0
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-nvarchar(128)
+uniqueidentifier
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-RepoSchema_name
+RepoSchema_guid
 // end::pk_indexpatterncolumnname[]
 
 

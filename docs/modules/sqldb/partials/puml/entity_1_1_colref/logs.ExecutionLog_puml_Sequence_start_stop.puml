@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:logs.ExecutionLog.adoc[prefix=..]" as logs.ExecutionLog << U >> {
+entity "puml-link:dhw:sqldb:logs.ExecutionLog.adoc[]" as logs.ExecutionLog << U >> {
   --
   created_dt : (datetime)
   current_execution_guid : (uniqueidentifier)
@@ -79,7 +80,7 @@ entity "puml-link:logs.ExecutionLog.adoc[prefix=..]" as logs.ExecutionLog << U >
   --
 }
 
-entity "puml-link:logs.ExecutionLog_parent.adoc[prefix=..]" as logs.ExecutionLog_parent << V >> {
+entity "puml-link:dhw:sqldb:logs.ExecutionLog_parent.adoc[]" as logs.ExecutionLog_parent << V >> {
   --
   - id : (bigint)
   parent_created_dt : (datetime)
@@ -115,7 +116,7 @@ entity "puml-link:logs.ExecutionLog_parent.adoc[prefix=..]" as logs.ExecutionLog
   --
 }
 
-entity "puml-link:logs.ExecutionLog_puml_Sequence_start_stop.adoc[prefix=..]" as logs.ExecutionLog_puml_Sequence_start_stop << V >> {
+entity "puml-link:dhw:sqldb:logs.ExecutionLog_puml_Sequence_start_stop.adoc[]" as logs.ExecutionLog_puml_Sequence_start_stop << V >> {
   --
   created_dt : (datetime)
   - execution_instance_guid : (uniqueidentifier)
@@ -127,7 +128,7 @@ entity "puml-link:logs.ExecutionLog_puml_Sequence_start_stop.adoc[prefix=..]" as
   --
 }
 
-entity "puml-link:logs.ftv_ExecutionLog_puml_sequence_start_stop_per_execution.adoc[prefix=..]" as logs.ftv_ExecutionLog_puml_sequence_start_stop_per_execution << IF >> {
+entity "puml-link:dhw:sqldb:logs.ftv_ExecutionLog_puml_sequence_start_stop_per_execution.adoc[]" as logs.ftv_ExecutionLog_puml_sequence_start_stop_per_execution << IF >> {
   --
   - puml_Sequence_start_stop : (nvarchar(max))
   --
@@ -137,15 +138,10 @@ entity "puml-link:logs.ftv_ExecutionLog_puml_sequence_start_stop_per_execution.a
 logs.ExecutionLog <.. logs.ExecutionLog_puml_Sequence_start_stop
 logs.ExecutionLog_parent <.. logs.ExecutionLog_puml_Sequence_start_stop
 logs.ExecutionLog_puml_Sequence_start_stop <.. logs.ftv_ExecutionLog_puml_sequence_start_stop_per_execution
-logs.ExecutionLog::created_dt <-- logs.ExecutionLog_puml_Sequence_start_stop::created_dt
-logs.ExecutionLog::execution_instance_guid <-- logs.ExecutionLog_puml_Sequence_start_stop::execution_instance_guid
-logs.ExecutionLog::id <-- logs.ExecutionLog_puml_Sequence_start_stop::id
-logs.ExecutionLog::proc_fullname <-- logs.ExecutionLog_puml_Sequence_start_stop::proc_fullname
-logs.ExecutionLog_parent::parent_proc_fullname <-- logs.ExecutionLog_puml_Sequence_start_stop::parent_proc_fullname
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"logs.ExecutionLog::created_dt" <-- "logs.ExecutionLog_puml_Sequence_start_stop::created_dt"
+"logs.ExecutionLog::execution_instance_guid" <-- "logs.ExecutionLog_puml_Sequence_start_stop::execution_instance_guid"
+"logs.ExecutionLog::id" <-- "logs.ExecutionLog_puml_Sequence_start_stop::id"
+"logs.ExecutionLog::proc_fullname" <-- "logs.ExecutionLog_puml_Sequence_start_stop::proc_fullname"
+"logs.ExecutionLog_parent::parent_proc_fullname" <-- "logs.ExecutionLog_puml_Sequence_start_stop::parent_proc_fullname"
 @enduml
 

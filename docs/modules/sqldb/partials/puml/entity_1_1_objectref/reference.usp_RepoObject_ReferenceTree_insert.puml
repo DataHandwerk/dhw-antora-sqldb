@@ -22,14 +22,19 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:logs.usp_ExecutionLog_insert.adoc[prefix=..]" as logs.usp_ExecutionLog_insert << P >> {
+entity "puml-link:dhw:sqldb:logs.usp_ExecutionLog_insert.adoc[]" as logs.usp_ExecutionLog_insert << P >> {
   --
 }
 
-entity "puml-link:reference.RepoObject_ReferenceTree.adoc[prefix=..]" as reference.RepoObject_ReferenceTree << U >> {
+entity "puml-link:dhw:sqldb:reference.RepoObject_ReferencedReferencing.adoc[]" as reference.RepoObject_ReferencedReferencing << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.RepoObject_ReferenceTree.adoc[]" as reference.RepoObject_ReferenceTree << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   **Referenced_Depth** : (int)
   **Referencing_Depth** : (int)
@@ -38,28 +43,17 @@ entity "puml-link:reference.RepoObject_ReferenceTree.adoc[prefix=..]" as referen
   --
 }
 
-entity "puml-link:reference.RepoObject_ReferencingReferenced.adoc[prefix=..]" as reference.RepoObject_ReferencingReferenced << V >> {
-  - **Referenced_guid** : (uniqueidentifier)
-  - **Referencing_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:reference.usp_RepoObject_ReferenceTree_insert.adoc[]" as reference.usp_RepoObject_ReferenceTree_insert << P >> {
   --
 }
 
-entity "puml-link:reference.usp_RepoObject_ReferenceTree_insert.adoc[prefix=..]" as reference.usp_RepoObject_ReferenceTree_insert << P >> {
-  --
-}
-
-entity "puml-link:repo.usp_main.adoc[prefix=..]" as repo.usp_main << P >> {
+entity "puml-link:dhw:sqldb:repo.usp_main.adoc[]" as repo.usp_main << P >> {
   --
 }
 
 logs.usp_ExecutionLog_insert <.. reference.usp_RepoObject_ReferenceTree_insert
+reference.RepoObject_ReferencedReferencing <.. reference.usp_RepoObject_ReferenceTree_insert
 reference.RepoObject_ReferenceTree <.. reference.usp_RepoObject_ReferenceTree_insert
-reference.RepoObject_ReferencingReferenced <.. reference.usp_RepoObject_ReferenceTree_insert
 reference.usp_RepoObject_ReferenceTree_insert <.. repo.usp_main
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
 @enduml
 

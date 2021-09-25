@@ -22,17 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:docs.fs_cleanStringForPuml.adoc[prefix=..]" as docs.fs_cleanStringForPuml << FN >> {
-  --
-  --
-  --
-}
-
-entity "puml-link:docs.RepoObject_Plantuml.adoc[prefix=..]" as docs.RepoObject_Plantuml << V >> {
-  - **RepoObject_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:docs.RepoObject_Plantuml.adoc[]" as docs.RepoObject_Plantuml << V >> {
   --
   ColRefList : (nvarchar(max))
   ObjectRefList : (nvarchar(max))
@@ -47,11 +41,12 @@ entity "puml-link:docs.RepoObject_Plantuml.adoc[prefix=..]" as docs.RepoObject_P
   PumlEntityList_0_30 : (nvarchar(max))
   PumlEntityList_30_0 : (nvarchar(max))
   - RepoObject_fullname2 : (nvarchar(257))
+  - RepoObject_guid : (uniqueidentifier)
   --
   --
 }
 
-entity "puml-link:docs.RepoObject_Plantuml_ObjectRefList_30_0.adoc[prefix=..]" as docs.RepoObject_Plantuml_ObjectRefList_30_0 << V >> {
+entity "puml-link:dhw:sqldb:docs.RepoObject_Plantuml_ObjectRefList_30_0.adoc[]" as docs.RepoObject_Plantuml_ObjectRefList_30_0 << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
   ObjectRefList : (nvarchar(max))
@@ -59,17 +54,23 @@ entity "puml-link:docs.RepoObject_Plantuml_ObjectRefList_30_0.adoc[prefix=..]" a
   --
 }
 
-entity "puml-link:reference.RepoObject_reference_T.adoc[prefix=..]" as reference.RepoObject_reference_T << U >> {
+entity "puml-link:dhw:sqldb:reference.RepoObject_reference_T.adoc[]" as reference.RepoObject_reference_T << U >> {
   **referenced_RepoObject_guid** : (uniqueidentifier)
   **referencing_RepoObject_guid** : (uniqueidentifier)
   --
   - is_ReversePersistenceViaView : (bit)
   referenced_entity_name : (nvarchar(128))
+  referenced_external_AntoraComponent : (nvarchar(128))
+  referenced_external_AntoraModule : (nvarchar(128))
+  referenced_is_external : (int)
   - referenced_is_PersistenceSource : (bit)
   - referenced_is_PersistenceTarget : (bit)
   referenced_schema_name : (nvarchar(128))
   referenced_type : (char(2))
   referencing_entity_name : (nvarchar(128))
+  referencing_external_AntoraComponent : (nvarchar(128))
+  referencing_external_AntoraModule : (nvarchar(128))
+  referencing_is_external : (int)
   - referencing_is_PersistenceTarget : (bit)
   - referencing_is_PersistenceUspSourceRef : (bit)
   referencing_is_PersistenceUspTargetRef : (bit)
@@ -77,13 +78,15 @@ entity "puml-link:reference.RepoObject_reference_T.adoc[prefix=..]" as reference
   referencing_type : (varchar(2))
   # referenced_fullname : (nvarchar(261))
   # referenced_fullname2 : (nvarchar(257))
+  ~ referenced_puml_entity : (nvarchar(4000))
   # referencing_fullname : (nvarchar(261))
   # referencing_fullname2 : (nvarchar(257))
+  ~ referencing_puml_entity : (nvarchar(4000))
   --
   --
 }
 
-entity "puml-link:reference.RepoObject_ReferenceTree.adoc[prefix=..]" as reference.RepoObject_ReferenceTree << U >> {
+entity "puml-link:dhw:sqldb:reference.RepoObject_ReferenceTree.adoc[]" as reference.RepoObject_ReferenceTree << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   **Referenced_Depth** : (int)
   **Referencing_Depth** : (int)
@@ -100,15 +103,9 @@ entity "puml-link:reference.RepoObject_ReferenceTree.adoc[prefix=..]" as referen
   --
 }
 
-docs.fs_cleanStringForPuml <.. docs.RepoObject_Plantuml_ObjectRefList_30_0
 docs.RepoObject_Plantuml_ObjectRefList_30_0 <.. docs.RepoObject_Plantuml
 reference.RepoObject_reference_T <.. docs.RepoObject_Plantuml_ObjectRefList_30_0
 reference.RepoObject_ReferenceTree <.. docs.RepoObject_Plantuml_ObjectRefList_30_0
-docs.RepoObject_Plantuml_ObjectRefList_30_0::ObjectRefList <-- docs.RepoObject_Plantuml::ObjectRefList_30_0
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"docs.RepoObject_Plantuml_ObjectRefList_30_0::ObjectRefList" <-- "docs.RepoObject_Plantuml::ObjectRefList_30_0"
 @enduml
 

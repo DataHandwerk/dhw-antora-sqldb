@@ -22,30 +22,30 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:docs.AntoraNavListPage_by_schema.adoc[prefix=..]" as docs.AntoraNavListPage_by_schema << V >> {
-  - **RepoObject_schema_name** : (nvarchar(128))
+entity "puml-link:dhw:sqldb:docs.AntoraNavListPage_by_schema.adoc[]" as docs.AntoraNavListPage_by_schema << V >> {
   --
 }
 
-entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
+entity "puml-link:dhw:sqldb:docs.RepoObject_OutputFilter.adoc[]" as docs.RepoObject_OutputFilter << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity "puml-link:repo.RepoSchema.adoc[prefix=..]" as repo.RepoSchema << U >> {
+entity "puml-link:dhw:sqldb:repo.RepoSchema.adoc[]" as repo.RepoSchema << U >> {
   - **RepoSchema_guid** : (uniqueidentifier)
   --
 }
 
+docs.RepoObject_OutputFilter <.. docs.AntoraNavListPage_by_schema
 repo.RepoObject <.. docs.AntoraNavListPage_by_schema
 repo.RepoSchema <.. docs.AntoraNavListPage_by_schema
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
 @enduml
 

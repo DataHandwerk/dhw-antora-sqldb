@@ -7,9 +7,6 @@
 :ExistsProperty--antorareferencinglist:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--pk_index_guid:
-:ExistsProperty--pk_indexpatterncolumndatatype:
-:ExistsProperty--pk_indexpatterncolumnname:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -50,25 +47,6 @@ view
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-ForeignKey_guid]
-=== ForeignKey_guid
-
-[cols="d,8m,m,m,m,d"]
-|===
-|1
-|*ForeignKey_guid*
-|uniqueidentifier
-|NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:repo.ForeignKey_Indexes_union_T.adoc#column-ForeignKey_guid[+repo.ForeignKey_Indexes_union_T.ForeignKey_guid+]
---
-
-
 [#column-delete_referential_action]
 === delete_referential_action
 
@@ -104,6 +82,25 @@ view
 .Referenced Columns
 --
 * xref:repo.ForeignKey_Indexes_union_T.adoc#column-ForeignKey_fullname[+repo.ForeignKey_Indexes_union_T.ForeignKey_fullname+]
+--
+
+
+[#column-ForeignKey_guid]
+=== ForeignKey_guid
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|ForeignKey_guid
+|uniqueidentifier
+|NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo.ForeignKey_Indexes_union_T.adoc#column-ForeignKey_guid[+repo.ForeignKey_Indexes_union_T.ForeignKey_guid+]
 --
 
 
@@ -531,12 +528,6 @@ view
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
-|1
-|*<<column-ForeignKey_guid>>*
-|uniqueidentifier
-|NULL
-|
-|
 
 
 
@@ -567,7 +558,6 @@ view
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
-
 |
 |<<column-delete_referential_action>>
 |tinyint
@@ -578,6 +568,13 @@ view
 |
 |<<column-ForeignKey_fullname>>
 |nvarchar(517)
+|NULL
+|
+|
+
+|
+|<<column-ForeignKey_guid>>
+|uniqueidentifier
 |NULL
 |
 |
@@ -742,15 +739,15 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-PK_ForeignKey_gross]
-=== PK_ForeignKey_gross
+[#index-idx_ForeignKey_gross2x_1]
+=== idx_ForeignKey_gross++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-ForeignKey_guid>>; uniqueidentifier
 --
-* PK, Unique, Real: 1, 1, 0
+* PK, Unique, Real: 0, 0, 0
 
 // end::AntoraIndexList[]
 
@@ -987,21 +984,21 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-32172D5A-AC9A-EB11-84F5-A81E8446D5B0
+
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-uniqueidentifier
+
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-ForeignKey_guid
+
 // end::pk_indexpatterncolumnname[]
 
 

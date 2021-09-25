@@ -10,7 +10,6 @@
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
-:ExistsProperty--AntoraIndexList:
 :ExistsProperty--Columns:
 // end::existing_properties[]
 
@@ -41,7 +40,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-08-17 19:29:56
+2021-09-24 22:39:44
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -85,11 +84,6 @@ view
 --
 {empty} +
 
-.Referenced Columns
---
-* xref:reference.RepoObjectColumn_ReferencingReferenced.adoc#column-Referencing_fullname[+reference.RepoObjectColumn_ReferencingReferenced.Referencing_fullname+]
---
-
 
 [#column-Referencing_fullname2]
 === Referencing_fullname2
@@ -117,11 +111,6 @@ view
 |
 |
 |===
-
-.Referenced Columns
---
-* xref:reference.RepoObjectColumn_ReferencingReferenced.adoc#column-Referencing_guid[+reference.RepoObjectColumn_ReferencingReferenced.Referencing_guid+]
---
 
 
 [#column-Referencing_type]
@@ -244,16 +233,6 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-idx_RepoObjectColumn_ReferencedList_1]
-=== idx_RepoObjectColumn_ReferencedList++__++1
-
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
-+
---
-* <<column-Referencing_guid>>; uniqueidentifier
---
-* PK, Unique, Real: 0, 0, 0
-
 // end::AntoraIndexList[]
 
 == AntoraParameterList
@@ -277,8 +256,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:docs.fs_cleanStringForAnchorId.adoc[]
-* xref:reference.RepoObjectColumn_ReferencingReferenced.adoc[]
+* xref:reference.RepoObjectColumn_ReferencedReferencing.adoc[]
 // end::antorareferencedlist[]
 
 
@@ -516,8 +494,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 === ReferencedObjectList
 
 // tag::referencedobjectlist[]
-* [docs].[fs_cleanStringForAnchorId]
-* [reference].[RepoObjectColumn_ReferencingReferenced]
+* [reference].[RepoObjectColumn_ReferencedReferencing]
 // end::referencedobjectlist[]
 
 
@@ -557,32 +534,21 @@ source: property.RepoObjectProperty WHERE property_int = 1
 [source,sql]
 ----
 
-
 CREATE View reference.RepoObjectColumn_ReferencedList
 As
 Select
     ror.Referencing_guid
   , AntoraReferencedColumnList  =
   --
-  String_Agg (
-                 Concat (
-                            --* xref:target-page-filename.adoc[link text]
-                            --we need to convert to first argument nvarchar(max) to avoid the limit of 8000 byte
-                            Cast('* xref:' As NVarchar(Max))
-                          , ror.Referenced_fullname2
-                          , '.adoc#column-' + docs.fs_cleanStringForAnchorId ( ror.ReferencedColumn_name ) + '[+'
-                            + ror.ReferencedColumn_fullname2 + '+]'
-                        )
-               , Char ( 13 ) + Char ( 10 )
-             ) Within Group(Order By
-                                ror.Referenced_fullname)
+  String_Agg ( ror.referenced_AntoraXref, Char ( 13 ) + Char ( 10 )) Within Group(Order By
+                                                                                      ror.Referenced_fullname)
   , Referencing_fullname        = Max ( ror.Referencing_fullname )
   , Referencing_fullname2       = Max ( ror.Referencing_fullname2 )
   , ReferencingColumn_fullname  = Max ( ror.ReferencingColumn_fullname )
   , ReferencingColumn_fullname2 = Max ( ror.ReferencingColumn_fullname2 )
   , Referencing_type            = Max ( ror.Referencing_type )
 From
-    reference.RepoObjectColumn_ReferencingReferenced As ror
+    reference.RepoObjectColumn_ReferencedReferencing As ror
 Group By
     ror.Referencing_guid
 

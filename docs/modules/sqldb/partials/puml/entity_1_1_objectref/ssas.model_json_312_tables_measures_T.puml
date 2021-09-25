@@ -22,42 +22,35 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:repo.Measures.adoc[prefix=..]" as repo.Measures << V >> {
+entity "puml-link:dhw:sqldb:repo.Measures.adoc[]" as repo.Measures << V >> {
   --
 }
 
-entity "puml-link:ssas.model_json_312_tables_measures.adoc[prefix=..]" as ssas.model_json_312_tables_measures << V >> {
+entity "puml-link:dhw:sqldb:ssas.model_json_312_tables_measures.adoc[]" as ssas.model_json_312_tables_measures << V >> {
   - **databasename** : (nvarchar(128))
   - **tables_name** : (nvarchar(128))
   **tables_measures_name** : (nvarchar(500))
   --
 }
 
-entity "puml-link:ssas.model_json_312_tables_measures_T.adoc[prefix=..]" as ssas.model_json_312_tables_measures_T << U >> {
-  - **databasename** : (nvarchar(128))
-  - **tables_name** : (nvarchar(128))
-  **tables_measures_name** : (nvarchar(500))
+entity "puml-link:dhw:sqldb:ssas.model_json_312_tables_measures_T.adoc[]" as ssas.model_json_312_tables_measures_T << U >> {
+  - **Measure_guid** : (uniqueidentifier)
   --
 }
 
-entity "puml-link:ssas.model_json_3121_tables_columns_descriptions_multiline.adoc[prefix=..]" as ssas.model_json_3121_tables_columns_descriptions_multiline << V >> {
-  - **databasename** : (nvarchar(128))
-  - **tables_name** : (nvarchar(128))
-  - **tables_measures_name** : (nvarchar(500))
+entity "puml-link:dhw:sqldb:ssas.model_json_3121_tables_columns_descriptions_multiline.adoc[]" as ssas.model_json_3121_tables_columns_descriptions_multiline << V >> {
   --
 }
 
-entity "puml-link:ssas.model_json_3122_tables_measures_expressions_multiline.adoc[prefix=..]" as ssas.model_json_3122_tables_measures_expressions_multiline << V >> {
-  - **databasename** : (nvarchar(128))
-  - **tables_name** : (nvarchar(128))
-  - **tables_measures_name** : (nvarchar(500))
+entity "puml-link:dhw:sqldb:ssas.model_json_3122_tables_measures_expressions_multiline.adoc[]" as ssas.model_json_3122_tables_measures_expressions_multiline << V >> {
   --
 }
 
-entity "puml-link:ssas.usp_PERSIST_model_json_312_tables_measures_T.adoc[prefix=..]" as ssas.usp_PERSIST_model_json_312_tables_measures_T << P >> {
+entity "puml-link:dhw:sqldb:ssas.usp_PERSIST_model_json_312_tables_measures_T.adoc[]" as ssas.usp_PERSIST_model_json_312_tables_measures_T << P >> {
   --
 }
 
@@ -66,10 +59,5 @@ ssas.model_json_312_tables_measures_T <.. repo.Measures
 ssas.model_json_312_tables_measures_T <.. ssas.model_json_3121_tables_columns_descriptions_multiline
 ssas.model_json_312_tables_measures_T <.. ssas.model_json_3122_tables_measures_expressions_multiline
 ssas.model_json_312_tables_measures_T <.. ssas.usp_PERSIST_model_json_312_tables_measures_T
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
 @enduml
 

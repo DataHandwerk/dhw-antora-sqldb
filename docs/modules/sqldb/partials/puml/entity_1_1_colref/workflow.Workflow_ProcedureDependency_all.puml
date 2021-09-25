@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:workflow.ProcedureDependency.adoc[prefix=..]" as workflow.ProcedureDependency << U >> {
+entity "puml-link:dhw:sqldb:workflow.ProcedureDependency.adoc[]" as workflow.ProcedureDependency << U >> {
   - **id** : (int)
   --
   Description : (nvarchar(4000))
@@ -39,7 +40,7 @@ entity "puml-link:workflow.ProcedureDependency.adoc[prefix=..]" as workflow.Proc
   --
 }
 
-entity "puml-link:workflow.Workflow.adoc[prefix=..]" as workflow.Workflow << U >> {
+entity "puml-link:dhw:sqldb:workflow.Workflow.adoc[]" as workflow.Workflow << U >> {
   - **id** : (int)
   --
   Description : (nvarchar(4000))
@@ -50,7 +51,7 @@ entity "puml-link:workflow.Workflow.adoc[prefix=..]" as workflow.Workflow << U >
   --
 }
 
-entity "puml-link:workflow.Workflow_ProcedureDependency_all.adoc[prefix=..]" as workflow.Workflow_ProcedureDependency_all << V >> {
+entity "puml-link:dhw:sqldb:workflow.Workflow_ProcedureDependency_all.adoc[]" as workflow.Workflow_ProcedureDependency_all << V >> {
   --
   - referenced_Procedure_RepoObject_guid : (uniqueidentifier)
   - referencing_Procedure_RepoObject_guid : (uniqueidentifier)
@@ -59,7 +60,7 @@ entity "puml-link:workflow.Workflow_ProcedureDependency_all.adoc[prefix=..]" as 
   --
 }
 
-entity "puml-link:workflow.Workflow_ProcedureDependency_wo_redundant.adoc[prefix=..]" as workflow.Workflow_ProcedureDependency_wo_redundant << V >> {
+entity "puml-link:dhw:sqldb:workflow.Workflow_ProcedureDependency_wo_redundant.adoc[]" as workflow.Workflow_ProcedureDependency_wo_redundant << V >> {
   --
   - referenced_Procedure_RepoObject_guid : (uniqueidentifier)
   - referencing_Procedure_RepoObject_guid : (uniqueidentifier)
@@ -68,7 +69,7 @@ entity "puml-link:workflow.Workflow_ProcedureDependency_wo_redundant.adoc[prefix
   --
 }
 
-entity "puml-link:workflow.WorkflowStep_active.adoc[prefix=..]" as workflow.WorkflowStep_active << V >> {
+entity "puml-link:dhw:sqldb:workflow.WorkflowStep_active.adoc[]" as workflow.WorkflowStep_active << V >> {
   --
   - is_PossibleReferenced : (bit)
   - Procedure_RepoObject_guid : (uniqueidentifier)
@@ -82,16 +83,11 @@ workflow.ProcedureDependency <.. workflow.Workflow_ProcedureDependency_all
 workflow.Workflow <.. workflow.Workflow_ProcedureDependency_all
 workflow.Workflow_ProcedureDependency_all <.. workflow.Workflow_ProcedureDependency_wo_redundant
 workflow.WorkflowStep_active <.. workflow.Workflow_ProcedureDependency_all
-workflow.ProcedureDependency::referenced_Procedure_RepoObject_guid <-- workflow.Workflow_ProcedureDependency_all::referenced_Procedure_RepoObject_guid
-workflow.ProcedureDependency::referencing_Procedure_RepoObject_guid <-- workflow.Workflow_ProcedureDependency_all::referencing_Procedure_RepoObject_guid
-workflow.Workflow::id <-- workflow.Workflow_ProcedureDependency_all::Workflow_id
-workflow.Workflow_ProcedureDependency_all::referenced_Procedure_RepoObject_guid <-- workflow.Workflow_ProcedureDependency_wo_redundant::referenced_Procedure_RepoObject_guid
-workflow.Workflow_ProcedureDependency_all::referencing_Procedure_RepoObject_guid <-- workflow.Workflow_ProcedureDependency_wo_redundant::referencing_Procedure_RepoObject_guid
-workflow.Workflow_ProcedureDependency_all::Workflow_id <-- workflow.Workflow_ProcedureDependency_wo_redundant::Workflow_id
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"workflow.ProcedureDependency::referenced_Procedure_RepoObject_guid" <-- "workflow.Workflow_ProcedureDependency_all::referenced_Procedure_RepoObject_guid"
+"workflow.ProcedureDependency::referencing_Procedure_RepoObject_guid" <-- "workflow.Workflow_ProcedureDependency_all::referencing_Procedure_RepoObject_guid"
+"workflow.Workflow::id" <-- "workflow.Workflow_ProcedureDependency_all::Workflow_id"
+"workflow.Workflow_ProcedureDependency_all::referenced_Procedure_RepoObject_guid" <-- "workflow.Workflow_ProcedureDependency_wo_redundant::referenced_Procedure_RepoObject_guid"
+"workflow.Workflow_ProcedureDependency_all::referencing_Procedure_RepoObject_guid" <-- "workflow.Workflow_ProcedureDependency_wo_redundant::referencing_Procedure_RepoObject_guid"
+"workflow.Workflow_ProcedureDependency_all::Workflow_id" <-- "workflow.Workflow_ProcedureDependency_wo_redundant::Workflow_id"
 @enduml
 

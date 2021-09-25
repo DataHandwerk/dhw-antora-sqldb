@@ -41,7 +41,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-10 19:03:24
+2021-09-24 22:39:45
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -266,6 +266,20 @@ view
 --
 * xref:repo.RepoObjectColumn_gross.adoc#column-InheritanceType[+repo.RepoObjectColumn_gross.InheritanceType+]
 --
+
+
+[#column-is_external]
+=== is_external
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|is_external
+|bit
+|NOT NULL
+|
+|
+|===
 
 
 [#column-is_index_primary_key]
@@ -1801,6 +1815,7 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 
 
 
+
 // end::AntoraPkColumnTableRows[]
 
 == AntoraNonPkColumnTableRows
@@ -1880,6 +1895,13 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 |<<column-InheritanceType>>
 |tinyint
 |NULL
+|
+|
+
+|
+|<<column-is_external>>
+|bit
+|NOT NULL
 |
 |
 
@@ -2372,10 +2394,32 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 
 // tag::AntoraIndexList[]
 
-[#index-idx_RepoObjectColumn_gross2_1]
+[#index-idx_RepoObjectColumn_gross22x_1]
 === idx_RepoObjectColumn_gross2++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-persistence_source_RepoObject_guid_via_Column>>; uniqueidentifier
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[#index-idx_RepoObjectColumn_gross22x_2]
+=== idx_RepoObjectColumn_gross2++__++2
+
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-index_column_id>>; int
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[#index-idx_RepoObjectColumn_gross22x_3]
+=== idx_RepoObjectColumn_gross2++__++3
+
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-SysObject_schema_name>>; nvarchar(128)
@@ -2384,10 +2428,10 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObjectColumn_gross2_2]
-=== idx_RepoObjectColumn_gross2++__++2
+[#index-idx_RepoObjectColumn_gross22x_4]
+=== idx_RepoObjectColumn_gross2++__++4
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_schema_name>>; nvarchar(128)
@@ -2396,21 +2440,10 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObjectColumn_gross2_3]
-=== idx_RepoObjectColumn_gross2++__++3
+[#index-idx_RepoObjectColumn_gross22x_5]
+=== idx_RepoObjectColumn_gross2++__++5
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
-+
---
-* <<column-pk_index_guid>>; uniqueidentifier
---
-* PK, Unique, Real: 0, 0, 0
-
-
-[#index-idx_RepoObjectColumn_gross2_4]
-=== idx_RepoObjectColumn_gross2++__++4
-
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObjectColumn_guid>>; uniqueidentifier
@@ -2418,10 +2451,10 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObjectColumn_gross2_5]
-=== idx_RepoObjectColumn_gross2++__++5
+[#index-idx_RepoObjectColumn_gross22x_6]
+=== idx_RepoObjectColumn_gross2++__++6
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObjectColumn_guid>>; uniqueidentifier
@@ -2430,10 +2463,10 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObjectColumn_gross2_6]
-=== idx_RepoObjectColumn_gross2++__++6
+[#index-idx_RepoObjectColumn_gross22x_7]
+=== idx_RepoObjectColumn_gross2++__++7
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -2442,35 +2475,24 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObjectColumn_gross2_7]
-=== idx_RepoObjectColumn_gross2++__++7
+[#index-idx_RepoObjectColumn_gross22x_8]
+=== idx_RepoObjectColumn_gross2++__++8
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-pk_index_guid>>; uniqueidentifier
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[#index-idx_RepoObjectColumn_gross22x_9]
+=== idx_RepoObjectColumn_gross2++__++9
+
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
---
-* PK, Unique, Real: 0, 0, 0
-
-
-[#index-idx_RepoObjectColumn_gross2_8]
-=== idx_RepoObjectColumn_gross2++__++8
-
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
-+
---
-* <<column-index_column_id>>; int
---
-* PK, Unique, Real: 0, 0, 0
-
-
-[#index-idx_RepoObjectColumn_gross2_9]
-=== idx_RepoObjectColumn_gross2++__++9
-
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
-+
---
-* <<column-persistence_source_RepoObject_guid_via_Column>>; uniqueidentifier
 --
 * PK, Unique, Real: 0, 0, 0
 
@@ -2833,6 +2855,7 @@ Select
   , roc.has_get_referenced_issue
   , roc.is_repo_managed
   , roc.is_ssas
+  , roc.is_external
   , roc.is_RepoObject_name_uniqueidentifier
   , roc.is_SysObject_missing
   , roc.is_SysObject_name_uniqueidentifier
@@ -2903,6 +2926,7 @@ From
         repo.RepoObjectColumn                      As roc_pers_check
             On
             roc_pers_check.RepoObjectColumn_guid = roc.persistence_source_RepoObjectColumn_guid
+
 ----
 =======
 // end::sql_modules_definition[]

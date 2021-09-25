@@ -22,17 +22,18 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:workflow.Workflow.adoc[prefix=..]" as workflow.Workflow << U >> {
+entity "puml-link:dhw:sqldb:workflow.Workflow.adoc[]" as workflow.Workflow << U >> {
 **PK_Workflow**
 
 ..
 id; int
 }
 
-entity "puml-link:workflow.WorkflowStep.adoc[prefix=..]" as workflow.WorkflowStep << U >> {
+entity "puml-link:dhw:sqldb:workflow.WorkflowStep.adoc[]" as workflow.WorkflowStep << U >> {
 **PK_WorkflowStep**
 
 ..
@@ -55,11 +56,6 @@ Workflow_id; int
 Procedure_RepoObject_guid; uniqueidentifier
 }
 
-workflow.Workflow::PK_Workflow <-- workflow.WorkflowStep::idx_WorkflowStep__1
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"workflow.Workflow::PK_Workflow" <-- "workflow.WorkflowStep::idx_WorkflowStep__1"
 @enduml
 

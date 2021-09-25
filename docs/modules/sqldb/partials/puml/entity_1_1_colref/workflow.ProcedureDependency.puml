@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:workflow.ProcedureDependency.adoc[prefix=..]" as workflow.ProcedureDependency << U >> {
+entity "puml-link:dhw:sqldb:workflow.ProcedureDependency.adoc[]" as workflow.ProcedureDependency << U >> {
   - **id** : (int)
   --
   Description : (nvarchar(4000))
@@ -39,7 +40,7 @@ entity "puml-link:workflow.ProcedureDependency.adoc[prefix=..]" as workflow.Proc
   --
 }
 
-entity "puml-link:workflow.ProcedureDependency_gross.adoc[prefix=..]" as workflow.ProcedureDependency_gross << V >> {
+entity "puml-link:dhw:sqldb:workflow.ProcedureDependency_gross.adoc[]" as workflow.ProcedureDependency_gross << V >> {
   --
   Description : (nvarchar(4000))
   - id : (int)
@@ -57,7 +58,7 @@ entity "puml-link:workflow.ProcedureDependency_gross.adoc[prefix=..]" as workflo
   --
 }
 
-entity "puml-link:workflow.ProcedureDependency_input_PersistenceDependency.adoc[prefix=..]" as workflow.ProcedureDependency_input_PersistenceDependency << V >> {
+entity "puml-link:dhw:sqldb:workflow.ProcedureDependency_input_PersistenceDependency.adoc[]" as workflow.ProcedureDependency_input_PersistenceDependency << V >> {
   **referenced_Procedure_RepoObject_guid** : (uniqueidentifier)
   **referencing_Procedure_RepoObject_guid** : (uniqueidentifier)
   --
@@ -68,7 +69,7 @@ entity "puml-link:workflow.ProcedureDependency_input_PersistenceDependency.adoc[
   --
 }
 
-entity "puml-link:workflow.Workflow_ProcedureDependency.adoc[prefix=..]" as workflow.Workflow_ProcedureDependency << V >> {
+entity "puml-link:dhw:sqldb:workflow.Workflow_ProcedureDependency.adoc[]" as workflow.Workflow_ProcedureDependency << V >> {
   --
   - referenced_Procedure_RepoObject_guid : (uniqueidentifier)
   - referencing_Procedure_RepoObject_guid : (uniqueidentifier)
@@ -77,7 +78,7 @@ entity "puml-link:workflow.Workflow_ProcedureDependency.adoc[prefix=..]" as work
   --
 }
 
-entity "puml-link:workflow.Workflow_ProcedureDependency_all.adoc[prefix=..]" as workflow.Workflow_ProcedureDependency_all << V >> {
+entity "puml-link:dhw:sqldb:workflow.Workflow_ProcedureDependency_all.adoc[]" as workflow.Workflow_ProcedureDependency_all << V >> {
   --
   - referenced_Procedure_RepoObject_guid : (uniqueidentifier)
   - referencing_Procedure_RepoObject_guid : (uniqueidentifier)
@@ -91,23 +92,18 @@ workflow.ProcedureDependency <.. workflow.ProcedureDependency_input_PersistenceD
 workflow.ProcedureDependency <.. workflow.Workflow_ProcedureDependency_all
 workflow.ProcedureDependency <.. workflow.Workflow_ProcedureDependency
 workflow.ProcedureDependency_input_PersistenceDependency <.. workflow.ProcedureDependency
-workflow.ProcedureDependency::Description <-- workflow.ProcedureDependency_gross::Description
-workflow.ProcedureDependency::id <-- workflow.ProcedureDependency_gross::id
-workflow.ProcedureDependency::is_active <-- workflow.ProcedureDependency_gross::is_active
-workflow.ProcedureDependency::is_PersistenceDependency <-- workflow.ProcedureDependency_gross::is_PersistenceDependency
-workflow.ProcedureDependency::is_PersistenceDependency <-- workflow.ProcedureDependency_input_PersistenceDependency::is_PersistenceDependency
-workflow.ProcedureDependency::referenced_Procedure_RepoObject_guid <-- workflow.ProcedureDependency_gross::referenced_Procedure_RepoObject_guid
-workflow.ProcedureDependency::referenced_Procedure_RepoObject_guid <-- workflow.ProcedureDependency_input_PersistenceDependency::referenced_Procedure_RepoObject_guid
-workflow.ProcedureDependency::referenced_Procedure_RepoObject_guid <-- workflow.Workflow_ProcedureDependency::referenced_Procedure_RepoObject_guid
-workflow.ProcedureDependency::referenced_Procedure_RepoObject_guid <-- workflow.Workflow_ProcedureDependency_all::referenced_Procedure_RepoObject_guid
-workflow.ProcedureDependency::referencing_Procedure_RepoObject_guid <-- workflow.ProcedureDependency_gross::referencing_Procedure_RepoObject_guid
-workflow.ProcedureDependency::referencing_Procedure_RepoObject_guid <-- workflow.ProcedureDependency_input_PersistenceDependency::referencing_Procedure_RepoObject_guid
-workflow.ProcedureDependency::referencing_Procedure_RepoObject_guid <-- workflow.Workflow_ProcedureDependency::referencing_Procedure_RepoObject_guid
-workflow.ProcedureDependency::referencing_Procedure_RepoObject_guid <-- workflow.Workflow_ProcedureDependency_all::referencing_Procedure_RepoObject_guid
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"workflow.ProcedureDependency::Description" <-- "workflow.ProcedureDependency_gross::Description"
+"workflow.ProcedureDependency::id" <-- "workflow.ProcedureDependency_gross::id"
+"workflow.ProcedureDependency::is_active" <-- "workflow.ProcedureDependency_gross::is_active"
+"workflow.ProcedureDependency::is_PersistenceDependency" <-- "workflow.ProcedureDependency_gross::is_PersistenceDependency"
+"workflow.ProcedureDependency::is_PersistenceDependency" <-- "workflow.ProcedureDependency_input_PersistenceDependency::is_PersistenceDependency"
+"workflow.ProcedureDependency::referenced_Procedure_RepoObject_guid" <-- "workflow.ProcedureDependency_gross::referenced_Procedure_RepoObject_guid"
+"workflow.ProcedureDependency::referenced_Procedure_RepoObject_guid" <-- "workflow.ProcedureDependency_input_PersistenceDependency::referenced_Procedure_RepoObject_guid"
+"workflow.ProcedureDependency::referenced_Procedure_RepoObject_guid" <-- "workflow.Workflow_ProcedureDependency::referenced_Procedure_RepoObject_guid"
+"workflow.ProcedureDependency::referenced_Procedure_RepoObject_guid" <-- "workflow.Workflow_ProcedureDependency_all::referenced_Procedure_RepoObject_guid"
+"workflow.ProcedureDependency::referencing_Procedure_RepoObject_guid" <-- "workflow.ProcedureDependency_gross::referencing_Procedure_RepoObject_guid"
+"workflow.ProcedureDependency::referencing_Procedure_RepoObject_guid" <-- "workflow.ProcedureDependency_input_PersistenceDependency::referencing_Procedure_RepoObject_guid"
+"workflow.ProcedureDependency::referencing_Procedure_RepoObject_guid" <-- "workflow.Workflow_ProcedureDependency::referencing_Procedure_RepoObject_guid"
+"workflow.ProcedureDependency::referencing_Procedure_RepoObject_guid" <-- "workflow.Workflow_ProcedureDependency_all::referencing_Procedure_RepoObject_guid"
 @enduml
 

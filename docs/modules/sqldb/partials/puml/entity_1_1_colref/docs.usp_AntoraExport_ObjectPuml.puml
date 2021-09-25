@@ -22,65 +22,74 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:config.fs_get_parameter_value.adoc[prefix=..]" as config.fs_get_parameter_value << FN >> {
+entity "puml-link:dhw:sqldb:config.fs_get_parameter_value.adoc[]" as config.fs_get_parameter_value << FN >> {
   --
   --
   --
 }
 
-entity "puml-link:docs.RepoObject_OutputFilter.adoc[prefix=..]" as docs.RepoObject_OutputFilter << V >> {
-  - **RepoObject_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:docs.RepoObject_OutputFilter.adoc[]" as docs.RepoObject_OutputFilter << V >> {
   --
+  AntoraComponent : (nvarchar(max))
+  AntoraModule : (nvarchar(max))
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
+  external_DatabaseName : (nvarchar(128))
   is_DocsOutput : (int)
+  - is_external : (bit)
   - is_ssas : (bit)
   - RepoObject_fullname : (nvarchar(261))
   - RepoObject_fullname2 : (nvarchar(257))
+  - RepoObject_guid : (uniqueidentifier)
   - RepoObject_name : (nvarchar(128))
   - RepoObject_schema_name : (nvarchar(128))
   SysObject_type : (char(2))
   SysObject_type_name : (nvarchar(128))
+  tables_isHidden : (bit)
   --
   --
 }
 
-entity "puml-link:docs.usp_AntoraExport.adoc[prefix=..]" as docs.usp_AntoraExport << P >> {
-  --
-  --
-  --
-}
-
-entity "puml-link:docs.usp_AntoraExport_ObjectPuml.adoc[prefix=..]" as docs.usp_AntoraExport_ObjectPuml << P >> {
+entity "puml-link:dhw:sqldb:docs.usp_AntoraExport.adoc[]" as docs.usp_AntoraExport << P >> {
   --
   --
   --
 }
 
-entity "puml-link:docs.usp_PERSIST_RepoObject_Plantuml_Entity_T.adoc[prefix=..]" as docs.usp_PERSIST_RepoObject_Plantuml_Entity_T << P >> {
+entity "puml-link:dhw:sqldb:docs.usp_AntoraExport_ObjectPuml.adoc[]" as docs.usp_AntoraExport_ObjectPuml << P >> {
   --
   --
   --
 }
 
-entity "puml-link:docs.usp_PERSIST_RepoObject_Plantuml_T.adoc[prefix=..]" as docs.usp_PERSIST_RepoObject_Plantuml_T << P >> {
+entity "puml-link:dhw:sqldb:docs.usp_PERSIST_RepoObject_Plantuml_Entity_T.adoc[]" as docs.usp_PERSIST_RepoObject_Plantuml_Entity_T << P >> {
   --
   --
   --
 }
 
-entity "puml-link:logs.usp_ExecutionLog_insert.adoc[prefix=..]" as logs.usp_ExecutionLog_insert << P >> {
+entity "puml-link:dhw:sqldb:docs.usp_PERSIST_RepoObject_Plantuml_T.adoc[]" as docs.usp_PERSIST_RepoObject_Plantuml_T << P >> {
   --
   --
   --
 }
 
-entity "puml-link:repo.RepoSchema.adoc[prefix=..]" as repo.RepoSchema << U >> {
+entity "puml-link:dhw:sqldb:logs.usp_ExecutionLog_insert.adoc[]" as logs.usp_ExecutionLog_insert << P >> {
+  --
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.RepoSchema.adoc[]" as repo.RepoSchema << U >> {
   - **RepoSchema_guid** : (uniqueidentifier)
   --
   - is_ssas : (bit)
   is_SysSchema_missing : (bit)
+  - MeasuresRepoObjekt_guid : (uniqueidentifier)
   RepoSchema_ms_description : (nvarchar(4000))
   - RepoSchema_name : (nvarchar(128))
   SysSchema_id : (int)
@@ -88,6 +97,7 @@ entity "puml-link:repo.RepoSchema.adoc[prefix=..]" as repo.RepoSchema << U >> {
   ~ has_different_sys_names : (bit)
   # is_RepoSchema_name_uniqueidentifier : (int)
   # is_SysSchema_name_uniqueidentifier : (int)
+  # MeasuresRepoObjekt_name : (varchar(9))
   --
   --
 }
@@ -99,11 +109,6 @@ docs.usp_PERSIST_RepoObject_Plantuml_Entity_T <.. docs.usp_AntoraExport_ObjectPu
 docs.usp_PERSIST_RepoObject_Plantuml_T <.. docs.usp_AntoraExport_ObjectPuml
 logs.usp_ExecutionLog_insert <.. docs.usp_AntoraExport_ObjectPuml
 repo.RepoSchema <.. docs.usp_AntoraExport_ObjectPuml
-
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
 
 @enduml
 

@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:config.ftv_get_parameter_value.adoc[prefix=..]" as config.ftv_get_parameter_value << IF >> {
+entity "puml-link:dhw:sqldb:config.ftv_get_parameter_value.adoc[]" as config.ftv_get_parameter_value << IF >> {
   --
   Parameter_value_result : (nvarchar(max))
   Parameter_value_result_date : (date)
@@ -35,16 +36,17 @@ entity "puml-link:config.ftv_get_parameter_value.adoc[prefix=..]" as config.ftv_
   --
 }
 
-entity "puml-link:docs.fs_cleanStringForAnchorId.adoc[prefix=..]" as docs.fs_cleanStringForAnchorId << FN >> {
+entity "puml-link:dhw:sqldb:docs.fs_cleanStringForAnchorId.adoc[]" as docs.fs_cleanStringForAnchorId << FN >> {
   --
   --
   --
 }
 
-entity "puml-link:docs.Unit_1_union.adoc[prefix=..]" as docs.Unit_1_union << V >> {
+entity "puml-link:dhw:sqldb:docs.Unit_1_union.adoc[]" as docs.Unit_1_union << V >> {
   --
   Object_fullname2 : (nvarchar(257))
   Object_Type : (varchar(2))
+  Unit_ColummName : (nvarchar(128))
   Unit_Description : (nvarchar(max))
   Unit_DisplayFolder : (nvarchar(500))
   Unit_Expression : (nvarchar(max))
@@ -57,6 +59,7 @@ entity "puml-link:docs.Unit_1_union.adoc[prefix=..]" as docs.Unit_1_union << V >
   Unit_IsUnique : (bit)
   - Unit_Metatype : (varchar(7))
   - Unit_Name : (nvarchar(500))
+  Unit_ObjectName : (nvarchar(128))
   - Unit_Schema : (nvarchar(128))
   Unit_SummarizeBy : (nvarchar(500))
   Unit_TypeName : (nvarchar(128))
@@ -64,7 +67,7 @@ entity "puml-link:docs.Unit_1_union.adoc[prefix=..]" as docs.Unit_1_union << V >
   --
 }
 
-entity "puml-link:docs.Unit_2.adoc[prefix=..]" as docs.Unit_2 << V >> {
+entity "puml-link:dhw:sqldb:docs.Unit_2.adoc[]" as docs.Unit_2 << V >> {
   --
   AntoraComponent : (nvarchar(max))
   AntoraModule : (nvarchar(max))
@@ -74,6 +77,7 @@ entity "puml-link:docs.Unit_2.adoc[prefix=..]" as docs.Unit_2 << V >> {
   AntoraVersion : (nvarchar(max))
   Object_fullname2 : (nvarchar(257))
   Object_Type : (varchar(2))
+  Unit_ColummName : (nvarchar(128))
   Unit_Description : (nvarchar(max))
   Unit_DisplayFolder : (nvarchar(500))
   Unit_Expression : (nvarchar(max))
@@ -86,6 +90,7 @@ entity "puml-link:docs.Unit_2.adoc[prefix=..]" as docs.Unit_2 << V >> {
   Unit_IsUnique : (bit)
   - Unit_Metatype : (varchar(7))
   - Unit_Name : (nvarchar(500))
+  Unit_ObjectName : (nvarchar(128))
   - Unit_Schema : (nvarchar(128))
   Unit_SummarizeBy : (nvarchar(500))
   Unit_TypeName : (nvarchar(128))
@@ -93,7 +98,7 @@ entity "puml-link:docs.Unit_2.adoc[prefix=..]" as docs.Unit_2 << V >> {
   --
 }
 
-entity "puml-link:docs.Unit_3.adoc[prefix=..]" as docs.Unit_3 << V >> {
+entity "puml-link:dhw:sqldb:docs.Unit_3.adoc[]" as docs.Unit_3 << V >> {
   --
   AntoraComponent : (nvarchar(max))
   AntoraModule : (nvarchar(max))
@@ -103,6 +108,7 @@ entity "puml-link:docs.Unit_3.adoc[prefix=..]" as docs.Unit_3 << V >> {
   AntoraVersion : (nvarchar(max))
   Object_fullname2 : (nvarchar(257))
   Object_Type : (varchar(2))
+  Unit_ColummName : (nvarchar(128))
   Unit_Description : (nvarchar(max))
   Unit_DisplayFolder : (nvarchar(500))
   Unit_Expression : (nvarchar(max))
@@ -115,6 +121,7 @@ entity "puml-link:docs.Unit_3.adoc[prefix=..]" as docs.Unit_3 << V >> {
   Unit_IsUnique : (bit)
   - Unit_Metatype : (varchar(7))
   - Unit_Name : (nvarchar(500))
+  Unit_ObjectName : (nvarchar(128))
   - Unit_Schema : (nvarchar(128))
   Unit_SummarizeBy : (nvarchar(500))
   Unit_TypeName : (nvarchar(128))
@@ -127,50 +134,49 @@ config.ftv_get_parameter_value <.. docs.Unit_2
 docs.fs_cleanStringForAnchorId <.. docs.Unit_2
 docs.Unit_1_union <.. docs.Unit_2
 docs.Unit_2 <.. docs.Unit_3
-docs.Unit_1_union::Object_fullname2 <-- docs.Unit_2::Object_fullname2
-docs.Unit_1_union::Object_Type <-- docs.Unit_2::Object_Type
-docs.Unit_1_union::Unit_Description <-- docs.Unit_2::Unit_Description
-docs.Unit_1_union::Unit_DisplayFolder <-- docs.Unit_2::Unit_DisplayFolder
-docs.Unit_1_union::Unit_Expression <-- docs.Unit_2::Unit_Expression
-docs.Unit_1_union::Unit_FormatString <-- docs.Unit_2::Unit_FormatString
-docs.Unit_1_union::Unit_fullname2 <-- docs.Unit_2::Unit_fullname2
-docs.Unit_1_union::Unit_guid <-- docs.Unit_2::Unit_guid
-docs.Unit_1_union::Unit_isHidden <-- docs.Unit_2::Unit_isHidden
-docs.Unit_1_union::Unit_IsKey <-- docs.Unit_2::Unit_IsKey
-docs.Unit_1_union::Unit_IsSsas <-- docs.Unit_2::Unit_IsSsas
-docs.Unit_1_union::Unit_IsUnique <-- docs.Unit_2::Unit_IsUnique
-docs.Unit_1_union::Unit_Metatype <-- docs.Unit_2::Unit_Metatype
-docs.Unit_1_union::Unit_Name <-- docs.Unit_2::Unit_Name
-docs.Unit_1_union::Unit_Schema <-- docs.Unit_2::Unit_Schema
-docs.Unit_1_union::Unit_SummarizeBy <-- docs.Unit_2::Unit_SummarizeBy
-docs.Unit_1_union::Unit_TypeName <-- docs.Unit_2::Unit_TypeName
-docs.Unit_2::AntoraComponent <-- docs.Unit_3::AntoraComponent
-docs.Unit_2::AntoraModule <-- docs.Unit_3::AntoraModule
-docs.Unit_2::AntoraPage <-- docs.Unit_3::AntoraPage
-docs.Unit_2::AntoraSectionId <-- docs.Unit_3::AntoraSectionId
-docs.Unit_2::AntoraSiteUrl <-- docs.Unit_3::AntoraSiteUrl
-docs.Unit_2::AntoraVersion <-- docs.Unit_3::AntoraVersion
-docs.Unit_2::Object_fullname2 <-- docs.Unit_3::Object_fullname2
-docs.Unit_2::Object_Type <-- docs.Unit_3::Object_Type
-docs.Unit_2::Unit_Description <-- docs.Unit_3::Unit_Description
-docs.Unit_2::Unit_DisplayFolder <-- docs.Unit_3::Unit_DisplayFolder
-docs.Unit_2::Unit_Expression <-- docs.Unit_3::Unit_Expression
-docs.Unit_2::Unit_FormatString <-- docs.Unit_3::Unit_FormatString
-docs.Unit_2::Unit_fullname2 <-- docs.Unit_3::Unit_fullname2
-docs.Unit_2::Unit_guid <-- docs.Unit_3::Unit_guid
-docs.Unit_2::Unit_isHidden <-- docs.Unit_3::Unit_isHidden
-docs.Unit_2::Unit_IsKey <-- docs.Unit_3::Unit_IsKey
-docs.Unit_2::Unit_IsSsas <-- docs.Unit_3::Unit_IsSsas
-docs.Unit_2::Unit_IsUnique <-- docs.Unit_3::Unit_IsUnique
-docs.Unit_2::Unit_Metatype <-- docs.Unit_3::Unit_Metatype
-docs.Unit_2::Unit_Name <-- docs.Unit_3::Unit_Name
-docs.Unit_2::Unit_Schema <-- docs.Unit_3::Unit_Schema
-docs.Unit_2::Unit_SummarizeBy <-- docs.Unit_3::Unit_SummarizeBy
-docs.Unit_2::Unit_TypeName <-- docs.Unit_3::Unit_TypeName
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"docs.Unit_1_union::Object_fullname2" <-- "docs.Unit_2::Object_fullname2"
+"docs.Unit_1_union::Object_Type" <-- "docs.Unit_2::Object_Type"
+"docs.Unit_1_union::Unit_ColummName" <-- "docs.Unit_2::Unit_ColummName"
+"docs.Unit_1_union::Unit_Description" <-- "docs.Unit_2::Unit_Description"
+"docs.Unit_1_union::Unit_DisplayFolder" <-- "docs.Unit_2::Unit_DisplayFolder"
+"docs.Unit_1_union::Unit_Expression" <-- "docs.Unit_2::Unit_Expression"
+"docs.Unit_1_union::Unit_FormatString" <-- "docs.Unit_2::Unit_FormatString"
+"docs.Unit_1_union::Unit_fullname2" <-- "docs.Unit_2::Unit_fullname2"
+"docs.Unit_1_union::Unit_guid" <-- "docs.Unit_2::Unit_guid"
+"docs.Unit_1_union::Unit_isHidden" <-- "docs.Unit_2::Unit_isHidden"
+"docs.Unit_1_union::Unit_IsKey" <-- "docs.Unit_2::Unit_IsKey"
+"docs.Unit_1_union::Unit_IsSsas" <-- "docs.Unit_2::Unit_IsSsas"
+"docs.Unit_1_union::Unit_IsUnique" <-- "docs.Unit_2::Unit_IsUnique"
+"docs.Unit_1_union::Unit_Metatype" <-- "docs.Unit_2::Unit_Metatype"
+"docs.Unit_1_union::Unit_Name" <-- "docs.Unit_2::Unit_Name"
+"docs.Unit_1_union::Unit_ObjectName" <-- "docs.Unit_2::Unit_ObjectName"
+"docs.Unit_1_union::Unit_Schema" <-- "docs.Unit_2::Unit_Schema"
+"docs.Unit_1_union::Unit_SummarizeBy" <-- "docs.Unit_2::Unit_SummarizeBy"
+"docs.Unit_1_union::Unit_TypeName" <-- "docs.Unit_2::Unit_TypeName"
+"docs.Unit_2::AntoraComponent" <-- "docs.Unit_3::AntoraComponent"
+"docs.Unit_2::AntoraModule" <-- "docs.Unit_3::AntoraModule"
+"docs.Unit_2::AntoraPage" <-- "docs.Unit_3::AntoraPage"
+"docs.Unit_2::AntoraSectionId" <-- "docs.Unit_3::AntoraSectionId"
+"docs.Unit_2::AntoraSiteUrl" <-- "docs.Unit_3::AntoraSiteUrl"
+"docs.Unit_2::AntoraVersion" <-- "docs.Unit_3::AntoraVersion"
+"docs.Unit_2::Object_fullname2" <-- "docs.Unit_3::Object_fullname2"
+"docs.Unit_2::Object_Type" <-- "docs.Unit_3::Object_Type"
+"docs.Unit_2::Unit_ColummName" <-- "docs.Unit_3::Unit_ColummName"
+"docs.Unit_2::Unit_Description" <-- "docs.Unit_3::Unit_Description"
+"docs.Unit_2::Unit_DisplayFolder" <-- "docs.Unit_3::Unit_DisplayFolder"
+"docs.Unit_2::Unit_Expression" <-- "docs.Unit_3::Unit_Expression"
+"docs.Unit_2::Unit_FormatString" <-- "docs.Unit_3::Unit_FormatString"
+"docs.Unit_2::Unit_fullname2" <-- "docs.Unit_3::Unit_fullname2"
+"docs.Unit_2::Unit_guid" <-- "docs.Unit_3::Unit_guid"
+"docs.Unit_2::Unit_isHidden" <-- "docs.Unit_3::Unit_isHidden"
+"docs.Unit_2::Unit_IsKey" <-- "docs.Unit_3::Unit_IsKey"
+"docs.Unit_2::Unit_IsSsas" <-- "docs.Unit_3::Unit_IsSsas"
+"docs.Unit_2::Unit_IsUnique" <-- "docs.Unit_3::Unit_IsUnique"
+"docs.Unit_2::Unit_Metatype" <-- "docs.Unit_3::Unit_Metatype"
+"docs.Unit_2::Unit_Name" <-- "docs.Unit_3::Unit_Name"
+"docs.Unit_2::Unit_ObjectName" <-- "docs.Unit_3::Unit_ObjectName"
+"docs.Unit_2::Unit_Schema" <-- "docs.Unit_3::Unit_Schema"
+"docs.Unit_2::Unit_SummarizeBy" <-- "docs.Unit_3::Unit_SummarizeBy"
+"docs.Unit_2::Unit_TypeName" <-- "docs.Unit_3::Unit_TypeName"
 @enduml
 

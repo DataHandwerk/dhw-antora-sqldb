@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:sqlparse.ftv_sqlparse.adoc[prefix=..]" as sqlparse.ftv_sqlparse << IF >> {
+entity "puml-link:dhw:sqldb:sqlparse.ftv_sqlparse.adoc[]" as sqlparse.ftv_sqlparse << IF >> {
   --
   children : (nvarchar(max))
   class : (nvarchar(500))
@@ -38,7 +39,7 @@ entity "puml-link:sqlparse.ftv_sqlparse.adoc[prefix=..]" as sqlparse.ftv_sqlpars
   --
 }
 
-entity "puml-link:sqlparse.RepoObject_SqlModules_20_statement_children.adoc[prefix=..]" as sqlparse.RepoObject_SqlModules_20_statement_children << V >> {
+entity "puml-link:dhw:sqldb:sqlparse.RepoObject_SqlModules_20_statement_children.adoc[]" as sqlparse.RepoObject_SqlModules_20_statement_children << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   - **json_key** : (nvarchar(4000))
   --
@@ -84,7 +85,7 @@ entity "puml-link:sqlparse.RepoObject_SqlModules_20_statement_children.adoc[pref
   --
 }
 
-entity "puml-link:sqlparse.RepoObject_SqlModules_22_identifier_alias_AS.adoc[prefix=..]" as sqlparse.RepoObject_SqlModules_22_identifier_alias_AS << V >> {
+entity "puml-link:dhw:sqldb:sqlparse.RepoObject_SqlModules_22_identifier_alias_AS.adoc[]" as sqlparse.RepoObject_SqlModules_22_identifier_alias_AS << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   - **json_key** : (nvarchar(4000))
   **RowNumber** : (bigint)
@@ -96,9 +97,7 @@ entity "puml-link:sqlparse.RepoObject_SqlModules_22_identifier_alias_AS.adoc[pre
   --
 }
 
-entity "puml-link:sqlparse.RepoObject_SqlModules_41_from.adoc[prefix=..]" as sqlparse.RepoObject_SqlModules_41_from << V >> {
-  - **RepoObject_guid** : (uniqueidentifier)
-  - **json_key** : (nvarchar(4000))
+entity "puml-link:dhw:sqldb:sqlparse.RepoObject_SqlModules_41_from.adoc[]" as sqlparse.RepoObject_SqlModules_41_from << V >> {
   --
   children : (nvarchar(max))
   class : (nvarchar(500))
@@ -110,6 +109,7 @@ entity "puml-link:sqlparse.RepoObject_SqlModules_41_from.adoc[prefix=..]" as sql
   is_keyword : (bit)
   is_whitespace : (bit)
   join_type : (varchar(16))
+  - json_key : (nvarchar(4000))
   Min_RowNumber_From : (bigint)
   Min_RowNumber_GroupBy : (bigint)
   Min_RowNumber_Where : (bigint)
@@ -117,6 +117,7 @@ entity "puml-link:sqlparse.RepoObject_SqlModules_41_from.adoc[prefix=..]" as sql
   normalized_PatIndex_Select : (bigint)
   normalized_wo_nolock : (nvarchar(max))
   patindex_nolock : (bigint)
+  - RepoObject_guid : (uniqueidentifier)
   RowNumber_per_Object : (bigint)
   SysObject_fullname : (nvarchar(261))
   --
@@ -126,16 +127,11 @@ entity "puml-link:sqlparse.RepoObject_SqlModules_41_from.adoc[prefix=..]" as sql
 sqlparse.ftv_sqlparse <.. sqlparse.RepoObject_SqlModules_22_identifier_alias_AS
 sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_22_identifier_alias_AS
 sqlparse.RepoObject_SqlModules_22_identifier_alias_AS <.. sqlparse.RepoObject_SqlModules_41_from
-sqlparse.RepoObject_SqlModules_20_statement_children::json_key <-- sqlparse.RepoObject_SqlModules_22_identifier_alias_AS::json_key
-sqlparse.RepoObject_SqlModules_20_statement_children::normalized <-- sqlparse.RepoObject_SqlModules_22_identifier_alias_AS::identifier_name
-sqlparse.RepoObject_SqlModules_20_statement_children::RepoObject_guid <-- sqlparse.RepoObject_SqlModules_22_identifier_alias_AS::RepoObject_guid
-sqlparse.RepoObject_SqlModules_20_statement_children::SysObject_fullname <-- sqlparse.RepoObject_SqlModules_22_identifier_alias_AS::SysObject_fullname
-sqlparse.RepoObject_SqlModules_22_identifier_alias_AS::identifier_alias <-- sqlparse.RepoObject_SqlModules_41_from::identifier_alias
-sqlparse.RepoObject_SqlModules_22_identifier_alias_AS::identifier_name <-- sqlparse.RepoObject_SqlModules_41_from::identifier_name
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"sqlparse.RepoObject_SqlModules_20_statement_children::json_key" <-- "sqlparse.RepoObject_SqlModules_22_identifier_alias_AS::json_key"
+"sqlparse.RepoObject_SqlModules_20_statement_children::normalized" <-- "sqlparse.RepoObject_SqlModules_22_identifier_alias_AS::identifier_name"
+"sqlparse.RepoObject_SqlModules_20_statement_children::RepoObject_guid" <-- "sqlparse.RepoObject_SqlModules_22_identifier_alias_AS::RepoObject_guid"
+"sqlparse.RepoObject_SqlModules_20_statement_children::SysObject_fullname" <-- "sqlparse.RepoObject_SqlModules_22_identifier_alias_AS::SysObject_fullname"
+"sqlparse.RepoObject_SqlModules_22_identifier_alias_AS::identifier_alias" <-- "sqlparse.RepoObject_SqlModules_41_from::identifier_alias"
+"sqlparse.RepoObject_SqlModules_22_identifier_alias_AS::identifier_name" <-- "sqlparse.RepoObject_SqlModules_41_from::identifier_name"
 @enduml
 

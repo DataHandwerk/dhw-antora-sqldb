@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:reference.Persistence.adoc[prefix=..]" as reference.Persistence << V >> {
+entity "puml-link:dhw:sqldb:reference.Persistence.adoc[]" as reference.Persistence << V >> {
   --
   referenced_fullname : (nvarchar(261))
   referenced_RepoObject_guid : (uniqueidentifier)
@@ -41,7 +42,7 @@ entity "puml-link:reference.Persistence.adoc[prefix=..]" as reference.Persistenc
   --
 }
 
-entity "puml-link:workflow.ProcedureDependency_input_PersistenceDependency.adoc[prefix=..]" as workflow.ProcedureDependency_input_PersistenceDependency << V >> {
+entity "puml-link:dhw:sqldb:workflow.ProcedureDependency_input_PersistenceDependency.adoc[]" as workflow.ProcedureDependency_input_PersistenceDependency << V >> {
   **referenced_Procedure_RepoObject_guid** : (uniqueidentifier)
   **referencing_Procedure_RepoObject_guid** : (uniqueidentifier)
   --
@@ -52,7 +53,7 @@ entity "puml-link:workflow.ProcedureDependency_input_PersistenceDependency.adoc[
   --
 }
 
-entity "puml-link:workflow.ProcedureDependency_input_PersistenceDependency_S.adoc[prefix=..]" as workflow.ProcedureDependency_input_PersistenceDependency_S << V >> {
+entity "puml-link:dhw:sqldb:workflow.ProcedureDependency_input_PersistenceDependency_S.adoc[]" as workflow.ProcedureDependency_input_PersistenceDependency_S << V >> {
   **referenced_Procedure_RepoObject_guid** : (uniqueidentifier)
   **referencing_Procedure_RepoObject_guid** : (uniqueidentifier)
   --
@@ -61,7 +62,7 @@ entity "puml-link:workflow.ProcedureDependency_input_PersistenceDependency_S.ado
   --
 }
 
-entity "puml-link:workflow.usp_PERSIST_ProcedureDependency_input_PersistenceDependency.adoc[prefix=..]" as workflow.usp_PERSIST_ProcedureDependency_input_PersistenceDependency << P >> {
+entity "puml-link:dhw:sqldb:workflow.usp_PERSIST_ProcedureDependency_input_PersistenceDependency.adoc[]" as workflow.usp_PERSIST_ProcedureDependency_input_PersistenceDependency << P >> {
   --
   --
   --
@@ -70,15 +71,10 @@ entity "puml-link:workflow.usp_PERSIST_ProcedureDependency_input_PersistenceDepe
 reference.Persistence <.. workflow.ProcedureDependency_input_PersistenceDependency_S
 workflow.ProcedureDependency_input_PersistenceDependency_S <.. workflow.ProcedureDependency_input_PersistenceDependency
 workflow.ProcedureDependency_input_PersistenceDependency_S <.. workflow.usp_PERSIST_ProcedureDependency_input_PersistenceDependency
-reference.Persistence::referenced_usp_persistence_RepoObject_guid <-- workflow.ProcedureDependency_input_PersistenceDependency_S::referenced_Procedure_RepoObject_guid
-reference.Persistence::referencing_usp_persistence_RepoObject_guid <-- workflow.ProcedureDependency_input_PersistenceDependency_S::referencing_Procedure_RepoObject_guid
-workflow.ProcedureDependency_input_PersistenceDependency_S::is_PersistenceDependency <-- workflow.ProcedureDependency_input_PersistenceDependency::is_PersistenceDependency
-workflow.ProcedureDependency_input_PersistenceDependency_S::referenced_Procedure_RepoObject_guid <-- workflow.ProcedureDependency_input_PersistenceDependency::referenced_Procedure_RepoObject_guid
-workflow.ProcedureDependency_input_PersistenceDependency_S::referencing_Procedure_RepoObject_guid <-- workflow.ProcedureDependency_input_PersistenceDependency::referencing_Procedure_RepoObject_guid
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"reference.Persistence::referenced_usp_persistence_RepoObject_guid" <-- "workflow.ProcedureDependency_input_PersistenceDependency_S::referenced_Procedure_RepoObject_guid"
+"reference.Persistence::referencing_usp_persistence_RepoObject_guid" <-- "workflow.ProcedureDependency_input_PersistenceDependency_S::referencing_Procedure_RepoObject_guid"
+"workflow.ProcedureDependency_input_PersistenceDependency_S::is_PersistenceDependency" <-- "workflow.ProcedureDependency_input_PersistenceDependency::is_PersistenceDependency"
+"workflow.ProcedureDependency_input_PersistenceDependency_S::referenced_Procedure_RepoObject_guid" <-- "workflow.ProcedureDependency_input_PersistenceDependency::referenced_Procedure_RepoObject_guid"
+"workflow.ProcedureDependency_input_PersistenceDependency_S::referencing_Procedure_RepoObject_guid" <-- "workflow.ProcedureDependency_input_PersistenceDependency::referencing_Procedure_RepoObject_guid"
 @enduml
 

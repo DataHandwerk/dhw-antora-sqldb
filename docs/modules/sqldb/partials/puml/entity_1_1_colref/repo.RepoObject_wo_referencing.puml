@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:configT.type.adoc[prefix=..]" as configT.type << V >> {
+entity "puml-link:dhw:sqldb:configT.type.adoc[]" as configT.type << V >> {
   **type** : (nvarchar(128))
   --
   - is_DocsOutput : (int)
@@ -34,17 +35,23 @@ entity "puml-link:configT.type.adoc[prefix=..]" as configT.type << V >> {
   --
 }
 
-entity "puml-link:reference.RepoObject_reference_T.adoc[prefix=..]" as reference.RepoObject_reference_T << U >> {
+entity "puml-link:dhw:sqldb:reference.RepoObject_reference_T.adoc[]" as reference.RepoObject_reference_T << U >> {
   **referenced_RepoObject_guid** : (uniqueidentifier)
   **referencing_RepoObject_guid** : (uniqueidentifier)
   --
   - is_ReversePersistenceViaView : (bit)
   referenced_entity_name : (nvarchar(128))
+  referenced_external_AntoraComponent : (nvarchar(128))
+  referenced_external_AntoraModule : (nvarchar(128))
+  referenced_is_external : (int)
   - referenced_is_PersistenceSource : (bit)
   - referenced_is_PersistenceTarget : (bit)
   referenced_schema_name : (nvarchar(128))
   referenced_type : (char(2))
   referencing_entity_name : (nvarchar(128))
+  referencing_external_AntoraComponent : (nvarchar(128))
+  referencing_external_AntoraModule : (nvarchar(128))
+  referencing_is_external : (int)
   - referencing_is_PersistenceTarget : (bit)
   - referencing_is_PersistenceUspSourceRef : (bit)
   referencing_is_PersistenceUspTargetRef : (bit)
@@ -52,21 +59,27 @@ entity "puml-link:reference.RepoObject_reference_T.adoc[prefix=..]" as reference
   referencing_type : (varchar(2))
   # referenced_fullname : (nvarchar(261))
   # referenced_fullname2 : (nvarchar(257))
+  ~ referenced_puml_entity : (nvarchar(4000))
   # referencing_fullname : (nvarchar(261))
   # referencing_fullname2 : (nvarchar(257))
+  ~ referencing_puml_entity : (nvarchar(4000))
   --
   --
 }
 
-entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
   has_execution_plan_issue : (bit)
   has_get_referenced_issue : (bit)
+  Inheritance_Source_fullname : (nvarchar(261))
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
   InheritanceDefinition : (nvarchar(4000))
   InheritanceType : (tinyint)
   - is_DocsExclude : (bit)
+  - is_external : (bit)
   is_repo_managed : (bit)
   is_required_ObjectMerge : (bit)
   - is_ssas : (bit)
@@ -101,7 +114,7 @@ entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
   --
 }
 
-entity "puml-link:repo.RepoObject_wo_referencing.adoc[prefix=..]" as repo.RepoObject_wo_referencing << V >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject_wo_referencing.adoc[]" as repo.RepoObject_wo_referencing << V >> {
   --
   is_repo_managed : (bit)
   - is_RepoObject_name_uniqueidentifier : (int)
@@ -119,19 +132,14 @@ entity "puml-link:repo.RepoObject_wo_referencing.adoc[prefix=..]" as repo.RepoOb
 configT.type <.. repo.RepoObject_wo_referencing
 reference.RepoObject_reference_T <.. repo.RepoObject_wo_referencing
 repo.RepoObject <.. repo.RepoObject_wo_referencing
-repo.RepoObject::is_repo_managed <-- repo.RepoObject_wo_referencing::is_repo_managed
-repo.RepoObject::is_RepoObject_name_uniqueidentifier <-- repo.RepoObject_wo_referencing::is_RepoObject_name_uniqueidentifier
-repo.RepoObject::RepoObject_fullname <-- repo.RepoObject_wo_referencing::RepoObject_fullname
-repo.RepoObject::RepoObject_fullname2 <-- repo.RepoObject_wo_referencing::RepoObject_fullname2
-repo.RepoObject::RepoObject_guid <-- repo.RepoObject_wo_referencing::RepoObject_guid
-repo.RepoObject::RepoObject_name <-- repo.RepoObject_wo_referencing::RepoObject_name
-repo.RepoObject::RepoObject_Referencing_Count <-- repo.RepoObject_wo_referencing::RepoObject_Referencing_Count
-repo.RepoObject::RepoObject_schema_name <-- repo.RepoObject_wo_referencing::RepoObject_schema_name
-repo.RepoObject::RepoObject_type <-- repo.RepoObject_wo_referencing::RepoObject_type
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"repo.RepoObject::is_repo_managed" <-- "repo.RepoObject_wo_referencing::is_repo_managed"
+"repo.RepoObject::is_RepoObject_name_uniqueidentifier" <-- "repo.RepoObject_wo_referencing::is_RepoObject_name_uniqueidentifier"
+"repo.RepoObject::RepoObject_fullname" <-- "repo.RepoObject_wo_referencing::RepoObject_fullname"
+"repo.RepoObject::RepoObject_fullname2" <-- "repo.RepoObject_wo_referencing::RepoObject_fullname2"
+"repo.RepoObject::RepoObject_guid" <-- "repo.RepoObject_wo_referencing::RepoObject_guid"
+"repo.RepoObject::RepoObject_name" <-- "repo.RepoObject_wo_referencing::RepoObject_name"
+"repo.RepoObject::RepoObject_Referencing_Count" <-- "repo.RepoObject_wo_referencing::RepoObject_Referencing_Count"
+"repo.RepoObject::RepoObject_schema_name" <-- "repo.RepoObject_wo_referencing::RepoObject_schema_name"
+"repo.RepoObject::RepoObject_type" <-- "repo.RepoObject_wo_referencing::RepoObject_type"
 @enduml
 

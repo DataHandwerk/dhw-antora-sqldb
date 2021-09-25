@@ -1,0 +1,116 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:logs.usp_ExecutionLog_insert.adoc[]" as logs.usp_ExecutionLog_insert << P >> {
+  --
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.external_RepoObjectColumnProperty.adoc[]" as property.external_RepoObjectColumnProperty << U >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
+  --
+  AntoraComponent : (nvarchar(max))
+  AntoraModule : (nvarchar(max))
+  dwh_database : (nvarchar(128))
+  property_value : (nvarchar(max))
+  repo_database : (nvarchar(128))
+  - RepoObject_name : (nvarchar(128))
+  - RepoObject_schema_name : (nvarchar(128))
+  - RepoObjectColumn_name : (nvarchar(128))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.external_RepoObjectProperty.adoc[]" as property.external_RepoObjectProperty << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
+  --
+  AntoraComponent : (nvarchar(max))
+  AntoraModule : (nvarchar(max))
+  dwh_database : (nvarchar(128))
+  property_value : (nvarchar(max))
+  repo_database : (nvarchar(128))
+  - RepoObject_name : (nvarchar(128))
+  - RepoObject_schema_name : (nvarchar(128))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.usp_external_property_import.adoc[]" as property.usp_external_property_import << P >> {
+  --
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.usp_PERSIST_RepoObjectColumnProperty_external_tgt.adoc[]" as property.usp_PERSIST_RepoObjectColumnProperty_external_tgt << P >> {
+  --
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.usp_PERSIST_RepoObjectProperty_external_tgt.adoc[]" as property.usp_PERSIST_RepoObjectProperty_external_tgt << P >> {
+  --
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.additional_Reference_database_T.adoc[]" as reference.additional_Reference_database_T << U >> {
+  - **AntoraComponent** : (nvarchar(128))
+  - **AntoraModule** : (nvarchar(128))
+  --
+  DatabaseName : (nvarchar(128))
+  RepoDatabaseName : (nvarchar(128))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.usp_additional_Reference.adoc[]" as reference.usp_additional_Reference << P >> {
+  --
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.usp_main.adoc[]" as repo.usp_main << P >> {
+  --
+  --
+  --
+}
+
+logs.usp_ExecutionLog_insert <.. property.usp_external_property_import
+property.external_RepoObjectColumnProperty <.. property.usp_external_property_import
+property.external_RepoObjectProperty <.. property.usp_external_property_import
+property.usp_external_property_import <.. repo.usp_main
+property.usp_PERSIST_RepoObjectColumnProperty_external_tgt <.. property.usp_external_property_import
+property.usp_PERSIST_RepoObjectProperty_external_tgt <.. property.usp_external_property_import
+reference.additional_Reference_database_T <.. property.usp_external_property_import
+reference.usp_additional_Reference <.. property.usp_external_property_import
+
+@enduml
+

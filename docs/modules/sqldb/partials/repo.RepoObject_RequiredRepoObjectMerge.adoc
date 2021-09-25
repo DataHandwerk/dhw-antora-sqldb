@@ -9,9 +9,6 @@
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
 :ExistsProperty--ms_description:
-:ExistsProperty--pk_index_guid:
-:ExistsProperty--pk_indexpatterncolumndatatype:
-:ExistsProperty--pk_indexpatterncolumnname:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -52,25 +49,6 @@ view
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-RepoObject_guid]
-=== RepoObject_guid
-
-[cols="d,8m,m,m,m,d"]
-|===
-|1
-|*RepoObject_guid*
-|uniqueidentifier
-|NOT NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:repo.RepoObject.adoc#column-RepoObject_guid[+repo.RepoObject.RepoObject_guid+]
---
-
-
 [#column-RepoObject_fullname]
 === RepoObject_fullname
 
@@ -93,6 +71,25 @@ view
 .Referenced Columns
 --
 * xref:repo.RepoObject.adoc#column-RepoObject_fullname[+repo.RepoObject.RepoObject_fullname+]
+--
+
+
+[#column-RepoObject_guid]
+=== RepoObject_guid
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|RepoObject_guid
+|uniqueidentifier
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo.RepoObject.adoc#column-RepoObject_guid[+repo.RepoObject.RepoObject_guid+]
 --
 
 
@@ -334,12 +331,6 @@ view
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
-|1
-|*<<column-RepoObject_guid>>*
-|uniqueidentifier
-|NOT NULL
-|
-|
 
 
 
@@ -358,10 +349,16 @@ view
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
-
 |
 |<<column-RepoObject_fullname>>
 |nvarchar(261)
+|NOT NULL
+|
+|
+
+|
+|<<column-RepoObject_guid>>
+|uniqueidentifier
 |NOT NULL
 |
 |
@@ -449,21 +446,32 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-PK_RepoObject_RequiredRepoObjectMerge]
-=== PK_RepoObject_RequiredRepoObjectMerge
+[#index-idx_RepoObject_RequiredRepoObjectMerge2x_1]
+=== idx_RepoObject_RequiredRepoObjectMerge++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
 --
-* PK, Unique, Real: 1, 1, 0
+* PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObject_RequiredRepoObjectMerge_1]
-=== idx_RepoObject_RequiredRepoObjectMerge++__++1
+[#index-idx_RepoObject_RequiredRepoObjectMerge2x_2]
+=== idx_RepoObject_RequiredRepoObjectMerge++__++2
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-ro2_RepoObject_guid>>; uniqueidentifier
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[#index-idx_RepoObject_RequiredRepoObjectMerge2x_3]
+=== idx_RepoObject_RequiredRepoObjectMerge++__++3
+
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-SysObject_schema_name>>; nvarchar(128)
@@ -472,10 +480,10 @@ view
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObject_RequiredRepoObjectMerge_2]
-=== idx_RepoObject_RequiredRepoObjectMerge++__++2
+[#index-idx_RepoObject_RequiredRepoObjectMerge2x_4]
+=== idx_RepoObject_RequiredRepoObjectMerge++__++4
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-ro2_SysObject_name>>; nvarchar(128)
@@ -483,14 +491,26 @@ view
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObject_RequiredRepoObjectMerge_3]
-=== idx_RepoObject_RequiredRepoObjectMerge++__++3
+[#index-idx_RepoObject_RequiredRepoObjectMerge2x_5]
+=== idx_RepoObject_RequiredRepoObjectMerge++__++5
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_schema_name>>; nvarchar(128)
 * <<column-RepoObject_name>>; nvarchar(128)
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[#index-idx_RepoObject_RequiredRepoObjectMerge2x_6]
+=== idx_RepoObject_RequiredRepoObjectMerge++__++6
+
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-ro2_RepoObject_schema_name>>; nvarchar(128)
+* <<column-ro2_RepoObject_name>>; nvarchar(128)
 --
 * PK, Unique, Real: 0, 0, 0
 
@@ -753,21 +773,21 @@ merge is done in `[repo].[usp_sync_guid_RepoObject]`
 === pk_index_guid
 
 // tag::pk_index_guid[]
-575AB48D-129E-EB11-84F6-A81E8446D5B0
+
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-uniqueidentifier
+
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-RepoObject_guid
+
 // end::pk_indexpatterncolumnname[]
 
 

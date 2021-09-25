@@ -7,9 +7,6 @@
 :ExistsProperty--antorareferencinglist:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--pk_index_guid:
-:ExistsProperty--pk_indexpatterncolumndatatype:
-:ExistsProperty--pk_indexpatterncolumnname:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -50,37 +47,13 @@ view
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-Workflow_id]
-=== Workflow_id
-
-[cols="d,8m,m,m,m,d"]
-|===
-|1
-|*Workflow_id*
-|int
-|NOT NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:workflow.Workflow_ProcedureDependency_T.adoc#column-Workflow_id[+workflow.Workflow_ProcedureDependency_T.Workflow_id+]
---
-
-.Referencing Columns
---
-* xref:workflow.Workflow_ProcedureDependency_T_bidirectional_T.adoc#column-Workflow_id[+workflow.Workflow_ProcedureDependency_T_bidirectional_T.Workflow_id+]
---
-
-
 [#column-referenced_Procedure_RepoObject_guid]
 === referenced_Procedure_RepoObject_guid
 
 [cols="d,8m,m,m,m,d"]
 |===
-|2
-|*referenced_Procedure_RepoObject_guid*
+|
+|referenced_Procedure_RepoObject_guid
 |uniqueidentifier
 |NOT NULL
 |
@@ -95,30 +68,6 @@ view
 .Referencing Columns
 --
 * xref:workflow.Workflow_ProcedureDependency_T_bidirectional_T.adoc#column-referenced_Procedure_RepoObject_guid[+workflow.Workflow_ProcedureDependency_T_bidirectional_T.referenced_Procedure_RepoObject_guid+]
---
-
-
-[#column-referencing_Procedure_RepoObject_guid]
-=== referencing_Procedure_RepoObject_guid
-
-[cols="d,8m,m,m,m,d"]
-|===
-|3
-|*referencing_Procedure_RepoObject_guid*
-|uniqueidentifier
-|NOT NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:workflow.Workflow_ProcedureDependency_T.adoc#column-referencing_Procedure_RepoObject_guid[+workflow.Workflow_ProcedureDependency_T.referencing_Procedure_RepoObject_guid+]
---
-
-.Referencing Columns
---
-* xref:workflow.Workflow_ProcedureDependency_T_bidirectional_T.adoc#column-referencing_Procedure_RepoObject_guid[+workflow.Workflow_ProcedureDependency_T_bidirectional_T.referencing_Procedure_RepoObject_guid+]
 --
 
 
@@ -152,6 +101,30 @@ view
 --
 
 
+[#column-referencing_Procedure_RepoObject_guid]
+=== referencing_Procedure_RepoObject_guid
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|referencing_Procedure_RepoObject_guid
+|uniqueidentifier
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:workflow.Workflow_ProcedureDependency_T.adoc#column-referencing_Procedure_RepoObject_guid[+workflow.Workflow_ProcedureDependency_T.referencing_Procedure_RepoObject_guid+]
+--
+
+.Referencing Columns
+--
+* xref:workflow.Workflow_ProcedureDependency_T_bidirectional_T.adoc#column-referencing_Procedure_RepoObject_guid[+workflow.Workflow_ProcedureDependency_T_bidirectional_T.referencing_Procedure_RepoObject_guid+]
+--
+
+
 [#column-referencing_RepoObject_fullname]
 === referencing_RepoObject_fullname
 
@@ -182,6 +155,30 @@ view
 --
 
 
+[#column-Workflow_id]
+=== Workflow_id
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|Workflow_id
+|int
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:workflow.Workflow_ProcedureDependency_T.adoc#column-Workflow_id[+workflow.Workflow_ProcedureDependency_T.Workflow_id+]
+--
+
+.Referencing Columns
+--
+* xref:workflow.Workflow_ProcedureDependency_T_bidirectional_T.adoc#column-Workflow_id[+workflow.Workflow_ProcedureDependency_T_bidirectional_T.Workflow_id+]
+--
+
+
 // end::AntoraColumnDetails[]
 
 == AntoraMeasureDetails
@@ -193,26 +190,8 @@ view
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
-|1
-|*<<column-Workflow_id>>*
-|int
-|NOT NULL
-|
-|
 
-|2
-|*<<column-referenced_Procedure_RepoObject_guid>>*
-|uniqueidentifier
-|NOT NULL
-|
-|
 
-|3
-|*<<column-referencing_Procedure_RepoObject_guid>>*
-|uniqueidentifier
-|NOT NULL
-|
-|
 
 
 
@@ -221,12 +200,23 @@ view
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
-
-
+|
+|<<column-referenced_Procedure_RepoObject_guid>>
+|uniqueidentifier
+|NOT NULL
+|
+|
 
 |
 |<<column-referenced_RepoObject_fullname>>
 |nvarchar(261)
+|NOT NULL
+|
+|
+
+|
+|<<column-referencing_Procedure_RepoObject_guid>>
+|uniqueidentifier
 |NOT NULL
 |
 |
@@ -238,29 +228,36 @@ view
 |
 |
 
+|
+|<<column-Workflow_id>>
+|int
+|NOT NULL
+|
+|
+
 // end::AntoraNonPkColumnTableRows[]
 
 == AntoraIndexList
 
 // tag::AntoraIndexList[]
 
-[#index-PK_Workflow_ProcedureDependency_T_bidirectional]
-=== PK_Workflow_ProcedureDependency_T_bidirectional
+[#index-idx_Workflow_ProcedureDependency_T_bidirectional2x_1]
+=== idx_Workflow_ProcedureDependency_T_bidirectional++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-Workflow_id>>; int
 * <<column-referenced_Procedure_RepoObject_guid>>; uniqueidentifier
 * <<column-referencing_Procedure_RepoObject_guid>>; uniqueidentifier
 --
-* PK, Unique, Real: 1, 1, 0
+* PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_Workflow_ProcedureDependency_T_bidirectional_2]
+[#index-idx_Workflow_ProcedureDependency_T_bidirectional2x_2]
 === idx_Workflow_ProcedureDependency_T_bidirectional++__++2
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-Workflow_id>>; int
@@ -268,10 +265,10 @@ view
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_Workflow_ProcedureDependency_T_bidirectional_3]
+[#index-idx_Workflow_ProcedureDependency_T_bidirectional2x_3]
 === idx_Workflow_ProcedureDependency_T_bidirectional++__++3
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-referenced_Procedure_RepoObject_guid>>; uniqueidentifier
@@ -280,10 +277,10 @@ view
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_Workflow_ProcedureDependency_T_bidirectional_4]
+[#index-idx_Workflow_ProcedureDependency_T_bidirectional2x_4]
 === idx_Workflow_ProcedureDependency_T_bidirectional++__++4
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-referenced_Procedure_RepoObject_guid>>; uniqueidentifier
@@ -291,10 +288,10 @@ view
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_Workflow_ProcedureDependency_T_bidirectional_5]
+[#index-idx_Workflow_ProcedureDependency_T_bidirectional2x_5]
 === idx_Workflow_ProcedureDependency_T_bidirectional++__++5
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-referencing_Procedure_RepoObject_guid>>; uniqueidentifier
@@ -332,7 +329,6 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencingList
 
 // tag::antorareferencinglist[]
-* xref:workflow.usp_PERSIST_Workflow_ProcedureDependency_T_bidirectional_T.adoc[]
 * xref:workflow.Workflow_ProcedureDependency_T_bidirectional_T.adoc[]
 // end::antorareferencinglist[]
 
@@ -536,21 +532,21 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-DBF59117-C5FD-EB11-850F-A81E8446D5B0
+
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-int,uniqueidentifier,uniqueidentifier
+
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-Workflow_id,referenced_Procedure_RepoObject_guid,referencing_Procedure_RepoObject_guid
+
 // end::pk_indexpatterncolumnname[]
 
 

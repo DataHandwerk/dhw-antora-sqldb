@@ -22,16 +22,17 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:reference.RepoObject_reference_T.adoc[prefix=..]" as reference.RepoObject_reference_T << U >> {
+entity "puml-link:dhw:sqldb:reference.RepoObject_reference_T.adoc[]" as reference.RepoObject_reference_T << U >> {
   **referenced_RepoObject_guid** : (uniqueidentifier)
   **referencing_RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity "puml-link:reference.RepoObjectColumn_reference_SqlExpressionDependencies.adoc[prefix=..]" as reference.RepoObjectColumn_reference_SqlExpressionDependencies << V >> {
+entity "puml-link:dhw:sqldb:reference.RepoObjectColumn_reference_SqlExpressionDependencies.adoc[]" as reference.RepoObjectColumn_reference_SqlExpressionDependencies << V >> {
   - **referencing_id** : (int)
   - **referencing_minor_id** : (int)
   **referenced_id** : (int)
@@ -39,21 +40,16 @@ entity "puml-link:reference.RepoObjectColumn_reference_SqlExpressionDependencies
   --
 }
 
-entity "puml-link:reference.RepoObjectColumn_reference_union.adoc[prefix=..]" as reference.RepoObjectColumn_reference_union << V >> {
+entity "puml-link:dhw:sqldb:reference.RepoObjectColumn_reference_union.adoc[]" as reference.RepoObjectColumn_reference_union << V >> {
   --
 }
 
-entity "puml-link:repo_sys.sql_expression_dependencies.adoc[prefix=..]" as repo_sys.sql_expression_dependencies << V >> {
+entity "puml-link:dhw:sqldb:repo_sys.sql_expression_dependencies.adoc[]" as repo_sys.sql_expression_dependencies << V >> {
   --
 }
 
 reference.RepoObject_reference_T <.. reference.RepoObjectColumn_reference_SqlExpressionDependencies
 reference.RepoObjectColumn_reference_SqlExpressionDependencies <.. reference.RepoObjectColumn_reference_union
 repo_sys.sql_expression_dependencies <.. reference.RepoObjectColumn_reference_SqlExpressionDependencies
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
 @enduml
 

@@ -22,18 +22,26 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:docs.AntoraNavListRepoObject_by_schema.adoc[prefix=..]" as docs.AntoraNavListRepoObject_by_schema << V >> {
-  - **RepoObject_schema_name** : (nvarchar(128))
+entity "puml-link:dhw:sqldb:config.fs_dwh_database_name.adoc[]" as config.fs_dwh_database_name << FN >> {
   --
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.AntoraNavListRepoObject_by_schema.adoc[]" as docs.AntoraNavListRepoObject_by_schema << V >> {
+  --
+  is_ssas : (tinyint)
   nav_list : (nvarchar(max))
+  - RepoObject_schema_name : (nvarchar(128))
   --
   --
 }
 
-entity "puml-link:docs.AntoraPage_ObjectBySchema.adoc[prefix=..]" as docs.AntoraPage_ObjectBySchema << V >> {
+entity "puml-link:dhw:sqldb:docs.AntoraPage_ObjectBySchema.adoc[]" as docs.AntoraPage_ObjectBySchema << V >> {
   --
   - page_content : (nvarchar(4000))
   - partial_content : (nvarchar(4000))
@@ -41,12 +49,8 @@ entity "puml-link:docs.AntoraPage_ObjectBySchema.adoc[prefix=..]" as docs.Antora
   --
 }
 
+config.fs_dwh_database_name <.. docs.AntoraPage_ObjectBySchema
 docs.AntoraNavListRepoObject_by_schema <.. docs.AntoraPage_ObjectBySchema
-
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
 
 @enduml
 

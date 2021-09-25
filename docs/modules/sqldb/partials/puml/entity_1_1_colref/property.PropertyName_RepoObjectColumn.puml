@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:config.Parameter.adoc[prefix=..]" as config.Parameter << U >> {
+entity "puml-link:dhw:sqldb:config.Parameter.adoc[]" as config.Parameter << U >> {
   - **Parameter_name** : (varchar(100))
   - **sub_Parameter** : (nvarchar(128))
   --
@@ -40,14 +41,14 @@ entity "puml-link:config.Parameter.adoc[prefix=..]" as config.Parameter << U >> 
   --
 }
 
-entity "puml-link:property.PropertyName_RepoObjectColumn.adoc[prefix=..]" as property.PropertyName_RepoObjectColumn << V >> {
+entity "puml-link:dhw:sqldb:property.PropertyName_RepoObjectColumn.adoc[]" as property.PropertyName_RepoObjectColumn << V >> {
   - **property_name** : (nvarchar(128))
   --
   --
   --
 }
 
-entity "puml-link:property.PropertyName_RepoObjectColumn_T.adoc[prefix=..]" as property.PropertyName_RepoObjectColumn_T << U >> {
+entity "puml-link:dhw:sqldb:property.PropertyName_RepoObjectColumn_T.adoc[]" as property.PropertyName_RepoObjectColumn_T << U >> {
   - **property_name** : (nvarchar(128))
   --
   - has_inheritance : (bit)
@@ -55,7 +56,7 @@ entity "puml-link:property.PropertyName_RepoObjectColumn_T.adoc[prefix=..]" as p
   --
 }
 
-entity "puml-link:property.RepoObjectColumnProperty.adoc[prefix=..]" as property.RepoObjectColumnProperty << U >> {
+entity "puml-link:dhw:sqldb:property.RepoObjectColumnProperty.adoc[]" as property.RepoObjectColumnProperty << U >> {
   - **RepoObjectColumnProperty_id** : (int)
   --
   inheritance : (tinyint)
@@ -71,7 +72,7 @@ entity "puml-link:property.RepoObjectColumnProperty.adoc[prefix=..]" as property
   --
 }
 
-entity "puml-link:property.usp_PERSIST_PropertyName_RepoObjectColumn_T.adoc[prefix=..]" as property.usp_PERSIST_PropertyName_RepoObjectColumn_T << P >> {
+entity "puml-link:dhw:sqldb:property.usp_PERSIST_PropertyName_RepoObjectColumn_T.adoc[]" as property.usp_PERSIST_PropertyName_RepoObjectColumn_T << P >> {
   --
   --
   --
@@ -81,11 +82,6 @@ config.Parameter <.. property.PropertyName_RepoObjectColumn
 property.PropertyName_RepoObjectColumn <.. property.PropertyName_RepoObjectColumn_T
 property.PropertyName_RepoObjectColumn <.. property.usp_PERSIST_PropertyName_RepoObjectColumn_T
 property.RepoObjectColumnProperty <.. property.PropertyName_RepoObjectColumn
-property.PropertyName_RepoObjectColumn::property_name <-- property.PropertyName_RepoObjectColumn_T::property_name
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"property.PropertyName_RepoObjectColumn::property_name" <-- "property.PropertyName_RepoObjectColumn_T::property_name"
 @enduml
 

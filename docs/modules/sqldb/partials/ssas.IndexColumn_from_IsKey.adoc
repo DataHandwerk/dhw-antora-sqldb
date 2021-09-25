@@ -7,9 +7,6 @@
 :ExistsProperty--antorareferencinglist:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--pk_index_guid:
-:ExistsProperty--pk_indexpatterncolumndatatype:
-:ExistsProperty--pk_indexpatterncolumnname:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -55,8 +52,8 @@ view
 
 [cols="d,8m,m,m,m,d"]
 |===
-|1
-|*databasename*
+|
+|databasename
 |nvarchar(128)
 |NOT NULL
 |
@@ -66,44 +63,6 @@ view
 .Referenced Columns
 --
 * xref:ssas.model_json_311_tables_columns_T.adoc#column-databasename[+ssas.model_json_311_tables_columns_T.databasename+]
---
-
-
-[#column-TableName]
-=== TableName
-
-[cols="d,8m,m,m,m,d"]
-|===
-|2
-|*TableName*
-|nvarchar(128)
-|NOT NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:ssas.model_json_311_tables_columns_T.adoc#column-tables_name[+ssas.model_json_311_tables_columns_T.tables_name+]
---
-
-
-[#column-tables_columns_name]
-=== tables_columns_name
-
-[cols="d,8m,m,m,m,d"]
-|===
-|3
-|*tables_columns_name*
-|nvarchar(128)
-|NOT NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:ssas.model_json_311_tables_columns_T.adoc#column-tables_columns_name[+ssas.model_json_311_tables_columns_T.tables_columns_name+]
 --
 
 
@@ -215,6 +174,44 @@ view
 --
 
 
+[#column-TableName]
+=== TableName
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|TableName
+|nvarchar(128)
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:ssas.model_json_311_tables_columns_T.adoc#column-tables_name[+ssas.model_json_311_tables_columns_T.tables_name+]
+--
+
+
+[#column-tables_columns_name]
+=== tables_columns_name
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|tables_columns_name
+|nvarchar(128)
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:ssas.model_json_311_tables_columns_T.adoc#column-tables_columns_name[+ssas.model_json_311_tables_columns_T.tables_columns_name+]
+--
+
+
 [#column-tables_columns_type]
 === tables_columns_type
 
@@ -245,26 +242,8 @@ view
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
-|1
-|*<<column-databasename>>*
-|nvarchar(128)
-|NOT NULL
-|
-|
 
-|2
-|*<<column-TableName>>*
-|nvarchar(128)
-|NOT NULL
-|
-|
 
-|3
-|*<<column-tables_columns_name>>*
-|nvarchar(128)
-|NOT NULL
-|
-|
 
 
 
@@ -279,8 +258,12 @@ view
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
-
-
+|
+|<<column-databasename>>
+|nvarchar(128)
+|NOT NULL
+|
+|
 
 |
 |<<column-index_column_id>>
@@ -332,6 +315,20 @@ view
 |
 
 |
+|<<column-TableName>>
+|nvarchar(128)
+|NOT NULL
+|
+|
+
+|
+|<<column-tables_columns_name>>
+|nvarchar(128)
+|NOT NULL
+|
+|
+
+|
 |<<column-tables_columns_type>>
 |nvarchar(500)
 |NULL
@@ -344,38 +341,27 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-PK_IndexColumn_from_IsKey]
-=== PK_IndexColumn_from_IsKey
+[#index-idx_IndexColumn_from_IsKey2x_1]
+=== idx_IndexColumn_from_IsKey++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-databasename>>; nvarchar(128)
 * <<column-TableName>>; nvarchar(128)
 * <<column-tables_columns_name>>; nvarchar(128)
 --
-* PK, Unique, Real: 1, 1, 0
+* PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_IndexColumn_from_IsKey_2]
+[#index-idx_IndexColumn_from_IsKey2x_2]
 === idx_IndexColumn_from_IsKey++__++2
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-databasename>>; nvarchar(128)
 * <<column-TableName>>; nvarchar(128)
---
-* PK, Unique, Real: 0, 0, 0
-
-
-[#index-idx_IndexColumn_from_IsKey_3]
-=== idx_IndexColumn_from_IsKey++__++3
-
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
-+
---
-* <<column-databasename>>; nvarchar(128)
 --
 * PK, Unique, Real: 0, 0, 0
 
@@ -612,21 +598,21 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-378D5BD5-270E-EC11-8518-A81E8446D5B0
+
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-nvarchar(128),nvarchar(128),nvarchar(128)
+
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-databasename,TableName,tables_columns_name
+
 // end::pk_indexpatterncolumnname[]
 
 

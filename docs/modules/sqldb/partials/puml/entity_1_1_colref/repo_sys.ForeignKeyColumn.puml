@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:repo.ForeignKey_IndexPattern.adoc[prefix=..]" as repo.ForeignKey_IndexPattern << V >> {
+entity "puml-link:dhw:sqldb:repo.ForeignKey_IndexPattern.adoc[]" as repo.ForeignKey_IndexPattern << V >> {
   - **constraint_object_id** : (int)
   **ForeignKey_guid** : (uniqueidentifier)
   --
@@ -41,7 +42,7 @@ entity "puml-link:repo.ForeignKey_IndexPattern.adoc[prefix=..]" as repo.ForeignK
   --
 }
 
-entity "puml-link:repo_sys.ForeignKey.adoc[prefix=..]" as repo_sys.ForeignKey << V >> {
+entity "puml-link:dhw:sqldb:repo_sys.ForeignKey.adoc[]" as repo_sys.ForeignKey << V >> {
   --
   - create_date : (datetime)
   delete_referential_action : (tinyint)
@@ -74,7 +75,7 @@ entity "puml-link:repo_sys.ForeignKey.adoc[prefix=..]" as repo_sys.ForeignKey <<
   --
 }
 
-entity "puml-link:repo_sys.ForeignKeyColumn.adoc[prefix=..]" as repo_sys.ForeignKeyColumn << V >> {
+entity "puml-link:dhw:sqldb:repo_sys.ForeignKeyColumn.adoc[]" as repo_sys.ForeignKeyColumn << V >> {
   --
   - constraint_column_id : (int)
   - constraint_object_id : (int)
@@ -101,7 +102,7 @@ entity "puml-link:repo_sys.ForeignKeyColumn.adoc[prefix=..]" as repo_sys.Foreign
   --
 }
 
-entity "puml-link:repo_sys.SysColumn.adoc[prefix=..]" as repo_sys.SysColumn << V >> {
+entity "puml-link:dhw:sqldb:repo_sys.SysColumn.adoc[]" as repo_sys.SysColumn << V >> {
   --
   collation_name : (sysname)
   column_encryption_key_database_name : (sysname)
@@ -163,7 +164,7 @@ entity "puml-link:repo_sys.SysColumn.adoc[prefix=..]" as repo_sys.SysColumn << V
   --
 }
 
-entity "puml-link:sys_dwh.foreign_key_columns.adoc[prefix=..]" as sys_dwh.foreign_key_columns << SN >> {
+entity "puml-link:dhw:sqldb:sys_dwh.foreign_key_columns.adoc[]" as sys_dwh.foreign_key_columns << SN >> {
   --
   --
   --
@@ -173,26 +174,21 @@ repo_sys.ForeignKey <.. repo_sys.ForeignKeyColumn
 repo_sys.ForeignKeyColumn <.. repo.ForeignKey_IndexPattern
 repo_sys.SysColumn <.. repo_sys.ForeignKeyColumn
 sys_dwh.foreign_key_columns <.. repo_sys.ForeignKeyColumn
-repo_sys.ForeignKey::ForeignKey_fullname <-- repo_sys.ForeignKeyColumn::ForeignKey_fullname
-repo_sys.ForeignKey::ForeignKey_guid <-- repo_sys.ForeignKeyColumn::ForeignKey_guid
-repo_sys.ForeignKey::name <-- repo_sys.ForeignKeyColumn::ForeignKey_name
-repo_sys.ForeignKey::parent_RepoObject_fullname <-- repo_sys.ForeignKeyColumn::referencing_RepoObject_fullname
-repo_sys.ForeignKey::parent_SysObject_fullname <-- repo_sys.ForeignKeyColumn::referencing_SysObject_fullname
-repo_sys.ForeignKeyColumn::ForeignKey_name <-- repo.ForeignKey_IndexPattern::ForeignKey_name
-repo_sys.SysColumn::SysObject_column_name <-- repo_sys.ForeignKeyColumn::referencing_column_name
-repo_sys.SysColumn::SysObject_column_name <-- repo_sys.ForeignKeyColumn::referenced_column_name
-repo_sys.SysColumn::SysObject_name <-- repo_sys.ForeignKeyColumn::referencing_name
-repo_sys.SysColumn::SysObject_name <-- repo_sys.ForeignKeyColumn::referenced_name
-repo_sys.SysColumn::SysObject_RepoObject_guid <-- repo_sys.ForeignKeyColumn::referencing_RepoObject_guid
-repo_sys.SysColumn::SysObject_RepoObject_guid <-- repo_sys.ForeignKeyColumn::referenced_RepoObject_guid
-repo_sys.SysColumn::SysObject_RepoObjectColumn_guid <-- repo_sys.ForeignKeyColumn::referencing_RepoObjectColumn_guid
-repo_sys.SysColumn::SysObject_RepoObjectColumn_guid <-- repo_sys.ForeignKeyColumn::referenced_RepoObjectColumn_guid
-repo_sys.SysColumn::SysObject_schema_name <-- repo_sys.ForeignKeyColumn::referencing_schema_name
-repo_sys.SysColumn::SysObject_schema_name <-- repo_sys.ForeignKeyColumn::referenced_schema_name
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"repo_sys.ForeignKey::ForeignKey_fullname" <-- "repo_sys.ForeignKeyColumn::ForeignKey_fullname"
+"repo_sys.ForeignKey::ForeignKey_guid" <-- "repo_sys.ForeignKeyColumn::ForeignKey_guid"
+"repo_sys.ForeignKey::name" <-- "repo_sys.ForeignKeyColumn::ForeignKey_name"
+"repo_sys.ForeignKey::parent_RepoObject_fullname" <-- "repo_sys.ForeignKeyColumn::referencing_RepoObject_fullname"
+"repo_sys.ForeignKey::parent_SysObject_fullname" <-- "repo_sys.ForeignKeyColumn::referencing_SysObject_fullname"
+"repo_sys.ForeignKeyColumn::ForeignKey_name" <-- "repo.ForeignKey_IndexPattern::ForeignKey_name"
+"repo_sys.SysColumn::SysObject_column_name" <-- "repo_sys.ForeignKeyColumn::referencing_column_name"
+"repo_sys.SysColumn::SysObject_column_name" <-- "repo_sys.ForeignKeyColumn::referenced_column_name"
+"repo_sys.SysColumn::SysObject_name" <-- "repo_sys.ForeignKeyColumn::referencing_name"
+"repo_sys.SysColumn::SysObject_name" <-- "repo_sys.ForeignKeyColumn::referenced_name"
+"repo_sys.SysColumn::SysObject_RepoObject_guid" <-- "repo_sys.ForeignKeyColumn::referencing_RepoObject_guid"
+"repo_sys.SysColumn::SysObject_RepoObject_guid" <-- "repo_sys.ForeignKeyColumn::referenced_RepoObject_guid"
+"repo_sys.SysColumn::SysObject_RepoObjectColumn_guid" <-- "repo_sys.ForeignKeyColumn::referencing_RepoObjectColumn_guid"
+"repo_sys.SysColumn::SysObject_RepoObjectColumn_guid" <-- "repo_sys.ForeignKeyColumn::referenced_RepoObjectColumn_guid"
+"repo_sys.SysColumn::SysObject_schema_name" <-- "repo_sys.ForeignKeyColumn::referencing_schema_name"
+"repo_sys.SysColumn::SysObject_schema_name" <-- "repo_sys.ForeignKeyColumn::referenced_schema_name"
 @enduml
 

@@ -22,16 +22,17 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:property.fs_get_RepoObjectColumnProperty_nvarchar.adoc[prefix=..]" as property.fs_get_RepoObjectColumnProperty_nvarchar << FN >> {
+entity "puml-link:dhw:sqldb:property.fs_get_RepoObjectColumnProperty_nvarchar.adoc[]" as property.fs_get_RepoObjectColumnProperty_nvarchar << FN >> {
   --
   --
   --
 }
 
-entity "puml-link:property.RepoObjectColumnProperty.adoc[prefix=..]" as property.RepoObjectColumnProperty << U >> {
+entity "puml-link:dhw:sqldb:property.RepoObjectColumnProperty.adoc[]" as property.RepoObjectColumnProperty << U >> {
   - **RepoObjectColumnProperty_id** : (int)
   --
   inheritance : (tinyint)
@@ -47,8 +48,7 @@ entity "puml-link:property.RepoObjectColumnProperty.adoc[prefix=..]" as property
   --
 }
 
-entity "puml-link:repo.RepoObjectColumn_gross.adoc[prefix=..]" as repo.RepoObjectColumn_gross << V >> {
-  - **RepoObjectColumn_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_gross.adoc[]" as repo.RepoObjectColumn_gross << V >> {
   --
   - Column_name : (nvarchar(128))
   Description : (nvarchar(max))
@@ -57,6 +57,7 @@ entity "puml-link:repo.RepoObjectColumn_gross.adoc[prefix=..]" as repo.RepoObjec
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
   InheritanceDefinition : (nvarchar(4000))
   InheritanceType : (tinyint)
+  - is_external : (bit)
   is_persistence_no_check : (bit)
   is_persistence_no_include : (bit)
   is_persistence_no_update : (bit)
@@ -102,6 +103,7 @@ entity "puml-link:repo.RepoObjectColumn_gross.adoc[prefix=..]" as repo.RepoObjec
   RepoObjectColumn_column_id : (int)
   - RepoObjectColumn_fullname : (nvarchar(520))
   - RepoObjectColumn_fullname2 : (nvarchar(386))
+  - RepoObjectColumn_guid : (uniqueidentifier)
   - RepoObjectColumn_name : (nvarchar(128))
   - SysObject_fullname : (nvarchar(261))
   - SysObject_fullname2 : (nvarchar(257))
@@ -128,11 +130,6 @@ entity "puml-link:repo.RepoObjectColumn_gross.adoc[prefix=..]" as repo.RepoObjec
 
 property.fs_get_RepoObjectColumnProperty_nvarchar <.. repo.RepoObjectColumn_gross
 property.RepoObjectColumnProperty <.. property.fs_get_RepoObjectColumnProperty_nvarchar
-
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
 
 @enduml
 

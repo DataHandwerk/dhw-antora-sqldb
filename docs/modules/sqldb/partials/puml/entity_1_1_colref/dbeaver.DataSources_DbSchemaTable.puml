@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:dbeaver.DataSources.adoc[prefix=..]" as dbeaver.DataSources << U >> {
+entity "puml-link:dhw:sqldb:dbeaver.DataSources.adoc[]" as dbeaver.DataSources << U >> {
   - **id** : (int)
   --
   BulkColumn : (varchar(max))
@@ -34,7 +35,7 @@ entity "puml-link:dbeaver.DataSources.adoc[prefix=..]" as dbeaver.DataSources <<
   --
 }
 
-entity "puml-link:dbeaver.DataSources_DbSchemaTable.adoc[prefix=..]" as dbeaver.DataSources_DbSchemaTable << V >> {
+entity "puml-link:dhw:sqldb:dbeaver.DataSources_DbSchemaTable.adoc[]" as dbeaver.DataSources_DbSchemaTable << V >> {
   --
   BulkColumn : (varchar(max))
   - id : (int)
@@ -55,7 +56,7 @@ entity "puml-link:dbeaver.DataSources_DbSchemaTable.adoc[prefix=..]" as dbeaver.
   --
 }
 
-entity "puml-link:dbeaver.DataSources_DbSchemaTable_constraint.adoc[prefix=..]" as dbeaver.DataSources_DbSchemaTable_constraint << V >> {
+entity "puml-link:dhw:sqldb:dbeaver.DataSources_DbSchemaTable_constraint.adoc[]" as dbeaver.DataSources_DbSchemaTable_constraint << V >> {
   --
   BulkColumn : (varchar(max))
   - id : (int)
@@ -79,7 +80,7 @@ entity "puml-link:dbeaver.DataSources_DbSchemaTable_constraint.adoc[prefix=..]" 
   --
 }
 
-entity "puml-link:dbeaver.DataSources_DbSchemaTable_FK.adoc[prefix=..]" as dbeaver.DataSources_DbSchemaTable_FK << V >> {
+entity "puml-link:dhw:sqldb:dbeaver.DataSources_DbSchemaTable_FK.adoc[]" as dbeaver.DataSources_DbSchemaTable_FK << V >> {
   --
   BulkColumn : (varchar(max))
   - id : (int)
@@ -107,36 +108,31 @@ entity "puml-link:dbeaver.DataSources_DbSchemaTable_FK.adoc[prefix=..]" as dbeav
 dbeaver.DataSources <.. dbeaver.DataSources_DbSchemaTable
 dbeaver.DataSources_DbSchemaTable <.. dbeaver.DataSources_DbSchemaTable_constraint
 dbeaver.DataSources_DbSchemaTable <.. dbeaver.DataSources_DbSchemaTable_FK
-dbeaver.DataSources_DbSchemaTable::BulkColumn <-- dbeaver.DataSources_DbSchemaTable_constraint::BulkColumn
-dbeaver.DataSources_DbSchemaTable::BulkColumn <-- dbeaver.DataSources_DbSchemaTable_FK::BulkColumn
-dbeaver.DataSources_DbSchemaTable::id <-- dbeaver.DataSources_DbSchemaTable_constraint::id
-dbeaver.DataSources_DbSchemaTable::id <-- dbeaver.DataSources_DbSchemaTable_FK::id
-dbeaver.DataSources_DbSchemaTable::is_json <-- dbeaver.DataSources_DbSchemaTable_constraint::is_json
-dbeaver.DataSources_DbSchemaTable::is_json <-- dbeaver.DataSources_DbSchemaTable_FK::is_json
-dbeaver.DataSources_DbSchemaTable::VirtualModel_database <-- dbeaver.DataSources_DbSchemaTable_constraint::VirtualModel_database
-dbeaver.DataSources_DbSchemaTable::VirtualModel_database <-- dbeaver.DataSources_DbSchemaTable_FK::VirtualModel_database
-dbeaver.DataSources_DbSchemaTable::VirtualModel_database_json <-- dbeaver.DataSources_DbSchemaTable_constraint::VirtualModel_database_json
-dbeaver.DataSources_DbSchemaTable::VirtualModel_database_json <-- dbeaver.DataSources_DbSchemaTable_FK::VirtualModel_database_json
-dbeaver.DataSources_DbSchemaTable::VirtualModel_json <-- dbeaver.DataSources_DbSchemaTable_constraint::VirtualModel_json
-dbeaver.DataSources_DbSchemaTable::VirtualModel_json <-- dbeaver.DataSources_DbSchemaTable_FK::VirtualModel_json
-dbeaver.DataSources_DbSchemaTable::VirtualModel_key <-- dbeaver.DataSources_DbSchemaTable_constraint::VirtualModel_key
-dbeaver.DataSources_DbSchemaTable::VirtualModel_key <-- dbeaver.DataSources_DbSchemaTable_FK::VirtualModel_key
-dbeaver.DataSources_DbSchemaTable::VirtualModel_schema <-- dbeaver.DataSources_DbSchemaTable_constraint::VirtualModel_schema
-dbeaver.DataSources_DbSchemaTable::VirtualModel_schema <-- dbeaver.DataSources_DbSchemaTable_FK::VirtualModel_schema
-dbeaver.DataSources_DbSchemaTable::VirtualModel_schema_json <-- dbeaver.DataSources_DbSchemaTable_constraint::VirtualModel_schema_json
-dbeaver.DataSources_DbSchemaTable::VirtualModel_schema_json <-- dbeaver.DataSources_DbSchemaTable_FK::VirtualModel_schema_json
-dbeaver.DataSources_DbSchemaTable::VirtualModel_table <-- dbeaver.DataSources_DbSchemaTable_constraint::VirtualModel_table
-dbeaver.DataSources_DbSchemaTable::VirtualModel_table <-- dbeaver.DataSources_DbSchemaTable_FK::VirtualModel_table
-dbeaver.DataSources_DbSchemaTable::VirtualModel_table_constraints_json <-- dbeaver.DataSources_DbSchemaTable_constraint::VirtualModel_table_constraints_json
-dbeaver.DataSources_DbSchemaTable::VirtualModel_table_FK_json <-- dbeaver.DataSources_DbSchemaTable_FK::VirtualModel_table_FK_json
-dbeaver.DataSources_DbSchemaTable::VirtualModel_table_json <-- dbeaver.DataSources_DbSchemaTable_constraint::VirtualModel_table_json
-dbeaver.DataSources_DbSchemaTable::VirtualModel_table_json <-- dbeaver.DataSources_DbSchemaTable_FK::VirtualModel_table_json
-dbeaver.DataSources_DbSchemaTable::VirtualModels <-- dbeaver.DataSources_DbSchemaTable_constraint::VirtualModels
-dbeaver.DataSources_DbSchemaTable::VirtualModels <-- dbeaver.DataSources_DbSchemaTable_FK::VirtualModels
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"dbeaver.DataSources_DbSchemaTable::BulkColumn" <-- "dbeaver.DataSources_DbSchemaTable_constraint::BulkColumn"
+"dbeaver.DataSources_DbSchemaTable::BulkColumn" <-- "dbeaver.DataSources_DbSchemaTable_FK::BulkColumn"
+"dbeaver.DataSources_DbSchemaTable::id" <-- "dbeaver.DataSources_DbSchemaTable_constraint::id"
+"dbeaver.DataSources_DbSchemaTable::id" <-- "dbeaver.DataSources_DbSchemaTable_FK::id"
+"dbeaver.DataSources_DbSchemaTable::is_json" <-- "dbeaver.DataSources_DbSchemaTable_constraint::is_json"
+"dbeaver.DataSources_DbSchemaTable::is_json" <-- "dbeaver.DataSources_DbSchemaTable_FK::is_json"
+"dbeaver.DataSources_DbSchemaTable::VirtualModel_database" <-- "dbeaver.DataSources_DbSchemaTable_constraint::VirtualModel_database"
+"dbeaver.DataSources_DbSchemaTable::VirtualModel_database" <-- "dbeaver.DataSources_DbSchemaTable_FK::VirtualModel_database"
+"dbeaver.DataSources_DbSchemaTable::VirtualModel_database_json" <-- "dbeaver.DataSources_DbSchemaTable_constraint::VirtualModel_database_json"
+"dbeaver.DataSources_DbSchemaTable::VirtualModel_database_json" <-- "dbeaver.DataSources_DbSchemaTable_FK::VirtualModel_database_json"
+"dbeaver.DataSources_DbSchemaTable::VirtualModel_json" <-- "dbeaver.DataSources_DbSchemaTable_constraint::VirtualModel_json"
+"dbeaver.DataSources_DbSchemaTable::VirtualModel_json" <-- "dbeaver.DataSources_DbSchemaTable_FK::VirtualModel_json"
+"dbeaver.DataSources_DbSchemaTable::VirtualModel_key" <-- "dbeaver.DataSources_DbSchemaTable_constraint::VirtualModel_key"
+"dbeaver.DataSources_DbSchemaTable::VirtualModel_key" <-- "dbeaver.DataSources_DbSchemaTable_FK::VirtualModel_key"
+"dbeaver.DataSources_DbSchemaTable::VirtualModel_schema" <-- "dbeaver.DataSources_DbSchemaTable_constraint::VirtualModel_schema"
+"dbeaver.DataSources_DbSchemaTable::VirtualModel_schema" <-- "dbeaver.DataSources_DbSchemaTable_FK::VirtualModel_schema"
+"dbeaver.DataSources_DbSchemaTable::VirtualModel_schema_json" <-- "dbeaver.DataSources_DbSchemaTable_constraint::VirtualModel_schema_json"
+"dbeaver.DataSources_DbSchemaTable::VirtualModel_schema_json" <-- "dbeaver.DataSources_DbSchemaTable_FK::VirtualModel_schema_json"
+"dbeaver.DataSources_DbSchemaTable::VirtualModel_table" <-- "dbeaver.DataSources_DbSchemaTable_constraint::VirtualModel_table"
+"dbeaver.DataSources_DbSchemaTable::VirtualModel_table" <-- "dbeaver.DataSources_DbSchemaTable_FK::VirtualModel_table"
+"dbeaver.DataSources_DbSchemaTable::VirtualModel_table_constraints_json" <-- "dbeaver.DataSources_DbSchemaTable_constraint::VirtualModel_table_constraints_json"
+"dbeaver.DataSources_DbSchemaTable::VirtualModel_table_FK_json" <-- "dbeaver.DataSources_DbSchemaTable_FK::VirtualModel_table_FK_json"
+"dbeaver.DataSources_DbSchemaTable::VirtualModel_table_json" <-- "dbeaver.DataSources_DbSchemaTable_constraint::VirtualModel_table_json"
+"dbeaver.DataSources_DbSchemaTable::VirtualModel_table_json" <-- "dbeaver.DataSources_DbSchemaTable_FK::VirtualModel_table_json"
+"dbeaver.DataSources_DbSchemaTable::VirtualModels" <-- "dbeaver.DataSources_DbSchemaTable_constraint::VirtualModels"
+"dbeaver.DataSources_DbSchemaTable::VirtualModels" <-- "dbeaver.DataSources_DbSchemaTable_FK::VirtualModels"
 @enduml
 

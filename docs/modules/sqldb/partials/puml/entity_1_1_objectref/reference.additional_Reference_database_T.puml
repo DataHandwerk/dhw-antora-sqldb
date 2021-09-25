@@ -1,0 +1,63 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:property.usp_external_property_import.adoc[]" as property.usp_external_property_import << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.usp_external_RepoObjectProperty.adoc[]" as property.usp_external_RepoObjectProperty << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.additional_Reference_database.adoc[]" as reference.additional_Reference_database << V >> {
+  - **AntoraComponent** : (nvarchar(128))
+  - **AntoraModule** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.additional_Reference_database_T.adoc[]" as reference.additional_Reference_database_T << U >> {
+  - **AntoraComponent** : (nvarchar(128))
+  - **AntoraModule** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.usp_PERSIST_additional_Reference_database_T.adoc[]" as reference.usp_PERSIST_additional_Reference_database_T << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.RepoObject_gross.adoc[]" as repo.RepoObject_gross << V >> {
+  --
+}
+
+reference.additional_Reference_database <.. reference.additional_Reference_database_T
+reference.additional_Reference_database_T <.. property.usp_external_RepoObjectProperty
+reference.additional_Reference_database_T <.. repo.RepoObject_gross
+reference.additional_Reference_database_T <.. reference.usp_PERSIST_additional_Reference_database_T
+reference.additional_Reference_database_T <.. property.usp_external_property_import
+@enduml
+

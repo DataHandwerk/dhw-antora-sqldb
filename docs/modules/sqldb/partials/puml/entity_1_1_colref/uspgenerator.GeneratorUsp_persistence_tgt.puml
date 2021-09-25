@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:uspgenerator.GeneratorUsp.adoc[prefix=..]" as uspgenerator.GeneratorUsp << U >> {
+entity "puml-link:dhw:sqldb:uspgenerator.GeneratorUsp.adoc[]" as uspgenerator.GeneratorUsp << U >> {
   - **id** : (int)
   --
   - has_logging : (tinyint)
@@ -38,7 +39,7 @@ entity "puml-link:uspgenerator.GeneratorUsp.adoc[prefix=..]" as uspgenerator.Gen
   --
 }
 
-entity "puml-link:uspgenerator.GeneratorUsp_persistence_tgt.adoc[prefix=..]" as uspgenerator.GeneratorUsp_persistence_tgt << V >> {
+entity "puml-link:dhw:sqldb:uspgenerator.GeneratorUsp_persistence_tgt.adoc[]" as uspgenerator.GeneratorUsp_persistence_tgt << V >> {
   --
   - has_logging : (tinyint)
   - id : (int)
@@ -51,16 +52,11 @@ entity "puml-link:uspgenerator.GeneratorUsp_persistence_tgt.adoc[prefix=..]" as 
 }
 
 uspgenerator.GeneratorUsp <.. uspgenerator.GeneratorUsp_persistence_tgt
-uspgenerator.GeneratorUsp::has_logging <-- uspgenerator.GeneratorUsp_persistence_tgt::has_logging
-uspgenerator.GeneratorUsp::id <-- uspgenerator.GeneratorUsp_persistence_tgt::id
-uspgenerator.GeneratorUsp::usp_Description <-- uspgenerator.GeneratorUsp_persistence_tgt::usp_Description
-uspgenerator.GeneratorUsp::usp_fullname <-- uspgenerator.GeneratorUsp_persistence_tgt::usp_fullname
-uspgenerator.GeneratorUsp::usp_name <-- uspgenerator.GeneratorUsp_persistence_tgt::usp_name
-uspgenerator.GeneratorUsp::usp_schema <-- uspgenerator.GeneratorUsp_persistence_tgt::usp_schema
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"uspgenerator.GeneratorUsp::has_logging" <-- "uspgenerator.GeneratorUsp_persistence_tgt::has_logging"
+"uspgenerator.GeneratorUsp::id" <-- "uspgenerator.GeneratorUsp_persistence_tgt::id"
+"uspgenerator.GeneratorUsp::usp_Description" <-- "uspgenerator.GeneratorUsp_persistence_tgt::usp_Description"
+"uspgenerator.GeneratorUsp::usp_fullname" <-- "uspgenerator.GeneratorUsp_persistence_tgt::usp_fullname"
+"uspgenerator.GeneratorUsp::usp_name" <-- "uspgenerator.GeneratorUsp_persistence_tgt::usp_name"
+"uspgenerator.GeneratorUsp::usp_schema" <-- "uspgenerator.GeneratorUsp_persistence_tgt::usp_schema"
 @enduml
 

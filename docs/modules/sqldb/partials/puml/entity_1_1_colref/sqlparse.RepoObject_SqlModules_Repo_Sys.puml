@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:property.RepoObjectProperty_Collect_source_sql_modules_definition.adoc[prefix=..]" as property.RepoObjectProperty_Collect_source_sql_modules_definition << V >> {
+entity "puml-link:dhw:sqldb:property.RepoObjectProperty_Collect_source_sql_modules_definition.adoc[]" as property.RepoObjectProperty_Collect_source_sql_modules_definition << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   **property_name** : (nvarchar(128))
   --
@@ -34,15 +35,19 @@ entity "puml-link:property.RepoObjectProperty_Collect_source_sql_modules_definit
   --
 }
 
-entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
   has_execution_plan_issue : (bit)
   has_get_referenced_issue : (bit)
+  Inheritance_Source_fullname : (nvarchar(261))
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
   InheritanceDefinition : (nvarchar(4000))
   InheritanceType : (tinyint)
   - is_DocsExclude : (bit)
+  - is_external : (bit)
   is_repo_managed : (bit)
   is_required_ObjectMerge : (bit)
   - is_ssas : (bit)
@@ -77,17 +82,19 @@ entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
   --
 }
 
-entity "puml-link:repo.RepoObject_gross2.adoc[prefix=..]" as repo.RepoObject_gross2 << V >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject_gross2.adoc[]" as repo.RepoObject_gross2 << V >> {
   --
   AntoraComponent : (nvarchar(max))
-  AntoraExternalReferencedList : (nvarchar(max))
-  AntoraExternalReferencingList : (nvarchar(max))
   AntoraModule : (nvarchar(max))
   AntoraReferencedList : (nvarchar(max))
   AntoraReferencingList : (nvarchar(max))
   CreateColumnList : (nvarchar(max))
   DbmlColumnList : (nvarchar(max))
   Description : (nvarchar(max))
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
+  external_DatabaseName : (nvarchar(128))
+  external_RepoDatabaseName : (nvarchar(128))
   has_different_sys_names : (bit)
   has_execution_plan_issue : (bit)
   has_get_referenced_issue : (bit)
@@ -100,6 +107,7 @@ entity "puml-link:repo.RepoObject_gross2.adoc[prefix=..]" as repo.RepoObject_gro
   InheritanceType : (tinyint)
   - is_DocsExclude : (bit)
   is_DocsOutput : (int)
+  - is_external : (bit)
   - is_in_reference : (int)
   is_persistence : (bit)
   is_persistence_check_duplicate_per_pk : (bit)
@@ -165,16 +173,17 @@ entity "puml-link:repo.RepoObject_gross2.adoc[prefix=..]" as repo.RepoObject_gro
   SysObject_type_name : (nvarchar(128))
   tables_dataCategory : (nvarchar(500))
   tables_description : (nvarchar(max))
-  tables_isHidden : (nvarchar(500))
+  tables_isHidden : (bit)
   target_filter : (nvarchar(4000))
   temporal_type : (tinyint)
   - usp_persistence_name : (nvarchar(140))
   usp_persistence_RepoObject_guid : (uniqueidentifier)
+  uspgenerator_usp_id : (int)
   --
   --
 }
 
-entity "puml-link:repo_sys.SysObject.adoc[prefix=..]" as repo_sys.SysObject << V >> {
+entity "puml-link:dhw:sqldb:repo_sys.SysObject.adoc[]" as repo_sys.SysObject << V >> {
   --
   - create_date : (datetime)
   history_table_id : (int)
@@ -201,7 +210,7 @@ entity "puml-link:repo_sys.SysObject.adoc[prefix=..]" as repo_sys.SysObject << V
   --
 }
 
-entity "puml-link:sqlparse.RepoObject_SqlModules.adoc[prefix=..]" as sqlparse.RepoObject_SqlModules << U >> {
+entity "puml-link:dhw:sqldb:sqlparse.RepoObject_SqlModules.adoc[]" as sqlparse.RepoObject_SqlModules << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
   - sql_modules_dt : (datetime)
@@ -213,7 +222,7 @@ entity "puml-link:sqlparse.RepoObject_SqlModules.adoc[prefix=..]" as sqlparse.Re
   --
 }
 
-entity "puml-link:sqlparse.RepoObject_SqlModules_Repo_Sys.adoc[prefix=..]" as sqlparse.RepoObject_SqlModules_Repo_Sys << V >> {
+entity "puml-link:dhw:sqldb:sqlparse.RepoObject_SqlModules_Repo_Sys.adoc[]" as sqlparse.RepoObject_SqlModules_Repo_Sys << V >> {
   --
   is_json_sql_modules_json : (int)
   is_outdated : (bit)
@@ -234,23 +243,18 @@ repo_sys.SysObject <.. sqlparse.RepoObject_SqlModules_Repo_Sys
 sqlparse.RepoObject_SqlModules <.. sqlparse.RepoObject_SqlModules_Repo_Sys
 sqlparse.RepoObject_SqlModules_Repo_Sys <.. property.RepoObjectProperty_Collect_source_sql_modules_definition
 sqlparse.RepoObject_SqlModules_Repo_Sys <.. repo.RepoObject_gross2
-repo.RepoObject::RepoObject_guid <-- sqlparse.RepoObject_SqlModules_Repo_Sys::RepoObject_guid
-repo.RepoObject::SysObject_type <-- sqlparse.RepoObject_SqlModules_Repo_Sys::SysObject_type
-repo_sys.SysObject::modify_date <-- sqlparse.RepoObject_SqlModules_Repo_Sys::modify_date
-repo_sys.SysObject::sql_modules_definition <-- sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_definition
-sqlparse.RepoObject_SqlModules::is_json_sql_modules_json <-- sqlparse.RepoObject_SqlModules_Repo_Sys::is_json_sql_modules_json
-sqlparse.RepoObject_SqlModules::sql_modules_dt <-- sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_dt
-sqlparse.RepoObject_SqlModules::sql_modules_formatted <-- sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_formatted
-sqlparse.RepoObject_SqlModules::sql_modules_formatted2 <-- sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_formatted2
-sqlparse.RepoObject_SqlModules::sql_modules_json <-- sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_json
-sqlparse.RepoObject_SqlModules_Repo_Sys::RepoObject_guid <-- property.RepoObjectProperty_Collect_source_sql_modules_definition::RepoObject_guid
-sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_definition <-- repo.RepoObject_gross2::sql_modules_definition
-sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_formatted <-- repo.RepoObject_gross2::sql_modules_formatted
-sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_formatted2 <-- repo.RepoObject_gross2::sql_modules_formatted2
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"repo.RepoObject::RepoObject_guid" <-- "sqlparse.RepoObject_SqlModules_Repo_Sys::RepoObject_guid"
+"repo.RepoObject::SysObject_type" <-- "sqlparse.RepoObject_SqlModules_Repo_Sys::SysObject_type"
+"repo_sys.SysObject::modify_date" <-- "sqlparse.RepoObject_SqlModules_Repo_Sys::modify_date"
+"repo_sys.SysObject::sql_modules_definition" <-- "sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_definition"
+"sqlparse.RepoObject_SqlModules::is_json_sql_modules_json" <-- "sqlparse.RepoObject_SqlModules_Repo_Sys::is_json_sql_modules_json"
+"sqlparse.RepoObject_SqlModules::sql_modules_dt" <-- "sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_dt"
+"sqlparse.RepoObject_SqlModules::sql_modules_formatted" <-- "sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_formatted"
+"sqlparse.RepoObject_SqlModules::sql_modules_formatted2" <-- "sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_formatted2"
+"sqlparse.RepoObject_SqlModules::sql_modules_json" <-- "sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_json"
+"sqlparse.RepoObject_SqlModules_Repo_Sys::RepoObject_guid" <-- "property.RepoObjectProperty_Collect_source_sql_modules_definition::RepoObject_guid"
+"sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_definition" <-- "repo.RepoObject_gross2::sql_modules_definition"
+"sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_formatted" <-- "repo.RepoObject_gross2::sql_modules_formatted"
+"sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_formatted2" <-- "repo.RepoObject_gross2::sql_modules_formatted2"
 @enduml
 

@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:repo.ForeignKey_ssas_Indexes_old.adoc[prefix=..]" as repo.ForeignKey_ssas_Indexes_old << V >> {
+entity "puml-link:dhw:sqldb:repo.ForeignKey_ssas_Indexes_old.adoc[]" as repo.ForeignKey_ssas_Indexes_old << V >> {
   --
   delete_referential_action : (tinyint)
   ForeignKey_fullname : (nvarchar(517))
@@ -55,7 +56,7 @@ entity "puml-link:repo.ForeignKey_ssas_Indexes_old.adoc[prefix=..]" as repo.Fore
   --
 }
 
-entity "puml-link:repo.ForeignKey_ssas_IndexPattern_old.adoc[prefix=..]" as repo.ForeignKey_ssas_IndexPattern_old << V >> {
+entity "puml-link:dhw:sqldb:repo.ForeignKey_ssas_IndexPattern_old.adoc[]" as repo.ForeignKey_ssas_IndexPattern_old << V >> {
   --
   - CrossFilteringBehavior : (bigint)
   - databasename : (nvarchar(128))
@@ -96,7 +97,7 @@ entity "puml-link:repo.ForeignKey_ssas_IndexPattern_old.adoc[prefix=..]" as repo
   --
 }
 
-entity "puml-link:repo.Index_ssas_T.adoc[prefix=..]" as repo.Index_ssas_T << U >> {
+entity "puml-link:dhw:sqldb:repo.Index_ssas_T.adoc[]" as repo.Index_ssas_T << U >> {
   - **databasename** : (nvarchar(128))
   **index_name** : (nvarchar(450))
   --
@@ -113,33 +114,28 @@ entity "puml-link:repo.Index_ssas_T.adoc[prefix=..]" as repo.Index_ssas_T << U >
 
 repo.ForeignKey_ssas_IndexPattern_old <.. repo.ForeignKey_ssas_Indexes_old
 repo.Index_ssas_T <.. repo.ForeignKey_ssas_Indexes_old
-repo.ForeignKey_ssas_IndexPattern_old::databasename <-- repo.ForeignKey_ssas_Indexes_old::referenced_SysObject_schema_name
-repo.ForeignKey_ssas_IndexPattern_old::databasename <-- repo.ForeignKey_ssas_Indexes_old::referencing_SysObject_schema_name
-repo.ForeignKey_ssas_IndexPattern_old::delete_referential_action <-- repo.ForeignKey_ssas_Indexes_old::delete_referential_action
-repo.ForeignKey_ssas_IndexPattern_old::ForeignKey_fullname <-- repo.ForeignKey_ssas_Indexes_old::ForeignKey_fullname
-repo.ForeignKey_ssas_IndexPattern_old::ForeignKey_guid <-- repo.ForeignKey_ssas_Indexes_old::ForeignKey_guid
-repo.ForeignKey_ssas_IndexPattern_old::ForeignKey_name <-- repo.ForeignKey_ssas_Indexes_old::ForeignKey_name
-repo.ForeignKey_ssas_IndexPattern_old::referenced_IndexPatternColumnDatatype <-- repo.ForeignKey_ssas_Indexes_old::referenced_IndexPatternColumnDatatype
-repo.ForeignKey_ssas_IndexPattern_old::referenced_IndexPatternColumnName <-- repo.ForeignKey_ssas_Indexes_old::referenced_IndexPatternColumnName
-repo.ForeignKey_ssas_IndexPattern_old::referenced_ObjectName <-- repo.ForeignKey_ssas_Indexes_old::referenced_SysObject_name
-repo.ForeignKey_ssas_IndexPattern_old::referenced_RepoObject_fullname <-- repo.ForeignKey_ssas_Indexes_old::referenced_RepoObject_fullname
-repo.ForeignKey_ssas_IndexPattern_old::referenced_RepoObject_fullname2 <-- repo.ForeignKey_ssas_Indexes_old::referenced_RepoObject_fullname2
-repo.ForeignKey_ssas_IndexPattern_old::referenced_RepoObject_guid <-- repo.ForeignKey_ssas_Indexes_old::referenced_RepoObject_guid
-repo.ForeignKey_ssas_IndexPattern_old::referencing_IndexPatternColumnDatatype <-- repo.ForeignKey_ssas_Indexes_old::referencing_IndexPatternColumnDatatype
-repo.ForeignKey_ssas_IndexPattern_old::referencing_IndexPatternColumnName <-- repo.ForeignKey_ssas_Indexes_old::referencing_IndexPatternColumnName
-repo.ForeignKey_ssas_IndexPattern_old::referencing_ObjectName <-- repo.ForeignKey_ssas_Indexes_old::referencing_SysObject_name
-repo.ForeignKey_ssas_IndexPattern_old::referencing_RepoObject_fullname <-- repo.ForeignKey_ssas_Indexes_old::referencing_RepoObject_fullname
-repo.ForeignKey_ssas_IndexPattern_old::referencing_RepoObject_fullname2 <-- repo.ForeignKey_ssas_Indexes_old::referencing_RepoObject_fullname2
-repo.ForeignKey_ssas_IndexPattern_old::referencing_RepoObject_guid <-- repo.ForeignKey_ssas_Indexes_old::referencing_RepoObject_guid
-repo.ForeignKey_ssas_IndexPattern_old::update_referential_action <-- repo.ForeignKey_ssas_Indexes_old::update_referential_action
-repo.Index_ssas_T::index_guid <-- repo.ForeignKey_ssas_Indexes_old::referenced_index_guid
-repo.Index_ssas_T::index_guid <-- repo.ForeignKey_ssas_Indexes_old::referencing_index_guid
-repo.Index_ssas_T::index_name <-- repo.ForeignKey_ssas_Indexes_old::referenced_index_name
-repo.Index_ssas_T::index_name <-- repo.ForeignKey_ssas_Indexes_old::referencing_index_name
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"repo.ForeignKey_ssas_IndexPattern_old::databasename" <-- "repo.ForeignKey_ssas_Indexes_old::referenced_SysObject_schema_name"
+"repo.ForeignKey_ssas_IndexPattern_old::databasename" <-- "repo.ForeignKey_ssas_Indexes_old::referencing_SysObject_schema_name"
+"repo.ForeignKey_ssas_IndexPattern_old::delete_referential_action" <-- "repo.ForeignKey_ssas_Indexes_old::delete_referential_action"
+"repo.ForeignKey_ssas_IndexPattern_old::ForeignKey_fullname" <-- "repo.ForeignKey_ssas_Indexes_old::ForeignKey_fullname"
+"repo.ForeignKey_ssas_IndexPattern_old::ForeignKey_guid" <-- "repo.ForeignKey_ssas_Indexes_old::ForeignKey_guid"
+"repo.ForeignKey_ssas_IndexPattern_old::ForeignKey_name" <-- "repo.ForeignKey_ssas_Indexes_old::ForeignKey_name"
+"repo.ForeignKey_ssas_IndexPattern_old::referenced_IndexPatternColumnDatatype" <-- "repo.ForeignKey_ssas_Indexes_old::referenced_IndexPatternColumnDatatype"
+"repo.ForeignKey_ssas_IndexPattern_old::referenced_IndexPatternColumnName" <-- "repo.ForeignKey_ssas_Indexes_old::referenced_IndexPatternColumnName"
+"repo.ForeignKey_ssas_IndexPattern_old::referenced_ObjectName" <-- "repo.ForeignKey_ssas_Indexes_old::referenced_SysObject_name"
+"repo.ForeignKey_ssas_IndexPattern_old::referenced_RepoObject_fullname" <-- "repo.ForeignKey_ssas_Indexes_old::referenced_RepoObject_fullname"
+"repo.ForeignKey_ssas_IndexPattern_old::referenced_RepoObject_fullname2" <-- "repo.ForeignKey_ssas_Indexes_old::referenced_RepoObject_fullname2"
+"repo.ForeignKey_ssas_IndexPattern_old::referenced_RepoObject_guid" <-- "repo.ForeignKey_ssas_Indexes_old::referenced_RepoObject_guid"
+"repo.ForeignKey_ssas_IndexPattern_old::referencing_IndexPatternColumnDatatype" <-- "repo.ForeignKey_ssas_Indexes_old::referencing_IndexPatternColumnDatatype"
+"repo.ForeignKey_ssas_IndexPattern_old::referencing_IndexPatternColumnName" <-- "repo.ForeignKey_ssas_Indexes_old::referencing_IndexPatternColumnName"
+"repo.ForeignKey_ssas_IndexPattern_old::referencing_ObjectName" <-- "repo.ForeignKey_ssas_Indexes_old::referencing_SysObject_name"
+"repo.ForeignKey_ssas_IndexPattern_old::referencing_RepoObject_fullname" <-- "repo.ForeignKey_ssas_Indexes_old::referencing_RepoObject_fullname"
+"repo.ForeignKey_ssas_IndexPattern_old::referencing_RepoObject_fullname2" <-- "repo.ForeignKey_ssas_Indexes_old::referencing_RepoObject_fullname2"
+"repo.ForeignKey_ssas_IndexPattern_old::referencing_RepoObject_guid" <-- "repo.ForeignKey_ssas_Indexes_old::referencing_RepoObject_guid"
+"repo.ForeignKey_ssas_IndexPattern_old::update_referential_action" <-- "repo.ForeignKey_ssas_Indexes_old::update_referential_action"
+"repo.Index_ssas_T::index_guid" <-- "repo.ForeignKey_ssas_Indexes_old::referenced_index_guid"
+"repo.Index_ssas_T::index_guid" <-- "repo.ForeignKey_ssas_Indexes_old::referencing_index_guid"
+"repo.Index_ssas_T::index_name" <-- "repo.ForeignKey_ssas_Indexes_old::referenced_index_name"
+"repo.Index_ssas_T::index_name" <-- "repo.ForeignKey_ssas_Indexes_old::referencing_index_name"
 @enduml
 

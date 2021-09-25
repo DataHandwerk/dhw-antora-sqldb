@@ -22,14 +22,15 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:docs.RepoObject_Adoc.adoc[prefix=..]" as docs.RepoObject_Adoc << V >> {
+entity "puml-link:dhw:sqldb:docs.RepoObject_Adoc.adoc[]" as docs.RepoObject_Adoc << V >> {
   --
 }
 
-entity "puml-link:property.ExtendedProperty_Repo2Sys_level1.adoc[prefix=..]" as property.ExtendedProperty_Repo2Sys_level1 << V >> {
+entity "puml-link:dhw:sqldb:property.ExtendedProperty_Repo2Sys_level1.adoc[]" as property.ExtendedProperty_Repo2Sys_level1 << V >> {
   - **level0type** : (nvarchar(6))
   - **level0name** : (nvarchar(128))
   **level1type** : (varchar(9))
@@ -38,7 +39,7 @@ entity "puml-link:property.ExtendedProperty_Repo2Sys_level1.adoc[prefix=..]" as 
   --
 }
 
-entity "puml-link:property.ExtendedProperty_Repo2Sys_level2_RepoObject.adoc[prefix=..]" as property.ExtendedProperty_Repo2Sys_level2_RepoObject << V >> {
+entity "puml-link:dhw:sqldb:property.ExtendedProperty_Repo2Sys_level2_RepoObject.adoc[]" as property.ExtendedProperty_Repo2Sys_level2_RepoObject << V >> {
   - **level0type** : (nvarchar(6))
   - **level0name** : (nvarchar(128))
   **level1type** : (varchar(9))
@@ -49,49 +50,55 @@ entity "puml-link:property.ExtendedProperty_Repo2Sys_level2_RepoObject.adoc[pref
   --
 }
 
-entity "puml-link:property.fs_get_RepoObjectProperty_nvarchar.adoc[prefix=..]" as property.fs_get_RepoObjectProperty_nvarchar << FN >> {
+entity "puml-link:dhw:sqldb:property.fs_get_RepoObjectProperty_nvarchar.adoc[]" as property.fs_get_RepoObjectProperty_nvarchar << FN >> {
   --
 }
 
-entity "puml-link:property.PropertyName_RepoObject.adoc[prefix=..]" as property.PropertyName_RepoObject << V >> {
+entity "puml-link:dhw:sqldb:property.PropertyName_RepoObject.adoc[]" as property.PropertyName_RepoObject << V >> {
   **property_name** : (nvarchar(128))
   --
 }
 
-entity "puml-link:property.RepoObjectProperty.adoc[prefix=..]" as property.RepoObjectProperty << U >> {
+entity "puml-link:dhw:sqldb:property.RepoObjectProperty.adoc[]" as property.RepoObjectProperty << U >> {
   - **RepoObjectProperty_id** : (int)
   --
 }
 
-entity "puml-link:property.RepoObjectProperty_ForUpdate.adoc[prefix=..]" as property.RepoObjectProperty_ForUpdate << V >> {
-  --
-}
-
-entity "puml-link:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc[prefix=..]" as property.RepoObjectProperty_InheritanceType_InheritanceDefinition << V >> {
+entity "puml-link:dhw:sqldb:property.RepoObjectProperty_external_tgt.adoc[]" as property.RepoObjectProperty_external_tgt << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   - **property_name** : (nvarchar(128))
   --
 }
 
-entity "puml-link:property.RepoObjectProperty_sys_repo.adoc[prefix=..]" as property.RepoObjectProperty_sys_repo << V >> {
+entity "puml-link:dhw:sqldb:property.RepoObjectProperty_ForUpdate.adoc[]" as property.RepoObjectProperty_ForUpdate << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc[]" as property.RepoObjectProperty_InheritanceType_InheritanceDefinition << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.RepoObjectProperty_sys_repo.adoc[]" as property.RepoObjectProperty_sys_repo << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   - **property_name** : (sysname)
   --
 }
 
-entity "puml-link:property.usp_RepoObject_Inheritance.adoc[prefix=..]" as property.usp_RepoObject_Inheritance << P >> {
+entity "puml-link:dhw:sqldb:property.usp_RepoObject_Inheritance.adoc[]" as property.usp_RepoObject_Inheritance << P >> {
   --
 }
 
-entity "puml-link:property.usp_RepoObjectProperty_collect.adoc[prefix=..]" as property.usp_RepoObjectProperty_collect << P >> {
+entity "puml-link:dhw:sqldb:property.usp_RepoObjectProperty_collect.adoc[]" as property.usp_RepoObjectProperty_collect << P >> {
   --
 }
 
-entity "puml-link:property.usp_RepoObjectProperty_set.adoc[prefix=..]" as property.usp_RepoObjectProperty_set << P >> {
+entity "puml-link:dhw:sqldb:property.usp_RepoObjectProperty_set.adoc[]" as property.usp_RepoObjectProperty_set << P >> {
   --
 }
 
-entity "puml-link:property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate.adoc[prefix=..]" as property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate << P >> {
+entity "puml-link:dhw:sqldb:property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate.adoc[]" as property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate << P >> {
   --
 }
 
@@ -107,10 +114,7 @@ property.RepoObjectProperty <.. docs.RepoObject_Adoc
 property.RepoObjectProperty <.. property.usp_RepoObjectProperty_set
 property.RepoObjectProperty <.. property.usp_RepoObjectProperty_collect
 property.RepoObjectProperty <.. property.RepoObjectProperty_ForUpdate
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+property.RepoObjectProperty <.. property.RepoObjectProperty_external_tgt
+property.RepoObjectProperty_external_tgt <.. property.RepoObjectProperty
 @enduml
 

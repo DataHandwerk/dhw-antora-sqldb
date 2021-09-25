@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:repo.Measures.adoc[prefix=..]" as repo.Measures << V >> {
+entity "puml-link:dhw:sqldb:repo.Measures.adoc[]" as repo.Measures << V >> {
   --
   Description : (nvarchar(max))
   Expression : (nvarchar(max))
@@ -41,6 +42,8 @@ entity "puml-link:repo.Measures.adoc[prefix=..]" as repo.Measures << V >> {
   - measures_fullname2 : (nvarchar(638))
   measures_isHidden : (bit)
   - measures_name : (nvarchar(500))
+  MeasuresRepoObjekt_guid : (uniqueidentifier)
+  MeasuresRepoObjekt_name : (varchar(9))
   - RepoObject_fullname2 : (nvarchar(257))
   - RepoObject_guid : (uniqueidentifier)
   - RepoObject_name : (nvarchar(128))
@@ -49,43 +52,38 @@ entity "puml-link:repo.Measures.adoc[prefix=..]" as repo.Measures << V >> {
   --
 }
 
-entity "puml-link:ssas.model_json_3121_tables_columns_descriptions_multiline.adoc[prefix=..]" as ssas.model_json_3121_tables_columns_descriptions_multiline << V >> {
-  - **databasename** : (nvarchar(128))
-  - **tables_name** : (nvarchar(128))
-  - **tables_measures_name** : (nvarchar(500))
+entity "puml-link:dhw:sqldb:ssas.model_json_3121_tables_columns_descriptions_multiline.adoc[]" as ssas.model_json_3121_tables_columns_descriptions_multiline << V >> {
   --
+  - databasename : (nvarchar(128))
   - Key : (nvarchar(4000))
   - Measure_guid : (uniqueidentifier)
   - RepoObject_guid : (uniqueidentifier)
+  - tables_measures_name : (nvarchar(500))
+  - tables_name : (nvarchar(128))
   - Type : (tinyint)
   Value : (nvarchar(max))
   --
   --
 }
 
-entity "puml-link:ssas.model_json_31211_tables_columns_descriptions_StrAgg.adoc[prefix=..]" as ssas.model_json_31211_tables_columns_descriptions_StrAgg << V >> {
-  - **databasename** : (nvarchar(128))
-  - **tables_name** : (nvarchar(128))
-  - **tables_measures_name** : (nvarchar(500))
+entity "puml-link:dhw:sqldb:ssas.model_json_31211_tables_columns_descriptions_StrAgg.adoc[]" as ssas.model_json_31211_tables_columns_descriptions_StrAgg << V >> {
   --
+  - databasename : (nvarchar(128))
   descriptions_StrAgg : (nvarchar(max))
   - Measure_guid : (uniqueidentifier)
   - RepoObject_guid : (uniqueidentifier)
+  - tables_measures_name : (nvarchar(500))
+  - tables_name : (nvarchar(128))
   --
   --
 }
 
 ssas.model_json_3121_tables_columns_descriptions_multiline <.. ssas.model_json_31211_tables_columns_descriptions_StrAgg
 ssas.model_json_31211_tables_columns_descriptions_StrAgg <.. repo.Measures
-ssas.model_json_3121_tables_columns_descriptions_multiline::databasename <-- ssas.model_json_31211_tables_columns_descriptions_StrAgg::databasename
-ssas.model_json_3121_tables_columns_descriptions_multiline::Measure_guid <-- ssas.model_json_31211_tables_columns_descriptions_StrAgg::Measure_guid
-ssas.model_json_3121_tables_columns_descriptions_multiline::RepoObject_guid <-- ssas.model_json_31211_tables_columns_descriptions_StrAgg::RepoObject_guid
-ssas.model_json_3121_tables_columns_descriptions_multiline::tables_measures_name <-- ssas.model_json_31211_tables_columns_descriptions_StrAgg::tables_measures_name
-ssas.model_json_3121_tables_columns_descriptions_multiline::tables_name <-- ssas.model_json_31211_tables_columns_descriptions_StrAgg::tables_name
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"ssas.model_json_3121_tables_columns_descriptions_multiline::databasename" <-- "ssas.model_json_31211_tables_columns_descriptions_StrAgg::databasename"
+"ssas.model_json_3121_tables_columns_descriptions_multiline::Measure_guid" <-- "ssas.model_json_31211_tables_columns_descriptions_StrAgg::Measure_guid"
+"ssas.model_json_3121_tables_columns_descriptions_multiline::RepoObject_guid" <-- "ssas.model_json_31211_tables_columns_descriptions_StrAgg::RepoObject_guid"
+"ssas.model_json_3121_tables_columns_descriptions_multiline::tables_measures_name" <-- "ssas.model_json_31211_tables_columns_descriptions_StrAgg::tables_measures_name"
+"ssas.model_json_3121_tables_columns_descriptions_multiline::tables_name" <-- "ssas.model_json_31211_tables_columns_descriptions_StrAgg::tables_name"
 @enduml
 

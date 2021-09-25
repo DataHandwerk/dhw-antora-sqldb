@@ -6,9 +6,6 @@
 :ExistsProperty--antorareferencedlist:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--pk_index_guid:
-:ExistsProperty--pk_indexpatterncolumndatatype:
-:ExistsProperty--pk_indexpatterncolumnname:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -49,25 +46,6 @@ view
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-RepoObjectColumn_guid]
-=== RepoObjectColumn_guid
-
-[cols="d,8m,m,m,m,d"]
-|===
-|1
-|*RepoObjectColumn_guid*
-|uniqueidentifier
-|NOT NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:repo.RepoObjectColumn.adoc#column-RepoObjectColumn_guid[+repo.RepoObjectColumn.RepoObjectColumn_guid+]
---
-
-
 [#column-has_different_sys_names]
 === has_different_sys_names
 
@@ -585,6 +563,25 @@ Column Value	Description
 --
 
 
+[#column-RepoObjectColumn_guid]
+=== RepoObjectColumn_guid
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|RepoObjectColumn_guid
+|uniqueidentifier
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo.RepoObjectColumn.adoc#column-RepoObjectColumn_guid[+repo.RepoObjectColumn.RepoObjectColumn_guid+]
+--
+
+
 [#column-RepoObjectColumn_name]
 === RepoObjectColumn_name
 
@@ -698,12 +695,6 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
-|1
-|*<<column-RepoObjectColumn_guid>>*
-|uniqueidentifier
-|NOT NULL
-|
-|
 
 
 
@@ -738,7 +729,6 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
-
 |
 |<<column-has_different_sys_names>>
 |bit
@@ -908,6 +898,13 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 |
 
 |
+|<<column-RepoObjectColumn_guid>>
+|uniqueidentifier
+|NOT NULL
+|
+|
+
+|
 |<<column-RepoObjectColumn_name>>
 |nvarchar(128)
 |NOT NULL
@@ -941,21 +938,21 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 
 // tag::AntoraIndexList[]
 
-[#index-PK_RepoObjectColumn_MissingSource_TypeV]
-=== PK_RepoObjectColumn_MissingSource_TypeV
+[#index-idx_RepoObjectColumn_MissingSource_TypeV2x_1]
+=== idx_RepoObjectColumn_MissingSource_TypeV++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObjectColumn_guid>>; uniqueidentifier
 --
-* PK, Unique, Real: 1, 1, 0
+* PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObjectColumn_MissingSource_TypeV_2]
+[#index-idx_RepoObjectColumn_MissingSource_TypeV2x_2]
 === idx_RepoObjectColumn_MissingSource_TypeV++__++2
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObjectColumn_guid>>; uniqueidentifier
@@ -964,10 +961,10 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObjectColumn_MissingSource_TypeV_3]
+[#index-idx_RepoObjectColumn_MissingSource_TypeV2x_3]
 === idx_RepoObjectColumn_MissingSource_TypeV++__++3
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -976,10 +973,10 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObjectColumn_MissingSource_TypeV_4]
+[#index-idx_RepoObjectColumn_MissingSource_TypeV2x_4]
 === idx_RepoObjectColumn_MissingSource_TypeV++__++4
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -1221,21 +1218,21 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-8B8AA10A-AB97-EB11-84F4-A81E8446D5B0
+
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-uniqueidentifier
+
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-RepoObjectColumn_guid
+
 // end::pk_indexpatterncolumnname[]
 
 

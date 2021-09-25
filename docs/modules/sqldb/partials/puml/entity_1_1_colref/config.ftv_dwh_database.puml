@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:config.ftv_dwh_database.adoc[prefix=..]" as config.ftv_dwh_database << IF >> {
+entity "puml-link:dhw:sqldb:config.ftv_dwh_database.adoc[]" as config.ftv_dwh_database << IF >> {
   --
   dwh_database_id : (smallint)
   dwh_database_name : (nvarchar(128))
@@ -33,7 +34,7 @@ entity "puml-link:config.ftv_dwh_database.adoc[prefix=..]" as config.ftv_dwh_dat
   --
 }
 
-entity "puml-link:config.Parameter.adoc[prefix=..]" as config.Parameter << U >> {
+entity "puml-link:dhw:sqldb:config.Parameter.adoc[]" as config.Parameter << U >> {
   - **Parameter_name** : (varchar(100))
   - **sub_Parameter** : (nvarchar(128))
   --
@@ -48,7 +49,7 @@ entity "puml-link:config.Parameter.adoc[prefix=..]" as config.Parameter << U >> 
   --
 }
 
-entity "puml-link:reference.RepoObjectColumn_reference_QueryPlan.adoc[prefix=..]" as reference.RepoObjectColumn_reference_QueryPlan << V >> {
+entity "puml-link:dhw:sqldb:reference.RepoObjectColumn_reference_QueryPlan.adoc[]" as reference.RepoObjectColumn_reference_QueryPlan << V >> {
   **referencing_id** : (int)
   **referencing_minor_id** : (int)
   **referenced_id** : (int)
@@ -81,13 +82,13 @@ entity "puml-link:reference.RepoObjectColumn_reference_QueryPlan.adoc[prefix=..]
   --
 }
 
-entity "puml-link:reference.usp_update_Referencing_Count.adoc[prefix=..]" as reference.usp_update_Referencing_Count << P >> {
+entity "puml-link:dhw:sqldb:reference.usp_update_Referencing_Count.adoc[]" as reference.usp_update_Referencing_Count << P >> {
   --
   --
   --
 }
 
-entity "puml-link:repo.RepoObject_SqlCreateTable.adoc[prefix=..]" as repo.RepoObject_SqlCreateTable << V >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject_SqlCreateTable.adoc[]" as repo.RepoObject_SqlCreateTable << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
   ConList : (nvarchar(max))
@@ -101,13 +102,13 @@ entity "puml-link:repo.RepoObject_SqlCreateTable.adoc[prefix=..]" as repo.RepoOb
   --
 }
 
-entity "puml-link:repo.usp_update_Referencing_Count.adoc[prefix=..]" as repo.usp_update_Referencing_Count << P >> {
+entity "puml-link:dhw:sqldb:repo.usp_update_Referencing_Count.adoc[]" as repo.usp_update_Referencing_Count << P >> {
   --
   --
   --
 }
 
-entity "puml-link:repo_sys.ExtendedProperties.adoc[prefix=..]" as repo_sys.ExtendedProperties << V >> {
+entity "puml-link:dhw:sqldb:repo_sys.ExtendedProperties.adoc[]" as repo_sys.ExtendedProperties << V >> {
   --
   - class : (tinyint)
   class_desc : (nvarchar(60))
@@ -131,7 +132,7 @@ entity "puml-link:repo_sys.ExtendedProperties.adoc[prefix=..]" as repo_sys.Exten
   --
 }
 
-entity "puml-link:repo_sys.sql_expression_dependencies.adoc[prefix=..]" as repo_sys.sql_expression_dependencies << V >> {
+entity "puml-link:dhw:sqldb:repo_sys.sql_expression_dependencies.adoc[]" as repo_sys.sql_expression_dependencies << V >> {
   --
   definition : (nvarchar(max))
   - is_ambiguous : (bit)
@@ -166,7 +167,7 @@ entity "puml-link:repo_sys.sql_expression_dependencies.adoc[prefix=..]" as repo_
   --
 }
 
-entity "puml-link:repo_sys.SysColumn.adoc[prefix=..]" as repo_sys.SysColumn << V >> {
+entity "puml-link:dhw:sqldb:repo_sys.SysColumn.adoc[]" as repo_sys.SysColumn << V >> {
   --
   collation_name : (sysname)
   column_encryption_key_database_name : (sysname)
@@ -228,8 +229,7 @@ entity "puml-link:repo_sys.SysColumn.adoc[prefix=..]" as repo_sys.SysColumn << V
   --
 }
 
-entity "puml-link:uspgenerator.GeneratorUsp_SqlUsp.adoc[prefix=..]" as uspgenerator.GeneratorUsp_SqlUsp << V >> {
-  - **usp_id** : (int)
+entity "puml-link:dhw:sqldb:uspgenerator.GeneratorUsp_SqlUsp.adoc[]" as uspgenerator.GeneratorUsp_SqlUsp << V >> {
   --
   - AdocUspSteps : (nvarchar(max))
   - has_logging : (tinyint)
@@ -239,6 +239,7 @@ entity "puml-link:uspgenerator.GeneratorUsp_SqlUsp.adoc[prefix=..]" as uspgenera
   - SqlUsp : (nvarchar(max))
   usp_Description : (nvarchar(4000))
   - usp_fullname : (nvarchar(261))
+  - usp_id : (int)
   - usp_name : (nvarchar(128))
   - usp_schema : (nvarchar(128))
   - UspExamples : (nvarchar(4000))
@@ -247,7 +248,7 @@ entity "puml-link:uspgenerator.GeneratorUsp_SqlUsp.adoc[prefix=..]" as uspgenera
   --
 }
 
-entity "puml-link:workflow.Workflow_SqlUsp.adoc[prefix=..]" as workflow.Workflow_SqlUsp << V >> {
+entity "puml-link:dhw:sqldb:workflow.Workflow_SqlUsp.adoc[]" as workflow.Workflow_SqlUsp << V >> {
   --
   - SqlUsp : (nvarchar(max))
   UspList : (nvarchar(max))
@@ -259,19 +260,14 @@ entity "puml-link:workflow.Workflow_SqlUsp.adoc[prefix=..]" as workflow.Workflow
 
 config.ftv_dwh_database <.. uspgenerator.GeneratorUsp_SqlUsp
 config.ftv_dwh_database <.. repo_sys.ExtendedProperties
+config.ftv_dwh_database <.. workflow.Workflow_SqlUsp
+config.ftv_dwh_database <.. reference.usp_update_Referencing_Count
+config.ftv_dwh_database <.. repo.usp_update_Referencing_Count
 config.ftv_dwh_database <.. repo_sys.SysColumn
 config.ftv_dwh_database <.. repo_sys.sql_expression_dependencies
 config.ftv_dwh_database <.. reference.RepoObjectColumn_reference_QueryPlan
 config.ftv_dwh_database <.. repo.RepoObject_SqlCreateTable
-config.ftv_dwh_database <.. reference.usp_update_Referencing_Count
-config.ftv_dwh_database <.. repo.usp_update_Referencing_Count
-config.ftv_dwh_database <.. workflow.Workflow_SqlUsp
 config.Parameter <.. config.ftv_dwh_database
-
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
 
 @enduml
 

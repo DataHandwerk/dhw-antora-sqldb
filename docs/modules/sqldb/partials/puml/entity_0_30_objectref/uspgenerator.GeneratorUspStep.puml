@@ -22,61 +22,63 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:docs.usp_AntoraExport.adoc[prefix=..]" as docs.usp_AntoraExport << P >> {
-  --
-}
-
-entity "puml-link:property.RepoObjectProperty_Collect_source_uspgenerator.adoc[prefix=..]" as property.RepoObjectProperty_Collect_source_uspgenerator << V >> {
+entity "puml-link:dhw:sqldb:property.RepoObjectProperty_Collect_source_uspgenerator.adoc[]" as property.RepoObjectProperty_Collect_source_uspgenerator << V >> {
   **RepoObject_guid** : (uniqueidentifier)
   - **property_name** : (varchar(14))
   --
 }
 
-entity "puml-link:property.usp_RepoObjectProperty_collect.adoc[prefix=..]" as property.usp_RepoObjectProperty_collect << P >> {
+entity "puml-link:dhw:sqldb:property.usp_RepoObject_Inheritance.adoc[]" as property.usp_RepoObject_Inheritance << P >> {
   --
 }
 
-entity "puml-link:repo.usp_main.adoc[prefix=..]" as repo.usp_main << P >> {
+entity "puml-link:dhw:sqldb:property.usp_RepoObjectProperty_collect.adoc[]" as property.usp_RepoObjectProperty_collect << P >> {
   --
 }
 
-entity "puml-link:uspgenerator.ftv_GeneratorUspStep_sql.adoc[prefix=..]" as uspgenerator.ftv_GeneratorUspStep_sql << IF >> {
+entity "puml-link:dhw:sqldb:repo.usp_main.adoc[]" as repo.usp_main << P >> {
   --
 }
 
-entity "puml-link:uspgenerator.ftv_GeneratorUspStep_tree.adoc[prefix=..]" as uspgenerator.ftv_GeneratorUspStep_tree << IF >> {
+entity "puml-link:dhw:sqldb:uspgenerator.ftv_GeneratorUspStep_sql.adoc[]" as uspgenerator.ftv_GeneratorUspStep_sql << IF >> {
   --
 }
 
-entity "puml-link:uspgenerator.GeneratorUsp_SqlUsp.adoc[prefix=..]" as uspgenerator.GeneratorUsp_SqlUsp << V >> {
-  - **usp_id** : (int)
+entity "puml-link:dhw:sqldb:uspgenerator.ftv_GeneratorUspStep_tree.adoc[]" as uspgenerator.ftv_GeneratorUspStep_tree << IF >> {
   --
 }
 
-entity "puml-link:uspgenerator.GeneratorUsp_StepList.adoc[prefix=..]" as uspgenerator.GeneratorUsp_StepList << V >> {
+entity "puml-link:dhw:sqldb:uspgenerator.GeneratorUsp_SqlUsp.adoc[]" as uspgenerator.GeneratorUsp_SqlUsp << V >> {
   --
 }
 
-entity "puml-link:uspgenerator.GeneratorUspStep.adoc[prefix=..]" as uspgenerator.GeneratorUspStep << U >> {
+entity "puml-link:dhw:sqldb:uspgenerator.GeneratorUsp_StepList.adoc[]" as uspgenerator.GeneratorUsp_StepList << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:uspgenerator.GeneratorUspStep.adoc[]" as uspgenerator.GeneratorUspStep << U >> {
   - **id** : (int)
   --
 }
 
-entity "puml-link:uspgenerator.GeneratorUspStep_Sql.adoc[prefix=..]" as uspgenerator.GeneratorUspStep_Sql << V >> {
+entity "puml-link:dhw:sqldb:uspgenerator.GeneratorUspStep_Sql.adoc[]" as uspgenerator.GeneratorUspStep_Sql << V >> {
   - **usp_id** : (int)
   **Number** : (int)
   --
 }
 
-entity "puml-link:uspgenerator.usp_GeneratorUsp_insert_update_persistence.adoc[prefix=..]" as uspgenerator.usp_GeneratorUsp_insert_update_persistence << P >> {
+entity "puml-link:dhw:sqldb:uspgenerator.usp_GeneratorUsp_insert_update_persistence.adoc[]" as uspgenerator.usp_GeneratorUsp_insert_update_persistence << P >> {
   --
 }
 
 property.RepoObjectProperty_Collect_source_uspgenerator <.. property.usp_RepoObjectProperty_collect
-property.usp_RepoObjectProperty_collect <.. docs.usp_AntoraExport
+property.usp_RepoObject_Inheritance <.. repo.usp_main
+property.usp_RepoObjectProperty_collect <.. repo.usp_main
+property.usp_RepoObjectProperty_collect <.. property.usp_RepoObject_Inheritance
 uspgenerator.ftv_GeneratorUspStep_sql <.. uspgenerator.GeneratorUspStep_Sql
 uspgenerator.ftv_GeneratorUspStep_tree <.. uspgenerator.GeneratorUspStep_Sql
 uspgenerator.GeneratorUsp_SqlUsp <.. property.RepoObjectProperty_Collect_source_uspgenerator
@@ -87,10 +89,5 @@ uspgenerator.GeneratorUspStep <.. uspgenerator.GeneratorUspStep_Sql
 uspgenerator.GeneratorUspStep <.. uspgenerator.usp_GeneratorUsp_insert_update_persistence
 uspgenerator.GeneratorUspStep_Sql <.. uspgenerator.GeneratorUsp_StepList
 uspgenerator.usp_GeneratorUsp_insert_update_persistence <.. repo.usp_main
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
 @enduml
 

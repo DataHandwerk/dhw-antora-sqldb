@@ -6,9 +6,6 @@
 :ExistsProperty--antorareferencedlist:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--pk_index_guid:
-:ExistsProperty--pk_indexpatterncolumndatatype:
-:ExistsProperty--pk_indexpatterncolumnname:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -49,25 +46,6 @@ view
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-RepoObjectColumn_guid]
-=== RepoObjectColumn_guid
-
-[cols="d,8m,m,m,m,d"]
-|===
-|1
-|*RepoObjectColumn_guid*
-|uniqueidentifier
-|NOT NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:repo.RepoObjectColumn_gross.adoc#column-RepoObjectColumn_guid[+repo.RepoObjectColumn_gross.RepoObjectColumn_guid+]
---
-
-
 [#column-RepoObject_fullname]
 === RepoObject_fullname
 
@@ -184,6 +162,25 @@ reference in [repo_sys].[type]
 |===
 
 
+[#column-RepoObjectColumn_guid]
+=== RepoObjectColumn_guid
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|RepoObjectColumn_guid
+|uniqueidentifier
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo.RepoObjectColumn_gross.adoc#column-RepoObjectColumn_guid[+repo.RepoObjectColumn_gross.RepoObjectColumn_guid+]
+--
+
+
 [#column-RepoObjectColumn_name]
 === RepoObjectColumn_name
 
@@ -239,12 +236,6 @@ Name of the column. Is unique within the object.
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
-|1
-|*<<column-RepoObjectColumn_guid>>*
-|uniqueidentifier
-|NOT NULL
-|
-|
 
 
 
@@ -259,7 +250,6 @@ Name of the column. Is unique within the object.
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
-
 |
 |<<column-RepoObject_fullname>>
 |nvarchar(261)
@@ -303,6 +293,13 @@ Name of the column. Is unique within the object.
 |
 
 |
+|<<column-RepoObjectColumn_guid>>
+|uniqueidentifier
+|NOT NULL
+|
+|
+
+|
 |<<column-RepoObjectColumn_name>>
 |nvarchar(128)
 |NOT NULL
@@ -322,21 +319,21 @@ Name of the column. Is unique within the object.
 
 // tag::AntoraIndexList[]
 
-[#index-PK_RepoObjectColumn_S]
-=== PK_RepoObjectColumn_S
+[#index-idx_RepoObjectColumn_S2x_1]
+=== idx_RepoObjectColumn_S++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObjectColumn_guid>>; uniqueidentifier
 --
-* PK, Unique, Real: 1, 1, 0
+* PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObjectColumn_S_2]
+[#index-idx_RepoObjectColumn_S2x_2]
 === idx_RepoObjectColumn_S++__++2
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -345,10 +342,10 @@ Name of the column. Is unique within the object.
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObjectColumn_S_3]
+[#index-idx_RepoObjectColumn_S2x_3]
 === idx_RepoObjectColumn_S++__++3
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -588,21 +585,21 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-D88818B0-CA97-EB11-84F4-A81E8446D5B0
+
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-uniqueidentifier
+
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-RepoObjectColumn_guid
+
 // end::pk_indexpatterncolumnname[]
 
 

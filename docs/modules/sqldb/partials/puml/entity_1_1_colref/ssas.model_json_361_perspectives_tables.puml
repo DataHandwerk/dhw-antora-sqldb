@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:ssas.model_json_36_perspectives.adoc[prefix=..]" as ssas.model_json_36_perspectives << V >> {
+entity "puml-link:dhw:sqldb:ssas.model_json_36_perspectives.adoc[]" as ssas.model_json_36_perspectives << V >> {
   - **databasename** : (nvarchar(128))
   **perspectives_name** : (nvarchar(500))
   --
@@ -34,7 +35,7 @@ entity "puml-link:ssas.model_json_36_perspectives.adoc[prefix=..]" as ssas.model
   --
 }
 
-entity "puml-link:ssas.model_json_361_perspectives_tables.adoc[prefix=..]" as ssas.model_json_361_perspectives_tables << V >> {
+entity "puml-link:dhw:sqldb:ssas.model_json_361_perspectives_tables.adoc[]" as ssas.model_json_361_perspectives_tables << V >> {
   - **databasename** : (nvarchar(128))
   **perspectives_name** : (nvarchar(500))
   **perspectives_tables_name** : (nvarchar(500))
@@ -46,7 +47,7 @@ entity "puml-link:ssas.model_json_361_perspectives_tables.adoc[prefix=..]" as ss
   --
 }
 
-entity "puml-link:ssas.model_json_3611_perspectives_tables_columns.adoc[prefix=..]" as ssas.model_json_3611_perspectives_tables_columns << V >> {
+entity "puml-link:dhw:sqldb:ssas.model_json_3611_perspectives_tables_columns.adoc[]" as ssas.model_json_3611_perspectives_tables_columns << V >> {
   - **databasename** : (nvarchar(128))
   **perspectives_name** : (nvarchar(500))
   **perspectives_tables_name** : (nvarchar(500))
@@ -56,7 +57,7 @@ entity "puml-link:ssas.model_json_3611_perspectives_tables_columns.adoc[prefix=.
   --
 }
 
-entity "puml-link:ssas.model_json_3612_perspectives_tables_hierarchies.adoc[prefix=..]" as ssas.model_json_3612_perspectives_tables_hierarchies << V >> {
+entity "puml-link:dhw:sqldb:ssas.model_json_3612_perspectives_tables_hierarchies.adoc[]" as ssas.model_json_3612_perspectives_tables_hierarchies << V >> {
   - **databasename** : (nvarchar(128))
   **perspectives_name** : (nvarchar(500))
   **perspectives_tables_name** : (nvarchar(500))
@@ -66,7 +67,7 @@ entity "puml-link:ssas.model_json_3612_perspectives_tables_hierarchies.adoc[pref
   --
 }
 
-entity "puml-link:ssas.model_json_3613_perspectives_tables_measures.adoc[prefix=..]" as ssas.model_json_3613_perspectives_tables_measures << V >> {
+entity "puml-link:dhw:sqldb:ssas.model_json_3613_perspectives_tables_measures.adoc[]" as ssas.model_json_3613_perspectives_tables_measures << V >> {
   - **databasename** : (nvarchar(128))
   **perspectives_name** : (nvarchar(500))
   **perspectives_tables_name** : (nvarchar(500))
@@ -80,21 +81,16 @@ ssas.model_json_36_perspectives <.. ssas.model_json_361_perspectives_tables
 ssas.model_json_361_perspectives_tables <.. ssas.model_json_3611_perspectives_tables_columns
 ssas.model_json_361_perspectives_tables <.. ssas.model_json_3612_perspectives_tables_hierarchies
 ssas.model_json_361_perspectives_tables <.. ssas.model_json_3613_perspectives_tables_measures
-ssas.model_json_36_perspectives::databasename <-- ssas.model_json_361_perspectives_tables::databasename
-ssas.model_json_36_perspectives::perspectives_name <-- ssas.model_json_361_perspectives_tables::perspectives_name
-ssas.model_json_361_perspectives_tables::databasename <-- ssas.model_json_3611_perspectives_tables_columns::databasename
-ssas.model_json_361_perspectives_tables::databasename <-- ssas.model_json_3612_perspectives_tables_hierarchies::databasename
-ssas.model_json_361_perspectives_tables::databasename <-- ssas.model_json_3613_perspectives_tables_measures::databasename
-ssas.model_json_361_perspectives_tables::perspectives_name <-- ssas.model_json_3611_perspectives_tables_columns::perspectives_name
-ssas.model_json_361_perspectives_tables::perspectives_name <-- ssas.model_json_3612_perspectives_tables_hierarchies::perspectives_name
-ssas.model_json_361_perspectives_tables::perspectives_name <-- ssas.model_json_3613_perspectives_tables_measures::perspectives_name
-ssas.model_json_361_perspectives_tables::perspectives_tables_name <-- ssas.model_json_3611_perspectives_tables_columns::perspectives_tables_name
-ssas.model_json_361_perspectives_tables::perspectives_tables_name <-- ssas.model_json_3612_perspectives_tables_hierarchies::perspectives_tables_name
-ssas.model_json_361_perspectives_tables::perspectives_tables_name <-- ssas.model_json_3613_perspectives_tables_measures::perspectives_tables_name
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"ssas.model_json_36_perspectives::databasename" <-- "ssas.model_json_361_perspectives_tables::databasename"
+"ssas.model_json_36_perspectives::perspectives_name" <-- "ssas.model_json_361_perspectives_tables::perspectives_name"
+"ssas.model_json_361_perspectives_tables::databasename" <-- "ssas.model_json_3611_perspectives_tables_columns::databasename"
+"ssas.model_json_361_perspectives_tables::databasename" <-- "ssas.model_json_3612_perspectives_tables_hierarchies::databasename"
+"ssas.model_json_361_perspectives_tables::databasename" <-- "ssas.model_json_3613_perspectives_tables_measures::databasename"
+"ssas.model_json_361_perspectives_tables::perspectives_name" <-- "ssas.model_json_3611_perspectives_tables_columns::perspectives_name"
+"ssas.model_json_361_perspectives_tables::perspectives_name" <-- "ssas.model_json_3612_perspectives_tables_hierarchies::perspectives_name"
+"ssas.model_json_361_perspectives_tables::perspectives_name" <-- "ssas.model_json_3613_perspectives_tables_measures::perspectives_name"
+"ssas.model_json_361_perspectives_tables::perspectives_tables_name" <-- "ssas.model_json_3611_perspectives_tables_columns::perspectives_tables_name"
+"ssas.model_json_361_perspectives_tables::perspectives_tables_name" <-- "ssas.model_json_3612_perspectives_tables_hierarchies::perspectives_tables_name"
+"ssas.model_json_361_perspectives_tables::perspectives_tables_name" <-- "ssas.model_json_3613_perspectives_tables_measures::perspectives_tables_name"
 @enduml
 

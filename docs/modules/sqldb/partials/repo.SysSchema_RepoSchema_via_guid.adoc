@@ -41,7 +41,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-08-17 19:57:29
+2021-09-21 10:40:43
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -351,10 +351,10 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-idx_SysSchema_RepoSchema_via_guid_1]
+[#index-idx_SysSchema_RepoSchema_via_guid2x_1]
 === idx_SysSchema_RepoSchema_via_guid++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoSchema_guid>>; uniqueidentifier
@@ -362,10 +362,10 @@ view
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_SysSchema_RepoSchema_via_guid_2]
+[#index-idx_SysSchema_RepoSchema_via_guid2x_2]
 === idx_SysSchema_RepoSchema_via_guid++__++2
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoSchema_name>>; nvarchar(128)
@@ -675,7 +675,6 @@ source: property.RepoObjectProperty WHERE property_int = 1
 [source,sql]
 ----
 
-
 CREATE View repo.SysSchema_RepoSchema_via_guid
 As
 --
@@ -695,7 +694,8 @@ From
     Left Outer Join
         repo.RepoSchema As rs
             On
-            ss.SysSchema_RepoSchema_guid = rs.RepoSchema_guid
+            rs.RepoSchema_guid = ss.SysSchema_RepoSchema_guid
+            And rs.is_ssas     = 0
 
 ----
 =======

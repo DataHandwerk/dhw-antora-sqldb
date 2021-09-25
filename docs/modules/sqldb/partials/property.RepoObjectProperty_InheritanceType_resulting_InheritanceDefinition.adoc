@@ -7,9 +7,6 @@
 :ExistsProperty--antorareferencinglist:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--pk_index_guid:
-:ExistsProperty--pk_indexpatterncolumndatatype:
-:ExistsProperty--pk_indexpatterncolumnname:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -44,39 +41,20 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-08-17 19:04:49
+2021-09-13 23:32:46
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-RepoObject_guid]
-=== RepoObject_guid
+[#column-Inheritance_Source_fullname]
+=== Inheritance_Source_fullname
 
 [cols="d,8m,m,m,m,d"]
 |===
-|1
-|*RepoObject_guid*
-|uniqueidentifier
-|NOT NULL
 |
-|
-|===
-
-.Referenced Columns
---
-* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-RepoObject_guid[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.RepoObject_guid+]
---
-
-
-[#column-property_name]
-=== property_name
-
-[cols="d,8m,m,m,m,d"]
-|===
-|2
-|*property_name*
-|nvarchar(128)
+|Inheritance_Source_fullname
+|nvarchar(261)
 |NULL
 |
 |
@@ -84,7 +62,7 @@ view
 
 .Referenced Columns
 --
-* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-property_name[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.property_name+]
+* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-Inheritance_Source_fullname[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.Inheritance_Source_fullname+]
 --
 
 
@@ -173,6 +151,25 @@ view
 |===
 
 
+[#column-property_name]
+=== property_name
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|property_name
+|nvarchar(128)
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-property_name[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.property_name+]
+--
+
+
 [#column-property_value]
 === property_value
 
@@ -221,6 +218,25 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 .Referenced Columns
 --
 * xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-RepoObject_fullname[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.RepoObject_fullname+]
+--
+
+
+[#column-RepoObject_guid]
+=== RepoObject_guid
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|RepoObject_guid
+|uniqueidentifier
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-RepoObject_guid[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.RepoObject_guid+]
 --
 
 
@@ -274,19 +290,8 @@ reference in [repo_sys].[type]
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
-|1
-|*<<column-RepoObject_guid>>*
-|uniqueidentifier
-|NOT NULL
-|
-|
 
-|2
-|*<<column-property_name>>*
-|nvarchar(128)
-|NULL
-|
-|
+
 
 
 
@@ -302,7 +307,12 @@ reference in [repo_sys].[type]
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
-
+|
+|<<column-Inheritance_Source_fullname>>
+|nvarchar(261)
+|NULL
+|
+|
 
 |
 |<<column-Inheritance_StringAggSeparatorSql>>
@@ -340,6 +350,13 @@ reference in [repo_sys].[type]
 |
 
 |
+|<<column-property_name>>
+|nvarchar(128)
+|NOT NULL
+|
+|
+
+|
 |<<column-property_value>>
 |nvarchar(max)
 |NULL
@@ -349,6 +366,13 @@ reference in [repo_sys].[type]
 |
 |<<column-RepoObject_fullname>>
 |nvarchar(261)
+|NOT NULL
+|
+|
+
+|
+|<<column-RepoObject_guid>>
+|uniqueidentifier
 |NOT NULL
 |
 |
@@ -373,22 +397,22 @@ reference in [repo_sys].[type]
 
 // tag::AntoraIndexList[]
 
-[#index-PK_RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition]
-=== PK_RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition
+[#index-idx_RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition2x_1]
+=== idx_RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
 * <<column-property_name>>; nvarchar(128)
 --
-* PK, Unique, Real: 1, 1, 0
+* PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition_2]
+[#index-idx_RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition2x_2]
 === idx_RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition++__++2
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -396,10 +420,10 @@ reference in [repo_sys].[type]
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition_3]
+[#index-idx_RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition2x_3]
 === idx_RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition++__++3
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-property_name>>; nvarchar(128)
@@ -639,21 +663,21 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-508AA10A-AB97-EB11-84F4-A81E8446D5B0
+
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-uniqueidentifier,nvarchar(128)
+
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-RepoObject_guid,property_name
+
 // end::pk_indexpatterncolumnname[]
 
 

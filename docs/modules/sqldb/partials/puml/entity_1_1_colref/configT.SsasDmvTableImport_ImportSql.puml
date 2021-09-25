@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:config.SsasDatabasename.adoc[prefix=..]" as config.SsasDatabasename << U >> {
+entity "puml-link:dhw:sqldb:config.SsasDatabasename.adoc[]" as config.SsasDatabasename << U >> {
   - **databasename** : (nvarchar(128))
   --
   - isActive : (bit)
@@ -35,7 +36,7 @@ entity "puml-link:config.SsasDatabasename.adoc[prefix=..]" as config.SsasDatabas
   --
 }
 
-entity "puml-link:configT.SsasDmvTableImport_DmvColumnList.adoc[prefix=..]" as configT.SsasDmvTableImport_DmvColumnList << V >> {
+entity "puml-link:dhw:sqldb:configT.SsasDmvTableImport_DmvColumnList.adoc[]" as configT.SsasDmvTableImport_DmvColumnList << V >> {
   --
   DmvColumnList : (nvarchar(4000))
   DmvTableName : (nvarchar(128))
@@ -43,7 +44,7 @@ entity "puml-link:configT.SsasDmvTableImport_DmvColumnList.adoc[prefix=..]" as c
   --
 }
 
-entity "puml-link:configT.SsasDmvTableImport_ImportSql.adoc[prefix=..]" as configT.SsasDmvTableImport_ImportSql << V >> {
+entity "puml-link:dhw:sqldb:configT.SsasDmvTableImport_ImportSql.adoc[]" as configT.SsasDmvTableImport_ImportSql << V >> {
   --
   - databasename : (nvarchar(128))
   - DeleteInsertSql : (nvarchar(4000))
@@ -58,14 +59,9 @@ entity "puml-link:configT.SsasDmvTableImport_ImportSql.adoc[prefix=..]" as confi
 
 config.SsasDatabasename <.. configT.SsasDmvTableImport_ImportSql
 configT.SsasDmvTableImport_DmvColumnList <.. configT.SsasDmvTableImport_ImportSql
-config.SsasDatabasename::databasename <-- configT.SsasDmvTableImport_ImportSql::databasename
-config.SsasDatabasename::isActive <-- configT.SsasDmvTableImport_ImportSql::isActive
-config.SsasDatabasename::isCurrentImport <-- configT.SsasDmvTableImport_ImportSql::isCurrentImport
-config.SsasDatabasename::LinkedServer <-- configT.SsasDmvTableImport_ImportSql::LinkedServer
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"config.SsasDatabasename::databasename" <-- "configT.SsasDmvTableImport_ImportSql::databasename"
+"config.SsasDatabasename::isActive" <-- "configT.SsasDmvTableImport_ImportSql::isActive"
+"config.SsasDatabasename::isCurrentImport" <-- "configT.SsasDmvTableImport_ImportSql::isCurrentImport"
+"config.SsasDatabasename::LinkedServer" <-- "configT.SsasDmvTableImport_ImportSql::LinkedServer"
 @enduml
 

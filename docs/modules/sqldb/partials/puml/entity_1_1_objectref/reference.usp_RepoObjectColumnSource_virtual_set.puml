@@ -22,36 +22,31 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:reference.RepoObjectColumnSource_virtual.adoc[prefix=..]" as reference.RepoObjectColumnSource_virtual << U >> {
+entity "puml-link:dhw:sqldb:reference.RepoObjectColumnSource_virtual.adoc[]" as reference.RepoObjectColumnSource_virtual << U >> {
   - **RepoObjectColumn_guid** : (uniqueidentifier)
   - **Source_RepoObjectColumn_guid** : (uniqueidentifier)
   --
 }
 
-entity "puml-link:reference.usp_RepoObjectColumnSource_virtual_set.adoc[prefix=..]" as reference.usp_RepoObjectColumnSource_virtual_set << P >> {
+entity "puml-link:dhw:sqldb:reference.usp_RepoObjectColumnSource_virtual_set.adoc[]" as reference.usp_RepoObjectColumnSource_virtual_set << P >> {
   --
 }
 
-entity "puml-link:repo.RepoObjectColumn.adoc[prefix=..]" as repo.RepoObjectColumn << U >> {
+entity "puml-link:dhw:sqldb:repo.RepoObjectColumn.adoc[]" as repo.RepoObjectColumn << U >> {
   - **RepoObjectColumn_guid** : (uniqueidentifier)
   --
 }
 
-entity "puml-link:repo.RepoObjectColumn_gross.adoc[prefix=..]" as repo.RepoObjectColumn_gross << V >> {
-  - **RepoObjectColumn_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_gross.adoc[]" as repo.RepoObjectColumn_gross << V >> {
   --
 }
 
 reference.RepoObjectColumnSource_virtual <.. reference.usp_RepoObjectColumnSource_virtual_set
 repo.RepoObjectColumn <.. reference.usp_RepoObjectColumnSource_virtual_set
 repo.RepoObjectColumn_gross <.. reference.usp_RepoObjectColumnSource_virtual_set
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
 @enduml
 

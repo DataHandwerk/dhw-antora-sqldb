@@ -22,11 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:repo.RepoObjectColumn_gross.adoc[prefix=..]" as repo.RepoObjectColumn_gross << V >> {
-  - **RepoObjectColumn_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_gross.adoc[]" as repo.RepoObjectColumn_gross << V >> {
   --
   - Column_name : (nvarchar(128))
   Description : (nvarchar(max))
@@ -35,6 +35,7 @@ entity "puml-link:repo.RepoObjectColumn_gross.adoc[prefix=..]" as repo.RepoObjec
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
   InheritanceDefinition : (nvarchar(4000))
   InheritanceType : (tinyint)
+  - is_external : (bit)
   is_persistence_no_check : (bit)
   is_persistence_no_include : (bit)
   is_persistence_no_update : (bit)
@@ -80,6 +81,7 @@ entity "puml-link:repo.RepoObjectColumn_gross.adoc[prefix=..]" as repo.RepoObjec
   RepoObjectColumn_column_id : (int)
   - RepoObjectColumn_fullname : (nvarchar(520))
   - RepoObjectColumn_fullname2 : (nvarchar(386))
+  - RepoObjectColumn_guid : (uniqueidentifier)
   - RepoObjectColumn_name : (nvarchar(128))
   - SysObject_fullname : (nvarchar(261))
   - SysObject_fullname2 : (nvarchar(257))
@@ -104,43 +106,38 @@ entity "puml-link:repo.RepoObjectColumn_gross.adoc[prefix=..]" as repo.RepoObjec
   --
 }
 
-entity "puml-link:ssas.model_json_3112_tables_columns_expressions_multiline.adoc[prefix=..]" as ssas.model_json_3112_tables_columns_expressions_multiline << V >> {
-  - **databasename** : (nvarchar(128))
-  - **tables_name** : (nvarchar(128))
-  - **tables_columns_name** : (nvarchar(128))
+entity "puml-link:dhw:sqldb:ssas.model_json_3112_tables_columns_expressions_multiline.adoc[]" as ssas.model_json_3112_tables_columns_expressions_multiline << V >> {
   --
+  - databasename : (nvarchar(128))
   - Key : (nvarchar(4000))
   - RepoObject_guid : (uniqueidentifier)
   - RepoObjectColumn_guid : (uniqueidentifier)
+  - tables_columns_name : (nvarchar(128))
+  - tables_name : (nvarchar(128))
   - Type : (tinyint)
   Value : (nvarchar(max))
   --
   --
 }
 
-entity "puml-link:ssas.model_json_31121_tables_columns_expressions_StrAgg.adoc[prefix=..]" as ssas.model_json_31121_tables_columns_expressions_StrAgg << V >> {
-  - **databasename** : (nvarchar(128))
-  - **tables_name** : (nvarchar(128))
-  - **tables_columns_name** : (nvarchar(128))
+entity "puml-link:dhw:sqldb:ssas.model_json_31121_tables_columns_expressions_StrAgg.adoc[]" as ssas.model_json_31121_tables_columns_expressions_StrAgg << V >> {
   --
+  - databasename : (nvarchar(128))
   expressions_StrAgg : (nvarchar(max))
   - RepoObject_guid : (uniqueidentifier)
   - RepoObjectColumn_guid : (uniqueidentifier)
+  - tables_columns_name : (nvarchar(128))
+  - tables_name : (nvarchar(128))
   --
   --
 }
 
 ssas.model_json_3112_tables_columns_expressions_multiline <.. ssas.model_json_31121_tables_columns_expressions_StrAgg
 ssas.model_json_31121_tables_columns_expressions_StrAgg <.. repo.RepoObjectColumn_gross
-ssas.model_json_3112_tables_columns_expressions_multiline::databasename <-- ssas.model_json_31121_tables_columns_expressions_StrAgg::databasename
-ssas.model_json_3112_tables_columns_expressions_multiline::RepoObject_guid <-- ssas.model_json_31121_tables_columns_expressions_StrAgg::RepoObject_guid
-ssas.model_json_3112_tables_columns_expressions_multiline::RepoObjectColumn_guid <-- ssas.model_json_31121_tables_columns_expressions_StrAgg::RepoObjectColumn_guid
-ssas.model_json_3112_tables_columns_expressions_multiline::tables_columns_name <-- ssas.model_json_31121_tables_columns_expressions_StrAgg::tables_columns_name
-ssas.model_json_3112_tables_columns_expressions_multiline::tables_name <-- ssas.model_json_31121_tables_columns_expressions_StrAgg::tables_name
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"ssas.model_json_3112_tables_columns_expressions_multiline::databasename" <-- "ssas.model_json_31121_tables_columns_expressions_StrAgg::databasename"
+"ssas.model_json_3112_tables_columns_expressions_multiline::RepoObject_guid" <-- "ssas.model_json_31121_tables_columns_expressions_StrAgg::RepoObject_guid"
+"ssas.model_json_3112_tables_columns_expressions_multiline::RepoObjectColumn_guid" <-- "ssas.model_json_31121_tables_columns_expressions_StrAgg::RepoObjectColumn_guid"
+"ssas.model_json_3112_tables_columns_expressions_multiline::tables_columns_name" <-- "ssas.model_json_31121_tables_columns_expressions_StrAgg::tables_columns_name"
+"ssas.model_json_3112_tables_columns_expressions_multiline::tables_name" <-- "ssas.model_json_31121_tables_columns_expressions_StrAgg::tables_name"
 @enduml
 

@@ -7,9 +7,6 @@
 :ExistsProperty--antorareferencinglist:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--pk_index_guid:
-:ExistsProperty--pk_indexpatterncolumndatatype:
-:ExistsProperty--pk_indexpatterncolumnname:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -50,30 +47,6 @@ view
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-target_RepoObject_guid]
-=== target_RepoObject_guid
-
-[cols="d,8m,m,m,m,d"]
-|===
-|1
-|*target_RepoObject_guid*
-|uniqueidentifier
-|NOT NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:repo.RepoObject_persistence.adoc#column-target_RepoObject_guid[+repo.RepoObject_persistence.target_RepoObject_guid+]
---
-
-.Referencing Columns
---
-* xref:repo.RepoObject_persistence_SourceMismatch.adoc#column-target_RepoObject_guid[+repo.RepoObject_persistence_SourceMismatch.target_RepoObject_guid+]
---
-
-
 [#column-default_source_RepoObject_name]
 === default_source_RepoObject_name
 
@@ -521,6 +494,30 @@ This requires a (real or virtual) PK defined in the source
 --
 
 
+[#column-target_RepoObject_guid]
+=== target_RepoObject_guid
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|target_RepoObject_guid
+|uniqueidentifier
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo.RepoObject_persistence.adoc#column-target_RepoObject_guid[+repo.RepoObject_persistence.target_RepoObject_guid+]
+--
+
+.Referencing Columns
+--
+* xref:repo.RepoObject_persistence_SourceMismatch.adoc#column-target_RepoObject_guid[+repo.RepoObject_persistence_SourceMismatch.target_RepoObject_guid+]
+--
+
+
 [#column-target_schema]
 === target_schema
 
@@ -581,12 +578,6 @@ This requires a (real or virtual) PK defined in the source
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
-|1
-|*<<column-target_RepoObject_guid>>*
-|uniqueidentifier
-|NOT NULL
-|
-|
 
 
 
@@ -613,7 +604,6 @@ This requires a (real or virtual) PK defined in the source
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
-
 |
 |<<column-default_source_RepoObject_name>>
 |nvarchar(128)
@@ -741,6 +731,13 @@ This requires a (real or virtual) PK defined in the source
 |
 
 |
+|<<column-target_RepoObject_guid>>
+|uniqueidentifier
+|NOT NULL
+|
+|
+
+|
 |<<column-target_schema>>
 |nvarchar(128)
 |NOT NULL
@@ -760,25 +757,25 @@ This requires a (real or virtual) PK defined in the source
 
 // tag::AntoraIndexList[]
 
-[#index-PK_RepoObject_persistence_ForUpdate]
-=== PK_RepoObject_persistence_ForUpdate
+[#index-idx_RepoObject_persistence_ForUpdate2x_1]
+=== idx_RepoObject_persistence_ForUpdate++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
-+
---
-* <<column-target_RepoObject_guid>>; uniqueidentifier
---
-* PK, Unique, Real: 1, 1, 0
-
-
-[#index-idx_RepoObject_persistence_ForUpdate_2]
-=== idx_RepoObject_persistence_ForUpdate++__++2
-
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-target_schema>>; nvarchar(128)
 * <<column-target_name>>; nvarchar(128)
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[#index-idx_RepoObject_persistence_ForUpdate2x_2]
+=== idx_RepoObject_persistence_ForUpdate++__++2
+
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-target_RepoObject_guid>>; uniqueidentifier
 --
 * PK, Unique, Real: 0, 0, 0
 
@@ -1016,21 +1013,21 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-118AA10A-AB97-EB11-84F4-A81E8446D5B0
+
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-uniqueidentifier
+
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-target_RepoObject_guid
+
 // end::pk_indexpatterncolumnname[]
 
 

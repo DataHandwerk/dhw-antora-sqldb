@@ -7,9 +7,6 @@
 :ExistsProperty--antorareferencinglist:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--pk_index_guid:
-:ExistsProperty--pk_indexpatterncolumndatatype:
-:ExistsProperty--pk_indexpatterncolumnname:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -44,37 +41,12 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-10 11:25:18
+2021-09-19 22:00:47
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-index_guid]
-=== index_guid
-
-[cols="d,8m,m,m,m,d"]
-|===
-|1
-|*index_guid*
-|uniqueidentifier
-|NOT NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:repo.Index_Settings.adoc#column-index_guid[+repo.Index_Settings.index_guid+]
---
-
-.Referencing Columns
---
-* xref:repo.ForeignKey_Indexes.adoc#column-referenced_index_guid[+repo.ForeignKey_Indexes.referenced_index_guid+]
-* xref:repo.ForeignKey_Indexes.adoc#column-referencing_index_guid[+repo.ForeignKey_Indexes.referencing_index_guid+]
---
-
-
 [#column-AntoraIndexColumnList]
 === AntoraIndexColumnList
 
@@ -148,6 +120,31 @@ view
 .Referenced Columns
 --
 * xref:repo.Index_ColumList_T.adoc#column-DbmlIndexColumnList[+repo.Index_ColumList_T.DbmlIndexColumnList+]
+--
+
+
+[#column-index_guid]
+=== index_guid
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|index_guid
+|uniqueidentifier
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo.Index_Settings.adoc#column-index_guid[+repo.Index_Settings.index_guid+]
+--
+
+.Referencing Columns
+--
+* xref:repo.ForeignKey_Indexes.adoc#column-referenced_index_guid[+repo.ForeignKey_Indexes.referenced_index_guid+]
+* xref:repo.ForeignKey_Indexes.adoc#column-referencing_index_guid[+repo.ForeignKey_Indexes.referencing_index_guid+]
 --
 
 
@@ -726,12 +723,6 @@ reference in [repo_sys].[type]
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
-|1
-|*<<column-index_guid>>*
-|uniqueidentifier
-|NOT NULL
-|
-|
 
 
 
@@ -767,7 +758,6 @@ reference in [repo_sys].[type]
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
-
 |
 |<<column-AntoraIndexColumnList>>
 |nvarchar(max)
@@ -793,6 +783,13 @@ reference in [repo_sys].[type]
 |<<column-DbmlIndexColumnList>>
 |nvarchar(max)
 |NULL
+|
+|
+
+|
+|<<column-index_guid>>
+|uniqueidentifier
+|NOT NULL
 |
 |
 
@@ -977,21 +974,21 @@ reference in [repo_sys].[type]
 
 // tag::AntoraIndexList[]
 
-[#index-PK_Index_gross]
-=== PK_Index_gross
+[#index-idx_Index_gross2x_1]
+=== idx_Index_gross++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-index_guid>>; uniqueidentifier
 --
-* PK, Unique, Real: 1, 1, 0
+* PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_Index_gross_2]
+[#index-idx_Index_gross2x_2]
 === idx_Index_gross++__++2
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-SysObject_schema_name>>; nvarchar(128)
@@ -1243,21 +1240,21 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-928AA10A-AB97-EB11-84F4-A81E8446D5B0
+
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-uniqueidentifier
+
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-index_guid
+
 // end::pk_indexpatterncolumnname[]
 
 

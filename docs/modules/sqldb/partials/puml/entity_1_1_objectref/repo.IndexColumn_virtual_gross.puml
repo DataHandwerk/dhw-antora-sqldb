@@ -22,37 +22,38 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:repo.Index_virtual.adoc[prefix=..]" as repo.Index_virtual << U >> {
+entity "puml-link:dhw:sqldb:repo.Index_virtual.adoc[]" as repo.Index_virtual << U >> {
   - **index_guid** : (uniqueidentifier)
   --
 }
 
-entity "puml-link:repo.IndexColumn_union.adoc[prefix=..]" as repo.IndexColumn_union << V >> {
+entity "puml-link:dhw:sqldb:repo.IndexColumn_union.adoc[]" as repo.IndexColumn_union << V >> {
   **index_guid** : (uniqueidentifier)
   - **index_column_id** : (int)
   --
 }
 
-entity "puml-link:repo.IndexColumn_virtual.adoc[prefix=..]" as repo.IndexColumn_virtual << U >> {
+entity "puml-link:dhw:sqldb:repo.IndexColumn_virtual.adoc[]" as repo.IndexColumn_virtual << U >> {
   - **index_guid** : (uniqueidentifier)
   - **index_column_id** : (int)
   --
 }
 
-entity "puml-link:repo.IndexColumn_virtual_gross.adoc[prefix=..]" as repo.IndexColumn_virtual_gross << V >> {
+entity "puml-link:dhw:sqldb:repo.IndexColumn_virtual_gross.adoc[]" as repo.IndexColumn_virtual_gross << V >> {
   - **index_column_id** : (int)
   --
 }
 
-entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity "puml-link:repo.RepoObjectColumn.adoc[prefix=..]" as repo.RepoObjectColumn << U >> {
+entity "puml-link:dhw:sqldb:repo.RepoObjectColumn.adoc[]" as repo.RepoObjectColumn << U >> {
   - **RepoObjectColumn_guid** : (uniqueidentifier)
   --
 }
@@ -62,10 +63,5 @@ repo.IndexColumn_virtual <.. repo.IndexColumn_virtual_gross
 repo.IndexColumn_virtual_gross <.. repo.IndexColumn_union
 repo.RepoObject <.. repo.IndexColumn_virtual_gross
 repo.RepoObjectColumn <.. repo.IndexColumn_virtual_gross
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
 @enduml
 

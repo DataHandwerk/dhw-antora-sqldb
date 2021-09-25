@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:config.ftv_dwh_database.adoc[prefix=..]" as config.ftv_dwh_database << IF >> {
+entity "puml-link:dhw:sqldb:config.ftv_dwh_database.adoc[]" as config.ftv_dwh_database << IF >> {
   --
   dwh_database_id : (smallint)
   dwh_database_name : (nvarchar(128))
@@ -33,7 +34,7 @@ entity "puml-link:config.ftv_dwh_database.adoc[prefix=..]" as config.ftv_dwh_dat
   --
 }
 
-entity "puml-link:property.RepoObjectProperty_Collect_source_uspgenerator.adoc[prefix=..]" as property.RepoObjectProperty_Collect_source_uspgenerator << V >> {
+entity "puml-link:dhw:sqldb:property.RepoObjectProperty_Collect_source_uspgenerator.adoc[]" as property.RepoObjectProperty_Collect_source_uspgenerator << V >> {
   **RepoObject_guid** : (uniqueidentifier)
   - **property_name** : (varchar(14))
   --
@@ -42,15 +43,19 @@ entity "puml-link:property.RepoObjectProperty_Collect_source_uspgenerator.adoc[p
   --
 }
 
-entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
   has_execution_plan_issue : (bit)
   has_get_referenced_issue : (bit)
+  Inheritance_Source_fullname : (nvarchar(261))
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
   InheritanceDefinition : (nvarchar(4000))
   InheritanceType : (tinyint)
   - is_DocsExclude : (bit)
+  - is_external : (bit)
   is_repo_managed : (bit)
   is_required_ObjectMerge : (bit)
   - is_ssas : (bit)
@@ -85,7 +90,7 @@ entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
   --
 }
 
-entity "puml-link:uspgenerator.GeneratorUsp.adoc[prefix=..]" as uspgenerator.GeneratorUsp << U >> {
+entity "puml-link:dhw:sqldb:uspgenerator.GeneratorUsp.adoc[]" as uspgenerator.GeneratorUsp << U >> {
   - **id** : (int)
   --
   - has_logging : (tinyint)
@@ -98,7 +103,7 @@ entity "puml-link:uspgenerator.GeneratorUsp.adoc[prefix=..]" as uspgenerator.Gen
   --
 }
 
-entity "puml-link:uspgenerator.GeneratorUsp_ParameterList.adoc[prefix=..]" as uspgenerator.GeneratorUsp_ParameterList << V >> {
+entity "puml-link:dhw:sqldb:uspgenerator.GeneratorUsp_ParameterList.adoc[]" as uspgenerator.GeneratorUsp_ParameterList << V >> {
   - **usp_id** : (int)
   --
   ParameterList : (nvarchar(max))
@@ -107,8 +112,7 @@ entity "puml-link:uspgenerator.GeneratorUsp_ParameterList.adoc[prefix=..]" as us
   --
 }
 
-entity "puml-link:uspgenerator.GeneratorUsp_SqlUsp.adoc[prefix=..]" as uspgenerator.GeneratorUsp_SqlUsp << V >> {
-  - **usp_id** : (int)
+entity "puml-link:dhw:sqldb:uspgenerator.GeneratorUsp_SqlUsp.adoc[]" as uspgenerator.GeneratorUsp_SqlUsp << V >> {
   --
   - AdocUspSteps : (nvarchar(max))
   - has_logging : (tinyint)
@@ -118,6 +122,7 @@ entity "puml-link:uspgenerator.GeneratorUsp_SqlUsp.adoc[prefix=..]" as uspgenera
   - SqlUsp : (nvarchar(max))
   usp_Description : (nvarchar(4000))
   - usp_fullname : (nvarchar(261))
+  - usp_id : (int)
   - usp_name : (nvarchar(128))
   - usp_schema : (nvarchar(128))
   - UspExamples : (nvarchar(4000))
@@ -126,7 +131,7 @@ entity "puml-link:uspgenerator.GeneratorUsp_SqlUsp.adoc[prefix=..]" as uspgenera
   --
 }
 
-entity "puml-link:uspgenerator.GeneratorUsp_StepList.adoc[prefix=..]" as uspgenerator.GeneratorUsp_StepList << V >> {
+entity "puml-link:dhw:sqldb:uspgenerator.GeneratorUsp_StepList.adoc[]" as uspgenerator.GeneratorUsp_StepList << V >> {
   --
   AdocStepList : (nvarchar(max))
   StepList : (nvarchar(max))
@@ -141,21 +146,16 @@ uspgenerator.GeneratorUsp <.. uspgenerator.GeneratorUsp_SqlUsp
 uspgenerator.GeneratorUsp_ParameterList <.. uspgenerator.GeneratorUsp_SqlUsp
 uspgenerator.GeneratorUsp_SqlUsp <.. property.RepoObjectProperty_Collect_source_uspgenerator
 uspgenerator.GeneratorUsp_StepList <.. uspgenerator.GeneratorUsp_SqlUsp
-repo.RepoObject::RepoObject_guid <-- uspgenerator.GeneratorUsp_SqlUsp::RepoObject_guid
-uspgenerator.GeneratorUsp::has_logging <-- uspgenerator.GeneratorUsp_SqlUsp::has_logging
-uspgenerator.GeneratorUsp::id <-- uspgenerator.GeneratorUsp_SqlUsp::usp_id
-uspgenerator.GeneratorUsp::usp_Description <-- uspgenerator.GeneratorUsp_SqlUsp::usp_Description
-uspgenerator.GeneratorUsp::usp_Description <-- uspgenerator.GeneratorUsp_SqlUsp::MS_Description
-uspgenerator.GeneratorUsp::usp_fullname <-- uspgenerator.GeneratorUsp_SqlUsp::usp_fullname
-uspgenerator.GeneratorUsp::usp_name <-- uspgenerator.GeneratorUsp_SqlUsp::usp_name
-uspgenerator.GeneratorUsp::usp_schema <-- uspgenerator.GeneratorUsp_SqlUsp::usp_schema
-uspgenerator.GeneratorUsp_ParameterList::ParameterList <-- uspgenerator.GeneratorUsp_SqlUsp::UspParameters
-uspgenerator.GeneratorUsp_SqlUsp::RepoObject_guid <-- property.RepoObjectProperty_Collect_source_uspgenerator::RepoObject_guid
-uspgenerator.GeneratorUsp_StepList::StepList <-- uspgenerator.GeneratorUsp_SqlUsp::SqlStepList
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"repo.RepoObject::RepoObject_guid" <-- "uspgenerator.GeneratorUsp_SqlUsp::RepoObject_guid"
+"uspgenerator.GeneratorUsp::has_logging" <-- "uspgenerator.GeneratorUsp_SqlUsp::has_logging"
+"uspgenerator.GeneratorUsp::id" <-- "uspgenerator.GeneratorUsp_SqlUsp::usp_id"
+"uspgenerator.GeneratorUsp::usp_Description" <-- "uspgenerator.GeneratorUsp_SqlUsp::usp_Description"
+"uspgenerator.GeneratorUsp::usp_Description" <-- "uspgenerator.GeneratorUsp_SqlUsp::MS_Description"
+"uspgenerator.GeneratorUsp::usp_fullname" <-- "uspgenerator.GeneratorUsp_SqlUsp::usp_fullname"
+"uspgenerator.GeneratorUsp::usp_name" <-- "uspgenerator.GeneratorUsp_SqlUsp::usp_name"
+"uspgenerator.GeneratorUsp::usp_schema" <-- "uspgenerator.GeneratorUsp_SqlUsp::usp_schema"
+"uspgenerator.GeneratorUsp_ParameterList::ParameterList" <-- "uspgenerator.GeneratorUsp_SqlUsp::UspParameters"
+"uspgenerator.GeneratorUsp_SqlUsp::RepoObject_guid" <-- "property.RepoObjectProperty_Collect_source_uspgenerator::RepoObject_guid"
+"uspgenerator.GeneratorUsp_StepList::StepList" <-- "uspgenerator.GeneratorUsp_SqlUsp::SqlStepList"
 @enduml
 

@@ -22,15 +22,18 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:repo.SysObject_RepoObject_via_guid.adoc[prefix=..]" as repo.SysObject_RepoObject_via_guid << V >> {
+entity "puml-link:dhw:sqldb:repo.SysObject_RepoObject_via_guid.adoc[]" as repo.SysObject_RepoObject_via_guid << V >> {
   --
   history_table_guid : (uniqueidentifier)
   history_table_id : (int)
+  is_external : (bit)
   is_repo_managed : (bit)
   is_RepoObject_name_uniqueidentifier : (int)
+  is_ssas : (bit)
   is_SysObject_name_uniqueidentifier : (int)
   - modify_date : (datetime)
   - parent_object_id : (int)
@@ -58,12 +61,14 @@ entity "puml-link:repo.SysObject_RepoObject_via_guid.adoc[prefix=..]" as repo.Sy
   --
 }
 
-entity "puml-link:repo.SysObject_RepoObject_via_name.adoc[prefix=..]" as repo.SysObject_RepoObject_via_name << V >> {
+entity "puml-link:dhw:sqldb:repo.SysObject_RepoObject_via_name.adoc[]" as repo.SysObject_RepoObject_via_name << V >> {
   --
   history_table_guid : (uniqueidentifier)
   history_table_id : (int)
+  is_external : (bit)
   is_repo_managed : (bit)
   is_RepoObject_name_uniqueidentifier : (int)
+  is_ssas : (bit)
   is_SysObject_name_uniqueidentifier : (int)
   - modify_date : (datetime)
   - parent_object_id : (int)
@@ -91,13 +96,13 @@ entity "puml-link:repo.SysObject_RepoObject_via_name.adoc[prefix=..]" as repo.Sy
   --
 }
 
-entity "puml-link:repo.usp_sync_guid_RepoObject.adoc[prefix=..]" as repo.usp_sync_guid_RepoObject << P >> {
+entity "puml-link:dhw:sqldb:repo.usp_sync_guid_RepoObject.adoc[]" as repo.usp_sync_guid_RepoObject << P >> {
   --
   --
   --
 }
 
-entity "puml-link:repo_sys.ColumnReference.adoc[prefix=..]" as repo_sys.ColumnReference << V >> {
+entity "puml-link:dhw:sqldb:repo_sys.ColumnReference.adoc[]" as repo_sys.ColumnReference << V >> {
   --
   - is_all_columns_found : (bit)
   - is_ambiguous : (bit)
@@ -122,7 +127,7 @@ entity "puml-link:repo_sys.ColumnReference.adoc[prefix=..]" as repo_sys.ColumnRe
   --
 }
 
-entity "puml-link:repo_sys.ExtendedProperties.adoc[prefix=..]" as repo_sys.ExtendedProperties << V >> {
+entity "puml-link:dhw:sqldb:repo_sys.ExtendedProperties.adoc[]" as repo_sys.ExtendedProperties << V >> {
   --
   - class : (tinyint)
   class_desc : (nvarchar(60))
@@ -146,7 +151,7 @@ entity "puml-link:repo_sys.ExtendedProperties.adoc[prefix=..]" as repo_sys.Exten
   --
 }
 
-entity "puml-link:repo_sys.parameters.adoc[prefix=..]" as repo_sys.parameters << V >> {
+entity "puml-link:dhw:sqldb:repo_sys.parameters.adoc[]" as repo_sys.parameters << V >> {
   --
   column_encryption_key_database_name : (sysname)
   column_encryption_key_id : (int)
@@ -181,7 +186,7 @@ entity "puml-link:repo_sys.parameters.adoc[prefix=..]" as repo_sys.parameters <<
   --
 }
 
-entity "puml-link:repo_sys.SysColumn.adoc[prefix=..]" as repo_sys.SysColumn << V >> {
+entity "puml-link:dhw:sqldb:repo_sys.SysColumn.adoc[]" as repo_sys.SysColumn << V >> {
   --
   collation_name : (sysname)
   column_encryption_key_database_name : (sysname)
@@ -243,7 +248,7 @@ entity "puml-link:repo_sys.SysColumn.adoc[prefix=..]" as repo_sys.SysColumn << V
   --
 }
 
-entity "puml-link:repo_sys.SysObject.adoc[prefix=..]" as repo_sys.SysObject << V >> {
+entity "puml-link:dhw:sqldb:repo_sys.SysObject.adoc[]" as repo_sys.SysObject << V >> {
   --
   - create_date : (datetime)
   history_table_id : (int)
@@ -270,7 +275,7 @@ entity "puml-link:repo_sys.SysObject.adoc[prefix=..]" as repo_sys.SysObject << V
   --
 }
 
-entity "puml-link:sqlparse.RepoObject_SqlModules_Repo_Sys.adoc[prefix=..]" as sqlparse.RepoObject_SqlModules_Repo_Sys << V >> {
+entity "puml-link:dhw:sqldb:sqlparse.RepoObject_SqlModules_Repo_Sys.adoc[]" as sqlparse.RepoObject_SqlModules_Repo_Sys << V >> {
   --
   is_json_sql_modules_json : (int)
   is_outdated : (bit)
@@ -286,25 +291,25 @@ entity "puml-link:sqlparse.RepoObject_SqlModules_Repo_Sys.adoc[prefix=..]" as sq
   --
 }
 
-entity "puml-link:sys_dwh.objects.adoc[prefix=..]" as sys_dwh.objects << SN >> {
+entity "puml-link:dhw:sqldb:sys_dwh.objects.adoc[]" as sys_dwh.objects << SN >> {
   --
   --
   --
 }
 
-entity "puml-link:sys_dwh.schemas.adoc[prefix=..]" as sys_dwh.schemas << SN >> {
+entity "puml-link:dhw:sqldb:sys_dwh.schemas.adoc[]" as sys_dwh.schemas << SN >> {
   --
   --
   --
 }
 
-entity "puml-link:sys_dwh.sql_modules.adoc[prefix=..]" as sys_dwh.sql_modules << SN >> {
+entity "puml-link:dhw:sqldb:sys_dwh.sql_modules.adoc[]" as sys_dwh.sql_modules << SN >> {
   --
   --
   --
 }
 
-entity "puml-link:sys_dwh.tables.adoc[prefix=..]" as sys_dwh.tables << SN >> {
+entity "puml-link:dhw:sqldb:sys_dwh.tables.adoc[]" as sys_dwh.tables << SN >> {
   --
   --
   --
@@ -322,41 +327,36 @@ sys_dwh.objects <.. repo_sys.SysObject
 sys_dwh.schemas <.. repo_sys.SysObject
 sys_dwh.sql_modules <.. repo_sys.SysObject
 sys_dwh.tables <.. repo_sys.SysObject
-repo_sys.SysObject::history_table_id <-- repo.SysObject_RepoObject_via_name::history_table_id
-repo_sys.SysObject::history_table_id <-- repo.SysObject_RepoObject_via_guid::history_table_id
-repo_sys.SysObject::modify_date <-- sqlparse.RepoObject_SqlModules_Repo_Sys::modify_date
-repo_sys.SysObject::modify_date <-- repo.SysObject_RepoObject_via_name::modify_date
-repo_sys.SysObject::modify_date <-- repo.SysObject_RepoObject_via_guid::modify_date
-repo_sys.SysObject::parent_object_id <-- repo.SysObject_RepoObject_via_name::parent_object_id
-repo_sys.SysObject::parent_object_id <-- repo.SysObject_RepoObject_via_guid::parent_object_id
-repo_sys.SysObject::sql_modules_definition <-- sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_definition
-repo_sys.SysObject::SysObject_fullname <-- repo_sys.ColumnReference::SysObject_full_name
-repo_sys.SysObject::SysObject_fullname <-- repo_sys.parameters::SysObject_fullname
-repo_sys.SysObject::SysObject_fullname2 <-- repo_sys.parameters::SysObject_fullname2
-repo_sys.SysObject::SysObject_id <-- repo.SysObject_RepoObject_via_name::SysObject_id
-repo_sys.SysObject::SysObject_id <-- repo.SysObject_RepoObject_via_guid::SysObject_id
-repo_sys.SysObject::SysObject_name <-- repo.SysObject_RepoObject_via_name::SysObject_name
-repo_sys.SysObject::SysObject_name <-- repo.SysObject_RepoObject_via_guid::SysObject_name
-repo_sys.SysObject::SysObject_name <-- repo_sys.parameters::SysObject_name
-repo_sys.SysObject::SysObject_RepoObject_guid <-- repo.SysObject_RepoObject_via_name::SysObject_RepoObject_guid
-repo_sys.SysObject::SysObject_RepoObject_guid <-- repo.SysObject_RepoObject_via_guid::SysObject_RepoObject_guid
-repo_sys.SysObject::SysObject_RepoObject_guid <-- repo_sys.parameters::SysObject_RepoObject_guid
-repo_sys.SysObject::SysObject_schema_name <-- repo.SysObject_RepoObject_via_name::SysObject_schema_name
-repo_sys.SysObject::SysObject_schema_name <-- repo.SysObject_RepoObject_via_guid::SysObject_schema_name
-repo_sys.SysObject::SysObject_schema_name <-- repo_sys.parameters::SysObject_schema_name
-repo_sys.SysObject::temporal_type <-- repo.SysObject_RepoObject_via_name::temporal_type
-repo_sys.SysObject::temporal_type <-- repo.SysObject_RepoObject_via_guid::temporal_type
-repo_sys.SysObject::type <-- repo.SysObject_RepoObject_via_name::SysObject_type
-repo_sys.SysObject::type <-- repo.SysObject_RepoObject_via_guid::SysObject_type
-repo_sys.SysObject::type <-- repo_sys.SysColumn::SysObject_type
-repo_sys.SysObject::type <-- repo_sys.parameters::SysObject_type
-repo_sys.SysObject::type_desc <-- repo_sys.SysColumn::SysObject_type_desc
-repo_sys.SysObject::type_desc <-- repo.SysObject_RepoObject_via_guid::SysObject_type_desc
-repo_sys.SysObject::type_desc <-- repo.SysObject_RepoObject_via_name::SysObject_type_desc
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"repo_sys.SysObject::history_table_id" <-- "repo.SysObject_RepoObject_via_name::history_table_id"
+"repo_sys.SysObject::history_table_id" <-- "repo.SysObject_RepoObject_via_guid::history_table_id"
+"repo_sys.SysObject::modify_date" <-- "sqlparse.RepoObject_SqlModules_Repo_Sys::modify_date"
+"repo_sys.SysObject::modify_date" <-- "repo.SysObject_RepoObject_via_name::modify_date"
+"repo_sys.SysObject::modify_date" <-- "repo.SysObject_RepoObject_via_guid::modify_date"
+"repo_sys.SysObject::parent_object_id" <-- "repo.SysObject_RepoObject_via_name::parent_object_id"
+"repo_sys.SysObject::parent_object_id" <-- "repo.SysObject_RepoObject_via_guid::parent_object_id"
+"repo_sys.SysObject::sql_modules_definition" <-- "sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_definition"
+"repo_sys.SysObject::SysObject_fullname" <-- "repo_sys.ColumnReference::SysObject_full_name"
+"repo_sys.SysObject::SysObject_fullname" <-- "repo_sys.parameters::SysObject_fullname"
+"repo_sys.SysObject::SysObject_fullname2" <-- "repo_sys.parameters::SysObject_fullname2"
+"repo_sys.SysObject::SysObject_id" <-- "repo.SysObject_RepoObject_via_name::SysObject_id"
+"repo_sys.SysObject::SysObject_id" <-- "repo.SysObject_RepoObject_via_guid::SysObject_id"
+"repo_sys.SysObject::SysObject_name" <-- "repo.SysObject_RepoObject_via_name::SysObject_name"
+"repo_sys.SysObject::SysObject_name" <-- "repo.SysObject_RepoObject_via_guid::SysObject_name"
+"repo_sys.SysObject::SysObject_name" <-- "repo_sys.parameters::SysObject_name"
+"repo_sys.SysObject::SysObject_RepoObject_guid" <-- "repo.SysObject_RepoObject_via_name::SysObject_RepoObject_guid"
+"repo_sys.SysObject::SysObject_RepoObject_guid" <-- "repo.SysObject_RepoObject_via_guid::SysObject_RepoObject_guid"
+"repo_sys.SysObject::SysObject_RepoObject_guid" <-- "repo_sys.parameters::SysObject_RepoObject_guid"
+"repo_sys.SysObject::SysObject_schema_name" <-- "repo.SysObject_RepoObject_via_name::SysObject_schema_name"
+"repo_sys.SysObject::SysObject_schema_name" <-- "repo.SysObject_RepoObject_via_guid::SysObject_schema_name"
+"repo_sys.SysObject::SysObject_schema_name" <-- "repo_sys.parameters::SysObject_schema_name"
+"repo_sys.SysObject::temporal_type" <-- "repo.SysObject_RepoObject_via_name::temporal_type"
+"repo_sys.SysObject::temporal_type" <-- "repo.SysObject_RepoObject_via_guid::temporal_type"
+"repo_sys.SysObject::type" <-- "repo.SysObject_RepoObject_via_name::SysObject_type"
+"repo_sys.SysObject::type" <-- "repo.SysObject_RepoObject_via_guid::SysObject_type"
+"repo_sys.SysObject::type" <-- "repo_sys.SysColumn::SysObject_type"
+"repo_sys.SysObject::type" <-- "repo_sys.parameters::SysObject_type"
+"repo_sys.SysObject::type_desc" <-- "repo_sys.SysColumn::SysObject_type_desc"
+"repo_sys.SysObject::type_desc" <-- "repo.SysObject_RepoObject_via_guid::SysObject_type_desc"
+"repo_sys.SysObject::type_desc" <-- "repo.SysObject_RepoObject_via_name::SysObject_type_desc"
 @enduml
 

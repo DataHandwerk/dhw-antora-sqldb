@@ -6,9 +6,6 @@
 :ExistsProperty--antorareferencedlist:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--pk_index_guid:
-:ExistsProperty--pk_indexpatterncolumndatatype:
-:ExistsProperty--pk_indexpatterncolumnname:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -49,25 +46,6 @@ view
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-type]
-=== type
-
-[cols="d,8m,m,m,m,d"]
-|===
-|1
-|*type*
-|nvarchar(128)
-|NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:configT.type.adoc#column-type[+configT.type.type+]
---
-
-
 [#column-nav_list]
 === nav_list
 
@@ -80,6 +58,25 @@ view
 |
 |
 |===
+
+
+[#column-type]
+=== type
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|type
+|nvarchar(128)
+|NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:configT.type.adoc#column-type[+configT.type.type+]
+--
 
 
 [#column-type_desc]
@@ -112,12 +109,6 @@ view
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
-|1
-|*<<column-type>>*
-|nvarchar(128)
-|NULL
-|
-|
 
 
 
@@ -126,11 +117,17 @@ view
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
-
 |
 |<<column-nav_list>>
 |nvarchar(309)
 |NOT NULL
+|
+|
+
+|
+|<<column-type>>
+|nvarchar(128)
+|NULL
 |
 |
 
@@ -147,15 +144,15 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-PK_AntoraNavListPage_by_type]
-=== PK_AntoraNavListPage_by_type
+[#index-idx_AntoraNavListPage_by_type2x_1]
+=== idx_AntoraNavListPage_by_type++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-type>>; nvarchar(128)
 --
-* PK, Unique, Real: 1, 1, 0
+* PK, Unique, Real: 0, 0, 0
 
 // end::AntoraIndexList[]
 
@@ -391,21 +388,21 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-366C33D7-1599-EB11-84F4-A81E8446D5B0
+
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-nvarchar(128)
+
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-type
+
 // end::pk_indexpatterncolumnname[]
 
 

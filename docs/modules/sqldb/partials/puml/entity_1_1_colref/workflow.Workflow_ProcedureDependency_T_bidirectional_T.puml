@@ -22,27 +22,22 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:workflow.usp_PERSIST_Workflow_ProcedureDependency_T_bidirectional_T.adoc[prefix=..]" as workflow.usp_PERSIST_Workflow_ProcedureDependency_T_bidirectional_T << P >> {
+entity "puml-link:dhw:sqldb:workflow.Workflow_ProcedureDependency_T_bidirectional.adoc[]" as workflow.Workflow_ProcedureDependency_T_bidirectional << V >> {
   --
-  --
-  --
-}
-
-entity "puml-link:workflow.Workflow_ProcedureDependency_T_bidirectional.adoc[prefix=..]" as workflow.Workflow_ProcedureDependency_T_bidirectional << V >> {
-  - **Workflow_id** : (int)
-  - **referenced_Procedure_RepoObject_guid** : (uniqueidentifier)
-  - **referencing_Procedure_RepoObject_guid** : (uniqueidentifier)
-  --
+  - referenced_Procedure_RepoObject_guid : (uniqueidentifier)
   - referenced_RepoObject_fullname : (nvarchar(261))
+  - referencing_Procedure_RepoObject_guid : (uniqueidentifier)
   - referencing_RepoObject_fullname : (nvarchar(261))
+  - Workflow_id : (int)
   --
   --
 }
 
-entity "puml-link:workflow.Workflow_ProcedureDependency_T_bidirectional_T.adoc[prefix=..]" as workflow.Workflow_ProcedureDependency_T_bidirectional_T << U >> {
+entity "puml-link:dhw:sqldb:workflow.Workflow_ProcedureDependency_T_bidirectional_T.adoc[]" as workflow.Workflow_ProcedureDependency_T_bidirectional_T << U >> {
   - **Workflow_id** : (int)
   - **referenced_Procedure_RepoObject_guid** : (uniqueidentifier)
   - **referencing_Procedure_RepoObject_guid** : (uniqueidentifier)
@@ -55,16 +50,10 @@ entity "puml-link:workflow.Workflow_ProcedureDependency_T_bidirectional_T.adoc[p
 }
 
 workflow.Workflow_ProcedureDependency_T_bidirectional <.. workflow.Workflow_ProcedureDependency_T_bidirectional_T
-workflow.Workflow_ProcedureDependency_T_bidirectional_T <.. workflow.usp_PERSIST_Workflow_ProcedureDependency_T_bidirectional_T
-workflow.Workflow_ProcedureDependency_T_bidirectional::referenced_Procedure_RepoObject_guid <-- workflow.Workflow_ProcedureDependency_T_bidirectional_T::referenced_Procedure_RepoObject_guid
-workflow.Workflow_ProcedureDependency_T_bidirectional::referenced_RepoObject_fullname <-- workflow.Workflow_ProcedureDependency_T_bidirectional_T::referenced_RepoObject_fullname
-workflow.Workflow_ProcedureDependency_T_bidirectional::referencing_Procedure_RepoObject_guid <-- workflow.Workflow_ProcedureDependency_T_bidirectional_T::referencing_Procedure_RepoObject_guid
-workflow.Workflow_ProcedureDependency_T_bidirectional::referencing_RepoObject_fullname <-- workflow.Workflow_ProcedureDependency_T_bidirectional_T::referencing_RepoObject_fullname
-workflow.Workflow_ProcedureDependency_T_bidirectional::Workflow_id <-- workflow.Workflow_ProcedureDependency_T_bidirectional_T::Workflow_id
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"workflow.Workflow_ProcedureDependency_T_bidirectional::referenced_Procedure_RepoObject_guid" <-- "workflow.Workflow_ProcedureDependency_T_bidirectional_T::referenced_Procedure_RepoObject_guid"
+"workflow.Workflow_ProcedureDependency_T_bidirectional::referenced_RepoObject_fullname" <-- "workflow.Workflow_ProcedureDependency_T_bidirectional_T::referenced_RepoObject_fullname"
+"workflow.Workflow_ProcedureDependency_T_bidirectional::referencing_Procedure_RepoObject_guid" <-- "workflow.Workflow_ProcedureDependency_T_bidirectional_T::referencing_Procedure_RepoObject_guid"
+"workflow.Workflow_ProcedureDependency_T_bidirectional::referencing_RepoObject_fullname" <-- "workflow.Workflow_ProcedureDependency_T_bidirectional_T::referencing_RepoObject_fullname"
+"workflow.Workflow_ProcedureDependency_T_bidirectional::Workflow_id" <-- "workflow.Workflow_ProcedureDependency_T_bidirectional_T::Workflow_id"
 @enduml
 

@@ -7,10 +7,6 @@
 :ExistsProperty--antorareferencinglist:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--pk_index_guid:
-:ExistsProperty--pk_indexpatterncolumndatatype:
-:ExistsProperty--pk_indexpatterncolumnname:
-:ExistsProperty--pk_indexsemanticgroup:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -56,8 +52,8 @@ view
 
 [cols="d,8m,m,m,m,d"]
 |===
-|1
-|*databasename*
+|
+|databasename
 |nvarchar(128)
 |NOT NULL
 |
@@ -72,54 +68,6 @@ view
 .Referencing Columns
 --
 * xref:ssas.model_json_31221_tables_measures_expressions_StrAgg.adoc#column-databasename[+ssas.model_json_31221_tables_measures_expressions_StrAgg.databasename+]
---
-
-
-[#column-tables_name]
-=== tables_name
-
-[cols="d,8m,m,m,m,d"]
-|===
-|2
-|*tables_name*
-|nvarchar(128)
-|NOT NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:ssas.model_json_312_tables_measures_T.adoc#column-tables_name[+ssas.model_json_312_tables_measures_T.tables_name+]
---
-
-.Referencing Columns
---
-* xref:ssas.model_json_31221_tables_measures_expressions_StrAgg.adoc#column-tables_name[+ssas.model_json_31221_tables_measures_expressions_StrAgg.tables_name+]
---
-
-
-[#column-tables_measures_name]
-=== tables_measures_name
-
-[cols="d,8m,m,m,m,d"]
-|===
-|3
-|*tables_measures_name*
-|nvarchar(500)
-|NOT NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:ssas.model_json_312_tables_measures_T.adoc#column-tables_measures_name[+ssas.model_json_312_tables_measures_T.tables_measures_name+]
---
-
-.Referencing Columns
---
-* xref:ssas.model_json_31221_tables_measures_expressions_StrAgg.adoc#column-tables_measures_name[+ssas.model_json_31221_tables_measures_expressions_StrAgg.tables_measures_name+]
 --
 
 
@@ -185,6 +133,54 @@ view
 --
 
 
+[#column-tables_measures_name]
+=== tables_measures_name
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|tables_measures_name
+|nvarchar(500)
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:ssas.model_json_312_tables_measures_T.adoc#column-tables_measures_name[+ssas.model_json_312_tables_measures_T.tables_measures_name+]
+--
+
+.Referencing Columns
+--
+* xref:ssas.model_json_31221_tables_measures_expressions_StrAgg.adoc#column-tables_measures_name[+ssas.model_json_31221_tables_measures_expressions_StrAgg.tables_measures_name+]
+--
+
+
+[#column-tables_name]
+=== tables_name
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|tables_name
+|nvarchar(128)
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:ssas.model_json_312_tables_measures_T.adoc#column-tables_name[+ssas.model_json_312_tables_measures_T.tables_name+]
+--
+
+.Referencing Columns
+--
+* xref:ssas.model_json_31221_tables_measures_expressions_StrAgg.adoc#column-tables_name[+ssas.model_json_31221_tables_measures_expressions_StrAgg.tables_name+]
+--
+
+
 [#column-Type]
 === Type
 
@@ -224,26 +220,8 @@ view
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
-|1
-|*<<column-databasename>>*
-|nvarchar(128)
-|NOT NULL
-|
-|
 
-|2
-|*<<column-tables_name>>*
-|nvarchar(128)
-|NOT NULL
-|
-|
 
-|3
-|*<<column-tables_measures_name>>*
-|nvarchar(500)
-|NOT NULL
-|
-|
 
 
 
@@ -255,8 +233,12 @@ view
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
-
-
+|
+|<<column-databasename>>
+|nvarchar(128)
+|NOT NULL
+|
+|
 
 |
 |<<column-Key>>
@@ -275,6 +257,20 @@ view
 |
 |<<column-RepoObject_guid>>
 |uniqueidentifier
+|NOT NULL
+|
+|
+
+|
+|<<column-tables_measures_name>>
+|nvarchar(500)
+|NOT NULL
+|
+|
+
+|
+|<<column-tables_name>>
+|nvarchar(128)
 |NOT NULL
 |
 |
@@ -299,38 +295,38 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-PK_model_json_3122_tables_measures_expressions_multiline]
-=== PK_model_json_3122_tables_measures_expressions_multiline
+[#index-idx_model_json_3122_tables_measures_expressions_multiline2x_1]
+=== idx_model_json_3122_tables_measures_expressions_multiline++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_ssas_table_measure[ssas_table_measure]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-Measure_guid>>; uniqueidentifier
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[#index-idx_model_json_3122_tables_measures_expressions_multiline2x_2]
+=== idx_model_json_3122_tables_measures_expressions_multiline++__++2
+
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#ssas_table_measure[ssas_table_measure]
 +
 --
 * <<column-databasename>>; nvarchar(128)
 * <<column-tables_name>>; nvarchar(128)
 * <<column-tables_measures_name>>; nvarchar(500)
 --
-* PK, Unique, Real: 1, 1, 0
+* PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_model_json_3122_tables_measures_expressions_multiline_2]
-=== idx_model_json_3122_tables_measures_expressions_multiline++__++2
+[#index-idx_model_json_3122_tables_measures_expressions_multiline2x_3]
+=== idx_model_json_3122_tables_measures_expressions_multiline++__++3
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-databasename>>; nvarchar(128)
 * <<column-tables_name>>; nvarchar(128)
---
-* PK, Unique, Real: 0, 0, 0
-
-
-[#index-idx_model_json_3122_tables_measures_expressions_multiline_3]
-=== idx_model_json_3122_tables_measures_expressions_multiline++__++3
-
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
-+
---
-* <<column-databasename>>; nvarchar(128)
 --
 * PK, Unique, Real: 0, 0, 0
 
@@ -567,28 +563,28 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-222FBFE5-9D0F-EC11-8518-A81E8446D5B0
+
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-nvarchar(128),nvarchar(128),nvarchar(500)
+
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-databasename,tables_name,tables_measures_name
+
 // end::pk_indexpatterncolumnname[]
 
 
 === pk_IndexSemanticGroup
 
 // tag::pk_indexsemanticgroup[]
-ssas_table_measure
+
 // end::pk_indexsemanticgroup[]
 
 

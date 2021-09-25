@@ -22,16 +22,17 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:logs.usp_ExecutionLog_insert.adoc[prefix=..]" as logs.usp_ExecutionLog_insert << P >> {
+entity "puml-link:dhw:sqldb:logs.usp_ExecutionLog_insert.adoc[]" as logs.usp_ExecutionLog_insert << P >> {
   --
   --
   --
 }
 
-entity "puml-link:property.RepoObjectColumnProperty.adoc[prefix=..]" as property.RepoObjectColumnProperty << U >> {
+entity "puml-link:dhw:sqldb:property.RepoObjectColumnProperty.adoc[]" as property.RepoObjectColumnProperty << U >> {
   - **RepoObjectColumnProperty_id** : (int)
   --
   inheritance : (tinyint)
@@ -47,7 +48,7 @@ entity "puml-link:property.RepoObjectColumnProperty.adoc[prefix=..]" as property
   --
 }
 
-entity "puml-link:property.RepoObjectColumnProperty_sys_repo.adoc[prefix=..]" as property.RepoObjectColumnProperty_sys_repo << V >> {
+entity "puml-link:dhw:sqldb:property.RepoObjectColumnProperty_sys_repo.adoc[]" as property.RepoObjectColumnProperty_sys_repo << V >> {
   - **RepoObjectColumn_guid** : (uniqueidentifier)
   - **property_name** : (sysname)
   --
@@ -61,7 +62,7 @@ entity "puml-link:property.RepoObjectColumnProperty_sys_repo.adoc[prefix=..]" as
   --
 }
 
-entity "puml-link:property.RepoObjectProperty.adoc[prefix=..]" as property.RepoObjectProperty << U >> {
+entity "puml-link:dhw:sqldb:property.RepoObjectProperty.adoc[]" as property.RepoObjectProperty << U >> {
   - **RepoObjectProperty_id** : (int)
   --
   inheritance : (tinyint)
@@ -77,7 +78,7 @@ entity "puml-link:property.RepoObjectProperty.adoc[prefix=..]" as property.RepoO
   --
 }
 
-entity "puml-link:property.RepoObjectProperty_sys_repo.adoc[prefix=..]" as property.RepoObjectProperty_sys_repo << V >> {
+entity "puml-link:dhw:sqldb:property.RepoObjectProperty_sys_repo.adoc[]" as property.RepoObjectProperty_sys_repo << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   - **property_name** : (sysname)
   --
@@ -90,17 +91,18 @@ entity "puml-link:property.RepoObjectProperty_sys_repo.adoc[prefix=..]" as prope
   --
 }
 
-entity "puml-link:property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate.adoc[prefix=..]" as property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate << P >> {
+entity "puml-link:dhw:sqldb:property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate.adoc[]" as property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate << P >> {
   --
   --
   --
 }
 
-entity "puml-link:repo.RepoSchema.adoc[prefix=..]" as repo.RepoSchema << U >> {
+entity "puml-link:dhw:sqldb:repo.RepoSchema.adoc[]" as repo.RepoSchema << U >> {
   - **RepoSchema_guid** : (uniqueidentifier)
   --
   - is_ssas : (bit)
   is_SysSchema_missing : (bit)
+  - MeasuresRepoObjekt_guid : (uniqueidentifier)
   RepoSchema_ms_description : (nvarchar(4000))
   - RepoSchema_name : (nvarchar(128))
   SysSchema_id : (int)
@@ -108,11 +110,12 @@ entity "puml-link:repo.RepoSchema.adoc[prefix=..]" as repo.RepoSchema << U >> {
   ~ has_different_sys_names : (bit)
   # is_RepoSchema_name_uniqueidentifier : (int)
   # is_SysSchema_name_uniqueidentifier : (int)
+  # MeasuresRepoObjekt_name : (varchar(9))
   --
   --
 }
 
-entity "puml-link:repo_sys.ExtendedProperties.adoc[prefix=..]" as repo_sys.ExtendedProperties << V >> {
+entity "puml-link:dhw:sqldb:repo_sys.ExtendedProperties.adoc[]" as repo_sys.ExtendedProperties << V >> {
   --
   - class : (tinyint)
   class_desc : (nvarchar(60))
@@ -143,11 +146,6 @@ property.RepoObjectProperty <.. property.usp_sync_ExtendedProperties_Sys2Repo_In
 property.RepoObjectProperty_sys_repo <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
 repo.RepoSchema <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
 repo_sys.ExtendedProperties <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
-
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
 
 @enduml
 

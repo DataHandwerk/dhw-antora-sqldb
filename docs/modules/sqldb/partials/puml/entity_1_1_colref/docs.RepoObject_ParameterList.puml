@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:docs.RepoObject_Adoc.adoc[prefix=..]" as docs.RepoObject_Adoc << V >> {
+entity "puml-link:dhw:sqldb:docs.RepoObject_Adoc.adoc[]" as docs.RepoObject_Adoc << V >> {
   --
   - AdocContent : (nvarchar(max))
   is_DocsOutput : (int)
@@ -43,7 +44,7 @@ entity "puml-link:docs.RepoObject_Adoc.adoc[prefix=..]" as docs.RepoObject_Adoc 
   --
 }
 
-entity "puml-link:docs.RepoObject_ParameterList.adoc[prefix=..]" as docs.RepoObject_ParameterList << V >> {
+entity "puml-link:dhw:sqldb:docs.RepoObject_ParameterList.adoc[]" as docs.RepoObject_ParameterList << V >> {
   **RepoObject_guid** : (uniqueidentifier)
   --
   AntoraParameterList : (nvarchar(max))
@@ -51,7 +52,7 @@ entity "puml-link:docs.RepoObject_ParameterList.adoc[prefix=..]" as docs.RepoObj
   --
 }
 
-entity "puml-link:repo_sys.parameters.adoc[prefix=..]" as repo_sys.parameters << V >> {
+entity "puml-link:dhw:sqldb:repo_sys.parameters.adoc[]" as repo_sys.parameters << V >> {
   --
   column_encryption_key_database_name : (sysname)
   column_encryption_key_id : (int)
@@ -88,11 +89,6 @@ entity "puml-link:repo_sys.parameters.adoc[prefix=..]" as repo_sys.parameters <<
 
 docs.RepoObject_ParameterList <.. docs.RepoObject_Adoc
 repo_sys.parameters <.. docs.RepoObject_ParameterList
-repo_sys.parameters::SysObject_RepoObject_guid <-- docs.RepoObject_ParameterList::RepoObject_guid
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"repo_sys.parameters::SysObject_RepoObject_guid" <-- "docs.RepoObject_ParameterList::RepoObject_guid"
 @enduml
 

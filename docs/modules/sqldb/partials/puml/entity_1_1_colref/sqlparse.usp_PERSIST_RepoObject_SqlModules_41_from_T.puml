@@ -22,18 +22,17 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:logs.usp_ExecutionLog_insert.adoc[prefix=..]" as logs.usp_ExecutionLog_insert << P >> {
+entity "puml-link:dhw:sqldb:logs.usp_ExecutionLog_insert.adoc[]" as logs.usp_ExecutionLog_insert << P >> {
   --
   --
   --
 }
 
-entity "puml-link:sqlparse.RepoObject_SqlModules_41_from.adoc[prefix=..]" as sqlparse.RepoObject_SqlModules_41_from << V >> {
-  - **RepoObject_guid** : (uniqueidentifier)
-  - **json_key** : (nvarchar(4000))
+entity "puml-link:dhw:sqldb:sqlparse.RepoObject_SqlModules_41_from.adoc[]" as sqlparse.RepoObject_SqlModules_41_from << V >> {
   --
   children : (nvarchar(max))
   class : (nvarchar(500))
@@ -45,6 +44,7 @@ entity "puml-link:sqlparse.RepoObject_SqlModules_41_from.adoc[prefix=..]" as sql
   is_keyword : (bit)
   is_whitespace : (bit)
   join_type : (varchar(16))
+  - json_key : (nvarchar(4000))
   Min_RowNumber_From : (bigint)
   Min_RowNumber_GroupBy : (bigint)
   Min_RowNumber_Where : (bigint)
@@ -52,15 +52,14 @@ entity "puml-link:sqlparse.RepoObject_SqlModules_41_from.adoc[prefix=..]" as sql
   normalized_PatIndex_Select : (bigint)
   normalized_wo_nolock : (nvarchar(max))
   patindex_nolock : (bigint)
+  - RepoObject_guid : (uniqueidentifier)
   RowNumber_per_Object : (bigint)
   SysObject_fullname : (nvarchar(261))
   --
   --
 }
 
-entity "puml-link:sqlparse.RepoObject_SqlModules_41_from_T.adoc[prefix=..]" as sqlparse.RepoObject_SqlModules_41_from_T << U >> {
-  - **RepoObject_guid** : (uniqueidentifier)
-  - **json_key** : (nvarchar(4000))
+entity "puml-link:dhw:sqldb:sqlparse.RepoObject_SqlModules_41_from_T.adoc[]" as sqlparse.RepoObject_SqlModules_41_from_T << U >> {
   --
   children : (nvarchar(max))
   class : (nvarchar(500))
@@ -72,6 +71,7 @@ entity "puml-link:sqlparse.RepoObject_SqlModules_41_from_T.adoc[prefix=..]" as s
   is_keyword : (bit)
   is_whitespace : (bit)
   join_type : (varchar(16))
+  - json_key : (nvarchar(4000))
   Min_RowNumber_From : (bigint)
   Min_RowNumber_GroupBy : (bigint)
   Min_RowNumber_Where : (bigint)
@@ -79,19 +79,20 @@ entity "puml-link:sqlparse.RepoObject_SqlModules_41_from_T.adoc[prefix=..]" as s
   normalized_PatIndex_Select : (bigint)
   normalized_wo_nolock : (nvarchar(max))
   patindex_nolock : (bigint)
+  - RepoObject_guid : (uniqueidentifier)
   RowNumber_per_Object : (bigint)
   SysObject_fullname : (nvarchar(261))
   --
   --
 }
 
-entity "puml-link:sqlparse.usp_PERSIST_RepoObject_SqlModules_41_from_T.adoc[prefix=..]" as sqlparse.usp_PERSIST_RepoObject_SqlModules_41_from_T << P >> {
+entity "puml-link:dhw:sqldb:sqlparse.usp_PERSIST_RepoObject_SqlModules_41_from_T.adoc[]" as sqlparse.usp_PERSIST_RepoObject_SqlModules_41_from_T << P >> {
   --
   --
   --
 }
 
-entity "puml-link:sqlparse.usp_sqlparse.adoc[prefix=..]" as sqlparse.usp_sqlparse << P >> {
+entity "puml-link:dhw:sqldb:sqlparse.usp_sqlparse.adoc[]" as sqlparse.usp_sqlparse << P >> {
   --
   --
   --
@@ -101,11 +102,6 @@ logs.usp_ExecutionLog_insert <.. sqlparse.usp_PERSIST_RepoObject_SqlModules_41_f
 sqlparse.RepoObject_SqlModules_41_from <.. sqlparse.usp_PERSIST_RepoObject_SqlModules_41_from_T
 sqlparse.RepoObject_SqlModules_41_from_T <.. sqlparse.usp_PERSIST_RepoObject_SqlModules_41_from_T
 sqlparse.usp_PERSIST_RepoObject_SqlModules_41_from_T <.. sqlparse.usp_sqlparse
-
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
 
 @enduml
 

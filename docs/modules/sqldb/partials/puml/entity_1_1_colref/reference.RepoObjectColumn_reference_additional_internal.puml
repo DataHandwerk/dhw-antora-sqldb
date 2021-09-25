@@ -22,17 +22,20 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:reference.additional_Reference_guid.adoc[prefix=..]" as reference.additional_Reference_guid << V >> {
+entity "puml-link:dhw:sqldb:reference.additional_Reference_guid.adoc[]" as reference.additional_Reference_guid << V >> {
   --
-  - is_internal : (int)
   - referenced_AntoraComponent : (nvarchar(128))
   - referenced_AntoraModule : (nvarchar(128))
   referenced_Column : (nvarchar(128))
+  referenced_external_AntoraComponent : (nvarchar(128))
+  referenced_external_AntoraModule : (nvarchar(128))
   referenced_fullname : (nvarchar(261))
   referenced_id : (int)
+  referenced_is_external : (bit)
   - referenced_Object : (nvarchar(128))
   referenced_RepoObject_guid : (uniqueidentifier)
   referenced_RepoObjectColumn_guid : (uniqueidentifier)
@@ -41,8 +44,11 @@ entity "puml-link:reference.additional_Reference_guid.adoc[prefix=..]" as refere
   - referencing_AntoraComponent : (nvarchar(128))
   - referencing_AntoraModule : (nvarchar(128))
   referencing_Column : (nvarchar(128))
+  referencing_external_AntoraComponent : (nvarchar(128))
+  referencing_external_AntoraModule : (nvarchar(128))
   referencing_fullname : (nvarchar(261))
   referencing_id : (int)
+  referencing_is_external : (bit)
   - referencing_Object : (nvarchar(128))
   referencing_RepoObject_guid : (uniqueidentifier)
   referencing_RepoObjectColumn_guid : (uniqueidentifier)
@@ -52,17 +58,23 @@ entity "puml-link:reference.additional_Reference_guid.adoc[prefix=..]" as refere
   --
 }
 
-entity "puml-link:reference.RepoObject_reference_T.adoc[prefix=..]" as reference.RepoObject_reference_T << U >> {
+entity "puml-link:dhw:sqldb:reference.RepoObject_reference_T.adoc[]" as reference.RepoObject_reference_T << U >> {
   **referenced_RepoObject_guid** : (uniqueidentifier)
   **referencing_RepoObject_guid** : (uniqueidentifier)
   --
   - is_ReversePersistenceViaView : (bit)
   referenced_entity_name : (nvarchar(128))
+  referenced_external_AntoraComponent : (nvarchar(128))
+  referenced_external_AntoraModule : (nvarchar(128))
+  referenced_is_external : (int)
   - referenced_is_PersistenceSource : (bit)
   - referenced_is_PersistenceTarget : (bit)
   referenced_schema_name : (nvarchar(128))
   referenced_type : (char(2))
   referencing_entity_name : (nvarchar(128))
+  referencing_external_AntoraComponent : (nvarchar(128))
+  referencing_external_AntoraModule : (nvarchar(128))
+  referencing_is_external : (int)
   - referencing_is_PersistenceTarget : (bit)
   - referencing_is_PersistenceUspSourceRef : (bit)
   referencing_is_PersistenceUspTargetRef : (bit)
@@ -70,13 +82,15 @@ entity "puml-link:reference.RepoObject_reference_T.adoc[prefix=..]" as reference
   referencing_type : (varchar(2))
   # referenced_fullname : (nvarchar(261))
   # referenced_fullname2 : (nvarchar(257))
+  ~ referenced_puml_entity : (nvarchar(4000))
   # referencing_fullname : (nvarchar(261))
   # referencing_fullname2 : (nvarchar(257))
+  ~ referencing_puml_entity : (nvarchar(4000))
   --
   --
 }
 
-entity "puml-link:reference.RepoObjectColumn_reference_additional_internal.adoc[prefix=..]" as reference.RepoObjectColumn_reference_additional_internal << V >> {
+entity "puml-link:dhw:sqldb:reference.RepoObjectColumn_reference_additional_internal.adoc[]" as reference.RepoObjectColumn_reference_additional_internal << V >> {
   --
   definition : (nvarchar(max))
   - InformationSource : (varchar(30))
@@ -101,52 +115,21 @@ entity "puml-link:reference.RepoObjectColumn_reference_additional_internal.adoc[
   --
 }
 
-entity "puml-link:reference.RepoObjectColumn_reference_union.adoc[prefix=..]" as reference.RepoObjectColumn_reference_union << V >> {
-  --
-  definition : (nvarchar(max))
-  - InformationSource : (varchar(34))
-  is_computed : (bit)
-  is_referenced_object : (bit)
-  is_referencing_object_equal_referenced_object : (bit)
-  referenced_column_name : (nvarchar(128))
-  referenced_entity_name : (nvarchar(128))
-  referenced_id : (int)
-  referenced_RepoObject_guid : (uniqueidentifier)
-  referenced_RepoObjectColumn_guid : (uniqueidentifier)
-  referenced_schema_name : (nvarchar(128))
-  referenced_type : (char(2))
-  referencing_column_name : (nvarchar(128))
-  referencing_entity_name : (nvarchar(128))
-  referencing_id : (int)
-  referencing_RepoObject_guid : (uniqueidentifier)
-  referencing_RepoObjectColumn_guid : (uniqueidentifier)
-  referencing_schema_name : (nvarchar(128))
-  referencing_type : (char(2))
-  --
-  --
-}
-
 reference.additional_Reference_guid <.. reference.RepoObjectColumn_reference_additional_internal
 reference.RepoObject_reference_T <.. reference.RepoObjectColumn_reference_additional_internal
-reference.RepoObjectColumn_reference_additional_internal <.. reference.RepoObjectColumn_reference_union
-reference.additional_Reference_guid::referenced_Column <-- reference.RepoObjectColumn_reference_additional_internal::referenced_column_name
-reference.additional_Reference_guid::referenced_id <-- reference.RepoObjectColumn_reference_additional_internal::referenced_id
-reference.additional_Reference_guid::referenced_Object <-- reference.RepoObjectColumn_reference_additional_internal::referenced_entity_name
-reference.additional_Reference_guid::referenced_RepoObject_guid <-- reference.RepoObjectColumn_reference_additional_internal::referenced_RepoObject_guid
-reference.additional_Reference_guid::referenced_RepoObjectColumn_guid <-- reference.RepoObjectColumn_reference_additional_internal::referenced_RepoObjectColumn_guid
-reference.additional_Reference_guid::referenced_Schema <-- reference.RepoObjectColumn_reference_additional_internal::referenced_schema_name
-reference.additional_Reference_guid::referenced_type <-- reference.RepoObjectColumn_reference_additional_internal::referenced_type
-reference.additional_Reference_guid::referencing_Column <-- reference.RepoObjectColumn_reference_additional_internal::referencing_column_name
-reference.additional_Reference_guid::referencing_id <-- reference.RepoObjectColumn_reference_additional_internal::referencing_id
-reference.additional_Reference_guid::referencing_Object <-- reference.RepoObjectColumn_reference_additional_internal::referencing_entity_name
-reference.additional_Reference_guid::referencing_RepoObject_guid <-- reference.RepoObjectColumn_reference_additional_internal::referencing_RepoObject_guid
-reference.additional_Reference_guid::referencing_RepoObjectColumn_guid <-- reference.RepoObjectColumn_reference_additional_internal::referencing_RepoObjectColumn_guid
-reference.additional_Reference_guid::referencing_Schema <-- reference.RepoObjectColumn_reference_additional_internal::referencing_schema_name
-reference.additional_Reference_guid::referencing_type <-- reference.RepoObjectColumn_reference_additional_internal::referencing_type
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"reference.additional_Reference_guid::referenced_Column" <-- "reference.RepoObjectColumn_reference_additional_internal::referenced_column_name"
+"reference.additional_Reference_guid::referenced_id" <-- "reference.RepoObjectColumn_reference_additional_internal::referenced_id"
+"reference.additional_Reference_guid::referenced_Object" <-- "reference.RepoObjectColumn_reference_additional_internal::referenced_entity_name"
+"reference.additional_Reference_guid::referenced_RepoObject_guid" <-- "reference.RepoObjectColumn_reference_additional_internal::referenced_RepoObject_guid"
+"reference.additional_Reference_guid::referenced_RepoObjectColumn_guid" <-- "reference.RepoObjectColumn_reference_additional_internal::referenced_RepoObjectColumn_guid"
+"reference.additional_Reference_guid::referenced_Schema" <-- "reference.RepoObjectColumn_reference_additional_internal::referenced_schema_name"
+"reference.additional_Reference_guid::referenced_type" <-- "reference.RepoObjectColumn_reference_additional_internal::referenced_type"
+"reference.additional_Reference_guid::referencing_Column" <-- "reference.RepoObjectColumn_reference_additional_internal::referencing_column_name"
+"reference.additional_Reference_guid::referencing_id" <-- "reference.RepoObjectColumn_reference_additional_internal::referencing_id"
+"reference.additional_Reference_guid::referencing_Object" <-- "reference.RepoObjectColumn_reference_additional_internal::referencing_entity_name"
+"reference.additional_Reference_guid::referencing_RepoObject_guid" <-- "reference.RepoObjectColumn_reference_additional_internal::referencing_RepoObject_guid"
+"reference.additional_Reference_guid::referencing_RepoObjectColumn_guid" <-- "reference.RepoObjectColumn_reference_additional_internal::referencing_RepoObjectColumn_guid"
+"reference.additional_Reference_guid::referencing_Schema" <-- "reference.RepoObjectColumn_reference_additional_internal::referencing_schema_name"
+"reference.additional_Reference_guid::referencing_type" <-- "reference.RepoObjectColumn_reference_additional_internal::referencing_type"
 @enduml
 

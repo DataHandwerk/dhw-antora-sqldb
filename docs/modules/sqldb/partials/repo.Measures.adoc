@@ -41,7 +41,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-06 21:35:25
+2021-09-19 20:53:19
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -288,6 +288,44 @@ view
 --
 
 
+[#column-MeasuresRepoObjekt_guid]
+=== MeasuresRepoObjekt_guid
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|MeasuresRepoObjekt_guid
+|uniqueidentifier
+|NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo.RepoSchema.adoc#column-MeasuresRepoObjekt_guid[+repo.RepoSchema.MeasuresRepoObjekt_guid+]
+--
+
+
+[#column-MeasuresRepoObjekt_name]
+=== MeasuresRepoObjekt_name
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|MeasuresRepoObjekt_name
+|varchar(9)
+|NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo.RepoSchema.adoc#column-MeasuresRepoObjekt_name[+repo.RepoSchema.MeasuresRepoObjekt_name+]
+--
+
+
 [#column-RepoObject_fullname2]
 === RepoObject_fullname2
 
@@ -318,11 +356,6 @@ view
 .Referenced Columns
 --
 * xref:ssas.model_json_312_tables_measures_T.adoc#column-RepoObject_guid[+ssas.model_json_312_tables_measures_T.RepoObject_guid+]
---
-
-.Referencing Columns
---
-* xref:docs.RepoObject_MeasureList.adoc#column-RepoObject_guid[+docs.RepoObject_MeasureList.RepoObject_guid+]
 --
 
 
@@ -375,6 +408,8 @@ view
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
+
+
 
 
 
@@ -497,6 +532,20 @@ view
 |
 
 |
+|<<column-MeasuresRepoObjekt_guid>>
+|uniqueidentifier
+|NULL
+|
+|
+
+|
+|<<column-MeasuresRepoObjekt_name>>
+|varchar(9)
+|NULL
+|
+|
+
+|
 |<<column-RepoObject_fullname2>>
 |nvarchar(257)
 |NOT NULL
@@ -530,10 +579,21 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-idx_Measures_1]
+[#index-idx_Measures2x_1]
 === idx_Measures++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_ssas_table_measure[ssas_table_measure]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-Measure_guid>>; uniqueidentifier
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[#index-idx_Measures2x_2]
+=== idx_Measures++__++2
+
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#ssas_table_measure[ssas_table_measure]
 +
 --
 * <<column-RepoSchema_name>>; nvarchar(128)
@@ -543,25 +603,14 @@ view
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_Measures_2]
-=== idx_Measures++__++2
+[#index-idx_Measures2x_3]
+=== idx_Measures++__++3
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoSchema_name>>; nvarchar(128)
 * <<column-RepoObject_name>>; nvarchar(128)
---
-* PK, Unique, Real: 0, 0, 0
-
-
-[#index-idx_Measures_3]
-=== idx_Measures++__++3
-
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
-+
---
-* <<column-RepoSchema_name>>; nvarchar(128)
 --
 * PK, Unique, Real: 0, 0, 0
 
@@ -588,6 +637,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
+* xref:repo.RepoSchema.adoc[]
 * xref:ssas.model_json_312_tables_measures_T.adoc[]
 * xref:ssas.model_json_31211_tables_columns_descriptions_StrAgg.adoc[]
 * xref:ssas.model_json_31221_tables_measures_expressions_StrAgg.adoc[]
@@ -597,8 +647,8 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencingList
 
 // tag::antorareferencinglist[]
-* xref:docs.RepoObject_MeasureList.adoc[]
 * xref:docs.Unit_1_union.adoc[]
+* xref:repo.Measures_union.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -829,6 +879,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 === ReferencedObjectList
 
 // tag::referencedobjectlist[]
+* [repo].[RepoSchema]
 * [ssas].[model_json_312_tables_measures_T]
 * [ssas].[model_json_31211_tables_columns_descriptions_StrAgg]
 * [ssas].[model_json_31221_tables_measures_expressions_StrAgg]
@@ -870,6 +921,7 @@ source: property.RepoObjectProperty WHERE property_int = 1
 =======
 [source,sql]
 ----
+
 CREATE View repo.Measures
 As
 Select
@@ -891,17 +943,25 @@ Select
   , RepoObject_fullname2    = T1.databasename + '.' + T1.tables_name
   , T1.RepoObject_guid
   , RepoObject_name         = T1.tables_name
+  , T4.MeasuresRepoObjekt_guid
+  , T4.MeasuresRepoObjekt_name
 From
     ssas.model_json_312_tables_measures_T                        As T1
     Left Outer Join
         ssas.model_json_31211_tables_columns_descriptions_StrAgg As T2
             On
-            T2.Measure_guid = T1.Measure_guid
+            T2.Measure_guid    = T1.Measure_guid
 
     Left Outer Join
         ssas.model_json_31221_tables_measures_expressions_StrAgg As T3
             On
-            T3.Measure_guid = T1.Measure_guid
+            T3.Measure_guid    = T1.Measure_guid
+
+    Left Outer Join
+        repo.RepoSchema                                          As T4
+            On
+            T4.RepoSchema_name = T1.databasename
+
 ----
 =======
 // end::sql_modules_definition[]

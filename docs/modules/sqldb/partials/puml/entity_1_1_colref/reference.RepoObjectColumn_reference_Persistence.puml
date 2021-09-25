@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:reference.RepoObjectColumn_reference_Persistence.adoc[prefix=..]" as reference.RepoObjectColumn_reference_Persistence << V >> {
+entity "puml-link:dhw:sqldb:reference.RepoObjectColumn_reference_Persistence.adoc[]" as reference.RepoObjectColumn_reference_Persistence << V >> {
   **referencing_id** : (int)
   **referencing_minor_id** : (int)
   **referenced_id** : (int)
@@ -54,7 +55,7 @@ entity "puml-link:reference.RepoObjectColumn_reference_Persistence.adoc[prefix=.
   --
 }
 
-entity "puml-link:reference.RepoObjectColumn_reference_union.adoc[prefix=..]" as reference.RepoObjectColumn_reference_union << V >> {
+entity "puml-link:dhw:sqldb:reference.RepoObjectColumn_reference_union.adoc[]" as reference.RepoObjectColumn_reference_union << V >> {
   --
   definition : (nvarchar(max))
   - InformationSource : (varchar(34))
@@ -63,14 +64,20 @@ entity "puml-link:reference.RepoObjectColumn_reference_union.adoc[prefix=..]" as
   is_referencing_object_equal_referenced_object : (bit)
   referenced_column_name : (nvarchar(128))
   referenced_entity_name : (nvarchar(128))
+  referenced_external_AntoraComponent : (nvarchar(128))
+  referenced_external_AntoraModule : (nvarchar(128))
   referenced_id : (int)
+  referenced_is_external : (tinyint)
   referenced_RepoObject_guid : (uniqueidentifier)
   referenced_RepoObjectColumn_guid : (uniqueidentifier)
   referenced_schema_name : (nvarchar(128))
   referenced_type : (char(2))
   referencing_column_name : (nvarchar(128))
   referencing_entity_name : (nvarchar(128))
+  referencing_external_AntoraComponent : (nvarchar(128))
+  referencing_external_AntoraModule : (nvarchar(128))
   referencing_id : (int)
+  referencing_is_external : (tinyint)
   referencing_RepoObject_guid : (uniqueidentifier)
   referencing_RepoObjectColumn_guid : (uniqueidentifier)
   referencing_schema_name : (nvarchar(128))
@@ -79,15 +86,19 @@ entity "puml-link:reference.RepoObjectColumn_reference_union.adoc[prefix=..]" as
   --
 }
 
-entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
   has_execution_plan_issue : (bit)
   has_get_referenced_issue : (bit)
+  Inheritance_Source_fullname : (nvarchar(261))
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
   InheritanceDefinition : (nvarchar(4000))
   InheritanceType : (tinyint)
   - is_DocsExclude : (bit)
+  - is_external : (bit)
   is_repo_managed : (bit)
   is_required_ObjectMerge : (bit)
   - is_ssas : (bit)
@@ -122,7 +133,7 @@ entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
   --
 }
 
-entity "puml-link:repo.RepoObject_persistence.adoc[prefix=..]" as repo.RepoObject_persistence << U >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject_persistence.adoc[]" as repo.RepoObject_persistence << U >> {
   - **target_RepoObject_guid** : (uniqueidentifier)
   --
   - has_history : (bit)
@@ -149,7 +160,7 @@ entity "puml-link:repo.RepoObject_persistence.adoc[prefix=..]" as repo.RepoObjec
   --
 }
 
-entity "puml-link:repo.RepoObjectColumn.adoc[prefix=..]" as repo.RepoObjectColumn << U >> {
+entity "puml-link:dhw:sqldb:repo.RepoObjectColumn.adoc[]" as repo.RepoObjectColumn << U >> {
   - **RepoObjectColumn_guid** : (uniqueidentifier)
   --
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
@@ -195,28 +206,23 @@ reference.RepoObjectColumn_reference_Persistence <.. reference.RepoObjectColumn_
 repo.RepoObject <.. reference.RepoObjectColumn_reference_Persistence
 repo.RepoObject_persistence <.. reference.RepoObjectColumn_reference_Persistence
 repo.RepoObjectColumn <.. reference.RepoObjectColumn_reference_Persistence
-repo.RepoObject::node_id <-- reference.RepoObjectColumn_reference_Persistence::referencing_node_id
-repo.RepoObject::node_id <-- reference.RepoObjectColumn_reference_Persistence::referenced_node_id
-repo.RepoObject::SysObject_id <-- reference.RepoObjectColumn_reference_Persistence::referencing_id
-repo.RepoObject::SysObject_id <-- reference.RepoObjectColumn_reference_Persistence::referenced_id
-repo.RepoObject::SysObject_name <-- reference.RepoObjectColumn_reference_Persistence::referencing_entity_name
-repo.RepoObject::SysObject_name <-- reference.RepoObjectColumn_reference_Persistence::referenced_entity_name
-repo.RepoObject::SysObject_schema_name <-- reference.RepoObjectColumn_reference_Persistence::referencing_schema_name
-repo.RepoObject::SysObject_schema_name <-- reference.RepoObjectColumn_reference_Persistence::referenced_schema_name
-repo.RepoObject::SysObject_type <-- reference.RepoObjectColumn_reference_Persistence::referencing_type
-repo.RepoObject::SysObject_type <-- reference.RepoObjectColumn_reference_Persistence::referenced_type
-repo.RepoObject_persistence::source_RepoObject_guid <-- reference.RepoObjectColumn_reference_Persistence::referenced_RepoObject_guid
-repo.RepoObject_persistence::target_RepoObject_guid <-- reference.RepoObjectColumn_reference_Persistence::referencing_RepoObject_guid
-repo.RepoObjectColumn::RepoObjectColumn_guid <-- reference.RepoObjectColumn_reference_Persistence::referencing_RepoObjectColumn_guid
-repo.RepoObjectColumn::RepoObjectColumn_guid <-- reference.RepoObjectColumn_reference_Persistence::referenced_RepoObjectColumn_guid
-repo.RepoObjectColumn::SysObjectColumn_column_id <-- reference.RepoObjectColumn_reference_Persistence::referencing_minor_id
-repo.RepoObjectColumn::SysObjectColumn_column_id <-- reference.RepoObjectColumn_reference_Persistence::referenced_minor_id
-repo.RepoObjectColumn::SysObjectColumn_name <-- reference.RepoObjectColumn_reference_Persistence::referencing_column_name
-repo.RepoObjectColumn::SysObjectColumn_name <-- reference.RepoObjectColumn_reference_Persistence::referenced_column_name
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"repo.RepoObject::node_id" <-- "reference.RepoObjectColumn_reference_Persistence::referencing_node_id"
+"repo.RepoObject::node_id" <-- "reference.RepoObjectColumn_reference_Persistence::referenced_node_id"
+"repo.RepoObject::SysObject_id" <-- "reference.RepoObjectColumn_reference_Persistence::referencing_id"
+"repo.RepoObject::SysObject_id" <-- "reference.RepoObjectColumn_reference_Persistence::referenced_id"
+"repo.RepoObject::SysObject_name" <-- "reference.RepoObjectColumn_reference_Persistence::referencing_entity_name"
+"repo.RepoObject::SysObject_name" <-- "reference.RepoObjectColumn_reference_Persistence::referenced_entity_name"
+"repo.RepoObject::SysObject_schema_name" <-- "reference.RepoObjectColumn_reference_Persistence::referencing_schema_name"
+"repo.RepoObject::SysObject_schema_name" <-- "reference.RepoObjectColumn_reference_Persistence::referenced_schema_name"
+"repo.RepoObject::SysObject_type" <-- "reference.RepoObjectColumn_reference_Persistence::referencing_type"
+"repo.RepoObject::SysObject_type" <-- "reference.RepoObjectColumn_reference_Persistence::referenced_type"
+"repo.RepoObject_persistence::source_RepoObject_guid" <-- "reference.RepoObjectColumn_reference_Persistence::referenced_RepoObject_guid"
+"repo.RepoObject_persistence::target_RepoObject_guid" <-- "reference.RepoObjectColumn_reference_Persistence::referencing_RepoObject_guid"
+"repo.RepoObjectColumn::RepoObjectColumn_guid" <-- "reference.RepoObjectColumn_reference_Persistence::referencing_RepoObjectColumn_guid"
+"repo.RepoObjectColumn::RepoObjectColumn_guid" <-- "reference.RepoObjectColumn_reference_Persistence::referenced_RepoObjectColumn_guid"
+"repo.RepoObjectColumn::SysObjectColumn_column_id" <-- "reference.RepoObjectColumn_reference_Persistence::referencing_minor_id"
+"repo.RepoObjectColumn::SysObjectColumn_column_id" <-- "reference.RepoObjectColumn_reference_Persistence::referenced_minor_id"
+"repo.RepoObjectColumn::SysObjectColumn_name" <-- "reference.RepoObjectColumn_reference_Persistence::referencing_column_name"
+"repo.RepoObjectColumn::SysObjectColumn_name" <-- "reference.RepoObjectColumn_reference_Persistence::referenced_column_name"
 @enduml
 

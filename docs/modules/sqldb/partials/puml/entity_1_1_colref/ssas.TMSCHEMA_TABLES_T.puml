@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:repo.ForeignKey_ssas_IndexPattern_old.adoc[prefix=..]" as repo.ForeignKey_ssas_IndexPattern_old << V >> {
+entity "puml-link:dhw:sqldb:repo.ForeignKey_ssas_IndexPattern_old.adoc[]" as repo.ForeignKey_ssas_IndexPattern_old << V >> {
   --
   - CrossFilteringBehavior : (bigint)
   - databasename : (nvarchar(128))
@@ -66,7 +67,7 @@ entity "puml-link:repo.ForeignKey_ssas_IndexPattern_old.adoc[prefix=..]" as repo
   --
 }
 
-entity "puml-link:ssas.TMSCHEMA_TABLES.adoc[prefix=..]" as ssas.TMSCHEMA_TABLES << U >> {
+entity "puml-link:dhw:sqldb:ssas.TMSCHEMA_TABLES.adoc[]" as ssas.TMSCHEMA_TABLES << U >> {
   - **databasename** : (nvarchar(128))
   - **ID** : (numeric(20, 0))
   --
@@ -86,7 +87,7 @@ entity "puml-link:ssas.TMSCHEMA_TABLES.adoc[prefix=..]" as ssas.TMSCHEMA_TABLES 
   --
 }
 
-entity "puml-link:ssas.TMSCHEMA_TABLES_T.adoc[prefix=..]" as ssas.TMSCHEMA_TABLES_T << U >> {
+entity "puml-link:dhw:sqldb:ssas.TMSCHEMA_TABLES_T.adoc[]" as ssas.TMSCHEMA_TABLES_T << U >> {
   - **databasename** : (nvarchar(128))
   - **ID** : (numeric(20, 0))
   --
@@ -107,7 +108,7 @@ entity "puml-link:ssas.TMSCHEMA_TABLES_T.adoc[prefix=..]" as ssas.TMSCHEMA_TABLE
   --
 }
 
-entity "puml-link:ssas.usp_PERSIST_TMSCHEMA_TABLES_T.adoc[prefix=..]" as ssas.usp_PERSIST_TMSCHEMA_TABLES_T << P >> {
+entity "puml-link:dhw:sqldb:ssas.usp_PERSIST_TMSCHEMA_TABLES_T.adoc[]" as ssas.usp_PERSIST_TMSCHEMA_TABLES_T << P >> {
   --
   --
   --
@@ -116,28 +117,23 @@ entity "puml-link:ssas.usp_PERSIST_TMSCHEMA_TABLES_T.adoc[prefix=..]" as ssas.us
 ssas.TMSCHEMA_TABLES <.. ssas.TMSCHEMA_TABLES_T
 ssas.TMSCHEMA_TABLES_T <.. ssas.usp_PERSIST_TMSCHEMA_TABLES_T
 ssas.TMSCHEMA_TABLES_T <.. repo.ForeignKey_ssas_IndexPattern_old
-ssas.TMSCHEMA_TABLES::databasename <-- ssas.TMSCHEMA_TABLES_T::databasename
-ssas.TMSCHEMA_TABLES::DataCategory <-- ssas.TMSCHEMA_TABLES_T::DataCategory
-ssas.TMSCHEMA_TABLES::DefaultDetailRowsDefinitionID <-- ssas.TMSCHEMA_TABLES_T::DefaultDetailRowsDefinitionID
-ssas.TMSCHEMA_TABLES::Description <-- ssas.TMSCHEMA_TABLES_T::Description
-ssas.TMSCHEMA_TABLES::ID <-- ssas.TMSCHEMA_TABLES_T::ID
-ssas.TMSCHEMA_TABLES::IsHidden <-- ssas.TMSCHEMA_TABLES_T::IsHidden
-ssas.TMSCHEMA_TABLES::IsPrivate <-- ssas.TMSCHEMA_TABLES_T::IsPrivate
-ssas.TMSCHEMA_TABLES::ModelID <-- ssas.TMSCHEMA_TABLES_T::ModelID
-ssas.TMSCHEMA_TABLES::ModifiedTime <-- ssas.TMSCHEMA_TABLES_T::ModifiedTime
-ssas.TMSCHEMA_TABLES::Name <-- ssas.TMSCHEMA_TABLES_T::Name
-ssas.TMSCHEMA_TABLES::ShowAsVariationsOnly <-- ssas.TMSCHEMA_TABLES_T::ShowAsVariationsOnly
-ssas.TMSCHEMA_TABLES::StructureModifiedTime <-- ssas.TMSCHEMA_TABLES_T::StructureModifiedTime
-ssas.TMSCHEMA_TABLES::SystemFlags <-- ssas.TMSCHEMA_TABLES_T::SystemFlags
-ssas.TMSCHEMA_TABLES::TableStorageID <-- ssas.TMSCHEMA_TABLES_T::TableStorageID
-ssas.TMSCHEMA_TABLES_T::Name <-- repo.ForeignKey_ssas_IndexPattern_old::referenced_ObjectName
-ssas.TMSCHEMA_TABLES_T::Name <-- repo.ForeignKey_ssas_IndexPattern_old::referencing_ObjectName
-ssas.TMSCHEMA_TABLES_T::RepoObject_guid <-- repo.ForeignKey_ssas_IndexPattern_old::referenced_RepoObject_guid
-ssas.TMSCHEMA_TABLES_T::RepoObject_guid <-- repo.ForeignKey_ssas_IndexPattern_old::referencing_RepoObject_guid
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"ssas.TMSCHEMA_TABLES::databasename" <-- "ssas.TMSCHEMA_TABLES_T::databasename"
+"ssas.TMSCHEMA_TABLES::DataCategory" <-- "ssas.TMSCHEMA_TABLES_T::DataCategory"
+"ssas.TMSCHEMA_TABLES::DefaultDetailRowsDefinitionID" <-- "ssas.TMSCHEMA_TABLES_T::DefaultDetailRowsDefinitionID"
+"ssas.TMSCHEMA_TABLES::Description" <-- "ssas.TMSCHEMA_TABLES_T::Description"
+"ssas.TMSCHEMA_TABLES::ID" <-- "ssas.TMSCHEMA_TABLES_T::ID"
+"ssas.TMSCHEMA_TABLES::IsHidden" <-- "ssas.TMSCHEMA_TABLES_T::IsHidden"
+"ssas.TMSCHEMA_TABLES::IsPrivate" <-- "ssas.TMSCHEMA_TABLES_T::IsPrivate"
+"ssas.TMSCHEMA_TABLES::ModelID" <-- "ssas.TMSCHEMA_TABLES_T::ModelID"
+"ssas.TMSCHEMA_TABLES::ModifiedTime" <-- "ssas.TMSCHEMA_TABLES_T::ModifiedTime"
+"ssas.TMSCHEMA_TABLES::Name" <-- "ssas.TMSCHEMA_TABLES_T::Name"
+"ssas.TMSCHEMA_TABLES::ShowAsVariationsOnly" <-- "ssas.TMSCHEMA_TABLES_T::ShowAsVariationsOnly"
+"ssas.TMSCHEMA_TABLES::StructureModifiedTime" <-- "ssas.TMSCHEMA_TABLES_T::StructureModifiedTime"
+"ssas.TMSCHEMA_TABLES::SystemFlags" <-- "ssas.TMSCHEMA_TABLES_T::SystemFlags"
+"ssas.TMSCHEMA_TABLES::TableStorageID" <-- "ssas.TMSCHEMA_TABLES_T::TableStorageID"
+"ssas.TMSCHEMA_TABLES_T::Name" <-- "repo.ForeignKey_ssas_IndexPattern_old::referenced_ObjectName"
+"ssas.TMSCHEMA_TABLES_T::Name" <-- "repo.ForeignKey_ssas_IndexPattern_old::referencing_ObjectName"
+"ssas.TMSCHEMA_TABLES_T::RepoObject_guid" <-- "repo.ForeignKey_ssas_IndexPattern_old::referenced_RepoObject_guid"
+"ssas.TMSCHEMA_TABLES_T::RepoObject_guid" <-- "repo.ForeignKey_ssas_IndexPattern_old::referencing_RepoObject_guid"
 @enduml
 

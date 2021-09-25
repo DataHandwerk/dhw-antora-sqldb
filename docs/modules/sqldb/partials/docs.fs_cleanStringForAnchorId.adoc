@@ -37,7 +37,7 @@ scalar function
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-07 20:31:24
+2021-09-18 13:14:17
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -99,13 +99,13 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencingList
 
 // tag::antorareferencinglist[]
+* xref:docs.AntoraIndexSemanticgroup.adoc[]
 * xref:docs.AntoraIndexSemanticgroupPatterndatatype.adoc[]
 * xref:docs.RepoObject_ColumnList.adoc[]
 * xref:docs.RepoObject_IndexList.adoc[]
 * xref:docs.RepoObject_MeasureList.adoc[]
 * xref:docs.Unit_2.adoc[]
-* xref:reference.RepoObjectColumn_ReferencedList.adoc[]
-* xref:reference.RepoObjectColumn_ReferencingList.adoc[]
+* xref:reference.RepoObjectColumn_ReferencedReferencing.adoc[]
 * xref:repo.ForeignKey_gross.adoc[]
 // end::antorareferencinglist[]
 
@@ -399,7 +399,7 @@ CREATE Function [docs].[fs_cleanStringForAnchorId]
 Returns NVarchar(4000)
 As
 Begin
-    Return Replace ( Replace ( Replace ( Replace ( Replace ( @source_string, '%', 'percent' ), '--', '-' ), '--', '-' ), ' ', '_' ), '__', '_' );
+    Return Replace ( Replace ( Replace ( Replace ( Replace ( Replace ( Replace ( Replace ( Replace ( Replace ( Replace ( Replace ( Replace ( Replace ( @source_string, '+', 'plus' ), '&', 'ampersand' ), '#', 'hash' ), ')', 'closingbracket' ), '(', 'openingbracket' ), '\', 'backslash' ), '/', 'slash' ), '.', 'dot' ), '?', 'questionmark' ), '%', 'percent' ), '--', '2x-' ), '--', '2x-' ), ' ', 'blank' ), '__', '2x_' );
 End;
 
 ----

@@ -9,9 +9,6 @@
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
 :ExistsProperty--ms_description:
-:ExistsProperty--pk_index_guid:
-:ExistsProperty--pk_indexpatterncolumndatatype:
-:ExistsProperty--pk_indexpatterncolumnname:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -52,25 +49,6 @@ view
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-ForeignKey_guid]
-=== ForeignKey_guid
-
-[cols="d,8m,m,m,m,d"]
-|===
-|2
-|*ForeignKey_guid*
-|uniqueidentifier
-|NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:repo.ForeignKey_IndexPattern.adoc#column-ForeignKey_guid[+repo.ForeignKey_IndexPattern.ForeignKey_guid+]
---
-
-
 [#column-delete_referential_action]
 === delete_referential_action
 
@@ -106,6 +84,25 @@ view
 .Referenced Columns
 --
 * xref:repo.ForeignKey_IndexPattern.adoc#column-ForeignKey_fullname[+repo.ForeignKey_IndexPattern.ForeignKey_fullname+]
+--
+
+
+[#column-ForeignKey_guid]
+=== ForeignKey_guid
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|ForeignKey_guid
+|uniqueidentifier
+|NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo.ForeignKey_IndexPattern.adoc#column-ForeignKey_guid[+repo.ForeignKey_IndexPattern.ForeignKey_guid+]
 --
 
 
@@ -538,12 +535,6 @@ view
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
-|2
-|*<<column-ForeignKey_guid>>*
-|uniqueidentifier
-|NULL
-|
-|
 
 
 
@@ -573,7 +564,6 @@ view
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
-
 |
 |<<column-delete_referential_action>>
 |tinyint
@@ -584,6 +574,13 @@ view
 |
 |<<column-ForeignKey_fullname>>
 |nvarchar(261)
+|NULL
+|
+|
+
+|
+|<<column-ForeignKey_guid>>
+|uniqueidentifier
 |NULL
 |
 |
@@ -741,21 +738,21 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-PK_ForeignKey_Indexes]
-=== PK_ForeignKey_Indexes
+[#index-idx_ForeignKey_Indexes2x_1]
+=== idx_ForeignKey_Indexes++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-ForeignKey_guid>>; uniqueidentifier
 --
-* PK, Unique, Real: 1, 1, 0
+* PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_ForeignKey_Indexes_2]
+[#index-idx_ForeignKey_Indexes2x_2]
 === idx_ForeignKey_Indexes++__++2
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-referenced_index_guid>>; uniqueidentifier
@@ -763,14 +760,37 @@ view
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_ForeignKey_Indexes_3]
+[#index-idx_ForeignKey_Indexes2x_3]
 === idx_ForeignKey_Indexes++__++3
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-referencing_index_guid>>; uniqueidentifier
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[#index-idx_ForeignKey_Indexes2x_4]
+=== idx_ForeignKey_Indexes++__++4
+
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-referenced_SysObject_schema_name>>; nvarchar(128)
 * <<column-referenced_SysObject_name>>; nvarchar(128)
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[#index-idx_ForeignKey_Indexes2x_5]
+=== idx_ForeignKey_Indexes++__++5
+
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-referencing_SysObject_schema_name>>; nvarchar(128)
+* <<column-referencing_SysObject_name>>; nvarchar(128)
 --
 * PK, Unique, Real: 0, 0, 0
 
@@ -1013,21 +1033,21 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-9B8AA10A-AB97-EB11-84F4-A81E8446D5B0
+
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-uniqueidentifier
+
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-ForeignKey_guid
+
 // end::pk_indexpatterncolumnname[]
 
 

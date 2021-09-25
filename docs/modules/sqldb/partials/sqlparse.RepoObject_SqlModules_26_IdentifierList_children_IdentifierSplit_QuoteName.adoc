@@ -7,9 +7,6 @@
 :ExistsProperty--antorareferencinglist:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--pk_index_guid:
-:ExistsProperty--pk_indexpatterncolumndatatype:
-:ExistsProperty--pk_indexpatterncolumnname:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -50,63 +47,6 @@ view
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-RepoObject_guid]
-=== RepoObject_guid
-
-[cols="d,8m,m,m,m,d"]
-|===
-|1
-|*RepoObject_guid*
-|uniqueidentifier
-|NOT NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:sqlparse.RepoObject_SqlModules_25_IdentifierList_children_IdentifierSplit.adoc#column-RepoObject_guid[+sqlparse.RepoObject_SqlModules_25_IdentifierList_children_IdentifierSplit.RepoObject_guid+]
---
-
-
-[#column-json_key]
-=== json_key
-
-[cols="d,8m,m,m,m,d"]
-|===
-|2
-|*json_key*
-|nvarchar(4000)
-|NOT NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:sqlparse.RepoObject_SqlModules_25_IdentifierList_children_IdentifierSplit.adoc#column-json_key[+sqlparse.RepoObject_SqlModules_25_IdentifierList_children_IdentifierSplit.json_key+]
---
-
-
-[#column-T2_json_key]
-=== T2_json_key
-
-[cols="d,8m,m,m,m,d"]
-|===
-|3
-|*T2_json_key*
-|nvarchar(4000)
-|NOT NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:sqlparse.RepoObject_SqlModules_25_IdentifierList_children_IdentifierSplit.adoc#column-T2_json_key[+sqlparse.RepoObject_SqlModules_25_IdentifierList_children_IdentifierSplit.T2_json_key+]
---
-
-
 [#column-class]
 === class
 
@@ -277,6 +217,25 @@ view
 |===
 
 
+[#column-json_key]
+=== json_key
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|json_key
+|nvarchar(4000)
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:sqlparse.RepoObject_SqlModules_25_IdentifierList_children_IdentifierSplit.adoc#column-json_key[+sqlparse.RepoObject_SqlModules_25_IdentifierList_children_IdentifierSplit.json_key+]
+--
+
+
 [#column-normalized]
 === normalized
 
@@ -293,6 +252,25 @@ view
 .Referenced Columns
 --
 * xref:sqlparse.RepoObject_SqlModules_25_IdentifierList_children_IdentifierSplit.adoc#column-normalized[+sqlparse.RepoObject_SqlModules_25_IdentifierList_children_IdentifierSplit.normalized+]
+--
+
+
+[#column-RepoObject_guid]
+=== RepoObject_guid
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|RepoObject_guid
+|uniqueidentifier
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:sqlparse.RepoObject_SqlModules_25_IdentifierList_children_IdentifierSplit.adoc#column-RepoObject_guid[+sqlparse.RepoObject_SqlModules_25_IdentifierList_children_IdentifierSplit.RepoObject_guid+]
 --
 
 
@@ -359,6 +337,25 @@ view
 --
 
 
+[#column-T2_json_key]
+=== T2_json_key
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|T2_json_key
+|nvarchar(4000)
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:sqlparse.RepoObject_SqlModules_25_IdentifierList_children_IdentifierSplit.adoc#column-T2_json_key[+sqlparse.RepoObject_SqlModules_25_IdentifierList_children_IdentifierSplit.T2_json_key+]
+--
+
+
 // end::AntoraColumnDetails[]
 
 == AntoraMeasureDetails
@@ -370,26 +367,8 @@ view
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
-|1
-|*<<column-RepoObject_guid>>*
-|uniqueidentifier
-|NOT NULL
-|
-|
 
-|2
-|*<<column-json_key>>*
-|nvarchar(4000)
-|NOT NULL
-|
-|
 
-|3
-|*<<column-T2_json_key>>*
-|nvarchar(4000)
-|NOT NULL
-|
-|
 
 
 
@@ -410,9 +389,6 @@ view
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
-
-
-
 |
 |<<column-class>>
 |nvarchar(500)
@@ -484,9 +460,23 @@ view
 |
 
 |
+|<<column-json_key>>
+|nvarchar(4000)
+|NOT NULL
+|
+|
+
+|
 |<<column-normalized>>
 |nvarchar(max)
 |NULL
+|
+|
+
+|
+|<<column-RepoObject_guid>>
+|uniqueidentifier
+|NOT NULL
 |
 |
 
@@ -511,29 +501,36 @@ view
 |
 |
 
+|
+|<<column-T2_json_key>>
+|nvarchar(4000)
+|NOT NULL
+|
+|
+
 // end::AntoraNonPkColumnTableRows[]
 
 == AntoraIndexList
 
 // tag::AntoraIndexList[]
 
-[#index-PK_RepoObject_SqlModules_26_IdentifierList_children_IdentifierSplit_QuoteName]
-=== PK_RepoObject_SqlModules_26_IdentifierList_children_IdentifierSplit_QuoteName
+[#index-idx_RepoObject_SqlModules_26_IdentifierList_children_IdentifierSplit_QuoteName2x_1]
+=== idx_RepoObject_SqlModules_26_IdentifierList_children_IdentifierSplit_QuoteName++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
 * <<column-json_key>>; nvarchar(4000)
 * <<column-T2_json_key>>; nvarchar(4000)
 --
-* PK, Unique, Real: 1, 1, 0
+* PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObject_SqlModules_26_IdentifierList_children_IdentifierSplit_QuoteName_2]
+[#index-idx_RepoObject_SqlModules_26_IdentifierList_children_IdentifierSplit_QuoteName2x_2]
 === idx_RepoObject_SqlModules_26_IdentifierList_children_IdentifierSplit_QuoteName++__++2
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -542,10 +539,10 @@ view
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObject_SqlModules_26_IdentifierList_children_IdentifierSplit_QuoteName_3]
+[#index-idx_RepoObject_SqlModules_26_IdentifierList_children_IdentifierSplit_QuoteName2x_3]
 === idx_RepoObject_SqlModules_26_IdentifierList_children_IdentifierSplit_QuoteName++__++3
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -785,21 +782,21 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-C58818B0-CA97-EB11-84F4-A81E8446D5B0
+
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-uniqueidentifier,nvarchar(4000),nvarchar(4000)
+
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-RepoObject_guid,json_key,T2_json_key
+
 // end::pk_indexpatterncolumnname[]
 
 

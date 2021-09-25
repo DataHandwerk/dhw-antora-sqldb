@@ -43,7 +43,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-06 22:28:40
+2021-09-20 15:02:37
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -147,6 +147,20 @@ view
 |===
 
 
+[#column-referenced_is_DocsOutput]
+=== referenced_is_DocsOutput
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|referenced_is_DocsOutput
+|int
+|NULL
+|
+|
+|===
+
+
 [#column-Referenced_type]
 === Referenced_type
 
@@ -183,6 +197,20 @@ view
 |
 |Referencing_fullname2
 |nvarchar(257)
+|NULL
+|
+|
+|===
+
+
+[#column-referencing_is_DocsOutput]
+=== referencing_is_DocsOutput
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|referencing_is_DocsOutput
+|int
 |NULL
 |
 |
@@ -255,6 +283,8 @@ view
 
 
 
+
+
 // end::AntoraPkColumnTableRows[]
 
 == AntoraNonPkColumnTableRows
@@ -275,6 +305,13 @@ view
 |
 |<<column-Referenced_fullname2>>
 |nvarchar(257)
+|NULL
+|
+|
+
+|
+|<<column-referenced_is_DocsOutput>>
+|int
 |NULL
 |
 |
@@ -301,6 +338,13 @@ view
 |
 
 |
+|<<column-referencing_is_DocsOutput>>
+|int
+|NULL
+|
+|
+
+|
 |<<column-Referencing_type>>
 |varchar(2)
 |NULL
@@ -316,7 +360,7 @@ view
 [#index-PK_RepoObject_ReferenceTree_referencing]
 === PK_RepoObject_ReferenceTree_referencing
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -630,12 +674,23 @@ source: property.RepoObjectProperty WHERE property_int = 1
 [source,sql]
 ----
 
-
 --bad performance
 CREATE View reference.RepoObject_ReferenceTree_referencing
 As
 Select
-    tree.*
+    tree.referenced_fullname
+  , tree.referenced_fullname2
+  , tree.Referenced_guid
+  , tree.referenced_is_DocsOutput
+  , tree.referenced_type
+  , tree.referencing_fullname
+  , tree.referencing_fullname2
+  , tree.Referencing_guid
+  , tree.referencing_type
+  , tree.referencing_is_DocsOutput
+  , tree.Referenced_Depth
+  , tree.Referencing_Depth
+  , tree.RepoObject_guid
 From
     repo.RepoObject_gross                                                                           As ro
     Cross Apply reference.ftv_RepoObject_ReferenceTree_referencing ( ro.RepoObject_guid, 100, 100 ) As tree

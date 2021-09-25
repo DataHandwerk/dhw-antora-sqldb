@@ -22,18 +22,23 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
   has_execution_plan_issue : (bit)
   has_get_referenced_issue : (bit)
+  Inheritance_Source_fullname : (nvarchar(261))
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
   InheritanceDefinition : (nvarchar(4000))
   InheritanceType : (tinyint)
   - is_DocsExclude : (bit)
+  - is_external : (bit)
   is_repo_managed : (bit)
   is_required_ObjectMerge : (bit)
   - is_ssas : (bit)
@@ -68,8 +73,7 @@ entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
   --
 }
 
-entity "puml-link:repo.RepoObject_persistence_ForUpdate.adoc[prefix=..]" as repo.RepoObject_persistence_ForUpdate << V >> {
-  - **target_RepoObject_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:repo.RepoObject_persistence_ForUpdate.adoc[]" as repo.RepoObject_persistence_ForUpdate << V >> {
   --
   default_source_RepoObject_name : (nvarchar(128))
   - has_history : (bit)
@@ -89,13 +93,14 @@ entity "puml-link:repo.RepoObject_persistence_ForUpdate.adoc[prefix=..]" as repo
   - target_name : (nvarchar(128))
   - target_RepoObject_fullname : (nvarchar(261))
   - target_RepoObject_fullname2 : (nvarchar(257))
+  - target_RepoObject_guid : (uniqueidentifier)
   - target_schema : (nvarchar(128))
   temporal_type : (tinyint)
   --
   --
 }
 
-entity "puml-link:repo.RepoObject_persistence_SourceMismatch.adoc[prefix=..]" as repo.RepoObject_persistence_SourceMismatch << V >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject_persistence_SourceMismatch.adoc[]" as repo.RepoObject_persistence_SourceMismatch << V >> {
   --
   default_source_RepoObject_name : (nvarchar(128))
   - is_guid_mismatch_via_name : (int)
@@ -116,20 +121,15 @@ entity "puml-link:repo.RepoObject_persistence_SourceMismatch.adoc[prefix=..]" as
 
 repo.RepoObject <.. repo.RepoObject_persistence_SourceMismatch
 repo.RepoObject_persistence_ForUpdate <.. repo.RepoObject_persistence_SourceMismatch
-repo.RepoObject::RepoObject_guid <-- repo.RepoObject_persistence_SourceMismatch::source_RepoObject_guid_via_name
-repo.RepoObject::RepoObject_guid <-- repo.RepoObject_persistence_SourceMismatch::source_RepoObject_guid_via_default_name
-repo.RepoObject::RepoObject_name <-- repo.RepoObject_persistence_SourceMismatch::source_RepoObject_name_via_guid
-repo.RepoObject_persistence_ForUpdate::default_source_RepoObject_name <-- repo.RepoObject_persistence_SourceMismatch::default_source_RepoObject_name
-repo.RepoObject_persistence_ForUpdate::source_RepoObject_guid <-- repo.RepoObject_persistence_SourceMismatch::source_RepoObject_guid
-repo.RepoObject_persistence_ForUpdate::source_RepoObject_name <-- repo.RepoObject_persistence_SourceMismatch::source_RepoObject_name
-repo.RepoObject_persistence_ForUpdate::target_name <-- repo.RepoObject_persistence_SourceMismatch::target_name
-repo.RepoObject_persistence_ForUpdate::target_RepoObject_fullname2 <-- repo.RepoObject_persistence_SourceMismatch::target_RepoObject_fullname2
-repo.RepoObject_persistence_ForUpdate::target_RepoObject_guid <-- repo.RepoObject_persistence_SourceMismatch::target_RepoObject_guid
-repo.RepoObject_persistence_ForUpdate::target_schema <-- repo.RepoObject_persistence_SourceMismatch::target_schema
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"repo.RepoObject::RepoObject_guid" <-- "repo.RepoObject_persistence_SourceMismatch::source_RepoObject_guid_via_name"
+"repo.RepoObject::RepoObject_guid" <-- "repo.RepoObject_persistence_SourceMismatch::source_RepoObject_guid_via_default_name"
+"repo.RepoObject::RepoObject_name" <-- "repo.RepoObject_persistence_SourceMismatch::source_RepoObject_name_via_guid"
+"repo.RepoObject_persistence_ForUpdate::default_source_RepoObject_name" <-- "repo.RepoObject_persistence_SourceMismatch::default_source_RepoObject_name"
+"repo.RepoObject_persistence_ForUpdate::source_RepoObject_guid" <-- "repo.RepoObject_persistence_SourceMismatch::source_RepoObject_guid"
+"repo.RepoObject_persistence_ForUpdate::source_RepoObject_name" <-- "repo.RepoObject_persistence_SourceMismatch::source_RepoObject_name"
+"repo.RepoObject_persistence_ForUpdate::target_name" <-- "repo.RepoObject_persistence_SourceMismatch::target_name"
+"repo.RepoObject_persistence_ForUpdate::target_RepoObject_fullname2" <-- "repo.RepoObject_persistence_SourceMismatch::target_RepoObject_fullname2"
+"repo.RepoObject_persistence_ForUpdate::target_RepoObject_guid" <-- "repo.RepoObject_persistence_SourceMismatch::target_RepoObject_guid"
+"repo.RepoObject_persistence_ForUpdate::target_schema" <-- "repo.RepoObject_persistence_SourceMismatch::target_schema"
 @enduml
 

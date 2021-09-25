@@ -22,16 +22,17 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:workflow.usp_workflow.adoc[prefix=..]" as workflow.usp_workflow << P >> {
+entity "puml-link:dhw:sqldb:workflow.usp_workflow.adoc[]" as workflow.usp_workflow << P >> {
   --
   --
   --
 }
 
-entity "puml-link:workflow.Workflow_ProcedureDependency_T_NotInSortorder.adoc[prefix=..]" as workflow.Workflow_ProcedureDependency_T_NotInSortorder << V >> {
+entity "puml-link:dhw:sqldb:workflow.Workflow_ProcedureDependency_T_NotInSortorder.adoc[]" as workflow.Workflow_ProcedureDependency_T_NotInSortorder << V >> {
   --
   - referenced_Procedure_RepoObject_guid : (uniqueidentifier)
   - referencing_Procedure_RepoObject_guid : (uniqueidentifier)
@@ -40,7 +41,7 @@ entity "puml-link:workflow.Workflow_ProcedureDependency_T_NotInSortorder.adoc[pr
   --
 }
 
-entity "puml-link:workflow.Workflow_UspList.adoc[prefix=..]" as workflow.Workflow_UspList << V >> {
+entity "puml-link:dhw:sqldb:workflow.Workflow_UspList.adoc[]" as workflow.Workflow_UspList << V >> {
   --
   UspList : (nvarchar(max))
   - Workflow_id : (int)
@@ -49,7 +50,7 @@ entity "puml-link:workflow.Workflow_UspList.adoc[prefix=..]" as workflow.Workflo
   --
 }
 
-entity "puml-link:workflow.WorkflowStep_Sortorder.adoc[prefix=..]" as workflow.WorkflowStep_Sortorder << U >> {
+entity "puml-link:dhw:sqldb:workflow.WorkflowStep_Sortorder.adoc[]" as workflow.WorkflowStep_Sortorder << U >> {
   - **Workflow_id** : (int)
   - **Procedure_RepoObject_guid** : (uniqueidentifier)
   --
@@ -61,11 +62,6 @@ entity "puml-link:workflow.WorkflowStep_Sortorder.adoc[prefix=..]" as workflow.W
 workflow.WorkflowStep_Sortorder <.. workflow.usp_workflow
 workflow.WorkflowStep_Sortorder <.. workflow.Workflow_ProcedureDependency_T_NotInSortorder
 workflow.WorkflowStep_Sortorder <.. workflow.Workflow_UspList
-workflow.WorkflowStep_Sortorder::Workflow_id <-- workflow.Workflow_UspList::Workflow_id
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"workflow.WorkflowStep_Sortorder::Workflow_id" <-- "workflow.Workflow_UspList::Workflow_id"
 @enduml
 

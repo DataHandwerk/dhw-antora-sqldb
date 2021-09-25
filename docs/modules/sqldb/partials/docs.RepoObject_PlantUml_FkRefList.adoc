@@ -41,7 +41,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-08-28 23:13:57
+2021-09-25 18:52:05
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -145,10 +145,10 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-idx_RepoObject_PlantUml_FkRefList_1]
+[#index-idx_RepoObject_PlantUml_FkRefList2x_1]
 === idx_RepoObject_PlantUml_FkRefList++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -468,13 +468,17 @@ Select
   , FkRefList            = String_Agg (
                                           Concat (
                                                      Cast(N'' As NVarchar(Max))
+                                                   , '"'
                                                    , docs.fs_cleanStringForPuml ( fk.referenced_RepoObject_fullname2 )
                                                    , '::'
                                                    , docs.fs_cleanStringForPuml ( fk.referenced_index_name )
+                                                   , '"'
                                                    , ' <-- '
+                                                   , '"'
                                                    , docs.fs_cleanStringForPuml ( fk.referencing_RepoObject_fullname2 )
                                                    , '::'
                                                    , docs.fs_cleanStringForPuml ( fk.referencing_index_name )
+                                                   , '"'
                                                  )
                                         , Char ( 13 ) + Char ( 10 )
                                       ) Within Group(Order By

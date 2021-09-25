@@ -37,13 +37,13 @@ user table
 == SysObject_id
 
 // tag::SysObject_id[]
-1178487277
+1472060330
 // end::SysObject_id[]
 
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-08-27 11:53:06
+2021-09-19 20:47:20
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -118,6 +118,30 @@ user table
 * xref:repo.RepoSchema_ssas_tgt.adoc#column-is_SysSchema_missing[+repo.RepoSchema_ssas_tgt.is_SysSchema_missing+]
 * xref:repo.SysSchema_RepoSchema_via_guid.adoc#column-RepoSchema_is_SysSchema_missing[+repo.SysSchema_RepoSchema_via_guid.RepoSchema_is_SysSchema_missing+]
 * xref:repo.SysSchema_RepoSchema_via_name.adoc#column-RepoSchema_is_SysSchema_missing[+repo.SysSchema_RepoSchema_via_name.RepoSchema_is_SysSchema_missing+]
+--
+
+
+[#column-MeasuresRepoObjekt_guid]
+=== MeasuresRepoObjekt_guid
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|MeasuresRepoObjekt_guid
+|uniqueidentifier
+|NOT NULL
+|
+|
+|===
+
+.Default: DF_RepoSchema_RepoSchema_guid1
+....
+(newsequentialid())
+....
+
+.Referencing Columns
+--
+* xref:repo.Measures.adoc#column-MeasuresRepoObjekt_guid[+repo.Measures.MeasuresRepoObjekt_guid+]
 --
 
 
@@ -330,6 +354,30 @@ user table
 --
 
 
+[#column-MeasuresRepoObjekt_name]
+=== MeasuresRepoObjekt_name
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|MeasuresRepoObjekt_name
+|varchar(9)
+|NOT NULL
+|
+|Persisted
+|===
+
+.Definition (PERSISTED)
+....
+('_measures')
+....
+
+.Referencing Columns
+--
+* xref:repo.Measures.adoc#column-MeasuresRepoObjekt_name[+repo.Measures.MeasuresRepoObjekt_name+]
+--
+
+
 // end::AntoraColumnDetails[]
 
 == AntoraMeasureDetails
@@ -357,6 +405,8 @@ user table
 
 
 
+
+
 // end::AntoraPkColumnTableRows[]
 
 == AntoraNonPkColumnTableRows
@@ -374,6 +424,13 @@ user table
 |<<column-is_SysSchema_missing>>
 |bit
 |NULL
+|
+|
+
+|
+|<<column-MeasuresRepoObjekt_guid>>
+|uniqueidentifier
+|NOT NULL
 |
 |
 
@@ -426,6 +483,13 @@ user table
 |
 |Persisted
 
+|
+|<<column-MeasuresRepoObjekt_name>>
+|varchar(9)
+|NOT NULL
+|
+|Persisted
+
 // end::AntoraNonPkColumnTableRows[]
 
 == AntoraIndexList
@@ -435,7 +499,7 @@ user table
 [#index-PK_RepoSchema]
 === PK_RepoSchema
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoSchema_guid>>; uniqueidentifier
@@ -446,7 +510,7 @@ user table
 [#index-UK_RepoSchema]
 === UK_RepoSchema
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoSchema_name>>; nvarchar(128)
@@ -488,7 +552,10 @@ source: property.RepoObjectProperty_cross As rop_cross
 * xref:docs.Unit_1_union.adoc[]
 * xref:docs.usp_AntoraExport_ObjectPuml.adoc[]
 * xref:property.ExtendedProperty_Repo2Sys_level0.adoc[]
+* xref:property.usp_RepoSchemaProperty_set.adoc[]
 * xref:property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate.adoc[]
+* xref:repo.Measures.adoc[]
+* xref:repo.RepoObject_SSAS_src.adoc[]
 * xref:repo.RepoSchema_ssas_tgt.adoc[]
 * xref:repo.SysSchema_RepoSchema_via_guid.adoc[]
 * xref:repo.SysSchema_RepoSchema_via_name.adoc[]

@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:dbeaver.DataSources.adoc[prefix=..]" as dbeaver.DataSources << U >> {
+entity "puml-link:dhw:sqldb:dbeaver.DataSources.adoc[]" as dbeaver.DataSources << U >> {
   - **id** : (int)
   --
   BulkColumn : (varchar(max))
@@ -34,7 +35,7 @@ entity "puml-link:dbeaver.DataSources.adoc[prefix=..]" as dbeaver.DataSources <<
   --
 }
 
-entity "puml-link:dbeaver.DataSources_connection.adoc[prefix=..]" as dbeaver.DataSources_connection << V >> {
+entity "puml-link:dhw:sqldb:dbeaver.DataSources_connection.adoc[]" as dbeaver.DataSources_connection << V >> {
   --
   BulkColumn : (varchar(max))
   conection_name : (nvarchar(100))
@@ -49,7 +50,7 @@ entity "puml-link:dbeaver.DataSources_connection.adoc[prefix=..]" as dbeaver.Dat
   --
 }
 
-entity "puml-link:dbeaver.DataSources_DbSchemaTable.adoc[prefix=..]" as dbeaver.DataSources_DbSchemaTable << V >> {
+entity "puml-link:dhw:sqldb:dbeaver.DataSources_DbSchemaTable.adoc[]" as dbeaver.DataSources_DbSchemaTable << V >> {
   --
   BulkColumn : (varchar(max))
   - id : (int)
@@ -70,13 +71,8 @@ entity "puml-link:dbeaver.DataSources_DbSchemaTable.adoc[prefix=..]" as dbeaver.
   --
 }
 
-dbeaver.DataSources <.. dbeaver.DataSources_DbSchemaTable
 dbeaver.DataSources <.. dbeaver.DataSources_connection
-dbeaver.DataSources::BulkColumn <-- dbeaver.DataSources::is_json
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+dbeaver.DataSources <.. dbeaver.DataSources_DbSchemaTable
+"dbeaver.DataSources::BulkColumn" <-- "dbeaver.DataSources::is_json"
 @enduml
 

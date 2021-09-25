@@ -59,7 +59,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-08-27 09:27:58
+2021-09-20 21:32:15
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -83,6 +83,34 @@ view
 * xref:repo.RepoObject.adoc#column-RepoObject_guid[+repo.RepoObject.RepoObject_guid+]
 * xref:repo.RepoObject_SSAS_src.adoc#column-RepoObject_guid[+repo.RepoObject_SSAS_src.RepoObject_guid+]
 --
+
+
+[#column-external_AntoraComponent]
+=== external_AntoraComponent
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|external_AntoraComponent
+|nvarchar(128)
+|NULL
+|
+|
+|===
+
+
+[#column-external_AntoraModule]
+=== external_AntoraModule
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|external_AntoraModule
+|nvarchar(128)
+|NULL
+|
+|
+|===
 
 
 [#column-has_execution_plan_issue]
@@ -178,6 +206,20 @@ view
 --
 * xref:repo.RepoObject.adoc#column-InheritanceType[+repo.RepoObject.InheritanceType+]
 --
+
+
+[#column-is_external]
+=== is_external
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|is_external
+|bit
+|NULL
+|
+|
+|===
 
 
 [#column-is_repo_managed]
@@ -609,11 +651,28 @@ reference in [repo_sys].[type]
 
 
 
+
+
+
 // end::AntoraPkColumnTableRows[]
 
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
+
+|
+|<<column-external_AntoraComponent>>
+|nvarchar(128)
+|NULL
+|
+|
+
+|
+|<<column-external_AntoraModule>>
+|nvarchar(128)
+|NULL
+|
+|
 
 |
 |<<column-has_execution_plan_issue>>
@@ -646,6 +705,13 @@ reference in [repo_sys].[type]
 |
 |<<column-InheritanceType>>
 |tinyint
+|NULL
+|
+|
+
+|
+|<<column-is_external>>
+|bit
 |NULL
 |
 |
@@ -792,7 +858,7 @@ reference in [repo_sys].[type]
 [#index-PK_RepoObject_SSAS_tgt]
 === PK_RepoObject_SSAS_tgt
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -800,10 +866,10 @@ reference in [repo_sys].[type]
 * PK, Unique, Real: 1, 1, 0
 
 
-[#index-UK_RepoObject_SSAS_tgt_2]
+[#index-UK_RepoObject_SSAS_tgt2x_2]
 === UK_RepoObject_SSAS_tgt++__++2
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-SysObject_schema_name>>; nvarchar(128)
@@ -812,10 +878,10 @@ reference in [repo_sys].[type]
 * PK, Unique, Real: 0, 1, 0
 
 
-[#index-UK_RepoObject_SSAS_tgt_3]
+[#index-UK_RepoObject_SSAS_tgt2x_3]
 === UK_RepoObject_SSAS_tgt++__++3
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_schema_name>>; nvarchar(128)
@@ -824,38 +890,16 @@ reference in [repo_sys].[type]
 * PK, Unique, Real: 0, 1, 0
 
 
-[#index-idx_RepoObject_SSAS_tgt_4]
+[#index-idx_RepoObject_SSAS_tgt2x_4]
 === idx_RepoObject_SSAS_tgt++__++4
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-pk_index_guid>>; uniqueidentifier
 --
 * PK, Unique, Real: 0, 0, 0
 * is disabled
-
-
-[#index-idx_RepoObject_SSAS_tgt_5]
-=== idx_RepoObject_SSAS_tgt++__++5
-
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
-+
---
-* <<column-RepoObject_schema_name>>; nvarchar(128)
---
-* PK, Unique, Real: 0, 0, 0
-
-
-[#index-idx_RepoObject_SSAS_tgt_6]
-=== idx_RepoObject_SSAS_tgt++__++6
-
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
-+
---
-* <<column-SysObject_schema_name>>; nvarchar(128)
---
-* PK, Unique, Real: 0, 0, 0
 
 // end::AntoraIndexList[]
 
@@ -1094,7 +1138,7 @@ xref:repo.RepoObject_SSAS_src.adoc[]
 === pk_index_guid
 
 // tag::pk_index_guid[]
-E52ED185-0907-EC11-8515-A81E8446D5B0
+C904BF8F-471C-EC11-8521-A81E8446D5B0
 // end::pk_index_guid[]
 
 
@@ -1168,7 +1212,8 @@ source: property.RepoObjectProperty WHERE property_int = 1
 =======
 [source,sql]
 ----
-Create View repo.RepoObject_SSAS_tgt
+
+CREATE View repo.RepoObject_SSAS_tgt
 As
 Select
     RepoObject_guid
@@ -1196,10 +1241,14 @@ Select
   , SysObject_parent_object_id
   , SysObject_schema_name
   , SysObject_type
+  , external_AntoraComponent
+  , external_AntoraModule
+  , is_external
 From
     repo.RepoObject
 Where
     is_ssas = 1
+
 ----
 =======
 // end::sql_modules_definition[]

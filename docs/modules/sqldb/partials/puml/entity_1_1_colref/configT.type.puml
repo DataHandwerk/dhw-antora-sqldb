@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:configT.spt_values.adoc[prefix=..]" as configT.spt_values << U >> {
+entity "puml-link:dhw:sqldb:configT.spt_values.adoc[]" as configT.spt_values << U >> {
   --
   high : (int)
   low : (int)
@@ -37,7 +38,7 @@ entity "puml-link:configT.spt_values.adoc[prefix=..]" as configT.spt_values << U
   --
 }
 
-entity "puml-link:configT.type.adoc[prefix=..]" as configT.type << V >> {
+entity "puml-link:dhw:sqldb:configT.type.adoc[]" as configT.type << V >> {
   **type** : (nvarchar(128))
   --
   - is_DocsOutput : (int)
@@ -46,7 +47,7 @@ entity "puml-link:configT.type.adoc[prefix=..]" as configT.type << V >> {
   --
 }
 
-entity "puml-link:configT.type_level1type_level2type.adoc[prefix=..]" as configT.type_level1type_level2type << V >> {
+entity "puml-link:dhw:sqldb:configT.type_level1type_level2type.adoc[]" as configT.type_level1type_level2type << V >> {
   **type** : (nvarchar(128))
   --
   level1type : (varchar(9))
@@ -56,32 +57,61 @@ entity "puml-link:configT.type_level1type_level2type.adoc[prefix=..]" as configT
   --
 }
 
-entity "puml-link:docs.AntoraNavListPage_by_type.adoc[prefix=..]" as docs.AntoraNavListPage_by_type << V >> {
-  **type** : (nvarchar(128))
+entity "puml-link:dhw:sqldb:docs.AntoraNavListPage_by_type.adoc[]" as docs.AntoraNavListPage_by_type << V >> {
   --
   - nav_list : (nvarchar(309))
+  type : (nvarchar(128))
   type_desc : (nvarchar(128))
   --
   --
 }
 
-entity "puml-link:docs.AntoraPage_ObjectByType.adoc[prefix=..]" as docs.AntoraPage_ObjectByType << V >> {
+entity "puml-link:dhw:sqldb:docs.AntoraPage_ObjectByType.adoc[]" as docs.AntoraPage_ObjectByType << V >> {
   --
   - partial_content : (nvarchar(4000))
   --
   --
 }
 
-entity "puml-link:docs.usp_AntoraExport_navigation.adoc[prefix=..]" as docs.usp_AntoraExport_navigation << P >> {
+entity "puml-link:dhw:sqldb:docs.usp_AntoraExport_navigation.adoc[]" as docs.usp_AntoraExport_navigation << P >> {
   --
   --
   --
 }
 
-entity "puml-link:repo.RepoObject_gross.adoc[prefix=..]" as repo.RepoObject_gross << V >> {
-  - **RepoObject_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:reference.RepoObject_ReferencedReferencing.adoc[]" as reference.RepoObject_ReferencedReferencing << V >> {
   --
+  - referenced_AntoraXref : (nvarchar(max))
+  referenced_external_AntoraComponent : (nvarchar(128))
+  referenced_external_AntoraModule : (nvarchar(128))
+  - Referenced_fullname : (nvarchar(261))
+  - Referenced_fullname2 : (nvarchar(257))
+  - Referenced_guid : (uniqueidentifier)
+  referenced_is_DocsOutput : (int)
+  - referenced_is_external : (bit)
+  Referenced_type : (char(2))
+  - referencing_AntoraXref : (nvarchar(max))
+  referencing_external_AntoraComponent : (nvarchar(128))
+  referencing_external_AntoraModule : (nvarchar(128))
+  - Referencing_fullname : (nvarchar(261))
+  - Referencing_fullname2 : (nvarchar(257))
+  - Referencing_guid : (uniqueidentifier)
+  referencing_is_DocsOutput : (int)
+  - referencing_is_external : (bit)
+  Referencing_type : (varchar(2))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.RepoObject_gross.adoc[]" as repo.RepoObject_gross << V >> {
+  --
+  AntoraComponent : (nvarchar(max))
+  AntoraModule : (nvarchar(max))
   Description : (nvarchar(max))
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
+  external_DatabaseName : (nvarchar(128))
+  external_RepoDatabaseName : (nvarchar(128))
   has_different_sys_names : (bit)
   has_execution_plan_issue : (bit)
   has_get_referenced_issue : (bit)
@@ -94,6 +124,7 @@ entity "puml-link:repo.RepoObject_gross.adoc[prefix=..]" as repo.RepoObject_gros
   InheritanceType : (tinyint)
   - is_DocsExclude : (bit)
   is_DocsOutput : (int)
+  - is_external : (bit)
   - is_in_reference : (int)
   is_persistence : (bit)
   is_persistence_check_duplicate_per_pk : (bit)
@@ -131,6 +162,7 @@ entity "puml-link:repo.RepoObject_gross.adoc[prefix=..]" as repo.RepoObject_gros
   Repo_temporal_type : (tinyint)
   - RepoObject_fullname : (nvarchar(261))
   - RepoObject_fullname2 : (nvarchar(257))
+  - RepoObject_guid : (uniqueidentifier)
   - RepoObject_name : (nvarchar(128))
   RepoObject_Referencing_Count : (int)
   - RepoObject_schema_name : (nvarchar(128))
@@ -151,16 +183,17 @@ entity "puml-link:repo.RepoObject_gross.adoc[prefix=..]" as repo.RepoObject_gros
   SysObject_type_name : (nvarchar(128))
   tables_dataCategory : (nvarchar(500))
   tables_description : (nvarchar(max))
-  tables_isHidden : (nvarchar(500))
+  tables_isHidden : (bit)
   target_filter : (nvarchar(4000))
   temporal_type : (tinyint)
   - usp_persistence_name : (nvarchar(140))
   usp_persistence_RepoObject_guid : (uniqueidentifier)
+  uspgenerator_usp_id : (int)
   --
   --
 }
 
-entity "puml-link:repo.RepoObject_wo_referencing.adoc[prefix=..]" as repo.RepoObject_wo_referencing << V >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject_wo_referencing.adoc[]" as repo.RepoObject_wo_referencing << V >> {
   --
   is_repo_managed : (bit)
   - is_RepoObject_name_uniqueidentifier : (int)
@@ -178,20 +211,18 @@ entity "puml-link:repo.RepoObject_wo_referencing.adoc[prefix=..]" as repo.RepoOb
 configT.spt_values <.. configT.type
 configT.type <.. configT.type_level1type_level2type
 configT.type <.. repo.RepoObject_gross
+configT.type <.. reference.RepoObject_ReferencedReferencing
 configT.type <.. docs.usp_AntoraExport_navigation
 configT.type <.. docs.AntoraNavListPage_by_type
 configT.type <.. docs.AntoraPage_ObjectByType
 configT.type <.. repo.RepoObject_wo_referencing
-configT.type::is_DocsOutput <-- repo.RepoObject_gross::is_DocsOutput
-configT.type::type <-- docs.AntoraNavListPage_by_type::type
-configT.type::type_desc <-- configT.type_level1type_level2type::type_desc
-configT.type::type_desc <-- repo.RepoObject_gross::RepoObject_type_name
-configT.type::type_desc <-- repo.RepoObject_gross::SysObject_type_name
-configT.type::type_desc <-- docs.AntoraNavListPage_by_type::type_desc
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"configT.type::is_DocsOutput" <-- "repo.RepoObject_gross::is_DocsOutput"
+"configT.type::is_DocsOutput" <-- "reference.RepoObject_ReferencedReferencing::referenced_is_DocsOutput"
+"configT.type::is_DocsOutput" <-- "reference.RepoObject_ReferencedReferencing::referencing_is_DocsOutput"
+"configT.type::type" <-- "docs.AntoraNavListPage_by_type::type"
+"configT.type::type_desc" <-- "configT.type_level1type_level2type::type_desc"
+"configT.type::type_desc" <-- "repo.RepoObject_gross::RepoObject_type_name"
+"configT.type::type_desc" <-- "repo.RepoObject_gross::SysObject_type_name"
+"configT.type::type_desc" <-- "docs.AntoraNavListPage_by_type::type_desc"
 @enduml
 

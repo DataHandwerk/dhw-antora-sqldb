@@ -22,134 +22,316 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:config.Parameter.adoc[prefix=..]" as config.Parameter << U >> {
+entity "puml-link:dhw:sqldb:config.ftv_get_parameter_value.adoc[]" as config.ftv_get_parameter_value << IF >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:config.Parameter.adoc[]" as config.Parameter << U >> {
   - **Parameter_name** : (varchar(100))
   - **sub_Parameter** : (nvarchar(128))
   --
 }
 
-entity "puml-link:property.PropertyName_RepoObject.adoc[prefix=..]" as property.PropertyName_RepoObject << V >> {
-  **property_name** : (nvarchar(128))
+entity "puml-link:dhw:sqldb:property.external_RepoObjectColumnProperty.adoc[]" as property.external_RepoObjectColumnProperty << U >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   --
 }
 
-entity "puml-link:property.PropertyName_RepoObject_T.adoc[prefix=..]" as property.PropertyName_RepoObject_T << U >> {
-  **property_name** : (nvarchar(128))
-  --
-}
-
-entity "puml-link:property.RepoObjectProperty.adoc[prefix=..]" as property.RepoObjectProperty << U >> {
-  - **RepoObjectProperty_id** : (int)
-  --
-}
-
-entity "puml-link:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc[prefix=..]" as property.RepoObjectProperty_InheritanceType_InheritanceDefinition << V >> {
+entity "puml-link:dhw:sqldb:property.external_RepoObjectProperty.adoc[]" as property.external_RepoObjectProperty << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   - **property_name** : (nvarchar(128))
   --
 }
 
-entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
+entity "puml-link:dhw:sqldb:property.PropertyName_RepoObject.adoc[]" as property.PropertyName_RepoObject << V >> {
+  **property_name** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.PropertyName_RepoObject_T.adoc[]" as property.PropertyName_RepoObject_T << U >> {
+  **property_name** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.RepoObjectColumnProperty.adoc[]" as property.RepoObjectColumnProperty << U >> {
+  - **RepoObjectColumnProperty_id** : (int)
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.RepoObjectColumnProperty_external_src.adoc[]" as property.RepoObjectColumnProperty_external_src << V >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.RepoObjectColumnProperty_external_tgt.adoc[]" as property.RepoObjectColumnProperty_external_tgt << V >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.RepoObjectProperty.adoc[]" as property.RepoObjectProperty << U >> {
+  - **RepoObjectProperty_id** : (int)
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.RepoObjectProperty_external_src.adoc[]" as property.RepoObjectProperty_external_src << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.RepoObjectProperty_external_tgt.adoc[]" as property.RepoObjectProperty_external_tgt << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc[]" as property.RepoObjectProperty_InheritanceType_InheritanceDefinition << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.additional_Reference.adoc[]" as reference.additional_Reference << U >> {
+  - **Id** : (int)
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.additional_Reference_is_external.adoc[]" as reference.additional_Reference_is_external << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.additional_Reference_Object.adoc[]" as reference.additional_Reference_Object << V >> {
+  - **AntoraComponent** : (nvarchar(128))
+  - **AntoraModule** : (nvarchar(128))
+  - **SchemaName** : (nvarchar(128))
+  - **ObjectName** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.additional_Reference_Object_T.adoc[]" as reference.additional_Reference_Object_T << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity "puml-link:repo.RepoObject_SSAS_src.adoc[prefix=..]" as repo.RepoObject_SSAS_src << V >> {
+entity "puml-link:dhw:sqldb:reference.additional_Reference_ObjectColumn.adoc[]" as reference.additional_Reference_ObjectColumn << V >> {
+  - **AntoraComponent** : (nvarchar(128))
+  - **AntoraModule** : (nvarchar(128))
+  - **SchemaName** : (nvarchar(128))
+  - **ObjectName** : (nvarchar(128))
+  **ColumnName** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.additional_Reference_ObjectColumn_T.adoc[]" as reference.additional_Reference_ObjectColumn_T << U >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity "puml-link:repo.RepoObject_SSAS_tgt.adoc[prefix=..]" as repo.RepoObject_SSAS_tgt << V >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject_external_src.adoc[]" as repo.RepoObject_external_src << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity "puml-link:repo.RepoObjectColumn.adoc[prefix=..]" as repo.RepoObjectColumn << U >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject_external_tgt.adoc[]" as repo.RepoObject_external_tgt << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.RepoObject_SSAS_src.adoc[]" as repo.RepoObject_SSAS_src << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.RepoObject_SSAS_tgt.adoc[]" as repo.RepoObject_SSAS_tgt << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.RepoObjectColumn.adoc[]" as repo.RepoObjectColumn << U >> {
   - **RepoObjectColumn_guid** : (uniqueidentifier)
   --
 }
 
-entity "puml-link:repo.RepoObjectColumn_SSAS_src.adoc[prefix=..]" as repo.RepoObjectColumn_SSAS_src << V >> {
+entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_external_src.adoc[]" as repo.RepoObjectColumn_external_src << V >> {
   - **RepoObjectColumn_guid** : (uniqueidentifier)
   --
 }
 
-entity "puml-link:repo.RepoObjectColumn_SSAS_tgt.adoc[prefix=..]" as repo.RepoObjectColumn_SSAS_tgt << V >> {
+entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_external_tgt.adoc[]" as repo.RepoObjectColumn_external_tgt << V >> {
   - **RepoObjectColumn_guid** : (uniqueidentifier)
   --
 }
 
-entity "puml-link:ssas.model_json.adoc[prefix=..]" as ssas.model_json << U >> {
+entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_SSAS_src.adoc[]" as repo.RepoObjectColumn_SSAS_src << V >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_SSAS_tgt.adoc[]" as repo.RepoObjectColumn_SSAS_tgt << V >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.RepoSchema.adoc[]" as repo.RepoSchema << U >> {
+  - **RepoSchema_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.RepoSchema_ssas_src.adoc[]" as repo.RepoSchema_ssas_src << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.RepoSchema_ssas_tgt.adoc[]" as repo.RepoSchema_ssas_tgt << V >> {
+  - **RepoSchema_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json.adoc[]" as ssas.model_json << U >> {
   - **databasename** : (nvarchar(128))
   --
 }
 
-entity "puml-link:ssas.model_json_10.adoc[prefix=..]" as ssas.model_json_10 << V >> {
-  - **databasename** : (nvarchar(128))
+entity "puml-link:dhw:sqldb:ssas.model_json_10.adoc[]" as ssas.model_json_10 << V >> {
   --
 }
 
-entity "puml-link:ssas.model_json_20.adoc[prefix=..]" as ssas.model_json_20 << V >> {
-  - **databasename** : (nvarchar(128))
+entity "puml-link:dhw:sqldb:ssas.model_json_20.adoc[]" as ssas.model_json_20 << V >> {
   --
 }
 
-entity "puml-link:ssas.model_json_31_tables.adoc[prefix=..]" as ssas.model_json_31_tables << V >> {
+entity "puml-link:dhw:sqldb:ssas.model_json_201_descriptions_multiline.adoc[]" as ssas.model_json_201_descriptions_multiline << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json_2011_descriptions_StrAgg.adoc[]" as ssas.model_json_2011_descriptions_StrAgg << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json_31_tables.adoc[]" as ssas.model_json_31_tables << V >> {
   - **databasename** : (nvarchar(128))
   **tables_name** : (nvarchar(128))
   --
 }
 
-entity "puml-link:ssas.model_json_31_tables_T.adoc[prefix=..]" as ssas.model_json_31_tables_T << U >> {
+entity "puml-link:dhw:sqldb:ssas.model_json_31_tables_T.adoc[]" as ssas.model_json_31_tables_T << U >> {
   - **databasename** : (nvarchar(128))
   **tables_name** : (nvarchar(128))
   --
 }
 
-entity "puml-link:ssas.model_json_311_tables_columns.adoc[prefix=..]" as ssas.model_json_311_tables_columns << V >> {
+entity "puml-link:dhw:sqldb:ssas.model_json_311_tables_columns.adoc[]" as ssas.model_json_311_tables_columns << V >> {
   - **databasename** : (nvarchar(128))
   - **tables_name** : (nvarchar(128))
   **tables_columns_name** : (nvarchar(128))
   --
 }
 
-entity "puml-link:ssas.model_json_311_tables_columns_T.adoc[prefix=..]" as ssas.model_json_311_tables_columns_T << U >> {
+entity "puml-link:dhw:sqldb:ssas.model_json_311_tables_columns_T.adoc[]" as ssas.model_json_311_tables_columns_T << U >> {
   - **databasename** : (nvarchar(128))
   - **tables_name** : (nvarchar(128))
   **tables_columns_name** : (nvarchar(128))
   --
 }
 
+config.ftv_get_parameter_value <.. repo.RepoObject_external_src
+config.ftv_get_parameter_value <.. reference.additional_Reference_is_external
+config.Parameter <.. config.ftv_get_parameter_value
 config.Parameter <.. property.PropertyName_RepoObject
 config.Parameter <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition
+property.external_RepoObjectColumnProperty <.. property.RepoObjectColumnProperty_external_src
+property.external_RepoObjectColumnProperty <.. property.RepoObjectColumnProperty_external_src
+property.external_RepoObjectProperty <.. property.RepoObjectProperty_external_src
+property.external_RepoObjectProperty <.. property.RepoObjectProperty_external_src
+property.external_RepoObjectProperty <.. property.RepoObjectProperty_external_src
 property.PropertyName_RepoObject <.. property.PropertyName_RepoObject_T
 property.PropertyName_RepoObject_T <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition
+property.PropertyName_RepoObject_T <.. property.RepoObjectProperty_external_tgt
+property.PropertyName_RepoObject_T <.. property.RepoObjectProperty_external_tgt
+property.PropertyName_RepoObject_T <.. property.RepoObjectProperty_external_tgt
+property.PropertyName_RepoObject_T <.. property.RepoObjectColumnProperty_external_tgt
+property.PropertyName_RepoObject_T <.. property.RepoObjectColumnProperty_external_tgt
+property.RepoObjectColumnProperty <.. property.RepoObjectColumnProperty_external_tgt
+property.RepoObjectColumnProperty <.. property.RepoObjectColumnProperty_external_tgt
+property.RepoObjectColumnProperty_external_src <.. property.RepoObjectColumnProperty_external_tgt
+property.RepoObjectColumnProperty_external_src <.. property.RepoObjectColumnProperty_external_tgt
+property.RepoObjectColumnProperty_external_tgt <.. repo.RepoObjectColumn
+property.RepoObjectColumnProperty_external_tgt <.. repo.RepoObjectColumn
+property.RepoObjectColumnProperty_external_tgt <.. property.RepoObjectColumnProperty
+property.RepoObjectColumnProperty_external_tgt <.. property.RepoObjectColumnProperty
+property.RepoObjectColumnProperty_external_tgt <.. repo.RepoObject
+property.RepoObjectColumnProperty_external_tgt <.. property.PropertyName_RepoObject_T
 property.RepoObjectProperty <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition
 property.RepoObjectProperty <.. property.PropertyName_RepoObject
-repo.RepoObject <.. repo.RepoObject_SSAS_tgt
+property.RepoObjectProperty <.. property.RepoObjectProperty_external_tgt
+property.RepoObjectProperty <.. property.RepoObjectProperty_external_tgt
+property.RepoObjectProperty <.. property.RepoObjectProperty_external_tgt
+property.RepoObjectProperty_external_src <.. property.RepoObjectProperty_external_tgt
+property.RepoObjectProperty_external_src <.. property.RepoObjectProperty_external_tgt
+property.RepoObjectProperty_external_src <.. property.RepoObjectProperty_external_tgt
+property.RepoObjectProperty_external_tgt <.. repo.RepoObject
+property.RepoObjectProperty_external_tgt <.. property.RepoObjectProperty
+property.RepoObjectProperty_external_tgt <.. property.PropertyName_RepoObject_T
+reference.additional_Reference <.. reference.additional_Reference_is_external
+reference.additional_Reference_is_external <.. reference.additional_Reference_ObjectColumn
+reference.additional_Reference_is_external <.. reference.additional_Reference_Object
+reference.additional_Reference_Object <.. reference.additional_Reference_Object_T
+reference.additional_Reference_Object_T <.. repo.RepoObjectColumn_external_src
+reference.additional_Reference_Object_T <.. repo.RepoObject_external_src
+reference.additional_Reference_ObjectColumn <.. reference.additional_Reference_ObjectColumn_T
+reference.additional_Reference_ObjectColumn_T <.. repo.RepoObjectColumn_external_src
 repo.RepoObject <.. property.RepoObjectProperty_InheritanceType_InheritanceDefinition
+repo.RepoObject <.. repo.RepoObject_SSAS_tgt
+repo.RepoObject <.. repo.RepoObject_external_tgt
+repo.RepoObject <.. property.RepoObjectProperty_external_tgt
+repo.RepoObject <.. property.RepoObjectProperty_external_tgt
+repo.RepoObject <.. property.RepoObjectProperty_external_tgt
+repo.RepoObject <.. property.RepoObjectColumnProperty_external_tgt
+repo.RepoObject <.. property.RepoObjectColumnProperty_external_tgt
+repo.RepoObject_external_src <.. repo.RepoObject_external_tgt
+repo.RepoObject_external_tgt <.. repo.RepoObject
+repo.RepoObject_external_tgt <.. repo.RepoObjectColumn_external_tgt
 repo.RepoObject_SSAS_src <.. repo.RepoObject_SSAS_tgt
 repo.RepoObject_SSAS_tgt <.. repo.RepoObject
 repo.RepoObject_SSAS_tgt <.. repo.RepoObjectColumn_SSAS_tgt
 repo.RepoObjectColumn <.. repo.RepoObjectColumn_SSAS_tgt
+repo.RepoObjectColumn <.. repo.RepoObjectColumn_external_tgt
+repo.RepoObjectColumn <.. property.RepoObjectColumnProperty_external_tgt
+repo.RepoObjectColumn <.. property.RepoObjectColumnProperty_external_tgt
+repo.RepoObjectColumn_external_src <.. repo.RepoObjectColumn_external_tgt
+repo.RepoObjectColumn_external_tgt <.. repo.RepoObject_external_tgt
+repo.RepoObjectColumn_external_tgt <.. repo.RepoObjectColumn
+repo.RepoObjectColumn_external_tgt <.. repo.RepoObjectColumn
 repo.RepoObjectColumn_SSAS_src <.. repo.RepoObjectColumn_SSAS_tgt
 repo.RepoObjectColumn_SSAS_tgt <.. repo.RepoObjectColumn
+repo.RepoObjectColumn_SSAS_tgt <.. repo.RepoObjectColumn
 repo.RepoObjectColumn_SSAS_tgt <.. repo.RepoObject_SSAS_tgt
+repo.RepoSchema <.. repo.RepoObject_SSAS_src
+repo.RepoSchema <.. repo.RepoSchema_ssas_tgt
+repo.RepoSchema_ssas_src <.. repo.RepoSchema_ssas_tgt
+repo.RepoSchema_ssas_tgt <.. repo.RepoSchema
 ssas.model_json <.. ssas.model_json_10
 ssas.model_json_10 <.. ssas.model_json_20
+ssas.model_json_20 <.. repo.RepoSchema_ssas_src
 ssas.model_json_20 <.. ssas.model_json_31_tables
+ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
+ssas.model_json_201_descriptions_multiline <.. ssas.model_json_2011_descriptions_StrAgg
+ssas.model_json_2011_descriptions_StrAgg <.. repo.RepoSchema_ssas_src
 ssas.model_json_31_tables <.. ssas.model_json_31_tables_T
-ssas.model_json_31_tables_T <.. repo.RepoObject_SSAS_src
 ssas.model_json_31_tables_T <.. ssas.model_json_311_tables_columns
+ssas.model_json_31_tables_T <.. repo.RepoObject_SSAS_src
 ssas.model_json_311_tables_columns <.. ssas.model_json_311_tables_columns_T
 ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_SSAS_src
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
 @enduml
 

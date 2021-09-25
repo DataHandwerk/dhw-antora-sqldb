@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:reference.RepoObjectColumn_reference_FirstResultSet.adoc[prefix=..]" as reference.RepoObjectColumn_reference_FirstResultSet << V >> {
+entity "puml-link:dhw:sqldb:reference.RepoObjectColumn_reference_FirstResultSet.adoc[]" as reference.RepoObjectColumn_reference_FirstResultSet << V >> {
   --
   - InformationSource : (varchar(37))
   is_hidden : (bit)
@@ -53,7 +54,7 @@ entity "puml-link:reference.RepoObjectColumn_reference_FirstResultSet.adoc[prefi
   --
 }
 
-entity "puml-link:reference.RepoObjectSource_FirstResultSet.adoc[prefix=..]" as reference.RepoObjectSource_FirstResultSet << U >> {
+entity "puml-link:dhw:sqldb:reference.RepoObjectSource_FirstResultSet.adoc[]" as reference.RepoObjectSource_FirstResultSet << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   - **column_ordinal** : (int)
   --
@@ -71,7 +72,7 @@ entity "puml-link:reference.RepoObjectSource_FirstResultSet.adoc[prefix=..]" as 
   --
 }
 
-entity "puml-link:reference.usp_RepoObjectSource_FirstResultSet.adoc[prefix=..]" as reference.usp_RepoObjectSource_FirstResultSet << P >> {
+entity "puml-link:dhw:sqldb:reference.usp_RepoObjectSource_FirstResultSet.adoc[]" as reference.usp_RepoObjectSource_FirstResultSet << P >> {
   --
   --
   --
@@ -79,16 +80,11 @@ entity "puml-link:reference.usp_RepoObjectSource_FirstResultSet.adoc[prefix=..]"
 
 reference.RepoObjectSource_FirstResultSet <.. reference.RepoObjectColumn_reference_FirstResultSet
 reference.RepoObjectSource_FirstResultSet <.. reference.usp_RepoObjectSource_FirstResultSet
-reference.RepoObjectSource_FirstResultSet::is_hidden <-- reference.RepoObjectColumn_reference_FirstResultSet::is_hidden
-reference.RepoObjectSource_FirstResultSet::RepoObject_guid <-- reference.RepoObjectColumn_reference_FirstResultSet::referencing_RepoObject_guid
-reference.RepoObjectSource_FirstResultSet::source_column_name <-- reference.RepoObjectColumn_reference_FirstResultSet::referenced_column_name
-reference.RepoObjectSource_FirstResultSet::source_schema_name <-- reference.RepoObjectColumn_reference_FirstResultSet::referenced_schema_name
-reference.RepoObjectSource_FirstResultSet::source_table_name <-- reference.RepoObjectColumn_reference_FirstResultSet::referenced_entity_name
-reference.RepoObjectSource_FirstResultSet::target_column_name <-- reference.RepoObjectColumn_reference_FirstResultSet::referencing_column_name
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"reference.RepoObjectSource_FirstResultSet::is_hidden" <-- "reference.RepoObjectColumn_reference_FirstResultSet::is_hidden"
+"reference.RepoObjectSource_FirstResultSet::RepoObject_guid" <-- "reference.RepoObjectColumn_reference_FirstResultSet::referencing_RepoObject_guid"
+"reference.RepoObjectSource_FirstResultSet::source_column_name" <-- "reference.RepoObjectColumn_reference_FirstResultSet::referenced_column_name"
+"reference.RepoObjectSource_FirstResultSet::source_schema_name" <-- "reference.RepoObjectColumn_reference_FirstResultSet::referenced_schema_name"
+"reference.RepoObjectSource_FirstResultSet::source_table_name" <-- "reference.RepoObjectColumn_reference_FirstResultSet::referenced_entity_name"
+"reference.RepoObjectSource_FirstResultSet::target_column_name" <-- "reference.RepoObjectColumn_reference_FirstResultSet::referencing_column_name"
 @enduml
 

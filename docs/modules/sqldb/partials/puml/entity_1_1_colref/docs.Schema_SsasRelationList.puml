@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:docs.Schema_puml.adoc[prefix=..]" as docs.Schema_puml << V >> {
+entity "puml-link:dhw:sqldb:docs.Schema_puml.adoc[]" as docs.Schema_puml << V >> {
   --
   - PumlSchemaEr : (nvarchar(max))
   - PumlSchemaIndexEr : (nvarchar(max))
@@ -36,7 +37,7 @@ entity "puml-link:docs.Schema_puml.adoc[prefix=..]" as docs.Schema_puml << V >> 
   --
 }
 
-entity "puml-link:docs.Schema_SsasRelationList.adoc[prefix=..]" as docs.Schema_SsasRelationList << V >> {
+entity "puml-link:dhw:sqldb:docs.Schema_SsasRelationList.adoc[]" as docs.Schema_SsasRelationList << V >> {
   --
   - SchemaName : (nvarchar(128))
   SsasRelationList_PumlRelation : (nvarchar(max))
@@ -44,7 +45,7 @@ entity "puml-link:docs.Schema_SsasRelationList.adoc[prefix=..]" as docs.Schema_S
   --
 }
 
-entity "puml-link:docs.ssas_PumlRelation.adoc[prefix=..]" as docs.ssas_PumlRelation << V >> {
+entity "puml-link:dhw:sqldb:docs.ssas_PumlRelation.adoc[]" as docs.ssas_PumlRelation << V >> {
   --
   delete_referential_action : (tinyint)
   ForeignKey_fullname : (nvarchar(517))
@@ -80,11 +81,6 @@ entity "puml-link:docs.ssas_PumlRelation.adoc[prefix=..]" as docs.ssas_PumlRelat
 
 docs.Schema_SsasRelationList <.. docs.Schema_puml
 docs.ssas_PumlRelation <.. docs.Schema_SsasRelationList
-docs.ssas_PumlRelation::SchemaName <-- docs.Schema_SsasRelationList::SchemaName
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"docs.ssas_PumlRelation::SchemaName" <-- "docs.Schema_SsasRelationList::SchemaName"
 @enduml
 

@@ -22,14 +22,15 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:repo.ForeignKey_Indexes.adoc[prefix=..]" as repo.ForeignKey_Indexes << V >> {
-  **ForeignKey_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:repo.ForeignKey_Indexes.adoc[]" as repo.ForeignKey_Indexes << V >> {
   --
   delete_referential_action : (tinyint)
   ForeignKey_fullname : (nvarchar(261))
+  ForeignKey_guid : (uniqueidentifier)
   ForeignKey_name : (sysname)
   - is_MatchingDatatypePattern : (int)
   referenced_index_guid : (uniqueidentifier)
@@ -55,7 +56,7 @@ entity "puml-link:repo.ForeignKey_Indexes.adoc[prefix=..]" as repo.ForeignKey_In
   --
 }
 
-entity "puml-link:repo.ForeignKey_Indexes_union.adoc[prefix=..]" as repo.ForeignKey_Indexes_union << V >> {
+entity "puml-link:dhw:sqldb:repo.ForeignKey_Indexes_union.adoc[]" as repo.ForeignKey_Indexes_union << V >> {
   **ForeignKey_guid** : (uniqueidentifier)
   --
   delete_referential_action : (tinyint)
@@ -85,7 +86,7 @@ entity "puml-link:repo.ForeignKey_Indexes_union.adoc[prefix=..]" as repo.Foreign
   --
 }
 
-entity "puml-link:repo.ForeignKey_Indexes_union_T.adoc[prefix=..]" as repo.ForeignKey_Indexes_union_T << U >> {
+entity "puml-link:dhw:sqldb:repo.ForeignKey_Indexes_union_T.adoc[]" as repo.ForeignKey_Indexes_union_T << U >> {
   **ForeignKey_guid** : (uniqueidentifier)
   --
   delete_referential_action : (tinyint)
@@ -115,7 +116,7 @@ entity "puml-link:repo.ForeignKey_Indexes_union_T.adoc[prefix=..]" as repo.Forei
   --
 }
 
-entity "puml-link:repo.ForeignKey_ssas_Indexes.adoc[prefix=..]" as repo.ForeignKey_ssas_Indexes << V >> {
+entity "puml-link:dhw:sqldb:repo.ForeignKey_ssas_Indexes.adoc[]" as repo.ForeignKey_ssas_Indexes << V >> {
   --
   delete_referential_action : (tinyint)
   ForeignKey_fullname : (nvarchar(517))
@@ -145,11 +146,11 @@ entity "puml-link:repo.ForeignKey_ssas_Indexes.adoc[prefix=..]" as repo.ForeignK
   --
 }
 
-entity "puml-link:repo.ForeignKey_virtual_Indexes.adoc[prefix=..]" as repo.ForeignKey_virtual_Indexes << V >> {
-  - **ForeignKey_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:repo.ForeignKey_virtual_Indexes.adoc[]" as repo.ForeignKey_virtual_Indexes << V >> {
   --
   - delete_referential_action : (tinyint)
   - ForeignKey_fullname : (nvarchar(517))
+  - ForeignKey_guid : (uniqueidentifier)
   ForeignKey_name : (nvarchar(128))
   - is_MatchingDatatypePattern : (int)
   referenced_index_guid : (uniqueidentifier)
@@ -175,7 +176,7 @@ entity "puml-link:repo.ForeignKey_virtual_Indexes.adoc[prefix=..]" as repo.Forei
   --
 }
 
-entity "puml-link:repo.usp_PERSIST_ForeignKey_Indexes_union_T.adoc[prefix=..]" as repo.usp_PERSIST_ForeignKey_Indexes_union_T << P >> {
+entity "puml-link:dhw:sqldb:repo.usp_PERSIST_ForeignKey_Indexes_union_T.adoc[]" as repo.usp_PERSIST_ForeignKey_Indexes_union_T << P >> {
   --
   --
   --
@@ -186,34 +187,29 @@ repo.ForeignKey_Indexes_union <.. repo.ForeignKey_Indexes_union_T
 repo.ForeignKey_Indexes_union <.. repo.usp_PERSIST_ForeignKey_Indexes_union_T
 repo.ForeignKey_ssas_Indexes <.. repo.ForeignKey_Indexes_union
 repo.ForeignKey_virtual_Indexes <.. repo.ForeignKey_Indexes_union
-repo.ForeignKey_Indexes_union::delete_referential_action <-- repo.ForeignKey_Indexes_union_T::delete_referential_action
-repo.ForeignKey_Indexes_union::ForeignKey_fullname <-- repo.ForeignKey_Indexes_union_T::ForeignKey_fullname
-repo.ForeignKey_Indexes_union::ForeignKey_guid <-- repo.ForeignKey_Indexes_union_T::ForeignKey_guid
-repo.ForeignKey_Indexes_union::ForeignKey_name <-- repo.ForeignKey_Indexes_union_T::ForeignKey_name
-repo.ForeignKey_Indexes_union::is_MatchingDatatypePattern <-- repo.ForeignKey_Indexes_union_T::is_MatchingDatatypePattern
-repo.ForeignKey_Indexes_union::referenced_index_guid <-- repo.ForeignKey_Indexes_union_T::referenced_index_guid
-repo.ForeignKey_Indexes_union::referenced_index_name <-- repo.ForeignKey_Indexes_union_T::referenced_index_name
-repo.ForeignKey_Indexes_union::referenced_IndexPatternColumnDatatype <-- repo.ForeignKey_Indexes_union_T::referenced_IndexPatternColumnDatatype
-repo.ForeignKey_Indexes_union::referenced_IndexPatternColumnName <-- repo.ForeignKey_Indexes_union_T::referenced_IndexPatternColumnName
-repo.ForeignKey_Indexes_union::referenced_RepoObject_fullname <-- repo.ForeignKey_Indexes_union_T::referenced_RepoObject_fullname
-repo.ForeignKey_Indexes_union::referenced_RepoObject_fullname2 <-- repo.ForeignKey_Indexes_union_T::referenced_RepoObject_fullname2
-repo.ForeignKey_Indexes_union::referenced_RepoObject_guid <-- repo.ForeignKey_Indexes_union_T::referenced_RepoObject_guid
-repo.ForeignKey_Indexes_union::referenced_SysObject_name <-- repo.ForeignKey_Indexes_union_T::referenced_SysObject_name
-repo.ForeignKey_Indexes_union::referenced_SysObject_schema_name <-- repo.ForeignKey_Indexes_union_T::referenced_SysObject_schema_name
-repo.ForeignKey_Indexes_union::referencing_index_guid <-- repo.ForeignKey_Indexes_union_T::referencing_index_guid
-repo.ForeignKey_Indexes_union::referencing_index_name <-- repo.ForeignKey_Indexes_union_T::referencing_index_name
-repo.ForeignKey_Indexes_union::referencing_IndexPatternColumnDatatype <-- repo.ForeignKey_Indexes_union_T::referencing_IndexPatternColumnDatatype
-repo.ForeignKey_Indexes_union::referencing_IndexPatternColumnName <-- repo.ForeignKey_Indexes_union_T::referencing_IndexPatternColumnName
-repo.ForeignKey_Indexes_union::referencing_RepoObject_fullname <-- repo.ForeignKey_Indexes_union_T::referencing_RepoObject_fullname
-repo.ForeignKey_Indexes_union::referencing_RepoObject_fullname2 <-- repo.ForeignKey_Indexes_union_T::referencing_RepoObject_fullname2
-repo.ForeignKey_Indexes_union::referencing_RepoObject_guid <-- repo.ForeignKey_Indexes_union_T::referencing_RepoObject_guid
-repo.ForeignKey_Indexes_union::referencing_SysObject_name <-- repo.ForeignKey_Indexes_union_T::referencing_SysObject_name
-repo.ForeignKey_Indexes_union::referencing_SysObject_schema_name <-- repo.ForeignKey_Indexes_union_T::referencing_SysObject_schema_name
-repo.ForeignKey_Indexes_union::update_referential_action <-- repo.ForeignKey_Indexes_union_T::update_referential_action
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"repo.ForeignKey_Indexes_union::delete_referential_action" <-- "repo.ForeignKey_Indexes_union_T::delete_referential_action"
+"repo.ForeignKey_Indexes_union::ForeignKey_fullname" <-- "repo.ForeignKey_Indexes_union_T::ForeignKey_fullname"
+"repo.ForeignKey_Indexes_union::ForeignKey_guid" <-- "repo.ForeignKey_Indexes_union_T::ForeignKey_guid"
+"repo.ForeignKey_Indexes_union::ForeignKey_name" <-- "repo.ForeignKey_Indexes_union_T::ForeignKey_name"
+"repo.ForeignKey_Indexes_union::is_MatchingDatatypePattern" <-- "repo.ForeignKey_Indexes_union_T::is_MatchingDatatypePattern"
+"repo.ForeignKey_Indexes_union::referenced_index_guid" <-- "repo.ForeignKey_Indexes_union_T::referenced_index_guid"
+"repo.ForeignKey_Indexes_union::referenced_index_name" <-- "repo.ForeignKey_Indexes_union_T::referenced_index_name"
+"repo.ForeignKey_Indexes_union::referenced_IndexPatternColumnDatatype" <-- "repo.ForeignKey_Indexes_union_T::referenced_IndexPatternColumnDatatype"
+"repo.ForeignKey_Indexes_union::referenced_IndexPatternColumnName" <-- "repo.ForeignKey_Indexes_union_T::referenced_IndexPatternColumnName"
+"repo.ForeignKey_Indexes_union::referenced_RepoObject_fullname" <-- "repo.ForeignKey_Indexes_union_T::referenced_RepoObject_fullname"
+"repo.ForeignKey_Indexes_union::referenced_RepoObject_fullname2" <-- "repo.ForeignKey_Indexes_union_T::referenced_RepoObject_fullname2"
+"repo.ForeignKey_Indexes_union::referenced_RepoObject_guid" <-- "repo.ForeignKey_Indexes_union_T::referenced_RepoObject_guid"
+"repo.ForeignKey_Indexes_union::referenced_SysObject_name" <-- "repo.ForeignKey_Indexes_union_T::referenced_SysObject_name"
+"repo.ForeignKey_Indexes_union::referenced_SysObject_schema_name" <-- "repo.ForeignKey_Indexes_union_T::referenced_SysObject_schema_name"
+"repo.ForeignKey_Indexes_union::referencing_index_guid" <-- "repo.ForeignKey_Indexes_union_T::referencing_index_guid"
+"repo.ForeignKey_Indexes_union::referencing_index_name" <-- "repo.ForeignKey_Indexes_union_T::referencing_index_name"
+"repo.ForeignKey_Indexes_union::referencing_IndexPatternColumnDatatype" <-- "repo.ForeignKey_Indexes_union_T::referencing_IndexPatternColumnDatatype"
+"repo.ForeignKey_Indexes_union::referencing_IndexPatternColumnName" <-- "repo.ForeignKey_Indexes_union_T::referencing_IndexPatternColumnName"
+"repo.ForeignKey_Indexes_union::referencing_RepoObject_fullname" <-- "repo.ForeignKey_Indexes_union_T::referencing_RepoObject_fullname"
+"repo.ForeignKey_Indexes_union::referencing_RepoObject_fullname2" <-- "repo.ForeignKey_Indexes_union_T::referencing_RepoObject_fullname2"
+"repo.ForeignKey_Indexes_union::referencing_RepoObject_guid" <-- "repo.ForeignKey_Indexes_union_T::referencing_RepoObject_guid"
+"repo.ForeignKey_Indexes_union::referencing_SysObject_name" <-- "repo.ForeignKey_Indexes_union_T::referencing_SysObject_name"
+"repo.ForeignKey_Indexes_union::referencing_SysObject_schema_name" <-- "repo.ForeignKey_Indexes_union_T::referencing_SysObject_schema_name"
+"repo.ForeignKey_Indexes_union::update_referential_action" <-- "repo.ForeignKey_Indexes_union_T::update_referential_action"
 @enduml
 

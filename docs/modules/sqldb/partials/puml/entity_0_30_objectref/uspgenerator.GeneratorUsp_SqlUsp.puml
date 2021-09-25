@@ -22,35 +22,36 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:docs.usp_AntoraExport.adoc[prefix=..]" as docs.usp_AntoraExport << P >> {
-  --
-}
-
-entity "puml-link:property.RepoObjectProperty_Collect_source_uspgenerator.adoc[prefix=..]" as property.RepoObjectProperty_Collect_source_uspgenerator << V >> {
+entity "puml-link:dhw:sqldb:property.RepoObjectProperty_Collect_source_uspgenerator.adoc[]" as property.RepoObjectProperty_Collect_source_uspgenerator << V >> {
   **RepoObject_guid** : (uniqueidentifier)
   - **property_name** : (varchar(14))
   --
 }
 
-entity "puml-link:property.usp_RepoObjectProperty_collect.adoc[prefix=..]" as property.usp_RepoObjectProperty_collect << P >> {
+entity "puml-link:dhw:sqldb:property.usp_RepoObject_Inheritance.adoc[]" as property.usp_RepoObject_Inheritance << P >> {
   --
 }
 
-entity "puml-link:uspgenerator.GeneratorUsp_SqlUsp.adoc[prefix=..]" as uspgenerator.GeneratorUsp_SqlUsp << V >> {
-  - **usp_id** : (int)
+entity "puml-link:dhw:sqldb:property.usp_RepoObjectProperty_collect.adoc[]" as property.usp_RepoObjectProperty_collect << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.usp_main.adoc[]" as repo.usp_main << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:uspgenerator.GeneratorUsp_SqlUsp.adoc[]" as uspgenerator.GeneratorUsp_SqlUsp << V >> {
   --
 }
 
 property.RepoObjectProperty_Collect_source_uspgenerator <.. property.usp_RepoObjectProperty_collect
-property.usp_RepoObjectProperty_collect <.. docs.usp_AntoraExport
+property.usp_RepoObject_Inheritance <.. repo.usp_main
+property.usp_RepoObjectProperty_collect <.. repo.usp_main
+property.usp_RepoObjectProperty_collect <.. property.usp_RepoObject_Inheritance
 uspgenerator.GeneratorUsp_SqlUsp <.. property.RepoObjectProperty_Collect_source_uspgenerator
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
 @enduml
 

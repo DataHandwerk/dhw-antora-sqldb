@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:repo.ForeignKey_virtual.adoc[prefix=..]" as repo.ForeignKey_virtual << U >> {
+entity "puml-link:dhw:sqldb:repo.ForeignKey_virtual.adoc[]" as repo.ForeignKey_virtual << U >> {
 **PK_ForeignKey_virtual**
 
 ..
@@ -42,19 +43,14 @@ referenced_index_guid; uniqueidentifier
 referencing_index_guid; uniqueidentifier
 }
 
-entity "puml-link:repo.Index_Settings.adoc[prefix=..]" as repo.Index_Settings << U >> {
+entity "puml-link:dhw:sqldb:repo.Index_Settings.adoc[]" as repo.Index_Settings << U >> {
 **PK_Index_Settings**
 
 ..
 index_guid; uniqueidentifier
 }
 
-repo.Index_Settings::PK_Index_Settings <-- repo.ForeignKey_virtual::idx_ForeignKey_virtual__2
-repo.Index_Settings::PK_Index_Settings <-- repo.ForeignKey_virtual::UK_ForeignKey_virtual__1
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"repo.Index_Settings::PK_Index_Settings" <-- "repo.ForeignKey_virtual::idx_ForeignKey_virtual__2"
+"repo.Index_Settings::PK_Index_Settings" <-- "repo.ForeignKey_virtual::UK_ForeignKey_virtual__1"
 @enduml
 

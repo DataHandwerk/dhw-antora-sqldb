@@ -22,16 +22,23 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:logs.usp_ExecutionLog_insert.adoc[prefix=..]" as logs.usp_ExecutionLog_insert << P >> {
+entity "puml-link:dhw:sqldb:logs.usp_ExecutionLog_insert.adoc[]" as logs.usp_ExecutionLog_insert << P >> {
   --
   --
   --
 }
 
-entity "puml-link:ssas.model_json_312_tables_measures.adoc[prefix=..]" as ssas.model_json_312_tables_measures << V >> {
+entity "puml-link:dhw:sqldb:repo.usp_sync_guid_ssas.adoc[]" as repo.usp_sync_guid_ssas << P >> {
+  --
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json_312_tables_measures.adoc[]" as ssas.model_json_312_tables_measures << V >> {
   - **databasename** : (nvarchar(128))
   - **tables_name** : (nvarchar(128))
   **tables_measures_name** : (nvarchar(500))
@@ -48,12 +55,10 @@ entity "puml-link:ssas.model_json_312_tables_measures.adoc[prefix=..]" as ssas.m
   --
 }
 
-entity "puml-link:ssas.model_json_312_tables_measures_T.adoc[prefix=..]" as ssas.model_json_312_tables_measures_T << U >> {
-  - **databasename** : (nvarchar(128))
-  - **tables_name** : (nvarchar(128))
-  **tables_measures_name** : (nvarchar(500))
+entity "puml-link:dhw:sqldb:ssas.model_json_312_tables_measures_T.adoc[]" as ssas.model_json_312_tables_measures_T << U >> {
+  - **Measure_guid** : (uniqueidentifier)
   --
-  - Measure_guid : (uniqueidentifier)
+  - databasename : (nvarchar(128))
   - RepoObject_guid : (uniqueidentifier)
   tables_measures_description : (nvarchar(max))
   tables_measures_description_ja : (nvarchar(max))
@@ -62,11 +67,13 @@ entity "puml-link:ssas.model_json_312_tables_measures_T.adoc[prefix=..]" as ssas
   tables_measures_expression_ja : (nvarchar(max))
   tables_measures_formatString : (nvarchar(500))
   tables_measures_isHidden : (bit)
+  tables_measures_name : (nvarchar(500))
+  - tables_name : (nvarchar(128))
   --
   --
 }
 
-entity "puml-link:ssas.usp_PERSIST_model_json_312_tables_measures_T.adoc[prefix=..]" as ssas.usp_PERSIST_model_json_312_tables_measures_T << P >> {
+entity "puml-link:dhw:sqldb:ssas.usp_PERSIST_model_json_312_tables_measures_T.adoc[]" as ssas.usp_PERSIST_model_json_312_tables_measures_T << P >> {
   --
   --
   --
@@ -75,11 +82,7 @@ entity "puml-link:ssas.usp_PERSIST_model_json_312_tables_measures_T.adoc[prefix=
 logs.usp_ExecutionLog_insert <.. ssas.usp_PERSIST_model_json_312_tables_measures_T
 ssas.model_json_312_tables_measures <.. ssas.usp_PERSIST_model_json_312_tables_measures_T
 ssas.model_json_312_tables_measures_T <.. ssas.usp_PERSIST_model_json_312_tables_measures_T
-
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
+ssas.usp_PERSIST_model_json_312_tables_measures_T <.. repo.usp_sync_guid_ssas
 
 @enduml
 

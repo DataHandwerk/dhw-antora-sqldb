@@ -22,16 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:docs.fs_cleanStringForAnchorId.adoc[prefix=..]" as docs.fs_cleanStringForAnchorId << FN >> {
-  --
-  --
-  --
-}
-
-entity "puml-link:reference.RepoObjectColumn_ReferencedList.adoc[prefix=..]" as reference.RepoObjectColumn_ReferencedList << V >> {
+entity "puml-link:dhw:sqldb:reference.RepoObjectColumn_ReferencedList.adoc[]" as reference.RepoObjectColumn_ReferencedList << V >> {
   --
   AntoraReferencedColumnList : (nvarchar(max))
   Referencing_fullname : (nvarchar(261))
@@ -44,19 +39,27 @@ entity "puml-link:reference.RepoObjectColumn_ReferencedList.adoc[prefix=..]" as 
   --
 }
 
-entity "puml-link:reference.RepoObjectColumn_ReferencingReferenced.adoc[prefix=..]" as reference.RepoObjectColumn_ReferencingReferenced << V >> {
-  - **Referenced_guid** : (uniqueidentifier)
-  - **Referencing_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:reference.RepoObjectColumn_ReferencedReferencing.adoc[]" as reference.RepoObjectColumn_ReferencedReferencing << V >> {
   --
+  - referenced_AntoraXref : (nvarchar(max))
+  referenced_external_AntoraComponent : (nvarchar(128))
+  referenced_external_AntoraModule : (nvarchar(128))
   - Referenced_fullname : (nvarchar(261))
   - Referenced_fullname2 : (nvarchar(257))
+  - Referenced_guid : (uniqueidentifier)
+  - referenced_is_external : (bit)
   Referenced_RepoObject_guid : (uniqueidentifier)
   Referenced_type : (char(2))
   - ReferencedColumn_fullname : (nvarchar(392))
   - ReferencedColumn_fullname2 : (nvarchar(386))
   ReferencedColumn_name : (nvarchar(128))
+  - referencing_AntoraXref : (nvarchar(max))
+  referencing_external_AntoraComponent : (nvarchar(128))
+  referencing_external_AntoraModule : (nvarchar(128))
   - Referencing_fullname : (nvarchar(261))
   - Referencing_fullname2 : (nvarchar(257))
+  - Referencing_guid : (uniqueidentifier)
+  - referencing_is_external : (bit)
   Referencing_RepoObject_guid : (uniqueidentifier)
   Referencing_type : (char(2))
   - ReferencingColumn_fullname : (nvarchar(392))
@@ -66,7 +69,7 @@ entity "puml-link:reference.RepoObjectColumn_ReferencingReferenced.adoc[prefix=.
   --
 }
 
-entity "puml-link:repo.RepoObjectColumn_gross2.adoc[prefix=..]" as repo.RepoObjectColumn_gross2 << V >> {
+entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_gross2.adoc[]" as repo.RepoObjectColumn_gross2 << V >> {
   --
   AntoraReferencedColumnList : (nvarchar(max))
   AntoraReferencingColumnList : (nvarchar(max))
@@ -79,6 +82,7 @@ entity "puml-link:repo.RepoObjectColumn_gross2.adoc[prefix=..]" as repo.RepoObje
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
   InheritanceDefinition : (nvarchar(4000))
   InheritanceType : (tinyint)
+  - is_external : (bit)
   is_index_primary_key : (bit)
   is_persistence_no_check : (bit)
   is_persistence_no_include : (bit)
@@ -152,16 +156,8 @@ entity "puml-link:repo.RepoObjectColumn_gross2.adoc[prefix=..]" as repo.RepoObje
   --
 }
 
-docs.fs_cleanStringForAnchorId <.. reference.RepoObjectColumn_ReferencedList
 reference.RepoObjectColumn_ReferencedList <.. repo.RepoObjectColumn_gross2
-reference.RepoObjectColumn_ReferencingReferenced <.. reference.RepoObjectColumn_ReferencedList
-reference.RepoObjectColumn_ReferencedList::AntoraReferencedColumnList <-- repo.RepoObjectColumn_gross2::AntoraReferencedColumnList
-reference.RepoObjectColumn_ReferencingReferenced::Referencing_fullname <-- reference.RepoObjectColumn_ReferencedList::Referencing_fullname
-reference.RepoObjectColumn_ReferencingReferenced::Referencing_guid <-- reference.RepoObjectColumn_ReferencedList::Referencing_guid
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+reference.RepoObjectColumn_ReferencedReferencing <.. reference.RepoObjectColumn_ReferencedList
+"reference.RepoObjectColumn_ReferencedList::AntoraReferencedColumnList" <-- "repo.RepoObjectColumn_gross2::AntoraReferencedColumnList"
 @enduml
 

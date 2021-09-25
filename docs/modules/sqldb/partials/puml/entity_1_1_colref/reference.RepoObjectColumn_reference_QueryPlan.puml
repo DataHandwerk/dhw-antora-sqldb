@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:config.ftv_dwh_database.adoc[prefix=..]" as config.ftv_dwh_database << IF >> {
+entity "puml-link:dhw:sqldb:config.ftv_dwh_database.adoc[]" as config.ftv_dwh_database << IF >> {
   --
   dwh_database_id : (smallint)
   dwh_database_name : (nvarchar(128))
@@ -33,17 +34,23 @@ entity "puml-link:config.ftv_dwh_database.adoc[prefix=..]" as config.ftv_dwh_dat
   --
 }
 
-entity "puml-link:reference.RepoObject_reference_T.adoc[prefix=..]" as reference.RepoObject_reference_T << U >> {
+entity "puml-link:dhw:sqldb:reference.RepoObject_reference_T.adoc[]" as reference.RepoObject_reference_T << U >> {
   **referenced_RepoObject_guid** : (uniqueidentifier)
   **referencing_RepoObject_guid** : (uniqueidentifier)
   --
   - is_ReversePersistenceViaView : (bit)
   referenced_entity_name : (nvarchar(128))
+  referenced_external_AntoraComponent : (nvarchar(128))
+  referenced_external_AntoraModule : (nvarchar(128))
+  referenced_is_external : (int)
   - referenced_is_PersistenceSource : (bit)
   - referenced_is_PersistenceTarget : (bit)
   referenced_schema_name : (nvarchar(128))
   referenced_type : (char(2))
   referencing_entity_name : (nvarchar(128))
+  referencing_external_AntoraComponent : (nvarchar(128))
+  referencing_external_AntoraModule : (nvarchar(128))
+  referencing_is_external : (int)
   - referencing_is_PersistenceTarget : (bit)
   - referencing_is_PersistenceUspSourceRef : (bit)
   referencing_is_PersistenceUspTargetRef : (bit)
@@ -51,13 +58,15 @@ entity "puml-link:reference.RepoObject_reference_T.adoc[prefix=..]" as reference
   referencing_type : (varchar(2))
   # referenced_fullname : (nvarchar(261))
   # referenced_fullname2 : (nvarchar(257))
+  ~ referenced_puml_entity : (nvarchar(4000))
   # referencing_fullname : (nvarchar(261))
   # referencing_fullname2 : (nvarchar(257))
+  ~ referencing_puml_entity : (nvarchar(4000))
   --
   --
 }
 
-entity "puml-link:reference.RepoObjectColumn_reference_QueryPlan.adoc[prefix=..]" as reference.RepoObjectColumn_reference_QueryPlan << V >> {
+entity "puml-link:dhw:sqldb:reference.RepoObjectColumn_reference_QueryPlan.adoc[]" as reference.RepoObjectColumn_reference_QueryPlan << V >> {
   **referencing_id** : (int)
   **referencing_minor_id** : (int)
   **referenced_id** : (int)
@@ -90,7 +99,7 @@ entity "puml-link:reference.RepoObjectColumn_reference_QueryPlan.adoc[prefix=..]
   --
 }
 
-entity "puml-link:reference.RepoObjectSource_QueryPlan.adoc[prefix=..]" as reference.RepoObjectSource_QueryPlan << U >> {
+entity "puml-link:dhw:sqldb:reference.RepoObjectSource_QueryPlan.adoc[]" as reference.RepoObjectSource_QueryPlan << U >> {
   --
   const_info : (xml)
   const_value : (nvarchar(4000))
@@ -110,7 +119,7 @@ entity "puml-link:reference.RepoObjectSource_QueryPlan.adoc[prefix=..]" as refer
   --
 }
 
-entity "puml-link:reference.SysObjectColumn_QueryPlanExpression.adoc[prefix=..]" as reference.SysObjectColumn_QueryPlanExpression << V >> {
+entity "puml-link:dhw:sqldb:reference.SysObjectColumn_QueryPlanExpression.adoc[]" as reference.SysObjectColumn_QueryPlanExpression << V >> {
   --
   RepoObject_guid : (uniqueidentifier)
   SysObjectColumn_column_id : (int)
@@ -119,15 +128,19 @@ entity "puml-link:reference.SysObjectColumn_QueryPlanExpression.adoc[prefix=..]"
   --
 }
 
-entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
   has_execution_plan_issue : (bit)
   has_get_referenced_issue : (bit)
+  Inheritance_Source_fullname : (nvarchar(261))
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
   InheritanceDefinition : (nvarchar(4000))
   InheritanceType : (tinyint)
   - is_DocsExclude : (bit)
+  - is_external : (bit)
   is_repo_managed : (bit)
   is_required_ObjectMerge : (bit)
   - is_ssas : (bit)
@@ -162,8 +175,7 @@ entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
   --
 }
 
-entity "puml-link:repo.RepoObjectColumn_gross.adoc[prefix=..]" as repo.RepoObjectColumn_gross << V >> {
-  - **RepoObjectColumn_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_gross.adoc[]" as repo.RepoObjectColumn_gross << V >> {
   --
   - Column_name : (nvarchar(128))
   Description : (nvarchar(max))
@@ -172,6 +184,7 @@ entity "puml-link:repo.RepoObjectColumn_gross.adoc[prefix=..]" as repo.RepoObjec
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
   InheritanceDefinition : (nvarchar(4000))
   InheritanceType : (tinyint)
+  - is_external : (bit)
   is_persistence_no_check : (bit)
   is_persistence_no_include : (bit)
   is_persistence_no_update : (bit)
@@ -217,6 +230,7 @@ entity "puml-link:repo.RepoObjectColumn_gross.adoc[prefix=..]" as repo.RepoObjec
   RepoObjectColumn_column_id : (int)
   - RepoObjectColumn_fullname : (nvarchar(520))
   - RepoObjectColumn_fullname2 : (nvarchar(386))
+  - RepoObjectColumn_guid : (uniqueidentifier)
   - RepoObjectColumn_name : (nvarchar(128))
   - SysObject_fullname : (nvarchar(261))
   - SysObject_fullname2 : (nvarchar(257))
@@ -247,30 +261,25 @@ reference.RepoObjectColumn_reference_QueryPlan <.. reference.SysObjectColumn_Que
 reference.RepoObjectSource_QueryPlan <.. reference.RepoObjectColumn_reference_QueryPlan
 repo.RepoObject <.. reference.RepoObjectColumn_reference_QueryPlan
 repo.RepoObjectColumn_gross <.. reference.RepoObjectColumn_reference_QueryPlan
-reference.RepoObjectSource_QueryPlan::is_source_column_name_expression <-- reference.RepoObjectColumn_reference_QueryPlan::is_source_column_name_expression
-reference.RepoObjectSource_QueryPlan::is_target_column_name_expression <-- reference.RepoObjectColumn_reference_QueryPlan::is_target_column_name_expression
-reference.RepoObjectSource_QueryPlan::RepoObject_guid <-- reference.RepoObjectColumn_reference_QueryPlan::referencing_RepoObject_guid
-reference.RepoObjectSource_QueryPlan::source_column_name <-- reference.RepoObjectColumn_reference_QueryPlan::referenced_column_name
-reference.RepoObjectSource_QueryPlan::source_schema_name <-- reference.RepoObjectColumn_reference_QueryPlan::source_schema_name_quoted
-reference.RepoObjectSource_QueryPlan::source_table_name <-- reference.RepoObjectColumn_reference_QueryPlan::source_table_name_quoted
-reference.RepoObjectSource_QueryPlan::target_column_name <-- reference.RepoObjectColumn_reference_QueryPlan::referencing_column_name
-repo.RepoObject::SysObject_id <-- reference.RepoObjectColumn_reference_QueryPlan::referencing_id
-repo.RepoObject::SysObject_name <-- reference.RepoObjectColumn_reference_QueryPlan::referencing_entity_name
-repo.RepoObject::SysObject_schema_name <-- reference.RepoObjectColumn_reference_QueryPlan::referencing_schema_name
-repo.RepoObject::SysObject_type <-- reference.RepoObjectColumn_reference_QueryPlan::referencing_type
-repo.RepoObjectColumn_gross::RepoObject_guid <-- reference.RepoObjectColumn_reference_QueryPlan::referenced_RepoObject_guid
-repo.RepoObjectColumn_gross::RepoObjectColumn_guid <-- reference.RepoObjectColumn_reference_QueryPlan::referencing_RepoObjectColumn_guid
-repo.RepoObjectColumn_gross::RepoObjectColumn_guid <-- reference.RepoObjectColumn_reference_QueryPlan::referenced_RepoObjectColumn_guid
-repo.RepoObjectColumn_gross::SysObject_id <-- reference.RepoObjectColumn_reference_QueryPlan::referenced_id
-repo.RepoObjectColumn_gross::SysObject_name <-- reference.RepoObjectColumn_reference_QueryPlan::referenced_entity_name
-repo.RepoObjectColumn_gross::SysObject_schema_name <-- reference.RepoObjectColumn_reference_QueryPlan::referenced_schema_name
-repo.RepoObjectColumn_gross::SysObject_type <-- reference.RepoObjectColumn_reference_QueryPlan::referenced_type
-repo.RepoObjectColumn_gross::SysObjectColumn_column_id <-- reference.RepoObjectColumn_reference_QueryPlan::referencing_minor_id
-repo.RepoObjectColumn_gross::SysObjectColumn_column_id <-- reference.RepoObjectColumn_reference_QueryPlan::referenced_minor_id
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"reference.RepoObjectSource_QueryPlan::is_source_column_name_expression" <-- "reference.RepoObjectColumn_reference_QueryPlan::is_source_column_name_expression"
+"reference.RepoObjectSource_QueryPlan::is_target_column_name_expression" <-- "reference.RepoObjectColumn_reference_QueryPlan::is_target_column_name_expression"
+"reference.RepoObjectSource_QueryPlan::RepoObject_guid" <-- "reference.RepoObjectColumn_reference_QueryPlan::referencing_RepoObject_guid"
+"reference.RepoObjectSource_QueryPlan::source_column_name" <-- "reference.RepoObjectColumn_reference_QueryPlan::referenced_column_name"
+"reference.RepoObjectSource_QueryPlan::source_schema_name" <-- "reference.RepoObjectColumn_reference_QueryPlan::source_schema_name_quoted"
+"reference.RepoObjectSource_QueryPlan::source_table_name" <-- "reference.RepoObjectColumn_reference_QueryPlan::source_table_name_quoted"
+"reference.RepoObjectSource_QueryPlan::target_column_name" <-- "reference.RepoObjectColumn_reference_QueryPlan::referencing_column_name"
+"repo.RepoObject::SysObject_id" <-- "reference.RepoObjectColumn_reference_QueryPlan::referencing_id"
+"repo.RepoObject::SysObject_name" <-- "reference.RepoObjectColumn_reference_QueryPlan::referencing_entity_name"
+"repo.RepoObject::SysObject_schema_name" <-- "reference.RepoObjectColumn_reference_QueryPlan::referencing_schema_name"
+"repo.RepoObject::SysObject_type" <-- "reference.RepoObjectColumn_reference_QueryPlan::referencing_type"
+"repo.RepoObjectColumn_gross::RepoObject_guid" <-- "reference.RepoObjectColumn_reference_QueryPlan::referenced_RepoObject_guid"
+"repo.RepoObjectColumn_gross::RepoObjectColumn_guid" <-- "reference.RepoObjectColumn_reference_QueryPlan::referencing_RepoObjectColumn_guid"
+"repo.RepoObjectColumn_gross::RepoObjectColumn_guid" <-- "reference.RepoObjectColumn_reference_QueryPlan::referenced_RepoObjectColumn_guid"
+"repo.RepoObjectColumn_gross::SysObject_id" <-- "reference.RepoObjectColumn_reference_QueryPlan::referenced_id"
+"repo.RepoObjectColumn_gross::SysObject_name" <-- "reference.RepoObjectColumn_reference_QueryPlan::referenced_entity_name"
+"repo.RepoObjectColumn_gross::SysObject_schema_name" <-- "reference.RepoObjectColumn_reference_QueryPlan::referenced_schema_name"
+"repo.RepoObjectColumn_gross::SysObject_type" <-- "reference.RepoObjectColumn_reference_QueryPlan::referenced_type"
+"repo.RepoObjectColumn_gross::SysObjectColumn_column_id" <-- "reference.RepoObjectColumn_reference_QueryPlan::referencing_minor_id"
+"repo.RepoObjectColumn_gross::SysObjectColumn_column_id" <-- "reference.RepoObjectColumn_reference_QueryPlan::referenced_minor_id"
 @enduml
 

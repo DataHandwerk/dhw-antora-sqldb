@@ -22,18 +22,23 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
   has_execution_plan_issue : (bit)
   has_get_referenced_issue : (bit)
+  Inheritance_Source_fullname : (nvarchar(261))
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
   InheritanceDefinition : (nvarchar(4000))
   InheritanceType : (tinyint)
   - is_DocsExclude : (bit)
+  - is_external : (bit)
   is_repo_managed : (bit)
   is_required_ObjectMerge : (bit)
   - is_ssas : (bit)
@@ -68,7 +73,7 @@ entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
   --
 }
 
-entity "puml-link:workflow.Workflow.adoc[prefix=..]" as workflow.Workflow << U >> {
+entity "puml-link:dhw:sqldb:workflow.Workflow.adoc[]" as workflow.Workflow << U >> {
   - **id** : (int)
   --
   Description : (nvarchar(4000))
@@ -79,7 +84,7 @@ entity "puml-link:workflow.Workflow.adoc[prefix=..]" as workflow.Workflow << U >
   --
 }
 
-entity "puml-link:workflow.Workflow_SqlUsp.adoc[prefix=..]" as workflow.Workflow_SqlUsp << V >> {
+entity "puml-link:dhw:sqldb:workflow.Workflow_SqlUsp.adoc[]" as workflow.Workflow_SqlUsp << V >> {
   --
   - SqlUsp : (nvarchar(max))
   UspList : (nvarchar(max))
@@ -89,7 +94,7 @@ entity "puml-link:workflow.Workflow_SqlUsp.adoc[prefix=..]" as workflow.Workflow
   --
 }
 
-entity "puml-link:workflow.Workflow_UspList.adoc[prefix=..]" as workflow.Workflow_UspList << V >> {
+entity "puml-link:dhw:sqldb:workflow.Workflow_UspList.adoc[]" as workflow.Workflow_UspList << V >> {
   --
   UspList : (nvarchar(max))
   - Workflow_id : (int)
@@ -98,7 +103,7 @@ entity "puml-link:workflow.Workflow_UspList.adoc[prefix=..]" as workflow.Workflo
   --
 }
 
-entity "puml-link:workflow.WorkflowStep_Sortorder.adoc[prefix=..]" as workflow.WorkflowStep_Sortorder << U >> {
+entity "puml-link:dhw:sqldb:workflow.WorkflowStep_Sortorder.adoc[]" as workflow.WorkflowStep_Sortorder << U >> {
   - **Workflow_id** : (int)
   - **Procedure_RepoObject_guid** : (uniqueidentifier)
   --
@@ -111,14 +116,9 @@ repo.RepoObject <.. workflow.Workflow_UspList
 workflow.Workflow <.. workflow.Workflow_UspList
 workflow.Workflow_UspList <.. workflow.Workflow_SqlUsp
 workflow.WorkflowStep_Sortorder <.. workflow.Workflow_UspList
-workflow.Workflow_UspList::UspList <-- workflow.Workflow_SqlUsp::UspList
-workflow.Workflow_UspList::Workflow_id <-- workflow.Workflow_SqlUsp::Workflow_id
-workflow.Workflow_UspList::Workflow_Name <-- workflow.Workflow_SqlUsp::Workflow_Name
-workflow.WorkflowStep_Sortorder::Workflow_id <-- workflow.Workflow_UspList::Workflow_id
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"workflow.Workflow_UspList::UspList" <-- "workflow.Workflow_SqlUsp::UspList"
+"workflow.Workflow_UspList::Workflow_id" <-- "workflow.Workflow_SqlUsp::Workflow_id"
+"workflow.Workflow_UspList::Workflow_Name" <-- "workflow.Workflow_SqlUsp::Workflow_Name"
+"workflow.WorkflowStep_Sortorder::Workflow_id" <-- "workflow.Workflow_UspList::Workflow_id"
 @enduml
 

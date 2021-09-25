@@ -22,18 +22,23 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
   has_execution_plan_issue : (bit)
   has_get_referenced_issue : (bit)
+  Inheritance_Source_fullname : (nvarchar(261))
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
   InheritanceDefinition : (nvarchar(4000))
   InheritanceType : (tinyint)
   - is_DocsExclude : (bit)
+  - is_external : (bit)
   is_repo_managed : (bit)
   is_required_ObjectMerge : (bit)
   - is_ssas : (bit)
@@ -68,7 +73,7 @@ entity "puml-link:repo.RepoObject.adoc[prefix=..]" as repo.RepoObject << U >> {
   --
 }
 
-entity "puml-link:repo.RepoObjectColumn.adoc[prefix=..]" as repo.RepoObjectColumn << U >> {
+entity "puml-link:dhw:sqldb:repo.RepoObjectColumn.adoc[]" as repo.RepoObjectColumn << U >> {
   - **RepoObjectColumn_guid** : (uniqueidentifier)
   --
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
@@ -110,7 +115,7 @@ entity "puml-link:repo.RepoObjectColumn.adoc[prefix=..]" as repo.RepoObjectColum
   --
 }
 
-entity "puml-link:sqlparse.RepoObject_SqlModules_44_from_Identifier_QuoteName.adoc[prefix=..]" as sqlparse.RepoObject_SqlModules_44_from_Identifier_QuoteName << V >> {
+entity "puml-link:dhw:sqldb:sqlparse.RepoObject_SqlModules_44_from_Identifier_QuoteName.adoc[]" as sqlparse.RepoObject_SqlModules_44_from_Identifier_QuoteName << V >> {
   --
   alias : (nvarchar(max))
   alias_QuoteName : (nvarchar(max))
@@ -131,7 +136,7 @@ entity "puml-link:sqlparse.RepoObject_SqlModules_44_from_Identifier_QuoteName.ad
   --
 }
 
-entity "puml-link:sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union_T.adoc[prefix=..]" as sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union_T << U >> {
+entity "puml-link:dhw:sqldb:sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union_T.adoc[]" as sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union_T << U >> {
   --
   alias_QuoteName : (nvarchar(max))
   class : (nvarchar(500))
@@ -145,7 +150,7 @@ entity "puml-link:sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union_T.ado
   --
 }
 
-entity "puml-link:sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias.adoc[prefix=..]" as sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias << V >> {
+entity "puml-link:dhw:sqldb:sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias.adoc[]" as sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias << V >> {
   --
   alias_QuoteName : (nvarchar(max))
   normalized : (nvarchar(max))
@@ -163,7 +168,7 @@ entity "puml-link:sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias.adoc[
   --
 }
 
-entity "puml-link:sqlparse.RepoObject_SqlModules_79_reference_union.adoc[prefix=..]" as sqlparse.RepoObject_SqlModules_79_reference_union << V >> {
+entity "puml-link:dhw:sqldb:sqlparse.RepoObject_SqlModules_79_reference_union.adoc[]" as sqlparse.RepoObject_SqlModules_79_reference_union << V >> {
   --
   alias_QuoteName : (nvarchar(max))
   normalized : (nvarchar(max))
@@ -186,16 +191,11 @@ repo.RepoObjectColumn <.. sqlparse.RepoObject_SqlModules_72_reference_NoTableAli
 sqlparse.RepoObject_SqlModules_44_from_Identifier_QuoteName <.. sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias
 sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union_T <.. sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias
 sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias <.. sqlparse.RepoObject_SqlModules_79_reference_union
-repo.RepoObject::RepoObject_guid <-- sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias::source_RepoObject_guid
-repo.RepoObject::SysObject_fullname <-- sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias::source_SysObject_fullname
-repo.RepoObjectColumn::RepoObjectColumn_guid <-- sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias::RepoObjectColumn_guid
-repo.RepoObjectColumn::RepoObjectColumn_guid <-- sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias::source_RepoObjectColumn_guid
-repo.RepoObjectColumn::RepoObjectColumn_name <-- sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias::RepoObjectColumn_name
-repo.RepoObjectColumn::RepoObjectColumn_name <-- sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias::source_RepoObjectColumn_name
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"repo.RepoObject::RepoObject_guid" <-- "sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias::source_RepoObject_guid"
+"repo.RepoObject::SysObject_fullname" <-- "sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias::source_SysObject_fullname"
+"repo.RepoObjectColumn::RepoObjectColumn_guid" <-- "sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias::RepoObjectColumn_guid"
+"repo.RepoObjectColumn::RepoObjectColumn_guid" <-- "sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias::source_RepoObjectColumn_guid"
+"repo.RepoObjectColumn::RepoObjectColumn_name" <-- "sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias::RepoObjectColumn_name"
+"repo.RepoObjectColumn::RepoObjectColumn_name" <-- "sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias::source_RepoObjectColumn_name"
 @enduml
 

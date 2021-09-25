@@ -22,10 +22,11 @@ skinparam class {
   BackgroundColor<<U>> White
   BackgroundColor<<V>> WhiteSmoke
   BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
 }
 
 
-entity "puml-link:repo.RepoObject_SSAS_src.adoc[prefix=..]" as repo.RepoObject_SSAS_src << V >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject_SSAS_src.adoc[]" as repo.RepoObject_SSAS_src << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
   - is_repo_managed : (int)
@@ -40,14 +41,17 @@ entity "puml-link:repo.RepoObject_SSAS_src.adoc[prefix=..]" as repo.RepoObject_S
   --
 }
 
-entity "puml-link:repo.RepoObject_SSAS_tgt.adoc[prefix=..]" as repo.RepoObject_SSAS_tgt << V >> {
+entity "puml-link:dhw:sqldb:repo.RepoObject_SSAS_tgt.adoc[]" as repo.RepoObject_SSAS_tgt << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
   has_execution_plan_issue : (bit)
   has_get_referenced_issue : (bit)
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
   InheritanceDefinition : (nvarchar(4000))
   InheritanceType : (tinyint)
+  is_external : (bit)
   - is_repo_managed : (int)
   is_required_ObjectMerge : (bit)
   - is_ssas : (int)
@@ -71,13 +75,31 @@ entity "puml-link:repo.RepoObject_SSAS_tgt.adoc[prefix=..]" as repo.RepoObject_S
   --
 }
 
-entity "puml-link:repo.usp_PERSIST_RepoObject_SSAS_tgt.adoc[prefix=..]" as repo.usp_PERSIST_RepoObject_SSAS_tgt << P >> {
+entity "puml-link:dhw:sqldb:repo.RepoSchema.adoc[]" as repo.RepoSchema << U >> {
+  - **RepoSchema_guid** : (uniqueidentifier)
+  --
+  - is_ssas : (bit)
+  is_SysSchema_missing : (bit)
+  - MeasuresRepoObjekt_guid : (uniqueidentifier)
+  RepoSchema_ms_description : (nvarchar(4000))
+  - RepoSchema_name : (nvarchar(128))
+  SysSchema_id : (int)
+  - SysSchema_name : (nvarchar(128))
+  ~ has_different_sys_names : (bit)
+  # is_RepoSchema_name_uniqueidentifier : (int)
+  # is_SysSchema_name_uniqueidentifier : (int)
+  # MeasuresRepoObjekt_name : (varchar(9))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.usp_PERSIST_RepoObject_SSAS_tgt.adoc[]" as repo.usp_PERSIST_RepoObject_SSAS_tgt << P >> {
   --
   --
   --
 }
 
-entity "puml-link:ssas.model_json_31_tables_T.adoc[prefix=..]" as ssas.model_json_31_tables_T << U >> {
+entity "puml-link:dhw:sqldb:ssas.model_json_31_tables_T.adoc[]" as ssas.model_json_31_tables_T << U >> {
   - **databasename** : (nvarchar(128))
   **tables_name** : (nvarchar(128))
   --
@@ -88,7 +110,7 @@ entity "puml-link:ssas.model_json_31_tables_T.adoc[prefix=..]" as ssas.model_jso
   tables_description : (nvarchar(max))
   tables_description_ja : (nvarchar(max))
   tables_hierarchies_ja : (nvarchar(max))
-  tables_isHidden : (nvarchar(500))
+  tables_isHidden : (bit)
   tables_measures_ja : (nvarchar(max))
   tables_partitions_ja : (nvarchar(max))
   --
@@ -97,25 +119,16 @@ entity "puml-link:ssas.model_json_31_tables_T.adoc[prefix=..]" as ssas.model_jso
 
 repo.RepoObject_SSAS_src <.. repo.RepoObject_SSAS_tgt
 repo.RepoObject_SSAS_src <.. repo.usp_PERSIST_RepoObject_SSAS_tgt
+repo.RepoSchema <.. repo.RepoObject_SSAS_src
 ssas.model_json_31_tables_T <.. repo.RepoObject_SSAS_src
-repo.RepoObject_SSAS_src::is_repo_managed <-- repo.RepoObject_SSAS_tgt::is_repo_managed
-repo.RepoObject_SSAS_src::is_ssas <-- repo.RepoObject_SSAS_tgt::is_ssas
-repo.RepoObject_SSAS_src::RepoObject_guid <-- repo.RepoObject_SSAS_tgt::RepoObject_guid
-repo.RepoObject_SSAS_src::RepoObject_name <-- repo.RepoObject_SSAS_tgt::RepoObject_name
-repo.RepoObject_SSAS_src::RepoObject_schema_name <-- repo.RepoObject_SSAS_tgt::RepoObject_schema_name
-repo.RepoObject_SSAS_src::RepoObject_type <-- repo.RepoObject_SSAS_tgt::RepoObject_type
-repo.RepoObject_SSAS_src::SysObject_name <-- repo.RepoObject_SSAS_tgt::SysObject_name
-repo.RepoObject_SSAS_src::SysObject_schema_name <-- repo.RepoObject_SSAS_tgt::SysObject_schema_name
-repo.RepoObject_SSAS_src::SysObject_type <-- repo.RepoObject_SSAS_tgt::SysObject_type
-ssas.model_json_31_tables_T::databasename <-- repo.RepoObject_SSAS_src::RepoObject_schema_name
-ssas.model_json_31_tables_T::databasename <-- repo.RepoObject_SSAS_src::SysObject_schema_name
-ssas.model_json_31_tables_T::RepoObject_guid <-- repo.RepoObject_SSAS_src::RepoObject_guid
-ssas.model_json_31_tables_T::tables_name <-- repo.RepoObject_SSAS_src::RepoObject_name
-ssas.model_json_31_tables_T::tables_name <-- repo.RepoObject_SSAS_src::SysObject_name
-footer
-to view a reduced diagram in original size and to be able to click on the links:
-open the diagram in a new tab via the Context menu.
-end footer
-
+"repo.RepoObject_SSAS_src::is_repo_managed" <-- "repo.RepoObject_SSAS_tgt::is_repo_managed"
+"repo.RepoObject_SSAS_src::is_ssas" <-- "repo.RepoObject_SSAS_tgt::is_ssas"
+"repo.RepoObject_SSAS_src::RepoObject_guid" <-- "repo.RepoObject_SSAS_tgt::RepoObject_guid"
+"repo.RepoObject_SSAS_src::RepoObject_name" <-- "repo.RepoObject_SSAS_tgt::RepoObject_name"
+"repo.RepoObject_SSAS_src::RepoObject_schema_name" <-- "repo.RepoObject_SSAS_tgt::RepoObject_schema_name"
+"repo.RepoObject_SSAS_src::RepoObject_type" <-- "repo.RepoObject_SSAS_tgt::RepoObject_type"
+"repo.RepoObject_SSAS_src::SysObject_name" <-- "repo.RepoObject_SSAS_tgt::SysObject_name"
+"repo.RepoObject_SSAS_src::SysObject_schema_name" <-- "repo.RepoObject_SSAS_tgt::SysObject_schema_name"
+"repo.RepoObject_SSAS_src::SysObject_type" <-- "repo.RepoObject_SSAS_tgt::SysObject_type"
 @enduml
 

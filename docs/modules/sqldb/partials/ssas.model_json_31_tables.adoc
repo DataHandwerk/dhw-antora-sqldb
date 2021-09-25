@@ -45,7 +45,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-01 08:31:00
+2021-09-20 15:15:59
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -215,7 +215,7 @@ view
 |===
 |
 |tables_isHidden
-|nvarchar(500)
+|bit
 |NULL
 |
 |
@@ -350,7 +350,7 @@ view
 
 |
 |<<column-tables_isHidden>>
-|nvarchar(500)
+|bit
 |NULL
 |
 |
@@ -378,7 +378,7 @@ view
 [#index-PK_model_json_31_tables]
 === PK_model_json_31_tables
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_ssas_table[ssas_table]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#ssas_table[ssas_table]
 +
 --
 * <<column-databasename>>; nvarchar(128)
@@ -387,10 +387,10 @@ view
 * PK, Unique, Real: 1, 1, 0
 
 
-[#index-idx_model_json_31_tables_2]
+[#index-idx_model_json_31_tables2x_2]
 === idx_model_json_31_tables++__++2
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-databasename>>; nvarchar(128)
@@ -699,8 +699,6 @@ source: property.RepoObjectProperty WHERE property_int = 1
 [source,sql]
 ----
 
-
-
 /*
 --check
 
@@ -719,7 +717,7 @@ order by
 Go
 */
 
-CREATE View [ssas].[model_json_31_tables]
+CREATE View ssas.model_json_31_tables
 As
 Select
     T1.databasename
@@ -759,7 +757,7 @@ From
       , tables_description NVarchar ( Max ) N'$.description'
       , tables_description_ja NVarchar ( Max ) N'$.description' As Json
       , tables_hierarchies_ja NVarchar ( Max ) N'$.hierarchies' As Json
-      , tables_isHidden NVarchar ( 500 ) N'$.isHidden'
+      , tables_isHidden Bit N'$.isHidden'
       , tables_measures_ja NVarchar ( Max ) N'$.measures' As Json
       , tables_partitions_ja NVarchar ( Max ) N'$.partitions' As Json
     ) As j2

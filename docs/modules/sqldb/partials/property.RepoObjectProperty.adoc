@@ -3,12 +3,14 @@
 == existing_properties
 
 // tag::existing_properties[]
+:ExistsProperty--antorareferencedlist:
 :ExistsProperty--antorareferencinglist:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
 :ExistsProperty--pk_index_guid:
 :ExistsProperty--pk_indexpatterncolumndatatype:
 :ExistsProperty--pk_indexpatterncolumnname:
+:ExistsProperty--referencedobjectlist:
 :ExistsProperty--FK:
 :ExistsProperty--AntoraIndexList:
 :ExistsProperty--Columns:
@@ -41,7 +43,7 @@ user table
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-05 13:11:18
+2021-09-21 10:37:13
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -414,7 +416,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 [#index-PK_RepoObjectProperty]
 === PK_RepoObjectProperty
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObjectProperty_id>>; int
@@ -425,7 +427,7 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 [#index-UK_RepoObjectProperty]
 === UK_RepoObjectProperty
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -434,17 +436,17 @@ therefore the maximum content is nvarchar(4000) or varchar(8000)
 * PK, Unique, Real: 0, 1, 1
 
 
-[#index-idx_RepoObjectProperty_1]
+[#index-idx_RepoObjectProperty2x_1]
 === idx_RepoObjectProperty++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#_no_group[no_group]
+* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
 --
 * PK, Unique, Real: 0, 0, 0
 * ++FK_RepoObjectProperty__RepoObject++ +
-
+referenced: xref:repo.RepoObject.adoc[], xref:repo.RepoObject.adoc#index-PK_RepoObject[+PK_RepoObject+]
 * is disabled
 
 // end::AntoraIndexList[]
@@ -470,7 +472,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-
+* xref:property.RepoObjectProperty_external_tgt.adoc[]
 // end::antorareferencedlist[]
 
 
@@ -482,6 +484,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 * xref:property.ExtendedProperty_Repo2Sys_level2_RepoObject.adoc[]
 * xref:property.fs_get_RepoObjectProperty_nvarchar.adoc[]
 * xref:property.PropertyName_RepoObject.adoc[]
+* xref:property.RepoObjectProperty_external_tgt.adoc[]
 * xref:property.RepoObjectProperty_ForUpdate.adoc[]
 * xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc[]
 * xref:property.RepoObjectProperty_sys_repo.adoc[]
@@ -719,7 +722,7 @@ RepoObjectProperty_id
 === ReferencedObjectList
 
 // tag::referencedobjectlist[]
-
+* [property].[RepoObjectProperty_external_tgt]
 // end::referencedobjectlist[]
 
 
