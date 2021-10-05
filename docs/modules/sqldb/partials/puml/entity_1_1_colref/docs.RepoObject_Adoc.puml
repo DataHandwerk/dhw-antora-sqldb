@@ -26,15 +26,19 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:docs.RepoObject_Adoc.adoc[]" as docs.RepoObject_Adoc << V >> {
+entity "puml-link:dhw:sqldb:docs.repoobject_adoc.adoc[]" as docs.RepoObject_Adoc << V >> {
   --
   - AdocContent : (nvarchar(max))
+  - cultures_name : (nvarchar(10))
   is_DocsOutput : (int)
   PropertyCount : (int)
+  RepoObject_DisplayName : (nvarchar(128))
+  RepoObject_FullDisplayName2 : (nvarchar(257))
   RepoObject_fullname : (nvarchar(261))
   RepoObject_fullname2 : (nvarchar(257))
   - RepoObject_guid : (uniqueidentifier)
   RepoObject_schema_name : (nvarchar(128))
+  RepoObject_translation : (nvarchar(128))
   SysObject_fullname : (nvarchar(261))
   SysObject_fullname2 : (nvarchar(257))
   SysObject_schema_name : (nvarchar(128))
@@ -44,30 +48,36 @@ entity "puml-link:dhw:sqldb:docs.RepoObject_Adoc.adoc[]" as docs.RepoObject_Adoc
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.RepoObject_Adoc_T.adoc[]" as docs.RepoObject_Adoc_T << U >> {
-  --
-  - AdocContent : (nvarchar(max))
-  is_DocsOutput : (int)
-  PropertyCount : (int)
-  RepoObject_fullname : (nvarchar(261))
-  RepoObject_fullname2 : (nvarchar(257))
-  - RepoObject_guid : (uniqueidentifier)
-  RepoObject_schema_name : (nvarchar(128))
-  SysObject_fullname : (nvarchar(261))
-  SysObject_fullname2 : (nvarchar(257))
-  SysObject_schema_name : (nvarchar(128))
-  SysObject_type : (char(2))
-  SysObject_type_name : (nvarchar(128))
-  --
-  --
-}
-
-entity "puml-link:dhw:sqldb:docs.RepoObject_ColumnList_T.adoc[]" as docs.RepoObject_ColumnList_T << U >> {
+entity "puml-link:dhw:sqldb:docs.repoobject_adoc_t.adoc[]" as docs.RepoObject_Adoc_T << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
+  - **cultures_name** : (nvarchar(10))
+  --
+  - AdocContent : (nvarchar(max))
+  is_DocsOutput : (int)
+  PropertyCount : (int)
+  RepoObject_DisplayName : (nvarchar(128))
+  RepoObject_FullDisplayName2 : (nvarchar(257))
+  RepoObject_fullname : (nvarchar(261))
+  RepoObject_fullname2 : (nvarchar(257))
+  RepoObject_schema_name : (nvarchar(128))
+  RepoObject_translation : (nvarchar(128))
+  SysObject_fullname : (nvarchar(261))
+  SysObject_fullname2 : (nvarchar(257))
+  SysObject_schema_name : (nvarchar(128))
+  SysObject_type : (char(2))
+  SysObject_type_name : (nvarchar(128))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.repoobject_columnlist_t.adoc[]" as docs.RepoObject_ColumnList_T << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **cultures_name** : (nvarchar(10))
   --
   AntoraColumnDetails : (nvarchar(max))
   AntoraNonPkColumnTableRows : (nvarchar(max))
   AntoraPkColumnTableRows : (nvarchar(max))
+  is_external : (tinyint)
   PlantumlIndexColumns : (nvarchar(max))
   PlantumlNonPkEntityColumns : (nvarchar(max))
   PlantumlNonPkHiddenEntityColumns : (nvarchar(max))
@@ -77,8 +87,9 @@ entity "puml-link:dhw:sqldb:docs.RepoObject_ColumnList_T.adoc[]" as docs.RepoObj
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.RepoObject_IndexList_T.adoc[]" as docs.RepoObject_IndexList_T << U >> {
-  **RepoObject_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:docs.repoobject_indexlist_t.adoc[]" as docs.RepoObject_IndexList_T << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **cultures_name** : (nvarchar(10))
   --
   AntoraIndexList : (nvarchar(max))
   PumlIndexList : (nvarchar(max))
@@ -86,16 +97,46 @@ entity "puml-link:dhw:sqldb:docs.RepoObject_IndexList_T.adoc[]" as docs.RepoObje
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.RepoObject_MeasureList.adoc[]" as docs.RepoObject_MeasureList << V >> {
+entity "puml-link:dhw:sqldb:docs.repoobject_measurelist.adoc[]" as docs.RepoObject_MeasureList << V >> {
+  **RepoObject_guid** : (uniqueidentifier)
+  **cultures_name** : (nvarchar(10))
   --
   AntoraMeasureDetails : (nvarchar(max))
+  is_external : (tinyint)
   PlantumlMeasures : (nvarchar(max))
-  RepoObject_guid : (uniqueidentifier)
   --
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.RepoObject_ParameterList.adoc[]" as docs.RepoObject_ParameterList << V >> {
+entity "puml-link:dhw:sqldb:docs.repoobject_outputfilter_t.adoc[]" as docs.RepoObject_OutputFilter_T << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **cultures_name** : (nvarchar(10))
+  --
+  AntoraComponent : (nvarchar(max))
+  AntoraModule : (nvarchar(max))
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
+  external_DatabaseName : (nvarchar(128))
+  is_DocsOutput : (int)
+  - is_external : (bit)
+  - is_ssas : (bit)
+  - PumlEntityTopDefault : (nvarchar(max))
+  - PumlEntityTopWorkaround : (nvarchar(max))
+  RepoObject_DisplayName : (nvarchar(128))
+  RepoObject_FullDisplayName2 : (nvarchar(257))
+  - RepoObject_fullname : (nvarchar(261))
+  - RepoObject_fullname2 : (nvarchar(257))
+  - RepoObject_name : (nvarchar(128))
+  - RepoObject_schema_name : (nvarchar(128))
+  RepoObject_translation : (nvarchar(128))
+  SysObject_type : (char(2))
+  SysObject_type_name : (nvarchar(128))
+  tables_isHidden : (bit)
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.repoobject_parameterlist.adoc[]" as docs.RepoObject_ParameterList << V >> {
   **RepoObject_guid** : (uniqueidentifier)
   --
   AntoraParameterList : (nvarchar(max))
@@ -103,13 +144,13 @@ entity "puml-link:dhw:sqldb:docs.RepoObject_ParameterList.adoc[]" as docs.RepoOb
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.usp_PERSIST_RepoObject_Adoc_T.adoc[]" as docs.usp_PERSIST_RepoObject_Adoc_T << P >> {
+entity "puml-link:dhw:sqldb:docs.usp_persist_repoobject_adoc_t.adoc[]" as docs.usp_PERSIST_RepoObject_Adoc_T << P >> {
   --
   --
   --
 }
 
-entity "puml-link:dhw:sqldb:property.RepoObjectProperty.adoc[]" as property.RepoObjectProperty << U >> {
+entity "puml-link:dhw:sqldb:property.repoobjectproperty.adoc[]" as property.RepoObjectProperty << U >> {
   - **RepoObjectProperty_id** : (int)
   --
   inheritance : (tinyint)
@@ -125,7 +166,7 @@ entity "puml-link:dhw:sqldb:property.RepoObjectProperty.adoc[]" as property.Repo
   --
 }
 
-entity "puml-link:dhw:sqldb:property.RepoObjectProperty_cross.adoc[]" as property.RepoObjectProperty_cross << V >> {
+entity "puml-link:dhw:sqldb:property.repoobjectproperty_cross.adoc[]" as property.RepoObjectProperty_cross << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   **property_name** : (nvarchar(128))
   --
@@ -133,14 +174,10 @@ entity "puml-link:dhw:sqldb:property.RepoObjectProperty_cross.adoc[]" as propert
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObject_gross2.adoc[]" as repo.RepoObject_gross2 << V >> {
+entity "puml-link:dhw:sqldb:repo.repoobject_gross.adoc[]" as repo.RepoObject_gross << V >> {
   --
   AntoraComponent : (nvarchar(max))
   AntoraModule : (nvarchar(max))
-  AntoraReferencedList : (nvarchar(max))
-  AntoraReferencingList : (nvarchar(max))
-  CreateColumnList : (nvarchar(max))
-  DbmlColumnList : (nvarchar(max))
   Description : (nvarchar(max))
   external_AntoraComponent : (nvarchar(128))
   external_AntoraModule : (nvarchar(128))
@@ -182,13 +219,10 @@ entity "puml-link:dhw:sqldb:repo.RepoObject_gross2.adoc[]" as repo.RepoObject_gr
   persistence_source_RepoObject_fullname : (nvarchar(261))
   persistence_source_RepoObject_fullname2 : (nvarchar(257))
   persistence_source_RepoObject_guid : (uniqueidentifier)
-  persistence_source_RepoObject_xref : (nvarchar(269))
+  persistence_source_RepoObject_xref : (nvarchar(4000))
   persistence_source_SysObject_fullname : (nvarchar(261))
   persistence_source_SysObject_fullname2 : (nvarchar(257))
-  persistence_source_SysObject_xref : (nvarchar(269))
-  PersistenceCompareColumnList : (nvarchar(max))
-  PersistenceInsertColumnList : (nvarchar(max))
-  PersistenceUpdateColumnList : (nvarchar(max))
+  persistence_source_SysObject_xref : (nvarchar(4000))
   pk_index_guid : (uniqueidentifier)
   pk_IndexPatternColumnDatatype : (nvarchar(4000))
   pk_IndexPatternColumnName : (nvarchar(4000))
@@ -206,10 +240,6 @@ entity "puml-link:dhw:sqldb:repo.RepoObject_gross2.adoc[]" as repo.RepoObject_gr
   - RepoObject_type : (char(2))
   RepoObject_type_name : (nvarchar(128))
   source_filter : (nvarchar(4000))
-  sql_modules_antora : (nvarchar(max))
-  sql_modules_definition : (nvarchar(max))
-  sql_modules_formatted : (nvarchar(max))
-  sql_modules_formatted2 : (nvarchar(max))
   - SysObject_fullname : (nvarchar(261))
   - SysObject_fullname2 : (nvarchar(257))
   SysObject_id : (int)
@@ -234,28 +264,54 @@ entity "puml-link:dhw:sqldb:repo.RepoObject_gross2.adoc[]" as repo.RepoObject_gr
   --
 }
 
+entity "puml-link:dhw:sqldb:repo.repoobject_sat2_t.adoc[]" as repo.RepoObject_sat2_T << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+  AntoraReferencedList : (nvarchar(max))
+  AntoraReferencingList : (nvarchar(max))
+  CreateColumnList : (nvarchar(max))
+  DbmlColumnList : (nvarchar(max))
+  PersistenceCompareColumnList : (nvarchar(max))
+  PersistenceInsertColumnList : (nvarchar(max))
+  PersistenceUpdateColumnList : (nvarchar(max))
+  sql_modules_antora : (nvarchar(max))
+  sql_modules_definition : (nvarchar(max))
+  sql_modules_formatted : (nvarchar(max))
+  sql_modules_formatted2 : (nvarchar(max))
+  --
+  --
+}
+
 docs.RepoObject_Adoc <.. docs.RepoObject_Adoc_T
 docs.RepoObject_Adoc <.. docs.usp_PERSIST_RepoObject_Adoc_T
 docs.RepoObject_ColumnList_T <.. docs.RepoObject_Adoc
 docs.RepoObject_IndexList_T <.. docs.RepoObject_Adoc
 docs.RepoObject_MeasureList <.. docs.RepoObject_Adoc
+docs.RepoObject_OutputFilter_T <.. docs.RepoObject_Adoc
 docs.RepoObject_ParameterList <.. docs.RepoObject_Adoc
 property.RepoObjectProperty <.. docs.RepoObject_Adoc
 property.RepoObjectProperty_cross <.. docs.RepoObject_Adoc
-repo.RepoObject_gross2 <.. docs.RepoObject_Adoc
+repo.RepoObject_gross <.. docs.RepoObject_Adoc
+repo.RepoObject_sat2_T <.. docs.RepoObject_Adoc
 "docs.RepoObject_Adoc::AdocContent" <-- "docs.RepoObject_Adoc_T::AdocContent"
+"docs.RepoObject_Adoc::cultures_name" <-- "docs.RepoObject_Adoc_T::cultures_name"
 "docs.RepoObject_Adoc::is_DocsOutput" <-- "docs.RepoObject_Adoc_T::is_DocsOutput"
 "docs.RepoObject_Adoc::PropertyCount" <-- "docs.RepoObject_Adoc_T::PropertyCount"
+"docs.RepoObject_Adoc::RepoObject_DisplayName" <-- "docs.RepoObject_Adoc_T::RepoObject_DisplayName"
+"docs.RepoObject_Adoc::RepoObject_FullDisplayName2" <-- "docs.RepoObject_Adoc_T::RepoObject_FullDisplayName2"
 "docs.RepoObject_Adoc::RepoObject_fullname" <-- "docs.RepoObject_Adoc_T::RepoObject_fullname"
 "docs.RepoObject_Adoc::RepoObject_fullname2" <-- "docs.RepoObject_Adoc_T::RepoObject_fullname2"
 "docs.RepoObject_Adoc::RepoObject_guid" <-- "docs.RepoObject_Adoc_T::RepoObject_guid"
 "docs.RepoObject_Adoc::RepoObject_schema_name" <-- "docs.RepoObject_Adoc_T::RepoObject_schema_name"
+"docs.RepoObject_Adoc::RepoObject_translation" <-- "docs.RepoObject_Adoc_T::RepoObject_translation"
 "docs.RepoObject_Adoc::SysObject_fullname" <-- "docs.RepoObject_Adoc_T::SysObject_fullname"
 "docs.RepoObject_Adoc::SysObject_fullname2" <-- "docs.RepoObject_Adoc_T::SysObject_fullname2"
 "docs.RepoObject_Adoc::SysObject_schema_name" <-- "docs.RepoObject_Adoc_T::SysObject_schema_name"
 "docs.RepoObject_Adoc::SysObject_type" <-- "docs.RepoObject_Adoc_T::SysObject_type"
 "docs.RepoObject_Adoc::SysObject_type_name" <-- "docs.RepoObject_Adoc_T::SysObject_type_name"
-"repo.RepoObject_gross2::is_DocsOutput" <-- "docs.RepoObject_Adoc::is_DocsOutput"
-"repo.RepoObject_gross2::RepoObject_guid" <-- "docs.RepoObject_Adoc::RepoObject_guid"
+"docs.RepoObject_OutputFilter_T::cultures_name" <-- "docs.RepoObject_Adoc::cultures_name"
+"docs.RepoObject_OutputFilter_T::is_DocsOutput" <-- "docs.RepoObject_Adoc::is_DocsOutput"
+"docs.RepoObject_OutputFilter_T::RepoObject_guid" <-- "docs.RepoObject_Adoc::RepoObject_guid"
+"repo.RepoObject_gross::is_DocsOutput" <-- "docs.RepoObject_Adoc::is_DocsOutput"
 @enduml
 

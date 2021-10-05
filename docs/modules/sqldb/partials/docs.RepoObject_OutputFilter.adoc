@@ -1,4 +1,6 @@
-= [docs].[RepoObject_OutputFilter]
+// tag::HeaderFullDisplayName[]
+= docs.RepoObject_OutputFilter
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -7,6 +9,10 @@
 :ExistsProperty--antorareferencinglist:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
+:ExistsProperty--pk_index_guid:
+:ExistsProperty--pk_indexpatterncolumndatatype:
+:ExistsProperty--pk_indexpatterncolumnname:
+:ExistsProperty--pk_indexsemanticgroup:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -19,6 +25,12 @@
 // tag::RepoObject_guid[]
 ED5BF6C2-0593-EB11-84F2-A81E8446D5B0
 // end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+docs.RepoObject_OutputFilter
+// end::RepoObject_FullDisplayName2[]
 
 == SysObject_type
 
@@ -41,14 +53,62 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-21 22:56:12
+2021-10-04 23:14:55
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-AntoraComponent]
-=== AntoraComponent
+[#column-repoobject_guid]
+=== repoobject_guid
+
+[cols="d,8m,m,m,m,d"]
+|===
+|1
+|*RepoObject_guid*
+|uniqueidentifier
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo.repoobject_gross.adoc#column-repoobject_guid[+repo.RepoObject_gross.RepoObject_guid+]
+--
+
+.Referencing Columns
+--
+* xref:docs.repoobject_outputfilter_t.adoc#column-repoobject_guid[+docs.RepoObject_OutputFilter_T.RepoObject_guid+]
+--
+
+
+[#column-cultures_name]
+=== cultures_name
+
+[cols="d,8m,m,m,m,d"]
+|===
+|2
+|*cultures_name*
+|nvarchar(10)
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:docs.culture.adoc#column-cultures_name[+docs.Culture.cultures_name+]
+--
+
+.Referencing Columns
+--
+* xref:docs.repoobject_outputfilter_t.adoc#column-cultures_name[+docs.RepoObject_OutputFilter_T.cultures_name+]
+--
+
+
+[#column-antoracomponent]
+=== antoracomponent
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -60,9 +120,19 @@ view
 |
 |===
 
+.Referenced Columns
+--
+* xref:repo.repoobject_gross.adoc#column-antoracomponent[+repo.RepoObject_gross.AntoraComponent+]
+--
 
-[#column-AntoraModule]
-=== AntoraModule
+.Referencing Columns
+--
+* xref:docs.repoobject_outputfilter_t.adoc#column-antoracomponent[+docs.RepoObject_OutputFilter_T.AntoraComponent+]
+--
+
+
+[#column-antoramodule]
+=== antoramodule
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -74,9 +144,19 @@ view
 |
 |===
 
+.Referenced Columns
+--
+* xref:repo.repoobject_gross.adoc#column-antoramodule[+repo.RepoObject_gross.AntoraModule+]
+--
 
-[#column-external_AntoraComponent]
-=== external_AntoraComponent
+.Referencing Columns
+--
+* xref:docs.repoobject_outputfilter_t.adoc#column-antoramodule[+docs.RepoObject_OutputFilter_T.AntoraModule+]
+--
+
+
+[#column-external_antoracomponent]
+=== external_antoracomponent
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -88,9 +168,19 @@ view
 |
 |===
 
+.Referenced Columns
+--
+* xref:repo.repoobject_gross.adoc#column-external_antoracomponent[+repo.RepoObject_gross.external_AntoraComponent+]
+--
 
-[#column-external_AntoraModule]
-=== external_AntoraModule
+.Referencing Columns
+--
+* xref:docs.repoobject_outputfilter_t.adoc#column-external_antoracomponent[+docs.RepoObject_OutputFilter_T.external_AntoraComponent+]
+--
+
+
+[#column-external_antoramodule]
+=== external_antoramodule
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -102,9 +192,19 @@ view
 |
 |===
 
+.Referenced Columns
+--
+* xref:repo.repoobject_gross.adoc#column-external_antoramodule[+repo.RepoObject_gross.external_AntoraModule+]
+--
 
-[#column-external_DatabaseName]
-=== external_DatabaseName
+.Referencing Columns
+--
+* xref:docs.repoobject_outputfilter_t.adoc#column-external_antoramodule[+docs.RepoObject_OutputFilter_T.external_AntoraModule+]
+--
+
+
+[#column-external_databasename]
+=== external_databasename
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -116,9 +216,19 @@ view
 |
 |===
 
+.Referenced Columns
+--
+* xref:repo.repoobject_gross.adoc#column-external_databasename[+repo.RepoObject_gross.external_DatabaseName+]
+--
 
-[#column-is_DocsOutput]
-=== is_DocsOutput
+.Referencing Columns
+--
+* xref:docs.repoobject_outputfilter_t.adoc#column-external_databasename[+docs.RepoObject_OutputFilter_T.external_DatabaseName+]
+--
+
+
+[#column-is_docsoutput]
+=== is_docsoutput
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -132,7 +242,12 @@ view
 
 .Referenced Columns
 --
-* xref:repo.RepoObject_gross.adoc#column-is_DocsOutput[+repo.RepoObject_gross.is_DocsOutput+]
+* xref:repo.repoobject_gross.adoc#column-is_docsoutput[+repo.RepoObject_gross.is_DocsOutput+]
+--
+
+.Referencing Columns
+--
+* xref:docs.repoobject_outputfilter_t.adoc#column-is_docsoutput[+docs.RepoObject_OutputFilter_T.is_DocsOutput+]
 --
 
 
@@ -148,6 +263,16 @@ view
 |
 |
 |===
+
+.Referenced Columns
+--
+* xref:repo.repoobject_gross.adoc#column-is_external[+repo.RepoObject_gross.is_external+]
+--
+
+.Referencing Columns
+--
+* xref:docs.repoobject_outputfilter_t.adoc#column-is_external[+docs.RepoObject_OutputFilter_T.is_external+]
+--
 
 
 [#column-is_ssas]
@@ -165,12 +290,93 @@ view
 
 .Referenced Columns
 --
-* xref:repo.RepoObject_gross.adoc#column-is_ssas[+repo.RepoObject_gross.is_ssas+]
+* xref:repo.repoobject_gross.adoc#column-is_ssas[+repo.RepoObject_gross.is_ssas+]
+--
+
+.Referencing Columns
+--
+* xref:docs.repoobject_outputfilter_t.adoc#column-is_ssas[+docs.RepoObject_OutputFilter_T.is_ssas+]
 --
 
 
-[#column-RepoObject_fullname]
-=== RepoObject_fullname
+[#column-pumlentitytopdefault]
+=== pumlentitytopdefault
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|PumlEntityTopDefault
+|nvarchar(max)
+|NOT NULL
+|
+|
+|===
+
+.Referencing Columns
+--
+* xref:docs.repoobject_outputfilter_t.adoc#column-pumlentitytopdefault[+docs.RepoObject_OutputFilter_T.PumlEntityTopDefault+]
+--
+
+
+[#column-pumlentitytopworkaround]
+=== pumlentitytopworkaround
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|PumlEntityTopWorkaround
+|nvarchar(max)
+|NOT NULL
+|
+|
+|===
+
+.Referencing Columns
+--
+* xref:docs.repoobject_outputfilter_t.adoc#column-pumlentitytopworkaround[+docs.RepoObject_OutputFilter_T.PumlEntityTopWorkaround+]
+--
+
+
+[#column-repoobject_displayname]
+=== repoobject_displayname
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|RepoObject_DisplayName
+|nvarchar(128)
+|NULL
+|
+|
+|===
+
+.Referencing Columns
+--
+* xref:docs.repoobject_outputfilter_t.adoc#column-repoobject_displayname[+docs.RepoObject_OutputFilter_T.RepoObject_DisplayName+]
+--
+
+
+[#column-repoobject_fulldisplayname2]
+=== repoobject_fulldisplayname2
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|RepoObject_FullDisplayName2
+|nvarchar(257)
+|NULL
+|
+|
+|===
+
+.Referencing Columns
+--
+* xref:docs.repoobject_outputfilter_t.adoc#column-repoobject_fulldisplayname2[+docs.RepoObject_OutputFilter_T.RepoObject_FullDisplayName2+]
+--
+
+
+[#column-repoobject_fullname]
+=== repoobject_fullname
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -190,12 +396,17 @@ view
 
 .Referenced Columns
 --
-* xref:repo.RepoObject_gross.adoc#column-RepoObject_fullname[+repo.RepoObject_gross.RepoObject_fullname+]
+* xref:repo.repoobject_gross.adoc#column-repoobject_fullname[+repo.RepoObject_gross.RepoObject_fullname+]
+--
+
+.Referencing Columns
+--
+* xref:docs.repoobject_outputfilter_t.adoc#column-repoobject_fullname[+docs.RepoObject_OutputFilter_T.RepoObject_fullname+]
 --
 
 
-[#column-RepoObject_fullname2]
-=== RepoObject_fullname2
+[#column-repoobject_fullname2]
+=== repoobject_fullname2
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -215,41 +426,17 @@ view
 
 .Referenced Columns
 --
-* xref:repo.RepoObject_gross.adoc#column-RepoObject_fullname2[+repo.RepoObject_gross.RepoObject_fullname2+]
+* xref:repo.repoobject_gross.adoc#column-repoobject_fullname2[+repo.RepoObject_gross.RepoObject_fullname2+]
 --
 
 .Referencing Columns
 --
-* xref:docs.RepoObject_Plantuml_Entity.adoc#column-RepoObject_fullname2[+docs.RepoObject_Plantuml_Entity.RepoObject_fullname2+]
+* xref:docs.repoobject_outputfilter_t.adoc#column-repoobject_fullname2[+docs.RepoObject_OutputFilter_T.RepoObject_fullname2+]
 --
 
 
-[#column-RepoObject_guid]
-=== RepoObject_guid
-
-[cols="d,8m,m,m,m,d"]
-|===
-|
-|RepoObject_guid
-|uniqueidentifier
-|NOT NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:repo.RepoObject_gross.adoc#column-RepoObject_guid[+repo.RepoObject_gross.RepoObject_guid+]
---
-
-.Referencing Columns
---
-* xref:docs.RepoObject_Plantuml_Entity.adoc#column-RepoObject_guid[+docs.RepoObject_Plantuml_Entity.RepoObject_guid+]
---
-
-
-[#column-RepoObject_name]
-=== RepoObject_name
+[#column-repoobject_name]
+=== repoobject_name
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -263,12 +450,17 @@ view
 
 .Referenced Columns
 --
-* xref:repo.RepoObject_gross.adoc#column-RepoObject_name[+repo.RepoObject_gross.RepoObject_name+]
+* xref:repo.repoobject_gross.adoc#column-repoobject_name[+repo.RepoObject_gross.RepoObject_name+]
+--
+
+.Referencing Columns
+--
+* xref:docs.repoobject_outputfilter_t.adoc#column-repoobject_name[+docs.RepoObject_OutputFilter_T.RepoObject_name+]
 --
 
 
-[#column-RepoObject_schema_name]
-=== RepoObject_schema_name
+[#column-repoobject_schema_name]
+=== repoobject_schema_name
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -282,19 +474,41 @@ view
 
 .Referenced Columns
 --
-* xref:repo.RepoObject_gross.adoc#column-RepoObject_schema_name[+repo.RepoObject_gross.RepoObject_schema_name+]
+* xref:repo.repoobject_gross.adoc#column-repoobject_schema_name[+repo.RepoObject_gross.RepoObject_schema_name+]
 --
 
 .Referencing Columns
 --
-* xref:docs.AntoraNavListRepoObject_by_schema.adoc#column-RepoObject_schema_name[+docs.AntoraNavListRepoObject_by_schema.RepoObject_schema_name+]
-* xref:docs.AntoraNavListRepoObject_by_schema_type.adoc#column-RepoObject_schema_name[+docs.AntoraNavListRepoObject_by_schema_type.RepoObject_schema_name+]
-* xref:docs.RepoObject_Plantuml_Entity.adoc#column-RepoObject_schema_name[+docs.RepoObject_Plantuml_Entity.RepoObject_schema_name+]
+* xref:docs.repoobject_outputfilter_t.adoc#column-repoobject_schema_name[+docs.RepoObject_OutputFilter_T.RepoObject_schema_name+]
 --
 
 
-[#column-SysObject_type]
-=== SysObject_type
+[#column-repoobject_translation]
+=== repoobject_translation
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|RepoObject_translation
+|nvarchar(128)
+|NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:ssas.model_json_34111_cultures_translations_model_tables.adoc#column-cultures_translations_model_tables_translatedcaption[+ssas.model_json_34111_cultures_translations_model_tables.cultures_translations_model_tables_translatedCaption+]
+--
+
+.Referencing Columns
+--
+* xref:docs.repoobject_outputfilter_t.adoc#column-repoobject_translation[+docs.RepoObject_OutputFilter_T.RepoObject_translation+]
+--
+
+
+[#column-sysobject_type]
+=== sysobject_type
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -306,20 +520,19 @@ view
 |
 |===
 
-.Description
---
-reference in [repo_sys].[type]
---
-{empty} +
-
 .Referenced Columns
 --
-* xref:repo.RepoObject_gross.adoc#column-SysObject_type[+repo.RepoObject_gross.SysObject_type+]
+* xref:repo.repoobject_gross.adoc#column-sysobject_type[+repo.RepoObject_gross.SysObject_type+]
+--
+
+.Referencing Columns
+--
+* xref:docs.repoobject_outputfilter_t.adoc#column-sysobject_type[+docs.RepoObject_OutputFilter_T.SysObject_type+]
 --
 
 
-[#column-SysObject_type_name]
-=== SysObject_type_name
+[#column-sysobject_type_name]
+=== sysobject_type_name
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -333,18 +546,17 @@ reference in [repo_sys].[type]
 
 .Referenced Columns
 --
-* xref:repo.RepoObject_gross.adoc#column-SysObject_type_name[+repo.RepoObject_gross.SysObject_type_name+]
+* xref:repo.repoobject_gross.adoc#column-sysobject_type_name[+repo.RepoObject_gross.SysObject_type_name+]
 --
 
 .Referencing Columns
 --
-* xref:docs.AntoraNavListRepoObject_by_schema_type.adoc#column-type_name[+docs.AntoraNavListRepoObject_by_schema_type.type_name+]
-* xref:docs.AntoraNavListRepoObject_by_type.adoc#column-type_name[+docs.AntoraNavListRepoObject_by_type.type_name+]
+* xref:docs.repoobject_outputfilter_t.adoc#column-sysobject_type_name[+docs.RepoObject_OutputFilter_T.SysObject_type_name+]
 --
 
 
-[#column-tables_isHidden]
-=== tables_isHidden
+[#column-tables_ishidden]
+=== tables_ishidden
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -355,6 +567,16 @@ reference in [repo_sys].[type]
 |
 |
 |===
+
+.Referenced Columns
+--
+* xref:repo.repoobject_gross.adoc#column-tables_ishidden[+repo.RepoObject_gross.tables_isHidden+]
+--
+
+.Referencing Columns
+--
+* xref:docs.repoobject_outputfilter_t.adoc#column-tables_ishidden[+docs.RepoObject_OutputFilter_T.tables_isHidden+]
+--
 
 
 // end::AntoraColumnDetails[]
@@ -368,6 +590,24 @@ reference in [repo_sys].[type]
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
+|1
+|*<<column-repoobject_guid>>*
+|uniqueidentifier
+|NOT NULL
+|
+|
+
+|2
+|*<<column-cultures_name>>*
+|nvarchar(10)
+|NOT NULL
+|
+|
+
+
+
+
+
 
 
 
@@ -389,43 +629,45 @@ reference in [repo_sys].[type]
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
+
+
 |
-|<<column-AntoraComponent>>
+|<<column-antoracomponent>>
 |nvarchar(max)
 |NULL
 |
 |
 
 |
-|<<column-AntoraModule>>
+|<<column-antoramodule>>
 |nvarchar(max)
 |NULL
 |
 |
 
 |
-|<<column-external_AntoraComponent>>
+|<<column-external_antoracomponent>>
 |nvarchar(128)
 |NULL
 |
 |
 
 |
-|<<column-external_AntoraModule>>
+|<<column-external_antoramodule>>
 |nvarchar(128)
 |NULL
 |
 |
 
 |
-|<<column-external_DatabaseName>>
+|<<column-external_databasename>>
 |nvarchar(128)
 |NULL
 |
 |
 
 |
-|<<column-is_DocsOutput>>
+|<<column-is_docsoutput>>
 |int
 |NULL
 |
@@ -446,56 +688,84 @@ reference in [repo_sys].[type]
 |
 
 |
-|<<column-RepoObject_fullname>>
+|<<column-pumlentitytopdefault>>
+|nvarchar(max)
+|NOT NULL
+|
+|
+
+|
+|<<column-pumlentitytopworkaround>>
+|nvarchar(max)
+|NOT NULL
+|
+|
+
+|
+|<<column-repoobject_displayname>>
+|nvarchar(128)
+|NULL
+|
+|
+
+|
+|<<column-repoobject_fulldisplayname2>>
+|nvarchar(257)
+|NULL
+|
+|
+
+|
+|<<column-repoobject_fullname>>
 |nvarchar(261)
 |NOT NULL
 |
 |
 
 |
-|<<column-RepoObject_fullname2>>
+|<<column-repoobject_fullname2>>
 |nvarchar(257)
 |NOT NULL
 |
 |
 
 |
-|<<column-RepoObject_guid>>
-|uniqueidentifier
-|NOT NULL
-|
-|
-
-|
-|<<column-RepoObject_name>>
+|<<column-repoobject_name>>
 |nvarchar(128)
 |NOT NULL
 |
 |
 
 |
-|<<column-RepoObject_schema_name>>
+|<<column-repoobject_schema_name>>
 |nvarchar(128)
 |NOT NULL
 |
 |
 
 |
-|<<column-SysObject_type>>
+|<<column-repoobject_translation>>
+|nvarchar(128)
+|NULL
+|
+|
+
+|
+|<<column-sysobject_type>>
 |char(2)
 |NULL
 |
 |
 
 |
-|<<column-SysObject_type_name>>
+|<<column-sysobject_type_name>>
 |nvarchar(128)
 |NULL
 |
 |
 
 |
-|<<column-tables_isHidden>>
+|<<column-tables_ishidden>>
 |bit
 |NULL
 |
@@ -507,10 +777,22 @@ reference in [repo_sys].[type]
 
 // tag::AntoraIndexList[]
 
-[#index-idx_RepoObject_OutputFilter2x_1]
-=== idx_RepoObject_OutputFilter++__++1
+[#index-pk_repoobject_outputfilter]
+=== pk_repoobject_outputfilter
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#repoobject_guid,cultures_name[RepoObject_guid,cultures_name]
++
+--
+* <<column-RepoObject_guid>>; uniqueidentifier
+* <<column-cultures_name>>; nvarchar(10)
+--
+* PK, Unique, Real: 1, 1, 0
+
+
+[#index-idx_repoobject_outputfilter2x_1]
+=== idx_repoobject_outputfilter++__++1
+
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_schema_name>>; nvarchar(128)
@@ -519,13 +801,24 @@ reference in [repo_sys].[type]
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObject_OutputFilter2x_2]
-=== idx_RepoObject_OutputFilter++__++2
+[#index-idx_repoobject_outputfilter2x_2]
+=== idx_repoobject_outputfilter++__++2
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[#index-idx_repoobject_outputfilter2x_3]
+=== idx_repoobject_outputfilter++__++3
+
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-AntoraComponent>>; nvarchar(max)
 --
 * PK, Unique, Real: 0, 0, 0
 
@@ -542,6 +835,13 @@ reference in [repo_sys].[type]
 source: property.RepoObjectProperty_cross As rop_cross
 
 
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
+
+
 === AdocUspSteps
 
 // tag::adocuspsteps[]
@@ -552,23 +852,20 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:repo.RepoObject_gross.adoc[]
+* xref:docs.culture.adoc[]
+* xref:docs.fs_cleanstringforfilename.adoc[]
+* xref:docs.fs_cleanstringforpuml.adoc[]
+* xref:repo.repoobject_gross.adoc[]
+* xref:ssas.model_json_3411_cultures_translations_model_t.adoc[]
+* xref:ssas.model_json_34111_cultures_translations_model_tables.adoc[]
 // end::antorareferencedlist[]
 
 
 === AntoraReferencingList
 
 // tag::antorareferencinglist[]
-* xref:docs.AntoraNavListPage_by_schema.adoc[]
-* xref:docs.AntoraNavListPage_by_type.adoc[]
-* xref:docs.AntoraNavListRepoObject_by_schema.adoc[]
-* xref:docs.AntoraNavListRepoObject_by_schema_type.adoc[]
-* xref:docs.AntoraNavListRepoObject_by_type.adoc[]
-* xref:docs.RepoObject_Plantuml_Entity.adoc[]
-* xref:docs.Unit_1_union.adoc[]
-* xref:docs.usp_AntoraExport_ObjectPage.adoc[]
-* xref:docs.usp_AntoraExport_ObjectPartialProperties.adoc[]
-* xref:docs.usp_AntoraExport_ObjectPuml.adoc[]
+* xref:docs.repoobject_outputfilter_t.adoc[]
+* xref:docs.usp_persist_repoobject_outputfilter_t.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -771,35 +1068,40 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-
+333CD359-0722-EC11-8524-A81E8446D5B0
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-
+uniqueidentifier,nvarchar(10)
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-
+RepoObject_guid,cultures_name
 // end::pk_indexpatterncolumnname[]
 
 
 === pk_IndexSemanticGroup
 
 // tag::pk_indexsemanticgroup[]
-
+RepoObject_guid,cultures_name
 // end::pk_indexsemanticgroup[]
 
 
 === ReferencedObjectList
 
 // tag::referencedobjectlist[]
+* [docs].[Culture]
+* [docs].[fs_cleanStringForFilename]
+* [docs].[fs_cleanStringForPuml]
 * [repo].[RepoObject_gross]
+* [ssas].[model_json_3411_cultures_translations_model_T]
+* [ssas].[model_json_34111_cultures_translations_model_tables]
 // end::referencedobjectlist[]
 
 
@@ -815,6 +1117,13 @@ source: property.RepoObjectProperty_cross As rop_cross
 // tag::uspexamples[]
 
 // end::uspexamples[]
+
+
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+
+// end::uspgenerator_usp_id[]
 
 
 === UspParameters
@@ -843,10 +1152,18 @@ CREATE View docs.RepoObject_OutputFilter
 As
 Select
     ro.RepoObject_guid
+  , c.cultures_name
   , ro.SysObject_type
   , ro.SysObject_type_name
   , ro.RepoObject_fullname
   , ro.RepoObject_fullname2
+  , RepoObject_FullDisplayName2 = ro.RepoObject_schema_name + '.'
+                                  + Coalesce (
+                                                 tmt.cultures_translations_model_tables_translatedCaption
+                                               , ro.RepoObject_name
+                                             )
+  , RepoObject_DisplayName      = Coalesce ( tmt.cultures_translations_model_tables_translatedCaption, ro.RepoObject_name )
+  , RepoObject_translation      = tmt.cultures_translations_model_tables_translatedCaption
   , ro.RepoObject_schema_name
   , ro.is_DocsOutput
   , ro.RepoObject_name
@@ -858,12 +1175,71 @@ Select
   , ro.external_DatabaseName
   , ro.AntoraComponent
   , ro.AntoraModule
+  , PumlEntityTopDefault        =
+  --
+  Concat (
+             'entity '
+           ---- puml-link:mycomponent:sqldb:config.Event_isInaktiv.adoc[]
+           ---- puml-link:config.Event_isInaktiv.adoc[]
+           , '"puml-link:' + ro.AntoraComponent + ':' + ro.AntoraModule
+             + Iif(ro.is_external = 1, '', Iif(c.cultures_name <> '', '-', '') + c.cultures_name) + ':'
+             + docs.fs_cleanStringForFilename ( ro.RepoObject_fullname2 )
+             --default
+             + '.adoc[]"'
+           , ' as '
+           , Iif(ro.is_external = 1, ro.AntoraComponent + '.' + ro.AntoraModule + '.', Null)
+           , docs.fs_cleanStringForPuml ( ro.RepoObject_fullname2 )
+           , Iif(ro.is_external = 1
+               , ' <' + Coalesce ( ro.external_DatabaseName, ro.AntoraComponent + ':' + ro.AntoraModule, '' ) + '> '
+               , Null)
+           , ' << ' + Iif(ro.is_external = 1, 'external', Trim ( ro.SysObject_type )) + ' >>'
+           , Iif(ro.tables_isHidden = 1, ' #line.dotted', Iif(ro.is_external = 1, ' #line.dashed', Null))
+         )
+  , PumlEntityTopWorkaround     =
+  --
+  Concat (
+             'entity '
+           ---- puml-link:mycomponent:sqldb:config.Event_isInaktiv.adoc[]
+           ---- puml-link:config.Event_isInaktiv.adoc[]
+           , '"puml-link:' + ro.AntoraComponent + ':' + ro.AntoraModule
+             + Iif(ro.is_external = 1, '', Iif(c.cultures_name <> '', '-', '') + c.cultures_name) + ':'
+             + docs.fs_cleanStringForFilename ( ro.RepoObject_fullname2 )
+             ----workaround empty prefix for #10 - prefix=
+             + '.adoc[prefix=]"'
+           , ' as '
+           , Iif(ro.is_external = 1, ro.AntoraComponent + '.' + ro.AntoraModule + '.', Null)
+           , docs.fs_cleanStringForPuml ( ro.RepoObject_fullname2 )
+           , Iif(ro.is_external = 1
+               , ' <' + Coalesce ( ro.external_DatabaseName, ro.AntoraComponent + ':' + ro.AntoraModule, '' ) + '> '
+               , Null)
+           , ' << ' + Iif(ro.is_external = 1, 'external', Trim ( ro.SysObject_type )) + ' >>'
+           , Iif(ro.tables_isHidden = 1, ' #line.dotted', Iif(ro.is_external = 1, ' #line.dashed', Null))
+         )
 From
-    repo.RepoObject_gross As ro
+    repo.RepoObject_gross   As ro
+    Cross Join docs.Culture As c
+    Left Join
+        ssas.model_json_3411_cultures_translations_model_T       As tm
+            On
+            tm.databasename                                 = ro.RepoObject_schema_name
+            And tm.cultures_name                            = c.cultures_name
+
+    Left Join
+        ssas.model_json_34111_cultures_translations_model_tables As tmt
+            On
+            tmt.databasename                                = tm.databasename
+            And tmt.cultures_name                           = tm.cultures_name
+            And tmt.cultures_translations_model_tables_name = ro.RepoObject_name
 Where
-    ro.is_DocsOutput      = 1
-    And ro.is_DocsExclude = 0
---And ro.is_external    = 0
+    ro.is_DocsOutput        = 1
+    And ro.is_DocsExclude   = 0
+    And
+    (
+        --include all by default
+        c.cultures_name     = ''
+        --additional include existing culters from tm, per ssas model
+        Or tm.cultures_name <> ''
+    )
 
 ----
 =======

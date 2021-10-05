@@ -1,4 +1,6 @@
-= [docs].[Schema_EntityList]
+// tag::HeaderFullDisplayName[]
+= docs.Schema_EntityList
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -7,6 +9,9 @@
 :ExistsProperty--antorareferencinglist:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
+:ExistsProperty--pk_index_guid:
+:ExistsProperty--pk_indexpatterncolumndatatype:
+:ExistsProperty--pk_indexpatterncolumnname:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -19,6 +24,12 @@
 // tag::RepoObject_guid[]
 0960D8EE-E90A-EC11-8516-A81E8446D5B0
 // end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+docs.Schema_EntityList
+// end::RepoObject_FullDisplayName2[]
 
 == SysObject_type
 
@@ -41,14 +52,52 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-24 18:26:36
+2021-10-04 19:21:21
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-EntityList_Puml]
-=== EntityList_Puml
+[#column-repoobject_schema_name]
+=== repoobject_schema_name
+
+[cols="d,8m,m,m,m,d"]
+|===
+|1
+|*RepoObject_schema_name*
+|nvarchar(128)
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:docs.repoobject_plantuml_entity_t.adoc#column-repoobject_schema_name[+docs.RepoObject_Plantuml_Entity_T.RepoObject_schema_name+]
+--
+
+
+[#column-cultures_name]
+=== cultures_name
+
+[cols="d,8m,m,m,m,d"]
+|===
+|2
+|*cultures_name*
+|nvarchar(10)
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:docs.repoobject_plantuml_entity_t.adoc#column-cultures_name[+docs.RepoObject_Plantuml_Entity_T.cultures_name+]
+--
+
+
+[#column-entitylist_puml]
+=== entitylist_puml
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -61,8 +110,8 @@ view
 |===
 
 
-[#column-EntityList_PumlOnlyIndex]
-=== EntityList_PumlOnlyIndex
+[#column-entitylist_pumlonlyindex]
+=== entitylist_pumlonlyindex
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -75,8 +124,8 @@ view
 |===
 
 
-[#column-EntityList_PumlOnlyPK]
-=== EntityList_PumlOnlyPK
+[#column-entitylist_pumlonlypk]
+=== entitylist_pumlonlypk
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -89,8 +138,8 @@ view
 |===
 
 
-[#column-EntityList_PumlOnlyPkOrIndex]
-=== EntityList_PumlOnlyPkOrIndex
+[#column-entitylist_pumlonlypkorindex]
+=== entitylist_pumlonlypkorindex
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -103,8 +152,8 @@ view
 |===
 
 
-[#column-EntityList_PumlOnlyPkOrIndexOrMeasure]
-=== EntityList_PumlOnlyPkOrIndexOrMeasure
+[#column-entitylist_pumlonlypkorindexormeasure]
+=== entitylist_pumlonlypkorindexormeasure
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -117,8 +166,8 @@ view
 |===
 
 
-[#column-EntityList_PumlOnlyPkOrNotHidden]
-=== EntityList_PumlOnlyPkOrNotHidden
+[#column-entitylist_pumlonlypkornothidden]
+=== entitylist_pumlonlypkornothidden
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -129,25 +178,6 @@ view
 |
 |
 |===
-
-
-[#column-RepoObject_schema_name]
-=== RepoObject_schema_name
-
-[cols="d,8m,m,m,m,d"]
-|===
-|
-|RepoObject_schema_name
-|nvarchar(128)
-|NOT NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:docs.RepoObject_Plantuml_Entity_T.adoc#column-RepoObject_schema_name[+docs.RepoObject_Plantuml_Entity_T.RepoObject_schema_name+]
---
 
 
 // end::AntoraColumnDetails[]
@@ -161,6 +191,19 @@ view
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
+|1
+|*<<column-repoobject_schema_name>>*
+|nvarchar(128)
+|NOT NULL
+|
+|
+
+|2
+|*<<column-cultures_name>>*
+|nvarchar(10)
+|NOT NULL
+|
+|
 
 
 
@@ -173,52 +216,47 @@ view
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
+
+
 |
-|<<column-EntityList_Puml>>
+|<<column-entitylist_puml>>
 |nvarchar(max)
 |NULL
 |
 |
 
 |
-|<<column-EntityList_PumlOnlyIndex>>
+|<<column-entitylist_pumlonlyindex>>
 |nvarchar(max)
 |NULL
 |
 |
 
 |
-|<<column-EntityList_PumlOnlyPK>>
+|<<column-entitylist_pumlonlypk>>
 |nvarchar(max)
 |NULL
 |
 |
 
 |
-|<<column-EntityList_PumlOnlyPkOrIndex>>
+|<<column-entitylist_pumlonlypkorindex>>
 |nvarchar(max)
 |NULL
 |
 |
 
 |
-|<<column-EntityList_PumlOnlyPkOrIndexOrMeasure>>
+|<<column-entitylist_pumlonlypkorindexormeasure>>
 |nvarchar(max)
 |NULL
 |
 |
 
 |
-|<<column-EntityList_PumlOnlyPkOrNotHidden>>
+|<<column-entitylist_pumlonlypkornothidden>>
 |nvarchar(max)
 |NULL
-|
-|
-
-|
-|<<column-RepoObject_schema_name>>
-|nvarchar(128)
-|NOT NULL
 |
 |
 
@@ -228,13 +266,36 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-idx_Schema_EntityList2x_1]
-=== idx_Schema_EntityList++__++1
+[#index-pk_schema_entitylist]
+=== pk_schema_entitylist
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_schema_name>>; nvarchar(128)
+* <<column-cultures_name>>; nvarchar(10)
+--
+* PK, Unique, Real: 1, 1, 0
+
+
+[#index-idx_schema_entitylist2x_2]
+=== idx_schema_entitylist++__++2
+
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-RepoObject_schema_name>>; nvarchar(128)
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[#index-idx_schema_entitylist2x_3]
+=== idx_schema_entitylist++__++3
+
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-cultures_name>>; nvarchar(10)
 --
 * PK, Unique, Real: 0, 0, 0
 
@@ -251,6 +312,13 @@ view
 source: property.RepoObjectProperty_cross As rop_cross
 
 
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
+
+
 === AdocUspSteps
 
 // tag::adocuspsteps[]
@@ -261,14 +329,14 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:docs.RepoObject_Plantuml_Entity_T.adoc[]
+* xref:docs.repoobject_plantuml_entity_t.adoc[]
 // end::antorareferencedlist[]
 
 
 === AntoraReferencingList
 
 // tag::antorareferencinglist[]
-* xref:docs.Schema_puml.adoc[]
+* xref:docs.schema_puml.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -471,21 +539,21 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-
+73CB9D3D-0822-EC11-8524-A81E8446D5B0
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-
+nvarchar(128),nvarchar(10)
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-
+RepoObject_schema_name,cultures_name
 // end::pk_indexpatterncolumnname[]
 
 
@@ -517,6 +585,13 @@ source: property.RepoObjectProperty_cross As rop_cross
 // end::uspexamples[]
 
 
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+
+// end::uspgenerator_usp_id[]
+
+
 === UspParameters
 
 // tag::uspparameters[]
@@ -543,6 +618,7 @@ CREATE View docs.Schema_EntityList
 As
 Select
     roe.RepoObject_schema_name
+  , roe.cultures_name
   , EntityList_Puml                       = String_Agg ( roe.RepoObject_Puml, Char ( 13 ) + Char ( 10 )) Within Group(Order By
                                                                                                                           roe.RepoObject_fullname2)
   , EntityList_PumlOnlyIndex              = String_Agg ( roe.RepoObject_PumlOnlyIndex, Char ( 13 ) + Char ( 10 )) Within Group(Order By
@@ -562,6 +638,7 @@ From
     docs.RepoObject_Plantuml_Entity_T As roe
 Group By
     roe.RepoObject_schema_name
+  , roe.cultures_name
 
 ----
 =======

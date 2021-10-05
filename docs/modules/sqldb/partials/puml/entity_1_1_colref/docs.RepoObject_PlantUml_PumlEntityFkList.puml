@@ -26,7 +26,9 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:docs.RepoObject_Plantuml.adoc[]" as docs.RepoObject_Plantuml << V >> {
+entity "puml-link:dhw:sqldb:docs.repoobject_plantuml.adoc[]" as docs.RepoObject_Plantuml << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  **cultures_name** : (nvarchar(10))
   --
   ColRefList : (nvarchar(max))
   ObjectRefList : (nvarchar(max))
@@ -41,15 +43,15 @@ entity "puml-link:dhw:sqldb:docs.RepoObject_Plantuml.adoc[]" as docs.RepoObject_
   PumlEntityList_0_30 : (nvarchar(max))
   PumlEntityList_30_0 : (nvarchar(max))
   - RepoObject_fullname2 : (nvarchar(257))
-  - RepoObject_guid : (uniqueidentifier)
   --
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.RepoObject_Plantuml_Entity_T.adoc[]" as docs.RepoObject_Plantuml_Entity_T << U >> {
+entity "puml-link:dhw:sqldb:docs.repoobject_plantuml_entity_t.adoc[]" as docs.RepoObject_Plantuml_Entity_T << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **cultures_name** : (nvarchar(10))
   --
   - RepoObject_fullname2 : (nvarchar(257))
-  - RepoObject_guid : (uniqueidentifier)
   - RepoObject_Puml : (nvarchar(max))
   - RepoObject_PumlOnlyIndex : (nvarchar(max))
   - RepoObject_PumlOnlyPK : (nvarchar(max))
@@ -61,16 +63,17 @@ entity "puml-link:dhw:sqldb:docs.RepoObject_Plantuml_Entity_T.adoc[]" as docs.Re
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.RepoObject_PlantUml_PumlEntityFkList.adoc[]" as docs.RepoObject_PlantUml_PumlEntityFkList << V >> {
+entity "puml-link:dhw:sqldb:docs.repoobject_plantuml_pumlentityfklist.adoc[]" as docs.RepoObject_PlantUml_PumlEntityFkList << V >> {
+  **RepoObject_guid** : (uniqueidentifier)
   --
+  - cultures_name : (nvarchar(10))
   PumlEntityFkList : (nvarchar(max))
   RepoObject_fullname2 : (nvarchar(257))
-  RepoObject_guid : (uniqueidentifier)
   --
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObject_related_FK_union.adoc[]" as repo.RepoObject_related_FK_union << V >> {
+entity "puml-link:dhw:sqldb:repo.repoobject_related_fk_union.adoc[]" as repo.RepoObject_related_FK_union << V >> {
   **RepoObject_guid** : (uniqueidentifier)
   **included_RepoObject_guid** : (uniqueidentifier)
   --
@@ -85,7 +88,9 @@ entity "puml-link:dhw:sqldb:repo.RepoObject_related_FK_union.adoc[]" as repo.Rep
 docs.RepoObject_Plantuml_Entity_T <.. docs.RepoObject_PlantUml_PumlEntityFkList
 docs.RepoObject_PlantUml_PumlEntityFkList <.. docs.RepoObject_Plantuml
 repo.RepoObject_related_FK_union <.. docs.RepoObject_PlantUml_PumlEntityFkList
+"docs.RepoObject_Plantuml_Entity_T::cultures_name" <-- "docs.RepoObject_PlantUml_PumlEntityFkList::cultures_name"
 "docs.RepoObject_Plantuml_Entity_T::RepoObject_fullname2" <-- "docs.RepoObject_PlantUml_PumlEntityFkList::RepoObject_fullname2"
+"docs.RepoObject_PlantUml_PumlEntityFkList::cultures_name" <-- "docs.RepoObject_Plantuml::cultures_name"
 "repo.RepoObject_related_FK_union::RepoObject_fullname2" <-- "docs.RepoObject_PlantUml_PumlEntityFkList::RepoObject_fullname2"
 "repo.RepoObject_related_FK_union::RepoObject_guid" <-- "docs.RepoObject_PlantUml_PumlEntityFkList::RepoObject_guid"
 @enduml

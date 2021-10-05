@@ -1,4 +1,6 @@
-= [ssas].[model_json_341_cultures_translations]
+// tag::HeaderFullDisplayName[]
+= ssas.model_json_341_cultures_translations
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -19,6 +21,12 @@
 // tag::RepoObject_guid[]
 FD5FD8EE-E90A-EC11-8516-A81E8446D5B0
 // end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+ssas.model_json_341_cultures_translations
+// end::RepoObject_FullDisplayName2[]
 
 == SysObject_type
 
@@ -41,7 +49,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-01 06:44:02
+2021-10-01 07:49:23
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -158,7 +166,7 @@ view
 [#index-idx_model_json_341_cultures_translations2x_1]
 === idx_model_json_341_cultures_translations++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-databasename>>; nvarchar(128)
@@ -170,7 +178,7 @@ view
 [#index-idx_model_json_341_cultures_translations2x_2]
 === idx_model_json_341_cultures_translations++__++2
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-databasename>>; nvarchar(128)
@@ -188,6 +196,13 @@ view
 == Other tags
 
 source: property.RepoObjectProperty_cross As rop_cross
+
+
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
 
 
 === AdocUspSteps
@@ -456,6 +471,13 @@ source: property.RepoObjectProperty_cross As rop_cross
 // end::uspexamples[]
 
 
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+
+// end::uspgenerator_usp_id[]
+
+
 === UspParameters
 
 // tag::uspparameters[]
@@ -477,6 +499,7 @@ source: property.RepoObjectProperty WHERE property_int = 1
 =======
 [source,sql]
 ----
+
 
 /*
 --get and check existing values
@@ -520,7 +543,7 @@ Where
     j2.[Key] = 'model'
 GO
 */
-CREATE View ssas.model_json_341_cultures_translations
+CREATE View [ssas].[model_json_341_cultures_translations]
 As
 Select
     T1.databasename
@@ -536,7 +559,7 @@ From
     With
     (
         cultures_translations_model_j NVarchar ( Max ) N'$.model' As Json
-    )                           As j2
+    )                             As j2
 
 ----
 =======

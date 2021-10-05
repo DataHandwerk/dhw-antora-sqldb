@@ -26,48 +26,7 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:repo.ForeignKey_ssas_IndexPattern_old.adoc[]" as repo.ForeignKey_ssas_IndexPattern_old << V >> {
-  --
-  - CrossFilteringBehavior : (bigint)
-  - databasename : (nvarchar(128))
-  delete_referential_action : (tinyint)
-  ForeignKey_fullname : (nvarchar(517))
-  - ForeignKey_guid : (uniqueidentifier)
-  ForeignKey_name : (nvarchar(max))
-  - ForeignKey_orignalName : (nvarchar(max))
-  - FromCardinality : (bigint)
-  - IsActive : (bit)
-  - JoinOnDateBehavior : (bigint)
-  referenced_ColumnName : (nvarchar(max))
-  referenced_IndexPatternColumnDatatype : (varchar(34))
-  referenced_IndexPatternColumnGuid : (varchar(36))
-  referenced_IndexPatternColumnName : (nvarchar(max))
-  referenced_IsKey : (bit)
-  referenced_IsNullable : (bit)
-  referenced_ObjectName : (nvarchar(max))
-  referenced_RepoObject_fullname : (nvarchar(517))
-  referenced_RepoObject_fullname2 : (nvarchar(max))
-  referenced_RepoObject_guid : (uniqueidentifier)
-  referencing_ColumnName : (nvarchar(max))
-  referencing_IndexPatternColumnDatatype : (varchar(34))
-  referencing_IndexPatternColumnGuid : (varchar(36))
-  referencing_IndexPatternColumnName : (nvarchar(max))
-  referencing_IsKey : (bit)
-  referencing_IsNullable : (bit)
-  referencing_ObjectName : (nvarchar(max))
-  referencing_RepoObject_fullname : (nvarchar(517))
-  referencing_RepoObject_fullname2 : (nvarchar(max))
-  referencing_RepoObject_guid : (uniqueidentifier)
-  - RelyOnReferentialIntegrity : (bit)
-  - SecurityFilteringBehavior : (bigint)
-  - ToCardinality : (bigint)
-  - Type : (bigint)
-  update_referential_action : (tinyint)
-  --
-  --
-}
-
-entity "puml-link:dhw:sqldb:ssas.TMSCHEMA_RELATIONSHIPS.adoc[]" as ssas.TMSCHEMA_RELATIONSHIPS << U >> {
+entity "puml-link:dhw:sqldb:ssas.tmschema_relationships.adoc[]" as ssas.TMSCHEMA_RELATIONSHIPS << U >> {
   - **databasename** : (nvarchar(128))
   - **ID** : (numeric(20, 0))
   --
@@ -94,7 +53,7 @@ entity "puml-link:dhw:sqldb:ssas.TMSCHEMA_RELATIONSHIPS.adoc[]" as ssas.TMSCHEMA
   --
 }
 
-entity "puml-link:dhw:sqldb:ssas.TMSCHEMA_RELATIONSHIPS_T.adoc[]" as ssas.TMSCHEMA_RELATIONSHIPS_T << U >> {
+entity "puml-link:dhw:sqldb:ssas.tmschema_relationships_t.adoc[]" as ssas.TMSCHEMA_RELATIONSHIPS_T << U >> {
   - **databasename** : (nvarchar(128))
   - **ID** : (numeric(20, 0))
   --
@@ -122,7 +81,7 @@ entity "puml-link:dhw:sqldb:ssas.TMSCHEMA_RELATIONSHIPS_T.adoc[]" as ssas.TMSCHE
   --
 }
 
-entity "puml-link:dhw:sqldb:ssas.usp_PERSIST_TMSCHEMA_RELATIONSHIPS_T.adoc[]" as ssas.usp_PERSIST_TMSCHEMA_RELATIONSHIPS_T << P >> {
+entity "puml-link:dhw:sqldb:ssas.usp_persist_tmschema_relationships_t.adoc[]" as ssas.usp_PERSIST_TMSCHEMA_RELATIONSHIPS_T << P >> {
   --
   --
   --
@@ -130,7 +89,6 @@ entity "puml-link:dhw:sqldb:ssas.usp_PERSIST_TMSCHEMA_RELATIONSHIPS_T.adoc[]" as
 
 ssas.TMSCHEMA_RELATIONSHIPS <.. ssas.TMSCHEMA_RELATIONSHIPS_T
 ssas.TMSCHEMA_RELATIONSHIPS_T <.. ssas.usp_PERSIST_TMSCHEMA_RELATIONSHIPS_T
-ssas.TMSCHEMA_RELATIONSHIPS_T <.. repo.ForeignKey_ssas_IndexPattern_old
 "ssas.TMSCHEMA_RELATIONSHIPS::CrossFilteringBehavior" <-- "ssas.TMSCHEMA_RELATIONSHIPS_T::CrossFilteringBehavior"
 "ssas.TMSCHEMA_RELATIONSHIPS::databasename" <-- "ssas.TMSCHEMA_RELATIONSHIPS_T::databasename"
 "ssas.TMSCHEMA_RELATIONSHIPS::FromCardinality" <-- "ssas.TMSCHEMA_RELATIONSHIPS_T::FromCardinality"
@@ -152,16 +110,5 @@ ssas.TMSCHEMA_RELATIONSHIPS_T <.. repo.ForeignKey_ssas_IndexPattern_old
 "ssas.TMSCHEMA_RELATIONSHIPS::ToColumnID" <-- "ssas.TMSCHEMA_RELATIONSHIPS_T::ToColumnID"
 "ssas.TMSCHEMA_RELATIONSHIPS::ToTableID" <-- "ssas.TMSCHEMA_RELATIONSHIPS_T::ToTableID"
 "ssas.TMSCHEMA_RELATIONSHIPS::Type" <-- "ssas.TMSCHEMA_RELATIONSHIPS_T::Type"
-"ssas.TMSCHEMA_RELATIONSHIPS_T::CrossFilteringBehavior" <-- "repo.ForeignKey_ssas_IndexPattern_old::CrossFilteringBehavior"
-"ssas.TMSCHEMA_RELATIONSHIPS_T::databasename" <-- "repo.ForeignKey_ssas_IndexPattern_old::databasename"
-"ssas.TMSCHEMA_RELATIONSHIPS_T::ForeignKey_guid" <-- "repo.ForeignKey_ssas_IndexPattern_old::ForeignKey_guid"
-"ssas.TMSCHEMA_RELATIONSHIPS_T::FromCardinality" <-- "repo.ForeignKey_ssas_IndexPattern_old::FromCardinality"
-"ssas.TMSCHEMA_RELATIONSHIPS_T::IsActive" <-- "repo.ForeignKey_ssas_IndexPattern_old::IsActive"
-"ssas.TMSCHEMA_RELATIONSHIPS_T::JoinOnDateBehavior" <-- "repo.ForeignKey_ssas_IndexPattern_old::JoinOnDateBehavior"
-"ssas.TMSCHEMA_RELATIONSHIPS_T::Name" <-- "repo.ForeignKey_ssas_IndexPattern_old::ForeignKey_orignalName"
-"ssas.TMSCHEMA_RELATIONSHIPS_T::RelyOnReferentialIntegrity" <-- "repo.ForeignKey_ssas_IndexPattern_old::RelyOnReferentialIntegrity"
-"ssas.TMSCHEMA_RELATIONSHIPS_T::SecurityFilteringBehavior" <-- "repo.ForeignKey_ssas_IndexPattern_old::SecurityFilteringBehavior"
-"ssas.TMSCHEMA_RELATIONSHIPS_T::ToCardinality" <-- "repo.ForeignKey_ssas_IndexPattern_old::ToCardinality"
-"ssas.TMSCHEMA_RELATIONSHIPS_T::Type" <-- "repo.ForeignKey_ssas_IndexPattern_old::Type"
 @enduml
 

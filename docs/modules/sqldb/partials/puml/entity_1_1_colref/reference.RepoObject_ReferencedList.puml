@@ -26,7 +26,7 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:reference.RepoObject_ReferencedList.adoc[]" as reference.RepoObject_ReferencedList << V >> {
+entity "puml-link:dhw:sqldb:reference.repoobject_referencedlist.adoc[]" as reference.RepoObject_ReferencedList << V >> {
   --
   AntoraReferencedList : (nvarchar(max))
   Referencing_fullname : (nvarchar(261))
@@ -37,7 +37,7 @@ entity "puml-link:dhw:sqldb:reference.RepoObject_ReferencedList.adoc[]" as refer
   --
 }
 
-entity "puml-link:dhw:sqldb:reference.RepoObject_ReferencedReferencing.adoc[]" as reference.RepoObject_ReferencedReferencing << V >> {
+entity "puml-link:dhw:sqldb:reference.repoobject_referencedreferencing.adoc[]" as reference.RepoObject_ReferencedReferencing << V >> {
   --
   - referenced_AntoraXref : (nvarchar(max))
   referenced_external_AntoraComponent : (nvarchar(128))
@@ -61,7 +61,7 @@ entity "puml-link:dhw:sqldb:reference.RepoObject_ReferencedReferencing.adoc[]" a
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObject_gross2.adoc[]" as repo.RepoObject_gross2 << V >> {
+entity "puml-link:dhw:sqldb:repo.repoobject_gross2.adoc[]" as repo.RepoObject_gross2 << V >> {
   --
   AntoraComponent : (nvarchar(max))
   AntoraModule : (nvarchar(max))
@@ -110,10 +110,10 @@ entity "puml-link:dhw:sqldb:repo.RepoObject_gross2.adoc[]" as repo.RepoObject_gr
   persistence_source_RepoObject_fullname : (nvarchar(261))
   persistence_source_RepoObject_fullname2 : (nvarchar(257))
   persistence_source_RepoObject_guid : (uniqueidentifier)
-  persistence_source_RepoObject_xref : (nvarchar(269))
+  persistence_source_RepoObject_xref : (nvarchar(4000))
   persistence_source_SysObject_fullname : (nvarchar(261))
   persistence_source_SysObject_fullname2 : (nvarchar(257))
-  persistence_source_SysObject_xref : (nvarchar(269))
+  persistence_source_SysObject_xref : (nvarchar(4000))
   PersistenceCompareColumnList : (nvarchar(max))
   PersistenceInsertColumnList : (nvarchar(max))
   PersistenceUpdateColumnList : (nvarchar(max))
@@ -162,9 +162,29 @@ entity "puml-link:dhw:sqldb:repo.RepoObject_gross2.adoc[]" as repo.RepoObject_gr
   --
 }
 
+entity "puml-link:dhw:sqldb:repo.repoobject_sat2.adoc[]" as repo.RepoObject_sat2 << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+  AntoraReferencedList : (nvarchar(max))
+  AntoraReferencingList : (nvarchar(max))
+  CreateColumnList : (nvarchar(max))
+  DbmlColumnList : (nvarchar(max))
+  PersistenceCompareColumnList : (nvarchar(max))
+  PersistenceInsertColumnList : (nvarchar(max))
+  PersistenceUpdateColumnList : (nvarchar(max))
+  sql_modules_antora : (nvarchar(max))
+  sql_modules_definition : (nvarchar(max))
+  sql_modules_formatted : (nvarchar(max))
+  sql_modules_formatted2 : (nvarchar(max))
+  --
+  --
+}
+
 reference.RepoObject_ReferencedList <.. repo.RepoObject_gross2
+reference.RepoObject_ReferencedList <.. repo.RepoObject_sat2
 reference.RepoObject_ReferencedReferencing <.. reference.RepoObject_ReferencedList
 "reference.RepoObject_ReferencedList::AntoraReferencedList" <-- "repo.RepoObject_gross2::AntoraReferencedList"
+"reference.RepoObject_ReferencedList::AntoraReferencedList" <-- "repo.RepoObject_sat2::AntoraReferencedList"
 "reference.RepoObject_ReferencedReferencing::referencing_fullname" <-- "reference.RepoObject_ReferencedList::Referencing_fullname"
 "reference.RepoObject_ReferencedReferencing::Referencing_guid" <-- "reference.RepoObject_ReferencedList::Referencing_guid"
 @enduml

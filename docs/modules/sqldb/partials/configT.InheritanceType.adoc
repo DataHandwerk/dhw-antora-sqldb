@@ -1,4 +1,6 @@
-= [configT].[InheritanceType]
+// tag::HeaderFullDisplayName[]
+= configT.InheritanceType
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -19,6 +21,12 @@
 // tag::RepoObject_guid[]
 5CB33A4A-426D-EB11-84E2-A81E8446D5B0
 // end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+configT.InheritanceType
+// end::RepoObject_FullDisplayName2[]
 
 == SysObject_type
 
@@ -41,14 +49,14 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-08-22 18:59:11
+2021-10-02 13:23:33
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-InheritanceType]
-=== InheritanceType
+[#column-inheritancetype]
+=== inheritancetype
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -61,8 +69,8 @@ view
 |===
 
 
-[#column-InheritanceTypeDescription]
-=== InheritanceTypeDescription
+[#column-inheritancetypedescription]
+=== inheritancetypedescription
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -87,7 +95,7 @@ view
 
 // tag::AntoraPkColumnTableRows[]
 |1
-|*<<column-InheritanceType>>*
+|*<<column-inheritancetype>>*
 |int
 |NOT NULL
 |
@@ -101,7 +109,7 @@ view
 // tag::AntoraNonPkColumnTableRows[]
 
 |
-|<<column-InheritanceTypeDescription>>
+|<<column-inheritancetypedescription>>
 |varchar(83)
 |NOT NULL
 |
@@ -113,10 +121,10 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-PK_InheritanceType]
-=== PK_InheritanceType
+[#index-pk_inheritancetype]
+=== pk_inheritancetype
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-InheritanceType>>; int
@@ -134,6 +142,13 @@ view
 == Other tags
 
 source: property.RepoObjectProperty_cross As rop_cross
+
+
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
 
 
 === AdocUspSteps
@@ -402,6 +417,13 @@ InheritanceType
 // end::uspexamples[]
 
 
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+
+// end::uspgenerator_usp_id[]
+
+
 === UspParameters
 
 // tag::uspparameters[]
@@ -423,17 +445,16 @@ source: property.RepoObjectProperty WHERE property_int = 1
 =======
 [source,sql]
 ----
+
 /*
-<<property_start>>MS_Description
+<<property_start>>Description
 <<property_end>>
 */
-CREATE View [configT].[InheritanceType]
+CREATE View configT.InheritanceType
 As
---
 Select
     InheritanceType            = 0
   , InheritanceTypeDescription = 'No inheritance from predecessor'
---
 Union All
 Select
     InheritanceType            = 11
@@ -482,7 +503,6 @@ Select
 --SELECT
 --       [InheritanceType] = 33
 --     , [InheritanceTypeDescription] = 'use CONCAT (for example: ''[RepoObject_name],CHAR(13),CHAR(10),EineNochZuDefinierendeFunktion(''MS_Description'')''), Inheritance from first predecessor, force'
-
 ----
 =======
 // end::sql_modules_definition[]

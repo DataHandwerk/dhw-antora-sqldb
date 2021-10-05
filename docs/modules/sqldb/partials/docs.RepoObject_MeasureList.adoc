@@ -1,4 +1,6 @@
-= [docs].[RepoObject_MeasureList]
+// tag::HeaderFullDisplayName[]
+= docs.RepoObject_MeasureList
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -7,9 +9,13 @@
 :ExistsProperty--antorareferencinglist:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
+:ExistsProperty--pk_index_guid:
+:ExistsProperty--pk_indexpatterncolumndatatype:
+:ExistsProperty--pk_indexpatterncolumnname:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
+:ExistsProperty--AntoraIndexList:
 :ExistsProperty--Columns:
 // end::existing_properties[]
 
@@ -18,6 +24,12 @@
 // tag::RepoObject_guid[]
 72E1C56A-C111-EC11-8519-A81E8446D5B0
 // end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+docs.RepoObject_MeasureList
+// end::RepoObject_FullDisplayName2[]
 
 == SysObject_type
 
@@ -40,14 +52,52 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-20 15:21:47
+2021-10-05 11:43:29
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-AntoraMeasureDetails]
-=== AntoraMeasureDetails
+[#column-repoobject_guid]
+=== repoobject_guid
+
+[cols="d,8m,m,m,m,d"]
+|===
+|1
+|*RepoObject_guid*
+|uniqueidentifier
+|NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo.measures_union.adoc#column-repoobject_guid[+repo.Measures_union.RepoObject_guid+]
+--
+
+
+[#column-cultures_name]
+=== cultures_name
+
+[cols="d,8m,m,m,m,d"]
+|===
+|2
+|*cultures_name*
+|nvarchar(10)
+|NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:docs.repoobject_outputfilter_t.adoc#column-cultures_name[+docs.RepoObject_OutputFilter_T.cultures_name+]
+--
+
+
+[#column-antorameasuredetails]
+=== antorameasuredetails
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -60,8 +110,27 @@ view
 |===
 
 
-[#column-PlantumlMeasures]
-=== PlantumlMeasures
+[#column-is_external]
+=== is_external
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|is_external
+|tinyint
+|NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:docs.repoobject_outputfilter_t.adoc#column-is_external[+docs.RepoObject_OutputFilter_T.is_external+]
+--
+
+
+[#column-plantumlmeasures]
+=== plantumlmeasures
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -72,25 +141,6 @@ view
 |
 |
 |===
-
-
-[#column-RepoObject_guid]
-=== RepoObject_guid
-
-[cols="d,8m,m,m,m,d"]
-|===
-|
-|RepoObject_guid
-|uniqueidentifier
-|NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:repo.Measures_union.adoc#column-RepoObject_guid[+repo.Measures_union.RepoObject_guid+]
---
 
 
 // end::AntoraColumnDetails[]
@@ -104,6 +154,20 @@ view
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
+|1
+|*<<column-repoobject_guid>>*
+|uniqueidentifier
+|NULL
+|
+|
+
+|2
+|*<<column-cultures_name>>*
+|nvarchar(10)
+|NULL
+|
+|
+
 
 
 
@@ -112,23 +176,25 @@ view
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
+
+
 |
-|<<column-AntoraMeasureDetails>>
+|<<column-antorameasuredetails>>
 |nvarchar(max)
 |NULL
 |
 |
 
 |
-|<<column-PlantumlMeasures>>
-|nvarchar(max)
+|<<column-is_external>>
+|tinyint
 |NULL
 |
 |
 
 |
-|<<column-RepoObject_guid>>
-|uniqueidentifier
+|<<column-plantumlmeasures>>
+|nvarchar(max)
 |NULL
 |
 |
@@ -138,6 +204,28 @@ view
 == AntoraIndexList
 
 // tag::AntoraIndexList[]
+
+[#index-pk_repoobject_measurelist]
+=== pk_repoobject_measurelist
+
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-RepoObject_guid>>; uniqueidentifier
+* <<column-cultures_name>>; nvarchar(10)
+--
+* PK, Unique, Real: 1, 1, 0
+
+
+[#index-idx_repoobject_measurelist2x_2]
+=== idx_repoobject_measurelist++__++2
+
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-cultures_name>>; nvarchar(10)
+--
+* PK, Unique, Real: 0, 0, 0
 
 // end::AntoraIndexList[]
 
@@ -152,6 +240,13 @@ view
 source: property.RepoObjectProperty_cross As rop_cross
 
 
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
+
+
 === AdocUspSteps
 
 // tag::adocuspsteps[]
@@ -162,18 +257,20 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:docs.fs_cleanStringForAnchorId.adoc[]
-* xref:docs.fs_cleanStringForLabel.adoc[]
-* xref:docs.fs_cleanStringForPuml.adoc[]
-* xref:repo.Measures_union.adoc[]
+* xref:docs.fs_cleanstringforanchorid.adoc[]
+* xref:docs.fs_cleanstringforlabel.adoc[]
+* xref:docs.fs_cleanstringforpuml.adoc[]
+* xref:docs.repoobject_outputfilter_t.adoc[]
+* xref:repo.measures_union.adoc[]
+* xref:ssas.measures_translation_t.adoc[]
 // end::antorareferencedlist[]
 
 
 === AntoraReferencingList
 
 // tag::antorareferencinglist[]
-* xref:docs.RepoObject_Adoc.adoc[]
-* xref:docs.RepoObject_Plantuml_Entity.adoc[]
+* xref:docs.repoobject_adoc.adoc[]
+* xref:docs.repoobject_plantuml_entity.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -376,21 +473,21 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-
+2C9EA450-0722-EC11-8524-A81E8446D5B0
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-
+uniqueidentifier,nvarchar(10)
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-
+RepoObject_guid,cultures_name
 // end::pk_indexpatterncolumnname[]
 
 
@@ -407,7 +504,9 @@ source: property.RepoObjectProperty_cross As rop_cross
 * [docs].[fs_cleanStringForAnchorId]
 * [docs].[fs_cleanStringForLabel]
 * [docs].[fs_cleanStringForPuml]
+* [docs].[RepoObject_OutputFilter_T]
 * [repo].[Measures_union]
+* [ssas].[Measures_translation_T]
 // end::referencedobjectlist[]
 
 
@@ -423,6 +522,13 @@ source: property.RepoObjectProperty_cross As rop_cross
 // tag::uspexamples[]
 
 // end::uspexamples[]
+
+
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+
+// end::uspgenerator_usp_id[]
 
 
 === UspParameters
@@ -451,6 +557,8 @@ CREATE View docs.RepoObject_MeasureList
 As
 Select
     rom.RepoObject_guid
+  , rof.cultures_name
+  , is_external          = Max ( Cast(rof.is_external As TinyInt))
   , AntoraMeasureDetails =
   --
   String_Agg (
@@ -458,11 +566,11 @@ Select
                             --we need to convert to first argument nvarchar(max) to avoid the limit of 8000 byte
                             Cast('' As NVarchar(Max))
                           , '[#measure-'
-                          , docs.fs_cleanStringForAnchorId ( rom.measures_name )
+                          , docs.fs_cleanStringForAnchorId ( transl.Measure_DisplayName )
                           , ']'
                           , Char ( 13 ) + Char ( 10 )
                           , '=== '
-                          , docs.fs_cleanStringForLabel ( rom.measures_name )
+                          , docs.fs_cleanStringForLabel ( transl.Measure_DisplayName )
                           , Char ( 13 ) + Char ( 10 )
                           , Char ( 13 ) + Char ( 10 )
                           , Case
@@ -516,7 +624,7 @@ Select
                         )
                , Char ( 13 ) + Char ( 10 )
              ) Within Group(Order By
-                                rom.measures_name)
+                                transl.Measure_DisplayName)
   , PlantumlMeasures     =
   --
   String_Agg (
@@ -525,7 +633,7 @@ Select
                           , Concat (
                                        '  ~ '
                                      , Iif(rom.measures_isHidden = 1, '<color:gray>', Null)
-                                     , docs.fs_cleanStringForPuml ( rom.measures_name )
+                                     , docs.fs_cleanStringForPuml ( transl.Measure_DisplayName )
                                      , Iif(rom.measures_isHidden = 1, ' (hidden)', Null)
                                      , Iif(rom.measures_isHidden = 1, '</color>', Null)
                                      , Char ( 13 ) + Char ( 10 )
@@ -533,11 +641,23 @@ Select
                         )
                , ''
              ) Within Group(Order By
-                                rom.measures_name)
+                                transl.Measure_DisplayName)
 From
-    repo.Measures_union As rom
+    repo.Measures_union                As rom
+    Left Outer Join
+        docs.RepoObject_OutputFilter_T As rof
+            On
+            rom.RepoObject_guid        = rof.RepoObject_guid
+
+    Left Join
+        ssas.Measures_translation_T    As transl
+            On
+            transl.Measure_guid        = rom.Measure_guid
+            And transl.cultures_name   = rof.cultures_name
+            And transl.RepoObject_name = rof.RepoObject_name
 Group By
     rom.RepoObject_guid
+  , rof.cultures_name
 
 ----
 =======

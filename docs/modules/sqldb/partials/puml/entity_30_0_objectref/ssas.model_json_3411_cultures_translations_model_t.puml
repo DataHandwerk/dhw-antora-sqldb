@@ -1,0 +1,72 @@
+@startuml
+'Left to right direction
+top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:ssas.model_json.adoc[]" as ssas.model_json << U >> {
+  - **databasename** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json_10.adoc[]" as ssas.model_json_10 << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json_20.adoc[]" as ssas.model_json_20 << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json_34_cultures.adoc[]" as ssas.model_json_34_cultures << V >> {
+  - **databasename** : (nvarchar(128))
+  **cultures_name** : (nvarchar(500))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json_341_cultures_translations.adoc[]" as ssas.model_json_341_cultures_translations << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json_3411_cultures_translations_model.adoc[]" as ssas.model_json_3411_cultures_translations_model << V >> {
+  - **databasename** : (nvarchar(128))
+  **cultures_name** : (nvarchar(500))
+  **cultures_translations_model_name** : (nvarchar(500))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json_3411_cultures_translations_model_t.adoc[]" as ssas.model_json_3411_cultures_translations_model_T << U >> {
+  - **databasename** : (nvarchar(128))
+  **cultures_name** : (nvarchar(500))
+  --
+}
+
+ssas.model_json <.. ssas.model_json_10
+ssas.model_json_10 <.. ssas.model_json_20
+ssas.model_json_20 <.. ssas.model_json_34_cultures
+ssas.model_json_34_cultures <.. ssas.model_json_341_cultures_translations
+ssas.model_json_341_cultures_translations <.. ssas.model_json_3411_cultures_translations_model
+ssas.model_json_3411_cultures_translations_model <.. ssas.model_json_3411_cultures_translations_model_T
+@enduml
+

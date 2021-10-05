@@ -1,4 +1,6 @@
-= [repo].[usp_main]
+// tag::HeaderFullDisplayName[]
+= repo.usp_main
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -12,6 +14,7 @@
 :ExistsProperty--ms_description:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--uspexamples:
+:ExistsProperty--uspgenerator_usp_id:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--AntoraParameterList:
 // end::existing_properties[]
@@ -21,6 +24,12 @@
 // tag::RepoObject_guid[]
 6BCBC49C-3862-EB11-84DC-A81E8446D5B0
 // end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+repo.usp_main
+// end::RepoObject_FullDisplayName2[]
 
 == SysObject_type
 
@@ -43,7 +52,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-25 19:59:02
+2021-10-04 23:48:20
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -88,6 +97,13 @@ stored procedure
 == Other tags
 
 source: property.RepoObjectProperty_cross As rop_cross
+
+
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
 
 
 === AdocUspSteps
@@ -172,6 +188,75 @@ source: property.RepoObjectProperty_cross As rop_cross
 =====
 
 |220
+
+
+|230
+|
+*(select config.fs_get_parameter_value ( 'sync enable', 'ssas' )) = 1 AND ( 'sync enable', 'dwh' )) = 0 *
+
+* `IF (select config.fs_get_parameter_value ( 'sync enable', 'ssas' )) = 1
+AND
+(select config.fs_get_parameter_value ( 'sync enable', 'dwh' )) = 0`
+
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+(select config.fs_get_parameter_value ( 'sync enable', 'ssas' )) = 1
+AND
+(select config.fs_get_parameter_value ( 'sync enable', 'dwh' )) = 0
+----
+=====
+
+|
+
+
+|231
+|
+*delete where is_ssas = 0 and is_external = 0*
+
+* d
+* [repo].[RepoObject]
+* [repo].[RepoObject]
+
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+Delete From
+repo.RepoObject
+Where
+    is_ssas         = 0
+    And is_external = 0
+----
+=====
+
+|230
+
+
+|235
+|
+*[ssas].[usp_PERSIST_RepoObjectColumn_translation_T]*
+
+* `EXEC [ssas].[usp_PERSIST_RepoObjectColumn_translation_T]`
+
+
+it is required in [docs].[RepoObject_ColumnList]
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+[ssas].[usp_PERSIST_RepoObjectColumn_translation_T]
+----
+=====
+
+|
 
 
 |240
@@ -338,6 +423,25 @@ From
 [source,sql]
 ----
 [reference].[usp_PERSIST_RepoObjectColumn_reference_T]
+----
+=====
+
+|
+
+
+|292
+|
+*[repo].[usp_PERSIST_RepoObject_sat2_T]*
+
+* `EXEC [repo].[usp_PERSIST_RepoObject_sat2_T]`
+
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+[repo].[usp_PERSIST_RepoObject_sat2_T]
 ----
 =====
 
@@ -604,7 +708,83 @@ Where
 |
 
 
-|3100
+|3200
+|
+*[property].[usp_RepoObjectProperty_collect]*
+
+* `EXEC [property].[usp_RepoObjectProperty_collect]`
+
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+[property].[usp_RepoObjectProperty_collect]
+----
+=====
+
+|
+
+
+|3310
+|
+*[reference].[usp_PERSIST_additional_Reference_from_properties_tgt]*
+
+* `EXEC [reference].[usp_PERSIST_additional_Reference_from_properties_tgt]`
+
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+[reference].[usp_PERSIST_additional_Reference_from_properties_tgt]
+----
+=====
+
+|
+
+
+|3320
+|
+*[reference].[usp_PERSIST_additional_Reference_wo_columns_from_properties_tgt]*
+
+* `EXEC [reference].[usp_PERSIST_additional_Reference_wo_columns_from_properties_tgt]`
+
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+[reference].[usp_PERSIST_additional_Reference_wo_columns_from_properties_tgt]
+----
+=====
+
+|
+
+
+|3330
+|
+*[reference].[usp_PERSIST_additional_Reference_from_ssas_tgt]*
+
+* `EXEC [reference].[usp_PERSIST_additional_Reference_from_ssas_tgt]`
+
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+[reference].[usp_PERSIST_additional_Reference_from_ssas_tgt]
+----
+=====
+
+|
+
+
+|3400
 |
 *[property].[usp_external_property_import]*
 
@@ -617,25 +797,6 @@ Where
 [source,sql]
 ----
 [property].[usp_external_property_import]
-----
-=====
-
-|
-
-
-|3200
-|
-*[repo].[usp_RepoObjectProperty_collect]*
-
-* `EXEC [property].[usp_RepoObjectProperty_collect]`
-
-
-.Statement
-[%collapsible]
-=====
-[source,sql]
-----
-[property].[usp_RepoObjectProperty_collect]
 ----
 =====
 
@@ -688,30 +849,35 @@ Where
 
 // tag::antorareferencedlist[]
 * xref:config.fs_get_parameter_value.adoc[]
-* xref:logs.usp_ExecutionLog_insert.adoc[]
+* xref:logs.usp_executionlog_insert.adoc[]
 * xref:property.usp_external_property_import.adoc[]
-* xref:property.usp_RepoObject_Inheritance.adoc[]
-* xref:property.usp_RepoObjectColumn_Inheritance.adoc[]
-* xref:property.usp_RepoObjectProperty_collect.adoc[]
-* xref:reference.RepoObject_reference_persistence.adoc[]
-* xref:reference.RepoObject_reference_persistence_target_as_source.adoc[]
-* xref:reference.RepoObject_reference_T.adoc[]
-* xref:reference.usp_additional_Reference.adoc[]
-* xref:reference.usp_PERSIST_RepoObject_reference_T.adoc[]
-* xref:reference.usp_PERSIST_RepoObjectColumn_reference_T.adoc[]
-* xref:reference.usp_RepoObject_ReferenceTree_insert.adoc[]
-* xref:reference.usp_RepoObject_update_SysObjectQueryPlan.adoc[]
-* xref:reference.usp_RepoObjectSource_FirstResultSet.adoc[]
-* xref:reference.usp_RepoObjectSource_QueryPlan.adoc[]
-* xref:reference.usp_update_Referencing_Count.adoc[]
-* xref:repo.RepoObject.adoc[]
-* xref:repo.RepoObject_persistence.adoc[]
-* xref:repo.usp_Index_ForeignKey.adoc[]
+* xref:property.usp_repoobject_inheritance.adoc[]
+* xref:property.usp_repoobjectcolumn_inheritance.adoc[]
+* xref:property.usp_repoobjectproperty_collect.adoc[]
+* xref:reference.repoobject_reference_persistence.adoc[]
+* xref:reference.repoobject_reference_persistence_target_as_source.adoc[]
+* xref:reference.repoobject_reference_t.adoc[]
+* xref:reference.usp_additional_reference.adoc[]
+* xref:reference.usp_persist_additional_reference_from_properties_tgt.adoc[]
+* xref:reference.usp_persist_additional_reference_from_ssas_tgt.adoc[]
+* xref:reference.usp_persist_additional_reference_wo_columns_from_properties_tgt.adoc[]
+* xref:reference.usp_persist_repoobject_reference_t.adoc[]
+* xref:reference.usp_persist_repoobjectcolumn_reference_t.adoc[]
+* xref:reference.usp_repoobject_referencetree_insert.adoc[]
+* xref:reference.usp_repoobject_update_sysobjectqueryplan.adoc[]
+* xref:reference.usp_repoobjectsource_firstresultset.adoc[]
+* xref:reference.usp_repoobjectsource_queryplan.adoc[]
+* xref:reference.usp_update_referencing_count.adoc[]
+* xref:repo.repoobject.adoc[]
+* xref:repo.repoobject_persistence.adoc[]
+* xref:repo.usp_index_foreignkey.adoc[]
 * xref:repo.usp_index_inheritance.adoc[]
-* xref:repo.usp_RepoObjectColumn_update_RepoObjectColumn_column_id.adoc[]
+* xref:repo.usp_persist_repoobject_sat2_t.adoc[]
+* xref:repo.usp_repoobjectcolumn_update_repoobjectcolumn_column_id.adoc[]
 * xref:repo.usp_sync_guid.adoc[]
 * xref:repo.usp_sync_guid_ssas.adoc[]
-* xref:uspgenerator.usp_GeneratorUsp_insert_update_persistence.adoc[]
+* xref:ssas.usp_persist_repoobjectcolumn_translation_t.adoc[]
+* xref:uspgenerator.usp_generatorusp_insert_update_persistence.adoc[]
 // end::antorareferencedlist[]
 
 
@@ -995,6 +1161,9 @@ use links in xref:sqldb:repo.usp_main.adoc#_referenced_objects[Referenced object
 * [reference].[RepoObject_reference_persistence_target_as_source]
 * [reference].[RepoObject_reference_T]
 * [reference].[usp_additional_Reference]
+* [reference].[usp_PERSIST_additional_Reference_from_properties_tgt]
+* [reference].[usp_PERSIST_additional_Reference_from_ssas_tgt]
+* [reference].[usp_PERSIST_additional_Reference_wo_columns_from_properties_tgt]
 * [reference].[usp_PERSIST_RepoObject_reference_T]
 * [reference].[usp_PERSIST_RepoObjectColumn_reference_T]
 * [reference].[usp_RepoObject_ReferenceTree_insert]
@@ -1006,9 +1175,11 @@ use links in xref:sqldb:repo.usp_main.adoc#_referenced_objects[Referenced object
 * [repo].[RepoObject_persistence]
 * [repo].[usp_Index_ForeignKey]
 * [repo].[usp_index_inheritance]
+* [repo].[usp_PERSIST_RepoObject_sat2_T]
 * [repo].[usp_RepoObjectColumn_update_RepoObjectColumn_column_id]
 * [repo].[usp_sync_guid]
 * [repo].[usp_sync_guid_ssas]
+* [ssas].[usp_PERSIST_RepoObjectColumn_translation_T]
 * [uspgenerator].[usp_GeneratorUsp_insert_update_persistence]
 // end::referencedobjectlist[]
 
@@ -1025,6 +1196,13 @@ use links in xref:sqldb:repo.usp_main.adoc#_referenced_objects[Referenced object
 // tag::uspexamples[]
 EXEC = [repo].[usp_main]
 // end::uspexamples[]
+
+
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+2
+// end::uspgenerator_usp_id[]
 
 
 === UspParameters
@@ -1149,6 +1327,56 @@ EXEC [repo].[usp_sync_guid_ssas]
  , @parent_execution_log_id = @current_execution_log_id
 
 END;
+
+/*{"ReportUspStep":[{"Number":230,"Name":"(select config.fs_get_parameter_value ( 'sync enable', 'ssas' )) = 1 AND ( 'sync enable', 'dwh' )) = 0 ","has_logging":0,"is_condition":1,"is_inactive":0,"is_SubProcedure":0}]}*/
+IF (select config.fs_get_parameter_value ( 'sync enable', 'ssas' )) = 1
+AND
+(select config.fs_get_parameter_value ( 'sync enable', 'dwh' )) = 0
+
+/*{"ReportUspStep":[{"Number":231,"Parent_Number":230,"Name":"delete where is_ssas = 0 and is_external = 0","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":0,"log_source_object":"[repo].[RepoObject]","log_target_object":"[repo].[RepoObject]","log_flag_InsertUpdateDelete":"d"}]}*/
+BEGIN
+PRINT CONCAT('usp_id;Number;Parent_Number: ',2,';',231,';',230);
+
+Delete From
+repo.RepoObject
+Where
+    is_ssas         = 0
+    And is_external = 0
+
+-- Logging START --
+SET @rows = @@ROWCOUNT
+SET @step_id = @step_id + 1
+SET @step_name = 'delete where is_ssas = 0 and is_external = 0'
+SET @source_object = '[repo].[RepoObject]'
+SET @target_object = '[repo].[RepoObject]'
+
+EXEC logs.usp_ExecutionLog_insert 
+ @execution_instance_guid = @execution_instance_guid
+ , @ssis_execution_id = @ssis_execution_id
+ , @sub_execution_id = @sub_execution_id
+ , @parent_execution_log_id = @parent_execution_log_id
+ , @current_execution_guid = @current_execution_guid
+ , @proc_id = @proc_id
+ , @proc_schema_name = @proc_schema_name
+ , @proc_name = @proc_name
+ , @event_info = @event_info
+ , @step_id = @step_id
+ , @step_name = @step_name
+ , @source_object = @source_object
+ , @target_object = @target_object
+ , @deleted = @rows
+-- Logging END --
+END;
+
+/*{"ReportUspStep":[{"Number":235,"Name":"[ssas].[usp_PERSIST_RepoObjectColumn_translation_T]","has_logging":0,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
+EXEC [ssas].[usp_PERSIST_RepoObjectColumn_translation_T]
+--add your own parameters
+--logging parameters
+ @execution_instance_guid = @execution_instance_guid
+ , @ssis_execution_id = @ssis_execution_id
+ , @sub_execution_id = @sub_execution_id
+ , @parent_execution_log_id = @current_execution_log_id
+
 
 /*{"ReportUspStep":[{"Number":240,"Name":"[reference].[usp_additional_Reference]","has_logging":0,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
 EXEC [reference].[usp_additional_Reference]
@@ -1311,6 +1539,16 @@ EXEC [reference].[usp_PERSIST_RepoObjectColumn_reference_T]
  , @parent_execution_log_id = @current_execution_log_id
 
 
+/*{"ReportUspStep":[{"Number":292,"Name":"[repo].[usp_PERSIST_RepoObject_sat2_T]","has_logging":0,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
+EXEC [repo].[usp_PERSIST_RepoObject_sat2_T]
+--add your own parameters
+--logging parameters
+ @execution_instance_guid = @execution_instance_guid
+ , @ssis_execution_id = @ssis_execution_id
+ , @sub_execution_id = @sub_execution_id
+ , @parent_execution_log_id = @current_execution_log_id
+
+
 /*{"ReportUspStep":[{"Number":300,"Name":"(select [config].[fs_get_parameter_value]('main enable usp_RepoObjectSource_FirstResultSet', DEFAULT)) = 1","has_logging":0,"is_condition":1,"is_inactive":0,"is_SubProcedure":0}]}*/
 IF (select [config].[fs_get_parameter_value]('main enable usp_RepoObjectSource_FirstResultSet', DEFAULT)) = 1
 
@@ -1451,8 +1689,8 @@ EXEC logs.usp_ExecutionLog_insert
  , @updated = @rows
 -- Logging END --
 
-/*{"ReportUspStep":[{"Number":3100,"Name":"[property].[usp_external_property_import]","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
-EXEC [property].[usp_external_property_import]
+/*{"ReportUspStep":[{"Number":3200,"Name":"[property].[usp_RepoObjectProperty_collect]","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
+EXEC [property].[usp_RepoObjectProperty_collect]
 --add your own parameters
 --logging parameters
  @execution_instance_guid = @execution_instance_guid
@@ -1461,8 +1699,38 @@ EXEC [property].[usp_external_property_import]
  , @parent_execution_log_id = @current_execution_log_id
 
 
-/*{"ReportUspStep":[{"Number":3200,"Name":"[repo].[usp_RepoObjectProperty_collect]","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
-EXEC [property].[usp_RepoObjectProperty_collect]
+/*{"ReportUspStep":[{"Number":3310,"Name":"[reference].[usp_PERSIST_additional_Reference_from_properties_tgt]","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
+EXEC [reference].[usp_PERSIST_additional_Reference_from_properties_tgt]
+--add your own parameters
+--logging parameters
+ @execution_instance_guid = @execution_instance_guid
+ , @ssis_execution_id = @ssis_execution_id
+ , @sub_execution_id = @sub_execution_id
+ , @parent_execution_log_id = @current_execution_log_id
+
+
+/*{"ReportUspStep":[{"Number":3320,"Name":"[reference].[usp_PERSIST_additional_Reference_wo_columns_from_properties_tgt]","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
+EXEC [reference].[usp_PERSIST_additional_Reference_wo_columns_from_properties_tgt]
+--add your own parameters
+--logging parameters
+ @execution_instance_guid = @execution_instance_guid
+ , @ssis_execution_id = @ssis_execution_id
+ , @sub_execution_id = @sub_execution_id
+ , @parent_execution_log_id = @current_execution_log_id
+
+
+/*{"ReportUspStep":[{"Number":3330,"Name":"[reference].[usp_PERSIST_additional_Reference_from_ssas_tgt]","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
+EXEC [reference].[usp_PERSIST_additional_Reference_from_ssas_tgt]
+--add your own parameters
+--logging parameters
+ @execution_instance_guid = @execution_instance_guid
+ , @ssis_execution_id = @ssis_execution_id
+ , @sub_execution_id = @sub_execution_id
+ , @parent_execution_log_id = @current_execution_log_id
+
+
+/*{"ReportUspStep":[{"Number":3400,"Name":"[property].[usp_external_property_import]","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
+EXEC [property].[usp_external_property_import]
 --add your own parameters
 --logging parameters
  @execution_instance_guid = @execution_instance_guid

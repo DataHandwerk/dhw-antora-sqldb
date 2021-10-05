@@ -26,7 +26,7 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
+entity "puml-link:dhw:sqldb:repo.repoobject.adoc[]" as repo.RepoObject << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
   external_AntoraComponent : (nvarchar(128))
@@ -73,7 +73,7 @@ entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObject_external_src.adoc[]" as repo.RepoObject_external_src << V >> {
+entity "puml-link:dhw:sqldb:repo.repoobject_external_src.adoc[]" as repo.RepoObject_external_src << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
   - external_AntoraComponent : (nvarchar(128))
@@ -90,7 +90,7 @@ entity "puml-link:dhw:sqldb:repo.RepoObject_external_src.adoc[]" as repo.RepoObj
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObject_external_tgt.adoc[]" as repo.RepoObject_external_tgt << V >> {
+entity "puml-link:dhw:sqldb:repo.repoobject_external_tgt.adoc[]" as repo.RepoObject_external_tgt << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
   - external_AntoraComponent : (nvarchar(128))
@@ -124,7 +124,7 @@ entity "puml-link:dhw:sqldb:repo.RepoObject_external_tgt.adoc[]" as repo.RepoObj
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_external_tgt.adoc[]" as repo.RepoObjectColumn_external_tgt << V >> {
+entity "puml-link:dhw:sqldb:repo.repoobjectcolumn_external_tgt.adoc[]" as repo.RepoObjectColumn_external_tgt << V >> {
   - **RepoObjectColumn_guid** : (uniqueidentifier)
   --
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
@@ -162,7 +162,7 @@ entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_external_tgt.adoc[]" as repo.R
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.usp_PERSIST_RepoObject_external_tgt.adoc[]" as repo.usp_PERSIST_RepoObject_external_tgt << P >> {
+entity "puml-link:dhw:sqldb:repo.usp_persist_repoobject_external_tgt.adoc[]" as repo.usp_PERSIST_RepoObject_external_tgt << P >> {
   --
   --
   --
@@ -174,6 +174,34 @@ repo.RepoObject_external_tgt <.. repo.usp_PERSIST_RepoObject_external_tgt
 repo.RepoObject_external_tgt <.. repo.RepoObject
 repo.RepoObject_external_tgt <.. repo.RepoObjectColumn_external_tgt
 repo.RepoObjectColumn_external_tgt <.. repo.RepoObject_external_tgt
+"repo.RepoObject::external_AntoraComponent" <-- "repo.RepoObject_external_tgt::external_AntoraComponent"
+"repo.RepoObject::external_AntoraModule" <-- "repo.RepoObject_external_tgt::external_AntoraModule"
+"repo.RepoObject::has_execution_plan_issue" <-- "repo.RepoObject_external_tgt::has_execution_plan_issue"
+"repo.RepoObject::has_get_referenced_issue" <-- "repo.RepoObject_external_tgt::has_get_referenced_issue"
+"repo.RepoObject::Inheritance_StringAggSeparatorSql" <-- "repo.RepoObject_external_tgt::Inheritance_StringAggSeparatorSql"
+"repo.RepoObject::InheritanceDefinition" <-- "repo.RepoObject_external_tgt::InheritanceDefinition"
+"repo.RepoObject::InheritanceType" <-- "repo.RepoObject_external_tgt::InheritanceType"
+"repo.RepoObject::is_external" <-- "repo.RepoObject_external_tgt::is_external"
+"repo.RepoObject::is_repo_managed" <-- "repo.RepoObject_external_tgt::is_repo_managed"
+"repo.RepoObject::is_required_ObjectMerge" <-- "repo.RepoObject_external_tgt::is_required_ObjectMerge"
+"repo.RepoObject::is_ssas" <-- "repo.RepoObject_external_tgt::is_ssas"
+"repo.RepoObject::is_SysObject_missing" <-- "repo.RepoObject_external_tgt::is_SysObject_missing"
+"repo.RepoObject::modify_dt" <-- "repo.RepoObject_external_tgt::modify_dt"
+"repo.RepoObject::pk_index_guid" <-- "repo.RepoObject_external_tgt::pk_index_guid"
+"repo.RepoObject::pk_IndexPatternColumnName_new" <-- "repo.RepoObject_external_tgt::pk_IndexPatternColumnName_new"
+"repo.RepoObject::Repo_history_table_guid" <-- "repo.RepoObject_external_tgt::Repo_history_table_guid"
+"repo.RepoObject::Repo_temporal_type" <-- "repo.RepoObject_external_tgt::Repo_temporal_type"
+"repo.RepoObject::RepoObject_guid" <-- "repo.RepoObject_external_tgt::RepoObject_guid"
+"repo.RepoObject::RepoObject_name" <-- "repo.RepoObject_external_tgt::RepoObject_name"
+"repo.RepoObject::RepoObject_Referencing_Count" <-- "repo.RepoObject_external_tgt::RepoObject_Referencing_Count"
+"repo.RepoObject::RepoObject_schema_name" <-- "repo.RepoObject_external_tgt::RepoObject_schema_name"
+"repo.RepoObject::RepoObject_type" <-- "repo.RepoObject_external_tgt::RepoObject_type"
+"repo.RepoObject::SysObject_id" <-- "repo.RepoObject_external_tgt::SysObject_id"
+"repo.RepoObject::SysObject_modify_date" <-- "repo.RepoObject_external_tgt::SysObject_modify_date"
+"repo.RepoObject::SysObject_name" <-- "repo.RepoObject_external_tgt::SysObject_name"
+"repo.RepoObject::SysObject_parent_object_id" <-- "repo.RepoObject_external_tgt::SysObject_parent_object_id"
+"repo.RepoObject::SysObject_schema_name" <-- "repo.RepoObject_external_tgt::SysObject_schema_name"
+"repo.RepoObject::SysObject_type" <-- "repo.RepoObject_external_tgt::SysObject_type"
 "repo.RepoObject_external_src::external_AntoraComponent" <-- "repo.RepoObject_external_tgt::external_AntoraComponent"
 "repo.RepoObject_external_src::external_AntoraModule" <-- "repo.RepoObject_external_tgt::external_AntoraModule"
 "repo.RepoObject_external_src::is_external" <-- "repo.RepoObject_external_tgt::is_external"

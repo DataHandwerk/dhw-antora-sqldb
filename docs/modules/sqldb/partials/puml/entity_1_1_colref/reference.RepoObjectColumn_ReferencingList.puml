@@ -26,7 +26,7 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:reference.RepoObjectColumn_ReferencedReferencing.adoc[]" as reference.RepoObjectColumn_ReferencedReferencing << V >> {
+entity "puml-link:dhw:sqldb:reference.repoobjectcolumn_referencedreferencing.adoc[]" as reference.RepoObjectColumn_ReferencedReferencing << V >> {
   --
   - referenced_AntoraXref : (nvarchar(max))
   referenced_external_AntoraComponent : (nvarchar(128))
@@ -56,7 +56,7 @@ entity "puml-link:dhw:sqldb:reference.RepoObjectColumn_ReferencedReferencing.ado
   --
 }
 
-entity "puml-link:dhw:sqldb:reference.RepoObjectColumn_ReferencingList.adoc[]" as reference.RepoObjectColumn_ReferencingList << V >> {
+entity "puml-link:dhw:sqldb:reference.repoobjectcolumn_referencinglist.adoc[]" as reference.RepoObjectColumn_ReferencingList << V >> {
   --
   AntoraReferencingColumnList : (nvarchar(max))
   Referenced_fullname : (nvarchar(261))
@@ -69,7 +69,7 @@ entity "puml-link:dhw:sqldb:reference.RepoObjectColumn_ReferencingList.adoc[]" a
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_gross2.adoc[]" as repo.RepoObjectColumn_gross2 << V >> {
+entity "puml-link:dhw:sqldb:repo.repoobjectcolumn_gross2.adoc[]" as repo.RepoObjectColumn_gross2 << V >> {
   --
   AntoraReferencedColumnList : (nvarchar(max))
   AntoraReferencingColumnList : (nvarchar(max))
@@ -158,6 +158,8 @@ entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_gross2.adoc[]" as repo.RepoObj
 
 reference.RepoObjectColumn_ReferencedReferencing <.. reference.RepoObjectColumn_ReferencingList
 reference.RepoObjectColumn_ReferencingList <.. repo.RepoObjectColumn_gross2
+"reference.RepoObjectColumn_ReferencedReferencing::Referenced_fullname" <-- "reference.RepoObjectColumn_ReferencingList::Referenced_fullname"
+"reference.RepoObjectColumn_ReferencedReferencing::Referenced_guid" <-- "reference.RepoObjectColumn_ReferencingList::Referenced_guid"
 "reference.RepoObjectColumn_ReferencingList::AntoraReferencingColumnList" <-- "repo.RepoObjectColumn_gross2::AntoraReferencingColumnList"
 @enduml
 

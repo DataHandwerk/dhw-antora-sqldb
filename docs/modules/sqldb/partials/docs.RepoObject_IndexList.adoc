@@ -1,4 +1,6 @@
-= [docs].[RepoObject_IndexList]
+// tag::HeaderFullDisplayName[]
+= docs.RepoObject_IndexList
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -23,6 +25,12 @@
 6FE2B548-5E96-EB11-84F4-A81E8446D5B0
 // end::RepoObject_guid[]
 
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+docs.RepoObject_IndexList
+// end::RepoObject_FullDisplayName2[]
+
 == SysObject_type
 
 // tag::SysObject_type[]
@@ -44,14 +52,14 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-24 20:39:04
+2021-10-05 11:51:23
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-RepoObject_guid]
-=== RepoObject_guid
+[#column-repoobject_guid]
+=== repoobject_guid
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -65,17 +73,41 @@ view
 
 .Referenced Columns
 --
-* xref:repo.Index_gross.adoc#column-parent_RepoObject_guid[+repo.Index_gross.parent_RepoObject_guid+]
+* xref:repo.index_gross.adoc#column-parent_repoobject_guid[+repo.Index_gross.parent_RepoObject_guid+]
 --
 
 .Referencing Columns
 --
-* xref:docs.RepoObject_IndexList_T.adoc#column-RepoObject_guid[+docs.RepoObject_IndexList_T.RepoObject_guid+]
+* xref:docs.repoobject_indexlist_t.adoc#column-repoobject_guid[+docs.RepoObject_IndexList_T.RepoObject_guid+]
 --
 
 
-[#column-AntoraIndexList]
-=== AntoraIndexList
+[#column-cultures_name]
+=== cultures_name
+
+[cols="d,8m,m,m,m,d"]
+|===
+|2
+|*cultures_name*
+|nvarchar(10)
+|NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:docs.repoobject_outputfilter_t.adoc#column-cultures_name[+docs.RepoObject_OutputFilter_T.cultures_name+]
+--
+
+.Referencing Columns
+--
+* xref:docs.repoobject_indexlist_t.adoc#column-cultures_name[+docs.RepoObject_IndexList_T.cultures_name+]
+--
+
+
+[#column-antoraindexlist]
+=== antoraindexlist
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -89,12 +121,12 @@ view
 
 .Referencing Columns
 --
-* xref:docs.RepoObject_IndexList_T.adoc#column-AntoraIndexList[+docs.RepoObject_IndexList_T.AntoraIndexList+]
+* xref:docs.repoobject_indexlist_t.adoc#column-antoraindexlist[+docs.RepoObject_IndexList_T.AntoraIndexList+]
 --
 
 
-[#column-PumlIndexList]
-=== PumlIndexList
+[#column-pumlindexlist]
+=== pumlindexlist
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -108,7 +140,7 @@ view
 
 .Referencing Columns
 --
-* xref:docs.RepoObject_IndexList_T.adoc#column-PumlIndexList[+docs.RepoObject_IndexList_T.PumlIndexList+]
+* xref:docs.repoobject_indexlist_t.adoc#column-pumlindexlist[+docs.RepoObject_IndexList_T.PumlIndexList+]
 --
 
 
@@ -124,8 +156,15 @@ view
 
 // tag::AntoraPkColumnTableRows[]
 |1
-|*<<column-RepoObject_guid>>*
+|*<<column-repoobject_guid>>*
 |uniqueidentifier
+|NULL
+|
+|
+
+|2
+|*<<column-cultures_name>>*
+|nvarchar(10)
 |NULL
 |
 |
@@ -138,15 +177,16 @@ view
 
 // tag::AntoraNonPkColumnTableRows[]
 
+
 |
-|<<column-AntoraIndexList>>
+|<<column-antoraindexlist>>
 |nvarchar(max)
 |NULL
 |
 |
 
 |
-|<<column-PumlIndexList>>
+|<<column-pumlindexlist>>
 |nvarchar(max)
 |NULL
 |
@@ -158,15 +198,38 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-PK_RepoObject_IndexList]
-=== PK_RepoObject_IndexList
+[#index-pk_repoobject_indexlist]
+=== pk_repoobject_indexlist
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-RepoObject_guid>>; uniqueidentifier
+* <<column-cultures_name>>; nvarchar(10)
+--
+* PK, Unique, Real: 1, 1, 0
+
+
+[#index-uk_repoobject_indexlist2x_1]
+=== uk_repoobject_indexlist++__++1
+
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
 --
-* PK, Unique, Real: 1, 1, 0
+* PK, Unique, Real: 0, 1, 0
+
+
+[#index-idx_repoobject_indexlist2x_3]
+=== idx_repoobject_indexlist++__++3
+
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-cultures_name>>; nvarchar(10)
+--
+* PK, Unique, Real: 0, 0, 0
 
 // end::AntoraIndexList[]
 
@@ -181,6 +244,13 @@ view
 source: property.RepoObjectProperty_cross As rop_cross
 
 
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
+
+
 === AdocUspSteps
 
 // tag::adocuspsteps[]
@@ -191,19 +261,20 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:docs.fs_cleanStringForAnchorId.adoc[]
-* xref:docs.fs_cleanStringForLabel.adoc[]
-* xref:docs.fs_cleanStringForPuml.adoc[]
-* xref:repo.ForeignKey_gross.adoc[]
-* xref:repo.Index_gross.adoc[]
+* xref:docs.fs_cleanstringforanchorid.adoc[]
+* xref:docs.fs_cleanstringforlabel.adoc[]
+* xref:docs.fs_cleanstringforpuml.adoc[]
+* xref:docs.repoobject_outputfilter_t.adoc[]
+* xref:repo.foreignkey_gross.adoc[]
+* xref:repo.index_gross.adoc[]
 // end::antorareferencedlist[]
 
 
 === AntoraReferencingList
 
 // tag::antorareferencinglist[]
-* xref:docs.RepoObject_IndexList_T.adoc[]
-* xref:docs.usp_PERSIST_RepoObject_IndexList_T.adoc[]
+* xref:docs.repoobject_indexlist_t.adoc[]
+* xref:docs.usp_persist_repoobject_indexlist_t.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -406,21 +477,21 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-FF97B507-1799-EB11-84F4-A81E8446D5B0
+A68C3649-0722-EC11-8524-A81E8446D5B0
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-uniqueidentifier
+uniqueidentifier,nvarchar(10)
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-RepoObject_guid
+RepoObject_guid,cultures_name
 // end::pk_indexpatterncolumnname[]
 
 
@@ -437,6 +508,7 @@ RepoObject_guid
 * [docs].[fs_cleanStringForAnchorId]
 * [docs].[fs_cleanStringForLabel]
 * [docs].[fs_cleanStringForPuml]
+* [docs].[RepoObject_OutputFilter_T]
 * [repo].[ForeignKey_gross]
 * [repo].[Index_gross]
 // end::referencedobjectlist[]
@@ -454,6 +526,13 @@ RepoObject_guid
 // tag::uspexamples[]
 
 // end::uspexamples[]
+
+
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+
+// end::uspgenerator_usp_id[]
 
 
 === UspParameters
@@ -482,6 +561,7 @@ CREATE View docs.RepoObject_IndexList
 As
 Select
     RepoObject_guid = ix.parent_RepoObject_guid
+  , rof.cultures_name
   , AntoraIndexList =
   --
   String_Agg (
@@ -501,7 +581,7 @@ Select
                           , docs.fs_cleanStringForLabel ( ix.index_name )
                           , Char ( 13 ) + Char ( 10 )
                           , Char ( 13 ) + Char ( 10 )
-                          , '* IndexSemanticGroup: ' + 'xref:other/IndexSemanticGroup.adoc#'
+                          , '* IndexSemanticGroup: ' + 'xref:other/indexsemanticgroup.adoc#'
                             + docs.fs_cleanStringForAnchorId ( IsNull ( ix.IndexSemanticGroup, '(no group)' )) + '['
                             + IsNull ( ix.IndexSemanticGroup, 'no_group' ) + ']'
                           , Char ( 13 ) + Char ( 10 )
@@ -547,14 +627,21 @@ Select
                               , ix.is_index_unique Desc
                               , ix.index_name)
 From
-    repo.Index_gross          As ix
+    repo.Index_gross                   As ix
     Left Join
-        repo.ForeignKey_gross As fk
+        repo.ForeignKey_gross          As fk
             On
             fk.referencing_index_guid = ix.index_guid
+
+    Left Join
+        docs.RepoObject_OutputFilter_T As rof
+            On
+            rof.RepoObject_guid       = ix.parent_RepoObject_guid
+Where
+    Not rof.cultures_name Is Null
 Group By
     ix.parent_RepoObject_guid
-
+  , rof.cultures_name
 ----
 =======
 // end::sql_modules_definition[]

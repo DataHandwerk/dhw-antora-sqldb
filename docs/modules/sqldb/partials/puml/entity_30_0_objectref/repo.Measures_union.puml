@@ -26,24 +26,24 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:repo.Measures.adoc[]" as repo.Measures << V >> {
+entity "puml-link:dhw:sqldb:repo.measures.adoc[]" as repo.Measures << V >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.Measures_union.adoc[]" as repo.Measures_union << V >> {
+entity "puml-link:dhw:sqldb:repo.measures_union.adoc[]" as repo.Measures_union << V >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoSchema.adoc[]" as repo.RepoSchema << U >> {
+entity "puml-link:dhw:sqldb:repo.reposchema.adoc[]" as repo.RepoSchema << U >> {
   - **RepoSchema_guid** : (uniqueidentifier)
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoSchema_ssas_src.adoc[]" as repo.RepoSchema_ssas_src << V >> {
+entity "puml-link:dhw:sqldb:repo.reposchema_ssas_src.adoc[]" as repo.RepoSchema_ssas_src << V >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoSchema_ssas_tgt.adoc[]" as repo.RepoSchema_ssas_tgt << V >> {
+entity "puml-link:dhw:sqldb:repo.reposchema_ssas_tgt.adoc[]" as repo.RepoSchema_ssas_tgt << V >> {
   - **RepoSchema_guid** : (uniqueidentifier)
   --
 }
@@ -65,7 +65,7 @@ entity "puml-link:dhw:sqldb:ssas.model_json_201_descriptions_multiline.adoc[]" a
   --
 }
 
-entity "puml-link:dhw:sqldb:ssas.model_json_2011_descriptions_StrAgg.adoc[]" as ssas.model_json_2011_descriptions_StrAgg << V >> {
+entity "puml-link:dhw:sqldb:ssas.model_json_2011_descriptions_stragg.adoc[]" as ssas.model_json_2011_descriptions_StrAgg << V >> {
   --
 }
 
@@ -75,7 +75,7 @@ entity "puml-link:dhw:sqldb:ssas.model_json_31_tables.adoc[]" as ssas.model_json
   --
 }
 
-entity "puml-link:dhw:sqldb:ssas.model_json_31_tables_T.adoc[]" as ssas.model_json_31_tables_T << U >> {
+entity "puml-link:dhw:sqldb:ssas.model_json_31_tables_t.adoc[]" as ssas.model_json_31_tables_T << U >> {
   - **databasename** : (nvarchar(128))
   **tables_name** : (nvarchar(128))
   --
@@ -88,7 +88,7 @@ entity "puml-link:dhw:sqldb:ssas.model_json_312_tables_measures.adoc[]" as ssas.
   --
 }
 
-entity "puml-link:dhw:sqldb:ssas.model_json_312_tables_measures_T.adoc[]" as ssas.model_json_312_tables_measures_T << U >> {
+entity "puml-link:dhw:sqldb:ssas.model_json_312_tables_measures_t.adoc[]" as ssas.model_json_312_tables_measures_T << U >> {
   - **Measure_guid** : (uniqueidentifier)
   --
 }
@@ -97,7 +97,7 @@ entity "puml-link:dhw:sqldb:ssas.model_json_3121_tables_columns_descriptions_mul
   --
 }
 
-entity "puml-link:dhw:sqldb:ssas.model_json_31211_tables_columns_descriptions_StrAgg.adoc[]" as ssas.model_json_31211_tables_columns_descriptions_StrAgg << V >> {
+entity "puml-link:dhw:sqldb:ssas.model_json_31211_tables_columns_descriptions_stragg.adoc[]" as ssas.model_json_31211_tables_columns_descriptions_StrAgg << V >> {
   --
 }
 
@@ -105,28 +105,28 @@ entity "puml-link:dhw:sqldb:ssas.model_json_3122_tables_measures_expressions_mul
   --
 }
 
-entity "puml-link:dhw:sqldb:ssas.model_json_31221_tables_measures_expressions_StrAgg.adoc[]" as ssas.model_json_31221_tables_measures_expressions_StrAgg << V >> {
+entity "puml-link:dhw:sqldb:ssas.model_json_31221_tables_measures_expressions_stragg.adoc[]" as ssas.model_json_31221_tables_measures_expressions_StrAgg << V >> {
   --
 }
 
 repo.Measures <.. repo.Measures_union
-repo.RepoSchema <.. repo.Measures
 repo.RepoSchema <.. repo.RepoSchema_ssas_tgt
+repo.RepoSchema <.. repo.Measures
 repo.RepoSchema_ssas_src <.. repo.RepoSchema_ssas_tgt
 repo.RepoSchema_ssas_tgt <.. repo.RepoSchema
 ssas.model_json <.. ssas.model_json_10
 ssas.model_json_10 <.. ssas.model_json_20
+ssas.model_json_20 <.. repo.RepoSchema_ssas_src
 ssas.model_json_20 <.. ssas.model_json_31_tables
 ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
-ssas.model_json_20 <.. repo.RepoSchema_ssas_src
 ssas.model_json_201_descriptions_multiline <.. ssas.model_json_2011_descriptions_StrAgg
 ssas.model_json_2011_descriptions_StrAgg <.. repo.RepoSchema_ssas_src
 ssas.model_json_31_tables <.. ssas.model_json_31_tables_T
 ssas.model_json_31_tables_T <.. ssas.model_json_312_tables_measures
 ssas.model_json_312_tables_measures <.. ssas.model_json_312_tables_measures_T
-ssas.model_json_312_tables_measures_T <.. repo.Measures
-ssas.model_json_312_tables_measures_T <.. ssas.model_json_3121_tables_columns_descriptions_multiline
 ssas.model_json_312_tables_measures_T <.. ssas.model_json_3122_tables_measures_expressions_multiline
+ssas.model_json_312_tables_measures_T <.. ssas.model_json_3121_tables_columns_descriptions_multiline
+ssas.model_json_312_tables_measures_T <.. repo.Measures
 ssas.model_json_3121_tables_columns_descriptions_multiline <.. ssas.model_json_31211_tables_columns_descriptions_StrAgg
 ssas.model_json_31211_tables_columns_descriptions_StrAgg <.. repo.Measures
 ssas.model_json_3122_tables_measures_expressions_multiline <.. ssas.model_json_31221_tables_measures_expressions_StrAgg

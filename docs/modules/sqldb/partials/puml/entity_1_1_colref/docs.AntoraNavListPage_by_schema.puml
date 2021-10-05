@@ -26,15 +26,24 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:docs.AntoraNavListPage_by_schema.adoc[]" as docs.AntoraNavListPage_by_schema << V >> {
+entity "puml-link:dhw:sqldb:docs.antoranavlistpage_by_schema.adoc[]" as docs.AntoraNavListPage_by_schema << V >> {
   --
+  cultures_name : (nvarchar(10))
   - nav_list : (nvarchar(4000))
   - RepoObject_schema_name : (nvarchar(128))
   --
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.RepoObject_OutputFilter.adoc[]" as docs.RepoObject_OutputFilter << V >> {
+entity "puml-link:dhw:sqldb:docs.fs_cleanstringforfilename.adoc[]" as docs.fs_cleanStringForFilename << FN >> {
+  --
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.repoobject_outputfilter_t.adoc[]" as docs.RepoObject_OutputFilter_T << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **cultures_name** : (nvarchar(10))
   --
   AntoraComponent : (nvarchar(max))
   AntoraModule : (nvarchar(max))
@@ -44,11 +53,15 @@ entity "puml-link:dhw:sqldb:docs.RepoObject_OutputFilter.adoc[]" as docs.RepoObj
   is_DocsOutput : (int)
   - is_external : (bit)
   - is_ssas : (bit)
+  - PumlEntityTopDefault : (nvarchar(max))
+  - PumlEntityTopWorkaround : (nvarchar(max))
+  RepoObject_DisplayName : (nvarchar(128))
+  RepoObject_FullDisplayName2 : (nvarchar(257))
   - RepoObject_fullname : (nvarchar(261))
   - RepoObject_fullname2 : (nvarchar(257))
-  - RepoObject_guid : (uniqueidentifier)
   - RepoObject_name : (nvarchar(128))
   - RepoObject_schema_name : (nvarchar(128))
+  RepoObject_translation : (nvarchar(128))
   SysObject_type : (char(2))
   SysObject_type_name : (nvarchar(128))
   tables_isHidden : (bit)
@@ -56,7 +69,7 @@ entity "puml-link:dhw:sqldb:docs.RepoObject_OutputFilter.adoc[]" as docs.RepoObj
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
+entity "puml-link:dhw:sqldb:repo.repoobject.adoc[]" as repo.RepoObject << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
   external_AntoraComponent : (nvarchar(128))
@@ -103,7 +116,7 @@ entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoSchema.adoc[]" as repo.RepoSchema << U >> {
+entity "puml-link:dhw:sqldb:repo.reposchema.adoc[]" as repo.RepoSchema << U >> {
   - **RepoSchema_guid** : (uniqueidentifier)
   --
   - is_ssas : (bit)
@@ -121,9 +134,11 @@ entity "puml-link:dhw:sqldb:repo.RepoSchema.adoc[]" as repo.RepoSchema << U >> {
   --
 }
 
-docs.RepoObject_OutputFilter <.. docs.AntoraNavListPage_by_schema
+docs.fs_cleanStringForFilename <.. docs.AntoraNavListPage_by_schema
+docs.RepoObject_OutputFilter_T <.. docs.AntoraNavListPage_by_schema
 repo.RepoObject <.. docs.AntoraNavListPage_by_schema
 repo.RepoSchema <.. docs.AntoraNavListPage_by_schema
+"docs.RepoObject_OutputFilter_T::cultures_name" <-- "docs.AntoraNavListPage_by_schema::cultures_name"
 "repo.RepoObject::RepoObject_schema_name" <-- "docs.AntoraNavListPage_by_schema::RepoObject_schema_name"
 @enduml
 

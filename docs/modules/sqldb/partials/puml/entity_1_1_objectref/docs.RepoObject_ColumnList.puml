@@ -26,32 +26,45 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:docs.fs_cleanStringForAnchorId.adoc[]" as docs.fs_cleanStringForAnchorId << FN >> {
+entity "puml-link:dhw:sqldb:docs.fs_cleanstringforanchorid.adoc[]" as docs.fs_cleanStringForAnchorId << FN >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.fs_cleanStringForLabel.adoc[]" as docs.fs_cleanStringForLabel << FN >> {
+entity "puml-link:dhw:sqldb:docs.fs_cleanstringforlabel.adoc[]" as docs.fs_cleanStringForLabel << FN >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.fs_cleanStringForPuml.adoc[]" as docs.fs_cleanStringForPuml << FN >> {
+entity "puml-link:dhw:sqldb:docs.fs_cleanstringforpuml.adoc[]" as docs.fs_cleanStringForPuml << FN >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.RepoObject_ColumnList.adoc[]" as docs.RepoObject_ColumnList << V >> {
+entity "puml-link:dhw:sqldb:docs.repoobject_columnlist.adoc[]" as docs.RepoObject_ColumnList << V >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.RepoObject_ColumnList_T.adoc[]" as docs.RepoObject_ColumnList_T << U >> {
+entity "puml-link:dhw:sqldb:docs.repoobject_columnlist_t.adoc[]" as docs.RepoObject_ColumnList_T << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
+  - **cultures_name** : (nvarchar(10))
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.usp_PERSIST_RepoObject_ColumnList_T.adoc[]" as docs.usp_PERSIST_RepoObject_ColumnList_T << P >> {
+entity "puml-link:dhw:sqldb:docs.repoobject_outputfilter_t.adoc[]" as docs.RepoObject_OutputFilter_T << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **cultures_name** : (nvarchar(10))
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_gross2.adoc[]" as repo.RepoObjectColumn_gross2 << V >> {
+entity "puml-link:dhw:sqldb:docs.usp_persist_repoobject_columnlist_t.adoc[]" as docs.usp_PERSIST_RepoObject_ColumnList_T << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobjectcolumn_gross2.adoc[]" as repo.RepoObjectColumn_gross2 << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.repoobjectcolumn_translation_t.adoc[]" as ssas.RepoObjectColumn_translation_T << U >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  - **cultures_name** : (nvarchar(10))
   --
 }
 
@@ -60,6 +73,8 @@ docs.fs_cleanStringForLabel <.. docs.RepoObject_ColumnList
 docs.fs_cleanStringForPuml <.. docs.RepoObject_ColumnList
 docs.RepoObject_ColumnList <.. docs.RepoObject_ColumnList_T
 docs.RepoObject_ColumnList <.. docs.usp_PERSIST_RepoObject_ColumnList_T
+docs.RepoObject_OutputFilter_T <.. docs.RepoObject_ColumnList
 repo.RepoObjectColumn_gross2 <.. docs.RepoObject_ColumnList
+ssas.RepoObjectColumn_translation_T <.. docs.RepoObject_ColumnList
 @enduml
 

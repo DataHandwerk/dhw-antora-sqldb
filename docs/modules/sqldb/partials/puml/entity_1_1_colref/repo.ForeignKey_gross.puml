@@ -26,14 +26,21 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:docs.fs_cleanStringForAnchorId.adoc[]" as docs.fs_cleanStringForAnchorId << FN >> {
+entity "puml-link:dhw:sqldb:docs.fs_cleanstringforanchorid.adoc[]" as docs.fs_cleanStringForAnchorId << FN >> {
   --
   --
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.RepoObject_IndexList.adoc[]" as docs.RepoObject_IndexList << V >> {
+entity "puml-link:dhw:sqldb:docs.fs_cleanstringforfilename.adoc[]" as docs.fs_cleanStringForFilename << FN >> {
+  --
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.repoobject_indexlist.adoc[]" as docs.RepoObject_IndexList << V >> {
   **RepoObject_guid** : (uniqueidentifier)
+  **cultures_name** : (nvarchar(10))
   --
   AntoraIndexList : (nvarchar(max))
   PumlIndexList : (nvarchar(max))
@@ -41,7 +48,7 @@ entity "puml-link:dhw:sqldb:docs.RepoObject_IndexList.adoc[]" as docs.RepoObject
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.ForeignKey_gross.adoc[]" as repo.ForeignKey_gross << V >> {
+entity "puml-link:dhw:sqldb:repo.foreignkey_gross.adoc[]" as repo.ForeignKey_gross << V >> {
   --
   delete_referential_action : (tinyint)
   ForeignKey_fullname : (nvarchar(517))
@@ -72,7 +79,7 @@ entity "puml-link:dhw:sqldb:repo.ForeignKey_gross.adoc[]" as repo.ForeignKey_gro
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.ForeignKey_Indexes_union_T.adoc[]" as repo.ForeignKey_Indexes_union_T << U >> {
+entity "puml-link:dhw:sqldb:repo.foreignkey_indexes_union_t.adoc[]" as repo.ForeignKey_Indexes_union_T << U >> {
   **ForeignKey_guid** : (uniqueidentifier)
   --
   delete_referential_action : (tinyint)
@@ -102,7 +109,7 @@ entity "puml-link:dhw:sqldb:repo.ForeignKey_Indexes_union_T.adoc[]" as repo.Fore
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.Index_gross.adoc[]" as repo.Index_gross << V >> {
+entity "puml-link:dhw:sqldb:repo.index_gross.adoc[]" as repo.Index_gross << V >> {
   --
   AntoraIndexColumnList : (nvarchar(max))
   ColumnList : (nvarchar(max))
@@ -114,6 +121,8 @@ entity "puml-link:dhw:sqldb:repo.Index_gross.adoc[]" as repo.Index_gross << V >>
   IndexPatternColumnDatatype : (nvarchar(4000))
   IndexPatternColumnName : (nvarchar(4000))
   IndexSemanticGroup : (nvarchar(512))
+  - is_DocsExclude : (bit)
+  is_DocsOutput : (int)
   is_index_disabled : (bit)
   is_index_primary_key : (bit)
   is_index_real : (bit)
@@ -139,6 +148,7 @@ entity "puml-link:dhw:sqldb:repo.Index_gross.adoc[]" as repo.Index_gross << V >>
 }
 
 docs.fs_cleanStringForAnchorId <.. repo.ForeignKey_gross
+docs.fs_cleanStringForFilename <.. repo.ForeignKey_gross
 repo.ForeignKey_gross <.. docs.RepoObject_IndexList
 repo.ForeignKey_Indexes_union_T <.. repo.ForeignKey_gross
 repo.Index_gross <.. repo.ForeignKey_gross

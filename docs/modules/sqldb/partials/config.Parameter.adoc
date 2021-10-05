@@ -1,16 +1,19 @@
-= [config].[Parameter]
+// tag::HeaderFullDisplayName[]
+= config.Parameter
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
 // tag::existing_properties[]
+:ExistsProperty--antorareferencedlist:
 :ExistsProperty--antorareferencinglist:
 :ExistsProperty--description:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--ms_description:
 :ExistsProperty--pk_index_guid:
 :ExistsProperty--pk_indexpatterncolumndatatype:
 :ExistsProperty--pk_indexpatterncolumnname:
+:ExistsProperty--referencedobjectlist:
 :ExistsProperty--FK:
 :ExistsProperty--AntoraIndexList:
 :ExistsProperty--Columns:
@@ -21,6 +24,12 @@
 // tag::RepoObject_guid[]
 2490291C-9D61-EB11-84DC-A81E8446D5B0
 // end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+config.Parameter
+// end::RepoObject_FullDisplayName2[]
 
 == SysObject_type
 
@@ -49,8 +58,8 @@ user table
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-Parameter_name]
-=== Parameter_name
+[#column-parameter_name]
+=== parameter_name
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -63,8 +72,8 @@ user table
 |===
 
 
-[#column-sub_Parameter]
-=== sub_Parameter
+[#column-sub_parameter]
+=== sub_parameter
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -82,8 +91,8 @@ user table
 ....
 
 
-[#column-Parameter_default_value]
-=== Parameter_default_value
+[#column-parameter_default_value]
+=== parameter_default_value
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -95,17 +104,22 @@ user table
 |
 |===
 
+.Referenced Columns
+--
+* xref:configt.parameter_default.adoc#column-parameter_default_value[+configT.Parameter_default.Parameter_default_value+]
+--
+
 .Referencing Columns
 --
-* xref:config.Parameter.adoc#column-Parameter_value_result[+config.Parameter.Parameter_value_result+]
-* xref:config.Parameter.adoc#column-Parameter_value_result_int[+config.Parameter.Parameter_value_result_int+]
-* xref:config.Parameter.adoc#column-Parameter_value_result_date[+config.Parameter.Parameter_value_result_date+]
-* xref:config.Parameter.adoc#column-Parameter_value_result_datetime[+config.Parameter.Parameter_value_result_datetime+]
+* xref:config.parameter.adoc#column-parameter_value_result[+config.Parameter.Parameter_value_result+]
+* xref:config.parameter.adoc#column-parameter_value_result_int[+config.Parameter.Parameter_value_result_int+]
+* xref:config.parameter.adoc#column-parameter_value_result_date[+config.Parameter.Parameter_value_result_date+]
+* xref:config.parameter.adoc#column-parameter_value_result_datetime[+config.Parameter.Parameter_value_result_datetime+]
 --
 
 
-[#column-Parameter_desciption]
-=== Parameter_desciption
+[#column-parameter_desciption]
+=== parameter_desciption
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -118,8 +132,8 @@ user table
 |===
 
 
-[#column-Parameter_value]
-=== Parameter_value
+[#column-parameter_value]
+=== parameter_value
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -133,15 +147,15 @@ user table
 
 .Referencing Columns
 --
-* xref:config.Parameter.adoc#column-Parameter_value_result[+config.Parameter.Parameter_value_result+]
-* xref:config.Parameter.adoc#column-Parameter_value_result_int[+config.Parameter.Parameter_value_result_int+]
-* xref:config.Parameter.adoc#column-Parameter_value_result_date[+config.Parameter.Parameter_value_result_date+]
-* xref:config.Parameter.adoc#column-Parameter_value_result_datetime[+config.Parameter.Parameter_value_result_datetime+]
+* xref:config.parameter.adoc#column-parameter_value_result[+config.Parameter.Parameter_value_result+]
+* xref:config.parameter.adoc#column-parameter_value_result_int[+config.Parameter.Parameter_value_result_int+]
+* xref:config.parameter.adoc#column-parameter_value_result_date[+config.Parameter.Parameter_value_result_date+]
+* xref:config.parameter.adoc#column-parameter_value_result_datetime[+config.Parameter.Parameter_value_result_datetime+]
 --
 
 
-[#column-Parameter_value_result]
-=== Parameter_value_result
+[#column-parameter_value_result]
+=== parameter_value_result
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -155,7 +169,7 @@ user table
 
 .Description
 --
-(TRY_CAST(coalesce([Parameter_value],[Parameter_default_value]) AS [nvarchar](4000)))
+(coalesce([Parameter_value],[Parameter_default_value]))
 --
 {empty} +
 
@@ -166,25 +180,25 @@ user table
 
 .Referenced Columns
 --
-* xref:config.Parameter.adoc#column-Parameter_default_value[+config.Parameter.Parameter_default_value+]
-* xref:config.Parameter.adoc#column-Parameter_value[+config.Parameter.Parameter_value+]
+* xref:config.parameter.adoc#column-parameter_default_value[+config.Parameter.Parameter_default_value+]
+* xref:config.parameter.adoc#column-parameter_value[+config.Parameter.Parameter_value+]
 --
 
 .Referencing Columns
 --
-* xref:property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.adoc#column-sub_InheritanceDefinition[+property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.sub_InheritanceDefinition+]
-* xref:property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.adoc#column-par_InheritanceDefinition[+property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.par_InheritanceDefinition+]
-* xref:property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.adoc#column-sub_Inheritance_StringAggSeparatorSql[+property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.sub_Inheritance_StringAggSeparatorSql+]
-* xref:property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.adoc#column-par_Inheritance_StringAggSeparatorSql[+property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.par_Inheritance_StringAggSeparatorSql+]
-* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-sub_InheritanceDefintion[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.sub_InheritanceDefintion+]
-* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-par_InheritanceDefintion[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.par_InheritanceDefintion+]
-* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-sub_Inheritance_StringAggSeparatorSql[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.sub_Inheritance_StringAggSeparatorSql+]
-* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-par_Inheritance_StringAggSeparatorSql[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.par_Inheritance_StringAggSeparatorSql+]
+* xref:property.repoobjectcolumnproperty_inheritancetype_inheritancedefinition.adoc#column-sub_inheritancedefinition[+property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.sub_InheritanceDefinition+]
+* xref:property.repoobjectcolumnproperty_inheritancetype_inheritancedefinition.adoc#column-par_inheritancedefinition[+property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.par_InheritanceDefinition+]
+* xref:property.repoobjectcolumnproperty_inheritancetype_inheritancedefinition.adoc#column-sub_inheritance_stringaggseparatorsql[+property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.sub_Inheritance_StringAggSeparatorSql+]
+* xref:property.repoobjectcolumnproperty_inheritancetype_inheritancedefinition.adoc#column-par_inheritance_stringaggseparatorsql[+property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.par_Inheritance_StringAggSeparatorSql+]
+* xref:property.repoobjectproperty_inheritancetype_inheritancedefinition.adoc#column-sub_inheritancedefintion[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.sub_InheritanceDefintion+]
+* xref:property.repoobjectproperty_inheritancetype_inheritancedefinition.adoc#column-par_inheritancedefintion[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.par_InheritanceDefintion+]
+* xref:property.repoobjectproperty_inheritancetype_inheritancedefinition.adoc#column-sub_inheritance_stringaggseparatorsql[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.sub_Inheritance_StringAggSeparatorSql+]
+* xref:property.repoobjectproperty_inheritancetype_inheritancedefinition.adoc#column-par_inheritance_stringaggseparatorsql[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.par_Inheritance_StringAggSeparatorSql+]
 --
 
 
-[#column-Parameter_value_result_date]
-=== Parameter_value_result_date
+[#column-parameter_value_result_date]
+=== parameter_value_result_date
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -198,7 +212,7 @@ user table
 
 .Description
 --
-(case when NOT [Parameter_value] IS NULL AND NOT sql_variant_property([Parameter_value],'BaseType')='uniqueidentifier' then TRY_CAST([Parameter_value] AS [date]) when NOT [Parameter_default_value] IS NULL AND NOT sql_variant_property([Parameter_default_value],'BaseType')='uniqueidentifier' then CONVERT([date],TRY_CAST([Parameter_default_value] AS [datetime]))  end)
+(TRY_CAST(left(coalesce([Parameter_value],[Parameter_default_value]),(4000)) AS [date]))
 --
 {empty} +
 
@@ -209,13 +223,13 @@ user table
 
 .Referenced Columns
 --
-* xref:config.Parameter.adoc#column-Parameter_default_value[+config.Parameter.Parameter_default_value+]
-* xref:config.Parameter.adoc#column-Parameter_value[+config.Parameter.Parameter_value+]
+* xref:config.parameter.adoc#column-parameter_default_value[+config.Parameter.Parameter_default_value+]
+* xref:config.parameter.adoc#column-parameter_value[+config.Parameter.Parameter_value+]
 --
 
 
-[#column-Parameter_value_result_datetime]
-=== Parameter_value_result_datetime
+[#column-parameter_value_result_datetime]
+=== parameter_value_result_datetime
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -229,7 +243,7 @@ user table
 
 .Description
 --
-(case when NOT [Parameter_value] IS NULL AND NOT sql_variant_property([Parameter_value],'BaseType')='uniqueidentifier' then TRY_CAST([Parameter_value] AS [datetime]) when NOT [Parameter_default_value] IS NULL AND NOT sql_variant_property([Parameter_default_value],'BaseType')='uniqueidentifier' then TRY_CAST([Parameter_default_value] AS [datetime])  end)
+(TRY_CAST(left(coalesce([Parameter_value],[Parameter_default_value]),(4000)) AS [datetime]))
 --
 {empty} +
 
@@ -240,13 +254,13 @@ user table
 
 .Referenced Columns
 --
-* xref:config.Parameter.adoc#column-Parameter_value[+config.Parameter.Parameter_value+]
-* xref:config.Parameter.adoc#column-Parameter_default_value[+config.Parameter.Parameter_default_value+]
+* xref:config.parameter.adoc#column-parameter_value[+config.Parameter.Parameter_value+]
+* xref:config.parameter.adoc#column-parameter_default_value[+config.Parameter.Parameter_default_value+]
 --
 
 
-[#column-Parameter_value_result_int]
-=== Parameter_value_result_int
+[#column-parameter_value_result_int]
+=== parameter_value_result_int
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -260,7 +274,7 @@ user table
 
 .Description
 --
-(TRY_CAST(coalesce([Parameter_value],[Parameter_default_value]) AS [int]))
+(TRY_CAST(left(coalesce([Parameter_value],[Parameter_default_value]),(4000)) AS [int]))
 --
 {empty} +
 
@@ -271,16 +285,16 @@ user table
 
 .Referenced Columns
 --
-* xref:config.Parameter.adoc#column-Parameter_value[+config.Parameter.Parameter_value+]
-* xref:config.Parameter.adoc#column-Parameter_default_value[+config.Parameter.Parameter_default_value+]
+* xref:config.parameter.adoc#column-parameter_default_value[+config.Parameter.Parameter_default_value+]
+* xref:config.parameter.adoc#column-parameter_value[+config.Parameter.Parameter_value+]
 --
 
 .Referencing Columns
 --
-* xref:property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.adoc#column-sub_InheritanceType[+property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.sub_InheritanceType+]
-* xref:property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.adoc#column-par_InheritanceType[+property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.par_InheritanceType+]
-* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-sub_InheritanceType[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.sub_InheritanceType+]
-* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc#column-par_InheritanceType[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.par_InheritanceType+]
+* xref:property.repoobjectcolumnproperty_inheritancetype_inheritancedefinition.adoc#column-sub_inheritancetype[+property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.sub_InheritanceType+]
+* xref:property.repoobjectcolumnproperty_inheritancetype_inheritancedefinition.adoc#column-par_inheritancetype[+property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.par_InheritanceType+]
+* xref:property.repoobjectproperty_inheritancetype_inheritancedefinition.adoc#column-sub_inheritancetype[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.sub_InheritanceType+]
+* xref:property.repoobjectproperty_inheritancetype_inheritancedefinition.adoc#column-par_inheritancetype[+property.RepoObjectProperty_InheritanceType_InheritanceDefinition.par_InheritanceType+]
 --
 
 
@@ -296,14 +310,14 @@ user table
 
 // tag::AntoraPkColumnTableRows[]
 |1
-|*<<column-Parameter_name>>*
+|*<<column-parameter_name>>*
 |varchar(100)
 |NOT NULL
 |
 |
 
 |2
-|*<<column-sub_Parameter>>*
+|*<<column-sub_parameter>>*
 |nvarchar(128)
 |NOT NULL
 |
@@ -324,49 +338,49 @@ user table
 
 
 |
-|<<column-Parameter_default_value>>
+|<<column-parameter_default_value>>
 |nvarchar(max)
 |NULL
 |
 |
 
 |
-|<<column-Parameter_desciption>>
+|<<column-parameter_desciption>>
 |nvarchar(1000)
 |NULL
 |
 |
 
 |
-|<<column-Parameter_value>>
+|<<column-parameter_value>>
 |nvarchar(max)
 |NULL
 |
 |
 
 |
-|<<column-Parameter_value_result>>
+|<<column-parameter_value_result>>
 |nvarchar(max)
 |NULL
 |
 |Calc
 
 |
-|<<column-Parameter_value_result_date>>
+|<<column-parameter_value_result_date>>
 |date
 |NULL
 |
 |Calc
 
 |
-|<<column-Parameter_value_result_datetime>>
+|<<column-parameter_value_result_datetime>>
 |datetime
 |NULL
 |
 |Calc
 
 |
-|<<column-Parameter_value_result_int>>
+|<<column-parameter_value_result_int>>
 |int
 |NULL
 |
@@ -378,10 +392,10 @@ user table
 
 // tag::AntoraIndexList[]
 
-[#index-PK_Parameter]
-=== PK_Parameter
+[#index-pk_parameter]
+=== pk_parameter
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-Parameter_name>>; varchar(100)
@@ -402,6 +416,13 @@ user table
 source: property.RepoObjectProperty_cross As rop_cross
 
 
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
+
+
 === AdocUspSteps
 
 // tag::adocuspsteps[]
@@ -412,7 +433,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-
+* xref:configt.parameter_default.adoc[]
 // end::antorareferencedlist[]
 
 
@@ -425,12 +446,12 @@ source: property.RepoObjectProperty_cross As rop_cross
 * xref:config.ftv_get_parameter_value.adoc[]
 * xref:config.usp_init_parameter.adoc[]
 * xref:config.usp_parameter_set.adoc[]
-* xref:docs.usp_AntoraExport_DocSnippet.adoc[]
-* xref:docs.usp_AntoraExport_ObjectPageTemplate.adoc[]
-* xref:property.PropertyName_RepoObject.adoc[]
-* xref:property.PropertyName_RepoObjectColumn.adoc[]
-* xref:property.RepoObjectColumnProperty_InheritanceType_InheritanceDefinition.adoc[]
-* xref:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc[]
+* xref:docs.usp_antoraexport_docsnippet.adoc[]
+* xref:docs.usp_antoraexport_objectpagetemplate.adoc[]
+* xref:property.propertyname_repoobject.adoc[]
+* xref:property.propertyname_repoobjectcolumn.adoc[]
+* xref:property.repoobjectcolumnproperty_inheritancetype_inheritancedefinition.adoc[]
+* xref:property.repoobjectproperty_inheritancetype_inheritancedefinition.adoc[]
 * xref:repo.usp_persistence_set.adoc[]
 // end::antorareferencinglist[]
 
@@ -438,11 +459,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 === Description
 
 // tag::description[]
-* default parameter values are defined (hard coded) in xref:sqldb:configT.Parameter_default.adoc[] and available in xref:sqldb:config.Parameter.adoc#column-Parameter_default_value[config.Parameter.Parameter_default_value]
-* default parameter values can be overwritten by project specific content using xref:sqldb:config.Parameter.adoc#column-Parameter_value[config.Parameter.Parameter_value]
-* resulting content is available in
-** xref:sqldb:config.Parameter.adoc#column-Parameter_value__result_int[config.Parameter.Parameter_value__result_int]
-** xref:sqldb:config.Parameter.adoc#column-Parameter_value__result_nvarchar[config.Parameter.Parameter_value__result_nvarchar]
+include::sqldb:partial$description/config.parameter.adoc[]
 
 // end::description[]
 
@@ -604,11 +621,6 @@ source: property.RepoObjectProperty_cross As rop_cross
 === MS_Description
 
 // tag::ms_description[]
-* default parameter values are defined (hard coded) in xref:sqldb:configT.Parameter_default.adoc[] and available in xref:sqldb:config.Parameter.adoc#column-Parameter_default_value[config.Parameter.Parameter_default_value]
-* default parameter values can be overwritten by project specific content using xref:sqldb:config.Parameter.adoc#column-Parameter_value[config.Parameter.Parameter_value]
-* resulting content is available in
-** xref:sqldb:config.Parameter.adoc#column-Parameter_value__result_int[config.Parameter.Parameter_value__result_int]
-** xref:sqldb:config.Parameter.adoc#column-Parameter_value__result_nvarchar[config.Parameter.Parameter_value__result_nvarchar]
 
 // end::ms_description[]
 
@@ -672,7 +684,7 @@ Parameter_name,sub_Parameter
 === ReferencedObjectList
 
 // tag::referencedobjectlist[]
-
+* [configT].[Parameter_default]
 // end::referencedobjectlist[]
 
 
@@ -688,6 +700,13 @@ Parameter_name,sub_Parameter
 // tag::uspexamples[]
 
 // end::uspexamples[]
+
+
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+
+// end::uspgenerator_usp_id[]
 
 
 === UspParameters

@@ -30,25 +30,37 @@ entity "puml-link:dhw:sqldb:config.fs_dwh_database_name.adoc[]" as config.fs_dwh
   --
 }
 
-entity "puml-link:dhw:sqldb:config.Parameter.adoc[]" as config.Parameter << U >> {
+entity "puml-link:dhw:sqldb:config.parameter.adoc[]" as config.Parameter << U >> {
   - **Parameter_name** : (varchar(100))
   - **sub_Parameter** : (nvarchar(128))
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.AntoraPage_ObjectBySchema.adoc[]" as docs.AntoraPage_ObjectBySchema << V >> {
+entity "puml-link:dhw:sqldb:docs.antorapage_objectbyschema.adoc[]" as docs.AntoraPage_ObjectBySchema << V >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:property.RepoObjectColumnProperty_ForUpdate.adoc[]" as property.RepoObjectColumnProperty_ForUpdate << V >> {
+entity "puml-link:dhw:sqldb:docs.antorapage_objectbytype.adoc[]" as docs.AntoraPage_ObjectByType << V >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:property.RepoObjectProperty_ForUpdate.adoc[]" as property.RepoObjectProperty_ForUpdate << V >> {
+entity "puml-link:dhw:sqldb:property.repoobjectcolumnproperty_forupdate.adoc[]" as property.RepoObjectColumnProperty_ForUpdate << V >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:repo_sys.usp_AddOrUpdateExtendedProperty.adoc[]" as repo_sys.usp_AddOrUpdateExtendedProperty << P >> {
+entity "puml-link:dhw:sqldb:property.repoobjectproperty_forupdate.adoc[]" as property.RepoObjectProperty_ForUpdate << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo_sys.usp_addorupdateextendedproperty.adoc[]" as repo_sys.usp_AddOrUpdateExtendedProperty << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo_sys.usp_dropextendedproperty_in_dwh.adoc[]" as repo_sys.usp_DropExtendedProperty_in_dwh << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo_sys.usp_dropextendedproperty_level_0.adoc[]" as repo_sys.usp_dropextendedproperty_level_0 << P >> {
   --
 }
 
@@ -63,9 +75,12 @@ entity "puml-link:dhw:sqldb:repo_sys.usp_dropextendedproperty_level_2.adoc[]" as
 config.fs_dwh_database_name <.. repo_sys.usp_AddOrUpdateExtendedProperty
 config.fs_dwh_database_name <.. repo_sys.usp_dropextendedproperty_level_1
 config.fs_dwh_database_name <.. repo_sys.usp_dropextendedproperty_level_2
+config.fs_dwh_database_name <.. docs.AntoraPage_ObjectByType
 config.fs_dwh_database_name <.. docs.AntoraPage_ObjectBySchema
 config.fs_dwh_database_name <.. property.RepoObjectColumnProperty_ForUpdate
 config.fs_dwh_database_name <.. property.RepoObjectProperty_ForUpdate
+config.fs_dwh_database_name <.. repo_sys.usp_DropExtendedProperty_in_dwh
+config.fs_dwh_database_name <.. repo_sys.usp_dropextendedproperty_level_0
 config.Parameter <.. config.fs_dwh_database_name
 @enduml
 

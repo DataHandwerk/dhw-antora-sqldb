@@ -26,7 +26,7 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:configT.spt_values.adoc[]" as configT.spt_values << U >> {
+entity "puml-link:dhw:sqldb:configt.spt_values.adoc[]" as configT.spt_values << U >> {
   --
   high : (int)
   low : (int)
@@ -38,7 +38,7 @@ entity "puml-link:dhw:sqldb:configT.spt_values.adoc[]" as configT.spt_values << 
   --
 }
 
-entity "puml-link:dhw:sqldb:configT.type.adoc[]" as configT.type << V >> {
+entity "puml-link:dhw:sqldb:configt.type.adoc[]" as configT.type << V >> {
   **type** : (nvarchar(128))
   --
   - is_DocsOutput : (int)
@@ -47,7 +47,7 @@ entity "puml-link:dhw:sqldb:configT.type.adoc[]" as configT.type << V >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:configT.type_level1type_level2type.adoc[]" as configT.type_level1type_level2type << V >> {
+entity "puml-link:dhw:sqldb:configt.type_level1type_level2type.adoc[]" as configT.type_level1type_level2type << V >> {
   **type** : (nvarchar(128))
   --
   level1type : (varchar(9))
@@ -57,29 +57,25 @@ entity "puml-link:dhw:sqldb:configT.type_level1type_level2type.adoc[]" as config
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.AntoraNavListPage_by_type.adoc[]" as docs.AntoraNavListPage_by_type << V >> {
+entity "puml-link:dhw:sqldb:docs.antoranavlistpage_by_type.adoc[]" as docs.AntoraNavListPage_by_type << V >> {
   --
-  - nav_list : (nvarchar(309))
+  - nav_list : (nvarchar(4000))
   type : (nvarchar(128))
   type_desc : (nvarchar(128))
   --
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.AntoraPage_ObjectByType.adoc[]" as docs.AntoraPage_ObjectByType << V >> {
+entity "puml-link:dhw:sqldb:docs.antorapage_objectbytype.adoc[]" as docs.AntoraPage_ObjectByType << V >> {
   --
+  - cultures_name : (nvarchar(10))
+  - page_content : (nvarchar(4000))
   - partial_content : (nvarchar(4000))
   --
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.usp_AntoraExport_navigation.adoc[]" as docs.usp_AntoraExport_navigation << P >> {
-  --
-  --
-  --
-}
-
-entity "puml-link:dhw:sqldb:reference.RepoObject_ReferencedReferencing.adoc[]" as reference.RepoObject_ReferencedReferencing << V >> {
+entity "puml-link:dhw:sqldb:reference.repoobject_referencedreferencing.adoc[]" as reference.RepoObject_ReferencedReferencing << V >> {
   --
   - referenced_AntoraXref : (nvarchar(max))
   referenced_external_AntoraComponent : (nvarchar(128))
@@ -103,7 +99,7 @@ entity "puml-link:dhw:sqldb:reference.RepoObject_ReferencedReferencing.adoc[]" a
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObject_gross.adoc[]" as repo.RepoObject_gross << V >> {
+entity "puml-link:dhw:sqldb:repo.repoobject_gross.adoc[]" as repo.RepoObject_gross << V >> {
   --
   AntoraComponent : (nvarchar(max))
   AntoraModule : (nvarchar(max))
@@ -148,10 +144,10 @@ entity "puml-link:dhw:sqldb:repo.RepoObject_gross.adoc[]" as repo.RepoObject_gro
   persistence_source_RepoObject_fullname : (nvarchar(261))
   persistence_source_RepoObject_fullname2 : (nvarchar(257))
   persistence_source_RepoObject_guid : (uniqueidentifier)
-  persistence_source_RepoObject_xref : (nvarchar(269))
+  persistence_source_RepoObject_xref : (nvarchar(4000))
   persistence_source_SysObject_fullname : (nvarchar(261))
   persistence_source_SysObject_fullname2 : (nvarchar(257))
-  persistence_source_SysObject_xref : (nvarchar(269))
+  persistence_source_SysObject_xref : (nvarchar(4000))
   pk_index_guid : (uniqueidentifier)
   pk_IndexPatternColumnDatatype : (nvarchar(4000))
   pk_IndexPatternColumnName : (nvarchar(4000))
@@ -193,7 +189,7 @@ entity "puml-link:dhw:sqldb:repo.RepoObject_gross.adoc[]" as repo.RepoObject_gro
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObject_wo_referencing.adoc[]" as repo.RepoObject_wo_referencing << V >> {
+entity "puml-link:dhw:sqldb:repo.repoobject_wo_referencing.adoc[]" as repo.RepoObject_wo_referencing << V >> {
   --
   is_repo_managed : (bit)
   - is_RepoObject_name_uniqueidentifier : (int)
@@ -212,7 +208,6 @@ configT.spt_values <.. configT.type
 configT.type <.. configT.type_level1type_level2type
 configT.type <.. repo.RepoObject_gross
 configT.type <.. reference.RepoObject_ReferencedReferencing
-configT.type <.. docs.usp_AntoraExport_navigation
 configT.type <.. docs.AntoraNavListPage_by_type
 configT.type <.. docs.AntoraPage_ObjectByType
 configT.type <.. repo.RepoObject_wo_referencing

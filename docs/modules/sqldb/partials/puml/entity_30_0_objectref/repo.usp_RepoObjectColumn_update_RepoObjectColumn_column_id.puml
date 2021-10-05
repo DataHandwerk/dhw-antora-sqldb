@@ -30,26 +30,33 @@ entity "puml-link:dhw:sqldb:config.fs_get_parameter_value.adoc[]" as config.fs_g
   --
 }
 
-entity "puml-link:dhw:sqldb:config.Parameter.adoc[]" as config.Parameter << U >> {
+entity "puml-link:dhw:sqldb:config.parameter.adoc[]" as config.Parameter << U >> {
   - **Parameter_name** : (varchar(100))
   - **sub_Parameter** : (nvarchar(128))
   --
 }
 
-entity "puml-link:dhw:sqldb:logs.ExecutionLog.adoc[]" as logs.ExecutionLog << U >> {
+entity "puml-link:dhw:sqldb:configt.parameter_default.adoc[]" as configT.Parameter_default << V >> {
+  - **Parameter_name** : (varchar(52))
+  - **sub_Parameter** : (nvarchar(27))
   --
 }
 
-entity "puml-link:dhw:sqldb:logs.usp_ExecutionLog_insert.adoc[]" as logs.usp_ExecutionLog_insert << P >> {
+entity "puml-link:dhw:sqldb:logs.executionlog.adoc[]" as logs.ExecutionLog << U >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.usp_RepoObjectColumn_update_RepoObjectColumn_column_id.adoc[]" as repo.usp_RepoObjectColumn_update_RepoObjectColumn_column_id << P >> {
+entity "puml-link:dhw:sqldb:logs.usp_executionlog_insert.adoc[]" as logs.usp_ExecutionLog_insert << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.usp_repoobjectcolumn_update_repoobjectcolumn_column_id.adoc[]" as repo.usp_RepoObjectColumn_update_RepoObjectColumn_column_id << P >> {
   --
 }
 
 config.fs_get_parameter_value <.. repo.usp_RepoObjectColumn_update_RepoObjectColumn_column_id
 config.Parameter <.. config.fs_get_parameter_value
+configT.Parameter_default <.. config.Parameter
 logs.ExecutionLog <.. logs.usp_ExecutionLog_insert
 logs.usp_ExecutionLog_insert <.. repo.usp_RepoObjectColumn_update_RepoObjectColumn_column_id
 @enduml

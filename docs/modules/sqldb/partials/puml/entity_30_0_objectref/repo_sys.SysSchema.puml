@@ -30,17 +30,23 @@ entity "puml-link:dhw:sqldb:config.ftv_dwh_database.adoc[]" as config.ftv_dwh_da
   --
 }
 
-entity "puml-link:dhw:sqldb:config.Parameter.adoc[]" as config.Parameter << U >> {
+entity "puml-link:dhw:sqldb:config.parameter.adoc[]" as config.Parameter << U >> {
   - **Parameter_name** : (varchar(100))
   - **sub_Parameter** : (nvarchar(128))
   --
 }
 
-entity "puml-link:dhw:sqldb:repo_sys.ExtendedProperties.adoc[]" as repo_sys.ExtendedProperties << V >> {
+entity "puml-link:dhw:sqldb:configt.parameter_default.adoc[]" as configT.Parameter_default << V >> {
+  - **Parameter_name** : (varchar(52))
+  - **sub_Parameter** : (nvarchar(27))
   --
 }
 
-entity "puml-link:dhw:sqldb:repo_sys.SysSchema.adoc[]" as repo_sys.SysSchema << V >> {
+entity "puml-link:dhw:sqldb:repo_sys.extendedproperties.adoc[]" as repo_sys.ExtendedProperties << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo_sys.sysschema.adoc[]" as repo_sys.SysSchema << V >> {
   --
 }
 
@@ -70,6 +76,7 @@ entity "puml-link:dhw:sqldb:sys_dwh.schemas.adoc[]" as sys_dwh.schemas << SN >> 
 
 config.ftv_dwh_database <.. repo_sys.ExtendedProperties
 config.Parameter <.. config.ftv_dwh_database
+configT.Parameter_default <.. config.Parameter
 repo_sys.ExtendedProperties <.. repo_sys.SysSchema
 sys_dwh.columns <.. repo_sys.ExtendedProperties
 sys_dwh.extended_properties <.. repo_sys.ExtendedProperties

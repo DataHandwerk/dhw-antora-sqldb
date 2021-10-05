@@ -1,4 +1,6 @@
-= [docs].[usp_AntoraExport_ObjectPartialProperties]
+// tag::HeaderFullDisplayName[]
+= docs.usp_AntoraExport_ObjectPartialProperties
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -10,8 +12,8 @@
 :ExistsProperty--exampleusage:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--ms_description:
 :ExistsProperty--referencedobjectlist:
+:ExistsProperty--uspgenerator_usp_id:
 :ExistsProperty--uspparameters:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--AntoraParameterList:
@@ -22,6 +24,12 @@
 // tag::RepoObject_guid[]
 EA5BF6C2-0593-EB11-84F2-A81E8446D5B0
 // end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+docs.usp_AntoraExport_ObjectPartialProperties
+// end::RepoObject_FullDisplayName2[]
 
 == SysObject_type
 
@@ -44,7 +52,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-25 19:58:55
+2021-10-04 23:48:15
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -80,7 +88,6 @@ stored procedure
 == AntoraParameterList
 
 // tag::AntoraParameterList[]
-* @outputDir (nvarchar(1000))
 * @isTrustedConnection (bit)
 * @userName (nvarchar(250))
 * @password (nvarchar(250))
@@ -93,6 +100,13 @@ stored procedure
 == Other tags
 
 source: property.RepoObjectProperty_cross As rop_cross
+
+
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
 
 
 === AdocUspSteps
@@ -128,26 +142,6 @@ ELSE
 |
 
 
-|120
-|
-*configure outputDir*
-
-
-
-.Statement
-[%collapsible]
-=====
-[source,sql]
-----
-SET @outputDir = ISNULL(@outputDir, (
-   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModule', '') + '\'
-   ) + 'partials\')
-----
-=====
-
-|
-
-
 |210
 |
 *declare variables*
@@ -159,9 +153,9 @@ SET @outputDir = ISNULL(@outputDir, (
 =====
 [source,sql]
 ----
-DECLARE @command NVARCHAR(4000);
-DECLARE @Object_fullname NVARCHAR(261);
-DECLARE @Object_fullname2 NVARCHAR(257);
+DECLARE @command NVARCHAR(4000)
+DECLARE @cultures_name NVARCHAR(10)
+DECLARE @Object_fullname2 NVARCHAR(257)
 
 ----
 =====
@@ -241,34 +235,36 @@ DECLARE @Object_fullname2 NVARCHAR(257);
 ----
 Declare db_cursor Cursor Local Fast_Forward For
 Select
-    RepoObject_fullname
+    cultures_name
   , RepoObject_fullname2
 From
-    docs.RepoObject_OutputFilter
+    docs.RepoObject_OutputFilter_T
 Where
     is_external = 0
 Order By
-    RepoObject_fullname
+    cultures_name
+  , RepoObject_fullname
 
 Open db_cursor
 
 Fetch Next From db_cursor
 Into
-    @Object_fullname
+    @cultures_name
   , @Object_fullname2
 
 While @@Fetch_Status = 0
 Begin
-    --Dynamically construct the BCP command
-    --
-    --bcp "SELECT [AdocContent] FROM [docs].[RepoObject_Adoc_T] WITH (READUNCOMMITTED) where [RepoObject_fullname] = '[config].[type]'" queryout D:\Repos\GitHub\DataHandwerk\DataHandwerk-docs\docs\modules\sqldb\pages\[config].[type].adoc -S localhost\sql2019 -d dhw_self -c -T
-    --
     Set @command
-        = 'bcp "SELECT [AdocContent] FROM [docs].[RepoObject_Adoc_T] WITH (READUNCOMMITTED) where [RepoObject_fullname] = '''
+        = 'bcp "SELECT [AdocContent] FROM [docs].[RepoObject_Adoc_T] WITH (READUNCOMMITTED) where [RepoObject_fullname2] = '''
           --
-          + @Object_fullname
+          + @Object_fullname2
           --
-          + '''" queryout "' + @outputDir + @Object_fullname2 + '.adoc"'
+          + ''' AND cultures_name = ''' + @cultures_name
+          --
+          + '''" queryout "'
+          --
+          + docs.fs_AntoraModuleFolder ( @cultures_name )
+          + '\partials\' + docs.fs_cleanStringForFilename ( @Object_fullname2 ) + '.adoc"'
           --
           + ' -S ' + @instanceName
           --
@@ -285,7 +281,7 @@ Begin
 
     Fetch Next From db_cursor
     Into
-        @Object_fullname
+        @cultures_name
       , @Object_fullname2
 End
 
@@ -304,19 +300,20 @@ Deallocate db_cursor
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:config.fs_get_parameter_value.adoc[]
-* xref:docs.RepoObject_OutputFilter.adoc[]
-* xref:docs.usp_PERSIST_RepoObject_Adoc_T.adoc[]
-* xref:docs.usp_PERSIST_RepoObject_ColumnList_T.adoc[]
-* xref:docs.usp_PERSIST_RepoObject_IndexList_T.adoc[]
-* xref:logs.usp_ExecutionLog_insert.adoc[]
+* xref:docs.fs_antoramodulefolder.adoc[]
+* xref:docs.fs_cleanstringforfilename.adoc[]
+* xref:docs.repoobject_outputfilter_t.adoc[]
+* xref:docs.usp_persist_repoobject_adoc_t.adoc[]
+* xref:docs.usp_persist_repoobject_columnlist_t.adoc[]
+* xref:docs.usp_persist_repoobject_indexlist_t.adoc[]
+* xref:logs.usp_executionlog_insert.adoc[]
 // end::antorareferencedlist[]
 
 
 === AntoraReferencingList
 
 // tag::antorareferencinglist[]
-* xref:docs.usp_AntoraExport.adoc[]
+* xref:docs.usp_antoraexport.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -324,10 +321,10 @@ Deallocate db_cursor
 
 // tag::description[]
 * the individual content per object is exported as 'partial' into (AntoraModuleFolder)``/``(AntoraModuleName)``/partials/schemaname.objectname.adoc``
-** export procedure: xref:docs.usp_AntoraExport_ObjectPartialProperties.adoc[]
-** all properties from xref:property.RepoObjectProperty.adoc[] are exported with a `tag` per property
+** export procedure: xref:docs.usp_antoraexport_objectpartialproperties.adoc[]
+** all properties from xref:property.repoobjectproperty.adoc[] are exported with a `tag` per property
 ** some additional `tag` are exported
-** the exported content is defined in xref:docs.RepoObject_Adoc.adoc[]
+** the exported content is defined in xref:docs.repoobject_adoc.adoc[]
 
 include::partial$docsnippet/antora-export-prerequisites.adoc[]
 // end::description[]
@@ -490,13 +487,7 @@ EXEC [docs].[usp_AntoraExport_ObjectPartialProperties]
 === MS_Description
 
 // tag::ms_description[]
-* the individual content per object is exported as 'partial' into (AntoraModuleFolder)``/``(AntoraModuleName)``/partials/schemaname.objectname.adoc``
-** export procedure: xref:docs.usp_AntoraExport_ObjectPartialProperties.adoc[]
-** all properties from xref:property.RepoObjectProperty.adoc[] are exported with a `tag` per property
-** some additional `tag` are exported
-** the exported content is defined in xref:docs.RepoObject_Adoc.adoc[]
 
-include::partial$docsnippet/antora-export-prerequisites.adoc[]
 // end::ms_description[]
 
 
@@ -559,8 +550,9 @@ include::partial$docsnippet/antora-export-prerequisites.adoc[]
 === ReferencedObjectList
 
 // tag::referencedobjectlist[]
-* [config].[fs_get_parameter_value]
-* [docs].[RepoObject_OutputFilter]
+* [docs].[fs_AntoraModuleFolder]
+* [docs].[fs_cleanStringForFilename]
+* [docs].[RepoObject_OutputFilter_T]
 * [docs].[usp_PERSIST_RepoObject_Adoc_T]
 * [docs].[usp_PERSIST_RepoObject_ColumnList_T]
 * [docs].[usp_PERSIST_RepoObject_IndexList_T]
@@ -582,11 +574,17 @@ include::partial$docsnippet/antora-export-prerequisites.adoc[]
 // end::uspexamples[]
 
 
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+31
+// end::uspgenerator_usp_id[]
+
+
 === UspParameters
 
 // tag::uspparameters[]
-@outputDir NVARCHAR(1000) = NULL /* example: 'D:\Repos\GitHub\DataHandwerk\DataHandwerk-docs\docs\modules\sqldb\partials\ */
-,@isTrustedConnection BIT = 1 /* specify whether you are connecting to the SQL instance with a trusted connection (Windows Authentication) or not */
+@isTrustedConnection BIT = 1 /* specify whether you are connecting to the SQL instance with a trusted connection (Windows Authentication) or not */
 ,@userName NVARCHAR(250) = 'loginName' /* If isTrustedConnection is set to 0 then you will need to add username and password for connecting to the SQL Server instance */
 ,@password NVARCHAR(250) = 'password'
 // end::uspparameters[]
@@ -611,8 +609,7 @@ code of this procedure is managed in the dhw repository. Do not modify manually.
 Use [uspgenerator].[GeneratorUsp], [uspgenerator].[GeneratorUspParameter], [uspgenerator].[GeneratorUspStep], [uspgenerator].[GeneratorUsp_SqlUsp]
 */
 CREATE   PROCEDURE [docs].[usp_AntoraExport_ObjectPartialProperties]
-@outputDir NVARCHAR(1000) = NULL /* example: 'D:\Repos\GitHub\DataHandwerk\DataHandwerk-docs\docs\modules\sqldb\partials\ */
-,@isTrustedConnection BIT = 1 /* specify whether you are connecting to the SQL instance with a trusted connection (Windows Authentication) or not */
+@isTrustedConnection BIT = 1 /* specify whether you are connecting to the SQL instance with a trusted connection (Windows Authentication) or not */
 ,@userName NVARCHAR(250) = 'loginName' /* If isTrustedConnection is set to 0 then you will need to add username and password for connecting to the SQL Server instance */
 ,@password NVARCHAR(250) = 'password'
 ,
@@ -674,10 +671,9 @@ EXEC logs.usp_ExecutionLog_insert
  , @execution_log_id = @current_execution_log_id OUTPUT
 ----you can log the content of your own parameters, do this only in the start-step
 ----data type is sql_variant
- , @parameter_01 = @outputDir
- , @parameter_02 = @isTrustedConnection
- , @parameter_03 = @userName
- , @parameter_04 = @password
+ , @parameter_01 = @isTrustedConnection
+ , @parameter_02 = @userName
+ , @parameter_03 = @password
 --
 PRINT '[docs].[usp_AntoraExport_ObjectPartialProperties]'
 --keep the code between logging parameters and "START" unchanged!
@@ -698,19 +694,12 @@ IF @isTrustedConnection = 1
 ELSE
  SET @TrustedUserPassword = ' -U ' + @userName + ' -P ' + @password
 
-/*{"ReportUspStep":[{"Number":120,"Name":"configure outputDir","has_logging":0,"is_condition":0,"is_inactive":0,"is_SubProcedure":0}]}*/
-PRINT CONCAT('usp_id;Number;Parent_Number: ',31,';',120,';',NULL);
-
-SET @outputDir = ISNULL(@outputDir, (
-   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModule', '') + '\'
-   ) + 'partials\')
-
 /*{"ReportUspStep":[{"Number":210,"Name":"declare variables","has_logging":0,"is_condition":0,"is_inactive":0,"is_SubProcedure":0}]}*/
 PRINT CONCAT('usp_id;Number;Parent_Number: ',31,';',210,';',NULL);
 
-DECLARE @command NVARCHAR(4000);
-DECLARE @Object_fullname NVARCHAR(261);
-DECLARE @Object_fullname2 NVARCHAR(257);
+DECLARE @command NVARCHAR(4000)
+DECLARE @cultures_name NVARCHAR(10)
+DECLARE @Object_fullname2 NVARCHAR(257)
 
 
 /*{"ReportUspStep":[{"Number":310,"Name":"[docs].[usp_PERSIST_RepoObject_IndexList_T]","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
@@ -748,34 +737,36 @@ PRINT CONCAT('usp_id;Number;Parent_Number: ',31,';',410,';',NULL);
 
 Declare db_cursor Cursor Local Fast_Forward For
 Select
-    RepoObject_fullname
+    cultures_name
   , RepoObject_fullname2
 From
-    docs.RepoObject_OutputFilter
+    docs.RepoObject_OutputFilter_T
 Where
     is_external = 0
 Order By
-    RepoObject_fullname
+    cultures_name
+  , RepoObject_fullname
 
 Open db_cursor
 
 Fetch Next From db_cursor
 Into
-    @Object_fullname
+    @cultures_name
   , @Object_fullname2
 
 While @@Fetch_Status = 0
 Begin
-    --Dynamically construct the BCP command
-    --
-    --bcp "SELECT [AdocContent] FROM [docs].[RepoObject_Adoc_T] WITH (READUNCOMMITTED) where [RepoObject_fullname] = '[config].[type]'" queryout D:\Repos\GitHub\DataHandwerk\DataHandwerk-docs\docs\modules\sqldb\pages\[config].[type].adoc -S localhost\sql2019 -d dhw_self -c -T
-    --
     Set @command
-        = 'bcp "SELECT [AdocContent] FROM [docs].[RepoObject_Adoc_T] WITH (READUNCOMMITTED) where [RepoObject_fullname] = '''
+        = 'bcp "SELECT [AdocContent] FROM [docs].[RepoObject_Adoc_T] WITH (READUNCOMMITTED) where [RepoObject_fullname2] = '''
           --
-          + @Object_fullname
+          + @Object_fullname2
           --
-          + '''" queryout "' + @outputDir + @Object_fullname2 + '.adoc"'
+          + ''' AND cultures_name = ''' + @cultures_name
+          --
+          + '''" queryout "'
+          --
+          + docs.fs_AntoraModuleFolder ( @cultures_name )
+          + '\partials\' + docs.fs_cleanStringForFilename ( @Object_fullname2 ) + '.adoc"'
           --
           + ' -S ' + @instanceName
           --
@@ -792,7 +783,7 @@ Begin
 
     Fetch Next From db_cursor
     Into
-        @Object_fullname
+        @cultures_name
       , @Object_fullname2
 End
 

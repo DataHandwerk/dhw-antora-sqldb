@@ -34,7 +34,7 @@ entity "puml-link:dhw:sqldb:config.ftv_dwh_database.adoc[]" as config.ftv_dwh_da
   --
 }
 
-entity "puml-link:dhw:sqldb:config.Parameter.adoc[]" as config.Parameter << U >> {
+entity "puml-link:dhw:sqldb:config.parameter.adoc[]" as config.Parameter << U >> {
   - **Parameter_name** : (varchar(100))
   - **sub_Parameter** : (nvarchar(128))
   --
@@ -49,7 +49,7 @@ entity "puml-link:dhw:sqldb:config.Parameter.adoc[]" as config.Parameter << U >>
   --
 }
 
-entity "puml-link:dhw:sqldb:reference.RepoObjectColumn_reference_QueryPlan.adoc[]" as reference.RepoObjectColumn_reference_QueryPlan << V >> {
+entity "puml-link:dhw:sqldb:reference.repoobjectcolumn_reference_queryplan.adoc[]" as reference.RepoObjectColumn_reference_QueryPlan << V >> {
   **referencing_id** : (int)
   **referencing_minor_id** : (int)
   **referenced_id** : (int)
@@ -82,13 +82,13 @@ entity "puml-link:dhw:sqldb:reference.RepoObjectColumn_reference_QueryPlan.adoc[
   --
 }
 
-entity "puml-link:dhw:sqldb:reference.usp_update_Referencing_Count.adoc[]" as reference.usp_update_Referencing_Count << P >> {
+entity "puml-link:dhw:sqldb:reference.usp_update_referencing_count.adoc[]" as reference.usp_update_Referencing_Count << P >> {
   --
   --
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObject_SqlCreateTable.adoc[]" as repo.RepoObject_SqlCreateTable << V >> {
+entity "puml-link:dhw:sqldb:repo.repoobject_sqlcreatetable.adoc[]" as repo.RepoObject_SqlCreateTable << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
   ConList : (nvarchar(max))
@@ -102,13 +102,13 @@ entity "puml-link:dhw:sqldb:repo.RepoObject_SqlCreateTable.adoc[]" as repo.RepoO
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.usp_update_Referencing_Count.adoc[]" as repo.usp_update_Referencing_Count << P >> {
+entity "puml-link:dhw:sqldb:repo.usp_update_referencing_count.adoc[]" as repo.usp_update_Referencing_Count << P >> {
   --
   --
   --
 }
 
-entity "puml-link:dhw:sqldb:repo_sys.ExtendedProperties.adoc[]" as repo_sys.ExtendedProperties << V >> {
+entity "puml-link:dhw:sqldb:repo_sys.extendedproperties.adoc[]" as repo_sys.ExtendedProperties << V >> {
   --
   - class : (tinyint)
   class_desc : (nvarchar(60))
@@ -167,7 +167,7 @@ entity "puml-link:dhw:sqldb:repo_sys.sql_expression_dependencies.adoc[]" as repo
   --
 }
 
-entity "puml-link:dhw:sqldb:repo_sys.SysColumn.adoc[]" as repo_sys.SysColumn << V >> {
+entity "puml-link:dhw:sqldb:repo_sys.syscolumn.adoc[]" as repo_sys.SysColumn << V >> {
   --
   collation_name : (sysname)
   column_encryption_key_database_name : (sysname)
@@ -229,7 +229,7 @@ entity "puml-link:dhw:sqldb:repo_sys.SysColumn.adoc[]" as repo_sys.SysColumn << 
   --
 }
 
-entity "puml-link:dhw:sqldb:uspgenerator.GeneratorUsp_SqlUsp.adoc[]" as uspgenerator.GeneratorUsp_SqlUsp << V >> {
+entity "puml-link:dhw:sqldb:uspgenerator.generatorusp_sqlusp.adoc[]" as uspgenerator.GeneratorUsp_SqlUsp << V >> {
   --
   - AdocUspSteps : (nvarchar(max))
   - has_logging : (tinyint)
@@ -248,7 +248,7 @@ entity "puml-link:dhw:sqldb:uspgenerator.GeneratorUsp_SqlUsp.adoc[]" as uspgener
   --
 }
 
-entity "puml-link:dhw:sqldb:workflow.Workflow_SqlUsp.adoc[]" as workflow.Workflow_SqlUsp << V >> {
+entity "puml-link:dhw:sqldb:workflow.workflow_sqlusp.adoc[]" as workflow.Workflow_SqlUsp << V >> {
   --
   - SqlUsp : (nvarchar(max))
   UspList : (nvarchar(max))
@@ -260,13 +260,13 @@ entity "puml-link:dhw:sqldb:workflow.Workflow_SqlUsp.adoc[]" as workflow.Workflo
 
 config.ftv_dwh_database <.. uspgenerator.GeneratorUsp_SqlUsp
 config.ftv_dwh_database <.. repo_sys.ExtendedProperties
-config.ftv_dwh_database <.. workflow.Workflow_SqlUsp
-config.ftv_dwh_database <.. reference.usp_update_Referencing_Count
-config.ftv_dwh_database <.. repo.usp_update_Referencing_Count
 config.ftv_dwh_database <.. repo_sys.SysColumn
 config.ftv_dwh_database <.. repo_sys.sql_expression_dependencies
+config.ftv_dwh_database <.. workflow.Workflow_SqlUsp
 config.ftv_dwh_database <.. reference.RepoObjectColumn_reference_QueryPlan
 config.ftv_dwh_database <.. repo.RepoObject_SqlCreateTable
+config.ftv_dwh_database <.. reference.usp_update_Referencing_Count
+config.ftv_dwh_database <.. repo.usp_update_Referencing_Count
 config.Parameter <.. config.ftv_dwh_database
 
 @enduml

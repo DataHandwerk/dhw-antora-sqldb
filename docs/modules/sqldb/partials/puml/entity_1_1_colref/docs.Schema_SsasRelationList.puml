@@ -26,26 +26,29 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:docs.Schema_puml.adoc[]" as docs.Schema_puml << V >> {
+entity "puml-link:dhw:sqldb:docs.schema_puml.adoc[]" as docs.Schema_puml << V >> {
+  - **RepoSchema_guid** : (uniqueidentifier)
+  **cultures_name** : (nvarchar(10))
   --
+  - is_ssas : (bit)
   - PumlSchemaEr : (nvarchar(max))
   - PumlSchemaIndexEr : (nvarchar(max))
   PumlSchemaSsasEr : (nvarchar(max))
-  - RepoSchema_guid : (uniqueidentifier)
   - RepoSchema_name : (nvarchar(128))
   --
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.Schema_SsasRelationList.adoc[]" as docs.Schema_SsasRelationList << V >> {
+entity "puml-link:dhw:sqldb:docs.schema_ssasrelationlist.adoc[]" as docs.Schema_SsasRelationList << V >> {
+  - **SchemaName** : (nvarchar(128))
+  **cultures_name** : (nvarchar(10))
   --
-  - SchemaName : (nvarchar(128))
   SsasRelationList_PumlRelation : (nvarchar(max))
   --
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.ssas_PumlRelation.adoc[]" as docs.ssas_PumlRelation << V >> {
+entity "puml-link:dhw:sqldb:docs.ssas_pumlrelation.adoc[]" as docs.ssas_PumlRelation << V >> {
   --
   delete_referential_action : (tinyint)
   ForeignKey_fullname : (nvarchar(517))

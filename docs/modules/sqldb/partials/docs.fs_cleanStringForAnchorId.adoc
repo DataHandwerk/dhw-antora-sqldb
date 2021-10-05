@@ -1,4 +1,6 @@
-= [docs].[fs_cleanStringForAnchorId]
+// tag::HeaderFullDisplayName[]
+= docs.fs_cleanStringForAnchorId
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -15,6 +17,12 @@
 // tag::RepoObject_guid[]
 667159E3-27E6-EB11-8507-A81E8446D5B0
 // end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+docs.fs_cleanStringForAnchorId
+// end::RepoObject_FullDisplayName2[]
 
 == SysObject_type
 
@@ -37,7 +45,7 @@ scalar function
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-18 13:14:17
+2021-10-01 20:16:11
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -82,6 +90,13 @@ scalar function
 source: property.RepoObjectProperty_cross As rop_cross
 
 
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
+
+
 === AdocUspSteps
 
 // tag::adocuspsteps[]
@@ -99,14 +114,14 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencingList
 
 // tag::antorareferencinglist[]
-* xref:docs.AntoraIndexSemanticgroup.adoc[]
-* xref:docs.AntoraIndexSemanticgroupPatterndatatype.adoc[]
-* xref:docs.RepoObject_ColumnList.adoc[]
-* xref:docs.RepoObject_IndexList.adoc[]
-* xref:docs.RepoObject_MeasureList.adoc[]
-* xref:docs.Unit_2.adoc[]
-* xref:reference.RepoObjectColumn_ReferencedReferencing.adoc[]
-* xref:repo.ForeignKey_gross.adoc[]
+* xref:docs.antoraindexsemanticgroup.adoc[]
+* xref:docs.antoraindexsemanticgrouppatterndatatype.adoc[]
+* xref:docs.repoobject_columnlist.adoc[]
+* xref:docs.repoobject_indexlist.adoc[]
+* xref:docs.repoobject_measurelist.adoc[]
+* xref:docs.unit_2.adoc[]
+* xref:reference.repoobjectcolumn_referencedreferencing.adoc[]
+* xref:repo.foreignkey_gross.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -355,6 +370,13 @@ source: property.RepoObjectProperty_cross As rop_cross
 // end::uspexamples[]
 
 
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+
+// end::uspgenerator_usp_id[]
+
+
 === UspParameters
 
 // tag::uspparameters[]
@@ -399,7 +421,7 @@ CREATE Function [docs].[fs_cleanStringForAnchorId]
 Returns NVarchar(4000)
 As
 Begin
-    Return Replace ( Replace ( Replace ( Replace ( Replace ( Replace ( Replace ( Replace ( Replace ( Replace ( Replace ( Replace ( Replace ( Replace ( @source_string, '+', 'plus' ), '&', 'ampersand' ), '#', 'hash' ), ')', 'closingbracket' ), '(', 'openingbracket' ), '\', 'backslash' ), '/', 'slash' ), '.', 'dot' ), '?', 'questionmark' ), '%', 'percent' ), '--', '2x-' ), '--', '2x-' ), ' ', 'blank' ), '__', '2x_' );
+    Return Lower(Replace ( Replace ( Replace ( Replace ( Replace ( Replace ( Replace ( Replace ( Replace ( Replace ( Replace ( Replace ( Replace ( Replace ( @source_string, '+', 'plus' ), '&', 'ampersand' ), '#', 'hash' ), ')', 'closingbracket' ), '(', 'openingbracket' ), '\', 'backslash' ), '/', 'slash' ), '.', 'dot' ), '?', 'questionmark' ), '%', 'percent' ), '--', '2x-' ), '--', '2x-' ), ' ', 'blank' ), '__', '2x_' ))
 End;
 
 ----

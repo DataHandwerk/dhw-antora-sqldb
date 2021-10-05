@@ -26,7 +26,7 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:reference.additional_Reference_Object_T.adoc[]" as reference.additional_Reference_Object_T << U >> {
+entity "puml-link:dhw:sqldb:reference.additional_reference_object_t.adoc[]" as reference.additional_Reference_Object_T << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
   - AntoraComponent : (nvarchar(128))
@@ -38,7 +38,7 @@ entity "puml-link:dhw:sqldb:reference.additional_Reference_Object_T.adoc[]" as r
   --
 }
 
-entity "puml-link:dhw:sqldb:reference.additional_Reference_ObjectColumn_T.adoc[]" as reference.additional_Reference_ObjectColumn_T << U >> {
+entity "puml-link:dhw:sqldb:reference.additional_reference_objectcolumn_t.adoc[]" as reference.additional_Reference_ObjectColumn_T << U >> {
   - **RepoObjectColumn_guid** : (uniqueidentifier)
   --
   - AntoraComponent : (nvarchar(128))
@@ -51,7 +51,7 @@ entity "puml-link:dhw:sqldb:reference.additional_Reference_ObjectColumn_T.adoc[]
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_external_src.adoc[]" as repo.RepoObjectColumn_external_src << V >> {
+entity "puml-link:dhw:sqldb:repo.repoobjectcolumn_external_src.adoc[]" as repo.RepoObjectColumn_external_src << V >> {
   - **RepoObjectColumn_guid** : (uniqueidentifier)
   --
   - is_SysObjectColumn_missing : (int)
@@ -62,7 +62,7 @@ entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_external_src.adoc[]" as repo.R
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_external_tgt.adoc[]" as repo.RepoObjectColumn_external_tgt << V >> {
+entity "puml-link:dhw:sqldb:repo.repoobjectcolumn_external_tgt.adoc[]" as repo.RepoObjectColumn_external_tgt << V >> {
   - **RepoObjectColumn_guid** : (uniqueidentifier)
   --
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
@@ -100,7 +100,7 @@ entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_external_tgt.adoc[]" as repo.R
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.usp_PERSIST_RepoObjectColumn_external_tgt.adoc[]" as repo.usp_PERSIST_RepoObjectColumn_external_tgt << P >> {
+entity "puml-link:dhw:sqldb:repo.usp_persist_repoobjectcolumn_external_tgt.adoc[]" as repo.usp_PERSIST_RepoObjectColumn_external_tgt << P >> {
   --
   --
   --
@@ -108,8 +108,12 @@ entity "puml-link:dhw:sqldb:repo.usp_PERSIST_RepoObjectColumn_external_tgt.adoc[
 
 reference.additional_Reference_Object_T <.. repo.RepoObjectColumn_external_src
 reference.additional_Reference_ObjectColumn_T <.. repo.RepoObjectColumn_external_src
-repo.RepoObjectColumn_external_src <.. repo.usp_PERSIST_RepoObjectColumn_external_tgt
 repo.RepoObjectColumn_external_src <.. repo.RepoObjectColumn_external_tgt
+repo.RepoObjectColumn_external_src <.. repo.usp_PERSIST_RepoObjectColumn_external_tgt
+"reference.additional_Reference_Object_T::RepoObject_guid" <-- "repo.RepoObjectColumn_external_src::RepoObject_guid"
+"reference.additional_Reference_ObjectColumn_T::ColumnName" <-- "repo.RepoObjectColumn_external_src::RepoObjectColumn_name"
+"reference.additional_Reference_ObjectColumn_T::ColumnName" <-- "repo.RepoObjectColumn_external_src::SysObjectColumn_name"
+"reference.additional_Reference_ObjectColumn_T::RepoObjectColumn_guid" <-- "repo.RepoObjectColumn_external_src::RepoObjectColumn_guid"
 "repo.RepoObjectColumn_external_src::is_SysObjectColumn_missing" <-- "repo.RepoObjectColumn_external_tgt::is_SysObjectColumn_missing"
 "repo.RepoObjectColumn_external_src::RepoObject_guid" <-- "repo.RepoObjectColumn_external_tgt::RepoObject_guid"
 "repo.RepoObjectColumn_external_src::RepoObjectColumn_guid" <-- "repo.RepoObjectColumn_external_tgt::RepoObjectColumn_guid"

@@ -1,4 +1,6 @@
-= [tool].[ftv_extract_substrings]
+// tag::HeaderFullDisplayName[]
+= tool.ftv_extract_substrings
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -9,7 +11,6 @@
 :ExistsProperty--exampleusage_2:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--ms_description:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--AntoraParameterList:
 :ExistsProperty--Columns:
@@ -20,6 +21,12 @@
 // tag::RepoObject_guid[]
 A1E4202C-E299-EB11-84F5-A81E8446D5B0
 // end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+tool.ftv_extract_substrings
+// end::RepoObject_FullDisplayName2[]
 
 == SysObject_type
 
@@ -42,7 +49,7 @@ inline function
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-04-15 16:45:56
+2021-10-02 13:23:34
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -146,8 +153,8 @@ inline function
 |===
 
 
-[#column-substring_netPostEol]
-=== substring_netPostEol
+[#column-substring_netposteol]
+=== substring_netposteol
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -160,8 +167,8 @@ inline function
 |===
 
 
-[#column-substring_netPreEol]
-=== substring_netPreEol
+[#column-substring_netpreeol]
+=== substring_netpreeol
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -249,14 +256,14 @@ inline function
 |
 
 |
-|<<column-substring_netPostEol>>
+|<<column-substring_netposteol>>
 |nvarchar(max)
 |NULL
 |
 |
 
 |
-|<<column-substring_netPreEol>>
+|<<column-substring_netpreeol>>
 |nvarchar(max)
 |NULL
 |
@@ -283,6 +290,13 @@ inline function
 source: property.RepoObjectProperty_cross As rop_cross
 
 
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
+
+
 === AdocUspSteps
 
 // tag::adocuspsteps[]
@@ -300,7 +314,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencingList
 
 // tag::antorareferencinglist[]
-* xref:property.RepoObjectProperty_Collect_source_sql_modules_definition.adoc[]
+* xref:property.repoobjectproperty_collect_source_sql_modules_definition.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -501,11 +515,6 @@ CROSS APPLY tool.[ftv_extract_substrings]([sql_modules_definition], CHAR(13) + C
 
 // tag::ms_description[]
 
-* extract multiple substrings between two tags from @string
-* each part between @pattern1 and @pattern2 resultes in one row
-* split the extracted substring_net into the parts for and after the first EOL (end of line)
-** substring_netPreEol
-** substring_netPostEol
 // end::ms_description[]
 
 
@@ -586,6 +595,13 @@ CROSS APPLY tool.[ftv_extract_substrings]([sql_modules_definition], CHAR(13) + C
 // end::uspexamples[]
 
 
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+
+// end::uspgenerator_usp_id[]
+
+
 === UspParameters
 
 // tag::uspparameters[]
@@ -608,7 +624,7 @@ source: property.RepoObjectProperty WHERE property_int = 1
 [source,sql]
 ----
 /*
-<<property_start>>MS_Description
+<<property_start>>Description
 * extract multiple substrings between two tags from @string
 * each part between @pattern1 and @pattern2 resultes in one row
 * split the extracted substring_net into the parts for and after the first EOL (end of line)

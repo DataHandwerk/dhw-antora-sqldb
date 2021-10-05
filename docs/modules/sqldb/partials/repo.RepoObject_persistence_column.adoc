@@ -1,4 +1,6 @@
-= [repo].[RepoObject_persistence_column]
+// tag::HeaderFullDisplayName[]
+= repo.RepoObject_persistence_column
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -21,6 +23,12 @@
 // tag::RepoObject_guid[]
 0490291C-9D61-EB11-84DC-A81E8446D5B0
 // end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+repo.RepoObject_persistence_column
+// end::RepoObject_FullDisplayName2[]
 
 == SysObject_type
 
@@ -49,8 +57,8 @@ view
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-target_RepoObject_guid]
-=== target_RepoObject_guid
+[#column-target_repoobject_guid]
+=== target_repoobject_guid
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -64,12 +72,12 @@ view
 
 .Referenced Columns
 --
-* xref:repo.RepoObject_persistence.adoc#column-target_RepoObject_guid[+repo.RepoObject_persistence.target_RepoObject_guid+]
+* xref:repo.repoobject_persistence.adoc#column-target_repoobject_guid[+repo.RepoObject_persistence.target_RepoObject_guid+]
 --
 
 
-[#column-RepoObjectColumn_guid_s]
-=== RepoObjectColumn_guid_s
+[#column-repoobjectcolumn_guid_s]
+=== repoobjectcolumn_guid_s
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -83,7 +91,7 @@ view
 
 .Referenced Columns
 --
-* xref:repo.RepoObjectColumn.adoc#column-RepoObjectColumn_guid[+repo.RepoObjectColumn.RepoObjectColumn_guid+]
+* xref:repo.repoobjectcolumn.adoc#column-repoobjectcolumn_guid[+repo.RepoObjectColumn.RepoObjectColumn_guid+]
 --
 
 
@@ -100,15 +108,9 @@ view
 |
 |===
 
-.Description
---
-temporal table should be created, it will also automatically create the columns required for the history
---
-{empty} +
-
 .Referenced Columns
 --
-* xref:repo.RepoObject_persistence.adoc#column-has_history[+repo.RepoObject_persistence.has_history+]
+* xref:repo.repoobject_persistence.adoc#column-has_history[+repo.RepoObject_persistence.has_history+]
 --
 
 
@@ -125,15 +127,9 @@ temporal table should be created, it will also automatically create the columns 
 |
 |===
 
-.Description
---
-history columns are created. Can be used if only these columns are required, but not the related history table
---
-{empty} +
-
 .Referenced Columns
 --
-* xref:repo.RepoObject_persistence.adoc#column-has_history_columns[+repo.RepoObject_persistence.has_history_columns+]
+* xref:repo.repoobject_persistence.adoc#column-has_history_columns[+repo.RepoObject_persistence.has_history_columns+]
 --
 
 
@@ -150,16 +146,9 @@ history columns are created. Can be used if only these columns are required, but
 |
 |===
 
-.Description
---
-the final history_schema_name will be defined in xref:sqldb:repo.RepoObject_SqlCreateTable.adoc[] +
-it looks like this column here is currently not used and should or could be deleted
---
-{empty} +
-
 .Referenced Columns
 --
-* xref:repo.RepoObject_persistence.adoc#column-history_schema_name[+repo.RepoObject_persistence.history_schema_name+]
+* xref:repo.repoobject_persistence.adoc#column-history_schema_name[+repo.RepoObject_persistence.history_schema_name+]
 --
 
 
@@ -176,16 +165,9 @@ it looks like this column here is currently not used and should or could be dele
 |
 |===
 
-.Description
---
-the final history_table_name will be defined in xref:sqldb:repo.RepoObject_SqlCreateTable.adoc[] +
-it looks like this column here is currently not used and should or could be deleted
---
-{empty} +
-
 .Referenced Columns
 --
-* xref:repo.RepoObject_persistence.adoc#column-history_table_name[+repo.RepoObject_persistence.history_table_name+]
+* xref:repo.repoobject_persistence.adoc#column-history_table_name[+repo.RepoObject_persistence.history_table_name+]
 --
 
 
@@ -204,7 +186,7 @@ it looks like this column here is currently not used and should or could be dele
 
 .Referenced Columns
 --
-* xref:repo.RepoObject_persistence.adoc#column-is_persistence[+repo.RepoObject_persistence.is_persistence+]
+* xref:repo.repoobject_persistence.adoc#column-is_persistence[+repo.RepoObject_persistence.is_persistence+]
 --
 
 
@@ -221,15 +203,9 @@ it looks like this column here is currently not used and should or could be dele
 |
 |===
 
-.Description
---
-persistence source should be checked empty source, empty source should not be persisted
---
-{empty} +
-
 .Referenced Columns
 --
-* xref:repo.RepoObject_persistence.adoc#column-is_persistence_check_for_empty_source[+repo.RepoObject_persistence.is_persistence_check_for_empty_source+]
+* xref:repo.repoobject_persistence.adoc#column-is_persistence_check_for_empty_source[+repo.RepoObject_persistence.is_persistence_check_for_empty_source+]
 --
 
 
@@ -246,17 +222,9 @@ persistence source should be checked empty source, empty source should not be pe
 |
 |===
 
-.Description
---
-changed columns should be deleted in persistence target +
-An alternative option is 'is_persistence_update_changed' +
-This requires a (real or virtual) PK defined in the source
---
-{empty} +
-
 .Referenced Columns
 --
-* xref:repo.RepoObject_persistence.adoc#column-is_persistence_delete_changed[+repo.RepoObject_persistence.is_persistence_delete_changed+]
+* xref:repo.repoobject_persistence.adoc#column-is_persistence_delete_changed[+repo.RepoObject_persistence.is_persistence_delete_changed+]
 --
 
 
@@ -273,16 +241,9 @@ This requires a (real or virtual) PK defined in the source
 |
 |===
 
-.Description
---
-missing columns should be deleted in persistence target +
-This requires a (real or virtual) PK defined in the source
---
-{empty} +
-
 .Referenced Columns
 --
-* xref:repo.RepoObject_persistence.adoc#column-is_persistence_delete_missing[+repo.RepoObject_persistence.is_persistence_delete_missing+]
+* xref:repo.repoobject_persistence.adoc#column-is_persistence_delete_missing[+repo.RepoObject_persistence.is_persistence_delete_missing+]
 --
 
 
@@ -299,20 +260,9 @@ This requires a (real or virtual) PK defined in the source
 |
 |===
 
-.Description
---
-missing columns or all columns should be inserted into persistence target +
-The final result depends on other settings
-
-* 'is_persistence_truncate' = 1 and 'is_persistence_insert' = 1 will just truncate the persistence target and insert all entries from persistence source
-* if a (real or virtual) PK is defined in the source, the insert can be combined with delete and update
-
---
-{empty} +
-
 .Referenced Columns
 --
-* xref:repo.RepoObject_persistence.adoc#column-is_persistence_insert[+repo.RepoObject_persistence.is_persistence_insert+]
+* xref:repo.repoobject_persistence.adoc#column-is_persistence_insert[+repo.RepoObject_persistence.is_persistence_insert+]
 --
 
 
@@ -331,7 +281,7 @@ The final result depends on other settings
 
 .Referenced Columns
 --
-* xref:repo.RepoObject_persistence.adoc#column-is_persistence_truncate[+repo.RepoObject_persistence.is_persistence_truncate+]
+* xref:repo.repoobject_persistence.adoc#column-is_persistence_truncate[+repo.RepoObject_persistence.is_persistence_truncate+]
 --
 
 
@@ -348,17 +298,9 @@ The final result depends on other settings
 |
 |===
 
-.Description
---
-changed columns should be updated in persistence target +
-An alternative option is 'is_persistence_delete_changed' +
-This requires a (real or virtual) PK defined in the source
---
-{empty} +
-
 .Referenced Columns
 --
-* xref:repo.RepoObject_persistence.adoc#column-is_persistence_update_changed[+repo.RepoObject_persistence.is_persistence_update_changed+]
+* xref:repo.repoobject_persistence.adoc#column-is_persistence_update_changed[+repo.RepoObject_persistence.is_persistence_update_changed+]
 --
 
 
@@ -377,12 +319,12 @@ This requires a (real or virtual) PK defined in the source
 
 .Referenced Columns
 --
-* xref:repo.RepoObject.adoc#column-is_repo_managed[+repo.RepoObject.is_repo_managed+]
+* xref:repo.repoobject.adoc#column-is_repo_managed[+repo.RepoObject.is_repo_managed+]
 --
 
 
-[#column-RepoObject_name_t]
-=== RepoObject_name_t
+[#column-repoobject_name_t]
+=== repoobject_name_t
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -396,12 +338,12 @@ This requires a (real or virtual) PK defined in the source
 
 .Referenced Columns
 --
-* xref:repo.RepoObject.adoc#column-RepoObject_name[+repo.RepoObject.RepoObject_name+]
+* xref:repo.repoobject.adoc#column-repoobject_name[+repo.RepoObject.RepoObject_name+]
 --
 
 
-[#column-RepoObject_schema_name_t]
-=== RepoObject_schema_name_t
+[#column-repoobject_schema_name_t]
+=== repoobject_schema_name_t
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -415,12 +357,12 @@ This requires a (real or virtual) PK defined in the source
 
 .Referenced Columns
 --
-* xref:repo.RepoObject.adoc#column-RepoObject_schema_name[+repo.RepoObject.RepoObject_schema_name+]
+* xref:repo.repoobject.adoc#column-repoobject_schema_name[+repo.RepoObject.RepoObject_schema_name+]
 --
 
 
-[#column-RepoObject_type_t]
-=== RepoObject_type_t
+[#column-repoobject_type_t]
+=== repoobject_type_t
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -432,20 +374,14 @@ This requires a (real or virtual) PK defined in the source
 |
 |===
 
-.Description
---
-reference in [repo_sys].[type]
---
-{empty} +
-
 .Referenced Columns
 --
-* xref:repo.RepoObject.adoc#column-RepoObject_type[+repo.RepoObject.RepoObject_type+]
+* xref:repo.repoobject.adoc#column-repoobject_type[+repo.RepoObject.RepoObject_type+]
 --
 
 
-[#column-RepoObjectColumn_name_t]
-=== RepoObjectColumn_name_t
+[#column-repoobjectcolumn_name_t]
+=== repoobjectcolumn_name_t
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -457,20 +393,14 @@ reference in [repo_sys].[type]
 |
 |===
 
-.Description
---
-Name of the column. Is unique within the object.
---
-{empty} +
-
 .Referenced Columns
 --
-* xref:repo.RepoObjectColumn.adoc#column-RepoObjectColumn_name[+repo.RepoObjectColumn.RepoObjectColumn_name+]
+* xref:repo.repoobjectcolumn.adoc#column-repoobjectcolumn_name[+repo.RepoObjectColumn.RepoObjectColumn_name+]
 --
 
 
-[#column-source_RepoObject_guid]
-=== source_RepoObject_guid
+[#column-source_repoobject_guid]
+=== source_repoobject_guid
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -484,12 +414,12 @@ Name of the column. Is unique within the object.
 
 .Referenced Columns
 --
-* xref:repo.RepoObject_persistence.adoc#column-source_RepoObject_guid[+repo.RepoObject_persistence.source_RepoObject_guid+]
+* xref:repo.repoobject_persistence.adoc#column-source_repoobject_guid[+repo.RepoObject_persistence.source_RepoObject_guid+]
 --
 
 
-[#column-SysObject_name_s]
-=== SysObject_name_s
+[#column-sysobject_name_s]
+=== sysobject_name_s
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -503,12 +433,12 @@ Name of the column. Is unique within the object.
 
 .Referenced Columns
 --
-* xref:repo.RepoObject.adoc#column-SysObject_name[+repo.RepoObject.SysObject_name+]
+* xref:repo.repoobject.adoc#column-sysobject_name[+repo.RepoObject.SysObject_name+]
 --
 
 
-[#column-SysObject_schema_name_s]
-=== SysObject_schema_name_s
+[#column-sysobject_schema_name_s]
+=== sysobject_schema_name_s
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -522,12 +452,12 @@ Name of the column. Is unique within the object.
 
 .Referenced Columns
 --
-* xref:repo.RepoObject.adoc#column-SysObject_schema_name[+repo.RepoObject.SysObject_schema_name+]
+* xref:repo.repoobject.adoc#column-sysobject_schema_name[+repo.RepoObject.SysObject_schema_name+]
 --
 
 
-[#column-SysObject_type_s]
-=== SysObject_type_s
+[#column-sysobject_type_s]
+=== sysobject_type_s
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -539,20 +469,14 @@ Name of the column. Is unique within the object.
 |
 |===
 
-.Description
---
-reference in [repo_sys].[type]
---
-{empty} +
-
 .Referenced Columns
 --
-* xref:repo.RepoObject.adoc#column-SysObject_type[+repo.RepoObject.SysObject_type+]
+* xref:repo.repoobject.adoc#column-sysobject_type[+repo.RepoObject.SysObject_type+]
 --
 
 
-[#column-SysObjectColumn_name_s]
-=== SysObjectColumn_name_s
+[#column-sysobjectcolumn_name_s]
+=== sysobjectcolumn_name_s
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -564,16 +488,9 @@ reference in [repo_sys].[type]
 |
 |===
 
-.Description
---
-Name of the column. Is unique within the object.
-if it not exists in the database, the RepoObject_guid or any other guid is used, because this column should not be empty
---
-{empty} +
-
 .Referenced Columns
 --
-* xref:repo.RepoObjectColumn.adoc#column-SysObjectColumn_name[+repo.RepoObjectColumn.SysObjectColumn_name+]
+* xref:repo.repoobjectcolumn.adoc#column-sysobjectcolumn_name[+repo.RepoObjectColumn.SysObjectColumn_name+]
 --
 
 
@@ -589,14 +506,14 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 
 // tag::AntoraPkColumnTableRows[]
 |1
-|*<<column-target_RepoObject_guid>>*
+|*<<column-target_repoobject_guid>>*
 |uniqueidentifier
 |NOT NULL
 |
 |
 
 |2
-|*<<column-RepoObjectColumn_guid_s>>*
+|*<<column-repoobjectcolumn_guid_s>>*
 |uniqueidentifier
 |NULL
 |
@@ -715,63 +632,63 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 |
 
 |
-|<<column-RepoObject_name_t>>
+|<<column-repoobject_name_t>>
 |nvarchar(128)
 |NOT NULL
 |
 |
 
 |
-|<<column-RepoObject_schema_name_t>>
+|<<column-repoobject_schema_name_t>>
 |nvarchar(128)
 |NOT NULL
 |
 |
 
 |
-|<<column-RepoObject_type_t>>
+|<<column-repoobject_type_t>>
 |char(2)
 |NOT NULL
 |
 |
 
 |
-|<<column-RepoObjectColumn_name_t>>
+|<<column-repoobjectcolumn_name_t>>
 |nvarchar(128)
 |NULL
 |
 |
 
 |
-|<<column-source_RepoObject_guid>>
+|<<column-source_repoobject_guid>>
 |uniqueidentifier
 |NULL
 |
 |
 
 |
-|<<column-SysObject_name_s>>
+|<<column-sysobject_name_s>>
 |nvarchar(128)
 |NULL
 |
 |
 
 |
-|<<column-SysObject_schema_name_s>>
+|<<column-sysobject_schema_name_s>>
 |nvarchar(128)
 |NULL
 |
 |
 
 |
-|<<column-SysObject_type_s>>
+|<<column-sysobject_type_s>>
 |char(2)
 |NULL
 |
 |
 
 |
-|<<column-SysObjectColumn_name_s>>
+|<<column-sysobjectcolumn_name_s>>
 |nvarchar(128)
 |NULL
 |
@@ -783,10 +700,10 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 
 // tag::AntoraIndexList[]
 
-[#index-PK_RepoObject_persistence_column]
-=== PK_RepoObject_persistence_column
+[#index-pk_repoobject_persistence_column]
+=== pk_repoobject_persistence_column
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-target_RepoObject_guid>>; uniqueidentifier
@@ -795,10 +712,10 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 * PK, Unique, Real: 1, 1, 0
 
 
-[#index-idx_RepoObject_persistence_column2x_2]
-=== idx_RepoObject_persistence_column++__++2
+[#index-idx_repoobject_persistence_column2x_2]
+=== idx_repoobject_persistence_column++__++2
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-SysObject_schema_name_s>>; nvarchar(128)
@@ -807,10 +724,10 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObject_persistence_column2x_3]
-=== idx_RepoObject_persistence_column++__++3
+[#index-idx_repoobject_persistence_column2x_3]
+=== idx_repoobject_persistence_column++__++3
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_schema_name_t>>; nvarchar(128)
@@ -819,10 +736,10 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObject_persistence_column2x_4]
-=== idx_RepoObject_persistence_column++__++4
+[#index-idx_repoobject_persistence_column2x_4]
+=== idx_repoobject_persistence_column++__++4
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObjectColumn_guid_s>>; uniqueidentifier
@@ -830,10 +747,10 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObject_persistence_column2x_5]
-=== idx_RepoObject_persistence_column++__++5
+[#index-idx_repoobject_persistence_column2x_5]
+=== idx_repoobject_persistence_column++__++5
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObjectColumn_guid_s>>; uniqueidentifier
@@ -842,10 +759,10 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObject_persistence_column2x_6]
-=== idx_RepoObject_persistence_column++__++6
+[#index-idx_repoobject_persistence_column2x_6]
+=== idx_repoobject_persistence_column++__++6
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObjectColumn_name_t>>; nvarchar(128)
@@ -853,10 +770,10 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObject_persistence_column2x_7]
-=== idx_RepoObject_persistence_column++__++7
+[#index-idx_repoobject_persistence_column2x_7]
+=== idx_repoobject_persistence_column++__++7
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-target_RepoObject_guid>>; uniqueidentifier
@@ -876,6 +793,13 @@ if it not exists in the database, the RepoObject_guid or any other guid is used,
 source: property.RepoObjectProperty_cross As rop_cross
 
 
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
+
+
 === AdocUspSteps
 
 // tag::adocuspsteps[]
@@ -886,9 +810,9 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:repo.RepoObject.adoc[]
-* xref:repo.RepoObject_persistence.adoc[]
-* xref:repo.RepoObjectColumn.adoc[]
+* xref:repo.repoobject.adoc[]
+* xref:repo.repoobject_persistence.adoc[]
+* xref:repo.repoobjectcolumn.adoc[]
 // end::antorareferencedlist[]
 
 
@@ -1144,6 +1068,13 @@ target_RepoObject_guid,RepoObjectColumn_guid_s
 // tag::uspexamples[]
 
 // end::uspexamples[]
+
+
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+
+// end::uspgenerator_usp_id[]
 
 
 === UspParameters

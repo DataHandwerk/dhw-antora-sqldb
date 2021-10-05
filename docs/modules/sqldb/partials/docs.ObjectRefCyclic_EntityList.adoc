@@ -1,4 +1,6 @@
-= [docs].[ObjectRefCyclic_EntityList]
+// tag::HeaderFullDisplayName[]
+= docs.ObjectRefCyclic_EntityList
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -10,6 +12,7 @@
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
+:ExistsProperty--AntoraIndexList:
 :ExistsProperty--Columns:
 // end::existing_properties[]
 
@@ -18,6 +21,12 @@
 // tag::RepoObject_guid[]
 84E72F09-C5FD-EB11-850F-A81E8446D5B0
 // end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+docs.ObjectRefCyclic_EntityList
+// end::RepoObject_FullDisplayName2[]
 
 == SysObject_type
 
@@ -40,14 +49,38 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-08-17 18:49:49
+2021-10-04 19:36:43
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-PumlEntityList]
-=== PumlEntityList
+[#column-cultures_name]
+=== cultures_name
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|cultures_name
+|nvarchar(10)
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:docs.repoobject_plantuml_entity_t.adoc#column-cultures_name[+docs.RepoObject_Plantuml_Entity_T.cultures_name+]
+--
+
+.Referencing Columns
+--
+* xref:docs.objectrefcyclic.adoc#column-cultures_name[+docs.ObjectRefCyclic.cultures_name+]
+--
+
+
+[#column-pumlentitylist]
+=== pumlentitylist
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -60,8 +93,8 @@ view
 |===
 
 
-[#column-PumlEntityOnlyPkList]
-=== PumlEntityOnlyPkList
+[#column-pumlentityonlypklist]
+=== pumlentityonlypklist
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -74,8 +107,8 @@ view
 |===
 
 
-[#column-XrefEntityList]
-=== XrefEntityList
+[#column-xrefentitylist]
+=== xrefentitylist
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -102,27 +135,35 @@ view
 
 
 
+
 // end::AntoraPkColumnTableRows[]
 
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
 |
-|<<column-PumlEntityList>>
+|<<column-cultures_name>>
+|nvarchar(10)
+|NOT NULL
+|
+|
+
+|
+|<<column-pumlentitylist>>
 |nvarchar(max)
 |NULL
 |
 |
 
 |
-|<<column-PumlEntityOnlyPkList>>
+|<<column-pumlentityonlypklist>>
 |nvarchar(max)
 |NULL
 |
 |
 
 |
-|<<column-XrefEntityList>>
+|<<column-xrefentitylist>>
 |nvarchar(max)
 |NULL
 |
@@ -133,6 +174,16 @@ view
 == AntoraIndexList
 
 // tag::AntoraIndexList[]
+
+[#index-idx_objectrefcyclic_entitylist2x_1]
+=== idx_objectrefcyclic_entitylist++__++1
+
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-cultures_name>>; nvarchar(10)
+--
+* PK, Unique, Real: 0, 0, 0
 
 // end::AntoraIndexList[]
 
@@ -147,6 +198,13 @@ view
 source: property.RepoObjectProperty_cross As rop_cross
 
 
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
+
+
 === AdocUspSteps
 
 // tag::adocuspsteps[]
@@ -157,15 +215,16 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:docs.RepoObject_Plantuml_Entity_T.adoc[]
-* xref:reference.ReferenceTree_cyclic_union.adoc[]
+* xref:docs.fs_cleanstringforfilename.adoc[]
+* xref:docs.repoobject_plantuml_entity_t.adoc[]
+* xref:reference.referencetree_cyclic_union.adoc[]
 // end::antorareferencedlist[]
 
 
 === AntoraReferencingList
 
 // tag::antorareferencinglist[]
-* xref:docs.ObjectRefCyclic.adoc[]
+* xref:docs.objectrefcyclic.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -396,6 +455,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 === ReferencedObjectList
 
 // tag::referencedobjectlist[]
+* [docs].[fs_cleanStringForFilename]
 * [docs].[RepoObject_Plantuml_Entity_T]
 * [reference].[ReferenceTree_cyclic_union]
 // end::referencedobjectlist[]
@@ -413,6 +473,13 @@ source: property.RepoObjectProperty_cross As rop_cross
 // tag::uspexamples[]
 
 // end::uspexamples[]
+
+
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+
+// end::uspgenerator_usp_id[]
 
 
 === UspParameters
@@ -437,16 +504,14 @@ source: property.RepoObjectProperty WHERE property_int = 1
 [source,sql]
 ----
 
-
-
-
 CREATE View docs.ObjectRefCyclic_EntityList
 As
 Select
-    PumlEntityList       =
-    --
-    String_Agg ( rop.RepoObject_Puml, Char ( 13 ) + Char ( 10 )) Within Group(Order By
-                                                                                  ro.ro_fullname2)
+    rop.cultures_name
+  , PumlEntityList       =
+  --
+  String_Agg ( rop.RepoObject_Puml, Char ( 13 ) + Char ( 10 )) Within Group(Order By
+                                                                                ro.ro_fullname2)
   , PumlEntityOnlyPkList =
   --
   String_Agg ( rop.RepoObject_PumlOnlyPK, Char ( 13 ) + Char ( 10 )) Within Group(Order By
@@ -457,7 +522,9 @@ Select
                  Concat (
                             --* xref:sqldb:target-page-filename.adoc[link text]
                             --we need to convert to first argument nvarchar(max) to avoid the limit of 8000 byte
-                            Cast('* xref:sqldb:' As NVarchar(Max)), ro.ro_fullname2, '.adoc[]'
+                            Cast('* xref:sqldb:' As NVarchar(Max))
+                          , docs.fs_cleanStringForFilename ( ro.ro_fullname2 )
+                          , '.adoc[]'
                         )
                , Char ( 13 ) + Char ( 10 )
              ) Within Group(Order By
@@ -480,6 +547,8 @@ From
     )                                 As ro
         On
         ro.ro_guid = rop.RepoObject_guid
+Group By
+    rop.cultures_name
 ----
 =======
 // end::sql_modules_definition[]

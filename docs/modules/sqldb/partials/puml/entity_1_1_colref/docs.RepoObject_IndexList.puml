@@ -26,26 +26,27 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:docs.fs_cleanStringForAnchorId.adoc[]" as docs.fs_cleanStringForAnchorId << FN >> {
+entity "puml-link:dhw:sqldb:docs.fs_cleanstringforanchorid.adoc[]" as docs.fs_cleanStringForAnchorId << FN >> {
   --
   --
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.fs_cleanStringForLabel.adoc[]" as docs.fs_cleanStringForLabel << FN >> {
+entity "puml-link:dhw:sqldb:docs.fs_cleanstringforlabel.adoc[]" as docs.fs_cleanStringForLabel << FN >> {
   --
   --
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.fs_cleanStringForPuml.adoc[]" as docs.fs_cleanStringForPuml << FN >> {
+entity "puml-link:dhw:sqldb:docs.fs_cleanstringforpuml.adoc[]" as docs.fs_cleanStringForPuml << FN >> {
   --
   --
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.RepoObject_IndexList.adoc[]" as docs.RepoObject_IndexList << V >> {
+entity "puml-link:dhw:sqldb:docs.repoobject_indexlist.adoc[]" as docs.RepoObject_IndexList << V >> {
   **RepoObject_guid** : (uniqueidentifier)
+  **cultures_name** : (nvarchar(10))
   --
   AntoraIndexList : (nvarchar(max))
   PumlIndexList : (nvarchar(max))
@@ -53,8 +54,9 @@ entity "puml-link:dhw:sqldb:docs.RepoObject_IndexList.adoc[]" as docs.RepoObject
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.RepoObject_IndexList_T.adoc[]" as docs.RepoObject_IndexList_T << U >> {
-  **RepoObject_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:docs.repoobject_indexlist_t.adoc[]" as docs.RepoObject_IndexList_T << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **cultures_name** : (nvarchar(10))
   --
   AntoraIndexList : (nvarchar(max))
   PumlIndexList : (nvarchar(max))
@@ -62,13 +64,41 @@ entity "puml-link:dhw:sqldb:docs.RepoObject_IndexList_T.adoc[]" as docs.RepoObje
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.usp_PERSIST_RepoObject_IndexList_T.adoc[]" as docs.usp_PERSIST_RepoObject_IndexList_T << P >> {
+entity "puml-link:dhw:sqldb:docs.repoobject_outputfilter_t.adoc[]" as docs.RepoObject_OutputFilter_T << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **cultures_name** : (nvarchar(10))
+  --
+  AntoraComponent : (nvarchar(max))
+  AntoraModule : (nvarchar(max))
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
+  external_DatabaseName : (nvarchar(128))
+  is_DocsOutput : (int)
+  - is_external : (bit)
+  - is_ssas : (bit)
+  - PumlEntityTopDefault : (nvarchar(max))
+  - PumlEntityTopWorkaround : (nvarchar(max))
+  RepoObject_DisplayName : (nvarchar(128))
+  RepoObject_FullDisplayName2 : (nvarchar(257))
+  - RepoObject_fullname : (nvarchar(261))
+  - RepoObject_fullname2 : (nvarchar(257))
+  - RepoObject_name : (nvarchar(128))
+  - RepoObject_schema_name : (nvarchar(128))
+  RepoObject_translation : (nvarchar(128))
+  SysObject_type : (char(2))
+  SysObject_type_name : (nvarchar(128))
+  tables_isHidden : (bit)
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.usp_persist_repoobject_indexlist_t.adoc[]" as docs.usp_PERSIST_RepoObject_IndexList_T << P >> {
   --
   --
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.ForeignKey_gross.adoc[]" as repo.ForeignKey_gross << V >> {
+entity "puml-link:dhw:sqldb:repo.foreignkey_gross.adoc[]" as repo.ForeignKey_gross << V >> {
   --
   delete_referential_action : (tinyint)
   ForeignKey_fullname : (nvarchar(517))
@@ -99,7 +129,7 @@ entity "puml-link:dhw:sqldb:repo.ForeignKey_gross.adoc[]" as repo.ForeignKey_gro
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.Index_gross.adoc[]" as repo.Index_gross << V >> {
+entity "puml-link:dhw:sqldb:repo.index_gross.adoc[]" as repo.Index_gross << V >> {
   --
   AntoraIndexColumnList : (nvarchar(max))
   ColumnList : (nvarchar(max))
@@ -111,6 +141,8 @@ entity "puml-link:dhw:sqldb:repo.Index_gross.adoc[]" as repo.Index_gross << V >>
   IndexPatternColumnDatatype : (nvarchar(4000))
   IndexPatternColumnName : (nvarchar(4000))
   IndexSemanticGroup : (nvarchar(512))
+  - is_DocsExclude : (bit)
+  is_DocsOutput : (int)
   is_index_disabled : (bit)
   is_index_primary_key : (bit)
   is_index_real : (bit)
@@ -140,11 +172,14 @@ docs.fs_cleanStringForLabel <.. docs.RepoObject_IndexList
 docs.fs_cleanStringForPuml <.. docs.RepoObject_IndexList
 docs.RepoObject_IndexList <.. docs.RepoObject_IndexList_T
 docs.RepoObject_IndexList <.. docs.usp_PERSIST_RepoObject_IndexList_T
+docs.RepoObject_OutputFilter_T <.. docs.RepoObject_IndexList
 repo.ForeignKey_gross <.. docs.RepoObject_IndexList
 repo.Index_gross <.. docs.RepoObject_IndexList
 "docs.RepoObject_IndexList::AntoraIndexList" <-- "docs.RepoObject_IndexList_T::AntoraIndexList"
+"docs.RepoObject_IndexList::cultures_name" <-- "docs.RepoObject_IndexList_T::cultures_name"
 "docs.RepoObject_IndexList::PumlIndexList" <-- "docs.RepoObject_IndexList_T::PumlIndexList"
 "docs.RepoObject_IndexList::RepoObject_guid" <-- "docs.RepoObject_IndexList_T::RepoObject_guid"
+"docs.RepoObject_OutputFilter_T::cultures_name" <-- "docs.RepoObject_IndexList::cultures_name"
 "repo.Index_gross::parent_RepoObject_guid" <-- "docs.RepoObject_IndexList::RepoObject_guid"
 @enduml
 

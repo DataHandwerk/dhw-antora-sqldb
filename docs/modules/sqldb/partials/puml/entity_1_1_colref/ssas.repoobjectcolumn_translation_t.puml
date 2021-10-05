@@ -1,0 +1,111 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:docs.repoobject_columnlist.adoc[]" as docs.RepoObject_ColumnList << V >> {
+  --
+  AntoraColumnDetails : (nvarchar(max))
+  AntoraNonPkColumnTableRows : (nvarchar(max))
+  AntoraPkColumnTableRows : (nvarchar(max))
+  - cultures_name : (nvarchar(10))
+  is_external : (tinyint)
+  PlantumlIndexColumns : (nvarchar(max))
+  PlantumlNonPkEntityColumns : (nvarchar(max))
+  PlantumlNonPkHiddenEntityColumns : (nvarchar(max))
+  PlantumlNonPkIndexColumns : (nvarchar(max))
+  PlantumlPkEntityColumns : (nvarchar(max))
+  - RepoObject_guid : (uniqueidentifier)
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.repoobject_plantuml_colreflist_1_1.adoc[]" as docs.RepoObject_Plantuml_ColRefList_1_1 << V >> {
+  --
+  ColRefList : (nvarchar(max))
+  - cultures_name : (nvarchar(10))
+  - RepoObject_guid : (uniqueidentifier)
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.repoobjectcolumn_translation.adoc[]" as ssas.RepoObjectColumn_translation << V >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  - **cultures_name** : (nvarchar(10))
+  --
+  - Column_name : (nvarchar(128))
+  cultures_translations_model_name : (nvarchar(500))
+  cultures_translations_model_tables_columns_name : (nvarchar(128))
+  cultures_translations_model_tables_name : (nvarchar(128))
+  databasename : (nvarchar(128))
+  RepoObjectColumn_DisplayName : (nvarchar(128))
+  RepoObjectColumn_translation : (nvarchar(128))
+  tables_columns_name : (nvarchar(128))
+  tables_name : (nvarchar(128))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.repoobjectcolumn_translation_t.adoc[]" as ssas.RepoObjectColumn_translation_T << U >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  - **cultures_name** : (nvarchar(10))
+  --
+  - Column_name : (nvarchar(128))
+  cultures_translations_model_name : (nvarchar(500))
+  cultures_translations_model_tables_columns_name : (nvarchar(128))
+  cultures_translations_model_tables_name : (nvarchar(128))
+  databasename : (nvarchar(128))
+  RepoObjectColumn_DisplayName : (nvarchar(128))
+  RepoObjectColumn_translation : (nvarchar(128))
+  tables_columns_name : (nvarchar(128))
+  tables_name : (nvarchar(128))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.usp_persist_repoobjectcolumn_translation_t.adoc[]" as ssas.usp_PERSIST_RepoObjectColumn_translation_T << P >> {
+  --
+  --
+  --
+}
+
+ssas.RepoObjectColumn_translation <.. ssas.RepoObjectColumn_translation_T
+ssas.RepoObjectColumn_translation_T <.. docs.RepoObject_ColumnList
+ssas.RepoObjectColumn_translation_T <.. docs.RepoObject_Plantuml_ColRefList_1_1
+ssas.RepoObjectColumn_translation_T <.. ssas.usp_PERSIST_RepoObjectColumn_translation_T
+"ssas.RepoObjectColumn_translation::Column_name" <-- "ssas.RepoObjectColumn_translation_T::Column_name"
+"ssas.RepoObjectColumn_translation::cultures_name" <-- "ssas.RepoObjectColumn_translation_T::cultures_name"
+"ssas.RepoObjectColumn_translation::cultures_translations_model_name" <-- "ssas.RepoObjectColumn_translation_T::cultures_translations_model_name"
+"ssas.RepoObjectColumn_translation::cultures_translations_model_tables_columns_name" <-- "ssas.RepoObjectColumn_translation_T::cultures_translations_model_tables_columns_name"
+"ssas.RepoObjectColumn_translation::cultures_translations_model_tables_name" <-- "ssas.RepoObjectColumn_translation_T::cultures_translations_model_tables_name"
+"ssas.RepoObjectColumn_translation::databasename" <-- "ssas.RepoObjectColumn_translation_T::databasename"
+"ssas.RepoObjectColumn_translation::RepoObjectColumn_DisplayName" <-- "ssas.RepoObjectColumn_translation_T::RepoObjectColumn_DisplayName"
+"ssas.RepoObjectColumn_translation::RepoObjectColumn_guid" <-- "ssas.RepoObjectColumn_translation_T::RepoObjectColumn_guid"
+"ssas.RepoObjectColumn_translation::RepoObjectColumn_translation" <-- "ssas.RepoObjectColumn_translation_T::RepoObjectColumn_translation"
+"ssas.RepoObjectColumn_translation::tables_columns_name" <-- "ssas.RepoObjectColumn_translation_T::tables_columns_name"
+"ssas.RepoObjectColumn_translation::tables_name" <-- "ssas.RepoObjectColumn_translation_T::tables_name"
+@enduml
+

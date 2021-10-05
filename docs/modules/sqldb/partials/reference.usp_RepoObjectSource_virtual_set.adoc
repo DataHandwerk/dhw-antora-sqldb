@@ -1,4 +1,6 @@
-= [reference].[usp_RepoObjectSource_virtual_set]
+// tag::HeaderFullDisplayName[]
+= reference.usp_RepoObjectSource_virtual_set
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -8,7 +10,6 @@
 :ExistsProperty--exampleusage:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--ms_description:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--AntoraParameterList:
@@ -19,6 +20,12 @@
 // tag::RepoObject_guid[]
 7E9A3468-7DA6-EB11-84FB-A81E8446D5B0
 // end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+reference.usp_RepoObjectSource_virtual_set
+// end::RepoObject_FullDisplayName2[]
 
 == SysObject_type
 
@@ -41,7 +48,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-08-15 14:29:06
+2021-10-02 13:23:34
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -90,6 +97,13 @@ stored procedure
 source: property.RepoObjectProperty_cross As rop_cross
 
 
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
+
+
 === AdocUspSteps
 
 // tag::adocuspsteps[]
@@ -100,8 +114,8 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:reference.RepoObjectSource_virtual.adoc[]
-* xref:repo.RepoObject.adoc[]
+* xref:reference.repoobjectsource_virtual.adoc[]
+* xref:repo.repoobject.adoc[]
 // end::antorareferencedlist[]
 
 
@@ -116,7 +130,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 
 // tag::description[]
 
-insert entries into xref:sqldb:reference.RepoObjectSource_virtual.adoc[], using guid, fullname or fullname2
+insert entries into xref:sqldb:reference.repoobjectsource_virtual.adoc[], using guid, fullname or fullname2
 // end::description[]
 
 
@@ -285,7 +299,6 @@ EXEC reference.usp_RepoObjectSource_virtual_set
 
 // tag::ms_description[]
 
-insert entries into xref:sqldb:reference.RepoObjectSource_virtual.adoc[], using guid, fullname or fullname2
 // end::ms_description[]
 
 
@@ -367,6 +380,13 @@ insert entries into xref:sqldb:reference.RepoObjectSource_virtual.adoc[], using 
 // end::uspexamples[]
 
 
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+
+// end::uspgenerator_usp_id[]
+
+
 === UspParameters
 
 // tag::uspparameters[]
@@ -390,8 +410,8 @@ source: property.RepoObjectProperty WHERE property_int = 1
 ----
 
 /*
-<<property_start>>MS_Description 
-insert entries into xref:sqldb:reference.RepoObjectSource_virtual.adoc[], using guid, fullname or fullname2
+<<property_start>>Description 
+insert entries into xref:sqldb:reference.repoobjectsource_virtual.adoc[], using guid, fullname or fullname2
 <<property_end>> 
 
 <<property_start>>exampleUsage
@@ -404,7 +424,7 @@ EXEC reference.usp_RepoObjectSource_virtual_set
   , @Source_RepoObject_fullname = '[SourceSchemaName].[SourceObjectName]';
 <<property_end>>
 */
-Create Procedure reference.usp_RepoObjectSource_virtual_set
+CREATE Procedure [reference].[usp_RepoObjectSource_virtual_set]
     --
     @RepoObject_guid             UniqueIdentifier = Null --if @RepoObject_guid is NULL, then @RepoObject_fullname or @RepoObject_fullname2 are used
   , @RepoObject_fullname         NVarchar(520)    = Null --can be used to define @RepoObject_guid; use '[SchemaName].[ObjectName]'

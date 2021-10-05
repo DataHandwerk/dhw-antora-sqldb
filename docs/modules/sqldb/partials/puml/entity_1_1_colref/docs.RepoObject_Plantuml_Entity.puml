@@ -26,28 +26,14 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:config.ftv_get_parameter_value.adoc[]" as config.ftv_get_parameter_value << IF >> {
-  --
-  Parameter_value_result : (nvarchar(max))
-  Parameter_value_result_date : (date)
-  Parameter_value_result_datetime : (datetime)
-  Parameter_value_result_int : (int)
-  --
-  --
-}
-
-entity "puml-link:dhw:sqldb:docs.fs_cleanStringForPuml.adoc[]" as docs.fs_cleanStringForPuml << FN >> {
-  --
-  --
-  --
-}
-
-entity "puml-link:dhw:sqldb:docs.RepoObject_ColumnList_T.adoc[]" as docs.RepoObject_ColumnList_T << U >> {
+entity "puml-link:dhw:sqldb:docs.repoobject_columnlist_t.adoc[]" as docs.RepoObject_ColumnList_T << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
+  - **cultures_name** : (nvarchar(10))
   --
   AntoraColumnDetails : (nvarchar(max))
   AntoraNonPkColumnTableRows : (nvarchar(max))
   AntoraPkColumnTableRows : (nvarchar(max))
+  is_external : (tinyint)
   PlantumlIndexColumns : (nvarchar(max))
   PlantumlNonPkEntityColumns : (nvarchar(max))
   PlantumlNonPkHiddenEntityColumns : (nvarchar(max))
@@ -57,8 +43,9 @@ entity "puml-link:dhw:sqldb:docs.RepoObject_ColumnList_T.adoc[]" as docs.RepoObj
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.RepoObject_IndexList_T.adoc[]" as docs.RepoObject_IndexList_T << U >> {
-  **RepoObject_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:docs.repoobject_indexlist_t.adoc[]" as docs.RepoObject_IndexList_T << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **cultures_name** : (nvarchar(10))
   --
   AntoraIndexList : (nvarchar(max))
   PumlIndexList : (nvarchar(max))
@@ -66,16 +53,20 @@ entity "puml-link:dhw:sqldb:docs.RepoObject_IndexList_T.adoc[]" as docs.RepoObje
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.RepoObject_MeasureList.adoc[]" as docs.RepoObject_MeasureList << V >> {
+entity "puml-link:dhw:sqldb:docs.repoobject_measurelist.adoc[]" as docs.RepoObject_MeasureList << V >> {
+  **RepoObject_guid** : (uniqueidentifier)
+  **cultures_name** : (nvarchar(10))
   --
   AntoraMeasureDetails : (nvarchar(max))
+  is_external : (tinyint)
   PlantumlMeasures : (nvarchar(max))
-  RepoObject_guid : (uniqueidentifier)
   --
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.RepoObject_OutputFilter.adoc[]" as docs.RepoObject_OutputFilter << V >> {
+entity "puml-link:dhw:sqldb:docs.repoobject_outputfilter_t.adoc[]" as docs.RepoObject_OutputFilter_T << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **cultures_name** : (nvarchar(10))
   --
   AntoraComponent : (nvarchar(max))
   AntoraModule : (nvarchar(max))
@@ -85,11 +76,15 @@ entity "puml-link:dhw:sqldb:docs.RepoObject_OutputFilter.adoc[]" as docs.RepoObj
   is_DocsOutput : (int)
   - is_external : (bit)
   - is_ssas : (bit)
+  - PumlEntityTopDefault : (nvarchar(max))
+  - PumlEntityTopWorkaround : (nvarchar(max))
+  RepoObject_DisplayName : (nvarchar(128))
+  RepoObject_FullDisplayName2 : (nvarchar(257))
   - RepoObject_fullname : (nvarchar(261))
   - RepoObject_fullname2 : (nvarchar(257))
-  - RepoObject_guid : (uniqueidentifier)
   - RepoObject_name : (nvarchar(128))
   - RepoObject_schema_name : (nvarchar(128))
+  RepoObject_translation : (nvarchar(128))
   SysObject_type : (char(2))
   SysObject_type_name : (nvarchar(128))
   tables_isHidden : (bit)
@@ -97,8 +92,9 @@ entity "puml-link:dhw:sqldb:docs.RepoObject_OutputFilter.adoc[]" as docs.RepoObj
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.RepoObject_Plantuml_Entity.adoc[]" as docs.RepoObject_Plantuml_Entity << V >> {
+entity "puml-link:dhw:sqldb:docs.repoobject_plantuml_entity.adoc[]" as docs.RepoObject_Plantuml_Entity << V >> {
   --
+  - cultures_name : (nvarchar(10))
   - RepoObject_fullname2 : (nvarchar(257))
   - RepoObject_guid : (uniqueidentifier)
   - RepoObject_Puml : (nvarchar(max))
@@ -112,10 +108,11 @@ entity "puml-link:dhw:sqldb:docs.RepoObject_Plantuml_Entity.adoc[]" as docs.Repo
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.RepoObject_Plantuml_Entity_T.adoc[]" as docs.RepoObject_Plantuml_Entity_T << U >> {
+entity "puml-link:dhw:sqldb:docs.repoobject_plantuml_entity_t.adoc[]" as docs.RepoObject_Plantuml_Entity_T << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **cultures_name** : (nvarchar(10))
   --
   - RepoObject_fullname2 : (nvarchar(257))
-  - RepoObject_guid : (uniqueidentifier)
   - RepoObject_Puml : (nvarchar(max))
   - RepoObject_PumlOnlyIndex : (nvarchar(max))
   - RepoObject_PumlOnlyPK : (nvarchar(max))
@@ -127,23 +124,23 @@ entity "puml-link:dhw:sqldb:docs.RepoObject_Plantuml_Entity_T.adoc[]" as docs.Re
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.usp_PERSIST_RepoObject_Plantuml_Entity_T.adoc[]" as docs.usp_PERSIST_RepoObject_Plantuml_Entity_T << P >> {
+entity "puml-link:dhw:sqldb:docs.usp_persist_repoobject_plantuml_entity_t.adoc[]" as docs.usp_PERSIST_RepoObject_Plantuml_Entity_T << P >> {
   --
   --
   --
 }
 
-config.ftv_get_parameter_value <.. docs.RepoObject_Plantuml_Entity
-docs.fs_cleanStringForPuml <.. docs.RepoObject_Plantuml_Entity
 docs.RepoObject_ColumnList_T <.. docs.RepoObject_Plantuml_Entity
 docs.RepoObject_IndexList_T <.. docs.RepoObject_Plantuml_Entity
 docs.RepoObject_MeasureList <.. docs.RepoObject_Plantuml_Entity
-docs.RepoObject_OutputFilter <.. docs.RepoObject_Plantuml_Entity
+docs.RepoObject_OutputFilter_T <.. docs.RepoObject_Plantuml_Entity
 docs.RepoObject_Plantuml_Entity <.. docs.RepoObject_Plantuml_Entity_T
 docs.RepoObject_Plantuml_Entity <.. docs.usp_PERSIST_RepoObject_Plantuml_Entity_T
-"docs.RepoObject_OutputFilter::RepoObject_fullname2" <-- "docs.RepoObject_Plantuml_Entity::RepoObject_fullname2"
-"docs.RepoObject_OutputFilter::RepoObject_guid" <-- "docs.RepoObject_Plantuml_Entity::RepoObject_guid"
-"docs.RepoObject_OutputFilter::RepoObject_schema_name" <-- "docs.RepoObject_Plantuml_Entity::RepoObject_schema_name"
+"docs.RepoObject_OutputFilter_T::cultures_name" <-- "docs.RepoObject_Plantuml_Entity::cultures_name"
+"docs.RepoObject_OutputFilter_T::RepoObject_fullname2" <-- "docs.RepoObject_Plantuml_Entity::RepoObject_fullname2"
+"docs.RepoObject_OutputFilter_T::RepoObject_guid" <-- "docs.RepoObject_Plantuml_Entity::RepoObject_guid"
+"docs.RepoObject_OutputFilter_T::RepoObject_schema_name" <-- "docs.RepoObject_Plantuml_Entity::RepoObject_schema_name"
+"docs.RepoObject_Plantuml_Entity::cultures_name" <-- "docs.RepoObject_Plantuml_Entity_T::cultures_name"
 "docs.RepoObject_Plantuml_Entity::RepoObject_fullname2" <-- "docs.RepoObject_Plantuml_Entity_T::RepoObject_fullname2"
 "docs.RepoObject_Plantuml_Entity::RepoObject_guid" <-- "docs.RepoObject_Plantuml_Entity_T::RepoObject_guid"
 "docs.RepoObject_Plantuml_Entity::RepoObject_Puml" <-- "docs.RepoObject_Plantuml_Entity_T::RepoObject_Puml"

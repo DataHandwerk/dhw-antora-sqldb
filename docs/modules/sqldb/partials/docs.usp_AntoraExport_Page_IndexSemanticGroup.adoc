@@ -1,4 +1,6 @@
-= [docs].[usp_AntoraExport_Page_IndexSemanticGroup]
+// tag::HeaderFullDisplayName[]
+= docs.usp_AntoraExport_Page_IndexSemanticGroup
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -10,8 +12,8 @@
 :ExistsProperty--exampleusage:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--ms_description:
 :ExistsProperty--referencedobjectlist:
+:ExistsProperty--uspgenerator_usp_id:
 :ExistsProperty--uspparameters:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--AntoraParameterList:
@@ -22,6 +24,12 @@
 // tag::RepoObject_guid[]
 8B1293B9-DE96-EB11-84F4-A81E8446D5B0
 // end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+docs.usp_AntoraExport_Page_IndexSemanticGroup
+// end::RepoObject_FullDisplayName2[]
 
 == SysObject_type
 
@@ -44,7 +52,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-25 19:58:56
+2021-10-04 23:48:16
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -80,7 +88,6 @@ stored procedure
 == AntoraParameterList
 
 // tag::AntoraParameterList[]
-* @outputDir (nvarchar(1000))
 * @isTrustedConnection (bit)
 * @userName (nvarchar(250))
 * @password (nvarchar(250))
@@ -93,6 +100,13 @@ stored procedure
 == Other tags
 
 source: property.RepoObjectProperty_cross As rop_cross
+
+
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
 
 
 === AdocUspSteps
@@ -128,26 +142,6 @@ ELSE
 |
 
 
-|120
-|
-*configure outputDir*
-
-
-
-.Statement
-[%collapsible]
-=====
-[source,sql]
-----
-SET @outputDir = ISNULL(@outputDir, (
-   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModule', '') + '\'
-   ) + 'pages\other\')
-----
-=====
-
-|
-
-
 |210
 |
 *declare variables*
@@ -160,6 +154,7 @@ SET @outputDir = ISNULL(@outputDir, (
 [source,sql]
 ----
 DECLARE @command NVARCHAR(4000)
+DECLARE @cultures_name NVARCHAR(10)
 
 ----
 =====
@@ -183,22 +178,50 @@ IndexSemanticGroup.adoc
 =====
 [source,sql]
 ----
-SET @command = 'bcp "SELECT [page_content] FROM [docs].[AntoraPage_IndexSemanticGroup]"  queryout ' + @outputDir + 'IndexSemanticGroup.adoc'
- --
- + ' -S ' + @instanceName
- --
- + ' -d ' + @databaseName
- --
- + ' -c -C 65001'
- --
- + @TrustedUserPassword
+Declare page_cursor Cursor Local Fast_Forward For
+Select
+    cultures_name
+From
+    docs.Culture
+Order By
+    cultures_name
 
-PRINT @command
+Open page_cursor
 
---Execute the BCP command
-EXEC xp_cmdshell @command
- , no_output
+Fetch Next From page_cursor
+Into
+    @cultures_name
 
+While @@Fetch_Status = 0
+Begin
+    Set @command = 'bcp "SELECT [page_content] FROM [docs].[AntoraPage_IndexSemanticGroup] '
+                   --
+                   + 'WHERE cultures_name = ''' + @cultures_name + ''''
+                   --
+                   + '" queryout "'
+                   --
+                   + docs.fs_AntoraModuleFolder ( @cultures_name ) + '\pages\other\' + 'indexsemanticgroup.adoc"'
+                   --
+                   + ' -S ' + @instanceName
+                   --
+                   + ' -d ' + @databaseName
+                   --
+                   + ' -c -C 65001'
+                   --
+                   + @TrustedUserPassword
+
+    Print @command
+
+    --Execute the BCP command
+    Exec sys.xp_cmdshell @command, no_output
+
+    Fetch Next From page_cursor
+    Into
+        @cultures_name
+End
+
+Close page_cursor
+Deallocate page_cursor
 ----
 =====
 
@@ -212,15 +235,16 @@ EXEC xp_cmdshell @command
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:config.fs_get_parameter_value.adoc[]
-* xref:logs.usp_ExecutionLog_insert.adoc[]
+* xref:docs.culture.adoc[]
+* xref:docs.fs_antoramodulefolder.adoc[]
+* xref:logs.usp_executionlog_insert.adoc[]
 // end::antorareferencedlist[]
 
 
 === AntoraReferencingList
 
 // tag::antorareferencinglist[]
-* xref:docs.usp_AntoraExport.adoc[]
+* xref:docs.usp_antoraexport.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -391,10 +415,7 @@ EXEC [docs].[usp_AntoraExport_Page_IndexSemanticGroup]
 === MS_Description
 
 // tag::ms_description[]
-one special page is exported into +
-@outputDir + 'IndexSemanticGroup.adoc'
 
-include::partial$docsnippet/antora-export-prerequisites.adoc[]
 // end::ms_description[]
 
 
@@ -457,7 +478,8 @@ include::partial$docsnippet/antora-export-prerequisites.adoc[]
 === ReferencedObjectList
 
 // tag::referencedobjectlist[]
-* [config].[fs_get_parameter_value]
+* [docs].[Culture]
+* [docs].[fs_AntoraModuleFolder]
 * [logs].[usp_ExecutionLog_insert]
 // end::referencedobjectlist[]
 
@@ -476,11 +498,17 @@ include::partial$docsnippet/antora-export-prerequisites.adoc[]
 // end::uspexamples[]
 
 
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+33
+// end::uspgenerator_usp_id[]
+
+
 === UspParameters
 
 // tag::uspparameters[]
-@outputDir NVARCHAR(1000) = NULL /* example: 'D:\Repos\GitHub\DataHandwerk\DataHandwerk-docs\docs\modules\sqldb\pages\ */
-,@isTrustedConnection BIT = 1 /* specify whether you are connecting to the SQL instance with a trusted connection (Windows Authentication) or not */
+@isTrustedConnection BIT = 1 /* specify whether you are connecting to the SQL instance with a trusted connection (Windows Authentication) or not */
 ,@userName NVARCHAR(250) = 'loginName' /* If isTrustedConnection is set to 0 then you will need to add username and password for connecting to the SQL Server instance */
 ,@password NVARCHAR(250) = 'password'
 // end::uspparameters[]
@@ -505,8 +533,7 @@ code of this procedure is managed in the dhw repository. Do not modify manually.
 Use [uspgenerator].[GeneratorUsp], [uspgenerator].[GeneratorUspParameter], [uspgenerator].[GeneratorUspStep], [uspgenerator].[GeneratorUsp_SqlUsp]
 */
 CREATE   PROCEDURE [docs].[usp_AntoraExport_Page_IndexSemanticGroup]
-@outputDir NVARCHAR(1000) = NULL /* example: 'D:\Repos\GitHub\DataHandwerk\DataHandwerk-docs\docs\modules\sqldb\pages\ */
-,@isTrustedConnection BIT = 1 /* specify whether you are connecting to the SQL instance with a trusted connection (Windows Authentication) or not */
+@isTrustedConnection BIT = 1 /* specify whether you are connecting to the SQL instance with a trusted connection (Windows Authentication) or not */
 ,@userName NVARCHAR(250) = 'loginName' /* If isTrustedConnection is set to 0 then you will need to add username and password for connecting to the SQL Server instance */
 ,@password NVARCHAR(250) = 'password'
 ,
@@ -568,10 +595,9 @@ EXEC logs.usp_ExecutionLog_insert
  , @execution_log_id = @current_execution_log_id OUTPUT
 ----you can log the content of your own parameters, do this only in the start-step
 ----data type is sql_variant
- , @parameter_01 = @outputDir
- , @parameter_02 = @isTrustedConnection
- , @parameter_03 = @userName
- , @parameter_04 = @password
+ , @parameter_01 = @isTrustedConnection
+ , @parameter_02 = @userName
+ , @parameter_03 = @password
 --
 PRINT '[docs].[usp_AntoraExport_Page_IndexSemanticGroup]'
 --keep the code between logging parameters and "START" unchanged!
@@ -592,17 +618,11 @@ IF @isTrustedConnection = 1
 ELSE
  SET @TrustedUserPassword = ' -U ' + @userName + ' -P ' + @password
 
-/*{"ReportUspStep":[{"Number":120,"Name":"configure outputDir","has_logging":0,"is_condition":0,"is_inactive":0,"is_SubProcedure":0}]}*/
-PRINT CONCAT('usp_id;Number;Parent_Number: ',33,';',120,';',NULL);
-
-SET @outputDir = ISNULL(@outputDir, (
-   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModule', '') + '\'
-   ) + 'pages\other\')
-
 /*{"ReportUspStep":[{"Number":210,"Name":"declare variables","has_logging":0,"is_condition":0,"is_inactive":0,"is_SubProcedure":0}]}*/
 PRINT CONCAT('usp_id;Number;Parent_Number: ',33,';',210,';',NULL);
 
 DECLARE @command NVARCHAR(4000)
+DECLARE @cultures_name NVARCHAR(10)
 
 
 /*{"ReportUspStep":[{"Number":410,"Name":"export FROM [docs].[AntoraPage_IndexSemanticGroup]","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":0,"log_source_object":"[docs].[AntoraPage_IndexSemanticGroup]","log_flag_InsertUpdateDelete":"u"}]}*/
@@ -612,22 +632,50 @@ PRINT CONCAT('usp_id;Number;Parent_Number: ',33,';',410,';',NULL);
 IndexSemanticGroup.adoc
 
 */
-SET @command = 'bcp "SELECT [page_content] FROM [docs].[AntoraPage_IndexSemanticGroup]"  queryout ' + @outputDir + 'IndexSemanticGroup.adoc'
- --
- + ' -S ' + @instanceName
- --
- + ' -d ' + @databaseName
- --
- + ' -c -C 65001'
- --
- + @TrustedUserPassword
+Declare page_cursor Cursor Local Fast_Forward For
+Select
+    cultures_name
+From
+    docs.Culture
+Order By
+    cultures_name
 
-PRINT @command
+Open page_cursor
 
---Execute the BCP command
-EXEC xp_cmdshell @command
- , no_output
+Fetch Next From page_cursor
+Into
+    @cultures_name
 
+While @@Fetch_Status = 0
+Begin
+    Set @command = 'bcp "SELECT [page_content] FROM [docs].[AntoraPage_IndexSemanticGroup] '
+                   --
+                   + 'WHERE cultures_name = ''' + @cultures_name + ''''
+                   --
+                   + '" queryout "'
+                   --
+                   + docs.fs_AntoraModuleFolder ( @cultures_name ) + '\pages\other\' + 'indexsemanticgroup.adoc"'
+                   --
+                   + ' -S ' + @instanceName
+                   --
+                   + ' -d ' + @databaseName
+                   --
+                   + ' -c -C 65001'
+                   --
+                   + @TrustedUserPassword
+
+    Print @command
+
+    --Execute the BCP command
+    Exec sys.xp_cmdshell @command, no_output
+
+    Fetch Next From page_cursor
+    Into
+        @cultures_name
+End
+
+Close page_cursor
+Deallocate page_cursor
 
 -- Logging START --
 SET @rows = @@ROWCOUNT

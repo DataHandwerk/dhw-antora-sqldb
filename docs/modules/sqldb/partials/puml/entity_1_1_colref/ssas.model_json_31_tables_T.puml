@@ -26,7 +26,7 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:repo.ForeignKey_ssas_IndexPattern.adoc[]" as repo.ForeignKey_ssas_IndexPattern << V >> {
+entity "puml-link:dhw:sqldb:repo.foreignkey_ssas_indexpattern.adoc[]" as repo.ForeignKey_ssas_IndexPattern << V >> {
   --
   - databasename : (nvarchar(128))
   delete_referential_action : (tinyint)
@@ -63,7 +63,7 @@ entity "puml-link:dhw:sqldb:repo.ForeignKey_ssas_IndexPattern.adoc[]" as repo.Fo
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObject_gross.adoc[]" as repo.RepoObject_gross << V >> {
+entity "puml-link:dhw:sqldb:repo.repoobject_gross.adoc[]" as repo.RepoObject_gross << V >> {
   --
   AntoraComponent : (nvarchar(max))
   AntoraModule : (nvarchar(max))
@@ -108,10 +108,10 @@ entity "puml-link:dhw:sqldb:repo.RepoObject_gross.adoc[]" as repo.RepoObject_gro
   persistence_source_RepoObject_fullname : (nvarchar(261))
   persistence_source_RepoObject_fullname2 : (nvarchar(257))
   persistence_source_RepoObject_guid : (uniqueidentifier)
-  persistence_source_RepoObject_xref : (nvarchar(269))
+  persistence_source_RepoObject_xref : (nvarchar(4000))
   persistence_source_SysObject_fullname : (nvarchar(261))
   persistence_source_SysObject_fullname2 : (nvarchar(257))
-  persistence_source_SysObject_xref : (nvarchar(269))
+  persistence_source_SysObject_xref : (nvarchar(4000))
   pk_index_guid : (uniqueidentifier)
   pk_IndexPatternColumnDatatype : (nvarchar(4000))
   pk_IndexPatternColumnName : (nvarchar(4000))
@@ -153,7 +153,7 @@ entity "puml-link:dhw:sqldb:repo.RepoObject_gross.adoc[]" as repo.RepoObject_gro
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObject_SSAS_src.adoc[]" as repo.RepoObject_SSAS_src << V >> {
+entity "puml-link:dhw:sqldb:repo.repoobject_ssas_src.adoc[]" as repo.RepoObject_SSAS_src << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
   - is_repo_managed : (int)
@@ -185,7 +185,7 @@ entity "puml-link:dhw:sqldb:ssas.model_json_31_tables.adoc[]" as ssas.model_json
   --
 }
 
-entity "puml-link:dhw:sqldb:ssas.model_json_31_tables_T.adoc[]" as ssas.model_json_31_tables_T << U >> {
+entity "puml-link:dhw:sqldb:ssas.model_json_31_tables_t.adoc[]" as ssas.model_json_31_tables_T << U >> {
   - **databasename** : (nvarchar(128))
   **tables_name** : (nvarchar(128))
   --
@@ -298,23 +298,23 @@ entity "puml-link:dhw:sqldb:ssas.model_json_316_tables_descriptions_multiline.ad
   --
 }
 
-entity "puml-link:dhw:sqldb:ssas.usp_PERSIST_model_json_31_tables_T.adoc[]" as ssas.usp_PERSIST_model_json_31_tables_T << P >> {
+entity "puml-link:dhw:sqldb:ssas.usp_persist_model_json_31_tables_t.adoc[]" as ssas.usp_PERSIST_model_json_31_tables_T << P >> {
   --
   --
   --
 }
 
 ssas.model_json_31_tables <.. ssas.model_json_31_tables_T
-ssas.model_json_31_tables_T <.. repo.RepoObject_SSAS_src
 ssas.model_json_31_tables_T <.. repo.RepoObject_gross
-ssas.model_json_31_tables_T <.. ssas.model_json_315_tables_annotations
-ssas.model_json_31_tables_T <.. ssas.usp_PERSIST_model_json_31_tables_T
+ssas.model_json_31_tables_T <.. repo.ForeignKey_ssas_IndexPattern
+ssas.model_json_31_tables_T <.. repo.RepoObject_SSAS_src
 ssas.model_json_31_tables_T <.. ssas.model_json_314_tables_hierarchies
-ssas.model_json_31_tables_T <.. ssas.model_json_316_tables_descriptions_multiline
 ssas.model_json_31_tables_T <.. ssas.model_json_313_tables_partitions
 ssas.model_json_31_tables_T <.. ssas.model_json_312_tables_measures
 ssas.model_json_31_tables_T <.. ssas.model_json_311_tables_columns
-ssas.model_json_31_tables_T <.. repo.ForeignKey_ssas_IndexPattern
+ssas.model_json_31_tables_T <.. ssas.model_json_315_tables_annotations
+ssas.model_json_31_tables_T <.. ssas.usp_PERSIST_model_json_31_tables_T
+ssas.model_json_31_tables_T <.. ssas.model_json_316_tables_descriptions_multiline
 "ssas.model_json_31_tables::databasename" <-- "ssas.model_json_31_tables_T::databasename"
 "ssas.model_json_31_tables::tables_annotations_ja" <-- "ssas.model_json_31_tables_T::tables_annotations_ja"
 "ssas.model_json_31_tables::tables_columns_ja" <-- "ssas.model_json_31_tables_T::tables_columns_ja"

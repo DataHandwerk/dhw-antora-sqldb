@@ -26,13 +26,7 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:config.fs_get_parameter_value.adoc[]" as config.fs_get_parameter_value << FN >> {
-  --
-  --
-  --
-}
-
-entity "puml-link:dhw:sqldb:config.Parameter.adoc[]" as config.Parameter << U >> {
+entity "puml-link:dhw:sqldb:config.parameter.adoc[]" as config.Parameter << U >> {
   - **Parameter_name** : (varchar(100))
   - **sub_Parameter** : (nvarchar(128))
   --
@@ -47,26 +41,40 @@ entity "puml-link:dhw:sqldb:config.Parameter.adoc[]" as config.Parameter << U >>
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.usp_AntoraExport.adoc[]" as docs.usp_AntoraExport << P >> {
+entity "puml-link:dhw:sqldb:docs.culture.adoc[]" as docs.Culture << V >> {
+  --
+  - cultures_name : (nvarchar(10))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.fs_antoramodulefolder.adoc[]" as docs.fs_AntoraModuleFolder << FN >> {
   --
   --
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.usp_AntoraExport_ObjectPageTemplate.adoc[]" as docs.usp_AntoraExport_ObjectPageTemplate << P >> {
+entity "puml-link:dhw:sqldb:docs.usp_antoraexport.adoc[]" as docs.usp_AntoraExport << P >> {
   --
   --
   --
 }
 
-entity "puml-link:dhw:sqldb:logs.usp_ExecutionLog_insert.adoc[]" as logs.usp_ExecutionLog_insert << P >> {
+entity "puml-link:dhw:sqldb:docs.usp_antoraexport_objectpagetemplate.adoc[]" as docs.usp_AntoraExport_ObjectPageTemplate << P >> {
   --
   --
   --
 }
 
-config.fs_get_parameter_value <.. docs.usp_AntoraExport_ObjectPageTemplate
+entity "puml-link:dhw:sqldb:logs.usp_executionlog_insert.adoc[]" as logs.usp_ExecutionLog_insert << P >> {
+  --
+  --
+  --
+}
+
 config.Parameter <.. docs.usp_AntoraExport_ObjectPageTemplate
+docs.culture <.. docs.usp_AntoraExport_ObjectPageTemplate
+docs.fs_AntoraModuleFolder <.. docs.usp_AntoraExport_ObjectPageTemplate
 docs.usp_AntoraExport_ObjectPageTemplate <.. docs.usp_AntoraExport
 logs.usp_ExecutionLog_insert <.. docs.usp_AntoraExport_ObjectPageTemplate
 

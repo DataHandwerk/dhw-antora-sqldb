@@ -1,4 +1,6 @@
-= [docs].[RepoObject_Plantuml_ObjectRefList_0_30]
+// tag::HeaderFullDisplayName[]
+= docs.RepoObject_Plantuml_ObjectRefList_0_30
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -23,6 +25,12 @@
 B1C70217-619D-EB11-84F6-A81E8446D5B0
 // end::RepoObject_guid[]
 
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+docs.RepoObject_Plantuml_ObjectRefList_0_30
+// end::RepoObject_FullDisplayName2[]
+
 == SysObject_type
 
 // tag::SysObject_type[]
@@ -44,14 +52,14 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-22 06:58:11
+2021-10-03 18:11:55
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-RepoObject_guid]
-=== RepoObject_guid
+[#column-repoobject_guid]
+=== repoobject_guid
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -64,8 +72,8 @@ view
 |===
 
 
-[#column-ObjectRefList]
-=== ObjectRefList
+[#column-objectreflist]
+=== objectreflist
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -79,7 +87,7 @@ view
 
 .Referencing Columns
 --
-* xref:docs.RepoObject_Plantuml.adoc#column-ObjectRefList_0_30[+docs.RepoObject_Plantuml.ObjectRefList_0_30+]
+* xref:docs.repoobject_plantuml.adoc#column-objectreflist_0_30[+docs.RepoObject_Plantuml.ObjectRefList_0_30+]
 --
 
 
@@ -95,7 +103,7 @@ view
 
 // tag::AntoraPkColumnTableRows[]
 |1
-|*<<column-RepoObject_guid>>*
+|*<<column-repoobject_guid>>*
 |uniqueidentifier
 |NOT NULL
 |
@@ -109,7 +117,7 @@ view
 // tag::AntoraNonPkColumnTableRows[]
 
 |
-|<<column-ObjectRefList>>
+|<<column-objectreflist>>
 |nvarchar(max)
 |NULL
 |
@@ -121,10 +129,10 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-PK_RepoObject_Plantuml_ObjectRefList_0_30]
-=== PK_RepoObject_Plantuml_ObjectRefList_0_30
+[#index-pk_repoobject_plantuml_objectreflist_0_30]
+=== pk_repoobject_plantuml_objectreflist_0_30
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -144,6 +152,13 @@ view
 source: property.RepoObjectProperty_cross As rop_cross
 
 
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
+
+
 === AdocUspSteps
 
 // tag::adocuspsteps[]
@@ -154,15 +169,15 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:reference.RepoObject_reference_T.adoc[]
-* xref:reference.RepoObject_ReferenceTree.adoc[]
+* xref:reference.repoobject_reference_t.adoc[]
+* xref:reference.repoobject_referencetree.adoc[]
 // end::antorareferencedlist[]
 
 
 === AntoraReferencingList
 
 // tag::antorareferencinglist[]
-* xref:docs.RepoObject_Plantuml.adoc[]
+* xref:docs.repoobject_plantuml.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -365,7 +380,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-62C29E81-109E-EB11-84F6-A81E8446D5B0
+99CFF2FE-0722-EC11-8524-A81E8446D5B0
 // end::pk_index_guid[]
 
 
@@ -412,6 +427,13 @@ RepoObject_guid
 // end::uspexamples[]
 
 
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+
+// end::uspgenerator_usp_id[]
+
+
 === UspParameters
 
 // tag::uspparameters[]
@@ -434,10 +456,13 @@ source: property.RepoObjectProperty WHERE property_int = 1
 [source,sql]
 ----
 
-CREATE View docs.RepoObject_Plantuml_ObjectRefList_0_30
+
+
+CREATE View [docs].[RepoObject_Plantuml_ObjectRefList_0_30]
 As
 Select
     ro.RepoObject_guid
+  --, cultures_name = Cast('' As NVarchar(10))
   --, ro.RepoObject_fullname2
   , ObjectRefList = String_Agg (
                                    Concat (
@@ -453,6 +478,7 @@ From
 --select all objects pairs that have any reference relation inside the reference path with ro.RepoObject_guid (in the desired direction)
 (
     Select
+        Distinct
         RepoObject_guid
       --,[RepoObject_fullname2]
       , Referencing_guid

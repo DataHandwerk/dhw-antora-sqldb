@@ -1,4 +1,6 @@
-= [property].[RepoObjectProperty_Collect_source_ROGross]
+// tag::HeaderFullDisplayName[]
+= property.RepoObjectProperty_Collect_source_ROGross
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -23,6 +25,12 @@
 B6FE9885-EA9D-EB11-84F6-A81E8446D5B0
 // end::RepoObject_guid[]
 
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+property.RepoObjectProperty_Collect_source_ROGross
+// end::RepoObject_FullDisplayName2[]
+
 == SysObject_type
 
 // tag::SysObject_type[]
@@ -44,14 +52,14 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-25 14:04:20
+2021-10-04 13:46:08
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-RepoObject_guid]
-=== RepoObject_guid
+[#column-repoobject_guid]
+=== repoobject_guid
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -65,7 +73,7 @@ view
 
 .Referenced Columns
 --
-* xref:repo.RepoObject_gross2.adoc#column-RepoObject_guid[+repo.RepoObject_gross2.RepoObject_guid+]
+* xref:repo.repoobject_gross.adoc#column-repoobject_guid[+repo.RepoObject_gross.RepoObject_guid+]
 --
 
 
@@ -109,7 +117,7 @@ view
 
 // tag::AntoraPkColumnTableRows[]
 |1
-|*<<column-RepoObject_guid>>*
+|*<<column-repoobject_guid>>*
 |uniqueidentifier
 |NOT NULL
 |
@@ -143,10 +151,10 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-PK_RepoObjectProperty_Collect_source_ROGross]
-=== PK_RepoObjectProperty_Collect_source_ROGross
+[#index-pk_repoobjectproperty_collect_source_rogross]
+=== pk_repoobjectproperty_collect_source_rogross
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -155,10 +163,10 @@ view
 * PK, Unique, Real: 1, 1, 0
 
 
-[#index-idx_RepoObjectProperty_Collect_source_ROGross2x_2]
-=== idx_RepoObjectProperty_Collect_source_ROGross++__++2
+[#index-idx_repoobjectproperty_collect_source_rogross2x_2]
+=== idx_repoobjectproperty_collect_source_rogross++__++2
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -178,6 +186,13 @@ view
 source: property.RepoObjectProperty_cross As rop_cross
 
 
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
+
+
 === AdocUspSteps
 
 // tag::adocuspsteps[]
@@ -188,14 +203,15 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:repo.RepoObject_gross2.adoc[]
+* xref:repo.repoobject_gross.adoc[]
+* xref:repo.repoobject_sat2_t.adoc[]
 // end::antorareferencedlist[]
 
 
 === AntoraReferencingList
 
 // tag::antorareferencinglist[]
-* xref:property.usp_RepoObjectProperty_collect.adoc[]
+* xref:property.usp_repoobjectproperty_collect.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -426,7 +442,8 @@ RepoObject_guid,property_name
 === ReferencedObjectList
 
 // tag::referencedobjectlist[]
-* [repo].[RepoObject_gross2]
+* [repo].[RepoObject_gross]
+* [repo].[RepoObject_sat2_T]
 // end::referencedobjectlist[]
 
 
@@ -442,6 +459,13 @@ RepoObject_guid,property_name
 // tag::uspexamples[]
 
 // end::uspexamples[]
+
+
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+
+// end::uspgenerator_usp_id[]
 
 
 === UspParameters
@@ -466,8 +490,7 @@ source: property.RepoObjectProperty WHERE property_int = 1
 [source,sql]
 ----
 
-
-CREATE View [property].[RepoObjectProperty_Collect_source_ROGross]
+CREATE View property.RepoObjectProperty_Collect_source_ROGross
 As
 Select
     ro.RepoObject_guid
@@ -496,6 +519,9 @@ Select
       When 'Description'
           Then
           Cast(ro.Description As NVarchar(Max))
+      When 'uspgenerator_usp_id'
+          Then
+          Cast(ro.uspgenerator_usp_id As NVarchar(Max))
       When 'usp_persistence_RepoObject_guid'
           Then
           Cast(ro.usp_persistence_RepoObject_guid As NVarchar(Max))
@@ -558,10 +584,10 @@ Select
           Cast(ro.InheritanceType As NVarchar(Max))
       When 'AntoraReferencedList'
           Then
-          Cast(ro.AntoraReferencedList As NVarchar(Max))
+          Cast(ros2.AntoraReferencedList As NVarchar(Max))
       When 'AntoraReferencingList'
           Then
-          Cast(ro.AntoraReferencingList As NVarchar(Max))
+          Cast(ros2.AntoraReferencingList As NVarchar(Max))
       --When 'AntoraExternalReferencedList'
       --    Then
       --    Cast(ro.AntoraExternalReferencedList As NVarchar(Max))
@@ -576,7 +602,12 @@ Select
           Cast(ro.has_get_referenced_issue As NVarchar(Max))
   End
 From
-    repo.RepoObject_gross2 As ro
+    repo.RepoObject_gross      As ro
+    Left Join
+        repo.RepoObject_sat2_T As ros2
+            On
+            ros2.RepoObject_guid = ro.RepoObject_guid
+
     --ensure all these property_name are included in the resulting view per RepoObject
     Cross Join
     (
@@ -588,6 +619,7 @@ From
           , ( 'is_repo_managed' )
           , ( 'is_ssas' )
           , ( 'Description' )
+          , ( 'uspgenerator_usp_id' )
           , ( 'usp_persistence_RepoObject_guid' )
           , ( 'persistence_source_RepoObject_guid' )
           , ( 'persistence_source_RepoObject_fullname' )
@@ -614,7 +646,7 @@ From
           --, ( 'AntoraExternalReferencingList' )
           , ( 'has_execution_plan_issue' )
           , ( 'has_get_referenced_issue' )
-    )                      As p_names ( property_name )
+    )                          As p_names ( property_name )
 Where
     Not ro.RepoObject_guid Is Null
 

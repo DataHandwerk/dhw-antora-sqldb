@@ -1,0 +1,81 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:ssas.model_json_34111_cultures_translations_model_tables.adoc[]" as ssas.model_json_34111_cultures_translations_model_tables << V >> {
+  --
+  - cultures_name : (nvarchar(10))
+  - cultures_translations_model_name : (nvarchar(500))
+  cultures_translations_model_tables_columns_ja : (nvarchar(max))
+  cultures_translations_model_tables_hierarchies_ja : (nvarchar(max))
+  cultures_translations_model_tables_measures_ja : (nvarchar(max))
+  cultures_translations_model_tables_name : (nvarchar(128))
+  cultures_translations_model_tables_translatedCaption : (nvarchar(128))
+  - databasename : (nvarchar(128))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json_341112_cultures_translations_model_tables_hierarchies.adoc[]" as ssas.model_json_341112_cultures_translations_model_tables_hierarchies << V >> {
+  --
+  - cultures_name : (nvarchar(10))
+  - cultures_translations_model_name : (nvarchar(500))
+  cultures_translations_model_tables_hierarchies_levels_ja : (nvarchar(max))
+  cultures_translations_model_tables_hierarchies_name : (nvarchar(128))
+  cultures_translations_model_tables_hierarchies_translatedCaption : (nvarchar(128))
+  cultures_translations_model_tables_name : (nvarchar(128))
+  - databasename : (nvarchar(128))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json_3411121_cultures_translations_model_tables_hierarchies_levels.adoc[]" as ssas.model_json_3411121_cultures_translations_model_tables_hierarchies_levels << V >> {
+  --
+  - cultures_name : (nvarchar(10))
+  - cultures_translations_model_name : (nvarchar(500))
+  cultures_translations_model_tables_hierarchies_levels_name : (nvarchar(128))
+  cultures_translations_model_tables_hierarchies_levels_translatedCaption : (nvarchar(128))
+  cultures_translations_model_tables_hierarchies_name : (nvarchar(128))
+  cultures_translations_model_tables_name : (nvarchar(128))
+  - databasename : (nvarchar(128))
+  --
+  --
+}
+
+ssas.model_json_34111_cultures_translations_model_tables <.. ssas.model_json_341112_cultures_translations_model_tables_hierarchies
+ssas.model_json_341112_cultures_translations_model_tables_hierarchies <.. ssas.model_json_3411121_cultures_translations_model_tables_hierarchies_levels
+"ssas.model_json_34111_cultures_translations_model_tables::cultures_name" <-- "ssas.model_json_341112_cultures_translations_model_tables_hierarchies::cultures_name"
+"ssas.model_json_34111_cultures_translations_model_tables::cultures_translations_model_name" <-- "ssas.model_json_341112_cultures_translations_model_tables_hierarchies::cultures_translations_model_name"
+"ssas.model_json_34111_cultures_translations_model_tables::cultures_translations_model_tables_name" <-- "ssas.model_json_341112_cultures_translations_model_tables_hierarchies::cultures_translations_model_tables_name"
+"ssas.model_json_34111_cultures_translations_model_tables::databasename" <-- "ssas.model_json_341112_cultures_translations_model_tables_hierarchies::databasename"
+"ssas.model_json_341112_cultures_translations_model_tables_hierarchies::cultures_name" <-- "ssas.model_json_3411121_cultures_translations_model_tables_hierarchies_levels::cultures_name"
+"ssas.model_json_341112_cultures_translations_model_tables_hierarchies::cultures_translations_model_name" <-- "ssas.model_json_3411121_cultures_translations_model_tables_hierarchies_levels::cultures_translations_model_name"
+"ssas.model_json_341112_cultures_translations_model_tables_hierarchies::cultures_translations_model_tables_hierarchies_name" <-- "ssas.model_json_3411121_cultures_translations_model_tables_hierarchies_levels::cultures_translations_model_tables_hierarchies_name"
+"ssas.model_json_341112_cultures_translations_model_tables_hierarchies::cultures_translations_model_tables_name" <-- "ssas.model_json_3411121_cultures_translations_model_tables_hierarchies_levels::cultures_translations_model_tables_name"
+"ssas.model_json_341112_cultures_translations_model_tables_hierarchies::databasename" <-- "ssas.model_json_3411121_cultures_translations_model_tables_hierarchies_levels::databasename"
+@enduml
+

@@ -1,11 +1,17 @@
-= [docs].[Schema_puml]
+// tag::HeaderFullDisplayName[]
+= docs.Schema_puml
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
 // tag::existing_properties[]
 :ExistsProperty--antorareferencedlist:
+:ExistsProperty--antorareferencinglist:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
+:ExistsProperty--pk_index_guid:
+:ExistsProperty--pk_indexpatterncolumndatatype:
+:ExistsProperty--pk_indexpatterncolumnname:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -18,6 +24,12 @@
 // tag::RepoObject_guid[]
 0B60D8EE-E90A-EC11-8516-A81E8446D5B0
 // end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+docs.Schema_puml
+// end::RepoObject_FullDisplayName2[]
 
 == SysObject_type
 
@@ -40,14 +52,66 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-24 18:27:08
+2021-10-04 21:23:40
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-PumlSchemaEr]
-=== PumlSchemaEr
+[#column-reposchema_guid]
+=== reposchema_guid
+
+[cols="d,8m,m,m,m,d"]
+|===
+|1
+|*RepoSchema_guid*
+|uniqueidentifier
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo.reposchema.adoc#column-reposchema_guid[+repo.RepoSchema.RepoSchema_guid+]
+--
+
+
+[#column-cultures_name]
+=== cultures_name
+
+[cols="d,8m,m,m,m,d"]
+|===
+|2
+|*cultures_name*
+|nvarchar(10)
+|NULL
+|
+|
+|===
+
+
+[#column-is_ssas]
+=== is_ssas
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|is_ssas
+|bit
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo.reposchema.adoc#column-is_ssas[+repo.RepoSchema.is_ssas+]
+--
+
+
+[#column-pumlschemaer]
+=== pumlschemaer
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -60,8 +124,8 @@ view
 |===
 
 
-[#column-PumlSchemaIndexEr]
-=== PumlSchemaIndexEr
+[#column-pumlschemaindexer]
+=== pumlschemaindexer
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -74,8 +138,8 @@ view
 |===
 
 
-[#column-PumlSchemaSsasEr]
-=== PumlSchemaSsasEr
+[#column-pumlschemassaser]
+=== pumlschemassaser
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -88,27 +152,8 @@ view
 |===
 
 
-[#column-RepoSchema_guid]
-=== RepoSchema_guid
-
-[cols="d,8m,m,m,m,d"]
-|===
-|
-|RepoSchema_guid
-|uniqueidentifier
-|NOT NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:repo.RepoSchema.adoc#column-RepoSchema_guid[+repo.RepoSchema.RepoSchema_guid+]
---
-
-
-[#column-RepoSchema_name]
-=== RepoSchema_name
+[#column-reposchema_name]
+=== reposchema_name
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -122,7 +167,7 @@ view
 
 .Referenced Columns
 --
-* xref:repo.RepoSchema.adoc#column-RepoSchema_name[+repo.RepoSchema.RepoSchema_name+]
+* xref:repo.reposchema.adoc#column-reposchema_name[+repo.RepoSchema.RepoSchema_name+]
 --
 
 
@@ -137,6 +182,20 @@ view
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
+|1
+|*<<column-reposchema_guid>>*
+|uniqueidentifier
+|NOT NULL
+|
+|
+
+|2
+|*<<column-cultures_name>>*
+|nvarchar(10)
+|NULL
+|
+|
+
 
 
 
@@ -147,36 +206,38 @@ view
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
+
+
 |
-|<<column-PumlSchemaEr>>
+|<<column-is_ssas>>
+|bit
+|NOT NULL
+|
+|
+
+|
+|<<column-pumlschemaer>>
 |nvarchar(max)
 |NOT NULL
 |
 |
 
 |
-|<<column-PumlSchemaIndexEr>>
+|<<column-pumlschemaindexer>>
 |nvarchar(max)
 |NOT NULL
 |
 |
 
 |
-|<<column-PumlSchemaSsasEr>>
+|<<column-pumlschemassaser>>
 |nvarchar(max)
 |NULL
 |
 |
 
 |
-|<<column-RepoSchema_guid>>
-|uniqueidentifier
-|NOT NULL
-|
-|
-
-|
-|<<column-RepoSchema_name>>
+|<<column-reposchema_name>>
 |nvarchar(128)
 |NOT NULL
 |
@@ -188,10 +249,22 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-idx_Schema_puml2x_1]
-=== idx_Schema_puml++__++1
+[#index-pk_schema_puml]
+=== pk_schema_puml
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-RepoSchema_guid>>; uniqueidentifier
+* <<column-cultures_name>>; nvarchar(10)
+--
+* PK, Unique, Real: 1, 1, 0
+
+
+[#index-idx_schema_puml2x_1]
+=== idx_schema_puml++__++1
+
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoSchema_guid>>; uniqueidentifier
@@ -199,10 +272,10 @@ view
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_Schema_puml2x_2]
-=== idx_Schema_puml++__++2
+[#index-idx_schema_puml2x_2]
+=== idx_schema_puml++__++2
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoSchema_name>>; nvarchar(128)
@@ -222,6 +295,13 @@ view
 source: property.RepoObjectProperty_cross As rop_cross
 
 
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
+
+
 === AdocUspSteps
 
 // tag::adocuspsteps[]
@@ -233,18 +313,19 @@ source: property.RepoObjectProperty_cross As rop_cross
 
 // tag::antorareferencedlist[]
 * xref:config.ftv_get_parameter_value.adoc[]
-* xref:docs.fs_PumlHeaderLeftToRight.adoc[]
-* xref:docs.Schema_EntityList.adoc[]
-* xref:docs.Schema_PlantUml_FkRefList.adoc[]
-* xref:docs.Schema_SsasRelationList.adoc[]
-* xref:repo.RepoSchema.adoc[]
+* xref:docs.fs_pumlheaderlefttoright.adoc[]
+* xref:docs.repoobject_outputfilter_t.adoc[]
+* xref:docs.schema_entitylist.adoc[]
+* xref:docs.schema_plantuml_fkreflist.adoc[]
+* xref:docs.schema_ssasrelationlist.adoc[]
+* xref:repo.reposchema.adoc[]
 // end::antorareferencedlist[]
 
 
 === AntoraReferencingList
 
 // tag::antorareferencinglist[]
-
+* xref:docs.usp_antoraexport_objectpuml.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -447,21 +528,21 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-
+016803A0-0822-EC11-8524-A81E8446D5B0
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-
+uniqueidentifier,nvarchar(10)
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-
+RepoSchema_guid,cultures_name
 // end::pk_indexpatterncolumnname[]
 
 
@@ -477,6 +558,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 // tag::referencedobjectlist[]
 * [config].[ftv_get_parameter_value]
 * [docs].[fs_PumlHeaderLeftToRight]
+* [docs].[RepoObject_OutputFilter_T]
 * [docs].[Schema_EntityList]
 * [docs].[Schema_PlantUml_FkRefList]
 * [docs].[Schema_SsasRelationList]
@@ -496,6 +578,13 @@ source: property.RepoObjectProperty_cross As rop_cross
 // tag::uspexamples[]
 
 // end::uspexamples[]
+
+
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+
+// end::uspgenerator_usp_id[]
 
 
 === UspParameters
@@ -530,7 +619,9 @@ CREATE View docs.Schema_puml
 As
 Select
     rs.RepoSchema_guid
+  , schema_culture.cultures_name
   , rs.RepoSchema_name
+  , rs.is_ssas
   --todo, how to draw relations between composed keys?
   , PumlSchemaEr      =
   --
@@ -583,21 +674,40 @@ Select
 From
     repo.RepoSchema                                                          As rs
     Left Join
+    (
+        Select
+            Distinct
+            RepoObject_schema_name
+          , cultures_name
+        From
+            docs.RepoObject_OutputFilter_T
+        Where
+            is_ssas = 1
+    )                                                                        As schema_culture
+        On
+        schema_culture.RepoObject_schema_name = rs.RepoSchema_name
+
+    Left Join
         docs.Schema_EntityList                                               As sel
             On
-            sel.RepoObject_schema_name = rs.RepoSchema_name
+            sel.RepoObject_schema_name = schema_culture.RepoObject_schema_name
+            And sel.cultures_name = schema_culture.cultures_name
 
     Left Join
         docs.Schema_PlantUml_FkRefList                                       As fklist
             On
-            fklist.SchemaName = rs.RepoSchema_name
+            fklist.SchemaName = schema_culture.RepoObject_schema_name
+            And fklist.cultures_name = schema_culture.cultures_name
 
     Left Join
         docs.Schema_SsasRelationList                                         As ssas_rl
             On
-            ssas_rl.SchemaName = rs.RepoSchema_name
+            ssas_rl.SchemaName = schema_culture.RepoObject_schema_name
+            And ssas_rl.cultures_name = schema_culture.cultures_name
     Cross Join config.ftv_get_parameter_value ( 'puml_skinparam_class', '' ) As skin
     Cross Join config.ftv_get_parameter_value ( 'puml_footer', '' ) As puml_footer
+Where
+    Not schema_culture.cultures_name Is Null
 
 ----
 =======

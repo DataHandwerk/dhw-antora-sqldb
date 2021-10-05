@@ -1,4 +1,6 @@
-= [docs].[RepoObject_Plantuml_ColRefList_1_1]
+// tag::HeaderFullDisplayName[]
+= docs.RepoObject_Plantuml_ColRefList_1_1
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -19,6 +21,12 @@
 // tag::RepoObject_guid[]
 5AC03C7F-23F6-EB11-850C-A81E8446D5B0
 // end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+docs.RepoObject_Plantuml_ColRefList_1_1
+// end::RepoObject_FullDisplayName2[]
 
 == SysObject_type
 
@@ -41,14 +49,14 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-25 18:51:16
+2021-10-03 20:37:11
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-ColRefList]
-=== ColRefList
+[#column-colreflist]
+=== colreflist
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -62,12 +70,36 @@ view
 
 .Referencing Columns
 --
-* xref:docs.RepoObject_Plantuml.adoc#column-ColRefList[+docs.RepoObject_Plantuml.ColRefList+]
+* xref:docs.repoobject_plantuml.adoc#column-colreflist[+docs.RepoObject_Plantuml.ColRefList+]
 --
 
 
-[#column-RepoObject_guid]
-=== RepoObject_guid
+[#column-cultures_name]
+=== cultures_name
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|cultures_name
+|nvarchar(10)
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:docs.repoobject_outputfilter_t.adoc#column-cultures_name[+docs.RepoObject_OutputFilter_T.cultures_name+]
+--
+
+.Referencing Columns
+--
+* xref:docs.repoobject_plantuml.adoc#column-cultures_name[+docs.RepoObject_Plantuml.cultures_name+]
+--
+
+
+[#column-repoobject_guid]
+=== repoobject_guid
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -81,7 +113,7 @@ view
 
 .Referenced Columns
 --
-* xref:repo.RepoObject.adoc#column-RepoObject_guid[+repo.RepoObject.RepoObject_guid+]
+* xref:docs.repoobject_outputfilter_t.adoc#column-repoobject_guid[+docs.RepoObject_OutputFilter_T.RepoObject_guid+]
 --
 
 
@@ -98,20 +130,28 @@ view
 // tag::AntoraPkColumnTableRows[]
 
 
+
 // end::AntoraPkColumnTableRows[]
 
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
 |
-|<<column-ColRefList>>
+|<<column-colreflist>>
 |nvarchar(max)
 |NULL
 |
 |
 
 |
-|<<column-RepoObject_guid>>
+|<<column-cultures_name>>
+|nvarchar(10)
+|NOT NULL
+|
+|
+
+|
+|<<column-repoobject_guid>>
 |uniqueidentifier
 |NOT NULL
 |
@@ -123,13 +163,25 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-idx_RepoObject_Plantuml_ColRefList_1_12x_1]
-=== idx_RepoObject_Plantuml_ColRefList_1_1++__++1
+[#index-idx_repoobject_plantuml_colreflist_1_12x_1]
+=== idx_repoobject_plantuml_colreflist_1_1++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[#index-idx_repoobject_plantuml_colreflist_1_12x_2]
+=== idx_repoobject_plantuml_colreflist_1_1++__++2
+
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-RepoObject_guid>>; uniqueidentifier
+* <<column-cultures_name>>; nvarchar(10)
 --
 * PK, Unique, Real: 0, 0, 0
 
@@ -146,6 +198,13 @@ view
 source: property.RepoObjectProperty_cross As rop_cross
 
 
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
+
+
 === AdocUspSteps
 
 // tag::adocuspsteps[]
@@ -156,16 +215,17 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:docs.fs_cleanStringForPuml.adoc[]
-* xref:reference.RepoObjectColumn_reference_T.adoc[]
-* xref:repo.RepoObject.adoc[]
+* xref:docs.fs_cleanstringforpuml.adoc[]
+* xref:docs.repoobject_outputfilter_t.adoc[]
+* xref:reference.repoobjectcolumn_reference_t.adoc[]
+* xref:ssas.repoobjectcolumn_translation_t.adoc[]
 // end::antorareferencedlist[]
 
 
 === AntoraReferencingList
 
 // tag::antorareferencinglist[]
-* xref:docs.RepoObject_Plantuml.adoc[]
+* xref:docs.repoobject_plantuml.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -397,8 +457,9 @@ source: property.RepoObjectProperty_cross As rop_cross
 
 // tag::referencedobjectlist[]
 * [docs].[fs_cleanStringForPuml]
+* [docs].[RepoObject_OutputFilter_T]
 * [reference].[RepoObjectColumn_reference_T]
-* [repo].[RepoObject]
+* [ssas].[RepoObjectColumn_translation_T]
 // end::referencedobjectlist[]
 
 
@@ -414,6 +475,13 @@ source: property.RepoObjectProperty_cross As rop_cross
 // tag::uspexamples[]
 
 // end::uspexamples[]
+
+
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+
+// end::uspgenerator_usp_id[]
 
 
 === UspParameters
@@ -442,6 +510,7 @@ CREATE View docs.RepoObject_Plantuml_ColRefList_1_1
 As
 Select
     ro.RepoObject_guid
+  , ro.cultures_name
   --, ro.RepoObject_fullname2
   , ColRefList =
   --
@@ -465,7 +534,7 @@ Select
                               , Null)
                           , docs.fs_cleanStringForPuml ( colref.Referencing_ro_fullname2 )
                           , '::'
-                          , docs.fs_cleanStringForPuml ( colref.Referencing_ro_ColumnName )
+                          , docs.fs_cleanStringForPuml ( referencing_trans.RepoObjectColumn_DisplayName )
                           , '"'
                         )
                , Char ( 13 ) + Char ( 10 )
@@ -473,7 +542,7 @@ Select
                                 colref.Referenced_ro_fullname2
                               , colref.Referenced_ro_ColumnName)
 From
-    repo.RepoObject As ro
+    docs.RepoObject_OutputFilter_T          As ro
     Inner Join
     (
         --Select
@@ -496,22 +565,34 @@ From
           , referenced_external_AntoraComponent
           , referenced_external_AntoraModule
           , referenced_is_external
+          , referenced_RepoObjectColumn_guid
           , Referencing_ro_guid                 = referencing_RepoObject_guid
           , Referencing_ro_fullname2            = referencing_ro_fullname2
           , Referencing_ro_ColumnName           = referencing_column_name
           , referencing_external_AntoraComponent
           , referencing_external_AntoraModule
           , referencing_is_external
+          , referencing_RepoObjectColumn_guid
         From
             reference.RepoObjectColumn_reference_T
-    )               As colref
+    )                                       As colref
         On
-        colref.Referencing_ro_guid        = ro.RepoObject_guid
-        Or colref.Referenced_ro_guid      = ro.RepoObject_guid
+        colref.Referencing_ro_guid                  = ro.RepoObject_guid
+        Or colref.Referenced_ro_guid                = ro.RepoObject_guid
            --exclude column references inside object (calculated columns):
-           And colref.Referencing_ro_guid <> colref.Referenced_ro_guid
+           And colref.Referencing_ro_guid           <> colref.Referenced_ro_guid
+
+    --currently we need only translation for referencing columns
+    --because translations ar implemented only in ssas
+    --and references are implemented only between referenced external data source (no culture) and referencing ssas table columns
+
+    Left Join
+        ssas.RepoObjectColumn_translation_T As referencing_trans
+            On
+            referencing_trans.RepoObjectColumn_guid = colref.referencing_RepoObjectColumn_guid
 Group By
     ro.RepoObject_guid
+  , ro.cultures_name
 
 ----
 =======

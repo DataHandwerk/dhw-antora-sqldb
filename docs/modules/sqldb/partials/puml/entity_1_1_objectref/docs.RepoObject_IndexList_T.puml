@@ -26,31 +26,33 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:docs.RepoObject_Adoc.adoc[]" as docs.RepoObject_Adoc << V >> {
+entity "puml-link:dhw:sqldb:docs.repoobject_adoc.adoc[]" as docs.RepoObject_Adoc << V >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.RepoObject_IndexList.adoc[]" as docs.RepoObject_IndexList << V >> {
+entity "puml-link:dhw:sqldb:docs.repoobject_indexlist.adoc[]" as docs.RepoObject_IndexList << V >> {
   **RepoObject_guid** : (uniqueidentifier)
+  **cultures_name** : (nvarchar(10))
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.RepoObject_IndexList_T.adoc[]" as docs.RepoObject_IndexList_T << U >> {
-  **RepoObject_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:docs.repoobject_indexlist_t.adoc[]" as docs.RepoObject_IndexList_T << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **cultures_name** : (nvarchar(10))
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.RepoObject_Plantuml_Entity.adoc[]" as docs.RepoObject_Plantuml_Entity << V >> {
+entity "puml-link:dhw:sqldb:docs.repoobject_plantuml_entity.adoc[]" as docs.RepoObject_Plantuml_Entity << V >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.usp_PERSIST_RepoObject_IndexList_T.adoc[]" as docs.usp_PERSIST_RepoObject_IndexList_T << P >> {
+entity "puml-link:dhw:sqldb:docs.usp_persist_repoobject_indexlist_t.adoc[]" as docs.usp_PERSIST_RepoObject_IndexList_T << P >> {
   --
 }
 
 docs.RepoObject_IndexList <.. docs.RepoObject_IndexList_T
-docs.RepoObject_IndexList_T <.. docs.RepoObject_Adoc
 docs.RepoObject_IndexList_T <.. docs.RepoObject_Plantuml_Entity
 docs.RepoObject_IndexList_T <.. docs.usp_PERSIST_RepoObject_IndexList_T
+docs.RepoObject_IndexList_T <.. docs.RepoObject_Adoc
 @enduml
 

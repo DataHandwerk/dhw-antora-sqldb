@@ -1,4 +1,6 @@
-= [repo].[usp_sync_guid_ssas]
+// tag::HeaderFullDisplayName[]
+= repo.usp_sync_guid_ssas
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -12,6 +14,7 @@
 :ExistsProperty--is_ssas:
 :ExistsProperty--ms_description:
 :ExistsProperty--referencedobjectlist:
+:ExistsProperty--uspgenerator_usp_id:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--AntoraParameterList:
 // end::existing_properties[]
@@ -21,6 +24,12 @@
 // tag::RepoObject_guid[]
 9350DDF7-2B07-EC11-8515-A81E8446D5B0
 // end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+repo.usp_sync_guid_ssas
+// end::RepoObject_FullDisplayName2[]
 
 == SysObject_type
 
@@ -43,7 +52,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-25 19:59:05
+2021-10-04 23:48:22
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -88,6 +97,13 @@ stored procedure
 == Other tags
 
 source: property.RepoObjectProperty_cross As rop_cross
+
+
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
 
 
 === AdocUspSteps
@@ -174,7 +190,45 @@ source: property.RepoObjectProperty_cross As rop_cross
 |
 
 
-|1000
+|330
+|
+*[ssas].[usp_PERSIST_model_json_33_dataSources_T]*
+
+* `EXEC [ssas].[usp_PERSIST_model_json_33_dataSources_T]`
+
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+[ssas].[usp_PERSIST_model_json_33_dataSources_T]
+----
+=====
+
+|
+
+
+|340
+|
+*[ssas].[usp_PERSIST_model_json_3411_cultures_translations_model_T]*
+
+* `EXEC [ssas].[usp_PERSIST_model_json_3411_cultures_translations_model_T]`
+
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+[ssas].[usp_PERSIST_model_json_3411_cultures_translations_model_T]
+----
+=====
+
+|
+
+
+|2100
 |
 *[repo].[usp_PERSIST_RepoSchema_ssas_tgt]*
 
@@ -193,7 +247,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 |
 
 
-|2000
+|2200
 |
 *[repo].[usp_PERSIST_RepoObject_SSAS_tgt]*
 
@@ -212,7 +266,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 |
 
 
-|3000
+|2300
 |
 *[repo].[usp_PERSIST_RepoObjectColumn_SSAS_tgt]*
 
@@ -231,7 +285,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 |
 
 
-|4010
+|2400
 |
 *[repo].[usp_PERSIST_Index_ssas_T]*
 
@@ -250,7 +304,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 |
 
 
-|4020
+|2500
 |
 *[repo].[usp_PERSIST_IndexColumn_ssas_T]*
 
@@ -268,6 +322,25 @@ source: property.RepoObjectProperty_cross As rop_cross
 
 |
 
+
+|3100
+|
+*[ssas].[usp_PERSIST_Measures_translation_T]*
+
+* `EXEC [ssas].[usp_PERSIST_Measures_translation_T]`
+
+
+.Statement
+[%collapsible]
+=====
+[source,sql]
+----
+[ssas].[usp_PERSIST_Measures_translation_T]
+----
+=====
+
+|
+
 |===
 
 // end::adocuspsteps[]
@@ -276,16 +349,19 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:logs.usp_ExecutionLog_insert.adoc[]
-* xref:repo.usp_PERSIST_Index_ssas_T.adoc[]
-* xref:repo.usp_PERSIST_IndexColumn_ssas_T.adoc[]
-* xref:repo.usp_PERSIST_RepoObject_SSAS_tgt.adoc[]
-* xref:repo.usp_PERSIST_RepoObjectColumn_SSAS_tgt.adoc[]
-* xref:repo.usp_PERSIST_RepoSchema_ssas_tgt.adoc[]
-* xref:ssas.usp_PERSIST_model_json_31_tables_T.adoc[]
-* xref:ssas.usp_PERSIST_model_json_311_tables_columns_T.adoc[]
-* xref:ssas.usp_PERSIST_model_json_312_tables_measures_T.adoc[]
-* xref:ssas.usp_PERSIST_model_json_32_relationships_T.adoc[]
+* xref:logs.usp_executionlog_insert.adoc[]
+* xref:repo.usp_persist_index_ssas_t.adoc[]
+* xref:repo.usp_persist_indexcolumn_ssas_t.adoc[]
+* xref:repo.usp_persist_repoobject_ssas_tgt.adoc[]
+* xref:repo.usp_persist_repoobjectcolumn_ssas_tgt.adoc[]
+* xref:repo.usp_persist_reposchema_ssas_tgt.adoc[]
+* xref:ssas.usp_persist_measures_translation_t.adoc[]
+* xref:ssas.usp_persist_model_json_31_tables_t.adoc[]
+* xref:ssas.usp_persist_model_json_311_tables_columns_t.adoc[]
+* xref:ssas.usp_persist_model_json_312_tables_measures_t.adoc[]
+* xref:ssas.usp_persist_model_json_32_relationships_t.adoc[]
+* xref:ssas.usp_persist_model_json_33_datasources_t.adoc[]
+* xref:ssas.usp_persist_model_json_3411_cultures_translations_model_t.adoc[]
 // end::antorareferencedlist[]
 
 
@@ -531,10 +607,13 @@ EXEC [repo].[usp_sync_guid_ssas]
 * [repo].[usp_PERSIST_RepoObject_SSAS_tgt]
 * [repo].[usp_PERSIST_RepoObjectColumn_SSAS_tgt]
 * [repo].[usp_PERSIST_RepoSchema_ssas_tgt]
+* [ssas].[usp_PERSIST_Measures_translation_T]
 * [ssas].[usp_PERSIST_model_json_31_tables_T]
 * [ssas].[usp_PERSIST_model_json_311_tables_columns_T]
 * [ssas].[usp_PERSIST_model_json_312_tables_measures_T]
 * [ssas].[usp_PERSIST_model_json_32_relationships_T]
+* [ssas].[usp_PERSIST_model_json_33_dataSources_T]
+* [ssas].[usp_PERSIST_model_json_3411_cultures_translations_model_T]
 // end::referencedobjectlist[]
 
 
@@ -550,6 +629,13 @@ EXEC [repo].[usp_sync_guid_ssas]
 // tag::uspexamples[]
 
 // end::uspexamples[]
+
+
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+79
+// end::uspgenerator_usp_id[]
 
 
 === UspParameters
@@ -685,7 +771,27 @@ EXEC [ssas].[usp_PERSIST_model_json_32_relationships_T]
  , @parent_execution_log_id = @current_execution_log_id
 
 
-/*{"ReportUspStep":[{"Number":1000,"Name":"[repo].[usp_PERSIST_RepoSchema_ssas_tgt]","has_logging":0,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
+/*{"ReportUspStep":[{"Number":330,"Name":"[ssas].[usp_PERSIST_model_json_33_dataSources_T]","has_logging":0,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
+EXEC [ssas].[usp_PERSIST_model_json_33_dataSources_T]
+--add your own parameters
+--logging parameters
+ @execution_instance_guid = @execution_instance_guid
+ , @ssis_execution_id = @ssis_execution_id
+ , @sub_execution_id = @sub_execution_id
+ , @parent_execution_log_id = @current_execution_log_id
+
+
+/*{"ReportUspStep":[{"Number":340,"Name":"[ssas].[usp_PERSIST_model_json_3411_cultures_translations_model_T]","has_logging":0,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
+EXEC [ssas].[usp_PERSIST_model_json_3411_cultures_translations_model_T]
+--add your own parameters
+--logging parameters
+ @execution_instance_guid = @execution_instance_guid
+ , @ssis_execution_id = @ssis_execution_id
+ , @sub_execution_id = @sub_execution_id
+ , @parent_execution_log_id = @current_execution_log_id
+
+
+/*{"ReportUspStep":[{"Number":2100,"Name":"[repo].[usp_PERSIST_RepoSchema_ssas_tgt]","has_logging":0,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
 EXEC [repo].[usp_PERSIST_RepoSchema_ssas_tgt]
 --add your own parameters
 --logging parameters
@@ -695,7 +801,7 @@ EXEC [repo].[usp_PERSIST_RepoSchema_ssas_tgt]
  , @parent_execution_log_id = @current_execution_log_id
 
 
-/*{"ReportUspStep":[{"Number":2000,"Name":"[repo].[usp_PERSIST_RepoObject_SSAS_tgt]","has_logging":0,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
+/*{"ReportUspStep":[{"Number":2200,"Name":"[repo].[usp_PERSIST_RepoObject_SSAS_tgt]","has_logging":0,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
 EXEC [repo].[usp_PERSIST_RepoObject_SSAS_tgt]
 --add your own parameters
 --logging parameters
@@ -705,7 +811,7 @@ EXEC [repo].[usp_PERSIST_RepoObject_SSAS_tgt]
  , @parent_execution_log_id = @current_execution_log_id
 
 
-/*{"ReportUspStep":[{"Number":3000,"Name":"[repo].[usp_PERSIST_RepoObjectColumn_SSAS_tgt]","has_logging":0,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
+/*{"ReportUspStep":[{"Number":2300,"Name":"[repo].[usp_PERSIST_RepoObjectColumn_SSAS_tgt]","has_logging":0,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
 EXEC [repo].[usp_PERSIST_RepoObjectColumn_SSAS_tgt]
 --add your own parameters
 --logging parameters
@@ -715,7 +821,7 @@ EXEC [repo].[usp_PERSIST_RepoObjectColumn_SSAS_tgt]
  , @parent_execution_log_id = @current_execution_log_id
 
 
-/*{"ReportUspStep":[{"Number":4010,"Name":"[repo].[usp_PERSIST_Index_ssas_T]","has_logging":0,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
+/*{"ReportUspStep":[{"Number":2400,"Name":"[repo].[usp_PERSIST_Index_ssas_T]","has_logging":0,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
 EXEC [repo].[usp_PERSIST_Index_ssas_T]
 --add your own parameters
 --logging parameters
@@ -725,8 +831,18 @@ EXEC [repo].[usp_PERSIST_Index_ssas_T]
  , @parent_execution_log_id = @current_execution_log_id
 
 
-/*{"ReportUspStep":[{"Number":4020,"Name":"[repo].[usp_PERSIST_IndexColumn_ssas_T]","has_logging":0,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
+/*{"ReportUspStep":[{"Number":2500,"Name":"[repo].[usp_PERSIST_IndexColumn_ssas_T]","has_logging":0,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
 EXEC [repo].[usp_PERSIST_IndexColumn_ssas_T]
+--add your own parameters
+--logging parameters
+ @execution_instance_guid = @execution_instance_guid
+ , @ssis_execution_id = @ssis_execution_id
+ , @sub_execution_id = @sub_execution_id
+ , @parent_execution_log_id = @current_execution_log_id
+
+
+/*{"ReportUspStep":[{"Number":3100,"Name":"[ssas].[usp_PERSIST_Measures_translation_T]","has_logging":0,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
+EXEC [ssas].[usp_PERSIST_Measures_translation_T]
 --add your own parameters
 --logging parameters
  @execution_instance_guid = @execution_instance_guid

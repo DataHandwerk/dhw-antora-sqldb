@@ -1,0 +1,58 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:docs.repoobject_columnlist.adoc[]" as docs.RepoObject_ColumnList << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.repoobject_plantuml_colreflist_1_1.adoc[]" as docs.RepoObject_Plantuml_ColRefList_1_1 << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.repoobjectcolumn_translation.adoc[]" as ssas.RepoObjectColumn_translation << V >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  - **cultures_name** : (nvarchar(10))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.repoobjectcolumn_translation_t.adoc[]" as ssas.RepoObjectColumn_translation_T << U >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  - **cultures_name** : (nvarchar(10))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.usp_persist_repoobjectcolumn_translation_t.adoc[]" as ssas.usp_PERSIST_RepoObjectColumn_translation_T << P >> {
+  --
+}
+
+ssas.RepoObjectColumn_translation <.. ssas.RepoObjectColumn_translation_T
+ssas.RepoObjectColumn_translation_T <.. docs.RepoObject_ColumnList
+ssas.RepoObjectColumn_translation_T <.. docs.RepoObject_Plantuml_ColRefList_1_1
+ssas.RepoObjectColumn_translation_T <.. ssas.usp_PERSIST_RepoObjectColumn_translation_T
+@enduml
+

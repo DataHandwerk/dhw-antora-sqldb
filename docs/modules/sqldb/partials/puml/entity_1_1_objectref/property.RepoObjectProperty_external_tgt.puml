@@ -26,33 +26,33 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:property.PropertyName_RepoObject_T.adoc[]" as property.PropertyName_RepoObject_T << U >> {
+entity "puml-link:dhw:sqldb:property.propertyname_repoobject_t.adoc[]" as property.PropertyName_RepoObject_T << U >> {
   **property_name** : (nvarchar(128))
   --
 }
 
-entity "puml-link:dhw:sqldb:property.RepoObjectProperty.adoc[]" as property.RepoObjectProperty << U >> {
+entity "puml-link:dhw:sqldb:property.repoobjectproperty.adoc[]" as property.RepoObjectProperty << U >> {
   - **RepoObjectProperty_id** : (int)
   --
 }
 
-entity "puml-link:dhw:sqldb:property.RepoObjectProperty_external_src.adoc[]" as property.RepoObjectProperty_external_src << V >> {
+entity "puml-link:dhw:sqldb:property.repoobjectproperty_external_src.adoc[]" as property.RepoObjectProperty_external_src << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   - **property_name** : (nvarchar(128))
   --
 }
 
-entity "puml-link:dhw:sqldb:property.RepoObjectProperty_external_tgt.adoc[]" as property.RepoObjectProperty_external_tgt << V >> {
+entity "puml-link:dhw:sqldb:property.repoobjectproperty_external_tgt.adoc[]" as property.RepoObjectProperty_external_tgt << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   - **property_name** : (nvarchar(128))
   --
 }
 
-entity "puml-link:dhw:sqldb:property.usp_PERSIST_RepoObjectProperty_external_tgt.adoc[]" as property.usp_PERSIST_RepoObjectProperty_external_tgt << P >> {
+entity "puml-link:dhw:sqldb:property.usp_persist_repoobjectproperty_external_tgt.adoc[]" as property.usp_PERSIST_RepoObjectProperty_external_tgt << P >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
+entity "puml-link:dhw:sqldb:repo.repoobject.adoc[]" as repo.RepoObject << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
 }
@@ -60,10 +60,10 @@ entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
 property.PropertyName_RepoObject_T <.. property.RepoObjectProperty_external_tgt
 property.RepoObjectProperty <.. property.RepoObjectProperty_external_tgt
 property.RepoObjectProperty_external_src <.. property.RepoObjectProperty_external_tgt
-property.RepoObjectProperty_external_tgt <.. property.RepoObjectProperty
 property.RepoObjectProperty_external_tgt <.. repo.RepoObject
 property.RepoObjectProperty_external_tgt <.. property.PropertyName_RepoObject_T
 property.RepoObjectProperty_external_tgt <.. property.usp_PERSIST_RepoObjectProperty_external_tgt
+property.RepoObjectProperty_external_tgt <.. property.RepoObjectProperty
 repo.RepoObject <.. property.RepoObjectProperty_external_tgt
 @enduml
 

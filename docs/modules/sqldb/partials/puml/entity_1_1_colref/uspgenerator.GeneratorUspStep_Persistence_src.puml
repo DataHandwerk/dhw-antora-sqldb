@@ -26,7 +26,7 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:repo.Index_ColumList_T.adoc[]" as repo.Index_ColumList_T << U >> {
+entity "puml-link:dhw:sqldb:repo.index_columlist_t.adoc[]" as repo.Index_ColumList_T << U >> {
   - **index_guid** : (uniqueidentifier)
   --
   AntoraIndexColumnList : (nvarchar(max))
@@ -39,7 +39,7 @@ entity "puml-link:dhw:sqldb:repo.Index_ColumList_T.adoc[]" as repo.Index_ColumLi
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObject_gross.adoc[]" as repo.RepoObject_gross << V >> {
+entity "puml-link:dhw:sqldb:repo.repoobject_gross.adoc[]" as repo.RepoObject_gross << V >> {
   --
   AntoraComponent : (nvarchar(max))
   AntoraModule : (nvarchar(max))
@@ -84,10 +84,10 @@ entity "puml-link:dhw:sqldb:repo.RepoObject_gross.adoc[]" as repo.RepoObject_gro
   persistence_source_RepoObject_fullname : (nvarchar(261))
   persistence_source_RepoObject_fullname2 : (nvarchar(257))
   persistence_source_RepoObject_guid : (uniqueidentifier)
-  persistence_source_RepoObject_xref : (nvarchar(269))
+  persistence_source_RepoObject_xref : (nvarchar(4000))
   persistence_source_SysObject_fullname : (nvarchar(261))
   persistence_source_SysObject_fullname2 : (nvarchar(257))
-  persistence_source_SysObject_xref : (nvarchar(269))
+  persistence_source_SysObject_xref : (nvarchar(4000))
   pk_index_guid : (uniqueidentifier)
   pk_IndexPatternColumnDatatype : (nvarchar(4000))
   pk_IndexPatternColumnName : (nvarchar(4000))
@@ -129,7 +129,7 @@ entity "puml-link:dhw:sqldb:repo.RepoObject_gross.adoc[]" as repo.RepoObject_gro
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObject_gross2.adoc[]" as repo.RepoObject_gross2 << V >> {
+entity "puml-link:dhw:sqldb:repo.repoobject_gross2.adoc[]" as repo.RepoObject_gross2 << V >> {
   --
   AntoraComponent : (nvarchar(max))
   AntoraModule : (nvarchar(max))
@@ -178,10 +178,10 @@ entity "puml-link:dhw:sqldb:repo.RepoObject_gross2.adoc[]" as repo.RepoObject_gr
   persistence_source_RepoObject_fullname : (nvarchar(261))
   persistence_source_RepoObject_fullname2 : (nvarchar(257))
   persistence_source_RepoObject_guid : (uniqueidentifier)
-  persistence_source_RepoObject_xref : (nvarchar(269))
+  persistence_source_RepoObject_xref : (nvarchar(4000))
   persistence_source_SysObject_fullname : (nvarchar(261))
   persistence_source_SysObject_fullname2 : (nvarchar(257))
-  persistence_source_SysObject_xref : (nvarchar(269))
+  persistence_source_SysObject_xref : (nvarchar(4000))
   PersistenceCompareColumnList : (nvarchar(max))
   PersistenceInsertColumnList : (nvarchar(max))
   PersistenceUpdateColumnList : (nvarchar(max))
@@ -230,7 +230,25 @@ entity "puml-link:dhw:sqldb:repo.RepoObject_gross2.adoc[]" as repo.RepoObject_gr
   --
 }
 
-entity "puml-link:dhw:sqldb:uspgenerator.GeneratorUsp.adoc[]" as uspgenerator.GeneratorUsp << U >> {
+entity "puml-link:dhw:sqldb:repo.repoobject_sat2_t.adoc[]" as repo.RepoObject_sat2_T << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+  AntoraReferencedList : (nvarchar(max))
+  AntoraReferencingList : (nvarchar(max))
+  CreateColumnList : (nvarchar(max))
+  DbmlColumnList : (nvarchar(max))
+  PersistenceCompareColumnList : (nvarchar(max))
+  PersistenceInsertColumnList : (nvarchar(max))
+  PersistenceUpdateColumnList : (nvarchar(max))
+  sql_modules_antora : (nvarchar(max))
+  sql_modules_definition : (nvarchar(max))
+  sql_modules_formatted : (nvarchar(max))
+  sql_modules_formatted2 : (nvarchar(max))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:uspgenerator.generatorusp.adoc[]" as uspgenerator.GeneratorUsp << U >> {
   - **id** : (int)
   --
   - has_logging : (tinyint)
@@ -243,7 +261,7 @@ entity "puml-link:dhw:sqldb:uspgenerator.GeneratorUsp.adoc[]" as uspgenerator.Ge
   --
 }
 
-entity "puml-link:dhw:sqldb:uspgenerator.GeneratorUspStep_Persistence_src.adoc[]" as uspgenerator.GeneratorUspStep_Persistence_src << V >> {
+entity "puml-link:dhw:sqldb:uspgenerator.generatoruspstep_persistence_src.adoc[]" as uspgenerator.GeneratorUspStep_Persistence_src << V >> {
   - **usp_id** : (int)
   --
   - has_logging : (int)
@@ -263,7 +281,7 @@ entity "puml-link:dhw:sqldb:uspgenerator.GeneratorUspStep_Persistence_src.adoc[]
   --
 }
 
-entity "puml-link:dhw:sqldb:uspgenerator.usp_GeneratorUsp_insert_update_persistence.adoc[]" as uspgenerator.usp_GeneratorUsp_insert_update_persistence << P >> {
+entity "puml-link:dhw:sqldb:uspgenerator.usp_generatorusp_insert_update_persistence.adoc[]" as uspgenerator.usp_GeneratorUsp_insert_update_persistence << P >> {
   --
   --
   --
@@ -272,6 +290,7 @@ entity "puml-link:dhw:sqldb:uspgenerator.usp_GeneratorUsp_insert_update_persiste
 repo.Index_ColumList_T <.. uspgenerator.GeneratorUspStep_Persistence_src
 repo.RepoObject_gross <.. uspgenerator.GeneratorUspStep_Persistence_src
 repo.RepoObject_gross2 <.. uspgenerator.GeneratorUspStep_Persistence_src
+repo.RepoObject_sat2_T <.. uspgenerator.GeneratorUspStep_Persistence_src
 uspgenerator.GeneratorUsp <.. uspgenerator.GeneratorUspStep_Persistence_src
 uspgenerator.GeneratorUspStep_Persistence_src <.. uspgenerator.usp_GeneratorUsp_insert_update_persistence
 

@@ -1,15 +1,17 @@
-= [configT].[Parameter_default]
+// tag::HeaderFullDisplayName[]
+= configT.Parameter_default
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
 // tag::existing_properties[]
+:ExistsProperty--additional_reference_csv:
 :ExistsProperty--antorareferencinglist:
 :ExistsProperty--description:
 :ExistsProperty--exampleusage:
 :ExistsProperty--exampleusage_2:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--ms_description:
 :ExistsProperty--pk_index_guid:
 :ExistsProperty--pk_indexpatterncolumndatatype:
 :ExistsProperty--pk_indexpatterncolumnname:
@@ -24,6 +26,12 @@
 // tag::RepoObject_guid[]
 DD8F291C-9D61-EB11-84DC-A81E8446D5B0
 // end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+configT.Parameter_default
+// end::RepoObject_FullDisplayName2[]
 
 == SysObject_type
 
@@ -46,14 +54,14 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-25 19:12:42
+2021-10-03 16:09:13
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-Parameter_name]
-=== Parameter_name
+[#column-parameter_name]
+=== parameter_name
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -66,8 +74,8 @@ view
 |===
 
 
-[#column-sub_Parameter]
-=== sub_Parameter
+[#column-sub_parameter]
+=== sub_parameter
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -80,8 +88,8 @@ view
 |===
 
 
-[#column-Parameter_default_value]
-=== Parameter_default_value
+[#column-parameter_default_value]
+=== parameter_default_value
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -93,9 +101,14 @@ view
 |
 |===
 
+.Referencing Columns
+--
+* xref:config.parameter.adoc#column-parameter_default_value[+config.Parameter.Parameter_default_value+]
+--
 
-[#column-Parameter_desciption]
-=== Parameter_desciption
+
+[#column-parameter_desciption]
+=== parameter_desciption
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -120,14 +133,14 @@ view
 
 // tag::AntoraPkColumnTableRows[]
 |1
-|*<<column-Parameter_name>>*
+|*<<column-parameter_name>>*
 |varchar(52)
 |NOT NULL
 |
 |
 
 |2
-|*<<column-sub_Parameter>>*
+|*<<column-sub_parameter>>*
 |nvarchar(27)
 |NOT NULL
 |
@@ -143,14 +156,14 @@ view
 
 
 |
-|<<column-Parameter_default_value>>
+|<<column-parameter_default_value>>
 |nvarchar(max)
 |NULL
 |
 |
 
 |
-|<<column-Parameter_desciption>>
+|<<column-parameter_desciption>>
 |nvarchar(247)
 |NOT NULL
 |
@@ -162,10 +175,10 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-PK_Parameter_default]
-=== PK_Parameter_default
+[#index-pk_parameter_default]
+=== pk_parameter_default
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-Parameter_name>>; varchar(52)
@@ -186,6 +199,17 @@ view
 source: property.RepoObjectProperty_cross As rop_cross
 
 
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+dhw,sqldb,configT,Parameter_default,Parameter_name,dhw,sqldb,config,Parameter,Parameter_name
+dhw,sqldb,configT,Parameter_default,sub_Parameter,dhw,sqldb,config,Parameter,sub_Parameter
+dhw,sqldb,configT,Parameter_default,Parameter_desciption,dhw,sqldb,config,Parameter,Parameter_desciption
+dhw,sqldb,configT,Parameter_default,Parameter_default_value,dhw,sqldb,config,Parameter,Parameter_default_value
+// end::additional_reference_csv[]
+
+
 === AdocUspSteps
 
 // tag::adocuspsteps[]
@@ -203,6 +227,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencingList
 
 // tag::antorareferencinglist[]
+* xref:config.parameter.adoc[]
 * xref:config.usp_init_parameter.adoc[]
 // end::antorareferencinglist[]
 
@@ -211,11 +236,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 
 // tag::description[]
 
-* default parameter values are defined (hard coded) in xref:sqldb:configT.Parameter_default.adoc[] and available in xref:sqldb:config.Parameter.adoc#column-Parameter_default_value[config.Parameter.Parameter_default_value]
-* default parameter values can be overwritten by project specific content using xref:sqldb:config.Parameter.adoc#column-Parameter_value[config.Parameter.Parameter_value]
-* resulting content is available in
-** xref:sqldb:config.Parameter.adoc#column-Parameter_value_result_int[+config.Parameter.Parameter_value__result_int+]
-** xref:sqldb:config.Parameter.adoc#column-Parameter_value_result_nvarchar[+config.Parameter.Parameter_value__result_nvarchar+]
+include::sqldb:partial$description/config.parameter.adoc[]
 // end::description[]
 
 
@@ -391,11 +412,6 @@ WHERE NOT EXISTS (
 
 // tag::ms_description[]
 
-* default parameter values are defined (hard coded) in xref:sqldb:configT.Parameter_default.adoc[] and available in xref:sqldb:config.Parameter.adoc#column-Parameter_default_value[config.Parameter.Parameter_default_value]
-* default parameter values can be overwritten by project specific content using xref:sqldb:config.Parameter.adoc#column-Parameter_value[config.Parameter.Parameter_value]
-* resulting content is available in
-** xref:sqldb:config.Parameter.adoc#column-Parameter_value_result_int[+config.Parameter.Parameter_value__result_int+]
-** xref:sqldb:config.Parameter.adoc#column-Parameter_value_result_nvarchar[+config.Parameter.Parameter_value__result_nvarchar+]
 // end::ms_description[]
 
 
@@ -476,6 +492,13 @@ Parameter_name,sub_Parameter
 // end::uspexamples[]
 
 
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+
+// end::uspgenerator_usp_id[]
+
+
 === UspParameters
 
 // tag::uspparameters[]
@@ -498,13 +521,17 @@ source: property.RepoObjectProperty WHERE property_int = 1
 [source,sql]
 ----
 
+
+
+
+
+
+
+
+
 /*
-<<property_start>>MS_Description
-* default parameter values are defined (hard coded) in xref:sqldb:configT.Parameter_default.adoc[] and available in xref:sqldb:config.Parameter.adoc#column-Parameter_default_value[config.Parameter.Parameter_default_value]
-* default parameter values can be overwritten by project specific content using xref:sqldb:config.Parameter.adoc#column-Parameter_value[config.Parameter.Parameter_value]
-* resulting content is available in
-** xref:sqldb:config.Parameter.adoc#column-Parameter_value_result_int[+config.Parameter.Parameter_value__result_int+]
-** xref:sqldb:config.Parameter.adoc#column-Parameter_value_result_nvarchar[+config.Parameter.Parameter_value__result_nvarchar+]
+<<property_start>>Description
+\include::sqldb:partial$description/config.parameter.adoc[]
 <<property_end>>
 
 <<property_start>>exampleUsage
@@ -528,7 +555,17 @@ WHERE NOT EXISTS (
 <<property_end>>
 
 */
-CREATE View configT.Parameter_default
+
+/*
+<<property_start>>additional_reference_csv
+dhw,sqldb,configT,Parameter_default,Parameter_name,dhw,sqldb,config,Parameter,Parameter_name
+dhw,sqldb,configT,Parameter_default,sub_Parameter,dhw,sqldb,config,Parameter,sub_Parameter
+dhw,sqldb,configT,Parameter_default,Parameter_desciption,dhw,sqldb,config,Parameter,Parameter_desciption
+dhw,sqldb,configT,Parameter_default,Parameter_default_value,dhw,sqldb,config,Parameter,Parameter_default_value
+<<property_end>>
+*/
+
+CREATE View [configT].[Parameter_default]
 As
 --
 --first [Parameter_default_value] datatype should be SQL_VARIANT to avoid taye casting issues for other entries
@@ -651,19 +688,19 @@ Union All
 Select
     Parameter_name          = 'InheritanceDefinition_column'
   , sub_Parameter           = N''
-  , Parameter_desciption    = N'CONCAT arguments to be used with some specific values in [config].[InheritanceType], for example: ''[RepoObject_name],CHAR(13),CHAR(10),EineNochZuDefinierendeFunktion(''MS_Description'')'''
+  , Parameter_desciption    = N'CONCAT arguments to be used with some specific values in [config].[InheritanceType], for example: ''[RepoObject_name],CHAR(13),CHAR(10),EineNochZuDefinierendeFunktion(''Description'')'''
   , Parameter_default_value = Null
 Union All
 Select
     Parameter_name          = 'InheritanceDefinition_column'
-  , sub_Parameter           = N'MS_Description'
-  , Parameter_desciption    = N'CONCAT arguments to be used with some specific values in [config].[InheritanceType], for example: ''[RepoObject_name],CHAR(13),CHAR(10),EineNochZuDefinierendeFunktion(''MS_Description'')'''
-  , Parameter_default_value = 'CAST(COALESCE(referencing.[Repo_definition], property.fs_get_RepoObjectColumnProperty_nvarchar(referenced.[RepoObjectColumn_guid], ''MS_Description'')) AS NVARCHAR(MAX))'
+  , sub_Parameter           = N'Description'
+  , Parameter_desciption    = N'CONCAT arguments to be used with some specific values in [config].[InheritanceType], for example: ''[RepoObject_name],CHAR(13),CHAR(10),EineNochZuDefinierendeFunktion(''Description'')'''
+  , Parameter_default_value = 'CAST(COALESCE(referencing.[Repo_definition], property.fs_get_RepoObjectColumnProperty_nvarchar(referenced.[RepoObjectColumn_guid], ''Description'')) AS NVARCHAR(MAX))'
 Union All
 Select
     Parameter_name          = 'InheritanceDefinition_column'
   , sub_Parameter           = N'ReferencedObjectColumnList'
-  , Parameter_desciption    = N'CONCAT arguments to be used with some specific values in [config].[InheritanceType], for example: ''[RepoObject_name],CHAR(13),CHAR(10),EineNochZuDefinierendeFunktion(''MS_Description'')'''
+  , Parameter_desciption    = N'CONCAT arguments to be used with some specific values in [config].[InheritanceType], for example: ''[RepoObject_name],CHAR(13),CHAR(10),EineNochZuDefinierendeFunktion(''Description'')'''
   , Parameter_default_value = '''* '' + referenced.[RepoObjectColumn_fullname]'
 Union All
 Select
@@ -674,8 +711,8 @@ Select
 Union All
 Select
     Parameter_name          = 'InheritanceDefinition_object'
-  , sub_Parameter           = N'MS_Description'
-  , Parameter_desciption    = N'CONCAT arguments, for example: ''property.fs_get_RepoObjectProperty_nvarchar(referenced.[RepoObject_guid],''MS_Description'') + CHAR(13)+CHAR(10)+''''''+CHAR(13)+CHAR(10)'''
+  , sub_Parameter           = N'Description'
+  , Parameter_desciption    = N'CONCAT arguments, for example: ''property.fs_get_RepoObjectProperty_nvarchar(referenced.[RepoObject_guid],''Description'') + CHAR(13)+CHAR(10)+''''''+CHAR(13)+CHAR(10)'''
   , Parameter_default_value = Null
 Union All
 Select
@@ -692,7 +729,7 @@ Select
 Union All
 Select
     Parameter_name          = 'InheritanceType_column'
-  , sub_Parameter           = N'MS_Description'
+  , sub_Parameter           = N'Description'
   , Parameter_desciption    = N'TINYINT; InheritanceType for column: possible values in [config].[InheritanceType]'
   , Parameter_default_value = '0'
 Union All
@@ -710,7 +747,7 @@ Select
 Union All
 Select
     Parameter_name          = 'InheritanceType_object'
-  , sub_Parameter           = N'MS_Description'
+  , sub_Parameter           = N'Description'
   , Parameter_desciption    = N'TINYINT; InheritanceType for object: possible values in [config].[InheritanceType]'
   , Parameter_default_value = '0'
 Union All
@@ -845,7 +882,7 @@ Select
   --
   Concat (
              Cast(N'' As NVarchar(Max))
-           , '= {docname}' + Char ( 13 ) + Char ( 10 )
+           , '\include::partial${docname}.adoc[tag=HeaderFullDisplayName]' + Char ( 13 ) + Char ( 10 )
            , Char ( 13 ) + Char ( 10 )
            , '\include::partial${docname}.adoc[tag=existing_properties]' + Char ( 13 ) + Char ( 10 )
            , '\include::partial${docname}.adoc[tag=boolean_attributes]' + Char ( 13 ) + Char ( 10 )
@@ -916,6 +953,9 @@ Select
            , '\ifdef::ExistsProperty--adocuspsteps[]' + Char ( 13 ) + Char ( 10 )
            , '' + Char ( 13 ) + Char ( 10 )
            , '== Procedure steps' + Char ( 13 ) + Char ( 10 )
+           , '' + Char ( 13 ) + Char ( 10 )
+           , 'uspgenerator_usp_id:' + Char ( 13 ) + Char ( 10 )
+           , '\include::partial${docname}.adoc[tag=uspgenerator_usp_id]' + Char ( 13 ) + Char ( 10 )
            , '' + Char ( 13 ) + Char ( 10 )
            , '\include::partial${docname}.adoc[tag=adocuspsteps]' + Char ( 13 ) + Char ( 10 )
            , '' + Char ( 13 ) + Char ( 10 )
@@ -1144,6 +1184,8 @@ Select
            , '== sql_modules_definition' + Char ( 13 ) + Char ( 10 )
            , '' + Char ( 13 ) + Char ( 10 )
            , '.{docname} script' + Char ( 13 ) + Char ( 10 )
+           --, '\include::partial${docname}.adoc[tag=RepoObject_FullDisplayName2]' + Char ( 13 ) + Char ( 10 )
+           --, ' script' + Char ( 13 ) + Char ( 10 )
            , '\include::partial${docname}.adoc[tag=sql_modules_definition]' + Char ( 13 ) + Char ( 10 )
            , '\endif::ExistsProperty--sql_modules_definition[]' + Char ( 13 ) + Char ( 10 )
          )

@@ -26,20 +26,32 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:configT.type.adoc[]" as configT.type << V >> {
+entity "puml-link:dhw:sqldb:configt.type.adoc[]" as configT.type << V >> {
   **type** : (nvarchar(128))
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.AntoraNavListPage_by_type.adoc[]" as docs.AntoraNavListPage_by_type << V >> {
+entity "puml-link:dhw:sqldb:docs.antoranavlistpage_by_type.adoc[]" as docs.AntoraNavListPage_by_type << V >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.RepoObject_OutputFilter.adoc[]" as docs.RepoObject_OutputFilter << V >> {
+entity "puml-link:dhw:sqldb:docs.fs_cleanstringforfilename.adoc[]" as docs.fs_cleanStringForFilename << FN >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.repoobject_outputfilter_t.adoc[]" as docs.RepoObject_OutputFilter_T << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **cultures_name** : (nvarchar(10))
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.usp_antoraexport_navigation.adoc[]" as docs.usp_AntoraExport_navigation << P >> {
   --
 }
 
 configT.type <.. docs.AntoraNavListPage_by_type
-docs.RepoObject_OutputFilter <.. docs.AntoraNavListPage_by_type
+docs.AntoraNavListPage_by_type <.. docs.usp_AntoraExport_navigation
+docs.fs_cleanStringForFilename <.. docs.AntoraNavListPage_by_type
+docs.RepoObject_OutputFilter_T <.. docs.AntoraNavListPage_by_type
 @enduml
 

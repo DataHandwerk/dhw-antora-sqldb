@@ -36,22 +36,24 @@ entity "puml-link:dhw:sqldb:config.ftv_get_parameter_value.adoc[]" as config.ftv
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.fs_PumlHeaderTopToBottom.adoc[]" as docs.fs_PumlHeaderTopToBottom << FN >> {
+entity "puml-link:dhw:sqldb:docs.fs_pumlheadertoptobottom.adoc[]" as docs.fs_PumlHeaderTopToBottom << FN >> {
   --
   --
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.ObjectRefCyclic.adoc[]" as docs.ObjectRefCyclic << V >> {
+entity "puml-link:dhw:sqldb:docs.objectrefcyclic.adoc[]" as docs.ObjectRefCyclic << V >> {
   --
+  - cultures_name : (nvarchar(10))
   - ObjectRefCyclic_Puml : (nvarchar(max))
   - page_content : (nvarchar(max))
   --
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.ObjectRefCyclic_EntityList.adoc[]" as docs.ObjectRefCyclic_EntityList << V >> {
+entity "puml-link:dhw:sqldb:docs.objectrefcyclic_entitylist.adoc[]" as docs.ObjectRefCyclic_EntityList << V >> {
   --
+  - cultures_name : (nvarchar(10))
   PumlEntityList : (nvarchar(max))
   PumlEntityOnlyPkList : (nvarchar(max))
   XrefEntityList : (nvarchar(max))
@@ -59,7 +61,7 @@ entity "puml-link:dhw:sqldb:docs.ObjectRefCyclic_EntityList.adoc[]" as docs.Obje
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.ObjectRefCyclic_ObjectRefList.adoc[]" as docs.ObjectRefCyclic_ObjectRefList << V >> {
+entity "puml-link:dhw:sqldb:docs.objectrefcyclic_objectreflist.adoc[]" as docs.ObjectRefCyclic_ObjectRefList << V >> {
   --
   PumlObjectRefList : (nvarchar(max))
   --
@@ -70,6 +72,6 @@ config.ftv_get_parameter_value <.. docs.ObjectRefCyclic
 docs.fs_PumlHeaderTopToBottom <.. docs.ObjectRefCyclic
 docs.ObjectRefCyclic_EntityList <.. docs.ObjectRefCyclic
 docs.ObjectRefCyclic_ObjectRefList <.. docs.ObjectRefCyclic
-
+"docs.ObjectRefCyclic_EntityList::cultures_name" <-- "docs.ObjectRefCyclic::cultures_name"
 @enduml
 

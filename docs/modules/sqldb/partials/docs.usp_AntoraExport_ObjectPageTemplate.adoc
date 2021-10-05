@@ -1,4 +1,6 @@
-= [docs].[usp_AntoraExport_ObjectPageTemplate]
+// tag::HeaderFullDisplayName[]
+= docs.usp_AntoraExport_ObjectPageTemplate
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -10,8 +12,8 @@
 :ExistsProperty--exampleusage:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--ms_description:
 :ExistsProperty--referencedobjectlist:
+:ExistsProperty--uspgenerator_usp_id:
 :ExistsProperty--uspparameters:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--AntoraParameterList:
@@ -22,6 +24,12 @@
 // tag::RepoObject_guid[]
 C0D49D8D-4595-EB11-84F4-A81E8446D5B0
 // end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+docs.usp_AntoraExport_ObjectPageTemplate
+// end::RepoObject_FullDisplayName2[]
 
 == SysObject_type
 
@@ -44,7 +52,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-25 19:58:55
+2021-10-04 23:48:15
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -80,7 +88,6 @@ stored procedure
 == AntoraParameterList
 
 // tag::AntoraParameterList[]
-* @outputDir (nvarchar(1000))
 * @isTrustedConnection (bit)
 * @userName (nvarchar(250))
 * @password (nvarchar(250))
@@ -93,6 +100,13 @@ stored procedure
 == Other tags
 
 source: property.RepoObjectProperty_cross As rop_cross
+
+
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
 
 
 === AdocUspSteps
@@ -128,27 +142,6 @@ ELSE
 |
 
 
-|120
-|
-*configure outputDir*
-
-
-
-.Statement
-[%collapsible]
-=====
-[source,sql]
-----
-SET @outputDir = ISNULL(@outputDir, (
-   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModule', '') + '\'
-   ) + 'partials\template\')
-
-----
-=====
-
-|
-
-
 |210
 |
 *declare variables*
@@ -160,11 +153,10 @@ SET @outputDir = ISNULL(@outputDir, (
 =====
 [source,sql]
 ----
-DECLARE @command NVARCHAR(4000);
-DECLARE @sub_parameter NVARCHAR(128);
-DECLARE @BaseFileName NVARCHAR(128) = 'master-page-'
-DECLARE @Object_fullname NVARCHAR(261);
-DECLARE @Object_fullname2 NVARCHAR(257);
+DECLARE @command NVARCHAR(4000)
+DECLARE @cultures_name NVARCHAR(10)
+DECLARE @sub_parameter NVARCHAR(128)
+--DECLARE @BaseFileName NVARCHAR(128) = 'master-page-'
 
 ----
 =====
@@ -185,52 +177,58 @@ DECLARE @Object_fullname2 NVARCHAR(257);
 =====
 [source,sql]
 ----
-DECLARE template_cursor CURSOR Local Fast_Forward
-FOR
-SELECT [sub_Parameter]
+Declare page_cursor Cursor Local Fast_Forward For
+Select
+    cultures_name
+  , sub_Parameter
 --,[Parameter_value__result_nvarchar]
-FROM [config].[Parameter]
-WHERE [Parameter_name] = 'AntoraPageTemplate'
- AND [sub_Parameter] <> ''
-ORDER BY [sub_Parameter]
+From
+    config.Parameter
+  , docs.culture
+Where
+    Parameter_name    = 'AntoraPageTemplate'
+    And sub_Parameter <> ''
+Order By
+    cultures_name
+  , sub_Parameter
 
-OPEN template_cursor
+Open page_cursor
 
-FETCH NEXT
-FROM template_cursor
-INTO @sub_parameter
+Fetch Next From page_cursor
+Into
+    @cultures_name
+  , @sub_parameter
 
-WHILE @@FETCH_STATUS = 0
-BEGIN
- --Dynamically construct the BCP command
- --
- --bcp "SELECT [config].[fs_get_parameter_value]('AntoraPageTemplate', N'1')" queryout D:\Repos\GitHub\DataHandwerk\DataHandwerk-docs\docs\modules\sqldb\partials\template\master-page-1.adoc -S localhost\sql2019 -d dhw_self -c -T
- --
- SET @command = 'bcp "SELECT [config].[fs_get_parameter_value](''AntoraPageTemplate'', N''' + @sub_parameter + ''')" queryout "' + @outputDir + @BaseFileName + @sub_parameter + '.adoc"'
-  --
-  + ' -S ' + @instanceName
-  --
-  + ' -d ' + @databaseName
-  --
-  + ' -c -C 65001'
-  --
-  + @TrustedUserPassword
+While @@Fetch_Status = 0
+Begin
+    Set @command
+        = 'bcp "SELECT [config].[fs_get_parameter_value](''AntoraPageTemplate'', N''' + @sub_parameter
+          + ''')" queryout "'
+          --
+          + docs.fs_AntoraModuleFolder ( @cultures_name )
+          + '\partials\template\' + 'master-page-' + @sub_parameter + '.adoc"'
+          --
+          + ' -S ' + @instanceName
+          --
+          + ' -d ' + @databaseName
+          --
+          + ' -c -C 65001'
+          --
+          + @TrustedUserPassword
 
- PRINT @command
+    Print @command
 
- --Execute the BCP command
- EXEC xp_cmdshell @command
-  , no_output
+    --Execute the BCP command
+    Exec sys.xp_cmdshell @command, no_output
 
- FETCH NEXT
- FROM template_cursor
- INTO @sub_parameter
-END
+    Fetch Next From page_cursor
+    Into
+        @cultures_name
+      , @sub_parameter
+End
 
-CLOSE template_cursor
-
-DEALLOCATE template_cursor
-
+Close page_cursor
+Deallocate page_cursor
 ----
 =====
 
@@ -252,22 +250,50 @@ master-page-examples.adoc
 =====
 [source,sql]
 ----
-SET @command = 'bcp "SELECT [page_content] FROM [docs].[AntoraTemplate_examples]"  queryout "' + @outputDir + 'master-page-examples.adoc"'
- --
- + ' -S ' + @instanceName
- --
- + ' -d ' + @databaseName
- --
- + ' -c -C 65001'
- --
- + @TrustedUserPassword
+Declare page_cursor Cursor Local Fast_Forward For
+Select
+    cultures_name
+From
+    docs.culture
+Order By
+    cultures_name
 
-PRINT @command
+Open page_cursor
 
---Execute the BCP command
-EXEC xp_cmdshell @command
- , no_output
+Fetch Next From page_cursor
+Into
+    @cultures_name
 
+While @@Fetch_Status = 0
+Begin
+    Set @command
+        = 'bcp "SELECT [page_content] FROM [docs].[AntoraTemplate_examples]" '
+          --
+          + ' queryout "'
+          --
+          + docs.fs_AntoraModuleFolder ( @cultures_name )
+          + '\partials\template\' + 'master-page-examples.adoc"'
+          --
+          + ' -S ' + @instanceName
+          --
+          + ' -d ' + @databaseName
+          --
+          + ' -c -C 65001'
+          --
+          + @TrustedUserPassword
+
+    Print @command
+
+    --Execute the BCP command
+    Exec sys.xp_cmdshell @command, no_output
+
+    Fetch Next From page_cursor
+    Into
+        @cultures_name
+End
+
+Close page_cursor
+Deallocate page_cursor
 ----
 =====
 
@@ -281,16 +307,17 @@ EXEC xp_cmdshell @command
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:config.fs_get_parameter_value.adoc[]
-* xref:config.Parameter.adoc[]
-* xref:logs.usp_ExecutionLog_insert.adoc[]
+* xref:config.parameter.adoc[]
+* xref:docs.culture.adoc[]
+* xref:docs.fs_antoramodulefolder.adoc[]
+* xref:logs.usp_executionlog_insert.adoc[]
 // end::antorareferencedlist[]
 
 
 === AntoraReferencingList
 
 // tag::antorareferencinglist[]
-* xref:docs.usp_AntoraExport.adoc[]
+* xref:docs.usp_antoraexport.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -298,8 +325,8 @@ EXEC xp_cmdshell @command
 
 // tag::description[]
 * source pages per object are exported into (AntoraModuleFolder)``/``(AntoraModuleName)``/pages/schemaname.objectname.adoc``
-** export procedure: xref:docs.usp_AntoraExport_ObjectPage.adoc[]
-** the content of all page files per object is the same, it has only includes. The content is defined in xref:config.Parameter.adoc#column-Parameter_value[config.Parameter.Parameter_value] for ('AntoraPageTemplate', '') (*empty* `Sub_parameter`)
+** export procedure: xref:docs.usp_antoraexport_objectpage.adoc[]
+** the content of all page files per object is the same, it has only includes. The content is defined in xref:config.parameter.adoc#column-parameter_value[config.Parameter.Parameter_value] for ('AntoraPageTemplate', '') (*empty* `Sub_parameter`)
  the default content is (real code without leading '/'):
 +
 ====
@@ -310,7 +337,7 @@ EXEC xp_cmdshell @command
 /include::partial$template/master-page-5.adoc[]
 ....
 ====
-** the content of these includes is defined in xref:config.Parameter.adoc#column-Parameter_value[config.Parameter.Parameter_value] for ('AntoraPageTemplate', 'x') (*non empty* `Sub_parameter` 'x'). The default for 'x' are `1` and `2`, these are nvarchar values. You can also use strings like 'part_a', 'part_b', but avoild blanks, because these `Sub_parameter` values become filname suffix.
+** the content of these includes is defined in xref:config.parameter.adoc#column-parameter_value[config.Parameter.Parameter_value] for ('AntoraPageTemplate', 'x') (*non empty* `Sub_parameter` 'x'). The default for 'x' are `1` and `2`, these are nvarchar values. You can also use strings like 'part_a', 'part_b', but avoild blanks, because these `Sub_parameter` values become filname suffix.
 * the template content is the same for all objects. We use +{docname}+ and get the final content from individual 'partials' per object. (real code without leading '/')
 +
 ====
@@ -335,7 +362,7 @@ is_repo_managed:
 /endif::ExistsProperty--is_repo_managed[]
 ....
 ====
-** export procedure: xref:docs.usp_AntoraExport_ObjectPageTemplate.adoc[]
+** export procedure: xref:docs.usp_antoraexport_objectpagetemplate.adoc[]
 
 include::partial$docsnippet/antora-export-prerequisites.adoc[]
 // end::description[]
@@ -498,47 +525,7 @@ EXEC [docs].[usp_AntoraExport_ObjectPageTemplate]
 === MS_Description
 
 // tag::ms_description[]
-* source pages per object are exported into (AntoraModuleFolder)``/``(AntoraModuleName)``/pages/schemaname.objectname.adoc``
-** export procedure: xref:docs.usp_AntoraExport_ObjectPage.adoc[]
-** the content of all page files per object is the same, it has only includes. The content is defined in xref:config.Parameter.adoc#column-Parameter_value[config.Parameter.Parameter_value] for ('AntoraPageTemplate', '') (*empty* `Sub_parameter`)
- the default content is (real code without leading '/'):
-+
-====
-....
-/include::partial$template/master-page-1.adoc[]
-/include::partial$template/master-page-examples.adoc[]
-/include::partial$template/master-page-4.adoc[]
-/include::partial$template/master-page-5.adoc[]
-....
-====
-** the content of these includes is defined in xref:config.Parameter.adoc#column-Parameter_value[config.Parameter.Parameter_value] for ('AntoraPageTemplate', 'x') (*non empty* `Sub_parameter` 'x'). The default for 'x' are `1` and `2`, these are nvarchar values. You can also use strings like 'part_a', 'part_b', but avoild blanks, because these `Sub_parameter` values become filname suffix.
-* the template content is the same for all objects. We use +{docname}+ and get the final content from individual 'partials' per object. (real code without leading '/')
-+
-====
-....
-= {docname}
 
-/include::partial${docname}.adoc[tag=existing_properties]
-
-type:
-/include::partial${docname}.adoc[tag=SysObject_type]
-(
-/include::partial${docname}.adoc[tag=SysObject_type_name]
-), modify_date:
-/include::partial${docname}.adoc[tag=SysObject_modify_date]
-
-RepoObject_guid:
-/include::partial${docname}.adoc[tag=RepoObject_guid]
-
-/ifdef::ExistsProperty--is_repo_managed[]
-is_repo_managed:
-/include::partial${docname}.adoc[tag=is_repo_managed]
-/endif::ExistsProperty--is_repo_managed[]
-....
-====
-** export procedure: xref:docs.usp_AntoraExport_ObjectPageTemplate.adoc[]
-
-include::partial$docsnippet/antora-export-prerequisites.adoc[]
 // end::ms_description[]
 
 
@@ -601,8 +588,9 @@ include::partial$docsnippet/antora-export-prerequisites.adoc[]
 === ReferencedObjectList
 
 // tag::referencedobjectlist[]
-* [config].[fs_get_parameter_value]
 * [config].[Parameter]
+* [docs].[Culture]
+* [docs].[fs_AntoraModuleFolder]
 * [logs].[usp_ExecutionLog_insert]
 // end::referencedobjectlist[]
 
@@ -621,11 +609,17 @@ include::partial$docsnippet/antora-export-prerequisites.adoc[]
 // end::uspexamples[]
 
 
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+30
+// end::uspgenerator_usp_id[]
+
+
 === UspParameters
 
 // tag::uspparameters[]
-@outputDir NVARCHAR(1000) = NULL /* example: 'D:\Repos\GitHub\DataHandwerk\DataHandwerk-docs\docs\modules\sqldb\partials\template\ */
-,@isTrustedConnection BIT = 1 /* specify whether you are connecting to the SQL instance with a trusted connection (Windows Authentication) or not */
+@isTrustedConnection BIT = 1 /* specify whether you are connecting to the SQL instance with a trusted connection (Windows Authentication) or not */
 ,@userName NVARCHAR(250) = 'loginName' /* If isTrustedConnection is set to 0 then you will need to add username and password for connecting to the SQL Server instance */
 ,@password NVARCHAR(250) = 'password'
 // end::uspparameters[]
@@ -650,8 +644,7 @@ code of this procedure is managed in the dhw repository. Do not modify manually.
 Use [uspgenerator].[GeneratorUsp], [uspgenerator].[GeneratorUspParameter], [uspgenerator].[GeneratorUspStep], [uspgenerator].[GeneratorUsp_SqlUsp]
 */
 CREATE   PROCEDURE [docs].[usp_AntoraExport_ObjectPageTemplate]
-@outputDir NVARCHAR(1000) = NULL /* example: 'D:\Repos\GitHub\DataHandwerk\DataHandwerk-docs\docs\modules\sqldb\partials\template\ */
-,@isTrustedConnection BIT = 1 /* specify whether you are connecting to the SQL instance with a trusted connection (Windows Authentication) or not */
+@isTrustedConnection BIT = 1 /* specify whether you are connecting to the SQL instance with a trusted connection (Windows Authentication) or not */
 ,@userName NVARCHAR(250) = 'loginName' /* If isTrustedConnection is set to 0 then you will need to add username and password for connecting to the SQL Server instance */
 ,@password NVARCHAR(250) = 'password'
 ,
@@ -713,10 +706,9 @@ EXEC logs.usp_ExecutionLog_insert
  , @execution_log_id = @current_execution_log_id OUTPUT
 ----you can log the content of your own parameters, do this only in the start-step
 ----data type is sql_variant
- , @parameter_01 = @outputDir
- , @parameter_02 = @isTrustedConnection
- , @parameter_03 = @userName
- , @parameter_04 = @password
+ , @parameter_01 = @isTrustedConnection
+ , @parameter_02 = @userName
+ , @parameter_03 = @password
 --
 PRINT '[docs].[usp_AntoraExport_ObjectPageTemplate]'
 --keep the code between logging parameters and "START" unchanged!
@@ -737,73 +729,70 @@ IF @isTrustedConnection = 1
 ELSE
  SET @TrustedUserPassword = ' -U ' + @userName + ' -P ' + @password
 
-/*{"ReportUspStep":[{"Number":120,"Name":"configure outputDir","has_logging":0,"is_condition":0,"is_inactive":0,"is_SubProcedure":0}]}*/
-PRINT CONCAT('usp_id;Number;Parent_Number: ',30,';',120,';',NULL);
-
-SET @outputDir = ISNULL(@outputDir, (
-   SELECT [config].[fs_get_parameter_value]('AntoraComponentFolder', '') + '\modules\' + [config].[fs_get_parameter_value]('AntoraModule', '') + '\'
-   ) + 'partials\template\')
-
-
 /*{"ReportUspStep":[{"Number":210,"Name":"declare variables","has_logging":0,"is_condition":0,"is_inactive":0,"is_SubProcedure":0}]}*/
 PRINT CONCAT('usp_id;Number;Parent_Number: ',30,';',210,';',NULL);
 
-DECLARE @command NVARCHAR(4000);
-DECLARE @sub_parameter NVARCHAR(128);
-DECLARE @BaseFileName NVARCHAR(128) = 'master-page-'
-DECLARE @Object_fullname NVARCHAR(261);
-DECLARE @Object_fullname2 NVARCHAR(257);
+DECLARE @command NVARCHAR(4000)
+DECLARE @cultures_name NVARCHAR(10)
+DECLARE @sub_parameter NVARCHAR(128)
+--DECLARE @BaseFileName NVARCHAR(128) = 'master-page-'
 
 
 /*{"ReportUspStep":[{"Number":410,"Name":"export FROM [repo].[fs_get_parameter_value]('AntoraPageTemplate', N'1') and other sub_Parameters","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":0,"log_source_object":"[repo].[Parameter]","log_flag_InsertUpdateDelete":"u"}]}*/
 PRINT CONCAT('usp_id;Number;Parent_Number: ',30,';',410,';',NULL);
 
-DECLARE template_cursor CURSOR Local Fast_Forward
-FOR
-SELECT [sub_Parameter]
+Declare page_cursor Cursor Local Fast_Forward For
+Select
+    cultures_name
+  , sub_Parameter
 --,[Parameter_value__result_nvarchar]
-FROM [config].[Parameter]
-WHERE [Parameter_name] = 'AntoraPageTemplate'
- AND [sub_Parameter] <> ''
-ORDER BY [sub_Parameter]
+From
+    config.Parameter
+  , docs.culture
+Where
+    Parameter_name    = 'AntoraPageTemplate'
+    And sub_Parameter <> ''
+Order By
+    cultures_name
+  , sub_Parameter
 
-OPEN template_cursor
+Open page_cursor
 
-FETCH NEXT
-FROM template_cursor
-INTO @sub_parameter
+Fetch Next From page_cursor
+Into
+    @cultures_name
+  , @sub_parameter
 
-WHILE @@FETCH_STATUS = 0
-BEGIN
- --Dynamically construct the BCP command
- --
- --bcp "SELECT [config].[fs_get_parameter_value]('AntoraPageTemplate', N'1')" queryout D:\Repos\GitHub\DataHandwerk\DataHandwerk-docs\docs\modules\sqldb\partials\template\master-page-1.adoc -S localhost\sql2019 -d dhw_self -c -T
- --
- SET @command = 'bcp "SELECT [config].[fs_get_parameter_value](''AntoraPageTemplate'', N''' + @sub_parameter + ''')" queryout "' + @outputDir + @BaseFileName + @sub_parameter + '.adoc"'
-  --
-  + ' -S ' + @instanceName
-  --
-  + ' -d ' + @databaseName
-  --
-  + ' -c -C 65001'
-  --
-  + @TrustedUserPassword
+While @@Fetch_Status = 0
+Begin
+    Set @command
+        = 'bcp "SELECT [config].[fs_get_parameter_value](''AntoraPageTemplate'', N''' + @sub_parameter
+          + ''')" queryout "'
+          --
+          + docs.fs_AntoraModuleFolder ( @cultures_name )
+          + '\partials\template\' + 'master-page-' + @sub_parameter + '.adoc"'
+          --
+          + ' -S ' + @instanceName
+          --
+          + ' -d ' + @databaseName
+          --
+          + ' -c -C 65001'
+          --
+          + @TrustedUserPassword
 
- PRINT @command
+    Print @command
 
- --Execute the BCP command
- EXEC xp_cmdshell @command
-  , no_output
+    --Execute the BCP command
+    Exec sys.xp_cmdshell @command, no_output
 
- FETCH NEXT
- FROM template_cursor
- INTO @sub_parameter
-END
+    Fetch Next From page_cursor
+    Into
+        @cultures_name
+      , @sub_parameter
+End
 
-CLOSE template_cursor
-
-DEALLOCATE template_cursor
-
+Close page_cursor
+Deallocate page_cursor
 
 -- Logging START --
 SET @rows = @@ROWCOUNT
@@ -835,22 +824,50 @@ PRINT CONCAT('usp_id;Number;Parent_Number: ',30,';',510,';',NULL);
 /*
 master-page-examples.adoc
 */
-SET @command = 'bcp "SELECT [page_content] FROM [docs].[AntoraTemplate_examples]"  queryout "' + @outputDir + 'master-page-examples.adoc"'
- --
- + ' -S ' + @instanceName
- --
- + ' -d ' + @databaseName
- --
- + ' -c -C 65001'
- --
- + @TrustedUserPassword
+Declare page_cursor Cursor Local Fast_Forward For
+Select
+    cultures_name
+From
+    docs.culture
+Order By
+    cultures_name
 
-PRINT @command
+Open page_cursor
 
---Execute the BCP command
-EXEC xp_cmdshell @command
- , no_output
+Fetch Next From page_cursor
+Into
+    @cultures_name
 
+While @@Fetch_Status = 0
+Begin
+    Set @command
+        = 'bcp "SELECT [page_content] FROM [docs].[AntoraTemplate_examples]" '
+          --
+          + ' queryout "'
+          --
+          + docs.fs_AntoraModuleFolder ( @cultures_name )
+          + '\partials\template\' + 'master-page-examples.adoc"'
+          --
+          + ' -S ' + @instanceName
+          --
+          + ' -d ' + @databaseName
+          --
+          + ' -c -C 65001'
+          --
+          + @TrustedUserPassword
+
+    Print @command
+
+    --Execute the BCP command
+    Exec sys.xp_cmdshell @command, no_output
+
+    Fetch Next From page_cursor
+    Into
+        @cultures_name
+End
+
+Close page_cursor
+Deallocate page_cursor
 
 -- Logging START --
 SET @rows = @@ROWCOUNT

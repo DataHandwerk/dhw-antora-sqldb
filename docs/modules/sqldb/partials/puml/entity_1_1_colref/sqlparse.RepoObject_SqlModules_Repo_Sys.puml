@@ -26,7 +26,7 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:property.RepoObjectProperty_Collect_source_sql_modules_definition.adoc[]" as property.RepoObjectProperty_Collect_source_sql_modules_definition << V >> {
+entity "puml-link:dhw:sqldb:property.repoobjectproperty_collect_source_sql_modules_definition.adoc[]" as property.RepoObjectProperty_Collect_source_sql_modules_definition << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   **property_name** : (nvarchar(128))
   --
@@ -35,7 +35,7 @@ entity "puml-link:dhw:sqldb:property.RepoObjectProperty_Collect_source_sql_modul
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
+entity "puml-link:dhw:sqldb:repo.repoobject.adoc[]" as repo.RepoObject << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
   external_AntoraComponent : (nvarchar(128))
@@ -82,7 +82,7 @@ entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObject_gross2.adoc[]" as repo.RepoObject_gross2 << V >> {
+entity "puml-link:dhw:sqldb:repo.repoobject_gross2.adoc[]" as repo.RepoObject_gross2 << V >> {
   --
   AntoraComponent : (nvarchar(max))
   AntoraModule : (nvarchar(max))
@@ -131,10 +131,10 @@ entity "puml-link:dhw:sqldb:repo.RepoObject_gross2.adoc[]" as repo.RepoObject_gr
   persistence_source_RepoObject_fullname : (nvarchar(261))
   persistence_source_RepoObject_fullname2 : (nvarchar(257))
   persistence_source_RepoObject_guid : (uniqueidentifier)
-  persistence_source_RepoObject_xref : (nvarchar(269))
+  persistence_source_RepoObject_xref : (nvarchar(4000))
   persistence_source_SysObject_fullname : (nvarchar(261))
   persistence_source_SysObject_fullname2 : (nvarchar(257))
-  persistence_source_SysObject_xref : (nvarchar(269))
+  persistence_source_SysObject_xref : (nvarchar(4000))
   PersistenceCompareColumnList : (nvarchar(max))
   PersistenceInsertColumnList : (nvarchar(max))
   PersistenceUpdateColumnList : (nvarchar(max))
@@ -183,7 +183,25 @@ entity "puml-link:dhw:sqldb:repo.RepoObject_gross2.adoc[]" as repo.RepoObject_gr
   --
 }
 
-entity "puml-link:dhw:sqldb:repo_sys.SysObject.adoc[]" as repo_sys.SysObject << V >> {
+entity "puml-link:dhw:sqldb:repo.repoobject_sat2.adoc[]" as repo.RepoObject_sat2 << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+  AntoraReferencedList : (nvarchar(max))
+  AntoraReferencingList : (nvarchar(max))
+  CreateColumnList : (nvarchar(max))
+  DbmlColumnList : (nvarchar(max))
+  PersistenceCompareColumnList : (nvarchar(max))
+  PersistenceInsertColumnList : (nvarchar(max))
+  PersistenceUpdateColumnList : (nvarchar(max))
+  sql_modules_antora : (nvarchar(max))
+  sql_modules_definition : (nvarchar(max))
+  sql_modules_formatted : (nvarchar(max))
+  sql_modules_formatted2 : (nvarchar(max))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo_sys.sysobject.adoc[]" as repo_sys.SysObject << V >> {
   --
   - create_date : (datetime)
   history_table_id : (int)
@@ -210,7 +228,7 @@ entity "puml-link:dhw:sqldb:repo_sys.SysObject.adoc[]" as repo_sys.SysObject << 
   --
 }
 
-entity "puml-link:dhw:sqldb:sqlparse.RepoObject_SqlModules.adoc[]" as sqlparse.RepoObject_SqlModules << U >> {
+entity "puml-link:dhw:sqldb:sqlparse.repoobject_sqlmodules.adoc[]" as sqlparse.RepoObject_SqlModules << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
   - sql_modules_dt : (datetime)
@@ -222,7 +240,7 @@ entity "puml-link:dhw:sqldb:sqlparse.RepoObject_SqlModules.adoc[]" as sqlparse.R
   --
 }
 
-entity "puml-link:dhw:sqldb:sqlparse.RepoObject_SqlModules_Repo_Sys.adoc[]" as sqlparse.RepoObject_SqlModules_Repo_Sys << V >> {
+entity "puml-link:dhw:sqldb:sqlparse.repoobject_sqlmodules_repo_sys.adoc[]" as sqlparse.RepoObject_SqlModules_Repo_Sys << V >> {
   --
   is_json_sql_modules_json : (int)
   is_outdated : (bit)
@@ -243,6 +261,7 @@ repo_sys.SysObject <.. sqlparse.RepoObject_SqlModules_Repo_Sys
 sqlparse.RepoObject_SqlModules <.. sqlparse.RepoObject_SqlModules_Repo_Sys
 sqlparse.RepoObject_SqlModules_Repo_Sys <.. property.RepoObjectProperty_Collect_source_sql_modules_definition
 sqlparse.RepoObject_SqlModules_Repo_Sys <.. repo.RepoObject_gross2
+sqlparse.RepoObject_SqlModules_Repo_Sys <.. repo.RepoObject_sat2
 "repo.RepoObject::RepoObject_guid" <-- "sqlparse.RepoObject_SqlModules_Repo_Sys::RepoObject_guid"
 "repo.RepoObject::SysObject_type" <-- "sqlparse.RepoObject_SqlModules_Repo_Sys::SysObject_type"
 "repo_sys.SysObject::modify_date" <-- "sqlparse.RepoObject_SqlModules_Repo_Sys::modify_date"
@@ -254,7 +273,10 @@ sqlparse.RepoObject_SqlModules_Repo_Sys <.. repo.RepoObject_gross2
 "sqlparse.RepoObject_SqlModules::sql_modules_json" <-- "sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_json"
 "sqlparse.RepoObject_SqlModules_Repo_Sys::RepoObject_guid" <-- "property.RepoObjectProperty_Collect_source_sql_modules_definition::RepoObject_guid"
 "sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_definition" <-- "repo.RepoObject_gross2::sql_modules_definition"
+"sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_definition" <-- "repo.RepoObject_sat2::sql_modules_definition"
 "sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_formatted" <-- "repo.RepoObject_gross2::sql_modules_formatted"
+"sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_formatted" <-- "repo.RepoObject_sat2::sql_modules_formatted"
 "sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_formatted2" <-- "repo.RepoObject_gross2::sql_modules_formatted2"
+"sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_formatted2" <-- "repo.RepoObject_sat2::sql_modules_formatted2"
 @enduml
 

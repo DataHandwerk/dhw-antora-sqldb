@@ -1,4 +1,6 @@
-= [docs].[RepoObject_ParameterList]
+// tag::HeaderFullDisplayName[]
+= docs.RepoObject_ParameterList
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -23,6 +25,12 @@
 9DDFBE88-CA97-EB11-84F4-A81E8446D5B0
 // end::RepoObject_guid[]
 
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+docs.RepoObject_ParameterList
+// end::RepoObject_FullDisplayName2[]
+
 == SysObject_type
 
 // tag::SysObject_type[]
@@ -44,14 +52,14 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-08-17 18:49:49
+2021-09-30 18:02:22
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-RepoObject_guid]
-=== RepoObject_guid
+[#column-repoobject_guid]
+=== repoobject_guid
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -65,12 +73,12 @@ view
 
 .Referenced Columns
 --
-* xref:repo_sys.parameters.adoc#column-SysObject_RepoObject_guid[+repo_sys.parameters.SysObject_RepoObject_guid+]
+* xref:repo_sys.parameters.adoc#column-sysobject_repoobject_guid[+repo_sys.parameters.SysObject_RepoObject_guid+]
 --
 
 
-[#column-AntoraParameterList]
-=== AntoraParameterList
+[#column-antoraparameterlist]
+=== antoraparameterlist
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -95,7 +103,7 @@ view
 
 // tag::AntoraPkColumnTableRows[]
 |1
-|*<<column-RepoObject_guid>>*
+|*<<column-repoobject_guid>>*
 |uniqueidentifier
 |NULL
 |
@@ -109,7 +117,7 @@ view
 // tag::AntoraNonPkColumnTableRows[]
 
 |
-|<<column-AntoraParameterList>>
+|<<column-antoraparameterlist>>
 |nvarchar(max)
 |NULL
 |
@@ -121,10 +129,10 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-PK_RepoObject_ParameterList]
-=== PK_RepoObject_ParameterList
+[#index-pk_repoobject_parameterlist]
+=== pk_repoobject_parameterlist
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -144,6 +152,13 @@ view
 source: property.RepoObjectProperty_cross As rop_cross
 
 
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
+
+
 === AdocUspSteps
 
 // tag::adocuspsteps[]
@@ -161,7 +176,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencingList
 
 // tag::antorareferencinglist[]
-* xref:docs.RepoObject_Adoc.adoc[]
+* xref:docs.repoobject_adoc.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -410,6 +425,13 @@ RepoObject_guid
 // end::uspexamples[]
 
 
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+
+// end::uspgenerator_usp_id[]
+
+
 === UspParameters
 
 // tag::uspparameters[]
@@ -431,8 +453,11 @@ source: property.RepoObjectProperty WHERE property_int = 1
 =======
 [source,sql]
 ----
+/*
+[cultures_name] is not part of the key. parameters are the same for all cultures
+*/
 
-CREATE View docs.RepoObject_ParameterList
+CREATE View [docs].[RepoObject_ParameterList]
 As
 Select
     RepoObject_guid     = SysObject_RepoObject_guid
@@ -453,6 +478,7 @@ From
     repo_sys.parameters
 Group By
     SysObject_RepoObject_guid
+
 ----
 =======
 // end::sql_modules_definition[]

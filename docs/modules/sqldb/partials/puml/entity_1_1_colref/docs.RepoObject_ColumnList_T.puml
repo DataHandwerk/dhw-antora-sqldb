@@ -26,15 +26,19 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:docs.RepoObject_Adoc.adoc[]" as docs.RepoObject_Adoc << V >> {
+entity "puml-link:dhw:sqldb:docs.repoobject_adoc.adoc[]" as docs.RepoObject_Adoc << V >> {
   --
   - AdocContent : (nvarchar(max))
+  - cultures_name : (nvarchar(10))
   is_DocsOutput : (int)
   PropertyCount : (int)
+  RepoObject_DisplayName : (nvarchar(128))
+  RepoObject_FullDisplayName2 : (nvarchar(257))
   RepoObject_fullname : (nvarchar(261))
   RepoObject_fullname2 : (nvarchar(257))
   - RepoObject_guid : (uniqueidentifier)
   RepoObject_schema_name : (nvarchar(128))
+  RepoObject_translation : (nvarchar(128))
   SysObject_fullname : (nvarchar(261))
   SysObject_fullname2 : (nvarchar(257))
   SysObject_schema_name : (nvarchar(128))
@@ -44,11 +48,13 @@ entity "puml-link:dhw:sqldb:docs.RepoObject_Adoc.adoc[]" as docs.RepoObject_Adoc
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.RepoObject_ColumnList.adoc[]" as docs.RepoObject_ColumnList << V >> {
+entity "puml-link:dhw:sqldb:docs.repoobject_columnlist.adoc[]" as docs.RepoObject_ColumnList << V >> {
   --
   AntoraColumnDetails : (nvarchar(max))
   AntoraNonPkColumnTableRows : (nvarchar(max))
   AntoraPkColumnTableRows : (nvarchar(max))
+  - cultures_name : (nvarchar(10))
+  is_external : (tinyint)
   PlantumlIndexColumns : (nvarchar(max))
   PlantumlNonPkEntityColumns : (nvarchar(max))
   PlantumlNonPkHiddenEntityColumns : (nvarchar(max))
@@ -59,12 +65,14 @@ entity "puml-link:dhw:sqldb:docs.RepoObject_ColumnList.adoc[]" as docs.RepoObjec
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.RepoObject_ColumnList_T.adoc[]" as docs.RepoObject_ColumnList_T << U >> {
+entity "puml-link:dhw:sqldb:docs.repoobject_columnlist_t.adoc[]" as docs.RepoObject_ColumnList_T << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
+  - **cultures_name** : (nvarchar(10))
   --
   AntoraColumnDetails : (nvarchar(max))
   AntoraNonPkColumnTableRows : (nvarchar(max))
   AntoraPkColumnTableRows : (nvarchar(max))
+  is_external : (tinyint)
   PlantumlIndexColumns : (nvarchar(max))
   PlantumlNonPkEntityColumns : (nvarchar(max))
   PlantumlNonPkHiddenEntityColumns : (nvarchar(max))
@@ -74,8 +82,9 @@ entity "puml-link:dhw:sqldb:docs.RepoObject_ColumnList_T.adoc[]" as docs.RepoObj
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.RepoObject_Plantuml_Entity.adoc[]" as docs.RepoObject_Plantuml_Entity << V >> {
+entity "puml-link:dhw:sqldb:docs.repoobject_plantuml_entity.adoc[]" as docs.RepoObject_Plantuml_Entity << V >> {
   --
+  - cultures_name : (nvarchar(10))
   - RepoObject_fullname2 : (nvarchar(257))
   - RepoObject_guid : (uniqueidentifier)
   - RepoObject_Puml : (nvarchar(max))
@@ -89,7 +98,7 @@ entity "puml-link:dhw:sqldb:docs.RepoObject_Plantuml_Entity.adoc[]" as docs.Repo
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.usp_PERSIST_RepoObject_ColumnList_T.adoc[]" as docs.usp_PERSIST_RepoObject_ColumnList_T << P >> {
+entity "puml-link:dhw:sqldb:docs.usp_persist_repoobject_columnlist_t.adoc[]" as docs.usp_PERSIST_RepoObject_ColumnList_T << P >> {
   --
   --
   --
@@ -102,6 +111,8 @@ docs.RepoObject_ColumnList_T <.. docs.usp_PERSIST_RepoObject_ColumnList_T
 "docs.RepoObject_ColumnList::AntoraColumnDetails" <-- "docs.RepoObject_ColumnList_T::AntoraColumnDetails"
 "docs.RepoObject_ColumnList::AntoraNonPkColumnTableRows" <-- "docs.RepoObject_ColumnList_T::AntoraNonPkColumnTableRows"
 "docs.RepoObject_ColumnList::AntoraPkColumnTableRows" <-- "docs.RepoObject_ColumnList_T::AntoraPkColumnTableRows"
+"docs.RepoObject_ColumnList::cultures_name" <-- "docs.RepoObject_ColumnList_T::cultures_name"
+"docs.RepoObject_ColumnList::is_external" <-- "docs.RepoObject_ColumnList_T::is_external"
 "docs.RepoObject_ColumnList::PlantumlIndexColumns" <-- "docs.RepoObject_ColumnList_T::PlantumlIndexColumns"
 "docs.RepoObject_ColumnList::PlantumlNonPkEntityColumns" <-- "docs.RepoObject_ColumnList_T::PlantumlNonPkEntityColumns"
 "docs.RepoObject_ColumnList::PlantumlNonPkHiddenEntityColumns" <-- "docs.RepoObject_ColumnList_T::PlantumlNonPkHiddenEntityColumns"

@@ -1,4 +1,6 @@
-= [property].[usp_RepoObjectProperty_collect]
+// tag::HeaderFullDisplayName[]
+= property.usp_RepoObjectProperty_collect
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -13,6 +15,7 @@
 :ExistsProperty--is_ssas:
 :ExistsProperty--ms_description:
 :ExistsProperty--referencedobjectlist:
+:ExistsProperty--uspgenerator_usp_id:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--AntoraParameterList:
 // end::existing_properties[]
@@ -22,6 +25,12 @@
 // tag::RepoObject_guid[]
 BD24DF58-0B9A-EB11-84F5-A81E8446D5B0
 // end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+property.usp_RepoObjectProperty_collect
+// end::RepoObject_FullDisplayName2[]
 
 == SysObject_type
 
@@ -44,7 +53,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-25 19:58:57
+2021-10-04 23:48:18
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -91,6 +100,13 @@ stored procedure
 source: property.RepoObjectProperty_cross As rop_cross
 
 
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
+
+
 === AdocUspSteps
 
 // tag::adocuspsteps[]
@@ -126,7 +142,7 @@ Using
 On t.RepoObject_guid = s.RepoObject_guid
    And t.property_name = s.property_name
 When Matched And (
-                     t.property_value <> s.property_value
+                     t.property_value Collate Latin1_General_100_CS_AS <> s.property_value Collate Latin1_General_100_CS_AS
                      Or t.property_value Is Null
                         And Not s.property_value Is Null
                      Or s.property_value Is Null
@@ -187,7 +203,7 @@ Using
 On t.RepoObject_guid = s.RepoObject_guid
    And t.property_name = s.property_name
 When Matched And (
-                     t.property_value <> s.property_value
+                     t.property_value Collate Latin1_General_100_CS_AS <> s.property_value Collate Latin1_General_100_CS_AS
                      Or t.property_value Is Null
                         And Not s.property_value Is Null
                      Or s.property_value Is Null
@@ -248,7 +264,7 @@ Using
 On t.RepoObject_guid = s.RepoObject_guid
    And t.property_name = s.property_name
 When Matched And (
-                     t.property_value <> s.property_value
+                     t.property_value Collate Latin1_General_100_CS_AS <> s.property_value Collate Latin1_General_100_CS_AS
                      Or t.property_value Is Null
                         And Not s.property_value Is Null
                      Or s.property_value Is Null
@@ -312,18 +328,18 @@ WHERE [property_value] IS NULL
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:logs.usp_ExecutionLog_insert.adoc[]
-* xref:property.RepoObjectProperty.adoc[]
-* xref:property.RepoObjectProperty_Collect_source_ROGross.adoc[]
-* xref:property.RepoObjectProperty_Collect_source_sql_modules_definition.adoc[]
-* xref:property.RepoObjectProperty_Collect_source_uspgenerator.adoc[]
+* xref:logs.usp_executionlog_insert.adoc[]
+* xref:property.repoobjectproperty.adoc[]
+* xref:property.repoobjectproperty_collect_source_rogross.adoc[]
+* xref:property.repoobjectproperty_collect_source_sql_modules_definition.adoc[]
+* xref:property.repoobjectproperty_collect_source_uspgenerator.adoc[]
 // end::antorareferencedlist[]
 
 
 === AntoraReferencingList
 
 // tag::antorareferencinglist[]
-* xref:property.usp_RepoObject_Inheritance.adoc[]
+* xref:property.usp_repoobject_inheritance.adoc[]
 * xref:repo.usp_main.adoc[]
 // end::antorareferencinglist[]
 
@@ -333,14 +349,14 @@ WHERE [property_value] IS NULL
 // tag::description[]
 collects the content for RepoObjectProperty from several sources:
 
-* xref:uspgenerator.GeneratorUsp.adoc[] +
-via xref:property.RepoObjectProperty_Collect_source_uspgenerator.adoc[]
-* xref:repo.RepoObject_gross.adoc[] +
-via xref:property.RepoObjectProperty_Collect_source_ROGross.adoc[]
-** Persistence attributes
-** AntoraReferenceLists
+* xref:uspgenerator.generatorusp.adoc[] +
+via xref:property.repoobjectproperty_collect_source_uspgenerator.adoc[]
+* xref:repo.repoobject_gross.adoc[] +
+via xref:property.repoobjectproperty_collect_source_rogross.adoc[]
+** persistence attributes
+** antorareferencelists
 ** some common properties
-* xref:property.RepoObjectProperty_Collect_source_sql_modules_definition.adoc[] +
+* xref:property.repoobjectproperty_collect_source_sql_modules_definition.adoc[] +
 this parses sql_modules_definition for tagged parts defining extended properties
 // end::description[]
 
@@ -504,14 +520,14 @@ EXEC [property].[usp_RepoObjectProperty_collect]
 // tag::ms_description[]
 collects the content for RepoObjectProperty from several sources:
 
-* xref:uspgenerator.GeneratorUsp.adoc[] +
-via xref:property.RepoObjectProperty_Collect_source_uspgenerator.adoc[]
-* xref:repo.RepoObject_gross.adoc[] +
-via xref:property.RepoObjectProperty_Collect_source_ROGross.adoc[]
-** Persistence attributes
-** AntoraReferenceLists
+* xref:uspgenerator.generatorusp.adoc[] +
+via xref:property.repoobjectproperty_collect_source_uspgenerator.adoc[]
+* xref:repo.repoobject_gross.adoc[] +
+via xref:property.repoobjectproperty_collect_source_rogross.adoc[]
+** persistence attributes
+** antorareferencelists
 ** some common properties
-* xref:property.RepoObjectProperty_Collect_source_sql_modules_definition.adoc[] +
+* xref:property.repoobjectproperty_collect_source_sql_modules_definition.adoc[] +
 this parses sql_modules_definition for tagged parts defining extended properties
 // end::ms_description[]
 
@@ -595,6 +611,13 @@ this parses sql_modules_definition for tagged parts defining extended properties
 // tag::uspexamples[]
 
 // end::uspexamples[]
+
+
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+20
+// end::uspgenerator_usp_id[]
 
 
 === UspParameters
@@ -707,7 +730,7 @@ Using
 On t.RepoObject_guid = s.RepoObject_guid
    And t.property_name = s.property_name
 When Matched And (
-                     t.property_value <> s.property_value
+                     t.property_value Collate Latin1_General_100_CS_AS <> s.property_value Collate Latin1_General_100_CS_AS
                      Or t.property_value Is Null
                         And Not s.property_value Is Null
                      Or s.property_value Is Null
@@ -776,7 +799,7 @@ Using
 On t.RepoObject_guid = s.RepoObject_guid
    And t.property_name = s.property_name
 When Matched And (
-                     t.property_value <> s.property_value
+                     t.property_value Collate Latin1_General_100_CS_AS <> s.property_value Collate Latin1_General_100_CS_AS
                      Or t.property_value Is Null
                         And Not s.property_value Is Null
                      Or s.property_value Is Null
@@ -845,7 +868,7 @@ Using
 On t.RepoObject_guid = s.RepoObject_guid
    And t.property_name = s.property_name
 When Matched And (
-                     t.property_value <> s.property_value
+                     t.property_value Collate Latin1_General_100_CS_AS <> s.property_value Collate Latin1_General_100_CS_AS
                      Or t.property_value Is Null
                         And Not s.property_value Is Null
                      Or s.property_value Is Null

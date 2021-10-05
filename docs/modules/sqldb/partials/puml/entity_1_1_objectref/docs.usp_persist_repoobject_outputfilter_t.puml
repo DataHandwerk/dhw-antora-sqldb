@@ -1,0 +1,58 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:docs.repoobject_outputfilter.adoc[]" as docs.RepoObject_OutputFilter << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **cultures_name** : (nvarchar(10))
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.repoobject_outputfilter_t.adoc[]" as docs.RepoObject_OutputFilter_T << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **cultures_name** : (nvarchar(10))
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.usp_antoraexport.adoc[]" as docs.usp_AntoraExport << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.usp_persist_repoobject_outputfilter_t.adoc[]" as docs.usp_PERSIST_RepoObject_OutputFilter_T << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:logs.usp_executionlog_insert.adoc[]" as logs.usp_ExecutionLog_insert << P >> {
+  --
+}
+
+docs.RepoObject_OutputFilter <.. docs.usp_PERSIST_RepoObject_OutputFilter_T
+docs.RepoObject_OutputFilter_T <.. docs.usp_PERSIST_RepoObject_OutputFilter_T
+docs.usp_PERSIST_RepoObject_OutputFilter_T <.. docs.usp_AntoraExport
+logs.usp_ExecutionLog_insert <.. docs.usp_PERSIST_RepoObject_OutputFilter_T
+@enduml
+

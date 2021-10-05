@@ -26,54 +26,59 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:configT.type.adoc[]" as configT.type << V >> {
+entity "puml-link:dhw:sqldb:configt.type.adoc[]" as configT.type << V >> {
   **type** : (nvarchar(128))
   --
 }
 
-entity "puml-link:dhw:sqldb:reference.ftv_RepoObject_ReferenceTree.adoc[]" as reference.ftv_RepoObject_ReferenceTree << IF >> {
+entity "puml-link:dhw:sqldb:docs.fs_cleanstringforfilename.adoc[]" as docs.fs_cleanStringForFilename << FN >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:reference.ftv_RepoObject_ReferenceTree_referenced.adoc[]" as reference.ftv_RepoObject_ReferenceTree_referenced << IF >> {
+entity "puml-link:dhw:sqldb:reference.ftv_repoobject_referencetree.adoc[]" as reference.ftv_RepoObject_ReferenceTree << IF >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:reference.ftv_RepoObject_ReferenceTree_referencing.adoc[]" as reference.ftv_RepoObject_ReferenceTree_referencing << IF >> {
+entity "puml-link:dhw:sqldb:reference.ftv_repoobject_referencetree_referenced.adoc[]" as reference.ftv_RepoObject_ReferenceTree_referenced << IF >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:reference.ftv_RepoObject_ReferenceTree_via_fullname.adoc[]" as reference.ftv_RepoObject_ReferenceTree_via_fullname << IF >> {
+entity "puml-link:dhw:sqldb:reference.ftv_repoobject_referencetree_referencing.adoc[]" as reference.ftv_RepoObject_ReferenceTree_referencing << IF >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:reference.RepoObject_reference_T.adoc[]" as reference.RepoObject_reference_T << U >> {
+entity "puml-link:dhw:sqldb:reference.ftv_repoobject_referencetree_via_fullname.adoc[]" as reference.ftv_RepoObject_ReferenceTree_via_fullname << IF >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.repoobject_reference_t.adoc[]" as reference.RepoObject_reference_T << U >> {
   **referenced_RepoObject_guid** : (uniqueidentifier)
   **referencing_RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity "puml-link:dhw:sqldb:reference.RepoObject_ReferencedList.adoc[]" as reference.RepoObject_ReferencedList << V >> {
+entity "puml-link:dhw:sqldb:reference.repoobject_referencedlist.adoc[]" as reference.RepoObject_ReferencedList << V >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:reference.RepoObject_ReferencedReferencing.adoc[]" as reference.RepoObject_ReferencedReferencing << V >> {
+entity "puml-link:dhw:sqldb:reference.repoobject_referencedreferencing.adoc[]" as reference.RepoObject_ReferencedReferencing << V >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:reference.RepoObject_ReferencingList.adoc[]" as reference.RepoObject_ReferencingList << V >> {
+entity "puml-link:dhw:sqldb:reference.repoobject_referencinglist.adoc[]" as reference.RepoObject_ReferencingList << V >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:reference.usp_RepoObject_ReferenceTree_insert.adoc[]" as reference.usp_RepoObject_ReferenceTree_insert << P >> {
+entity "puml-link:dhw:sqldb:reference.usp_repoobject_referencetree_insert.adoc[]" as reference.usp_RepoObject_ReferenceTree_insert << P >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObject_gross.adoc[]" as repo.RepoObject_gross << V >> {
+entity "puml-link:dhw:sqldb:repo.repoobject_gross.adoc[]" as repo.RepoObject_gross << V >> {
   --
 }
 
 configT.type <.. reference.RepoObject_ReferencedReferencing
+docs.fs_cleanStringForFilename <.. reference.RepoObject_ReferencedReferencing
 reference.RepoObject_reference_T <.. reference.RepoObject_ReferencedReferencing
 reference.RepoObject_ReferencedReferencing <.. repo.RepoObject_gross
 reference.RepoObject_ReferencedReferencing <.. reference.ftv_RepoObject_ReferenceTree

@@ -26,15 +26,19 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:docs.RepoObject_Adoc.adoc[]" as docs.RepoObject_Adoc << V >> {
+entity "puml-link:dhw:sqldb:docs.repoobject_adoc.adoc[]" as docs.RepoObject_Adoc << V >> {
   --
   - AdocContent : (nvarchar(max))
+  - cultures_name : (nvarchar(10))
   is_DocsOutput : (int)
   PropertyCount : (int)
+  RepoObject_DisplayName : (nvarchar(128))
+  RepoObject_FullDisplayName2 : (nvarchar(257))
   RepoObject_fullname : (nvarchar(261))
   RepoObject_fullname2 : (nvarchar(257))
   - RepoObject_guid : (uniqueidentifier)
   RepoObject_schema_name : (nvarchar(128))
+  RepoObject_translation : (nvarchar(128))
   SysObject_fullname : (nvarchar(261))
   SysObject_fullname2 : (nvarchar(257))
   SysObject_schema_name : (nvarchar(128))
@@ -44,15 +48,19 @@ entity "puml-link:dhw:sqldb:docs.RepoObject_Adoc.adoc[]" as docs.RepoObject_Adoc
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.RepoObject_Adoc_T.adoc[]" as docs.RepoObject_Adoc_T << U >> {
+entity "puml-link:dhw:sqldb:docs.repoobject_adoc_t.adoc[]" as docs.RepoObject_Adoc_T << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **cultures_name** : (nvarchar(10))
   --
   - AdocContent : (nvarchar(max))
   is_DocsOutput : (int)
   PropertyCount : (int)
+  RepoObject_DisplayName : (nvarchar(128))
+  RepoObject_FullDisplayName2 : (nvarchar(257))
   RepoObject_fullname : (nvarchar(261))
   RepoObject_fullname2 : (nvarchar(257))
-  - RepoObject_guid : (uniqueidentifier)
   RepoObject_schema_name : (nvarchar(128))
+  RepoObject_translation : (nvarchar(128))
   SysObject_fullname : (nvarchar(261))
   SysObject_fullname2 : (nvarchar(257))
   SysObject_schema_name : (nvarchar(128))
@@ -62,7 +70,7 @@ entity "puml-link:dhw:sqldb:docs.RepoObject_Adoc_T.adoc[]" as docs.RepoObject_Ad
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.usp_PERSIST_RepoObject_Adoc_T.adoc[]" as docs.usp_PERSIST_RepoObject_Adoc_T << P >> {
+entity "puml-link:dhw:sqldb:docs.usp_persist_repoobject_adoc_t.adoc[]" as docs.usp_PERSIST_RepoObject_Adoc_T << P >> {
   --
   --
   --
@@ -71,12 +79,16 @@ entity "puml-link:dhw:sqldb:docs.usp_PERSIST_RepoObject_Adoc_T.adoc[]" as docs.u
 docs.RepoObject_Adoc <.. docs.RepoObject_Adoc_T
 docs.REpoObject_Adoc_T <.. docs.usp_PERSIST_RepoObject_Adoc_T
 "docs.RepoObject_Adoc::AdocContent" <-- "docs.RepoObject_Adoc_T::AdocContent"
+"docs.RepoObject_Adoc::cultures_name" <-- "docs.RepoObject_Adoc_T::cultures_name"
 "docs.RepoObject_Adoc::is_DocsOutput" <-- "docs.RepoObject_Adoc_T::is_DocsOutput"
 "docs.RepoObject_Adoc::PropertyCount" <-- "docs.RepoObject_Adoc_T::PropertyCount"
+"docs.RepoObject_Adoc::RepoObject_DisplayName" <-- "docs.RepoObject_Adoc_T::RepoObject_DisplayName"
+"docs.RepoObject_Adoc::RepoObject_FullDisplayName2" <-- "docs.RepoObject_Adoc_T::RepoObject_FullDisplayName2"
 "docs.RepoObject_Adoc::RepoObject_fullname" <-- "docs.RepoObject_Adoc_T::RepoObject_fullname"
 "docs.RepoObject_Adoc::RepoObject_fullname2" <-- "docs.RepoObject_Adoc_T::RepoObject_fullname2"
 "docs.RepoObject_Adoc::RepoObject_guid" <-- "docs.RepoObject_Adoc_T::RepoObject_guid"
 "docs.RepoObject_Adoc::RepoObject_schema_name" <-- "docs.RepoObject_Adoc_T::RepoObject_schema_name"
+"docs.RepoObject_Adoc::RepoObject_translation" <-- "docs.RepoObject_Adoc_T::RepoObject_translation"
 "docs.RepoObject_Adoc::SysObject_fullname" <-- "docs.RepoObject_Adoc_T::SysObject_fullname"
 "docs.RepoObject_Adoc::SysObject_fullname2" <-- "docs.RepoObject_Adoc_T::SysObject_fullname2"
 "docs.RepoObject_Adoc::SysObject_schema_name" <-- "docs.RepoObject_Adoc_T::SysObject_schema_name"

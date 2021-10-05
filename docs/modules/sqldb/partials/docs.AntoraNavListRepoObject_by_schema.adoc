@@ -1,4 +1,6 @@
-= [docs].[AntoraNavListRepoObject_by_schema]
+// tag::HeaderFullDisplayName[]
+= docs.AntoraNavListRepoObject_by_schema
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -19,6 +21,12 @@
 // tag::RepoObject_guid[]
 9C8B79D5-B993-EB11-84F2-A81E8446D5B0
 // end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+docs.AntoraNavListRepoObject_by_schema
+// end::RepoObject_FullDisplayName2[]
 
 == SysObject_type
 
@@ -41,12 +49,36 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-25 12:39:58
+2021-10-04 21:33:23
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
+[#column-cultures_name]
+=== cultures_name
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|cultures_name
+|nvarchar(10)
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:docs.repoobject_outputfilter_t.adoc#column-cultures_name[+docs.RepoObject_OutputFilter_T.cultures_name+]
+--
+
+.Referencing Columns
+--
+* xref:docs.antorapage_objectbyschema.adoc#column-cultures_name[+docs.AntoraPage_ObjectBySchema.cultures_name+]
+--
+
+
 [#column-is_ssas]
 === is_ssas
 
@@ -59,6 +91,11 @@ view
 |
 |
 |===
+
+.Referenced Columns
+--
+* xref:docs.repoobject_outputfilter_t.adoc#column-is_ssas[+docs.RepoObject_OutputFilter_T.is_ssas+]
+--
 
 
 [#column-nav_list]
@@ -75,8 +112,8 @@ view
 |===
 
 
-[#column-RepoObject_schema_name]
-=== RepoObject_schema_name
+[#column-repoobject_schema_name]
+=== repoobject_schema_name
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -90,7 +127,7 @@ view
 
 .Referenced Columns
 --
-* xref:docs.RepoObject_OutputFilter.adoc#column-RepoObject_schema_name[+docs.RepoObject_OutputFilter.RepoObject_schema_name+]
+* xref:docs.repoobject_outputfilter_t.adoc#column-repoobject_schema_name[+docs.RepoObject_OutputFilter_T.RepoObject_schema_name+]
 --
 
 
@@ -108,11 +145,19 @@ view
 
 
 
+
 // end::AntoraPkColumnTableRows[]
 
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
+|
+|<<column-cultures_name>>
+|nvarchar(10)
+|NOT NULL
+|
+|
+
 |
 |<<column-is_ssas>>
 |tinyint
@@ -128,7 +173,7 @@ view
 |
 
 |
-|<<column-RepoObject_schema_name>>
+|<<column-repoobject_schema_name>>
 |nvarchar(128)
 |NOT NULL
 |
@@ -140,10 +185,21 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-idx_AntoraNavListRepoObject_by_schema2x_1]
-=== idx_AntoraNavListRepoObject_by_schema++__++1
+[#index-idx_antoranavlistrepoobject_by_schema2x_1]
+=== idx_antoranavlistrepoobject_by_schema++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-cultures_name>>; nvarchar(10)
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[#index-idx_antoranavlistrepoobject_by_schema2x_2]
+=== idx_antoranavlistrepoobject_by_schema++__++2
+
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_schema_name>>; nvarchar(128)
@@ -163,6 +219,13 @@ view
 source: property.RepoObjectProperty_cross As rop_cross
 
 
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
+
+
 === AdocUspSteps
 
 // tag::adocuspsteps[]
@@ -173,15 +236,16 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:docs.RepoObject_OutputFilter.adoc[]
+* xref:docs.fs_cleanstringforfilename.adoc[]
+* xref:docs.repoobject_outputfilter_t.adoc[]
 // end::antorareferencedlist[]
 
 
 === AntoraReferencingList
 
 // tag::antorareferencinglist[]
-* xref:docs.AntoraPage_ObjectBySchema.adoc[]
-* xref:docs.usp_AntoraExport_navigation.adoc[]
+* xref:docs.antorapage_objectbyschema.adoc[]
+* xref:docs.usp_antoraexport_navigation.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -412,7 +476,8 @@ source: property.RepoObjectProperty_cross As rop_cross
 === ReferencedObjectList
 
 // tag::referencedobjectlist[]
-* [docs].[RepoObject_OutputFilter]
+* [docs].[fs_cleanStringForFilename]
+* [docs].[RepoObject_OutputFilter_T]
 // end::referencedobjectlist[]
 
 
@@ -428,6 +493,13 @@ source: property.RepoObjectProperty_cross As rop_cross
 // tag::uspexamples[]
 
 // end::uspexamples[]
+
+
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+
+// end::uspgenerator_usp_id[]
 
 
 === UspParameters
@@ -456,24 +528,28 @@ CREATE View docs.AntoraNavListRepoObject_by_schema
 As
 Select
     ro.RepoObject_schema_name
+  , ro.cultures_name
   , nav_list =
   --
   String_Agg (
                  Concat (
                             --* xref:target-page-filename.adoc[link text]
                             --we need to convert to first argument nvarchar(max) to avoid the limit of 8000 byte
-                            Cast('* xref:' As NVarchar(Max)), ro.RepoObject_fullname2, '.adoc[]'
+                            Cast('* xref:' As NVarchar(Max))
+                          , docs.fs_cleanStringForFilename ( ro.RepoObject_fullname2 )
+                          , '.adoc[]'
                         )
                , Char ( 13 ) + Char ( 10 )
              ) Within Group(Order By
-                                ro.RepoObject_fullname2)
+                                ro.RepoObject_DisplayName)
   , is_ssas  = Max ( Cast(ro.is_ssas As TinyInt))
 From
-    docs.RepoObject_OutputFilter As ro
+    docs.RepoObject_OutputFilter_T As ro
 Where
     ro.is_external = 0
 Group By
     ro.RepoObject_schema_name
+  , ro.cultures_name
 
 ----
 =======

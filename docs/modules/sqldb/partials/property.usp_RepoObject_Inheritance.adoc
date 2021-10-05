@@ -1,4 +1,6 @@
-= [property].[usp_RepoObject_Inheritance]
+// tag::HeaderFullDisplayName[]
+= property.usp_RepoObject_Inheritance
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -17,6 +19,12 @@
 // tag::RepoObject_guid[]
 63B33A4A-426D-EB11-84E2-A81E8446D5B0
 // end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+property.usp_RepoObject_Inheritance
+// end::RepoObject_FullDisplayName2[]
 
 == SysObject_type
 
@@ -39,7 +47,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-14 12:14:33
+2021-10-02 15:21:12
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -86,6 +94,13 @@ stored procedure
 source: property.RepoObjectProperty_cross As rop_cross
 
 
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
+
+
 === AdocUspSteps
 
 // tag::adocuspsteps[]
@@ -96,12 +111,12 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:logs.usp_ExecutionLog_insert.adoc[]
-* xref:property.RepoObject_Inheritance_temp.adoc[]
-* xref:property.RepoObjectProperty.adoc[]
-* xref:property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition.adoc[]
-* xref:property.usp_PERSIST_PropertyName_RepoObject_T.adoc[]
-* xref:property.usp_RepoObjectProperty_collect.adoc[]
+* xref:logs.usp_executionlog_insert.adoc[]
+* xref:property.repoobject_inheritance_temp.adoc[]
+* xref:property.repoobjectproperty.adoc[]
+* xref:property.repoobjectproperty_inheritancetype_resulting_inheritancedefinition.adoc[]
+* xref:property.usp_persist_propertyname_repoobject_t.adoc[]
+* xref:property.usp_repoobjectproperty_collect.adoc[]
 // end::antorareferencedlist[]
 
 
@@ -360,6 +375,13 @@ source: property.RepoObjectProperty_cross As rop_cross
 // tag::uspexamples[]
 
 // end::uspexamples[]
+
+
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+
+// end::uspgenerator_usp_id[]
 
 
 === UspParameters
@@ -664,22 +686,22 @@ WHERE [T1].[resulting_InheritanceDefinition] = ''' + @resulting_InheritanceDefin
                                 property.RepoObject_Inheritance_temp
                             Where
                                 --
-                                is_StringAggAllSources                    = 0
+                                is_StringAggAllSources                                 = 0
                                 --only the first source
-                                And RowNumberSource                       = 1
+                                And RowNumberSource                                    = 1
                                 And
                                 (
-                                    is_force_inherit_empty_source         = 1
+                                    is_force_inherit_empty_source                      = 1
                                     Or Not property_value_new Is Null
                                 )
                                 And
                                 (
                                     property_value Is Null
-                                    Or property_value                     <> property_value_new
+                                    Or property_value Collate Latin1_General_100_CS_AS <> property_value_new Collate Latin1_General_100_CS_AS
                                     Or
                                     (
                                         Not property_value Is Null
-                                        And is_force_inherit_empty_source = 1
+                                        And is_force_inherit_empty_source              = 1
                                         And property_value_new Is Null
                                     )
                                 )
@@ -689,7 +711,7 @@ WHERE [T1].[resulting_InheritanceDefinition] = ''' + @resulting_InheritanceDefin
                         When Matched And (
                                              Not S.property_value_new Is Null
                                              And T.property_value Is Null
-                                             Or T.property_value <> S.property_value_new
+                                             Or T.property_value Collate Latin1_General_100_CS_AS <> S.property_value_new Collate Latin1_General_100_CS_AS
                                          )
                             Then Update Set
                                      T.property_value = S.property_value_new
@@ -769,17 +791,17 @@ WHERE [T1].[resulting_InheritanceDefinition] = ''' + @resulting_InheritanceDefin
                         ) As T1
                             Where
                                 (
-                                    T1.is_force_inherit_empty_source         = 1
+                                    T1.is_force_inherit_empty_source                      = 1
                                     Or Not T1.property_value_new Is Null
                                 )
                                 And
                                 (
                                     T1.property_value Is Null
-                                    Or T1.property_value                     <> T1.property_value_new
+                                    Or T1.property_value Collate Latin1_General_100_CS_AS <> T1.property_value_new Collate Latin1_General_100_CS_AS
                                     Or
                                     (
                                         Not T1.property_value Is Null
-                                        And T1.is_force_inherit_empty_source = 1
+                                        And T1.is_force_inherit_empty_source              = 1
                                         And T1.property_value_new Is Null
                                     )
                                 )
@@ -789,7 +811,7 @@ WHERE [T1].[resulting_InheritanceDefinition] = ''' + @resulting_InheritanceDefin
                         When Matched And (
                                              Not S.property_value_new Is Null
                                              And T.property_value Is Null
-                                             Or T.property_value <> S.property_value_new
+                                             Or T.property_value Collate Latin1_General_100_CS_AS <> S.property_value_new Collate Latin1_General_100_CS_AS
                                          )
                             Then Update Set
                                      T.property_value = S.property_value_new

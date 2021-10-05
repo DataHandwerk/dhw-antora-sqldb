@@ -1,4 +1,6 @@
-= [docs].[usp_PERSIST_RepoObject_IndexList_T]
+// tag::HeaderFullDisplayName[]
+= docs.usp_PERSIST_RepoObject_IndexList_T
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -10,6 +12,7 @@
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
 :ExistsProperty--referencedobjectlist:
+:ExistsProperty--uspgenerator_usp_id:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--AntoraParameterList:
 // end::existing_properties[]
@@ -19,6 +22,12 @@
 // tag::RepoObject_guid[]
 EFE49B2C-9498-EB11-84F4-A81E8446D5B0
 // end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+docs.usp_PERSIST_RepoObject_IndexList_T
+// end::RepoObject_FullDisplayName2[]
 
 == SysObject_type
 
@@ -41,7 +50,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-25 19:58:56
+2021-10-04 23:48:17
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -86,6 +95,13 @@ stored procedure
 == Other tags
 
 source: property.RepoObjectProperty_cross As rop_cross
+
+
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
 
 
 === AdocUspSteps
@@ -134,11 +150,13 @@ INSERT INTO
  [docs].[RepoObject_IndexList_T]
  (
   [RepoObject_guid]
+, [cultures_name]
 , [AntoraIndexList]
 , [PumlIndexList]
 )
 SELECT
   [RepoObject_guid]
+, [cultures_name]
 , [AntoraIndexList]
 , [PumlIndexList]
 
@@ -156,16 +174,16 @@ FROM [docs].[RepoObject_IndexList] AS S
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:docs.RepoObject_IndexList.adoc[]
-* xref:docs.RepoObject_IndexList_T.adoc[]
-* xref:logs.usp_ExecutionLog_insert.adoc[]
+* xref:docs.repoobject_indexlist.adoc[]
+* xref:docs.repoobject_indexlist_t.adoc[]
+* xref:logs.usp_executionlog_insert.adoc[]
 // end::antorareferencedlist[]
 
 
 === AntoraReferencingList
 
 // tag::antorareferencinglist[]
-* xref:docs.usp_AntoraExport_ObjectPartialProperties.adoc[]
+* xref:docs.usp_antoraexport_objectpartialproperties.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -416,6 +434,13 @@ EXEC [docs].[usp_PERSIST_RepoObject_IndexList_T]
 // end::uspexamples[]
 
 
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+34
+// end::uspgenerator_usp_id[]
+
+
 === UspParameters
 
 // tag::uspparameters[]
@@ -545,11 +570,13 @@ INSERT INTO
  [docs].[RepoObject_IndexList_T]
  (
   [RepoObject_guid]
+, [cultures_name]
 , [AntoraIndexList]
 , [PumlIndexList]
 )
 SELECT
   [RepoObject_guid]
+, [cultures_name]
 , [AntoraIndexList]
 , [PumlIndexList]
 

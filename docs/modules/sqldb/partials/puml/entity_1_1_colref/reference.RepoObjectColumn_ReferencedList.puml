@@ -26,7 +26,7 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:reference.RepoObjectColumn_ReferencedList.adoc[]" as reference.RepoObjectColumn_ReferencedList << V >> {
+entity "puml-link:dhw:sqldb:reference.repoobjectcolumn_referencedlist.adoc[]" as reference.RepoObjectColumn_ReferencedList << V >> {
   --
   AntoraReferencedColumnList : (nvarchar(max))
   Referencing_fullname : (nvarchar(261))
@@ -39,7 +39,7 @@ entity "puml-link:dhw:sqldb:reference.RepoObjectColumn_ReferencedList.adoc[]" as
   --
 }
 
-entity "puml-link:dhw:sqldb:reference.RepoObjectColumn_ReferencedReferencing.adoc[]" as reference.RepoObjectColumn_ReferencedReferencing << V >> {
+entity "puml-link:dhw:sqldb:reference.repoobjectcolumn_referencedreferencing.adoc[]" as reference.RepoObjectColumn_ReferencedReferencing << V >> {
   --
   - referenced_AntoraXref : (nvarchar(max))
   referenced_external_AntoraComponent : (nvarchar(128))
@@ -69,7 +69,7 @@ entity "puml-link:dhw:sqldb:reference.RepoObjectColumn_ReferencedReferencing.ado
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_gross2.adoc[]" as repo.RepoObjectColumn_gross2 << V >> {
+entity "puml-link:dhw:sqldb:repo.repoobjectcolumn_gross2.adoc[]" as repo.RepoObjectColumn_gross2 << V >> {
   --
   AntoraReferencedColumnList : (nvarchar(max))
   AntoraReferencingColumnList : (nvarchar(max))
@@ -159,5 +159,7 @@ entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_gross2.adoc[]" as repo.RepoObj
 reference.RepoObjectColumn_ReferencedList <.. repo.RepoObjectColumn_gross2
 reference.RepoObjectColumn_ReferencedReferencing <.. reference.RepoObjectColumn_ReferencedList
 "reference.RepoObjectColumn_ReferencedList::AntoraReferencedColumnList" <-- "repo.RepoObjectColumn_gross2::AntoraReferencedColumnList"
+"reference.RepoObjectColumn_ReferencedReferencing::Referencing_fullname" <-- "reference.RepoObjectColumn_ReferencedList::Referencing_fullname"
+"reference.RepoObjectColumn_ReferencedReferencing::Referencing_guid" <-- "reference.RepoObjectColumn_ReferencedList::Referencing_guid"
 @enduml
 

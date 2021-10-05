@@ -1,4 +1,6 @@
-= [docs].[ObjectRefCyclic]
+// tag::HeaderFullDisplayName[]
+= docs.ObjectRefCyclic
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -9,6 +11,7 @@
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
+:ExistsProperty--AntoraIndexList:
 :ExistsProperty--Columns:
 // end::existing_properties[]
 
@@ -17,6 +20,12 @@
 // tag::RepoObject_guid[]
 87E72F09-C5FD-EB11-850F-A81E8446D5B0
 // end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+docs.ObjectRefCyclic
+// end::RepoObject_FullDisplayName2[]
 
 == SysObject_type
 
@@ -39,14 +48,33 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-16 23:58:03
+2021-10-04 19:38:20
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-ObjectRefCyclic_Puml]
-=== ObjectRefCyclic_Puml
+[#column-cultures_name]
+=== cultures_name
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|cultures_name
+|nvarchar(10)
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:docs.objectrefcyclic_entitylist.adoc#column-cultures_name[+docs.ObjectRefCyclic_EntityList.cultures_name+]
+--
+
+
+[#column-objectrefcyclic_puml]
+=== objectrefcyclic_puml
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -86,13 +114,21 @@ view
 // tag::AntoraPkColumnTableRows[]
 
 
+
 // end::AntoraPkColumnTableRows[]
 
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
 |
-|<<column-ObjectRefCyclic_Puml>>
+|<<column-cultures_name>>
+|nvarchar(10)
+|NOT NULL
+|
+|
+
+|
+|<<column-objectrefcyclic_puml>>
 |nvarchar(max)
 |NOT NULL
 |
@@ -111,6 +147,16 @@ view
 
 // tag::AntoraIndexList[]
 
+[#index-idx_objectrefcyclic2x_1]
+=== idx_objectrefcyclic++__++1
+
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-cultures_name>>; nvarchar(10)
+--
+* PK, Unique, Real: 0, 0, 0
+
 // end::AntoraIndexList[]
 
 == AntoraParameterList
@@ -124,6 +170,13 @@ view
 source: property.RepoObjectProperty_cross As rop_cross
 
 
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
+
+
 === AdocUspSteps
 
 // tag::adocuspsteps[]
@@ -135,9 +188,9 @@ source: property.RepoObjectProperty_cross As rop_cross
 
 // tag::antorareferencedlist[]
 * xref:config.ftv_get_parameter_value.adoc[]
-* xref:docs.fs_PumlHeaderTopToBottom.adoc[]
-* xref:docs.ObjectRefCyclic_EntityList.adoc[]
-* xref:docs.ObjectRefCyclic_ObjectRefList.adoc[]
+* xref:docs.fs_pumlheadertoptobottom.adoc[]
+* xref:docs.objectrefcyclic_entitylist.adoc[]
+* xref:docs.objectrefcyclic_objectreflist.adoc[]
 // end::antorareferencedlist[]
 
 
@@ -396,6 +449,13 @@ source: property.RepoObjectProperty_cross As rop_cross
 // end::uspexamples[]
 
 
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+
+// end::uspgenerator_usp_id[]
+
+
 === UspParameters
 
 // tag::uspparameters[]
@@ -418,31 +478,31 @@ source: property.RepoObjectProperty WHERE property_int = 1
 [source,sql]
 ----
 
-
-CREATE View [docs].[ObjectRefCyclic]
+CREATE View docs.ObjectRefCyclic
 As
 Select
-    page_content         =
-    --
-    Concat (
-               '= Cyclic Object References'
-             , Char ( 13 ) + Char ( 10 )
-             , Char ( 13 ) + Char ( 10 )
-             , '== Object List'
-             , Char ( 13 ) + Char ( 10 )
-             , Char ( 13 ) + Char ( 10 )
-             , elist.XrefEntityList
-             , Char ( 13 ) + Char ( 10 )
-             , Char ( 13 ) + Char ( 10 )
-             , '== Object Reference Diagram - Cyclic'
-             , Char ( 13 ) + Char ( 10 )
-             , '
+    cultures_name
+  , page_content         =
+  --
+  Concat (
+             '= Cyclic Object References'
+           , Char ( 13 ) + Char ( 10 )
+           , Char ( 13 ) + Char ( 10 )
+           , '== Object List'
+           , Char ( 13 ) + Char ( 10 )
+           , Char ( 13 ) + Char ( 10 )
+           , elist.XrefEntityList
+           , Char ( 13 ) + Char ( 10 )
+           , Char ( 13 ) + Char ( 10 )
+           , '== Object Reference Diagram - Cyclic'
+           , Char ( 13 ) + Char ( 10 )
+           , '
 [plantuml, ObjectRefCyclic, svg, subs=macros]
 ....
-\include::partial$puml/ObjectRefCyclic.puml[]
+\include::partial$puml/objectrefcyclic.puml[]
 ....
 '
-           )
+         )
   , ObjectRefCyclic_Puml =
   --
   Concat (

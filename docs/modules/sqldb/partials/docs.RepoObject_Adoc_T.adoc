@@ -1,4 +1,6 @@
-= [docs].[RepoObject_Adoc_T]
+// tag::HeaderFullDisplayName[]
+= docs.RepoObject_Adoc_T
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -19,11 +21,13 @@
 :ExistsProperty--is_persistence_update_changed:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--ms_description:
 :ExistsProperty--persistence_source_repoobject_fullname:
 :ExistsProperty--persistence_source_repoobject_fullname2:
 :ExistsProperty--persistence_source_repoobject_guid:
 :ExistsProperty--persistence_source_repoobject_xref:
+:ExistsProperty--pk_index_guid:
+:ExistsProperty--pk_indexpatterncolumndatatype:
+:ExistsProperty--pk_indexpatterncolumnname:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--usp_persistence_repoobject_guid:
 :ExistsProperty--FK:
@@ -36,6 +40,12 @@
 // tag::RepoObject_guid[]
 F4D1303B-0993-EB11-84F2-A81E8446D5B0
 // end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+docs.RepoObject_Adoc_T
+// end::RepoObject_FullDisplayName2[]
 
 == SysObject_type
 
@@ -52,20 +62,58 @@ user table
 == SysObject_id
 
 // tag::SysObject_id[]
-909246294
+1513108481
 // end::SysObject_id[]
 
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-04-27 12:41:30
+2021-10-01 18:06:44
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-AdocContent]
-=== AdocContent
+[#column-repoobject_guid]
+=== repoobject_guid
+
+[cols="d,8m,m,m,m,d"]
+|===
+|1
+|*RepoObject_guid*
+|uniqueidentifier
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:docs.repoobject_adoc.adoc#column-repoobject_guid[+docs.RepoObject_Adoc.RepoObject_guid+]
+--
+
+
+[#column-cultures_name]
+=== cultures_name
+
+[cols="d,8m,m,m,m,d"]
+|===
+|2
+|*cultures_name*
+|nvarchar(10)
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:docs.repoobject_adoc.adoc#column-cultures_name[+docs.RepoObject_Adoc.cultures_name+]
+--
+
+
+[#column-adoccontent]
+=== adoccontent
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -79,12 +127,12 @@ user table
 
 .Referenced Columns
 --
-* xref:docs.RepoObject_Adoc.adoc#column-AdocContent[+docs.RepoObject_Adoc.AdocContent+]
+* xref:docs.repoobject_adoc.adoc#column-adoccontent[+docs.RepoObject_Adoc.AdocContent+]
 --
 
 
-[#column-is_DocsOutput]
-=== is_DocsOutput
+[#column-is_docsoutput]
+=== is_docsoutput
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -98,12 +146,12 @@ user table
 
 .Referenced Columns
 --
-* xref:docs.RepoObject_Adoc.adoc#column-is_DocsOutput[+docs.RepoObject_Adoc.is_DocsOutput+]
+* xref:docs.repoobject_adoc.adoc#column-is_docsoutput[+docs.RepoObject_Adoc.is_DocsOutput+]
 --
 
 
-[#column-PropertyCount]
-=== PropertyCount
+[#column-propertycount]
+=== propertycount
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -117,12 +165,50 @@ user table
 
 .Referenced Columns
 --
-* xref:docs.RepoObject_Adoc.adoc#column-PropertyCount[+docs.RepoObject_Adoc.PropertyCount+]
+* xref:docs.repoobject_adoc.adoc#column-propertycount[+docs.RepoObject_Adoc.PropertyCount+]
 --
 
 
-[#column-RepoObject_fullname]
-=== RepoObject_fullname
+[#column-repoobject_displayname]
+=== repoobject_displayname
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|RepoObject_DisplayName
+|nvarchar(128)
+|NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:docs.repoobject_adoc.adoc#column-repoobject_displayname[+docs.RepoObject_Adoc.RepoObject_DisplayName+]
+--
+
+
+[#column-repoobject_fulldisplayname2]
+=== repoobject_fulldisplayname2
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|RepoObject_FullDisplayName2
+|nvarchar(257)
+|NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:docs.repoobject_adoc.adoc#column-repoobject_fulldisplayname2[+docs.RepoObject_Adoc.RepoObject_FullDisplayName2+]
+--
+
+
+[#column-repoobject_fullname]
+=== repoobject_fullname
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -136,12 +222,12 @@ user table
 
 .Referenced Columns
 --
-* xref:docs.RepoObject_Adoc.adoc#column-RepoObject_fullname[+docs.RepoObject_Adoc.RepoObject_fullname+]
+* xref:docs.repoobject_adoc.adoc#column-repoobject_fullname[+docs.RepoObject_Adoc.RepoObject_fullname+]
 --
 
 
-[#column-RepoObject_fullname2]
-=== RepoObject_fullname2
+[#column-repoobject_fullname2]
+=== repoobject_fullname2
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -155,31 +241,12 @@ user table
 
 .Referenced Columns
 --
-* xref:docs.RepoObject_Adoc.adoc#column-RepoObject_fullname2[+docs.RepoObject_Adoc.RepoObject_fullname2+]
+* xref:docs.repoobject_adoc.adoc#column-repoobject_fullname2[+docs.RepoObject_Adoc.RepoObject_fullname2+]
 --
 
 
-[#column-RepoObject_guid]
-=== RepoObject_guid
-
-[cols="d,8m,m,m,m,d"]
-|===
-|
-|RepoObject_guid
-|uniqueidentifier
-|NOT NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:docs.RepoObject_Adoc.adoc#column-RepoObject_guid[+docs.RepoObject_Adoc.RepoObject_guid+]
---
-
-
-[#column-RepoObject_schema_name]
-=== RepoObject_schema_name
+[#column-repoobject_schema_name]
+=== repoobject_schema_name
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -193,12 +260,31 @@ user table
 
 .Referenced Columns
 --
-* xref:docs.RepoObject_Adoc.adoc#column-RepoObject_schema_name[+docs.RepoObject_Adoc.RepoObject_schema_name+]
+* xref:docs.repoobject_adoc.adoc#column-repoobject_schema_name[+docs.RepoObject_Adoc.RepoObject_schema_name+]
 --
 
 
-[#column-SysObject_fullname]
-=== SysObject_fullname
+[#column-repoobject_translation]
+=== repoobject_translation
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|RepoObject_translation
+|nvarchar(128)
+|NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:docs.repoobject_adoc.adoc#column-repoobject_translation[+docs.RepoObject_Adoc.RepoObject_translation+]
+--
+
+
+[#column-sysobject_fullname]
+=== sysobject_fullname
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -212,12 +298,12 @@ user table
 
 .Referenced Columns
 --
-* xref:docs.RepoObject_Adoc.adoc#column-SysObject_fullname[+docs.RepoObject_Adoc.SysObject_fullname+]
+* xref:docs.repoobject_adoc.adoc#column-sysobject_fullname[+docs.RepoObject_Adoc.SysObject_fullname+]
 --
 
 
-[#column-SysObject_fullname2]
-=== SysObject_fullname2
+[#column-sysobject_fullname2]
+=== sysobject_fullname2
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -231,12 +317,12 @@ user table
 
 .Referenced Columns
 --
-* xref:docs.RepoObject_Adoc.adoc#column-SysObject_fullname2[+docs.RepoObject_Adoc.SysObject_fullname2+]
+* xref:docs.repoobject_adoc.adoc#column-sysobject_fullname2[+docs.RepoObject_Adoc.SysObject_fullname2+]
 --
 
 
-[#column-SysObject_schema_name]
-=== SysObject_schema_name
+[#column-sysobject_schema_name]
+=== sysobject_schema_name
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -250,12 +336,12 @@ user table
 
 .Referenced Columns
 --
-* xref:docs.RepoObject_Adoc.adoc#column-SysObject_schema_name[+docs.RepoObject_Adoc.SysObject_schema_name+]
+* xref:docs.repoobject_adoc.adoc#column-sysobject_schema_name[+docs.RepoObject_Adoc.SysObject_schema_name+]
 --
 
 
-[#column-SysObject_type]
-=== SysObject_type
+[#column-sysobject_type]
+=== sysobject_type
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -269,12 +355,12 @@ user table
 
 .Referenced Columns
 --
-* xref:docs.RepoObject_Adoc.adoc#column-SysObject_type[+docs.RepoObject_Adoc.SysObject_type+]
+* xref:docs.repoobject_adoc.adoc#column-sysobject_type[+docs.RepoObject_Adoc.SysObject_type+]
 --
 
 
-[#column-SysObject_type_name]
-=== SysObject_type_name
+[#column-sysobject_type_name]
+=== sysobject_type_name
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -288,7 +374,7 @@ user table
 
 .Referenced Columns
 --
-* xref:docs.RepoObject_Adoc.adoc#column-SysObject_type_name[+docs.RepoObject_Adoc.SysObject_type_name+]
+* xref:docs.repoobject_adoc.adoc#column-sysobject_type_name[+docs.RepoObject_Adoc.SysObject_type_name+]
 --
 
 
@@ -303,6 +389,22 @@ user table
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
+|1
+|*<<column-repoobject_guid>>*
+|uniqueidentifier
+|NOT NULL
+|
+|
+
+|2
+|*<<column-cultures_name>>*
+|nvarchar(10)
+|NOT NULL
+|
+|
+
+
+
 
 
 
@@ -320,85 +422,101 @@ user table
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
+
+
 |
-|<<column-AdocContent>>
+|<<column-adoccontent>>
 |nvarchar(max)
 |NOT NULL
 |
 |
 
 |
-|<<column-is_DocsOutput>>
+|<<column-is_docsoutput>>
 |int
 |NULL
 |
 |
 
 |
-|<<column-PropertyCount>>
+|<<column-propertycount>>
 |int
 |NULL
 |
 |
 
 |
-|<<column-RepoObject_fullname>>
-|nvarchar(261)
-|NULL
-|
-|
-
-|
-|<<column-RepoObject_fullname2>>
-|nvarchar(257)
-|NULL
-|
-|
-
-|
-|<<column-RepoObject_guid>>
-|uniqueidentifier
-|NOT NULL
-|
-|
-
-|
-|<<column-RepoObject_schema_name>>
+|<<column-repoobject_displayname>>
 |nvarchar(128)
 |NULL
 |
 |
 
 |
-|<<column-SysObject_fullname>>
-|nvarchar(261)
-|NULL
-|
-|
-
-|
-|<<column-SysObject_fullname2>>
+|<<column-repoobject_fulldisplayname2>>
 |nvarchar(257)
 |NULL
 |
 |
 
 |
-|<<column-SysObject_schema_name>>
+|<<column-repoobject_fullname>>
+|nvarchar(261)
+|NULL
+|
+|
+
+|
+|<<column-repoobject_fullname2>>
+|nvarchar(257)
+|NULL
+|
+|
+
+|
+|<<column-repoobject_schema_name>>
 |nvarchar(128)
 |NULL
 |
 |
 
 |
-|<<column-SysObject_type>>
+|<<column-repoobject_translation>>
+|nvarchar(128)
+|NULL
+|
+|
+
+|
+|<<column-sysobject_fullname>>
+|nvarchar(261)
+|NULL
+|
+|
+
+|
+|<<column-sysobject_fullname2>>
+|nvarchar(257)
+|NULL
+|
+|
+
+|
+|<<column-sysobject_schema_name>>
+|nvarchar(128)
+|NULL
+|
+|
+
+|
+|<<column-sysobject_type>>
 |char(2)
 |NULL
 |
 |
 
 |
-|<<column-SysObject_type_name>>
+|<<column-sysobject_type_name>>
 |nvarchar(128)
 |NULL
 |
@@ -410,10 +528,22 @@ user table
 
 // tag::AntoraIndexList[]
 
-[#index-idx_RepoObject_Adoc_T2x_1]
-=== idx_RepoObject_Adoc_T++__++1
+[#index-pk_repoobject_adoc_t]
+=== pk_repoobject_adoc_t
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-RepoObject_guid>>; uniqueidentifier
+* <<column-cultures_name>>; nvarchar(10)
+--
+* PK, Unique, Real: 1, 1, 1
+
+
+[#index-idx_repoobject_adoc_t2x_1]
+=== idx_repoobject_adoc_t++__++1
+
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -433,6 +563,13 @@ user table
 source: property.RepoObjectProperty_cross As rop_cross
 
 
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
+
+
 === AdocUspSteps
 
 // tag::adocuspsteps[]
@@ -443,14 +580,14 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:docs.RepoObject_Adoc.adoc[]
+* xref:docs.repoobject_adoc.adoc[]
 // end::antorareferencedlist[]
 
 
 === AntoraReferencingList
 
 // tag::antorareferencinglist[]
-* xref:docs.usp_PERSIST_RepoObject_Adoc_T.adoc[]
+* xref:docs.usp_persist_repoobject_adoc_t.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -460,18 +597,18 @@ source: property.RepoObjectProperty_cross As rop_cross
 
 `AdocContent` is the content of a page to be used by Antora as partial.
 
-The view xref:docs.RepoObject_Adoc.adoc[] will persisted into xref:docs.RepoObject_Adoc_T.adoc[] +
-and later exported for Antora by xref:docs.usp_PERSIST_RepoObject_Adoc_T.adoc[]
+The view xref:docs.repoobject_adoc.adoc[] will persisted into xref:docs.repoobject_adoc_t.adoc[] +
+and later exported for Antora by xref:docs.usp_persist_repoobject_adoc_t.adoc[]
 
 One document per RepoObject is generated, it contains all information (but not diagrams) which is used by Antora. 
 
 All Parts of the documentations are tagged, Antora can reference the content using this tags.
 
-* any per RepoObject existing properties in xref:property.RepoObjectProperty.adoc[] are extracted as separate tags
-* some specific additional tags are extracted from other sources (some lists, some content from xref:repo.RepoObject_gross.adoc[])
+* any per RepoObject existing properties in xref:property.repoobjectproperty.adoc[] are extracted as separate tags
+* some specific additional tags are extracted from other sources (some lists, some content from xref:repo.repoobject_gross.adoc[])
 * a special entry per exported tag is created: `':ExistsProperty--' + Lower ( rop.property_name ) + ':'` which can be used to check the existence of a tag entry
 
-To use additional content in Antora documentation first try to include new properties into xref:property.RepoObjectProperty.adoc[]
+To use additional content in Antora documentation first try to include new properties into xref:property.repoobjectproperty.adoc[]
 // end::description[]
 
 
@@ -633,20 +770,6 @@ To use additional content in Antora documentation first try to include new prope
 
 // tag::ms_description[]
 
-`AdocContent` is the content of a page to be used by Antora as partial.
-
-The view xref:docs.RepoObject_Adoc.adoc[] will persisted into xref:docs.RepoObject_Adoc_T.adoc[] +
-and later exported for Antora by xref:docs.usp_PERSIST_RepoObject_Adoc_T.adoc[]
-
-One document per RepoObject is generated, it contains all information (but not diagrams) which is used by Antora. 
-
-All Parts of the documentations are tagged, Antora can reference the content using this tags.
-
-* any per RepoObject existing properties in xref:property.RepoObjectProperty.adoc[] are extracted as separate tags
-* some specific additional tags are extracted from other sources (some lists, some content from xref:repo.RepoObject_gross.adoc[])
-* a special entry per exported tag is created: `':ExistsProperty--' + Lower ( rop.property_name ) + ':'` which can be used to check the existence of a tag entry
-
-To use additional content in Antora documentation first try to include new properties into xref:property.RepoObjectProperty.adoc[]
 // end::ms_description[]
 
 
@@ -674,28 +797,28 @@ D5E0B563-4291-EB11-84F2-A81E8446D5B0
 === persistence_source_RepoObject_xref
 
 // tag::persistence_source_repoobject_xref[]
-xref:docs.RepoObject_Adoc.adoc[]
+xref:docs.repoobject_adoc.adoc[]
 // end::persistence_source_repoobject_xref[]
 
 
 === pk_index_guid
 
 // tag::pk_index_guid[]
-
+A8A507D5-0622-EC11-8524-A81E8446D5B0
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-
+uniqueidentifier,nvarchar(10)
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-
+RepoObject_guid,cultures_name
 // end::pk_indexpatterncolumnname[]
 
 
@@ -725,6 +848,13 @@ xref:docs.RepoObject_Adoc.adoc[]
 // tag::uspexamples[]
 
 // end::uspexamples[]
+
+
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+
+// end::uspgenerator_usp_id[]
 
 
 === UspParameters

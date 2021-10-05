@@ -30,35 +30,41 @@ entity "puml-link:dhw:sqldb:config.ftv_dwh_database.adoc[]" as config.ftv_dwh_da
   --
 }
 
-entity "puml-link:dhw:sqldb:config.Parameter.adoc[]" as config.Parameter << U >> {
+entity "puml-link:dhw:sqldb:config.parameter.adoc[]" as config.Parameter << U >> {
   - **Parameter_name** : (varchar(100))
   - **sub_Parameter** : (nvarchar(128))
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoSchema.adoc[]" as repo.RepoSchema << U >> {
+entity "puml-link:dhw:sqldb:configt.parameter_default.adoc[]" as configT.Parameter_default << V >> {
+  - **Parameter_name** : (varchar(52))
+  - **sub_Parameter** : (nvarchar(27))
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.reposchema.adoc[]" as repo.RepoSchema << U >> {
   - **RepoSchema_guid** : (uniqueidentifier)
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoSchema_ssas_src.adoc[]" as repo.RepoSchema_ssas_src << V >> {
+entity "puml-link:dhw:sqldb:repo.reposchema_ssas_src.adoc[]" as repo.RepoSchema_ssas_src << V >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoSchema_ssas_tgt.adoc[]" as repo.RepoSchema_ssas_tgt << V >> {
+entity "puml-link:dhw:sqldb:repo.reposchema_ssas_tgt.adoc[]" as repo.RepoSchema_ssas_tgt << V >> {
   - **RepoSchema_guid** : (uniqueidentifier)
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.SysSchema_RepoSchema_via_name.adoc[]" as repo.SysSchema_RepoSchema_via_name << V >> {
+entity "puml-link:dhw:sqldb:repo.sysschema_reposchema_via_name.adoc[]" as repo.SysSchema_RepoSchema_via_name << V >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:repo_sys.ExtendedProperties.adoc[]" as repo_sys.ExtendedProperties << V >> {
+entity "puml-link:dhw:sqldb:repo_sys.extendedproperties.adoc[]" as repo_sys.ExtendedProperties << V >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:repo_sys.SysSchema.adoc[]" as repo_sys.SysSchema << V >> {
+entity "puml-link:dhw:sqldb:repo_sys.sysschema.adoc[]" as repo_sys.SysSchema << V >> {
   --
 }
 
@@ -79,7 +85,7 @@ entity "puml-link:dhw:sqldb:ssas.model_json_201_descriptions_multiline.adoc[]" a
   --
 }
 
-entity "puml-link:dhw:sqldb:ssas.model_json_2011_descriptions_StrAgg.adoc[]" as ssas.model_json_2011_descriptions_StrAgg << V >> {
+entity "puml-link:dhw:sqldb:ssas.model_json_2011_descriptions_stragg.adoc[]" as ssas.model_json_2011_descriptions_StrAgg << V >> {
   --
 }
 
@@ -109,16 +115,17 @@ entity "puml-link:dhw:sqldb:sys_dwh.schemas.adoc[]" as sys_dwh.schemas << SN >> 
 
 config.ftv_dwh_database <.. repo_sys.ExtendedProperties
 config.Parameter <.. config.ftv_dwh_database
-repo.RepoSchema <.. repo.RepoSchema_ssas_tgt
+configT.Parameter_default <.. config.Parameter
 repo.RepoSchema <.. repo.SysSchema_RepoSchema_via_name
+repo.RepoSchema <.. repo.RepoSchema_ssas_tgt
 repo.RepoSchema_ssas_src <.. repo.RepoSchema_ssas_tgt
 repo.RepoSchema_ssas_tgt <.. repo.RepoSchema
 repo_sys.ExtendedProperties <.. repo_sys.SysSchema
 repo_sys.SysSchema <.. repo.SysSchema_RepoSchema_via_name
 ssas.model_json <.. ssas.model_json_10
 ssas.model_json_10 <.. ssas.model_json_20
-ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
 ssas.model_json_20 <.. repo.RepoSchema_ssas_src
+ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
 ssas.model_json_201_descriptions_multiline <.. ssas.model_json_2011_descriptions_StrAgg
 ssas.model_json_2011_descriptions_StrAgg <.. repo.RepoSchema_ssas_src
 sys_dwh.columns <.. repo_sys.ExtendedProperties

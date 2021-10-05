@@ -1,4 +1,6 @@
-= [property].[RepoObjectProperty_cross]
+// tag::HeaderFullDisplayName[]
+= property.RepoObjectProperty_cross
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -8,7 +10,6 @@
 :ExistsProperty--description:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--ms_description:
 :ExistsProperty--pk_index_guid:
 :ExistsProperty--pk_indexpatterncolumndatatype:
 :ExistsProperty--pk_indexpatterncolumnname:
@@ -24,6 +25,12 @@
 // tag::RepoObject_guid[]
 EC5BF6C2-0593-EB11-84F2-A81E8446D5B0
 // end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+property.RepoObjectProperty_cross
+// end::RepoObject_FullDisplayName2[]
 
 == SysObject_type
 
@@ -46,14 +53,14 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-08-17 19:03:10
+2021-10-02 13:23:34
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-RepoObject_guid]
-=== RepoObject_guid
+[#column-repoobject_guid]
+=== repoobject_guid
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -67,7 +74,7 @@ view
 
 .Referenced Columns
 --
-* xref:repo.RepoObject.adoc#column-RepoObject_guid[+repo.RepoObject.RepoObject_guid+]
+* xref:repo.repoobject.adoc#column-repoobject_guid[+repo.RepoObject.RepoObject_guid+]
 --
 
 
@@ -86,7 +93,7 @@ view
 
 .Referenced Columns
 --
-* xref:property.PropertyName_RepoObject.adoc#column-property_name[+property.PropertyName_RepoObject.property_name+]
+* xref:property.propertyname_repoobject.adoc#column-property_name[+property.PropertyName_RepoObject.property_name+]
 --
 
 
@@ -102,7 +109,7 @@ view
 
 // tag::AntoraPkColumnTableRows[]
 |1
-|*<<column-RepoObject_guid>>*
+|*<<column-repoobject_guid>>*
 |uniqueidentifier
 |NOT NULL
 |
@@ -128,10 +135,10 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-PK_RepoObjectProperty_cross]
-=== PK_RepoObjectProperty_cross
+[#index-pk_repoobjectproperty_cross]
+=== pk_repoobjectproperty_cross
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -140,10 +147,10 @@ view
 * PK, Unique, Real: 1, 1, 0
 
 
-[#index-idx_RepoObjectProperty_cross2x_2]
-=== idx_RepoObjectProperty_cross++__++2
+[#index-idx_repoobjectproperty_cross2x_2]
+=== idx_repoobjectproperty_cross++__++2
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
@@ -151,10 +158,10 @@ view
 * PK, Unique, Real: 0, 0, 0
 
 
-[#index-idx_RepoObjectProperty_cross2x_3]
-=== idx_RepoObjectProperty_cross++__++3
+[#index-idx_repoobjectproperty_cross2x_3]
+=== idx_repoobjectproperty_cross++__++3
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#property_name[property_name]
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#property_name[property_name]
 +
 --
 * <<column-property_name>>; nvarchar(128)
@@ -174,6 +181,13 @@ view
 source: property.RepoObjectProperty_cross As rop_cross
 
 
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
+
+
 === AdocUspSteps
 
 // tag::adocuspsteps[]
@@ -184,15 +198,15 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:property.PropertyName_RepoObject.adoc[]
-* xref:repo.RepoObject.adoc[]
+* xref:property.propertyname_repoobject.adoc[]
+* xref:repo.repoobject.adoc[]
 // end::antorareferencedlist[]
 
 
 === AntoraReferencingList
 
 // tag::antorareferencinglist[]
-* xref:docs.RepoObject_Adoc.adoc[]
+* xref:docs.repoobject_adoc.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -364,9 +378,6 @@ When we use includes with tags we can't check if the tags exists or not. That's 
 
 // tag::ms_description[]
 
-* cross join between RepoObject and *all* used properties in any RepoObject
-* required for Antora export: per RepoObject we export partials for all Properties: +
-When we use includes with tags we can't check if the tags exists or not. That's why we need to create all tags, with contents without content
 // end::ms_description[]
 
 
@@ -448,6 +459,13 @@ RepoObject_guid,property_name
 // end::uspexamples[]
 
 
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+
+// end::uspgenerator_usp_id[]
+
+
 === UspParameters
 
 // tag::uspparameters[]
@@ -471,7 +489,7 @@ source: property.RepoObjectProperty WHERE property_int = 1
 ----
 
 /*
-<<property_start>>MS_Description
+<<property_start>>Description
 * cross join between RepoObject and *all* used properties in any RepoObject
 * required for Antora export: per RepoObject we export partials for all Properties: +
 When we use includes with tags we can't check if the tags exists or not. That's why we need to create all tags, with contents without content
@@ -485,7 +503,6 @@ Select
 From
     repo.RepoObject                             As ro
     Cross Join property.PropertyName_RepoObject As p
-
 ----
 =======
 // end::sql_modules_definition[]

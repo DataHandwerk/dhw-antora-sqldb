@@ -26,17 +26,19 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:docs.AntoraIndexSemanticgroupPatterndatatype.adoc[]" as docs.AntoraIndexSemanticgroupPatterndatatype << V >> {
+entity "puml-link:dhw:sqldb:docs.antoraindexsemanticgrouppatterndatatype.adoc[]" as docs.AntoraIndexSemanticgroupPatterndatatype << V >> {
   **IndexSemanticGroup** : (nvarchar(512))
   **IndexPatternColumnDatatype** : (nvarchar(4000))
   --
   AntoraIndexSemanticgroupPatterndatatype : (nvarchar(max))
+  cultures_name : (nvarchar(10))
   --
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.RepoObject_IndexList.adoc[]" as docs.RepoObject_IndexList << V >> {
+entity "puml-link:dhw:sqldb:docs.repoobject_indexlist.adoc[]" as docs.RepoObject_IndexList << V >> {
   **RepoObject_guid** : (uniqueidentifier)
+  **cultures_name** : (nvarchar(10))
   --
   AntoraIndexList : (nvarchar(max))
   PumlIndexList : (nvarchar(max))
@@ -44,7 +46,7 @@ entity "puml-link:dhw:sqldb:docs.RepoObject_IndexList.adoc[]" as docs.RepoObject
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.ForeignKey_gross.adoc[]" as repo.ForeignKey_gross << V >> {
+entity "puml-link:dhw:sqldb:repo.foreignkey_gross.adoc[]" as repo.ForeignKey_gross << V >> {
   --
   delete_referential_action : (tinyint)
   ForeignKey_fullname : (nvarchar(517))
@@ -75,7 +77,7 @@ entity "puml-link:dhw:sqldb:repo.ForeignKey_gross.adoc[]" as repo.ForeignKey_gro
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.ForeignKey_Indexes.adoc[]" as repo.ForeignKey_Indexes << V >> {
+entity "puml-link:dhw:sqldb:repo.foreignkey_indexes.adoc[]" as repo.ForeignKey_Indexes << V >> {
   --
   delete_referential_action : (tinyint)
   ForeignKey_fullname : (nvarchar(261))
@@ -105,7 +107,7 @@ entity "puml-link:dhw:sqldb:repo.ForeignKey_Indexes.adoc[]" as repo.ForeignKey_I
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.ForeignKey_virtual_Indexes.adoc[]" as repo.ForeignKey_virtual_Indexes << V >> {
+entity "puml-link:dhw:sqldb:repo.foreignkey_virtual_indexes.adoc[]" as repo.ForeignKey_virtual_Indexes << V >> {
   --
   - delete_referential_action : (tinyint)
   - ForeignKey_fullname : (nvarchar(517))
@@ -135,7 +137,7 @@ entity "puml-link:dhw:sqldb:repo.ForeignKey_virtual_Indexes.adoc[]" as repo.Fore
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.Index_ColumList_T.adoc[]" as repo.Index_ColumList_T << U >> {
+entity "puml-link:dhw:sqldb:repo.index_columlist_t.adoc[]" as repo.Index_ColumList_T << U >> {
   - **index_guid** : (uniqueidentifier)
   --
   AntoraIndexColumnList : (nvarchar(max))
@@ -148,7 +150,7 @@ entity "puml-link:dhw:sqldb:repo.Index_ColumList_T.adoc[]" as repo.Index_ColumLi
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.Index_gross.adoc[]" as repo.Index_gross << V >> {
+entity "puml-link:dhw:sqldb:repo.index_gross.adoc[]" as repo.Index_gross << V >> {
   --
   AntoraIndexColumnList : (nvarchar(max))
   ColumnList : (nvarchar(max))
@@ -160,6 +162,8 @@ entity "puml-link:dhw:sqldb:repo.Index_gross.adoc[]" as repo.Index_gross << V >>
   IndexPatternColumnDatatype : (nvarchar(4000))
   IndexPatternColumnName : (nvarchar(4000))
   IndexSemanticGroup : (nvarchar(512))
+  - is_DocsExclude : (bit)
+  is_DocsOutput : (int)
   is_index_disabled : (bit)
   is_index_primary_key : (bit)
   is_index_real : (bit)
@@ -184,7 +188,7 @@ entity "puml-link:dhw:sqldb:repo.Index_gross.adoc[]" as repo.Index_gross << V >>
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.Index_Settings.adoc[]" as repo.Index_Settings << U >> {
+entity "puml-link:dhw:sqldb:repo.index_settings.adoc[]" as repo.Index_Settings << U >> {
   - **index_guid** : (uniqueidentifier)
   --
   IndexPatternColumnDatatype : (nvarchar(4000))
@@ -195,7 +199,7 @@ entity "puml-link:dhw:sqldb:repo.Index_Settings.adoc[]" as repo.Index_Settings <
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.Index_union.adoc[]" as repo.Index_union << V >> {
+entity "puml-link:dhw:sqldb:repo.index_union.adoc[]" as repo.Index_union << V >> {
   **index_guid** : (uniqueidentifier)
   --
   index_name : (nvarchar(450))
@@ -211,7 +215,7 @@ entity "puml-link:dhw:sqldb:repo.Index_union.adoc[]" as repo.Index_union << V >>
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObject_gross.adoc[]" as repo.RepoObject_gross << V >> {
+entity "puml-link:dhw:sqldb:repo.repoobject_gross.adoc[]" as repo.RepoObject_gross << V >> {
   --
   AntoraComponent : (nvarchar(max))
   AntoraModule : (nvarchar(max))
@@ -256,10 +260,10 @@ entity "puml-link:dhw:sqldb:repo.RepoObject_gross.adoc[]" as repo.RepoObject_gro
   persistence_source_RepoObject_fullname : (nvarchar(261))
   persistence_source_RepoObject_fullname2 : (nvarchar(257))
   persistence_source_RepoObject_guid : (uniqueidentifier)
-  persistence_source_RepoObject_xref : (nvarchar(269))
+  persistence_source_RepoObject_xref : (nvarchar(4000))
   persistence_source_SysObject_fullname : (nvarchar(261))
   persistence_source_SysObject_fullname2 : (nvarchar(257))
-  persistence_source_SysObject_xref : (nvarchar(269))
+  persistence_source_SysObject_xref : (nvarchar(4000))
   pk_index_guid : (uniqueidentifier)
   pk_IndexPatternColumnDatatype : (nvarchar(4000))
   pk_IndexPatternColumnName : (nvarchar(4000))
@@ -301,7 +305,7 @@ entity "puml-link:dhw:sqldb:repo.RepoObject_gross.adoc[]" as repo.RepoObject_gro
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObject_SqlCreateTable.adoc[]" as repo.RepoObject_SqlCreateTable << V >> {
+entity "puml-link:dhw:sqldb:repo.repoobject_sqlcreatetable.adoc[]" as repo.RepoObject_SqlCreateTable << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
   ConList : (nvarchar(max))
@@ -315,7 +319,7 @@ entity "puml-link:dhw:sqldb:repo.RepoObject_SqlCreateTable.adoc[]" as repo.RepoO
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.usp_Index_finish.adoc[]" as repo.usp_Index_finish << P >> {
+entity "puml-link:dhw:sqldb:repo.usp_index_finish.adoc[]" as repo.usp_Index_finish << P >> {
   --
   --
   --
@@ -327,16 +331,16 @@ entity "puml-link:dhw:sqldb:repo.usp_index_inheritance.adoc[]" as repo.usp_index
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.usp_Index_virtual_set.adoc[]" as repo.usp_Index_virtual_set << P >> {
+entity "puml-link:dhw:sqldb:repo.usp_index_virtual_set.adoc[]" as repo.usp_Index_virtual_set << P >> {
   --
   --
   --
 }
 
 repo.Index_ColumList_T <.. repo.Index_gross
-repo.Index_gross <.. repo.usp_Index_virtual_set
 repo.Index_gross <.. repo.RepoObject_SqlCreateTable
 repo.Index_gross <.. repo.usp_index_inheritance
+repo.Index_gross <.. repo.usp_Index_virtual_set
 repo.Index_gross <.. repo.ForeignKey_Indexes
 repo.Index_gross <.. repo.ForeignKey_virtual_Indexes
 repo.Index_gross <.. repo.usp_Index_finish
@@ -399,6 +403,8 @@ repo.RepoObject_gross <.. repo.Index_gross
 "repo.Index_union::is_index_unique" <-- "repo.Index_gross::is_index_unique"
 "repo.Index_union::parent_RepoObject_guid" <-- "repo.Index_gross::parent_RepoObject_guid"
 "repo.Index_union::referenced_index_guid" <-- "repo.Index_gross::referenced_index_guid"
+"repo.RepoObject_gross::is_DocsExclude" <-- "repo.Index_gross::is_DocsExclude"
+"repo.RepoObject_gross::is_DocsOutput" <-- "repo.Index_gross::is_DocsOutput"
 "repo.RepoObject_gross::is_persistence" <-- "repo.Index_gross::is_persistence"
 "repo.RepoObject_gross::is_repo_managed" <-- "repo.Index_gross::is_repo_managed"
 "repo.RepoObject_gross::RepoObject_fullname" <-- "repo.Index_gross::RepoObject_fullname"

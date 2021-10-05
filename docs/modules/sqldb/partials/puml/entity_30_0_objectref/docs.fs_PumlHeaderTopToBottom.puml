@@ -30,17 +30,24 @@ entity "puml-link:dhw:sqldb:config.ftv_get_parameter_value.adoc[]" as config.ftv
   --
 }
 
-entity "puml-link:dhw:sqldb:config.Parameter.adoc[]" as config.Parameter << U >> {
+entity "puml-link:dhw:sqldb:config.parameter.adoc[]" as config.Parameter << U >> {
   - **Parameter_name** : (varchar(100))
   - **sub_Parameter** : (nvarchar(128))
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.fs_PumlHeaderTopToBottom.adoc[]" as docs.fs_PumlHeaderTopToBottom << FN >> {
+entity "puml-link:dhw:sqldb:configt.parameter_default.adoc[]" as configT.Parameter_default << V >> {
+  - **Parameter_name** : (varchar(52))
+  - **sub_Parameter** : (nvarchar(27))
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.fs_pumlheadertoptobottom.adoc[]" as docs.fs_PumlHeaderTopToBottom << FN >> {
   --
 }
 
 config.ftv_get_parameter_value <.. docs.fs_PumlHeaderTopToBottom
 config.Parameter <.. config.ftv_get_parameter_value
+configT.Parameter_default <.. config.Parameter
 @enduml
 

@@ -26,19 +26,24 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:reference.RepoObject_reference_persistence_target_as_source.adoc[]" as reference.RepoObject_reference_persistence_target_as_source << V >> {
+entity "puml-link:dhw:sqldb:reference.repoobject_reference_persistence_target_as_source.adoc[]" as reference.RepoObject_reference_persistence_target_as_source << V >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:reference.RepoObject_reference_SqlExpressionDependencies.adoc[]" as reference.RepoObject_reference_SqlExpressionDependencies << V >> {
+entity "puml-link:dhw:sqldb:reference.repoobject_reference_sqlexpressiondependencies.adoc[]" as reference.RepoObject_reference_SqlExpressionDependencies << V >> {
   **referenced_RepoObject_guid** : (uniqueidentifier)
   **referencing_RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity "puml-link:dhw:sqldb:reference.RepoObject_reference_union.adoc[]" as reference.RepoObject_reference_union << V >> {
+entity "puml-link:dhw:sqldb:reference.repoobject_reference_union.adoc[]" as reference.RepoObject_reference_union << V >> {
   **referenced_RepoObject_guid** : (uniqueidentifier)
   **referencing_RepoObject_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobject.adoc[]" as repo.RepoObject << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
@@ -48,6 +53,7 @@ entity "puml-link:dhw:sqldb:repo_sys.sql_expression_dependencies.adoc[]" as repo
 
 reference.RepoObject_reference_SqlExpressionDependencies <.. reference.RepoObject_reference_union
 reference.RepoObject_reference_SqlExpressionDependencies <.. reference.RepoObject_reference_persistence_target_as_source
+repo.RepoObject <.. reference.RepoObject_reference_SqlExpressionDependencies
 repo_sys.sql_expression_dependencies <.. reference.RepoObject_reference_SqlExpressionDependencies
 @enduml
 

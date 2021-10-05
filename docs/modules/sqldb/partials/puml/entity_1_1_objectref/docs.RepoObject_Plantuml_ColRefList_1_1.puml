@@ -26,32 +26,42 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:docs.fs_cleanStringForPuml.adoc[]" as docs.fs_cleanStringForPuml << FN >> {
+entity "puml-link:dhw:sqldb:docs.fs_cleanstringforpuml.adoc[]" as docs.fs_cleanStringForPuml << FN >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.RepoObject_Plantuml.adoc[]" as docs.RepoObject_Plantuml << V >> {
+entity "puml-link:dhw:sqldb:docs.repoobject_outputfilter_t.adoc[]" as docs.RepoObject_OutputFilter_T << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **cultures_name** : (nvarchar(10))
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.RepoObject_Plantuml_ColRefList_1_1.adoc[]" as docs.RepoObject_Plantuml_ColRefList_1_1 << V >> {
+entity "puml-link:dhw:sqldb:docs.repoobject_plantuml.adoc[]" as docs.RepoObject_Plantuml << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  **cultures_name** : (nvarchar(10))
   --
 }
 
-entity "puml-link:dhw:sqldb:reference.RepoObjectColumn_reference_T.adoc[]" as reference.RepoObjectColumn_reference_T << U >> {
+entity "puml-link:dhw:sqldb:docs.repoobject_plantuml_colreflist_1_1.adoc[]" as docs.RepoObject_Plantuml_ColRefList_1_1 << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.repoobjectcolumn_reference_t.adoc[]" as reference.RepoObjectColumn_reference_T << U >> {
   **referenced_RepoObjectColumn_guid** : (uniqueidentifier)
   **referencing_RepoObjectColumn_guid** : (uniqueidentifier)
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
-  - **RepoObject_guid** : (uniqueidentifier)
+entity "puml-link:dhw:sqldb:ssas.repoobjectcolumn_translation_t.adoc[]" as ssas.RepoObjectColumn_translation_T << U >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  - **cultures_name** : (nvarchar(10))
   --
 }
 
 docs.fs_cleanStringForPuml <.. docs.RepoObject_Plantuml_ColRefList_1_1
+docs.RepoObject_OutputFilter_T <.. docs.RepoObject_Plantuml_ColRefList_1_1
 docs.RepoObject_Plantuml_ColRefList_1_1 <.. docs.RepoObject_Plantuml
 reference.RepoObjectColumn_reference_T <.. docs.RepoObject_Plantuml_ColRefList_1_1
-repo.RepoObject <.. docs.RepoObject_Plantuml_ColRefList_1_1
+ssas.RepoObjectColumn_translation_T <.. docs.RepoObject_Plantuml_ColRefList_1_1
 @enduml
 

@@ -30,21 +30,27 @@ entity "puml-link:dhw:sqldb:config.ftv_dwh_database.adoc[]" as config.ftv_dwh_da
   --
 }
 
-entity "puml-link:dhw:sqldb:config.Parameter.adoc[]" as config.Parameter << U >> {
+entity "puml-link:dhw:sqldb:config.parameter.adoc[]" as config.Parameter << U >> {
   - **Parameter_name** : (varchar(100))
   - **sub_Parameter** : (nvarchar(128))
   --
 }
 
-entity "puml-link:dhw:sqldb:repo_sys.ExtendedProperties.adoc[]" as repo_sys.ExtendedProperties << V >> {
+entity "puml-link:dhw:sqldb:configt.parameter_default.adoc[]" as configT.Parameter_default << V >> {
+  - **Parameter_name** : (varchar(52))
+  - **sub_Parameter** : (nvarchar(27))
   --
 }
 
-entity "puml-link:dhw:sqldb:repo_sys.SysColumn.adoc[]" as repo_sys.SysColumn << V >> {
+entity "puml-link:dhw:sqldb:repo_sys.extendedproperties.adoc[]" as repo_sys.ExtendedProperties << V >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:repo_sys.SysObject.adoc[]" as repo_sys.SysObject << V >> {
+entity "puml-link:dhw:sqldb:repo_sys.syscolumn.adoc[]" as repo_sys.SysColumn << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo_sys.sysobject.adoc[]" as repo_sys.SysObject << V >> {
   --
 }
 
@@ -99,18 +105,19 @@ entity "puml-link:dhw:sqldb:sys_dwh.types.adoc[]" as sys_dwh.types << SN >> {
 config.ftv_dwh_database <.. repo_sys.ExtendedProperties
 config.ftv_dwh_database <.. repo_sys.SysColumn
 config.Parameter <.. config.ftv_dwh_database
-repo_sys.ExtendedProperties <.. repo_sys.SysObject
+configT.Parameter_default <.. config.Parameter
 repo_sys.ExtendedProperties <.. repo_sys.SysColumn
+repo_sys.ExtendedProperties <.. repo_sys.SysObject
 repo_sys.SysObject <.. repo_sys.SysColumn
-sys_dwh.columns <.. repo_sys.SysColumn
 sys_dwh.columns <.. repo_sys.ExtendedProperties
+sys_dwh.columns <.. repo_sys.SysColumn
 sys_dwh.computed_columns <.. repo_sys.SysColumn
 sys_dwh.default_constraints <.. repo_sys.SysColumn
 sys_dwh.extended_properties <.. repo_sys.ExtendedProperties
 sys_dwh.identity_columns <.. repo_sys.SysColumn
 sys_dwh.indexes <.. repo_sys.ExtendedProperties
-sys_dwh.objects <.. repo_sys.ExtendedProperties
 sys_dwh.objects <.. repo_sys.SysObject
+sys_dwh.objects <.. repo_sys.ExtendedProperties
 sys_dwh.parameters <.. repo_sys.ExtendedProperties
 sys_dwh.schemas <.. repo_sys.ExtendedProperties
 sys_dwh.schemas <.. repo_sys.SysObject

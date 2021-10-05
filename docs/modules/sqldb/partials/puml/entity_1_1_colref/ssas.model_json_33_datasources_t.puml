@@ -1,0 +1,97 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:ssas.additional_reference_step1.adoc[]" as ssas.additional_Reference_step1 << V >> {
+  --
+  - databasename : (nvarchar(128))
+  Part1 : (nvarchar(max))
+  Part2 : (nvarchar(max))
+  Part3 : (nvarchar(max))
+  referenced_AntoraComponent : (nvarchar(128))
+  referenced_AntoraModule : (nvarchar(128))
+  referencing_AntoraComponent : (nvarchar(max))
+  referencing_AntoraModule : (nvarchar(max))
+  RepoObject_guid : (uniqueidentifier)
+  RepoObjectColumn_guid : (uniqueidentifier)
+  tables_columns_name : (nvarchar(128))
+  tables_columns_sourceColumn : (nvarchar(500))
+  - tables_name : (nvarchar(128))
+  tables_partitions_name : (nvarchar(500))
+  tables_partitions_source_dataSource : (nvarchar(500))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json_33_datasources.adoc[]" as ssas.model_json_33_dataSources << V >> {
+  - **databasename** : (nvarchar(128))
+  **dataSources_name** : (nvarchar(500))
+  --
+  dataSources_account : (nvarchar(500))
+  dataSources_annotations_ja : (nvarchar(max))
+  dataSources_connectionString : (nvarchar(4000))
+  dataSources_impersonationMode : (nvarchar(500))
+  dataSources_provider : (nvarchar(500))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json_33_datasources_t.adoc[]" as ssas.model_json_33_dataSources_T << U >> {
+  - **databasename** : (nvarchar(128))
+  **dataSources_name** : (nvarchar(500))
+  --
+  dataSources_account : (nvarchar(500))
+  dataSources_annotations_ja : (nvarchar(max))
+  dataSources_connectionString : (nvarchar(4000))
+  dataSources_impersonationMode : (nvarchar(500))
+  dataSources_provider : (nvarchar(500))
+  - referenced_AntoraComponent : (nvarchar(128))
+  - referenced_AntoraModule : (nvarchar(128))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.usp_persist_model_json_33_datasources_t.adoc[]" as ssas.usp_PERSIST_model_json_33_dataSources_T << P >> {
+  --
+  --
+  --
+}
+
+ssas.model_json_33_dataSources <.. ssas.model_json_33_dataSources_T
+ssas.model_json_33_dataSources_T <.. ssas.additional_Reference_step1
+ssas.model_json_33_dataSources_T <.. ssas.usp_PERSIST_model_json_33_dataSources_T
+"ssas.model_json_33_dataSources::databasename" <-- "ssas.model_json_33_dataSources_T::databasename"
+"ssas.model_json_33_dataSources::dataSources_account" <-- "ssas.model_json_33_dataSources_T::dataSources_account"
+"ssas.model_json_33_dataSources::dataSources_annotations_ja" <-- "ssas.model_json_33_dataSources_T::dataSources_annotations_ja"
+"ssas.model_json_33_dataSources::dataSources_connectionString" <-- "ssas.model_json_33_dataSources_T::dataSources_connectionString"
+"ssas.model_json_33_dataSources::dataSources_impersonationMode" <-- "ssas.model_json_33_dataSources_T::dataSources_impersonationMode"
+"ssas.model_json_33_dataSources::dataSources_name" <-- "ssas.model_json_33_dataSources_T::dataSources_name"
+"ssas.model_json_33_dataSources::dataSources_provider" <-- "ssas.model_json_33_dataSources_T::dataSources_provider"
+"ssas.model_json_33_dataSources_T::referenced_AntoraComponent" <-- "ssas.additional_Reference_step1::referenced_AntoraComponent"
+"ssas.model_json_33_dataSources_T::referenced_AntoraModule" <-- "ssas.additional_Reference_step1::referenced_AntoraModule"
+@enduml
+

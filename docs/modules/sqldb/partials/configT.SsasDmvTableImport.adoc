@@ -1,4 +1,6 @@
-= [configT].[SsasDmvTableImport]
+// tag::HeaderFullDisplayName[]
+= configT.SsasDmvTableImport
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -8,7 +10,6 @@
 :ExistsProperty--exampleusage:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--ms_description:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
 :ExistsProperty--Columns:
@@ -19,6 +20,12 @@
 // tag::RepoObject_guid[]
 CFE6A70A-8A06-EC11-8515-A81E8446D5B0
 // end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+configT.SsasDmvTableImport
+// end::RepoObject_FullDisplayName2[]
 
 == SysObject_type
 
@@ -41,14 +48,14 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-05 12:09:09
+2021-10-02 13:23:34
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-DmvTableName]
-=== DmvTableName
+[#column-dmvtablename]
+=== dmvtablename
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -62,12 +69,12 @@ view
 
 .Referencing Columns
 --
-* xref:configT.SsasDmvTableImport_DmvColumnList.adoc#column-DmvTableName[+configT.SsasDmvTableImport_DmvColumnList.DmvTableName+]
+* xref:configt.ssasdmvtableimport_dmvcolumnlist.adoc#column-dmvtablename[+configT.SsasDmvTableImport_DmvColumnList.DmvTableName+]
 --
 
 
-[#column-isActive]
-=== isActive
+[#column-isactive]
+=== isactive
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -99,14 +106,14 @@ view
 
 // tag::AntoraNonPkColumnTableRows[]
 |
-|<<column-DmvTableName>>
+|<<column-dmvtablename>>
 |nvarchar(128)
 |NULL
 |
 |
 
 |
-|<<column-isActive>>
+|<<column-isactive>>
 |bit
 |NULL
 |
@@ -131,6 +138,13 @@ view
 source: property.RepoObjectProperty_cross As rop_cross
 
 
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
+
+
 === AdocUspSteps
 
 // tag::adocuspsteps[]
@@ -148,7 +162,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencingList
 
 // tag::antorareferencinglist[]
-* xref:configT.SsasDmvTableImport_DmvColumnList.adoc[]
+* xref:configt.ssasdmvtableimport_dmvcolumnlist.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -337,9 +351,6 @@ When Not Matched By Target
 
 // tag::ms_description[]
 
-obsolet
-
-defines, which SSAS DMV tables should be imported
 // end::ms_description[]
 
 
@@ -420,6 +431,13 @@ defines, which SSAS DMV tables should be imported
 // end::uspexamples[]
 
 
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+
+// end::uspgenerator_usp_id[]
+
+
 === UspParameters
 
 // tag::uspparameters[]
@@ -444,7 +462,7 @@ source: property.RepoObjectProperty WHERE property_int = 1
 
 
 /*
-<<property_start>>MS_Description
+<<property_start>>Description
 obsolet
 
 defines, which SSAS DMV tables should be imported
@@ -602,7 +620,6 @@ Union All
 Select
     DmvTableName = Cast('TMSCHEMA_VARIATIONS' As NVarchar(128))
   , isActive     = Cast(1 As Bit)
-
 ----
 =======
 // end::sql_modules_definition[]

@@ -26,19 +26,21 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:docs.fs_cleanStringForPuml.adoc[]" as docs.fs_cleanStringForPuml << FN >> {
+entity "puml-link:dhw:sqldb:docs.fs_cleanstringforpuml.adoc[]" as docs.fs_cleanStringForPuml << FN >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.Schema_SsasRelationList.adoc[]" as docs.Schema_SsasRelationList << V >> {
+entity "puml-link:dhw:sqldb:docs.schema_ssasrelationlist.adoc[]" as docs.Schema_SsasRelationList << V >> {
+  - **SchemaName** : (nvarchar(128))
+  **cultures_name** : (nvarchar(10))
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.ssas_PumlRelation.adoc[]" as docs.ssas_PumlRelation << V >> {
+entity "puml-link:dhw:sqldb:docs.ssas_pumlrelation.adoc[]" as docs.ssas_PumlRelation << V >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.ForeignKey_ssas_IndexPattern.adoc[]" as repo.ForeignKey_ssas_IndexPattern << V >> {
+entity "puml-link:dhw:sqldb:repo.foreignkey_ssas_indexpattern.adoc[]" as repo.ForeignKey_ssas_IndexPattern << V >> {
   --
 }
 
@@ -61,7 +63,7 @@ entity "puml-link:dhw:sqldb:ssas.model_json_31_tables.adoc[]" as ssas.model_json
   --
 }
 
-entity "puml-link:dhw:sqldb:ssas.model_json_31_tables_T.adoc[]" as ssas.model_json_31_tables_T << U >> {
+entity "puml-link:dhw:sqldb:ssas.model_json_31_tables_t.adoc[]" as ssas.model_json_31_tables_T << U >> {
   - **databasename** : (nvarchar(128))
   **tables_name** : (nvarchar(128))
   --
@@ -74,7 +76,7 @@ entity "puml-link:dhw:sqldb:ssas.model_json_311_tables_columns.adoc[]" as ssas.m
   --
 }
 
-entity "puml-link:dhw:sqldb:ssas.model_json_311_tables_columns_T.adoc[]" as ssas.model_json_311_tables_columns_T << U >> {
+entity "puml-link:dhw:sqldb:ssas.model_json_311_tables_columns_t.adoc[]" as ssas.model_json_311_tables_columns_T << U >> {
   - **databasename** : (nvarchar(128))
   - **tables_name** : (nvarchar(128))
   **tables_columns_name** : (nvarchar(128))
@@ -87,7 +89,7 @@ entity "puml-link:dhw:sqldb:ssas.model_json_32_relationships.adoc[]" as ssas.mod
   --
 }
 
-entity "puml-link:dhw:sqldb:ssas.model_json_32_relationships_T.adoc[]" as ssas.model_json_32_relationships_T << U >> {
+entity "puml-link:dhw:sqldb:ssas.model_json_32_relationships_t.adoc[]" as ssas.model_json_32_relationships_T << U >> {
   - **ForeignKey_guid** : (uniqueidentifier)
   --
 }
@@ -96,11 +98,9 @@ docs.fs_cleanStringForPuml <.. docs.ssas_PumlRelation
 docs.ssas_PumlRelation <.. docs.Schema_SsasRelationList
 repo.ForeignKey_ssas_IndexPattern <.. docs.ssas_PumlRelation
 ssas.model_json <.. ssas.model_json_10
-ssas.model_json <.. ssas.model_json_10
 ssas.model_json_10 <.. ssas.model_json_20
-ssas.model_json_10 <.. ssas.model_json_20
-ssas.model_json_20 <.. ssas.model_json_31_tables
 ssas.model_json_20 <.. ssas.model_json_32_relationships
+ssas.model_json_20 <.. ssas.model_json_31_tables
 ssas.model_json_31_tables <.. ssas.model_json_31_tables_T
 ssas.model_json_31_tables_T <.. repo.ForeignKey_ssas_IndexPattern
 ssas.model_json_31_tables_T <.. ssas.model_json_311_tables_columns

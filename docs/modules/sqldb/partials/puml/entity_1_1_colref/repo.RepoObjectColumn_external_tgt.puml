@@ -26,7 +26,7 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:repo.RepoObject_external_tgt.adoc[]" as repo.RepoObject_external_tgt << V >> {
+entity "puml-link:dhw:sqldb:repo.repoobject_external_tgt.adoc[]" as repo.RepoObject_external_tgt << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
   - external_AntoraComponent : (nvarchar(128))
@@ -60,7 +60,7 @@ entity "puml-link:dhw:sqldb:repo.RepoObject_external_tgt.adoc[]" as repo.RepoObj
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObjectColumn.adoc[]" as repo.RepoObjectColumn << U >> {
+entity "puml-link:dhw:sqldb:repo.repoobjectcolumn.adoc[]" as repo.RepoObjectColumn << U >> {
   - **RepoObjectColumn_guid** : (uniqueidentifier)
   --
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
@@ -102,7 +102,7 @@ entity "puml-link:dhw:sqldb:repo.RepoObjectColumn.adoc[]" as repo.RepoObjectColu
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_external_src.adoc[]" as repo.RepoObjectColumn_external_src << V >> {
+entity "puml-link:dhw:sqldb:repo.repoobjectcolumn_external_src.adoc[]" as repo.RepoObjectColumn_external_src << V >> {
   - **RepoObjectColumn_guid** : (uniqueidentifier)
   --
   - is_SysObjectColumn_missing : (int)
@@ -113,7 +113,7 @@ entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_external_src.adoc[]" as repo.R
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_external_tgt.adoc[]" as repo.RepoObjectColumn_external_tgt << V >> {
+entity "puml-link:dhw:sqldb:repo.repoobjectcolumn_external_tgt.adoc[]" as repo.RepoObjectColumn_external_tgt << V >> {
   - **RepoObjectColumn_guid** : (uniqueidentifier)
   --
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
@@ -151,7 +151,7 @@ entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_external_tgt.adoc[]" as repo.R
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.usp_PERSIST_RepoObjectColumn_external_tgt.adoc[]" as repo.usp_PERSIST_RepoObjectColumn_external_tgt << P >> {
+entity "puml-link:dhw:sqldb:repo.usp_persist_repoobjectcolumn_external_tgt.adoc[]" as repo.usp_PERSIST_RepoObjectColumn_external_tgt << P >> {
   --
   --
   --
@@ -160,9 +160,41 @@ entity "puml-link:dhw:sqldb:repo.usp_PERSIST_RepoObjectColumn_external_tgt.adoc[
 repo.RepoObject_external_tgt <.. repo.RepoObjectColumn_external_tgt
 repo.RepoObjectColumn <.. repo.RepoObjectColumn_external_tgt
 repo.RepoObjectColumn_external_src <.. repo.RepoObjectColumn_external_tgt
+repo.RepoObjectColumn_external_tgt <.. repo.RepoObjectColumn
 repo.RepoObjectColumn_external_tgt <.. repo.RepoObject_external_tgt
 repo.RepoObjectColumn_external_tgt <.. repo.usp_PERSIST_RepoObjectColumn_external_tgt
-repo.RepoObjectColumn_external_tgt <.. repo.RepoObjectColumn
+"repo.RepoObjectColumn::Inheritance_StringAggSeparatorSql" <-- "repo.RepoObjectColumn_external_tgt::Inheritance_StringAggSeparatorSql"
+"repo.RepoObjectColumn::InheritanceDefinition" <-- "repo.RepoObjectColumn_external_tgt::InheritanceDefinition"
+"repo.RepoObjectColumn::InheritanceType" <-- "repo.RepoObjectColumn_external_tgt::InheritanceType"
+"repo.RepoObjectColumn::is_persistence_no_check" <-- "repo.RepoObjectColumn_external_tgt::is_persistence_no_check"
+"repo.RepoObjectColumn::is_persistence_no_include" <-- "repo.RepoObjectColumn_external_tgt::is_persistence_no_include"
+"repo.RepoObjectColumn::is_persistence_no_update" <-- "repo.RepoObjectColumn_external_tgt::is_persistence_no_update"
+"repo.RepoObjectColumn::is_query_plan_expression" <-- "repo.RepoObjectColumn_external_tgt::is_query_plan_expression"
+"repo.RepoObjectColumn::is_required_ColumnMerge" <-- "repo.RepoObjectColumn_external_tgt::is_required_ColumnMerge"
+"repo.RepoObjectColumn::is_SysObjectColumn_missing" <-- "repo.RepoObjectColumn_external_tgt::is_SysObjectColumn_missing"
+"repo.RepoObjectColumn::persistence_source_RepoObjectColumn_guid" <-- "repo.RepoObjectColumn_external_tgt::persistence_source_RepoObjectColumn_guid"
+"repo.RepoObjectColumn::Referencing_Count" <-- "repo.RepoObjectColumn_external_tgt::Referencing_Count"
+"repo.RepoObjectColumn::Repo_default_definition" <-- "repo.RepoObjectColumn_external_tgt::Repo_default_definition"
+"repo.RepoObjectColumn::Repo_default_is_system_named" <-- "repo.RepoObjectColumn_external_tgt::Repo_default_is_system_named"
+"repo.RepoObjectColumn::Repo_default_name" <-- "repo.RepoObjectColumn_external_tgt::Repo_default_name"
+"repo.RepoObjectColumn::Repo_definition" <-- "repo.RepoObjectColumn_external_tgt::Repo_definition"
+"repo.RepoObjectColumn::Repo_generated_always_type" <-- "repo.RepoObjectColumn_external_tgt::Repo_generated_always_type"
+"repo.RepoObjectColumn::Repo_graph_type" <-- "repo.RepoObjectColumn_external_tgt::Repo_graph_type"
+"repo.RepoObjectColumn::Repo_increment_value" <-- "repo.RepoObjectColumn_external_tgt::Repo_increment_value"
+"repo.RepoObjectColumn::Repo_is_computed" <-- "repo.RepoObjectColumn_external_tgt::Repo_is_computed"
+"repo.RepoObjectColumn::Repo_is_identity" <-- "repo.RepoObjectColumn_external_tgt::Repo_is_identity"
+"repo.RepoObjectColumn::Repo_is_nullable" <-- "repo.RepoObjectColumn_external_tgt::Repo_is_nullable"
+"repo.RepoObjectColumn::Repo_is_persisted" <-- "repo.RepoObjectColumn_external_tgt::Repo_is_persisted"
+"repo.RepoObjectColumn::Repo_seed_value" <-- "repo.RepoObjectColumn_external_tgt::Repo_seed_value"
+"repo.RepoObjectColumn::Repo_user_type_fullname" <-- "repo.RepoObjectColumn_external_tgt::Repo_user_type_fullname"
+"repo.RepoObjectColumn::Repo_user_type_name" <-- "repo.RepoObjectColumn_external_tgt::Repo_user_type_name"
+"repo.RepoObjectColumn::Repo_uses_database_collation" <-- "repo.RepoObjectColumn_external_tgt::Repo_uses_database_collation"
+"repo.RepoObjectColumn::RepoObject_guid" <-- "repo.RepoObjectColumn_external_tgt::RepoObject_guid"
+"repo.RepoObjectColumn::RepoObjectColumn_column_id" <-- "repo.RepoObjectColumn_external_tgt::RepoObjectColumn_column_id"
+"repo.RepoObjectColumn::RepoObjectColumn_guid" <-- "repo.RepoObjectColumn_external_tgt::RepoObjectColumn_guid"
+"repo.RepoObjectColumn::RepoObjectColumn_name" <-- "repo.RepoObjectColumn_external_tgt::RepoObjectColumn_name"
+"repo.RepoObjectColumn::SysObjectColumn_column_id" <-- "repo.RepoObjectColumn_external_tgt::SysObjectColumn_column_id"
+"repo.RepoObjectColumn::SysObjectColumn_name" <-- "repo.RepoObjectColumn_external_tgt::SysObjectColumn_name"
 "repo.RepoObjectColumn_external_src::is_SysObjectColumn_missing" <-- "repo.RepoObjectColumn_external_tgt::is_SysObjectColumn_missing"
 "repo.RepoObjectColumn_external_src::RepoObject_guid" <-- "repo.RepoObjectColumn_external_tgt::RepoObject_guid"
 "repo.RepoObjectColumn_external_src::RepoObjectColumn_guid" <-- "repo.RepoObjectColumn_external_tgt::RepoObjectColumn_guid"

@@ -26,7 +26,7 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:reference.additional_Reference_guid.adoc[]" as reference.additional_Reference_guid << V >> {
+entity "puml-link:dhw:sqldb:reference.additional_reference_guid.adoc[]" as reference.additional_Reference_guid << V >> {
   --
   - referenced_AntoraComponent : (nvarchar(128))
   - referenced_AntoraModule : (nvarchar(128))
@@ -58,7 +58,7 @@ entity "puml-link:dhw:sqldb:reference.additional_Reference_guid.adoc[]" as refer
   --
 }
 
-entity "puml-link:dhw:sqldb:reference.RepoObject_reference_additional.adoc[]" as reference.RepoObject_reference_additional << V >> {
+entity "puml-link:dhw:sqldb:reference.repoobject_reference_additional.adoc[]" as reference.RepoObject_reference_additional << V >> {
   --
   - InformationSource : (varchar(30))
   - referenced_entity_name : (nvarchar(128))
@@ -83,7 +83,7 @@ entity "puml-link:dhw:sqldb:reference.RepoObject_reference_additional.adoc[]" as
   --
 }
 
-entity "puml-link:dhw:sqldb:reference.RepoObject_reference_union.adoc[]" as reference.RepoObject_reference_union << V >> {
+entity "puml-link:dhw:sqldb:reference.repoobject_reference_union.adoc[]" as reference.RepoObject_reference_union << V >> {
   **referenced_RepoObject_guid** : (uniqueidentifier)
   **referencing_RepoObject_guid** : (uniqueidentifier)
   --
@@ -111,6 +111,23 @@ entity "puml-link:dhw:sqldb:reference.RepoObject_reference_union.adoc[]" as refe
 
 reference.additional_Reference_guid <.. reference.RepoObject_reference_additional
 reference.RepoObject_reference_additional <.. reference.RepoObject_reference_union
-
+"reference.additional_Reference_guid::referenced_external_AntoraComponent" <-- "reference.RepoObject_reference_additional::referenced_external_AntoraComponent"
+"reference.additional_Reference_guid::referenced_external_AntoraModule" <-- "reference.RepoObject_reference_additional::referenced_external_AntoraModule"
+"reference.additional_Reference_guid::referenced_fullname" <-- "reference.RepoObject_reference_additional::referenced_fullname"
+"reference.additional_Reference_guid::referenced_id" <-- "reference.RepoObject_reference_additional::referenced_id"
+"reference.additional_Reference_guid::referenced_is_external" <-- "reference.RepoObject_reference_additional::referenced_is_external"
+"reference.additional_Reference_guid::referenced_Object" <-- "reference.RepoObject_reference_additional::referenced_entity_name"
+"reference.additional_Reference_guid::referenced_RepoObject_guid" <-- "reference.RepoObject_reference_additional::referenced_RepoObject_guid"
+"reference.additional_Reference_guid::referenced_Schema" <-- "reference.RepoObject_reference_additional::referenced_schema_name"
+"reference.additional_Reference_guid::referenced_type" <-- "reference.RepoObject_reference_additional::referenced_type"
+"reference.additional_Reference_guid::referencing_external_AntoraComponent" <-- "reference.RepoObject_reference_additional::referencing_external_AntoraComponent"
+"reference.additional_Reference_guid::referencing_external_AntoraModule" <-- "reference.RepoObject_reference_additional::referencing_external_AntoraModule"
+"reference.additional_Reference_guid::referencing_fullname" <-- "reference.RepoObject_reference_additional::referencing_fullname"
+"reference.additional_Reference_guid::referencing_id" <-- "reference.RepoObject_reference_additional::referencing_id"
+"reference.additional_Reference_guid::referencing_is_external" <-- "reference.RepoObject_reference_additional::referencing_is_external"
+"reference.additional_Reference_guid::referencing_Object" <-- "reference.RepoObject_reference_additional::referencing_entity_name"
+"reference.additional_Reference_guid::referencing_RepoObject_guid" <-- "reference.RepoObject_reference_additional::referencing_RepoObject_guid"
+"reference.additional_Reference_guid::referencing_Schema" <-- "reference.RepoObject_reference_additional::referencing_schema_name"
+"reference.additional_Reference_guid::referencing_type" <-- "reference.RepoObject_reference_additional::referencing_type"
 @enduml
 

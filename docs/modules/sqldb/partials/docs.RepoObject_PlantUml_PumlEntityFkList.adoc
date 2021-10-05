@@ -1,4 +1,6 @@
-= [docs].[RepoObject_PlantUml_PumlEntityFkList]
+// tag::HeaderFullDisplayName[]
+= docs.RepoObject_PlantUml_PumlEntityFkList
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -7,6 +9,9 @@
 :ExistsProperty--antorareferencinglist:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
+:ExistsProperty--pk_index_guid:
+:ExistsProperty--pk_indexpatterncolumndatatype:
+:ExistsProperty--pk_indexpatterncolumnname:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -19,6 +24,12 @@
 // tag::RepoObject_guid[]
 1D224606-439A-EB11-84F5-A81E8446D5B0
 // end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+docs.RepoObject_PlantUml_PumlEntityFkList
+// end::RepoObject_FullDisplayName2[]
 
 == SysObject_type
 
@@ -41,14 +52,57 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-08-17 18:49:49
+2021-10-04 19:46:47
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-PumlEntityFkList]
-=== PumlEntityFkList
+[#column-repoobject_guid]
+=== repoobject_guid
+
+[cols="d,8m,m,m,m,d"]
+|===
+|1
+|*RepoObject_guid*
+|uniqueidentifier
+|NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo.repoobject_related_fk_union.adoc#column-repoobject_guid[+repo.RepoObject_related_FK_union.RepoObject_guid+]
+--
+
+
+[#column-cultures_name]
+=== cultures_name
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|cultures_name
+|nvarchar(10)
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:docs.repoobject_plantuml_entity_t.adoc#column-cultures_name[+docs.RepoObject_Plantuml_Entity_T.cultures_name+]
+--
+
+.Referencing Columns
+--
+* xref:docs.repoobject_plantuml.adoc#column-cultures_name[+docs.RepoObject_Plantuml.cultures_name+]
+--
+
+
+[#column-pumlentityfklist]
+=== pumlentityfklist
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -61,8 +115,8 @@ view
 |===
 
 
-[#column-RepoObject_fullname2]
-=== RepoObject_fullname2
+[#column-repoobject_fullname2]
+=== repoobject_fullname2
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -82,27 +136,8 @@ view
 
 .Referenced Columns
 --
-* xref:docs.RepoObject_Plantuml_Entity_T.adoc#column-RepoObject_fullname2[+docs.RepoObject_Plantuml_Entity_T.RepoObject_fullname2+]
-* xref:repo.RepoObject_related_FK_union.adoc#column-RepoObject_fullname2[+repo.RepoObject_related_FK_union.RepoObject_fullname2+]
---
-
-
-[#column-RepoObject_guid]
-=== RepoObject_guid
-
-[cols="d,8m,m,m,m,d"]
-|===
-|
-|RepoObject_guid
-|uniqueidentifier
-|NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:repo.RepoObject_related_FK_union.adoc#column-RepoObject_guid[+repo.RepoObject_related_FK_union.RepoObject_guid+]
+* xref:docs.repoobject_plantuml_entity_t.adoc#column-repoobject_fullname2[+docs.RepoObject_Plantuml_Entity_T.RepoObject_fullname2+]
+* xref:repo.repoobject_related_fk_union.adoc#column-repoobject_fullname2[+repo.RepoObject_related_FK_union.RepoObject_fullname2+]
 --
 
 
@@ -117,6 +152,13 @@ view
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
+|1
+|*<<column-repoobject_guid>>*
+|uniqueidentifier
+|NULL
+|
+|
+
 
 
 
@@ -125,23 +167,24 @@ view
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
+
 |
-|<<column-PumlEntityFkList>>
+|<<column-cultures_name>>
+|nvarchar(10)
+|NOT NULL
+|
+|
+
+|
+|<<column-pumlentityfklist>>
 |nvarchar(max)
 |NULL
 |
 |
 
 |
-|<<column-RepoObject_fullname2>>
+|<<column-repoobject_fullname2>>
 |nvarchar(257)
-|NULL
-|
-|
-
-|
-|<<column-RepoObject_guid>>
-|uniqueidentifier
 |NULL
 |
 |
@@ -152,13 +195,24 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-idx_RepoObject_PlantUml_PumlEntityFkList2x_1]
-=== idx_RepoObject_PlantUml_PumlEntityFkList++__++1
+[#index-pk_repoobject_plantuml_pumlentityfklist]
+=== pk_repoobject_plantuml_pumlentityfklist
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
+--
+* PK, Unique, Real: 1, 1, 0
+
+
+[#index-idx_repoobject_plantuml_pumlentityfklist2x_2]
+=== idx_repoobject_plantuml_pumlentityfklist++__++2
+
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-cultures_name>>; nvarchar(10)
 --
 * PK, Unique, Real: 0, 0, 0
 
@@ -175,6 +229,13 @@ view
 source: property.RepoObjectProperty_cross As rop_cross
 
 
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
+
+
 === AdocUspSteps
 
 // tag::adocuspsteps[]
@@ -185,15 +246,15 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:docs.RepoObject_Plantuml_Entity_T.adoc[]
-* xref:repo.RepoObject_related_FK_union.adoc[]
+* xref:docs.repoobject_plantuml_entity_t.adoc[]
+* xref:repo.repoobject_related_fk_union.adoc[]
 // end::antorareferencedlist[]
 
 
 === AntoraReferencingList
 
 // tag::antorareferencinglist[]
-* xref:docs.RepoObject_Plantuml.adoc[]
+* xref:docs.repoobject_plantuml.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -396,21 +457,21 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-
+5B886D18-0822-EC11-8524-A81E8446D5B0
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-
+uniqueidentifier
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-
+RepoObject_guid
 // end::pk_indexpatterncolumnname[]
 
 
@@ -443,6 +504,13 @@ source: property.RepoObjectProperty_cross As rop_cross
 // end::uspexamples[]
 
 
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+
+// end::uspgenerator_usp_id[]
+
+
 === UspParameters
 
 // tag::uspparameters[]
@@ -469,6 +537,7 @@ CREATE View docs.RepoObject_PlantUml_PumlEntityFkList
 As
 Select
     ro.RepoObject_guid
+  , rop.cultures_name
   , RepoObject_fullname2 = Max ( ro.RepoObject_fullname2 )
   , PumlEntityFkList     = String_Agg ( rop.RepoObject_PumlOnlyIndex, Char ( 13 ) + Char ( 10 )) Within Group(Order By
                                                                                                                   ro.included_RepoObject_fullname2)
@@ -480,6 +549,8 @@ From
             rop.RepoObject_guid = ro.included_RepoObject_guid
 Group By
     ro.RepoObject_guid
+  , rop.cultures_name
+
 ----
 =======
 // end::sql_modules_definition[]

@@ -30,18 +30,24 @@ entity "puml-link:dhw:sqldb:config.ftv_get_parameter_value.adoc[]" as config.ftv
   --
 }
 
-entity "puml-link:dhw:sqldb:config.Parameter.adoc[]" as config.Parameter << U >> {
+entity "puml-link:dhw:sqldb:config.parameter.adoc[]" as config.Parameter << U >> {
   - **Parameter_name** : (varchar(100))
   - **sub_Parameter** : (nvarchar(128))
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObject_persistence.adoc[]" as repo.RepoObject_persistence << U >> {
+entity "puml-link:dhw:sqldb:configt.parameter_default.adoc[]" as configT.Parameter_default << V >> {
+  - **Parameter_name** : (varchar(52))
+  - **sub_Parameter** : (nvarchar(27))
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobject_persistence.adoc[]" as repo.RepoObject_persistence << U >> {
   - **target_RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_HistValidColums_setpoint.adoc[]" as repo.RepoObjectColumn_HistValidColums_setpoint << V >> {
+entity "puml-link:dhw:sqldb:repo.repoobjectcolumn_histvalidcolums_setpoint.adoc[]" as repo.RepoObjectColumn_HistValidColums_setpoint << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   **RepoObjectColumn_name** : (sysname)
   --
@@ -49,6 +55,7 @@ entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_HistValidColums_setpoint.adoc[
 
 config.ftv_get_parameter_value <.. repo.RepoObjectColumn_HistValidColums_setpoint
 config.Parameter <.. config.ftv_get_parameter_value
+configT.Parameter_default <.. config.Parameter
 repo.RepoObject_persistence <.. repo.RepoObjectColumn_HistValidColums_setpoint
 @enduml
 

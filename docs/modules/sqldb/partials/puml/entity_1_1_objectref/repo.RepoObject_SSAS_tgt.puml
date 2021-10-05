@@ -26,35 +26,35 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
+entity "puml-link:dhw:sqldb:repo.repoobject.adoc[]" as repo.RepoObject << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObject_SSAS_src.adoc[]" as repo.RepoObject_SSAS_src << V >> {
+entity "puml-link:dhw:sqldb:repo.repoobject_ssas_src.adoc[]" as repo.RepoObject_SSAS_src << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObject_SSAS_tgt.adoc[]" as repo.RepoObject_SSAS_tgt << V >> {
+entity "puml-link:dhw:sqldb:repo.repoobject_ssas_tgt.adoc[]" as repo.RepoObject_SSAS_tgt << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObjectColumn_SSAS_tgt.adoc[]" as repo.RepoObjectColumn_SSAS_tgt << V >> {
+entity "puml-link:dhw:sqldb:repo.repoobjectcolumn_ssas_tgt.adoc[]" as repo.RepoObjectColumn_SSAS_tgt << V >> {
   - **RepoObjectColumn_guid** : (uniqueidentifier)
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.usp_PERSIST_RepoObject_SSAS_tgt.adoc[]" as repo.usp_PERSIST_RepoObject_SSAS_tgt << P >> {
+entity "puml-link:dhw:sqldb:repo.usp_persist_repoobject_ssas_tgt.adoc[]" as repo.usp_PERSIST_RepoObject_SSAS_tgt << P >> {
   --
 }
 
 repo.RepoObject <.. repo.RepoObject_SSAS_tgt
 repo.RepoObject_SSAS_src <.. repo.RepoObject_SSAS_tgt
+repo.RepoObject_SSAS_tgt <.. repo.usp_PERSIST_RepoObject_SSAS_tgt
 repo.RepoObject_SSAS_tgt <.. repo.RepoObject
 repo.RepoObject_SSAS_tgt <.. repo.RepoObjectColumn_SSAS_tgt
-repo.RepoObject_SSAS_tgt <.. repo.usp_PERSIST_RepoObject_SSAS_tgt
 repo.RepoObjectColumn_SSAS_tgt <.. repo.RepoObject_SSAS_tgt
 @enduml
 

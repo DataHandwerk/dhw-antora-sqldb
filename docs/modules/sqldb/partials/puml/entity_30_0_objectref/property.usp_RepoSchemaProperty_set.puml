@@ -26,25 +26,25 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:property.RepoSchemaProperty.adoc[]" as property.RepoSchemaProperty << U >> {
+entity "puml-link:dhw:sqldb:property.reposchemaproperty.adoc[]" as property.RepoSchemaProperty << U >> {
   - **RepoSchemaProperty_id** : (int)
   --
 }
 
-entity "puml-link:dhw:sqldb:property.usp_RepoSchemaProperty_set.adoc[]" as property.usp_RepoSchemaProperty_set << P >> {
+entity "puml-link:dhw:sqldb:property.usp_reposchemaproperty_set.adoc[]" as property.usp_RepoSchemaProperty_set << P >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoSchema.adoc[]" as repo.RepoSchema << U >> {
+entity "puml-link:dhw:sqldb:repo.reposchema.adoc[]" as repo.RepoSchema << U >> {
   - **RepoSchema_guid** : (uniqueidentifier)
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoSchema_ssas_src.adoc[]" as repo.RepoSchema_ssas_src << V >> {
+entity "puml-link:dhw:sqldb:repo.reposchema_ssas_src.adoc[]" as repo.RepoSchema_ssas_src << V >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoSchema_ssas_tgt.adoc[]" as repo.RepoSchema_ssas_tgt << V >> {
+entity "puml-link:dhw:sqldb:repo.reposchema_ssas_tgt.adoc[]" as repo.RepoSchema_ssas_tgt << V >> {
   - **RepoSchema_guid** : (uniqueidentifier)
   --
 }
@@ -66,7 +66,7 @@ entity "puml-link:dhw:sqldb:ssas.model_json_201_descriptions_multiline.adoc[]" a
   --
 }
 
-entity "puml-link:dhw:sqldb:ssas.model_json_2011_descriptions_StrAgg.adoc[]" as ssas.model_json_2011_descriptions_StrAgg << V >> {
+entity "puml-link:dhw:sqldb:ssas.model_json_2011_descriptions_stragg.adoc[]" as ssas.model_json_2011_descriptions_StrAgg << V >> {
   --
 }
 
@@ -77,8 +77,8 @@ repo.RepoSchema_ssas_src <.. repo.RepoSchema_ssas_tgt
 repo.RepoSchema_ssas_tgt <.. repo.RepoSchema
 ssas.model_json <.. ssas.model_json_10
 ssas.model_json_10 <.. ssas.model_json_20
-ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
 ssas.model_json_20 <.. repo.RepoSchema_ssas_src
+ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
 ssas.model_json_201_descriptions_multiline <.. ssas.model_json_2011_descriptions_StrAgg
 ssas.model_json_2011_descriptions_StrAgg <.. repo.RepoSchema_ssas_src
 @enduml

@@ -1,4 +1,6 @@
-= [docs].[Schema_SsasRelationList]
+// tag::HeaderFullDisplayName[]
+= docs.Schema_SsasRelationList
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -7,6 +9,9 @@
 :ExistsProperty--antorareferencinglist:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
+:ExistsProperty--pk_index_guid:
+:ExistsProperty--pk_indexpatterncolumndatatype:
+:ExistsProperty--pk_indexpatterncolumnname:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -19,6 +24,12 @@
 // tag::RepoObject_guid[]
 0C60D8EE-E90A-EC11-8516-A81E8446D5B0
 // end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+docs.Schema_SsasRelationList
+// end::RepoObject_FullDisplayName2[]
 
 == SysObject_type
 
@@ -41,19 +52,19 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-08-29 14:32:38
+2021-09-30 17:54:47
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-SchemaName]
-=== SchemaName
+[#column-schemaname]
+=== schemaname
 
 [cols="d,8m,m,m,m,d"]
 |===
-|
-|SchemaName
+|1
+|*SchemaName*
 |nvarchar(128)
 |NOT NULL
 |
@@ -62,12 +73,26 @@ view
 
 .Referenced Columns
 --
-* xref:docs.ssas_PumlRelation.adoc#column-SchemaName[+docs.ssas_PumlRelation.SchemaName+]
+* xref:docs.ssas_pumlrelation.adoc#column-schemaname[+docs.ssas_PumlRelation.SchemaName+]
 --
 
 
-[#column-SsasRelationList_PumlRelation]
-=== SsasRelationList_PumlRelation
+[#column-cultures_name]
+=== cultures_name
+
+[cols="d,8m,m,m,m,d"]
+|===
+|2
+|*cultures_name*
+|nvarchar(10)
+|NULL
+|
+|
+|===
+
+
+[#column-ssasrelationlist_pumlrelation]
+=== ssasrelationlist_pumlrelation
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -91,6 +116,19 @@ view
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
+|1
+|*<<column-schemaname>>*
+|nvarchar(128)
+|NOT NULL
+|
+|
+
+|2
+|*<<column-cultures_name>>*
+|nvarchar(10)
+|NULL
+|
+|
 
 
 // end::AntoraPkColumnTableRows[]
@@ -98,15 +136,10 @@ view
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
-|
-|<<column-SchemaName>>
-|nvarchar(128)
-|NOT NULL
-|
-|
+
 
 |
-|<<column-SsasRelationList_PumlRelation>>
+|<<column-ssasrelationlist_pumlrelation>>
 |nvarchar(max)
 |NULL
 |
@@ -118,10 +151,22 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-idx_Schema_SsasRelationList2x_1]
-=== idx_Schema_SsasRelationList++__++1
+[#index-pk_schema_ssasrelationlist]
+=== pk_schema_ssasrelationlist
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-SchemaName>>; nvarchar(128)
+* <<column-cultures_name>>; nvarchar(10)
+--
+* PK, Unique, Real: 1, 1, 0
+
+
+[#index-idx_schema_ssasrelationlist2x_1]
+=== idx_schema_ssasrelationlist++__++1
+
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-SchemaName>>; nvarchar(128)
@@ -141,6 +186,13 @@ view
 source: property.RepoObjectProperty_cross As rop_cross
 
 
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
+
+
 === AdocUspSteps
 
 // tag::adocuspsteps[]
@@ -151,14 +203,14 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:docs.ssas_PumlRelation.adoc[]
+* xref:docs.ssas_pumlrelation.adoc[]
 // end::antorareferencedlist[]
 
 
 === AntoraReferencingList
 
 // tag::antorareferencinglist[]
-* xref:docs.Schema_puml.adoc[]
+* xref:docs.schema_puml.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -361,21 +413,21 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-
+4A0EAD8B-0822-EC11-8524-A81E8446D5B0
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-
+nvarchar(128),nvarchar(10)
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-
+SchemaName,cultures_name
 // end::pk_indexpatterncolumnname[]
 
 
@@ -407,6 +459,13 @@ source: property.RepoObjectProperty_cross As rop_cross
 // end::uspexamples[]
 
 
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+
+// end::uspgenerator_usp_id[]
+
+
 === UspParameters
 
 // tag::uspparameters[]
@@ -429,10 +488,11 @@ source: property.RepoObjectProperty WHERE property_int = 1
 [source,sql]
 ----
 
-create View docs.Schema_SsasRelationList
+CREATE View docs.Schema_SsasRelationList
 As
 Select
     rel.SchemaName
+  , cultures_name                 = Cast('' As NVarchar(10))
   , SsasRelationList_PumlRelation = String_Agg ( rel.PumlRelation, Char ( 13 ) + Char ( 10 )) Within Group(Order By
                                                                                                                rel.referenced_RepoObject_fullname2
                                                                                                              , rel.referencing_RepoObject_fullname2)

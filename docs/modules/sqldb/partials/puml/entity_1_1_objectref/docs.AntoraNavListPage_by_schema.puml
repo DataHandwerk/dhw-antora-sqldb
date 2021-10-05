@@ -26,25 +26,32 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:docs.AntoraNavListPage_by_schema.adoc[]" as docs.AntoraNavListPage_by_schema << V >> {
+entity "puml-link:dhw:sqldb:docs.antoranavlistpage_by_schema.adoc[]" as docs.AntoraNavListPage_by_schema << V >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.RepoObject_OutputFilter.adoc[]" as docs.RepoObject_OutputFilter << V >> {
+entity "puml-link:dhw:sqldb:docs.fs_cleanstringforfilename.adoc[]" as docs.fs_cleanStringForFilename << FN >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
+entity "puml-link:dhw:sqldb:docs.repoobject_outputfilter_t.adoc[]" as docs.RepoObject_OutputFilter_T << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **cultures_name** : (nvarchar(10))
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobject.adoc[]" as repo.RepoObject << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoSchema.adoc[]" as repo.RepoSchema << U >> {
+entity "puml-link:dhw:sqldb:repo.reposchema.adoc[]" as repo.RepoSchema << U >> {
   - **RepoSchema_guid** : (uniqueidentifier)
   --
 }
 
-docs.RepoObject_OutputFilter <.. docs.AntoraNavListPage_by_schema
+docs.fs_cleanStringForFilename <.. docs.AntoraNavListPage_by_schema
+docs.RepoObject_OutputFilter_T <.. docs.AntoraNavListPage_by_schema
 repo.RepoObject <.. docs.AntoraNavListPage_by_schema
 repo.RepoSchema <.. docs.AntoraNavListPage_by_schema
 @enduml

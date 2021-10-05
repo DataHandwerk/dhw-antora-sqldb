@@ -1,4 +1,6 @@
-= [docs].[AntoraNavListRepoObject_by_type]
+// tag::HeaderFullDisplayName[]
+= docs.AntoraNavListRepoObject_by_type
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -23,6 +25,12 @@
 9B8B79D5-B993-EB11-84F2-A81E8446D5B0
 // end::RepoObject_guid[]
 
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+docs.AntoraNavListRepoObject_by_type
+// end::RepoObject_FullDisplayName2[]
+
 == SysObject_type
 
 // tag::SysObject_type[]
@@ -44,7 +52,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-24 21:51:47
+2021-10-04 21:34:56
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -62,6 +70,25 @@ view
 |
 |
 |===
+
+
+[#column-cultures_name]
+=== cultures_name
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|cultures_name
+|nvarchar(10)
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:docs.repoobject_outputfilter_t.adoc#column-cultures_name[+docs.RepoObject_OutputFilter_T.cultures_name+]
+--
 
 
 [#column-nav_list]
@@ -93,7 +120,7 @@ view
 
 .Referenced Columns
 --
-* xref:docs.RepoObject_OutputFilter.adoc#column-SysObject_type_name[+docs.RepoObject_OutputFilter.SysObject_type_name+]
+* xref:docs.repoobject_outputfilter_t.adoc#column-sysobject_type_name[+docs.RepoObject_OutputFilter_T.SysObject_type_name+]
 --
 
 
@@ -117,11 +144,19 @@ view
 
 
 
+
 // end::AntoraPkColumnTableRows[]
 
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
+
+|
+|<<column-cultures_name>>
+|nvarchar(10)
+|NOT NULL
+|
+|
 
 |
 |<<column-nav_list>>
@@ -143,15 +178,26 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-PK_AntoraNavListRepoObject_by_type]
-=== PK_AntoraNavListRepoObject_by_type
+[#index-pk_antoranavlistrepoobject_by_type]
+=== pk_antoranavlistrepoobject_by_type
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-type>>; char(2)
 --
 * PK, Unique, Real: 1, 1, 0
+
+
+[#index-idx_antoranavlistrepoobject_by_type2x_2]
+=== idx_antoranavlistrepoobject_by_type++__++2
+
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-cultures_name>>; nvarchar(10)
+--
+* PK, Unique, Real: 0, 0, 0
 
 // end::AntoraIndexList[]
 
@@ -166,6 +212,13 @@ view
 source: property.RepoObjectProperty_cross As rop_cross
 
 
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
+
+
 === AdocUspSteps
 
 // tag::adocuspsteps[]
@@ -176,15 +229,16 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:docs.RepoObject_OutputFilter.adoc[]
+* xref:docs.fs_cleanstringforfilename.adoc[]
+* xref:docs.repoobject_outputfilter_t.adoc[]
 // end::antorareferencedlist[]
 
 
 === AntoraReferencingList
 
 // tag::antorareferencinglist[]
-* xref:docs.AntoraPage_ObjectByType.adoc[]
-* xref:docs.usp_AntoraExport_navigation.adoc[]
+* xref:docs.antorapage_objectbytype.adoc[]
+* xref:docs.usp_antoraexport_navigation.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -415,7 +469,8 @@ type
 === ReferencedObjectList
 
 // tag::referencedobjectlist[]
-* [docs].[RepoObject_OutputFilter]
+* [docs].[fs_cleanStringForFilename]
+* [docs].[RepoObject_OutputFilter_T]
 // end::referencedobjectlist[]
 
 
@@ -431,6 +486,13 @@ type
 // tag::uspexamples[]
 
 // end::uspexamples[]
+
+
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+
+// end::uspgenerator_usp_id[]
 
 
 === UspParameters
@@ -455,30 +517,35 @@ source: property.RepoObjectProperty WHERE property_int = 1
 [source,sql]
 ----
 
-CREATE View docs.AntoraNavListRepoObject_by_type
+
+CREATE View [docs].[AntoraNavListRepoObject_by_type]
 As
 Select
     type      = ro.SysObject_type
   , type_name = ro.SysObject_type_name
+  , ro.cultures_name
   , nav_list  =
   --
   String_Agg (
                  Concat (
                             --* xref:target-page-filename.adoc[link text]
                             --we need to convert to first argument nvarchar(max) to avoid the limit of 8000 byte
-                            Cast('* xref:' As NVarchar(Max)), ro.RepoObject_fullname2, '.adoc[]'
+                            Cast('* xref:' As NVarchar(Max))
+                          , docs.fs_cleanStringForFilename ( ro.RepoObject_fullname2 )
+                          , '.adoc[]'
                         )
                , Char ( 13 ) + Char ( 10 )
              ) Within Group(Order By
-                                ro.RepoObject_fullname2)
+                                ro.RepoObject_DisplayName)
 From
-    docs.RepoObject_OutputFilter As ro
+    docs.RepoObject_OutputFilter_T As ro
 Where
     ro.is_DocsOutput   = 1
     And ro.is_external = 0
 Group By
     ro.SysObject_type
   , ro.SysObject_type_name
+  , ro.cultures_name
 
 ----
 =======

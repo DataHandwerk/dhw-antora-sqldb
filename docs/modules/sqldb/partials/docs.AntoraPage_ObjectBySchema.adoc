@@ -1,4 +1,6 @@
-= [docs].[AntoraPage_ObjectBySchema]
+// tag::HeaderFullDisplayName[]
+= docs.AntoraPage_ObjectBySchema
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -9,6 +11,7 @@
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
+:ExistsProperty--AntoraIndexList:
 :ExistsProperty--Columns:
 // end::existing_properties[]
 
@@ -17,6 +20,12 @@
 // tag::RepoObject_guid[]
 AF5A9DE2-3799-EB11-84F5-A81E8446D5B0
 // end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+docs.AntoraPage_ObjectBySchema
+// end::RepoObject_FullDisplayName2[]
 
 == SysObject_type
 
@@ -39,12 +48,31 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-25 12:42:55
+2021-10-04 14:19:21
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
+[#column-cultures_name]
+=== cultures_name
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|cultures_name
+|nvarchar(10)
+|NOT NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:docs.antoranavlistrepoobject_by_schema.adoc#column-cultures_name[+docs.AntoraNavListRepoObject_by_schema.cultures_name+]
+--
+
+
 [#column-page_content]
 === page_content
 
@@ -86,11 +114,19 @@ view
 // tag::AntoraPkColumnTableRows[]
 
 
+
 // end::AntoraPkColumnTableRows[]
 
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
+|
+|<<column-cultures_name>>
+|nvarchar(10)
+|NOT NULL
+|
+|
+
 |
 |<<column-page_content>>
 |nvarchar(4000)
@@ -111,6 +147,16 @@ view
 
 // tag::AntoraIndexList[]
 
+[#index-idx_antorapage_objectbyschema2x_1]
+=== idx_antorapage_objectbyschema++__++1
+
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-cultures_name>>; nvarchar(10)
+--
+* PK, Unique, Real: 0, 0, 0
+
 // end::AntoraIndexList[]
 
 == AntoraParameterList
@@ -124,6 +170,13 @@ view
 source: property.RepoObjectProperty_cross As rop_cross
 
 
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
+
+
 === AdocUspSteps
 
 // tag::adocuspsteps[]
@@ -135,7 +188,8 @@ source: property.RepoObjectProperty_cross As rop_cross
 
 // tag::antorareferencedlist[]
 * xref:config.fs_dwh_database_name.adoc[]
-* xref:docs.AntoraNavListRepoObject_by_schema.adoc[]
+* xref:docs.antoranavlistrepoobject_by_schema.adoc[]
+* xref:docs.fs_cleanstringforfilename.adoc[]
 // end::antorareferencedlist[]
 
 
@@ -375,6 +429,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 // tag::referencedobjectlist[]
 * [config].[fs_dwh_database_name]
 * [docs].[AntoraNavListRepoObject_by_schema]
+* [docs].[fs_cleanStringForFilename]
 // end::referencedobjectlist[]
 
 
@@ -390,6 +445,13 @@ source: property.RepoObjectProperty_cross As rop_cross
 // tag::uspexamples[]
 
 // end::uspexamples[]
+
+
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+
+// end::uspgenerator_usp_id[]
 
 
 === UspParameters
@@ -438,45 +500,49 @@ output example page_content:
 CREATE View docs.AntoraPage_ObjectBySchema
 As
 Select
-    partial_content
-    --
-    = Concat (
-                 '* xref:nav/objects-by-schema.adoc[]'
-               , Char ( 13 ) + Char ( 10 )
-               , String_Agg (
-                                Concat (
-                                           '** xref:nav/nav-schema-' + ro.RepoObject_schema_name + '.adoc[]'
-                                         , Char ( 13 ) + Char ( 10 )
-                                         , '+'
-                                         , Char ( 13 ) + Char ( 10 )
-                                         , '--'
-                                         , Char ( 13 ) + Char ( 10 )
-                                         , '\include::partial$navlist/navlist-schema-' + ro.RepoObject_schema_name
-                                           + '.adoc[]'
-                                         , Char ( 13 ) + Char ( 10 )
-                                         , '--'
-                                       )
-                              , Char ( 13 ) + Char ( 10 )
-                            ) Within Group(Order By
-                                               ro.RepoObject_schema_name)
-             )
+    ro.cultures_name
+  , partial_content
+  --
+  = Concat (
+               '* xref:nav/objects-by-schema.adoc[]'
+             , Char ( 13 ) + Char ( 10 )
+             , String_Agg (
+                              Concat (
+                                         '** xref:nav/nav-schema-'
+                                         + docs.fs_cleanStringForFilename ( ro.RepoObject_schema_name ) + '.adoc[]'
+                                       , Char ( 13 ) + Char ( 10 )
+                                       , '+'
+                                       , Char ( 13 ) + Char ( 10 )
+                                       , '--'
+                                       , Char ( 13 ) + Char ( 10 )
+                                       , '\include::partial$navlist/navlist-schema-'
+                                         + docs.fs_cleanStringForFilename ( ro.RepoObject_schema_name ) + '.adoc[]'
+                                       , Char ( 13 ) + Char ( 10 )
+                                       , '--'
+                                     )
+                            , Char ( 13 ) + Char ( 10 )
+                          ) Within Group(Order By
+                                             ro.RepoObject_schema_name)
+           )
   , page_content
   --
-    = Concat (
-                 Iif(Max ( ro.is_ssas ) = 1
-                 , '= SSAS Tabular Models'
+  = Concat (
+               Iif(Max ( ro.is_ssas ) = 1
+                 , '= SSAS Tabular Models' + Iif(ro.cultures_name <> '', ' - ' + ro.cultures_name, '')
                  , '= ' + config.fs_dwh_database_name () + ' - Objects by schema')
-               , Char ( 13 ) + Char ( 10 )
-               , Char ( 13 ) + Char ( 10 )
-               , String_Agg (
-                                '\include::nav-schema-' + ro.RepoObject_schema_name + '.adoc[leveloffset=+1]'
-                              , Char ( 13 ) + Char ( 10 ) + Char ( 13 ) + Char ( 10 )
-                            ) Within Group(Order By
-                                               ro.RepoObject_schema_name)
-             )
+             , Char ( 13 ) + Char ( 10 )
+             , Char ( 13 ) + Char ( 10 )
+             , String_Agg (
+                              '\include::nav-schema-' + docs.fs_cleanStringForFilename ( ro.RepoObject_schema_name )
+                              + '.adoc[leveloffset=+1]'
+                            , Char ( 13 ) + Char ( 10 ) + Char ( 13 ) + Char ( 10 )
+                          ) Within Group(Order By
+                                             ro.RepoObject_schema_name)
+           )
 From
     docs.AntoraNavListRepoObject_by_schema As ro
-
+Group By
+    ro.cultures_name
 ----
 =======
 // end::sql_modules_definition[]

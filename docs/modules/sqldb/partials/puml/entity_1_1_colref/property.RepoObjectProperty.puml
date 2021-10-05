@@ -26,15 +26,19 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:docs.RepoObject_Adoc.adoc[]" as docs.RepoObject_Adoc << V >> {
+entity "puml-link:dhw:sqldb:docs.repoobject_adoc.adoc[]" as docs.RepoObject_Adoc << V >> {
   --
   - AdocContent : (nvarchar(max))
+  - cultures_name : (nvarchar(10))
   is_DocsOutput : (int)
   PropertyCount : (int)
+  RepoObject_DisplayName : (nvarchar(128))
+  RepoObject_FullDisplayName2 : (nvarchar(257))
   RepoObject_fullname : (nvarchar(261))
   RepoObject_fullname2 : (nvarchar(257))
   - RepoObject_guid : (uniqueidentifier)
   RepoObject_schema_name : (nvarchar(128))
+  RepoObject_translation : (nvarchar(128))
   SysObject_fullname : (nvarchar(261))
   SysObject_fullname2 : (nvarchar(257))
   SysObject_schema_name : (nvarchar(128))
@@ -44,7 +48,7 @@ entity "puml-link:dhw:sqldb:docs.RepoObject_Adoc.adoc[]" as docs.RepoObject_Adoc
   --
 }
 
-entity "puml-link:dhw:sqldb:property.ExtendedProperty_Repo2Sys_level1.adoc[]" as property.ExtendedProperty_Repo2Sys_level1 << V >> {
+entity "puml-link:dhw:sqldb:property.extendedproperty_repo2sys_level1.adoc[]" as property.ExtendedProperty_Repo2Sys_level1 << V >> {
   - **level0type** : (nvarchar(6))
   - **level0name** : (nvarchar(128))
   **level1type** : (varchar(9))
@@ -60,7 +64,7 @@ entity "puml-link:dhw:sqldb:property.ExtendedProperty_Repo2Sys_level1.adoc[]" as
   --
 }
 
-entity "puml-link:dhw:sqldb:property.ExtendedProperty_Repo2Sys_level2_RepoObject.adoc[]" as property.ExtendedProperty_Repo2Sys_level2_RepoObject << V >> {
+entity "puml-link:dhw:sqldb:property.extendedproperty_repo2sys_level2_repoobject.adoc[]" as property.ExtendedProperty_Repo2Sys_level2_RepoObject << V >> {
   - **level0type** : (nvarchar(6))
   - **level0name** : (nvarchar(128))
   **level1type** : (varchar(9))
@@ -78,20 +82,20 @@ entity "puml-link:dhw:sqldb:property.ExtendedProperty_Repo2Sys_level2_RepoObject
   --
 }
 
-entity "puml-link:dhw:sqldb:property.fs_get_RepoObjectProperty_nvarchar.adoc[]" as property.fs_get_RepoObjectProperty_nvarchar << FN >> {
+entity "puml-link:dhw:sqldb:property.fs_get_repoobjectproperty_nvarchar.adoc[]" as property.fs_get_RepoObjectProperty_nvarchar << FN >> {
   --
   --
   --
 }
 
-entity "puml-link:dhw:sqldb:property.PropertyName_RepoObject.adoc[]" as property.PropertyName_RepoObject << V >> {
+entity "puml-link:dhw:sqldb:property.propertyname_repoobject.adoc[]" as property.PropertyName_RepoObject << V >> {
   **property_name** : (nvarchar(128))
   --
   --
   --
 }
 
-entity "puml-link:dhw:sqldb:property.RepoObjectProperty.adoc[]" as property.RepoObjectProperty << U >> {
+entity "puml-link:dhw:sqldb:property.repoobjectproperty.adoc[]" as property.RepoObjectProperty << U >> {
   - **RepoObjectProperty_id** : (int)
   --
   inheritance : (tinyint)
@@ -107,7 +111,7 @@ entity "puml-link:dhw:sqldb:property.RepoObjectProperty.adoc[]" as property.Repo
   --
 }
 
-entity "puml-link:dhw:sqldb:property.RepoObjectProperty_external_tgt.adoc[]" as property.RepoObjectProperty_external_tgt << V >> {
+entity "puml-link:dhw:sqldb:property.repoobjectproperty_external_tgt.adoc[]" as property.RepoObjectProperty_external_tgt << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   - **property_name** : (nvarchar(128))
   --
@@ -118,7 +122,7 @@ entity "puml-link:dhw:sqldb:property.RepoObjectProperty_external_tgt.adoc[]" as 
   --
 }
 
-entity "puml-link:dhw:sqldb:property.RepoObjectProperty_ForUpdate.adoc[]" as property.RepoObjectProperty_ForUpdate << V >> {
+entity "puml-link:dhw:sqldb:property.repoobjectproperty_forupdate.adoc[]" as property.RepoObjectProperty_ForUpdate << V >> {
   --
   AntoraComponent : (nvarchar(max))
   AntoraModule : (nvarchar(max))
@@ -139,7 +143,7 @@ entity "puml-link:dhw:sqldb:property.RepoObjectProperty_ForUpdate.adoc[]" as pro
   --
 }
 
-entity "puml-link:dhw:sqldb:property.RepoObjectProperty_InheritanceType_InheritanceDefinition.adoc[]" as property.RepoObjectProperty_InheritanceType_InheritanceDefinition << V >> {
+entity "puml-link:dhw:sqldb:property.repoobjectproperty_inheritancetype_inheritancedefinition.adoc[]" as property.RepoObjectProperty_InheritanceType_InheritanceDefinition << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   - **property_name** : (nvarchar(128))
   --
@@ -163,7 +167,21 @@ entity "puml-link:dhw:sqldb:property.RepoObjectProperty_InheritanceType_Inherita
   --
 }
 
-entity "puml-link:dhw:sqldb:property.RepoObjectProperty_sys_repo.adoc[]" as property.RepoObjectProperty_sys_repo << V >> {
+entity "puml-link:dhw:sqldb:property.repoobjectproperty_selectedpropertyname_split.adoc[]" as property.RepoObjectProperty_SelectedPropertyName_split << V >> {
+  --
+  LinePerGuidProperty : (bigint)
+  - property_name : (nvarchar(128))
+  property_value : (nvarchar(max))
+  - RepoObject_guid : (uniqueidentifier)
+  RowPerGuidPropertyLine : (bigint)
+  value_line : (nvarchar(max))
+  value_line_len : (bigint)
+  value_line_row : (nvarchar(max))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.repoobjectproperty_sys_repo.adoc[]" as property.RepoObjectProperty_sys_repo << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   - **property_name** : (sysname)
   --
@@ -176,25 +194,25 @@ entity "puml-link:dhw:sqldb:property.RepoObjectProperty_sys_repo.adoc[]" as prop
   --
 }
 
-entity "puml-link:dhw:sqldb:property.usp_RepoObject_Inheritance.adoc[]" as property.usp_RepoObject_Inheritance << P >> {
+entity "puml-link:dhw:sqldb:property.usp_repoobject_inheritance.adoc[]" as property.usp_RepoObject_Inheritance << P >> {
   --
   --
   --
 }
 
-entity "puml-link:dhw:sqldb:property.usp_RepoObjectProperty_collect.adoc[]" as property.usp_RepoObjectProperty_collect << P >> {
+entity "puml-link:dhw:sqldb:property.usp_repoobjectproperty_collect.adoc[]" as property.usp_RepoObjectProperty_collect << P >> {
   --
   --
   --
 }
 
-entity "puml-link:dhw:sqldb:property.usp_RepoObjectProperty_set.adoc[]" as property.usp_RepoObjectProperty_set << P >> {
+entity "puml-link:dhw:sqldb:property.usp_repoobjectproperty_set.adoc[]" as property.usp_RepoObjectProperty_set << P >> {
   --
   --
   --
 }
 
-entity "puml-link:dhw:sqldb:property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate.adoc[]" as property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate << P >> {
+entity "puml-link:dhw:sqldb:property.usp_sync_extendedproperties_sys2repo_insertupdate.adoc[]" as property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate << P >> {
   --
   --
   --
@@ -213,11 +231,15 @@ property.RepoObjectProperty <.. property.usp_RepoObjectProperty_set
 property.RepoObjectProperty <.. property.usp_RepoObjectProperty_collect
 property.RepoObjectProperty <.. property.RepoObjectProperty_ForUpdate
 property.RepoObjectProperty <.. property.RepoObjectProperty_external_tgt
+property.RepoObjectProperty <.. property.RepoObjectProperty_SelectedPropertyName_split
 property.RepoObjectProperty_external_tgt <.. property.RepoObjectProperty
 "property.RepoObjectProperty::inheritance" <-- "property.RepoObjectProperty_ForUpdate::inheritance"
+"property.RepoObjectProperty::inheritance" <-- "property.RepoObjectProperty_external_tgt::inheritance"
 "property.RepoObjectProperty::property_name" <-- "property.ExtendedProperty_Repo2Sys_level1::property_name"
 "property.RepoObjectProperty::property_name" <-- "property.ExtendedProperty_Repo2Sys_level2_RepoObject::property_name"
 "property.RepoObjectProperty::property_name" <-- "property.RepoObjectProperty_ForUpdate::property_name"
+"property.RepoObjectProperty::property_name" <-- "property.RepoObjectProperty_external_tgt::property_name"
+"property.RepoObjectProperty::property_name" <-- "property.RepoObjectProperty_SelectedPropertyName_split::property_name"
 "property.RepoObjectProperty::property_value" <-- "property.RepoObjectProperty::property_int"
 "property.RepoObjectProperty::property_value" <-- "property.RepoObjectProperty::property_bigint"
 "property.RepoObjectProperty::property_value" <-- "property.RepoObjectProperty::property_real"
@@ -225,9 +247,14 @@ property.RepoObjectProperty_external_tgt <.. property.RepoObjectProperty
 "property.RepoObjectProperty::property_value" <-- "property.RepoObjectProperty::property_money"
 "property.RepoObjectProperty::property_value" <-- "property.RepoObjectProperty_InheritanceType_InheritanceDefinition::property_value"
 "property.RepoObjectProperty::property_value" <-- "property.RepoObjectProperty_ForUpdate::property_value"
+"property.RepoObjectProperty::property_value" <-- "property.RepoObjectProperty_external_tgt::property_value"
+"property.RepoObjectProperty::property_value" <-- "property.RepoObjectProperty_SelectedPropertyName_split::property_value"
 "property.RepoObjectProperty::RepoObject_guid" <-- "property.ExtendedProperty_Repo2Sys_level1::RepoObject_guid"
 "property.RepoObjectProperty::RepoObject_guid" <-- "property.ExtendedProperty_Repo2Sys_level2_RepoObject::RepoObject_guid"
 "property.RepoObjectProperty::RepoObject_guid" <-- "property.RepoObjectProperty_ForUpdate::RepoObject_guid"
+"property.RepoObjectProperty::RepoObject_guid" <-- "property.RepoObjectProperty_external_tgt::RepoObject_guid"
+"property.RepoObjectProperty::RepoObject_guid" <-- "property.RepoObjectProperty_SelectedPropertyName_split::RepoObject_guid"
 "property.RepoObjectProperty::RepoObjectProperty_id" <-- "property.RepoObjectProperty_ForUpdate::RepoObjectProperty_id"
+"property.RepoObjectProperty::RepoObjectProperty_id" <-- "property.RepoObjectProperty_external_tgt::RepoObjectProperty_id"
 @enduml
 

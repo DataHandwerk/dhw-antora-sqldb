@@ -26,10 +26,11 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:docs.RepoObject_Plantuml_Entity_T.adoc[]" as docs.RepoObject_Plantuml_Entity_T << U >> {
+entity "puml-link:dhw:sqldb:docs.repoobject_plantuml_entity_t.adoc[]" as docs.RepoObject_Plantuml_Entity_T << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **cultures_name** : (nvarchar(10))
   --
   - RepoObject_fullname2 : (nvarchar(257))
-  - RepoObject_guid : (uniqueidentifier)
   - RepoObject_Puml : (nvarchar(max))
   - RepoObject_PumlOnlyIndex : (nvarchar(max))
   - RepoObject_PumlOnlyPK : (nvarchar(max))
@@ -41,7 +42,9 @@ entity "puml-link:dhw:sqldb:docs.RepoObject_Plantuml_Entity_T.adoc[]" as docs.Re
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.Schema_EntityList.adoc[]" as docs.Schema_EntityList << V >> {
+entity "puml-link:dhw:sqldb:docs.schema_entitylist.adoc[]" as docs.Schema_EntityList << V >> {
+  - **RepoObject_schema_name** : (nvarchar(128))
+  - **cultures_name** : (nvarchar(10))
   --
   EntityList_Puml : (nvarchar(max))
   EntityList_PumlOnlyIndex : (nvarchar(max))
@@ -49,17 +52,18 @@ entity "puml-link:dhw:sqldb:docs.Schema_EntityList.adoc[]" as docs.Schema_Entity
   EntityList_PumlOnlyPkOrIndex : (nvarchar(max))
   EntityList_PumlOnlyPkOrIndexOrMeasure : (nvarchar(max))
   EntityList_PumlOnlyPkOrNotHidden : (nvarchar(max))
-  - RepoObject_schema_name : (nvarchar(128))
   --
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.Schema_puml.adoc[]" as docs.Schema_puml << V >> {
+entity "puml-link:dhw:sqldb:docs.schema_puml.adoc[]" as docs.Schema_puml << V >> {
+  - **RepoSchema_guid** : (uniqueidentifier)
+  **cultures_name** : (nvarchar(10))
   --
+  - is_ssas : (bit)
   - PumlSchemaEr : (nvarchar(max))
   - PumlSchemaIndexEr : (nvarchar(max))
   PumlSchemaSsasEr : (nvarchar(max))
-  - RepoSchema_guid : (uniqueidentifier)
   - RepoSchema_name : (nvarchar(128))
   --
   --
@@ -67,6 +71,7 @@ entity "puml-link:dhw:sqldb:docs.Schema_puml.adoc[]" as docs.Schema_puml << V >>
 
 docs.RepoObject_Plantuml_Entity_T <.. docs.Schema_EntityList
 docs.Schema_EntityList <.. docs.Schema_puml
+"docs.RepoObject_Plantuml_Entity_T::cultures_name" <-- "docs.Schema_EntityList::cultures_name"
 "docs.RepoObject_Plantuml_Entity_T::RepoObject_schema_name" <-- "docs.Schema_EntityList::RepoObject_schema_name"
 @enduml
 

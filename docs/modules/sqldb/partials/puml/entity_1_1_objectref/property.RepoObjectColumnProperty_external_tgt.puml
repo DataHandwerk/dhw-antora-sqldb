@@ -26,38 +26,38 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:property.PropertyName_RepoObject_T.adoc[]" as property.PropertyName_RepoObject_T << U >> {
+entity "puml-link:dhw:sqldb:property.propertyname_repoobject_t.adoc[]" as property.PropertyName_RepoObject_T << U >> {
   **property_name** : (nvarchar(128))
   --
 }
 
-entity "puml-link:dhw:sqldb:property.RepoObjectColumnProperty.adoc[]" as property.RepoObjectColumnProperty << U >> {
+entity "puml-link:dhw:sqldb:property.repoobjectcolumnproperty.adoc[]" as property.RepoObjectColumnProperty << U >> {
   - **RepoObjectColumnProperty_id** : (int)
   --
 }
 
-entity "puml-link:dhw:sqldb:property.RepoObjectColumnProperty_external_src.adoc[]" as property.RepoObjectColumnProperty_external_src << V >> {
+entity "puml-link:dhw:sqldb:property.repoobjectcolumnproperty_external_src.adoc[]" as property.RepoObjectColumnProperty_external_src << V >> {
   - **RepoObjectColumn_guid** : (uniqueidentifier)
   - **property_name** : (nvarchar(128))
   --
 }
 
-entity "puml-link:dhw:sqldb:property.RepoObjectColumnProperty_external_tgt.adoc[]" as property.RepoObjectColumnProperty_external_tgt << V >> {
+entity "puml-link:dhw:sqldb:property.repoobjectcolumnproperty_external_tgt.adoc[]" as property.RepoObjectColumnProperty_external_tgt << V >> {
   - **RepoObjectColumn_guid** : (uniqueidentifier)
   - **property_name** : (nvarchar(128))
   --
 }
 
-entity "puml-link:dhw:sqldb:property.usp_PERSIST_RepoObjectColumnProperty_external_tgt.adoc[]" as property.usp_PERSIST_RepoObjectColumnProperty_external_tgt << P >> {
+entity "puml-link:dhw:sqldb:property.usp_persist_repoobjectcolumnproperty_external_tgt.adoc[]" as property.usp_PERSIST_RepoObjectColumnProperty_external_tgt << P >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
+entity "puml-link:dhw:sqldb:repo.repoobject.adoc[]" as repo.RepoObject << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObjectColumn.adoc[]" as repo.RepoObjectColumn << U >> {
+entity "puml-link:dhw:sqldb:repo.repoobjectcolumn.adoc[]" as repo.RepoObjectColumn << U >> {
   - **RepoObjectColumn_guid** : (uniqueidentifier)
   --
 }
@@ -65,11 +65,11 @@ entity "puml-link:dhw:sqldb:repo.RepoObjectColumn.adoc[]" as repo.RepoObjectColu
 property.PropertyName_RepoObject_T <.. property.RepoObjectColumnProperty_external_tgt
 property.RepoObjectColumnProperty <.. property.RepoObjectColumnProperty_external_tgt
 property.RepoObjectColumnProperty_external_src <.. property.RepoObjectColumnProperty_external_tgt
-property.RepoObjectColumnProperty_external_tgt <.. repo.RepoObject
 property.RepoObjectColumnProperty_external_tgt <.. property.PropertyName_RepoObject_T
 property.RepoObjectColumnProperty_external_tgt <.. property.usp_PERSIST_RepoObjectColumnProperty_external_tgt
-property.RepoObjectColumnProperty_external_tgt <.. repo.RepoObjectColumn
 property.RepoObjectColumnProperty_external_tgt <.. property.RepoObjectColumnProperty
+property.RepoObjectColumnProperty_external_tgt <.. repo.RepoObject
+property.RepoObjectColumnProperty_external_tgt <.. repo.RepoObjectColumn
 repo.RepoObject <.. property.RepoObjectColumnProperty_external_tgt
 repo.RepoObjectColumn <.. property.RepoObjectColumnProperty_external_tgt
 @enduml

@@ -26,31 +26,36 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:property.RepoObjectProperty_Collect_source_sql_modules_definition.adoc[]" as property.RepoObjectProperty_Collect_source_sql_modules_definition << V >> {
+entity "puml-link:dhw:sqldb:property.repoobjectproperty_collect_source_sql_modules_definition.adoc[]" as property.RepoObjectProperty_Collect_source_sql_modules_definition << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   **property_name** : (nvarchar(128))
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObject.adoc[]" as repo.RepoObject << U >> {
+entity "puml-link:dhw:sqldb:repo.repoobject.adoc[]" as repo.RepoObject << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObject_gross2.adoc[]" as repo.RepoObject_gross2 << V >> {
+entity "puml-link:dhw:sqldb:repo.repoobject_gross2.adoc[]" as repo.RepoObject_gross2 << V >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:repo_sys.SysObject.adoc[]" as repo_sys.SysObject << V >> {
-  --
-}
-
-entity "puml-link:dhw:sqldb:sqlparse.RepoObject_SqlModules.adoc[]" as sqlparse.RepoObject_SqlModules << U >> {
+entity "puml-link:dhw:sqldb:repo.repoobject_sat2.adoc[]" as repo.RepoObject_sat2 << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
 }
 
-entity "puml-link:dhw:sqldb:sqlparse.RepoObject_SqlModules_Repo_Sys.adoc[]" as sqlparse.RepoObject_SqlModules_Repo_Sys << V >> {
+entity "puml-link:dhw:sqldb:repo_sys.sysobject.adoc[]" as repo_sys.SysObject << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:sqlparse.repoobject_sqlmodules.adoc[]" as sqlparse.RepoObject_SqlModules << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:sqlparse.repoobject_sqlmodules_repo_sys.adoc[]" as sqlparse.RepoObject_SqlModules_Repo_Sys << V >> {
   --
 }
 
@@ -59,5 +64,6 @@ repo_sys.SysObject <.. sqlparse.RepoObject_SqlModules_Repo_Sys
 sqlparse.RepoObject_SqlModules <.. sqlparse.RepoObject_SqlModules_Repo_Sys
 sqlparse.RepoObject_SqlModules_Repo_Sys <.. property.RepoObjectProperty_Collect_source_sql_modules_definition
 sqlparse.RepoObject_SqlModules_Repo_Sys <.. repo.RepoObject_gross2
+sqlparse.RepoObject_SqlModules_Repo_Sys <.. repo.RepoObject_sat2
 @enduml
 

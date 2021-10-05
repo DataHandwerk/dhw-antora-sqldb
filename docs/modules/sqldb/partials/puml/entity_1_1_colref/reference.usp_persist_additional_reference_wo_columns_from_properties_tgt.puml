@@ -1,0 +1,86 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:logs.usp_executionlog_insert.adoc[]" as logs.usp_ExecutionLog_insert << P >> {
+  --
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.additional_reference_wo_columns_from_properties_src.adoc[]" as reference.additional_Reference_wo_columns_from_properties_src << V >> {
+  **referenced_AntoraComponent** : (nvarchar(max))
+  **referenced_AntoraModule** : (nvarchar(max))
+  **referenced_Schema** : (nvarchar(max))
+  **referenced_Object** : (nvarchar(max))
+  **referencing_AntoraComponent** : (nvarchar(max))
+  **referencing_AntoraModule** : (nvarchar(max))
+  **referencing_Schema** : (nvarchar(max))
+  **referencing_Object** : (nvarchar(max))
+  --
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.additional_reference_wo_columns_from_properties_tgt.adoc[]" as reference.additional_Reference_wo_columns_from_properties_tgt << V >> {
+  - **Id** : (int)
+  --
+  referenced_AntoraComponent : (nvarchar(max))
+  referenced_AntoraModule : (nvarchar(max))
+  referenced_Column : (nvarchar(128))
+  referenced_Object : (nvarchar(max))
+  referenced_Schema : (nvarchar(max))
+  referencing_AntoraComponent : (nvarchar(max))
+  referencing_AntoraModule : (nvarchar(max))
+  referencing_Column : (nvarchar(128))
+  referencing_Object : (nvarchar(max))
+  referencing_Schema : (nvarchar(max))
+  - tik : (nvarchar(1311))
+  tik_hash : (binary(16))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.usp_persist_additional_reference_wo_columns_from_properties_tgt.adoc[]" as reference.usp_PERSIST_additional_Reference_wo_columns_from_properties_tgt << P >> {
+  --
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.usp_main.adoc[]" as repo.usp_main << P >> {
+  --
+  --
+  --
+}
+
+logs.usp_ExecutionLog_insert <.. reference.usp_PERSIST_additional_Reference_wo_columns_from_properties_tgt
+reference.additional_Reference_wo_columns_from_properties_src <.. reference.usp_PERSIST_additional_Reference_wo_columns_from_properties_tgt
+reference.additional_Reference_wo_columns_from_properties_tgt <.. reference.usp_PERSIST_additional_Reference_wo_columns_from_properties_tgt
+reference.usp_PERSIST_additional_Reference_wo_columns_from_properties_tgt <.. repo.usp_main
+
+@enduml
+

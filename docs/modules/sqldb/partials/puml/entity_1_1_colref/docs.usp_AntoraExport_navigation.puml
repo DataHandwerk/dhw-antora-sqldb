@@ -26,23 +26,18 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:config.fs_get_parameter_value.adoc[]" as config.fs_get_parameter_value << FN >> {
+entity "puml-link:dhw:sqldb:docs.antoranavlistpage_by_type.adoc[]" as docs.AntoraNavListPage_by_type << V >> {
   --
-  --
-  --
-}
-
-entity "puml-link:dhw:sqldb:configT.type.adoc[]" as configT.type << V >> {
-  **type** : (nvarchar(128))
-  --
-  - is_DocsOutput : (int)
+  - nav_list : (nvarchar(4000))
+  type : (nvarchar(128))
   type_desc : (nvarchar(128))
   --
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.AntoraNavListRepoObject_by_schema.adoc[]" as docs.AntoraNavListRepoObject_by_schema << V >> {
+entity "puml-link:dhw:sqldb:docs.antoranavlistrepoobject_by_schema.adoc[]" as docs.AntoraNavListRepoObject_by_schema << V >> {
   --
+  - cultures_name : (nvarchar(10))
   is_ssas : (tinyint)
   nav_list : (nvarchar(max))
   - RepoObject_schema_name : (nvarchar(128))
@@ -50,48 +45,71 @@ entity "puml-link:dhw:sqldb:docs.AntoraNavListRepoObject_by_schema.adoc[]" as do
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.AntoraNavListRepoObject_by_schema_type.adoc[]" as docs.AntoraNavListRepoObject_by_schema_type << V >> {
+entity "puml-link:dhw:sqldb:docs.antoranavlistrepoobject_by_schema_type.adoc[]" as docs.AntoraNavListRepoObject_by_schema_type << V >> {
   - **RepoObject_schema_name** : (nvarchar(128))
   **type** : (char(2))
   --
+  - cultures_name : (nvarchar(10))
   nav_list : (nvarchar(max))
   type_name : (nvarchar(128))
   --
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.AntoraNavListRepoObject_by_type.adoc[]" as docs.AntoraNavListRepoObject_by_type << V >> {
+entity "puml-link:dhw:sqldb:docs.antoranavlistrepoobject_by_type.adoc[]" as docs.AntoraNavListRepoObject_by_type << V >> {
   **type** : (char(2))
   --
+  - cultures_name : (nvarchar(10))
   nav_list : (nvarchar(max))
   type_name : (nvarchar(128))
   --
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.usp_AntoraExport.adoc[]" as docs.usp_AntoraExport << P >> {
+entity "puml-link:dhw:sqldb:docs.culture.adoc[]" as docs.Culture << V >> {
+  --
+  - cultures_name : (nvarchar(10))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.fs_antoramodulefolder.adoc[]" as docs.fs_AntoraModuleFolder << FN >> {
   --
   --
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.usp_AntoraExport_navigation.adoc[]" as docs.usp_AntoraExport_navigation << P >> {
+entity "puml-link:dhw:sqldb:docs.fs_cleanstringforfilename.adoc[]" as docs.fs_cleanStringForFilename << FN >> {
   --
   --
   --
 }
 
-entity "puml-link:dhw:sqldb:logs.usp_ExecutionLog_insert.adoc[]" as logs.usp_ExecutionLog_insert << P >> {
+entity "puml-link:dhw:sqldb:docs.usp_antoraexport.adoc[]" as docs.usp_AntoraExport << P >> {
   --
   --
   --
 }
 
-config.fs_get_parameter_value <.. docs.usp_AntoraExport_navigation
-configT.type <.. docs.usp_AntoraExport_navigation
+entity "puml-link:dhw:sqldb:docs.usp_antoraexport_navigation.adoc[]" as docs.usp_AntoraExport_navigation << P >> {
+  --
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:logs.usp_executionlog_insert.adoc[]" as logs.usp_ExecutionLog_insert << P >> {
+  --
+  --
+  --
+}
+
+docs.AntoraNavListPage_by_type <.. docs.usp_AntoraExport_navigation
 docs.AntoraNavListRepoObject_by_schema <.. docs.usp_AntoraExport_navigation
 docs.AntoraNavListRepoObject_by_schema_type <.. docs.usp_AntoraExport_navigation
 docs.AntoraNavListRepoObject_by_type <.. docs.usp_AntoraExport_navigation
+docs.culture <.. docs.usp_AntoraExport_navigation
+docs.fs_AntoraModuleFolder <.. docs.usp_AntoraExport_navigation
+docs.fs_cleanStringForFilename <.. docs.usp_AntoraExport_navigation
 docs.usp_AntoraExport_navigation <.. docs.usp_AntoraExport
 logs.usp_ExecutionLog_insert <.. docs.usp_AntoraExport_navigation
 

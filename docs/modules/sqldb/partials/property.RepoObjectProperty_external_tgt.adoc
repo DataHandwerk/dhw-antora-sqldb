@@ -1,4 +1,6 @@
-= [property].[RepoObjectProperty_external_tgt]
+// tag::HeaderFullDisplayName[]
+= property.RepoObjectProperty_external_tgt
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -38,6 +40,12 @@
 47948D1F-D01B-EC11-8521-A81E8446D5B0
 // end::RepoObject_guid[]
 
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+property.RepoObjectProperty_external_tgt
+// end::RepoObject_FullDisplayName2[]
+
 == SysObject_type
 
 // tag::SysObject_type[]
@@ -65,8 +73,8 @@ view
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-RepoObject_guid]
-=== RepoObject_guid
+[#column-repoobject_guid]
+=== repoobject_guid
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -80,7 +88,8 @@ view
 
 .Referenced Columns
 --
-* xref:property.RepoObjectProperty_external_src.adoc#column-RepoObject_guid[+property.RepoObjectProperty_external_src.RepoObject_guid+]
+* xref:property.repoobjectproperty.adoc#column-repoobject_guid[+property.RepoObjectProperty.RepoObject_guid+]
+* xref:property.repoobjectproperty_external_src.adoc#column-repoobject_guid[+property.RepoObjectProperty_external_src.RepoObject_guid+]
 --
 
 
@@ -99,7 +108,8 @@ view
 
 .Referenced Columns
 --
-* xref:property.RepoObjectProperty_external_src.adoc#column-property_name[+property.RepoObjectProperty_external_src.property_name+]
+* xref:property.repoobjectproperty.adoc#column-property_name[+property.RepoObjectProperty.property_name+]
+* xref:property.repoobjectproperty_external_src.adoc#column-property_name[+property.RepoObjectProperty_external_src.property_name+]
 --
 
 
@@ -115,6 +125,11 @@ view
 |
 |
 |===
+
+.Referenced Columns
+--
+* xref:property.repoobjectproperty.adoc#column-inheritance[+property.RepoObjectProperty.inheritance+]
+--
 
 
 [#column-property_value]
@@ -132,12 +147,13 @@ view
 
 .Referenced Columns
 --
-* xref:property.RepoObjectProperty_external_src.adoc#column-property_value[+property.RepoObjectProperty_external_src.property_value+]
+* xref:property.repoobjectproperty.adoc#column-property_value[+property.RepoObjectProperty.property_value+]
+* xref:property.repoobjectproperty_external_src.adoc#column-property_value[+property.RepoObjectProperty_external_src.property_value+]
 --
 
 
-[#column-RepoObjectProperty_id]
-=== RepoObjectProperty_id
+[#column-repoobjectproperty_id]
+=== repoobjectproperty_id
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -148,6 +164,11 @@ view
 |
 |
 |===
+
+.Referenced Columns
+--
+* xref:property.repoobjectproperty.adoc#column-repoobjectproperty_id[+property.RepoObjectProperty.RepoObjectProperty_id+]
+--
 
 
 // end::AntoraColumnDetails[]
@@ -162,7 +183,7 @@ view
 
 // tag::AntoraPkColumnTableRows[]
 |1
-|*<<column-RepoObject_guid>>*
+|*<<column-repoobject_guid>>*
 |uniqueidentifier
 |NOT NULL
 |
@@ -200,7 +221,7 @@ view
 |
 
 |
-|<<column-RepoObjectProperty_id>>
+|<<column-repoobjectproperty_id>>
 |int
 |NOT NULL
 |
@@ -212,16 +233,39 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-PK_RepoObjectProperty_external_tgt]
-=== PK_RepoObjectProperty_external_tgt
+[#index-pk_repoobjectproperty_external_tgt]
+=== pk_repoobjectproperty_external_tgt
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
 * <<column-property_name>>; nvarchar(128)
 --
 * PK, Unique, Real: 1, 1, 0
+
+
+[#index-uk_repoobjectproperty_external_tgt2x_2]
+=== uk_repoobjectproperty_external_tgt++__++2
+
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-RepoObjectProperty_id>>; int
+--
+* PK, Unique, Real: 0, 1, 0
+
+
+[#index-idx_repoobjectproperty_external_tgt2x_3]
+=== idx_repoobjectproperty_external_tgt++__++3
+
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-RepoObject_guid>>; uniqueidentifier
+--
+* PK, Unique, Real: 0, 0, 0
+* is disabled
 
 // end::AntoraIndexList[]
 
@@ -236,6 +280,13 @@ view
 source: property.RepoObjectProperty_cross As rop_cross
 
 
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
+
+
 === AdocUspSteps
 
 // tag::adocuspsteps[]
@@ -246,20 +297,20 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:property.PropertyName_RepoObject_T.adoc[]
-* xref:property.RepoObjectProperty.adoc[]
-* xref:property.RepoObjectProperty_external_src.adoc[]
-* xref:repo.RepoObject.adoc[]
+* xref:property.propertyname_repoobject_t.adoc[]
+* xref:property.repoobjectproperty.adoc[]
+* xref:property.repoobjectproperty_external_src.adoc[]
+* xref:repo.repoobject.adoc[]
 // end::antorareferencedlist[]
 
 
 === AntoraReferencingList
 
 // tag::antorareferencinglist[]
-* xref:property.PropertyName_RepoObject_T.adoc[]
-* xref:property.RepoObjectProperty.adoc[]
-* xref:property.usp_PERSIST_RepoObjectProperty_external_tgt.adoc[]
-* xref:repo.RepoObject.adoc[]
+* xref:property.propertyname_repoobject_t.adoc[]
+* xref:property.repoobjectproperty.adoc[]
+* xref:property.usp_persist_repoobjectproperty_external_tgt.adoc[]
+* xref:repo.repoobject.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -455,7 +506,7 @@ property.RepoObjectProperty_external_src
 === persistence_source_RepoObject_xref
 
 // tag::persistence_source_repoobject_xref[]
-xref:property.RepoObjectProperty_external_src.adoc[]
+xref:property.repoobjectproperty_external_src.adoc[]
 // end::persistence_source_repoobject_xref[]
 
 
@@ -509,6 +560,13 @@ E943462F-471C-EC11-8521-A81E8446D5B0
 // tag::uspexamples[]
 
 // end::uspexamples[]
+
+
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+
+// end::uspgenerator_usp_id[]
 
 
 === UspParameters

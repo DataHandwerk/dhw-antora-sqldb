@@ -26,19 +26,33 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:docs.Schema_puml.adoc[]" as docs.Schema_puml << V >> {
+entity "puml-link:dhw:sqldb:docs.schema_puml.adoc[]" as docs.Schema_puml << V >> {
+  - **RepoSchema_guid** : (uniqueidentifier)
+  **cultures_name** : (nvarchar(10))
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.Schema_SsasRelationList.adoc[]" as docs.Schema_SsasRelationList << V >> {
+entity "puml-link:dhw:sqldb:docs.schema_ssasrelationlist.adoc[]" as docs.Schema_SsasRelationList << V >> {
+  - **SchemaName** : (nvarchar(128))
+  **cultures_name** : (nvarchar(10))
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.ssas_PumlRelation.adoc[]" as docs.ssas_PumlRelation << V >> {
+entity "puml-link:dhw:sqldb:docs.ssas_pumlrelation.adoc[]" as docs.ssas_PumlRelation << V >> {
   --
 }
 
+entity "puml-link:dhw:sqldb:docs.usp_antoraexport.adoc[]" as docs.usp_AntoraExport << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.usp_antoraexport_objectpuml.adoc[]" as docs.usp_AntoraExport_ObjectPuml << P >> {
+  --
+}
+
+docs.Schema_puml <.. docs.usp_AntoraExport_ObjectPuml
 docs.Schema_SsasRelationList <.. docs.Schema_puml
 docs.ssas_PumlRelation <.. docs.Schema_SsasRelationList
+docs.usp_AntoraExport_ObjectPuml <.. docs.usp_AntoraExport
 @enduml
 

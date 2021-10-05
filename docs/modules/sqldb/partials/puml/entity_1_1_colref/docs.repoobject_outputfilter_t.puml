@@ -1,0 +1,381 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:docs.antoraindexsemanticgrouppatterndatatype.adoc[]" as docs.AntoraIndexSemanticgroupPatterndatatype << V >> {
+  **IndexSemanticGroup** : (nvarchar(512))
+  **IndexPatternColumnDatatype** : (nvarchar(4000))
+  --
+  AntoraIndexSemanticgroupPatterndatatype : (nvarchar(max))
+  cultures_name : (nvarchar(10))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.antoranavlistpage_by_schema.adoc[]" as docs.AntoraNavListPage_by_schema << V >> {
+  --
+  cultures_name : (nvarchar(10))
+  - nav_list : (nvarchar(4000))
+  - RepoObject_schema_name : (nvarchar(128))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.antoranavlistpage_by_type.adoc[]" as docs.AntoraNavListPage_by_type << V >> {
+  --
+  - nav_list : (nvarchar(4000))
+  type : (nvarchar(128))
+  type_desc : (nvarchar(128))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.antoranavlistrepoobject_by_schema.adoc[]" as docs.AntoraNavListRepoObject_by_schema << V >> {
+  --
+  - cultures_name : (nvarchar(10))
+  is_ssas : (tinyint)
+  nav_list : (nvarchar(max))
+  - RepoObject_schema_name : (nvarchar(128))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.antoranavlistrepoobject_by_schema_type.adoc[]" as docs.AntoraNavListRepoObject_by_schema_type << V >> {
+  - **RepoObject_schema_name** : (nvarchar(128))
+  **type** : (char(2))
+  --
+  - cultures_name : (nvarchar(10))
+  nav_list : (nvarchar(max))
+  type_name : (nvarchar(128))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.antoranavlistrepoobject_by_type.adoc[]" as docs.AntoraNavListRepoObject_by_type << V >> {
+  **type** : (char(2))
+  --
+  - cultures_name : (nvarchar(10))
+  nav_list : (nvarchar(max))
+  type_name : (nvarchar(128))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.repoobject_adoc.adoc[]" as docs.RepoObject_Adoc << V >> {
+  --
+  - AdocContent : (nvarchar(max))
+  - cultures_name : (nvarchar(10))
+  is_DocsOutput : (int)
+  PropertyCount : (int)
+  RepoObject_DisplayName : (nvarchar(128))
+  RepoObject_FullDisplayName2 : (nvarchar(257))
+  RepoObject_fullname : (nvarchar(261))
+  RepoObject_fullname2 : (nvarchar(257))
+  - RepoObject_guid : (uniqueidentifier)
+  RepoObject_schema_name : (nvarchar(128))
+  RepoObject_translation : (nvarchar(128))
+  SysObject_fullname : (nvarchar(261))
+  SysObject_fullname2 : (nvarchar(257))
+  SysObject_schema_name : (nvarchar(128))
+  SysObject_type : (char(2))
+  SysObject_type_name : (nvarchar(128))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.repoobject_columnlist.adoc[]" as docs.RepoObject_ColumnList << V >> {
+  --
+  AntoraColumnDetails : (nvarchar(max))
+  AntoraNonPkColumnTableRows : (nvarchar(max))
+  AntoraPkColumnTableRows : (nvarchar(max))
+  - cultures_name : (nvarchar(10))
+  is_external : (tinyint)
+  PlantumlIndexColumns : (nvarchar(max))
+  PlantumlNonPkEntityColumns : (nvarchar(max))
+  PlantumlNonPkHiddenEntityColumns : (nvarchar(max))
+  PlantumlNonPkIndexColumns : (nvarchar(max))
+  PlantumlPkEntityColumns : (nvarchar(max))
+  - RepoObject_guid : (uniqueidentifier)
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.repoobject_indexlist.adoc[]" as docs.RepoObject_IndexList << V >> {
+  **RepoObject_guid** : (uniqueidentifier)
+  **cultures_name** : (nvarchar(10))
+  --
+  AntoraIndexList : (nvarchar(max))
+  PumlIndexList : (nvarchar(max))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.repoobject_measurelist.adoc[]" as docs.RepoObject_MeasureList << V >> {
+  **RepoObject_guid** : (uniqueidentifier)
+  **cultures_name** : (nvarchar(10))
+  --
+  AntoraMeasureDetails : (nvarchar(max))
+  is_external : (tinyint)
+  PlantumlMeasures : (nvarchar(max))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.repoobject_outputfilter.adoc[]" as docs.RepoObject_OutputFilter << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **cultures_name** : (nvarchar(10))
+  --
+  AntoraComponent : (nvarchar(max))
+  AntoraModule : (nvarchar(max))
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
+  external_DatabaseName : (nvarchar(128))
+  is_DocsOutput : (int)
+  - is_external : (bit)
+  - is_ssas : (bit)
+  - PumlEntityTopDefault : (nvarchar(max))
+  - PumlEntityTopWorkaround : (nvarchar(max))
+  RepoObject_DisplayName : (nvarchar(128))
+  RepoObject_FullDisplayName2 : (nvarchar(257))
+  - RepoObject_fullname : (nvarchar(261))
+  - RepoObject_fullname2 : (nvarchar(257))
+  - RepoObject_name : (nvarchar(128))
+  - RepoObject_schema_name : (nvarchar(128))
+  RepoObject_translation : (nvarchar(128))
+  SysObject_type : (char(2))
+  SysObject_type_name : (nvarchar(128))
+  tables_isHidden : (bit)
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.repoobject_outputfilter_t.adoc[]" as docs.RepoObject_OutputFilter_T << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **cultures_name** : (nvarchar(10))
+  --
+  AntoraComponent : (nvarchar(max))
+  AntoraModule : (nvarchar(max))
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
+  external_DatabaseName : (nvarchar(128))
+  is_DocsOutput : (int)
+  - is_external : (bit)
+  - is_ssas : (bit)
+  - PumlEntityTopDefault : (nvarchar(max))
+  - PumlEntityTopWorkaround : (nvarchar(max))
+  RepoObject_DisplayName : (nvarchar(128))
+  RepoObject_FullDisplayName2 : (nvarchar(257))
+  - RepoObject_fullname : (nvarchar(261))
+  - RepoObject_fullname2 : (nvarchar(257))
+  - RepoObject_name : (nvarchar(128))
+  - RepoObject_schema_name : (nvarchar(128))
+  RepoObject_translation : (nvarchar(128))
+  SysObject_type : (char(2))
+  SysObject_type_name : (nvarchar(128))
+  tables_isHidden : (bit)
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.repoobject_plantuml.adoc[]" as docs.RepoObject_Plantuml << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  **cultures_name** : (nvarchar(10))
+  --
+  ColRefList : (nvarchar(max))
+  ObjectRefList : (nvarchar(max))
+  ObjectRefList_0_30 : (nvarchar(max))
+  ObjectRefList_30_0 : (nvarchar(max))
+  - PlantumlEntity_0_30_ObjectRef : (nvarchar(max))
+  - PlantumlEntity_1_1_ColRef : (nvarchar(max))
+  - PlantumlEntity_1_1_FkRef : (nvarchar(max))
+  - PlantumlEntity_1_1_ObjectRef : (nvarchar(max))
+  - PlantumlEntity_30_0_ObjectRef : (nvarchar(max))
+  PumlEntityList : (nvarchar(max))
+  PumlEntityList_0_30 : (nvarchar(max))
+  PumlEntityList_30_0 : (nvarchar(max))
+  - RepoObject_fullname2 : (nvarchar(257))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.repoobject_plantuml_colreflist_1_1.adoc[]" as docs.RepoObject_Plantuml_ColRefList_1_1 << V >> {
+  --
+  ColRefList : (nvarchar(max))
+  - cultures_name : (nvarchar(10))
+  - RepoObject_guid : (uniqueidentifier)
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.repoobject_plantuml_entity.adoc[]" as docs.RepoObject_Plantuml_Entity << V >> {
+  --
+  - cultures_name : (nvarchar(10))
+  - RepoObject_fullname2 : (nvarchar(257))
+  - RepoObject_guid : (uniqueidentifier)
+  - RepoObject_Puml : (nvarchar(max))
+  - RepoObject_PumlOnlyIndex : (nvarchar(max))
+  - RepoObject_PumlOnlyPK : (nvarchar(max))
+  - RepoObject_PumlOnlyPkOrIndex : (nvarchar(max))
+  - RepoObject_PumlOnlyPkOrIndexOrMeasure : (nvarchar(max))
+  - RepoObject_PumlOnlyPkOrNotHidden : (nvarchar(max))
+  - RepoObject_schema_name : (nvarchar(128))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.schema_puml.adoc[]" as docs.Schema_puml << V >> {
+  - **RepoSchema_guid** : (uniqueidentifier)
+  **cultures_name** : (nvarchar(10))
+  --
+  - is_ssas : (bit)
+  - PumlSchemaEr : (nvarchar(max))
+  - PumlSchemaIndexEr : (nvarchar(max))
+  PumlSchemaSsasEr : (nvarchar(max))
+  - RepoSchema_name : (nvarchar(128))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.unit_1_union.adoc[]" as docs.Unit_1_union << V >> {
+  --
+  Object_fullname2 : (nvarchar(257))
+  Object_Type : (varchar(2))
+  Unit_ColummName : (nvarchar(128))
+  Unit_Description : (nvarchar(max))
+  Unit_DisplayFolder : (nvarchar(500))
+  Unit_Expression : (nvarchar(max))
+  Unit_FormatString : (nvarchar(500))
+  - Unit_fullname2 : (nvarchar(638))
+  - Unit_guid : (uniqueidentifier)
+  Unit_isHidden : (bit)
+  Unit_IsKey : (bit)
+  Unit_IsSsas : (bit)
+  Unit_IsUnique : (bit)
+  - Unit_Metatype : (varchar(7))
+  - Unit_Name : (nvarchar(500))
+  Unit_ObjectName : (nvarchar(128))
+  - Unit_Schema : (nvarchar(128))
+  Unit_SummarizeBy : (nvarchar(500))
+  Unit_TypeName : (nvarchar(128))
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.usp_antoraexport_objectpage.adoc[]" as docs.usp_AntoraExport_ObjectPage << P >> {
+  --
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.usp_antoraexport_objectpartialproperties.adoc[]" as docs.usp_AntoraExport_ObjectPartialProperties << P >> {
+  --
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.usp_antoraexport_objectpuml.adoc[]" as docs.usp_AntoraExport_ObjectPuml << P >> {
+  --
+  --
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.usp_persist_repoobject_outputfilter_t.adoc[]" as docs.usp_PERSIST_RepoObject_OutputFilter_T << P >> {
+  --
+  --
+  --
+}
+
+docs.RepoObject_OutputFilter <.. docs.RepoObject_OutputFilter_T
+docs.RepoObject_OutputFilter_T <.. docs.usp_AntoraExport_ObjectPartialProperties
+docs.RepoObject_OutputFilter_T <.. docs.RepoObject_Adoc
+docs.RepoObject_OutputFilter_T <.. docs.AntoraNavListRepoObject_by_schema_type
+docs.RepoObject_OutputFilter_T <.. docs.AntoraNavListRepoObject_by_schema
+docs.RepoObject_OutputFilter_T <.. docs.AntoraNavListRepoObject_by_type
+docs.RepoObject_OutputFilter_T <.. docs.usp_AntoraExport_ObjectPage
+docs.RepoObject_OutputFilter_T <.. docs.AntoraNavListPage_by_schema
+docs.RepoObject_OutputFilter_T <.. docs.AntoraIndexSemanticgroupPatterndatatype
+docs.RepoObject_OutputFilter_T <.. docs.AntoraNavListPage_by_type
+docs.RepoObject_OutputFilter_T <.. docs.RepoObject_IndexList
+docs.RepoObject_OutputFilter_T <.. docs.usp_AntoraExport_ObjectPuml
+docs.RepoObject_OutputFilter_T <.. docs.RepoObject_Plantuml
+docs.RepoObject_OutputFilter_T <.. docs.RepoObject_Plantuml_Entity
+docs.RepoObject_OutputFilter_T <.. docs.RepoObject_ColumnList
+docs.RepoObject_OutputFilter_T <.. docs.RepoObject_MeasureList
+docs.RepoObject_OutputFilter_T <.. docs.usp_PERSIST_RepoObject_OutputFilter_T
+docs.RepoObject_OutputFilter_T <.. docs.Schema_puml
+docs.RepoObject_OutputFilter_T <.. docs.RepoObject_Plantuml_ColRefList_1_1
+docs.RepoObject_OutputFilter_T <.. docs.Unit_1_union
+"docs.RepoObject_OutputFilter::AntoraComponent" <-- "docs.RepoObject_OutputFilter_T::AntoraComponent"
+"docs.RepoObject_OutputFilter::AntoraModule" <-- "docs.RepoObject_OutputFilter_T::AntoraModule"
+"docs.RepoObject_OutputFilter::cultures_name" <-- "docs.RepoObject_OutputFilter_T::cultures_name"
+"docs.RepoObject_OutputFilter::external_AntoraComponent" <-- "docs.RepoObject_OutputFilter_T::external_AntoraComponent"
+"docs.RepoObject_OutputFilter::external_AntoraModule" <-- "docs.RepoObject_OutputFilter_T::external_AntoraModule"
+"docs.RepoObject_OutputFilter::external_DatabaseName" <-- "docs.RepoObject_OutputFilter_T::external_DatabaseName"
+"docs.RepoObject_OutputFilter::is_DocsOutput" <-- "docs.RepoObject_OutputFilter_T::is_DocsOutput"
+"docs.RepoObject_OutputFilter::is_external" <-- "docs.RepoObject_OutputFilter_T::is_external"
+"docs.RepoObject_OutputFilter::is_ssas" <-- "docs.RepoObject_OutputFilter_T::is_ssas"
+"docs.RepoObject_OutputFilter::PumlEntityTopDefault" <-- "docs.RepoObject_OutputFilter_T::PumlEntityTopDefault"
+"docs.RepoObject_OutputFilter::PumlEntityTopWorkaround" <-- "docs.RepoObject_OutputFilter_T::PumlEntityTopWorkaround"
+"docs.RepoObject_OutputFilter::RepoObject_DisplayName" <-- "docs.RepoObject_OutputFilter_T::RepoObject_DisplayName"
+"docs.RepoObject_OutputFilter::RepoObject_FullDisplayName2" <-- "docs.RepoObject_OutputFilter_T::RepoObject_FullDisplayName2"
+"docs.RepoObject_OutputFilter::RepoObject_fullname" <-- "docs.RepoObject_OutputFilter_T::RepoObject_fullname"
+"docs.RepoObject_OutputFilter::RepoObject_fullname2" <-- "docs.RepoObject_OutputFilter_T::RepoObject_fullname2"
+"docs.RepoObject_OutputFilter::RepoObject_guid" <-- "docs.RepoObject_OutputFilter_T::RepoObject_guid"
+"docs.RepoObject_OutputFilter::RepoObject_name" <-- "docs.RepoObject_OutputFilter_T::RepoObject_name"
+"docs.RepoObject_OutputFilter::RepoObject_schema_name" <-- "docs.RepoObject_OutputFilter_T::RepoObject_schema_name"
+"docs.RepoObject_OutputFilter::RepoObject_translation" <-- "docs.RepoObject_OutputFilter_T::RepoObject_translation"
+"docs.RepoObject_OutputFilter::SysObject_type" <-- "docs.RepoObject_OutputFilter_T::SysObject_type"
+"docs.RepoObject_OutputFilter::SysObject_type_name" <-- "docs.RepoObject_OutputFilter_T::SysObject_type_name"
+"docs.RepoObject_OutputFilter::tables_isHidden" <-- "docs.RepoObject_OutputFilter_T::tables_isHidden"
+"docs.RepoObject_OutputFilter_T::cultures_name" <-- "docs.RepoObject_ColumnList::cultures_name"
+"docs.RepoObject_OutputFilter_T::cultures_name" <-- "docs.RepoObject_MeasureList::cultures_name"
+"docs.RepoObject_OutputFilter_T::cultures_name" <-- "docs.RepoObject_Plantuml_ColRefList_1_1::cultures_name"
+"docs.RepoObject_OutputFilter_T::cultures_name" <-- "docs.RepoObject_Plantuml_Entity::cultures_name"
+"docs.RepoObject_OutputFilter_T::cultures_name" <-- "docs.RepoObject_Plantuml::cultures_name"
+"docs.RepoObject_OutputFilter_T::cultures_name" <-- "docs.RepoObject_Adoc::cultures_name"
+"docs.RepoObject_OutputFilter_T::cultures_name" <-- "docs.RepoObject_IndexList::cultures_name"
+"docs.RepoObject_OutputFilter_T::cultures_name" <-- "docs.AntoraNavListPage_by_schema::cultures_name"
+"docs.RepoObject_OutputFilter_T::cultures_name" <-- "docs.AntoraNavListRepoObject_by_schema::cultures_name"
+"docs.RepoObject_OutputFilter_T::cultures_name" <-- "docs.AntoraNavListRepoObject_by_schema_type::cultures_name"
+"docs.RepoObject_OutputFilter_T::cultures_name" <-- "docs.AntoraNavListRepoObject_by_type::cultures_name"
+"docs.RepoObject_OutputFilter_T::cultures_name" <-- "docs.AntoraIndexSemanticgroupPatterndatatype::cultures_name"
+"docs.RepoObject_OutputFilter_T::is_DocsOutput" <-- "docs.RepoObject_Adoc::is_DocsOutput"
+"docs.RepoObject_OutputFilter_T::is_external" <-- "docs.RepoObject_ColumnList::is_external"
+"docs.RepoObject_OutputFilter_T::is_external" <-- "docs.RepoObject_MeasureList::is_external"
+"docs.RepoObject_OutputFilter_T::is_ssas" <-- "docs.AntoraNavListRepoObject_by_schema::is_ssas"
+"docs.RepoObject_OutputFilter_T::RepoObject_fullname2" <-- "docs.RepoObject_Plantuml_Entity::RepoObject_fullname2"
+"docs.RepoObject_OutputFilter_T::RepoObject_guid" <-- "docs.RepoObject_Adoc::RepoObject_guid"
+"docs.RepoObject_OutputFilter_T::RepoObject_guid" <-- "docs.RepoObject_ColumnList::RepoObject_guid"
+"docs.RepoObject_OutputFilter_T::RepoObject_guid" <-- "docs.RepoObject_Plantuml_Entity::RepoObject_guid"
+"docs.RepoObject_OutputFilter_T::RepoObject_guid" <-- "docs.RepoObject_Plantuml_ColRefList_1_1::RepoObject_guid"
+"docs.RepoObject_OutputFilter_T::RepoObject_schema_name" <-- "docs.AntoraNavListRepoObject_by_schema::RepoObject_schema_name"
+"docs.RepoObject_OutputFilter_T::RepoObject_schema_name" <-- "docs.AntoraNavListRepoObject_by_schema_type::RepoObject_schema_name"
+"docs.RepoObject_OutputFilter_T::RepoObject_schema_name" <-- "docs.RepoObject_Plantuml_Entity::RepoObject_schema_name"
+"docs.RepoObject_OutputFilter_T::SysObject_type_name" <-- "docs.AntoraNavListRepoObject_by_type::type_name"
+"docs.RepoObject_OutputFilter_T::SysObject_type_name" <-- "docs.AntoraNavListRepoObject_by_schema_type::type_name"
+@enduml
+

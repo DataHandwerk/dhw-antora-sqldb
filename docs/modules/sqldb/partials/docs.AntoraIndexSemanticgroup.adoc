@@ -1,4 +1,6 @@
-= [docs].[AntoraIndexSemanticgroup]
+// tag::HeaderFullDisplayName[]
+= docs.AntoraIndexSemanticgroup
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -19,6 +21,12 @@
 // tag::RepoObject_guid[]
 891293B9-DE96-EB11-84F4-A81E8446D5B0
 // end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+docs.AntoraIndexSemanticgroup
+// end::RepoObject_FullDisplayName2[]
 
 == SysObject_type
 
@@ -41,14 +49,14 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-24 20:08:56
+2021-10-04 23:47:20
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-AntoraIndexSemanticgroup]
-=== AntoraIndexSemanticgroup
+[#column-antoraindexsemanticgroup]
+=== antoraindexsemanticgroup
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -59,6 +67,25 @@ view
 |
 |
 |===
+
+
+[#column-cultures_name]
+=== cultures_name
+
+[cols="d,8m,m,m,m,d"]
+|===
+|
+|cultures_name
+|nvarchar(10)
+|NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:docs.antoraindexsemanticgrouppatterndatatype.adoc#column-cultures_name[+docs.AntoraIndexSemanticgroupPatterndatatype.cultures_name+]
+--
 
 
 [#column-fixvalue]
@@ -75,8 +102,8 @@ view
 |===
 
 
-[#column-IndexSemanticGroup]
-=== IndexSemanticGroup
+[#column-indexsemanticgroup]
+=== indexsemanticgroup
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -90,7 +117,7 @@ view
 
 .Referenced Columns
 --
-* xref:docs.AntoraIndexSemanticgroupPatterndatatype.adoc#column-IndexSemanticGroup[+docs.AntoraIndexSemanticgroupPatterndatatype.IndexSemanticGroup+]
+* xref:docs.antoraindexsemanticgrouppatterndatatype.adoc#column-indexsemanticgroup[+docs.AntoraIndexSemanticgroupPatterndatatype.IndexSemanticGroup+]
 --
 
 
@@ -108,14 +135,22 @@ view
 
 
 
+
 // end::AntoraPkColumnTableRows[]
 
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
 |
-|<<column-AntoraIndexSemanticgroup>>
+|<<column-antoraindexsemanticgroup>>
 |nvarchar(max)
+|NULL
+|
+|
+
+|
+|<<column-cultures_name>>
+|nvarchar(10)
 |NULL
 |
 |
@@ -128,7 +163,7 @@ view
 |
 
 |
-|<<column-IndexSemanticGroup>>
+|<<column-indexsemanticgroup>>
 |nvarchar(512)
 |NULL
 |
@@ -140,13 +175,24 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-idx_AntoraIndexSemanticgroup2x_1]
-=== idx_AntoraIndexSemanticgroup++__++1
+[#index-idx_antoraindexsemanticgroup2x_1]
+=== idx_antoraindexsemanticgroup++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-IndexSemanticGroup>>; nvarchar(512)
+--
+* PK, Unique, Real: 0, 0, 0
+
+
+[#index-idx_antoraindexsemanticgroup2x_2]
+=== idx_antoraindexsemanticgroup++__++2
+
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
++
+--
+* <<column-cultures_name>>; nvarchar(10)
 --
 * PK, Unique, Real: 0, 0, 0
 
@@ -163,6 +209,13 @@ view
 source: property.RepoObjectProperty_cross As rop_cross
 
 
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
+
+
 === AdocUspSteps
 
 // tag::adocuspsteps[]
@@ -173,15 +226,15 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:docs.AntoraIndexSemanticgroupPatterndatatype.adoc[]
-* xref:docs.fs_cleanStringForAnchorId.adoc[]
+* xref:docs.antoraindexsemanticgrouppatterndatatype.adoc[]
+* xref:docs.fs_cleanstringforanchorid.adoc[]
 // end::antorareferencedlist[]
 
 
 === AntoraReferencingList
 
 // tag::antorareferencinglist[]
-* xref:docs.AntoraPage_IndexSemanticGroup.adoc[]
+* xref:docs.antorapage_indexsemanticgroup.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -431,6 +484,13 @@ source: property.RepoObjectProperty_cross As rop_cross
 // end::uspexamples[]
 
 
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+
+// end::uspgenerator_usp_id[]
+
+
 === UspParameters
 
 // tag::uspparameters[]
@@ -454,13 +514,15 @@ source: property.RepoObjectProperty WHERE property_int = 1
 ----
 
 /*
-<<property_start>>MS_Description
+<<property_start>>Description
 <<property_end>>
 */
+
 CREATE View docs.AntoraIndexSemanticgroup
 As
 Select
     IndexSemanticGroup
+  , cultures_name
   , AntoraIndexSemanticgroup = Char ( 13 ) + Char ( 10 )
                                --
                                + '[#' + docs.fs_cleanStringForAnchorId ( IsNull ( IndexSemanticGroup, '(no group)' ))
@@ -476,6 +538,7 @@ From
     docs.AntoraIndexSemanticgroupPatterndatatype
 Group By
     IndexSemanticGroup
+  , cultures_name
 
 ----
 =======

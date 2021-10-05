@@ -1,4 +1,6 @@
-= [config].[usp_init_parameter]
+// tag::HeaderFullDisplayName[]
+= config.usp_init_parameter
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -8,7 +10,6 @@
 :ExistsProperty--description:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--ms_description:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 // end::existing_properties[]
@@ -18,6 +19,12 @@
 // tag::RepoObject_guid[]
 8D90291C-9D61-EB11-84DC-A81E8446D5B0
 // end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+config.usp_init_parameter
+// end::RepoObject_FullDisplayName2[]
 
 == SysObject_type
 
@@ -40,7 +47,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-13 11:18:07
+2021-10-02 13:23:34
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -84,6 +91,13 @@ stored procedure
 source: property.RepoObjectProperty_cross As rop_cross
 
 
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
+
+
 === AdocUspSteps
 
 // tag::adocuspsteps[]
@@ -94,8 +108,8 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:config.Parameter.adoc[]
-* xref:configT.Parameter_default.adoc[]
+* xref:config.parameter.adoc[]
+* xref:configt.parameter_default.adoc[]
 // end::antorareferencedlist[]
 
 
@@ -110,7 +124,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 
 // tag::description[]
 
-* merges default values for parameters from xref:sqldb:configT.Parameter_default.adoc[] into xref:sqldb:config.Parameter.adoc[]
+* merges default values for parameters from xref:sqldb:configt.parameter_default.adoc[] into xref:sqldb:config.parameter.adoc[]
 // end::description[]
 
 
@@ -272,7 +286,6 @@ source: property.RepoObjectProperty_cross As rop_cross
 
 // tag::ms_description[]
 
-* merges default values for parameters from xref:sqldb:configT.Parameter_default.adoc[] into xref:sqldb:config.Parameter.adoc[]
 // end::ms_description[]
 
 
@@ -354,6 +367,13 @@ source: property.RepoObjectProperty_cross As rop_cross
 // end::uspexamples[]
 
 
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+
+// end::uspgenerator_usp_id[]
+
+
 === UspParameters
 
 // tag::uspparameters[]
@@ -377,8 +397,8 @@ source: property.RepoObjectProperty WHERE property_int = 1
 ----
 
 /*
-<<property_start>>MS_Description
-* merges default values for parameters from xref:sqldb:configT.Parameter_default.adoc[] into xref:sqldb:config.Parameter.adoc[]
+<<property_start>>Description
+* merges default values for parameters from xref:sqldb:configt.parameter_default.adoc[] into xref:sqldb:config.parameter.adoc[]
 <<property_end>>
 */
 CREATE Procedure config.usp_init_parameter
@@ -424,7 +444,7 @@ From
             And source.sub_Parameter = T2.sub_Parameter
 Where
     --we need case sensitive compairison
-    T2.Parameter_desciption Collate SQL_Latin1_General_CP1_CS_AS       <> source.Parameter_desciption Collate SQL_Latin1_General_CP1_CS_AS
+    T2.Parameter_desciption Collate Latin1_General_100_CS_AS       <> source.Parameter_desciption Collate Latin1_General_100_CS_AS
     Or
     (
         T2.Parameter_desciption Is Null
@@ -435,7 +455,7 @@ Where
         Not T2.Parameter_desciption Is Null
         And source.Parameter_desciption Is Null
     )
-    Or T2.Parameter_default_value Collate SQL_Latin1_General_CP1_CS_AS <> source.Parameter_default_value Collate SQL_Latin1_General_CP1_CS_AS
+    Or T2.Parameter_default_value Collate Latin1_General_100_CS_AS <> source.Parameter_default_value Collate Latin1_General_100_CS_AS
     Or
     (
         T2.Parameter_default_value Is Null
@@ -446,7 +466,6 @@ Where
         Not T2.Parameter_default_value Is Null
         And source.Parameter_default_value Is Null
     );
-
 ----
 =======
 // end::sql_modules_definition[]

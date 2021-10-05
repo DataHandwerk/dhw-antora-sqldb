@@ -1,4 +1,6 @@
-= [tool].[usp_TruncateTables]
+// tag::HeaderFullDisplayName[]
+= tool.usp_TruncateTables
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -7,7 +9,6 @@
 :ExistsProperty--exampleusage:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
-:ExistsProperty--ms_description:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--AntoraParameterList:
 // end::existing_properties[]
@@ -17,6 +18,12 @@
 // tag::RepoObject_guid[]
 1CACB147-4AF5-EB11-850C-A81E8446D5B0
 // end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+tool.usp_TruncateTables
+// end::RepoObject_FullDisplayName2[]
 
 == SysObject_type
 
@@ -39,7 +46,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-08-03 14:46:33
+2021-10-02 13:23:35
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -81,6 +88,13 @@ stored procedure
 == Other tags
 
 source: property.RepoObjectProperty_cross As rop_cross
+
+
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
 
 
 === AdocUspSteps
@@ -272,7 +286,6 @@ EXEC [tool].[usp_TruncateTables]
 
 // tag::ms_description[]
 
-* truncate tables in a given schema
 // end::ms_description[]
 
 
@@ -353,6 +366,13 @@ EXEC [tool].[usp_TruncateTables]
 // end::uspexamples[]
 
 
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+
+// end::uspgenerator_usp_id[]
+
+
 === UspParameters
 
 // tag::uspparameters[]
@@ -375,7 +395,7 @@ source: property.RepoObjectProperty WHERE property_int = 1
 [source,sql]
 ----
 /*
-<<property_start>>MS_Description
+<<property_start>>Description
 * truncate tables in a given schema
 <<property_end>>
 
@@ -384,7 +404,7 @@ EXEC [tool].[usp_TruncateTables]
 @Schema = 'MySchema'
 <<property_end>>
 */
-Create Procedure [tool].[usp_TruncateTables]
+CREATE Procedure [tool].[usp_TruncateTables]
 ( @Schema Varchar(100) Null )
 As
 Declare @Table_Schema Varchar(100);

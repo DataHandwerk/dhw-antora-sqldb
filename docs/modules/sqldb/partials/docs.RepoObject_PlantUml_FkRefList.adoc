@@ -1,4 +1,6 @@
-= [docs].[RepoObject_PlantUml_FkRefList]
+// tag::HeaderFullDisplayName[]
+= docs.RepoObject_PlantUml_FkRefList
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
@@ -7,6 +9,9 @@
 :ExistsProperty--antorareferencinglist:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
+:ExistsProperty--pk_index_guid:
+:ExistsProperty--pk_indexpatterncolumndatatype:
+:ExistsProperty--pk_indexpatterncolumnname:
 :ExistsProperty--referencedobjectlist:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--FK:
@@ -19,6 +24,12 @@
 // tag::RepoObject_guid[]
 1E224606-439A-EB11-84F5-A81E8446D5B0
 // end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+docs.RepoObject_PlantUml_FkRefList
+// end::RepoObject_FullDisplayName2[]
 
 == SysObject_type
 
@@ -41,14 +52,33 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-25 18:52:05
+2021-10-03 18:30:26
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-FkRefList]
-=== FkRefList
+[#column-repoobject_guid]
+=== repoobject_guid
+
+[cols="d,8m,m,m,m,d"]
+|===
+|1
+|*RepoObject_guid*
+|uniqueidentifier
+|NULL
+|
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo.repoobject_related_fk_union.adoc#column-repoobject_guid[+repo.RepoObject_related_FK_union.RepoObject_guid+]
+--
+
+
+[#column-fkreflist]
+=== fkreflist
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -61,8 +91,8 @@ view
 |===
 
 
-[#column-RepoObject_fullname2]
-=== RepoObject_fullname2
+[#column-repoobject_fullname2]
+=== repoobject_fullname2
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -76,26 +106,7 @@ view
 
 .Referenced Columns
 --
-* xref:repo.RepoObject_related_FK_union.adoc#column-RepoObject_fullname2[+repo.RepoObject_related_FK_union.RepoObject_fullname2+]
---
-
-
-[#column-RepoObject_guid]
-=== RepoObject_guid
-
-[cols="d,8m,m,m,m,d"]
-|===
-|
-|RepoObject_guid
-|uniqueidentifier
-|NULL
-|
-|
-|===
-
-.Referenced Columns
---
-* xref:repo.RepoObject_related_FK_union.adoc#column-RepoObject_guid[+repo.RepoObject_related_FK_union.RepoObject_guid+]
+* xref:repo.repoobject_related_fk_union.adoc#column-repoobject_fullname2[+repo.RepoObject_related_FK_union.RepoObject_fullname2+]
 --
 
 
@@ -110,6 +121,12 @@ view
 == AntoraPkColumnTableRows
 
 // tag::AntoraPkColumnTableRows[]
+|1
+|*<<column-repoobject_guid>>*
+|uniqueidentifier
+|NULL
+|
+|
 
 
 
@@ -118,23 +135,17 @@ view
 == AntoraNonPkColumnTableRows
 
 // tag::AntoraNonPkColumnTableRows[]
+
 |
-|<<column-FkRefList>>
+|<<column-fkreflist>>
 |nvarchar(max)
 |NULL
 |
 |
 
 |
-|<<column-RepoObject_fullname2>>
+|<<column-repoobject_fullname2>>
 |nvarchar(257)
-|NULL
-|
-|
-
-|
-|<<column-RepoObject_guid>>
-|uniqueidentifier
 |NULL
 |
 |
@@ -145,15 +156,15 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-idx_RepoObject_PlantUml_FkRefList2x_1]
-=== idx_RepoObject_PlantUml_FkRefList++__++1
+[#index-pk_repoobject_plantuml_fkreflist]
+=== pk_repoobject_plantuml_fkreflist
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-RepoObject_guid>>; uniqueidentifier
 --
-* PK, Unique, Real: 0, 0, 0
+* PK, Unique, Real: 1, 1, 0
 
 // end::AntoraIndexList[]
 
@@ -168,6 +179,13 @@ view
 source: property.RepoObjectProperty_cross As rop_cross
 
 
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
+
+
 === AdocUspSteps
 
 // tag::adocuspsteps[]
@@ -178,16 +196,16 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:docs.fs_cleanStringForPuml.adoc[]
-* xref:repo.ForeignKey_Indexes_union_T.adoc[]
-* xref:repo.RepoObject_related_FK_union.adoc[]
+* xref:docs.fs_cleanstringforpuml.adoc[]
+* xref:repo.foreignkey_indexes_union_t.adoc[]
+* xref:repo.repoobject_related_fk_union.adoc[]
 // end::antorareferencedlist[]
 
 
 === AntoraReferencingList
 
 // tag::antorareferencinglist[]
-* xref:docs.RepoObject_Plantuml.adoc[]
+* xref:docs.repoobject_plantuml.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -390,21 +408,21 @@ source: property.RepoObjectProperty_cross As rop_cross
 === pk_index_guid
 
 // tag::pk_index_guid[]
-
+0055B1F7-0722-EC11-8524-A81E8446D5B0
 // end::pk_index_guid[]
 
 
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-
+uniqueidentifier
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-
+RepoObject_guid
 // end::pk_indexpatterncolumnname[]
 
 
@@ -438,6 +456,13 @@ source: property.RepoObjectProperty_cross As rop_cross
 // end::uspexamples[]
 
 
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+
+// end::uspgenerator_usp_id[]
+
+
 === UspParameters
 
 // tag::uspparameters[]
@@ -460,10 +485,12 @@ source: property.RepoObjectProperty WHERE property_int = 1
 [source,sql]
 ----
 
-CREATE View docs.RepoObject_PlantUml_FkRefList
+
+CREATE View [docs].[RepoObject_PlantUml_FkRefList]
 As
 Select
     ro.RepoObject_guid
+  --, cultures_name        = Cast('' As NVarchar(10))
   , RepoObject_fullname2 = Max ( ro.RepoObject_fullname2 )
   , FkRefList            = String_Agg (
                                           Concat (

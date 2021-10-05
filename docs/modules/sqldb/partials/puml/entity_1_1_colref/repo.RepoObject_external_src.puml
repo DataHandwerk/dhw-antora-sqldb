@@ -36,7 +36,7 @@ entity "puml-link:dhw:sqldb:config.ftv_get_parameter_value.adoc[]" as config.ftv
   --
 }
 
-entity "puml-link:dhw:sqldb:reference.additional_Reference_Object_T.adoc[]" as reference.additional_Reference_Object_T << U >> {
+entity "puml-link:dhw:sqldb:reference.additional_reference_object_t.adoc[]" as reference.additional_Reference_Object_T << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
   - AntoraComponent : (nvarchar(128))
@@ -48,7 +48,7 @@ entity "puml-link:dhw:sqldb:reference.additional_Reference_Object_T.adoc[]" as r
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObject_external_src.adoc[]" as repo.RepoObject_external_src << V >> {
+entity "puml-link:dhw:sqldb:repo.repoobject_external_src.adoc[]" as repo.RepoObject_external_src << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
   - external_AntoraComponent : (nvarchar(128))
@@ -65,7 +65,7 @@ entity "puml-link:dhw:sqldb:repo.RepoObject_external_src.adoc[]" as repo.RepoObj
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObject_external_tgt.adoc[]" as repo.RepoObject_external_tgt << V >> {
+entity "puml-link:dhw:sqldb:repo.repoobject_external_tgt.adoc[]" as repo.RepoObject_external_tgt << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   --
   - external_AntoraComponent : (nvarchar(128))
@@ -99,7 +99,7 @@ entity "puml-link:dhw:sqldb:repo.RepoObject_external_tgt.adoc[]" as repo.RepoObj
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.usp_PERSIST_RepoObject_external_tgt.adoc[]" as repo.usp_PERSIST_RepoObject_external_tgt << P >> {
+entity "puml-link:dhw:sqldb:repo.usp_persist_repoobject_external_tgt.adoc[]" as repo.usp_PERSIST_RepoObject_external_tgt << P >> {
   --
   --
   --
@@ -109,6 +109,13 @@ config.ftv_get_parameter_value <.. repo.RepoObject_external_src
 reference.additional_Reference_Object_T <.. repo.RepoObject_external_src
 repo.RepoObject_external_src <.. repo.RepoObject_external_tgt
 repo.RepoObject_external_src <.. repo.usp_PERSIST_RepoObject_external_tgt
+"reference.additional_Reference_Object_T::AntoraComponent" <-- "repo.RepoObject_external_src::external_AntoraComponent"
+"reference.additional_Reference_Object_T::AntoraModule" <-- "repo.RepoObject_external_src::external_AntoraModule"
+"reference.additional_Reference_Object_T::ObjectName" <-- "repo.RepoObject_external_src::RepoObject_name"
+"reference.additional_Reference_Object_T::ObjectName" <-- "repo.RepoObject_external_src::SysObject_name"
+"reference.additional_Reference_Object_T::RepoObject_guid" <-- "repo.RepoObject_external_src::RepoObject_guid"
+"reference.additional_Reference_Object_T::SchemaName" <-- "repo.RepoObject_external_src::RepoObject_schema_name"
+"reference.additional_Reference_Object_T::SchemaName" <-- "repo.RepoObject_external_src::SysObject_schema_name"
 "repo.RepoObject_external_src::external_AntoraComponent" <-- "repo.RepoObject_external_tgt::external_AntoraComponent"
 "repo.RepoObject_external_src::external_AntoraModule" <-- "repo.RepoObject_external_tgt::external_AntoraModule"
 "repo.RepoObject_external_src::is_external" <-- "repo.RepoObject_external_tgt::is_external"

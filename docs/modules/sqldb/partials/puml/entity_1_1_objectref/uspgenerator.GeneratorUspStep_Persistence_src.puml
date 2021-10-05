@@ -26,36 +26,42 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:repo.Index_ColumList_T.adoc[]" as repo.Index_ColumList_T << U >> {
+entity "puml-link:dhw:sqldb:repo.index_columlist_t.adoc[]" as repo.Index_ColumList_T << U >> {
   - **index_guid** : (uniqueidentifier)
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObject_gross.adoc[]" as repo.RepoObject_gross << V >> {
+entity "puml-link:dhw:sqldb:repo.repoobject_gross.adoc[]" as repo.RepoObject_gross << V >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:repo.RepoObject_gross2.adoc[]" as repo.RepoObject_gross2 << V >> {
+entity "puml-link:dhw:sqldb:repo.repoobject_gross2.adoc[]" as repo.RepoObject_gross2 << V >> {
   --
 }
 
-entity "puml-link:dhw:sqldb:uspgenerator.GeneratorUsp.adoc[]" as uspgenerator.GeneratorUsp << U >> {
+entity "puml-link:dhw:sqldb:repo.repoobject_sat2_t.adoc[]" as repo.RepoObject_sat2_T << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:uspgenerator.generatorusp.adoc[]" as uspgenerator.GeneratorUsp << U >> {
   - **id** : (int)
   --
 }
 
-entity "puml-link:dhw:sqldb:uspgenerator.GeneratorUspStep_Persistence_src.adoc[]" as uspgenerator.GeneratorUspStep_Persistence_src << V >> {
+entity "puml-link:dhw:sqldb:uspgenerator.generatoruspstep_persistence_src.adoc[]" as uspgenerator.GeneratorUspStep_Persistence_src << V >> {
   - **usp_id** : (int)
   --
 }
 
-entity "puml-link:dhw:sqldb:uspgenerator.usp_GeneratorUsp_insert_update_persistence.adoc[]" as uspgenerator.usp_GeneratorUsp_insert_update_persistence << P >> {
+entity "puml-link:dhw:sqldb:uspgenerator.usp_generatorusp_insert_update_persistence.adoc[]" as uspgenerator.usp_GeneratorUsp_insert_update_persistence << P >> {
   --
 }
 
 repo.Index_ColumList_T <.. uspgenerator.GeneratorUspStep_Persistence_src
 repo.RepoObject_gross <.. uspgenerator.GeneratorUspStep_Persistence_src
 repo.RepoObject_gross2 <.. uspgenerator.GeneratorUspStep_Persistence_src
+repo.RepoObject_sat2_T <.. uspgenerator.GeneratorUspStep_Persistence_src
 uspgenerator.GeneratorUsp <.. uspgenerator.GeneratorUspStep_Persistence_src
 uspgenerator.GeneratorUspStep_Persistence_src <.. uspgenerator.usp_GeneratorUsp_insert_update_persistence
 @enduml

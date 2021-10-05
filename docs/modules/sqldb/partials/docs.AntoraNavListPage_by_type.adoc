@@ -1,9 +1,12 @@
-= [docs].[AntoraNavListPage_by_type]
+// tag::HeaderFullDisplayName[]
+= docs.AntoraNavListPage_by_type
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
 // tag::existing_properties[]
 :ExistsProperty--antorareferencedlist:
+:ExistsProperty--antorareferencinglist:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
 :ExistsProperty--referencedobjectlist:
@@ -18,6 +21,12 @@
 // tag::RepoObject_guid[]
 861293B9-DE96-EB11-84F4-A81E8446D5B0
 // end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+docs.AntoraNavListPage_by_type
+// end::RepoObject_FullDisplayName2[]
 
 == SysObject_type
 
@@ -40,7 +49,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-06 22:28:40
+2021-10-03 20:32:54
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -53,7 +62,7 @@ view
 |===
 |
 |nav_list
-|nvarchar(309)
+|nvarchar(4000)
 |NOT NULL
 |
 |
@@ -75,7 +84,7 @@ view
 
 .Referenced Columns
 --
-* xref:configT.type.adoc#column-type[+configT.type.type+]
+* xref:configt.type.adoc#column-type[+configT.type.type+]
 --
 
 
@@ -94,7 +103,7 @@ view
 
 .Referenced Columns
 --
-* xref:configT.type.adoc#column-type_desc[+configT.type.type_desc+]
+* xref:configt.type.adoc#column-type_desc[+configT.type.type_desc+]
 --
 
 
@@ -119,7 +128,7 @@ view
 // tag::AntoraNonPkColumnTableRows[]
 |
 |<<column-nav_list>>
-|nvarchar(309)
+|nvarchar(4000)
 |NOT NULL
 |
 |
@@ -144,10 +153,10 @@ view
 
 // tag::AntoraIndexList[]
 
-[#index-idx_AntoraNavListPage_by_type2x_1]
-=== idx_AntoraNavListPage_by_type++__++1
+[#index-idx_antoranavlistpage_by_type2x_1]
+=== idx_antoranavlistpage_by_type++__++1
 
-* IndexSemanticGroup: xref:other/IndexSemanticGroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
+* IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#openingbracketnoblankgroupclosingbracket[no_group]
 +
 --
 * <<column-type>>; nvarchar(128)
@@ -167,6 +176,13 @@ view
 source: property.RepoObjectProperty_cross As rop_cross
 
 
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
+
+
 === AdocUspSteps
 
 // tag::adocuspsteps[]
@@ -177,15 +193,16 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:configT.type.adoc[]
-* xref:docs.RepoObject_OutputFilter.adoc[]
+* xref:configt.type.adoc[]
+* xref:docs.fs_cleanstringforfilename.adoc[]
+* xref:docs.repoobject_outputfilter_t.adoc[]
 // end::antorareferencedlist[]
 
 
 === AntoraReferencingList
 
 // tag::antorareferencinglist[]
-
+* xref:docs.usp_antoraexport_navigation.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -417,7 +434,8 @@ source: property.RepoObjectProperty_cross As rop_cross
 
 // tag::referencedobjectlist[]
 * [configT].[type]
-* [docs].[RepoObject_OutputFilter]
+* [docs].[fs_cleanStringForFilename]
+* [docs].[RepoObject_OutputFilter_T]
 // end::referencedobjectlist[]
 
 
@@ -433,6 +451,13 @@ source: property.RepoObjectProperty_cross As rop_cross
 // tag::uspexamples[]
 
 // end::uspexamples[]
+
+
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+
+// end::uspgenerator_usp_id[]
 
 
 === UspParameters
@@ -457,7 +482,9 @@ source: property.RepoObjectProperty WHERE property_int = 1
 [source,sql]
 ----
 
-CREATE View docs.AntoraNavListPage_by_type
+
+
+CREATE View [docs].[AntoraNavListPage_by_type]
 As
 Select
     t.type
@@ -469,7 +496,7 @@ Select
            , t.type_desc
            , Char ( 13 ) + Char ( 10 )
            , Char ( 13 ) + Char ( 10 )
-           , '\include::partial$navlist/navlist-type-' + t.type + '.adoc[]'
+           , '\include::partial$navlist/navlist-type-' + docs.fs_cleanStringForFilename ( t.type ) + '.adoc[]'
            , Char ( 13 ) + Char ( 10 )
          )
 From
@@ -481,10 +508,11 @@ Where
     Select
         1
     From
-        docs.RepoObject_OutputFilter As f
+        docs.RepoObject_OutputFilter_T As f
     Where
         f.SysObject_type = t.type
 )
+
 ----
 =======
 // end::sql_modules_definition[]

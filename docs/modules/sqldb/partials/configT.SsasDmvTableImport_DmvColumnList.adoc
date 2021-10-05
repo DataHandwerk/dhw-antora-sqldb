@@ -1,10 +1,13 @@
-= [configT].[SsasDmvTableImport_DmvColumnList]
+// tag::HeaderFullDisplayName[]
+= configT.SsasDmvTableImport_DmvColumnList
+// end::HeaderFullDisplayName[]
 
 == existing_properties
 
 // tag::existing_properties[]
 :ExistsProperty--antorareferencedlist:
 :ExistsProperty--antorareferencinglist:
+:ExistsProperty--description:
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
 :ExistsProperty--referencedobjectlist:
@@ -18,6 +21,12 @@
 // tag::RepoObject_guid[]
 D0E6A70A-8A06-EC11-8515-A81E8446D5B0
 // end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+configT.SsasDmvTableImport_DmvColumnList
+// end::RepoObject_FullDisplayName2[]
 
 == SysObject_type
 
@@ -40,14 +49,14 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-08-27 09:52:43
+2021-10-03 16:15:56
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
 
 // tag::AntoraColumnDetails[]
-[#column-DmvColumnList]
-=== DmvColumnList
+[#column-dmvcolumnlist]
+=== dmvcolumnlist
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -60,8 +69,8 @@ view
 |===
 
 
-[#column-DmvTableName]
-=== DmvTableName
+[#column-dmvtablename]
+=== dmvtablename
 
 [cols="d,8m,m,m,m,d"]
 |===
@@ -75,7 +84,7 @@ view
 
 .Referenced Columns
 --
-* xref:configT.SsasDmvTableImport.adoc#column-DmvTableName[+configT.SsasDmvTableImport.DmvTableName+]
+* xref:configt.ssasdmvtableimport.adoc#column-dmvtablename[+configT.SsasDmvTableImport.DmvTableName+]
 --
 
 
@@ -98,14 +107,14 @@ view
 
 // tag::AntoraNonPkColumnTableRows[]
 |
-|<<column-DmvColumnList>>
+|<<column-dmvcolumnlist>>
 |nvarchar(4000)
 |NULL
 |
 |
 
 |
-|<<column-DmvTableName>>
+|<<column-dmvtablename>>
 |nvarchar(128)
 |NULL
 |
@@ -130,6 +139,13 @@ view
 source: property.RepoObjectProperty_cross As rop_cross
 
 
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
+
+
 === AdocUspSteps
 
 // tag::adocuspsteps[]
@@ -140,14 +156,14 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
-* xref:configT.SsasDmvTableImport.adoc[]
+* xref:configt.ssasdmvtableimport.adoc[]
 // end::antorareferencedlist[]
 
 
 === AntoraReferencingList
 
 // tag::antorareferencinglist[]
-* xref:configT.SsasDmvTableImport_ImportSql.adoc[]
+* xref:configt.ssasdmvtableimport_importsql.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -155,6 +171,11 @@ source: property.RepoObjectProperty_cross As rop_cross
 
 // tag::description[]
 
+obsolet
+
+Because the target table structure was created from 
+`Select * into Target from Soure`
+we just scan the target table columns to get the column lists
 // end::description[]
 
 
@@ -396,6 +417,13 @@ source: property.RepoObjectProperty_cross As rop_cross
 // end::uspexamples[]
 
 
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+
+// end::uspgenerator_usp_id[]
+
+
 === UspParameters
 
 // tag::uspparameters[]
@@ -418,12 +446,17 @@ source: property.RepoObjectProperty WHERE property_int = 1
 [source,sql]
 ----
 
+
 /*
+<<property_start>>Description
+obsolet
+
 Because the target table structure was created from 
 `Select * into Target from Soure`
 we just scan the target table columns to get the column lists
+<<property_end>>
 */
-CREATE View configT.SsasDmvTableImport_DmvColumnList
+CREATE View [configT].[SsasDmvTableImport_DmvColumnList]
 As
 Select
     T1.DmvTableName
