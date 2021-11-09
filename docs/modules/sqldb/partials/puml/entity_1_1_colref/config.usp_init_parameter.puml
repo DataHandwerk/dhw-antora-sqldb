@@ -29,7 +29,6 @@ skinparam class {
 entity "puml-link:dhw:sqldb:config.parameter.adoc[]" as config.Parameter << U >> {
   - **Parameter_name** : (varchar(100))
   - **sub_Parameter** : (nvarchar(128))
-  --
   Parameter_default_value : (nvarchar(max))
   Parameter_desciption : (nvarchar(1000))
   Parameter_value : (nvarchar(max))
@@ -38,34 +37,32 @@ entity "puml-link:dhw:sqldb:config.parameter.adoc[]" as config.Parameter << U >>
   ~ Parameter_value_result_datetime : (datetime)
   ~ Parameter_value_result_int : (int)
   --
-  --
 }
 
 entity "puml-link:dhw:sqldb:config.usp_connect_database.adoc[]" as config.usp_connect_database << P >> {
   --
-  --
-  --
 }
 
 entity "puml-link:dhw:sqldb:config.usp_init_parameter.adoc[]" as config.usp_init_parameter << P >> {
-  --
-  --
   --
 }
 
 entity "puml-link:dhw:sqldb:configt.parameter_default.adoc[]" as configT.Parameter_default << V >> {
   - **Parameter_name** : (varchar(52))
   - **sub_Parameter** : (nvarchar(27))
-  --
   Parameter_default_value : (nvarchar(max))
   - Parameter_desciption : (nvarchar(247))
   --
+}
+
+entity "puml-link:dhw:sqldb:repo.usp_sync_guid.adoc[]" as repo.usp_sync_guid << P >> {
   --
 }
 
 config.Parameter <.. config.usp_init_parameter
 config.usp_init_parameter <.. config.usp_connect_database
+config.usp_init_parameter <.. repo.usp_sync_guid
 configT.Parameter_default <.. config.usp_init_parameter
-
+footer The diagram is interactive and contains links.
 @enduml
 

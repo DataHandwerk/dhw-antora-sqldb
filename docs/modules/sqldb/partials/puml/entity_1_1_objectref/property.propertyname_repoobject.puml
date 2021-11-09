@@ -1,0 +1,71 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:config.parameter.adoc[]" as config.Parameter << U >> {
+  - **Parameter_name** : (varchar(100))
+  - **sub_Parameter** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.antoratemplate_examples.adoc[]" as docs.AntoraTemplate_examples << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.propertyname_repoobject.adoc[]" as property.PropertyName_RepoObject << V >> {
+  **property_name** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.propertyname_repoobject_t.adoc[]" as property.PropertyName_RepoObject_T << U >> {
+  **property_name** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.repoobjectproperty.adoc[]" as property.RepoObjectProperty << U >> {
+  - **RepoObjectProperty_id** : (int)
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.repoobjectproperty_cross.adoc[]" as property.RepoObjectProperty_cross << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  **property_name** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.usp_persist_propertyname_repoobject_t.adoc[]" as property.usp_PERSIST_PropertyName_RepoObject_T << P >> {
+  --
+}
+
+config.Parameter <.. property.PropertyName_RepoObject
+property.PropertyName_RepoObject <.. property.RepoObjectProperty_cross
+property.PropertyName_RepoObject <.. docs.AntoraTemplate_examples
+property.PropertyName_RepoObject <.. property.PropertyName_RepoObject_T
+property.PropertyName_RepoObject <.. property.usp_PERSIST_PropertyName_RepoObject_T
+property.RepoObjectProperty <.. property.PropertyName_RepoObjectfooter The diagram is interactive and contains links.
+@enduml
+

@@ -1,0 +1,126 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:repo.index_ssas.adoc[]" as repo.Index_ssas << V >> {
+  - **databasename** : (nvarchar(128))
+  **index_name** : (nvarchar(450))
+  - ColumnName : (nvarchar(128))
+  - is_index_primary_key : (bit)
+  - is_index_unique : (bit)
+  - RepoObject_guid : (uniqueidentifier)
+  - TableName : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.indexcolumn_ssas.adoc[]" as repo.IndexColumn_ssas << V >> {
+  - **index_guid** : (uniqueidentifier)
+  - **index_column_id** : (int)
+  - ColumnName : (nvarchar(128))
+  - databasename : (nvarchar(128))
+  - RepoObjectColumn_guid : (uniqueidentifier)
+  - TableName : (nvarchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.indexcolumn_from_iskey.adoc[]" as ssas.IndexColumn_from_IsKey << V >> {
+  - databasename : (nvarchar(128))
+  - index_column_id : (int)
+  - index_name : (nvarchar(265))
+  - is_descending_key : (int)
+  - is_index_primary_key : (bit)
+  - is_index_unique : (bit)
+  - RepoObject_guid : (uniqueidentifier)
+  - RepoObjectColumn_guid : (uniqueidentifier)
+  - TableName : (nvarchar(128))
+  - tables_columns_name : (nvarchar(128))
+  tables_columns_type : (nvarchar(500))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.indexcolumn_from_isunique.adoc[]" as ssas.IndexColumn_from_IsUnique << V >> {
+  - databasename : (nvarchar(128))
+  - index_column_id : (int)
+  - index_name : (nvarchar(264))
+  - is_descending_key : (int)
+  - is_index_primary_key : (bit)
+  - is_index_unique : (bit)
+  - RepoObject_guid : (uniqueidentifier)
+  - RepoObjectColumn_guid : (uniqueidentifier)
+  - TableName : (nvarchar(128))
+  - tables_columns_name : (nvarchar(128))
+  tables_columns_type : (nvarchar(500))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.indexcolumn_from_relationship.adoc[]" as ssas.IndexColumn_from_Relationship << V >> {
+  - databasename : (nvarchar(128))
+  - index_column_id : (int)
+  - index_name : (nvarchar(264))
+  - is_descending_key : (int)
+  - is_index_primary_key : (bit)
+  - is_index_unique : (bit)
+  - RepoObject_guid : (uniqueidentifier)
+  - RepoObjectColumn_guid : (uniqueidentifier)
+  - TableName : (nvarchar(128))
+  - tables_columns_name : (nvarchar(128))
+  tables_columns_type : (nvarchar(500))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.indexcolumn_union.adoc[]" as ssas.IndexColumn_union << V >> {
+  - ColumnName : (nvarchar(128))
+  - databasename : (nvarchar(128))
+  - index_column_id : (int)
+  index_name : (nvarchar(450))
+  - is_descending_key : (int)
+  - is_index_primary_key : (bit)
+  - is_index_unique : (bit)
+  - RepoObject_guid : (uniqueidentifier)
+  - RepoObjectColumn_guid : (uniqueidentifier)
+  - TableName : (nvarchar(128))
+  tables_columns_type : (nvarchar(500))
+  --
+}
+
+ssas.IndexColumn_from_IsKey <.. ssas.IndexColumn_union
+ssas.IndexColumn_from_IsUnique <.. ssas.IndexColumn_union
+ssas.IndexColumn_from_Relationship <.. ssas.IndexColumn_union
+ssas.IndexColumn_union <.. repo.Index_ssas
+ssas.IndexColumn_union <.. repo.IndexColumn_ssas
+"ssas.IndexColumn_union::ColumnName" <-- "repo.IndexColumn_ssas::ColumnName"
+"ssas.IndexColumn_union::ColumnName" <-- "repo.Index_ssas::ColumnName"
+"ssas.IndexColumn_union::databasename" <-- "repo.Index_ssas::databasename"
+"ssas.IndexColumn_union::index_column_id" <-- "repo.IndexColumn_ssas::index_column_id"
+"ssas.IndexColumn_union::index_name" <-- "repo.Index_ssas::index_name"
+"ssas.IndexColumn_union::is_index_primary_key" <-- "repo.Index_ssas::is_index_primary_key"
+"ssas.IndexColumn_union::is_index_unique" <-- "repo.Index_ssas::is_index_unique"
+"ssas.IndexColumn_union::RepoObject_guid" <-- "repo.Index_ssas::RepoObject_guid"
+"ssas.IndexColumn_union::RepoObjectColumn_guid" <-- "repo.IndexColumn_ssas::RepoObjectColumn_guid"
+"ssas.IndexColumn_union::TableName" <-- "repo.Index_ssas::TableName"footer The diagram is interactive and contains links.
+@enduml
+

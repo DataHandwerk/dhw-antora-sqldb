@@ -1,0 +1,62 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:ssis.package_src.adoc[]" as ssis.Package_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_dft_srcdest_src.adoc[]" as ssis.PackageTask_Dft_SrcDest_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **DFTTasksPath** : (varchar(max))
+  **SourceColumn** : (varchar(8000))
+  **DestinationColumn** : (varchar(8000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tblcontrolflow.adoc[]" as ssis_t.TblControlFlow << U >> {
+  - **ControlFlowDetailsRowID** : (int)
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tbltask_dft_details.adoc[]" as ssis_t.TblTask_Dft_Details << U >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tbltask_dft_srcdest.adoc[]" as ssis_t.TblTask_Dft_SrcDest << U >> {
+  --
+}
+
+ssis.Package_src <.. ssis.PackageTask_Dft_SrcDest_src
+ssis_t.TblControlFlow <.. ssis.PackageTask_Dft_SrcDest_src
+ssis_t.TblTask_Dft_Details <.. ssis.PackageTask_Dft_SrcDest_src
+ssis_t.TblTask_Dft_SrcDest <.. ssis.PackageTask_Dft_SrcDest_srcfooter The diagram is interactive and contains links.
+@enduml
+

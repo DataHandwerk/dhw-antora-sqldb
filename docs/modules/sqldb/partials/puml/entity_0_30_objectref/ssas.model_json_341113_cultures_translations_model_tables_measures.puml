@@ -132,6 +132,10 @@ entity "puml-link:dhw:sqldb:ssas.measures_translation.adoc[]" as ssas.Measures_t
   --
 }
 
+entity "puml-link:dhw:sqldb:ssas.measures_translation_displayfolder_union.adoc[]" as ssas.Measures_translation_displayfolder_union << V >> {
+  --
+}
+
 entity "puml-link:dhw:sqldb:ssas.measures_translation_t.adoc[]" as ssas.Measures_translation_T << U >> {
   - **Measure_guid** : (uniqueidentifier)
   - **cultures_name** : (nvarchar(10))
@@ -149,19 +153,19 @@ entity "puml-link:dhw:sqldb:ssas.usp_persist_measures_translation_t.adoc[]" as s
 
 docs.ftv_RepoObject_Reference_PlantUml_EntityRefList <.. docs.RepoObject_Plantuml
 docs.ObjectRefCyclic_EntityList <.. docs.ObjectRefCyclic
-docs.RepoObject_Adoc <.. docs.RepoObject_Adoc_T
 docs.RepoObject_Adoc <.. docs.usp_PERSIST_RepoObject_Adoc_T
+docs.RepoObject_Adoc <.. docs.RepoObject_Adoc_T
 docs.REpoObject_Adoc_T <.. docs.usp_PERSIST_RepoObject_Adoc_T
-docs.RepoObject_MeasureList <.. docs.RepoObject_Plantuml_Entity
 docs.RepoObject_MeasureList <.. docs.RepoObject_Adoc
+docs.RepoObject_MeasureList <.. docs.RepoObject_Plantuml_Entity
 docs.RepoObject_Plantuml <.. docs.RepoObject_Plantuml_T
 docs.RepoObject_Plantuml <.. docs.usp_PERSIST_RepoObject_Plantuml_T
-docs.RepoObject_Plantuml_Entity <.. docs.usp_PERSIST_RepoObject_Plantuml_Entity_T
 docs.RepoObject_Plantuml_Entity <.. docs.RepoObject_Plantuml_Entity_T
-docs.RepoObject_Plantuml_Entity_T <.. docs.usp_PERSIST_RepoObject_Plantuml_Entity_T
-docs.RepoObject_Plantuml_Entity_T <.. docs.ftv_RepoObject_Reference_PlantUml_EntityRefList
-docs.RepoObject_Plantuml_Entity_T <.. docs.RepoObject_PlantUml_PumlEntityFkList
+docs.RepoObject_Plantuml_Entity <.. docs.usp_PERSIST_RepoObject_Plantuml_Entity_T
 docs.RepoObject_Plantuml_Entity_T <.. docs.ObjectRefCyclic_EntityList
+docs.RepoObject_Plantuml_Entity_T <.. docs.RepoObject_PlantUml_PumlEntityFkList
+docs.RepoObject_Plantuml_Entity_T <.. docs.ftv_RepoObject_Reference_PlantUml_EntityRefList
+docs.RepoObject_Plantuml_Entity_T <.. docs.usp_PERSIST_RepoObject_Plantuml_Entity_T
 docs.RepoObject_Plantuml_Entity_T <.. docs.Schema_EntityList
 docs.RepoObject_PlantUml_PumlEntityFkList <.. docs.RepoObject_Plantuml
 docs.RepoObject_Plantuml_T <.. docs.usp_PERSIST_RepoObject_Plantuml_T
@@ -175,9 +179,10 @@ docs.usp_PERSIST_RepoObject_Plantuml_T <.. docs.usp_AntoraExport_ObjectPuml
 repo.usp_sync_guid_ssas <.. repo.usp_main
 ssas.Measures_translation <.. ssas.Measures_translation_T
 ssas.Measures_translation <.. ssas.usp_PERSIST_Measures_translation_T
-ssas.Measures_translation_T <.. docs.RepoObject_MeasureList
+ssas.Measures_translation_displayfolder_union <.. docs.RepoObject_MeasureList
 ssas.Measures_translation_T <.. ssas.usp_PERSIST_Measures_translation_T
+ssas.Measures_translation_T <.. ssas.Measures_translation_displayfolder_union
 ssas.model_json_341113_cultures_translations_model_tables_measures <.. ssas.Measures_translation
-ssas.usp_PERSIST_Measures_translation_T <.. repo.usp_sync_guid_ssas
+ssas.usp_PERSIST_Measures_translation_T <.. repo.usp_sync_guid_ssasfooter The diagram is interactive and contains links.
 @enduml
 

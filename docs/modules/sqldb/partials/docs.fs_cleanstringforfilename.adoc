@@ -45,7 +45,7 @@ scalar function
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-10-01 23:15:10
+2021-11-08 16:56:57
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -53,12 +53,6 @@ scalar function
 // tag::AntoraColumnDetails[]
 
 // end::AntoraColumnDetails[]
-
-== AntoraMeasureDetails
-
-// tag::AntoraMeasureDetails[]
-
-// end::AntoraMeasureDetails[]
 
 == AntoraPkColumnTableRows
 
@@ -78,12 +72,30 @@ scalar function
 
 // end::AntoraIndexList[]
 
+== AntoraMeasureDetails
+
+// tag::AntoraMeasureDetails[]
+
+// end::AntoraMeasureDetails[]
+
 == AntoraParameterList
 
 // tag::AntoraParameterList[]
 *  (nvarchar(4000))
 * @source_string (nvarchar(4000))
 // end::AntoraParameterList[]
+
+== AntoraXrefCulturesList
+
+// tag::AntoraXrefCulturesList[]
+* xref:dhw:sqldb:docs.fs_cleanstringforfilename.adoc[] - 
+// end::AntoraXrefCulturesList[]
+
+== cultures_count
+
+// tag::cultures_count[]
+1
+// end::cultures_count[]
 
 == Other tags
 
@@ -122,12 +134,20 @@ source: property.RepoObjectProperty_cross As rop_cross
 * xref:docs.antoranavlistrepoobject_by_type.adoc[]
 * xref:docs.antorapage_objectbyschema.adoc[]
 * xref:docs.antorapage_objectbytype.adoc[]
+* xref:docs.ftv_repoobject_antoraxref.adoc[]
 * xref:docs.objectrefcyclic_entitylist.adoc[]
 * xref:docs.repoobject_outputfilter.adoc[]
-* xref:docs.usp_antoraexport_navigation.adoc[]
+* xref:docs.ssis_navlist_package.adoc[]
+* xref:docs.ssis_pumlpartialdftcomponent.adoc[]
+* xref:docs.ssis_pumlpartialtaskcomponent.adoc[]
+* xref:docs.ssis_task.adoc[]
+* xref:docs.ssis_tasklist.adoc[]
+* xref:docs.usp_antoraexport_objectnavigation.adoc[]
 * xref:docs.usp_antoraexport_objectpage.adoc[]
 * xref:docs.usp_antoraexport_objectpartialproperties.adoc[]
 * xref:docs.usp_antoraexport_objectpuml.adoc[]
+* xref:docs.usp_antoraexport_ssispage.adoc[]
+* xref:docs.usp_antoraexport_ssispartialproperties.adoc[]
 * xref:reference.repoobject_referencedreferencing.adoc[]
 * xref:reference.repoobjectcolumn_referencedreferencing.adoc[]
 * xref:repo.foreignkey_gross.adoc[]
@@ -142,7 +162,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 // end::description[]
 
 
-=== exampleUsage
+=== ExampleUsage
 
 // tag::exampleusage[]
 
@@ -406,19 +426,25 @@ source: property.RepoObjectProperty WHERE property_int = 1
 // tag::sql_modules_definition[]
 [%collapsible]
 =======
-[source,sql]
+[source,sql,numbered]
 ----
-
-CREATE Function docs.fs_cleanStringForFilename
+CREATE Function [docs].[fs_cleanStringForFilename]
 (
     @source_string NVarchar(4000)
 )
 Returns NVarchar(4000)
 As
 Begin
-    Return Lower ( Replace ( Trim ( @source_string ), ' ', 'blank' ))
+    Return 
+	  Lower ( 
+	    Replace ( Replace ( Replace ( Replace (
+		Trim ( @source_string )
+		, ' ', 'blank' )
+		, '/', 'slash' )
+		, '\', 'backslash' )
+		, '*', 'star' )
+	)
 End;
-
 ----
 =======
 // end::sql_modules_definition[]

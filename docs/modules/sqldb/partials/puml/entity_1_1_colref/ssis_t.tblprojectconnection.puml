@@ -1,0 +1,63 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:ssis.projectconnection_src.adoc[]" as ssis.ProjectConnection_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **ConnectionManagerID** : (uniqueidentifier)
+  ConnectionManagerName : (varchar(max))
+  ConnectionManagerType : (varchar(max))
+  - ConnectionPath : (varchar(8000))
+  ConnectionString : (nvarchar(max))
+  ExpressionValue : (nvarchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tblprojectconnection.adoc[]" as ssis_t.TblProjectConnection << U >> {
+  ConnectionManagerID : (uniqueidentifier)
+  ConnectionManagerName : (varchar(max))
+  ConnectionManagerType : (varchar(max))
+  - ConnectionPath : (varchar(8000))
+  ConnectionString : (nvarchar(max))
+  ExpressionValue : (nvarchar(max))
+  - RowID : (int)
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.usp_getprojectconnection.adoc[]" as ssis_t.usp_GetProjectConnection << P >> {
+  --
+}
+
+ssis_t.TblProjectConnection <.. ssis.ProjectConnection_src
+ssis_t.TblProjectConnection <.. ssis_t.usp_GetProjectConnection
+"ssis_t.TblProjectConnection::ConnectionManagerID" <-- "ssis.ProjectConnection_src::ConnectionManagerID"
+"ssis_t.TblProjectConnection::ConnectionManagerName" <-- "ssis.ProjectConnection_src::ConnectionManagerName"
+"ssis_t.TblProjectConnection::ConnectionManagerType" <-- "ssis.ProjectConnection_src::ConnectionManagerType"
+"ssis_t.TblProjectConnection::ConnectionString" <-- "ssis.ProjectConnection_src::ConnectionString"
+"ssis_t.TblProjectConnection::ExpressionValue" <-- "ssis.ProjectConnection_src::ExpressionValue"footer The diagram is interactive and contains links.
+@enduml
+

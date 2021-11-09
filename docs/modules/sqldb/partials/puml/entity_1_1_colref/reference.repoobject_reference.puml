@@ -1,0 +1,126 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:reference.repoobject_reference.adoc[]" as reference.RepoObject_reference << V >> {
+  referenced_entity_name : (nvarchar(128))
+  referenced_external_AntoraComponent : (nvarchar(128))
+  referenced_external_AntoraModule : (nvarchar(128))
+  referenced_is_external : (int)
+  referenced_RepoObject_guid : (uniqueidentifier)
+  referenced_schema_name : (nvarchar(128))
+  referenced_type : (char(2))
+  referencing_entity_name : (nvarchar(128))
+  referencing_external_AntoraComponent : (nvarchar(128))
+  referencing_external_AntoraModule : (nvarchar(128))
+  referencing_is_external : (int)
+  referencing_RepoObject_guid : (uniqueidentifier)
+  referencing_schema_name : (nvarchar(128))
+  referencing_type : (varchar(2))
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.repoobject_reference_t.adoc[]" as reference.RepoObject_reference_T << U >> {
+  **referenced_RepoObject_guid** : (uniqueidentifier)
+  **referencing_RepoObject_guid** : (uniqueidentifier)
+  - is_ReversePersistenceViaView : (bit)
+  referenced_entity_name : (nvarchar(128))
+  referenced_external_AntoraComponent : (nvarchar(128))
+  referenced_external_AntoraModule : (nvarchar(128))
+  referenced_is_external : (int)
+  - referenced_is_PersistenceSource : (bit)
+  - referenced_is_PersistenceTarget : (bit)
+  referenced_schema_name : (nvarchar(128))
+  referenced_type : (char(2))
+  referencing_entity_name : (nvarchar(128))
+  referencing_external_AntoraComponent : (nvarchar(128))
+  referencing_external_AntoraModule : (nvarchar(128))
+  referencing_is_external : (int)
+  - referencing_is_PersistenceTarget : (bit)
+  - referencing_is_PersistenceUspSourceRef : (bit)
+  referencing_is_PersistenceUspTargetRef : (bit)
+  referencing_schema_name : (nvarchar(128))
+  referencing_type : (varchar(2))
+  # referenced_fullname : (nvarchar(261))
+  # referenced_fullname2 : (nvarchar(257))
+  ~ referenced_puml_entity : (nvarchar(4000))
+  # referencing_fullname : (nvarchar(261))
+  # referencing_fullname2 : (nvarchar(257))
+  ~ referencing_puml_entity : (nvarchar(4000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.repoobject_reference_union.adoc[]" as reference.RepoObject_reference_union << V >> {
+  **referenced_RepoObject_guid** : (uniqueidentifier)
+  **referencing_RepoObject_guid** : (uniqueidentifier)
+  - InformationSource : (varchar(34))
+  - one : (int)
+  referenced_entity_name : (nvarchar(128))
+  referenced_external_AntoraComponent : (nvarchar(128))
+  referenced_external_AntoraModule : (nvarchar(128))
+  referenced_fullname : (nvarchar(517))
+  referenced_id : (int)
+  referenced_is_external : (int)
+  referenced_schema_name : (nvarchar(128))
+  referenced_type : (char(2))
+  referencing_entity_name : (nvarchar(128))
+  referencing_external_AntoraComponent : (nvarchar(128))
+  referencing_external_AntoraModule : (nvarchar(128))
+  referencing_fullname : (nvarchar(517))
+  referencing_id : (int)
+  referencing_is_external : (int)
+  referencing_schema_name : (nvarchar(128))
+  referencing_type : (varchar(2))
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.usp_persist_repoobject_reference_t.adoc[]" as reference.usp_PERSIST_RepoObject_reference_T << P >> {
+  --
+}
+
+reference.RepoObject_reference <.. reference.RepoObject_reference_T
+reference.RepoObject_reference <.. reference.usp_PERSIST_RepoObject_reference_T
+reference.RepoObject_reference_union <.. reference.RepoObject_reference
+"reference.RepoObject_reference::referenced_entity_name" <-- "reference.RepoObject_reference_T::referenced_entity_name"
+"reference.RepoObject_reference::referenced_external_AntoraComponent" <-- "reference.RepoObject_reference_T::referenced_external_AntoraComponent"
+"reference.RepoObject_reference::referenced_external_AntoraModule" <-- "reference.RepoObject_reference_T::referenced_external_AntoraModule"
+"reference.RepoObject_reference::referenced_is_external" <-- "reference.RepoObject_reference_T::referenced_is_external"
+"reference.RepoObject_reference::referenced_RepoObject_guid" <-- "reference.RepoObject_reference_T::referenced_RepoObject_guid"
+"reference.RepoObject_reference::referenced_schema_name" <-- "reference.RepoObject_reference_T::referenced_schema_name"
+"reference.RepoObject_reference::referenced_type" <-- "reference.RepoObject_reference_T::referenced_type"
+"reference.RepoObject_reference::referencing_entity_name" <-- "reference.RepoObject_reference_T::referencing_entity_name"
+"reference.RepoObject_reference::referencing_external_AntoraComponent" <-- "reference.RepoObject_reference_T::referencing_external_AntoraComponent"
+"reference.RepoObject_reference::referencing_external_AntoraModule" <-- "reference.RepoObject_reference_T::referencing_external_AntoraModule"
+"reference.RepoObject_reference::referencing_is_external" <-- "reference.RepoObject_reference_T::referencing_is_external"
+"reference.RepoObject_reference::referencing_RepoObject_guid" <-- "reference.RepoObject_reference_T::referencing_RepoObject_guid"
+"reference.RepoObject_reference::referencing_schema_name" <-- "reference.RepoObject_reference_T::referencing_schema_name"
+"reference.RepoObject_reference::referencing_type" <-- "reference.RepoObject_reference_T::referencing_type"
+"reference.RepoObject_reference_union::referenced_entity_name" <-- "reference.RepoObject_reference::referenced_entity_name"
+"reference.RepoObject_reference_union::referenced_RepoObject_guid" <-- "reference.RepoObject_reference::referenced_RepoObject_guid"
+"reference.RepoObject_reference_union::referencing_RepoObject_guid" <-- "reference.RepoObject_reference::referencing_RepoObject_guid"footer The diagram is interactive and contains links.
+@enduml
+

@@ -1,0 +1,179 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:configt.type_level1type_level2type.adoc[]" as configT.type_level1type_level2type << V >> {
+  **type** : (nvarchar(128))
+  level1type : (varchar(9))
+  level2type : (varchar(10))
+  type_desc : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.extendedproperty_repo2sys_level2_repoobjectcolumn.adoc[]" as property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn << V >> {
+  - **level0type** : (nvarchar(6))
+  - **level0name** : (nvarchar(128))
+  **level1type** : (varchar(9))
+  - **level1name** : (nvarchar(128))
+  - **level2type** : (nvarchar(6))
+  - **level2name** : (nvarchar(128))
+  - **property_name** : (nvarchar(128))
+  - parent_RepoObject_guid : (uniqueidentifier)
+  - parent_RepoObject_type : (char(2))
+  property_value : (nvarchar(4000))
+  Repo_user_type_fullname : (nvarchar(128))
+  - RepoObjectColumn_guid : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.extendedproperty_repo2sys_level2_union.adoc[]" as property.ExtendedProperty_Repo2Sys_level2_Union << V >> {
+  - **level0type** : (nvarchar(6))
+  - **level0name** : (nvarchar(128))
+  **level1type** : (varchar(9))
+  - **level1name** : (nvarchar(128))
+  **level2type** : (nvarchar(10))
+  - **level2name** : (nvarchar(128))
+  - **property_name** : (nvarchar(128))
+  property_value : (nvarchar(4000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.repoobjectcolumnproperty.adoc[]" as property.RepoObjectColumnProperty << U >> {
+  - **RepoObjectColumnProperty_id** : (int)
+  inheritance : (tinyint)
+  - property_name : (nvarchar(128))
+  - property_value : (nvarchar(max))
+  - RepoObjectColumn_guid : (uniqueidentifier)
+  ~ property_bigint : (bigint)
+  ~ property_float : (float)
+  ~ property_int : (int)
+  ~ property_money : (money)
+  ~ property_real : (real)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobject.adoc[]" as repo.RepoObject << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
+  has_execution_plan_issue : (bit)
+  has_get_referenced_issue : (bit)
+  Inheritance_Source_fullname : (nvarchar(261))
+  Inheritance_StringAggSeparatorSql : (nvarchar(4000))
+  InheritanceDefinition : (nvarchar(4000))
+  InheritanceType : (tinyint)
+  - is_DocsExclude : (bit)
+  - is_external : (bit)
+  is_repo_managed : (bit)
+  is_required_ObjectMerge : (bit)
+  - is_ssas : (bit)
+  is_SysObject_missing : (bit)
+  - modify_dt : (datetime)
+  pk_index_guid : (uniqueidentifier)
+  pk_IndexPatternColumnName_new : (nvarchar(4000))
+  Repo_history_table_guid : (uniqueidentifier)
+  Repo_temporal_type : (tinyint)
+  - RepoObject_name : (nvarchar(128))
+  RepoObject_Referencing_Count : (int)
+  - RepoObject_schema_name : (nvarchar(128))
+  - RepoObject_type : (char(2))
+  SysObject_id : (int)
+  SysObject_modify_date : (datetime)
+  - SysObject_name : (nvarchar(128))
+  - SysObject_parent_object_id : (int)
+  - SysObject_schema_name : (nvarchar(128))
+  SysObject_type : (char(2))
+  ~ has_different_sys_names : (bit)
+  # is_RepoObject_name_uniqueidentifier : (int)
+  # is_SysObject_name_uniqueidentifier : (int)
+  ~ node_id : (bigint)
+  # RepoObject_fullname : (nvarchar(261))
+  # RepoObject_fullname2 : (nvarchar(257))
+  # SysObject_fullname : (nvarchar(261))
+  # SysObject_fullname2 : (nvarchar(257))
+  ~ SysObject_query_sql : (nvarchar(406))
+  # usp_persistence_fullname2 : (nvarchar(269))
+  # usp_persistence_name : (nvarchar(140))
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobjectcolumn.adoc[]" as repo.RepoObjectColumn << U >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  Inheritance_StringAggSeparatorSql : (nvarchar(4000))
+  InheritanceDefinition : (nvarchar(4000))
+  InheritanceType : (tinyint)
+  is_persistence_no_check : (bit)
+  is_persistence_no_include : (bit)
+  is_persistence_no_update : (bit)
+  is_query_plan_expression : (bit)
+  is_required_ColumnMerge : (bit)
+  is_SysObjectColumn_missing : (bit)
+  persistence_source_RepoObjectColumn_guid : (uniqueidentifier)
+  Referencing_Count : (int)
+  Repo_default_definition : (nvarchar(max))
+  Repo_default_is_system_named : (bit)
+  Repo_default_name : (nvarchar(128))
+  Repo_definition : (nvarchar(max))
+  - Repo_generated_always_type : (tinyint)
+  Repo_graph_type : (int)
+  Repo_increment_value : (sql_variant)
+  - Repo_is_computed : (bit)
+  - Repo_is_identity : (bit)
+  Repo_is_nullable : (bit)
+  Repo_is_persisted : (bit)
+  Repo_seed_value : (sql_variant)
+  Repo_user_type_fullname : (nvarchar(128))
+  Repo_user_type_name : (nvarchar(128))
+  Repo_uses_database_collation : (bit)
+  - RepoObject_guid : (uniqueidentifier)
+  RepoObjectColumn_column_id : (int)
+  - RepoObjectColumn_name : (nvarchar(128))
+  SysObjectColumn_column_id : (int)
+  - SysObjectColumn_name : (nvarchar(128))
+  # Column_name : (nvarchar(128))
+  ~ has_different_sys_names : (bit)
+  # is_RepoObjectColumn_name_uniqueidentifier : (int)
+  # is_SysObjectColumn_name_uniqueidentifier : (int)
+  --
+}
+
+configT.type_level1type_level2type <.. property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn
+property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn <.. property.ExtendedProperty_Repo2Sys_level2_Union
+property.RepoObjectColumnProperty <.. property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn
+repo.RepoObject <.. property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn
+repo.RepoObjectColumn <.. property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn
+"configT.type_level1type_level2type::level1type" <-- "property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::level1type"
+"property.RepoObjectColumnProperty::property_name" <-- "property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::property_name"
+"property.RepoObjectColumnProperty::RepoObjectColumn_guid" <-- "property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::RepoObjectColumn_guid"
+"repo.RepoObject::RepoObject_guid" <-- "property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::parent_RepoObject_guid"
+"repo.RepoObject::RepoObject_name" <-- "property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::level1name"
+"repo.RepoObject::RepoObject_schema_name" <-- "property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::level0name"
+"repo.RepoObject::RepoObject_type" <-- "property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::parent_RepoObject_type"
+"repo.RepoObjectColumn::Repo_user_type_fullname" <-- "property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::Repo_user_type_fullname"
+"repo.RepoObjectColumn::RepoObjectColumn_name" <-- "property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn::level2name"footer The diagram is interactive and contains links.
+@enduml
+

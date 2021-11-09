@@ -50,7 +50,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-10-04 23:48:20
+2021-11-07 17:28:38
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -58,12 +58,6 @@ stored procedure
 // tag::AntoraColumnDetails[]
 
 // end::AntoraColumnDetails[]
-
-== AntoraMeasureDetails
-
-// tag::AntoraMeasureDetails[]
-
-// end::AntoraMeasureDetails[]
 
 == AntoraPkColumnTableRows
 
@@ -83,6 +77,12 @@ stored procedure
 
 // end::AntoraIndexList[]
 
+== AntoraMeasureDetails
+
+// tag::AntoraMeasureDetails[]
+
+// end::AntoraMeasureDetails[]
+
 == AntoraParameterList
 
 // tag::AntoraParameterList[]
@@ -91,6 +91,18 @@ stored procedure
 * @sub_execution_id (int)
 * @parent_execution_log_id (bigint)
 // end::AntoraParameterList[]
+
+== AntoraXrefCulturesList
+
+// tag::AntoraXrefCulturesList[]
+* xref:dhw:sqldb:repo.usp_index_inheritance.adoc[] - 
+// end::AntoraXrefCulturesList[]
+
+== cultures_count
+
+// tag::cultures_count[]
+1
+// end::cultures_count[]
 
 == Other tags
 
@@ -122,7 +134,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 [repo].[usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T]
 ----
@@ -143,7 +155,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 DELETE
 FROM repo.[Index_virtual]
@@ -173,7 +185,7 @@ WHERE NOT [referenced_index_guid] IS NULL
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 INSERT INTO repo.[Index_virtual] (
  [parent_RepoObject_guid]
@@ -216,7 +228,7 @@ WHERE (
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 UPDATE iv
 SET [referenced_index_guid] = T1.[source_index_guid]
@@ -246,7 +258,7 @@ WHERE iv.[referenced_index_guid] IS NULL
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 DELETE
 FROM repo.[IndexColumn_virtual]
@@ -279,7 +291,7 @@ WHERE
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 INSERT INTO repo.[IndexColumn_virtual] (
  [index_guid]
@@ -316,7 +328,7 @@ WHERE NOT EXISTS (
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 UPDATE i_target
 SET is_index_disabled = i_source.is_index_disabled
@@ -350,7 +362,7 @@ WHERE (i_target.is_persistence = 1)
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 DELETE iv
 FROM [repo].[Index_virtual] [iv]
@@ -378,7 +390,7 @@ WHERE EXISTS (
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 UPDATE icv
 SET [RepoObjectColumn_guid] = [setpoint].[referencing_RepoObjectColumn_guid]
@@ -411,7 +423,7 @@ INNER JOIN [repo].[IndexColumn_virtual_referenced_setpoint] AS [setpoint]
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 [repo].[usp_Index_finish]
 ----
@@ -454,7 +466,7 @@ INNER JOIN [repo].[IndexColumn_virtual_referenced_setpoint] AS [setpoint]
 // end::description[]
 
 
-=== exampleUsage
+=== ExampleUsage
 
 // tag::exampleusage[]
 EXEC [repo].[usp_Index_inheritance]
@@ -727,7 +739,7 @@ source: property.RepoObjectProperty WHERE property_int = 1
 // tag::sql_modules_definition[]
 [%collapsible]
 =======
-[source,sql]
+[source,sql,numbered]
 ----
 /*
 code of this procedure is managed in the dhw repository. Do not modify manually.

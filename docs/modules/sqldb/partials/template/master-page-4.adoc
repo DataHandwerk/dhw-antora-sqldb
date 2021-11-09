@@ -48,13 +48,11 @@ endif::ExistsProperty--adocuspsteps[]
 include::partial$puml/entity/{docname}.puml[]
 ....
 
-todo: several entities (left to right), containing SSAS translations
-
 ifdef::ExistsProperty--Columns[]
 
 == Columns
 
-.Columns of {docname}
+.Columns of {doctitle}
 [cols="d,8m,m,m,m,d"]
 |===
 |PK|Column Name|Data Type|NULL?|ID|Calc
@@ -96,19 +94,6 @@ include::partial${docname}.adoc[tag=has_history_columns]
 
 endif::ExistsProperty--is_persistence,ExistsProperty--has_history,ExistsProperty--has_history_columns[]
 
-ifdef::is_ssas[]
-
-== todo SSAS Relation Diagram
-
-todo: use other diagram containing relations an related objects
-
-[plantuml, entity_pk_or_index-{docname}, svg, subs=macros]
-....
-include::partial$puml/entity_pk_or_index/{docname}.puml[]
-....
-
-endif::is_ssas[]
-
 ifndef::is_ssas[]
 ifdef::ExistsProperty--FK[]
 
@@ -121,4 +106,5 @@ include::partial$puml/entity_1_1_fk/{docname}.puml[]
 
 endif::ExistsProperty--FK[]
 endif::is_ssas[]
+
 

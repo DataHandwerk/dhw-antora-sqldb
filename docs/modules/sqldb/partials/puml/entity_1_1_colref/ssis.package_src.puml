@@ -1,0 +1,419 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:ssis.antoramodule_tgt_filter.adoc[]" as ssis.AntoraModule_tgt_filter << V >> {
+  - AntoraModule : (varchar(50))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.package_src.adoc[]" as ssis.Package_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  PackageCreationDate : (datetime)
+  PackageCreatorComputerName : (nvarchar(500))
+  PackageCreatorName : (varchar(1000))
+  PackageDescription : (nvarchar(max))
+  PackageDTSID : (uniqueidentifier)
+  PackageLastModifiedProductVersion : (nvarchar(500))
+  PackageLocaleID : (int)
+  PackageObjectName : (nvarchar(500))
+  - PackagePath : (varchar(8000))
+  PackageProtectionLevel : (varchar(100))
+  PackageProtectionLevelName : (varchar(28))
+  PackageVersionGUID : (uniqueidentifier)
+  - ProjectPath : (varchar(8000))
+  - RowID : (int)
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.package_tgt.adoc[]" as ssis.Package_tgt << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  PackageCreationDate : (datetime)
+  PackageCreatorComputerName : (nvarchar(500))
+  PackageCreatorName : (varchar(1000))
+  PackageDescription : (nvarchar(max))
+  PackageDTSID : (uniqueidentifier)
+  PackageLastModifiedProductVersion : (nvarchar(500))
+  PackageLocaleID : (int)
+  PackageObjectName : (nvarchar(500))
+  - PackagePath : (varchar(8000))
+  PackageProtectionLevel : (varchar(100))
+  PackageProtectionLevelName : (varchar(28))
+  PackageVersionGUID : (uniqueidentifier)
+  - PackageXML : (xml)
+  - ProjectPath : (varchar(8000))
+  - RowID : (int)
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packageconnection_src.adoc[]" as ssis.PackageConnection_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **ConnectionManagerID** : (uniqueidentifier)
+  ConnectionManagerName : (varchar(max))
+  ConnectionManagerType : (varchar(max))
+  ConnectionString : (varchar(max))
+  ExpressionValue : (varchar(max))
+  RetainSameConnectionProperty : (nvarchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packageflow_src.adoc[]" as ssis.PackageFlow_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **TaskFrom** : (varchar(2000))
+  **Taskto** : (varchar(2000))
+  CreationName : (nvarchar(max))
+  DTSID : (uniqueidentifier)
+  EvalOp : (int)
+  Expression : (nvarchar(max))
+  FlowType : (varchar(1000))
+  LogicalAnd : (bit)
+  ObjectName : (nvarchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packageparameter_src.adoc[]" as ssis.PackageParameter_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **ParameterName** : (varchar(500))
+  ExpressionValue : (varchar(5000))
+  ParameterDataType : (varchar(max))
+  ParameterHexValue : (varchar(1000))
+  ParameterValue : (varchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_dft_component_input_externalmetadatacolumn_src.adoc[]" as ssis.PackageTask_Dft_Component_input_externalMetadataColumn_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **Column_refId** : (varchar(max))
+  Column_dataType : (varchar(100))
+  Column_length : (int)
+  Column_name : (varchar(max))
+  Column_precision : (int)
+  Column_scale : (int)
+  Component_refId : (varchar(max))
+  - ControlFlowDetailsRowID : (int)
+  externalMetadataColumns_isused : (bit)
+  input_errorOrTruncationOperation : (varchar(100))
+  input_errorRowDisposition : (varchar(100))
+  input_hasSideEffects : (bit)
+  input_name : (varchar(500))
+  input_refId : (varchar(max))
+  TaskPath : (varchar(8000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_dft_component_input_inputcolumn_src.adoc[]" as ssis.PackageTask_Dft_Component_input_inputColumn_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **Column_refId** : (varchar(max))
+  Column_cachedDataType : (varchar(100))
+  Column_cachedName : (varchar(max))
+  Column_externalMetadataColumnId : (varchar(max))
+  Column_lineageId : (varchar(max))
+  Component_refId : (varchar(max))
+  - ControlFlowDetailsRowID : (int)
+  input_errorOrTruncationOperation : (varchar(100))
+  input_errorRowDisposition : (varchar(100))
+  input_hasSideEffects : (bit)
+  input_name : (varchar(500))
+  input_refId : (varchar(max))
+  TaskPath : (varchar(8000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_dft_component_input_src.adoc[]" as ssis.PackageTask_Dft_Component_input_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **input_refId** : (varchar(max))
+  Component_refId : (varchar(max))
+  - ControlFlowDetailsRowID : (int)
+  input_errorOrTruncationOperation : (varchar(100))
+  input_errorRowDisposition : (varchar(100))
+  input_hasSideEffects : (bit)
+  input_name : (varchar(500))
+  TaskPath : (varchar(8000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_dft_component_output_externalmetadatacolumn_src.adoc[]" as ssis.PackageTask_Dft_Component_output_externalMetadataColumn_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **Column_refId** : (varchar(max))
+  Column_dataType : (varchar(100))
+  Column_length : (int)
+  Column_name : (varchar(max))
+  Column_precision : (int)
+  Column_scale : (int)
+  Component_refId : (varchar(max))
+  - ControlFlowDetailsRowID : (int)
+  externalMetadataColumns_isused : (bit)
+  output_name : (varchar(500))
+  output_refId : (varchar(max))
+  TaskPath : (varchar(8000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_dft_component_output_outputcolumn_src.adoc[]" as ssis.PackageTask_Dft_Component_output_outputcolumn_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **Column_refId** : (varchar(max))
+  Column_dataType : (varchar(100))
+  Column_errorOrTruncationOperation : (varchar(100))
+  Column_errorRowDisposition : (varchar(100))
+  Column_externalMetadataColumnId : (varchar(max))
+  Column_length : (int)
+  Column_lineageId : (varchar(max))
+  Column_name : (varchar(max))
+  Column_precision : (int)
+  Column_scale : (int)
+  Column_truncationRowDisposition : (varchar(max))
+  Component_refId : (varchar(max))
+  - ControlFlowDetailsRowID : (int)
+  output_isErrorOut : (bit)
+  output_name : (varchar(500))
+  output_refId : (varchar(max))
+  TaskPath : (varchar(8000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_dft_component_output_src.adoc[]" as ssis.PackageTask_Dft_Component_output_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **output_refId** : (varchar(max))
+  Component_refId : (varchar(max))
+  - ControlFlowDetailsRowID : (int)
+  output_isErrorOut : (bit)
+  output_name : (varchar(500))
+  TaskPath : (varchar(8000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_dft_component_src.adoc[]" as ssis.PackageTask_Dft_Component_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **Component_refId** : (varchar(max))
+  Component_AccessMode : (varchar(max))
+  Component_AlwaysUseDefaultCodePage : (varchar(max))
+  Component_CommandTimeout : (int)
+  Component_componentClassID : (varchar(max))
+  Component_Connection_description : (varchar(max))
+  Component_Connection_name : (varchar(max))
+  Component_Connection_refId : (varchar(max))
+  Component_connectionManagerID : (varchar(max))
+  Component_connectionManagerRefId : (varchar(max))
+  Component_ContactInfo : (varchar(max))
+  Component_DefaultCodePage : (int)
+  Component_description : (varchar(max))
+  Component_FastLoadKeepIdentity : (bit)
+  Component_FastLoadKeepNulls : (bit)
+  Component_FastLoadMaxInsertCommitSize : (int)
+  Component_FastLoadOptions : (varchar(max))
+  Component_IsSortedProperty : (varchar(10))
+  Component_name : (varchar(max))
+  Component_OpenRowset : (varchar(max))
+  Component_OpenRowsetVariable : (varchar(max))
+  Component_ParameterMapping : (varchar(max))
+  Component_SqlCommand : (varchar(max))
+  Component_SqlCommandVariable : (varchar(max))
+  Component_VariableName : (varchar(max))
+  - ControlFlowDetailsRowID : (int)
+  TaskPath : (varchar(8000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_dft_srcdest_src.adoc[]" as ssis.PackageTask_Dft_SrcDest_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **DFTTasksPath** : (varchar(max))
+  **SourceColumn** : (varchar(8000))
+  **DestinationColumn** : (varchar(8000))
+  DataSource : (varchar(50))
+  MultihashcolumnSortPosition : (varchar(max))
+  SortKeyPosition : (varchar(10))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_sql_parameter_src.adoc[]" as ssis.PackageTask_Sql_Parameter_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **TaskPath** : (varchar(8000))
+  **ParameterBindingSequence** : (varchar(1000))
+  - ControlFlowDetailsRowID : (int)
+  ParameterBindingParameterName : (varchar(1000))
+  ResultSetParameterName : (varchar(1000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_src.adoc[]" as ssis.PackageTask_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **TaskPath** : (varchar(8000))
+  - ControlFlowDetailsRowID : (int)
+  DelayValidationPropertyValue : (varchar(100))
+  ExecutedPackageName : (varchar(1000))
+  ExecutePackageConnection : (varchar(1000))
+  ExecutePackageExpression : (varchar(1000))
+  ExpressionValue : (varchar(5000))
+  IsDisabled : (varchar(10))
+  Script : (varchar(max))
+  SqlConnection : (uniqueidentifier)
+  SqlStatementSource : (nvarchar(max))
+  TaskDescription : (varchar(max))
+  TaskName : (varchar(2000))
+  TaskType : (varchar(5000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagevariable_src.adoc[]" as ssis.PackageVariable_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **VariableName** : (varchar(500))
+  ExpressionValue : (varchar(5000))
+  VariableDataType : (varchar(max))
+  VariableHexValue : (varchar(1000))
+  VariableValue : (varchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.project.adoc[]" as ssis.Project << U >> {
+  - **AntoraModule** : (varchar(50))
+  ProjectPath : (varchar(8000))
+  ~ sql_import : (varchar(8000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.usp_persist_package_tgt.adoc[]" as ssis.usp_PERSIST_Package_tgt << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.pkgstats.adoc[]" as ssis_t.pkgStats << U >> {
+  - **RowID** : (int)
+  PackageCreationDate : (datetime)
+  PackageCreatorComputerName : (nvarchar(500))
+  PackageCreatorName : (varchar(1000))
+  PackageDescription : (nvarchar(max))
+  PackageDTSID : (uniqueidentifier)
+  PackageLastModifiedProductVersion : (nvarchar(500))
+  PackageLocaleID : (int)
+  PackageObjectName : (nvarchar(500))
+  - PackagePath : (varchar(8000))
+  PackageProtectionLevel : (varchar(100))
+  PackageVersionGUID : (uniqueidentifier)
+  - PackageXML : (xml)
+  - ProjectPath : (varchar(8000))
+  # PackageName : (varchar(200))
+  ~ PackageProtectionLevelName : (varchar(28))
+  --
+}
+
+ssis.Package_src <.. ssis.PackageTask_Dft_Component_input_externalMetadataColumn_src
+ssis.Package_src <.. ssis.AntoraModule_tgt_filter
+ssis.Package_src <.. ssis.Package_tgt
+ssis.Package_src <.. ssis.PackageConnection_src
+ssis.Package_src <.. ssis.PackageFlow_src
+ssis.Package_src <.. ssis.PackageParameter_src
+ssis.Package_src <.. ssis.PackageTask_Dft_SrcDest_src
+ssis.Package_src <.. ssis.PackageTask_Sql_Parameter_src
+ssis.Package_src <.. ssis.PackageTask_src
+ssis.Package_src <.. ssis.PackageVariable_src
+ssis.Package_src <.. ssis.usp_PERSIST_Package_tgt
+ssis.Package_src <.. ssis.PackageTask_Dft_Component_src
+ssis.Package_src <.. ssis.PackageTask_Dft_Component_input_src
+ssis.Package_src <.. ssis.PackageTask_Dft_Component_output_src
+ssis.Package_src <.. ssis.PackageTask_Dft_Component_output_outputcolumn_src
+ssis.Package_src <.. ssis.PackageTask_Dft_Component_output_externalMetadataColumn_src
+ssis.Package_src <.. ssis.PackageTask_Dft_Component_input_inputColumn_src
+ssis.Project <.. ssis.Package_src
+ssis_t.pkgStats <.. ssis.Package_src
+"ssis.Package_src::AntoraModule" <-- "ssis.PackageConnection_src::AntoraModule"
+"ssis.Package_src::AntoraModule" <-- "ssis.Package_tgt::AntoraModule"
+"ssis.Package_src::AntoraModule" <-- "ssis.AntoraModule_tgt_filter::AntoraModule"
+"ssis.Package_src::AntoraModule" <-- "ssis.PackageFlow_src::AntoraModule"
+"ssis.Package_src::AntoraModule" <-- "ssis.PackageParameter_src::AntoraModule"
+"ssis.Package_src::AntoraModule" <-- "ssis.PackageTask_Dft_SrcDest_src::AntoraModule"
+"ssis.Package_src::AntoraModule" <-- "ssis.PackageTask_Sql_Parameter_src::AntoraModule"
+"ssis.Package_src::AntoraModule" <-- "ssis.PackageTask_src::AntoraModule"
+"ssis.Package_src::AntoraModule" <-- "ssis.PackageVariable_src::AntoraModule"
+"ssis.Package_src::AntoraModule" <-- "ssis.PackageTask_Dft_Component_src::AntoraModule"
+"ssis.Package_src::AntoraModule" <-- "ssis.PackageTask_Dft_Component_input_src::AntoraModule"
+"ssis.Package_src::AntoraModule" <-- "ssis.PackageTask_Dft_Component_output_src::AntoraModule"
+"ssis.Package_src::AntoraModule" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_src::AntoraModule"
+"ssis.Package_src::AntoraModule" <-- "ssis.PackageTask_Dft_Component_output_externalMetadataColumn_src::AntoraModule"
+"ssis.Package_src::AntoraModule" <-- "ssis.PackageTask_Dft_Component_input_inputColumn_src::AntoraModule"
+"ssis.Package_src::AntoraModule" <-- "ssis.PackageTask_Dft_Component_input_externalMetadataColumn_src::AntoraModule"
+"ssis.Package_src::PackageCreationDate" <-- "ssis.Package_tgt::PackageCreationDate"
+"ssis.Package_src::PackageCreatorComputerName" <-- "ssis.Package_tgt::PackageCreatorComputerName"
+"ssis.Package_src::PackageCreatorName" <-- "ssis.Package_tgt::PackageCreatorName"
+"ssis.Package_src::PackageDescription" <-- "ssis.Package_tgt::PackageDescription"
+"ssis.Package_src::PackageDTSID" <-- "ssis.Package_tgt::PackageDTSID"
+"ssis.Package_src::PackageLastModifiedProductVersion" <-- "ssis.Package_tgt::PackageLastModifiedProductVersion"
+"ssis.Package_src::PackageLocaleID" <-- "ssis.Package_tgt::PackageLocaleID"
+"ssis.Package_src::PackageName" <-- "ssis.Package_tgt::PackageName"
+"ssis.Package_src::PackageName" <-- "ssis.PackageConnection_src::PackageName"
+"ssis.Package_src::PackageName" <-- "ssis.PackageVariable_src::PackageName"
+"ssis.Package_src::PackageName" <-- "ssis.PackageTask_src::PackageName"
+"ssis.Package_src::PackageName" <-- "ssis.PackageFlow_src::PackageName"
+"ssis.Package_src::PackageName" <-- "ssis.PackageParameter_src::PackageName"
+"ssis.Package_src::PackageName" <-- "ssis.PackageTask_Dft_SrcDest_src::PackageName"
+"ssis.Package_src::PackageName" <-- "ssis.PackageTask_Sql_Parameter_src::PackageName"
+"ssis.Package_src::PackageName" <-- "ssis.PackageTask_Dft_Component_input_externalMetadataColumn_src::PackageName"
+"ssis.Package_src::PackageName" <-- "ssis.PackageTask_Dft_Component_input_inputColumn_src::PackageName"
+"ssis.Package_src::PackageName" <-- "ssis.PackageTask_Dft_Component_output_externalMetadataColumn_src::PackageName"
+"ssis.Package_src::PackageName" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_src::PackageName"
+"ssis.Package_src::PackageName" <-- "ssis.PackageTask_Dft_Component_output_src::PackageName"
+"ssis.Package_src::PackageName" <-- "ssis.PackageTask_Dft_Component_input_src::PackageName"
+"ssis.Package_src::PackageName" <-- "ssis.PackageTask_Dft_Component_src::PackageName"
+"ssis.Package_src::PackageObjectName" <-- "ssis.Package_tgt::PackageObjectName"
+"ssis.Package_src::PackagePath" <-- "ssis.Package_tgt::PackagePath"
+"ssis.Package_src::PackageProtectionLevel" <-- "ssis.Package_tgt::PackageProtectionLevel"
+"ssis.Package_src::PackageProtectionLevelName" <-- "ssis.Package_tgt::PackageProtectionLevelName"
+"ssis.Package_src::PackageVersionGUID" <-- "ssis.Package_tgt::PackageVersionGUID"
+"ssis.Package_src::ProjectPath" <-- "ssis.Package_tgt::ProjectPath"
+"ssis.Package_src::RowID" <-- "ssis.Package_tgt::RowID"
+"ssis.Project::AntoraModule" <-- "ssis.Package_src::AntoraModule"
+"ssis_t.pkgStats::PackageCreationDate" <-- "ssis.Package_src::PackageCreationDate"
+"ssis_t.pkgStats::PackageCreatorComputerName" <-- "ssis.Package_src::PackageCreatorComputerName"
+"ssis_t.pkgStats::PackageCreatorName" <-- "ssis.Package_src::PackageCreatorName"
+"ssis_t.pkgStats::PackageDescription" <-- "ssis.Package_src::PackageDescription"
+"ssis_t.pkgStats::PackageDTSID" <-- "ssis.Package_src::PackageDTSID"
+"ssis_t.pkgStats::PackageLastModifiedProductVersion" <-- "ssis.Package_src::PackageLastModifiedProductVersion"
+"ssis_t.pkgStats::PackageLocaleID" <-- "ssis.Package_src::PackageLocaleID"
+"ssis_t.pkgStats::PackageName" <-- "ssis.Package_src::PackageName"
+"ssis_t.pkgStats::PackageObjectName" <-- "ssis.Package_src::PackageObjectName"
+"ssis_t.pkgStats::PackagePath" <-- "ssis.Package_src::PackagePath"
+"ssis_t.pkgStats::PackageProtectionLevel" <-- "ssis.Package_src::PackageProtectionLevel"
+"ssis_t.pkgStats::PackageProtectionLevelName" <-- "ssis.Package_src::PackageProtectionLevelName"
+"ssis_t.pkgStats::PackageVersionGUID" <-- "ssis.Package_src::PackageVersionGUID"
+"ssis_t.pkgStats::ProjectPath" <-- "ssis.Package_src::ProjectPath"
+"ssis_t.pkgStats::RowID" <-- "ssis.Package_src::RowID"footer The diagram is interactive and contains links.
+@enduml
+

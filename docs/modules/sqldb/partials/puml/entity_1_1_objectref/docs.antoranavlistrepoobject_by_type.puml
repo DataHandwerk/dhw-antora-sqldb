@@ -1,0 +1,57 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:docs.antoranavlistrepoobject_by_type.adoc[]" as docs.AntoraNavListRepoObject_by_type << V >> {
+  **type** : (char(2))
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.antorapage_objectbytype.adoc[]" as docs.AntoraPage_ObjectByType << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.fs_cleanstringforfilename.adoc[]" as docs.fs_cleanStringForFilename << FN >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.repoobject_outputfilter_t.adoc[]" as docs.RepoObject_OutputFilter_T << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **cultures_name** : (nvarchar(10))
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.usp_antoraexport_objectnavigation.adoc[]" as docs.usp_AntoraExport_ObjectNavigation << P >> {
+  --
+}
+
+docs.AntoraNavListRepoObject_by_type <.. docs.AntoraPage_ObjectByType
+docs.AntoraNavListRepoObject_by_type <.. docs.usp_AntoraExport_ObjectNavigation
+docs.fs_cleanStringForFilename <.. docs.AntoraNavListRepoObject_by_type
+docs.RepoObject_OutputFilter_T <.. docs.AntoraNavListRepoObject_by_typefooter The diagram is interactive and contains links.
+@enduml
+

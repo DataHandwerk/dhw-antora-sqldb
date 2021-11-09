@@ -1,0 +1,152 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:ssis.antoramodule_tgt_filter.adoc[]" as ssis.AntoraModule_tgt_filter << V >> {
+  - AntoraModule : (varchar(50))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_dft_component_output_outputcolumn.adoc[]" as ssis.PackageTask_Dft_Component_output_outputcolumn << U >> {
+  - AntoraModule : (varchar(50))
+  Column_dataType : (varchar(100))
+  Column_errorOrTruncationOperation : (varchar(100))
+  Column_errorRowDisposition : (varchar(100))
+  Column_externalMetadataColumnId : (varchar(max))
+  Column_length : (int)
+  Column_lineageId : (varchar(max))
+  Column_name : (varchar(max))
+  Column_precision : (int)
+  Column_refId : (varchar(max))
+  Column_scale : (int)
+  Column_truncationRowDisposition : (varchar(max))
+  Component_refId : (varchar(max))
+  - ControlFlowDetailsRowID : (int)
+  output_isErrorOut : (bit)
+  output_name : (varchar(500))
+  output_refId : (varchar(max))
+  PackageName : (varchar(200))
+  TaskPath : (varchar(8000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_dft_component_output_outputcolumn_src.adoc[]" as ssis.PackageTask_Dft_Component_output_outputcolumn_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **Column_refId** : (varchar(max))
+  Column_dataType : (varchar(100))
+  Column_errorOrTruncationOperation : (varchar(100))
+  Column_errorRowDisposition : (varchar(100))
+  Column_externalMetadataColumnId : (varchar(max))
+  Column_length : (int)
+  Column_lineageId : (varchar(max))
+  Column_name : (varchar(max))
+  Column_precision : (int)
+  Column_scale : (int)
+  Column_truncationRowDisposition : (varchar(max))
+  Component_refId : (varchar(max))
+  - ControlFlowDetailsRowID : (int)
+  output_isErrorOut : (bit)
+  output_name : (varchar(500))
+  output_refId : (varchar(max))
+  TaskPath : (varchar(8000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_dft_component_output_outputcolumn_tgt.adoc[]" as ssis.PackageTask_Dft_Component_output_outputColumn_tgt << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **Column_refId** : (varchar(max))
+  Column_dataType : (varchar(100))
+  Column_errorOrTruncationOperation : (varchar(100))
+  Column_errorRowDisposition : (varchar(100))
+  Column_externalMetadataColumnId : (varchar(max))
+  Column_length : (int)
+  Column_lineageId : (varchar(max))
+  Column_name : (varchar(max))
+  Column_precision : (int)
+  Column_scale : (int)
+  Column_truncationRowDisposition : (varchar(max))
+  Component_refId : (varchar(max))
+  - ControlFlowDetailsRowID : (int)
+  output_isErrorOut : (bit)
+  output_name : (varchar(500))
+  output_refId : (varchar(max))
+  TaskPath : (varchar(8000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.usp_persist_packagetask_dft_component_output_outputcolumn_tgt.adoc[]" as ssis.usp_PERSIST_PackageTask_Dft_Component_output_outputColumn_tgt << P >> {
+  --
+}
+
+ssis.AntoraModule_tgt_filter <.. ssis.PackageTask_Dft_Component_output_outputcolumn_tgt
+ssis.PackageTask_Dft_Component_output_outputcolumn <.. ssis.PackageTask_Dft_Component_output_outputcolumn_tgt
+ssis.PackageTask_Dft_Component_output_outputcolumn_src <.. ssis.PackageTask_Dft_Component_output_outputcolumn_tgt
+ssis.PackageTask_Dft_Component_output_outputcolumn_tgt <.. ssis.AntoraModule_tgt_filter
+ssis.PackageTask_Dft_Component_output_outputcolumn_tgt <.. ssis.PackageTask_Dft_Component_output_outputcolumn
+ssis.PackageTask_Dft_Component_output_outputColumn_tgt <.. ssis.usp_PERSIST_PackageTask_Dft_Component_output_outputColumn_tgt
+"ssis.PackageTask_Dft_Component_output_outputcolumn::AntoraModule" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::AntoraModule"
+"ssis.PackageTask_Dft_Component_output_outputcolumn::Column_dataType" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::Column_dataType"
+"ssis.PackageTask_Dft_Component_output_outputcolumn::Column_errorOrTruncationOperation" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::Column_errorOrTruncationOperation"
+"ssis.PackageTask_Dft_Component_output_outputcolumn::Column_errorRowDisposition" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::Column_errorRowDisposition"
+"ssis.PackageTask_Dft_Component_output_outputcolumn::Column_externalMetadataColumnId" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::Column_externalMetadataColumnId"
+"ssis.PackageTask_Dft_Component_output_outputcolumn::Column_length" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::Column_length"
+"ssis.PackageTask_Dft_Component_output_outputcolumn::Column_lineageId" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::Column_lineageId"
+"ssis.PackageTask_Dft_Component_output_outputcolumn::Column_name" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::Column_name"
+"ssis.PackageTask_Dft_Component_output_outputcolumn::Column_precision" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::Column_precision"
+"ssis.PackageTask_Dft_Component_output_outputcolumn::Column_refId" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::Column_refId"
+"ssis.PackageTask_Dft_Component_output_outputcolumn::Column_scale" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::Column_scale"
+"ssis.PackageTask_Dft_Component_output_outputcolumn::Column_truncationRowDisposition" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::Column_truncationRowDisposition"
+"ssis.PackageTask_Dft_Component_output_outputcolumn::Component_refId" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::Component_refId"
+"ssis.PackageTask_Dft_Component_output_outputcolumn::ControlFlowDetailsRowID" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::ControlFlowDetailsRowID"
+"ssis.PackageTask_Dft_Component_output_outputcolumn::output_isErrorOut" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::output_isErrorOut"
+"ssis.PackageTask_Dft_Component_output_outputcolumn::output_name" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::output_name"
+"ssis.PackageTask_Dft_Component_output_outputcolumn::output_refId" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::output_refId"
+"ssis.PackageTask_Dft_Component_output_outputcolumn::PackageName" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::PackageName"
+"ssis.PackageTask_Dft_Component_output_outputcolumn::TaskPath" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::TaskPath"
+"ssis.PackageTask_Dft_Component_output_outputcolumn_src::AntoraModule" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::AntoraModule"
+"ssis.PackageTask_Dft_Component_output_outputcolumn_src::Column_dataType" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::Column_dataType"
+"ssis.PackageTask_Dft_Component_output_outputcolumn_src::Column_errorOrTruncationOperation" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::Column_errorOrTruncationOperation"
+"ssis.PackageTask_Dft_Component_output_outputcolumn_src::Column_errorRowDisposition" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::Column_errorRowDisposition"
+"ssis.PackageTask_Dft_Component_output_outputcolumn_src::Column_externalMetadataColumnId" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::Column_externalMetadataColumnId"
+"ssis.PackageTask_Dft_Component_output_outputcolumn_src::Column_length" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::Column_length"
+"ssis.PackageTask_Dft_Component_output_outputcolumn_src::Column_lineageId" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::Column_lineageId"
+"ssis.PackageTask_Dft_Component_output_outputcolumn_src::Column_name" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::Column_name"
+"ssis.PackageTask_Dft_Component_output_outputcolumn_src::Column_precision" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::Column_precision"
+"ssis.PackageTask_Dft_Component_output_outputcolumn_src::Column_refId" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::Column_refId"
+"ssis.PackageTask_Dft_Component_output_outputcolumn_src::Column_scale" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::Column_scale"
+"ssis.PackageTask_Dft_Component_output_outputcolumn_src::Column_truncationRowDisposition" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::Column_truncationRowDisposition"
+"ssis.PackageTask_Dft_Component_output_outputcolumn_src::Component_refId" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::Component_refId"
+"ssis.PackageTask_Dft_Component_output_outputcolumn_src::ControlFlowDetailsRowID" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::ControlFlowDetailsRowID"
+"ssis.PackageTask_Dft_Component_output_outputcolumn_src::output_isErrorOut" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::output_isErrorOut"
+"ssis.PackageTask_Dft_Component_output_outputcolumn_src::output_name" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::output_name"
+"ssis.PackageTask_Dft_Component_output_outputcolumn_src::output_refId" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::output_refId"
+"ssis.PackageTask_Dft_Component_output_outputcolumn_src::PackageName" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::PackageName"
+"ssis.PackageTask_Dft_Component_output_outputcolumn_src::TaskPath" <-- "ssis.PackageTask_Dft_Component_output_outputcolumn_tgt::TaskPath"footer The diagram is interactive and contains links.
+@enduml
+

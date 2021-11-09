@@ -1,0 +1,483 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:ssis_t.connection.adoc[]" as ssis_t.Connection << U >> {
+  ConnectionManager : (varchar(5000))
+  ConnectionManagerID : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.packagedetails.adoc[]" as ssis_t.PackageDetails << V >> {
+  PackageCreationDate : (datetime)
+  PackageCreatorComputerName : (nvarchar(500))
+  PackageCreatorName : (nvarchar(500))
+  PackageDescription : (nvarchar(max))
+  PackageDTSID : (uniqueidentifier)
+  PackageLastModifiedProductVersion : (nvarchar(500))
+  PackageLocaleID : (int)
+  PackageObjectName : (nvarchar(500))
+  - PackagePath : (varchar(8000))
+  PackageProtectionLevel : (nvarchar(500))
+  PackageVersionGUID : (uniqueidentifier)
+  - RowID : (int)
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.pkgstats.adoc[]" as ssis_t.pkgStats << U >> {
+  - **RowID** : (int)
+  PackageCreationDate : (datetime)
+  PackageCreatorComputerName : (nvarchar(500))
+  PackageCreatorName : (varchar(1000))
+  PackageDescription : (nvarchar(max))
+  PackageDTSID : (uniqueidentifier)
+  PackageLastModifiedProductVersion : (nvarchar(500))
+  PackageLocaleID : (int)
+  PackageObjectName : (nvarchar(500))
+  - PackagePath : (varchar(8000))
+  PackageProtectionLevel : (varchar(100))
+  PackageVersionGUID : (uniqueidentifier)
+  - PackageXML : (xml)
+  - ProjectPath : (varchar(8000))
+  # PackageName : (varchar(200))
+  ~ PackageProtectionLevelName : (varchar(28))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tblconnection.adoc[]" as ssis_t.TblConnection << U >> {
+  - Category : (varchar(10))
+  ConnectionManagerID : (uniqueidentifier)
+  ConnectionManagerName : (varchar(max))
+  ConnectionManagerType : (varchar(max))
+  ConnectionString : (varchar(max))
+  - DelayValidationPropertyValue : (varchar(2))
+  ExpressionValue : (varchar(max))
+  PackageCreatorName : (varchar(1000))
+  PackageName : (varchar(8000))
+  - PackagePath : (varchar(8000))
+  RetainSameConnectionProperty : (nvarchar(max))
+  - RowID : (int)
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tblconnection_src.adoc[]" as ssis_t.TblConnection_src << V >> {
+  - Category : (varchar(10))
+  ConnectionManagerID : (uniqueidentifier)
+  ConnectionManagerName : (varchar(max))
+  ConnectionManagerType : (varchar(max))
+  ConnectionString : (varchar(max))
+  - DelayValidationPropertyValue : (varchar(2))
+  ExpressionValue : (varchar(max))
+  PackageCreatorName : (varchar(1000))
+  PackageName : (varchar(8000))
+  - PackagePath : (varchar(8000))
+  RetainSameConnectionProperty : (nvarchar(max))
+  - RowID : (int)
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tblcontrolflow.adoc[]" as ssis_t.TblControlFlow << U >> {
+  - **ControlFlowDetailsRowID** : (int)
+  DelayValidationPropertyValue : (varchar(100))
+  DFTQuery : (xml)
+  ExecPkgTaskQry : (xml)
+  ExpressionValue : (varchar(5000))
+  IsDisabled : (varchar(10))
+  RowID : (int)
+  ScriptTaskQry : (xml)
+  SqlTaskQry : (xml)
+  TaskDescription : (varchar(max))
+  TaskName : (varchar(2000))
+  TaskPath : (varchar(8000))
+  TaskType : (varchar(5000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tblcontrolflow_src.adoc[]" as ssis_t.TblControlFlow_src << V >> {
+  DelayValidationPropertyValue : (nvarchar(max))
+  DFTQuery : (xml)
+  ExecPkgTaskQry : (xml)
+  ExpressionValue : (nvarchar(max))
+  - IsDisabled : (nvarchar(max))
+  - RowID : (int)
+  ScriptTaskQry : (xml)
+  SqlTaskQry : (xml)
+  TaskDescription : (nvarchar(max))
+  TaskName : (nvarchar(max))
+  TaskPath : (varchar(max))
+  TaskType : (nvarchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tblparameter.adoc[]" as ssis_t.TblParameter << U >> {
+  Category : (varchar(1000))
+  ExpressionValue : (varchar(5000))
+  PackageCreatorName : (varchar(1000))
+  PackageName : (varchar(max))
+  PackagePath : (varchar(5000))
+  ParameterDataType : (varchar(max))
+  ParameterHexValue : (varchar(1000))
+  ParameterName : (varchar(500))
+  - ParameterRowID : (int)
+  ParameterValue : (varchar(max))
+  RowID : (int)
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tblparameter_src.adoc[]" as ssis_t.TblParameter_src << V >> {
+  - Category : (varchar(8))
+  - ExpressionValue : (varchar(max))
+  PackageCreatorName : (varchar(1000))
+  PackageName : (varchar(8000))
+  - PackagePath : (varchar(8000))
+  ParameterDataType : (varchar(max))
+  ParameterHexValue : (varchar(max))
+  ParameterName : (varchar(max))
+  - ParameterValue : (varchar(max))
+  - RowID : (int)
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tblprecedenceconstraint.adoc[]" as ssis_t.TblPrecedenceConstraint << U >> {
+  CreationName : (nvarchar(max))
+  DTSID : (uniqueidentifier)
+  EvalOp : (int)
+  Expression : (nvarchar(max))
+  FlowType : (varchar(1000))
+  LogicalAnd : (bit)
+  ObjectName : (nvarchar(max))
+  PackagePath : (varchar(2000))
+  RowID : (int)
+  TaskFrom : (varchar(2000))
+  Taskto : (varchar(2000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tblprecedenceconstraint_src.adoc[]" as ssis_t.TblPrecedenceConstraint_src << V >> {
+  CreationName : (nvarchar(max))
+  DTSID : (uniqueidentifier)
+  EvalOp : (int)
+  Expression : (nvarchar(max))
+  - FlowType : (varchar(12))
+  LogicalAnd : (bit)
+  ObjectName : (nvarchar(max))
+  - PackagePath : (varchar(8000))
+  - RowID : (int)
+  TaskFrom : (nvarchar(max))
+  TaskTo : (nvarchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tbltask_dft_component.adoc[]" as ssis_t.TblTask_Dft_Component << U >> {
+  - **DftComponentId** : (int)
+  AccessMode : (varchar(max))
+  AlwaysUseDefaultCodePage : (varchar(max))
+  CommandTimeout : (int)
+  componentClassID : (varchar(max))
+  Connection_description : (varchar(max))
+  Connection_name : (varchar(max))
+  Connection_refId : (varchar(max))
+  connectionManagerID : (varchar(max))
+  connectionManagerRefId : (varchar(max))
+  ContactInfo : (varchar(max))
+  - ControlFlowDetailsRowID : (int)
+  DefaultCodePage : (int)
+  description : (varchar(max))
+  FastLoadKeepIdentity : (bit)
+  FastLoadKeepNulls : (bit)
+  FastLoadMaxInsertCommitSize : (int)
+  FastLoadOptions : (varchar(max))
+  inputsQry : (xml)
+  IsSortedProperty : (varchar(10))
+  name : (varchar(max))
+  OpenRowset : (varchar(max))
+  OpenRowsetVariable : (varchar(max))
+  outputsQry : (xml)
+  ParameterMapping : (varchar(max))
+  refId : (varchar(max))
+  RowID : (int)
+  SqlCommand : (varchar(max))
+  SqlCommandVariable : (varchar(max))
+  VariableName : (varchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tbltask_dft_component_src.adoc[]" as ssis_t.TblTask_Dft_Component_src << V >> {
+  AccessMode : (varchar(max))
+  AlwaysUseDefaultCodePage : (varchar(max))
+  CommandTimeout : (int)
+  componentClassID : (varchar(max))
+  Connection_description : (varchar(max))
+  Connection_name : (varchar(max))
+  Connection_refId : (varchar(max))
+  connectionManagerID : (varchar(max))
+  connectionManagerRefId : (varchar(max))
+  ContactInfo : (varchar(max))
+  - ControlFlowDetailsRowID : (int)
+  DefaultCodePage : (int)
+  description : (varchar(max))
+  FastLoadKeepIdentity : (bit)
+  FastLoadKeepNulls : (bit)
+  FastLoadMaxInsertCommitSize : (int)
+  FastLoadOptions : (varchar(max))
+  inputsQry : (xml)
+  IsSortedProperty : (varchar(10))
+  name : (varchar(max))
+  OpenRowset : (varchar(max))
+  OpenRowsetVariable : (varchar(max))
+  outputsQry : (xml)
+  ParameterMapping : (varchar(max))
+  refId : (varchar(max))
+  RowID : (int)
+  SqlCommand : (varchar(max))
+  SqlCommandVariable : (varchar(max))
+  VariableName : (varchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tbltask_dft_derived.adoc[]" as ssis_t.TblTask_Dft_Derived << U >> {
+  DataFlowDetailsRowID : (int)
+  DerivedValue : (varchar(8000))
+  DestinationColumn : (varchar(8000))
+  RowID : (int)
+  SourceColumn : (varchar(8000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tbltask_dft_details.adoc[]" as ssis_t.TblTask_Dft_Details << U >> {
+  ControlFlowDetailsRowID : (int)
+  - DataFlowDetailsRowID : (int)
+  DFTConnectionManager : (varchar(max))
+  DFTRowSet : (varchar(max))
+  DFTSQLCommand : (varchar(max))
+  DFTTaskName : (varchar(max))
+  DFTTasksPath : (varchar(max))
+  DFTTaskType : (varchar(max))
+  DFTTaskType1 : (varchar(max))
+  InputQry : (xml)
+  IsSortedProperty : (varchar(10))
+  MultihashcolumnSortPosition : (varchar(max))
+  OutputQry : (xml)
+  ParameterBindingParameterName : (varchar(2000))
+  RowID : (int)
+  Variable : (varchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tbltask_dft_srcdest.adoc[]" as ssis_t.TblTask_Dft_SrcDest << U >> {
+  DataFlowDetailsRowID : (int)
+  DataSource : (varchar(50))
+  DestinationColumn : (varchar(8000))
+  RowID : (int)
+  SortKeyPosition : (varchar(10))
+  SourceColumn : (varchar(8000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tbltask_executepackage.adoc[]" as ssis_t.TblTask_ExecutePackage << U >> {
+  - **ControlFlowDetailsRowID** : (int)
+  ExecutedPackageName : (varchar(1000))
+  ExecutePackageConnection : (varchar(1000))
+  ExecutePackageExpression : (varchar(1000))
+  RowID : (int)
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tbltask_lookup.adoc[]" as ssis_t.TblTask_Lookup << U >> {
+  DataFlowDetailsRowID : (int)
+  DestinationColumn : (varchar(8000))
+  LookupJoins : (varchar(8000))
+  RowID : (int)
+  SourceColumn : (varchar(8000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tbltask_script.adoc[]" as ssis_t.TblTask_Script << U >> {
+  - **ControlFlowDetailsRowID** : (int)
+  RowID : (int)
+  Script : (varchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tbltask_script_src.adoc[]" as ssis_t.TblTask_Script_src << V >> {
+  - ControlFlowDetailsRowID : (int)
+  RowID : (int)
+  Script : (varchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tbltask_sql.adoc[]" as ssis_t.TblTask_Sql << U >> {
+  - **ControlFlowDetailsRowID** : (int)
+  - RowID : (int)
+  SqlConnection : (uniqueidentifier)
+  SqlStatementSource : (nvarchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tbltask_sql_parameter.adoc[]" as ssis_t.TblTask_Sql_Parameter << U >> {
+  ControlFlowDetailsRowID : (int)
+  ParameterBindingParameterName : (varchar(1000))
+  ParameterBindingSequence : (varchar(1000))
+  ResultSetParameterName : (varchar(1000))
+  RowID : (int)
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tbltask_sql_src.adoc[]" as ssis_t.TblTask_Sql_src << V >> {
+  - ControlFlowDetailsRowID : (int)
+  RowID : (int)
+  SqlConnection : (uniqueidentifier)
+  SqlStatementSource : (nvarchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tblvariable.adoc[]" as ssis_t.TblVariable << U >> {
+  Category : (varchar(1000))
+  ExpressionValue : (varchar(5000))
+  PackageCreatorName : (varchar(1000))
+  PackageName : (varchar(max))
+  PackagePath : (varchar(5000))
+  RowID : (int)
+  VariableDataType : (varchar(max))
+  VariableHexValue : (varchar(1000))
+  VariableName : (varchar(500))
+  - VariableRowID : (int)
+  VariableValue : (varchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tblvariable_src.adoc[]" as ssis_t.TblVariable_src << V >> {
+  - Category : (varchar(8))
+  - ExpressionValue : (varchar(max))
+  PackageCreatorName : (varchar(1000))
+  PackageName : (varchar(8000))
+  - PackagePath : (varchar(8000))
+  - RowID : (int)
+  VariableDataType : (varchar(max))
+  VariableHexValue : (varchar(max))
+  VariableName : (varchar(max))
+  - VariableValue : (varchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tempprecedence1.adoc[]" as ssis_t.tempprecedence1 << U >> {
+  - isparentlevel : (int)
+  level : (bigint)
+  RowID : (int)
+  TaskFrom : (varchar(2000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tempprecedence2.adoc[]" as ssis_t.tempprecedence2 << U >> {
+  LEVEL : (int)
+  parentlevel : (int)
+  ROWID : (int)
+  task : (varchar(2000))
+  TaskFrom : (varchar(2000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tempprecedence3.adoc[]" as ssis_t.tempprecedence3 << U >> {
+  LEVEL : (int)
+  parentlevel : (int)
+  ROWID : (int)
+  task : (varchar(2000))
+  trank : (bigint)
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tempprecedence4.adoc[]" as ssis_t.tempprecedence4 << U >> {
+  level : (int)
+  ROWID : (int)
+  task : (varchar(2000))
+  tlevel : (int)
+  trank : (bigint)
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tempprecedence5.adoc[]" as ssis_t.tempprecedence5 << U >> {
+  ROWID : (int)
+  sequenceno : (nvarchar(max))
+  task : (varchar(2000))
+  trank : (bigint)
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tempprecedence5_hierarchy.adoc[]" as ssis_t.tempprecedence5_Hierarchy << U >> {
+  rid : (hierarchyid)
+  ROWID : (int)
+  sequenceno : (nvarchar(max))
+  task : (varchar(2000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tempprecedence6.adoc[]" as ssis_t.tempprecedence6 << U >> {
+  ROWID : (int)
+  sequenceno : (bigint)
+  task : (varchar(2000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.usp_getpackagedetails.adoc[]" as ssis_t.usp_GetPackageDetails << P >> {
+  --
+}
+
+ssis_t.Connection <.. ssis_t.usp_GetPackageDetails
+ssis_t.PackageDetails <.. ssis_t.usp_GetPackageDetails
+ssis_t.pkgStats <.. ssis_t.usp_GetPackageDetails
+ssis_t.TblConnection <.. ssis_t.usp_GetPackageDetails
+ssis_t.TblConnection_src <.. ssis_t.usp_GetPackageDetails
+ssis_t.TblControlFlow <.. ssis_t.usp_GetPackageDetails
+ssis_t.TblControlFlow_src <.. ssis_t.usp_GetPackageDetails
+ssis_t.TblParameter <.. ssis_t.usp_GetPackageDetails
+ssis_t.TblParameter_src <.. ssis_t.usp_GetPackageDetails
+ssis_t.TblPrecedenceConstraint <.. ssis_t.usp_GetPackageDetails
+ssis_t.TblPrecedenceConstraint_src <.. ssis_t.usp_GetPackageDetails
+ssis_t.TblTask_Dft_Component <.. ssis_t.usp_GetPackageDetails
+ssis_t.TblTask_Dft_Component_src <.. ssis_t.usp_GetPackageDetails
+ssis_t.TblTask_Dft_Derived <.. ssis_t.usp_GetPackageDetails
+ssis_t.TblTask_Dft_Details <.. ssis_t.usp_GetPackageDetails
+ssis_t.TblTask_Dft_SrcDest <.. ssis_t.usp_GetPackageDetails
+ssis_t.TblTask_ExecutePackage <.. ssis_t.usp_GetPackageDetails
+ssis_t.TblTask_Lookup <.. ssis_t.usp_GetPackageDetails
+ssis_t.TblTask_Script <.. ssis_t.usp_GetPackageDetails
+ssis_t.TblTask_Script_src <.. ssis_t.usp_GetPackageDetails
+ssis_t.TblTask_Sql <.. ssis_t.usp_GetPackageDetails
+ssis_t.TblTask_Sql_Parameter <.. ssis_t.usp_GetPackageDetails
+ssis_t.TblTask_Sql_src <.. ssis_t.usp_GetPackageDetails
+ssis_t.TblVariable <.. ssis_t.usp_GetPackageDetails
+ssis_t.TblVariable_src <.. ssis_t.usp_GetPackageDetails
+ssis_t.tempprecedence1 <.. ssis_t.usp_GetPackageDetails
+ssis_t.tempprecedence2 <.. ssis_t.usp_GetPackageDetails
+ssis_t.tempprecedence3 <.. ssis_t.usp_GetPackageDetails
+ssis_t.tempprecedence4 <.. ssis_t.usp_GetPackageDetails
+ssis_t.tempprecedence5 <.. ssis_t.usp_GetPackageDetails
+ssis_t.tempprecedence5_Hierarchy <.. ssis_t.usp_GetPackageDetails
+ssis_t.tempprecedence6 <.. ssis_t.usp_GetPackageDetails
+footer The diagram is interactive and contains links.
+@enduml
+

@@ -52,7 +52,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-10-04 23:48:20
+2021-11-07 17:28:38
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -60,12 +60,6 @@ stored procedure
 // tag::AntoraColumnDetails[]
 
 // end::AntoraColumnDetails[]
-
-== AntoraMeasureDetails
-
-// tag::AntoraMeasureDetails[]
-
-// end::AntoraMeasureDetails[]
 
 == AntoraPkColumnTableRows
 
@@ -85,6 +79,12 @@ stored procedure
 
 // end::AntoraIndexList[]
 
+== AntoraMeasureDetails
+
+// tag::AntoraMeasureDetails[]
+
+// end::AntoraMeasureDetails[]
+
 == AntoraParameterList
 
 // tag::AntoraParameterList[]
@@ -93,6 +93,18 @@ stored procedure
 * @sub_execution_id (int)
 * @parent_execution_log_id (bigint)
 // end::AntoraParameterList[]
+
+== AntoraXrefCulturesList
+
+// tag::AntoraXrefCulturesList[]
+* xref:dhw:sqldb:repo.usp_main.adoc[] - 
+// end::AntoraXrefCulturesList[]
+
+== cultures_count
+
+// tag::cultures_count[]
+1
+// end::cultures_count[]
 
 == Other tags
 
@@ -124,7 +136,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 (select config.fs_get_parameter_value ( 'sync enable', 'dwh' )) = 1
 ----
@@ -143,7 +155,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 [repo].[usp_sync_guid]
 ----
@@ -162,7 +174,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 (select config.fs_get_parameter_value ( 'sync enable', 'ssas' )) = 1
 ----
@@ -181,7 +193,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 [repo].[usp_sync_guid_ssas]
 ----
@@ -202,7 +214,7 @@ AND
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 (select config.fs_get_parameter_value ( 'sync enable', 'ssas' )) = 1
 AND
@@ -225,7 +237,7 @@ AND
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 Delete From
 repo.RepoObject
@@ -250,7 +262,7 @@ it is required in [docs].[RepoObject_ColumnList]
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 [ssas].[usp_PERSIST_RepoObjectColumn_translation_T]
 ----
@@ -269,7 +281,7 @@ it is required in [docs].[RepoObject_ColumnList]
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 [reference].[usp_additional_Reference]
 ----
@@ -288,7 +300,7 @@ it is required in [docs].[RepoObject_ColumnList]
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 [reference].[usp_PERSIST_RepoObject_reference_T]
 ----
@@ -308,7 +320,7 @@ it is required in [docs].[RepoObject_ColumnList]
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 Update
     T1
@@ -339,7 +351,7 @@ From
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 Update
     T1
@@ -371,7 +383,7 @@ From
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 Update
     T1
@@ -401,7 +413,7 @@ From
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 [reference].[usp_RepoObject_ReferenceTree_insert]
 ----
@@ -420,7 +432,7 @@ From
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 [reference].[usp_PERSIST_RepoObjectColumn_reference_T]
 ----
@@ -439,7 +451,7 @@ From
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 [repo].[usp_PERSIST_RepoObject_sat2_T]
 ----
@@ -458,7 +470,7 @@ From
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 (select [config].[fs_get_parameter_value]('main enable usp_RepoObjectSource_FirstResultSet', DEFAULT)) = 1
 ----
@@ -478,7 +490,7 @@ From
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 [reference].[usp_RepoObjectSource_FirstResultSet]
 --This can take a very long time
@@ -498,7 +510,7 @@ From
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 (select [config].[fs_get_parameter_value]('main enable usp_RepoObject_update_SysObjectQueryPlan', DEFAULT)) = 1
 ----
@@ -519,7 +531,7 @@ This can take a very long time
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 [reference].[usp_RepoObject_update_SysObjectQueryPlan]
 ----
@@ -538,7 +550,7 @@ This can take a very long time
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 (select [config].[fs_get_parameter_value]('main enable usp_RepoObjectSource_QueryPlan', DEFAULT)) = 1
 ----
@@ -560,7 +572,7 @@ This can take a very long time
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 [reference].[usp_RepoObjectSource_QueryPlan]
 ----
@@ -579,7 +591,7 @@ This can take a very long time
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 [reference].[usp_update_Referencing_Count]
 ----
@@ -602,7 +614,7 @@ should or could be executed several times until no new indexes are inherited
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 [repo].[usp_index_inheritance]
 ----
@@ -621,7 +633,7 @@ should or could be executed several times until no new indexes are inherited
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 [repo].[usp_Index_ForeignKey]
 ----
@@ -642,7 +654,7 @@ This must happen later than the index logic, because the PK can change there. An
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 [repo].[usp_RepoObjectColumn_update_RepoObjectColumn_column_id]
 ----
@@ -663,7 +675,7 @@ RepoObjectColumn_column_id is required and should be updated before
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 [uspgenerator].[usp_GeneratorUsp_insert_update_persistence]
 ----
@@ -684,7 +696,7 @@ RepoObjectColumn_column_id is required and should be updated before
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 Update
     repo.RepoObject
@@ -718,7 +730,7 @@ Where
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 [property].[usp_RepoObjectProperty_collect]
 ----
@@ -737,7 +749,7 @@ Where
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 [reference].[usp_PERSIST_additional_Reference_from_properties_tgt]
 ----
@@ -756,7 +768,7 @@ Where
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 [reference].[usp_PERSIST_additional_Reference_wo_columns_from_properties_tgt]
 ----
@@ -775,7 +787,7 @@ Where
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 [reference].[usp_PERSIST_additional_Reference_from_ssas_tgt]
 ----
@@ -794,7 +806,7 @@ Where
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 [property].[usp_external_property_import]
 ----
@@ -813,7 +825,7 @@ Where
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 [property].[usp_RepoObject_Inheritance]
 ----
@@ -832,7 +844,7 @@ Where
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 [property].[usp_RepoObjectColumn_Inheritance]
 ----
@@ -913,7 +925,7 @@ use links in xref:sqldb:repo.usp_main.adoc#_referenced_objects[Referenced object
 // end::description[]
 
 
-=== exampleUsage
+=== ExampleUsage
 
 // tag::exampleusage[]
 EXEC [repo].[usp_main]
@@ -1224,7 +1236,7 @@ source: property.RepoObjectProperty WHERE property_int = 1
 // tag::sql_modules_definition[]
 [%collapsible]
 =======
-[source,sql]
+[source,sql,numbered]
 ----
 /*
 code of this procedure is managed in the dhw repository. Do not modify manually.

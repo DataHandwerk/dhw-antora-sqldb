@@ -1,0 +1,142 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:docs.ssis_task.adoc[]" as docs.ssis_Task << V >> {
+  AdocFilename : (nvarchar(4000))
+  - AntoraModule : (varchar(50))
+  - PackageName : (varchar(200))
+  - TaskContent : (nvarchar(max))
+  - TaskPath : (varchar(8000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.ssis_tasklist.adoc[]" as docs.ssis_TaskList << V >> {
+  - AntoraModule : (varchar(50))
+  - PackageName : (varchar(200))
+  TaskList : (nvarchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask.adoc[]" as ssis.PackageTask << U >> {
+  - AntoraModule : (varchar(50))
+  - ControlFlowDetailsRowID : (int)
+  DelayValidationPropertyValue : (varchar(100))
+  ExecutedPackageName : (varchar(1000))
+  ExecutePackageConnection : (varchar(1000))
+  ExecutePackageExpression : (varchar(1000))
+  ExpressionValue : (varchar(5000))
+  IsDisabled : (varchar(10))
+  - PackageName : (varchar(200))
+  Script : (varchar(max))
+  SqlConnection : (uniqueidentifier)
+  SqlStatementSource : (nvarchar(max))
+  TaskDescription : (varchar(max))
+  - TaskName : (varchar(2000))
+  - TaskPath : (varchar(8000))
+  TaskType : (varchar(5000))
+  # PackageBasename : (varchar(8000))
+  # TaskPathLevel : (int)
+  # TaskPathParent : (varchar(8000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_levellaglead.adoc[]" as ssis.PackageTask_LevelLagLead << V >> {
+  - AntoraModule : (varchar(50))
+  PackageBasename : (varchar(8000))
+  - PackageName : (varchar(200))
+  - TaskName : (varchar(2000))
+  - TaskPath : (varchar(8000))
+  TaskPathLevel : (int)
+  TaskPathLevelLag : (int)
+  TaskPathLevelLead : (int)
+  TaskPathParent : (varchar(8000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_tgt.adoc[]" as ssis.PackageTask_tgt << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **TaskPath** : (varchar(8000))
+  - ControlFlowDetailsRowID : (int)
+  DelayValidationPropertyValue : (varchar(100))
+  DFTQuery : (xml)
+  ExecPkgTaskQry : (xml)
+  ExecutedPackageName : (varchar(1000))
+  ExecutePackageConnection : (varchar(1000))
+  ExecutePackageExpression : (varchar(1000))
+  ExpressionValue : (varchar(5000))
+  IsDisabled : (varchar(10))
+  Script : (varchar(max))
+  ScriptTaskQry : (xml)
+  SqlConnection : (uniqueidentifier)
+  SqlStatementSource : (nvarchar(max))
+  SqlTaskQry : (xml)
+  TaskDescription : (varchar(max))
+  TaskName : (varchar(2000))
+  TaskType : (varchar(5000))
+  --
+}
+
+ssis.PackageTask <.. ssis.PackageTask_tgt
+ssis.PackageTask <.. docs.ssis_TaskList
+ssis.PackageTask <.. ssis.PackageTask_LevelLagLead
+ssis.PackageTask <.. docs.ssis_Task
+ssis.PackageTask_tgt <.. ssis.PackageTask
+"ssis.PackageTask::AntoraModule" <-- "ssis.PackageTask_tgt::AntoraModule"
+"ssis.PackageTask::AntoraModule" <-- "docs.ssis_TaskList::AntoraModule"
+"ssis.PackageTask::AntoraModule" <-- "ssis.PackageTask_LevelLagLead::AntoraModule"
+"ssis.PackageTask::AntoraModule" <-- "docs.ssis_Task::AntoraModule"
+"ssis.PackageTask::ControlFlowDetailsRowID" <-- "ssis.PackageTask_tgt::ControlFlowDetailsRowID"
+"ssis.PackageTask::DelayValidationPropertyValue" <-- "ssis.PackageTask_tgt::DelayValidationPropertyValue"
+"ssis.PackageTask::ExecutedPackageName" <-- "ssis.PackageTask_tgt::ExecutedPackageName"
+"ssis.PackageTask::ExecutePackageConnection" <-- "ssis.PackageTask_tgt::ExecutePackageConnection"
+"ssis.PackageTask::ExecutePackageExpression" <-- "ssis.PackageTask_tgt::ExecutePackageExpression"
+"ssis.PackageTask::ExpressionValue" <-- "ssis.PackageTask_tgt::ExpressionValue"
+"ssis.PackageTask::IsDisabled" <-- "ssis.PackageTask_tgt::IsDisabled"
+"ssis.PackageTask::PackageBasename" <-- "ssis.PackageTask_LevelLagLead::PackageBasename"
+"ssis.PackageTask::PackageName" <-- "ssis.PackageTask::PackageBasename"
+"ssis.PackageTask::PackageName" <-- "docs.ssis_Task::PackageName"
+"ssis.PackageTask::PackageName" <-- "ssis.PackageTask_LevelLagLead::PackageName"
+"ssis.PackageTask::PackageName" <-- "docs.ssis_TaskList::PackageName"
+"ssis.PackageTask::PackageName" <-- "ssis.PackageTask_tgt::PackageName"
+"ssis.PackageTask::Script" <-- "ssis.PackageTask_tgt::Script"
+"ssis.PackageTask::SqlConnection" <-- "ssis.PackageTask_tgt::SqlConnection"
+"ssis.PackageTask::SqlStatementSource" <-- "ssis.PackageTask_tgt::SqlStatementSource"
+"ssis.PackageTask::TaskDescription" <-- "ssis.PackageTask_tgt::TaskDescription"
+"ssis.PackageTask::TaskName" <-- "ssis.PackageTask_tgt::TaskName"
+"ssis.PackageTask::TaskName" <-- "ssis.PackageTask_LevelLagLead::TaskName"
+"ssis.PackageTask::TaskPath" <-- "ssis.PackageTask_LevelLagLead::TaskPath"
+"ssis.PackageTask::TaskPath" <-- "ssis.PackageTask::TaskPathLevel"
+"ssis.PackageTask::TaskPath" <-- "ssis.PackageTask::TaskPathParent"
+"ssis.PackageTask::TaskPath" <-- "docs.ssis_Task::TaskPath"
+"ssis.PackageTask::TaskPath" <-- "ssis.PackageTask_tgt::TaskPath"
+"ssis.PackageTask::TaskPathLevel" <-- "ssis.PackageTask_LevelLagLead::TaskPathLevel"
+"ssis.PackageTask::TaskPathParent" <-- "ssis.PackageTask_LevelLagLead::TaskPathParent"
+"ssis.PackageTask::TaskType" <-- "ssis.PackageTask_tgt::TaskType"footer The diagram is interactive and contains links.
+@enduml
+

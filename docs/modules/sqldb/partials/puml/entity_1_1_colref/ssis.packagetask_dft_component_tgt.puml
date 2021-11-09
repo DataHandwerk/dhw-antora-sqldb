@@ -1,0 +1,204 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:ssis.antoramodule_tgt_filter.adoc[]" as ssis.AntoraModule_tgt_filter << V >> {
+  - AntoraModule : (varchar(50))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_dft_component.adoc[]" as ssis.PackageTask_Dft_Component << U >> {
+  - AntoraModule : (varchar(50))
+  Component_AccessMode : (varchar(max))
+  Component_AlwaysUseDefaultCodePage : (varchar(max))
+  Component_CommandTimeout : (int)
+  Component_componentClassID : (varchar(max))
+  Component_Connection_description : (varchar(max))
+  Component_Connection_name : (varchar(max))
+  Component_Connection_refId : (varchar(max))
+  Component_connectionManagerID : (varchar(max))
+  Component_connectionManagerRefId : (varchar(max))
+  Component_ContactInfo : (varchar(max))
+  Component_DefaultCodePage : (int)
+  Component_description : (varchar(max))
+  Component_FastLoadKeepIdentity : (bit)
+  Component_FastLoadKeepNulls : (bit)
+  Component_FastLoadMaxInsertCommitSize : (int)
+  Component_FastLoadOptions : (varchar(max))
+  Component_IsSortedProperty : (varchar(10))
+  - Component_name : (varchar(max))
+  Component_OpenRowset : (varchar(max))
+  Component_OpenRowsetVariable : (varchar(max))
+  Component_ParameterMapping : (varchar(max))
+  - Component_refId : (varchar(max))
+  Component_SqlCommand : (varchar(max))
+  Component_SqlCommandVariable : (varchar(max))
+  Component_VariableName : (varchar(max))
+  - ControlFlowDetailsRowID : (int)
+  - PackageName : (varchar(200))
+  - TaskPath : (varchar(8000))
+  ~ Component_ConnectionManagerName : (varchar(max))
+  # PackageBasename : (varchar(8000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_dft_component_src.adoc[]" as ssis.PackageTask_Dft_Component_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **Component_refId** : (varchar(max))
+  Component_AccessMode : (varchar(max))
+  Component_AlwaysUseDefaultCodePage : (varchar(max))
+  Component_CommandTimeout : (int)
+  Component_componentClassID : (varchar(max))
+  Component_Connection_description : (varchar(max))
+  Component_Connection_name : (varchar(max))
+  Component_Connection_refId : (varchar(max))
+  Component_connectionManagerID : (varchar(max))
+  Component_connectionManagerRefId : (varchar(max))
+  Component_ContactInfo : (varchar(max))
+  Component_DefaultCodePage : (int)
+  Component_description : (varchar(max))
+  Component_FastLoadKeepIdentity : (bit)
+  Component_FastLoadKeepNulls : (bit)
+  Component_FastLoadMaxInsertCommitSize : (int)
+  Component_FastLoadOptions : (varchar(max))
+  Component_IsSortedProperty : (varchar(10))
+  Component_name : (varchar(max))
+  Component_OpenRowset : (varchar(max))
+  Component_OpenRowsetVariable : (varchar(max))
+  Component_ParameterMapping : (varchar(max))
+  Component_SqlCommand : (varchar(max))
+  Component_SqlCommandVariable : (varchar(max))
+  Component_VariableName : (varchar(max))
+  - ControlFlowDetailsRowID : (int)
+  TaskPath : (varchar(8000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_dft_component_tgt.adoc[]" as ssis.PackageTask_Dft_Component_tgt << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **Component_refId** : (varchar(max))
+  Component_AccessMode : (varchar(max))
+  Component_AlwaysUseDefaultCodePage : (varchar(max))
+  Component_CommandTimeout : (int)
+  Component_componentClassID : (varchar(max))
+  Component_Connection_description : (varchar(max))
+  Component_Connection_name : (varchar(max))
+  Component_Connection_refId : (varchar(max))
+  Component_connectionManagerID : (varchar(max))
+  Component_connectionManagerRefId : (varchar(max))
+  Component_ContactInfo : (varchar(max))
+  Component_DefaultCodePage : (int)
+  Component_description : (varchar(max))
+  Component_FastLoadKeepIdentity : (bit)
+  Component_FastLoadKeepNulls : (bit)
+  Component_FastLoadMaxInsertCommitSize : (int)
+  Component_FastLoadOptions : (varchar(max))
+  Component_IsSortedProperty : (varchar(10))
+  Component_name : (varchar(max))
+  Component_OpenRowset : (varchar(max))
+  Component_OpenRowsetVariable : (varchar(max))
+  Component_ParameterMapping : (varchar(max))
+  Component_SqlCommand : (varchar(max))
+  Component_SqlCommandVariable : (varchar(max))
+  Component_VariableName : (varchar(max))
+  - ControlFlowDetailsRowID : (int)
+  TaskPath : (varchar(8000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.usp_persist_packagetask_dft_component_tgt.adoc[]" as ssis.usp_PERSIST_PackageTask_Dft_Component_tgt << P >> {
+  --
+}
+
+ssis.AntoraModule_tgt_filter <.. ssis.PackageTask_Dft_Component_tgt
+ssis.PackageTask_Dft_Component <.. ssis.PackageTask_Dft_Component_tgt
+ssis.PackageTask_Dft_Component_src <.. ssis.PackageTask_Dft_Component_tgt
+ssis.PackageTask_Dft_Component_tgt <.. ssis.AntoraModule_tgt_filter
+ssis.PackageTask_Dft_Component_tgt <.. ssis.PackageTask_Dft_Component
+ssis.PackageTask_Dft_Component_tgt <.. ssis.usp_PERSIST_PackageTask_Dft_Component_tgt
+"ssis.PackageTask_Dft_Component::AntoraModule" <-- "ssis.PackageTask_Dft_Component_tgt::AntoraModule"
+"ssis.PackageTask_Dft_Component::Component_AccessMode" <-- "ssis.PackageTask_Dft_Component_tgt::Component_AccessMode"
+"ssis.PackageTask_Dft_Component::Component_AlwaysUseDefaultCodePage" <-- "ssis.PackageTask_Dft_Component_tgt::Component_AlwaysUseDefaultCodePage"
+"ssis.PackageTask_Dft_Component::Component_CommandTimeout" <-- "ssis.PackageTask_Dft_Component_tgt::Component_CommandTimeout"
+"ssis.PackageTask_Dft_Component::Component_componentClassID" <-- "ssis.PackageTask_Dft_Component_tgt::Component_componentClassID"
+"ssis.PackageTask_Dft_Component::Component_Connection_description" <-- "ssis.PackageTask_Dft_Component_tgt::Component_Connection_description"
+"ssis.PackageTask_Dft_Component::Component_Connection_name" <-- "ssis.PackageTask_Dft_Component_tgt::Component_Connection_name"
+"ssis.PackageTask_Dft_Component::Component_Connection_refId" <-- "ssis.PackageTask_Dft_Component_tgt::Component_Connection_refId"
+"ssis.PackageTask_Dft_Component::Component_connectionManagerID" <-- "ssis.PackageTask_Dft_Component_tgt::Component_connectionManagerID"
+"ssis.PackageTask_Dft_Component::Component_connectionManagerRefId" <-- "ssis.PackageTask_Dft_Component_tgt::Component_connectionManagerRefId"
+"ssis.PackageTask_Dft_Component::Component_ContactInfo" <-- "ssis.PackageTask_Dft_Component_tgt::Component_ContactInfo"
+"ssis.PackageTask_Dft_Component::Component_DefaultCodePage" <-- "ssis.PackageTask_Dft_Component_tgt::Component_DefaultCodePage"
+"ssis.PackageTask_Dft_Component::Component_description" <-- "ssis.PackageTask_Dft_Component_tgt::Component_description"
+"ssis.PackageTask_Dft_Component::Component_FastLoadKeepIdentity" <-- "ssis.PackageTask_Dft_Component_tgt::Component_FastLoadKeepIdentity"
+"ssis.PackageTask_Dft_Component::Component_FastLoadKeepNulls" <-- "ssis.PackageTask_Dft_Component_tgt::Component_FastLoadKeepNulls"
+"ssis.PackageTask_Dft_Component::Component_FastLoadMaxInsertCommitSize" <-- "ssis.PackageTask_Dft_Component_tgt::Component_FastLoadMaxInsertCommitSize"
+"ssis.PackageTask_Dft_Component::Component_FastLoadOptions" <-- "ssis.PackageTask_Dft_Component_tgt::Component_FastLoadOptions"
+"ssis.PackageTask_Dft_Component::Component_IsSortedProperty" <-- "ssis.PackageTask_Dft_Component_tgt::Component_IsSortedProperty"
+"ssis.PackageTask_Dft_Component::Component_name" <-- "ssis.PackageTask_Dft_Component_tgt::Component_name"
+"ssis.PackageTask_Dft_Component::Component_OpenRowset" <-- "ssis.PackageTask_Dft_Component_tgt::Component_OpenRowset"
+"ssis.PackageTask_Dft_Component::Component_OpenRowsetVariable" <-- "ssis.PackageTask_Dft_Component_tgt::Component_OpenRowsetVariable"
+"ssis.PackageTask_Dft_Component::Component_ParameterMapping" <-- "ssis.PackageTask_Dft_Component_tgt::Component_ParameterMapping"
+"ssis.PackageTask_Dft_Component::Component_refId" <-- "ssis.PackageTask_Dft_Component_tgt::Component_refId"
+"ssis.PackageTask_Dft_Component::Component_SqlCommand" <-- "ssis.PackageTask_Dft_Component_tgt::Component_SqlCommand"
+"ssis.PackageTask_Dft_Component::Component_SqlCommandVariable" <-- "ssis.PackageTask_Dft_Component_tgt::Component_SqlCommandVariable"
+"ssis.PackageTask_Dft_Component::Component_VariableName" <-- "ssis.PackageTask_Dft_Component_tgt::Component_VariableName"
+"ssis.PackageTask_Dft_Component::ControlFlowDetailsRowID" <-- "ssis.PackageTask_Dft_Component_tgt::ControlFlowDetailsRowID"
+"ssis.PackageTask_Dft_Component::PackageName" <-- "ssis.PackageTask_Dft_Component_tgt::PackageName"
+"ssis.PackageTask_Dft_Component::TaskPath" <-- "ssis.PackageTask_Dft_Component_tgt::TaskPath"
+"ssis.PackageTask_Dft_Component_src::AntoraModule" <-- "ssis.PackageTask_Dft_Component_tgt::AntoraModule"
+"ssis.PackageTask_Dft_Component_src::Component_AccessMode" <-- "ssis.PackageTask_Dft_Component_tgt::Component_AccessMode"
+"ssis.PackageTask_Dft_Component_src::Component_AlwaysUseDefaultCodePage" <-- "ssis.PackageTask_Dft_Component_tgt::Component_AlwaysUseDefaultCodePage"
+"ssis.PackageTask_Dft_Component_src::Component_CommandTimeout" <-- "ssis.PackageTask_Dft_Component_tgt::Component_CommandTimeout"
+"ssis.PackageTask_Dft_Component_src::Component_componentClassID" <-- "ssis.PackageTask_Dft_Component_tgt::Component_componentClassID"
+"ssis.PackageTask_Dft_Component_src::Component_Connection_description" <-- "ssis.PackageTask_Dft_Component_tgt::Component_Connection_description"
+"ssis.PackageTask_Dft_Component_src::Component_Connection_name" <-- "ssis.PackageTask_Dft_Component_tgt::Component_Connection_name"
+"ssis.PackageTask_Dft_Component_src::Component_Connection_refId" <-- "ssis.PackageTask_Dft_Component_tgt::Component_Connection_refId"
+"ssis.PackageTask_Dft_Component_src::Component_connectionManagerID" <-- "ssis.PackageTask_Dft_Component_tgt::Component_connectionManagerID"
+"ssis.PackageTask_Dft_Component_src::Component_connectionManagerRefId" <-- "ssis.PackageTask_Dft_Component_tgt::Component_connectionManagerRefId"
+"ssis.PackageTask_Dft_Component_src::Component_ContactInfo" <-- "ssis.PackageTask_Dft_Component_tgt::Component_ContactInfo"
+"ssis.PackageTask_Dft_Component_src::Component_DefaultCodePage" <-- "ssis.PackageTask_Dft_Component_tgt::Component_DefaultCodePage"
+"ssis.PackageTask_Dft_Component_src::Component_description" <-- "ssis.PackageTask_Dft_Component_tgt::Component_description"
+"ssis.PackageTask_Dft_Component_src::Component_FastLoadKeepIdentity" <-- "ssis.PackageTask_Dft_Component_tgt::Component_FastLoadKeepIdentity"
+"ssis.PackageTask_Dft_Component_src::Component_FastLoadKeepNulls" <-- "ssis.PackageTask_Dft_Component_tgt::Component_FastLoadKeepNulls"
+"ssis.PackageTask_Dft_Component_src::Component_FastLoadMaxInsertCommitSize" <-- "ssis.PackageTask_Dft_Component_tgt::Component_FastLoadMaxInsertCommitSize"
+"ssis.PackageTask_Dft_Component_src::Component_FastLoadOptions" <-- "ssis.PackageTask_Dft_Component_tgt::Component_FastLoadOptions"
+"ssis.PackageTask_Dft_Component_src::Component_IsSortedProperty" <-- "ssis.PackageTask_Dft_Component_tgt::Component_IsSortedProperty"
+"ssis.PackageTask_Dft_Component_src::Component_name" <-- "ssis.PackageTask_Dft_Component_tgt::Component_name"
+"ssis.PackageTask_Dft_Component_src::Component_OpenRowset" <-- "ssis.PackageTask_Dft_Component_tgt::Component_OpenRowset"
+"ssis.PackageTask_Dft_Component_src::Component_OpenRowsetVariable" <-- "ssis.PackageTask_Dft_Component_tgt::Component_OpenRowsetVariable"
+"ssis.PackageTask_Dft_Component_src::Component_ParameterMapping" <-- "ssis.PackageTask_Dft_Component_tgt::Component_ParameterMapping"
+"ssis.PackageTask_Dft_Component_src::Component_refId" <-- "ssis.PackageTask_Dft_Component_tgt::Component_refId"
+"ssis.PackageTask_Dft_Component_src::Component_SqlCommand" <-- "ssis.PackageTask_Dft_Component_tgt::Component_SqlCommand"
+"ssis.PackageTask_Dft_Component_src::Component_SqlCommandVariable" <-- "ssis.PackageTask_Dft_Component_tgt::Component_SqlCommandVariable"
+"ssis.PackageTask_Dft_Component_src::Component_VariableName" <-- "ssis.PackageTask_Dft_Component_tgt::Component_VariableName"
+"ssis.PackageTask_Dft_Component_src::ControlFlowDetailsRowID" <-- "ssis.PackageTask_Dft_Component_tgt::ControlFlowDetailsRowID"
+"ssis.PackageTask_Dft_Component_src::PackageName" <-- "ssis.PackageTask_Dft_Component_tgt::PackageName"
+"ssis.PackageTask_Dft_Component_src::TaskPath" <-- "ssis.PackageTask_Dft_Component_tgt::TaskPath"footer The diagram is interactive and contains links.
+@enduml
+

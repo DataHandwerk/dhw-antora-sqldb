@@ -1,0 +1,54 @@
+@startuml
+'Left to right direction
+top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_dft_srcdest_src.adoc[]" as ssis.PackageTask_Dft_SrcDest_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **DFTTasksPath** : (varchar(max))
+  **SourceColumn** : (varchar(8000))
+  **DestinationColumn** : (varchar(8000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tbltask_dft_srcdest.adoc[]" as ssis_t.TblTask_Dft_SrcDest << U >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.usp_getpackagedetails.adoc[]" as ssis_t.usp_GetPackageDetails << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.usp_packageanalysis.adoc[]" as ssis_t.usp_PackageAnalysis << P >> {
+  --
+}
+
+ssis_t.TblTask_Dft_SrcDest <.. ssis_t.usp_GetPackageDetails
+ssis_t.TblTask_Dft_SrcDest <.. ssis.PackageTask_Dft_SrcDest_src
+ssis_t.TblTask_Dft_SrcDest <.. ssis_t.usp_PackageAnalysisfooter The diagram is interactive and contains links.
+@enduml
+

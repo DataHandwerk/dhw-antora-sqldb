@@ -1,0 +1,94 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:docs.repoobject_columnlist.adoc[]" as docs.RepoObject_ColumnList << V >> {
+  AntoraColumnDetails : (nvarchar(max))
+  AntoraNonPkColumnTableRows : (nvarchar(max))
+  AntoraPkColumnTableRows : (nvarchar(max))
+  - cultures_name : (nvarchar(10))
+  is_external : (tinyint)
+  PlantumlAllEntityColumns : (nvarchar(max))
+  PlantumlIndexColumns : (nvarchar(max))
+  PlantumlNonPkEntityColumns : (nvarchar(max))
+  PlantumlNonPkHiddenEntityColumns : (nvarchar(max))
+  PlantumlNonPkIndexColumns : (nvarchar(max))
+  PlantumlPkEntityColumns : (nvarchar(max))
+  - RepoObject_guid : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.repoobjectcolumn_translation_displayfolder_union.adoc[]" as ssas.RepoObjectColumn_translation_displayfolder_union << V >> {
+  - Column_name : (nvarchar(128))
+  - cultures_name : (nvarchar(10))
+  cultures_translations_model_name : (nvarchar(500))
+  cultures_translations_model_tables_columns_name : (nvarchar(128))
+  cultures_translations_model_tables_name : (nvarchar(128))
+  databasename : (nvarchar(128))
+  displayfolder_DisplayName : (nvarchar(512))
+  displayfolder_translation : (nvarchar(512))
+  - is_displayfolder : (int)
+  pk_index_guid : (uniqueidentifier)
+  - RepoObject_name : (nvarchar(128))
+  - RepoObject_schema_name : (nvarchar(128))
+  RepoObjectColumn_DisplayName : (nvarchar(128))
+  - RepoObjectColumn_guid : (uniqueidentifier)
+  RepoObjectColumn_translation : (nvarchar(128))
+  tabcol_IsHidden : (tinyint)
+  tables_columns_displayFolder : (nvarchar(500))
+  tables_columns_name : (nvarchar(128))
+  tables_name : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.repoobjectcolumn_translation_t.adoc[]" as ssas.RepoObjectColumn_translation_T << U >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  - **cultures_name** : (nvarchar(10))
+  - Column_name : (nvarchar(128))
+  cultures_translations_model_name : (nvarchar(500))
+  cultures_translations_model_tables_columns_name : (nvarchar(128))
+  cultures_translations_model_tables_name : (nvarchar(128))
+  databasename : (nvarchar(128))
+  displayfolder_DisplayName : (nvarchar(512))
+  displayfolder_translation : (nvarchar(512))
+  pk_index_guid : (uniqueidentifier)
+  - RepoObject_name : (nvarchar(128))
+  - RepoObject_schema_name : (nvarchar(128))
+  RepoObjectColumn_DisplayName : (nvarchar(128))
+  RepoObjectColumn_translation : (nvarchar(128))
+  - tabcol_IsHidden : (bit)
+  tables_columns_displayFolder : (nvarchar(500))
+  tables_columns_name : (nvarchar(128))
+  tables_name : (nvarchar(128))
+  --
+}
+
+ssas.RepoObjectColumn_translation_displayfolder_union <.. docs.RepoObject_ColumnList
+ssas.RepoObjectColumn_translation_T <.. ssas.RepoObjectColumn_translation_displayfolder_union
+footer The diagram is interactive and contains links.
+@enduml
+

@@ -1,0 +1,107 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:docs.antoraindexsemanticgrouppatterndatatype.adoc[]" as docs.AntoraIndexSemanticgroupPatterndatatype << V >> {
+  **IndexSemanticGroup** : (nvarchar(512))
+  **IndexPatternColumnDatatype** : (nvarchar(4000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.repoobject_indexlist.adoc[]" as docs.RepoObject_IndexList << V >> {
+  **RepoObject_guid** : (uniqueidentifier)
+  **cultures_name** : (nvarchar(10))
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.foreignkey_gross.adoc[]" as repo.ForeignKey_gross << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.foreignkey_indexes.adoc[]" as repo.ForeignKey_Indexes << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.foreignkey_virtual_indexes.adoc[]" as repo.ForeignKey_virtual_Indexes << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.index_columlist_t.adoc[]" as repo.Index_ColumList_T << U >> {
+  - **index_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.index_gross.adoc[]" as repo.Index_gross << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.index_settings.adoc[]" as repo.Index_Settings << U >> {
+  - **index_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.index_union.adoc[]" as repo.Index_union << V >> {
+  **index_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobject_gross.adoc[]" as repo.RepoObject_gross << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobject_sqlcreatetable.adoc[]" as repo.RepoObject_SqlCreateTable << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.usp_index_finish.adoc[]" as repo.usp_Index_finish << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.usp_index_inheritance.adoc[]" as repo.usp_index_inheritance << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.usp_index_virtual_set.adoc[]" as repo.usp_Index_virtual_set << P >> {
+  --
+}
+
+repo.Index_ColumList_T <.. repo.Index_gross
+repo.Index_gross <.. repo.RepoObject_SqlCreateTable
+repo.Index_gross <.. repo.usp_index_inheritance
+repo.Index_gross <.. repo.usp_Index_virtual_set
+repo.Index_gross <.. repo.ForeignKey_Indexes
+repo.Index_gross <.. repo.ForeignKey_virtual_Indexes
+repo.Index_gross <.. repo.usp_Index_finish
+repo.Index_gross <.. docs.RepoObject_IndexList
+repo.Index_gross <.. docs.AntoraIndexSemanticgroupPatterndatatype
+repo.Index_gross <.. repo.ForeignKey_gross
+repo.Index_Settings <.. repo.Index_gross
+repo.Index_union <.. repo.Index_gross
+repo.RepoObject_gross <.. repo.Index_grossfooter The diagram is interactive and contains links.
+@enduml
+

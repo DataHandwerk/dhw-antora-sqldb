@@ -1,0 +1,62 @@
+@startuml
+'Left to right direction
+top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:workflow.usp_workflow.adoc[]" as workflow.usp_workflow << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:workflow.workflow_proceduredependency_t_notinsortorder.adoc[]" as workflow.Workflow_ProcedureDependency_T_NotInSortorder << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:workflow.workflow_proceduredependency_t_notinsortorder_check.adoc[]" as workflow.Workflow_ProcedureDependency_T_NotInSortorder_check << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:workflow.workflow_sqlusp.adoc[]" as workflow.Workflow_SqlUsp << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:workflow.workflow_usplist.adoc[]" as workflow.Workflow_UspList << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:workflow.workflowstep_sortorder.adoc[]" as workflow.WorkflowStep_Sortorder << U >> {
+  - **Workflow_id** : (int)
+  - **Procedure_RepoObject_guid** : (uniqueidentifier)
+  --
+}
+
+workflow.Workflow_ProcedureDependency_T_NotInSortorder <.. workflow.Workflow_ProcedureDependency_T_NotInSortorder_check
+workflow.Workflow_ProcedureDependency_T_NotInSortorder <.. workflow.usp_workflow
+workflow.Workflow_UspList <.. workflow.Workflow_SqlUsp
+workflow.WorkflowStep_Sortorder <.. workflow.usp_workflow
+workflow.WorkflowStep_Sortorder <.. workflow.Workflow_ProcedureDependency_T_NotInSortorder
+workflow.WorkflowStep_Sortorder <.. workflow.Workflow_UspListfooter The diagram is interactive and contains links.
+@enduml
+

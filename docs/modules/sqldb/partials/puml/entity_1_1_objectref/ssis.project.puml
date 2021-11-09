@@ -1,0 +1,59 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:docs.usp_antoraexport.adoc[]" as docs.usp_AntoraExport << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.usp_antoraexport_ssispagetemplate.adoc[]" as docs.usp_AntoraExport_SsisPageTemplate << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.package_src.adoc[]" as ssis.Package_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.project.adoc[]" as ssis.Project << U >> {
+  - **AntoraModule** : (varchar(50))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.projectconnection_src.adoc[]" as ssis.ProjectConnection_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **ConnectionManagerID** : (uniqueidentifier)
+  --
+}
+
+ssis.Project <.. docs.usp_AntoraExport
+ssis.Project <.. ssis.Package_src
+ssis.Project <.. ssis.ProjectConnection_src
+ssis.Project <.. docs.usp_AntoraExport_SsisPageTemplatefooter The diagram is interactive and contains links.
+@enduml
+

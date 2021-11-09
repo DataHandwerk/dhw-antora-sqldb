@@ -48,6 +48,10 @@ entity "puml-link:dhw:sqldb:config.parameter.adoc[]" as config.Parameter << U >>
   --
 }
 
+entity "puml-link:dhw:sqldb:config.usp_init_parameter.adoc[]" as config.usp_init_parameter << P >> {
+  --
+}
+
 entity "puml-link:dhw:sqldb:configt.parameter_default.adoc[]" as configT.Parameter_default << V >> {
   - **Parameter_name** : (varchar(52))
   - **sub_Parameter** : (nvarchar(27))
@@ -559,9 +563,9 @@ entity "puml-link:dhw:sqldb:sys_dwh.types.adoc[]" as sys_dwh.types << SN >> {
 }
 
 config.fs_dwh_database_name <.. repo_sys.usp_AddOrUpdateExtendedProperty
-config.fs_get_parameter_value <.. repo.usp_sync_guid_RepoObject
-config.fs_get_parameter_value <.. repo.usp_sync_guid_RepoObjectColumn
 config.fs_get_parameter_value <.. repo.usp_sync_guid_RepoSchema
+config.fs_get_parameter_value <.. repo.usp_sync_guid_RepoObjectColumn
+config.fs_get_parameter_value <.. repo.usp_sync_guid_RepoObject
 config.ftv_dwh_database <.. repo_sys.ExtendedProperties
 config.ftv_dwh_database <.. repo_sys.SysColumn
 config.ftv_get_parameter_value <.. repo.RepoObject_external_src
@@ -569,11 +573,14 @@ config.ftv_get_parameter_value <.. reference.additional_Reference_is_external
 config.ftv_get_parameter_value <.. ssas.additional_Reference_step1
 config.ftv_get_parameter_value <.. repo.RepoObjectColumn_HistValidColums_setpoint
 config.Parameter <.. repo.usp_persistence_set
-config.Parameter <.. config.fs_get_parameter_value
+config.Parameter <.. config.usp_init_parameter
 config.Parameter <.. config.fs_dwh_database_name
+config.Parameter <.. config.fs_get_parameter_value
 config.Parameter <.. config.ftv_get_parameter_value
 config.Parameter <.. property.PropertyName_RepoObject
 config.Parameter <.. config.ftv_dwh_database
+config.usp_init_parameter <.. repo.usp_sync_guid
+configT.Parameter_default <.. config.usp_init_parameter
 configT.Parameter_default <.. config.Parameter
 configT.spt_values <.. configT.type
 configT.type <.. configT.type_level1type_level2type
@@ -582,9 +589,9 @@ configT.type_level1type_level2type <.. repo.usp_sync_guid_RepoObjectColumn
 logs.ExecutionLog <.. logs.usp_ExecutionLog_insert
 logs.usp_ExecutionLog_insert <.. repo.usp_sync_guid_RepoSchema
 logs.usp_ExecutionLog_insert <.. repo.usp_sync_guid
+logs.usp_ExecutionLog_insert <.. repo.usp_persistence_set
 logs.usp_ExecutionLog_insert <.. repo.usp_sync_guid_RepoObject
 logs.usp_ExecutionLog_insert <.. repo.usp_sync_guid_RepoObjectColumn
-logs.usp_ExecutionLog_insert <.. repo.usp_persistence_set
 property.external_RepoObjectColumnProperty <.. property.RepoObjectColumnProperty_external_src
 property.external_RepoObjectProperty <.. property.RepoObjectProperty_external_src
 property.fs_get_RepoObjectColumnProperty_nvarchar <.. repo.RepoObjectColumn_gross
@@ -602,15 +609,15 @@ property.RepoObjectProperty <.. property.RepoObjectProperty_SelectedPropertyName
 property.RepoObjectProperty <.. property.RepoObjectProperty_external_tgt
 property.RepoObjectProperty <.. property.PropertyName_RepoObject
 property.RepoObjectProperty_external_src <.. property.RepoObjectProperty_external_tgt
+property.RepoObjectProperty_external_tgt <.. property.PropertyName_RepoObject_T
 property.RepoObjectProperty_external_tgt <.. repo.RepoObject
 property.RepoObjectProperty_external_tgt <.. property.RepoObjectProperty
-property.RepoObjectProperty_external_tgt <.. property.PropertyName_RepoObject_T
-property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_wo_columns_from_properties_src
 property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_from_properties_src
+property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_wo_columns_from_properties_src
+reference.additional_Reference <.. reference.additional_Reference_from_ssas_tgt
 reference.additional_Reference <.. reference.additional_Reference_is_external
 reference.additional_Reference <.. reference.additional_Reference_from_properties_tgt
 reference.additional_Reference <.. reference.additional_Reference_wo_columns_from_properties_tgt
-reference.additional_Reference <.. reference.additional_Reference_from_ssas_tgt
 reference.additional_Reference_from_properties_src <.. reference.additional_Reference_from_properties_tgt
 reference.additional_Reference_from_properties_tgt <.. reference.additional_Reference
 reference.additional_Reference_from_ssas_src <.. reference.additional_Reference_from_ssas_tgt
@@ -627,39 +634,39 @@ reference.additional_Reference_wo_columns_from_properties_tgt <.. reference.addi
 reference.RepoObjectColumnSource_virtual <.. repo.usp_sync_guid_RepoObjectColumn
 reference.RepoObjectSource_virtual <.. repo.usp_sync_guid_RepoObject
 repo.IndexColumn_virtual <.. repo.usp_sync_guid_RepoObjectColumn
-repo.RepoObject <.. repo.SysObject_RepoObject_via_name
-repo.RepoObject <.. repo.SysColumn_RepoObjectColumn_via_name
 repo.RepoObject <.. repo.SysObject_RepoObject_via_guid
 repo.RepoObject <.. repo.SysColumn_RepoObjectColumn_via_guid
-repo.RepoObject <.. repo.RepoObjectColumn_gross
+repo.RepoObject <.. repo.SysColumn_RepoObjectColumn_via_name
+repo.RepoObject <.. repo.SysObject_RepoObject_via_name
+repo.RepoObject <.. property.RepoObjectColumnProperty_external_tgt
+repo.RepoObject <.. repo.RepoObject_external_tgt
+repo.RepoObject <.. property.RepoObjectProperty_external_tgt
 repo.RepoObject <.. repo.RepoObject_RequiredRepoObjectMerge
 repo.RepoObject <.. repo.usp_sync_guid_RepoObject
 repo.RepoObject <.. repo.usp_sync_guid_RepoObjectColumn
 repo.RepoObject <.. repo.usp_persistence_set
+repo.RepoObject <.. repo.RepoObjectColumn_gross
 repo.RepoObject <.. repo.RepoObject_SSAS_tgt
-repo.RepoObject <.. property.RepoObjectColumnProperty_external_tgt
-repo.RepoObject <.. repo.RepoObject_external_tgt
-repo.RepoObject <.. property.RepoObjectProperty_external_tgt
 repo.RepoObject_external_src <.. repo.RepoObject_external_tgt
 repo.RepoObject_external_tgt <.. repo.RepoObject
 repo.RepoObject_external_tgt <.. repo.RepoObjectColumn_external_tgt
 repo.RepoObject_persistence <.. repo.usp_sync_guid_RepoObject
-repo.RepoObject_persistence <.. repo.usp_sync_guid_RepoObjectColumn
 repo.RepoObject_persistence <.. repo.RepoObjectColumn_HistValidColums_setpoint
+repo.RepoObject_persistence <.. repo.usp_sync_guid_RepoObjectColumn
 repo.RepoObject_persistence <.. repo.usp_persistence_set
 repo.RepoObject_persistence <.. repo.RepoObjectColumn_gross
 repo.RepoObject_RequiredRepoObjectMerge <.. repo.usp_sync_guid_RepoObject
 repo.RepoObject_SSAS_src <.. repo.RepoObject_SSAS_tgt
 repo.RepoObject_SSAS_tgt <.. repo.RepoObject
 repo.RepoObject_SSAS_tgt <.. repo.RepoObjectColumn_SSAS_tgt
-repo.RepoObjectColumn <.. property.RepoObjectColumnProperty_external_tgt
-repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_name
-repo.RepoObjectColumn <.. repo.RepoObjectColumn_external_tgt
-repo.RepoObjectColumn <.. repo.usp_sync_guid_RepoObjectColumn
 repo.RepoObjectColumn <.. repo.RepoObjectColumn_RequiredRepoObjectColumnMerge
+repo.RepoObjectColumn <.. repo.usp_sync_guid_RepoObjectColumn
+repo.RepoObjectColumn <.. property.RepoObjectColumnProperty_external_tgt
+repo.RepoObjectColumn <.. repo.RepoObjectColumn_external_tgt
 repo.RepoObjectColumn <.. repo.RepoObjectColumn_SSAS_tgt
 repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_guid
 repo.RepoObjectColumn <.. repo.RepoObjectColumn_gross
+repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_name
 repo.RepoObjectColumn_external_src <.. repo.RepoObjectColumn_external_tgt
 repo.RepoObjectColumn_external_tgt <.. repo.RepoObjectColumn
 repo.RepoObjectColumn_external_tgt <.. repo.RepoObject_external_tgt
@@ -669,11 +676,11 @@ repo.RepoObjectColumn_RequiredRepoObjectColumnMerge <.. repo.usp_sync_guid_RepoO
 repo.RepoObjectColumn_SSAS_src <.. repo.RepoObjectColumn_SSAS_tgt
 repo.RepoObjectColumn_SSAS_tgt <.. repo.RepoObjectColumn
 repo.RepoObjectColumn_SSAS_tgt <.. repo.RepoObject_SSAS_tgt
-repo.RepoSchema <.. repo.RepoObject_SSAS_src
-repo.RepoSchema <.. repo.RepoSchema_ssas_tgt
-repo.RepoSchema <.. repo.usp_sync_guid_RepoSchema
 repo.RepoSchema <.. repo.SysSchema_RepoSchema_via_name
 repo.RepoSchema <.. repo.SysSchema_RepoSchema_via_guid
+repo.RepoSchema <.. repo.RepoSchema_ssas_tgt
+repo.RepoSchema <.. repo.RepoObject_SSAS_src
+repo.RepoSchema <.. repo.usp_sync_guid_RepoSchema
 repo.RepoSchema_ssas_src <.. repo.RepoSchema_ssas_tgt
 repo.RepoSchema_ssas_tgt <.. repo.RepoSchema
 repo.SysColumn_RepoObjectColumn_via_guid <.. repo.usp_sync_guid_RepoObjectColumn
@@ -686,29 +693,29 @@ repo.usp_sync_guid <.. repo.usp_persistence_set
 repo.usp_sync_guid_RepoObject <.. repo.usp_sync_guid
 repo.usp_sync_guid_RepoObjectColumn <.. repo.usp_sync_guid
 repo.usp_sync_guid_RepoSchema <.. repo.usp_sync_guid
-repo_sys.ExtendedProperties <.. repo_sys.SysObject
 repo_sys.ExtendedProperties <.. repo_sys.SysSchema
 repo_sys.ExtendedProperties <.. repo_sys.SysColumn
-repo_sys.SysColumn <.. repo.SysColumn_RepoObjectColumn_via_name
+repo_sys.ExtendedProperties <.. repo_sys.SysObject
 repo_sys.SysColumn <.. repo.SysColumn_RepoObjectColumn_via_guid
 repo_sys.SysColumn <.. repo.usp_sync_guid_RepoObjectColumn
+repo_sys.SysColumn <.. repo.SysColumn_RepoObjectColumn_via_name
 repo_sys.SysObject <.. repo.SysObject_RepoObject_via_name
-repo_sys.SysObject <.. repo.SysObject_RepoObject_via_guid
 repo_sys.SysObject <.. repo.usp_sync_guid_RepoObject
+repo_sys.SysObject <.. repo.SysObject_RepoObject_via_guid
 repo_sys.SysObject <.. repo_sys.SysColumn
 repo_sys.SysSchema <.. repo.usp_sync_guid_RepoSchema
 repo_sys.SysSchema <.. repo.SysSchema_RepoSchema_via_name
 repo_sys.SysSchema <.. repo.SysSchema_RepoSchema_via_guid
 repo_sys.usp_AddOrUpdateExtendedProperty <.. repo.usp_sync_guid_RepoSchema
-repo_sys.usp_AddOrUpdateExtendedProperty <.. repo.usp_sync_guid_RepoObjectColumn
 repo_sys.usp_AddOrUpdateExtendedProperty <.. repo.usp_sync_guid_RepoObject
+repo_sys.usp_AddOrUpdateExtendedProperty <.. repo.usp_sync_guid_RepoObjectColumn
 ssas.additional_Reference_step1 <.. reference.additional_Reference_from_ssas_src
 ssas.model_json <.. ssas.model_json_10
 ssas.model_json_10 <.. ssas.model_json_20
 ssas.model_json_20 <.. repo.RepoSchema_ssas_src
-ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
 ssas.model_json_20 <.. ssas.model_json_31_tables
 ssas.model_json_20 <.. ssas.model_json_33_dataSources
+ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
 ssas.model_json_201_descriptions_multiline <.. ssas.model_json_2011_descriptions_StrAgg
 ssas.model_json_2011_descriptions_StrAgg <.. repo.RepoSchema_ssas_src
 ssas.model_json_31_tables <.. ssas.model_json_31_tables_T
@@ -717,10 +724,10 @@ ssas.model_json_31_tables_T <.. ssas.model_json_311_tables_columns
 ssas.model_json_31_tables_T <.. ssas.model_json_313_tables_partitions
 ssas.model_json_311_tables_columns <.. ssas.model_json_311_tables_columns_T
 ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_SSAS_src
-ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_gross
-ssas.model_json_311_tables_columns_T <.. ssas.additional_Reference_step1
-ssas.model_json_311_tables_columns_T <.. ssas.model_json_3111_tables_columns_descriptions_multiline
 ssas.model_json_311_tables_columns_T <.. ssas.model_json_3112_tables_columns_expressions_multiline
+ssas.model_json_311_tables_columns_T <.. ssas.model_json_3111_tables_columns_descriptions_multiline
+ssas.model_json_311_tables_columns_T <.. ssas.additional_Reference_step1
+ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_gross
 ssas.model_json_3111_tables_columns_descriptions_multiline <.. ssas.model_json_31111_tables_columns_descriptions_StrAgg
 ssas.model_json_31111_tables_columns_descriptions_StrAgg <.. repo.RepoObjectColumn_gross
 ssas.model_json_3112_tables_columns_expressions_multiline <.. ssas.model_json_31121_tables_columns_expressions_StrAgg
@@ -748,6 +755,6 @@ sys_dwh.schemas <.. repo_sys.SysObject
 sys_dwh.schemas <.. repo_sys.SysSchema
 sys_dwh.sql_modules <.. repo_sys.SysObject
 sys_dwh.tables <.. repo_sys.SysObject
-sys_dwh.types <.. repo_sys.SysColumn
+sys_dwh.types <.. repo_sys.SysColumnfooter The diagram is interactive and contains links.
 @enduml
 

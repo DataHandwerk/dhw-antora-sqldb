@@ -1,0 +1,196 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:reference.persistence.adoc[]" as reference.Persistence << V >> {
+  referenced_fullname : (nvarchar(261))
+  referenced_RepoObject_guid : (uniqueidentifier)
+  referenced_schema_name : (nvarchar(128))
+  referenced_usp_persistence_name : (nvarchar(140))
+  referenced_usp_persistence_RepoObject_guid : (uniqueidentifier)
+  referencing_fullname : (nvarchar(261))
+  referencing_RepoObject_guid : (uniqueidentifier)
+  referencing_schema_name : (nvarchar(128))
+  referencing_usp_persistence_name : (nvarchar(140))
+  referencing_usp_persistence_RepoObject_guid : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.persistence_bidirectional.adoc[]" as reference.Persistence_bidirectional << V >> {
+  referenced_fullname : (nvarchar(261))
+  referenced_RepoObject_guid : (uniqueidentifier)
+  referenced_schema_name : (nvarchar(128))
+  referenced_usp_persistence_name : (nvarchar(140))
+  referenced_usp_persistence_RepoObject_guid : (uniqueidentifier)
+  referencing_fullname : (nvarchar(261))
+  referencing_RepoObject_guid : (uniqueidentifier)
+  referencing_schema_name : (nvarchar(128))
+  referencing_usp_persistence_name : (nvarchar(140))
+  referencing_usp_persistence_RepoObject_guid : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.repoobject_referencetree.adoc[]" as reference.RepoObject_ReferenceTree << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  **Referenced_Depth** : (int)
+  **Referencing_Depth** : (int)
+  - **Referenced_guid** : (uniqueidentifier)
+  - **Referencing_guid** : (uniqueidentifier)
+  Referenced_fullname : (nvarchar(261))
+  Referenced_fullname2 : (nvarchar(257))
+  Referenced_type : (char(2))
+  Referencing_fullname : (nvarchar(261))
+  Referencing_fullname2 : (nvarchar(257))
+  Referencing_type : (varchar(2))
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobject_gross.adoc[]" as repo.RepoObject_gross << V >> {
+  AntoraComponent : (nvarchar(max))
+  AntoraModule : (nvarchar(max))
+  Description : (nvarchar(max))
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
+  external_DatabaseName : (nvarchar(128))
+  external_RepoDatabaseName : (nvarchar(128))
+  has_different_sys_names : (bit)
+  has_execution_plan_issue : (bit)
+  has_get_referenced_issue : (bit)
+  has_history : (bit)
+  has_history_columns : (bit)
+  history_schema_name : (nvarchar(128))
+  history_table_name : (nvarchar(128))
+  Inheritance_StringAggSeparatorSql : (nvarchar(4000))
+  InheritanceDefinition : (nvarchar(4000))
+  InheritanceType : (tinyint)
+  - is_DocsExclude : (bit)
+  is_DocsOutput : (int)
+  - is_external : (bit)
+  - is_in_reference : (int)
+  is_persistence : (bit)
+  is_persistence_check_duplicate_per_pk : (bit)
+  is_persistence_check_for_empty_source : (bit)
+  is_persistence_delete_changed : (bit)
+  is_persistence_delete_missing : (bit)
+  is_persistence_insert : (bit)
+  is_persistence_merge_delete_missing : (bit)
+  is_persistence_merge_insert : (bit)
+  is_persistence_merge_update_changed : (bit)
+  is_persistence_persist_source : (bit)
+  is_persistence_truncate : (bit)
+  is_persistence_update_changed : (bit)
+  is_repo_managed : (bit)
+  - is_RepoObject_name_uniqueidentifier : (int)
+  is_required_ObjectMerge : (bit)
+  - is_ssas : (bit)
+  is_SysObject_missing : (bit)
+  - is_SysObject_name_uniqueidentifier : (int)
+  - modify_dt : (datetime)
+  node_id : (bigint)
+  persistence_source_RepoObject_fullname : (nvarchar(261))
+  persistence_source_RepoObject_fullname2 : (nvarchar(257))
+  persistence_source_RepoObject_guid : (uniqueidentifier)
+  persistence_source_RepoObject_xref : (nvarchar(4000))
+  persistence_source_SysObject_fullname : (nvarchar(261))
+  persistence_source_SysObject_fullname_or_tempsource : (nvarchar(261))
+  persistence_source_SysObject_fullname2 : (nvarchar(257))
+  persistence_source_SysObject_xref : (nvarchar(4000))
+  pk_index_guid : (uniqueidentifier)
+  pk_IndexPatternColumnDatatype : (nvarchar(4000))
+  pk_IndexPatternColumnName : (nvarchar(4000))
+  pk_IndexPatternColumnName_new : (nvarchar(4000))
+  pk_IndexSemanticGroup : (nvarchar(512))
+  Property_ms_description : (nvarchar(4000))
+  Repo_history_table_guid : (uniqueidentifier)
+  Repo_temporal_type : (tinyint)
+  - RepoObject_fullname : (nvarchar(261))
+  - RepoObject_fullname2 : (nvarchar(257))
+  - RepoObject_guid : (uniqueidentifier)
+  - RepoObject_name : (nvarchar(128))
+  RepoObject_Referencing_Count : (int)
+  - RepoObject_schema_name : (nvarchar(128))
+  - RepoObject_type : (char(2))
+  RepoObject_type_name : (nvarchar(128))
+  source_filter : (nvarchar(4000))
+  - SysObject_fullname : (nvarchar(261))
+  - SysObject_fullname2 : (nvarchar(257))
+  SysObject_id : (int)
+  SysObject_modify_date : (datetime)
+  - SysObject_name : (nvarchar(128))
+  - SysObject_parent_object_id : (int)
+  SysObject_query_executed_dt : (datetime)
+  SysObject_query_plan : (xml)
+  - SysObject_query_sql : (nvarchar(406))
+  - SysObject_schema_name : (nvarchar(128))
+  SysObject_type : (char(2))
+  SysObject_type_name : (nvarchar(128))
+  tables_dataCategory : (nvarchar(500))
+  tables_description : (nvarchar(max))
+  tables_isHidden : (bit)
+  target_filter : (nvarchar(4000))
+  temporal_type : (tinyint)
+  - usp_persistence_name : (nvarchar(140))
+  usp_persistence_RepoObject_guid : (uniqueidentifier)
+  uspgenerator_usp_id : (int)
+  --
+}
+
+entity "puml-link:dhw:sqldb:workflow.proceduredependency_input_persistencedependency_s.adoc[]" as workflow.ProcedureDependency_input_PersistenceDependency_S << V >> {
+  **referenced_Procedure_RepoObject_guid** : (uniqueidentifier)
+  **referencing_Procedure_RepoObject_guid** : (uniqueidentifier)
+  - is_PersistenceDependency : (int)
+  --
+}
+
+reference.Persistence <.. workflow.ProcedureDependency_input_PersistenceDependency_S
+reference.Persistence <.. reference.Persistence_bidirectional
+reference.RepoObject_ReferenceTree <.. reference.Persistence
+repo.RepoObject_gross <.. reference.Persistence
+"reference.Persistence::referenced_fullname" <-- "reference.Persistence_bidirectional::referenced_fullname"
+"reference.Persistence::referenced_RepoObject_guid" <-- "reference.Persistence_bidirectional::referenced_RepoObject_guid"
+"reference.Persistence::referenced_schema_name" <-- "reference.Persistence_bidirectional::referenced_schema_name"
+"reference.Persistence::referenced_usp_persistence_name" <-- "reference.Persistence_bidirectional::referenced_usp_persistence_name"
+"reference.Persistence::referenced_usp_persistence_RepoObject_guid" <-- "reference.Persistence_bidirectional::referenced_usp_persistence_RepoObject_guid"
+"reference.Persistence::referenced_usp_persistence_RepoObject_guid" <-- "workflow.ProcedureDependency_input_PersistenceDependency_S::referenced_Procedure_RepoObject_guid"
+"reference.Persistence::referencing_fullname" <-- "reference.Persistence_bidirectional::referencing_fullname"
+"reference.Persistence::referencing_RepoObject_guid" <-- "reference.Persistence_bidirectional::referencing_RepoObject_guid"
+"reference.Persistence::referencing_schema_name" <-- "reference.Persistence_bidirectional::referencing_schema_name"
+"reference.Persistence::referencing_usp_persistence_name" <-- "reference.Persistence_bidirectional::referencing_usp_persistence_name"
+"reference.Persistence::referencing_usp_persistence_RepoObject_guid" <-- "reference.Persistence_bidirectional::referencing_usp_persistence_RepoObject_guid"
+"reference.Persistence::referencing_usp_persistence_RepoObject_guid" <-- "workflow.ProcedureDependency_input_PersistenceDependency_S::referencing_Procedure_RepoObject_guid"
+"repo.RepoObject_gross::RepoObject_fullname" <-- "reference.Persistence::referenced_fullname"
+"repo.RepoObject_gross::RepoObject_fullname" <-- "reference.Persistence::referencing_fullname"
+"repo.RepoObject_gross::RepoObject_guid" <-- "reference.Persistence::referencing_RepoObject_guid"
+"repo.RepoObject_gross::RepoObject_guid" <-- "reference.Persistence::referenced_RepoObject_guid"
+"repo.RepoObject_gross::RepoObject_schema_name" <-- "reference.Persistence::referenced_schema_name"
+"repo.RepoObject_gross::RepoObject_schema_name" <-- "reference.Persistence::referencing_schema_name"
+"repo.RepoObject_gross::usp_persistence_name" <-- "reference.Persistence::referencing_usp_persistence_name"
+"repo.RepoObject_gross::usp_persistence_name" <-- "reference.Persistence::referenced_usp_persistence_name"
+"repo.RepoObject_gross::usp_persistence_RepoObject_guid" <-- "reference.Persistence::referenced_usp_persistence_RepoObject_guid"
+"repo.RepoObject_gross::usp_persistence_RepoObject_guid" <-- "reference.Persistence::referencing_usp_persistence_RepoObject_guid"footer The diagram is interactive and contains links.
+@enduml
+

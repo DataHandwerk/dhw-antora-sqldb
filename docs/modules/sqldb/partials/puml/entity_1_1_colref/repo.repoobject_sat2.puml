@@ -27,29 +27,24 @@ skinparam class {
 
 
 entity "puml-link:dhw:sqldb:reference.repoobject_referencedlist.adoc[]" as reference.RepoObject_ReferencedList << V >> {
-  --
   AntoraReferencedList : (nvarchar(max))
   Referencing_fullname : (nvarchar(261))
   Referencing_fullname2 : (nvarchar(257))
   - Referencing_guid : (uniqueidentifier)
   Referencing_type : (varchar(2))
   --
-  --
 }
 
 entity "puml-link:dhw:sqldb:reference.repoobject_referencinglist.adoc[]" as reference.RepoObject_ReferencingList << V >> {
-  --
   AntoraReferencingList : (nvarchar(max))
   Referenced_fullname : (nvarchar(261))
   Referenced_fullname2 : (nvarchar(257))
   - Referenced_guid : (uniqueidentifier)
   Referenced_type : (char(2))
   --
-  --
 }
 
 entity "puml-link:dhw:sqldb:repo.repoobject_columnlist.adoc[]" as repo.RepoObject_ColumnList << V >> {
-  --
   CreateColumnList : (nvarchar(max))
   DbmlColumnList : (nvarchar(max))
   PersistenceCompareColumnList : (nvarchar(max))
@@ -58,11 +53,9 @@ entity "puml-link:dhw:sqldb:repo.repoobject_columnlist.adoc[]" as repo.RepoObjec
   - RepoObject_guid : (uniqueidentifier)
   RepoObjectColumn_fullname : (nvarchar(520))
   --
-  --
 }
 
 entity "puml-link:dhw:sqldb:repo.repoobject_gross.adoc[]" as repo.RepoObject_gross << V >> {
-  --
   AntoraComponent : (nvarchar(max))
   AntoraModule : (nvarchar(max))
   Description : (nvarchar(max))
@@ -93,6 +86,7 @@ entity "puml-link:dhw:sqldb:repo.repoobject_gross.adoc[]" as repo.RepoObject_gro
   is_persistence_merge_delete_missing : (bit)
   is_persistence_merge_insert : (bit)
   is_persistence_merge_update_changed : (bit)
+  is_persistence_persist_source : (bit)
   is_persistence_truncate : (bit)
   is_persistence_update_changed : (bit)
   is_repo_managed : (bit)
@@ -108,6 +102,7 @@ entity "puml-link:dhw:sqldb:repo.repoobject_gross.adoc[]" as repo.RepoObject_gro
   persistence_source_RepoObject_guid : (uniqueidentifier)
   persistence_source_RepoObject_xref : (nvarchar(4000))
   persistence_source_SysObject_fullname : (nvarchar(261))
+  persistence_source_SysObject_fullname_or_tempsource : (nvarchar(261))
   persistence_source_SysObject_fullname2 : (nvarchar(257))
   persistence_source_SysObject_xref : (nvarchar(4000))
   pk_index_guid : (uniqueidentifier)
@@ -148,12 +143,10 @@ entity "puml-link:dhw:sqldb:repo.repoobject_gross.adoc[]" as repo.RepoObject_gro
   usp_persistence_RepoObject_guid : (uniqueidentifier)
   uspgenerator_usp_id : (int)
   --
-  --
 }
 
 entity "puml-link:dhw:sqldb:repo.repoobject_sat2.adoc[]" as repo.RepoObject_sat2 << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
-  --
   AntoraReferencedList : (nvarchar(max))
   AntoraReferencingList : (nvarchar(max))
   CreateColumnList : (nvarchar(max))
@@ -165,13 +158,11 @@ entity "puml-link:dhw:sqldb:repo.repoobject_sat2.adoc[]" as repo.RepoObject_sat2
   sql_modules_definition : (nvarchar(max))
   sql_modules_formatted : (nvarchar(max))
   sql_modules_formatted2 : (nvarchar(max))
-  --
   --
 }
 
 entity "puml-link:dhw:sqldb:repo.repoobject_sat2_t.adoc[]" as repo.RepoObject_sat2_T << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
-  --
   AntoraReferencedList : (nvarchar(max))
   AntoraReferencingList : (nvarchar(max))
   CreateColumnList : (nvarchar(max))
@@ -184,17 +175,13 @@ entity "puml-link:dhw:sqldb:repo.repoobject_sat2_t.adoc[]" as repo.RepoObject_sa
   sql_modules_formatted : (nvarchar(max))
   sql_modules_formatted2 : (nvarchar(max))
   --
-  --
 }
 
 entity "puml-link:dhw:sqldb:repo.usp_persist_repoobject_sat2_t.adoc[]" as repo.usp_PERSIST_RepoObject_sat2_T << P >> {
   --
-  --
-  --
 }
 
 entity "puml-link:dhw:sqldb:sqlparse.repoobject_sqlmodules_repo_sys.adoc[]" as sqlparse.RepoObject_SqlModules_Repo_Sys << V >> {
-  --
   is_json_sql_modules_json : (int)
   is_outdated : (bit)
   - modify_date : (datetime)
@@ -205,7 +192,6 @@ entity "puml-link:dhw:sqldb:sqlparse.repoobject_sqlmodules_repo_sys.adoc[]" as s
   sql_modules_formatted2 : (nvarchar(max))
   sql_modules_json : (nvarchar(max))
   SysObject_type : (char(2))
-  --
   --
 }
 
@@ -238,6 +224,6 @@ sqlparse.RepoObject_SqlModules_Repo_Sys <.. repo.RepoObject_sat2
 "repo.RepoObject_sat2::sql_modules_formatted2" <-- "repo.RepoObject_sat2_T::sql_modules_formatted2"
 "sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_definition" <-- "repo.RepoObject_sat2::sql_modules_definition"
 "sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_formatted" <-- "repo.RepoObject_sat2::sql_modules_formatted"
-"sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_formatted2" <-- "repo.RepoObject_sat2::sql_modules_formatted2"
+"sqlparse.RepoObject_SqlModules_Repo_Sys::sql_modules_formatted2" <-- "repo.RepoObject_sat2::sql_modules_formatted2"footer The diagram is interactive and contains links.
 @enduml
 

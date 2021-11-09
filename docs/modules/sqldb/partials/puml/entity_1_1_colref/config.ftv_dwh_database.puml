@@ -27,17 +27,14 @@ skinparam class {
 
 
 entity "puml-link:dhw:sqldb:config.ftv_dwh_database.adoc[]" as config.ftv_dwh_database << IF >> {
-  --
   dwh_database_id : (smallint)
   dwh_database_name : (nvarchar(128))
-  --
   --
 }
 
 entity "puml-link:dhw:sqldb:config.parameter.adoc[]" as config.Parameter << U >> {
   - **Parameter_name** : (varchar(100))
   - **sub_Parameter** : (nvarchar(128))
-  --
   Parameter_default_value : (nvarchar(max))
   Parameter_desciption : (nvarchar(1000))
   Parameter_value : (nvarchar(max))
@@ -46,7 +43,6 @@ entity "puml-link:dhw:sqldb:config.parameter.adoc[]" as config.Parameter << U >>
   ~ Parameter_value_result_datetime : (datetime)
   ~ Parameter_value_result_int : (int)
   --
-  --
 }
 
 entity "puml-link:dhw:sqldb:reference.repoobjectcolumn_reference_queryplan.adoc[]" as reference.RepoObjectColumn_reference_QueryPlan << V >> {
@@ -54,7 +50,6 @@ entity "puml-link:dhw:sqldb:reference.repoobjectcolumn_reference_queryplan.adoc[
   **referencing_minor_id** : (int)
   **referenced_id** : (int)
   **referenced_minor_id** : (int)
-  --
   definition : (nvarchar(max))
   - InformationSource : (varchar(10))
   is_computed : (bit)
@@ -79,18 +74,14 @@ entity "puml-link:dhw:sqldb:reference.repoobjectcolumn_reference_queryplan.adoc[
   source_schema_name_quoted : (nvarchar(128))
   source_table_name_quoted : (nvarchar(128))
   --
-  --
 }
 
 entity "puml-link:dhw:sqldb:reference.usp_update_referencing_count.adoc[]" as reference.usp_update_Referencing_Count << P >> {
-  --
-  --
   --
 }
 
 entity "puml-link:dhw:sqldb:repo.repoobject_sqlcreatetable.adoc[]" as repo.RepoObject_SqlCreateTable << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
-  --
   ConList : (nvarchar(max))
   - DbmlTable : (nvarchar(max))
   persistence_source_RepoObject_fullname : (nvarchar(261))
@@ -99,17 +90,13 @@ entity "puml-link:dhw:sqldb:repo.repoobject_sqlcreatetable.adoc[]" as repo.RepoO
   - RepoObject_fullname : (nvarchar(261))
   - SqlCreateTable : (nvarchar(max))
   --
-  --
 }
 
 entity "puml-link:dhw:sqldb:repo.usp_update_referencing_count.adoc[]" as repo.usp_update_Referencing_Count << P >> {
   --
-  --
-  --
 }
 
 entity "puml-link:dhw:sqldb:repo_sys.extendedproperties.adoc[]" as repo_sys.ExtendedProperties << V >> {
-  --
   - class : (tinyint)
   class_desc : (nvarchar(60))
   entity_column_name : (nvarchar(128))
@@ -129,11 +116,9 @@ entity "puml-link:dhw:sqldb:repo_sys.extendedproperties.adoc[]" as repo_sys.Exte
   SysObject_name : (nvarchar(128))
   SysObject_schema_name : (nvarchar(128))
   --
-  --
 }
 
 entity "puml-link:dhw:sqldb:repo_sys.sql_expression_dependencies.adoc[]" as repo_sys.sql_expression_dependencies << V >> {
-  --
   definition : (nvarchar(max))
   - is_ambiguous : (bit)
   - is_caller_dependent : (bit)
@@ -164,11 +149,9 @@ entity "puml-link:dhw:sqldb:repo_sys.sql_expression_dependencies.adoc[]" as repo
   referencing_type : (char(2))
   referencing_type_desciption : (nvarchar(60))
   --
-  --
 }
 
 entity "puml-link:dhw:sqldb:repo_sys.syscolumn.adoc[]" as repo_sys.SysColumn << V >> {
-  --
   collation_name : (sysname)
   column_encryption_key_database_name : (sysname)
   column_encryption_key_id : (int)
@@ -226,11 +209,9 @@ entity "puml-link:dhw:sqldb:repo_sys.syscolumn.adoc[]" as repo_sys.SysColumn << 
   uses_database_collation : (bit)
   - xml_collection_id : (int)
   --
-  --
 }
 
 entity "puml-link:dhw:sqldb:uspgenerator.generatorusp_sqlusp.adoc[]" as uspgenerator.GeneratorUsp_SqlUsp << V >> {
-  --
   - AdocUspSteps : (nvarchar(max))
   - has_logging : (tinyint)
   MS_Description : (nvarchar(4000))
@@ -245,29 +226,26 @@ entity "puml-link:dhw:sqldb:uspgenerator.generatorusp_sqlusp.adoc[]" as uspgener
   - UspExamples : (nvarchar(4000))
   UspParameters : (nvarchar(max))
   --
-  --
 }
 
 entity "puml-link:dhw:sqldb:workflow.workflow_sqlusp.adoc[]" as workflow.Workflow_SqlUsp << V >> {
-  --
   - SqlUsp : (nvarchar(max))
   UspList : (nvarchar(max))
   - Workflow_id : (int)
   Workflow_Name : (nvarchar(500))
   --
-  --
 }
 
 config.ftv_dwh_database <.. uspgenerator.GeneratorUsp_SqlUsp
 config.ftv_dwh_database <.. repo_sys.ExtendedProperties
-config.ftv_dwh_database <.. repo_sys.SysColumn
-config.ftv_dwh_database <.. repo_sys.sql_expression_dependencies
 config.ftv_dwh_database <.. workflow.Workflow_SqlUsp
-config.ftv_dwh_database <.. reference.RepoObjectColumn_reference_QueryPlan
-config.ftv_dwh_database <.. repo.RepoObject_SqlCreateTable
 config.ftv_dwh_database <.. reference.usp_update_Referencing_Count
 config.ftv_dwh_database <.. repo.usp_update_Referencing_Count
+config.ftv_dwh_database <.. repo_sys.SysColumn
+config.ftv_dwh_database <.. repo_sys.sql_expression_dependencies
+config.ftv_dwh_database <.. reference.RepoObjectColumn_reference_QueryPlan
+config.ftv_dwh_database <.. repo.RepoObject_SqlCreateTable
 config.Parameter <.. config.ftv_dwh_database
-
+footer The diagram is interactive and contains links.
 @enduml
 

@@ -26,74 +26,86 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:docs.repoobject_columnlist.adoc[]" as docs.RepoObject_ColumnList << V >> {
-  --
-  AntoraColumnDetails : (nvarchar(max))
-  AntoraNonPkColumnTableRows : (nvarchar(max))
-  AntoraPkColumnTableRows : (nvarchar(max))
-  - cultures_name : (nvarchar(10))
-  is_external : (tinyint)
-  PlantumlIndexColumns : (nvarchar(max))
-  PlantumlNonPkEntityColumns : (nvarchar(max))
-  PlantumlNonPkHiddenEntityColumns : (nvarchar(max))
-  PlantumlNonPkIndexColumns : (nvarchar(max))
-  PlantumlPkEntityColumns : (nvarchar(max))
-  - RepoObject_guid : (uniqueidentifier)
-  --
-  --
-}
-
 entity "puml-link:dhw:sqldb:docs.repoobject_plantuml_colreflist_1_1.adoc[]" as docs.RepoObject_Plantuml_ColRefList_1_1 << V >> {
-  --
   ColRefList : (nvarchar(max))
   - cultures_name : (nvarchar(10))
   - RepoObject_guid : (uniqueidentifier)
-  --
   --
 }
 
 entity "puml-link:dhw:sqldb:ssas.repoobjectcolumn_translation.adoc[]" as ssas.RepoObjectColumn_translation << V >> {
   - **RepoObjectColumn_guid** : (uniqueidentifier)
   - **cultures_name** : (nvarchar(10))
-  --
   - Column_name : (nvarchar(128))
   cultures_translations_model_name : (nvarchar(500))
   cultures_translations_model_tables_columns_name : (nvarchar(128))
   cultures_translations_model_tables_name : (nvarchar(128))
   databasename : (nvarchar(128))
+  displayfolder_DisplayName : (nvarchar(512))
+  displayfolder_translation : (nvarchar(512))
+  pk_index_guid : (uniqueidentifier)
+  - RepoObject_name : (nvarchar(128))
+  - RepoObject_schema_name : (nvarchar(128))
   RepoObjectColumn_DisplayName : (nvarchar(128))
   RepoObjectColumn_translation : (nvarchar(128))
+  - tabcol_IsHidden : (bit)
+  tables_columns_displayFolder : (nvarchar(500))
   tables_columns_name : (nvarchar(128))
   tables_name : (nvarchar(128))
   --
+}
+
+entity "puml-link:dhw:sqldb:ssas.repoobjectcolumn_translation_displayfolder_union.adoc[]" as ssas.RepoObjectColumn_translation_displayfolder_union << V >> {
+  - Column_name : (nvarchar(128))
+  - cultures_name : (nvarchar(10))
+  cultures_translations_model_name : (nvarchar(500))
+  cultures_translations_model_tables_columns_name : (nvarchar(128))
+  cultures_translations_model_tables_name : (nvarchar(128))
+  databasename : (nvarchar(128))
+  displayfolder_DisplayName : (nvarchar(512))
+  displayfolder_translation : (nvarchar(512))
+  - is_displayfolder : (int)
+  pk_index_guid : (uniqueidentifier)
+  - RepoObject_name : (nvarchar(128))
+  - RepoObject_schema_name : (nvarchar(128))
+  RepoObjectColumn_DisplayName : (nvarchar(128))
+  - RepoObjectColumn_guid : (uniqueidentifier)
+  RepoObjectColumn_translation : (nvarchar(128))
+  tabcol_IsHidden : (tinyint)
+  tables_columns_displayFolder : (nvarchar(500))
+  tables_columns_name : (nvarchar(128))
+  tables_name : (nvarchar(128))
   --
 }
 
 entity "puml-link:dhw:sqldb:ssas.repoobjectcolumn_translation_t.adoc[]" as ssas.RepoObjectColumn_translation_T << U >> {
   - **RepoObjectColumn_guid** : (uniqueidentifier)
   - **cultures_name** : (nvarchar(10))
-  --
   - Column_name : (nvarchar(128))
   cultures_translations_model_name : (nvarchar(500))
   cultures_translations_model_tables_columns_name : (nvarchar(128))
   cultures_translations_model_tables_name : (nvarchar(128))
   databasename : (nvarchar(128))
+  displayfolder_DisplayName : (nvarchar(512))
+  displayfolder_translation : (nvarchar(512))
+  pk_index_guid : (uniqueidentifier)
+  - RepoObject_name : (nvarchar(128))
+  - RepoObject_schema_name : (nvarchar(128))
   RepoObjectColumn_DisplayName : (nvarchar(128))
   RepoObjectColumn_translation : (nvarchar(128))
+  - tabcol_IsHidden : (bit)
+  tables_columns_displayFolder : (nvarchar(500))
   tables_columns_name : (nvarchar(128))
   tables_name : (nvarchar(128))
-  --
   --
 }
 
 entity "puml-link:dhw:sqldb:ssas.usp_persist_repoobjectcolumn_translation_t.adoc[]" as ssas.usp_PERSIST_RepoObjectColumn_translation_T << P >> {
   --
-  --
-  --
 }
 
 ssas.RepoObjectColumn_translation <.. ssas.RepoObjectColumn_translation_T
-ssas.RepoObjectColumn_translation_T <.. docs.RepoObject_ColumnList
+ssas.RepoObjectColumn_translation_T <.. ssas.RepoObjectColumn_translation_displayfolder_union
 ssas.RepoObjectColumn_translation_T <.. docs.RepoObject_Plantuml_ColRefList_1_1
 ssas.RepoObjectColumn_translation_T <.. ssas.usp_PERSIST_RepoObjectColumn_translation_T
 "ssas.RepoObjectColumn_translation::Column_name" <-- "ssas.RepoObjectColumn_translation_T::Column_name"
@@ -102,10 +114,17 @@ ssas.RepoObjectColumn_translation_T <.. ssas.usp_PERSIST_RepoObjectColumn_transl
 "ssas.RepoObjectColumn_translation::cultures_translations_model_tables_columns_name" <-- "ssas.RepoObjectColumn_translation_T::cultures_translations_model_tables_columns_name"
 "ssas.RepoObjectColumn_translation::cultures_translations_model_tables_name" <-- "ssas.RepoObjectColumn_translation_T::cultures_translations_model_tables_name"
 "ssas.RepoObjectColumn_translation::databasename" <-- "ssas.RepoObjectColumn_translation_T::databasename"
+"ssas.RepoObjectColumn_translation::displayfolder_DisplayName" <-- "ssas.RepoObjectColumn_translation_T::displayfolder_DisplayName"
+"ssas.RepoObjectColumn_translation::displayfolder_translation" <-- "ssas.RepoObjectColumn_translation_T::displayfolder_translation"
+"ssas.RepoObjectColumn_translation::pk_index_guid" <-- "ssas.RepoObjectColumn_translation_T::pk_index_guid"
+"ssas.RepoObjectColumn_translation::RepoObject_name" <-- "ssas.RepoObjectColumn_translation_T::RepoObject_name"
+"ssas.RepoObjectColumn_translation::RepoObject_schema_name" <-- "ssas.RepoObjectColumn_translation_T::RepoObject_schema_name"
 "ssas.RepoObjectColumn_translation::RepoObjectColumn_DisplayName" <-- "ssas.RepoObjectColumn_translation_T::RepoObjectColumn_DisplayName"
 "ssas.RepoObjectColumn_translation::RepoObjectColumn_guid" <-- "ssas.RepoObjectColumn_translation_T::RepoObjectColumn_guid"
 "ssas.RepoObjectColumn_translation::RepoObjectColumn_translation" <-- "ssas.RepoObjectColumn_translation_T::RepoObjectColumn_translation"
+"ssas.RepoObjectColumn_translation::tabcol_IsHidden" <-- "ssas.RepoObjectColumn_translation_T::tabcol_IsHidden"
+"ssas.RepoObjectColumn_translation::tables_columns_displayFolder" <-- "ssas.RepoObjectColumn_translation_T::tables_columns_displayFolder"
 "ssas.RepoObjectColumn_translation::tables_columns_name" <-- "ssas.RepoObjectColumn_translation_T::tables_columns_name"
-"ssas.RepoObjectColumn_translation::tables_name" <-- "ssas.RepoObjectColumn_translation_T::tables_name"
+"ssas.RepoObjectColumn_translation::tables_name" <-- "ssas.RepoObjectColumn_translation_T::tables_name"footer The diagram is interactive and contains links.
 @enduml
 

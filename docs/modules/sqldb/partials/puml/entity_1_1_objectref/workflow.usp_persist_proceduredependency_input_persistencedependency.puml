@@ -1,0 +1,58 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:logs.usp_executionlog_insert.adoc[]" as logs.usp_ExecutionLog_insert << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:workflow.proceduredependency_input_persistencedependency.adoc[]" as workflow.ProcedureDependency_input_PersistenceDependency << V >> {
+  **referenced_Procedure_RepoObject_guid** : (uniqueidentifier)
+  **referencing_Procedure_RepoObject_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:workflow.proceduredependency_input_persistencedependency_s.adoc[]" as workflow.ProcedureDependency_input_PersistenceDependency_S << V >> {
+  **referenced_Procedure_RepoObject_guid** : (uniqueidentifier)
+  **referencing_Procedure_RepoObject_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:workflow.usp_persist_proceduredependency_input_persistencedependency.adoc[]" as workflow.usp_PERSIST_ProcedureDependency_input_PersistenceDependency << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:workflow.usp_workflow.adoc[]" as workflow.usp_workflow << P >> {
+  --
+}
+
+logs.usp_ExecutionLog_insert <.. workflow.usp_PERSIST_ProcedureDependency_input_PersistenceDependency
+workflow.ProcedureDependency_input_PersistenceDependency <.. workflow.usp_PERSIST_ProcedureDependency_input_PersistenceDependency
+workflow.ProcedureDependency_input_PersistenceDependency_S <.. workflow.usp_PERSIST_ProcedureDependency_input_PersistenceDependency
+workflow.usp_PERSIST_ProcedureDependency_input_PersistenceDependency <.. workflow.usp_workflowfooter The diagram is interactive and contains links.
+@enduml
+

@@ -1,0 +1,148 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_dft_component_input_externalmetadatacolumn_src.adoc[]" as ssis.PackageTask_Dft_Component_input_externalMetadataColumn_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **Column_refId** : (varchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_dft_component_input_inputcolumn_src.adoc[]" as ssis.PackageTask_Dft_Component_input_inputColumn_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **Column_refId** : (varchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_dft_component_input_src.adoc[]" as ssis.PackageTask_Dft_Component_input_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **input_refId** : (varchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_dft_component_output_externalmetadatacolumn_src.adoc[]" as ssis.PackageTask_Dft_Component_output_externalMetadataColumn_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **Column_refId** : (varchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_dft_component_output_outputcolumn_src.adoc[]" as ssis.PackageTask_Dft_Component_output_outputcolumn_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **Column_refId** : (varchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_dft_component_output_src.adoc[]" as ssis.PackageTask_Dft_Component_output_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **output_refId** : (varchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_dft_component_src.adoc[]" as ssis.PackageTask_Dft_Component_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **Component_refId** : (varchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_dft_srcdest_src.adoc[]" as ssis.PackageTask_Dft_SrcDest_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **DFTTasksPath** : (varchar(max))
+  **SourceColumn** : (varchar(8000))
+  **DestinationColumn** : (varchar(8000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_sql_parameter_src.adoc[]" as ssis.PackageTask_Sql_Parameter_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **TaskPath** : (varchar(8000))
+  **ParameterBindingSequence** : (varchar(1000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_src.adoc[]" as ssis.PackageTask_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **TaskPath** : (varchar(8000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tblcontrolflow.adoc[]" as ssis_t.TblControlFlow << U >> {
+  - **ControlFlowDetailsRowID** : (int)
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tbltask_dft_component_src.adoc[]" as ssis_t.TblTask_Dft_Component_src << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tbltask_dft_details_src.adoc[]" as ssis_t.TblTask_Dft_Details_src << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tbltask_script_src.adoc[]" as ssis_t.TblTask_Script_src << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tbltask_sql_src.adoc[]" as ssis_t.TblTask_Sql_src << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.usp_getpackagedetails.adoc[]" as ssis_t.usp_GetPackageDetails << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.usp_packageanalysis.adoc[]" as ssis_t.usp_PackageAnalysis << P >> {
+  --
+}
+
+ssis_t.TblControlFlow <.. ssis_t.usp_GetPackageDetails
+ssis_t.TblControlFlow <.. ssis.PackageTask_src
+ssis_t.TblControlFlow <.. ssis_t.TblTask_Dft_Details_src
+ssis_t.TblControlFlow <.. ssis.PackageTask_Sql_Parameter_src
+ssis_t.TblControlFlow <.. ssis.PackageTask_Dft_SrcDest_src
+ssis_t.TblControlFlow <.. ssis_t.TblTask_Script_src
+ssis_t.TblControlFlow <.. ssis_t.TblTask_Sql_src
+ssis_t.TblControlFlow <.. ssis_t.usp_PackageAnalysis
+ssis_t.TblControlFlow <.. ssis_t.TblTask_Dft_Component_src
+ssis_t.TblControlFlow <.. ssis.PackageTask_Dft_Component_input_externalMetadataColumn_src
+ssis_t.TblControlFlow <.. ssis.PackageTask_Dft_Component_output_externalMetadataColumn_src
+ssis_t.TblControlFlow <.. ssis.PackageTask_Dft_Component_input_inputColumn_src
+ssis_t.TblControlFlow <.. ssis.PackageTask_Dft_Component_src
+ssis_t.TblControlFlow <.. ssis.PackageTask_Dft_Component_input_src
+ssis_t.TblControlFlow <.. ssis.PackageTask_Dft_Component_output_src
+ssis_t.TblControlFlow <.. ssis.PackageTask_Dft_Component_output_outputcolumn_srcfooter The diagram is interactive and contains links.
+@enduml
+

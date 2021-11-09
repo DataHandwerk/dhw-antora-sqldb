@@ -1,0 +1,394 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:docs.repoobject_columnlist.adoc[]" as docs.RepoObject_ColumnList << V >> {
+  AntoraColumnDetails : (nvarchar(max))
+  AntoraNonPkColumnTableRows : (nvarchar(max))
+  AntoraPkColumnTableRows : (nvarchar(max))
+  - cultures_name : (nvarchar(10))
+  is_external : (tinyint)
+  PlantumlAllEntityColumns : (nvarchar(max))
+  PlantumlIndexColumns : (nvarchar(max))
+  PlantumlNonPkEntityColumns : (nvarchar(max))
+  PlantumlNonPkHiddenEntityColumns : (nvarchar(max))
+  PlantumlNonPkIndexColumns : (nvarchar(max))
+  PlantumlPkEntityColumns : (nvarchar(max))
+  - RepoObject_guid : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.repoobjectcolumn_referencedlist.adoc[]" as reference.RepoObjectColumn_ReferencedList << V >> {
+  AntoraReferencedColumnList : (nvarchar(max))
+  Referencing_fullname : (nvarchar(261))
+  Referencing_fullname2 : (nvarchar(257))
+  - Referencing_guid : (uniqueidentifier)
+  Referencing_type : (char(2))
+  ReferencingColumn_fullname : (nvarchar(392))
+  ReferencingColumn_fullname2 : (nvarchar(386))
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.repoobjectcolumn_referencinglist.adoc[]" as reference.RepoObjectColumn_ReferencingList << V >> {
+  AntoraReferencingColumnList : (nvarchar(max))
+  Referenced_fullname : (nvarchar(261))
+  Referenced_fullname2 : (nvarchar(257))
+  - Referenced_guid : (uniqueidentifier)
+  Referenced_type : (char(2))
+  ReferencedColumn_fullname : (nvarchar(392))
+  ReferencedColumn_fullname2 : (nvarchar(386))
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.indexcolumn_union_t.adoc[]" as repo.IndexColumn_union_T << U >> {
+  **index_guid** : (uniqueidentifier)
+  - **index_column_id** : (int)
+  index_name : (nvarchar(450))
+  is_descending_key : (bit)
+  is_index_primary_key : (bit)
+  is_index_real : (bit)
+  is_index_unique : (bit)
+  parent_RepoObject_guid : (uniqueidentifier)
+  parent_schema_name : (nvarchar(128))
+  parent_SysObject_fullname : (nvarchar(261))
+  parent_SysObject_name : (nvarchar(128))
+  RepoObjectColumn_guid : (uniqueidentifier)
+  SysObject_column_name : (nvarchar(128))
+  SysObject_column_user_type_fullname : (nvarchar(182))
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobject_columnlist.adoc[]" as repo.RepoObject_ColumnList << V >> {
+  CreateColumnList : (nvarchar(max))
+  DbmlColumnList : (nvarchar(max))
+  PersistenceCompareColumnList : (nvarchar(max))
+  PersistenceInsertColumnList : (nvarchar(max))
+  PersistenceUpdateColumnList : (nvarchar(max))
+  - RepoObject_guid : (uniqueidentifier)
+  RepoObjectColumn_fullname : (nvarchar(520))
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobjectcolumn.adoc[]" as repo.RepoObjectColumn << U >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  Inheritance_StringAggSeparatorSql : (nvarchar(4000))
+  InheritanceDefinition : (nvarchar(4000))
+  InheritanceType : (tinyint)
+  is_persistence_no_check : (bit)
+  is_persistence_no_include : (bit)
+  is_persistence_no_update : (bit)
+  is_query_plan_expression : (bit)
+  is_required_ColumnMerge : (bit)
+  is_SysObjectColumn_missing : (bit)
+  persistence_source_RepoObjectColumn_guid : (uniqueidentifier)
+  Referencing_Count : (int)
+  Repo_default_definition : (nvarchar(max))
+  Repo_default_is_system_named : (bit)
+  Repo_default_name : (nvarchar(128))
+  Repo_definition : (nvarchar(max))
+  - Repo_generated_always_type : (tinyint)
+  Repo_graph_type : (int)
+  Repo_increment_value : (sql_variant)
+  - Repo_is_computed : (bit)
+  - Repo_is_identity : (bit)
+  Repo_is_nullable : (bit)
+  Repo_is_persisted : (bit)
+  Repo_seed_value : (sql_variant)
+  Repo_user_type_fullname : (nvarchar(128))
+  Repo_user_type_name : (nvarchar(128))
+  Repo_uses_database_collation : (bit)
+  - RepoObject_guid : (uniqueidentifier)
+  RepoObjectColumn_column_id : (int)
+  - RepoObjectColumn_name : (nvarchar(128))
+  SysObjectColumn_column_id : (int)
+  - SysObjectColumn_name : (nvarchar(128))
+  # Column_name : (nvarchar(128))
+  ~ has_different_sys_names : (bit)
+  # is_RepoObjectColumn_name_uniqueidentifier : (int)
+  # is_SysObjectColumn_name_uniqueidentifier : (int)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobjectcolumn_gross.adoc[]" as repo.RepoObjectColumn_gross << V >> {
+  - Column_name : (nvarchar(128))
+  Description : (nvarchar(max))
+  has_different_sys_names : (bit)
+  has_get_referenced_issue : (bit)
+  Inheritance_StringAggSeparatorSql : (nvarchar(4000))
+  InheritanceDefinition : (nvarchar(4000))
+  InheritanceType : (tinyint)
+  - is_external : (bit)
+  is_persistence_no_check : (bit)
+  is_persistence_no_include : (bit)
+  is_persistence_no_update : (bit)
+  is_query_plan_expression : (bit)
+  is_repo_managed : (bit)
+  - is_RepoObject_name_uniqueidentifier : (int)
+  - is_RepoObjectColumn_name_uniqueidentifier : (int)
+  is_required_ColumnMerge : (bit)
+  - is_ssas : (bit)
+  is_SysObject_missing : (bit)
+  - is_SysObject_name_uniqueidentifier : (int)
+  is_SysObjectColumn_missing : (bit)
+  - is_SysObjectColumn_name_uniqueidentifier : (int)
+  - modify_dt : (datetime)
+  node_id : (bigint)
+  persistence_source_RepoObject_guid : (uniqueidentifier)
+  persistence_source_RepoObjectColumn_guid : (uniqueidentifier)
+  pk_index_guid : (uniqueidentifier)
+  Property_ms_description : (nvarchar(4000))
+  Referencing_Count : (int)
+  Repo_default_definition : (nvarchar(max))
+  Repo_default_is_system_named : (bit)
+  Repo_default_name : (nvarchar(128))
+  Repo_definition : (nvarchar(max))
+  - Repo_generated_always_type : (tinyint)
+  Repo_graph_type : (int)
+  Repo_increment_value : (sql_variant)
+  - Repo_is_computed : (bit)
+  - Repo_is_identity : (bit)
+  Repo_is_nullable : (bit)
+  Repo_is_persisted : (bit)
+  Repo_seed_value : (sql_variant)
+  Repo_user_type_fullname : (nvarchar(128))
+  Repo_user_type_name : (nvarchar(128))
+  Repo_uses_database_collation : (bit)
+  - RepoObject_fullname : (nvarchar(261))
+  - RepoObject_fullname2 : (nvarchar(257))
+  - RepoObject_guid : (uniqueidentifier)
+  - RepoObject_name : (nvarchar(128))
+  RepoObject_Referencing_Count : (int)
+  - RepoObject_schema_name : (nvarchar(128))
+  - RepoObject_type : (char(2))
+  RepoObjectColumn_column_id : (int)
+  - RepoObjectColumn_fullname : (nvarchar(520))
+  - RepoObjectColumn_fullname2 : (nvarchar(386))
+  - RepoObjectColumn_guid : (uniqueidentifier)
+  - RepoObjectColumn_name : (nvarchar(128))
+  - SysObject_fullname : (nvarchar(261))
+  - SysObject_fullname2 : (nvarchar(257))
+  SysObject_id : (int)
+  SysObject_modify_date : (datetime)
+  - SysObject_name : (nvarchar(128))
+  - SysObject_parent_object_id : (int)
+  - SysObject_schema_name : (nvarchar(128))
+  SysObject_type : (char(2))
+  SysObjectColumn_column_id : (int)
+  - SysObjectColumn_name : (nvarchar(128))
+  tabcol_Description : (nvarchar(max))
+  tabcol_DisplayFolder : (nvarchar(500))
+  tabcol_Expression : (nvarchar(max))
+  tabcol_FormatString : (nvarchar(500))
+  - tabcol_IsHidden : (bit)
+  - tabcol_IsKey : (bit)
+  - tabcol_IsUnique : (bit)
+  tabcol_SummarizeBy : (nvarchar(500))
+  tabcol_Type : (nvarchar(500))
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobjectcolumn_gross2.adoc[]" as repo.RepoObjectColumn_gross2 << V >> {
+  AntoraReferencedColumnList : (nvarchar(max))
+  AntoraReferencingColumnList : (nvarchar(max))
+  - Column_name : (nvarchar(128))
+  Description : (nvarchar(max))
+  has_different_sys_names : (bit)
+  has_get_referenced_issue : (bit)
+  index_column_id : (int)
+  index_name : (nvarchar(450))
+  Inheritance_StringAggSeparatorSql : (nvarchar(4000))
+  InheritanceDefinition : (nvarchar(4000))
+  InheritanceType : (tinyint)
+  - is_external : (bit)
+  is_index_primary_key : (bit)
+  is_persistence_no_check : (bit)
+  is_persistence_no_include : (bit)
+  is_persistence_no_update : (bit)
+  is_query_plan_expression : (bit)
+  is_repo_managed : (bit)
+  - is_RepoObject_name_uniqueidentifier : (int)
+  - is_RepoObjectColumn_name_uniqueidentifier : (int)
+  is_required_ColumnMerge : (bit)
+  - is_ssas : (bit)
+  is_SysObject_missing : (bit)
+  - is_SysObject_name_uniqueidentifier : (int)
+  is_SysObjectColumn_missing : (bit)
+  - is_SysObjectColumn_name_uniqueidentifier : (int)
+  isAnyIndexColumn : (int)
+  - modify_dt : (datetime)
+  node_id : (bigint)
+  persistence_source_RepoObject_guid : (uniqueidentifier)
+  persistence_source_RepoObject_guid_via_Column : (uniqueidentifier)
+  persistence_source_RepoObjectColumn_guid : (uniqueidentifier)
+  pk_index_guid : (uniqueidentifier)
+  Property_ms_description : (nvarchar(4000))
+  Referencing_Count : (int)
+  Repo_default_definition : (nvarchar(max))
+  Repo_default_is_system_named : (bit)
+  Repo_default_name : (nvarchar(128))
+  Repo_definition : (nvarchar(max))
+  - Repo_generated_always_type : (tinyint)
+  Repo_graph_type : (int)
+  Repo_increment_value : (sql_variant)
+  - Repo_is_computed : (bit)
+  - Repo_is_identity : (bit)
+  Repo_is_nullable : (bit)
+  Repo_is_persisted : (bit)
+  Repo_seed_value : (sql_variant)
+  Repo_user_type_fullname : (nvarchar(128))
+  Repo_user_type_name : (nvarchar(128))
+  Repo_uses_database_collation : (bit)
+  - RepoObject_fullname : (nvarchar(261))
+  - RepoObject_fullname2 : (nvarchar(257))
+  - RepoObject_guid : (uniqueidentifier)
+  - RepoObject_name : (nvarchar(128))
+  RepoObject_Referencing_Count : (int)
+  - RepoObject_schema_name : (nvarchar(128))
+  - RepoObject_type : (char(2))
+  RepoObjectColumn_column_id : (int)
+  - RepoObjectColumn_fullname : (nvarchar(520))
+  - RepoObjectColumn_fullname2 : (nvarchar(386))
+  - RepoObjectColumn_guid : (uniqueidentifier)
+  - RepoObjectColumn_name : (nvarchar(128))
+  - SysObject_fullname : (nvarchar(261))
+  - SysObject_fullname2 : (nvarchar(257))
+  SysObject_id : (int)
+  SysObject_modify_date : (datetime)
+  - SysObject_name : (nvarchar(128))
+  - SysObject_parent_object_id : (int)
+  - SysObject_schema_name : (nvarchar(128))
+  SysObject_type : (char(2))
+  SysObjectColumn_column_id : (int)
+  - SysObjectColumn_name : (nvarchar(128))
+  tabcol_Description : (nvarchar(max))
+  tabcol_DisplayFolder : (nvarchar(500))
+  tabcol_Expression : (nvarchar(max))
+  tabcol_FormatString : (nvarchar(500))
+  - tabcol_IsHidden : (bit)
+  - tabcol_IsKey : (bit)
+  - tabcol_IsUnique : (bit)
+  tabcol_SummarizeBy : (nvarchar(500))
+  tabcol_Type : (nvarchar(500))
+  --
+}
+
+entity "puml-link:dhw:sqldb:uspgenerator.usp_generatorusp_insert_update_persistence.adoc[]" as uspgenerator.usp_GeneratorUsp_insert_update_persistence << P >> {
+  --
+}
+
+reference.RepoObjectColumn_ReferencedList <.. repo.RepoObjectColumn_gross2
+reference.RepoObjectColumn_ReferencingList <.. repo.RepoObjectColumn_gross2
+repo.IndexColumn_union_T <.. repo.RepoObjectColumn_gross2
+repo.RepoObjectColumn <.. repo.RepoObjectColumn_gross2
+repo.RepoObjectColumn_gross <.. repo.RepoObjectColumn_gross2
+repo.RepoObjectColumn_gross2 <.. repo.RepoObject_ColumnList
+repo.RepoObjectColumn_gross2 <.. docs.RepoObject_ColumnList
+repo.RepoObjectColumn_gross2 <.. uspgenerator.usp_GeneratorUsp_insert_update_persistence
+"reference.RepoObjectColumn_ReferencedList::AntoraReferencedColumnList" <-- "repo.RepoObjectColumn_gross2::AntoraReferencedColumnList"
+"reference.RepoObjectColumn_ReferencingList::AntoraReferencingColumnList" <-- "repo.RepoObjectColumn_gross2::AntoraReferencingColumnList"
+"repo.IndexColumn_union_T::index_column_id" <-- "repo.RepoObjectColumn_gross2::index_column_id"
+"repo.IndexColumn_union_T::index_name" <-- "repo.RepoObjectColumn_gross2::index_name"
+"repo.IndexColumn_union_T::is_index_primary_key" <-- "repo.RepoObjectColumn_gross2::is_index_primary_key"
+"repo.RepoObjectColumn::RepoObject_guid" <-- "repo.RepoObjectColumn_gross2::persistence_source_RepoObject_guid_via_Column"
+"repo.RepoObjectColumn_gross::Column_name" <-- "repo.RepoObjectColumn_gross2::Column_name"
+"repo.RepoObjectColumn_gross::Description" <-- "repo.RepoObjectColumn_gross2::Description"
+"repo.RepoObjectColumn_gross::has_different_sys_names" <-- "repo.RepoObjectColumn_gross2::has_different_sys_names"
+"repo.RepoObjectColumn_gross::has_get_referenced_issue" <-- "repo.RepoObjectColumn_gross2::has_get_referenced_issue"
+"repo.RepoObjectColumn_gross::Inheritance_StringAggSeparatorSql" <-- "repo.RepoObjectColumn_gross2::Inheritance_StringAggSeparatorSql"
+"repo.RepoObjectColumn_gross::InheritanceDefinition" <-- "repo.RepoObjectColumn_gross2::InheritanceDefinition"
+"repo.RepoObjectColumn_gross::InheritanceType" <-- "repo.RepoObjectColumn_gross2::InheritanceType"
+"repo.RepoObjectColumn_gross::is_external" <-- "repo.RepoObjectColumn_gross2::is_external"
+"repo.RepoObjectColumn_gross::is_persistence_no_check" <-- "repo.RepoObjectColumn_gross2::is_persistence_no_check"
+"repo.RepoObjectColumn_gross::is_persistence_no_include" <-- "repo.RepoObjectColumn_gross2::is_persistence_no_include"
+"repo.RepoObjectColumn_gross::is_persistence_no_update" <-- "repo.RepoObjectColumn_gross2::is_persistence_no_update"
+"repo.RepoObjectColumn_gross::is_query_plan_expression" <-- "repo.RepoObjectColumn_gross2::is_query_plan_expression"
+"repo.RepoObjectColumn_gross::is_repo_managed" <-- "repo.RepoObjectColumn_gross2::is_repo_managed"
+"repo.RepoObjectColumn_gross::is_RepoObject_name_uniqueidentifier" <-- "repo.RepoObjectColumn_gross2::is_RepoObject_name_uniqueidentifier"
+"repo.RepoObjectColumn_gross::is_RepoObjectColumn_name_uniqueidentifier" <-- "repo.RepoObjectColumn_gross2::is_RepoObjectColumn_name_uniqueidentifier"
+"repo.RepoObjectColumn_gross::is_required_ColumnMerge" <-- "repo.RepoObjectColumn_gross2::is_required_ColumnMerge"
+"repo.RepoObjectColumn_gross::is_ssas" <-- "repo.RepoObjectColumn_gross2::is_ssas"
+"repo.RepoObjectColumn_gross::is_SysObject_missing" <-- "repo.RepoObjectColumn_gross2::is_SysObject_missing"
+"repo.RepoObjectColumn_gross::is_SysObject_name_uniqueidentifier" <-- "repo.RepoObjectColumn_gross2::is_SysObject_name_uniqueidentifier"
+"repo.RepoObjectColumn_gross::is_SysObjectColumn_missing" <-- "repo.RepoObjectColumn_gross2::is_SysObjectColumn_missing"
+"repo.RepoObjectColumn_gross::is_SysObjectColumn_name_uniqueidentifier" <-- "repo.RepoObjectColumn_gross2::is_SysObjectColumn_name_uniqueidentifier"
+"repo.RepoObjectColumn_gross::modify_dt" <-- "repo.RepoObjectColumn_gross2::modify_dt"
+"repo.RepoObjectColumn_gross::node_id" <-- "repo.RepoObjectColumn_gross2::node_id"
+"repo.RepoObjectColumn_gross::persistence_source_RepoObject_guid" <-- "repo.RepoObjectColumn_gross2::persistence_source_RepoObject_guid"
+"repo.RepoObjectColumn_gross::persistence_source_RepoObjectColumn_guid" <-- "repo.RepoObjectColumn_gross2::persistence_source_RepoObjectColumn_guid"
+"repo.RepoObjectColumn_gross::pk_index_guid" <-- "repo.RepoObjectColumn_gross2::pk_index_guid"
+"repo.RepoObjectColumn_gross::Property_ms_description" <-- "repo.RepoObjectColumn_gross2::Property_ms_description"
+"repo.RepoObjectColumn_gross::Referencing_Count" <-- "repo.RepoObjectColumn_gross2::Referencing_Count"
+"repo.RepoObjectColumn_gross::Repo_default_definition" <-- "repo.RepoObjectColumn_gross2::Repo_default_definition"
+"repo.RepoObjectColumn_gross::Repo_default_is_system_named" <-- "repo.RepoObjectColumn_gross2::Repo_default_is_system_named"
+"repo.RepoObjectColumn_gross::Repo_default_name" <-- "repo.RepoObjectColumn_gross2::Repo_default_name"
+"repo.RepoObjectColumn_gross::Repo_definition" <-- "repo.RepoObjectColumn_gross2::Repo_definition"
+"repo.RepoObjectColumn_gross::Repo_generated_always_type" <-- "repo.RepoObjectColumn_gross2::Repo_generated_always_type"
+"repo.RepoObjectColumn_gross::Repo_graph_type" <-- "repo.RepoObjectColumn_gross2::Repo_graph_type"
+"repo.RepoObjectColumn_gross::Repo_increment_value" <-- "repo.RepoObjectColumn_gross2::Repo_increment_value"
+"repo.RepoObjectColumn_gross::Repo_is_computed" <-- "repo.RepoObjectColumn_gross2::Repo_is_computed"
+"repo.RepoObjectColumn_gross::Repo_is_identity" <-- "repo.RepoObjectColumn_gross2::Repo_is_identity"
+"repo.RepoObjectColumn_gross::Repo_is_nullable" <-- "repo.RepoObjectColumn_gross2::Repo_is_nullable"
+"repo.RepoObjectColumn_gross::Repo_is_persisted" <-- "repo.RepoObjectColumn_gross2::Repo_is_persisted"
+"repo.RepoObjectColumn_gross::Repo_seed_value" <-- "repo.RepoObjectColumn_gross2::Repo_seed_value"
+"repo.RepoObjectColumn_gross::Repo_user_type_fullname" <-- "repo.RepoObjectColumn_gross2::Repo_user_type_fullname"
+"repo.RepoObjectColumn_gross::Repo_user_type_name" <-- "repo.RepoObjectColumn_gross2::Repo_user_type_name"
+"repo.RepoObjectColumn_gross::Repo_uses_database_collation" <-- "repo.RepoObjectColumn_gross2::Repo_uses_database_collation"
+"repo.RepoObjectColumn_gross::RepoObject_fullname" <-- "repo.RepoObjectColumn_gross2::RepoObject_fullname"
+"repo.RepoObjectColumn_gross::RepoObject_fullname2" <-- "repo.RepoObjectColumn_gross2::RepoObject_fullname2"
+"repo.RepoObjectColumn_gross::RepoObject_guid" <-- "repo.RepoObjectColumn_gross2::RepoObject_guid"
+"repo.RepoObjectColumn_gross::RepoObject_name" <-- "repo.RepoObjectColumn_gross2::RepoObject_name"
+"repo.RepoObjectColumn_gross::RepoObject_Referencing_Count" <-- "repo.RepoObjectColumn_gross2::RepoObject_Referencing_Count"
+"repo.RepoObjectColumn_gross::RepoObject_schema_name" <-- "repo.RepoObjectColumn_gross2::RepoObject_schema_name"
+"repo.RepoObjectColumn_gross::RepoObject_type" <-- "repo.RepoObjectColumn_gross2::RepoObject_type"
+"repo.RepoObjectColumn_gross::RepoObjectColumn_column_id" <-- "repo.RepoObjectColumn_gross2::RepoObjectColumn_column_id"
+"repo.RepoObjectColumn_gross::RepoObjectColumn_fullname" <-- "repo.RepoObjectColumn_gross2::RepoObjectColumn_fullname"
+"repo.RepoObjectColumn_gross::RepoObjectColumn_fullname2" <-- "repo.RepoObjectColumn_gross2::RepoObjectColumn_fullname2"
+"repo.RepoObjectColumn_gross::RepoObjectColumn_guid" <-- "repo.RepoObjectColumn_gross2::RepoObjectColumn_guid"
+"repo.RepoObjectColumn_gross::RepoObjectColumn_name" <-- "repo.RepoObjectColumn_gross2::RepoObjectColumn_name"
+"repo.RepoObjectColumn_gross::SysObject_fullname" <-- "repo.RepoObjectColumn_gross2::SysObject_fullname"
+"repo.RepoObjectColumn_gross::SysObject_fullname2" <-- "repo.RepoObjectColumn_gross2::SysObject_fullname2"
+"repo.RepoObjectColumn_gross::SysObject_id" <-- "repo.RepoObjectColumn_gross2::SysObject_id"
+"repo.RepoObjectColumn_gross::SysObject_modify_date" <-- "repo.RepoObjectColumn_gross2::SysObject_modify_date"
+"repo.RepoObjectColumn_gross::SysObject_name" <-- "repo.RepoObjectColumn_gross2::SysObject_name"
+"repo.RepoObjectColumn_gross::SysObject_parent_object_id" <-- "repo.RepoObjectColumn_gross2::SysObject_parent_object_id"
+"repo.RepoObjectColumn_gross::SysObject_schema_name" <-- "repo.RepoObjectColumn_gross2::SysObject_schema_name"
+"repo.RepoObjectColumn_gross::SysObject_type" <-- "repo.RepoObjectColumn_gross2::SysObject_type"
+"repo.RepoObjectColumn_gross::SysObjectColumn_column_id" <-- "repo.RepoObjectColumn_gross2::SysObjectColumn_column_id"
+"repo.RepoObjectColumn_gross::SysObjectColumn_name" <-- "repo.RepoObjectColumn_gross2::SysObjectColumn_name"
+"repo.RepoObjectColumn_gross::tabcol_Description" <-- "repo.RepoObjectColumn_gross2::tabcol_Description"
+"repo.RepoObjectColumn_gross::tabcol_DisplayFolder" <-- "repo.RepoObjectColumn_gross2::tabcol_DisplayFolder"
+"repo.RepoObjectColumn_gross::tabcol_Expression" <-- "repo.RepoObjectColumn_gross2::tabcol_Expression"
+"repo.RepoObjectColumn_gross::tabcol_FormatString" <-- "repo.RepoObjectColumn_gross2::tabcol_FormatString"
+"repo.RepoObjectColumn_gross::tabcol_IsHidden" <-- "repo.RepoObjectColumn_gross2::tabcol_IsHidden"
+"repo.RepoObjectColumn_gross::tabcol_IsKey" <-- "repo.RepoObjectColumn_gross2::tabcol_IsKey"
+"repo.RepoObjectColumn_gross::tabcol_IsUnique" <-- "repo.RepoObjectColumn_gross2::tabcol_IsUnique"
+"repo.RepoObjectColumn_gross::tabcol_SummarizeBy" <-- "repo.RepoObjectColumn_gross2::tabcol_SummarizeBy"
+"repo.RepoObjectColumn_gross::tabcol_Type" <-- "repo.RepoObjectColumn_gross2::tabcol_Type"
+"repo.RepoObjectColumn_gross2::is_external" <-- "docs.RepoObject_ColumnList::is_external"
+"repo.RepoObjectColumn_gross2::RepoObject_guid" <-- "repo.RepoObject_ColumnList::RepoObject_guid"footer The diagram is interactive and contains links.
+@enduml
+

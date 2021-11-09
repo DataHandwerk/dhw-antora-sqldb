@@ -1,0 +1,117 @@
+@startuml
+'Left to right direction
+top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:config.fs_get_parameter_value.adoc[]" as config.fs_get_parameter_value << FN >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:config.parameter.adoc[]" as config.Parameter << U >> {
+  - **Parameter_name** : (varchar(100))
+  - **sub_Parameter** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:configt.parameter_default.adoc[]" as configT.Parameter_default << V >> {
+  - **Parameter_name** : (varchar(52))
+  - **sub_Parameter** : (nvarchar(27))
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.culture.adoc[]" as docs.Culture << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.fs_antoramodulefolder.adoc[]" as docs.fs_AntoraModuleFolder << FN >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.usp_antoraexport_objectpagetemplate.adoc[]" as docs.usp_AntoraExport_ObjectPageTemplate << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:logs.executionlog.adoc[]" as logs.ExecutionLog << U >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:logs.usp_executionlog_insert.adoc[]" as logs.usp_ExecutionLog_insert << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json.adoc[]" as ssas.model_json << U >> {
+  - **databasename** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json_10.adoc[]" as ssas.model_json_10 << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json_20.adoc[]" as ssas.model_json_20 << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json_34_cultures.adoc[]" as ssas.model_json_34_cultures << V >> {
+  - **databasename** : (nvarchar(128))
+  **cultures_name** : (nvarchar(500))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json_341_cultures_translations.adoc[]" as ssas.model_json_341_cultures_translations << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json_3411_cultures_translations_model.adoc[]" as ssas.model_json_3411_cultures_translations_model << V >> {
+  - **databasename** : (nvarchar(128))
+  **cultures_name** : (nvarchar(500))
+  **cultures_translations_model_name** : (nvarchar(500))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json_3411_cultures_translations_model_t.adoc[]" as ssas.model_json_3411_cultures_translations_model_T << U >> {
+  - **databasename** : (nvarchar(128))
+  **cultures_name** : (nvarchar(500))
+  --
+}
+
+config.fs_get_parameter_value <.. docs.fs_AntoraModuleFolder
+config.Parameter <.. docs.usp_AntoraExport_ObjectPageTemplate
+config.Parameter <.. config.fs_get_parameter_value
+configT.Parameter_default <.. config.Parameter
+docs.culture <.. docs.usp_AntoraExport_ObjectPageTemplate
+docs.fs_AntoraModuleFolder <.. docs.usp_AntoraExport_ObjectPageTemplate
+logs.ExecutionLog <.. logs.usp_ExecutionLog_insert
+logs.usp_ExecutionLog_insert <.. docs.usp_AntoraExport_ObjectPageTemplate
+ssas.model_json <.. ssas.model_json_10
+ssas.model_json_10 <.. ssas.model_json_20
+ssas.model_json_20 <.. ssas.model_json_34_cultures
+ssas.model_json_34_cultures <.. ssas.model_json_341_cultures_translations
+ssas.model_json_341_cultures_translations <.. ssas.model_json_3411_cultures_translations_model
+ssas.model_json_3411_cultures_translations_model <.. ssas.model_json_3411_cultures_translations_model_T
+ssas.model_json_3411_cultures_translations_model_T <.. docs.Culturefooter The diagram is interactive and contains links.
+@enduml
+

@@ -1,0 +1,88 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:ssis_t.tblcontrolflow.adoc[]" as ssis_t.TblControlFlow << U >> {
+  - **ControlFlowDetailsRowID** : (int)
+  DelayValidationPropertyValue : (varchar(100))
+  DFTQuery : (xml)
+  ExecPkgTaskQry : (xml)
+  ExpressionValue : (varchar(5000))
+  IsDisabled : (varchar(10))
+  RowID : (int)
+  ScriptTaskQry : (xml)
+  SqlTaskQry : (xml)
+  TaskDescription : (varchar(max))
+  TaskName : (varchar(2000))
+  TaskPath : (varchar(8000))
+  TaskType : (varchar(5000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tbltask_dft_component_src.adoc[]" as ssis_t.TblTask_Dft_Component_src << V >> {
+  AccessMode : (varchar(max))
+  AlwaysUseDefaultCodePage : (varchar(max))
+  CommandTimeout : (int)
+  componentClassID : (varchar(max))
+  Connection_description : (varchar(max))
+  Connection_name : (varchar(max))
+  Connection_refId : (varchar(max))
+  connectionManagerID : (varchar(max))
+  connectionManagerRefId : (varchar(max))
+  ContactInfo : (varchar(max))
+  - ControlFlowDetailsRowID : (int)
+  DefaultCodePage : (int)
+  description : (varchar(max))
+  FastLoadKeepIdentity : (bit)
+  FastLoadKeepNulls : (bit)
+  FastLoadMaxInsertCommitSize : (int)
+  FastLoadOptions : (varchar(max))
+  inputsQry : (xml)
+  IsSortedProperty : (varchar(10))
+  name : (varchar(max))
+  OpenRowset : (varchar(max))
+  OpenRowsetVariable : (varchar(max))
+  outputsQry : (xml)
+  ParameterMapping : (varchar(max))
+  refId : (varchar(max))
+  RowID : (int)
+  SqlCommand : (varchar(max))
+  SqlCommandVariable : (varchar(max))
+  VariableName : (varchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.usp_getpackagedetails.adoc[]" as ssis_t.usp_GetPackageDetails << P >> {
+  --
+}
+
+ssis_t.TblControlFlow <.. ssis_t.TblTask_Dft_Component_src
+ssis_t.TblTask_Dft_Component_src <.. ssis_t.usp_GetPackageDetails
+"ssis_t.TblControlFlow::ControlFlowDetailsRowID" <-- "ssis_t.TblTask_Dft_Component_src::ControlFlowDetailsRowID"
+"ssis_t.TblControlFlow::RowID" <-- "ssis_t.TblTask_Dft_Component_src::RowID"footer The diagram is interactive and contains links.
+@enduml
+

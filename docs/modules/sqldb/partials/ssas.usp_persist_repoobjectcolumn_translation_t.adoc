@@ -50,7 +50,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-10-04 23:48:22
+2021-11-07 17:28:40
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -58,12 +58,6 @@ stored procedure
 // tag::AntoraColumnDetails[]
 
 // end::AntoraColumnDetails[]
-
-== AntoraMeasureDetails
-
-// tag::AntoraMeasureDetails[]
-
-// end::AntoraMeasureDetails[]
 
 == AntoraPkColumnTableRows
 
@@ -83,6 +77,12 @@ stored procedure
 
 // end::AntoraIndexList[]
 
+== AntoraMeasureDetails
+
+// tag::AntoraMeasureDetails[]
+
+// end::AntoraMeasureDetails[]
+
 == AntoraParameterList
 
 // tag::AntoraParameterList[]
@@ -91,6 +91,18 @@ stored procedure
 * @sub_execution_id (int)
 * @parent_execution_log_id (bigint)
 // end::AntoraParameterList[]
+
+== AntoraXrefCulturesList
+
+// tag::AntoraXrefCulturesList[]
+* xref:dhw:sqldb:ssas.usp_persist_repoobjectcolumn_translation_t.adoc[] - 
+// end::AntoraXrefCulturesList[]
+
+== cultures_count
+
+// tag::cultures_count[]
+1
+// end::cultures_count[]
 
 == Other tags
 
@@ -123,7 +135,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 TRUNCATE TABLE [ssas].[RepoObjectColumn_translation_T]
 ----
@@ -144,7 +156,7 @@ TRUNCATE TABLE [ssas].[RepoObjectColumn_translation_T]
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 INSERT INTO 
  [ssas].[RepoObjectColumn_translation_T]
@@ -156,8 +168,15 @@ INSERT INTO
 , [cultures_translations_model_tables_columns_name]
 , [cultures_translations_model_tables_name]
 , [databasename]
+, [displayfolder_DisplayName]
+, [displayfolder_translation]
+, [pk_index_guid]
+, [RepoObject_name]
+, [RepoObject_schema_name]
 , [RepoObjectColumn_DisplayName]
 , [RepoObjectColumn_translation]
+, [tabcol_IsHidden]
+, [tables_columns_displayFolder]
 , [tables_columns_name]
 , [tables_name]
 )
@@ -169,8 +188,15 @@ SELECT
 , [cultures_translations_model_tables_columns_name]
 , [cultures_translations_model_tables_name]
 , [databasename]
+, [displayfolder_DisplayName]
+, [displayfolder_translation]
+, [pk_index_guid]
+, [RepoObject_name]
+, [RepoObject_schema_name]
 , [RepoObjectColumn_DisplayName]
 , [RepoObjectColumn_translation]
+, [tabcol_IsHidden]
+, [tables_columns_displayFolder]
 , [tables_columns_name]
 , [tables_name]
 
@@ -208,7 +234,7 @@ FROM [ssas].[RepoObjectColumn_translation] AS S
 // end::description[]
 
 
-=== exampleUsage
+=== ExampleUsage
 
 // tag::exampleusage[]
 EXEC [ssas].[usp_PERSIST_RepoObjectColumn_translation_T]
@@ -474,7 +500,7 @@ source: property.RepoObjectProperty WHERE property_int = 1
 // tag::sql_modules_definition[]
 [%collapsible]
 =======
-[source,sql]
+[source,sql,numbered]
 ----
 /*
 code of this procedure is managed in the dhw repository. Do not modify manually.
@@ -590,8 +616,15 @@ INSERT INTO
 , [cultures_translations_model_tables_columns_name]
 , [cultures_translations_model_tables_name]
 , [databasename]
+, [displayfolder_DisplayName]
+, [displayfolder_translation]
+, [pk_index_guid]
+, [RepoObject_name]
+, [RepoObject_schema_name]
 , [RepoObjectColumn_DisplayName]
 , [RepoObjectColumn_translation]
+, [tabcol_IsHidden]
+, [tables_columns_displayFolder]
 , [tables_columns_name]
 , [tables_name]
 )
@@ -603,8 +636,15 @@ SELECT
 , [cultures_translations_model_tables_columns_name]
 , [cultures_translations_model_tables_name]
 , [databasename]
+, [displayfolder_DisplayName]
+, [displayfolder_translation]
+, [pk_index_guid]
+, [RepoObject_name]
+, [RepoObject_schema_name]
 , [RepoObjectColumn_DisplayName]
 , [RepoObjectColumn_translation]
+, [tabcol_IsHidden]
+, [tables_columns_displayFolder]
 , [tables_columns_name]
 , [tables_name]
 

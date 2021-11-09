@@ -1,0 +1,236 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:docs.fs_cleanstringforanchorid.adoc[]" as docs.fs_cleanStringForAnchorId << FN >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.fs_cleanstringforheader.adoc[]" as docs.fs_cleanStringForHeader << FN >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.fs_cleanstringforpuml.adoc[]" as docs.fs_cleanStringForPuml << FN >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.repoobject_columnlist.adoc[]" as docs.RepoObject_ColumnList << V >> {
+  AntoraColumnDetails : (nvarchar(max))
+  AntoraNonPkColumnTableRows : (nvarchar(max))
+  AntoraPkColumnTableRows : (nvarchar(max))
+  - cultures_name : (nvarchar(10))
+  is_external : (tinyint)
+  PlantumlAllEntityColumns : (nvarchar(max))
+  PlantumlIndexColumns : (nvarchar(max))
+  PlantumlNonPkEntityColumns : (nvarchar(max))
+  PlantumlNonPkHiddenEntityColumns : (nvarchar(max))
+  PlantumlNonPkIndexColumns : (nvarchar(max))
+  PlantumlPkEntityColumns : (nvarchar(max))
+  - RepoObject_guid : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.repoobject_columnlist_t.adoc[]" as docs.RepoObject_ColumnList_T << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **cultures_name** : (nvarchar(10))
+  AntoraColumnDetails : (nvarchar(max))
+  AntoraNonPkColumnTableRows : (nvarchar(max))
+  AntoraPkColumnTableRows : (nvarchar(max))
+  is_external : (tinyint)
+  PlantumlAllEntityColumns : (nvarchar(max))
+  PlantumlIndexColumns : (nvarchar(max))
+  PlantumlNonPkEntityColumns : (nvarchar(max))
+  PlantumlNonPkHiddenEntityColumns : (nvarchar(max))
+  PlantumlNonPkIndexColumns : (nvarchar(max))
+  PlantumlPkEntityColumns : (nvarchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.repoobject_outputfilter_t.adoc[]" as docs.RepoObject_OutputFilter_T << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **cultures_name** : (nvarchar(10))
+  AntoraComponent : (nvarchar(max))
+  AntoraModule : (nvarchar(max))
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
+  external_DatabaseName : (nvarchar(128))
+  is_DocsOutput : (int)
+  - is_external : (bit)
+  - is_ssas : (bit)
+  - PumlEntityTopDefault : (nvarchar(max))
+  - PumlEntityTopWorkaround : (nvarchar(max))
+  RepoObject_DisplayName : (nvarchar(128))
+  RepoObject_FullDisplayName2 : (nvarchar(257))
+  - RepoObject_fullname : (nvarchar(261))
+  - RepoObject_fullname2 : (nvarchar(257))
+  - RepoObject_name : (nvarchar(128))
+  - RepoObject_schema_name : (nvarchar(128))
+  RepoObject_translation : (nvarchar(128))
+  SysObject_type : (char(2))
+  SysObject_type_name : (nvarchar(128))
+  tables_isHidden : (bit)
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.usp_persist_repoobject_columnlist_t.adoc[]" as docs.usp_PERSIST_RepoObject_ColumnList_T << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobjectcolumn_gross2.adoc[]" as repo.RepoObjectColumn_gross2 << V >> {
+  AntoraReferencedColumnList : (nvarchar(max))
+  AntoraReferencingColumnList : (nvarchar(max))
+  - Column_name : (nvarchar(128))
+  Description : (nvarchar(max))
+  has_different_sys_names : (bit)
+  has_get_referenced_issue : (bit)
+  index_column_id : (int)
+  index_name : (nvarchar(450))
+  Inheritance_StringAggSeparatorSql : (nvarchar(4000))
+  InheritanceDefinition : (nvarchar(4000))
+  InheritanceType : (tinyint)
+  - is_external : (bit)
+  is_index_primary_key : (bit)
+  is_persistence_no_check : (bit)
+  is_persistence_no_include : (bit)
+  is_persistence_no_update : (bit)
+  is_query_plan_expression : (bit)
+  is_repo_managed : (bit)
+  - is_RepoObject_name_uniqueidentifier : (int)
+  - is_RepoObjectColumn_name_uniqueidentifier : (int)
+  is_required_ColumnMerge : (bit)
+  - is_ssas : (bit)
+  is_SysObject_missing : (bit)
+  - is_SysObject_name_uniqueidentifier : (int)
+  is_SysObjectColumn_missing : (bit)
+  - is_SysObjectColumn_name_uniqueidentifier : (int)
+  isAnyIndexColumn : (int)
+  - modify_dt : (datetime)
+  node_id : (bigint)
+  persistence_source_RepoObject_guid : (uniqueidentifier)
+  persistence_source_RepoObject_guid_via_Column : (uniqueidentifier)
+  persistence_source_RepoObjectColumn_guid : (uniqueidentifier)
+  pk_index_guid : (uniqueidentifier)
+  Property_ms_description : (nvarchar(4000))
+  Referencing_Count : (int)
+  Repo_default_definition : (nvarchar(max))
+  Repo_default_is_system_named : (bit)
+  Repo_default_name : (nvarchar(128))
+  Repo_definition : (nvarchar(max))
+  - Repo_generated_always_type : (tinyint)
+  Repo_graph_type : (int)
+  Repo_increment_value : (sql_variant)
+  - Repo_is_computed : (bit)
+  - Repo_is_identity : (bit)
+  Repo_is_nullable : (bit)
+  Repo_is_persisted : (bit)
+  Repo_seed_value : (sql_variant)
+  Repo_user_type_fullname : (nvarchar(128))
+  Repo_user_type_name : (nvarchar(128))
+  Repo_uses_database_collation : (bit)
+  - RepoObject_fullname : (nvarchar(261))
+  - RepoObject_fullname2 : (nvarchar(257))
+  - RepoObject_guid : (uniqueidentifier)
+  - RepoObject_name : (nvarchar(128))
+  RepoObject_Referencing_Count : (int)
+  - RepoObject_schema_name : (nvarchar(128))
+  - RepoObject_type : (char(2))
+  RepoObjectColumn_column_id : (int)
+  - RepoObjectColumn_fullname : (nvarchar(520))
+  - RepoObjectColumn_fullname2 : (nvarchar(386))
+  - RepoObjectColumn_guid : (uniqueidentifier)
+  - RepoObjectColumn_name : (nvarchar(128))
+  - SysObject_fullname : (nvarchar(261))
+  - SysObject_fullname2 : (nvarchar(257))
+  SysObject_id : (int)
+  SysObject_modify_date : (datetime)
+  - SysObject_name : (nvarchar(128))
+  - SysObject_parent_object_id : (int)
+  - SysObject_schema_name : (nvarchar(128))
+  SysObject_type : (char(2))
+  SysObjectColumn_column_id : (int)
+  - SysObjectColumn_name : (nvarchar(128))
+  tabcol_Description : (nvarchar(max))
+  tabcol_DisplayFolder : (nvarchar(500))
+  tabcol_Expression : (nvarchar(max))
+  tabcol_FormatString : (nvarchar(500))
+  - tabcol_IsHidden : (bit)
+  - tabcol_IsKey : (bit)
+  - tabcol_IsUnique : (bit)
+  tabcol_SummarizeBy : (nvarchar(500))
+  tabcol_Type : (nvarchar(500))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.repoobjectcolumn_translation_displayfolder_union.adoc[]" as ssas.RepoObjectColumn_translation_displayfolder_union << V >> {
+  - Column_name : (nvarchar(128))
+  - cultures_name : (nvarchar(10))
+  cultures_translations_model_name : (nvarchar(500))
+  cultures_translations_model_tables_columns_name : (nvarchar(128))
+  cultures_translations_model_tables_name : (nvarchar(128))
+  databasename : (nvarchar(128))
+  displayfolder_DisplayName : (nvarchar(512))
+  displayfolder_translation : (nvarchar(512))
+  - is_displayfolder : (int)
+  pk_index_guid : (uniqueidentifier)
+  - RepoObject_name : (nvarchar(128))
+  - RepoObject_schema_name : (nvarchar(128))
+  RepoObjectColumn_DisplayName : (nvarchar(128))
+  - RepoObjectColumn_guid : (uniqueidentifier)
+  RepoObjectColumn_translation : (nvarchar(128))
+  tabcol_IsHidden : (tinyint)
+  tables_columns_displayFolder : (nvarchar(500))
+  tables_columns_name : (nvarchar(128))
+  tables_name : (nvarchar(128))
+  --
+}
+
+docs.fs_cleanStringForAnchorId <.. docs.RepoObject_ColumnList
+docs.fs_cleanStringForHeader <.. docs.RepoObject_ColumnList
+docs.fs_cleanStringForPuml <.. docs.RepoObject_ColumnList
+docs.RepoObject_ColumnList <.. docs.RepoObject_ColumnList_T
+docs.RepoObject_ColumnList <.. docs.usp_PERSIST_RepoObject_ColumnList_T
+docs.RepoObject_OutputFilter_T <.. docs.RepoObject_ColumnList
+repo.RepoObjectColumn_gross2 <.. docs.RepoObject_ColumnList
+ssas.RepoObjectColumn_translation_displayfolder_union <.. docs.RepoObject_ColumnList
+"docs.RepoObject_ColumnList::AntoraColumnDetails" <-- "docs.RepoObject_ColumnList_T::AntoraColumnDetails"
+"docs.RepoObject_ColumnList::AntoraNonPkColumnTableRows" <-- "docs.RepoObject_ColumnList_T::AntoraNonPkColumnTableRows"
+"docs.RepoObject_ColumnList::AntoraPkColumnTableRows" <-- "docs.RepoObject_ColumnList_T::AntoraPkColumnTableRows"
+"docs.RepoObject_ColumnList::cultures_name" <-- "docs.RepoObject_ColumnList_T::cultures_name"
+"docs.RepoObject_ColumnList::is_external" <-- "docs.RepoObject_ColumnList_T::is_external"
+"docs.RepoObject_ColumnList::PlantumlAllEntityColumns" <-- "docs.RepoObject_ColumnList_T::PlantumlAllEntityColumns"
+"docs.RepoObject_ColumnList::PlantumlIndexColumns" <-- "docs.RepoObject_ColumnList_T::PlantumlIndexColumns"
+"docs.RepoObject_ColumnList::PlantumlNonPkEntityColumns" <-- "docs.RepoObject_ColumnList_T::PlantumlNonPkEntityColumns"
+"docs.RepoObject_ColumnList::PlantumlNonPkHiddenEntityColumns" <-- "docs.RepoObject_ColumnList_T::PlantumlNonPkHiddenEntityColumns"
+"docs.RepoObject_ColumnList::PlantumlNonPkIndexColumns" <-- "docs.RepoObject_ColumnList_T::PlantumlNonPkIndexColumns"
+"docs.RepoObject_ColumnList::PlantumlPkEntityColumns" <-- "docs.RepoObject_ColumnList_T::PlantumlPkEntityColumns"
+"docs.RepoObject_ColumnList::RepoObject_guid" <-- "docs.RepoObject_ColumnList_T::RepoObject_guid"
+"docs.RepoObject_OutputFilter_T::cultures_name" <-- "docs.RepoObject_ColumnList::cultures_name"
+"docs.RepoObject_OutputFilter_T::is_external" <-- "docs.RepoObject_ColumnList::is_external"
+"docs.RepoObject_OutputFilter_T::RepoObject_guid" <-- "docs.RepoObject_ColumnList::RepoObject_guid"
+"repo.RepoObjectColumn_gross2::is_external" <-- "docs.RepoObject_ColumnList::is_external"footer The diagram is interactive and contains links.
+@enduml
+

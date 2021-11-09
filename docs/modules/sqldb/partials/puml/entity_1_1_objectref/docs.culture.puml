@@ -30,6 +30,10 @@ entity "puml-link:dhw:sqldb:docs.culture.adoc[]" as docs.Culture << V >> {
   --
 }
 
+entity "puml-link:dhw:sqldb:docs.objectrefcyclic.adoc[]" as docs.ObjectRefCyclic << V >> {
+  --
+}
+
 entity "puml-link:dhw:sqldb:docs.repoobject_outputfilter.adoc[]" as docs.RepoObject_OutputFilter << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   - **cultures_name** : (nvarchar(10))
@@ -44,7 +48,7 @@ entity "puml-link:dhw:sqldb:docs.usp_antoraexport_docsnippet.adoc[]" as docs.usp
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.usp_antoraexport_navigation.adoc[]" as docs.usp_AntoraExport_navigation << P >> {
+entity "puml-link:dhw:sqldb:docs.usp_antoraexport_objectnavigation.adoc[]" as docs.usp_AntoraExport_ObjectNavigation << P >> {
   --
 }
 
@@ -79,15 +83,16 @@ entity "puml-link:dhw:sqldb:ssas.repoobjectcolumn_translation.adoc[]" as ssas.Re
   --
 }
 
-docs.Culture <.. docs.RepoObject_OutputFilter
-docs.culture <.. docs.usp_AntoraExport_ObjectRefCyclic
-docs.Culture <.. ssas.RepoObjectColumn_translation
-docs.Culture <.. docs.usp_AntoraExport_DocSnippet
-docs.Culture <.. ssas.Measures_translation
 docs.culture <.. docs.usp_AntoraExport
 docs.Culture <.. docs.usp_AntoraExport_Page_IndexSemanticGroup
 docs.culture <.. docs.usp_AntoraExport_ObjectPageTemplate
-docs.culture <.. docs.usp_AntoraExport_navigation
-ssas.model_json_3411_cultures_translations_model_T <.. docs.Culture
+docs.Culture <.. docs.RepoObject_OutputFilter
+docs.culture <.. docs.usp_AntoraExport_ObjectRefCyclic
+docs.Culture <.. ssas.RepoObjectColumn_translation
+docs.Culture <.. docs.ObjectRefCyclic
+docs.Culture <.. docs.usp_AntoraExport_DocSnippet
+docs.Culture <.. ssas.Measures_translation
+docs.culture <.. docs.usp_AntoraExport_ObjectNavigation
+ssas.model_json_3411_cultures_translations_model_T <.. docs.Culturefooter The diagram is interactive and contains links.
 @enduml
 

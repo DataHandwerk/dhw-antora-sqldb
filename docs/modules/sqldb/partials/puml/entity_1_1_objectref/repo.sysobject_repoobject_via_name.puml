@@ -1,0 +1,60 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:repo.repoobject.adoc[]" as repo.RepoObject << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.sysobject_repoobject_via_name.adoc[]" as repo.SysObject_RepoObject_via_name << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.usp_sync_guid_repoobject.adoc[]" as repo.usp_sync_guid_RepoObject << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo_sys.indexcolumn_unique.adoc[]" as repo_sys.IndexColumn_unique << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo_sys.sql_expression_dependencies.adoc[]" as repo_sys.sql_expression_dependencies << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo_sys.sysobject.adoc[]" as repo_sys.SysObject << V >> {
+  --
+}
+
+repo.RepoObject <.. repo.SysObject_RepoObject_via_name
+repo.SysObject_RepoObject_via_name <.. repo_sys.IndexColumn_unique
+repo.SysObject_RepoObject_via_name <.. repo_sys.sql_expression_dependencies
+repo.SysObject_RepoObject_via_name <.. repo.usp_sync_guid_RepoObject
+repo_sys.SysObject <.. repo.SysObject_RepoObject_via_namefooter The diagram is interactive and contains links.
+@enduml
+

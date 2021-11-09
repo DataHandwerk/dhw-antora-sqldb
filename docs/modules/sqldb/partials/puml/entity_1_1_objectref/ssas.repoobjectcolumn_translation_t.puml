@@ -26,10 +26,6 @@ skinparam class {
 }
 
 
-entity "puml-link:dhw:sqldb:docs.repoobject_columnlist.adoc[]" as docs.RepoObject_ColumnList << V >> {
-  --
-}
-
 entity "puml-link:dhw:sqldb:docs.repoobject_plantuml_colreflist_1_1.adoc[]" as docs.RepoObject_Plantuml_ColRefList_1_1 << V >> {
   --
 }
@@ -37,6 +33,10 @@ entity "puml-link:dhw:sqldb:docs.repoobject_plantuml_colreflist_1_1.adoc[]" as d
 entity "puml-link:dhw:sqldb:ssas.repoobjectcolumn_translation.adoc[]" as ssas.RepoObjectColumn_translation << V >> {
   - **RepoObjectColumn_guid** : (uniqueidentifier)
   - **cultures_name** : (nvarchar(10))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.repoobjectcolumn_translation_displayfolder_union.adoc[]" as ssas.RepoObjectColumn_translation_displayfolder_union << V >> {
   --
 }
 
@@ -51,8 +51,8 @@ entity "puml-link:dhw:sqldb:ssas.usp_persist_repoobjectcolumn_translation_t.adoc
 }
 
 ssas.RepoObjectColumn_translation <.. ssas.RepoObjectColumn_translation_T
-ssas.RepoObjectColumn_translation_T <.. docs.RepoObject_ColumnList
+ssas.RepoObjectColumn_translation_T <.. ssas.RepoObjectColumn_translation_displayfolder_union
 ssas.RepoObjectColumn_translation_T <.. docs.RepoObject_Plantuml_ColRefList_1_1
-ssas.RepoObjectColumn_translation_T <.. ssas.usp_PERSIST_RepoObjectColumn_translation_T
+ssas.RepoObjectColumn_translation_T <.. ssas.usp_PERSIST_RepoObjectColumn_translation_Tfooter The diagram is interactive and contains links.
 @enduml
 

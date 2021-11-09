@@ -28,7 +28,6 @@ skinparam class {
 
 entity "puml-link:dhw:sqldb:property.repoobjectproperty.adoc[]" as property.RepoObjectProperty << U >> {
   - **RepoObjectProperty_id** : (int)
-  --
   inheritance : (tinyint)
   - property_name : (nvarchar(128))
   property_value : (nvarchar(max))
@@ -39,11 +38,9 @@ entity "puml-link:dhw:sqldb:property.repoobjectproperty.adoc[]" as property.Repo
   ~ property_money : (money)
   ~ property_real : (real)
   --
-  --
 }
 
 entity "puml-link:dhw:sqldb:property.repoobjectproperty_selectedpropertyname_split.adoc[]" as property.RepoObjectProperty_SelectedPropertyName_split << V >> {
-  --
   LinePerGuidProperty : (bigint)
   - property_name : (nvarchar(128))
   property_value : (nvarchar(max))
@@ -52,7 +49,6 @@ entity "puml-link:dhw:sqldb:property.repoobjectproperty_selectedpropertyname_spl
   value_line : (nvarchar(max))
   value_line_len : (bigint)
   value_line_row : (nvarchar(max))
-  --
   --
 }
 
@@ -68,8 +64,6 @@ entity "puml-link:dhw:sqldb:reference.additional_reference_from_properties_src.a
   **referencing_Object** : (nvarchar(max))
   **referencing_Column** : (nvarchar(max))
   --
-  --
-  --
 }
 
 entity "puml-link:dhw:sqldb:reference.additional_reference_wo_columns_from_properties_src.adoc[]" as reference.additional_Reference_wo_columns_from_properties_src << V >> {
@@ -82,8 +76,6 @@ entity "puml-link:dhw:sqldb:reference.additional_reference_wo_columns_from_prope
   **referencing_Schema** : (nvarchar(max))
   **referencing_Object** : (nvarchar(max))
   --
-  --
-  --
 }
 
 property.RepoObjectProperty <.. property.RepoObjectProperty_SelectedPropertyName_split
@@ -91,6 +83,6 @@ property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_
 property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_wo_columns_from_properties_src
 "property.RepoObjectProperty::property_name" <-- "property.RepoObjectProperty_SelectedPropertyName_split::property_name"
 "property.RepoObjectProperty::property_value" <-- "property.RepoObjectProperty_SelectedPropertyName_split::property_value"
-"property.RepoObjectProperty::RepoObject_guid" <-- "property.RepoObjectProperty_SelectedPropertyName_split::RepoObject_guid"
+"property.RepoObjectProperty::RepoObject_guid" <-- "property.RepoObjectProperty_SelectedPropertyName_split::RepoObject_guid"footer The diagram is interactive and contains links.
 @enduml
 

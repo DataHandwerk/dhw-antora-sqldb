@@ -1,0 +1,61 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:config.parameter.adoc[]" as config.Parameter << U >> {
+  - **Parameter_name** : (varchar(100))
+  - **sub_Parameter** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.culture.adoc[]" as docs.Culture << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.fs_antoramodulefolder.adoc[]" as docs.fs_AntoraModuleFolder << FN >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.usp_antoraexport.adoc[]" as docs.usp_AntoraExport << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.usp_antoraexport_docsnippet.adoc[]" as docs.usp_AntoraExport_DocSnippet << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:logs.usp_executionlog_insert.adoc[]" as logs.usp_ExecutionLog_insert << P >> {
+  --
+}
+
+config.Parameter <.. docs.usp_AntoraExport_DocSnippet
+docs.Culture <.. docs.usp_AntoraExport_DocSnippet
+docs.fs_AntoraModuleFolder <.. docs.usp_AntoraExport_DocSnippet
+docs.usp_AntoraExport_DocSnippet <.. docs.usp_AntoraExport
+logs.usp_ExecutionLog_insert <.. docs.usp_AntoraExport_DocSnippetfooter The diagram is interactive and contains links.
+@enduml
+

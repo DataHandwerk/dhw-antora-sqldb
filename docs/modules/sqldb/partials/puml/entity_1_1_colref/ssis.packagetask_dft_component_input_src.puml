@@ -1,0 +1,139 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:ssis.package_src.adoc[]" as ssis.Package_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  PackageCreationDate : (datetime)
+  PackageCreatorComputerName : (nvarchar(500))
+  PackageCreatorName : (varchar(1000))
+  PackageDescription : (nvarchar(max))
+  PackageDTSID : (uniqueidentifier)
+  PackageLastModifiedProductVersion : (nvarchar(500))
+  PackageLocaleID : (int)
+  PackageObjectName : (nvarchar(500))
+  - PackagePath : (varchar(8000))
+  PackageProtectionLevel : (varchar(100))
+  PackageProtectionLevelName : (varchar(28))
+  PackageVersionGUID : (uniqueidentifier)
+  - ProjectPath : (varchar(8000))
+  - RowID : (int)
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_dft_component_input_src.adoc[]" as ssis.PackageTask_Dft_Component_input_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **input_refId** : (varchar(max))
+  Component_refId : (varchar(max))
+  - ControlFlowDetailsRowID : (int)
+  input_errorOrTruncationOperation : (varchar(100))
+  input_errorRowDisposition : (varchar(100))
+  input_hasSideEffects : (bit)
+  input_name : (varchar(500))
+  TaskPath : (varchar(8000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_dft_component_input_tgt.adoc[]" as ssis.PackageTask_Dft_Component_input_tgt << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **input_refId** : (varchar(max))
+  Component_refId : (varchar(max))
+  - ControlFlowDetailsRowID : (int)
+  input_errorOrTruncationOperation : (varchar(100))
+  input_errorRowDisposition : (varchar(100))
+  input_hasSideEffects : (bit)
+  input_name : (varchar(500))
+  nodescontent : (xml)
+  TaskPath : (varchar(8000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.usp_persist_packagetask_dft_component_input_tgt.adoc[]" as ssis.usp_PERSIST_PackageTask_Dft_Component_input_tgt << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tblcontrolflow.adoc[]" as ssis_t.TblControlFlow << U >> {
+  - **ControlFlowDetailsRowID** : (int)
+  DelayValidationPropertyValue : (varchar(100))
+  DFTQuery : (xml)
+  ExecPkgTaskQry : (xml)
+  ExpressionValue : (varchar(5000))
+  IsDisabled : (varchar(10))
+  RowID : (int)
+  ScriptTaskQry : (xml)
+  SqlTaskQry : (xml)
+  TaskDescription : (varchar(max))
+  TaskName : (varchar(2000))
+  TaskPath : (varchar(8000))
+  TaskType : (varchar(5000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tbltask_dft_component_inputs_src.adoc[]" as ssis_t.TblTask_Dft_Component_inputs_src << V >> {
+  - ControlFlowDetailsRowID : (int)
+  - DftComponentId : (int)
+  input_errorOrTruncationOperation : (varchar(100))
+  input_errorRowDisposition : (varchar(100))
+  input_hasSideEffects : (bit)
+  input_name : (varchar(500))
+  input_refId : (varchar(max))
+  nodescontent : (xml)
+  refId : (varchar(max))
+  RowID : (int)
+  --
+}
+
+ssis.Package_src <.. ssis.PackageTask_Dft_Component_input_src
+ssis.PackageTask_Dft_Component_input_src <.. ssis.PackageTask_Dft_Component_input_tgt
+ssis.PackageTask_Dft_Component_input_src <.. ssis.usp_PERSIST_PackageTask_Dft_Component_input_tgt
+ssis_t.TblControlFlow <.. ssis.PackageTask_Dft_Component_input_src
+ssis_t.TblTask_Dft_Component_inputs_src <.. ssis.PackageTask_Dft_Component_input_src
+"ssis.Package_src::AntoraModule" <-- "ssis.PackageTask_Dft_Component_input_src::AntoraModule"
+"ssis.Package_src::PackageName" <-- "ssis.PackageTask_Dft_Component_input_src::PackageName"
+"ssis.PackageTask_Dft_Component_input_src::AntoraModule" <-- "ssis.PackageTask_Dft_Component_input_tgt::AntoraModule"
+"ssis.PackageTask_Dft_Component_input_src::Component_refId" <-- "ssis.PackageTask_Dft_Component_input_tgt::Component_refId"
+"ssis.PackageTask_Dft_Component_input_src::ControlFlowDetailsRowID" <-- "ssis.PackageTask_Dft_Component_input_tgt::ControlFlowDetailsRowID"
+"ssis.PackageTask_Dft_Component_input_src::input_errorOrTruncationOperation" <-- "ssis.PackageTask_Dft_Component_input_tgt::input_errorOrTruncationOperation"
+"ssis.PackageTask_Dft_Component_input_src::input_errorRowDisposition" <-- "ssis.PackageTask_Dft_Component_input_tgt::input_errorRowDisposition"
+"ssis.PackageTask_Dft_Component_input_src::input_hasSideEffects" <-- "ssis.PackageTask_Dft_Component_input_tgt::input_hasSideEffects"
+"ssis.PackageTask_Dft_Component_input_src::input_name" <-- "ssis.PackageTask_Dft_Component_input_tgt::input_name"
+"ssis.PackageTask_Dft_Component_input_src::input_refId" <-- "ssis.PackageTask_Dft_Component_input_tgt::input_refId"
+"ssis.PackageTask_Dft_Component_input_src::PackageName" <-- "ssis.PackageTask_Dft_Component_input_tgt::PackageName"
+"ssis.PackageTask_Dft_Component_input_src::TaskPath" <-- "ssis.PackageTask_Dft_Component_input_tgt::TaskPath"
+"ssis_t.TblControlFlow::TaskPath" <-- "ssis.PackageTask_Dft_Component_input_src::TaskPath"
+"ssis_t.TblTask_Dft_Component_inputs_src::ControlFlowDetailsRowID" <-- "ssis.PackageTask_Dft_Component_input_src::ControlFlowDetailsRowID"
+"ssis_t.TblTask_Dft_Component_inputs_src::input_errorOrTruncationOperation" <-- "ssis.PackageTask_Dft_Component_input_src::input_errorOrTruncationOperation"
+"ssis_t.TblTask_Dft_Component_inputs_src::input_errorRowDisposition" <-- "ssis.PackageTask_Dft_Component_input_src::input_errorRowDisposition"
+"ssis_t.TblTask_Dft_Component_inputs_src::input_hasSideEffects" <-- "ssis.PackageTask_Dft_Component_input_src::input_hasSideEffects"
+"ssis_t.TblTask_Dft_Component_inputs_src::input_name" <-- "ssis.PackageTask_Dft_Component_input_src::input_name"
+"ssis_t.TblTask_Dft_Component_inputs_src::input_refId" <-- "ssis.PackageTask_Dft_Component_input_src::input_refId"
+"ssis_t.TblTask_Dft_Component_inputs_src::refId" <-- "ssis.PackageTask_Dft_Component_input_src::Component_refId"footer The diagram is interactive and contains links.
+@enduml
+

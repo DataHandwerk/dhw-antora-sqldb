@@ -1,0 +1,48 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_dft_component_output_externalmetadatacolumn_src.adoc[]" as ssis.PackageTask_Dft_Component_output_externalMetadataColumn_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **Column_refId** : (varchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tbltask_dft_component.adoc[]" as ssis_t.TblTask_Dft_Component << U >> {
+  - **DftComponentId** : (int)
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tbltask_dft_component_outputs_externalmetadatacolumn_src.adoc[]" as ssis_t.TblTask_Dft_Component_outputs_externalMetadataColumn_src << V >> {
+  --
+}
+
+ssis_t.TblTask_Dft_Component <.. ssis_t.TblTask_Dft_Component_outputs_externalMetadataColumn_src
+ssis_t.TblTask_Dft_Component_outputs_externalMetadataColumn_src <.. ssis.PackageTask_Dft_Component_output_externalMetadataColumn_srcfooter The diagram is interactive and contains links.
+@enduml
+

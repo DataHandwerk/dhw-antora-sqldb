@@ -28,12 +28,9 @@ skinparam class {
 
 entity "puml-link:dhw:sqldb:logs.usp_executionlog_insert.adoc[]" as logs.usp_ExecutionLog_insert << P >> {
   --
-  --
-  --
 }
 
 entity "puml-link:dhw:sqldb:repo.index_gross.adoc[]" as repo.Index_gross << V >> {
-  --
   AntoraIndexColumnList : (nvarchar(max))
   ColumnList : (nvarchar(max))
   ConstraintColumnList : (nvarchar(max))
@@ -67,12 +64,10 @@ entity "puml-link:dhw:sqldb:repo.index_gross.adoc[]" as repo.Index_gross << V >>
   - SysObject_schema_name : (nvarchar(128))
   SysObject_type : (char(2))
   --
-  --
 }
 
 entity "puml-link:dhw:sqldb:repo.index_virtual.adoc[]" as repo.Index_virtual << U >> {
   - **index_guid** : (uniqueidentifier)
-  --
   - has_managedName : (bit)
   index_name : (nvarchar(128))
   - index_type : (tinyint)
@@ -83,11 +78,9 @@ entity "puml-link:dhw:sqldb:repo.index_virtual.adoc[]" as repo.Index_virtual << 
   referenced_index_guid : (uniqueidentifier)
   RowNumberInReferencing : (int)
   --
-  --
 }
 
 entity "puml-link:dhw:sqldb:repo.index_virtual_forupdate.adoc[]" as repo.Index_virtual_ForUpdate << V >> {
-  --
   - has_managedName : (bit)
   - index_guid : (uniqueidentifier)
   index_name : (nvarchar(128))
@@ -108,32 +101,26 @@ entity "puml-link:dhw:sqldb:repo.index_virtual_forupdate.adoc[]" as repo.Index_v
   - SysObject_fullname : (nvarchar(261))
   - SysObject_fullname2 : (nvarchar(257))
   --
-  --
 }
 
 entity "puml-link:dhw:sqldb:repo.index_virtual_indexpatterncolumnguid.adoc[]" as repo.Index_virtual_IndexPatternColumnGuid << V >> {
-  --
   - index_guid : (uniqueidentifier)
   IndexPatternColumnGuid : (varchar(8000))
   parent_RepoObject_guid : (uniqueidentifier)
-  --
   --
 }
 
 entity "puml-link:dhw:sqldb:repo.indexcolumn_virtual.adoc[]" as repo.IndexColumn_virtual << U >> {
   - **index_guid** : (uniqueidentifier)
   - **index_column_id** : (int)
-  --
   - is_descending_key : (bit)
   - RepoObjectColumn_guid : (uniqueidentifier)
-  --
   --
 }
 
 entity "puml-link:dhw:sqldb:repo.indexcolumn_virtual_referenced_setpoint.adoc[]" as repo.IndexColumn_virtual_referenced_setpoint << V >> {
   - **index_guid** : (uniqueidentifier)
   - **index_column_id** : (int)
-  --
   is_descending_key : (bit)
   referenced_index_guid : (uniqueidentifier)
   referenced_RepoObject_guid : (uniqueidentifier)
@@ -142,11 +129,9 @@ entity "puml-link:dhw:sqldb:repo.indexcolumn_virtual_referenced_setpoint.adoc[]"
   referencing_RepoObjectColumn_guid : (uniqueidentifier)
   RowNumberInReferencing : (int)
   --
-  --
 }
 
 entity "puml-link:dhw:sqldb:repo.indexreferencedreferencing_hasfullcolumnsinreferencing.adoc[]" as repo.IndexReferencedReferencing_HasFullColumnsInReferencing << V >> {
-  --
   referenced_index_guid : (uniqueidentifier)
   - referenced_RepoObject_guid : (uniqueidentifier)
   referencing_IndexPatternColumnGuid : (varchar(8000))
@@ -156,30 +141,21 @@ entity "puml-link:dhw:sqldb:repo.indexreferencedreferencing_hasfullcolumnsinrefe
   source_index_guid : (uniqueidentifier)
   - source_index_type : (tinyint)
   --
-  --
 }
 
 entity "puml-link:dhw:sqldb:repo.usp_index_finish.adoc[]" as repo.usp_Index_finish << P >> {
-  --
-  --
   --
 }
 
 entity "puml-link:dhw:sqldb:repo.usp_index_inheritance.adoc[]" as repo.usp_index_inheritance << P >> {
   --
-  --
-  --
 }
 
 entity "puml-link:dhw:sqldb:repo.usp_main.adoc[]" as repo.usp_main << P >> {
   --
-  --
-  --
 }
 
 entity "puml-link:dhw:sqldb:repo.usp_persist_indexcolumn_referencedreferencing_hasfullcolumnsinreferencing_t.adoc[]" as repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T << P >> {
-  --
-  --
   --
 }
 
@@ -194,6 +170,6 @@ repo.IndexReferencedReferencing_HasFullColumnsInReferencing <.. repo.usp_index_i
 repo.usp_Index_finish <.. repo.usp_index_inheritance
 repo.usp_index_inheritance <.. repo.usp_main
 repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.usp_index_inheritance
-
+footer The diagram is interactive and contains links.
 @enduml
 

@@ -1,0 +1,92 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:configt.type.adoc[]" as configT.type << V >> {
+  **type** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.fs_cleanstringforfilename.adoc[]" as docs.fs_cleanStringForFilename << FN >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.ftv_repoobject_referencetree.adoc[]" as reference.ftv_RepoObject_ReferenceTree << IF >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.ftv_repoobject_referencetree_referenced.adoc[]" as reference.ftv_RepoObject_ReferenceTree_referenced << IF >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.ftv_repoobject_referencetree_referencing.adoc[]" as reference.ftv_RepoObject_ReferenceTree_referencing << IF >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.ftv_repoobject_referencetree_via_fullname.adoc[]" as reference.ftv_RepoObject_ReferenceTree_via_fullname << IF >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.repoobject_reference_t.adoc[]" as reference.RepoObject_reference_T << U >> {
+  **referenced_RepoObject_guid** : (uniqueidentifier)
+  **referencing_RepoObject_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.repoobject_referencedlist.adoc[]" as reference.RepoObject_ReferencedList << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.repoobject_referencedreferencing.adoc[]" as reference.RepoObject_ReferencedReferencing << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.repoobject_referencinglist.adoc[]" as reference.RepoObject_ReferencingList << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.usp_repoobject_referencetree_insert.adoc[]" as reference.usp_RepoObject_ReferenceTree_insert << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobject_gross.adoc[]" as repo.RepoObject_gross << V >> {
+  --
+}
+
+configT.type <.. reference.RepoObject_ReferencedReferencing
+docs.fs_cleanStringForFilename <.. reference.RepoObject_ReferencedReferencing
+reference.RepoObject_reference_T <.. reference.RepoObject_ReferencedReferencing
+reference.RepoObject_ReferencedReferencing <.. reference.ftv_RepoObject_ReferenceTree_via_fullname
+reference.RepoObject_ReferencedReferencing <.. repo.RepoObject_gross
+reference.RepoObject_ReferencedReferencing <.. reference.ftv_RepoObject_ReferenceTree
+reference.RepoObject_ReferencedReferencing <.. reference.RepoObject_ReferencedList
+reference.RepoObject_ReferencedReferencing <.. reference.RepoObject_ReferencingList
+reference.RepoObject_ReferencedReferencing <.. reference.ftv_RepoObject_ReferenceTree_referenced
+reference.RepoObject_ReferencedReferencing <.. reference.ftv_RepoObject_ReferenceTree_referencing
+reference.RepoObject_ReferencedReferencing <.. reference.usp_RepoObject_ReferenceTree_insertfooter The diagram is interactive and contains links.
+@enduml
+

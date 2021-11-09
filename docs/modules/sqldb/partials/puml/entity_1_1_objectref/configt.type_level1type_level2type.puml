@@ -1,0 +1,95 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:configt.type.adoc[]" as configT.type << V >> {
+  **type** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:configt.type_level1type_level2type.adoc[]" as configT.type_level1type_level2type << V >> {
+  **type** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.extendedproperty_repo2sys_level1.adoc[]" as property.ExtendedProperty_Repo2Sys_level1 << V >> {
+  - **level0type** : (nvarchar(6))
+  - **level0name** : (nvarchar(128))
+  **level1type** : (varchar(9))
+  - **level1name** : (nvarchar(128))
+  - **property_name** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.extendedproperty_repo2sys_level2_repoobject.adoc[]" as property.ExtendedProperty_Repo2Sys_level2_RepoObject << V >> {
+  - **level0type** : (nvarchar(6))
+  - **level0name** : (nvarchar(128))
+  **level1type** : (varchar(9))
+  - **level1name** : (nvarchar(128))
+  **level2type** : (varchar(10))
+  - **level2name** : (nvarchar(128))
+  - **property_name** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.extendedproperty_repo2sys_level2_repoobjectcolumn.adoc[]" as property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumn << V >> {
+  - **level0type** : (nvarchar(6))
+  - **level0name** : (nvarchar(128))
+  **level1type** : (varchar(9))
+  - **level1name** : (nvarchar(128))
+  - **level2type** : (nvarchar(6))
+  - **level2name** : (nvarchar(128))
+  - **property_name** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.usp_sync_guid_repoobject.adoc[]" as repo.usp_sync_guid_RepoObject << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.usp_sync_guid_repoobjectcolumn.adoc[]" as repo.usp_sync_guid_RepoObjectColumn << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo_sys.extendedproperties_parameterforaddupdatedrop.adoc[]" as repo_sys.ExtendedProperties_ParameterForAddUpdateDrop << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:sys_self.extendedproperties_parameterforaddupdatedrop.adoc[]" as sys_self.ExtendedProperties_ParameterForAddUpdateDrop << V >> {
+  --
+}
+
+configT.type <.. configT.type_level1type_level2type
+configT.type_level1type_level2type <.. sys_self.ExtendedProperties_ParameterForAddUpdateDrop
+configT.type_level1type_level2type <.. repo_sys.ExtendedProperties_ParameterForAddUpdateDrop
+configT.type_level1type_level2type <.. repo.usp_sync_guid_RepoObject
+configT.type_level1type_level2type <.. repo.usp_sync_guid_RepoObjectColumn
+configT.type_level1type_level2type <.. property.ExtendedProperty_Repo2Sys_level1
+configT.type_level1type_level2type <.. property.ExtendedProperty_Repo2Sys_level2_RepoObject
+configT.type_level1type_level2type <.. property.ExtendedProperty_Repo2Sys_level2_RepoObjectColumnfooter The diagram is interactive and contains links.
+@enduml
+

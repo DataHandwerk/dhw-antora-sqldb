@@ -1,0 +1,50 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:reference.repoobject_referencedlist.adoc[]" as reference.RepoObject_ReferencedList << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.repoobject_referencedreferencing.adoc[]" as reference.RepoObject_ReferencedReferencing << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobject_gross2.adoc[]" as repo.RepoObject_gross2 << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobject_sat2.adoc[]" as repo.RepoObject_sat2 << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+}
+
+reference.RepoObject_ReferencedList <.. repo.RepoObject_gross2
+reference.RepoObject_ReferencedList <.. repo.RepoObject_sat2
+reference.RepoObject_ReferencedReferencing <.. reference.RepoObject_ReferencedListfooter The diagram is interactive and contains links.
+@enduml
+

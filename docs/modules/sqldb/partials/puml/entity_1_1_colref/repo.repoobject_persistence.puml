@@ -1,0 +1,488 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:reference.repoobject_reference_persistence.adoc[]" as reference.RepoObject_reference_persistence << V >> {
+  **referenced_RepoObject_guid** : (uniqueidentifier)
+  - **referencing_RepoObject_guid** : (uniqueidentifier)
+  - InformationSource : (varchar(27))
+  - referenced_entity_name : (nvarchar(128))
+  - referenced_fullname : (nvarchar(261))
+  referenced_id : (int)
+  - referenced_schema_name : (nvarchar(128))
+  referenced_type : (char(2))
+  - referencing_entity_name : (nvarchar(128))
+  - referencing_fullname : (nvarchar(261))
+  referencing_id : (int)
+  - referencing_schema_name : (nvarchar(128))
+  referencing_type : (varchar(2))
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.repoobject_reference_t_bidirectional.adoc[]" as reference.RepoObject_reference_T_bidirectional << V >> {
+  referenced_entity_name : (nvarchar(128))
+  - referenced_fullname : (nvarchar(261))
+  - referenced_fullname2 : (nvarchar(257))
+  referenced_is_persistence : (bit)
+  - referenced_RepoObject_guid : (uniqueidentifier)
+  referenced_schema_name : (nvarchar(128))
+  referenced_source_RepoObject_guid : (uniqueidentifier)
+  referenced_type : (char(2))
+  referencing_entity_name : (nvarchar(128))
+  - referencing_fullname : (nvarchar(261))
+  - referencing_fullname2 : (nvarchar(257))
+  referencing_is_persistence : (bit)
+  - referencing_RepoObject_guid : (uniqueidentifier)
+  referencing_schema_name : (nvarchar(128))
+  referencing_source_RepoObject_guid : (uniqueidentifier)
+  referencing_type : (varchar(2))
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.repoobjectcolumn_reference_persistence.adoc[]" as reference.RepoObjectColumn_reference_Persistence << V >> {
+  **referencing_id** : (int)
+  **referencing_minor_id** : (int)
+  **referenced_id** : (int)
+  **referenced_minor_id** : (int)
+  definition : (nvarchar(max))
+  - InformationSource : (varchar(27))
+  is_computed : (bit)
+  is_referenced_object : (bit)
+  is_referencing_object_equal_referenced_object : (bit)
+  - referenced_column_name : (nvarchar(128))
+  - referenced_entity_name : (nvarchar(128))
+  referenced_node_id : (bigint)
+  referenced_RepoObject_guid : (uniqueidentifier)
+  - referenced_RepoObjectColumn_guid : (uniqueidentifier)
+  - referenced_schema_name : (nvarchar(128))
+  referenced_type : (char(2))
+  - referencing_column_name : (nvarchar(128))
+  - referencing_entity_name : (nvarchar(128))
+  referencing_node_id : (bigint)
+  - referencing_RepoObject_guid : (uniqueidentifier)
+  - referencing_RepoObjectColumn_guid : (uniqueidentifier)
+  - referencing_schema_name : (nvarchar(128))
+  referencing_type : (char(2))
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobject__after_delete.adoc[]" as repo.RepoObject__after_delete << TR >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobject_gross.adoc[]" as repo.RepoObject_gross << V >> {
+  AntoraComponent : (nvarchar(max))
+  AntoraModule : (nvarchar(max))
+  Description : (nvarchar(max))
+  external_AntoraComponent : (nvarchar(128))
+  external_AntoraModule : (nvarchar(128))
+  external_DatabaseName : (nvarchar(128))
+  external_RepoDatabaseName : (nvarchar(128))
+  has_different_sys_names : (bit)
+  has_execution_plan_issue : (bit)
+  has_get_referenced_issue : (bit)
+  has_history : (bit)
+  has_history_columns : (bit)
+  history_schema_name : (nvarchar(128))
+  history_table_name : (nvarchar(128))
+  Inheritance_StringAggSeparatorSql : (nvarchar(4000))
+  InheritanceDefinition : (nvarchar(4000))
+  InheritanceType : (tinyint)
+  - is_DocsExclude : (bit)
+  is_DocsOutput : (int)
+  - is_external : (bit)
+  - is_in_reference : (int)
+  is_persistence : (bit)
+  is_persistence_check_duplicate_per_pk : (bit)
+  is_persistence_check_for_empty_source : (bit)
+  is_persistence_delete_changed : (bit)
+  is_persistence_delete_missing : (bit)
+  is_persistence_insert : (bit)
+  is_persistence_merge_delete_missing : (bit)
+  is_persistence_merge_insert : (bit)
+  is_persistence_merge_update_changed : (bit)
+  is_persistence_persist_source : (bit)
+  is_persistence_truncate : (bit)
+  is_persistence_update_changed : (bit)
+  is_repo_managed : (bit)
+  - is_RepoObject_name_uniqueidentifier : (int)
+  is_required_ObjectMerge : (bit)
+  - is_ssas : (bit)
+  is_SysObject_missing : (bit)
+  - is_SysObject_name_uniqueidentifier : (int)
+  - modify_dt : (datetime)
+  node_id : (bigint)
+  persistence_source_RepoObject_fullname : (nvarchar(261))
+  persistence_source_RepoObject_fullname2 : (nvarchar(257))
+  persistence_source_RepoObject_guid : (uniqueidentifier)
+  persistence_source_RepoObject_xref : (nvarchar(4000))
+  persistence_source_SysObject_fullname : (nvarchar(261))
+  persistence_source_SysObject_fullname_or_tempsource : (nvarchar(261))
+  persistence_source_SysObject_fullname2 : (nvarchar(257))
+  persistence_source_SysObject_xref : (nvarchar(4000))
+  pk_index_guid : (uniqueidentifier)
+  pk_IndexPatternColumnDatatype : (nvarchar(4000))
+  pk_IndexPatternColumnName : (nvarchar(4000))
+  pk_IndexPatternColumnName_new : (nvarchar(4000))
+  pk_IndexSemanticGroup : (nvarchar(512))
+  Property_ms_description : (nvarchar(4000))
+  Repo_history_table_guid : (uniqueidentifier)
+  Repo_temporal_type : (tinyint)
+  - RepoObject_fullname : (nvarchar(261))
+  - RepoObject_fullname2 : (nvarchar(257))
+  - RepoObject_guid : (uniqueidentifier)
+  - RepoObject_name : (nvarchar(128))
+  RepoObject_Referencing_Count : (int)
+  - RepoObject_schema_name : (nvarchar(128))
+  - RepoObject_type : (char(2))
+  RepoObject_type_name : (nvarchar(128))
+  source_filter : (nvarchar(4000))
+  - SysObject_fullname : (nvarchar(261))
+  - SysObject_fullname2 : (nvarchar(257))
+  SysObject_id : (int)
+  SysObject_modify_date : (datetime)
+  - SysObject_name : (nvarchar(128))
+  - SysObject_parent_object_id : (int)
+  SysObject_query_executed_dt : (datetime)
+  SysObject_query_plan : (xml)
+  - SysObject_query_sql : (nvarchar(406))
+  - SysObject_schema_name : (nvarchar(128))
+  SysObject_type : (char(2))
+  SysObject_type_name : (nvarchar(128))
+  tables_dataCategory : (nvarchar(500))
+  tables_description : (nvarchar(max))
+  tables_isHidden : (bit)
+  target_filter : (nvarchar(4000))
+  temporal_type : (tinyint)
+  - usp_persistence_name : (nvarchar(140))
+  usp_persistence_RepoObject_guid : (uniqueidentifier)
+  uspgenerator_usp_id : (int)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobject_persistence.adoc[]" as repo.RepoObject_persistence << U >> {
+  - **target_RepoObject_guid** : (uniqueidentifier)
+  - has_history : (bit)
+  - has_history_columns : (bit)
+  history_schema_name : (nvarchar(128))
+  history_table_name : (nvarchar(128))
+  - is_persistence_check_duplicate_per_pk : (bit)
+  - is_persistence_check_for_empty_source : (bit)
+  - is_persistence_delete_changed : (bit)
+  - is_persistence_delete_missing : (bit)
+  - is_persistence_insert : (bit)
+  - is_persistence_merge_delete_missing : (bit)
+  - is_persistence_merge_insert : (bit)
+  - is_persistence_merge_update_changed : (bit)
+  - is_persistence_persist_source : (bit)
+  - is_persistence_truncate : (bit)
+  - is_persistence_update_changed : (bit)
+  source_filter : (nvarchar(4000))
+  source_RepoObject_guid : (uniqueidentifier)
+  source_RepoObject_name : (nvarchar(128))
+  target_filter : (nvarchar(4000))
+  ~ is_persistence : (bit)
+  ~ temporal_type : (tinyint)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobject_persistence_column.adoc[]" as repo.RepoObject_persistence_column << V >> {
+  - **target_RepoObject_guid** : (uniqueidentifier)
+  **RepoObjectColumn_guid_s** : (uniqueidentifier)
+  - has_history : (bit)
+  - has_history_columns : (bit)
+  history_schema_name : (nvarchar(128))
+  history_table_name : (nvarchar(128))
+  is_persistence : (bit)
+  - is_persistence_check_for_empty_source : (bit)
+  - is_persistence_delete_changed : (bit)
+  - is_persistence_delete_missing : (bit)
+  - is_persistence_insert : (bit)
+  - is_persistence_truncate : (bit)
+  - is_persistence_update_changed : (bit)
+  is_repo_managed_t : (bit)
+  - RepoObject_name_t : (nvarchar(128))
+  - RepoObject_schema_name_t : (nvarchar(128))
+  - RepoObject_type_t : (char(2))
+  RepoObjectColumn_name_t : (nvarchar(128))
+  source_RepoObject_guid : (uniqueidentifier)
+  SysObject_name_s : (nvarchar(128))
+  SysObject_schema_name_s : (nvarchar(128))
+  SysObject_type_s : (char(2))
+  SysObjectColumn_name_s : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobject_persistence_forupdate.adoc[]" as repo.RepoObject_persistence_ForUpdate << V >> {
+  default_source_RepoObject_name : (nvarchar(128))
+  - has_history : (bit)
+  - has_history_columns : (bit)
+  history_schema_name : (nvarchar(128))
+  history_table_name : (nvarchar(128))
+  is_persistence : (bit)
+  - is_persistence_check_duplicate_per_pk : (bit)
+  - is_persistence_check_for_empty_source : (bit)
+  - is_persistence_delete_changed : (bit)
+  - is_persistence_delete_missing : (bit)
+  - is_persistence_insert : (bit)
+  - is_persistence_persist_source : (bit)
+  - is_persistence_truncate : (bit)
+  - is_persistence_update_changed : (bit)
+  source_RepoObject_guid : (uniqueidentifier)
+  source_RepoObject_name : (nvarchar(128))
+  - target_name : (nvarchar(128))
+  - target_RepoObject_fullname : (nvarchar(261))
+  - target_RepoObject_fullname2 : (nvarchar(257))
+  - target_RepoObject_guid : (uniqueidentifier)
+  - target_schema : (nvarchar(128))
+  temporal_type : (tinyint)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobject_persistence_objectnames.adoc[]" as repo.RepoObject_persistence_ObjectNames << V >> {
+  - has_history : (bit)
+  - has_history_columns : (bit)
+  history_schema_name : (nvarchar(128))
+  history_table_name : (nvarchar(128))
+  is_persistence : (bit)
+  - is_persistence_check_for_empty_source : (bit)
+  - is_persistence_delete_changed : (bit)
+  - is_persistence_delete_missing : (bit)
+  - is_persistence_insert : (bit)
+  - is_persistence_truncate : (bit)
+  - is_persistence_update_changed : (bit)
+  is_repo_managed_t : (bit)
+  - RepoObject_name_t : (nvarchar(128))
+  - RepoObject_schema_name_t : (nvarchar(128))
+  - RepoObject_type_t : (char(2))
+  source_RepoObject_guid : (uniqueidentifier)
+  SysObject_name_s : (nvarchar(128))
+  SysObject_schema_name_s : (nvarchar(128))
+  SysObject_type_s : (char(2))
+  - target_RepoObject_guid : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobjectcolumn_gross.adoc[]" as repo.RepoObjectColumn_gross << V >> {
+  - Column_name : (nvarchar(128))
+  Description : (nvarchar(max))
+  has_different_sys_names : (bit)
+  has_get_referenced_issue : (bit)
+  Inheritance_StringAggSeparatorSql : (nvarchar(4000))
+  InheritanceDefinition : (nvarchar(4000))
+  InheritanceType : (tinyint)
+  - is_external : (bit)
+  is_persistence_no_check : (bit)
+  is_persistence_no_include : (bit)
+  is_persistence_no_update : (bit)
+  is_query_plan_expression : (bit)
+  is_repo_managed : (bit)
+  - is_RepoObject_name_uniqueidentifier : (int)
+  - is_RepoObjectColumn_name_uniqueidentifier : (int)
+  is_required_ColumnMerge : (bit)
+  - is_ssas : (bit)
+  is_SysObject_missing : (bit)
+  - is_SysObject_name_uniqueidentifier : (int)
+  is_SysObjectColumn_missing : (bit)
+  - is_SysObjectColumn_name_uniqueidentifier : (int)
+  - modify_dt : (datetime)
+  node_id : (bigint)
+  persistence_source_RepoObject_guid : (uniqueidentifier)
+  persistence_source_RepoObjectColumn_guid : (uniqueidentifier)
+  pk_index_guid : (uniqueidentifier)
+  Property_ms_description : (nvarchar(4000))
+  Referencing_Count : (int)
+  Repo_default_definition : (nvarchar(max))
+  Repo_default_is_system_named : (bit)
+  Repo_default_name : (nvarchar(128))
+  Repo_definition : (nvarchar(max))
+  - Repo_generated_always_type : (tinyint)
+  Repo_graph_type : (int)
+  Repo_increment_value : (sql_variant)
+  - Repo_is_computed : (bit)
+  - Repo_is_identity : (bit)
+  Repo_is_nullable : (bit)
+  Repo_is_persisted : (bit)
+  Repo_seed_value : (sql_variant)
+  Repo_user_type_fullname : (nvarchar(128))
+  Repo_user_type_name : (nvarchar(128))
+  Repo_uses_database_collation : (bit)
+  - RepoObject_fullname : (nvarchar(261))
+  - RepoObject_fullname2 : (nvarchar(257))
+  - RepoObject_guid : (uniqueidentifier)
+  - RepoObject_name : (nvarchar(128))
+  RepoObject_Referencing_Count : (int)
+  - RepoObject_schema_name : (nvarchar(128))
+  - RepoObject_type : (char(2))
+  RepoObjectColumn_column_id : (int)
+  - RepoObjectColumn_fullname : (nvarchar(520))
+  - RepoObjectColumn_fullname2 : (nvarchar(386))
+  - RepoObjectColumn_guid : (uniqueidentifier)
+  - RepoObjectColumn_name : (nvarchar(128))
+  - SysObject_fullname : (nvarchar(261))
+  - SysObject_fullname2 : (nvarchar(257))
+  SysObject_id : (int)
+  SysObject_modify_date : (datetime)
+  - SysObject_name : (nvarchar(128))
+  - SysObject_parent_object_id : (int)
+  - SysObject_schema_name : (nvarchar(128))
+  SysObject_type : (char(2))
+  SysObjectColumn_column_id : (int)
+  - SysObjectColumn_name : (nvarchar(128))
+  tabcol_Description : (nvarchar(max))
+  tabcol_DisplayFolder : (nvarchar(500))
+  tabcol_Expression : (nvarchar(max))
+  tabcol_FormatString : (nvarchar(500))
+  - tabcol_IsHidden : (bit)
+  - tabcol_IsKey : (bit)
+  - tabcol_IsUnique : (bit)
+  tabcol_SummarizeBy : (nvarchar(500))
+  tabcol_Type : (nvarchar(500))
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobjectcolumn_histvalidcolums_setpoint.adoc[]" as repo.RepoObjectColumn_HistValidColums_setpoint << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  **RepoObjectColumn_name** : (sysname)
+  - Repo_generated_always_type : (int)
+  - Repo_is_nullable : (int)
+  - Repo_user_type_fullname : (varchar(12))
+  - Repo_user_type_name : (varchar(9))
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.usp_index_finish.adoc[]" as repo.usp_Index_finish << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.usp_main.adoc[]" as repo.usp_main << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.usp_persistence_set.adoc[]" as repo.usp_persistence_set << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.usp_sync_guid_repoobject.adoc[]" as repo.usp_sync_guid_RepoObject << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.usp_sync_guid_repoobjectcolumn.adoc[]" as repo.usp_sync_guid_RepoObjectColumn << P >> {
+  --
+}
+
+repo.RepoObject_persistence <.. reference.RepoObjectColumn_reference_Persistence
+repo.RepoObject_persistence <.. reference.RepoObject_reference_persistence
+repo.RepoObject_persistence <.. repo.RepoObjectColumn_HistValidColums_setpoint
+repo.RepoObject_persistence <.. repo.RepoObjectColumn_gross
+repo.RepoObject_persistence <.. repo.RepoObject_persistence_ObjectNames
+repo.RepoObject_persistence <.. repo.RepoObject_persistence_column
+repo.RepoObject_persistence <.. repo.RepoObject__after_delete
+repo.RepoObject_persistence <.. repo.RepoObject_gross
+repo.RepoObject_persistence <.. repo.usp_sync_guid_RepoObject
+repo.RepoObject_persistence <.. repo.usp_sync_guid_RepoObjectColumn
+repo.RepoObject_persistence <.. repo.usp_persistence_set
+repo.RepoObject_persistence <.. repo.usp_main
+repo.RepoObject_persistence <.. repo.RepoObject_persistence_ForUpdate
+repo.RepoObject_persistence <.. repo.usp_Index_finish
+repo.RepoObject_persistence <.. reference.RepoObject_reference_T_bidirectional
+"repo.RepoObject_persistence::has_history" <-- "repo.RepoObject_persistence::temporal_type"
+"repo.RepoObject_persistence::has_history" <-- "repo.RepoObject_persistence_ObjectNames::has_history"
+"repo.RepoObject_persistence::has_history" <-- "repo.RepoObject_persistence_column::has_history"
+"repo.RepoObject_persistence::has_history" <-- "repo.RepoObject_persistence_ForUpdate::has_history"
+"repo.RepoObject_persistence::has_history" <-- "repo.RepoObject_gross::has_history"
+"repo.RepoObject_persistence::has_history_columns" <-- "repo.RepoObject_gross::has_history_columns"
+"repo.RepoObject_persistence::has_history_columns" <-- "repo.RepoObject_persistence_ForUpdate::has_history_columns"
+"repo.RepoObject_persistence::has_history_columns" <-- "repo.RepoObject_persistence_column::has_history_columns"
+"repo.RepoObject_persistence::has_history_columns" <-- "repo.RepoObject_persistence_ObjectNames::has_history_columns"
+"repo.RepoObject_persistence::history_schema_name" <-- "repo.RepoObject_persistence_ObjectNames::history_schema_name"
+"repo.RepoObject_persistence::history_schema_name" <-- "repo.RepoObject_persistence_column::history_schema_name"
+"repo.RepoObject_persistence::history_schema_name" <-- "repo.RepoObject_persistence_ForUpdate::history_schema_name"
+"repo.RepoObject_persistence::history_schema_name" <-- "repo.RepoObject_gross::history_schema_name"
+"repo.RepoObject_persistence::history_table_name" <-- "repo.RepoObject_gross::history_table_name"
+"repo.RepoObject_persistence::history_table_name" <-- "repo.RepoObject_persistence_ForUpdate::history_table_name"
+"repo.RepoObject_persistence::history_table_name" <-- "repo.RepoObject_persistence_column::history_table_name"
+"repo.RepoObject_persistence::history_table_name" <-- "repo.RepoObject_persistence_ObjectNames::history_table_name"
+"repo.RepoObject_persistence::is_persistence" <-- "repo.RepoObject_persistence_ObjectNames::is_persistence"
+"repo.RepoObject_persistence::is_persistence" <-- "repo.RepoObject_persistence_column::is_persistence"
+"repo.RepoObject_persistence::is_persistence" <-- "repo.RepoObject_persistence_ForUpdate::is_persistence"
+"repo.RepoObject_persistence::is_persistence" <-- "repo.RepoObject_gross::is_persistence"
+"repo.RepoObject_persistence::is_persistence" <-- "reference.RepoObject_reference_T_bidirectional::referenced_is_persistence"
+"repo.RepoObject_persistence::is_persistence" <-- "reference.RepoObject_reference_T_bidirectional::referencing_is_persistence"
+"repo.RepoObject_persistence::is_persistence_check_duplicate_per_pk" <-- "repo.RepoObject_gross::is_persistence_check_duplicate_per_pk"
+"repo.RepoObject_persistence::is_persistence_check_duplicate_per_pk" <-- "repo.RepoObject_persistence_ForUpdate::is_persistence_check_duplicate_per_pk"
+"repo.RepoObject_persistence::is_persistence_check_for_empty_source" <-- "repo.RepoObject_persistence_ForUpdate::is_persistence_check_for_empty_source"
+"repo.RepoObject_persistence::is_persistence_check_for_empty_source" <-- "repo.RepoObject_gross::is_persistence_check_for_empty_source"
+"repo.RepoObject_persistence::is_persistence_check_for_empty_source" <-- "repo.RepoObject_persistence_column::is_persistence_check_for_empty_source"
+"repo.RepoObject_persistence::is_persistence_check_for_empty_source" <-- "repo.RepoObject_persistence_ObjectNames::is_persistence_check_for_empty_source"
+"repo.RepoObject_persistence::is_persistence_delete_changed" <-- "repo.RepoObject_persistence_ObjectNames::is_persistence_delete_changed"
+"repo.RepoObject_persistence::is_persistence_delete_changed" <-- "repo.RepoObject_persistence_column::is_persistence_delete_changed"
+"repo.RepoObject_persistence::is_persistence_delete_changed" <-- "repo.RepoObject_gross::is_persistence_delete_changed"
+"repo.RepoObject_persistence::is_persistence_delete_changed" <-- "repo.RepoObject_persistence_ForUpdate::is_persistence_delete_changed"
+"repo.RepoObject_persistence::is_persistence_delete_missing" <-- "repo.RepoObject_persistence_ForUpdate::is_persistence_delete_missing"
+"repo.RepoObject_persistence::is_persistence_delete_missing" <-- "repo.RepoObject_gross::is_persistence_delete_missing"
+"repo.RepoObject_persistence::is_persistence_delete_missing" <-- "repo.RepoObject_persistence_column::is_persistence_delete_missing"
+"repo.RepoObject_persistence::is_persistence_delete_missing" <-- "repo.RepoObject_persistence_ObjectNames::is_persistence_delete_missing"
+"repo.RepoObject_persistence::is_persistence_insert" <-- "repo.RepoObject_persistence_ObjectNames::is_persistence_insert"
+"repo.RepoObject_persistence::is_persistence_insert" <-- "repo.RepoObject_persistence_column::is_persistence_insert"
+"repo.RepoObject_persistence::is_persistence_insert" <-- "repo.RepoObject_gross::is_persistence_insert"
+"repo.RepoObject_persistence::is_persistence_insert" <-- "repo.RepoObject_persistence_ForUpdate::is_persistence_insert"
+"repo.RepoObject_persistence::is_persistence_merge_delete_missing" <-- "repo.RepoObject_gross::is_persistence_merge_delete_missing"
+"repo.RepoObject_persistence::is_persistence_merge_insert" <-- "repo.RepoObject_gross::is_persistence_merge_insert"
+"repo.RepoObject_persistence::is_persistence_merge_update_changed" <-- "repo.RepoObject_gross::is_persistence_merge_update_changed"
+"repo.RepoObject_persistence::is_persistence_persist_source" <-- "repo.RepoObject_gross::is_persistence_persist_source"
+"repo.RepoObject_persistence::is_persistence_persist_source" <-- "repo.RepoObject_persistence_ForUpdate::is_persistence_persist_source"
+"repo.RepoObject_persistence::is_persistence_truncate" <-- "repo.RepoObject_persistence_ForUpdate::is_persistence_truncate"
+"repo.RepoObject_persistence::is_persistence_truncate" <-- "repo.RepoObject_gross::is_persistence_truncate"
+"repo.RepoObject_persistence::is_persistence_truncate" <-- "repo.RepoObject_persistence_column::is_persistence_truncate"
+"repo.RepoObject_persistence::is_persistence_truncate" <-- "repo.RepoObject_persistence_ObjectNames::is_persistence_truncate"
+"repo.RepoObject_persistence::is_persistence_update_changed" <-- "repo.RepoObject_persistence_ObjectNames::is_persistence_update_changed"
+"repo.RepoObject_persistence::is_persistence_update_changed" <-- "repo.RepoObject_persistence_column::is_persistence_update_changed"
+"repo.RepoObject_persistence::is_persistence_update_changed" <-- "repo.RepoObject_gross::is_persistence_update_changed"
+"repo.RepoObject_persistence::is_persistence_update_changed" <-- "repo.RepoObject_persistence_ForUpdate::is_persistence_update_changed"
+"repo.RepoObject_persistence::source_filter" <-- "repo.RepoObject_gross::source_filter"
+"repo.RepoObject_persistence::source_RepoObject_guid" <-- "reference.RepoObject_reference_T_bidirectional::referencing_source_RepoObject_guid"
+"repo.RepoObject_persistence::source_RepoObject_guid" <-- "reference.RepoObject_reference_T_bidirectional::referenced_source_RepoObject_guid"
+"repo.RepoObject_persistence::source_RepoObject_guid" <-- "repo.RepoObject_persistence_ForUpdate::source_RepoObject_guid"
+"repo.RepoObject_persistence::source_RepoObject_guid" <-- "repo.RepoObject_gross::persistence_source_RepoObject_guid"
+"repo.RepoObject_persistence::source_RepoObject_guid" <-- "repo.RepoObject_persistence_column::source_RepoObject_guid"
+"repo.RepoObject_persistence::source_RepoObject_guid" <-- "reference.RepoObjectColumn_reference_Persistence::referenced_RepoObject_guid"
+"repo.RepoObject_persistence::source_RepoObject_guid" <-- "repo.RepoObject_persistence_ObjectNames::source_RepoObject_guid"
+"repo.RepoObject_persistence::source_RepoObject_guid" <-- "reference.RepoObject_reference_persistence::referenced_RepoObject_guid"
+"repo.RepoObject_persistence::source_RepoObject_guid" <-- "repo.RepoObjectColumn_gross::persistence_source_RepoObject_guid"
+"repo.RepoObject_persistence::source_RepoObject_name" <-- "repo.RepoObject_persistence_ForUpdate::source_RepoObject_name"
+"repo.RepoObject_persistence::target_filter" <-- "repo.RepoObject_gross::target_filter"
+"repo.RepoObject_persistence::target_RepoObject_guid" <-- "reference.RepoObject_reference_persistence::referencing_RepoObject_guid"
+"repo.RepoObject_persistence::target_RepoObject_guid" <-- "repo.RepoObject_persistence_ObjectNames::target_RepoObject_guid"
+"repo.RepoObject_persistence::target_RepoObject_guid" <-- "reference.RepoObjectColumn_reference_Persistence::referencing_RepoObject_guid"
+"repo.RepoObject_persistence::target_RepoObject_guid" <-- "repo.RepoObject_persistence_column::target_RepoObject_guid"
+"repo.RepoObject_persistence::target_RepoObject_guid" <-- "repo.RepoObjectColumn_HistValidColums_setpoint::RepoObject_guid"
+"repo.RepoObject_persistence::target_RepoObject_guid" <-- "repo.RepoObject_persistence_ForUpdate::target_RepoObject_guid"
+"repo.RepoObject_persistence::temporal_type" <-- "repo.RepoObject_persistence_ForUpdate::temporal_type"
+"repo.RepoObject_persistence::temporal_type" <-- "repo.RepoObject_gross::temporal_type"footer The diagram is interactive and contains links.
+@enduml
+

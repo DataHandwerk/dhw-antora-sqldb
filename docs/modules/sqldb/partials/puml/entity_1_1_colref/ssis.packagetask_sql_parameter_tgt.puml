@@ -1,0 +1,92 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:ssis.antoramodule_tgt_filter.adoc[]" as ssis.AntoraModule_tgt_filter << V >> {
+  - AntoraModule : (varchar(50))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_sql_parameter.adoc[]" as ssis.PackageTask_Sql_Parameter << U >> {
+  - AntoraModule : (varchar(50))
+  - ControlFlowDetailsRowID : (int)
+  - PackageName : (varchar(200))
+  ParameterBindingParameterName : (varchar(1000))
+  - ParameterBindingSequence : (varchar(1000))
+  ResultSetParameterName : (varchar(1000))
+  - TaskPath : (varchar(8000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_sql_parameter_src.adoc[]" as ssis.PackageTask_Sql_Parameter_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **TaskPath** : (varchar(8000))
+  **ParameterBindingSequence** : (varchar(1000))
+  - ControlFlowDetailsRowID : (int)
+  ParameterBindingParameterName : (varchar(1000))
+  ResultSetParameterName : (varchar(1000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_sql_parameter_tgt.adoc[]" as ssis.PackageTask_Sql_Parameter_tgt << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **TaskPath** : (varchar(8000))
+  **ParameterBindingSequence** : (varchar(1000))
+  - ControlFlowDetailsRowID : (int)
+  ParameterBindingParameterName : (varchar(1000))
+  ResultSetParameterName : (varchar(1000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.usp_persist_packagetask_sql_parameter_tgt.adoc[]" as ssis.usp_PERSIST_PackageTask_Sql_Parameter_tgt << P >> {
+  --
+}
+
+ssis.AntoraModule_tgt_filter <.. ssis.PackageTask_Sql_Parameter_tgt
+ssis.PackageTask_Sql_Parameter <.. ssis.PackageTask_Sql_Parameter_tgt
+ssis.PackageTask_Sql_Parameter_src <.. ssis.PackageTask_Sql_Parameter_tgt
+ssis.PackageTask_Sql_Parameter_tgt <.. ssis.AntoraModule_tgt_filter
+ssis.PackageTask_Sql_Parameter_tgt <.. ssis.PackageTask_Sql_Parameter
+ssis.PackageTask_Sql_Parameter_tgt <.. ssis.usp_PERSIST_PackageTask_Sql_Parameter_tgt
+"ssis.PackageTask_Sql_Parameter::AntoraModule" <-- "ssis.PackageTask_Sql_Parameter_tgt::AntoraModule"
+"ssis.PackageTask_Sql_Parameter::ControlFlowDetailsRowID" <-- "ssis.PackageTask_Sql_Parameter_tgt::ControlFlowDetailsRowID"
+"ssis.PackageTask_Sql_Parameter::PackageName" <-- "ssis.PackageTask_Sql_Parameter_tgt::PackageName"
+"ssis.PackageTask_Sql_Parameter::ParameterBindingParameterName" <-- "ssis.PackageTask_Sql_Parameter_tgt::ParameterBindingParameterName"
+"ssis.PackageTask_Sql_Parameter::ParameterBindingSequence" <-- "ssis.PackageTask_Sql_Parameter_tgt::ParameterBindingSequence"
+"ssis.PackageTask_Sql_Parameter::ResultSetParameterName" <-- "ssis.PackageTask_Sql_Parameter_tgt::ResultSetParameterName"
+"ssis.PackageTask_Sql_Parameter::TaskPath" <-- "ssis.PackageTask_Sql_Parameter_tgt::TaskPath"
+"ssis.PackageTask_Sql_Parameter_src::AntoraModule" <-- "ssis.PackageTask_Sql_Parameter_tgt::AntoraModule"
+"ssis.PackageTask_Sql_Parameter_src::ControlFlowDetailsRowID" <-- "ssis.PackageTask_Sql_Parameter_tgt::ControlFlowDetailsRowID"
+"ssis.PackageTask_Sql_Parameter_src::PackageName" <-- "ssis.PackageTask_Sql_Parameter_tgt::PackageName"
+"ssis.PackageTask_Sql_Parameter_src::ParameterBindingParameterName" <-- "ssis.PackageTask_Sql_Parameter_tgt::ParameterBindingParameterName"
+"ssis.PackageTask_Sql_Parameter_src::ParameterBindingSequence" <-- "ssis.PackageTask_Sql_Parameter_tgt::ParameterBindingSequence"
+"ssis.PackageTask_Sql_Parameter_src::ResultSetParameterName" <-- "ssis.PackageTask_Sql_Parameter_tgt::ResultSetParameterName"
+"ssis.PackageTask_Sql_Parameter_src::TaskPath" <-- "ssis.PackageTask_Sql_Parameter_tgt::TaskPath"footer The diagram is interactive and contains links.
+@enduml
+

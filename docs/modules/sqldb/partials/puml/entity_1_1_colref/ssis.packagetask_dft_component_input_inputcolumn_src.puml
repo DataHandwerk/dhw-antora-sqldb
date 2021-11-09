@@ -1,0 +1,164 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:ssis.package_src.adoc[]" as ssis.Package_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  PackageCreationDate : (datetime)
+  PackageCreatorComputerName : (nvarchar(500))
+  PackageCreatorName : (varchar(1000))
+  PackageDescription : (nvarchar(max))
+  PackageDTSID : (uniqueidentifier)
+  PackageLastModifiedProductVersion : (nvarchar(500))
+  PackageLocaleID : (int)
+  PackageObjectName : (nvarchar(500))
+  - PackagePath : (varchar(8000))
+  PackageProtectionLevel : (varchar(100))
+  PackageProtectionLevelName : (varchar(28))
+  PackageVersionGUID : (uniqueidentifier)
+  - ProjectPath : (varchar(8000))
+  - RowID : (int)
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_dft_component_input_inputcolumn_src.adoc[]" as ssis.PackageTask_Dft_Component_input_inputColumn_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **Column_refId** : (varchar(max))
+  Column_cachedDataType : (varchar(100))
+  Column_cachedName : (varchar(max))
+  Column_externalMetadataColumnId : (varchar(max))
+  Column_lineageId : (varchar(max))
+  Component_refId : (varchar(max))
+  - ControlFlowDetailsRowID : (int)
+  input_errorOrTruncationOperation : (varchar(100))
+  input_errorRowDisposition : (varchar(100))
+  input_hasSideEffects : (bit)
+  input_name : (varchar(500))
+  input_refId : (varchar(max))
+  TaskPath : (varchar(8000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_dft_component_input_inputcolumn_tgt.adoc[]" as ssis.PackageTask_Dft_Component_input_inputColumn_tgt << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **Column_refId** : (varchar(max))
+  Column_cachedDataType : (varchar(100))
+  Column_cachedName : (varchar(max))
+  Column_externalMetadataColumnId : (varchar(max))
+  Column_lineageId : (varchar(max))
+  Component_refId : (varchar(max))
+  - ControlFlowDetailsRowID : (int)
+  input_errorOrTruncationOperation : (varchar(100))
+  input_errorRowDisposition : (varchar(100))
+  input_hasSideEffects : (bit)
+  input_name : (varchar(500))
+  input_refId : (varchar(max))
+  TaskPath : (varchar(8000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.usp_persist_packagetask_dft_component_input_inputcolumn_tgt.adoc[]" as ssis.usp_PERSIST_PackageTask_Dft_Component_input_inputColumn_tgt << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tblcontrolflow.adoc[]" as ssis_t.TblControlFlow << U >> {
+  - **ControlFlowDetailsRowID** : (int)
+  DelayValidationPropertyValue : (varchar(100))
+  DFTQuery : (xml)
+  ExecPkgTaskQry : (xml)
+  ExpressionValue : (varchar(5000))
+  IsDisabled : (varchar(10))
+  RowID : (int)
+  ScriptTaskQry : (xml)
+  SqlTaskQry : (xml)
+  TaskDescription : (varchar(max))
+  TaskName : (varchar(2000))
+  TaskPath : (varchar(8000))
+  TaskType : (varchar(5000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis_t.tbltask_dft_component_inputs_inputcolumn_src.adoc[]" as ssis_t.TblTask_Dft_Component_inputs_inputColumn_src << V >> {
+  Column_cachedDataType : (varchar(100))
+  Column_cachedName : (varchar(max))
+  Column_externalMetadataColumnId : (varchar(max))
+  Column_lineageId : (varchar(max))
+  Column_refId : (varchar(max))
+  columnscontent : (xml)
+  - ControlFlowDetailsRowID : (int)
+  - DftComponentId : (int)
+  input_errorOrTruncationOperation : (varchar(100))
+  input_errorRowDisposition : (varchar(100))
+  input_hasSideEffects : (bit)
+  input_name : (varchar(500))
+  input_refId : (varchar(max))
+  nodescontent : (xml)
+  refId : (varchar(max))
+  RowID : (int)
+  --
+}
+
+ssis.Package_src <.. ssis.PackageTask_Dft_Component_input_inputColumn_src
+ssis.PackageTask_Dft_Component_input_inputColumn_src <.. ssis.PackageTask_Dft_Component_input_inputColumn_tgt
+ssis.PackageTask_Dft_Component_input_inputColumn_src <.. ssis.usp_PERSIST_PackageTask_Dft_Component_input_inputColumn_tgt
+ssis_t.TblControlFlow <.. ssis.PackageTask_Dft_Component_input_inputColumn_src
+ssis_t.TblTask_Dft_Component_inputs_inputColumn_src <.. ssis.PackageTask_Dft_Component_input_inputColumn_src
+"ssis.Package_src::AntoraModule" <-- "ssis.PackageTask_Dft_Component_input_inputColumn_src::AntoraModule"
+"ssis.Package_src::PackageName" <-- "ssis.PackageTask_Dft_Component_input_inputColumn_src::PackageName"
+"ssis.PackageTask_Dft_Component_input_inputColumn_src::AntoraModule" <-- "ssis.PackageTask_Dft_Component_input_inputColumn_tgt::AntoraModule"
+"ssis.PackageTask_Dft_Component_input_inputColumn_src::Column_cachedDataType" <-- "ssis.PackageTask_Dft_Component_input_inputColumn_tgt::Column_cachedDataType"
+"ssis.PackageTask_Dft_Component_input_inputColumn_src::Column_cachedName" <-- "ssis.PackageTask_Dft_Component_input_inputColumn_tgt::Column_cachedName"
+"ssis.PackageTask_Dft_Component_input_inputColumn_src::Column_externalMetadataColumnId" <-- "ssis.PackageTask_Dft_Component_input_inputColumn_tgt::Column_externalMetadataColumnId"
+"ssis.PackageTask_Dft_Component_input_inputColumn_src::Column_lineageId" <-- "ssis.PackageTask_Dft_Component_input_inputColumn_tgt::Column_lineageId"
+"ssis.PackageTask_Dft_Component_input_inputColumn_src::Column_refId" <-- "ssis.PackageTask_Dft_Component_input_inputColumn_tgt::Column_refId"
+"ssis.PackageTask_Dft_Component_input_inputColumn_src::Component_refId" <-- "ssis.PackageTask_Dft_Component_input_inputColumn_tgt::Component_refId"
+"ssis.PackageTask_Dft_Component_input_inputColumn_src::ControlFlowDetailsRowID" <-- "ssis.PackageTask_Dft_Component_input_inputColumn_tgt::ControlFlowDetailsRowID"
+"ssis.PackageTask_Dft_Component_input_inputColumn_src::input_errorOrTruncationOperation" <-- "ssis.PackageTask_Dft_Component_input_inputColumn_tgt::input_errorOrTruncationOperation"
+"ssis.PackageTask_Dft_Component_input_inputColumn_src::input_errorRowDisposition" <-- "ssis.PackageTask_Dft_Component_input_inputColumn_tgt::input_errorRowDisposition"
+"ssis.PackageTask_Dft_Component_input_inputColumn_src::input_hasSideEffects" <-- "ssis.PackageTask_Dft_Component_input_inputColumn_tgt::input_hasSideEffects"
+"ssis.PackageTask_Dft_Component_input_inputColumn_src::input_name" <-- "ssis.PackageTask_Dft_Component_input_inputColumn_tgt::input_name"
+"ssis.PackageTask_Dft_Component_input_inputColumn_src::input_refId" <-- "ssis.PackageTask_Dft_Component_input_inputColumn_tgt::input_refId"
+"ssis.PackageTask_Dft_Component_input_inputColumn_src::PackageName" <-- "ssis.PackageTask_Dft_Component_input_inputColumn_tgt::PackageName"
+"ssis.PackageTask_Dft_Component_input_inputColumn_src::TaskPath" <-- "ssis.PackageTask_Dft_Component_input_inputColumn_tgt::TaskPath"
+"ssis_t.TblControlFlow::TaskPath" <-- "ssis.PackageTask_Dft_Component_input_inputColumn_src::TaskPath"
+"ssis_t.TblTask_Dft_Component_inputs_inputColumn_src::Column_cachedDataType" <-- "ssis.PackageTask_Dft_Component_input_inputColumn_src::Column_cachedDataType"
+"ssis_t.TblTask_Dft_Component_inputs_inputColumn_src::Column_cachedName" <-- "ssis.PackageTask_Dft_Component_input_inputColumn_src::Column_cachedName"
+"ssis_t.TblTask_Dft_Component_inputs_inputColumn_src::Column_externalMetadataColumnId" <-- "ssis.PackageTask_Dft_Component_input_inputColumn_src::Column_externalMetadataColumnId"
+"ssis_t.TblTask_Dft_Component_inputs_inputColumn_src::Column_lineageId" <-- "ssis.PackageTask_Dft_Component_input_inputColumn_src::Column_lineageId"
+"ssis_t.TblTask_Dft_Component_inputs_inputColumn_src::Column_refId" <-- "ssis.PackageTask_Dft_Component_input_inputColumn_src::Column_refId"
+"ssis_t.TblTask_Dft_Component_inputs_inputColumn_src::ControlFlowDetailsRowID" <-- "ssis.PackageTask_Dft_Component_input_inputColumn_src::ControlFlowDetailsRowID"
+"ssis_t.TblTask_Dft_Component_inputs_inputColumn_src::input_errorOrTruncationOperation" <-- "ssis.PackageTask_Dft_Component_input_inputColumn_src::input_errorOrTruncationOperation"
+"ssis_t.TblTask_Dft_Component_inputs_inputColumn_src::input_errorRowDisposition" <-- "ssis.PackageTask_Dft_Component_input_inputColumn_src::input_errorRowDisposition"
+"ssis_t.TblTask_Dft_Component_inputs_inputColumn_src::input_hasSideEffects" <-- "ssis.PackageTask_Dft_Component_input_inputColumn_src::input_hasSideEffects"
+"ssis_t.TblTask_Dft_Component_inputs_inputColumn_src::input_name" <-- "ssis.PackageTask_Dft_Component_input_inputColumn_src::input_name"
+"ssis_t.TblTask_Dft_Component_inputs_inputColumn_src::input_refId" <-- "ssis.PackageTask_Dft_Component_input_inputColumn_src::input_refId"
+"ssis_t.TblTask_Dft_Component_inputs_inputColumn_src::refId" <-- "ssis.PackageTask_Dft_Component_input_inputColumn_src::Component_refId"footer The diagram is interactive and contains links.
+@enduml
+

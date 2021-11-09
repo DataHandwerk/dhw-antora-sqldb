@@ -1,0 +1,85 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:repo.repoobject.adoc[]" as repo.RepoObject << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:sqlparse.repoobject_sqlmodules.adoc[]" as sqlparse.RepoObject_SqlModules << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:sqlparse.repoobject_sqlmodules_29_1_object_is_union.adoc[]" as sqlparse.RepoObject_SqlModules_29_1_object_is_union << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:sqlparse.repoobject_sqlmodules_29_2_object_is_groupby.adoc[]" as sqlparse.RepoObject_SqlModules_29_2_object_is_GroupBy << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:sqlparse.repoobject_sqlmodules_31_object.adoc[]" as sqlparse.RepoObject_SqlModules_31_object << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:sqlparse.repoobject_sqlmodules_32_objectclass.adoc[]" as sqlparse.RepoObject_SqlModules_32_ObjectClass << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  **class** : (nvarchar(500))
+  --
+}
+
+entity "puml-link:dhw:sqldb:sqlparse.repoobject_sqlmodules_33_objectnormalized.adoc[]" as sqlparse.RepoObject_SqlModules_33_ObjectNormalized << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  **normalized** : (nvarchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:sqlparse.repoobject_sqlmodules_39_object.adoc[]" as sqlparse.RepoObject_SqlModules_39_object << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:sqlparse.repoobject_sqlmodules_41_from.adoc[]" as sqlparse.RepoObject_SqlModules_41_from << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:sqlparse.repoobject_sqlmodules_61_selectidentifier_union.adoc[]" as sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union << V >> {
+  --
+}
+
+repo.RepoObject <.. sqlparse.RepoObject_SqlModules_39_object
+sqlparse.RepoObject_SqlModules <.. sqlparse.RepoObject_SqlModules_39_object
+sqlparse.RepoObject_SqlModules_29_1_object_is_union <.. sqlparse.RepoObject_SqlModules_39_object
+sqlparse.RepoObject_SqlModules_29_2_object_is_GroupBy <.. sqlparse.RepoObject_SqlModules_39_object
+sqlparse.RepoObject_SqlModules_31_object <.. sqlparse.RepoObject_SqlModules_39_object
+sqlparse.RepoObject_SqlModules_32_ObjectClass <.. sqlparse.RepoObject_SqlModules_39_object
+sqlparse.RepoObject_SqlModules_33_ObjectNormalized <.. sqlparse.RepoObject_SqlModules_39_object
+sqlparse.RepoObject_SqlModules_39_object <.. sqlparse.RepoObject_SqlModules_41_from
+sqlparse.RepoObject_SqlModules_39_object <.. sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Unionfooter The diagram is interactive and contains links.
+@enduml
+

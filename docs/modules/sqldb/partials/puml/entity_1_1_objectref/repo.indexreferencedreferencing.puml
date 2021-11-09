@@ -1,0 +1,58 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:reference.repoobject_reference_t.adoc[]" as reference.RepoObject_reference_T << U >> {
+  **referenced_RepoObject_guid** : (uniqueidentifier)
+  **referencing_RepoObject_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.index_union.adoc[]" as repo.Index_union << V >> {
+  **index_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.index_virtual.adoc[]" as repo.Index_virtual << U >> {
+  - **index_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.indexreferencedreferencing.adoc[]" as repo.IndexReferencedReferencing << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.indexreferencedreferencing_hasfullcolumnsinreferencing.adoc[]" as repo.IndexReferencedReferencing_HasFullColumnsInReferencing << V >> {
+  --
+}
+
+reference.RepoObject_reference_T <.. repo.IndexReferencedReferencing
+repo.Index_union <.. repo.IndexReferencedReferencing
+repo.Index_virtual <.. repo.IndexReferencedReferencing
+repo.IndexReferencedReferencing <.. repo.IndexReferencedReferencing_HasFullColumnsInReferencingfooter The diagram is interactive and contains links.
+@enduml
+

@@ -27,19 +27,16 @@ skinparam class {
 
 
 entity "puml-link:dhw:sqldb:config.ftv_get_parameter_value.adoc[]" as config.ftv_get_parameter_value << IF >> {
-  --
   Parameter_value_result : (nvarchar(max))
   Parameter_value_result_date : (date)
   Parameter_value_result_datetime : (datetime)
   Parameter_value_result_int : (int)
-  --
   --
 }
 
 entity "puml-link:dhw:sqldb:config.parameter.adoc[]" as config.Parameter << U >> {
   - **Parameter_name** : (varchar(100))
   - **sub_Parameter** : (nvarchar(128))
-  --
   Parameter_default_value : (nvarchar(max))
   Parameter_desciption : (nvarchar(1000))
   Parameter_value : (nvarchar(max))
@@ -48,34 +45,26 @@ entity "puml-link:dhw:sqldb:config.parameter.adoc[]" as config.Parameter << U >>
   ~ Parameter_value_result_datetime : (datetime)
   ~ Parameter_value_result_int : (int)
   --
-  --
 }
 
 entity "puml-link:dhw:sqldb:docs.fs_pumlheaderlefttoright.adoc[]" as docs.fs_PumlHeaderLeftToRight << FN >> {
-  --
-  --
   --
 }
 
 entity "puml-link:dhw:sqldb:docs.fs_pumlheadertoptobottom.adoc[]" as docs.fs_PumlHeaderTopToBottom << FN >> {
   --
-  --
-  --
 }
 
 entity "puml-link:dhw:sqldb:docs.objectrefcyclic.adoc[]" as docs.ObjectRefCyclic << V >> {
-  --
   - cultures_name : (nvarchar(10))
   - ObjectRefCyclic_Puml : (nvarchar(max))
   - page_content : (nvarchar(max))
-  --
   --
 }
 
 entity "puml-link:dhw:sqldb:docs.repoobject_plantuml.adoc[]" as docs.RepoObject_Plantuml << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   **cultures_name** : (nvarchar(10))
-  --
   ColRefList : (nvarchar(max))
   ObjectRefList : (nvarchar(max))
   ObjectRefList_0_30 : (nvarchar(max))
@@ -90,24 +79,35 @@ entity "puml-link:dhw:sqldb:docs.repoobject_plantuml.adoc[]" as docs.RepoObject_
   PumlEntityList_30_0 : (nvarchar(max))
   - RepoObject_fullname2 : (nvarchar(257))
   --
-  --
 }
 
 entity "puml-link:dhw:sqldb:docs.schema_puml.adoc[]" as docs.Schema_puml << V >> {
   - **RepoSchema_guid** : (uniqueidentifier)
   **cultures_name** : (nvarchar(10))
-  --
   - is_ssas : (bit)
   - PumlSchemaEr : (nvarchar(max))
   - PumlSchemaIndexEr : (nvarchar(max))
   PumlSchemaSsasEr : (nvarchar(max))
   - RepoSchema_name : (nvarchar(128))
   --
+}
+
+entity "puml-link:dhw:sqldb:docs.ssis_pumldfttask.adoc[]" as docs.ssis_PumlDftTask << V >> {
+  - AntoraModule : (varchar(50))
+  - PackageName : (varchar(200))
+  - PumlDftTask : (nvarchar(max))
+  - TaskPath : (varchar(8000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.ssis_pumlpackage.adoc[]" as docs.ssis_PumlPackage << V >> {
+  - AntoraModule : (varchar(50))
+  - PackageName : (varchar(200))
+  - PumlPackageControlFlows : (nvarchar(max))
   --
 }
 
 entity "puml-link:dhw:sqldb:docs.unit_2.adoc[]" as docs.Unit_2 << V >> {
-  --
   AntoraComponent : (nvarchar(max))
   AntoraModule : (nvarchar(max))
   AntoraPage : (nvarchar(4000))
@@ -134,11 +134,9 @@ entity "puml-link:dhw:sqldb:docs.unit_2.adoc[]" as docs.Unit_2 << V >> {
   Unit_SummarizeBy : (nvarchar(500))
   Unit_TypeName : (nvarchar(128))
   --
-  --
 }
 
 entity "puml-link:dhw:sqldb:reference.additional_reference_is_external.adoc[]" as reference.additional_Reference_is_external << V >> {
-  --
   internal_AntoraComponent : (nvarchar(max))
   internal_AntoraModule : (nvarchar(max))
   - referenced_AntoraComponent : (nvarchar(128))
@@ -154,12 +152,10 @@ entity "puml-link:dhw:sqldb:reference.additional_reference_is_external.adoc[]" a
   - referencing_Object : (nvarchar(128))
   - referencing_Schema : (nvarchar(128))
   --
-  --
 }
 
 entity "puml-link:dhw:sqldb:repo.repoobject_external_src.adoc[]" as repo.RepoObject_external_src << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
-  --
   - external_AntoraComponent : (nvarchar(128))
   - external_AntoraModule : (nvarchar(128))
   - is_external : (int)
@@ -171,11 +167,9 @@ entity "puml-link:dhw:sqldb:repo.repoobject_external_src.adoc[]" as repo.RepoObj
   - SysObject_schema_name : (nvarchar(128))
   - SysObject_type : (varchar(1))
   --
-  --
 }
 
 entity "puml-link:dhw:sqldb:repo.repoobject_gross.adoc[]" as repo.RepoObject_gross << V >> {
-  --
   AntoraComponent : (nvarchar(max))
   AntoraModule : (nvarchar(max))
   Description : (nvarchar(max))
@@ -206,6 +200,7 @@ entity "puml-link:dhw:sqldb:repo.repoobject_gross.adoc[]" as repo.RepoObject_gro
   is_persistence_merge_delete_missing : (bit)
   is_persistence_merge_insert : (bit)
   is_persistence_merge_update_changed : (bit)
+  is_persistence_persist_source : (bit)
   is_persistence_truncate : (bit)
   is_persistence_update_changed : (bit)
   is_repo_managed : (bit)
@@ -221,6 +216,7 @@ entity "puml-link:dhw:sqldb:repo.repoobject_gross.adoc[]" as repo.RepoObject_gro
   persistence_source_RepoObject_guid : (uniqueidentifier)
   persistence_source_RepoObject_xref : (nvarchar(4000))
   persistence_source_SysObject_fullname : (nvarchar(261))
+  persistence_source_SysObject_fullname_or_tempsource : (nvarchar(261))
   persistence_source_SysObject_fullname2 : (nvarchar(257))
   persistence_source_SysObject_xref : (nvarchar(4000))
   pk_index_guid : (uniqueidentifier)
@@ -261,12 +257,10 @@ entity "puml-link:dhw:sqldb:repo.repoobject_gross.adoc[]" as repo.RepoObject_gro
   usp_persistence_RepoObject_guid : (uniqueidentifier)
   uspgenerator_usp_id : (int)
   --
-  --
 }
 
 entity "puml-link:dhw:sqldb:repo.repoobject_sqlcreatetable.adoc[]" as repo.RepoObject_SqlCreateTable << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
-  --
   ConList : (nvarchar(max))
   - DbmlTable : (nvarchar(max))
   persistence_source_RepoObject_fullname : (nvarchar(261))
@@ -275,23 +269,19 @@ entity "puml-link:dhw:sqldb:repo.repoobject_sqlcreatetable.adoc[]" as repo.RepoO
   - RepoObject_fullname : (nvarchar(261))
   - SqlCreateTable : (nvarchar(max))
   --
-  --
 }
 
 entity "puml-link:dhw:sqldb:repo.repoobjectcolumn_histvalidcolums_setpoint.adoc[]" as repo.RepoObjectColumn_HistValidColums_setpoint << V >> {
   - **RepoObject_guid** : (uniqueidentifier)
   **RepoObjectColumn_name** : (sysname)
-  --
   - Repo_generated_always_type : (int)
   - Repo_is_nullable : (int)
   - Repo_user_type_fullname : (varchar(12))
   - Repo_user_type_name : (varchar(9))
   --
-  --
 }
 
 entity "puml-link:dhw:sqldb:ssas.additional_reference_step1.adoc[]" as ssas.additional_Reference_step1 << V >> {
-  --
   - databasename : (nvarchar(128))
   Part1 : (nvarchar(max))
   Part2 : (nvarchar(max))
@@ -308,7 +298,6 @@ entity "puml-link:dhw:sqldb:ssas.additional_reference_step1.adoc[]" as ssas.addi
   tables_partitions_name : (nvarchar(500))
   tables_partitions_source_dataSource : (nvarchar(500))
   --
-  --
 }
 
 config.ftv_get_parameter_value <.. repo.RepoObjectColumn_HistValidColums_setpoint
@@ -323,7 +312,9 @@ config.ftv_get_parameter_value <.. docs.Unit_2
 config.ftv_get_parameter_value <.. repo.RepoObject_external_src
 config.ftv_get_parameter_value <.. reference.additional_Reference_is_external
 config.ftv_get_parameter_value <.. ssas.additional_Reference_step1
+config.ftv_get_parameter_value <.. docs.ssis_PumlPackage
+config.ftv_get_parameter_value <.. docs.ssis_PumlDftTask
 config.Parameter <.. config.ftv_get_parameter_value
-
+footer The diagram is interactive and contains links.
 @enduml
 

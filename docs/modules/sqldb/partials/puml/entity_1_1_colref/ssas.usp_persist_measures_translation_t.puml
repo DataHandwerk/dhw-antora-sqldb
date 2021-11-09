@@ -28,13 +28,9 @@ skinparam class {
 
 entity "puml-link:dhw:sqldb:logs.usp_executionlog_insert.adoc[]" as logs.usp_ExecutionLog_insert << P >> {
   --
-  --
-  --
 }
 
 entity "puml-link:dhw:sqldb:repo.usp_sync_guid_ssas.adoc[]" as repo.usp_sync_guid_ssas << P >> {
-  --
-  --
   --
 }
 
@@ -42,12 +38,13 @@ entity "puml-link:dhw:sqldb:ssas.measures_translation.adoc[]" as ssas.Measures_t
   - **Measure_guid** : (uniqueidentifier)
   - **cultures_name** : (nvarchar(10))
   **RepoObject_name** : (nvarchar(128))
-  --
+  displayfolder_DisplayName : (nvarchar(512))
+  displayfolder_translation : (nvarchar(512))
   Measure_DisplayName : (nvarchar(500))
   Measure_translation : (nvarchar(128))
+  measures_displayFolder : (nvarchar(500))
   - measures_name : (nvarchar(500))
   - RepoSchema_name : (nvarchar(128))
-  --
   --
 }
 
@@ -55,18 +52,17 @@ entity "puml-link:dhw:sqldb:ssas.measures_translation_t.adoc[]" as ssas.Measures
   - **Measure_guid** : (uniqueidentifier)
   - **cultures_name** : (nvarchar(10))
   **RepoObject_name** : (nvarchar(128))
-  --
+  displayfolder_DisplayName : (nvarchar(512))
+  displayfolder_translation : (nvarchar(512))
   Measure_DisplayName : (nvarchar(500))
   Measure_translation : (nvarchar(128))
+  measures_displayFolder : (nvarchar(500))
   - measures_name : (nvarchar(500))
   - RepoSchema_name : (nvarchar(128))
-  --
   --
 }
 
 entity "puml-link:dhw:sqldb:ssas.usp_persist_measures_translation_t.adoc[]" as ssas.usp_PERSIST_Measures_translation_T << P >> {
-  --
-  --
   --
 }
 
@@ -74,6 +70,6 @@ logs.usp_ExecutionLog_insert <.. ssas.usp_PERSIST_Measures_translation_T
 ssas.Measures_translation <.. ssas.usp_PERSIST_Measures_translation_T
 ssas.Measures_translation_T <.. ssas.usp_PERSIST_Measures_translation_T
 ssas.usp_PERSIST_Measures_translation_T <.. repo.usp_sync_guid_ssas
-
+footer The diagram is interactive and contains links.
 @enduml
 

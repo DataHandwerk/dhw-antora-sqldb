@@ -1,0 +1,77 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:config.parameter.adoc[]" as config.Parameter << U >> {
+  - **Parameter_name** : (varchar(100))
+  - **sub_Parameter** : (nvarchar(128))
+  Parameter_default_value : (nvarchar(max))
+  Parameter_desciption : (nvarchar(1000))
+  Parameter_value : (nvarchar(max))
+  ~ Parameter_value_result : (nvarchar(max))
+  ~ Parameter_value_result_date : (date)
+  ~ Parameter_value_result_datetime : (datetime)
+  ~ Parameter_value_result_int : (int)
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.propertyname_repoobjectcolumn.adoc[]" as property.PropertyName_RepoObjectColumn << V >> {
+  - **property_name** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.propertyname_repoobjectcolumn_t.adoc[]" as property.PropertyName_RepoObjectColumn_T << U >> {
+  - **property_name** : (nvarchar(128))
+  - has_inheritance : (bit)
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.repoobjectcolumnproperty.adoc[]" as property.RepoObjectColumnProperty << U >> {
+  - **RepoObjectColumnProperty_id** : (int)
+  inheritance : (tinyint)
+  - property_name : (nvarchar(128))
+  - property_value : (nvarchar(max))
+  - RepoObjectColumn_guid : (uniqueidentifier)
+  ~ property_bigint : (bigint)
+  ~ property_float : (float)
+  ~ property_int : (int)
+  ~ property_money : (money)
+  ~ property_real : (real)
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.usp_persist_propertyname_repoobjectcolumn_t.adoc[]" as property.usp_PERSIST_PropertyName_RepoObjectColumn_T << P >> {
+  --
+}
+
+config.Parameter <.. property.PropertyName_RepoObjectColumn
+property.PropertyName_RepoObjectColumn <.. property.PropertyName_RepoObjectColumn_T
+property.PropertyName_RepoObjectColumn <.. property.usp_PERSIST_PropertyName_RepoObjectColumn_T
+property.RepoObjectColumnProperty <.. property.PropertyName_RepoObjectColumn
+"property.PropertyName_RepoObjectColumn::property_name" <-- "property.PropertyName_RepoObjectColumn_T::property_name"footer The diagram is interactive and contains links.
+@enduml
+

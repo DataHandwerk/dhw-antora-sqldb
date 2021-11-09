@@ -1,0 +1,64 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:config.ftv_get_parameter_value.adoc[]" as config.ftv_get_parameter_value << IF >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.ssis_pumldfttask.adoc[]" as docs.ssis_PumlDftTask << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.ssis_pumlpartialdataflow.adoc[]" as docs.ssis_PumlPartialDataFlow << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.ssis_pumlpartialdftcomponent.adoc[]" as docs.ssis_PumlPartialDftComponent << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.ssis_task.adoc[]" as docs.ssis_Task << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.ssis_tasklist.adoc[]" as docs.ssis_TaskList << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_dft_component.adoc[]" as ssis.PackageTask_Dft_Component << U >> {
+  --
+}
+
+config.ftv_get_parameter_value <.. docs.ssis_PumlDftTask
+docs.ssis_PumlDftTask <.. docs.ssis_TaskList
+docs.ssis_PumlDftTask <.. docs.ssis_Task
+docs.ssis_PumlPartialDataFlow <.. docs.ssis_PumlDftTask
+docs.ssis_PumlPartialDftComponent <.. docs.ssis_PumlDftTask
+ssis.PackageTask_Dft_Component <.. docs.ssis_PumlDftTaskfooter The diagram is interactive and contains links.
+@enduml
+

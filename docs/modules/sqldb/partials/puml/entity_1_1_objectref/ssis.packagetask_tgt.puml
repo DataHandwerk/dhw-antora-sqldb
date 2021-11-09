@@ -1,0 +1,62 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:ssis.antoramodule_tgt_filter.adoc[]" as ssis.AntoraModule_tgt_filter << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask.adoc[]" as ssis.PackageTask << U >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_src.adoc[]" as ssis.PackageTask_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **TaskPath** : (varchar(8000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_tgt.adoc[]" as ssis.PackageTask_tgt << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **TaskPath** : (varchar(8000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.usp_persist_packagetask_tgt.adoc[]" as ssis.usp_PERSIST_PackageTask_tgt << P >> {
+  --
+}
+
+ssis.AntoraModule_tgt_filter <.. ssis.PackageTask_tgt
+ssis.PackageTask <.. ssis.PackageTask_tgt
+ssis.PackageTask_src <.. ssis.PackageTask_tgt
+ssis.PackageTask_tgt <.. ssis.PackageTask
+ssis.PackageTask_tgt <.. ssis.usp_PERSIST_PackageTask_tgt
+ssis.PackageTask_tgt <.. ssis.AntoraModule_tgt_filterfooter The diagram is interactive and contains links.
+@enduml
+

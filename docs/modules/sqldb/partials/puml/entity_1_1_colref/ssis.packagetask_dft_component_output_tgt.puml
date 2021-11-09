@@ -1,0 +1,97 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:ssis.antoramodule_tgt_filter.adoc[]" as ssis.AntoraModule_tgt_filter << V >> {
+  - AntoraModule : (varchar(50))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_dft_component_output.adoc[]" as ssis.PackageTask_Dft_Component_output << U >> {
+  - AntoraModule : (varchar(50))
+  Component_refId : (varchar(max))
+  - ControlFlowDetailsRowID : (int)
+  output_isErrorOut : (bit)
+  output_name : (varchar(500))
+  output_refId : (varchar(max))
+  PackageName : (varchar(200))
+  TaskPath : (varchar(8000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_dft_component_output_src.adoc[]" as ssis.PackageTask_Dft_Component_output_src << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **output_refId** : (varchar(max))
+  Component_refId : (varchar(max))
+  - ControlFlowDetailsRowID : (int)
+  output_isErrorOut : (bit)
+  output_name : (varchar(500))
+  TaskPath : (varchar(8000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.packagetask_dft_component_output_tgt.adoc[]" as ssis.PackageTask_Dft_Component_output_tgt << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  **output_refId** : (varchar(max))
+  Component_refId : (varchar(max))
+  - ControlFlowDetailsRowID : (int)
+  output_isErrorOut : (bit)
+  output_name : (varchar(500))
+  TaskPath : (varchar(8000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.usp_persist_packagetask_dft_component_output_tgt.adoc[]" as ssis.usp_PERSIST_PackageTask_Dft_Component_output_tgt << P >> {
+  --
+}
+
+ssis.AntoraModule_tgt_filter <.. ssis.PackageTask_Dft_Component_output_tgt
+ssis.PackageTask_Dft_Component_output <.. ssis.PackageTask_Dft_Component_output_tgt
+ssis.PackageTask_Dft_Component_output_src <.. ssis.PackageTask_Dft_Component_output_tgt
+ssis.PackageTask_Dft_Component_output_tgt <.. ssis.AntoraModule_tgt_filter
+ssis.PackageTask_Dft_Component_output_tgt <.. ssis.PackageTask_Dft_Component_output
+ssis.PackageTask_Dft_Component_output_tgt <.. ssis.usp_PERSIST_PackageTask_Dft_Component_output_tgt
+"ssis.PackageTask_Dft_Component_output::AntoraModule" <-- "ssis.PackageTask_Dft_Component_output_tgt::AntoraModule"
+"ssis.PackageTask_Dft_Component_output::Component_refId" <-- "ssis.PackageTask_Dft_Component_output_tgt::Component_refId"
+"ssis.PackageTask_Dft_Component_output::ControlFlowDetailsRowID" <-- "ssis.PackageTask_Dft_Component_output_tgt::ControlFlowDetailsRowID"
+"ssis.PackageTask_Dft_Component_output::output_isErrorOut" <-- "ssis.PackageTask_Dft_Component_output_tgt::output_isErrorOut"
+"ssis.PackageTask_Dft_Component_output::output_name" <-- "ssis.PackageTask_Dft_Component_output_tgt::output_name"
+"ssis.PackageTask_Dft_Component_output::output_refId" <-- "ssis.PackageTask_Dft_Component_output_tgt::output_refId"
+"ssis.PackageTask_Dft_Component_output::PackageName" <-- "ssis.PackageTask_Dft_Component_output_tgt::PackageName"
+"ssis.PackageTask_Dft_Component_output::TaskPath" <-- "ssis.PackageTask_Dft_Component_output_tgt::TaskPath"
+"ssis.PackageTask_Dft_Component_output_src::AntoraModule" <-- "ssis.PackageTask_Dft_Component_output_tgt::AntoraModule"
+"ssis.PackageTask_Dft_Component_output_src::Component_refId" <-- "ssis.PackageTask_Dft_Component_output_tgt::Component_refId"
+"ssis.PackageTask_Dft_Component_output_src::ControlFlowDetailsRowID" <-- "ssis.PackageTask_Dft_Component_output_tgt::ControlFlowDetailsRowID"
+"ssis.PackageTask_Dft_Component_output_src::output_isErrorOut" <-- "ssis.PackageTask_Dft_Component_output_tgt::output_isErrorOut"
+"ssis.PackageTask_Dft_Component_output_src::output_name" <-- "ssis.PackageTask_Dft_Component_output_tgt::output_name"
+"ssis.PackageTask_Dft_Component_output_src::output_refId" <-- "ssis.PackageTask_Dft_Component_output_tgt::output_refId"
+"ssis.PackageTask_Dft_Component_output_src::PackageName" <-- "ssis.PackageTask_Dft_Component_output_tgt::PackageName"
+"ssis.PackageTask_Dft_Component_output_src::TaskPath" <-- "ssis.PackageTask_Dft_Component_output_tgt::TaskPath"footer The diagram is interactive and contains links.
+@enduml
+

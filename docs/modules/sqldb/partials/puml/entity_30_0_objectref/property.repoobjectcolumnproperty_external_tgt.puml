@@ -1,0 +1,445 @@
+@startuml
+'Left to right direction
+top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:config.ftv_get_parameter_value.adoc[]" as config.ftv_get_parameter_value << IF >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:config.parameter.adoc[]" as config.Parameter << U >> {
+  - **Parameter_name** : (varchar(100))
+  - **sub_Parameter** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:configt.parameter_default.adoc[]" as configT.Parameter_default << V >> {
+  - **Parameter_name** : (varchar(52))
+  - **sub_Parameter** : (nvarchar(27))
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.external_repoobjectcolumnproperty.adoc[]" as property.external_RepoObjectColumnProperty << U >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.external_repoobjectproperty.adoc[]" as property.external_RepoObjectProperty << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.propertyname_repoobject.adoc[]" as property.PropertyName_RepoObject << V >> {
+  **property_name** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.propertyname_repoobject_t.adoc[]" as property.PropertyName_RepoObject_T << U >> {
+  **property_name** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.repoobjectcolumnproperty.adoc[]" as property.RepoObjectColumnProperty << U >> {
+  - **RepoObjectColumnProperty_id** : (int)
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.repoobjectcolumnproperty_external_src.adoc[]" as property.RepoObjectColumnProperty_external_src << V >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.repoobjectcolumnproperty_external_tgt.adoc[]" as property.RepoObjectColumnProperty_external_tgt << V >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.repoobjectproperty.adoc[]" as property.RepoObjectProperty << U >> {
+  - **RepoObjectProperty_id** : (int)
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.repoobjectproperty_external_src.adoc[]" as property.RepoObjectProperty_external_src << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.repoobjectproperty_external_tgt.adoc[]" as property.RepoObjectProperty_external_tgt << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.repoobjectproperty_selectedpropertyname_split.adoc[]" as property.RepoObjectProperty_SelectedPropertyName_split << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.additional_reference.adoc[]" as reference.additional_Reference << U >> {
+  - **Id** : (int)
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.additional_reference_from_properties_src.adoc[]" as reference.additional_Reference_from_properties_src << V >> {
+  **referenced_AntoraComponent** : (nvarchar(max))
+  **referenced_AntoraModule** : (nvarchar(max))
+  **referenced_Schema** : (nvarchar(max))
+  **referenced_Object** : (nvarchar(max))
+  **referenced_Column** : (nvarchar(max))
+  **referencing_AntoraComponent** : (nvarchar(max))
+  **referencing_AntoraModule** : (nvarchar(max))
+  **referencing_Schema** : (nvarchar(max))
+  **referencing_Object** : (nvarchar(max))
+  **referencing_Column** : (nvarchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.additional_reference_from_properties_tgt.adoc[]" as reference.additional_Reference_from_properties_tgt << V >> {
+  - **Id** : (int)
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.additional_reference_from_ssas_src.adoc[]" as reference.additional_Reference_from_ssas_src << V >> {
+  **referenced_AntoraComponent** : (nvarchar(128))
+  **referenced_AntoraModule** : (nvarchar(128))
+  **referenced_Schema** : (nvarchar(max))
+  **referenced_Object** : (nvarchar(max))
+  **referenced_Column** : (nvarchar(500))
+  **referencing_AntoraComponent** : (nvarchar(max))
+  **referencing_AntoraModule** : (nvarchar(max))
+  - **referencing_Schema** : (nvarchar(128))
+  - **referencing_Object** : (nvarchar(128))
+  **referencing_Column** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.additional_reference_from_ssas_tgt.adoc[]" as reference.additional_Reference_from_ssas_tgt << V >> {
+  - **Id** : (int)
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.additional_reference_is_external.adoc[]" as reference.additional_Reference_is_external << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.additional_reference_object.adoc[]" as reference.additional_Reference_Object << V >> {
+  - **AntoraComponent** : (nvarchar(128))
+  - **AntoraModule** : (nvarchar(128))
+  - **SchemaName** : (nvarchar(128))
+  - **ObjectName** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.additional_reference_object_t.adoc[]" as reference.additional_Reference_Object_T << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.additional_reference_objectcolumn.adoc[]" as reference.additional_Reference_ObjectColumn << V >> {
+  - **AntoraComponent** : (nvarchar(128))
+  - **AntoraModule** : (nvarchar(128))
+  - **SchemaName** : (nvarchar(128))
+  - **ObjectName** : (nvarchar(128))
+  **ColumnName** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.additional_reference_objectcolumn_t.adoc[]" as reference.additional_Reference_ObjectColumn_T << U >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.additional_reference_wo_columns_from_properties_src.adoc[]" as reference.additional_Reference_wo_columns_from_properties_src << V >> {
+  **referenced_AntoraComponent** : (nvarchar(max))
+  **referenced_AntoraModule** : (nvarchar(max))
+  **referenced_Schema** : (nvarchar(max))
+  **referenced_Object** : (nvarchar(max))
+  **referencing_AntoraComponent** : (nvarchar(max))
+  **referencing_AntoraModule** : (nvarchar(max))
+  **referencing_Schema** : (nvarchar(max))
+  **referencing_Object** : (nvarchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.additional_reference_wo_columns_from_properties_tgt.adoc[]" as reference.additional_Reference_wo_columns_from_properties_tgt << V >> {
+  - **Id** : (int)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobject.adoc[]" as repo.RepoObject << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobject_external_src.adoc[]" as repo.RepoObject_external_src << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobject_external_tgt.adoc[]" as repo.RepoObject_external_tgt << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobject_ssas_src.adoc[]" as repo.RepoObject_SSAS_src << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobject_ssas_tgt.adoc[]" as repo.RepoObject_SSAS_tgt << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobjectcolumn.adoc[]" as repo.RepoObjectColumn << U >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobjectcolumn_external_src.adoc[]" as repo.RepoObjectColumn_external_src << V >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobjectcolumn_external_tgt.adoc[]" as repo.RepoObjectColumn_external_tgt << V >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobjectcolumn_ssas_src.adoc[]" as repo.RepoObjectColumn_SSAS_src << V >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobjectcolumn_ssas_tgt.adoc[]" as repo.RepoObjectColumn_SSAS_tgt << V >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.reposchema.adoc[]" as repo.RepoSchema << U >> {
+  - **RepoSchema_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.reposchema_ssas_src.adoc[]" as repo.RepoSchema_ssas_src << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.reposchema_ssas_tgt.adoc[]" as repo.RepoSchema_ssas_tgt << V >> {
+  - **RepoSchema_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.additional_reference_step1.adoc[]" as ssas.additional_Reference_step1 << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json.adoc[]" as ssas.model_json << U >> {
+  - **databasename** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json_10.adoc[]" as ssas.model_json_10 << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json_20.adoc[]" as ssas.model_json_20 << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json_201_descriptions_multiline.adoc[]" as ssas.model_json_201_descriptions_multiline << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json_2011_descriptions_stragg.adoc[]" as ssas.model_json_2011_descriptions_StrAgg << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json_31_tables.adoc[]" as ssas.model_json_31_tables << V >> {
+  - **databasename** : (nvarchar(128))
+  **tables_name** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json_31_tables_t.adoc[]" as ssas.model_json_31_tables_T << U >> {
+  - **databasename** : (nvarchar(128))
+  **tables_name** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json_311_tables_columns.adoc[]" as ssas.model_json_311_tables_columns << V >> {
+  - **databasename** : (nvarchar(128))
+  - **tables_name** : (nvarchar(128))
+  **tables_columns_name** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json_311_tables_columns_t.adoc[]" as ssas.model_json_311_tables_columns_T << U >> {
+  - **databasename** : (nvarchar(128))
+  - **tables_name** : (nvarchar(128))
+  **tables_columns_name** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json_313_tables_partitions.adoc[]" as ssas.model_json_313_tables_partitions << V >> {
+  - **databasename** : (nvarchar(128))
+  - **tables_name** : (nvarchar(128))
+  **tables_partitions_name** : (nvarchar(500))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json_3131_tables_partitions_source.adoc[]" as ssas.model_json_3131_tables_partitions_source << V >> {
+  - **databasename** : (nvarchar(128))
+  - **tables_name** : (nvarchar(128))
+  **tables_partitions_name** : (nvarchar(500))
+  **tables_partitions_source_name** : (nvarchar(500))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json_31311_tables_partitions_source_posfrom.adoc[]" as ssas.model_json_31311_tables_partitions_source_PosFrom << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json_313111_tables_partitions_source_stringfrom.adoc[]" as ssas.model_json_313111_tables_partitions_source_StringFrom << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json_3131111_tables_partitions_source_posdot.adoc[]" as ssas.model_json_3131111_tables_partitions_source_PosDot << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json_31311111_tables_partitions_source_part123.adoc[]" as ssas.model_json_31311111_tables_partitions_source_Part123 << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json_33_datasources.adoc[]" as ssas.model_json_33_dataSources << V >> {
+  - **databasename** : (nvarchar(128))
+  **dataSources_name** : (nvarchar(500))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.model_json_33_datasources_t.adoc[]" as ssas.model_json_33_dataSources_T << U >> {
+  - **databasename** : (nvarchar(128))
+  **dataSources_name** : (nvarchar(500))
+  --
+}
+
+config.ftv_get_parameter_value <.. ssas.additional_Reference_step1
+config.ftv_get_parameter_value <.. reference.additional_Reference_is_external
+config.ftv_get_parameter_value <.. repo.RepoObject_external_src
+config.Parameter <.. property.PropertyName_RepoObject
+config.Parameter <.. config.ftv_get_parameter_value
+configT.Parameter_default <.. config.Parameter
+property.external_RepoObjectColumnProperty <.. property.RepoObjectColumnProperty_external_src
+property.external_RepoObjectProperty <.. property.RepoObjectProperty_external_src
+property.PropertyName_RepoObject <.. property.PropertyName_RepoObject_T
+property.PropertyName_RepoObject_T <.. property.RepoObjectColumnProperty_external_tgt
+property.PropertyName_RepoObject_T <.. property.RepoObjectProperty_external_tgt
+property.RepoObjectColumnProperty <.. property.RepoObjectColumnProperty_external_tgt
+property.RepoObjectColumnProperty_external_src <.. property.RepoObjectColumnProperty_external_tgt
+property.RepoObjectColumnProperty_external_tgt <.. repo.RepoObject
+property.RepoObjectColumnProperty_external_tgt <.. repo.RepoObjectColumn
+property.RepoObjectColumnProperty_external_tgt <.. property.RepoObjectColumnProperty
+property.RepoObjectColumnProperty_external_tgt <.. property.PropertyName_RepoObject_T
+property.RepoObjectProperty <.. property.RepoObjectProperty_SelectedPropertyName_split
+property.RepoObjectProperty <.. property.RepoObjectProperty_external_tgt
+property.RepoObjectProperty <.. property.PropertyName_RepoObject
+property.RepoObjectProperty_external_src <.. property.RepoObjectProperty_external_tgt
+property.RepoObjectProperty_external_tgt <.. property.PropertyName_RepoObject_T
+property.RepoObjectProperty_external_tgt <.. property.RepoObjectProperty
+property.RepoObjectProperty_external_tgt <.. repo.RepoObject
+property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_wo_columns_from_properties_src
+property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_from_properties_src
+reference.additional_Reference <.. reference.additional_Reference_from_ssas_tgt
+reference.additional_Reference <.. reference.additional_Reference_wo_columns_from_properties_tgt
+reference.additional_Reference <.. reference.additional_Reference_from_properties_tgt
+reference.additional_Reference <.. reference.additional_Reference_is_external
+reference.additional_Reference_from_properties_src <.. reference.additional_Reference_from_properties_tgt
+reference.additional_Reference_from_properties_tgt <.. reference.additional_Reference
+reference.additional_Reference_from_ssas_src <.. reference.additional_Reference_from_ssas_tgt
+reference.additional_Reference_from_ssas_tgt <.. reference.additional_Reference
+reference.additional_Reference_is_external <.. reference.additional_Reference_ObjectColumn
+reference.additional_Reference_is_external <.. reference.additional_Reference_Object
+reference.additional_Reference_Object <.. reference.additional_Reference_Object_T
+reference.additional_Reference_Object_T <.. repo.RepoObjectColumn_external_src
+reference.additional_Reference_Object_T <.. repo.RepoObject_external_src
+reference.additional_Reference_ObjectColumn <.. reference.additional_Reference_ObjectColumn_T
+reference.additional_Reference_ObjectColumn_T <.. repo.RepoObjectColumn_external_src
+reference.additional_Reference_wo_columns_from_properties_src <.. reference.additional_Reference_wo_columns_from_properties_tgt
+reference.additional_Reference_wo_columns_from_properties_tgt <.. reference.additional_Reference
+repo.RepoObject <.. repo.RepoObject_SSAS_tgt
+repo.RepoObject <.. property.RepoObjectProperty_external_tgt
+repo.RepoObject <.. repo.RepoObject_external_tgt
+repo.RepoObject <.. property.RepoObjectColumnProperty_external_tgt
+repo.RepoObject_external_src <.. repo.RepoObject_external_tgt
+repo.RepoObject_external_tgt <.. repo.RepoObjectColumn_external_tgt
+repo.RepoObject_external_tgt <.. repo.RepoObject
+repo.RepoObject_SSAS_src <.. repo.RepoObject_SSAS_tgt
+repo.RepoObject_SSAS_tgt <.. repo.RepoObject
+repo.RepoObject_SSAS_tgt <.. repo.RepoObjectColumn_SSAS_tgt
+repo.RepoObjectColumn <.. repo.RepoObjectColumn_SSAS_tgt
+repo.RepoObjectColumn <.. repo.RepoObjectColumn_external_tgt
+repo.RepoObjectColumn <.. property.RepoObjectColumnProperty_external_tgt
+repo.RepoObjectColumn_external_src <.. repo.RepoObjectColumn_external_tgt
+repo.RepoObjectColumn_external_tgt <.. repo.RepoObjectColumn
+repo.RepoObjectColumn_external_tgt <.. repo.RepoObject_external_tgt
+repo.RepoObjectColumn_SSAS_src <.. repo.RepoObjectColumn_SSAS_tgt
+repo.RepoObjectColumn_SSAS_tgt <.. repo.RepoObjectColumn
+repo.RepoObjectColumn_SSAS_tgt <.. repo.RepoObject_SSAS_tgt
+repo.RepoSchema <.. repo.RepoSchema_ssas_tgt
+repo.RepoSchema <.. repo.RepoObject_SSAS_src
+repo.RepoSchema_ssas_src <.. repo.RepoSchema_ssas_tgt
+repo.RepoSchema_ssas_tgt <.. repo.RepoSchema
+ssas.additional_Reference_step1 <.. reference.additional_Reference_from_ssas_src
+ssas.model_json <.. ssas.model_json_10
+ssas.model_json_10 <.. ssas.model_json_20
+ssas.model_json_20 <.. ssas.model_json_31_tables
+ssas.model_json_20 <.. repo.RepoSchema_ssas_src
+ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
+ssas.model_json_20 <.. ssas.model_json_33_dataSources
+ssas.model_json_201_descriptions_multiline <.. ssas.model_json_2011_descriptions_StrAgg
+ssas.model_json_2011_descriptions_StrAgg <.. repo.RepoSchema_ssas_src
+ssas.model_json_31_tables <.. ssas.model_json_31_tables_T
+ssas.model_json_31_tables_T <.. repo.RepoObject_SSAS_src
+ssas.model_json_31_tables_T <.. ssas.model_json_313_tables_partitions
+ssas.model_json_31_tables_T <.. ssas.model_json_311_tables_columns
+ssas.model_json_311_tables_columns <.. ssas.model_json_311_tables_columns_T
+ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_SSAS_src
+ssas.model_json_311_tables_columns_T <.. ssas.additional_Reference_step1
+ssas.model_json_313_tables_partitions <.. ssas.model_json_3131_tables_partitions_source
+ssas.model_json_3131_tables_partitions_source <.. ssas.model_json_31311_tables_partitions_source_PosFrom
+ssas.model_json_31311_tables_partitions_source_PosFrom <.. ssas.model_json_313111_tables_partitions_source_StringFrom
+ssas.model_json_313111_tables_partitions_source_StringFrom <.. ssas.model_json_3131111_tables_partitions_source_PosDot
+ssas.model_json_3131111_tables_partitions_source_PosDot <.. ssas.model_json_31311111_tables_partitions_source_Part123
+ssas.model_json_31311111_tables_partitions_source_Part123 <.. ssas.additional_Reference_step1
+ssas.model_json_33_dataSources <.. ssas.model_json_33_dataSources_T
+ssas.model_json_33_dataSources_T <.. ssas.additional_Reference_step1footer The diagram is interactive and contains links.
+@enduml
+

@@ -98,6 +98,10 @@ entity "puml-link:dhw:sqldb:docs.repoobject_adoc_t.adoc[]" as docs.RepoObject_Ad
   --
 }
 
+entity "puml-link:dhw:sqldb:docs.repoobject_antoraxrefcultureslist.adoc[]" as docs.RepoObject_AntoraXrefCulturesList << V >> {
+  --
+}
+
 entity "puml-link:dhw:sqldb:docs.repoobject_columnlist.adoc[]" as docs.RepoObject_ColumnList << V >> {
   --
 }
@@ -175,6 +179,12 @@ entity "puml-link:dhw:sqldb:docs.schema_puml.adoc[]" as docs.Schema_puml << V >>
   --
 }
 
+entity "puml-link:dhw:sqldb:docs.schema_ssasrelationlist.adoc[]" as docs.Schema_SsasRelationList << V >> {
+  - **SchemaName** : (nvarchar(128))
+  **cultures_name** : (nvarchar(10))
+  --
+}
+
 entity "puml-link:dhw:sqldb:docs.unit_1_union.adoc[]" as docs.Unit_1_union << V >> {
   --
 }
@@ -191,7 +201,7 @@ entity "puml-link:dhw:sqldb:docs.usp_antoraexport.adoc[]" as docs.usp_AntoraExpo
   --
 }
 
-entity "puml-link:dhw:sqldb:docs.usp_antoraexport_navigation.adoc[]" as docs.usp_AntoraExport_navigation << P >> {
+entity "puml-link:dhw:sqldb:docs.usp_antoraexport_objectnavigation.adoc[]" as docs.usp_AntoraExport_ObjectNavigation << P >> {
   --
 }
 
@@ -233,66 +243,70 @@ entity "puml-link:dhw:sqldb:docs.usp_persist_repoobject_plantuml_t.adoc[]" as do
 
 docs.AntoraIndexSemanticgroup <.. docs.AntoraPage_IndexSemanticGroup
 docs.AntoraIndexSemanticgroupPatterndatatype <.. docs.AntoraIndexSemanticgroup
-docs.AntoraNavListPage_by_type <.. docs.usp_AntoraExport_navigation
-docs.AntoraNavListRepoObject_by_schema <.. docs.usp_AntoraExport_navigation
+docs.AntoraNavListPage_by_type <.. docs.usp_AntoraExport_ObjectNavigation
 docs.AntoraNavListRepoObject_by_schema <.. docs.AntoraPage_ObjectBySchema
-docs.AntoraNavListRepoObject_by_schema_type <.. docs.usp_AntoraExport_navigation
+docs.AntoraNavListRepoObject_by_schema <.. docs.usp_AntoraExport_ObjectNavigation
+docs.AntoraNavListRepoObject_by_schema_type <.. docs.usp_AntoraExport_ObjectNavigation
+docs.AntoraNavListRepoObject_by_type <.. docs.usp_AntoraExport_ObjectNavigation
 docs.AntoraNavListRepoObject_by_type <.. docs.AntoraPage_ObjectByType
-docs.AntoraNavListRepoObject_by_type <.. docs.usp_AntoraExport_navigation
 docs.ftv_RepoObject_Reference_PlantUml_EntityRefList <.. docs.RepoObject_Plantuml
 docs.ObjectRefCyclic_EntityList <.. docs.ObjectRefCyclic
-docs.RepoObject_Adoc <.. docs.RepoObject_Adoc_T
 docs.RepoObject_Adoc <.. docs.usp_PERSIST_RepoObject_Adoc_T
+docs.RepoObject_Adoc <.. docs.RepoObject_Adoc_T
 docs.REpoObject_Adoc_T <.. docs.usp_PERSIST_RepoObject_Adoc_T
-docs.RepoObject_ColumnList <.. docs.RepoObject_ColumnList_T
+docs.RepoObject_AntoraXrefCulturesList <.. docs.RepoObject_Adoc
 docs.RepoObject_ColumnList <.. docs.usp_PERSIST_RepoObject_ColumnList_T
-docs.RepoObject_ColumnList_T <.. docs.RepoObject_Adoc
+docs.RepoObject_ColumnList <.. docs.RepoObject_ColumnList_T
 docs.RepoObject_ColumnList_T <.. docs.usp_PERSIST_RepoObject_ColumnList_T
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Adoc
 docs.RepoObject_ColumnList_T <.. docs.RepoObject_Plantuml_Entity
-docs.RepoObject_IndexList <.. docs.usp_PERSIST_RepoObject_IndexList_T
 docs.RepoObject_IndexList <.. docs.RepoObject_IndexList_T
-docs.RepoObject_IndexList_T <.. docs.RepoObject_Adoc
-docs.RepoObject_IndexList_T <.. docs.RepoObject_Plantuml_Entity
+docs.RepoObject_IndexList <.. docs.usp_PERSIST_RepoObject_IndexList_T
 docs.RepoObject_IndexList_T <.. docs.usp_PERSIST_RepoObject_IndexList_T
-docs.RepoObject_MeasureList <.. docs.RepoObject_Plantuml_Entity
+docs.RepoObject_IndexList_T <.. docs.RepoObject_Plantuml_Entity
+docs.RepoObject_IndexList_T <.. docs.RepoObject_Adoc
 docs.RepoObject_MeasureList <.. docs.RepoObject_Adoc
+docs.RepoObject_MeasureList <.. docs.RepoObject_Plantuml_Entity
 docs.RepoObject_OutputFilter_T <.. docs.RepoObject_Adoc
-docs.RepoObject_OutputFilter_T <.. docs.AntoraNavListRepoObject_by_schema
-docs.RepoObject_OutputFilter_T <.. docs.AntoraNavListRepoObject_by_type
 docs.RepoObject_OutputFilter_T <.. docs.usp_AntoraExport_ObjectPage
 docs.RepoObject_OutputFilter_T <.. docs.usp_AntoraExport_ObjectPartialProperties
-docs.RepoObject_OutputFilter_T <.. docs.AntoraIndexSemanticgroupPatterndatatype
-docs.RepoObject_OutputFilter_T <.. docs.AntoraNavListPage_by_type
 docs.RepoObject_OutputFilter_T <.. docs.RepoObject_IndexList
 docs.RepoObject_OutputFilter_T <.. docs.usp_AntoraExport_ObjectPuml
 docs.RepoObject_OutputFilter_T <.. docs.RepoObject_Plantuml
 docs.RepoObject_OutputFilter_T <.. docs.RepoObject_Plantuml_Entity
 docs.RepoObject_OutputFilter_T <.. docs.RepoObject_ColumnList
 docs.RepoObject_OutputFilter_T <.. docs.AntoraNavListRepoObject_by_schema_type
+docs.RepoObject_OutputFilter_T <.. docs.AntoraNavListRepoObject_by_schema
+docs.RepoObject_OutputFilter_T <.. docs.AntoraNavListRepoObject_by_type
+docs.RepoObject_OutputFilter_T <.. docs.RepoObject_AntoraXrefCulturesList
 docs.RepoObject_OutputFilter_T <.. docs.usp_PERSIST_RepoObject_OutputFilter_T
 docs.RepoObject_OutputFilter_T <.. docs.RepoObject_MeasureList
 docs.RepoObject_OutputFilter_T <.. docs.Unit_1_union
+docs.RepoObject_OutputFilter_T <.. docs.Schema_SsasRelationList
 docs.RepoObject_OutputFilter_T <.. docs.Schema_puml
 docs.RepoObject_OutputFilter_T <.. docs.RepoObject_Plantuml_ColRefList_1_1
 docs.RepoObject_OutputFilter_T <.. docs.AntoraNavListPage_by_schema
-docs.RepoObject_Plantuml <.. docs.RepoObject_Plantuml_T
+docs.RepoObject_OutputFilter_T <.. docs.AntoraIndexSemanticgroupPatterndatatype
+docs.RepoObject_OutputFilter_T <.. docs.AntoraNavListPage_by_type
 docs.RepoObject_Plantuml <.. docs.usp_PERSIST_RepoObject_Plantuml_T
+docs.RepoObject_Plantuml <.. docs.RepoObject_Plantuml_T
 docs.RepoObject_Plantuml_ColRefList_1_1 <.. docs.RepoObject_Plantuml
-docs.RepoObject_Plantuml_Entity <.. docs.usp_PERSIST_RepoObject_Plantuml_Entity_T
 docs.RepoObject_Plantuml_Entity <.. docs.RepoObject_Plantuml_Entity_T
-docs.RepoObject_Plantuml_Entity_T <.. docs.usp_PERSIST_RepoObject_Plantuml_Entity_T
-docs.RepoObject_Plantuml_Entity_T <.. docs.ftv_RepoObject_Reference_PlantUml_EntityRefList
-docs.RepoObject_Plantuml_Entity_T <.. docs.RepoObject_PlantUml_PumlEntityFkList
+docs.RepoObject_Plantuml_Entity <.. docs.usp_PERSIST_RepoObject_Plantuml_Entity_T
 docs.RepoObject_Plantuml_Entity_T <.. docs.ObjectRefCyclic_EntityList
+docs.RepoObject_Plantuml_Entity_T <.. docs.RepoObject_PlantUml_PumlEntityFkList
+docs.RepoObject_Plantuml_Entity_T <.. docs.ftv_RepoObject_Reference_PlantUml_EntityRefList
+docs.RepoObject_Plantuml_Entity_T <.. docs.usp_PERSIST_RepoObject_Plantuml_Entity_T
 docs.RepoObject_Plantuml_Entity_T <.. docs.Schema_EntityList
 docs.RepoObject_PlantUml_PumlEntityFkList <.. docs.RepoObject_Plantuml
 docs.RepoObject_Plantuml_T <.. docs.usp_PERSIST_RepoObject_Plantuml_T
 docs.Schema_EntityList <.. docs.Schema_puml
 docs.Schema_puml <.. docs.usp_AntoraExport_ObjectPuml
+docs.Schema_SsasRelationList <.. docs.Schema_puml
 docs.Unit_1_union <.. docs.Unit_2
 docs.Unit_2 <.. docs.Unit_3
 docs.Unit_3 <.. dmdocs.unit
-docs.usp_AntoraExport_navigation <.. docs.usp_AntoraExport
+docs.usp_AntoraExport_ObjectNavigation <.. docs.usp_AntoraExport
 docs.usp_AntoraExport_ObjectPage <.. docs.usp_AntoraExport
 docs.usp_AntoraExport_ObjectPartialProperties <.. docs.usp_AntoraExport
 docs.usp_AntoraExport_ObjectPuml <.. docs.usp_AntoraExport
@@ -301,6 +315,6 @@ docs.usp_PERSIST_RepoObject_ColumnList_T <.. docs.usp_AntoraExport_ObjectPartial
 docs.usp_PERSIST_RepoObject_IndexList_T <.. docs.usp_AntoraExport_ObjectPartialProperties
 docs.usp_PERSIST_RepoObject_OutputFilter_T <.. docs.usp_AntoraExport
 docs.usp_PERSIST_RepoObject_Plantuml_Entity_T <.. docs.usp_AntoraExport_ObjectPuml
-docs.usp_PERSIST_RepoObject_Plantuml_T <.. docs.usp_AntoraExport_ObjectPuml
+docs.usp_PERSIST_RepoObject_Plantuml_T <.. docs.usp_AntoraExport_ObjectPumlfooter The diagram is interactive and contains links.
 @enduml
 

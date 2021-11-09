@@ -1,0 +1,56 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:repo.repoobject.adoc[]" as repo.RepoObject << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobjectcolumn.adoc[]" as repo.RepoObjectColumn << U >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.syscolumn_repoobjectcolumn_via_guid.adoc[]" as repo.SysColumn_RepoObjectColumn_via_guid << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.usp_sync_guid_repoobjectcolumn.adoc[]" as repo.usp_sync_guid_RepoObjectColumn << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo_sys.syscolumn.adoc[]" as repo_sys.SysColumn << V >> {
+  --
+}
+
+repo.RepoObject <.. repo.SysColumn_RepoObjectColumn_via_guid
+repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_guid
+repo.SysColumn_RepoObjectColumn_via_guid <.. repo.usp_sync_guid_RepoObjectColumn
+repo_sys.SysColumn <.. repo.SysColumn_RepoObjectColumn_via_guidfooter The diagram is interactive and contains links.
+@enduml
+

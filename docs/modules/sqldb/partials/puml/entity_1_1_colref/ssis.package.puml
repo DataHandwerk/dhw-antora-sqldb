@@ -1,0 +1,124 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:docs.ssis_adoc.adoc[]" as docs.ssis_Adoc << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageBasename** : (varchar(8000))
+  - AdocContent : (nvarchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.ssis_generallist.adoc[]" as docs.ssis_GeneralList << V >> {
+  - AntoraModule : (varchar(50))
+  - GeneralList : (nvarchar(max))
+  - PackageName : (varchar(200))
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.ssis_navlist_package.adoc[]" as docs.ssis_navlist_package << V >> {
+  - AntoraModule : (varchar(50))
+  nav_list : (nvarchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.usp_antoraexport_ssispage.adoc[]" as docs.usp_AntoraExport_SsisPage << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.package.adoc[]" as ssis.Package << U >> {
+  - **AntoraModule** : (varchar(50))
+  - **PackageName** : (varchar(200))
+  PackageCreationDate : (datetime)
+  PackageCreatorComputerName : (nvarchar(500))
+  PackageCreatorName : (varchar(1000))
+  PackageDescription : (nvarchar(max))
+  - PackageDTSID : (uniqueidentifier)
+  PackageLastModifiedProductVersion : (nvarchar(500))
+  PackageLocaleID : (int)
+  PackageObjectName : (nvarchar(500))
+  - PackagePath : (varchar(8000))
+  PackageProtectionLevel : (varchar(100))
+  PackageProtectionLevelName : (varchar(28))
+  PackageVersionGUID : (uniqueidentifier)
+  - ProjectPath : (varchar(8000))
+  - RowID : (int)
+  # PackageBasename : (varchar(8000))
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssis.package_tgt.adoc[]" as ssis.Package_tgt << V >> {
+  - **AntoraModule** : (varchar(50))
+  **PackageName** : (varchar(200))
+  PackageCreationDate : (datetime)
+  PackageCreatorComputerName : (nvarchar(500))
+  PackageCreatorName : (varchar(1000))
+  PackageDescription : (nvarchar(max))
+  PackageDTSID : (uniqueidentifier)
+  PackageLastModifiedProductVersion : (nvarchar(500))
+  PackageLocaleID : (int)
+  PackageObjectName : (nvarchar(500))
+  - PackagePath : (varchar(8000))
+  PackageProtectionLevel : (varchar(100))
+  PackageProtectionLevelName : (varchar(28))
+  PackageVersionGUID : (uniqueidentifier)
+  - PackageXML : (xml)
+  - ProjectPath : (varchar(8000))
+  - RowID : (int)
+  --
+}
+
+ssis.Package <.. ssis.Package_tgt
+ssis.Package <.. docs.ssis_Adoc
+ssis.Package <.. docs.usp_AntoraExport_SsisPage
+ssis.Package <.. docs.ssis_GeneralList
+ssis.Package <.. docs.ssis_navlist_package
+ssis.Package_tgt <.. ssis.Package
+"ssis.Package::AntoraModule" <-- "ssis.Package_tgt::AntoraModule"
+"ssis.Package::AntoraModule" <-- "docs.ssis_Adoc::AntoraModule"
+"ssis.Package::AntoraModule" <-- "docs.ssis_GeneralList::AntoraModule"
+"ssis.Package::AntoraModule" <-- "docs.ssis_navlist_package::AntoraModule"
+"ssis.Package::PackageBasename" <-- "docs.ssis_Adoc::PackageBasename"
+"ssis.Package::PackageCreationDate" <-- "ssis.Package_tgt::PackageCreationDate"
+"ssis.Package::PackageCreatorComputerName" <-- "ssis.Package_tgt::PackageCreatorComputerName"
+"ssis.Package::PackageCreatorName" <-- "ssis.Package_tgt::PackageCreatorName"
+"ssis.Package::PackageDescription" <-- "ssis.Package_tgt::PackageDescription"
+"ssis.Package::PackageDTSID" <-- "ssis.Package_tgt::PackageDTSID"
+"ssis.Package::PackageLastModifiedProductVersion" <-- "ssis.Package_tgt::PackageLastModifiedProductVersion"
+"ssis.Package::PackageLocaleID" <-- "ssis.Package_tgt::PackageLocaleID"
+"ssis.Package::PackageName" <-- "ssis.Package_tgt::PackageName"
+"ssis.Package::PackageName" <-- "ssis.Package::PackageBasename"
+"ssis.Package::PackageName" <-- "docs.ssis_GeneralList::PackageName"
+"ssis.Package::PackageObjectName" <-- "ssis.Package_tgt::PackageObjectName"
+"ssis.Package::PackagePath" <-- "ssis.Package_tgt::PackagePath"
+"ssis.Package::PackageProtectionLevel" <-- "ssis.Package_tgt::PackageProtectionLevel"
+"ssis.Package::PackageProtectionLevelName" <-- "ssis.Package_tgt::PackageProtectionLevelName"
+"ssis.Package::PackageVersionGUID" <-- "ssis.Package_tgt::PackageVersionGUID"
+"ssis.Package::ProjectPath" <-- "ssis.Package_tgt::ProjectPath"
+"ssis.Package::RowID" <-- "ssis.Package_tgt::RowID"footer The diagram is interactive and contains links.
+@enduml
+

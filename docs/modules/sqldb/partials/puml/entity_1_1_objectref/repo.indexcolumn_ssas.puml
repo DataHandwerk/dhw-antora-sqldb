@@ -1,0 +1,60 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:repo.index_ssas_t.adoc[]" as repo.Index_ssas_T << U >> {
+  - **databasename** : (nvarchar(128))
+  **index_name** : (nvarchar(450))
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.indexcolumn_ssas.adoc[]" as repo.IndexColumn_ssas << V >> {
+  - **index_guid** : (uniqueidentifier)
+  - **index_column_id** : (int)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.indexcolumn_ssas_t.adoc[]" as repo.IndexColumn_ssas_T << U >> {
+  - **index_guid** : (uniqueidentifier)
+  - **index_column_id** : (int)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.usp_persist_indexcolumn_ssas_t.adoc[]" as repo.usp_PERSIST_IndexColumn_ssas_T << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:ssas.indexcolumn_union.adoc[]" as ssas.IndexColumn_union << V >> {
+  --
+}
+
+repo.Index_ssas_T <.. repo.IndexColumn_ssas
+repo.IndexColumn_ssas <.. repo.IndexColumn_ssas_T
+repo.IndexColumn_ssas <.. repo.usp_PERSIST_IndexColumn_ssas_T
+ssas.IndexColumn_union <.. repo.IndexColumn_ssasfooter The diagram is interactive and contains links.
+@enduml
+

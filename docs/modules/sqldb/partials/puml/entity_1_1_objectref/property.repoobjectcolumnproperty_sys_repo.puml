@@ -1,0 +1,64 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:property.repoobjectcolumnproperty.adoc[]" as property.RepoObjectColumnProperty << U >> {
+  - **RepoObjectColumnProperty_id** : (int)
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.repoobjectcolumnproperty_sys_repo.adoc[]" as property.RepoObjectColumnProperty_sys_repo << V >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  - **property_name** : (sysname)
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.usp_sync_extendedproperties_sys2repo_insertupdate.adoc[]" as property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobject.adoc[]" as repo.RepoObject << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobjectcolumn.adoc[]" as repo.RepoObjectColumn << U >> {
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo_sys.extendedproperties.adoc[]" as repo_sys.ExtendedProperties << V >> {
+  --
+}
+
+property.RepoObjectColumnProperty <.. property.RepoObjectColumnProperty_sys_repo
+property.RepoObjectColumnProperty_sys_repo <.. property.usp_sync_ExtendedProperties_Sys2Repo_InsertUpdate
+repo.RepoObject <.. property.RepoObjectColumnProperty_sys_repo
+repo.RepoObjectColumn <.. property.RepoObjectColumnProperty_sys_repo
+repo_sys.ExtendedProperties <.. property.RepoObjectColumnProperty_sys_repofooter The diagram is interactive and contains links.
+@enduml
+

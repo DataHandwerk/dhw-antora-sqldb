@@ -1,0 +1,107 @@
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>> Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>> White
+  BackgroundColor<<V>> WhiteSmoke
+  BackgroundColor<<X>> Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:logs.usp_executionlog_insert.adoc[]" as logs.usp_ExecutionLog_insert << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.repoobject_inheritance_temp.adoc[]" as property.RepoObject_Inheritance_temp << U >> {
+  Inheritance_StringAggSeparatorSql : (nvarchar(4000))
+  InheritanceType : (int)
+  - is_force_inherit_empty_source : (int)
+  - is_StringAggAllSources : (int)
+  - property_name : (nvarchar(128))
+  property_value : (nvarchar(max))
+  property_value_new : (nvarchar(max))
+  - referenced_RepoObject_fullname : (nvarchar(261))
+  referenced_RepoObject_guid : (uniqueidentifier)
+  - referenced_RepoObject_name : (nvarchar(128))
+  - referencing_RepoObject_fullname : (nvarchar(261))
+  - referencing_RepoObject_name : (nvarchar(128))
+  - RepoObject_guid : (uniqueidentifier)
+  resulting_InheritanceDefinition : (nvarchar(4000))
+  RowNumberSource : (bigint)
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.repoobjectproperty.adoc[]" as property.RepoObjectProperty << U >> {
+  - **RepoObjectProperty_id** : (int)
+  inheritance : (tinyint)
+  - property_name : (nvarchar(128))
+  property_value : (nvarchar(max))
+  - RepoObject_guid : (uniqueidentifier)
+  ~ property_bigint : (bigint)
+  ~ property_float : (float)
+  ~ property_int : (int)
+  ~ property_money : (money)
+  ~ property_real : (real)
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.repoobjectproperty_inheritancetype_resulting_inheritancedefinition.adoc[]" as property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition << V >> {
+  Inheritance_Source_fullname : (nvarchar(261))
+  Inheritance_StringAggSeparatorSql : (nvarchar(max))
+  InheritanceDefinition : (nvarchar(max))
+  InheritanceType : (int)
+  - is_force_inherit_empty_source : (int)
+  - is_StringAggAllSources : (int)
+  - property_name : (nvarchar(128))
+  property_value : (nvarchar(max))
+  - RepoObject_fullname : (nvarchar(261))
+  - RepoObject_guid : (uniqueidentifier)
+  - RepoObject_type : (char(2))
+  resulting_InheritanceDefinition : (nvarchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.usp_persist_propertyname_repoobject_t.adoc[]" as property.usp_PERSIST_PropertyName_RepoObject_T << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.usp_repoobject_inheritance.adoc[]" as property.usp_RepoObject_Inheritance << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.usp_repoobjectproperty_collect.adoc[]" as property.usp_RepoObjectProperty_collect << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.usp_main.adoc[]" as repo.usp_main << P >> {
+  --
+}
+
+logs.usp_ExecutionLog_insert <.. property.usp_RepoObject_Inheritance
+property.RepoObject_Inheritance_temp <.. property.usp_RepoObject_Inheritance
+property.RepoObjectProperty <.. property.usp_RepoObject_Inheritance
+property.RepoObjectProperty_InheritanceType_resulting_InheritanceDefinition <.. property.usp_RepoObject_Inheritance
+property.usp_PERSIST_PropertyName_RepoObject_T <.. property.usp_RepoObject_Inheritance
+property.usp_RepoObject_Inheritance <.. repo.usp_main
+property.usp_RepoObjectProperty_collect <.. property.usp_RepoObject_Inheritance
+footer The diagram is interactive and contains links.
+@enduml
+

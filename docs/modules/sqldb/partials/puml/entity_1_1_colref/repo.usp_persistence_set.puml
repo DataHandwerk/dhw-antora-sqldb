@@ -29,7 +29,6 @@ skinparam class {
 entity "puml-link:dhw:sqldb:config.parameter.adoc[]" as config.Parameter << U >> {
   - **Parameter_name** : (varchar(100))
   - **sub_Parameter** : (nvarchar(128))
-  --
   Parameter_default_value : (nvarchar(max))
   Parameter_desciption : (nvarchar(1000))
   Parameter_value : (nvarchar(max))
@@ -38,18 +37,14 @@ entity "puml-link:dhw:sqldb:config.parameter.adoc[]" as config.Parameter << U >>
   ~ Parameter_value_result_datetime : (datetime)
   ~ Parameter_value_result_int : (int)
   --
-  --
 }
 
 entity "puml-link:dhw:sqldb:logs.usp_executionlog_insert.adoc[]" as logs.usp_ExecutionLog_insert << P >> {
-  --
-  --
   --
 }
 
 entity "puml-link:dhw:sqldb:repo.repoobject.adoc[]" as repo.RepoObject << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
-  --
   external_AntoraComponent : (nvarchar(128))
   external_AntoraModule : (nvarchar(128))
   has_execution_plan_issue : (bit)
@@ -91,12 +86,10 @@ entity "puml-link:dhw:sqldb:repo.repoobject.adoc[]" as repo.RepoObject << U >> {
   # usp_persistence_fullname2 : (nvarchar(269))
   # usp_persistence_name : (nvarchar(140))
   --
-  --
 }
 
 entity "puml-link:dhw:sqldb:repo.repoobject_persistence.adoc[]" as repo.RepoObject_persistence << U >> {
   - **target_RepoObject_guid** : (uniqueidentifier)
-  --
   - has_history : (bit)
   - has_history_columns : (bit)
   history_schema_name : (nvarchar(128))
@@ -109,6 +102,7 @@ entity "puml-link:dhw:sqldb:repo.repoobject_persistence.adoc[]" as repo.RepoObje
   - is_persistence_merge_delete_missing : (bit)
   - is_persistence_merge_insert : (bit)
   - is_persistence_merge_update_changed : (bit)
+  - is_persistence_persist_source : (bit)
   - is_persistence_truncate : (bit)
   - is_persistence_update_changed : (bit)
   source_filter : (nvarchar(4000))
@@ -118,18 +112,13 @@ entity "puml-link:dhw:sqldb:repo.repoobject_persistence.adoc[]" as repo.RepoObje
   ~ is_persistence : (bit)
   ~ temporal_type : (tinyint)
   --
-  --
 }
 
 entity "puml-link:dhw:sqldb:repo.usp_persistence_set.adoc[]" as repo.usp_persistence_set << P >> {
   --
-  --
-  --
 }
 
 entity "puml-link:dhw:sqldb:repo.usp_sync_guid.adoc[]" as repo.usp_sync_guid << P >> {
-  --
-  --
   --
 }
 
@@ -138,6 +127,6 @@ logs.usp_ExecutionLog_insert <.. repo.usp_persistence_set
 repo.RepoObject <.. repo.usp_persistence_set
 repo.RepoObject_persistence <.. repo.usp_persistence_set
 repo.usp_sync_guid <.. repo.usp_persistence_set
-
+footer The diagram is interactive and contains links.
 @enduml
 

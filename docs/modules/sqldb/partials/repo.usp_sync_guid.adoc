@@ -52,7 +52,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-10-04 23:48:21
+2021-11-07 17:28:39
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -60,12 +60,6 @@ stored procedure
 // tag::AntoraColumnDetails[]
 
 // end::AntoraColumnDetails[]
-
-== AntoraMeasureDetails
-
-// tag::AntoraMeasureDetails[]
-
-// end::AntoraMeasureDetails[]
 
 == AntoraPkColumnTableRows
 
@@ -85,6 +79,12 @@ stored procedure
 
 // end::AntoraIndexList[]
 
+== AntoraMeasureDetails
+
+// tag::AntoraMeasureDetails[]
+
+// end::AntoraMeasureDetails[]
+
 == AntoraParameterList
 
 // tag::AntoraParameterList[]
@@ -93,6 +93,18 @@ stored procedure
 * @sub_execution_id (int)
 * @parent_execution_log_id (bigint)
 // end::AntoraParameterList[]
+
+== AntoraXrefCulturesList
+
+// tag::AntoraXrefCulturesList[]
+* xref:dhw:sqldb:repo.usp_sync_guid.adoc[] - 
+// end::AntoraXrefCulturesList[]
+
+== cultures_count
+
+// tag::cultures_count[]
+1
+// end::cultures_count[]
 
 == Other tags
 
@@ -114,6 +126,24 @@ source: property.RepoObjectProperty_cross As rop_cross
 |===
 |Number|Name (Action, Source, Target)|Parent
 
+|150
+|
+*EXEC [config].[usp_init_parameter]*
+
+
+
+.Statement
+[%collapsible]
+=====
+[source,sql,numbered]
+----
+EXEC [config].[usp_init_parameter]
+----
+=====
+
+|
+
+
 |200
 |
 *[repo].[usp_sync_guid_RepoSchema]*
@@ -124,7 +154,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 [repo].[usp_sync_guid_RepoSchema]
 ----
@@ -143,7 +173,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 [repo].[usp_sync_guid_RepoObject]
 ----
@@ -162,7 +192,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 .Statement
 [%collapsible]
 =====
-[source,sql]
+[source,sql,numbered]
 ----
 [repo].[usp_sync_guid_RepoObjectColumn]
 ----
@@ -178,6 +208,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 === AntoraReferencedList
 
 // tag::antorareferencedlist[]
+* xref:config.usp_init_parameter.adoc[]
 * xref:logs.usp_executionlog_insert.adoc[]
 * xref:repo.usp_sync_guid_repoobject.adoc[]
 * xref:repo.usp_sync_guid_repoobjectcolumn.adoc[]
@@ -202,7 +233,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 // end::description[]
 
 
-=== exampleUsage
+=== ExampleUsage
 
 // tag::exampleusage[]
 EXEC [repo].[usp_sync_guid]
@@ -424,6 +455,7 @@ EXEC [repo].[usp_sync_guid]
 === ReferencedObjectList
 
 // tag::referencedobjectlist[]
+* [config].[usp_init_parameter]
 * [logs].[usp_ExecutionLog_insert]
 * [repo].[usp_sync_guid_RepoObject]
 * [repo].[usp_sync_guid_RepoObjectColumn]
@@ -472,7 +504,7 @@ source: property.RepoObjectProperty WHERE property_int = 1
 // tag::sql_modules_definition[]
 [%collapsible]
 =======
-[source,sql]
+[source,sql,numbered]
 ----
 /*
 code of this procedure is managed in the dhw repository. Do not modify manually.
@@ -546,6 +578,35 @@ PRINT '[repo].[usp_sync_guid]'
 --
 ----- start here with your own code
 --
+/*{"ReportUspStep":[{"Number":150,"Name":"EXEC [config].[usp_init_parameter]","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":0}]}*/
+PRINT CONCAT('usp_id;Number;Parent_Number: ',1,';',150,';',NULL);
+
+EXEC [config].[usp_init_parameter]
+
+-- Logging START --
+SET @rows = @@ROWCOUNT
+SET @step_id = @step_id + 1
+SET @step_name = 'EXEC [config].[usp_init_parameter]'
+SET @source_object = NULL
+SET @target_object = NULL
+
+EXEC logs.usp_ExecutionLog_insert 
+ @execution_instance_guid = @execution_instance_guid
+ , @ssis_execution_id = @ssis_execution_id
+ , @sub_execution_id = @sub_execution_id
+ , @parent_execution_log_id = @parent_execution_log_id
+ , @current_execution_guid = @current_execution_guid
+ , @proc_id = @proc_id
+ , @proc_schema_name = @proc_schema_name
+ , @proc_name = @proc_name
+ , @event_info = @event_info
+ , @step_id = @step_id
+ , @step_name = @step_name
+ , @source_object = @source_object
+ , @target_object = @target_object
+
+-- Logging END --
+
 /*{"ReportUspStep":[{"Number":200,"Name":"[repo].[usp_sync_guid_RepoSchema]","has_logging":0,"is_condition":0,"is_inactive":0,"is_SubProcedure":1}]}*/
 EXEC [repo].[usp_sync_guid_RepoSchema]
 --add your own parameters
