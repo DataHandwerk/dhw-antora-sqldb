@@ -1,0 +1,42 @@
+xref:sqldb:repo.repoobject_persistence.adoc[] contains metadata between persistence source and persistence target, this metadata needs to be included as reference
+
+* normally the persistence target can be a table +
+ xref:sqldb:reference.repoobject_reference_persistence.adoc[]
+* the persistence target can be a view on top a table, then some extra handling is required:
+** add a reference: view (referenced) <- table (referencing) +
+   xref:sqldb:reference.repoobject_reference_persistence_target_as_source.adoc[]
+*** [ ] issue: often the view is based on several view data sources
++
+--
+* the one and only real persistence target table
+* some additional tables which are used as filter of the target table
+
+some logic is possible for most cases
+
+* column `has_match_left_and_suffix_tgt` = 1 in case of `aaa.bbb_ccc_tgt <- aaa.bbb`
+** same schema
+** the view uses the suffix '_tgt'
+** the object name of the table is included in the view name
+--
+** [x] remove the reference between referencing view and referenced table
++
+--
+this is done in xref:sqldb:reference.repoobject_reference.adoc[]
+[source,sql]
+....
+Where
+    --avoid cyclic references
+    --exclude references `aaa.bbb <- aaa.bbb_ccc_tgt`, we already added `aaa.bbb_ccc_tgt <- aaa.bbb`
+    Not Exists
+(
+    Select
+        1
+    From
+        reference.RepoObject_reference_persistence_target_as_source As T2
+    Where
+        T2.has_match_left_and_suffix_tgt   = 1
+        And T2.referenced_RepoObject_guid  = T1.referencing_RepoObject_guid
+        And T2.referencing_RepoObject_guid = T1.referenced_RepoObject_guid
+)
+....
+--

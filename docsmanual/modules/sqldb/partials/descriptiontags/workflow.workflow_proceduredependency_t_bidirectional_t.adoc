@@ -1,0 +1,50 @@
+= workflow.Workflow_ProcedureDependency_T_bidirectional_T
+
+// tag::description[]
+Auxiliary table for xref:sqldb:workflow.usp_workflow.adoc[]
+
+First the table is repopulated, then the `is_redundant` column is updated if there are redundant relationships determined in the xref:sqldb:workflow.workflow_proceduredependency_t_redundant.adoc[] view.
+
+====
+* A <= B <= C
+* A <= C (redundant, because a reference to A already exists indirectly via B).
+====
+
+We must not mark all of them as redundant at the same time, because some of them recognize each other as redundant. +
+Therefore marking as `is_redundant` happens one by one for always only one reference by referencing_Procedure_RepoObject_guid
+
+[source,sql]
+----
+Declare @updated Int = -1;
+
+While @updated <> 0
+Begin
+    Update
+        T1
+    Set
+        T1.is_redundant = 1
+    From
+        workflow.Workflow_ProcedureDependency_T               As T1
+        Inner Join
+            workflow.Workflow_ProcedureDependency_T_redundant As T2
+                On
+                T1.Workflow_id                               = T2.Workflow_id
+                And T1.referencing_Procedure_RepoObject_guid = T2.referencing_Procedure_RepoObject_guid
+                And T1.referenced_Procedure_RepoObject_guid  = T2.referenced_Procedure_RepoObject_guid
+    Where
+        ( T1.is_redundant          = 0 )
+        And T2.RownrPerReferencing = 1;
+
+    Set @updated = @@RowCount;
+    --Set @rows = @rows + @updated;
+End;
+----
+// uncomment the following attribute, to hide exported (by AntoraExport) descriptions. Keep the empty line on top of the attribute!
+
+//:hide-exported-description:
+// end::description[]
+
+== Measures
+
+
+

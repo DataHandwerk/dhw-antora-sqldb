@@ -1,0 +1,229 @@
+= Cyclic Object References
+
+== Object List
+
+* xref:sqldb:property.propertyname_repoobject.adoc[]
+* xref:sqldb:property.propertyname_repoobject_t.adoc[]
+* xref:sqldb:property.repoobjectproperty.adoc[]
+* xref:sqldb:property.repoobjectproperty_external_tgt.adoc[]
+* xref:sqldb:property.repoobjectproperty_selectedpropertyname_split.adoc[]
+* xref:sqldb:property.usp_persist_propertyname_repoobject_t.adoc[]
+* xref:sqldb:property.usp_persist_repoobjectproperty_external_tgt.adoc[]
+* xref:sqldb:reference.additional_reference.adoc[]
+* xref:sqldb:reference.additional_reference_from_properties_src.adoc[]
+* xref:sqldb:reference.additional_reference_from_properties_tgt.adoc[]
+* xref:sqldb:reference.additional_reference_is_external.adoc[]
+* xref:sqldb:reference.additional_reference_object.adoc[]
+* xref:sqldb:reference.additional_reference_object_t.adoc[]
+* xref:sqldb:reference.additional_reference_wo_columns_from_properties_src.adoc[]
+* xref:sqldb:reference.additional_reference_wo_columns_from_properties_tgt.adoc[]
+* xref:sqldb:reference.usp_persist_additional_reference_from_properties_tgt.adoc[]
+* xref:sqldb:reference.usp_persist_additional_reference_object_t.adoc[]
+* xref:sqldb:reference.usp_persist_additional_reference_wo_columns_from_properties_tgt.adoc[]
+* xref:sqldb:repo.repoobject.adoc[]
+* xref:sqldb:repo.repoobject_external_src.adoc[]
+* xref:sqldb:repo.repoobject_external_tgt.adoc[]
+* xref:sqldb:repo.usp_persist_repoobject_external_tgt.adoc[]
+
+== Object Reference Diagram - Cyclic
+
+[plantuml, ObjectRefCyclic, svg, subs=macros]
+....
+@startuml
+'Left to right direction
+top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>>  Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>>  White
+  BackgroundColor<<V>>  WhiteSmoke
+  BackgroundColor<<X>>  Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:property.propertyname_repoobject.adoc[]" as property.PropertyName_RepoObject << V >> {
+  **property_name** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.propertyname_repoobject_t.adoc[]" as property.PropertyName_RepoObject_T << U >> {
+  **property_name** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.repoobjectproperty.adoc[]" as property.RepoObjectProperty << U >> {
+  - **RepoObjectProperty_id** : (int)
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.repoobjectproperty_external_tgt.adoc[]" as property.RepoObjectProperty_external_tgt << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.repoobjectproperty_selectedpropertyname_split.adoc[]" as property.RepoObjectProperty_SelectedPropertyName_split << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.usp_persist_propertyname_repoobject_t.adoc[]" as property.usp_PERSIST_PropertyName_RepoObject_T << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:property.usp_persist_repoobjectproperty_external_tgt.adoc[]" as property.usp_PERSIST_RepoObjectProperty_external_tgt << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.additional_reference.adoc[]" as reference.additional_Reference << U >> {
+  - **Id** : (int)
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.additional_reference_from_properties_src.adoc[]" as reference.additional_Reference_from_properties_src << V >> {
+  **referenced_AntoraComponent** : (nvarchar(max))
+  **referenced_AntoraModule** : (nvarchar(max))
+  **referenced_Schema** : (nvarchar(max))
+  **referenced_Object** : (nvarchar(max))
+  **referenced_Column** : (nvarchar(max))
+  **referencing_AntoraComponent** : (nvarchar(max))
+  **referencing_AntoraModule** : (nvarchar(max))
+  **referencing_Schema** : (nvarchar(max))
+  **referencing_Object** : (nvarchar(max))
+  **referencing_Column** : (nvarchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.additional_reference_from_properties_tgt.adoc[]" as reference.additional_Reference_from_properties_tgt << V >> {
+  **referenced_AntoraComponent** : (nvarchar(max))
+  **referenced_AntoraModule** : (nvarchar(max))
+  **referenced_Schema** : (nvarchar(max))
+  **referenced_Object** : (nvarchar(max))
+  **referenced_Column** : (nvarchar(max))
+  **referencing_AntoraComponent** : (nvarchar(max))
+  **referencing_AntoraModule** : (nvarchar(max))
+  **referencing_Schema** : (nvarchar(max))
+  **referencing_Object** : (nvarchar(max))
+  **referencing_Column** : (nvarchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.additional_reference_is_external.adoc[]" as reference.additional_Reference_is_external << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.additional_reference_object.adoc[]" as reference.additional_Reference_Object << V >> {
+  - **AntoraComponent** : (nvarchar(128))
+  - **AntoraModule** : (nvarchar(128))
+  - **SchemaName** : (nvarchar(128))
+  - **ObjectName** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.additional_reference_object_t.adoc[]" as reference.additional_Reference_Object_T << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.additional_reference_wo_columns_from_properties_src.adoc[]" as reference.additional_Reference_wo_columns_from_properties_src << V >> {
+  **referenced_AntoraComponent** : (nvarchar(max))
+  **referenced_AntoraModule** : (nvarchar(max))
+  **referenced_Schema** : (nvarchar(max))
+  **referenced_Object** : (nvarchar(max))
+  **referencing_AntoraComponent** : (nvarchar(max))
+  **referencing_AntoraModule** : (nvarchar(max))
+  **referencing_Schema** : (nvarchar(max))
+  **referencing_Object** : (nvarchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.additional_reference_wo_columns_from_properties_tgt.adoc[]" as reference.additional_Reference_wo_columns_from_properties_tgt << V >> {
+  **referenced_AntoraComponent** : (nvarchar(max))
+  **referenced_AntoraModule** : (nvarchar(max))
+  **referenced_Schema** : (nvarchar(max))
+  **referenced_Object** : (nvarchar(max))
+  **referencing_AntoraComponent** : (nvarchar(max))
+  **referencing_AntoraModule** : (nvarchar(max))
+  **referencing_Schema** : (nvarchar(max))
+  **referencing_Object** : (nvarchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.usp_persist_additional_reference_from_properties_tgt.adoc[]" as reference.usp_PERSIST_additional_Reference_from_properties_tgt << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.usp_persist_additional_reference_object_t.adoc[]" as reference.usp_PERSIST_additional_Reference_Object_T << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.usp_persist_additional_reference_wo_columns_from_properties_tgt.adoc[]" as reference.usp_PERSIST_additional_Reference_wo_columns_from_properties_tgt << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobject.adoc[]" as repo.RepoObject << U >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobject_external_src.adoc[]" as repo.RepoObject_external_src << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobject_external_tgt.adoc[]" as repo.RepoObject_external_tgt << V >> {
+  - **RepoObject_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.usp_persist_repoobject_external_tgt.adoc[]" as repo.usp_PERSIST_RepoObject_external_tgt << P >> {
+  --
+}
+
+property.PropertyName_RepoObject <.. property.PropertyName_RepoObject_T
+property.PropertyName_RepoObject_T <.. property.usp_PERSIST_PropertyName_RepoObject_T
+property.PropertyName_RepoObject_T <.. property.RepoObjectProperty_external_tgt
+property.RepoObjectProperty <.. property.PropertyName_RepoObject
+property.RepoObjectProperty <.. property.RepoObjectProperty_SelectedPropertyName_split
+property.RepoObjectProperty_external_tgt <.. property.RepoObjectProperty
+property.RepoObjectProperty_external_tgt <.. property.usp_PERSIST_RepoObjectProperty_external_tgt
+property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_from_properties_src
+property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_wo_columns_from_properties_src
+reference.additional_Reference <.. reference.additional_Reference_is_external
+reference.additional_Reference_from_properties_src <.. reference.additional_Reference_from_properties_tgt
+reference.additional_Reference_from_properties_tgt <.. reference.additional_Reference
+reference.additional_Reference_from_properties_tgt <.. reference.usp_PERSIST_additional_Reference_from_properties_tgt
+reference.additional_Reference_is_external <.. reference.additional_Reference_Object
+reference.additional_Reference_Object <.. reference.additional_Reference_Object_T
+reference.additional_Reference_Object_T <.. reference.usp_PERSIST_additional_Reference_Object_T
+reference.additional_Reference_Object_T <.. repo.RepoObject_external_src
+reference.additional_Reference_wo_columns_from_properties_src <.. reference.additional_Reference_wo_columns_from_properties_tgt
+reference.additional_Reference_wo_columns_from_properties_tgt <.. reference.additional_Reference
+reference.additional_Reference_wo_columns_from_properties_tgt <.. reference.usp_PERSIST_additional_Reference_wo_columns_from_properties_tgt
+repo.RepoObject <.. repo.RepoObject_external_src
+repo.RepoObject <.. property.RepoObjectProperty_external_tgt
+repo.RepoObject_external_src <.. repo.RepoObject_external_tgt
+repo.RepoObject_external_tgt <.. repo.RepoObject
+repo.RepoObject_external_tgt <.. repo.usp_PERSIST_RepoObject_external_tgt
+footer The diagram is interactive and contains links.
+
+
+@enduml
+
+....
+

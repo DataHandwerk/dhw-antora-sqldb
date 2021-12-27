@@ -1,17 +1,18 @@
-include::partial${docname}.adoc[tag=HeaderFullDisplayName]
+include::partial$content/{docname}.adoc[tag=HeaderFullDisplayName]
+:noindex:
 
-include::partial${docname}.adoc[tag=existing_properties]
-include::partial${docname}.adoc[tag=boolean_attributes]
+include::partial$content/{docname}.adoc[tag=existing_properties]
+include::partial$content/{docname}.adoc[tag=boolean_attributes]
 
 type:
-include::partial${docname}.adoc[tag=SysObject_type]
+include::partial$content/{docname}.adoc[tag=SysObject_type]
 (
-include::partial${docname}.adoc[tag=SysObject_type_name]
+include::partial$content/{docname}.adoc[tag=SysObject_type_name]
 ), modify_date:
-include::partial${docname}.adoc[tag=SysObject_modify_date]
+include::partial$content/{docname}.adoc[tag=SysObject_modify_date]
 
 RepoObject_guid:
-include::partial${docname}.adoc[tag=RepoObject_guid]
+include::partial$content/{docname}.adoc[tag=RepoObject_guid]
 
 ifdef::is_repo_managed[]
 is_repo_managed: 1
@@ -22,26 +23,32 @@ is_ssas: 1
 
 == Translations
 
-include::partial${docname}.adoc[tag=AntoraXrefCulturesList]
+include::partial$content/{docname}.adoc[tag=AntoraXrefCulturesList]
 
 endif::is_ssas[]
 
 ifdef::ExistsProperty--uspgenerator_usp_id[]
 uspgenerator_usp_id:
-include::partial${docname}.adoc[tag=uspgenerator_usp_id]
+include::partial$content/{docname}.adoc[tag=uspgenerator_usp_id]
 
 endif::ExistsProperty--uspgenerator_usp_id[]
 ifdef::ExistsProperty--inheritancetype[]
 InheritanceType:
-include::partial${docname}.adoc[tag=inheritancetype]
+include::partial$content/{docname}.adoc[tag=inheritancetype]
 
 endif::ExistsProperty--inheritancetype[]
-ifdef::ExistsProperty--description[]
 
 == Description
 
-include::partial${docname}.adoc[tag=description]
+// tag::description[]
+include::partial$descriptiontags/{docname}.adoc[tag=description,opts=optional]
 
-endif::ExistsProperty--description[]
+//the following attribute could be set in the include above to enable or disable the usage of exported descriptions
+ifndef::hide-exported-description[]
+
+include::partial$content/{docname}.adoc[tag=description,opts=optional]
+
+endif::hide-exported-description[]
+// end::description[]
 
 

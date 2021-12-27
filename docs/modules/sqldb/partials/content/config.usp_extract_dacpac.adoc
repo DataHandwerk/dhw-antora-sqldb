@@ -1,0 +1,878 @@
+// tag::HeaderFullDisplayName[]
+= config.usp_extract_dacpac - P
+// end::HeaderFullDisplayName[]
+
+== existing_properties
+
+// tag::existing_properties[]
+
+:ExistsProperty--antorareferencedlist:
+:ExistsProperty--description:
+:ExistsProperty--exampleusage:
+:ExistsProperty--is_repo_managed:
+:ExistsProperty--is_ssas:
+:ExistsProperty--referencedobjectlist:
+:ExistsProperty--sql_modules_definition:
+:ExistsProperty--AntoraParameterList:
+// end::existing_properties[]
+
+== RepoObject_guid
+
+// tag::RepoObject_guid[]
+F01EA651-464D-EC11-8531-A81E8446D5B0
+// end::RepoObject_guid[]
+
+== RepoObject_FullDisplayName2
+
+// tag::RepoObject_FullDisplayName2[]
+config.usp_extract_dacpac
+// end::RepoObject_FullDisplayName2[]
+
+== SysObject_type
+
+// tag::SysObject_type[]
+P 
+// end::SysObject_type[]
+
+== SysObject_type_name
+
+// tag::SysObject_type_name[]
+stored procedure
+// end::SysObject_type_name[]
+
+== SysObject_id
+
+// tag::SysObject_id[]
+875202218
+// end::SysObject_id[]
+
+== SysObject_modify_date
+
+// tag::SysObject_modify_date[]
+2021-12-06 10:58:50
+// end::SysObject_modify_date[]
+
+== AntoraColumnDetails
+
+// tag::AntoraColumnDetails[]
+
+// end::AntoraColumnDetails[]
+
+== AntoraPkColumnTableRows
+
+// tag::AntoraPkColumnTableRows[]
+
+// end::AntoraPkColumnTableRows[]
+
+== AntoraNonPkColumnTableRows
+
+// tag::AntoraNonPkColumnTableRows[]
+
+// end::AntoraNonPkColumnTableRows[]
+
+== AntoraIndexList
+
+// tag::AntoraIndexList[]
+
+// end::AntoraIndexList[]
+
+== AntoraMeasureDetails
+
+// tag::AntoraMeasureDetails[]
+
+// end::AntoraMeasureDetails[]
+
+== AntoraMeasureDescriptions
+
+
+
+== AntoraParameterList
+
+// tag::AntoraParameterList[]
+* @TargetFolder (nvarchar(4000))
+* @TargetFileBaseName (nvarchar(1000))
+// end::AntoraParameterList[]
+
+== AntoraXrefCulturesList
+
+// tag::AntoraXrefCulturesList[]
+* xref:dhw:sqldb:config.usp_extract_dacpac.adoc[] - 
+// end::AntoraXrefCulturesList[]
+
+== cultures_count
+
+// tag::cultures_count[]
+1
+// end::cultures_count[]
+
+== Other tags
+
+source: property.RepoObjectProperty_cross As rop_cross
+
+
+=== additional_reference_csv
+
+// tag::additional_reference_csv[]
+
+// end::additional_reference_csv[]
+
+
+=== AdocUspSteps
+
+// tag::adocuspsteps[]
+
+// end::adocuspsteps[]
+
+
+=== AntoraReferencedList
+
+// tag::antorareferencedlist[]
+* xref:dhw:sqldb:config.fs_get_parameter_value.adoc[]
+// end::antorareferencedlist[]
+
+
+=== AntoraReferencingList
+
+// tag::antorareferencinglist[]
+
+// end::antorareferencinglist[]
+
+
+=== Description
+
+// tag::description[]
+
+* extract repository and relevant table data to dacpac
+* default @TargetFolder: config.fs_get_parameter_value ( 'sqlpackage', 'TargetFolder' )
+* default @TargetFileBaseName: @TargetFileBaseName, Db_Name () + '.dacpac'
+* folder containing sqlpackage.exe should be defined in config.fs_get_parameter_value ( 'sqlpackage', 'ProgrammFolder' )
+* issues with xp_cmdshell executing the prepared command
+** copy the prepared command and execute it in a command prompt or power shell
+* see details in xref:user-guide:backup-repo-db.adoc[]
+// end::description[]
+
+
+=== exampleUsage
+
+// tag::exampleusage[]
+
+--if you store the @TargetFolder in config.fs_get_parameter_value ( 'sqlpackage', 'TargetFolder' )
+Exec config.usp_extract_dacpac
+
+Exec config.usp_extract_dacpac
+    @TargetFolder = 'D:\Repos\gitlab\DataHandwerk\DataHandwerk-toolkit-mssql\dhw_dacpac'
+
+Exec config.usp_extract_dacpac
+    @TargetFolder = 'D:\Repos\gitlab\DataHandwerk\DataHandwerk-toolkit-mssql\dhw_dacpac'
+  , @TargetFileBaseName = 'ddd.dacpac'
+// end::exampleusage[]
+
+
+=== exampleUsage_2
+
+// tag::exampleusage_2[]
+
+// end::exampleusage_2[]
+
+
+=== exampleUsage_3
+
+// tag::exampleusage_3[]
+
+// end::exampleusage_3[]
+
+
+=== exampleUsage_4
+
+// tag::exampleusage_4[]
+
+// end::exampleusage_4[]
+
+
+=== exampleUsage_5
+
+// tag::exampleusage_5[]
+
+// end::exampleusage_5[]
+
+
+=== exampleWrong_Usage
+
+// tag::examplewrong_usage[]
+
+// end::examplewrong_usage[]
+
+
+=== has_execution_plan_issue
+
+// tag::has_execution_plan_issue[]
+
+// end::has_execution_plan_issue[]
+
+
+=== has_get_referenced_issue
+
+// tag::has_get_referenced_issue[]
+
+// end::has_get_referenced_issue[]
+
+
+=== has_history
+
+// tag::has_history[]
+
+// end::has_history[]
+
+
+=== has_history_columns
+
+// tag::has_history_columns[]
+
+// end::has_history_columns[]
+
+
+=== InheritanceType
+
+// tag::inheritancetype[]
+
+// end::inheritancetype[]
+
+
+=== is_persistence
+
+// tag::is_persistence[]
+
+// end::is_persistence[]
+
+
+=== is_persistence_check_duplicate_per_pk
+
+// tag::is_persistence_check_duplicate_per_pk[]
+
+// end::is_persistence_check_duplicate_per_pk[]
+
+
+=== is_persistence_check_for_empty_source
+
+// tag::is_persistence_check_for_empty_source[]
+
+// end::is_persistence_check_for_empty_source[]
+
+
+=== is_persistence_delete_changed
+
+// tag::is_persistence_delete_changed[]
+
+// end::is_persistence_delete_changed[]
+
+
+=== is_persistence_delete_missing
+
+// tag::is_persistence_delete_missing[]
+
+// end::is_persistence_delete_missing[]
+
+
+=== is_persistence_insert
+
+// tag::is_persistence_insert[]
+
+// end::is_persistence_insert[]
+
+
+=== is_persistence_truncate
+
+// tag::is_persistence_truncate[]
+
+// end::is_persistence_truncate[]
+
+
+=== is_persistence_update_changed
+
+// tag::is_persistence_update_changed[]
+
+// end::is_persistence_update_changed[]
+
+
+=== is_repo_managed
+
+// tag::is_repo_managed[]
+0
+// end::is_repo_managed[]
+
+
+=== is_ssas
+
+// tag::is_ssas[]
+0
+// end::is_ssas[]
+
+
+=== microsoft_database_tools_support
+
+// tag::microsoft_database_tools_support[]
+
+// end::microsoft_database_tools_support[]
+
+
+=== MS_Description
+
+// tag::ms_description[]
+
+// end::ms_description[]
+
+
+=== persistence_source_RepoObject_fullname
+
+// tag::persistence_source_repoobject_fullname[]
+
+// end::persistence_source_repoobject_fullname[]
+
+
+=== persistence_source_RepoObject_fullname2
+
+// tag::persistence_source_repoobject_fullname2[]
+
+// end::persistence_source_repoobject_fullname2[]
+
+
+=== persistence_source_RepoObject_guid
+
+// tag::persistence_source_repoobject_guid[]
+
+// end::persistence_source_repoobject_guid[]
+
+
+=== persistence_source_RepoObject_xref
+
+// tag::persistence_source_repoobject_xref[]
+
+// end::persistence_source_repoobject_xref[]
+
+
+=== pk_index_guid
+
+// tag::pk_index_guid[]
+
+// end::pk_index_guid[]
+
+
+=== pk_IndexPatternColumnDatatype
+
+// tag::pk_indexpatterncolumndatatype[]
+
+// end::pk_indexpatterncolumndatatype[]
+
+
+=== pk_IndexPatternColumnName
+
+// tag::pk_indexpatterncolumnname[]
+
+// end::pk_indexpatterncolumnname[]
+
+
+=== pk_IndexSemanticGroup
+
+// tag::pk_indexsemanticgroup[]
+
+// end::pk_indexsemanticgroup[]
+
+
+=== ReferencedObjectList
+
+// tag::referencedobjectlist[]
+* [config].[fs_get_parameter_value]
+// end::referencedobjectlist[]
+
+
+=== usp_persistence_RepoObject_guid
+
+// tag::usp_persistence_repoobject_guid[]
+
+// end::usp_persistence_repoobject_guid[]
+
+
+=== UspExamples
+
+// tag::uspexamples[]
+
+// end::uspexamples[]
+
+
+=== uspgenerator_usp_id
+
+// tag::uspgenerator_usp_id[]
+
+// end::uspgenerator_usp_id[]
+
+
+=== UspParameters
+
+// tag::uspparameters[]
+
+// end::uspparameters[]
+
+== Boolean Attributes
+
+source: property.RepoObjectProperty WHERE property_int = 1
+
+// tag::boolean_attributes[]
+
+
+// end::boolean_attributes[]
+
+== PlantUML diagrams
+
+=== PlantUML Entity
+
+// tag::puml_entity[]
+[plantuml, entity-{docname}, svg, subs=macros]
+....
+'Left to right direction
+top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>>  Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>>  White
+  BackgroundColor<<V>>  WhiteSmoke
+  BackgroundColor<<X>>  Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:config.usp_extract_dacpac.adoc[]" as config.usp_extract_dacpac << P >> {
+  --
+}
+....
+
+// end::puml_entity[]
+
+=== PlantUML Entity 1 1 FK
+
+// tag::puml_entity_1_1_fk[]
+[plantuml, entity_1_1_fk-{docname}, svg, subs=macros]
+....
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>>  Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>>  White
+  BackgroundColor<<V>>  WhiteSmoke
+  BackgroundColor<<X>>  Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+
+
+
+footer The diagram is interactive and contains links.
+
+@enduml
+....
+
+// end::puml_entity_1_1_fk[]
+
+=== PlantUML 1 1 ObjectRef
+
+// tag::puml_entity_1_1_objectref[]
+[plantuml, entity_1_1_objectref-{docname}, svg, subs=macros]
+....
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>>  Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>>  White
+  BackgroundColor<<V>>  WhiteSmoke
+  BackgroundColor<<X>>  Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:config.fs_get_parameter_value.adoc[]" as config.fs_get_parameter_value << FN >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:config.usp_extract_dacpac.adoc[]" as config.usp_extract_dacpac << P >> {
+  --
+}
+
+config.fs_get_parameter_value <.. config.usp_extract_dacpac
+
+footer The diagram is interactive and contains links.
+
+@enduml
+....
+
+// end::puml_entity_1_1_objectref[]
+
+=== PlantUML 30 0 ObjectRef
+
+// tag::puml_entity_30_0_objectref[]
+[plantuml, entity_30_0_objectref-{docname}, svg, subs=macros]
+....
+@startuml
+'Left to right direction
+top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>>  Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>>  White
+  BackgroundColor<<V>>  WhiteSmoke
+  BackgroundColor<<X>>  Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:config.fs_get_parameter_value.adoc[]" as config.fs_get_parameter_value << FN >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:config.parameter.adoc[]" as config.Parameter << U >> {
+  - **Parameter_name** : (varchar(100))
+  - **sub_Parameter** : (nvarchar(128))
+  --
+}
+
+entity "puml-link:dhw:sqldb:config.usp_extract_dacpac.adoc[]" as config.usp_extract_dacpac << P >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:configt.parameter_default.adoc[]" as configT.Parameter_default << V >> {
+  - **Parameter_name** : (varchar(52))
+  - **sub_Parameter** : (nvarchar(26))
+  --
+}
+
+config.fs_get_parameter_value <.. config.usp_extract_dacpac
+config.Parameter <.. config.fs_get_parameter_value
+configT.Parameter_default <.. config.Parameter
+
+footer The diagram is interactive and contains links.
+
+@enduml
+....
+
+// end::puml_entity_30_0_objectref[]
+
+=== PlantUML 0 30 ObjectRef
+
+// tag::puml_entity_0_30_objectref[]
+[plantuml, entity_0_30_objectref-{docname}, svg, subs=macros]
+....
+@startuml
+'Left to right direction
+top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>>  Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>>  White
+  BackgroundColor<<V>>  WhiteSmoke
+  BackgroundColor<<X>>  Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:config.usp_extract_dacpac.adoc[]" as config.usp_extract_dacpac << P >> {
+  --
+}
+
+
+
+footer The diagram is interactive and contains links.
+
+@enduml
+....
+
+// end::puml_entity_0_30_objectref[]
+
+=== PlantUML 1 1 ColumnRef
+
+// tag::puml_entity_1_1_colref[]
+[plantuml, entity_1_1_colref-{docname}, svg, subs=macros]
+....
+@startuml
+left to right direction
+'top to bottom direction
+hide circle
+'avoide "." issues:
+set namespaceSeparator none
+
+
+skinparam class {
+  BackgroundColor White
+  BackgroundColor<<FN>> Yellow
+  BackgroundColor<<FS>> Yellow
+  BackgroundColor<<FT>> LightGray
+  BackgroundColor<<IF>> Yellow
+  BackgroundColor<<IS>> Yellow
+  BackgroundColor<<P>>  Aqua
+  BackgroundColor<<PC>> Aqua
+  BackgroundColor<<SN>> Yellow
+  BackgroundColor<<SO>> SlateBlue
+  BackgroundColor<<TF>> LightGray
+  BackgroundColor<<TR>> Tomato
+  BackgroundColor<<U>>  White
+  BackgroundColor<<V>>  WhiteSmoke
+  BackgroundColor<<X>>  Aqua
+  BackgroundColor<<external>> AliceBlue
+}
+
+
+entity "puml-link:dhw:sqldb:config.fs_get_parameter_value.adoc[]" as config.fs_get_parameter_value << FN >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:config.usp_extract_dacpac.adoc[]" as config.usp_extract_dacpac << P >> {
+  --
+}
+
+config.fs_get_parameter_value <.. config.usp_extract_dacpac
+
+
+footer The diagram is interactive and contains links.
+
+@enduml
+....
+
+// end::puml_entity_1_1_colref[]
+
+
+== sql_modules_definition
+
+// tag::sql_modules_definition[]
+[%collapsible]
+=======
+[source,sql,numbered,indent=0]
+----
+
+/*
+<<property_start>>Description
+* extract repository and relevant table data to dacpac
+* default @TargetFolder: config.fs_get_parameter_value ( 'sqlpackage', 'TargetFolder' )
+* default @TargetFileBaseName: @TargetFileBaseName, Db_Name () + '.dacpac'
+* folder containing sqlpackage.exe should be defined in config.fs_get_parameter_value ( 'sqlpackage', 'ProgrammFolder' )
+* issues with xp_cmdshell executing the prepared command
+** copy the prepared command and execute it in a command prompt or power shell
+* see details in xref:user-guide:backup-repo-db.adoc[]
+<<property_end>>
+
+<<property_start>>exampleUsage
+--if you store the @TargetFolder in config.fs_get_parameter_value ( 'sqlpackage', 'TargetFolder' )
+Exec config.usp_extract_dacpac
+
+Exec config.usp_extract_dacpac
+    @TargetFolder = 'D:\Repos\gitlab\DataHandwerk\DataHandwerk-toolkit-mssql\dhw_dacpac'
+
+Exec config.usp_extract_dacpac
+    @TargetFolder = 'D:\Repos\gitlab\DataHandwerk\DataHandwerk-toolkit-mssql\dhw_dacpac'
+  , @TargetFileBaseName = 'ddd.dacpac'
+<<property_end>>
+*/
+CREATE Procedure [config].[usp_extract_dacpac]
+(
+    @TargetFolder       NVarchar(4000) = Null
+  , @TargetFileBaseName NVarchar(1000) = Null
+)
+As
+Begin
+    Set @TargetFolder = IsNull ( @TargetFolder, config.fs_get_parameter_value ( 'sqlpackage', 'TargetFolder' ))
+    Set @TargetFileBaseName = IsNull ( @TargetFileBaseName, Db_Name () + '.dacpac' )
+
+    Declare @TargetFile NVarchar(4000) = @TargetFolder + N'\' + @TargetFileBaseName
+    Declare @instanceName NVarchar(500) = @@ServerName --example: 'ACER-F17\SQL2019', '.\SQL2019', localhost\SQL2019
+    Declare @databaseName NVarchar(128) = Db_Name ()
+    Declare @command NVarchar(max)
+
+    Set @command
+        = Concat (
+                     '"'
+                   , config.fs_get_parameter_value ( 'sqlpackage', 'ProgrammFolder' )
+                   , '\sqlpackage.exe'
+                   , '"'
+                   , ' /TargetFile:"'
+                   , @TargetFile
+                   , '"'
+                   , ' /Action:Extract'
+                   , ' /SourceServerName:"'
+                   , @instanceName
+                   , '"'
+                   , ' /SourceDatabaseName:"'
+                   , @databaseName
+                   , '"'
+                   , ' /p:IgnorePermissions=TRUE /p:IgnoreUserLoginMappings=TRUE'
+                   , ' /p:TableData=[config].[Parameter]'
+                   , ' /p:TableData=[config].[SsasDatabasename]'
+                   , ' /p:TableData=[configT].[spt_values]'
+                   , ' /p:TableData=[property].[external_RepoObjectColumnProperty]'
+                   , ' /p:TableData=[property].[external_RepoObjectProperty]'
+                   , ' /p:TableData=[property].[MeasureProperty]'
+                   , ' /p:TableData=[property].[PropertyName_Measure_T]'
+                   , ' /p:TableData=[property].[PropertyName_RepoObject_T]'
+                   , ' /p:TableData=[property].[PropertyName_RepoObjectColumn_T]'
+                   , ' /p:TableData=[property].[RepoObjectColumnProperty]'
+                   , ' /p:TableData=[property].[RepoObjectProperty]'
+                   , ' /p:TableData=[property].[RepoSchemaProperty]'
+                   , ' /p:TableData=[reference].[additional_Reference]'
+                   , ' /p:TableData=[reference].[additional_Reference_database_T]'
+                   , ' /p:TableData=[reference].[additional_Reference_Object_T]'
+                   , ' /p:TableData=[reference].[additional_Reference_ObjectColumn_T]'
+                   , ' /p:TableData=[reference].[RepoObject_QueryPlan]'
+                   , ' /p:TableData=[reference].[RepoObject_reference_T]'
+                   , ' /p:TableData=[reference].[RepoObject_ReferenceTree]'
+                   --, ' /p:TableData=[reference].[RepoObject_ReferenceTree_0_30_T]'
+                   --, ' /p:TableData=[reference].[RepoObject_ReferenceTree_30_0_T]'
+                   , ' /p:TableData=[reference].[RepoObjectColumn_reference_T]'
+                   , ' /p:TableData=[reference].[RepoObjectColumnSource_virtual]'
+                   , ' /p:TableData=[reference].[RepoObjectSource_FirstResultSet]'
+                   , ' /p:TableData=[reference].[RepoObjectSource_QueryPlan]'
+                   , ' /p:TableData=[reference].[RepoObjectSource_virtual]'
+                   , ' /p:TableData=[repo].[ForeignKey_Indexes_union_T]'
+                   , ' /p:TableData=[repo].[ForeignKey_virtual]'
+                   , ' /p:TableData=[repo].[Index_ColumList_T]'
+                   , ' /p:TableData=[repo].[Index_Settings]'
+                   , ' /p:TableData=[repo].[Index_ssas_T]'
+                   , ' /p:TableData=[repo].[Index_virtual]'
+                   --, ' /p:TableData=[repo].[IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T]'
+                   , ' /p:TableData=[repo].[IndexColumn_ssas_T]'
+                   , ' /p:TableData=[repo].[IndexColumn_union_T]'
+                   , ' /p:TableData=[repo].[IndexColumn_virtual]'
+                   , ' /p:TableData=[repo].[RepoObject]'
+                   , ' /p:TableData=[repo].[RepoObject_persistence]'
+                   , ' /p:TableData=[repo].[RepoObjectColumn]'
+                   , ' /p:TableData=[repo].[RepoSchema]'
+                   , ' /p:TableData=[sqlparse].[RepoObject_SqlModules]'
+                   , ' /p:TableData=[sqlparse].[RepoObject_SqlModules_41_from_T]'
+                   , ' /p:TableData=[sqlparse].[RepoObject_SqlModules_61_SelectIdentifier_Union_T]'
+                   , ' /p:TableData=[ssas].[Measure_translation_T]'
+                   , ' /p:TableData=[ssas].[model_json]'
+                   , ' /p:TableData=[ssas].[model_json_31_tables_T]'
+                   , ' /p:TableData=[ssas].[model_json_311_tables_columns_T]'
+                   , ' /p:TableData=[ssas].[model_json_312_tables_measures_T]'
+                   , ' /p:TableData=[ssas].[model_json_32_relationships_T]'
+                   , ' /p:TableData=[ssas].[model_json_33_dataSources_T]'
+                   , ' /p:TableData=[ssas].[model_json_3411_cultures_translations_model_T]'
+                   , ' /p:TableData=[ssas].[RepoObjectColumn_translation_T]'
+                   , ' /p:TableData=[ssis].[Package]'
+                   , ' /p:TableData=[ssis].[PackageConnection]'
+                   , ' /p:TableData=[ssis].[PackageFlow]'
+                   , ' /p:TableData=[ssis].[PackageParameter]'
+                   , ' /p:TableData=[ssis].[PackageTask]'
+                   , ' /p:TableData=[ssis].[PackageTask_Dft_Component]'
+                   , ' /p:TableData=[ssis].[PackageTask_Dft_Component_input]'
+                   , ' /p:TableData=[ssis].[PackageTask_Dft_Component_input_externalMetadataColumn]'
+                   , ' /p:TableData=[ssis].[PackageTask_Dft_Component_input_inputColumn]'
+                   , ' /p:TableData=[ssis].[PackageTask_Dft_Component_output]'
+                   , ' /p:TableData=[ssis].[PackageTask_Dft_Component_output_externalMetadataColumn]'
+                   , ' /p:TableData=[ssis].[PackageTask_Dft_Component_output_outputcolumn]'
+                   --, ' /p:TableData=[ssis].[PackageTask_Dft_SrcDest]'
+                   , ' /p:TableData=[ssis].[PackageTask_Sql_Parameter]'
+                   , ' /p:TableData=[ssis].[PackageVariable]'
+                   , ' /p:TableData=[ssis].[Project]'
+                   , ' /p:TableData=[ssis].[ProjectConnection]'
+                   , ' /p:TableData=[uspgenerator].[GeneratorUsp]'
+                   , ' /p:TableData=[uspgenerator].[GeneratorUspParameter]'
+                   , ' /p:TableData=[uspgenerator].[GeneratorUspStep]'
+                   , ' /p:TableData=[workflow].[Connection]'
+                   , ' /p:TableData=[workflow].[ProcedureDependency]'
+                   , ' /p:TableData=[workflow].[Workflow]'
+                   , ' /p:TableData=[workflow].[Workflow_ProcedureDependency_T]'
+                   , ' /p:TableData=[workflow].[Workflow_ProcedureDependency_T_bidirectional_T]'
+                   , ' /p:TableData=[workflow].[WorkflowStep]'
+                   , ' /p:TableData=[workflow].[WorkflowStep_Sortorder]'
+                 )
+
+    Print @command
+
+    Select
+        @command
+
+--issues with xp_cmdshell and multiple pairs of "
+--replacing by ' will not solve, because this will be a wrong syntax for sqlpackage.exe
+--Set @command = Replace ( @command, '"', '''' )
+--Exec sys.xp_cmdshell @command
+End;
+----
+=======
+// end::sql_modules_definition[]
+
+
