@@ -50,7 +50,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-12-27 16:28:18
+2021-12-27 17:57:57
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -2671,7 +2671,8 @@ footer The diagram is interactive and contains links.
 [source,sql,numbered,indent=0]
 ----
 
-CREATE View docs.RepoObject_ColumnList
+
+CREATE View [docs].[RepoObject_ColumnList]
 As
 Select
     rof.RepoObject_guid
@@ -2727,7 +2728,7 @@ Select
                                                             , Char ( 13 ) + Char ( 10 )
                                                             , '----'
                                                             , Char ( 13 ) + Char ( 10 )
-                                                            , roc.Repo_definition
+                                                            , Replace ( roc.Repo_definition, '|', '\|' )
                                                             , Char ( 13 ) + Char ( 10 )
                                                             , '----'
                                                             , Char ( 13 ) + Char ( 10 )
@@ -2746,7 +2747,7 @@ Select
                                                             , Char ( 13 ) + Char ( 10 )
                                                             , '----'
                                                             , Char ( 13 ) + Char ( 10 )
-                                                            , roc.Repo_default_definition
+                                                            , Replace ( roc.Repo_default_definition, '|', '\|' )
                                                             , Char ( 13 ) + Char ( 10 )
                                                             , '----'
                                                             , Char ( 13 ) + Char ( 10 )
@@ -2922,7 +2923,7 @@ Select
                                                                     , Char ( 13 ) + Char ( 10 )
                                                                     , '----'
                                                                     , Char ( 13 ) + Char ( 10 )
-                                                                    , roc.Repo_definition
+                                                                    , Replace ( roc.Repo_definition, '|', '\|' )
                                                                     , Char ( 13 ) + Char ( 10 )
                                                                     , '----'
                                                                     , Char ( 13 ) + Char ( 10 )
@@ -2942,7 +2943,11 @@ Select
                                                                     , Char ( 13 ) + Char ( 10 )
                                                                     , '----'
                                                                     , Char ( 13 ) + Char ( 10 )
-                                                                    , roc.Repo_default_definition
+                                                                    , Replace (
+                                                                                  roc.Repo_default_definition
+                                                                                , '|'
+                                                                                , '\|'
+                                                                              )
                                                                     , Char ( 13 ) + Char ( 10 )
                                                                     , '----'
                                                                     , Char ( 13 ) + Char ( 10 )
@@ -3015,7 +3020,7 @@ Select
                                                                     , Char ( 13 ) + Char ( 10 )
                                                                     , '----'
                                                                     , Char ( 13 ) + Char ( 10 )
-                                                                    , roc.Repo_definition
+                                                                    , Replace ( roc.Repo_definition, '|', '\|' )
                                                                     , Char ( 13 ) + Char ( 10 )
                                                                     , '----'
                                                                     , Char ( 13 ) + Char ( 10 )
@@ -3035,7 +3040,11 @@ Select
                                                                     , Char ( 13 ) + Char ( 10 )
                                                                     , '----'
                                                                     , Char ( 13 ) + Char ( 10 )
-                                                                    , roc.Repo_default_definition
+                                                                    , Replace (
+                                                                                  roc.Repo_default_definition
+                                                                                , '|'
+                                                                                , '\|'
+                                                                              )
                                                                     , Char ( 13 ) + Char ( 10 )
                                                                     , '----'
                                                                     , Char ( 13 ) + Char ( 10 )
