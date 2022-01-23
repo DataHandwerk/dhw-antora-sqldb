@@ -51,7 +51,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-12-17 19:13:08
+2022-01-21 18:39:34
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -189,8 +189,8 @@ ON
 T.[RepoObjectColumn_guid] = S.[RepoObjectColumn_guid]
 
 WHERE
-   T.[is_SysObjectColumn_missing] <> S.[is_SysObjectColumn_missing]
-OR T.[Repo_is_nullable] <> S.[Repo_is_nullable]
+   T.[is_SysObjectColumn_missing] <> S.[is_SysObjectColumn_missing] OR (S.[is_SysObjectColumn_missing] IS NULL AND NOT T.[is_SysObjectColumn_missing] IS NULL) OR (NOT S.[is_SysObjectColumn_missing] IS NULL AND T.[is_SysObjectColumn_missing] IS NULL)
+OR T.[Repo_is_nullable] <> S.[Repo_is_nullable] OR (S.[Repo_is_nullable] IS NULL AND NOT T.[Repo_is_nullable] IS NULL) OR (NOT S.[Repo_is_nullable] IS NULL AND T.[Repo_is_nullable] IS NULL)
 OR T.[Repo_user_type_fullname] <> S.[Repo_user_type_fullname] OR (S.[Repo_user_type_fullname] IS NULL AND NOT T.[Repo_user_type_fullname] IS NULL) OR (NOT S.[Repo_user_type_fullname] IS NULL AND T.[Repo_user_type_fullname] IS NULL)
 OR T.[Repo_user_type_name] <> S.[Repo_user_type_name] OR (S.[Repo_user_type_name] IS NULL AND NOT T.[Repo_user_type_name] IS NULL) OR (NOT S.[Repo_user_type_name] IS NULL AND T.[Repo_user_type_name] IS NULL)
 OR T.[RepoObject_guid] <> S.[RepoObject_guid]
@@ -834,8 +834,8 @@ repo.RepoSchema_ssas_tgt <.. repo.RepoSchema
 ssas.model_json <.. ssas.model_json_10
 ssas.model_json_10 <.. ssas.model_json_20
 ssas.model_json_20 <.. repo.RepoSchema_ssas_src
-ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
 ssas.model_json_20 <.. ssas.model_json_31_tables
+ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
 ssas.model_json_201_descriptions_multiline <.. ssas.model_json_2011_descriptions_StrAgg
 ssas.model_json_2011_descriptions_StrAgg <.. repo.RepoSchema_ssas_src
 ssas.model_json_31_tables <.. ssas.model_json_31_tables_T
@@ -960,9 +960,12 @@ entity "puml-link:dhw:sqldb:repo.repoobjectcolumn_ssas_tgt.adoc[]" as repo.RepoO
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
   InheritanceDefinition : (nvarchar(4000))
   InheritanceType : (tinyint)
+  is_persistence_Ignore : (bit)
   is_persistence_no_check : (bit)
   is_persistence_no_include : (bit)
   is_persistence_no_update : (bit)
+  is_persistence_NoCompareButUpdate : (bit)
+  is_persistence_NoCompareNoUpdate : (bit)
   is_query_plan_expression : (bit)
   is_required_ColumnMerge : (bit)
   - is_SysObjectColumn_missing : (int)

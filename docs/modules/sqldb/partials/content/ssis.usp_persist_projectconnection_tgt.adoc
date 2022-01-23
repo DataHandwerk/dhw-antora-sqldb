@@ -51,7 +51,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-12-17 19:13:09
+2022-01-21 18:39:36
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -190,7 +190,7 @@ T.[AntoraModule] = S.[AntoraModule]
 AND T.[ConnectionManagerID] = S.[ConnectionManagerID]
 
 WHERE
-   T.[ConnectionManagerName] <> S.[ConnectionManagerName] OR (S.[ConnectionManagerName] IS NULL AND NOT T.[ConnectionManagerName] IS NULL) OR (NOT S.[ConnectionManagerName] IS NULL AND T.[ConnectionManagerName] IS NULL)
+   T.[ConnectionManagerName] <> S.[ConnectionManagerName]
 OR T.[ConnectionManagerType] <> S.[ConnectionManagerType] OR (S.[ConnectionManagerType] IS NULL AND NOT T.[ConnectionManagerType] IS NULL) OR (NOT S.[ConnectionManagerType] IS NULL AND T.[ConnectionManagerType] IS NULL)
 OR T.[ConnectionPath] <> S.[ConnectionPath]
 OR T.[ConnectionString] <> S.[ConnectionString] OR (S.[ConnectionString] IS NULL AND NOT T.[ConnectionString] IS NULL) OR (NOT S.[ConnectionString] IS NULL AND T.[ConnectionString] IS NULL)
@@ -786,8 +786,8 @@ ssis.AntoraModule_tgt_filter <.. ssis.ProjectConnection_tgt
 ssis.Package_src <.. ssis.AntoraModule_tgt_filter
 ssis.Project <.. ssis.ProjectConnection_src
 ssis.Project <.. ssis.Package_src
-ssis.ProjectConnection_src <.. ssis.ProjectConnection_tgt
 ssis.ProjectConnection_src <.. ssis.usp_PERSIST_ProjectConnection_tgt
+ssis.ProjectConnection_src <.. ssis.ProjectConnection_tgt
 ssis.ProjectConnection_tgt <.. ssis.usp_PERSIST_ProjectConnection_tgt
 ssis_t.pkgStats <.. ssis.Package_src
 ssis_t.ProjectConnection <.. ssis.ProjectConnection_src

@@ -105,7 +105,7 @@ view
 |2
 |*PackageName*
 |varchar(200)
-|NULL
+|NOT NULL
 |
 |===
 
@@ -124,7 +124,7 @@ view
 |3
 |*TaskFrom*
 |varchar(2000)
-|NULL
+|NOT NULL
 |
 |===
 
@@ -143,7 +143,7 @@ view
 |4
 |*Taskto*
 |varchar(2000)
-|NULL
+|NOT NULL
 |
 |===
 
@@ -301,19 +301,19 @@ view
 |2
 |*<<column-packagename>>*
 |varchar(200)
-|NULL
+|NOT NULL
 |
 
 |3
 |*<<column-taskfrom>>*
 |varchar(2000)
-|NULL
+|NOT NULL
 |
 
 |4
 |*<<column-taskto>>*
 |varchar(2000)
-|NULL
+|NOT NULL
 |
 
 
@@ -624,7 +624,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 === is_repo_managed
 
 // tag::is_repo_managed[]
-1
+0
 // end::is_repo_managed[]
 
 
@@ -751,7 +751,6 @@ source: property.RepoObjectProperty WHERE property_int = 1
 :is_persistence_delete_missing:
 :is_persistence_insert:
 :is_persistence_update_changed:
-:is_repo_managed:
 
 // end::boolean_attributes[]
 
@@ -1134,8 +1133,8 @@ entity "puml-link:dhw:sqldb:ssis.usp_persist_packageflow_tgt.adoc[]" as ssis.usp
 
 docs.ssis_Adoc <.. docs.ssis_Adoc_T
 docs.ssis_Adoc <.. docs.usp_PERSIST_ssis_Adoc_T
-docs.ssis_Adoc_T <.. docs.usp_PERSIST_ssis_Adoc_T
 docs.ssis_Adoc_T <.. docs.usp_AntoraExport_SsisPartialsContent
+docs.ssis_Adoc_T <.. docs.usp_PERSIST_ssis_Adoc_T
 docs.ssis_PumlDftTask <.. docs.ssis_Task
 docs.ssis_PumlDftTask <.. docs.ssis_TaskList
 docs.ssis_PumlPackage <.. docs.ssis_Adoc
@@ -1144,10 +1143,10 @@ docs.ssis_PumlPartialDataFlow <.. docs.ssis_PumlDftTask
 docs.ssis_TaskList <.. docs.ssis_Adoc
 docs.usp_AntoraExport_SsisPartialsContent <.. docs.usp_AntoraExport
 docs.usp_PERSIST_ssis_Adoc_T <.. docs.usp_AntoraExport_SsisPartialsContent
-ssis.PackageFlow <.. docs.ssis_PumlPartialControlFlows
 ssis.PackageFlow <.. docs.ssis_PumlPartialDataFlow
-ssis.PackageFlow_tgt <.. ssis.PackageFlow
+ssis.PackageFlow <.. docs.ssis_PumlPartialControlFlows
 ssis.PackageFlow_tgt <.. ssis.usp_PERSIST_PackageFlow_tgt
+ssis.PackageFlow_tgt <.. ssis.PackageFlow
 ssis.usp_PERSIST_PackageFlow_tgt <.. ssis.usp_import
 
 footer The diagram is interactive and contains links.

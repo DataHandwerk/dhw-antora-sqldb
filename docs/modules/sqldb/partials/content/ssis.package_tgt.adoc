@@ -105,7 +105,7 @@ view
 |2
 |*PackageName*
 |varchar(200)
-|NULL
+|NOT NULL
 |
 |===
 
@@ -200,7 +200,7 @@ view
 |
 |PackageDTSID
 |uniqueidentifier
-|NULL
+|NOT NULL
 |
 |===
 
@@ -344,19 +344,6 @@ view
 --
 
 
-[#column-packagexml]
-=== PackageXML
-
-[cols="d,8a,m,m,m"]
-|===
-|
-|PackageXML
-|xml
-|NOT NULL
-|
-|===
-
-
 [#column-projectpath]
 === ProjectPath
 
@@ -409,9 +396,8 @@ view
 |2
 |*<<column-packagename>>*
 |varchar(200)
-|NULL
+|NOT NULL
 |
-
 
 
 
@@ -461,7 +447,7 @@ view
 |
 |<<column-packagedtsid>>
 |uniqueidentifier
-|NULL
+|NOT NULL
 |
 
 |
@@ -504,12 +490,6 @@ view
 |<<column-packageversionguid>>
 |uniqueidentifier
 |NULL
-|
-
-|
-|<<column-packagexml>>
-|xml
-|NOT NULL
 |
 
 |
@@ -771,7 +751,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 === is_repo_managed
 
 // tag::is_repo_managed[]
-1
+0
 // end::is_repo_managed[]
 
 
@@ -898,7 +878,6 @@ source: property.RepoObjectProperty WHERE property_int = 1
 :is_persistence_delete_missing:
 :is_persistence_insert:
 :is_persistence_update_changed:
-:is_repo_managed:
 
 // end::boolean_attributes[]
 
@@ -1270,8 +1249,8 @@ ssis.Package <.. docs.ssis_navlist_package
 ssis.Package <.. docs.ssis_GeneralList
 ssis.Package <.. docs.usp_AntoraExport_SsisPage
 ssis.Package <.. docs.ssis_Adoc
-ssis.Package_tgt <.. ssis.Package
 ssis.Package_tgt <.. ssis.usp_PERSIST_Package_tgt
+ssis.Package_tgt <.. ssis.Package
 ssis.usp_PERSIST_Package_tgt <.. ssis.usp_import
 
 footer The diagram is interactive and contains links.

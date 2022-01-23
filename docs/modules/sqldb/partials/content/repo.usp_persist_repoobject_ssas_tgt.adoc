@@ -51,7 +51,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-12-17 19:13:08
+2022-01-21 18:39:34
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -190,14 +190,14 @@ ON
 T.[RepoObject_guid] = S.[RepoObject_guid]
 
 WHERE
-   T.[is_repo_managed] <> S.[is_repo_managed]
+   T.[is_repo_managed] <> S.[is_repo_managed] OR (S.[is_repo_managed] IS NULL AND NOT T.[is_repo_managed] IS NULL) OR (NOT S.[is_repo_managed] IS NULL AND T.[is_repo_managed] IS NULL)
 OR T.[is_ssas] <> S.[is_ssas]
 OR T.[RepoObject_name] <> S.[RepoObject_name]
 OR T.[RepoObject_schema_name] <> S.[RepoObject_schema_name]
 OR T.[RepoObject_type] <> S.[RepoObject_type]
 OR T.[SysObject_name] <> S.[SysObject_name]
 OR T.[SysObject_schema_name] <> S.[SysObject_schema_name]
-OR T.[SysObject_type] <> S.[SysObject_type]
+OR T.[SysObject_type] <> S.[SysObject_type] OR (S.[SysObject_type] IS NULL AND NOT T.[SysObject_type] IS NULL) OR (NOT S.[SysObject_type] IS NULL AND T.[SysObject_type] IS NULL)
 
 ----
 =====
@@ -812,8 +812,8 @@ repo.RepoSchema_ssas_tgt <.. repo.RepoSchema
 ssas.model_json <.. ssas.model_json_10
 ssas.model_json_10 <.. ssas.model_json_20
 ssas.model_json_20 <.. repo.RepoSchema_ssas_src
-ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
 ssas.model_json_20 <.. ssas.model_json_31_tables
+ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
 ssas.model_json_201_descriptions_multiline <.. ssas.model_json_2011_descriptions_StrAgg
 ssas.model_json_2011_descriptions_StrAgg <.. repo.RepoSchema_ssas_src
 ssas.model_json_31_tables <.. ssas.model_json_31_tables_T

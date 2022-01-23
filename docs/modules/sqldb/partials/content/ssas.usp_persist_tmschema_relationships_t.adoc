@@ -12,7 +12,6 @@
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
 :ExistsProperty--referencedobjectlist:
-:ExistsProperty--uspgenerator_usp_id:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--AntoraParameterList:
 // end::existing_properties[]
@@ -50,7 +49,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-12-17 19:13:09
+2022-01-21 18:39:35
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -314,8 +313,6 @@ AND T.[ID] = S.[ID]
 
 // tag::antorareferencedlist[]
 * xref:dhw:sqldb:logs.usp_executionlog_insert.adoc[]
-* xref:dhw:sqldb:ssas.tmschema_relationships.adoc[]
-* xref:dhw:sqldb:ssas.tmschema_relationships_t.adoc[]
 // end::antorareferencedlist[]
 
 
@@ -554,8 +551,6 @@ EXEC [ssas].[usp_PERSIST_TMSCHEMA_RELATIONSHIPS_T]
 
 // tag::referencedobjectlist[]
 * [logs].[usp_ExecutionLog_insert]
-* [ssas].[TMSCHEMA_RELATIONSHIPS]
-* [ssas].[TMSCHEMA_RELATIONSHIPS_T]
 // end::referencedobjectlist[]
 
 
@@ -576,7 +571,7 @@ EXEC [ssas].[usp_PERSIST_TMSCHEMA_RELATIONSHIPS_T]
 === uspgenerator_usp_id
 
 // tag::uspgenerator_usp_id[]
-82
+
 // end::uspgenerator_usp_id[]
 
 
@@ -716,25 +711,11 @@ entity "puml-link:dhw:sqldb:logs.usp_executionlog_insert.adoc[]" as logs.usp_Exe
   --
 }
 
-entity "puml-link:dhw:sqldb:ssas.tmschema_relationships.adoc[]" as ssas.TMSCHEMA_RELATIONSHIPS << U >> {
-  - **databasename** : (nvarchar(128))
-  - **ID** : (numeric(20, 0))
-  --
-}
-
-entity "puml-link:dhw:sqldb:ssas.tmschema_relationships_t.adoc[]" as ssas.TMSCHEMA_RELATIONSHIPS_T << U >> {
-  - **databasename** : (nvarchar(128))
-  - **ID** : (numeric(20, 0))
-  --
-}
-
 entity "puml-link:dhw:sqldb:ssas.usp_persist_tmschema_relationships_t.adoc[]" as ssas.usp_PERSIST_TMSCHEMA_RELATIONSHIPS_T << P >> {
   --
 }
 
 logs.usp_ExecutionLog_insert <.. ssas.usp_PERSIST_TMSCHEMA_RELATIONSHIPS_T
-ssas.TMSCHEMA_RELATIONSHIPS <.. ssas.usp_PERSIST_TMSCHEMA_RELATIONSHIPS_T
-ssas.TMSCHEMA_RELATIONSHIPS_T <.. ssas.usp_PERSIST_TMSCHEMA_RELATIONSHIPS_T
 
 footer The diagram is interactive and contains links.
 
@@ -785,27 +766,12 @@ entity "puml-link:dhw:sqldb:logs.usp_executionlog_insert.adoc[]" as logs.usp_Exe
   --
 }
 
-entity "puml-link:dhw:sqldb:ssas.tmschema_relationships.adoc[]" as ssas.TMSCHEMA_RELATIONSHIPS << U >> {
-  - **databasename** : (nvarchar(128))
-  - **ID** : (numeric(20, 0))
-  --
-}
-
-entity "puml-link:dhw:sqldb:ssas.tmschema_relationships_t.adoc[]" as ssas.TMSCHEMA_RELATIONSHIPS_T << U >> {
-  - **databasename** : (nvarchar(128))
-  - **ID** : (numeric(20, 0))
-  --
-}
-
 entity "puml-link:dhw:sqldb:ssas.usp_persist_tmschema_relationships_t.adoc[]" as ssas.usp_PERSIST_TMSCHEMA_RELATIONSHIPS_T << P >> {
   --
 }
 
 logs.ExecutionLog <.. logs.usp_ExecutionLog_insert
 logs.usp_ExecutionLog_insert <.. ssas.usp_PERSIST_TMSCHEMA_RELATIONSHIPS_T
-ssas.TMSCHEMA_RELATIONSHIPS <.. ssas.TMSCHEMA_RELATIONSHIPS_T
-ssas.TMSCHEMA_RELATIONSHIPS <.. ssas.usp_PERSIST_TMSCHEMA_RELATIONSHIPS_T
-ssas.TMSCHEMA_RELATIONSHIPS_T <.. ssas.usp_PERSIST_TMSCHEMA_RELATIONSHIPS_T
 
 footer The diagram is interactive and contains links.
 
@@ -897,64 +863,11 @@ entity "puml-link:dhw:sqldb:logs.usp_executionlog_insert.adoc[]" as logs.usp_Exe
   --
 }
 
-entity "puml-link:dhw:sqldb:ssas.tmschema_relationships.adoc[]" as ssas.TMSCHEMA_RELATIONSHIPS << U >> {
-  - **databasename** : (nvarchar(128))
-  - **ID** : (numeric(20, 0))
-  - CrossFilteringBehavior : (bigint)
-  - FromCardinality : (bigint)
-  - FromColumnID : (numeric(20, 0))
-  - FromTableID : (numeric(20, 0))
-  - IsActive : (bit)
-  - JoinOnDateBehavior : (bigint)
-  - ModelID : (numeric(20, 0))
-  - ModifiedTime : (datetime)
-  - Name : (nvarchar(max))
-  RefreshedTime : (datetime)
-  RelationshipStorage2ID : (numeric(20, 0))
-  RelationshipStorageID : (numeric(20, 0))
-  - RelyOnReferentialIntegrity : (bit)
-  - SecurityFilteringBehavior : (bigint)
-  - State : (bigint)
-  - ToCardinality : (bigint)
-  - ToColumnID : (numeric(20, 0))
-  - ToTableID : (numeric(20, 0))
-  - Type : (bigint)
-  --
-}
-
-entity "puml-link:dhw:sqldb:ssas.tmschema_relationships_t.adoc[]" as ssas.TMSCHEMA_RELATIONSHIPS_T << U >> {
-  - **databasename** : (nvarchar(128))
-  - **ID** : (numeric(20, 0))
-  - CrossFilteringBehavior : (bigint)
-  - ForeignKey_guid : (uniqueidentifier)
-  - FromCardinality : (bigint)
-  - FromColumnID : (numeric(20, 0))
-  - FromTableID : (numeric(20, 0))
-  - IsActive : (bit)
-  - JoinOnDateBehavior : (bigint)
-  - ModelID : (numeric(20, 0))
-  - ModifiedTime : (datetime)
-  - Name : (nvarchar(max))
-  RefreshedTime : (datetime)
-  RelationshipStorage2ID : (numeric(20, 0))
-  RelationshipStorageID : (numeric(20, 0))
-  - RelyOnReferentialIntegrity : (bit)
-  - SecurityFilteringBehavior : (bigint)
-  - State : (bigint)
-  - ToCardinality : (bigint)
-  - ToColumnID : (numeric(20, 0))
-  - ToTableID : (numeric(20, 0))
-  - Type : (bigint)
-  --
-}
-
 entity "puml-link:dhw:sqldb:ssas.usp_persist_tmschema_relationships_t.adoc[]" as ssas.usp_PERSIST_TMSCHEMA_RELATIONSHIPS_T << P >> {
   --
 }
 
 logs.usp_ExecutionLog_insert <.. ssas.usp_PERSIST_TMSCHEMA_RELATIONSHIPS_T
-ssas.TMSCHEMA_RELATIONSHIPS <.. ssas.usp_PERSIST_TMSCHEMA_RELATIONSHIPS_T
-ssas.TMSCHEMA_RELATIONSHIPS_T <.. ssas.usp_PERSIST_TMSCHEMA_RELATIONSHIPS_T
 
 
 footer The diagram is interactive and contains links.

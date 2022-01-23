@@ -105,7 +105,7 @@ view
 |2
 |*PackageName*
 |varchar(200)
-|NULL
+|NOT NULL
 |
 |===
 
@@ -124,7 +124,7 @@ view
 |3
 |*VariableName*
 |varchar(500)
-|NULL
+|NOT NULL
 |
 |===
 
@@ -225,13 +225,13 @@ view
 |2
 |*<<column-packagename>>*
 |varchar(200)
-|NULL
+|NOT NULL
 |
 
 |3
 |*<<column-variablename>>*
 |varchar(500)
-|NULL
+|NOT NULL
 |
 
 
@@ -519,7 +519,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 === is_repo_managed
 
 // tag::is_repo_managed[]
-1
+0
 // end::is_repo_managed[]
 
 
@@ -646,7 +646,6 @@ source: property.RepoObjectProperty WHERE property_int = 1
 :is_persistence_delete_missing:
 :is_persistence_insert:
 :is_persistence_update_changed:
-:is_repo_managed:
 
 // end::boolean_attributes[]
 
@@ -906,8 +905,8 @@ entity "puml-link:dhw:sqldb:ssis_t.tblvariable.adoc[]" as ssis_t.TblVariable << 
 }
 
 ssis.AntoraModule_tgt_filter <.. ssis.PackageVariable_tgt
-ssis.Package_src <.. ssis.AntoraModule_tgt_filter
 ssis.Package_src <.. ssis.PackageVariable_src
+ssis.Package_src <.. ssis.AntoraModule_tgt_filter
 ssis.PackageVariable_src <.. ssis.PackageVariable_tgt
 ssis.Project <.. ssis.Package_src
 ssis_t.pkgStats <.. ssis.Package_src
@@ -1005,8 +1004,8 @@ entity "puml-link:dhw:sqldb:ssis.usp_persist_packagevariable_tgt.adoc[]" as ssis
 
 docs.ssis_Adoc <.. docs.ssis_Adoc_T
 docs.ssis_Adoc <.. docs.usp_PERSIST_ssis_Adoc_T
-docs.ssis_Adoc_T <.. docs.usp_PERSIST_ssis_Adoc_T
 docs.ssis_Adoc_T <.. docs.usp_AntoraExport_SsisPartialsContent
+docs.ssis_Adoc_T <.. docs.usp_PERSIST_ssis_Adoc_T
 docs.ssis_VariableList <.. docs.ssis_Adoc
 docs.usp_AntoraExport_SsisPartialsContent <.. docs.usp_AntoraExport
 docs.usp_PERSIST_ssis_Adoc_T <.. docs.usp_AntoraExport_SsisPartialsContent

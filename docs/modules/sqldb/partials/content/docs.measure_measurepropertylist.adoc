@@ -622,7 +622,8 @@ entity "puml-link:dhw:sqldb:docs.repoobject_measurelist.adoc[]" as docs.RepoObje
 }
 
 entity "puml-link:dhw:sqldb:property.measureproperty.adoc[]" as property.MeasureProperty << U >> {
-  - **MeasureProperty_id** : (int)
+  - **Measure_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   --
 }
 
@@ -685,7 +686,8 @@ entity "puml-link:dhw:sqldb:docs.measure_measurepropertylist.adoc[]" as docs.Mea
 }
 
 entity "puml-link:dhw:sqldb:property.measureproperty.adoc[]" as property.MeasureProperty << U >> {
-  - **MeasureProperty_id** : (int)
+  - **Measure_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   --
 }
 
@@ -779,8 +781,8 @@ entity "puml-link:dhw:sqldb:ssas.model_json_31221_tables_measures_expressions_st
   --
 }
 
-property.MeasureProperty <.. docs.Measure_MeasurePropertyList
 property.MeasureProperty <.. property.PropertyName_Measure
+property.MeasureProperty <.. docs.Measure_MeasurePropertyList
 property.PropertyName_Measure <.. property.PropertyName_Measure_T
 property.PropertyName_Measure_T <.. docs.Measure_MeasurePropertyList
 repo.Measure <.. docs.Measure_MeasurePropertyList
@@ -790,8 +792,8 @@ repo.RepoSchema_ssas_tgt <.. repo.RepoSchema
 ssas.model_json <.. ssas.model_json_10
 ssas.model_json_10 <.. ssas.model_json_20
 ssas.model_json_20 <.. repo.RepoSchema_ssas_src
-ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
 ssas.model_json_20 <.. ssas.model_json_31_tables
+ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
 ssas.model_json_201_descriptions_multiline <.. ssas.model_json_2011_descriptions_StrAgg
 ssas.model_json_2011_descriptions_StrAgg <.. repo.RepoSchema_ssas_src
 ssas.model_json_31_tables <.. ssas.model_json_31_tables_T
@@ -959,12 +961,12 @@ docs.RepoObject_Plantuml_Entity <.. docs.RepoObject_Plantuml_Entity_T
 docs.RepoObject_Plantuml_Entity_T <.. docs.RepoObject_Adoc
 docs.RepoObject_Plantuml_Entity_T <.. docs.usp_PERSIST_RepoObject_Plantuml_Entity_T
 docs.RepoObject_Plantuml_Entity_T <.. docs.ftv_RepoObject_Reference_PlantUml_EntityRefList
-docs.RepoObject_Plantuml_Entity_T <.. docs.Schema_EntityList
 docs.RepoObject_Plantuml_Entity_T <.. docs.RepoObject_PlantUml_PumlEntityFkList
 docs.RepoObject_Plantuml_Entity_T <.. docs.ObjectRefCyclic_EntityList
+docs.RepoObject_Plantuml_Entity_T <.. docs.Schema_EntityList
 docs.RepoObject_PlantUml_PumlEntityFkList <.. docs.RepoObject_Plantuml
-docs.RepoObject_Plantuml_T <.. docs.usp_PERSIST_RepoObject_Plantuml_T
 docs.RepoObject_Plantuml_T <.. docs.RepoObject_Adoc
+docs.RepoObject_Plantuml_T <.. docs.usp_PERSIST_RepoObject_Plantuml_T
 docs.Schema_EntityList <.. docs.Schema_puml
 docs.Schema_puml <.. docs.AntoraNavListPage_by_schema
 docs.usp_AntoraExport_ObjectPartialsContent <.. docs.usp_AntoraExport
@@ -1032,10 +1034,9 @@ entity "puml-link:dhw:sqldb:docs.repoobject_measurelist.adoc[]" as docs.RepoObje
 }
 
 entity "puml-link:dhw:sqldb:property.measureproperty.adoc[]" as property.MeasureProperty << U >> {
-  - **MeasureProperty_id** : (int)
+  - **Measure_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   inheritance : (tinyint)
-  - Measure_guid : (uniqueidentifier)
-  - property_name : (nvarchar(128))
   property_value : (nvarchar(max))
   ~ property_bigint : (bigint)
   ~ property_float : (float)

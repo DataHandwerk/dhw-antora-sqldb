@@ -12,7 +12,6 @@
 :ExistsProperty--is_repo_managed:
 :ExistsProperty--is_ssas:
 :ExistsProperty--referencedobjectlist:
-:ExistsProperty--uspgenerator_usp_id:
 :ExistsProperty--sql_modules_definition:
 :ExistsProperty--AntoraParameterList:
 // end::existing_properties[]
@@ -50,7 +49,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-12-17 19:13:09
+2022-01-21 18:39:35
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -286,8 +285,6 @@ AND T.[ID] = S.[ID]
 
 // tag::antorareferencedlist[]
 * xref:dhw:sqldb:logs.usp_executionlog_insert.adoc[]
-* xref:dhw:sqldb:ssas.tmschema_tables.adoc[]
-* xref:dhw:sqldb:ssas.tmschema_tables_t.adoc[]
 // end::antorareferencedlist[]
 
 
@@ -526,8 +523,6 @@ EXEC [ssas].[usp_PERSIST_TMSCHEMA_TABLES_T]
 
 // tag::referencedobjectlist[]
 * [logs].[usp_ExecutionLog_insert]
-* [ssas].[TMSCHEMA_TABLES]
-* [ssas].[TMSCHEMA_TABLES_T]
 // end::referencedobjectlist[]
 
 
@@ -548,7 +543,7 @@ EXEC [ssas].[usp_PERSIST_TMSCHEMA_TABLES_T]
 === uspgenerator_usp_id
 
 // tag::uspgenerator_usp_id[]
-72
+
 // end::uspgenerator_usp_id[]
 
 
@@ -688,25 +683,11 @@ entity "puml-link:dhw:sqldb:logs.usp_executionlog_insert.adoc[]" as logs.usp_Exe
   --
 }
 
-entity "puml-link:dhw:sqldb:ssas.tmschema_tables.adoc[]" as ssas.TMSCHEMA_TABLES << U >> {
-  - **databasename** : (nvarchar(128))
-  - **ID** : (numeric(20, 0))
-  --
-}
-
-entity "puml-link:dhw:sqldb:ssas.tmschema_tables_t.adoc[]" as ssas.TMSCHEMA_TABLES_T << U >> {
-  - **databasename** : (nvarchar(128))
-  - **ID** : (numeric(20, 0))
-  --
-}
-
 entity "puml-link:dhw:sqldb:ssas.usp_persist_tmschema_tables_t.adoc[]" as ssas.usp_PERSIST_TMSCHEMA_TABLES_T << P >> {
   --
 }
 
 logs.usp_ExecutionLog_insert <.. ssas.usp_PERSIST_TMSCHEMA_TABLES_T
-ssas.TMSCHEMA_TABLES <.. ssas.usp_PERSIST_TMSCHEMA_TABLES_T
-ssas.TMSCHEMA_TABLES_T <.. ssas.usp_PERSIST_TMSCHEMA_TABLES_T
 
 footer The diagram is interactive and contains links.
 
@@ -757,27 +738,12 @@ entity "puml-link:dhw:sqldb:logs.usp_executionlog_insert.adoc[]" as logs.usp_Exe
   --
 }
 
-entity "puml-link:dhw:sqldb:ssas.tmschema_tables.adoc[]" as ssas.TMSCHEMA_TABLES << U >> {
-  - **databasename** : (nvarchar(128))
-  - **ID** : (numeric(20, 0))
-  --
-}
-
-entity "puml-link:dhw:sqldb:ssas.tmschema_tables_t.adoc[]" as ssas.TMSCHEMA_TABLES_T << U >> {
-  - **databasename** : (nvarchar(128))
-  - **ID** : (numeric(20, 0))
-  --
-}
-
 entity "puml-link:dhw:sqldb:ssas.usp_persist_tmschema_tables_t.adoc[]" as ssas.usp_PERSIST_TMSCHEMA_TABLES_T << P >> {
   --
 }
 
 logs.ExecutionLog <.. logs.usp_ExecutionLog_insert
 logs.usp_ExecutionLog_insert <.. ssas.usp_PERSIST_TMSCHEMA_TABLES_T
-ssas.TMSCHEMA_TABLES <.. ssas.TMSCHEMA_TABLES_T
-ssas.TMSCHEMA_TABLES <.. ssas.usp_PERSIST_TMSCHEMA_TABLES_T
-ssas.TMSCHEMA_TABLES_T <.. ssas.usp_PERSIST_TMSCHEMA_TABLES_T
 
 footer The diagram is interactive and contains links.
 
@@ -869,50 +835,11 @@ entity "puml-link:dhw:sqldb:logs.usp_executionlog_insert.adoc[]" as logs.usp_Exe
   --
 }
 
-entity "puml-link:dhw:sqldb:ssas.tmschema_tables.adoc[]" as ssas.TMSCHEMA_TABLES << U >> {
-  - **databasename** : (nvarchar(128))
-  - **ID** : (numeric(20, 0))
-  DataCategory : (nvarchar(max))
-  DefaultDetailRowsDefinitionID : (numeric(20, 0))
-  Description : (nvarchar(max))
-  - IsHidden : (bit)
-  - IsPrivate : (bit)
-  - ModelID : (numeric(20, 0))
-  - ModifiedTime : (datetime)
-  - Name : (nvarchar(max))
-  - ShowAsVariationsOnly : (bit)
-  - StructureModifiedTime : (datetime)
-  - SystemFlags : (bigint)
-  - TableStorageID : (numeric(20, 0))
-  --
-}
-
-entity "puml-link:dhw:sqldb:ssas.tmschema_tables_t.adoc[]" as ssas.TMSCHEMA_TABLES_T << U >> {
-  - **databasename** : (nvarchar(128))
-  - **ID** : (numeric(20, 0))
-  DataCategory : (nvarchar(max))
-  DefaultDetailRowsDefinitionID : (numeric(20, 0))
-  Description : (nvarchar(max))
-  - IsHidden : (bit)
-  - IsPrivate : (bit)
-  - ModelID : (numeric(20, 0))
-  - ModifiedTime : (datetime)
-  - Name : (nvarchar(max))
-  - RepoObject_guid : (uniqueidentifier)
-  - ShowAsVariationsOnly : (bit)
-  - StructureModifiedTime : (datetime)
-  - SystemFlags : (bigint)
-  - TableStorageID : (numeric(20, 0))
-  --
-}
-
 entity "puml-link:dhw:sqldb:ssas.usp_persist_tmschema_tables_t.adoc[]" as ssas.usp_PERSIST_TMSCHEMA_TABLES_T << P >> {
   --
 }
 
 logs.usp_ExecutionLog_insert <.. ssas.usp_PERSIST_TMSCHEMA_TABLES_T
-ssas.TMSCHEMA_TABLES <.. ssas.usp_PERSIST_TMSCHEMA_TABLES_T
-ssas.TMSCHEMA_TABLES_T <.. ssas.usp_PERSIST_TMSCHEMA_TABLES_T
 
 
 footer The diagram is interactive and contains links.

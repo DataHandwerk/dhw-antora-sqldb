@@ -68,7 +68,7 @@ user table
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-11-25 19:14:02
+2022-01-23 14:10:30
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -108,8 +108,8 @@ user table
 |===
 |2
 |*cultures_name*
-|nvarchar(500)
-|NULL
+|nvarchar(10)
+|NOT NULL
 |
 |===
 
@@ -132,7 +132,7 @@ user table
 |
 |cultures_translations_model_name
 |nvarchar(500)
-|NULL
+|NOT NULL
 |
 |===
 
@@ -235,8 +235,8 @@ user table
 
 |2
 |*<<column-culturesunderlinename>>*
-|nvarchar(500)
-|NULL
+|nvarchar(10)
+|NOT NULL
 |
 
 
@@ -254,7 +254,7 @@ user table
 |
 |<<column-culturesunderlinetranslationsunderlinemodelunderlinename>>
 |nvarchar(500)
-|NULL
+|NOT NULL
 |
 
 |
@@ -314,7 +314,7 @@ user table
 +
 --
 * <<column-databasename>>; nvarchar(128)
-* <<column-cultures_name>>; nvarchar(500)
+* <<column-cultures_name>>; nvarchar(10)
 * <<column-cultures_translations_model_name>>; nvarchar(500)
 --
 * PK, Unique, Real: 0, 1, 0
@@ -539,7 +539,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 === is_repo_managed
 
 // tag::is_repo_managed[]
-1
+0
 // end::is_repo_managed[]
 
 
@@ -664,7 +664,6 @@ source: property.RepoObjectProperty WHERE property_int = 1
 :is_persistence_delete_missing:
 :is_persistence_insert:
 :is_persistence_update_changed:
-:is_repo_managed:
 
 // end::boolean_attributes[]
 
@@ -845,8 +844,8 @@ entity "puml-link:dhw:sqldb:ssas.usp_persist_model_json_3411_cultures_translatio
 ssas.model_json_3411_cultures_translations_model <.. ssas.model_json_3411_cultures_translations_model_T
 ssas.model_json_3411_cultures_translations_model_T <.. docs.Culture
 ssas.model_json_3411_cultures_translations_model_T <.. ssas.model_json_34111_cultures_translations_model_tables
-ssas.model_json_3411_cultures_translations_model_T <.. ssas.usp_PERSIST_model_json_3411_cultures_translations_model_T
 ssas.model_json_3411_cultures_translations_model_T <.. docs.RepoObject_OutputFilter
+ssas.model_json_3411_cultures_translations_model_T <.. ssas.usp_PERSIST_model_json_3411_cultures_translations_model_T
 
 footer The diagram is interactive and contains links.
 
@@ -1301,17 +1300,17 @@ entity "puml-link:dhw:sqldb:ssas.usp_persist_repoobjectcolumn_translation_t.adoc
 }
 
 docs.AntoraNavListPage_by_type <.. docs.usp_AntoraExport_ObjectNavigation
-docs.AntoraNavListRepoObject_by_schema <.. docs.AntoraPage_ObjectBySchema
 docs.AntoraNavListRepoObject_by_schema <.. docs.usp_AntoraExport_ObjectNavigation
+docs.AntoraNavListRepoObject_by_schema <.. docs.AntoraPage_ObjectBySchema
 docs.AntoraNavListRepoObject_by_schema_type <.. docs.usp_AntoraExport_ObjectNavigation
 docs.AntoraNavListRepoObject_by_type <.. docs.usp_AntoraExport_ObjectNavigation
 docs.AntoraNavListRepoObject_by_type <.. docs.AntoraPage_ObjectByType
-docs.Culture <.. ssas.Measure_translation
 docs.Culture <.. ssas.RepoObjectColumn_translation
-docs.culture <.. docs.usp_AntoraExport_ObjectNavigation
 docs.culture <.. docs.usp_AntoraExport_ObjectRefCyclic
 docs.Culture <.. docs.ObjectRefCyclic
 docs.Culture <.. docs.usp_AntoraExport_DocSnippet
+docs.culture <.. docs.usp_AntoraExport_ObjectNavigation
+docs.Culture <.. ssas.Measure_translation
 docs.culture <.. docs.usp_AntoraExport
 docs.Culture <.. docs.usp_AntoraExport_Page_IndexSemanticGroup
 docs.culture <.. docs.usp_AntoraExport_ObjectPageTemplate
@@ -1320,25 +1319,28 @@ docs.ftv_RepoObject_Reference_PlantUml_EntityRefList <.. docs.RepoObject_Plantum
 docs.IndexSemanticgroup <.. docs.AntoraPage_IndexSemanticGroup
 docs.IndexSemanticgroupPatterndatatype <.. docs.IndexSemanticgroup
 docs.ObjectRefCyclic_EntityList <.. docs.ObjectRefCyclic
-docs.RepoObject_Adoc <.. docs.RepoObject_Adoc_T
 docs.RepoObject_Adoc <.. docs.usp_PERSIST_RepoObject_Adoc_T
+docs.RepoObject_Adoc <.. docs.RepoObject_Adoc_T
 docs.REpoObject_Adoc_T <.. docs.usp_PERSIST_RepoObject_Adoc_T
 docs.RepoObject_AntoraXrefCulturesList <.. docs.RepoObject_Adoc
 docs.RepoObject_ColumnList <.. docs.RepoObject_ColumnList_T
 docs.RepoObject_ColumnList <.. docs.usp_PERSIST_RepoObject_ColumnList_T
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Adoc
 docs.RepoObject_ColumnList_T <.. docs.RepoObject_Plantuml_Entity
 docs.RepoObject_ColumnList_T <.. docs.usp_PERSIST_RepoObject_ColumnList_T
-docs.RepoObject_ColumnList_T <.. docs.RepoObject_Adoc
 docs.RepoObject_IndexList <.. docs.usp_PERSIST_RepoObject_IndexList_T
 docs.RepoObject_IndexList <.. docs.RepoObject_IndexList_T
+docs.RepoObject_IndexList_T <.. docs.usp_PERSIST_RepoObject_IndexList_T
 docs.RepoObject_IndexList_T <.. docs.RepoObject_Adoc
 docs.RepoObject_IndexList_T <.. docs.RepoObject_Plantuml_Entity
-docs.RepoObject_IndexList_T <.. docs.usp_PERSIST_RepoObject_IndexList_T
 docs.RepoObject_MeasureDescriptionList <.. docs.RepoObject_Adoc
 docs.RepoObject_MeasureList <.. docs.RepoObject_Adoc
 docs.RepoObject_MeasureList <.. docs.RepoObject_Plantuml_Entity
-docs.RepoObject_OutputFilter <.. docs.usp_PERSIST_RepoObject_OutputFilter_T
 docs.RepoObject_OutputFilter <.. docs.RepoObject_OutputFilter_T
+docs.RepoObject_OutputFilter <.. docs.usp_PERSIST_RepoObject_OutputFilter_T
+docs.RepoObject_OutputFilter_T <.. docs.RepoObject_OutputFilter_T_gross
+docs.RepoObject_OutputFilter_T <.. docs.RepoObject_AntoraXrefCulturesList
+docs.RepoObject_OutputFilter_T <.. docs.usp_AntoraExport_ObjectPartialsContent
 docs.RepoObject_OutputFilter_T <.. docs.usp_AntoraExport_ObjectPage
 docs.RepoObject_OutputFilter_T <.. docs.AntoraNavListRepoObject_by_type
 docs.RepoObject_OutputFilter_T <.. docs.AntoraNavListRepoObject_by_schema
@@ -1355,26 +1357,23 @@ docs.RepoObject_OutputFilter_T <.. docs.Schema_puml
 docs.RepoObject_OutputFilter_T <.. docs.Schema_SsasRelationList
 docs.RepoObject_OutputFilter_T <.. docs.Unit_1_union
 docs.RepoObject_OutputFilter_T <.. docs.usp_PERSIST_RepoObject_OutputFilter_T
-docs.RepoObject_OutputFilter_T <.. docs.RepoObject_AntoraXrefCulturesList
-docs.RepoObject_OutputFilter_T <.. docs.usp_AntoraExport_ObjectPartialsContent
-docs.RepoObject_OutputFilter_T <.. docs.RepoObject_OutputFilter_T_gross
+docs.RepoObject_OutputFilter_T_gross <.. docs.RepoObject_MeasureDescriptionList
 docs.RepoObject_OutputFilter_T_gross <.. docs.RepoObject_Adoc
 docs.RepoObject_OutputFilter_T_gross <.. docs.RepoObject_MeasureList
-docs.RepoObject_OutputFilter_T_gross <.. docs.RepoObject_MeasureDescriptionList
-docs.RepoObject_Plantuml <.. docs.RepoObject_Plantuml_T
 docs.RepoObject_Plantuml <.. docs.usp_PERSIST_RepoObject_Plantuml_T
+docs.RepoObject_Plantuml <.. docs.RepoObject_Plantuml_T
 docs.RepoObject_Plantuml_ColRefList_1_1 <.. docs.RepoObject_Plantuml
-docs.RepoObject_Plantuml_Entity <.. docs.RepoObject_Plantuml_Entity_T
 docs.RepoObject_Plantuml_Entity <.. docs.usp_PERSIST_RepoObject_Plantuml_Entity_T
+docs.RepoObject_Plantuml_Entity <.. docs.RepoObject_Plantuml_Entity_T
 docs.RepoObject_Plantuml_Entity_T <.. docs.RepoObject_Adoc
 docs.RepoObject_Plantuml_Entity_T <.. docs.usp_PERSIST_RepoObject_Plantuml_Entity_T
 docs.RepoObject_Plantuml_Entity_T <.. docs.ftv_RepoObject_Reference_PlantUml_EntityRefList
-docs.RepoObject_Plantuml_Entity_T <.. docs.Schema_EntityList
 docs.RepoObject_Plantuml_Entity_T <.. docs.RepoObject_PlantUml_PumlEntityFkList
 docs.RepoObject_Plantuml_Entity_T <.. docs.ObjectRefCyclic_EntityList
+docs.RepoObject_Plantuml_Entity_T <.. docs.Schema_EntityList
 docs.RepoObject_PlantUml_PumlEntityFkList <.. docs.RepoObject_Plantuml
-docs.RepoObject_Plantuml_T <.. docs.usp_PERSIST_RepoObject_Plantuml_T
 docs.RepoObject_Plantuml_T <.. docs.RepoObject_Adoc
+docs.RepoObject_Plantuml_T <.. docs.usp_PERSIST_RepoObject_Plantuml_T
 docs.Schema_EntityList <.. docs.Schema_puml
 docs.Schema_puml <.. docs.AntoraNavListPage_by_schema
 docs.Schema_SsasRelationList <.. docs.Schema_puml
@@ -1401,23 +1400,23 @@ ssas.Measure_translation_displayfolder_union <.. docs.RepoObject_MeasureList
 ssas.Measure_translation_T <.. ssas.usp_PERSIST_Measure_translation_T
 ssas.Measure_translation_T <.. ssas.Measure_translation_displayfolder_union
 ssas.Measure_translation_T <.. docs.RepoObject_MeasureDescriptionList
-ssas.model_json_3411_cultures_translations_model_T <.. docs.RepoObject_OutputFilter
 ssas.model_json_3411_cultures_translations_model_T <.. ssas.usp_PERSIST_model_json_3411_cultures_translations_model_T
+ssas.model_json_3411_cultures_translations_model_T <.. docs.RepoObject_OutputFilter
 ssas.model_json_3411_cultures_translations_model_T <.. docs.Culture
 ssas.model_json_3411_cultures_translations_model_T <.. ssas.model_json_34111_cultures_translations_model_tables
-ssas.model_json_34111_cultures_translations_model_tables <.. ssas.model_json_341113_cultures_translations_model_tables_measures
 ssas.model_json_34111_cultures_translations_model_tables <.. docs.RepoObject_OutputFilter
 ssas.model_json_34111_cultures_translations_model_tables <.. ssas.model_json_341111_cultures_translations_model_tables_columns
 ssas.model_json_34111_cultures_translations_model_tables <.. ssas.model_json_341112_cultures_translations_model_tables_hierarchies
+ssas.model_json_34111_cultures_translations_model_tables <.. ssas.model_json_341113_cultures_translations_model_tables_measures
 ssas.model_json_341111_cultures_translations_model_tables_columns <.. ssas.RepoObjectColumn_translation
 ssas.model_json_341112_cultures_translations_model_tables_hierarchies <.. ssas.model_json_3411121_cultures_translations_model_tables_hierarchies_levels
 ssas.model_json_341113_cultures_translations_model_tables_measures <.. ssas.Measure_translation
-ssas.RepoObjectColumn_translation <.. ssas.RepoObjectColumn_translation_T
 ssas.RepoObjectColumn_translation <.. ssas.usp_PERSIST_RepoObjectColumn_translation_T
+ssas.RepoObjectColumn_translation <.. ssas.RepoObjectColumn_translation_T
 ssas.RepoObjectColumn_translation_displayfolder_union <.. docs.RepoObject_ColumnList
+ssas.RepoObjectColumn_translation_T <.. ssas.RepoObjectColumn_translation_displayfolder_union
 ssas.RepoObjectColumn_translation_T <.. docs.RepoObject_Plantuml_ColRefList_1_1
 ssas.RepoObjectColumn_translation_T <.. ssas.usp_PERSIST_RepoObjectColumn_translation_T
-ssas.RepoObjectColumn_translation_T <.. ssas.RepoObjectColumn_translation_displayfolder_union
 ssas.usp_PERSIST_Measure_translation_T <.. repo.usp_sync_guid_ssas
 ssas.usp_PERSIST_model_json_3411_cultures_translations_model_T <.. repo.usp_sync_guid_ssas
 ssas.usp_PERSIST_RepoObjectColumn_translation_T <.. repo.usp_main
@@ -1533,8 +1532,8 @@ entity "puml-link:dhw:sqldb:ssas.usp_persist_model_json_3411_cultures_translatio
 ssas.model_json_3411_cultures_translations_model <.. ssas.model_json_3411_cultures_translations_model_T
 ssas.model_json_3411_cultures_translations_model_T <.. docs.Culture
 ssas.model_json_3411_cultures_translations_model_T <.. ssas.model_json_34111_cultures_translations_model_tables
-ssas.model_json_3411_cultures_translations_model_T <.. ssas.usp_PERSIST_model_json_3411_cultures_translations_model_T
 ssas.model_json_3411_cultures_translations_model_T <.. docs.RepoObject_OutputFilter
+ssas.model_json_3411_cultures_translations_model_T <.. ssas.usp_PERSIST_model_json_3411_cultures_translations_model_T
 "ssas.model_json_3411_cultures_translations_model::cultures_name" <-- "ssas.model_json_3411_cultures_translations_model_T::cultures_name"
 "ssas.model_json_3411_cultures_translations_model::cultures_translations_model_name" <-- "ssas.model_json_3411_cultures_translations_model_T::cultures_translations_model_name"
 "ssas.model_json_3411_cultures_translations_model::cultures_translations_model_perspectives_ja" <-- "ssas.model_json_3411_cultures_translations_model_T::cultures_translations_model_perspectives_ja"

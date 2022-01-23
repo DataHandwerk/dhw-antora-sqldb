@@ -68,7 +68,7 @@ user table
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-11-25 19:13:52
+2022-01-23 14:10:10
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -86,7 +86,7 @@ user table
 |1
 |*property_name*
 |nvarchar(128)
-|NULL
+|NOT NULL
 |
 |===
 
@@ -188,7 +188,7 @@ user table
 |1
 |*<<column-propertyunderlinename>>*
 |nvarchar(128)
-|NULL
+|NOT NULL
 |
 
 
@@ -480,7 +480,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 === is_repo_managed
 
 // tag::is_repo_managed[]
-1
+0
 // end::is_repo_managed[]
 
 
@@ -603,7 +603,6 @@ source: property.RepoObjectProperty WHERE property_int = 1
 
 :is_persistence:
 :is_persistence_insert:
-:is_repo_managed:
 
 // end::boolean_attributes[]
 
@@ -798,7 +797,8 @@ skinparam class {
 
 
 entity "puml-link:dhw:sqldb:property.measureproperty.adoc[]" as property.MeasureProperty << U >> {
-  - **MeasureProperty_id** : (int)
+  - **Measure_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   --
 }
 
@@ -970,8 +970,8 @@ entity "puml-link:dhw:sqldb:repo.usp_main.adoc[]" as repo.usp_main << P >> {
 docs.ftv_RepoObject_Reference_PlantUml_EntityRefList <.. docs.RepoObject_Plantuml
 docs.Measure_MeasurePropertyList <.. docs.RepoObject_MeasureList
 docs.ObjectRefCyclic_EntityList <.. docs.ObjectRefCyclic
-docs.RepoObject_Adoc <.. docs.RepoObject_Adoc_T
 docs.RepoObject_Adoc <.. docs.usp_PERSIST_RepoObject_Adoc_T
+docs.RepoObject_Adoc <.. docs.RepoObject_Adoc_T
 docs.REpoObject_Adoc_T <.. docs.usp_PERSIST_RepoObject_Adoc_T
 docs.RepoObject_MeasureList <.. docs.RepoObject_Adoc
 docs.RepoObject_MeasureList <.. docs.RepoObject_Plantuml_Entity
@@ -980,11 +980,11 @@ docs.RepoObject_Plantuml <.. docs.usp_PERSIST_RepoObject_Plantuml_T
 docs.RepoObject_Plantuml_Entity <.. docs.usp_PERSIST_RepoObject_Plantuml_Entity_T
 docs.RepoObject_Plantuml_Entity <.. docs.RepoObject_Plantuml_Entity_T
 docs.RepoObject_Plantuml_Entity_T <.. docs.RepoObject_Adoc
+docs.RepoObject_Plantuml_Entity_T <.. docs.ObjectRefCyclic_EntityList
+docs.RepoObject_Plantuml_Entity_T <.. docs.RepoObject_PlantUml_PumlEntityFkList
 docs.RepoObject_Plantuml_Entity_T <.. docs.ftv_RepoObject_Reference_PlantUml_EntityRefList
 docs.RepoObject_Plantuml_Entity_T <.. docs.usp_PERSIST_RepoObject_Plantuml_Entity_T
 docs.RepoObject_Plantuml_Entity_T <.. docs.Schema_EntityList
-docs.RepoObject_Plantuml_Entity_T <.. docs.ObjectRefCyclic_EntityList
-docs.RepoObject_Plantuml_Entity_T <.. docs.RepoObject_PlantUml_PumlEntityFkList
 docs.RepoObject_PlantUml_PumlEntityFkList <.. docs.RepoObject_Plantuml
 docs.RepoObject_Plantuml_T <.. docs.RepoObject_Adoc
 docs.RepoObject_Plantuml_T <.. docs.usp_PERSIST_RepoObject_Plantuml_T

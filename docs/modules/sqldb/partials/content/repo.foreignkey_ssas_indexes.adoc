@@ -1233,12 +1233,12 @@ referencing_index_guid; uniqueidentifier
 - idx_ForeignKey_ssas_Indexes__10
 
 ..
-referenced_SysObject_schema_name; nvarchar(128)
+referencing_SysObject_schema_name; nvarchar(128)
 --
 - idx_ForeignKey_ssas_Indexes__11
 
 ..
-referencing_SysObject_schema_name; nvarchar(128)
+referenced_SysObject_schema_name; nvarchar(128)
 --
 - idx_ForeignKey_ssas_Indexes__2
 
@@ -1481,19 +1481,19 @@ ssas.IndexColumn_from_Relationship <.. ssas.IndexColumn_union
 ssas.IndexColumn_union <.. repo.Index_ssas
 ssas.model_json <.. ssas.model_json_10
 ssas.model_json_10 <.. ssas.model_json_20
-ssas.model_json_20 <.. ssas.model_json_32_relationships
 ssas.model_json_20 <.. ssas.model_json_31_tables
+ssas.model_json_20 <.. ssas.model_json_32_relationships
 ssas.model_json_31_tables <.. ssas.model_json_31_tables_T
-ssas.model_json_31_tables_T <.. ssas.model_json_311_tables_columns
 ssas.model_json_31_tables_T <.. repo.ForeignKey_ssas_IndexPattern
+ssas.model_json_31_tables_T <.. ssas.model_json_311_tables_columns
 ssas.model_json_311_tables_columns <.. ssas.model_json_311_tables_columns_T
 ssas.model_json_311_tables_columns_T <.. repo.ForeignKey_ssas_IndexPattern
-ssas.model_json_311_tables_columns_T <.. ssas.IndexColumn_from_IsKey
 ssas.model_json_311_tables_columns_T <.. ssas.IndexColumn_from_IsUnique
 ssas.model_json_311_tables_columns_T <.. ssas.IndexColumn_from_Relationship
+ssas.model_json_311_tables_columns_T <.. ssas.IndexColumn_from_IsKey
 ssas.model_json_32_relationships <.. ssas.model_json_32_relationships_T
-ssas.model_json_32_relationships_T <.. repo.ForeignKey_ssas_IndexPattern
 ssas.model_json_32_relationships_T <.. ssas.IndexColumn_from_Relationship
+ssas.model_json_32_relationships_T <.. repo.ForeignKey_ssas_IndexPattern
 
 footer The diagram is interactive and contains links.
 
@@ -1706,19 +1706,19 @@ docs.RepoObject_Adoc <.. docs.RepoObject_Adoc_T
 docs.REpoObject_Adoc_T <.. docs.usp_PERSIST_RepoObject_Adoc_T
 docs.RepoObject_IndexList <.. docs.usp_PERSIST_RepoObject_IndexList_T
 docs.RepoObject_IndexList <.. docs.RepoObject_IndexList_T
+docs.RepoObject_IndexList_T <.. docs.usp_PERSIST_RepoObject_IndexList_T
 docs.RepoObject_IndexList_T <.. docs.RepoObject_Adoc
 docs.RepoObject_IndexList_T <.. docs.RepoObject_Plantuml_Entity
-docs.RepoObject_IndexList_T <.. docs.usp_PERSIST_RepoObject_IndexList_T
-docs.RepoObject_Plantuml <.. docs.RepoObject_Plantuml_T
 docs.RepoObject_Plantuml <.. docs.usp_PERSIST_RepoObject_Plantuml_T
+docs.RepoObject_Plantuml <.. docs.RepoObject_Plantuml_T
 docs.RepoObject_Plantuml_Entity <.. docs.usp_PERSIST_RepoObject_Plantuml_Entity_T
 docs.RepoObject_Plantuml_Entity <.. docs.RepoObject_Plantuml_Entity_T
 docs.RepoObject_Plantuml_Entity_T <.. docs.RepoObject_Adoc
+docs.RepoObject_Plantuml_Entity_T <.. docs.ObjectRefCyclic_EntityList
+docs.RepoObject_Plantuml_Entity_T <.. docs.RepoObject_PlantUml_PumlEntityFkList
 docs.RepoObject_Plantuml_Entity_T <.. docs.ftv_RepoObject_Reference_PlantUml_EntityRefList
 docs.RepoObject_Plantuml_Entity_T <.. docs.usp_PERSIST_RepoObject_Plantuml_Entity_T
 docs.RepoObject_Plantuml_Entity_T <.. docs.Schema_EntityList
-docs.RepoObject_Plantuml_Entity_T <.. docs.ObjectRefCyclic_EntityList
-docs.RepoObject_Plantuml_Entity_T <.. docs.RepoObject_PlantUml_PumlEntityFkList
 docs.RepoObject_PlantUml_FkRefList <.. docs.RepoObject_Plantuml
 docs.RepoObject_PlantUml_PumlEntityFkList <.. docs.RepoObject_Plantuml
 docs.RepoObject_Plantuml_T <.. docs.RepoObject_Adoc
@@ -1733,8 +1733,8 @@ docs.usp_PERSIST_RepoObject_IndexList_T <.. docs.usp_AntoraExport_ObjectPartials
 docs.usp_PERSIST_RepoObject_Plantuml_Entity_T <.. docs.usp_AntoraExport_ObjectPuml
 docs.usp_PERSIST_RepoObject_Plantuml_T <.. docs.usp_AntoraExport_ObjectPuml
 repo.ForeignKey_gross <.. docs.RepoObject_IndexList
-repo.ForeignKey_Indexes_union <.. repo.usp_PERSIST_ForeignKey_Indexes_union_T
 repo.ForeignKey_Indexes_union <.. repo.ForeignKey_Indexes_union_T
+repo.ForeignKey_Indexes_union <.. repo.usp_PERSIST_ForeignKey_Indexes_union_T
 repo.ForeignKey_Indexes_union_T <.. docs.Schema_PumlPartial_FkRefList
 repo.ForeignKey_Indexes_union_T <.. repo.usp_PERSIST_ForeignKey_Indexes_union_T
 repo.ForeignKey_Indexes_union_T <.. docs.RepoObject_PlantUml_FkRefList
@@ -1743,8 +1743,8 @@ repo.ForeignKey_Indexes_union_T <.. repo.ForeignKey_gross
 repo.ForeignKey_Indexes_union_T <.. docs.ForeignKey_RelationScript
 repo.ForeignKey_Indexes_union_T <.. repo.usp_Index_finish
 repo.ForeignKey_ssas_Indexes <.. repo.ForeignKey_Indexes_union
-repo.RepoObject_related_FK_union <.. docs.RepoObject_PlantUml_PumlEntityFkList
 repo.RepoObject_related_FK_union <.. docs.RepoObject_PlantUml_FkRefList
+repo.RepoObject_related_FK_union <.. docs.RepoObject_PlantUml_PumlEntityFkList
 repo.usp_Index_finish <.. repo.usp_index_inheritance
 repo.usp_Index_finish <.. repo.usp_Index_ForeignKey
 repo.usp_Index_ForeignKey <.. repo.usp_main

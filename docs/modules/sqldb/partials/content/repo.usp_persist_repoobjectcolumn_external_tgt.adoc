@@ -51,7 +51,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-12-17 19:13:08
+2022-01-21 18:39:34
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -186,8 +186,8 @@ ON
 T.[RepoObjectColumn_guid] = S.[RepoObjectColumn_guid]
 
 WHERE
-   T.[is_SysObjectColumn_missing] <> S.[is_SysObjectColumn_missing]
-OR T.[RepoObject_guid] <> S.[RepoObject_guid] OR (S.[RepoObject_guid] IS NULL AND NOT T.[RepoObject_guid] IS NULL) OR (NOT S.[RepoObject_guid] IS NULL AND T.[RepoObject_guid] IS NULL)
+   T.[is_SysObjectColumn_missing] <> S.[is_SysObjectColumn_missing] OR (S.[is_SysObjectColumn_missing] IS NULL AND NOT T.[is_SysObjectColumn_missing] IS NULL) OR (NOT S.[is_SysObjectColumn_missing] IS NULL AND T.[is_SysObjectColumn_missing] IS NULL)
+OR T.[RepoObject_guid] <> S.[RepoObject_guid]
 OR T.[RepoObjectColumn_name] <> S.[RepoObjectColumn_name]
 OR T.[SysObjectColumn_name] <> S.[SysObjectColumn_name]
 
@@ -756,7 +756,8 @@ entity "puml-link:dhw:sqldb:property.propertyname_repoobject_t.adoc[]" as proper
 }
 
 entity "puml-link:dhw:sqldb:property.repoobjectproperty.adoc[]" as property.RepoObjectProperty << U >> {
-  - **RepoObjectProperty_id** : (int)
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   --
 }
 
@@ -777,7 +778,7 @@ entity "puml-link:dhw:sqldb:property.repoobjectproperty_selectedpropertyname_spl
 }
 
 entity "puml-link:dhw:sqldb:reference.additional_reference.adoc[]" as reference.additional_Reference << U >> {
-  - **Id** : (int)
+  # **tik_hash_c** : (nvarchar(32))
   --
 }
 
@@ -1040,11 +1041,11 @@ entity "puml-link:dhw:sqldb:ssas.model_json_33_datasources_t.adoc[]" as ssas.mod
   --
 }
 
+config.ftv_get_parameter_value <.. repo.RepoObject_external_src
 config.ftv_get_parameter_value <.. reference.additional_Reference_is_external
 config.ftv_get_parameter_value <.. ssas.additional_Reference_step1
-config.ftv_get_parameter_value <.. repo.RepoObject_external_src
-config.Parameter <.. property.PropertyName_RepoObject
 config.Parameter <.. config.ftv_get_parameter_value
+config.Parameter <.. property.PropertyName_RepoObject
 configT.Parameter_default <.. config.Parameter
 logs.ExecutionLog <.. logs.usp_ExecutionLog_insert
 logs.usp_ExecutionLog_insert <.. repo.usp_PERSIST_RepoObjectColumn_external_tgt
@@ -1055,8 +1056,8 @@ property.RepoObjectProperty <.. property.RepoObjectProperty_SelectedPropertyName
 property.RepoObjectProperty <.. property.PropertyName_RepoObject
 property.RepoObjectProperty_external_src <.. property.RepoObjectProperty_external_tgt
 property.RepoObjectProperty_external_tgt <.. property.RepoObjectProperty
-property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_from_properties_src
 property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_wo_columns_from_properties_src
+property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_from_properties_src
 reference.additional_Reference <.. reference.additional_Reference_is_external
 reference.additional_Reference_from_properties_src <.. reference.additional_Reference_from_properties_tgt
 reference.additional_Reference_from_properties_tgt <.. reference.additional_Reference
@@ -1089,9 +1090,9 @@ ssas.additional_Reference_step1 <.. reference.additional_Reference_from_ssas_src
 ssas.model_json <.. ssas.model_json_10
 ssas.model_json_10 <.. ssas.model_json_20
 ssas.model_json_20 <.. repo.RepoSchema_ssas_src
-ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
 ssas.model_json_20 <.. ssas.model_json_31_tables
 ssas.model_json_20 <.. ssas.model_json_33_dataSources
+ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
 ssas.model_json_201_descriptions_multiline <.. ssas.model_json_2011_descriptions_StrAgg
 ssas.model_json_2011_descriptions_StrAgg <.. repo.RepoSchema_ssas_src
 ssas.model_json_31_tables <.. ssas.model_json_31_tables_T
@@ -1232,9 +1233,12 @@ entity "puml-link:dhw:sqldb:repo.repoobjectcolumn_external_tgt.adoc[]" as repo.R
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
   InheritanceDefinition : (nvarchar(4000))
   InheritanceType : (tinyint)
+  is_persistence_Ignore : (bit)
   is_persistence_no_check : (bit)
   is_persistence_no_include : (bit)
   is_persistence_no_update : (bit)
+  is_persistence_NoCompareButUpdate : (bit)
+  is_persistence_NoCompareNoUpdate : (bit)
   is_query_plan_expression : (bit)
   is_required_ColumnMerge : (bit)
   - is_SysObjectColumn_missing : (int)

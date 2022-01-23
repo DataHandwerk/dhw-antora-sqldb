@@ -68,7 +68,7 @@ user table
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-11-25 19:14:02
+2022-01-23 14:10:31
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -271,6 +271,14 @@ user table
 |===
 |
 |RepoObject_name
+
+.Default: DF_RepoObjectColumn_translation_T_RepoObject_name
+[source,sql]
+----
+('')
+----
+
+
 |nvarchar(128)
 |NOT NULL
 |
@@ -289,6 +297,14 @@ user table
 |===
 |
 |RepoObject_schema_name
+
+.Default: DF_RepoObjectColumn_translation_T_RepoObject_schema_name
+[source,sql]
+----
+('')
+----
+
+
 |nvarchar(128)
 |NOT NULL
 |
@@ -343,8 +359,8 @@ user table
 |===
 |
 |tabcol_IsHidden
-|bit
-|NOT NULL
+|tinyint
+|NULL
 |
 |===
 
@@ -498,12 +514,28 @@ user table
 
 |
 |<<column-repoobjectunderlinename>>
+
+.Default: DF_RepoObjectColumn_translation_T_RepoObject_name
+[source,sql]
+----
+('')
+----
+
+
 |nvarchar(128)
 |NOT NULL
 |
 
 |
 |<<column-repoobjectunderlineschemaunderlinename>>
+
+.Default: DF_RepoObjectColumn_translation_T_RepoObject_schema_name
+[source,sql]
+----
+('')
+----
+
+
 |nvarchar(128)
 |NOT NULL
 |
@@ -522,8 +554,8 @@ user table
 
 |
 |<<column-tabcolunderlineishidden>>
-|bit
-|NOT NULL
+|tinyint
+|NULL
 |
 
 |
@@ -850,7 +882,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 === is_repo_managed
 
 // tag::is_repo_managed[]
-1
+0
 // end::is_repo_managed[]
 
 
@@ -974,7 +1006,6 @@ source: property.RepoObjectProperty WHERE property_int = 1
 :is_persistence:
 :is_persistence_insert:
 :is_persistence_truncate:
-:is_repo_managed:
 
 // end::boolean_attributes[]
 
@@ -1184,9 +1215,9 @@ entity "puml-link:dhw:sqldb:ssas.usp_persist_repoobjectcolumn_translation_t.adoc
 }
 
 ssas.RepoObjectColumn_translation <.. ssas.RepoObjectColumn_translation_T
+ssas.RepoObjectColumn_translation_T <.. ssas.RepoObjectColumn_translation_displayfolder_union
 ssas.RepoObjectColumn_translation_T <.. docs.RepoObject_Plantuml_ColRefList_1_1
 ssas.RepoObjectColumn_translation_T <.. ssas.usp_PERSIST_RepoObjectColumn_translation_T
-ssas.RepoObjectColumn_translation_T <.. ssas.RepoObjectColumn_translation_displayfolder_union
 
 footer The diagram is interactive and contains links.
 
@@ -1275,7 +1306,8 @@ entity "puml-link:dhw:sqldb:property.propertyname_repoobject_t.adoc[]" as proper
 }
 
 entity "puml-link:dhw:sqldb:property.repoobjectcolumnproperty.adoc[]" as property.RepoObjectColumnProperty << U >> {
-  - **RepoObjectColumnProperty_id** : (int)
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   --
 }
 
@@ -1292,7 +1324,8 @@ entity "puml-link:dhw:sqldb:property.repoobjectcolumnproperty_external_tgt.adoc[
 }
 
 entity "puml-link:dhw:sqldb:property.repoobjectproperty.adoc[]" as property.RepoObjectProperty << U >> {
-  - **RepoObjectProperty_id** : (int)
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   --
 }
 
@@ -1313,7 +1346,7 @@ entity "puml-link:dhw:sqldb:property.repoobjectproperty_selectedpropertyname_spl
 }
 
 entity "puml-link:dhw:sqldb:reference.additional_reference.adoc[]" as reference.additional_Reference << U >> {
-  - **Id** : (int)
+  # **tik_hash_c** : (nvarchar(32))
   --
 }
 
@@ -1675,8 +1708,8 @@ property.RepoObjectProperty <.. property.RepoObjectProperty_SelectedPropertyName
 property.RepoObjectProperty <.. property.PropertyName_RepoObject
 property.RepoObjectProperty_external_src <.. property.RepoObjectProperty_external_tgt
 property.RepoObjectProperty_external_tgt <.. property.RepoObjectProperty
-property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_from_properties_src
 property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_wo_columns_from_properties_src
+property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_from_properties_src
 reference.additional_Reference <.. reference.additional_Reference_is_external
 reference.additional_Reference_from_properties_src <.. reference.additional_Reference_from_properties_tgt
 reference.additional_Reference_from_properties_tgt <.. reference.additional_Reference
@@ -1717,22 +1750,22 @@ ssas.additional_Reference_step1 <.. reference.additional_Reference_from_ssas_src
 ssas.model_json <.. ssas.model_json_10
 ssas.model_json_10 <.. ssas.model_json_20
 ssas.model_json_20 <.. repo.RepoSchema_ssas_src
-ssas.model_json_20 <.. ssas.model_json_34_cultures
-ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
 ssas.model_json_20 <.. ssas.model_json_31_tables
 ssas.model_json_20 <.. ssas.model_json_33_dataSources
+ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
+ssas.model_json_20 <.. ssas.model_json_34_cultures
 ssas.model_json_201_descriptions_multiline <.. ssas.model_json_2011_descriptions_StrAgg
 ssas.model_json_2011_descriptions_StrAgg <.. repo.RepoSchema_ssas_src
 ssas.model_json_31_tables <.. ssas.model_json_31_tables_T
+ssas.model_json_31_tables_T <.. ssas.model_json_313_tables_partitions
 ssas.model_json_31_tables_T <.. repo.RepoObject_SSAS_src
 ssas.model_json_31_tables_T <.. ssas.model_json_311_tables_columns
-ssas.model_json_31_tables_T <.. ssas.model_json_313_tables_partitions
 ssas.model_json_311_tables_columns <.. ssas.model_json_311_tables_columns_T
-ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_gross
+ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_SSAS_src
 ssas.model_json_311_tables_columns_T <.. ssas.model_json_3111_tables_columns_descriptions_multiline
 ssas.model_json_311_tables_columns_T <.. ssas.model_json_3112_tables_columns_expressions_multiline
-ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_SSAS_src
 ssas.model_json_311_tables_columns_T <.. ssas.RepoObjectColumn_translation
+ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_gross
 ssas.model_json_311_tables_columns_T <.. ssas.additional_Reference_step1
 ssas.model_json_3111_tables_columns_descriptions_multiline <.. ssas.model_json_31111_tables_columns_descriptions_StrAgg
 ssas.model_json_31111_tables_columns_descriptions_StrAgg <.. repo.RepoObjectColumn_gross
@@ -1749,8 +1782,8 @@ ssas.model_json_33_dataSources_T <.. ssas.additional_Reference_step1
 ssas.model_json_34_cultures <.. ssas.model_json_341_cultures_translations
 ssas.model_json_341_cultures_translations <.. ssas.model_json_3411_cultures_translations_model
 ssas.model_json_3411_cultures_translations_model <.. ssas.model_json_3411_cultures_translations_model_T
-ssas.model_json_3411_cultures_translations_model_T <.. ssas.model_json_34111_cultures_translations_model_tables
 ssas.model_json_3411_cultures_translations_model_T <.. docs.Culture
+ssas.model_json_3411_cultures_translations_model_T <.. ssas.model_json_34111_cultures_translations_model_tables
 ssas.model_json_34111_cultures_translations_model_tables <.. ssas.model_json_341111_cultures_translations_model_tables_columns
 ssas.model_json_341111_cultures_translations_model_tables_columns <.. ssas.RepoObjectColumn_translation
 ssas.RepoObjectColumn_translation <.. ssas.RepoObjectColumn_translation_T
@@ -1925,22 +1958,22 @@ docs.ObjectRefCyclic_EntityList <.. docs.ObjectRefCyclic
 docs.RepoObject_Adoc <.. docs.usp_PERSIST_RepoObject_Adoc_T
 docs.RepoObject_Adoc <.. docs.RepoObject_Adoc_T
 docs.REpoObject_Adoc_T <.. docs.usp_PERSIST_RepoObject_Adoc_T
-docs.RepoObject_ColumnList <.. docs.usp_PERSIST_RepoObject_ColumnList_T
 docs.RepoObject_ColumnList <.. docs.RepoObject_ColumnList_T
-docs.RepoObject_ColumnList_T <.. docs.RepoObject_Adoc
+docs.RepoObject_ColumnList <.. docs.usp_PERSIST_RepoObject_ColumnList_T
 docs.RepoObject_ColumnList_T <.. docs.usp_PERSIST_RepoObject_ColumnList_T
 docs.RepoObject_ColumnList_T <.. docs.RepoObject_Plantuml_Entity
+docs.RepoObject_ColumnList_T <.. docs.RepoObject_Adoc
 docs.RepoObject_Plantuml <.. docs.RepoObject_Plantuml_T
 docs.RepoObject_Plantuml <.. docs.usp_PERSIST_RepoObject_Plantuml_T
 docs.RepoObject_Plantuml_ColRefList_1_1 <.. docs.RepoObject_Plantuml
-docs.RepoObject_Plantuml_Entity <.. docs.RepoObject_Plantuml_Entity_T
 docs.RepoObject_Plantuml_Entity <.. docs.usp_PERSIST_RepoObject_Plantuml_Entity_T
+docs.RepoObject_Plantuml_Entity <.. docs.RepoObject_Plantuml_Entity_T
 docs.RepoObject_Plantuml_Entity_T <.. docs.RepoObject_Adoc
+docs.RepoObject_Plantuml_Entity_T <.. docs.ObjectRefCyclic_EntityList
+docs.RepoObject_Plantuml_Entity_T <.. docs.RepoObject_PlantUml_PumlEntityFkList
 docs.RepoObject_Plantuml_Entity_T <.. docs.ftv_RepoObject_Reference_PlantUml_EntityRefList
 docs.RepoObject_Plantuml_Entity_T <.. docs.usp_PERSIST_RepoObject_Plantuml_Entity_T
 docs.RepoObject_Plantuml_Entity_T <.. docs.Schema_EntityList
-docs.RepoObject_Plantuml_Entity_T <.. docs.ObjectRefCyclic_EntityList
-docs.RepoObject_Plantuml_Entity_T <.. docs.RepoObject_PlantUml_PumlEntityFkList
 docs.RepoObject_PlantUml_PumlEntityFkList <.. docs.RepoObject_Plantuml
 docs.RepoObject_Plantuml_T <.. docs.RepoObject_Adoc
 docs.RepoObject_Plantuml_T <.. docs.usp_PERSIST_RepoObject_Plantuml_T
@@ -1953,9 +1986,9 @@ docs.usp_PERSIST_RepoObject_ColumnList_T <.. docs.usp_AntoraExport_ObjectPartial
 docs.usp_PERSIST_RepoObject_Plantuml_Entity_T <.. docs.usp_AntoraExport_ObjectPuml
 docs.usp_PERSIST_RepoObject_Plantuml_T <.. docs.usp_AntoraExport_ObjectPuml
 ssas.RepoObjectColumn_translation_displayfolder_union <.. docs.RepoObject_ColumnList
+ssas.RepoObjectColumn_translation_T <.. ssas.RepoObjectColumn_translation_displayfolder_union
 ssas.RepoObjectColumn_translation_T <.. docs.RepoObject_Plantuml_ColRefList_1_1
 ssas.RepoObjectColumn_translation_T <.. ssas.usp_PERSIST_RepoObjectColumn_translation_T
-ssas.RepoObjectColumn_translation_T <.. ssas.RepoObjectColumn_translation_displayfolder_union
 ssas.usp_PERSIST_RepoObjectColumn_translation_T <.. repo.usp_main
 
 footer The diagram is interactive and contains links.
@@ -2077,9 +2110,9 @@ entity "puml-link:dhw:sqldb:ssas.usp_persist_repoobjectcolumn_translation_t.adoc
 }
 
 ssas.RepoObjectColumn_translation <.. ssas.RepoObjectColumn_translation_T
+ssas.RepoObjectColumn_translation_T <.. ssas.RepoObjectColumn_translation_displayfolder_union
 ssas.RepoObjectColumn_translation_T <.. docs.RepoObject_Plantuml_ColRefList_1_1
 ssas.RepoObjectColumn_translation_T <.. ssas.usp_PERSIST_RepoObjectColumn_translation_T
-ssas.RepoObjectColumn_translation_T <.. ssas.RepoObjectColumn_translation_displayfolder_union
 "ssas.RepoObjectColumn_translation::Column_name" <-- "ssas.RepoObjectColumn_translation_T::Column_name"
 "ssas.RepoObjectColumn_translation::cultures_name" <-- "ssas.RepoObjectColumn_translation_T::cultures_name"
 "ssas.RepoObjectColumn_translation::cultures_translations_model_name" <-- "ssas.RepoObjectColumn_translation_T::cultures_translations_model_name"

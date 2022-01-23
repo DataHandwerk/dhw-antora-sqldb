@@ -51,7 +51,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-12-17 19:13:07
+2022-01-21 18:39:32
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -735,7 +735,8 @@ entity "puml-link:dhw:sqldb:property.propertyname_repoobject_t.adoc[]" as proper
 }
 
 entity "puml-link:dhw:sqldb:property.repoobjectproperty.adoc[]" as property.RepoObjectProperty << U >> {
-  - **RepoObjectProperty_id** : (int)
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   --
 }
 
@@ -756,7 +757,7 @@ entity "puml-link:dhw:sqldb:property.repoobjectproperty_selectedpropertyname_spl
 }
 
 entity "puml-link:dhw:sqldb:reference.additional_reference.adoc[]" as reference.additional_Reference << U >> {
-  - **Id** : (int)
+  # **tik_hash_c** : (nvarchar(32))
   --
 }
 
@@ -911,6 +912,10 @@ entity "puml-link:dhw:sqldb:reference.repoobject_reference_persistence.adoc[]" a
 }
 
 entity "puml-link:dhw:sqldb:reference.repoobject_reference_persistence_target_as_source.adoc[]" as reference.RepoObject_reference_persistence_target_as_source << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.repoobject_reference_persistence_target_as_source_explicit.adoc[]" as reference.RepoObject_reference_persistence_target_as_source_explicit << V >> {
   --
 }
 
@@ -1227,23 +1232,23 @@ entity "puml-link:dhw:sqldb:uspgenerator.generatorusp.adoc[]" as uspgenerator.Ge
   --
 }
 
+config.ftv_dwh_database <.. repo_sys.SysColumn
 config.ftv_dwh_database <.. repo_sys.sql_expression_dependencies
 config.ftv_dwh_database <.. repo_sys.ExtendedProperties
-config.ftv_dwh_database <.. repo_sys.SysColumn
 config.ftv_get_parameter_value <.. repo.RepoObject_external_src
 config.ftv_get_parameter_value <.. repo.RepoObject_gross
 config.ftv_get_parameter_value <.. reference.additional_Reference_is_external
 config.ftv_get_parameter_value <.. ssas.additional_Reference_step1
-config.Parameter <.. property.PropertyName_RepoObject
 config.Parameter <.. config.ftv_dwh_database
+config.Parameter <.. property.PropertyName_RepoObject
 config.Parameter <.. config.ftv_get_parameter_value
 configT.Parameter_default <.. config.Parameter
 configT.spt_values <.. configT.type
 configT.type <.. reference.RepoObject_ReferencedReferencing
 configT.type <.. repo.RepoObject_gross_persistence
 configT.type <.. repo.RepoObject_gross
-docs.fs_cleanStringForFilename <.. reference.RepoObject_ReferencedReferencing
 docs.fs_cleanStringForFilename <.. repo.RepoObject_gross
+docs.fs_cleanStringForFilename <.. reference.RepoObject_ReferencedReferencing
 docs.fs_cleanStringForFilename <.. repo.RepoObject_gross_persistence
 logs.ExecutionLog <.. logs.usp_ExecutionLog_insert
 logs.usp_ExecutionLog_insert <.. reference.usp_PERSIST_RepoObject_ReferenceTree_30_0_T
@@ -1251,13 +1256,13 @@ property.external_RepoObjectProperty <.. property.RepoObjectProperty_external_sr
 property.fs_get_RepoObjectProperty_nvarchar <.. repo.RepoObject_gross
 property.PropertyName_RepoObject <.. property.PropertyName_RepoObject_T
 property.PropertyName_RepoObject_T <.. property.RepoObjectProperty_external_tgt
-property.RepoObjectProperty <.. property.fs_get_RepoObjectProperty_nvarchar
 property.RepoObjectProperty <.. property.RepoObjectProperty_SelectedPropertyName_split
+property.RepoObjectProperty <.. property.fs_get_RepoObjectProperty_nvarchar
 property.RepoObjectProperty <.. property.PropertyName_RepoObject
 property.RepoObjectProperty_external_src <.. property.RepoObjectProperty_external_tgt
 property.RepoObjectProperty_external_tgt <.. property.RepoObjectProperty
-property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_from_properties_src
 property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_wo_columns_from_properties_src
+property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_from_properties_src
 reference.additional_Reference <.. reference.additional_Reference_guid
 reference.additional_Reference <.. reference.additional_Reference_is_external
 reference.additional_Reference_database <.. reference.additional_Reference_database_T
@@ -1267,8 +1272,8 @@ reference.additional_Reference_from_properties_tgt <.. reference.additional_Refe
 reference.additional_Reference_from_ssas_src <.. reference.additional_Reference_from_ssas_tgt
 reference.additional_Reference_from_ssas_tgt <.. reference.additional_Reference
 reference.additional_Reference_guid <.. reference.RepoObject_reference_additional
-reference.additional_Reference_is_external <.. reference.additional_Reference_database
 reference.additional_Reference_is_external <.. reference.additional_Reference_ObjectColumn
+reference.additional_Reference_is_external <.. reference.additional_Reference_database
 reference.additional_Reference_is_external <.. reference.additional_Reference_Object
 reference.additional_Reference_Object <.. reference.additional_Reference_Object_T
 reference.additional_Reference_Object_T <.. repo.RepoObject_external_src
@@ -1282,15 +1287,18 @@ reference.RepoObject_QueryPlan <.. repo.RepoObject_gross
 reference.RepoObject_reference <.. reference.RepoObject_reference_T
 reference.RepoObject_reference_additional <.. reference.RepoObject_reference_union
 reference.RepoObject_reference_persistence <.. reference.RepoObject_reference_union
-reference.RepoObject_reference_persistence_target_as_source <.. reference.RepoObject_reference_union
 reference.RepoObject_reference_persistence_target_as_source <.. reference.RepoObject_reference
+reference.RepoObject_reference_persistence_target_as_source <.. reference.RepoObject_reference_union
+reference.RepoObject_reference_persistence_target_as_source_explicit <.. reference.RepoObject_reference_union
+reference.RepoObject_reference_persistence_target_as_source_explicit <.. reference.RepoObject_reference
+reference.RepoObject_reference_SqlExpressionDependencies <.. reference.RepoObject_reference_persistence_target_as_source_explicit
 reference.RepoObject_reference_SqlExpressionDependencies <.. reference.RepoObject_reference_union
 reference.RepoObject_reference_SqlExpressionDependencies <.. reference.RepoObject_reference_persistence_target_as_source
 reference.RepoObject_reference_T <.. reference.RepoObject_ReferencedReferencing
 reference.RepoObject_reference_union <.. reference.RepoObject_reference
 reference.RepoObject_reference_virtual <.. reference.RepoObject_reference_union
-reference.RepoObject_ReferencedReferencing <.. reference.ftv_RepoObject_ReferenceTree
 reference.RepoObject_ReferencedReferencing <.. repo.RepoObject_gross
+reference.RepoObject_ReferencedReferencing <.. reference.ftv_RepoObject_ReferenceTree
 reference.RepoObject_ReferenceTree_30_0 <.. reference.RepoObject_ReferenceTree_30_0_T
 reference.RepoObject_ReferenceTree_30_0 <.. reference.usp_PERSIST_RepoObject_ReferenceTree_30_0_T
 reference.RepoObject_ReferenceTree_30_0_T <.. reference.usp_PERSIST_RepoObject_ReferenceTree_30_0_T
@@ -1300,6 +1308,7 @@ repo.RepoObject <.. reference.RepoObject_reference_persistence
 repo.RepoObject <.. repo.SysObject_RepoObject_via_name
 repo.RepoObject <.. repo.SysColumn_RepoObjectColumn_via_name
 repo.RepoObject <.. repo.RepoObject_gross_persistence
+repo.RepoObject <.. reference.RepoObject_reference_persistence_target_as_source_explicit
 repo.RepoObject <.. property.RepoObjectProperty_external_tgt
 repo.RepoObject <.. repo.RepoObjectColumn_external_src
 repo.RepoObject <.. repo.RepoObject_external_src
@@ -1312,9 +1321,10 @@ repo.RepoObject_external_tgt <.. repo.RepoObject
 repo.RepoObject_external_tgt <.. repo.RepoObjectColumn_external_tgt
 repo.RepoObject_gross <.. reference.RepoObject_ReferenceTree_30_0
 repo.RepoObject_gross_persistence <.. reference.RepoObject_reference_persistence_target_as_source
-repo.RepoObject_persistence <.. repo.RepoObject_gross_persistence
 repo.RepoObject_persistence <.. repo.RepoObject_gross
 repo.RepoObject_persistence <.. reference.RepoObject_reference_persistence
+repo.RepoObject_persistence <.. repo.RepoObject_gross_persistence
+repo.RepoObject_persistence <.. reference.RepoObject_reference_persistence_target_as_source_explicit
 repo.RepoObject_SSAS_src <.. repo.RepoObject_SSAS_tgt
 repo.RepoObject_SSAS_tgt <.. repo.RepoObjectColumn_SSAS_tgt
 repo.RepoObject_SSAS_tgt <.. repo.RepoObject
@@ -1333,23 +1343,23 @@ repo_sys.ExtendedProperties <.. repo_sys.SysObject
 repo_sys.ExtendedProperties <.. repo_sys.SysColumn
 repo_sys.sql_expression_dependencies <.. reference.RepoObject_reference_SqlExpressionDependencies
 repo_sys.SysColumn <.. repo.SysColumn_RepoObjectColumn_via_name
-repo_sys.SysObject <.. repo.SysObject_RepoObject_via_name
 repo_sys.SysObject <.. repo_sys.SysColumn
+repo_sys.SysObject <.. repo.SysObject_RepoObject_via_name
 ssas.additional_Reference_step1 <.. reference.additional_Reference_from_ssas_src
 ssas.model_json <.. ssas.model_json_10
 ssas.model_json_10 <.. ssas.model_json_20
 ssas.model_json_20 <.. repo.RepoSchema_ssas_src
-ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
 ssas.model_json_20 <.. ssas.model_json_31_tables
 ssas.model_json_20 <.. ssas.model_json_33_dataSources
+ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
 ssas.model_json_201_descriptions_multiline <.. ssas.model_json_2011_descriptions_StrAgg
 ssas.model_json_2011_descriptions_StrAgg <.. repo.RepoSchema_ssas_src
 ssas.model_json_31_tables <.. ssas.model_json_31_tables_T
-ssas.model_json_31_tables_T <.. repo.RepoObject_SSAS_src
-ssas.model_json_31_tables_T <.. ssas.model_json_311_tables_columns
-ssas.model_json_31_tables_T <.. ssas.model_json_313_tables_partitions
 ssas.model_json_31_tables_T <.. repo.RepoObject_gross
 ssas.model_json_31_tables_T <.. ssas.model_json_316_tables_descriptions_multiline
+ssas.model_json_31_tables_T <.. ssas.model_json_313_tables_partitions
+ssas.model_json_31_tables_T <.. repo.RepoObject_SSAS_src
+ssas.model_json_31_tables_T <.. ssas.model_json_311_tables_columns
 ssas.model_json_311_tables_columns <.. ssas.model_json_311_tables_columns_T
 ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_SSAS_src
 ssas.model_json_311_tables_columns_T <.. ssas.additional_Reference_step1

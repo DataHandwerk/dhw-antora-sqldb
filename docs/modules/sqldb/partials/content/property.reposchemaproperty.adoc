@@ -44,13 +44,13 @@ user table
 == SysObject_id
 
 // tag::SysObject_id[]
-968390519
+1335727861
 // end::SysObject_id[]
 
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-11-25 19:13:52
+2022-01-23 14:10:12
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -60,16 +60,29 @@ user table
 == _
 
 
-[#column-reposchemapropertyunderlineid]
-=== RepoSchemaProperty_id
+[#column-reposchemaunderlineguid]
+=== RepoSchema_guid
 
 [cols="d,8a,m,m,m"]
 |===
 |1
-|*RepoSchemaProperty_id*
-|int
+|*RepoSchema_guid*
+|uniqueidentifier
 |NOT NULL
-|(1,1)
+|
+|===
+
+
+[#column-propertyunderlinename]
+=== property_name
+
+[cols="d,8a,m,m,m"]
+|===
+|2
+|*property_name*
+|nvarchar(128)
+|NOT NULL
+|
 |===
 
 
@@ -82,19 +95,6 @@ user table
 |inheritance
 |tinyint
 |NULL
-|
-|===
-
-
-[#column-propertyunderlinename]
-=== property_name
-
-[cols="d,8a,m,m,m"]
-|===
-|
-|property_name
-|nvarchar(128)
-|NOT NULL
 |
 |===
 
@@ -121,16 +121,16 @@ user table
 --
 
 
-[#column-reposchemaunderlineguid]
-=== RepoSchema_guid
+[#column-reposchemapropertyunderlineid]
+=== RepoSchemaProperty_id
 
 [cols="d,8a,m,m,m"]
 |===
 |
-|RepoSchema_guid
-|uniqueidentifier
+|RepoSchemaProperty_id
+|int
 |NOT NULL
-|
+|(1,1)
 |===
 
 
@@ -300,11 +300,16 @@ user table
 
 // tag::AntoraPkColumnTableRows[]
 |1
-|*<<column-reposchemapropertyunderlineid>>*
-|int
+|*<<column-reposchemaunderlineguid>>*
+|uniqueidentifier
 |NOT NULL
-|(1,1)
+|
 
+|2
+|*<<column-propertyunderlinename>>*
+|nvarchar(128)
+|NOT NULL
+|
 
 
 
@@ -320,16 +325,11 @@ user table
 
 // tag::AntoraNonPkColumnTableRows[]
 
+
 |
 |<<column-inheritance>>
 |tinyint
 |NULL
-|
-
-|
-|<<column-propertyunderlinename>>
-|nvarchar(128)
-|NOT NULL
 |
 
 |
@@ -339,10 +339,10 @@ user table
 |
 
 |
-|<<column-reposchemaunderlineguid>>
-|uniqueidentifier
+|<<column-reposchemapropertyunderlineid>>
+|int
 |NOT NULL
-|
+|(1,1)
 
 |
 |<<column-propertyunderlinebigint>>
@@ -426,7 +426,8 @@ user table
 * IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#startbnoblankgroupendb[no_group]
 +
 --
-* <<column-RepoSchemaProperty_id>>; int
+* <<column-RepoSchema_guid>>; uniqueidentifier
+* <<column-property_name>>; nvarchar(128)
 --
 * PK, Unique, Real: 1, 1, 1
 
@@ -725,14 +726,14 @@ B30747EC-8CA3-EB11-84FA-A81E8446D5B0
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-int
+uniqueidentifier,nvarchar(128)
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-RepoSchemaProperty_id
+RepoSchema_guid,property_name
 // end::pk_indexpatterncolumnname[]
 
 
@@ -821,11 +822,11 @@ skinparam class {
 
 
 entity "puml-link:dhw:sqldb:property.reposchemaproperty.adoc[]" as property.RepoSchemaProperty << U >> {
-  - **RepoSchemaProperty_id** : (int)
+  - **RepoSchema_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   inheritance : (tinyint)
-  - property_name : (nvarchar(128))
   property_value : (nvarchar(max))
-  - RepoSchema_guid : (uniqueidentifier)
+  - RepoSchemaProperty_id : (int)
   ~ property_bigint : (bigint)
   ~ property_float : (float)
   ~ property_int : (int)
@@ -874,7 +875,8 @@ entity "puml-link:dhw:sqldb:property.reposchemaproperty.adoc[]" as property.Repo
 **PK_RepoSchemaProperty**
 
 ..
-RepoSchemaProperty_id; int
+RepoSchema_guid; uniqueidentifier
+property_name; nvarchar(128)
 --
 UK_RepoSchemaProperty
 
@@ -943,7 +945,8 @@ skinparam class {
 
 
 entity "puml-link:dhw:sqldb:property.reposchemaproperty.adoc[]" as property.RepoSchemaProperty << U >> {
-  - **RepoSchemaProperty_id** : (int)
+  - **RepoSchema_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   --
 }
 
@@ -994,7 +997,8 @@ skinparam class {
 
 
 entity "puml-link:dhw:sqldb:property.reposchemaproperty.adoc[]" as property.RepoSchemaProperty << U >> {
-  - **RepoSchemaProperty_id** : (int)
+  - **RepoSchema_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   --
 }
 
@@ -1041,7 +1045,8 @@ skinparam class {
 
 
 entity "puml-link:dhw:sqldb:property.reposchemaproperty.adoc[]" as property.RepoSchemaProperty << U >> {
-  - **RepoSchemaProperty_id** : (int)
+  - **RepoSchema_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   --
 }
 
@@ -1092,11 +1097,11 @@ skinparam class {
 
 
 entity "puml-link:dhw:sqldb:property.reposchemaproperty.adoc[]" as property.RepoSchemaProperty << U >> {
-  - **RepoSchemaProperty_id** : (int)
+  - **RepoSchema_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   inheritance : (tinyint)
-  - property_name : (nvarchar(128))
   property_value : (nvarchar(max))
-  - RepoSchema_guid : (uniqueidentifier)
+  - RepoSchemaProperty_id : (int)
   ~ property_bigint : (bigint)
   ~ property_float : (float)
   ~ property_int : (int)

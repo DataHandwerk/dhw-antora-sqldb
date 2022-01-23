@@ -105,7 +105,7 @@ view
 |2
 |*PackageName*
 |varchar(200)
-|NULL
+|NOT NULL
 |
 |===
 
@@ -124,7 +124,7 @@ view
 |3
 |*ConnectionManagerID*
 |uniqueidentifier
-|NULL
+|NOT NULL
 |
 |===
 
@@ -244,13 +244,13 @@ view
 |2
 |*<<column-packagename>>*
 |varchar(200)
-|NULL
+|NOT NULL
 |
 
 |3
 |*<<column-connectionmanagerid>>*
 |uniqueidentifier
-|NULL
+|NOT NULL
 |
 
 
@@ -545,7 +545,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 === is_repo_managed
 
 // tag::is_repo_managed[]
-1
+0
 // end::is_repo_managed[]
 
 
@@ -672,7 +672,6 @@ source: property.RepoObjectProperty WHERE property_int = 1
 :is_persistence_delete_missing:
 :is_persistence_insert:
 :is_persistence_update_changed:
-:is_repo_managed:
 
 // end::boolean_attributes[]
 
@@ -1038,17 +1037,17 @@ entity "puml-link:dhw:sqldb:ssis.usp_persist_packageconnection_tgt.adoc[]" as ss
   --
 }
 
-docs.ssis_Adoc <.. docs.usp_PERSIST_ssis_Adoc_T
 docs.ssis_Adoc <.. docs.ssis_Adoc_T
+docs.ssis_Adoc <.. docs.usp_PERSIST_ssis_Adoc_T
 docs.ssis_Adoc_T <.. docs.usp_AntoraExport_SsisPartialsContent
 docs.ssis_Adoc_T <.. docs.usp_PERSIST_ssis_Adoc_T
 docs.ssis_PackageConnectionList <.. docs.ssis_Adoc
 docs.ssis_TaskList <.. docs.ssis_Adoc
 docs.usp_AntoraExport_SsisPartialsContent <.. docs.usp_AntoraExport
 docs.usp_PERSIST_ssis_Adoc_T <.. docs.usp_AntoraExport_SsisPartialsContent
+ssis.PackageConnection <.. docs.ssis_PackageConnectionList
 ssis.PackageConnection <.. docs.ssis_TaskList
 ssis.PackageConnection <.. docs.ssis_Task
-ssis.PackageConnection <.. docs.ssis_PackageConnectionList
 ssis.PackageConnection_tgt <.. ssis.usp_PERSIST_PackageConnection_tgt
 ssis.PackageConnection_tgt <.. ssis.PackageConnection
 ssis.usp_PERSIST_PackageConnection_tgt <.. ssis.usp_import

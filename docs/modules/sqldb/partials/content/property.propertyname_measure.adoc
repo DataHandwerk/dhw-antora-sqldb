@@ -571,7 +571,8 @@ skinparam class {
 
 
 entity "puml-link:dhw:sqldb:property.measureproperty.adoc[]" as property.MeasureProperty << U >> {
-  - **MeasureProperty_id** : (int)
+  - **Measure_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   --
 }
 
@@ -634,7 +635,8 @@ skinparam class {
 
 
 entity "puml-link:dhw:sqldb:property.measureproperty.adoc[]" as property.MeasureProperty << U >> {
-  - **MeasureProperty_id** : (int)
+  - **Measure_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   --
 }
 
@@ -817,12 +819,12 @@ docs.RepoObject_Plantuml_Entity <.. docs.RepoObject_Plantuml_Entity_T
 docs.RepoObject_Plantuml_Entity_T <.. docs.RepoObject_Adoc
 docs.RepoObject_Plantuml_Entity_T <.. docs.usp_PERSIST_RepoObject_Plantuml_Entity_T
 docs.RepoObject_Plantuml_Entity_T <.. docs.ftv_RepoObject_Reference_PlantUml_EntityRefList
-docs.RepoObject_Plantuml_Entity_T <.. docs.Schema_EntityList
 docs.RepoObject_Plantuml_Entity_T <.. docs.RepoObject_PlantUml_PumlEntityFkList
 docs.RepoObject_Plantuml_Entity_T <.. docs.ObjectRefCyclic_EntityList
+docs.RepoObject_Plantuml_Entity_T <.. docs.Schema_EntityList
 docs.RepoObject_PlantUml_PumlEntityFkList <.. docs.RepoObject_Plantuml
-docs.RepoObject_Plantuml_T <.. docs.usp_PERSIST_RepoObject_Plantuml_T
 docs.RepoObject_Plantuml_T <.. docs.RepoObject_Adoc
+docs.RepoObject_Plantuml_T <.. docs.usp_PERSIST_RepoObject_Plantuml_T
 docs.Schema_EntityList <.. docs.Schema_puml
 docs.Schema_puml <.. docs.AntoraNavListPage_by_schema
 docs.usp_AntoraExport_ObjectPartialsContent <.. docs.usp_AntoraExport
@@ -877,10 +879,9 @@ skinparam class {
 
 
 entity "puml-link:dhw:sqldb:property.measureproperty.adoc[]" as property.MeasureProperty << U >> {
-  - **MeasureProperty_id** : (int)
+  - **Measure_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   inheritance : (tinyint)
-  - Measure_guid : (uniqueidentifier)
-  - property_name : (nvarchar(128))
   property_value : (nvarchar(max))
   ~ property_bigint : (bigint)
   ~ property_float : (float)

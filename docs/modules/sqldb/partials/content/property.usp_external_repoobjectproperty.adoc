@@ -46,7 +46,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-23 09:19:27
+2022-01-05 18:06:37
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -662,7 +662,8 @@ entity "puml-link:dhw:sqldb:property.repoobjectcolumnproperty_external_tgt.adoc[
 }
 
 entity "puml-link:dhw:sqldb:property.repoobjectproperty.adoc[]" as property.RepoObjectProperty << U >> {
-  - **RepoObjectProperty_id** : (int)
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   --
 }
 
@@ -695,7 +696,7 @@ entity "puml-link:dhw:sqldb:property.usp_persist_repoobjectproperty_external_tgt
 }
 
 entity "puml-link:dhw:sqldb:reference.additional_reference.adoc[]" as reference.additional_Reference << U >> {
-  - **Id** : (int)
+  # **tik_hash_c** : (nvarchar(32))
   --
 }
 
@@ -981,9 +982,9 @@ entity "puml-link:dhw:sqldb:ssas.model_json_33_datasources_t.adoc[]" as ssas.mod
   --
 }
 
-config.ftv_get_parameter_value <.. repo.RepoObject_external_src
 config.ftv_get_parameter_value <.. ssas.additional_Reference_step1
 config.ftv_get_parameter_value <.. reference.additional_Reference_is_external
+config.ftv_get_parameter_value <.. repo.RepoObject_external_src
 config.Parameter <.. config.ftv_get_parameter_value
 config.Parameter <.. property.PropertyName_RepoObject
 configT.Parameter_default <.. config.Parameter
@@ -997,17 +998,17 @@ property.external_RepoObjectProperty <.. property.RepoObjectProperty_external_sr
 property.PropertyName_RepoObject <.. property.PropertyName_RepoObject_T
 property.PropertyName_RepoObject_T <.. property.RepoObjectColumnProperty_external_tgt
 property.PropertyName_RepoObject_T <.. property.RepoObjectProperty_external_tgt
-property.RepoObjectColumnProperty_external_src <.. property.usp_PERSIST_RepoObjectColumnProperty_external_tgt
 property.RepoObjectColumnProperty_external_src <.. property.RepoObjectColumnProperty_external_tgt
+property.RepoObjectColumnProperty_external_src <.. property.usp_PERSIST_RepoObjectColumnProperty_external_tgt
 property.RepoObjectColumnProperty_external_tgt <.. property.usp_PERSIST_RepoObjectColumnProperty_external_tgt
-property.RepoObjectProperty <.. property.RepoObjectProperty_SelectedPropertyName_split
 property.RepoObjectProperty <.. property.PropertyName_RepoObject
-property.RepoObjectProperty_external_src <.. property.RepoObjectProperty_external_tgt
+property.RepoObjectProperty <.. property.RepoObjectProperty_SelectedPropertyName_split
 property.RepoObjectProperty_external_src <.. property.usp_PERSIST_RepoObjectProperty_external_tgt
-property.RepoObjectProperty_external_tgt <.. property.usp_PERSIST_RepoObjectProperty_external_tgt
+property.RepoObjectProperty_external_src <.. property.RepoObjectProperty_external_tgt
 property.RepoObjectProperty_external_tgt <.. property.RepoObjectProperty
-property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_from_properties_src
+property.RepoObjectProperty_external_tgt <.. property.usp_PERSIST_RepoObjectProperty_external_tgt
 property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_wo_columns_from_properties_src
+property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_from_properties_src
 property.usp_PERSIST_RepoObjectColumnProperty_external_tgt <.. property.usp_external_RepoObjectProperty
 property.usp_PERSIST_RepoObjectProperty_external_tgt <.. property.usp_external_RepoObjectProperty
 reference.additional_Reference <.. reference.additional_Reference_is_external
@@ -1049,15 +1050,15 @@ ssas.additional_Reference_step1 <.. reference.additional_Reference_from_ssas_src
 ssas.model_json <.. ssas.model_json_10
 ssas.model_json_10 <.. ssas.model_json_20
 ssas.model_json_20 <.. repo.RepoSchema_ssas_src
-ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
 ssas.model_json_20 <.. ssas.model_json_33_dataSources
 ssas.model_json_20 <.. ssas.model_json_31_tables
+ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
 ssas.model_json_201_descriptions_multiline <.. ssas.model_json_2011_descriptions_StrAgg
 ssas.model_json_2011_descriptions_StrAgg <.. repo.RepoSchema_ssas_src
 ssas.model_json_31_tables <.. ssas.model_json_31_tables_T
+ssas.model_json_31_tables_T <.. ssas.model_json_313_tables_partitions
 ssas.model_json_31_tables_T <.. ssas.model_json_311_tables_columns
 ssas.model_json_31_tables_T <.. repo.RepoObject_SSAS_src
-ssas.model_json_31_tables_T <.. ssas.model_json_313_tables_partitions
 ssas.model_json_311_tables_columns <.. ssas.model_json_311_tables_columns_T
 ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_SSAS_src
 ssas.model_json_311_tables_columns_T <.. ssas.additional_Reference_step1

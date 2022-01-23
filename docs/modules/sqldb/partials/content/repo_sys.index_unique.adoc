@@ -974,7 +974,8 @@ entity "puml-link:dhw:sqldb:property.propertyname_repoobject_t.adoc[]" as proper
 }
 
 entity "puml-link:dhw:sqldb:property.repoobjectproperty.adoc[]" as property.RepoObjectProperty << U >> {
-  - **RepoObjectProperty_id** : (int)
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   --
 }
 
@@ -995,7 +996,7 @@ entity "puml-link:dhw:sqldb:property.repoobjectproperty_selectedpropertyname_spl
 }
 
 entity "puml-link:dhw:sqldb:reference.additional_reference.adoc[]" as reference.additional_Reference << U >> {
-  - **Id** : (int)
+  # **tik_hash_c** : (nvarchar(32))
   --
 }
 
@@ -1251,8 +1252,8 @@ property.RepoObjectProperty <.. property.RepoObjectProperty_SelectedPropertyName
 property.RepoObjectProperty <.. property.PropertyName_RepoObject
 property.RepoObjectProperty_external_src <.. property.RepoObjectProperty_external_tgt
 property.RepoObjectProperty_external_tgt <.. property.RepoObjectProperty
-property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_from_properties_src
 property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_wo_columns_from_properties_src
+property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_from_properties_src
 reference.additional_Reference <.. reference.additional_Reference_is_external
 reference.additional_Reference_from_properties_src <.. reference.additional_Reference_from_properties_tgt
 reference.additional_Reference_from_properties_tgt <.. reference.additional_Reference
@@ -1277,9 +1278,9 @@ ssas.additional_Reference_step1 <.. reference.additional_Reference_from_ssas_src
 ssas.model_json <.. ssas.model_json_10
 ssas.model_json_10 <.. ssas.model_json_20
 ssas.model_json_20 <.. repo.RepoSchema_ssas_src
-ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
 ssas.model_json_20 <.. ssas.model_json_31_tables
 ssas.model_json_20 <.. ssas.model_json_33_dataSources
+ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
 ssas.model_json_201_descriptions_multiline <.. ssas.model_json_2011_descriptions_StrAgg
 ssas.model_json_2011_descriptions_StrAgg <.. repo.RepoSchema_ssas_src
 ssas.model_json_31_tables <.. ssas.model_json_31_tables_T
@@ -1567,28 +1568,28 @@ docs.ftv_RepoObject_Reference_PlantUml_EntityRefList <.. docs.RepoObject_Plantum
 docs.IndexSemanticgroup <.. docs.AntoraPage_IndexSemanticGroup
 docs.IndexSemanticgroupPatterndatatype <.. docs.IndexSemanticgroup
 docs.ObjectRefCyclic_EntityList <.. docs.ObjectRefCyclic
-docs.RepoObject_Adoc <.. docs.RepoObject_Adoc_T
 docs.RepoObject_Adoc <.. docs.usp_PERSIST_RepoObject_Adoc_T
+docs.RepoObject_Adoc <.. docs.RepoObject_Adoc_T
 docs.REpoObject_Adoc_T <.. docs.usp_PERSIST_RepoObject_Adoc_T
 docs.RepoObject_IndexList <.. docs.usp_PERSIST_RepoObject_IndexList_T
 docs.RepoObject_IndexList <.. docs.RepoObject_IndexList_T
+docs.RepoObject_IndexList_T <.. docs.usp_PERSIST_RepoObject_IndexList_T
 docs.RepoObject_IndexList_T <.. docs.RepoObject_Plantuml_Entity
 docs.RepoObject_IndexList_T <.. docs.RepoObject_Adoc
-docs.RepoObject_IndexList_T <.. docs.usp_PERSIST_RepoObject_IndexList_T
-docs.RepoObject_Plantuml <.. docs.RepoObject_Plantuml_T
 docs.RepoObject_Plantuml <.. docs.usp_PERSIST_RepoObject_Plantuml_T
+docs.RepoObject_Plantuml <.. docs.RepoObject_Plantuml_T
 docs.RepoObject_Plantuml_Entity <.. docs.usp_PERSIST_RepoObject_Plantuml_Entity_T
 docs.RepoObject_Plantuml_Entity <.. docs.RepoObject_Plantuml_Entity_T
 docs.RepoObject_Plantuml_Entity_T <.. docs.RepoObject_Adoc
+docs.RepoObject_Plantuml_Entity_T <.. docs.ObjectRefCyclic_EntityList
+docs.RepoObject_Plantuml_Entity_T <.. docs.RepoObject_PlantUml_PumlEntityFkList
 docs.RepoObject_Plantuml_Entity_T <.. docs.ftv_RepoObject_Reference_PlantUml_EntityRefList
 docs.RepoObject_Plantuml_Entity_T <.. docs.usp_PERSIST_RepoObject_Plantuml_Entity_T
 docs.RepoObject_Plantuml_Entity_T <.. docs.Schema_EntityList
-docs.RepoObject_Plantuml_Entity_T <.. docs.ObjectRefCyclic_EntityList
-docs.RepoObject_Plantuml_Entity_T <.. docs.RepoObject_PlantUml_PumlEntityFkList
 docs.RepoObject_PlantUml_FkRefList <.. docs.RepoObject_Plantuml
 docs.RepoObject_PlantUml_PumlEntityFkList <.. docs.RepoObject_Plantuml
-docs.RepoObject_Plantuml_T <.. docs.usp_PERSIST_RepoObject_Plantuml_T
 docs.RepoObject_Plantuml_T <.. docs.RepoObject_Adoc
+docs.RepoObject_Plantuml_T <.. docs.usp_PERSIST_RepoObject_Plantuml_T
 docs.Schema_EntityList <.. docs.Schema_puml
 docs.Schema_puml <.. docs.AntoraNavListPage_by_schema
 docs.Schema_PumlPartial_FkRefList <.. docs.Schema_puml
@@ -1601,8 +1602,8 @@ docs.usp_PERSIST_RepoObject_Plantuml_T <.. docs.usp_AntoraExport_ObjectPuml
 repo.ForeignKey_gross <.. docs.RepoObject_IndexList
 repo.ForeignKey_Indexes <.. repo.usp_Index_ForeignKey
 repo.ForeignKey_Indexes <.. repo.ForeignKey_Indexes_union
-repo.ForeignKey_Indexes_union <.. repo.ForeignKey_Indexes_union_T
 repo.ForeignKey_Indexes_union <.. repo.usp_PERSIST_ForeignKey_Indexes_union_T
+repo.ForeignKey_Indexes_union <.. repo.ForeignKey_Indexes_union_T
 repo.ForeignKey_Indexes_union_T <.. docs.Schema_PumlPartial_FkRefList
 repo.ForeignKey_Indexes_union_T <.. repo.usp_PERSIST_ForeignKey_Indexes_union_T
 repo.ForeignKey_Indexes_union_T <.. docs.RepoObject_PlantUml_FkRefList
@@ -1611,28 +1612,28 @@ repo.ForeignKey_Indexes_union_T <.. repo.ForeignKey_gross
 repo.ForeignKey_Indexes_union_T <.. docs.ForeignKey_RelationScript
 repo.ForeignKey_Indexes_union_T <.. repo.usp_Index_finish
 repo.ForeignKey_virtual_Indexes <.. repo.ForeignKey_Indexes_union
-repo.Index_gross <.. repo.RepoObject_SqlCreateTable
 repo.Index_gross <.. repo.ForeignKey_gross
 repo.Index_gross <.. docs.IndexSemanticgroupPatterndatatype
 repo.Index_gross <.. docs.RepoObject_IndexList
 repo.Index_gross <.. repo.usp_Index_finish
+repo.Index_gross <.. repo.RepoObject_SqlCreateTable
 repo.Index_gross <.. repo.ForeignKey_virtual_Indexes
 repo.Index_gross <.. repo.ForeignKey_Indexes
 repo.Index_gross <.. repo.usp_Index_virtual_set
 repo.Index_gross <.. repo.usp_index_inheritance
 repo.Index_SqlConstraint_PkUq <.. repo.RepoObject_SqlCreateTable
-repo.Index_union <.. repo.Index_SqlConstraint_PkUq
-repo.Index_union <.. repo.IndexReferencedReferencing
 repo.Index_union <.. repo.Index_Settings_ForUpdate
 repo.Index_union <.. repo.usp_Index_finish
 repo.Index_union <.. repo.Index_gross
+repo.Index_union <.. repo.Index_SqlConstraint_PkUq
+repo.Index_union <.. repo.IndexReferencedReferencing
 repo.IndexReferencedReferencing <.. repo.IndexReferencedReferencing_HasFullColumnsInReferencing
 repo.IndexReferencedReferencing_HasFullColumnsInReferencing <.. repo.usp_index_inheritance
 repo.RepoObject_related_FK_union <.. docs.RepoObject_PlantUml_FkRefList
 repo.RepoObject_related_FK_union <.. docs.RepoObject_PlantUml_PumlEntityFkList
 repo.RepoObject_SqlCreateTable <.. reference.ftv_RepoObject_ColumReferenceRepoObject
-repo.usp_Index_finish <.. repo.usp_index_inheritance
 repo.usp_Index_finish <.. repo.usp_Index_ForeignKey
+repo.usp_Index_finish <.. repo.usp_index_inheritance
 repo.usp_Index_ForeignKey <.. repo.usp_main
 repo.usp_index_inheritance <.. repo.usp_main
 repo.usp_Index_virtual_set <.. repo.usp_Index_ForeignKey

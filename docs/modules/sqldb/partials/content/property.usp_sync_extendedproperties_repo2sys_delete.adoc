@@ -50,7 +50,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-12-17 19:13:06
+2022-01-21 18:39:31
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -1096,7 +1096,8 @@ entity "puml-link:dhw:sqldb:property.propertyname_repoobject_t.adoc[]" as proper
 }
 
 entity "puml-link:dhw:sqldb:property.repoobjectcolumnproperty.adoc[]" as property.RepoObjectColumnProperty << U >> {
-  - **RepoObjectColumnProperty_id** : (int)
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   --
 }
 
@@ -1113,7 +1114,8 @@ entity "puml-link:dhw:sqldb:property.repoobjectcolumnproperty_external_tgt.adoc[
 }
 
 entity "puml-link:dhw:sqldb:property.repoobjectproperty.adoc[]" as property.RepoObjectProperty << U >> {
-  - **RepoObjectProperty_id** : (int)
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   --
 }
 
@@ -1138,7 +1140,7 @@ entity "puml-link:dhw:sqldb:property.usp_sync_extendedproperties_repo2sys_delete
 }
 
 entity "puml-link:dhw:sqldb:reference.additional_reference.adoc[]" as reference.additional_Reference << U >> {
-  - **Id** : (int)
+  # **tik_hash_c** : (nvarchar(32))
   --
 }
 
@@ -1445,12 +1447,12 @@ entity "puml-link:dhw:sqldb:sys_dwh.schemas.adoc[]" as sys_dwh.schemas << SN >> 
 }
 
 config.ftv_dwh_database <.. repo_sys.ExtendedProperties
-config.ftv_get_parameter_value <.. repo.RepoObject_external_src
 config.ftv_get_parameter_value <.. ssas.additional_Reference_step1
 config.ftv_get_parameter_value <.. reference.additional_Reference_is_external
+config.ftv_get_parameter_value <.. repo.RepoObject_external_src
+config.Parameter <.. config.ftv_dwh_database
 config.Parameter <.. property.PropertyName_RepoObject
 config.Parameter <.. config.ftv_get_parameter_value
-config.Parameter <.. config.ftv_dwh_database
 configT.Parameter_default <.. config.Parameter
 configT.spt_values <.. configT.type
 configT.type <.. configT.type_level1type_level2type
@@ -1479,8 +1481,8 @@ property.RepoObjectProperty <.. property.RepoObjectProperty_SelectedPropertyName
 property.RepoObjectProperty <.. property.PropertyName_RepoObject
 property.RepoObjectProperty_external_src <.. property.RepoObjectProperty_external_tgt
 property.RepoObjectProperty_external_tgt <.. property.RepoObjectProperty
-property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_from_properties_src
 property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_wo_columns_from_properties_src
+property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_from_properties_src
 reference.additional_Reference <.. reference.additional_Reference_is_external
 reference.additional_Reference_from_properties_src <.. reference.additional_Reference_from_properties_tgt
 reference.additional_Reference_from_properties_tgt <.. reference.additional_Reference
@@ -1524,15 +1526,15 @@ ssas.additional_Reference_step1 <.. reference.additional_Reference_from_ssas_src
 ssas.model_json <.. ssas.model_json_10
 ssas.model_json_10 <.. ssas.model_json_20
 ssas.model_json_20 <.. repo.RepoSchema_ssas_src
-ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
 ssas.model_json_20 <.. ssas.model_json_33_dataSources
 ssas.model_json_20 <.. ssas.model_json_31_tables
+ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
 ssas.model_json_201_descriptions_multiline <.. ssas.model_json_2011_descriptions_StrAgg
 ssas.model_json_2011_descriptions_StrAgg <.. repo.RepoSchema_ssas_src
 ssas.model_json_31_tables <.. ssas.model_json_31_tables_T
+ssas.model_json_31_tables_T <.. ssas.model_json_313_tables_partitions
 ssas.model_json_31_tables_T <.. ssas.model_json_311_tables_columns
 ssas.model_json_31_tables_T <.. repo.RepoObject_SSAS_src
-ssas.model_json_31_tables_T <.. ssas.model_json_313_tables_partitions
 ssas.model_json_311_tables_columns <.. ssas.model_json_311_tables_columns_T
 ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_SSAS_src
 ssas.model_json_311_tables_columns_T <.. ssas.additional_Reference_step1

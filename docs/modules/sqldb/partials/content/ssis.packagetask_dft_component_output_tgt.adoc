@@ -546,7 +546,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 === is_repo_managed
 
 // tag::is_repo_managed[]
-1
+0
 // end::is_repo_managed[]
 
 
@@ -673,7 +673,6 @@ source: property.RepoObjectProperty WHERE property_int = 1
 :is_persistence_delete_missing:
 :is_persistence_insert:
 :is_persistence_update_changed:
-:is_repo_managed:
 
 // end::boolean_attributes[]
 
@@ -941,8 +940,8 @@ entity "puml-link:dhw:sqldb:ssis_t.tbltask_dft_component_outputs_src.adoc[]" as 
 }
 
 ssis.AntoraModule_tgt_filter <.. ssis.PackageTask_Dft_Component_output_tgt
-ssis.Package_src <.. ssis.PackageTask_Dft_Component_output_src
 ssis.Package_src <.. ssis.AntoraModule_tgt_filter
+ssis.Package_src <.. ssis.PackageTask_Dft_Component_output_src
 ssis.PackageTask_Dft_Component_output_src <.. ssis.PackageTask_Dft_Component_output_tgt
 ssis.Project <.. ssis.Package_src
 ssis_t.pkgStats <.. ssis.Package_src
@@ -1051,17 +1050,17 @@ entity "puml-link:dhw:sqldb:ssis.usp_persist_packagetask_dft_component_output_tg
 
 docs.ssis_Adoc <.. docs.usp_PERSIST_ssis_Adoc_T
 docs.ssis_Adoc <.. docs.ssis_Adoc_T
-docs.ssis_Adoc_T <.. docs.usp_PERSIST_ssis_Adoc_T
 docs.ssis_Adoc_T <.. docs.usp_AntoraExport_SsisPartialsContent
-docs.ssis_DftTaskComponentList <.. docs.ssis_Task
+docs.ssis_Adoc_T <.. docs.usp_PERSIST_ssis_Adoc_T
 docs.ssis_DftTaskComponentList <.. docs.ssis_TaskList
+docs.ssis_DftTaskComponentList <.. docs.ssis_Task
 docs.ssis_DftTaskComponentOutputList <.. docs.ssis_DftTaskComponentList
 docs.ssis_TaskList <.. docs.ssis_Adoc
 docs.usp_AntoraExport_SsisPartialsContent <.. docs.usp_AntoraExport
 docs.usp_PERSIST_ssis_Adoc_T <.. docs.usp_AntoraExport_SsisPartialsContent
 ssis.PackageTask_Dft_Component_output <.. docs.ssis_DftTaskComponentOutputList
-ssis.PackageTask_Dft_Component_output_tgt <.. ssis.usp_PERSIST_PackageTask_Dft_Component_output_tgt
 ssis.PackageTask_Dft_Component_output_tgt <.. ssis.PackageTask_Dft_Component_output
+ssis.PackageTask_Dft_Component_output_tgt <.. ssis.usp_PERSIST_PackageTask_Dft_Component_output_tgt
 ssis.usp_PERSIST_PackageTask_Dft_Component_output_tgt <.. ssis.usp_import
 
 footer The diagram is interactive and contains links.

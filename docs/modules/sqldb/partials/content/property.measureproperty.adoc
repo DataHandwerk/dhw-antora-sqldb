@@ -44,13 +44,13 @@ user table
 == SysObject_id
 
 // tag::SysObject_id[]
-1131203130
+1143727177
 // end::SysObject_id[]
 
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-11-25 19:13:52
+2022-01-23 14:10:10
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -60,16 +60,29 @@ user table
 == _
 
 
-[#column-measurepropertyunderlineid]
-=== MeasureProperty_id
+[#column-measureunderlineguid]
+=== Measure_guid
 
 [cols="d,8a,m,m,m"]
 |===
 |1
-|*MeasureProperty_id*
-|int
+|*Measure_guid*
+|uniqueidentifier
 |NOT NULL
-|(1,1)
+|
+|===
+
+
+[#column-propertyunderlinename]
+=== property_name
+
+[cols="d,8a,m,m,m"]
+|===
+|2
+|*property_name*
+|nvarchar(128)
+|NOT NULL
+|
 |===
 
 
@@ -82,32 +95,6 @@ user table
 |inheritance
 |tinyint
 |NULL
-|
-|===
-
-
-[#column-measureunderlineguid]
-=== Measure_guid
-
-[cols="d,8a,m,m,m"]
-|===
-|
-|Measure_guid
-|uniqueidentifier
-|NOT NULL
-|
-|===
-
-
-[#column-propertyunderlinename]
-=== property_name
-
-[cols="d,8a,m,m,m"]
-|===
-|
-|property_name
-|nvarchar(128)
-|NOT NULL
 |
 |===
 
@@ -300,12 +287,16 @@ user table
 
 // tag::AntoraPkColumnTableRows[]
 |1
-|*<<column-measurepropertyunderlineid>>*
-|int
+|*<<column-measureunderlineguid>>*
+|uniqueidentifier
 |NOT NULL
-|(1,1)
+|
 
-
+|2
+|*<<column-propertyunderlinename>>*
+|nvarchar(128)
+|NOT NULL
+|
 
 
 
@@ -320,22 +311,11 @@ user table
 
 // tag::AntoraNonPkColumnTableRows[]
 
+
 |
 |<<column-inheritance>>
 |tinyint
 |NULL
-|
-
-|
-|<<column-measureunderlineguid>>
-|uniqueidentifier
-|NOT NULL
-|
-
-|
-|<<column-propertyunderlinename>>
-|nvarchar(128)
-|NOT NULL
 |
 
 |
@@ -426,7 +406,8 @@ user table
 * IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#startbnoblankgroupendb[no_group]
 +
 --
-* <<column-MeasureProperty_id>>; int
+* <<column-Measure_guid>>; uniqueidentifier
+* <<column-property_name>>; nvarchar(128)
 --
 * PK, Unique, Real: 1, 1, 1
 
@@ -727,14 +708,14 @@ F51EA651-464D-EC11-8531-A81E8446D5B0
 === pk_IndexPatternColumnDatatype
 
 // tag::pk_indexpatterncolumndatatype[]
-int
+uniqueidentifier,nvarchar(128)
 // end::pk_indexpatterncolumndatatype[]
 
 
 === pk_IndexPatternColumnName
 
 // tag::pk_indexpatterncolumnname[]
-MeasureProperty_id
+Measure_guid,property_name
 // end::pk_indexpatterncolumnname[]
 
 
@@ -823,10 +804,9 @@ skinparam class {
 
 
 entity "puml-link:dhw:sqldb:property.measureproperty.adoc[]" as property.MeasureProperty << U >> {
-  - **MeasureProperty_id** : (int)
+  - **Measure_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   inheritance : (tinyint)
-  - Measure_guid : (uniqueidentifier)
-  - property_name : (nvarchar(128))
   property_value : (nvarchar(max))
   ~ property_bigint : (bigint)
   ~ property_float : (float)
@@ -876,7 +856,8 @@ entity "puml-link:dhw:sqldb:property.measureproperty.adoc[]" as property.Measure
 **PK_MeasureProperty**
 
 ..
-MeasureProperty_id; int
+Measure_guid; uniqueidentifier
+property_name; nvarchar(128)
 --
 UK_MeasureProperty
 
@@ -962,7 +943,8 @@ entity "puml-link:dhw:sqldb:docs.measure_measurepropertylist.adoc[]" as docs.Mea
 }
 
 entity "puml-link:dhw:sqldb:property.measureproperty.adoc[]" as property.MeasureProperty << U >> {
-  - **MeasureProperty_id** : (int)
+  - **Measure_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   --
 }
 
@@ -1020,7 +1002,8 @@ skinparam class {
 
 
 entity "puml-link:dhw:sqldb:property.measureproperty.adoc[]" as property.MeasureProperty << U >> {
-  - **MeasureProperty_id** : (int)
+  - **Measure_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   --
 }
 
@@ -1166,7 +1149,8 @@ entity "puml-link:dhw:sqldb:docs.usp_persist_repoobject_plantuml_t.adoc[]" as do
 }
 
 entity "puml-link:dhw:sqldb:property.measureproperty.adoc[]" as property.MeasureProperty << U >> {
-  - **MeasureProperty_id** : (int)
+  - **Measure_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   --
 }
 
@@ -1205,11 +1189,11 @@ docs.RepoObject_Plantuml <.. docs.usp_PERSIST_RepoObject_Plantuml_T
 docs.RepoObject_Plantuml_Entity <.. docs.RepoObject_Plantuml_Entity_T
 docs.RepoObject_Plantuml_Entity <.. docs.usp_PERSIST_RepoObject_Plantuml_Entity_T
 docs.RepoObject_Plantuml_Entity_T <.. docs.RepoObject_Adoc
+docs.RepoObject_Plantuml_Entity_T <.. docs.ObjectRefCyclic_EntityList
+docs.RepoObject_Plantuml_Entity_T <.. docs.RepoObject_PlantUml_PumlEntityFkList
 docs.RepoObject_Plantuml_Entity_T <.. docs.ftv_RepoObject_Reference_PlantUml_EntityRefList
 docs.RepoObject_Plantuml_Entity_T <.. docs.usp_PERSIST_RepoObject_Plantuml_Entity_T
 docs.RepoObject_Plantuml_Entity_T <.. docs.Schema_EntityList
-docs.RepoObject_Plantuml_Entity_T <.. docs.ObjectRefCyclic_EntityList
-docs.RepoObject_Plantuml_Entity_T <.. docs.RepoObject_PlantUml_PumlEntityFkList
 docs.RepoObject_PlantUml_PumlEntityFkList <.. docs.RepoObject_Plantuml
 docs.RepoObject_Plantuml_T <.. docs.RepoObject_Adoc
 docs.RepoObject_Plantuml_T <.. docs.usp_PERSIST_RepoObject_Plantuml_T
@@ -1277,10 +1261,9 @@ entity "puml-link:dhw:sqldb:docs.measure_measurepropertylist.adoc[]" as docs.Mea
 }
 
 entity "puml-link:dhw:sqldb:property.measureproperty.adoc[]" as property.MeasureProperty << U >> {
-  - **MeasureProperty_id** : (int)
+  - **Measure_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   inheritance : (tinyint)
-  - Measure_guid : (uniqueidentifier)
-  - property_name : (nvarchar(128))
   property_value : (nvarchar(max))
   ~ property_bigint : (bigint)
   ~ property_float : (float)

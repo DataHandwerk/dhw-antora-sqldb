@@ -54,7 +54,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-12-16 11:37:50
+2022-01-23 13:02:34
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -111,10 +111,14 @@ stored procedure
 * @history_table_name (nvarchar(128))
 * @prescript (nvarchar(max))
 * @postscript (nvarchar(max))
+* @ColumnListNoCompareButUpdate (nvarchar(4000))
+* @ColumnListNoCompareNoUpdate (nvarchar(4000))
+* @ColumnListIgnore (nvarchar(4000))
 * @execution_instance_guid (uniqueidentifier)
 * @ssis_execution_id (bigint)
 * @sub_execution_id (int)
 * @parent_execution_log_id (bigint)
+* @ExecutionLogId_action (char(1))
 // end::AntoraParameterList[]
 
 == AntoraXrefCulturesList
@@ -264,8 +268,11 @@ Exec repo.usp_persistence_set
   , @is_persistence_update_changed = 1
   , @is_persistence_insert = 1
   , @is_persistence_persist_source = 0
-  , @prescript = NULL
-  , @postscript = NULL
+  , @prescript = Null
+  , @postscript = Null
+  , @ColumnListNoCompareButUpdate = Null
+  , @ColumnListNoCompareNoUpdate = Null
+  , @ColumnListIgnore = Null
 ----not implemented:
 --, @is_persistence_merge_delete_missing = 0
 --, @is_persistence_merge_update_changed = 0
@@ -926,7 +933,8 @@ entity "puml-link:dhw:sqldb:property.propertyname_repoobject_t.adoc[]" as proper
 }
 
 entity "puml-link:dhw:sqldb:property.repoobjectcolumnproperty.adoc[]" as property.RepoObjectColumnProperty << U >> {
-  - **RepoObjectColumnProperty_id** : (int)
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   --
 }
 
@@ -943,7 +951,8 @@ entity "puml-link:dhw:sqldb:property.repoobjectcolumnproperty_external_tgt.adoc[
 }
 
 entity "puml-link:dhw:sqldb:property.repoobjectproperty.adoc[]" as property.RepoObjectProperty << U >> {
-  - **RepoObjectProperty_id** : (int)
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   --
 }
 
@@ -964,7 +973,7 @@ entity "puml-link:dhw:sqldb:property.repoobjectproperty_selectedpropertyname_spl
 }
 
 entity "puml-link:dhw:sqldb:reference.additional_reference.adoc[]" as reference.additional_Reference << U >> {
-  - **Id** : (int)
+  # **tik_hash_c** : (nvarchar(32))
   --
 }
 
@@ -1114,6 +1123,22 @@ entity "puml-link:dhw:sqldb:repo.repoobject_external_tgt.adoc[]" as repo.RepoObj
 
 entity "puml-link:dhw:sqldb:repo.repoobject_persistence.adoc[]" as repo.RepoObject_persistence << U >> {
   - **target_RepoObject_guid** : (uniqueidentifier)
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobject_persistence_nocomparebutupdate.adoc[]" as repo.RepoObject_persistence_NoCompareButUpdate << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobject_persistence_nocomparenoupdate.adoc[]" as repo.RepoObject_persistence_NoCompareNoUpdate << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobject_persistence_source_ignore.adoc[]" as repo.RepoObject_persistence_source_Ignore << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:repo.repoobject_persistence_target_ignore.adoc[]" as repo.RepoObject_persistence_target_Ignore << V >> {
   --
 }
 
@@ -1417,13 +1442,13 @@ config.ftv_get_parameter_value <.. repo.RepoObject_external_src
 config.ftv_get_parameter_value <.. repo.RepoObjectColumn_HistValidColums_setpoint
 config.ftv_get_parameter_value <.. reference.additional_Reference_is_external
 config.ftv_get_parameter_value <.. ssas.additional_Reference_step1
+config.Parameter <.. repo.usp_persistence_set
 config.Parameter <.. config.usp_init_parameter
 config.Parameter <.. config.fs_dwh_database_name
-config.Parameter <.. repo.usp_persistence_set
-config.Parameter <.. property.PropertyName_RepoObject
-config.Parameter <.. config.ftv_get_parameter_value
-config.Parameter <.. config.fs_get_parameter_value
 config.Parameter <.. config.ftv_dwh_database
+config.Parameter <.. property.PropertyName_RepoObject
+config.Parameter <.. config.fs_get_parameter_value
+config.Parameter <.. config.ftv_get_parameter_value
 config.usp_init_parameter <.. repo.usp_sync_guid
 configT.Parameter_default <.. config.usp_init_parameter
 configT.Parameter_default <.. config.Parameter
@@ -1450,8 +1475,8 @@ property.RepoObjectProperty <.. property.RepoObjectProperty_SelectedPropertyName
 property.RepoObjectProperty <.. property.PropertyName_RepoObject
 property.RepoObjectProperty_external_src <.. property.RepoObjectProperty_external_tgt
 property.RepoObjectProperty_external_tgt <.. property.RepoObjectProperty
-property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_from_properties_src
 property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_wo_columns_from_properties_src
+property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_from_properties_src
 reference.additional_Reference <.. reference.additional_Reference_is_external
 reference.additional_Reference_from_properties_src <.. reference.additional_Reference_from_properties_tgt
 reference.additional_Reference_from_properties_tgt <.. reference.additional_Reference
@@ -1485,21 +1510,33 @@ repo.RepoObject <.. repo.RepoObject_external_src
 repo.RepoObject_external_src <.. repo.RepoObject_external_tgt
 repo.RepoObject_external_tgt <.. repo.RepoObject
 repo.RepoObject_external_tgt <.. repo.RepoObjectColumn_external_tgt
-repo.RepoObject_persistence <.. repo.RepoObjectColumn_HistValidColums_setpoint
 repo.RepoObject_persistence <.. repo.usp_sync_guid_RepoObject
 repo.RepoObject_persistence <.. repo.usp_sync_guid_RepoObjectColumn
 repo.RepoObject_persistence <.. repo.usp_persistence_set
+repo.RepoObject_persistence <.. repo.RepoObject_persistence_NoCompareButUpdate
+repo.RepoObject_persistence <.. repo.RepoObject_persistence_NoCompareNoUpdate
+repo.RepoObject_persistence <.. repo.RepoObject_persistence_target_Ignore
+repo.RepoObject_persistence <.. repo.RepoObject_persistence_source_Ignore
+repo.RepoObject_persistence <.. repo.RepoObjectColumn_HistValidColums_setpoint
 repo.RepoObject_persistence <.. repo.RepoObjectColumn_gross
+repo.RepoObject_persistence_NoCompareButUpdate <.. repo.usp_sync_guid_RepoObjectColumn
+repo.RepoObject_persistence_NoCompareNoUpdate <.. repo.usp_sync_guid_RepoObjectColumn
+repo.RepoObject_persistence_source_Ignore <.. repo.usp_sync_guid_RepoObjectColumn
+repo.RepoObject_persistence_target_Ignore <.. repo.usp_sync_guid_RepoObjectColumn
 repo.RepoObject_RequiredRepoObjectMerge <.. repo.usp_sync_guid_RepoObject
 repo.RepoObject_SSAS_src <.. repo.RepoObject_SSAS_tgt
 repo.RepoObject_SSAS_tgt <.. repo.RepoObjectColumn_SSAS_tgt
 repo.RepoObject_SSAS_tgt <.. repo.RepoObject
-repo.RepoObjectColumn <.. repo.RepoObjectColumn_RequiredRepoObjectColumnMerge
+repo.RepoObjectColumn <.. repo.RepoObject_persistence_NoCompareButUpdate
+repo.RepoObjectColumn <.. repo.RepoObject_persistence_NoCompareNoUpdate
+repo.RepoObjectColumn <.. repo.RepoObject_persistence_target_Ignore
+repo.RepoObjectColumn <.. repo.RepoObject_persistence_source_Ignore
 repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_guid
-repo.RepoObjectColumn <.. repo.usp_sync_guid_RepoObjectColumn
 repo.RepoObjectColumn <.. repo.RepoObjectColumn_gross
 repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_name
 repo.RepoObjectColumn <.. property.RepoObjectColumnProperty_external_tgt
+repo.RepoObjectColumn <.. repo.usp_sync_guid_RepoObjectColumn
+repo.RepoObjectColumn <.. repo.RepoObjectColumn_RequiredRepoObjectColumnMerge
 repo.RepoObjectColumn_external_src <.. repo.RepoObjectColumn_external_tgt
 repo.RepoObjectColumn_external_tgt <.. repo.RepoObjectColumn
 repo.RepoObjectColumn_gross <.. repo.usp_sync_guid_RepoObjectColumn
@@ -1507,10 +1544,10 @@ repo.RepoObjectColumn_HistValidColums_setpoint <.. repo.usp_sync_guid_RepoObject
 repo.RepoObjectColumn_RequiredRepoObjectColumnMerge <.. repo.usp_sync_guid_RepoObjectColumn
 repo.RepoObjectColumn_SSAS_src <.. repo.RepoObjectColumn_SSAS_tgt
 repo.RepoObjectColumn_SSAS_tgt <.. repo.RepoObjectColumn
-repo.RepoSchema <.. repo.SysSchema_RepoSchema_via_guid
-repo.RepoSchema <.. repo.RepoObject_SSAS_src
 repo.RepoSchema <.. repo.usp_sync_guid_RepoSchema
 repo.RepoSchema <.. repo.SysSchema_RepoSchema_via_name
+repo.RepoSchema <.. repo.SysSchema_RepoSchema_via_guid
+repo.RepoSchema <.. repo.RepoObject_SSAS_src
 repo.RepoSchema_ssas_src <.. repo.RepoSchema_ssas_tgt
 repo.RepoSchema_ssas_tgt <.. repo.RepoSchema
 repo.SysColumn_RepoObjectColumn_via_guid <.. repo.usp_sync_guid_RepoObjectColumn
@@ -1523,15 +1560,15 @@ repo.usp_sync_guid <.. repo.usp_persistence_set
 repo.usp_sync_guid_RepoObject <.. repo.usp_sync_guid
 repo.usp_sync_guid_RepoObjectColumn <.. repo.usp_sync_guid
 repo.usp_sync_guid_RepoSchema <.. repo.usp_sync_guid
-repo_sys.ExtendedProperties <.. repo_sys.SysObject
 repo_sys.ExtendedProperties <.. repo_sys.SysSchema
 repo_sys.ExtendedProperties <.. repo_sys.SysColumn
+repo_sys.ExtendedProperties <.. repo_sys.SysObject
 repo_sys.SysColumn <.. repo.SysColumn_RepoObjectColumn_via_guid
 repo_sys.SysColumn <.. repo.usp_sync_guid_RepoObjectColumn
 repo_sys.SysColumn <.. repo.SysColumn_RepoObjectColumn_via_name
-repo_sys.SysObject <.. repo.SysObject_RepoObject_via_name
 repo_sys.SysObject <.. repo.SysObject_RepoObject_via_guid
 repo_sys.SysObject <.. repo.usp_sync_guid_RepoObject
+repo_sys.SysObject <.. repo.SysObject_RepoObject_via_name
 repo_sys.SysObject <.. repo_sys.SysColumn
 repo_sys.SysSchema <.. repo.usp_sync_guid_RepoSchema
 repo_sys.SysSchema <.. repo.SysSchema_RepoSchema_via_name
@@ -1543,21 +1580,21 @@ ssas.additional_Reference_step1 <.. reference.additional_Reference_from_ssas_src
 ssas.model_json <.. ssas.model_json_10
 ssas.model_json_10 <.. ssas.model_json_20
 ssas.model_json_20 <.. repo.RepoSchema_ssas_src
-ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
 ssas.model_json_20 <.. ssas.model_json_31_tables
 ssas.model_json_20 <.. ssas.model_json_33_dataSources
+ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
 ssas.model_json_201_descriptions_multiline <.. ssas.model_json_2011_descriptions_StrAgg
 ssas.model_json_2011_descriptions_StrAgg <.. repo.RepoSchema_ssas_src
 ssas.model_json_31_tables <.. ssas.model_json_31_tables_T
+ssas.model_json_31_tables_T <.. ssas.model_json_313_tables_partitions
 ssas.model_json_31_tables_T <.. repo.RepoObject_SSAS_src
 ssas.model_json_31_tables_T <.. ssas.model_json_311_tables_columns
-ssas.model_json_31_tables_T <.. ssas.model_json_313_tables_partitions
 ssas.model_json_311_tables_columns <.. ssas.model_json_311_tables_columns_T
-ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_gross
+ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_SSAS_src
 ssas.model_json_311_tables_columns_T <.. ssas.model_json_3112_tables_columns_expressions_multiline
 ssas.model_json_311_tables_columns_T <.. ssas.model_json_3111_tables_columns_descriptions_multiline
-ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_SSAS_src
 ssas.model_json_311_tables_columns_T <.. ssas.additional_Reference_step1
+ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_gross
 ssas.model_json_3111_tables_columns_descriptions_multiline <.. ssas.model_json_31111_tables_columns_descriptions_StrAgg
 ssas.model_json_31111_tables_columns_descriptions_StrAgg <.. repo.RepoObjectColumn_gross
 ssas.model_json_3112_tables_columns_expressions_multiline <.. ssas.model_json_31121_tables_columns_expressions_StrAgg
@@ -1580,9 +1617,9 @@ sys_dwh.indexes <.. repo_sys.ExtendedProperties
 sys_dwh.objects <.. repo_sys.SysObject
 sys_dwh.objects <.. repo_sys.ExtendedProperties
 sys_dwh.parameters <.. repo_sys.ExtendedProperties
-sys_dwh.schemas <.. repo_sys.SysSchema
-sys_dwh.schemas <.. repo_sys.SysObject
 sys_dwh.schemas <.. repo_sys.ExtendedProperties
+sys_dwh.schemas <.. repo_sys.SysObject
+sys_dwh.schemas <.. repo_sys.SysSchema
 sys_dwh.sql_modules <.. repo_sys.SysObject
 sys_dwh.tables <.. repo_sys.SysObject
 sys_dwh.types <.. repo_sys.SysColumn
@@ -1739,6 +1776,11 @@ entity "puml-link:dhw:sqldb:repo.repoobject.adoc[]" as repo.RepoObject << U >> {
 
 entity "puml-link:dhw:sqldb:repo.repoobject_persistence.adoc[]" as repo.RepoObject_persistence << U >> {
   - **target_RepoObject_guid** : (uniqueidentifier)
+  ColumnListIgnore : (nvarchar(4000))
+  ColumnListNoCompareButUpdate : (nvarchar(4000))
+  ColumnListNoCompareNoUpdate : (nvarchar(4000))
+  ExecutionLogId_action : (char(1))
+  final_target_RepoObject_name : (nvarchar(128))
   - has_history : (bit)
   - has_history_columns : (bit)
   history_schema_name : (nvarchar(128))
@@ -1748,9 +1790,6 @@ entity "puml-link:dhw:sqldb:repo.repoobject_persistence.adoc[]" as repo.RepoObje
   - is_persistence_delete_changed : (bit)
   - is_persistence_delete_missing : (bit)
   - is_persistence_insert : (bit)
-  - is_persistence_merge_delete_missing : (bit)
-  - is_persistence_merge_insert : (bit)
-  - is_persistence_merge_update_changed : (bit)
   - is_persistence_persist_source : (bit)
   - is_persistence_truncate : (bit)
   - is_persistence_update_changed : (bit)
@@ -1886,8 +1925,11 @@ Exec repo.usp_persistence_set
   , @is_persistence_update_changed = 1
   , @is_persistence_insert = 1
   , @is_persistence_persist_source = 0
-  , @prescript = NULL
-  , @postscript = NULL
+  , @prescript = Null
+  , @postscript = Null
+  , @ColumnListNoCompareButUpdate = Null
+  , @ColumnListNoCompareNoUpdate = Null
+  , @ColumnListIgnore = Null
 ----not implemented:
 --, @is_persistence_merge_delete_missing = 0
 --, @is_persistence_merge_update_changed = 0
@@ -1988,7 +2030,7 @@ EXEC repo.[usp_persistence_set]
 <<property_end>>
 
 */
-CREATE Procedure repo.usp_persistence_set
+CREATE Procedure [repo].[usp_persistence_set]
     @source_RepoObject_guid                UniqueIdentifier = Null        --
   , @source_fullname                       NVarchar(261)    = Null        --it is possible to use @source_RepoObject_guid OR @source_fullname; use: "[schema].[object_name]"
   , @persistence_RepoObject_guid           UniqueIdentifier = Null Output --if this parameter is not null then an existing RepoObject is used to modify, if it is null then a RepoObject will be created, don't use brackts: "object_name_T"
@@ -2020,11 +2062,15 @@ CREATE Procedure repo.usp_persistence_set
                                                                           --todo: use general parameters to define this
   , @prescript                             NVarchar(Max)    = Null
   , @postscript                            NVarchar(Max)    = Null
+  , @ColumnListNoCompareButUpdate          NVarchar(4000)   = Null
+  , @ColumnListNoCompareNoUpdate           NVarchar(4000)   = Null
+  , @ColumnListIgnore                      NVarchar(4000)   = Null
                                                                           -- some optional parameters, used for logging
   , @execution_instance_guid               UniqueIdentifier = Null        --SSIS system variable ExecutionInstanceGUID could be used, but other any other guid
   , @ssis_execution_id                     BigInt           = Null        --only SSIS system variable ServerExecutionID should be used, or any other consistent number system, do not mix
   , @sub_execution_id                      Int              = Null
   , @parent_execution_log_id               BigInt           = Null
+  , @ExecutionLogId_action                 Char(1)          = Null
 As
 Declare
     @current_execution_log_id BigInt
@@ -2073,7 +2119,7 @@ Exec logs.usp_ExecutionLog_insert
   , @inserted = Null
   , @updated = Null
   , @deleted = Null
-  , @info_01 = Null
+  --, @info_01 = Null
   , @info_02 = Null
   , @info_03 = Null
   , @info_04 = Null
@@ -2094,15 +2140,17 @@ Exec logs.usp_ExecutionLog_insert
   , @parameter_09 = @is_persistence_update_changed
   , @parameter_10 = @is_persistence_insert
   , @parameter_11 = @is_persistence_persist_source
-  --, @parameter_11 = @is_persistence_merge_delete_missing
-  --, @parameter_12 = @is_persistence_merge_update_changed
-  --, @parameter_13 = @is_persistence_merge_insert
-  , @parameter_14 = @has_history_columns
-  , @parameter_15 = @has_history
-  , @parameter_16 = @history_schema_name
-  , @parameter_17 = @history_table_name
-  , @parameter_18 = @prescript
-  , @parameter_19 = @postscript
+  , @parameter_12 = @has_history_columns
+  , @parameter_13 = @has_history
+  , @parameter_14 = @history_schema_name
+  , @parameter_15 = @history_table_name
+  , @parameter_16 = @prescript
+  , @parameter_17 = @postscript
+  , @parameter_18 = @ColumnListNoCompareButUpdate
+  , @parameter_19 = @ColumnListNoCompareNoUpdate
+  , @parameter_20 = @ColumnListIgnore
+  ----no more paramater columns available, use @info columns
+  , @info_01 = @ExecutionLogId_action
 
 --
 ----START
@@ -2375,7 +2423,8 @@ Begin
               , @persistence_table_name
               , 'U'
               , @persistence_schema_name
-              , 1
+              -- #42, is_repo_managed: 0 as default instead of 1 and don't force it to be 1
+              , 0
             );
 
         Set @persistence_RepoObject_guid =
@@ -2550,6 +2599,10 @@ Set
   --using '' as parameter content?
   , prescript = IsNull ( @prescript, prescript )
   , postscript = IsNull ( @postscript, postscript )
+  , ColumnListNoCompareButUpdate = IsNull ( @ColumnListNoCompareButUpdate, ColumnListNoCompareButUpdate )
+  , ColumnListNoCompareNoUpdate = IsNull ( @ColumnListNoCompareNoUpdate, ColumnListNoCompareNoUpdate )
+  , ColumnListIgnore = IsNull ( @ColumnListIgnore, ColumnListIgnore )
+  , ExecutionLogId_action = IsNull ( @ExecutionLogId_action, ExecutionLogId_action )
 Where
     target_RepoObject_guid = @persistence_RepoObject_guid;
 
@@ -2586,47 +2639,48 @@ Exec logs.usp_ExecutionLog_insert
   , @info_08 = Null
   , @info_09 = Null;
 
---ensure @persistence_RepoObject_guid is marked as [is_repo_managed] = 1
-Update
-    repo.RepoObject
-Set
-    is_repo_managed = 1
-Where
-    IsNull ( is_repo_managed, 0 ) <> 1
-    And RepoObject_guid           = @persistence_RepoObject_guid;
+-- #42, is_repo_managed: 0 as default instead of 1 and don't force it to be 1
+----ensure @persistence_RepoObject_guid is marked as [is_repo_managed] = 1
+--Update
+--    repo.RepoObject
+--Set
+--    is_repo_managed = 1
+--Where
+--    IsNull ( is_repo_managed, 0 ) <> 1
+--    And RepoObject_guid           = @persistence_RepoObject_guid;
 
-Set @rows = @@RowCount;
-Set @step_id = @step_id + 1;
-Set @step_name = N'SET [is_repo_managed] = 1 (WHERE [RepoObject_guid] = @persistence_RepoObject_guid)';
-Set @source_object = Null;
-Set @target_object = N'[repo].[RepoObject]';
+--Set @rows = @@RowCount;
+--Set @step_id = @step_id + 1;
+--Set @step_name = N'SET [is_repo_managed] = 1 (WHERE [RepoObject_guid] = @persistence_RepoObject_guid)';
+--Set @source_object = Null;
+--Set @target_object = N'[repo].[RepoObject]';
 
-Exec logs.usp_ExecutionLog_insert
-    @execution_instance_guid = @execution_instance_guid
-  , @ssis_execution_id = @ssis_execution_id
-  , @sub_execution_id = @sub_execution_id
-  , @parent_execution_log_id = @parent_execution_log_id
-  , @current_execution_guid = @current_execution_guid
-  , @proc_id = @proc_id
-  , @proc_schema_name = @proc_schema_name
-  , @proc_name = @proc_name
-  , @event_info = @event_info
-  , @step_id = @step_id
-  , @step_name = @step_name
-  , @source_object = @source_object
-  , @target_object = @target_object
-  , @inserted = Null
-  , @updated = @rows
-  , @deleted = Null
-  , @info_01 = Null
-  , @info_02 = Null
-  , @info_03 = Null
-  , @info_04 = Null
-  , @info_05 = Null
-  , @info_06 = Null
-  , @info_07 = Null
-  , @info_08 = Null
-  , @info_09 = Null;
+--Exec logs.usp_ExecutionLog_insert
+--    @execution_instance_guid = @execution_instance_guid
+--  , @ssis_execution_id = @ssis_execution_id
+--  , @sub_execution_id = @sub_execution_id
+--  , @parent_execution_log_id = @parent_execution_log_id
+--  , @current_execution_guid = @current_execution_guid
+--  , @proc_id = @proc_id
+--  , @proc_schema_name = @proc_schema_name
+--  , @proc_name = @proc_name
+--  , @event_info = @event_info
+--  , @step_id = @step_id
+--  , @step_name = @step_name
+--  , @source_object = @source_object
+--  , @target_object = @target_object
+--  , @inserted = Null
+--  , @updated = @rows
+--  , @deleted = Null
+--  , @info_01 = Null
+--  , @info_02 = Null
+--  , @info_03 = Null
+--  , @info_04 = Null
+--  , @info_05 = Null
+--  , @info_06 = Null
+--  , @info_07 = Null
+--  , @info_08 = Null
+--  , @info_09 = Null;
 
 --set temporal_type
 --0 = NON_TEMPORAL_TABLE
@@ -2688,150 +2742,9 @@ Exec logs.usp_ExecutionLog_insert
 -------------------------------------------------
 --
 --ensure all columns from source exists:
---the following already happens in [repo].[usp_sync_guid_RepoObjectColumn] and we don't need to repeat it here:
+--this already happens in [repo].[usp_sync_guid_RepoObjectColumn] and we don't need to repeat it here:
 --
-/*
---persistence: update RepoObjectColumn_name from SysObjecColumn_name of persistence_source_RepoObjectColumn_guid
-UPDATE roc_p
-	SET
-	    [RepoObjectColumn_name] = [roc_s].[SysObjectColumn_name]
-	, [Repo_user_type_name] = [roc_s].[Sys_user_type_name]
-	, [Repo_user_type_fullname] = [roc_s].[Sys_user_type_fullname]
-FROM   [repo].[RepoObjectColumn] [roc_p]
-	    INNER JOIN
-	    [repo].[RepoObjectColumn] [roc_s]
-	    ON [roc_p].[persistence_source_RepoObjectColumn_guid] = [roc_s].[RepoObjectColumn_guid]
-	    INNER JOIN
-	    [repo].[RepoObject] [ro_p]
-	    ON [roc_p].[RepoObject_guid] = [ro_p].[RepoObject_guid]
-WHERE
-	    [ro_p].[is_repo_managed] = 1
-	    AND ([roc_p].[RepoObjectColumn_name] <> [roc_s].[SysObjectColumn_name]
-	        OR [roc_p].[Repo_user_type_fullname] <> [roc_s].[Sys_user_type_fullname]
-	        OR ([roc_p].[Repo_user_type_fullname] IS NULL
-	            AND NOT [roc_s].[Sys_user_type_fullname] IS NULL)
-	        OR (NOT [roc_p].[Repo_user_type_fullname] IS NULL
-	            AND [roc_s].[Sys_user_type_fullname] IS NULL)
-	    --we don't need to check user_type_name, it is included in user_type_fullname
-	    --OR [roc_p].[Repo_user_type_name] <> [roc_s].[Sys_user_type_name]
-	    --
-	    )
-*/
 
-----try to find [persistence_source_RepoObjectColumn_guid] for existing persistence columns by Column name
---UPDATE roc_p
---SET [roc_p].[persistence_source_RepoObjectColumn_guid] = [roc_s].[RepoObjectColumn_guid]
-----update attributes later in a separate step:
-----, [roc_p].[Repo_user_type_name] = [roc_s].[Sys_user_type_name]
-----, [roc_p].[Repo_user_type_fullname] = [roc_s].[Sys_user_type_fullname]
---FROM [repo].[RepoObjectColumn] AS [roc_p]
---INNER JOIN [repo].[RepoObjectColumn] AS [roc_s]
--- ON [roc_p].[RepoObjectColumn_name] = [roc_s].[RepoObjectColumn_name]
---WHERE [roc_p].[persistence_source_RepoObjectColumn_guid] IS NULL
--- AND [roc_p].[RepoObject_guid] = @persistence_RepoObject_guid
--- AND [roc_s].[RepoObject_guid] = @source_RepoObject_guid
--- --skip special table columns (ValidFrom, ValidTo) in target (= persistence)
--- AND (
---  [roc_p].[Repo_generated_always_type] = 0
---  OR [roc_p].[Repo_generated_always_type] IS NULL
---  )
--- --skip [is_query_plan_expression] in target
--- AND (
---  [roc_p].[is_query_plan_expression] = 0
---  OR [roc_p].[is_query_plan_expression] IS NULL
---  )
---SET @rows = @@rowcount;
---SET @step_id = @step_id + 1
---SET @step_name = '[roc_p].[persistence_source_RepoObjectColumn_guid] = [roc_s].[RepoObjectColumn_guid] (matching by column name)'
---SET @source_object = '[repo].[RepoObjectColumn]'
---SET @target_object = '[repo].[RepoObjectColumn]'
---EXEC repo.usp_ExecutionLog_insert @execution_instance_guid = @execution_instance_guid
--- , @ssis_execution_id = @ssis_execution_id
--- , @sub_execution_id = @sub_execution_id
--- , @parent_execution_log_id = @parent_execution_log_id
--- , @current_execution_guid = @current_execution_guid
--- , @proc_id = @proc_id
--- , @proc_schema_name = @proc_schema_name
--- , @proc_name = @proc_name
--- , @event_info = @event_info
--- , @step_id = @step_id
--- , @step_name = @step_name
--- , @source_object = @source_object
--- , @target_object = @target_object
--- , @inserted = NULL
--- , @updated = @rows
--- , @deleted = NULL
--- , @info_01 = NULL
--- , @info_02 = NULL
--- , @info_03 = NULL
--- , @info_04 = NULL
--- , @info_05 = NULL
--- , @info_06 = NULL
--- , @info_07 = NULL
--- , @info_08 = NULL
--- , @info_09 = NULL
-----add missing (in target) persistence columns, existing in source
---INSERT INTO [repo].[RepoObjectColumn] (
--- [RepoObject_guid]
--- , [RepoObjectColumn_name]
--- , [persistence_source_RepoObjectColumn_guid]
--- )
-----do this in a separate step:
-----, [Repo_user_type_name]
-----, [Repo_user_type_fullname]
---SELECT @persistence_RepoObject_guid
--- , [roc_s].[RepoObjectColumn_name]
--- , [roc_s].[RepoObjectColumn_guid]
-----, [roc_s].[Sys_user_type_name]
-----, [roc_s].[Sys_user_type_fullname]
---FROM [repo].[RepoObjectColumn] AS [roc_s]
---WHERE [roc_s].[RepoObject_guid] = @source_RepoObject_guid
--- AND NOT EXISTS (
---  SELECT 1
---  FROM [repo].[RepoObjectColumn] AS [roc_p]
---  WHERE [roc_p].[RepoObject_guid] = @persistence_RepoObject_guid
---   AND [roc_p].[persistence_source_RepoObjectColumn_guid] = [roc_s].[RepoObjectColumn_guid]
---  )
--- --skip special table columns (ValidFrom, ValidTo) in source
--- AND (
---  [roc_s].[Repo_generated_always_type] = 0
---  OR [roc_s].[Repo_generated_always_type] IS NULL
---  )
--- --skip [is_query_plan_expression] in source
--- AND (
---  [roc_s].[is_query_plan_expression] = 0
---  OR [roc_s].[is_query_plan_expression] IS NULL
---  )
---SET @rows = @@rowcount;
---SET @step_id = @step_id + 1
---SET @step_name = 'add missing persistence columns existing in source'
---SET @source_object = '[repo].[RepoObjectColumn]'
---SET @target_object = '[repo].[RepoObjectColumn]'
---EXEC repo.usp_ExecutionLog_insert @execution_instance_guid = @execution_instance_guid
--- , @ssis_execution_id = @ssis_execution_id
--- , @sub_execution_id = @sub_execution_id
--- , @parent_execution_log_id = @parent_execution_log_id
--- , @current_execution_guid = @current_execution_guid
--- , @proc_id = @proc_id
--- , @proc_schema_name = @proc_schema_name
--- , @proc_name = @proc_name
--- , @event_info = @event_info
--- , @step_id = @step_id
--- , @step_name = @step_name
--- , @source_object = @source_object
--- , @target_object = @target_object
--- , @inserted = @rows
--- , @updated = NULL
--- , @deleted = NULL
--- , @info_01 = NULL
--- , @info_02 = NULL
--- , @info_03 = NULL
--- , @info_04 = NULL
--- , @info_05 = NULL
--- , @info_06 = NULL
--- , @info_07 = NULL
--- , @info_08 = NULL
--- , @info_09 = NULL
 --sync new columns, use existing procedure to manage the filling of Repo_... columns
 Exec repo.usp_sync_guid
     @execution_instance_guid = @execution_instance_guid
@@ -2839,63 +2752,6 @@ Exec repo.usp_sync_guid
   , @sub_execution_id = @sub_execution_id
   , @parent_execution_log_id = @current_execution_log_id;
 
-/*
-	ensure all columns from source exists
-	
-	
-	[has_history_columns]
-	über [repo].[RepoObjectColumn] oder direkt im sql der Tabelle?
-	wass passiert, wenn diese Spalten erst später hinzugefügt werden sollen?
-	
-	*/
--------------------------------------------------
--------------  SQL for table  -------------------
--------------------------------------------------
---
---
--------------------------------------------------
--------------  SQL for procedure  ---------------
--------------------------------------------------
---
---
-----todo: which to use for persistence name? RepoObject names or SysObject names?
-----SysObject Names could be still empty, if @persistence_RepoObject_guid exists only in repo but not yet in database
---SELECT
---       @persistence_schema_name = [RepoObject_schema_name]
---     , @persistence_table_name = [RepoObject_name]
---FROM
---     repo.RepoObject AS ro
---WHERE  [ro].[SysObject_type] = 'U'
---       AND [RepoObject_guid] = @persistence_RepoObject_guid
-/*
-	if not @persistence_RepoObject_guid is null
-	check, if @persistence_RepoObject_guid exists and it is a user table
-	
-	check, if @persistence_RepoObject_guid is in [repo].[RepoObject_persistence]
-	wenn nicht, dieses dort eintragen
-	
-	
-	if @persistence_RepoObject_guid is null
-	
-	create new RepoObject and insert into [repo].[RepoObject_persistence]
-	set @persistence_RepoObject_guid to the new RepoObject
-	
-	Spalten
-	
-	sql für create table
-	
-	nachdenken über
-	- umbenannte Spalten
-	- geänderter Datentyp
-	- neue Spalten
-	- nicht mehr existierende Spalten
-	
-	sql für Prozedure zum Befüllen der Persistierung 
-	
-	*/
---
---END
---
 --SET @rows = @@ROWCOUNT;
 Set @step_id = @step_id + 1;
 Set @step_name = N'end';

@@ -1457,7 +1457,8 @@ entity "puml-link:dhw:sqldb:property.propertyname_repoobject_t.adoc[]" as proper
 }
 
 entity "puml-link:dhw:sqldb:property.repoobjectproperty.adoc[]" as property.RepoObjectProperty << U >> {
-  - **RepoObjectProperty_id** : (int)
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   --
 }
 
@@ -1478,7 +1479,7 @@ entity "puml-link:dhw:sqldb:property.repoobjectproperty_selectedpropertyname_spl
 }
 
 entity "puml-link:dhw:sqldb:reference.additional_reference.adoc[]" as reference.additional_Reference << U >> {
-  - **Id** : (int)
+  # **tik_hash_c** : (nvarchar(32))
   --
 }
 
@@ -1761,19 +1762,19 @@ config.ftv_dwh_database <.. repo_sys.ExtendedProperties
 config.ftv_get_parameter_value <.. ssas.additional_Reference_step1
 config.ftv_get_parameter_value <.. reference.additional_Reference_is_external
 config.ftv_get_parameter_value <.. repo.RepoObject_external_src
-config.Parameter <.. property.PropertyName_RepoObject
 config.Parameter <.. config.ftv_dwh_database
+config.Parameter <.. property.PropertyName_RepoObject
 config.Parameter <.. config.ftv_get_parameter_value
 configT.Parameter_default <.. config.Parameter
 property.external_RepoObjectProperty <.. property.RepoObjectProperty_external_src
 property.PropertyName_RepoObject <.. property.PropertyName_RepoObject_T
 property.PropertyName_RepoObject_T <.. property.RepoObjectProperty_external_tgt
-property.RepoObjectProperty <.. property.PropertyName_RepoObject
 property.RepoObjectProperty <.. property.RepoObjectProperty_SelectedPropertyName_split
+property.RepoObjectProperty <.. property.PropertyName_RepoObject
 property.RepoObjectProperty_external_src <.. property.RepoObjectProperty_external_tgt
 property.RepoObjectProperty_external_tgt <.. property.RepoObjectProperty
-property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_from_properties_src
 property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_wo_columns_from_properties_src
+property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_from_properties_src
 reference.additional_Reference <.. reference.additional_Reference_is_external
 reference.additional_Reference_from_properties_src <.. reference.additional_Reference_from_properties_tgt
 reference.additional_Reference_from_properties_tgt <.. reference.additional_Reference
@@ -1800,15 +1801,15 @@ ssas.additional_Reference_step1 <.. reference.additional_Reference_from_ssas_src
 ssas.model_json <.. ssas.model_json_10
 ssas.model_json_10 <.. ssas.model_json_20
 ssas.model_json_20 <.. repo.RepoSchema_ssas_src
-ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
 ssas.model_json_20 <.. ssas.model_json_33_dataSources
 ssas.model_json_20 <.. ssas.model_json_31_tables
+ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
 ssas.model_json_201_descriptions_multiline <.. ssas.model_json_2011_descriptions_StrAgg
 ssas.model_json_2011_descriptions_StrAgg <.. repo.RepoSchema_ssas_src
 ssas.model_json_31_tables <.. ssas.model_json_31_tables_T
+ssas.model_json_31_tables_T <.. ssas.model_json_313_tables_partitions
 ssas.model_json_31_tables_T <.. ssas.model_json_311_tables_columns
 ssas.model_json_31_tables_T <.. repo.RepoObject_SSAS_src
-ssas.model_json_31_tables_T <.. ssas.model_json_313_tables_partitions
 ssas.model_json_311_tables_columns <.. ssas.model_json_311_tables_columns_T
 ssas.model_json_311_tables_columns_T <.. ssas.additional_Reference_step1
 ssas.model_json_313_tables_partitions <.. ssas.model_json_3131_tables_partitions_source
@@ -1825,8 +1826,8 @@ sys_dwh.indexes <.. repo_sys.ExtendedProperties
 sys_dwh.objects <.. repo_sys.SysObject
 sys_dwh.objects <.. repo_sys.ExtendedProperties
 sys_dwh.parameters <.. repo_sys.ExtendedProperties
-sys_dwh.schemas <.. repo_sys.SysObject
 sys_dwh.schemas <.. repo_sys.ExtendedProperties
+sys_dwh.schemas <.. repo_sys.SysObject
 sys_dwh.sql_modules <.. repo_sys.SysObject
 sys_dwh.tables <.. repo_sys.SysObject
 

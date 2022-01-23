@@ -51,7 +51,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-10-02 13:23:34
+2022-01-05 18:06:34
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -392,7 +392,7 @@ view
 * IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#startbnoblankgroupendb[no_group]
 +
 --
-* <<column-RepoObjectColumn_guid>>; uniqueidentifier
+* <<column-roc2_RepoObjectColumn_guid>>; uniqueidentifier
 * <<column-SysObjectColumn_name>>; nvarchar(128)
 --
 * PK, Unique, Real: 0, 0, 0
@@ -404,7 +404,7 @@ view
 * IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#startbnoblankgroupendb[no_group]
 +
 --
-* <<column-roc2_RepoObjectColumn_guid>>; uniqueidentifier
+* <<column-RepoObjectColumn_guid>>; uniqueidentifier
 * <<column-roc2_SysObjectColumn_name>>; nvarchar(128)
 --
 * PK, Unique, Real: 0, 0, 0
@@ -889,13 +889,13 @@ roc2_RepoObjectColumn_guid; uniqueidentifier
 - idx_RepoObjectColumn_RequiredRepoObjectColumnMerge__3
 
 ..
-RepoObjectColumn_guid; uniqueidentifier
+roc2_RepoObjectColumn_guid; uniqueidentifier
 SysObjectColumn_name; nvarchar(128)
 --
 - idx_RepoObjectColumn_RequiredRepoObjectColumnMerge__4
 
 ..
-roc2_RepoObjectColumn_guid; uniqueidentifier
+RepoObjectColumn_guid; uniqueidentifier
 roc2_SysObjectColumn_name; nvarchar(128)
 --
 - idx_RepoObjectColumn_RequiredRepoObjectColumnMerge__5
@@ -1046,7 +1046,8 @@ entity "puml-link:dhw:sqldb:property.propertyname_repoobject_t.adoc[]" as proper
 }
 
 entity "puml-link:dhw:sqldb:property.repoobjectproperty.adoc[]" as property.RepoObjectProperty << U >> {
-  - **RepoObjectProperty_id** : (int)
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   --
 }
 
@@ -1067,7 +1068,7 @@ entity "puml-link:dhw:sqldb:property.repoobjectproperty_selectedpropertyname_spl
 }
 
 entity "puml-link:dhw:sqldb:reference.additional_reference.adoc[]" as reference.additional_Reference << U >> {
-  - **Id** : (int)
+  # **tik_hash_c** : (nvarchar(32))
   --
 }
 
@@ -1358,15 +1359,15 @@ property.RepoObjectProperty <.. property.RepoObjectProperty_SelectedPropertyName
 property.RepoObjectProperty <.. property.PropertyName_RepoObject
 property.RepoObjectProperty_external_src <.. property.RepoObjectProperty_external_tgt
 property.RepoObjectProperty_external_tgt <.. property.RepoObjectProperty
-property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_from_properties_src
 property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_wo_columns_from_properties_src
+property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_from_properties_src
 reference.additional_Reference <.. reference.additional_Reference_is_external
 reference.additional_Reference_from_properties_src <.. reference.additional_Reference_from_properties_tgt
 reference.additional_Reference_from_properties_tgt <.. reference.additional_Reference
 reference.additional_Reference_from_ssas_src <.. reference.additional_Reference_from_ssas_tgt
 reference.additional_Reference_from_ssas_tgt <.. reference.additional_Reference
-reference.additional_Reference_is_external <.. reference.additional_Reference_ObjectColumn
 reference.additional_Reference_is_external <.. reference.additional_Reference_Object
+reference.additional_Reference_is_external <.. reference.additional_Reference_ObjectColumn
 reference.additional_Reference_Object <.. reference.additional_Reference_Object_T
 reference.additional_Reference_Object_T <.. repo.RepoObject_external_src
 reference.additional_Reference_Object_T <.. repo.RepoObjectColumn_external_src
@@ -1395,9 +1396,9 @@ ssas.additional_Reference_step1 <.. reference.additional_Reference_from_ssas_src
 ssas.model_json <.. ssas.model_json_10
 ssas.model_json_10 <.. ssas.model_json_20
 ssas.model_json_20 <.. repo.RepoSchema_ssas_src
-ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
 ssas.model_json_20 <.. ssas.model_json_31_tables
 ssas.model_json_20 <.. ssas.model_json_33_dataSources
+ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
 ssas.model_json_201_descriptions_multiline <.. ssas.model_json_2011_descriptions_StrAgg
 ssas.model_json_2011_descriptions_StrAgg <.. repo.RepoSchema_ssas_src
 ssas.model_json_31_tables <.. ssas.model_json_31_tables_T
@@ -1526,9 +1527,9 @@ entity "puml-link:dhw:sqldb:repo.repoobjectcolumn.adoc[]" as repo.RepoObjectColu
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
   InheritanceDefinition : (nvarchar(4000))
   InheritanceType : (tinyint)
-  is_persistence_no_check : (bit)
-  is_persistence_no_include : (bit)
-  is_persistence_no_update : (bit)
+  is_persistence_Ignore : (bit)
+  is_persistence_NoCompareButUpdate : (bit)
+  is_persistence_NoCompareNoUpdate : (bit)
   is_query_plan_expression : (bit)
   is_required_ColumnMerge : (bit)
   is_SysObjectColumn_missing : (bit)

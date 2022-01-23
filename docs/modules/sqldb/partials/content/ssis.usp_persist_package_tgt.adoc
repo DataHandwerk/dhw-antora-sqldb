@@ -51,7 +51,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-12-17 19:13:09
+2022-01-21 18:39:35
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -203,7 +203,7 @@ WHERE
 OR T.[PackageCreatorComputerName] <> S.[PackageCreatorComputerName] OR (S.[PackageCreatorComputerName] IS NULL AND NOT T.[PackageCreatorComputerName] IS NULL) OR (NOT S.[PackageCreatorComputerName] IS NULL AND T.[PackageCreatorComputerName] IS NULL)
 OR T.[PackageCreatorName] <> S.[PackageCreatorName] OR (S.[PackageCreatorName] IS NULL AND NOT T.[PackageCreatorName] IS NULL) OR (NOT S.[PackageCreatorName] IS NULL AND T.[PackageCreatorName] IS NULL)
 OR T.[PackageDescription] <> S.[PackageDescription] OR (S.[PackageDescription] IS NULL AND NOT T.[PackageDescription] IS NULL) OR (NOT S.[PackageDescription] IS NULL AND T.[PackageDescription] IS NULL)
-OR T.[PackageDTSID] <> S.[PackageDTSID] OR (S.[PackageDTSID] IS NULL AND NOT T.[PackageDTSID] IS NULL) OR (NOT S.[PackageDTSID] IS NULL AND T.[PackageDTSID] IS NULL)
+OR T.[PackageDTSID] <> S.[PackageDTSID]
 OR T.[PackageLastModifiedProductVersion] <> S.[PackageLastModifiedProductVersion] OR (S.[PackageLastModifiedProductVersion] IS NULL AND NOT T.[PackageLastModifiedProductVersion] IS NULL) OR (NOT S.[PackageLastModifiedProductVersion] IS NULL AND T.[PackageLastModifiedProductVersion] IS NULL)
 OR T.[PackageLocaleID] <> S.[PackageLocaleID] OR (S.[PackageLocaleID] IS NULL AND NOT T.[PackageLocaleID] IS NULL) OR (NOT S.[PackageLocaleID] IS NULL AND T.[PackageLocaleID] IS NULL)
 OR T.[PackageObjectName] <> S.[PackageObjectName] OR (S.[PackageObjectName] IS NULL AND NOT T.[PackageObjectName] IS NULL) OR (NOT S.[PackageObjectName] IS NULL AND T.[PackageObjectName] IS NULL)
@@ -804,9 +804,9 @@ entity "puml-link:dhw:sqldb:ssis_t.pkgstats.adoc[]" as ssis_t.pkgStats << U >> {
 logs.ExecutionLog <.. logs.usp_ExecutionLog_insert
 logs.usp_ExecutionLog_insert <.. ssis.usp_PERSIST_Package_tgt
 ssis.AntoraModule_tgt_filter <.. ssis.Package_tgt
+ssis.Package_src <.. ssis.usp_PERSIST_Package_tgt
 ssis.Package_src <.. ssis.Package_tgt
 ssis.Package_src <.. ssis.AntoraModule_tgt_filter
-ssis.Package_src <.. ssis.usp_PERSIST_Package_tgt
 ssis.Package_tgt <.. ssis.usp_PERSIST_Package_tgt
 ssis.Project <.. ssis.Package_src
 ssis_t.pkgStats <.. ssis.Package_src

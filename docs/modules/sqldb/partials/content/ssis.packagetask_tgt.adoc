@@ -105,7 +105,7 @@ view
 |2
 |*PackageName*
 |varchar(200)
-|NULL
+|NOT NULL
 |
 |===
 
@@ -124,7 +124,7 @@ view
 |3
 |*TaskPath*
 |varchar(8000)
-|NULL
+|NOT NULL
 |
 |===
 
@@ -171,32 +171,6 @@ view
 * xref:ssis.packagetask.adoc#column-delayvalidationpropertyvalue[+ssis.PackageTask.DelayValidationPropertyValue+]
 * xref:ssis.packagetask_src.adoc#column-delayvalidationpropertyvalue[+ssis.PackageTask_src.DelayValidationPropertyValue+]
 --
-
-
-[#column-dftquery]
-=== DFTQuery
-
-[cols="d,8a,m,m,m"]
-|===
-|
-|DFTQuery
-|xml
-|NULL
-|
-|===
-
-
-[#column-execpkgtaskqry]
-=== ExecPkgTaskQry
-
-[cols="d,8a,m,m,m"]
-|===
-|
-|ExecPkgTaskQry
-|xml
-|NULL
-|
-|===
 
 
 [#column-executedpackagename]
@@ -313,19 +287,6 @@ view
 --
 
 
-[#column-scripttaskqry]
-=== ScriptTaskQry
-
-[cols="d,8a,m,m,m"]
-|===
-|
-|ScriptTaskQry
-|xml
-|NULL
-|
-|===
-
-
 [#column-sqlconnection]
 === SqlConnection
 
@@ -364,19 +325,6 @@ view
 --
 
 
-[#column-sqltaskqry]
-=== SqlTaskQry
-
-[cols="d,8a,m,m,m"]
-|===
-|
-|SqlTaskQry
-|xml
-|NULL
-|
-|===
-
-
 [#column-taskdescription]
 === TaskDescription
 
@@ -404,7 +352,7 @@ view
 |
 |TaskName
 |varchar(2000)
-|NULL
+|NOT NULL
 |
 |===
 
@@ -448,18 +396,14 @@ view
 |2
 |*<<column-packagename>>*
 |varchar(200)
-|NULL
+|NOT NULL
 |
 
 |3
 |*<<column-taskpath>>*
 |varchar(8000)
-|NULL
+|NOT NULL
 |
-
-
-
-
 
 
 
@@ -491,18 +435,6 @@ view
 |
 |<<column-delayvalidationpropertyvalue>>
 |varchar(100)
-|NULL
-|
-
-|
-|<<column-dftquery>>
-|xml
-|NULL
-|
-
-|
-|<<column-execpkgtaskqry>>
-|xml
 |NULL
 |
 
@@ -543,12 +475,6 @@ view
 |
 
 |
-|<<column-scripttaskqry>>
-|xml
-|NULL
-|
-
-|
 |<<column-sqlconnection>>
 |uniqueidentifier
 |NULL
@@ -561,12 +487,6 @@ view
 |
 
 |
-|<<column-sqltaskqry>>
-|xml
-|NULL
-|
-
-|
 |<<column-taskdescription>>
 |varchar(max)
 |NULL
@@ -575,7 +495,7 @@ view
 |
 |<<column-taskname>>
 |varchar(2000)
-|NULL
+|NOT NULL
 |
 
 |
@@ -844,7 +764,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 === is_repo_managed
 
 // tag::is_repo_managed[]
-1
+0
 // end::is_repo_managed[]
 
 
@@ -971,7 +891,6 @@ source: property.RepoObjectProperty WHERE property_int = 1
 :is_persistence_delete_missing:
 :is_persistence_insert:
 :is_persistence_update_changed:
-:is_repo_managed:
 
 // end::boolean_attributes[]
 
@@ -1262,8 +1181,8 @@ entity "puml-link:dhw:sqldb:ssis_t.tbltask_sql.adoc[]" as ssis_t.TblTask_Sql << 
 }
 
 ssis.AntoraModule_tgt_filter <.. ssis.PackageTask_tgt
-ssis.Package_src <.. ssis.AntoraModule_tgt_filter
 ssis.Package_src <.. ssis.PackageTask_src
+ssis.Package_src <.. ssis.AntoraModule_tgt_filter
 ssis.PackageTask_src <.. ssis.PackageTask_tgt
 ssis.Project <.. ssis.Package_src
 ssis_t.pkgStats <.. ssis.Package_src
@@ -1375,21 +1294,21 @@ entity "puml-link:dhw:sqldb:ssis.usp_persist_packagetask_tgt.adoc[]" as ssis.usp
   --
 }
 
-docs.ssis_Adoc <.. docs.usp_PERSIST_ssis_Adoc_T
 docs.ssis_Adoc <.. docs.ssis_Adoc_T
-docs.ssis_Adoc_T <.. docs.usp_AntoraExport_SsisPartialsContent
+docs.ssis_Adoc <.. docs.usp_PERSIST_ssis_Adoc_T
 docs.ssis_Adoc_T <.. docs.usp_PERSIST_ssis_Adoc_T
+docs.ssis_Adoc_T <.. docs.usp_AntoraExport_SsisPartialsContent
 docs.ssis_PumlPackage <.. docs.ssis_Adoc
 docs.ssis_PumlPartialTaskComponent <.. docs.ssis_PumlPackage
 docs.ssis_TaskList <.. docs.ssis_Adoc
 docs.usp_AntoraExport_SsisPartialsContent <.. docs.usp_AntoraExport
 docs.usp_PERSIST_ssis_Adoc_T <.. docs.usp_AntoraExport_SsisPartialsContent
+ssis.PackageTask <.. docs.ssis_Task
 ssis.PackageTask <.. docs.ssis_TaskList
 ssis.PackageTask <.. ssis.PackageTask_LevelLagLead
-ssis.PackageTask <.. docs.ssis_Task
 ssis.PackageTask_LevelLagLead <.. docs.ssis_PumlPartialTaskComponent
-ssis.PackageTask_tgt <.. ssis.usp_PERSIST_PackageTask_tgt
 ssis.PackageTask_tgt <.. ssis.PackageTask
+ssis.PackageTask_tgt <.. ssis.usp_PERSIST_PackageTask_tgt
 ssis.usp_PERSIST_PackageTask_tgt <.. ssis.usp_import
 
 footer The diagram is interactive and contains links.

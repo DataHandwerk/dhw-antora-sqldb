@@ -49,7 +49,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-08-17 19:33:26
+2022-01-05 18:06:33
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -1163,7 +1163,8 @@ entity "puml-link:dhw:sqldb:property.propertyname_repoobject_t.adoc[]" as proper
 }
 
 entity "puml-link:dhw:sqldb:property.repoobjectcolumnproperty.adoc[]" as property.RepoObjectColumnProperty << U >> {
-  - **RepoObjectColumnProperty_id** : (int)
+  - **RepoObjectColumn_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   --
 }
 
@@ -1180,7 +1181,8 @@ entity "puml-link:dhw:sqldb:property.repoobjectcolumnproperty_external_tgt.adoc[
 }
 
 entity "puml-link:dhw:sqldb:property.repoobjectproperty.adoc[]" as property.RepoObjectProperty << U >> {
-  - **RepoObjectProperty_id** : (int)
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   --
 }
 
@@ -1201,7 +1203,7 @@ entity "puml-link:dhw:sqldb:property.repoobjectproperty_selectedpropertyname_spl
 }
 
 entity "puml-link:dhw:sqldb:reference.additional_reference.adoc[]" as reference.additional_Reference << U >> {
-  - **Id** : (int)
+  # **tik_hash_c** : (nvarchar(32))
   --
 }
 
@@ -1335,6 +1337,10 @@ entity "puml-link:dhw:sqldb:reference.repoobject_reference_persistence.adoc[]" a
 }
 
 entity "puml-link:dhw:sqldb:reference.repoobject_reference_persistence_target_as_source.adoc[]" as reference.RepoObject_reference_persistence_target_as_source << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.repoobject_reference_persistence_target_as_source_explicit.adoc[]" as reference.RepoObject_reference_persistence_target_as_source_explicit << V >> {
   --
 }
 
@@ -1929,13 +1935,13 @@ entity "puml-link:dhw:sqldb:sys_dwh.types.adoc[]" as sys_dwh.types << SN >> {
 }
 
 config.ftv_dwh_database <.. repo_sys.sql_expression_dependencies
-config.ftv_dwh_database <.. repo_sys.ExtendedProperties
 config.ftv_dwh_database <.. repo_sys.SysColumn
+config.ftv_dwh_database <.. repo_sys.ExtendedProperties
 config.ftv_get_parameter_value <.. repo.RepoObject_external_src
 config.ftv_get_parameter_value <.. reference.additional_Reference_is_external
 config.ftv_get_parameter_value <.. ssas.additional_Reference_step1
-config.Parameter <.. property.PropertyName_RepoObject
 config.Parameter <.. config.ftv_dwh_database
+config.Parameter <.. property.PropertyName_RepoObject
 config.Parameter <.. config.ftv_get_parameter_value
 configT.join_type <.. sqlparse.RepoObject_SqlModules_41_from
 configT.Parameter_default <.. config.Parameter
@@ -1955,8 +1961,8 @@ property.RepoObjectProperty <.. property.RepoObjectProperty_SelectedPropertyName
 property.RepoObjectProperty <.. property.PropertyName_RepoObject
 property.RepoObjectProperty_external_src <.. property.RepoObjectProperty_external_tgt
 property.RepoObjectProperty_external_tgt <.. property.RepoObjectProperty
-property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_from_properties_src
 property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_wo_columns_from_properties_src
+property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_from_properties_src
 reference.additional_Reference <.. reference.additional_Reference_guid
 reference.additional_Reference <.. reference.additional_Reference_is_external
 reference.additional_Reference_from_properties_src <.. reference.additional_Reference_from_properties_tgt
@@ -1977,8 +1983,11 @@ reference.additional_Reference_wo_columns_from_properties_tgt <.. reference.addi
 reference.RepoObject_reference <.. reference.RepoObject_reference_T
 reference.RepoObject_reference_additional <.. reference.RepoObject_reference_union
 reference.RepoObject_reference_persistence <.. reference.RepoObject_reference_union
-reference.RepoObject_reference_persistence_target_as_source <.. reference.RepoObject_reference_union
 reference.RepoObject_reference_persistence_target_as_source <.. reference.RepoObject_reference
+reference.RepoObject_reference_persistence_target_as_source <.. reference.RepoObject_reference_union
+reference.RepoObject_reference_persistence_target_as_source_explicit <.. reference.RepoObject_reference_union
+reference.RepoObject_reference_persistence_target_as_source_explicit <.. reference.RepoObject_reference
+reference.RepoObject_reference_SqlExpressionDependencies <.. reference.RepoObject_reference_persistence_target_as_source_explicit
 reference.RepoObject_reference_SqlExpressionDependencies <.. reference.RepoObject_reference_union
 reference.RepoObject_reference_SqlExpressionDependencies <.. reference.RepoObject_reference_persistence_target_as_source
 reference.RepoObject_reference_T <.. reference.RepoObjectColumn_reference_additional
@@ -1999,8 +2008,8 @@ reference.RepoObjectSource_virtual <.. reference.RepoObject_reference_virtual
 repo.Index_ssas <.. repo.Index_ssas_T
 repo.Index_ssas_T <.. repo.IndexColumn_ssas
 repo.Index_ssas_T <.. repo.IndexColumn_ssas_gross
-repo.Index_virtual <.. repo.IndexColumn_virtual_referenced_setpoint
 repo.Index_virtual <.. repo.IndexColumn_virtual_gross
+repo.Index_virtual <.. repo.IndexColumn_virtual_referenced_setpoint
 repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T
 repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.IndexColumn_virtual_referenced_setpoint
 repo.IndexColumn_ssas <.. repo.IndexColumn_ssas_T
@@ -2019,6 +2028,7 @@ repo.RepoObject <.. repo.IndexColumn_virtual_gross
 repo.RepoObject <.. sqlparse.RepoObject_SqlModules_10_statement
 repo.RepoObject <.. sqlparse.RepoObject_SqlModules_39_object
 repo.RepoObject <.. repo.RepoObject_gross_persistence
+repo.RepoObject <.. reference.RepoObject_reference_persistence_target_as_source_explicit
 repo.RepoObject <.. property.RepoObjectProperty_external_tgt
 repo.RepoObject <.. repo.RepoObjectColumn_external_src
 repo.RepoObject <.. repo.IndexColumn_ssas_gross
@@ -2037,24 +2047,25 @@ repo.RepoObject_external_tgt <.. repo.RepoObject
 repo.RepoObject_external_tgt <.. repo.RepoObjectColumn_external_tgt
 repo.RepoObject_gross_persistence <.. reference.RepoObject_reference_persistence_target_as_source
 repo.RepoObject_persistence <.. repo.RepoObject_gross_persistence
-repo.RepoObject_persistence <.. repo.RepoObjectColumn_gross
+repo.RepoObject_persistence <.. reference.RepoObject_reference_persistence_target_as_source_explicit
 repo.RepoObject_persistence <.. reference.RepoObject_reference_persistence
 repo.RepoObject_persistence <.. reference.RepoObjectColumn_reference_Persistence
+repo.RepoObject_persistence <.. repo.RepoObjectColumn_gross
 repo.RepoObject_SSAS_src <.. repo.RepoObject_SSAS_tgt
 repo.RepoObject_SSAS_tgt <.. repo.RepoObjectColumn_SSAS_tgt
 repo.RepoObject_SSAS_tgt <.. repo.RepoObject
+repo.RepoObjectColumn <.. reference.RepoObjectColumn_reference_Persistence
+repo.RepoObjectColumn <.. repo.IndexColumn_virtual_gross
+repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_name
+repo.RepoObjectColumn <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing
+repo.RepoObjectColumn <.. sqlparse.RepoObject_SqlModules_71_reference_ExpliciteTableAlias
+repo.RepoObjectColumn <.. repo.RepoObjectColumn_gross
+repo.RepoObjectColumn <.. reference.additional_Reference_guid
 repo.RepoObjectColumn <.. repo.IndexColumn_ssas_gross
 repo.RepoObjectColumn <.. sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias
 repo.RepoObjectColumn <.. reference.RepoObjectColumn_reference_SqlModules
 repo.RepoObjectColumn <.. property.RepoObjectColumnProperty_external_tgt
-repo.RepoObjectColumn <.. reference.additional_Reference_guid
-repo.RepoObjectColumn <.. sqlparse.RepoObject_SqlModules_71_reference_ExpliciteTableAlias
-repo.RepoObjectColumn <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing
 repo.RepoObjectColumn <.. repo.check_IndexColumn_virtual_referenced_setpoint
-repo.RepoObjectColumn <.. repo.RepoObjectColumn_gross
-repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_name
-repo.RepoObjectColumn <.. repo.IndexColumn_virtual_gross
-repo.RepoObjectColumn <.. reference.RepoObjectColumn_reference_Persistence
 repo.RepoObjectColumn_external_src <.. repo.RepoObjectColumn_external_tgt
 repo.RepoObjectColumn_external_tgt <.. repo.RepoObjectColumn
 repo.RepoObjectColumn_gross <.. reference.RepoObjectColumn_reference_virtual
@@ -2063,10 +2074,10 @@ repo.RepoObjectColumn_SSAS_tgt <.. repo.RepoObjectColumn
 repo.RepoSchema <.. repo.RepoObject_SSAS_src
 repo.RepoSchema_ssas_src <.. repo.RepoSchema_ssas_tgt
 repo.RepoSchema_ssas_tgt <.. repo.RepoSchema
-repo.SysColumn_RepoObjectColumn_via_name <.. repo_sys.IndexColumn_unique
 repo.SysColumn_RepoObjectColumn_via_name <.. repo_sys.sql_expression_dependencies
-repo.SysObject_RepoObject_via_name <.. repo_sys.IndexColumn_unique
+repo.SysColumn_RepoObjectColumn_via_name <.. repo_sys.IndexColumn_unique
 repo.SysObject_RepoObject_via_name <.. repo_sys.sql_expression_dependencies
+repo.SysObject_RepoObject_via_name <.. repo_sys.IndexColumn_unique
 repo_sys.ExtendedProperties <.. repo_sys.SysObject
 repo_sys.ExtendedProperties <.. repo_sys.SysColumn
 repo_sys.IndexColumn_unique <.. repo.IndexColumn_union
@@ -2084,13 +2095,13 @@ sqlparse.RepoObject_SqlModules <.. sqlparse.RepoObject_SqlModules_10_statement
 sqlparse.RepoObject_SqlModules_10_statement <.. sqlparse.RepoObject_SqlModules_20_statement_children
 sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_29_1_object_is_union
 sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_21_statement_children_helper
-sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_22_identifier_alias_AS
-sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_33_ObjectNormalized
 sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_29_2_object_is_GroupBy
 sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_32_ObjectClass
 sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_51_Identitfier
 sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_41_from
 sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_24_IdentifierList_children
+sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_22_identifier_alias_AS
+sqlparse.RepoObject_SqlModules_20_statement_children <.. sqlparse.RepoObject_SqlModules_33_ObjectNormalized
 sqlparse.RepoObject_SqlModules_21_statement_children_helper <.. sqlparse.RepoObject_SqlModules_31_object
 sqlparse.RepoObject_SqlModules_22_identifier_alias_AS <.. sqlparse.RepoObject_SqlModules_41_from
 sqlparse.RepoObject_SqlModules_24_IdentifierList_children <.. sqlparse.RepoObject_SqlModules_25_IdentifierList_children_IdentifierSplit
@@ -2127,25 +2138,25 @@ ssas.IndexColumn_union <.. repo.Index_ssas
 ssas.model_json <.. ssas.model_json_10
 ssas.model_json_10 <.. ssas.model_json_20
 ssas.model_json_20 <.. repo.RepoSchema_ssas_src
-ssas.model_json_20 <.. ssas.model_json_32_relationships
-ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
 ssas.model_json_20 <.. ssas.model_json_31_tables
 ssas.model_json_20 <.. ssas.model_json_33_dataSources
+ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
+ssas.model_json_20 <.. ssas.model_json_32_relationships
 ssas.model_json_201_descriptions_multiline <.. ssas.model_json_2011_descriptions_StrAgg
 ssas.model_json_2011_descriptions_StrAgg <.. repo.RepoSchema_ssas_src
 ssas.model_json_31_tables <.. ssas.model_json_31_tables_T
+ssas.model_json_31_tables_T <.. ssas.model_json_313_tables_partitions
 ssas.model_json_31_tables_T <.. repo.RepoObject_SSAS_src
 ssas.model_json_31_tables_T <.. ssas.model_json_311_tables_columns
-ssas.model_json_31_tables_T <.. ssas.model_json_313_tables_partitions
 ssas.model_json_311_tables_columns <.. ssas.model_json_311_tables_columns_T
-ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_gross
 ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_SSAS_src
-ssas.model_json_311_tables_columns_T <.. ssas.IndexColumn_from_Relationship
-ssas.model_json_311_tables_columns_T <.. ssas.IndexColumn_from_IsUnique
-ssas.model_json_311_tables_columns_T <.. ssas.IndexColumn_from_IsKey
 ssas.model_json_311_tables_columns_T <.. ssas.model_json_3112_tables_columns_expressions_multiline
 ssas.model_json_311_tables_columns_T <.. ssas.model_json_3111_tables_columns_descriptions_multiline
 ssas.model_json_311_tables_columns_T <.. ssas.additional_Reference_step1
+ssas.model_json_311_tables_columns_T <.. ssas.IndexColumn_from_IsUnique
+ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_gross
+ssas.model_json_311_tables_columns_T <.. ssas.IndexColumn_from_IsKey
+ssas.model_json_311_tables_columns_T <.. ssas.IndexColumn_from_Relationship
 ssas.model_json_3111_tables_columns_descriptions_multiline <.. ssas.model_json_31111_tables_columns_descriptions_StrAgg
 ssas.model_json_31111_tables_columns_descriptions_StrAgg <.. repo.RepoObjectColumn_gross
 ssas.model_json_3112_tables_columns_expressions_multiline <.. ssas.model_json_31121_tables_columns_expressions_StrAgg
@@ -2169,11 +2180,11 @@ sys_dwh.identity_columns <.. repo_sys.SysColumn
 sys_dwh.index_columns <.. repo_sys.IndexColumn_unique
 sys_dwh.indexes <.. repo_sys.ExtendedProperties
 sys_dwh.indexes <.. repo_sys.IndexColumn_unique
-sys_dwh.objects <.. repo_sys.ExtendedProperties
 sys_dwh.objects <.. repo_sys.SysObject
+sys_dwh.objects <.. repo_sys.ExtendedProperties
 sys_dwh.parameters <.. repo_sys.ExtendedProperties
-sys_dwh.schemas <.. repo_sys.SysObject
 sys_dwh.schemas <.. repo_sys.ExtendedProperties
+sys_dwh.schemas <.. repo_sys.SysObject
 sys_dwh.sql_expression_dependencies <.. repo_sys.sql_expression_dependencies
 sys_dwh.sql_modules <.. repo_sys.SysObject
 sys_dwh.tables <.. repo_sys.SysObject
@@ -2348,9 +2359,9 @@ entity "puml-link:dhw:sqldb:repo.repoobjectcolumn.adoc[]" as repo.RepoObjectColu
   Inheritance_StringAggSeparatorSql : (nvarchar(4000))
   InheritanceDefinition : (nvarchar(4000))
   InheritanceType : (tinyint)
-  is_persistence_no_check : (bit)
-  is_persistence_no_include : (bit)
-  is_persistence_no_update : (bit)
+  is_persistence_Ignore : (bit)
+  is_persistence_NoCompareButUpdate : (bit)
+  is_persistence_NoCompareNoUpdate : (bit)
   is_query_plan_expression : (bit)
   is_required_ColumnMerge : (bit)
   is_SysObjectColumn_missing : (bit)

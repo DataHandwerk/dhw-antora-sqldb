@@ -50,7 +50,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-12-16 11:41:45
+2022-01-13 19:32:38
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -118,6 +118,29 @@ view
 .Referencing Columns
 --
 * xref:repo.repoobject_gross2.adoc#column-description[+repo.RepoObject_gross2.Description+]
+--
+
+
+[#column-executionlogidunderlineaction]
+=== ExecutionLogId_action
+
+[cols="d,8a,m,m,m"]
+|===
+|
+|ExecutionLogId_action
+|char(1)
+|NULL
+|
+|===
+
+.Referenced Columns
+--
+* xref:repo.repoobject_persistence.adoc#column-executionlogidunderlineaction[+repo.RepoObject_persistence.ExecutionLogId_action+]
+--
+
+.Referencing Columns
+--
+* xref:repo.repoobject_gross2.adoc#column-executionlogidunderlineaction[+repo.RepoObject_gross2.ExecutionLogId_action+]
 --
 
 
@@ -705,75 +728,6 @@ view
 .Referencing Columns
 --
 * xref:repo.repoobject_gross2.adoc#column-isunderlinepersistenceunderlineinsert[+repo.RepoObject_gross2.is_persistence_insert+]
---
-
-
-[#column-isunderlinepersistenceunderlinemergeunderlinedeleteunderlinemissing]
-=== is_persistence_merge_delete_missing
-
-[cols="d,8a,m,m,m"]
-|===
-|
-|is_persistence_merge_delete_missing
-|bit
-|NULL
-|
-|===
-
-.Referenced Columns
---
-* xref:repo.repoobject_persistence.adoc#column-isunderlinepersistenceunderlinemergeunderlinedeleteunderlinemissing[+repo.RepoObject_persistence.is_persistence_merge_delete_missing+]
---
-
-.Referencing Columns
---
-* xref:repo.repoobject_gross2.adoc#column-isunderlinepersistenceunderlinemergeunderlinedeleteunderlinemissing[+repo.RepoObject_gross2.is_persistence_merge_delete_missing+]
---
-
-
-[#column-isunderlinepersistenceunderlinemergeunderlineinsert]
-=== is_persistence_merge_insert
-
-[cols="d,8a,m,m,m"]
-|===
-|
-|is_persistence_merge_insert
-|bit
-|NULL
-|
-|===
-
-.Referenced Columns
---
-* xref:repo.repoobject_persistence.adoc#column-isunderlinepersistenceunderlinemergeunderlineinsert[+repo.RepoObject_persistence.is_persistence_merge_insert+]
---
-
-.Referencing Columns
---
-* xref:repo.repoobject_gross2.adoc#column-isunderlinepersistenceunderlinemergeunderlineinsert[+repo.RepoObject_gross2.is_persistence_merge_insert+]
---
-
-
-[#column-isunderlinepersistenceunderlinemergeunderlineupdateunderlinechanged]
-=== is_persistence_merge_update_changed
-
-[cols="d,8a,m,m,m"]
-|===
-|
-|is_persistence_merge_update_changed
-|bit
-|NULL
-|
-|===
-
-.Referenced Columns
---
-* xref:repo.repoobject_persistence.adoc#column-isunderlinepersistenceunderlinemergeunderlineupdateunderlinechanged[+repo.RepoObject_persistence.is_persistence_merge_update_changed+]
---
-
-.Referencing Columns
---
-* xref:repo.repoobject_gross2.adoc#column-isunderlinepersistenceunderlinemergeunderlineupdateunderlinechanged[+repo.RepoObject_gross2.is_persistence_merge_update_changed+]
 --
 
 
@@ -2256,8 +2210,6 @@ view
 
 
 
-
-
 // end::AntoraPkColumnTableRows[]
 
 == AntoraNonPkColumnTableRows
@@ -2278,6 +2230,12 @@ view
 |
 |<<column-description>>
 |nvarchar(max)
+|NULL
+|
+
+|
+|<<column-executionlogidunderlineaction>>
+|char(1)
 |NULL
 |
 
@@ -2427,24 +2385,6 @@ view
 
 |
 |<<column-isunderlinepersistenceunderlineinsert>>
-|bit
-|NULL
-|
-
-|
-|<<column-isunderlinepersistenceunderlinemergeunderlinedeleteunderlinemissing>>
-|bit
-|NULL
-|
-
-|
-|<<column-isunderlinepersistenceunderlinemergeunderlineinsert>>
-|bit
-|NULL
-|
-
-|
-|<<column-isunderlinepersistenceunderlinemergeunderlineupdateunderlinechanged>>
 |bit
 |NULL
 |
@@ -3284,6 +3224,7 @@ entity "puml-link:dhw:sqldb:repo.repoobject_gross.adoc[]" as repo.RepoObject_gro
   AntoraComponent : (nvarchar(max))
   AntoraModule : (nvarchar(max))
   Description : (nvarchar(max))
+  ExecutionLogId_action : (char(1))
   external_AntoraComponent : (nvarchar(128))
   external_AntoraModule : (nvarchar(128))
   external_DatabaseName : (nvarchar(128))
@@ -3309,9 +3250,6 @@ entity "puml-link:dhw:sqldb:repo.repoobject_gross.adoc[]" as repo.RepoObject_gro
   is_persistence_delete_changed : (bit)
   is_persistence_delete_missing : (bit)
   is_persistence_insert : (bit)
-  is_persistence_merge_delete_missing : (bit)
-  is_persistence_merge_insert : (bit)
-  is_persistence_merge_update_changed : (bit)
   is_persistence_persist_source : (bit)
   is_persistence_truncate : (bit)
   is_persistence_update_changed : (bit)
@@ -3814,7 +3752,8 @@ entity "puml-link:dhw:sqldb:property.propertyname_repoobject_t.adoc[]" as proper
 }
 
 entity "puml-link:dhw:sqldb:property.repoobjectproperty.adoc[]" as property.RepoObjectProperty << U >> {
-  - **RepoObjectProperty_id** : (int)
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **property_name** : (nvarchar(128))
   --
 }
 
@@ -3835,7 +3774,7 @@ entity "puml-link:dhw:sqldb:property.repoobjectproperty_selectedpropertyname_spl
 }
 
 entity "puml-link:dhw:sqldb:reference.additional_reference.adoc[]" as reference.additional_Reference << U >> {
-  - **Id** : (int)
+  # **tik_hash_c** : (nvarchar(32))
   --
 }
 
@@ -3986,6 +3925,10 @@ entity "puml-link:dhw:sqldb:reference.repoobject_reference_persistence.adoc[]" a
 }
 
 entity "puml-link:dhw:sqldb:reference.repoobject_reference_persistence_target_as_source.adoc[]" as reference.RepoObject_reference_persistence_target_as_source << V >> {
+  --
+}
+
+entity "puml-link:dhw:sqldb:reference.repoobject_reference_persistence_target_as_source_explicit.adoc[]" as reference.RepoObject_reference_persistence_target_as_source_explicit << V >> {
   --
 }
 
@@ -4287,35 +4230,35 @@ entity "puml-link:dhw:sqldb:uspgenerator.generatorusp.adoc[]" as uspgenerator.Ge
   --
 }
 
-config.ftv_dwh_database <.. repo_sys.SysColumn
 config.ftv_dwh_database <.. repo_sys.ExtendedProperties
+config.ftv_dwh_database <.. repo_sys.SysColumn
 config.ftv_dwh_database <.. repo_sys.sql_expression_dependencies
 config.ftv_get_parameter_value <.. repo.RepoObject_external_src
 config.ftv_get_parameter_value <.. repo.RepoObject_gross
 config.ftv_get_parameter_value <.. ssas.additional_Reference_step1
 config.ftv_get_parameter_value <.. reference.additional_Reference_is_external
+config.Parameter <.. config.ftv_dwh_database
 config.Parameter <.. property.PropertyName_RepoObject
 config.Parameter <.. config.ftv_get_parameter_value
-config.Parameter <.. config.ftv_dwh_database
 configT.Parameter_default <.. config.Parameter
 configT.spt_values <.. configT.type
 configT.type <.. repo.RepoObject_gross_persistence
 configT.type <.. reference.RepoObject_ReferencedReferencing
 configT.type <.. repo.RepoObject_gross
-docs.fs_cleanStringForFilename <.. repo.RepoObject_gross_persistence
 docs.fs_cleanStringForFilename <.. repo.RepoObject_gross
+docs.fs_cleanStringForFilename <.. repo.RepoObject_gross_persistence
 docs.fs_cleanStringForFilename <.. reference.RepoObject_ReferencedReferencing
 property.external_RepoObjectProperty <.. property.RepoObjectProperty_external_src
 property.fs_get_RepoObjectProperty_nvarchar <.. repo.RepoObject_gross
 property.PropertyName_RepoObject <.. property.PropertyName_RepoObject_T
 property.PropertyName_RepoObject_T <.. property.RepoObjectProperty_external_tgt
 property.RepoObjectProperty <.. property.PropertyName_RepoObject
-property.RepoObjectProperty <.. property.RepoObjectProperty_SelectedPropertyName_split
 property.RepoObjectProperty <.. property.fs_get_RepoObjectProperty_nvarchar
+property.RepoObjectProperty <.. property.RepoObjectProperty_SelectedPropertyName_split
 property.RepoObjectProperty_external_src <.. property.RepoObjectProperty_external_tgt
 property.RepoObjectProperty_external_tgt <.. property.RepoObjectProperty
-property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_from_properties_src
 property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_wo_columns_from_properties_src
+property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_from_properties_src
 reference.additional_Reference <.. reference.additional_Reference_guid
 reference.additional_Reference <.. reference.additional_Reference_is_external
 reference.additional_Reference_database <.. reference.additional_Reference_database_T
@@ -4339,8 +4282,11 @@ reference.RepoObject_QueryPlan <.. repo.RepoObject_gross
 reference.RepoObject_reference <.. reference.RepoObject_reference_T
 reference.RepoObject_reference_additional <.. reference.RepoObject_reference_union
 reference.RepoObject_reference_persistence <.. reference.RepoObject_reference_union
-reference.RepoObject_reference_persistence_target_as_source <.. reference.RepoObject_reference_union
 reference.RepoObject_reference_persistence_target_as_source <.. reference.RepoObject_reference
+reference.RepoObject_reference_persistence_target_as_source <.. reference.RepoObject_reference_union
+reference.RepoObject_reference_persistence_target_as_source_explicit <.. reference.RepoObject_reference_union
+reference.RepoObject_reference_persistence_target_as_source_explicit <.. reference.RepoObject_reference
+reference.RepoObject_reference_SqlExpressionDependencies <.. reference.RepoObject_reference_persistence_target_as_source_explicit
 reference.RepoObject_reference_SqlExpressionDependencies <.. reference.RepoObject_reference_persistence_target_as_source
 reference.RepoObject_reference_SqlExpressionDependencies <.. reference.RepoObject_reference_union
 reference.RepoObject_reference_T <.. reference.RepoObject_ReferencedReferencing
@@ -4352,6 +4298,7 @@ repo.Index_Settings <.. repo.RepoObject_gross
 repo.RepoObject <.. reference.RepoObject_reference_persistence
 repo.RepoObject <.. repo.SysColumn_RepoObjectColumn_via_name
 repo.RepoObject <.. repo.SysObject_RepoObject_via_name
+repo.RepoObject <.. reference.RepoObject_reference_persistence_target_as_source_explicit
 repo.RepoObject <.. repo.RepoObject_gross_persistence
 repo.RepoObject <.. repo.RepoObjectColumn_external_src
 repo.RepoObject <.. property.RepoObjectProperty_external_tgt
@@ -4364,14 +4311,15 @@ repo.RepoObject_external_src <.. repo.RepoObject_external_tgt
 repo.RepoObject_external_tgt <.. repo.RepoObject
 repo.RepoObject_external_tgt <.. repo.RepoObjectColumn_external_tgt
 repo.RepoObject_gross_persistence <.. reference.RepoObject_reference_persistence_target_as_source
-repo.RepoObject_persistence <.. reference.RepoObject_reference_persistence
 repo.RepoObject_persistence <.. repo.RepoObject_gross
+repo.RepoObject_persistence <.. reference.RepoObject_reference_persistence
+repo.RepoObject_persistence <.. reference.RepoObject_reference_persistence_target_as_source_explicit
 repo.RepoObject_persistence <.. repo.RepoObject_gross_persistence
 repo.RepoObject_SSAS_src <.. repo.RepoObject_SSAS_tgt
 repo.RepoObject_SSAS_tgt <.. repo.RepoObjectColumn_SSAS_tgt
 repo.RepoObject_SSAS_tgt <.. repo.RepoObject
-repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_name
 repo.RepoObjectColumn <.. reference.additional_Reference_guid
+repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_name
 repo.RepoObjectColumn_external_src <.. repo.RepoObjectColumn_external_tgt
 repo.RepoObjectColumn_external_tgt <.. repo.RepoObjectColumn
 repo.RepoObjectColumn_SSAS_src <.. repo.RepoObjectColumn_SSAS_tgt
@@ -4385,23 +4333,23 @@ repo_sys.ExtendedProperties <.. repo_sys.SysObject
 repo_sys.ExtendedProperties <.. repo_sys.SysColumn
 repo_sys.sql_expression_dependencies <.. reference.RepoObject_reference_SqlExpressionDependencies
 repo_sys.SysColumn <.. repo.SysColumn_RepoObjectColumn_via_name
-repo_sys.SysObject <.. repo.SysObject_RepoObject_via_name
 repo_sys.SysObject <.. repo_sys.SysColumn
+repo_sys.SysObject <.. repo.SysObject_RepoObject_via_name
 ssas.additional_Reference_step1 <.. reference.additional_Reference_from_ssas_src
 ssas.model_json <.. ssas.model_json_10
 ssas.model_json_10 <.. ssas.model_json_20
 ssas.model_json_20 <.. repo.RepoSchema_ssas_src
-ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
 ssas.model_json_20 <.. ssas.model_json_33_dataSources
 ssas.model_json_20 <.. ssas.model_json_31_tables
+ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
 ssas.model_json_201_descriptions_multiline <.. ssas.model_json_2011_descriptions_StrAgg
 ssas.model_json_2011_descriptions_StrAgg <.. repo.RepoSchema_ssas_src
 ssas.model_json_31_tables <.. ssas.model_json_31_tables_T
+ssas.model_json_31_tables_T <.. repo.RepoObject_gross
+ssas.model_json_31_tables_T <.. ssas.model_json_316_tables_descriptions_multiline
+ssas.model_json_31_tables_T <.. ssas.model_json_313_tables_partitions
 ssas.model_json_31_tables_T <.. ssas.model_json_311_tables_columns
 ssas.model_json_31_tables_T <.. repo.RepoObject_SSAS_src
-ssas.model_json_31_tables_T <.. ssas.model_json_316_tables_descriptions_multiline
-ssas.model_json_31_tables_T <.. repo.RepoObject_gross
-ssas.model_json_31_tables_T <.. ssas.model_json_313_tables_partitions
 ssas.model_json_311_tables_columns <.. ssas.model_json_311_tables_columns_T
 ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_SSAS_src
 ssas.model_json_311_tables_columns_T <.. ssas.additional_Reference_step1
@@ -5056,17 +5004,17 @@ entity "puml-link:dhw:sqldb:workflow.workflowstep_src.adoc[]" as workflow.Workfl
 }
 
 docs.AntoraNavListPage_by_type <.. docs.usp_AntoraExport_ObjectNavigation
-docs.AntoraNavListRepoObject_by_schema <.. docs.usp_AntoraExport_ObjectNavigation
 docs.AntoraNavListRepoObject_by_schema <.. docs.AntoraPage_ObjectBySchema
+docs.AntoraNavListRepoObject_by_schema <.. docs.usp_AntoraExport_ObjectNavigation
 docs.AntoraNavListRepoObject_by_schema_type <.. docs.usp_AntoraExport_ObjectNavigation
-docs.AntoraNavListRepoObject_by_type <.. docs.usp_AntoraExport_ObjectNavigation
 docs.AntoraNavListRepoObject_by_type <.. docs.AntoraPage_ObjectByType
+docs.AntoraNavListRepoObject_by_type <.. docs.usp_AntoraExport_ObjectNavigation
 docs.ftv_RepoObject_Reference_PlantUml_EntityRefList <.. docs.RepoObject_Plantuml
 docs.IndexSemanticgroup <.. docs.AntoraPage_IndexSemanticGroup
 docs.IndexSemanticgroupPatterndatatype <.. docs.IndexSemanticgroup
 docs.ObjectRefCyclic_EntityList <.. docs.ObjectRefCyclic
-docs.RepoObject_Adoc <.. docs.usp_PERSIST_RepoObject_Adoc_T
 docs.RepoObject_Adoc <.. docs.RepoObject_Adoc_T
+docs.RepoObject_Adoc <.. docs.usp_PERSIST_RepoObject_Adoc_T
 docs.REpoObject_Adoc_T <.. docs.usp_PERSIST_RepoObject_Adoc_T
 docs.RepoObject_AntoraXrefCulturesList <.. docs.RepoObject_Adoc
 docs.RepoObject_ColumnList <.. docs.RepoObject_ColumnList_T
@@ -5076,14 +5024,17 @@ docs.RepoObject_ColumnList_T <.. docs.usp_PERSIST_RepoObject_ColumnList_T
 docs.RepoObject_ColumnList_T <.. docs.RepoObject_Plantuml_Entity
 docs.RepoObject_IndexList <.. docs.usp_PERSIST_RepoObject_IndexList_T
 docs.RepoObject_IndexList <.. docs.RepoObject_IndexList_T
+docs.RepoObject_IndexList_T <.. docs.usp_PERSIST_RepoObject_IndexList_T
 docs.RepoObject_IndexList_T <.. docs.RepoObject_Plantuml_Entity
 docs.RepoObject_IndexList_T <.. docs.RepoObject_Adoc
-docs.RepoObject_IndexList_T <.. docs.usp_PERSIST_RepoObject_IndexList_T
 docs.RepoObject_MeasureDescriptionList <.. docs.RepoObject_Adoc
 docs.RepoObject_MeasureList <.. docs.RepoObject_Adoc
 docs.RepoObject_MeasureList <.. docs.RepoObject_Plantuml_Entity
-docs.RepoObject_OutputFilter <.. docs.usp_PERSIST_RepoObject_OutputFilter_T
 docs.RepoObject_OutputFilter <.. docs.RepoObject_OutputFilter_T
+docs.RepoObject_OutputFilter <.. docs.usp_PERSIST_RepoObject_OutputFilter_T
+docs.RepoObject_OutputFilter_T <.. docs.RepoObject_OutputFilter_T_gross
+docs.RepoObject_OutputFilter_T <.. docs.RepoObject_AntoraXrefCulturesList
+docs.RepoObject_OutputFilter_T <.. docs.usp_AntoraExport_ObjectPartialsContent
 docs.RepoObject_OutputFilter_T <.. docs.usp_AntoraExport_ObjectPage
 docs.RepoObject_OutputFilter_T <.. docs.AntoraNavListRepoObject_by_type
 docs.RepoObject_OutputFilter_T <.. docs.AntoraNavListRepoObject_by_schema
@@ -5091,10 +5042,6 @@ docs.RepoObject_OutputFilter_T <.. docs.AntoraNavListRepoObject_by_schema_type
 docs.RepoObject_OutputFilter_T <.. docs.RepoObject_ColumnList
 docs.RepoObject_OutputFilter_T <.. docs.RepoObject_Plantuml_Entity
 docs.RepoObject_OutputFilter_T <.. docs.RepoObject_Plantuml
-docs.RepoObject_OutputFilter_T <.. docs.usp_PERSIST_RepoObject_OutputFilter_T
-docs.RepoObject_OutputFilter_T <.. docs.RepoObject_AntoraXrefCulturesList
-docs.RepoObject_OutputFilter_T <.. docs.usp_AntoraExport_ObjectPartialsContent
-docs.RepoObject_OutputFilter_T <.. docs.RepoObject_OutputFilter_T_gross
 docs.RepoObject_OutputFilter_T <.. docs.RepoObject_IndexList
 docs.RepoObject_OutputFilter_T <.. docs.AntoraNavListPage_by_type
 docs.RepoObject_OutputFilter_T <.. docs.IndexSemanticgroupPatterndatatype
@@ -5103,20 +5050,21 @@ docs.RepoObject_OutputFilter_T <.. docs.RepoObject_Plantuml_ColRefList_1_1
 docs.RepoObject_OutputFilter_T <.. docs.Schema_puml
 docs.RepoObject_OutputFilter_T <.. docs.Schema_SsasRelationList
 docs.RepoObject_OutputFilter_T <.. docs.Unit_1_union
+docs.RepoObject_OutputFilter_T <.. docs.usp_PERSIST_RepoObject_OutputFilter_T
+docs.RepoObject_OutputFilter_T_gross <.. docs.RepoObject_MeasureDescriptionList
 docs.RepoObject_OutputFilter_T_gross <.. docs.RepoObject_Adoc
 docs.RepoObject_OutputFilter_T_gross <.. docs.RepoObject_MeasureList
-docs.RepoObject_OutputFilter_T_gross <.. docs.RepoObject_MeasureDescriptionList
-docs.RepoObject_Plantuml <.. docs.RepoObject_Plantuml_T
 docs.RepoObject_Plantuml <.. docs.usp_PERSIST_RepoObject_Plantuml_T
+docs.RepoObject_Plantuml <.. docs.RepoObject_Plantuml_T
 docs.RepoObject_Plantuml_ColRefList_1_1 <.. docs.RepoObject_Plantuml
 docs.RepoObject_Plantuml_Entity <.. docs.RepoObject_Plantuml_Entity_T
 docs.RepoObject_Plantuml_Entity <.. docs.usp_PERSIST_RepoObject_Plantuml_Entity_T
 docs.RepoObject_Plantuml_Entity_T <.. docs.RepoObject_Adoc
 docs.RepoObject_Plantuml_Entity_T <.. docs.usp_PERSIST_RepoObject_Plantuml_Entity_T
 docs.RepoObject_Plantuml_Entity_T <.. docs.ftv_RepoObject_Reference_PlantUml_EntityRefList
-docs.RepoObject_Plantuml_Entity_T <.. docs.Schema_EntityList
 docs.RepoObject_Plantuml_Entity_T <.. docs.RepoObject_PlantUml_PumlEntityFkList
 docs.RepoObject_Plantuml_Entity_T <.. docs.ObjectRefCyclic_EntityList
+docs.RepoObject_Plantuml_Entity_T <.. docs.Schema_EntityList
 docs.RepoObject_PlantUml_FkRefList <.. docs.RepoObject_Plantuml
 docs.RepoObject_PlantUml_PumlEntityFkList <.. docs.RepoObject_Plantuml
 docs.RepoObject_Plantuml_T <.. docs.RepoObject_Adoc
@@ -5157,36 +5105,40 @@ reference.usp_RepoObject_update_SysObjectQueryPlan <.. repo.usp_main
 reference.usp_RepoObjectSource_FirstResultSet <.. repo.usp_main
 reference.usp_RepoObjectSource_QueryPlan <.. repo.usp_main
 repo.ForeignKey_gross <.. docs.RepoObject_IndexList
-repo.ForeignKey_Indexes <.. repo.usp_Index_ForeignKey
 repo.ForeignKey_Indexes <.. repo.ForeignKey_Indexes_union
-repo.ForeignKey_Indexes_union <.. repo.ForeignKey_Indexes_union_T
+repo.ForeignKey_Indexes <.. repo.usp_Index_ForeignKey
 repo.ForeignKey_Indexes_union <.. repo.usp_PERSIST_ForeignKey_Indexes_union_T
+repo.ForeignKey_Indexes_union <.. repo.ForeignKey_Indexes_union_T
+repo.ForeignKey_Indexes_union_T <.. repo.usp_Index_finish
 repo.ForeignKey_Indexes_union_T <.. docs.Schema_PumlPartial_FkRefList
 repo.ForeignKey_Indexes_union_T <.. repo.usp_PERSIST_ForeignKey_Indexes_union_T
 repo.ForeignKey_Indexes_union_T <.. docs.RepoObject_PlantUml_FkRefList
 repo.ForeignKey_Indexes_union_T <.. repo.RepoObject_related_FK_union
 repo.ForeignKey_Indexes_union_T <.. repo.ForeignKey_gross
 repo.ForeignKey_Indexes_union_T <.. docs.ForeignKey_RelationScript
-repo.ForeignKey_Indexes_union_T <.. repo.usp_Index_finish
 repo.ForeignKey_virtual_Indexes <.. repo.ForeignKey_Indexes_union
-repo.Index_gross <.. repo.RepoObject_SqlCreateTable
 repo.Index_gross <.. repo.ForeignKey_gross
 repo.Index_gross <.. docs.IndexSemanticgroupPatterndatatype
 repo.Index_gross <.. docs.RepoObject_IndexList
 repo.Index_gross <.. repo.usp_Index_finish
+repo.Index_gross <.. repo.RepoObject_SqlCreateTable
 repo.Index_gross <.. repo.ForeignKey_virtual_Indexes
 repo.Index_gross <.. repo.ForeignKey_Indexes
 repo.Index_gross <.. repo.usp_Index_virtual_set
 repo.Index_gross <.. repo.usp_index_inheritance
 repo.Index_virtual_ForUpdate <.. repo.usp_index_inheritance
-repo.RepoObject_gross <.. reference.RepoObject_ReferenceTree_referencing_0_30
-repo.RepoObject_gross <.. reference.RepoObject_ReferenceTree_0_30
-repo.RepoObject_gross <.. reference.RepoObject_ReferenceTree_30_0
-repo.RepoObject_gross <.. reference.Persistence
 repo.RepoObject_gross <.. workflow.WorkflowStep_src
 repo.RepoObject_gross <.. repo.RepoObject_gross2
 repo.RepoObject_gross <.. docs.Unit_1_union
 repo.RepoObject_gross <.. repo.RepoObject_sat2
+repo.RepoObject_gross <.. reference.RepoObject_ReferenceTree_referenced
+repo.RepoObject_gross <.. reference.RepoObject_ReferenceTree_referencing
+repo.RepoObject_gross <.. property.RepoObjectProperty_Collect_source_ROGross
+repo.RepoObject_gross <.. reference.RepoObject_ReferenceTree_referenced_30_0
+repo.RepoObject_gross <.. reference.RepoObject_ReferenceTree_referencing_0_30
+repo.RepoObject_gross <.. reference.RepoObject_ReferenceTree_0_30
+repo.RepoObject_gross <.. reference.RepoObject_ReferenceTree_30_0
+repo.RepoObject_gross <.. reference.Persistence
 repo.RepoObject_gross <.. repo.RepoObject_SqlCreateTable
 repo.RepoObject_gross <.. uspgenerator.GeneratorUspStep_Persistence_IsInactive_setpoint
 repo.RepoObject_gross <.. uspgenerator.GeneratorUspStep_Persistence_src
@@ -5199,21 +5151,17 @@ repo.RepoObject_gross <.. docs.RepoObject_Adoc
 repo.RepoObject_gross <.. docs.RepoObject_OutputFilter
 repo.RepoObject_gross <.. docs.RepoObject_Plantuml
 repo.RepoObject_gross <.. repo.Index_virtual_ForUpdate
-repo.RepoObject_gross <.. reference.RepoObject_ReferenceTree_referenced
-repo.RepoObject_gross <.. reference.RepoObject_ReferenceTree_referencing
-repo.RepoObject_gross <.. property.RepoObjectProperty_Collect_source_ROGross
-repo.RepoObject_gross <.. reference.RepoObject_ReferenceTree_referenced_30_0
 repo.RepoObject_gross2 <.. uspgenerator.GeneratorUspStep_Persistence_src
-repo.RepoObject_related_FK_union <.. docs.RepoObject_PlantUml_FkRefList
 repo.RepoObject_related_FK_union <.. docs.RepoObject_PlantUml_PumlEntityFkList
+repo.RepoObject_related_FK_union <.. docs.RepoObject_PlantUml_FkRefList
 repo.RepoObject_sat2 <.. repo.usp_PERSIST_RepoObject_sat2_T
 repo.RepoObject_sat2 <.. repo.RepoObject_sat2_T
 repo.RepoObject_sat2_T <.. repo.usp_PERSIST_RepoObject_sat2_T
 repo.RepoObject_sat2_T <.. property.RepoObjectProperty_Collect_source_ROGross
 repo.RepoObject_sat2_T <.. docs.RepoObject_Adoc
 repo.RepoObject_SqlCreateTable <.. reference.ftv_RepoObject_ColumReferenceRepoObject
-repo.usp_Index_finish <.. repo.usp_index_inheritance
 repo.usp_Index_finish <.. repo.usp_Index_ForeignKey
+repo.usp_Index_finish <.. repo.usp_index_inheritance
 repo.usp_Index_ForeignKey <.. repo.usp_main
 repo.usp_index_inheritance <.. repo.usp_main
 repo.usp_Index_virtual_set <.. repo.usp_Index_ForeignKey
@@ -5243,16 +5191,16 @@ workflow.Workflow_ProcedureDependency_T <.. workflow.usp_workflow
 workflow.Workflow_ProcedureDependency_T <.. workflow.Workflow_ProcedureDependency_T_bidirectional
 workflow.Workflow_ProcedureDependency_T <.. workflow.usp_PERSIST_Workflow_ProcedureDependency_T
 workflow.Workflow_ProcedureDependency_T <.. workflow.Workflow_ProcedureDependency_T_active
-workflow.Workflow_ProcedureDependency_T_active <.. workflow.Workflow_ProcedureDependency_T_NotInSortorder
 workflow.Workflow_ProcedureDependency_T_active <.. workflow.Workflow_ProcedureDependency_T_redundant
 workflow.Workflow_ProcedureDependency_T_active <.. workflow.Workflow_ProcedureDependency_T_TaskName
+workflow.Workflow_ProcedureDependency_T_active <.. workflow.Workflow_ProcedureDependency_T_NotInSortorder
 workflow.Workflow_ProcedureDependency_T_bidirectional <.. workflow.usp_workflow
 workflow.Workflow_ProcedureDependency_T_bidirectional <.. workflow.Workflow_ProcedureDependency_T_bidirectional_T
 workflow.Workflow_ProcedureDependency_T_NotInSortorder <.. workflow.usp_workflow
 workflow.Workflow_ProcedureDependency_T_NotInSortorder <.. workflow.Workflow_ProcedureDependency_T_NotInSortorder_check
 workflow.Workflow_ProcedureDependency_T_NotInSortorder_check <.. workflow.usp_workflow
-workflow.Workflow_ProcedureDependency_T_redundant <.. workflow.usp_workflow
 workflow.Workflow_ProcedureDependency_T_redundant <.. workflow.Workflow_ProcedureDependency_wo_redundant
+workflow.Workflow_ProcedureDependency_T_redundant <.. workflow.usp_workflow
 workflow.Workflow_ProcedureDependency_T_TaskName <.. workflow.Biml_PrecedenceConstraints
 workflow.WorkflowStep <.. workflow.WorkflowStep_ForUpdate
 workflow.WorkflowStep <.. workflow.WorkflowStep_active
@@ -5693,6 +5641,7 @@ entity "puml-link:dhw:sqldb:repo.repoobject_gross.adoc[]" as repo.RepoObject_gro
   AntoraComponent : (nvarchar(max))
   AntoraModule : (nvarchar(max))
   Description : (nvarchar(max))
+  ExecutionLogId_action : (char(1))
   external_AntoraComponent : (nvarchar(128))
   external_AntoraModule : (nvarchar(128))
   external_DatabaseName : (nvarchar(128))
@@ -5718,9 +5667,6 @@ entity "puml-link:dhw:sqldb:repo.repoobject_gross.adoc[]" as repo.RepoObject_gro
   is_persistence_delete_changed : (bit)
   is_persistence_delete_missing : (bit)
   is_persistence_insert : (bit)
-  is_persistence_merge_delete_missing : (bit)
-  is_persistence_merge_insert : (bit)
-  is_persistence_merge_update_changed : (bit)
   is_persistence_persist_source : (bit)
   is_persistence_truncate : (bit)
   is_persistence_update_changed : (bit)
@@ -5788,6 +5734,7 @@ entity "puml-link:dhw:sqldb:repo.repoobject_gross2.adoc[]" as repo.RepoObject_gr
   CreateColumnList : (nvarchar(max))
   DbmlColumnList : (nvarchar(max))
   Description : (nvarchar(max))
+  ExecutionLogId_action : (char(1))
   external_AntoraComponent : (nvarchar(128))
   external_AntoraModule : (nvarchar(128))
   external_DatabaseName : (nvarchar(128))
@@ -5813,9 +5760,6 @@ entity "puml-link:dhw:sqldb:repo.repoobject_gross2.adoc[]" as repo.RepoObject_gr
   is_persistence_delete_changed : (bit)
   is_persistence_delete_missing : (bit)
   is_persistence_insert : (bit)
-  is_persistence_merge_delete_missing : (bit)
-  is_persistence_merge_insert : (bit)
-  is_persistence_merge_update_changed : (bit)
   is_persistence_persist_source : (bit)
   is_persistence_truncate : (bit)
   is_persistence_update_changed : (bit)
@@ -5837,6 +5781,7 @@ entity "puml-link:dhw:sqldb:repo.repoobject_gross2.adoc[]" as repo.RepoObject_gr
   persistence_source_SysObject_xref : (nvarchar(4000))
   PersistenceCompareColumnList : (nvarchar(max))
   PersistenceInsertColumnList : (nvarchar(max))
+  PersistenceInsertColumnListSource : (nvarchar(max))
   PersistenceUpdateColumnList : (nvarchar(max))
   pk_index_guid : (uniqueidentifier)
   pk_IndexPatternColumnDatatype : (nvarchar(4000))
@@ -5884,6 +5829,11 @@ entity "puml-link:dhw:sqldb:repo.repoobject_gross2.adoc[]" as repo.RepoObject_gr
 
 entity "puml-link:dhw:sqldb:repo.repoobject_persistence.adoc[]" as repo.RepoObject_persistence << U >> {
   - **target_RepoObject_guid** : (uniqueidentifier)
+  ColumnListIgnore : (nvarchar(4000))
+  ColumnListNoCompareButUpdate : (nvarchar(4000))
+  ColumnListNoCompareNoUpdate : (nvarchar(4000))
+  ExecutionLogId_action : (char(1))
+  final_target_RepoObject_name : (nvarchar(128))
   - has_history : (bit)
   - has_history_columns : (bit)
   history_schema_name : (nvarchar(128))
@@ -5893,9 +5843,6 @@ entity "puml-link:dhw:sqldb:repo.repoobject_persistence.adoc[]" as repo.RepoObje
   - is_persistence_delete_changed : (bit)
   - is_persistence_delete_missing : (bit)
   - is_persistence_insert : (bit)
-  - is_persistence_merge_delete_missing : (bit)
-  - is_persistence_merge_insert : (bit)
-  - is_persistence_merge_update_changed : (bit)
   - is_persistence_persist_source : (bit)
   - is_persistence_truncate : (bit)
   - is_persistence_update_changed : (bit)
@@ -6107,12 +6054,13 @@ uspgenerator.GeneratorUsp <.. repo.RepoObject_gross
 "repo.RepoObject_gross::AntoraModule" <-- "docs.RepoObject_OutputFilter::AntoraModule"
 "repo.RepoObject_gross::AntoraModule" <-- "repo.RepoObject_gross2::AntoraModule"
 "repo.RepoObject_gross::Description" <-- "repo.RepoObject_gross2::Description"
+"repo.RepoObject_gross::ExecutionLogId_action" <-- "repo.RepoObject_gross2::ExecutionLogId_action"
 "repo.RepoObject_gross::external_AntoraComponent" <-- "docs.RepoObject_OutputFilter::external_AntoraComponent"
 "repo.RepoObject_gross::external_AntoraComponent" <-- "repo.RepoObject_gross2::external_AntoraComponent"
 "repo.RepoObject_gross::external_AntoraModule" <-- "repo.RepoObject_gross2::external_AntoraModule"
 "repo.RepoObject_gross::external_AntoraModule" <-- "docs.RepoObject_OutputFilter::external_AntoraModule"
-"repo.RepoObject_gross::external_DatabaseName" <-- "repo.RepoObject_gross2::external_DatabaseName"
 "repo.RepoObject_gross::external_DatabaseName" <-- "docs.RepoObject_OutputFilter::external_DatabaseName"
+"repo.RepoObject_gross::external_DatabaseName" <-- "repo.RepoObject_gross2::external_DatabaseName"
 "repo.RepoObject_gross::external_RepoDatabaseName" <-- "repo.RepoObject_gross2::external_RepoDatabaseName"
 "repo.RepoObject_gross::has_different_sys_names" <-- "repo.RepoObject_gross2::has_different_sys_names"
 "repo.RepoObject_gross::has_execution_plan_issue" <-- "repo.RepoObject_gross2::has_execution_plan_issue"
@@ -6129,8 +6077,8 @@ uspgenerator.GeneratorUsp <.. repo.RepoObject_gross
 "repo.RepoObject_gross::is_DocsExclude" <-- "repo.Index_gross::is_DocsExclude"
 "repo.RepoObject_gross::is_DocsOutput" <-- "repo.Index_gross::is_DocsOutput"
 "repo.RepoObject_gross::is_DocsOutput" <-- "repo.RepoObject_gross2::is_DocsOutput"
-"repo.RepoObject_gross::is_DocsOutput" <-- "docs.RepoObject_Adoc::is_DocsOutput"
 "repo.RepoObject_gross::is_DocsOutput" <-- "docs.RepoObject_OutputFilter::is_DocsOutput"
+"repo.RepoObject_gross::is_DocsOutput" <-- "docs.RepoObject_Adoc::is_DocsOutput"
 "repo.RepoObject_gross::is_external" <-- "docs.RepoObject_OutputFilter::is_external"
 "repo.RepoObject_gross::is_external" <-- "repo.RepoObject_gross2::is_external"
 "repo.RepoObject_gross::is_external" <-- "repo.Index_gross::is_external"
@@ -6143,9 +6091,6 @@ uspgenerator.GeneratorUsp <.. repo.RepoObject_gross
 "repo.RepoObject_gross::is_persistence_delete_changed" <-- "repo.RepoObject_gross2::is_persistence_delete_changed"
 "repo.RepoObject_gross::is_persistence_delete_missing" <-- "repo.RepoObject_gross2::is_persistence_delete_missing"
 "repo.RepoObject_gross::is_persistence_insert" <-- "repo.RepoObject_gross2::is_persistence_insert"
-"repo.RepoObject_gross::is_persistence_merge_delete_missing" <-- "repo.RepoObject_gross2::is_persistence_merge_delete_missing"
-"repo.RepoObject_gross::is_persistence_merge_insert" <-- "repo.RepoObject_gross2::is_persistence_merge_insert"
-"repo.RepoObject_gross::is_persistence_merge_update_changed" <-- "repo.RepoObject_gross2::is_persistence_merge_update_changed"
 "repo.RepoObject_gross::is_persistence_persist_source" <-- "repo.RepoObject_gross2::is_persistence_persist_source"
 "repo.RepoObject_gross::is_persistence_truncate" <-- "repo.RepoObject_gross2::is_persistence_truncate"
 "repo.RepoObject_gross::is_persistence_update_changed" <-- "repo.RepoObject_gross2::is_persistence_update_changed"
@@ -6185,13 +6130,13 @@ uspgenerator.GeneratorUsp <.. repo.RepoObject_gross
 "repo.RepoObject_gross::RepoObject_fullname" <-- "reference.Persistence::referenced_fullname"
 "repo.RepoObject_gross::RepoObject_fullname" <-- "reference.Persistence::referencing_fullname"
 "repo.RepoObject_gross::RepoObject_fullname" <-- "repo.Index_gross::RepoObject_fullname"
+"repo.RepoObject_gross::RepoObject_fullname2" <-- "docs.RepoObject_OutputFilter::RepoObject_fullname2"
 "repo.RepoObject_gross::RepoObject_fullname2" <-- "docs.RepoObject_Plantuml::RepoObject_fullname2"
 "repo.RepoObject_gross::RepoObject_fullname2" <-- "repo.Index_gross::RepoObject_fullname2"
-"repo.RepoObject_gross::RepoObject_fullname2" <-- "docs.RepoObject_OutputFilter::RepoObject_fullname2"
 "repo.RepoObject_gross::RepoObject_fullname2" <-- "repo.RepoObject_gross2::RepoObject_fullname2"
 "repo.RepoObject_gross::RepoObject_guid" <-- "repo.RepoObject_gross2::RepoObject_guid"
-"repo.RepoObject_gross::RepoObject_guid" <-- "docs.RepoObject_OutputFilter::RepoObject_guid"
 "repo.RepoObject_gross::RepoObject_guid" <-- "docs.RepoObject_Plantuml::RepoObject_guid"
+"repo.RepoObject_gross::RepoObject_guid" <-- "docs.RepoObject_OutputFilter::RepoObject_guid"
 "repo.RepoObject_gross::RepoObject_guid" <-- "property.RepoObjectProperty_Collect_source_ROGross::RepoObject_guid"
 "repo.RepoObject_gross::RepoObject_guid" <-- "reference.Persistence::referencing_RepoObject_guid"
 "repo.RepoObject_gross::RepoObject_guid" <-- "reference.Persistence::referenced_RepoObject_guid"
@@ -6235,10 +6180,11 @@ uspgenerator.GeneratorUsp <.. repo.RepoObject_gross
 "repo.RepoObject_gross::usp_persistence_name" <-- "repo.RepoObject_gross2::usp_persistence_name"
 "repo.RepoObject_gross::usp_persistence_name" <-- "reference.Persistence::referencing_usp_persistence_name"
 "repo.RepoObject_gross::usp_persistence_name" <-- "reference.Persistence::referenced_usp_persistence_name"
-"repo.RepoObject_gross::usp_persistence_RepoObject_guid" <-- "reference.Persistence::referencing_usp_persistence_RepoObject_guid"
 "repo.RepoObject_gross::usp_persistence_RepoObject_guid" <-- "reference.Persistence::referenced_usp_persistence_RepoObject_guid"
+"repo.RepoObject_gross::usp_persistence_RepoObject_guid" <-- "reference.Persistence::referencing_usp_persistence_RepoObject_guid"
 "repo.RepoObject_gross::usp_persistence_RepoObject_guid" <-- "repo.RepoObject_gross2::usp_persistence_RepoObject_guid"
 "repo.RepoObject_gross::uspgenerator_usp_id" <-- "repo.RepoObject_gross2::uspgenerator_usp_id"
+"repo.RepoObject_persistence::ExecutionLogId_action" <-- "repo.RepoObject_gross::ExecutionLogId_action"
 "repo.RepoObject_persistence::has_history" <-- "repo.RepoObject_gross::has_history"
 "repo.RepoObject_persistence::has_history_columns" <-- "repo.RepoObject_gross::has_history_columns"
 "repo.RepoObject_persistence::history_schema_name" <-- "repo.RepoObject_gross::history_schema_name"
@@ -6249,9 +6195,6 @@ uspgenerator.GeneratorUsp <.. repo.RepoObject_gross
 "repo.RepoObject_persistence::is_persistence_delete_changed" <-- "repo.RepoObject_gross::is_persistence_delete_changed"
 "repo.RepoObject_persistence::is_persistence_delete_missing" <-- "repo.RepoObject_gross::is_persistence_delete_missing"
 "repo.RepoObject_persistence::is_persistence_insert" <-- "repo.RepoObject_gross::is_persistence_insert"
-"repo.RepoObject_persistence::is_persistence_merge_delete_missing" <-- "repo.RepoObject_gross::is_persistence_merge_delete_missing"
-"repo.RepoObject_persistence::is_persistence_merge_insert" <-- "repo.RepoObject_gross::is_persistence_merge_insert"
-"repo.RepoObject_persistence::is_persistence_merge_update_changed" <-- "repo.RepoObject_gross::is_persistence_merge_update_changed"
 "repo.RepoObject_persistence::is_persistence_persist_source" <-- "repo.RepoObject_gross::is_persistence_persist_source"
 "repo.RepoObject_persistence::is_persistence_truncate" <-- "repo.RepoObject_gross::is_persistence_truncate"
 "repo.RepoObject_persistence::is_persistence_update_changed" <-- "repo.RepoObject_gross::is_persistence_update_changed"
@@ -6376,10 +6319,11 @@ Select
   , ro_p.is_persistence_insert
   , ro_p.is_persistence_truncate
   , ro_p.is_persistence_update_changed
-  , ro_p.is_persistence_merge_delete_missing
-  , ro_p.is_persistence_merge_insert
-  , ro_p.is_persistence_merge_update_changed
+  --, ro_p.is_persistence_merge_delete_missing
+  --, ro_p.is_persistence_merge_insert
+  --, ro_p.is_persistence_merge_update_changed
   , ro_p.is_persistence_persist_source
+  , ro_p.ExecutionLogId_action
   , ro_p.history_schema_name
   , ro_p.history_table_name
   , prescript                                           = ro_p.prescript
