@@ -968,9 +968,9 @@ entity "puml-link:dhw:sqldb:ssas.measure_translation.adoc[]" as ssas.Measure_tra
 }
 
 repo.Measure <.. repo.Measure_union
+repo.Measure_union <.. docs.RepoObject_MeasureDescriptionList
 repo.Measure_union <.. docs.RepoObject_MeasureList
 repo.Measure_union <.. ssas.Measure_translation
-repo.Measure_union <.. docs.RepoObject_MeasureDescriptionList
 
 footer The diagram is interactive and contains links.
 
@@ -1064,7 +1064,7 @@ entity "puml-link:dhw:sqldb:ssas.model_json_31_tables.adoc[]" as ssas.model_json
 
 entity "puml-link:dhw:sqldb:ssas.model_json_31_tables_t.adoc[]" as ssas.model_json_31_tables_T << U >> {
   - **databasename** : (nvarchar(128))
-  **tables_name** : (nvarchar(128))
+  - **tables_name** : (nvarchar(128))
   --
 }
 
@@ -1217,7 +1217,7 @@ entity "puml-link:dhw:sqldb:docs.repoobject_plantuml_pumlentityfklist.adoc[]" as
 
 entity "puml-link:dhw:sqldb:docs.repoobject_plantuml_t.adoc[]" as docs.RepoObject_Plantuml_T << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
-  **cultures_name** : (nvarchar(10))
+  - **cultures_name** : (nvarchar(10))
   --
 }
 
@@ -1283,7 +1283,7 @@ entity "puml-link:dhw:sqldb:ssas.measure_translation_displayfolder_union.adoc[]"
 entity "puml-link:dhw:sqldb:ssas.measure_translation_t.adoc[]" as ssas.Measure_translation_T << U >> {
   - **Measure_guid** : (uniqueidentifier)
   - **cultures_name** : (nvarchar(10))
-  **RepoObject_name** : (nvarchar(128))
+  - **RepoObject_name** : (nvarchar(128))
   --
 }
 
@@ -1319,9 +1319,9 @@ docs.usp_AntoraExport_ObjectPuml <.. docs.usp_AntoraExport
 docs.usp_PERSIST_RepoObject_Adoc_T <.. docs.usp_AntoraExport_ObjectPartialsContent
 docs.usp_PERSIST_RepoObject_Plantuml_Entity_T <.. docs.usp_AntoraExport_ObjectPuml
 docs.usp_PERSIST_RepoObject_Plantuml_T <.. docs.usp_AntoraExport_ObjectPuml
-repo.Measure_union <.. ssas.Measure_translation
 repo.Measure_union <.. docs.RepoObject_MeasureList
 repo.Measure_union <.. docs.RepoObject_MeasureDescriptionList
+repo.Measure_union <.. ssas.Measure_translation
 repo.usp_sync_guid_ssas <.. repo.usp_main
 ssas.Measure_translation <.. ssas.usp_PERSIST_Measure_translation_T
 ssas.Measure_translation <.. ssas.Measure_translation_T
@@ -1453,9 +1453,9 @@ entity "puml-link:dhw:sqldb:ssas.measure_translation.adoc[]" as ssas.Measure_tra
 }
 
 repo.Measure <.. repo.Measure_union
+repo.Measure_union <.. docs.RepoObject_MeasureDescriptionList
 repo.Measure_union <.. docs.RepoObject_MeasureList
 repo.Measure_union <.. ssas.Measure_translation
-repo.Measure_union <.. docs.RepoObject_MeasureDescriptionList
 "repo.Measure_union::Measure_guid" <-- "ssas.Measure_translation::Measure_guid"
 "repo.Measure_union::measures_displayFolder" <-- "ssas.Measure_translation::measures_displayFolder"
 "repo.Measure_union::measures_name" <-- "ssas.Measure_translation::measures_name"

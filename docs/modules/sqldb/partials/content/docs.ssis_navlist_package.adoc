@@ -676,7 +676,7 @@ entity "puml-link:dhw:sqldb:ssis.package_src.adoc[]" as ssis.Package_src << V >>
 
 entity "puml-link:dhw:sqldb:ssis.package_tgt.adoc[]" as ssis.Package_tgt << V >> {
   - **AntoraModule** : (varchar(50))
-  **PackageName** : (varchar(200))
+  - **PackageName** : (varchar(200))
   --
 }
 
@@ -693,8 +693,8 @@ entity "puml-link:dhw:sqldb:ssis_t.pkgstats.adoc[]" as ssis_t.pkgStats << U >> {
 docs.fs_cleanStringForFilename <.. docs.ssis_navlist_package
 ssis.AntoraModule_tgt_filter <.. ssis.Package_tgt
 ssis.Package <.. docs.ssis_navlist_package
-ssis.Package_src <.. ssis.AntoraModule_tgt_filter
 ssis.Package_src <.. ssis.Package_tgt
+ssis.Package_src <.. ssis.AntoraModule_tgt_filter
 ssis.Package_tgt <.. ssis.Package
 ssis.Project <.. ssis.Package_src
 ssis_t.pkgStats <.. ssis.Package_src

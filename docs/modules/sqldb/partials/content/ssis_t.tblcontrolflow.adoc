@@ -981,21 +981,21 @@ entity "puml-link:dhw:sqldb:ssis_t.usp_packageanalysis.adoc[]" as ssis_t.usp_Pac
   --
 }
 
+ssis_t.TblControlFlow <.. ssis.PackageTask_Sql_Parameter_src
 ssis_t.TblControlFlow <.. ssis_t.usp_GetPackageDetails
 ssis_t.TblControlFlow <.. ssis.PackageTask_src
 ssis_t.TblControlFlow <.. ssis_t.TblTask_Dft_Details_src
-ssis_t.TblControlFlow <.. ssis.PackageTask_Sql_Parameter_src
 ssis_t.TblControlFlow <.. ssis_t.TblTask_Script_src
 ssis_t.TblControlFlow <.. ssis_t.TblTask_Sql_src
 ssis_t.TblControlFlow <.. ssis_t.usp_PackageAnalysis
 ssis_t.TblControlFlow <.. ssis_t.TblTask_Dft_Component_src
 ssis_t.TblControlFlow <.. ssis.PackageTask_Dft_Component_src
 ssis_t.TblControlFlow <.. ssis.PackageTask_Dft_Component_input_src
+ssis_t.TblControlFlow <.. ssis.PackageTask_Dft_Component_input_externalMetadataColumn_src
 ssis_t.TblControlFlow <.. ssis.PackageTask_Dft_Component_output_src
 ssis_t.TblControlFlow <.. ssis.PackageTask_Dft_Component_output_outputcolumn_src
 ssis_t.TblControlFlow <.. ssis.PackageTask_Dft_Component_output_externalMetadataColumn_src
 ssis_t.TblControlFlow <.. ssis.PackageTask_Dft_Component_input_inputColumn_src
-ssis_t.TblControlFlow <.. ssis.PackageTask_Dft_Component_input_externalMetadataColumn_src
 
 footer The diagram is interactive and contains links.
 
@@ -1092,7 +1092,7 @@ entity "puml-link:dhw:sqldb:docs.ssis_adoc.adoc[]" as docs.ssis_Adoc << V >> {
 
 entity "puml-link:dhw:sqldb:docs.ssis_adoc_t.adoc[]" as docs.ssis_Adoc_T << U >> {
   - **AntoraModule** : (varchar(50))
-  **PackageBasename** : (varchar(8000))
+  - **PackageBasename** : (varchar(8000))
   --
 }
 
@@ -1304,9 +1304,9 @@ entity "puml-link:dhw:sqldb:ssis.packagetask_sql_parameter_src.adoc[]" as ssis.P
 
 entity "puml-link:dhw:sqldb:ssis.packagetask_sql_parameter_tgt.adoc[]" as ssis.PackageTask_Sql_Parameter_tgt << V >> {
   - **AntoraModule** : (varchar(50))
-  **PackageName** : (varchar(200))
-  **TaskPath** : (varchar(8000))
-  **ParameterBindingSequence** : (varchar(1000))
+  - **PackageName** : (varchar(200))
+  - **TaskPath** : (varchar(8000))
+  - **ParameterBindingSequence** : (varchar(1000))
   --
 }
 
@@ -1319,8 +1319,8 @@ entity "puml-link:dhw:sqldb:ssis.packagetask_src.adoc[]" as ssis.PackageTask_src
 
 entity "puml-link:dhw:sqldb:ssis.packagetask_tgt.adoc[]" as ssis.PackageTask_tgt << V >> {
   - **AntoraModule** : (varchar(50))
-  **PackageName** : (varchar(200))
-  **TaskPath** : (varchar(8000))
+  - **PackageName** : (varchar(200))
+  - **TaskPath** : (varchar(8000))
   --
 }
 
@@ -1417,12 +1417,12 @@ docs.usp_PERSIST_ssis_Adoc_T <.. docs.usp_AntoraExport_SsisPartialsContent
 ssis.PackageTask <.. docs.ssis_Task
 ssis.PackageTask <.. ssis.PackageTask_LevelLagLead
 ssis.PackageTask <.. docs.ssis_TaskList
-ssis.PackageTask_Dft_Component <.. docs.ssis_DftTaskComponentList
 ssis.PackageTask_Dft_Component <.. docs.ssis_PumlDftTask
 ssis.PackageTask_Dft_Component <.. docs.ssis_PumlPartialDftComponent
+ssis.PackageTask_Dft_Component <.. docs.ssis_DftTaskComponentList
 ssis.PackageTask_Dft_Component_input <.. docs.ssis_DftTaskComponentInputList
-ssis.PackageTask_Dft_Component_input_externalMetadataColumn <.. docs.ssis_DftTaskComponentInputColumnList
 ssis.PackageTask_Dft_Component_input_externalMetadataColumn <.. docs.ssis_DftTaskComponentOutputColumnList
+ssis.PackageTask_Dft_Component_input_externalMetadataColumn <.. docs.ssis_DftTaskComponentInputColumnList
 ssis.PackageTask_Dft_Component_input_externalMetadataColumn_src <.. ssis.usp_PERSIST_PackageTask_Dft_Component_input_externalMetadataColumn_tgt
 ssis.PackageTask_Dft_Component_input_externalMetadataColumn_src <.. ssis.PackageTask_Dft_Component_input_externalMetadataColumn_tgt
 ssis.PackageTask_Dft_Component_input_externalMetadataColumn_tgt <.. ssis.PackageTask_Dft_Component_input_externalMetadataColumn
@@ -1430,8 +1430,8 @@ ssis.PackageTask_Dft_Component_input_externalMetadataColumn_tgt <.. ssis.usp_PER
 ssis.PackageTask_Dft_Component_input_inputColumn <.. docs.ssis_DftTaskComponentInputColumnList
 ssis.PackageTask_Dft_Component_input_inputColumn_src <.. ssis.usp_PERSIST_PackageTask_Dft_Component_input_inputColumn_tgt
 ssis.PackageTask_Dft_Component_input_inputColumn_src <.. ssis.PackageTask_Dft_Component_input_inputColumn_tgt
-ssis.PackageTask_Dft_Component_input_inputColumn_tgt <.. ssis.PackageTask_Dft_Component_input_inputColumn
 ssis.PackageTask_Dft_Component_input_inputColumn_tgt <.. ssis.usp_PERSIST_PackageTask_Dft_Component_input_inputColumn_tgt
+ssis.PackageTask_Dft_Component_input_inputColumn_tgt <.. ssis.PackageTask_Dft_Component_input_inputColumn
 ssis.PackageTask_Dft_Component_input_src <.. ssis.usp_PERSIST_PackageTask_Dft_Component_input_tgt
 ssis.PackageTask_Dft_Component_input_src <.. ssis.PackageTask_Dft_Component_input_tgt
 ssis.PackageTask_Dft_Component_input_tgt <.. ssis.PackageTask_Dft_Component_input
@@ -1795,21 +1795,21 @@ entity "puml-link:dhw:sqldb:ssis_t.usp_packageanalysis.adoc[]" as ssis_t.usp_Pac
   --
 }
 
+ssis_t.TblControlFlow <.. ssis.PackageTask_Sql_Parameter_src
 ssis_t.TblControlFlow <.. ssis_t.usp_GetPackageDetails
 ssis_t.TblControlFlow <.. ssis.PackageTask_src
 ssis_t.TblControlFlow <.. ssis_t.TblTask_Dft_Details_src
-ssis_t.TblControlFlow <.. ssis.PackageTask_Sql_Parameter_src
 ssis_t.TblControlFlow <.. ssis_t.TblTask_Script_src
 ssis_t.TblControlFlow <.. ssis_t.TblTask_Sql_src
 ssis_t.TblControlFlow <.. ssis_t.usp_PackageAnalysis
 ssis_t.TblControlFlow <.. ssis_t.TblTask_Dft_Component_src
 ssis_t.TblControlFlow <.. ssis.PackageTask_Dft_Component_src
 ssis_t.TblControlFlow <.. ssis.PackageTask_Dft_Component_input_src
+ssis_t.TblControlFlow <.. ssis.PackageTask_Dft_Component_input_externalMetadataColumn_src
 ssis_t.TblControlFlow <.. ssis.PackageTask_Dft_Component_output_src
 ssis_t.TblControlFlow <.. ssis.PackageTask_Dft_Component_output_outputcolumn_src
 ssis_t.TblControlFlow <.. ssis.PackageTask_Dft_Component_output_externalMetadataColumn_src
 ssis_t.TblControlFlow <.. ssis.PackageTask_Dft_Component_input_inputColumn_src
-ssis_t.TblControlFlow <.. ssis.PackageTask_Dft_Component_input_externalMetadataColumn_src
 "ssis_t.TblControlFlow::ControlFlowDetailsRowID" <-- "ssis_t.TblTask_Sql_src::ControlFlowDetailsRowID"
 "ssis_t.TblControlFlow::ControlFlowDetailsRowID" <-- "ssis_t.TblTask_Script_src::ControlFlowDetailsRowID"
 "ssis_t.TblControlFlow::ControlFlowDetailsRowID" <-- "ssis_t.TblTask_Dft_Details_src::ControlFlowDetailsRowID"

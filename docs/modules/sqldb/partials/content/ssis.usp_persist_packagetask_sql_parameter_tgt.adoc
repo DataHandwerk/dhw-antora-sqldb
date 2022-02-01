@@ -51,7 +51,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2022-01-21 18:39:36
+2022-01-23 17:32:32
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -675,9 +675,9 @@ entity "puml-link:dhw:sqldb:ssis.packagetask_sql_parameter_src.adoc[]" as ssis.P
 
 entity "puml-link:dhw:sqldb:ssis.packagetask_sql_parameter_tgt.adoc[]" as ssis.PackageTask_Sql_Parameter_tgt << V >> {
   - **AntoraModule** : (varchar(50))
-  **PackageName** : (varchar(200))
-  **TaskPath** : (varchar(8000))
-  **ParameterBindingSequence** : (varchar(1000))
+  - **PackageName** : (varchar(200))
+  - **TaskPath** : (varchar(8000))
+  - **ParameterBindingSequence** : (varchar(1000))
   --
 }
 
@@ -763,9 +763,9 @@ entity "puml-link:dhw:sqldb:ssis.packagetask_sql_parameter_src.adoc[]" as ssis.P
 
 entity "puml-link:dhw:sqldb:ssis.packagetask_sql_parameter_tgt.adoc[]" as ssis.PackageTask_Sql_Parameter_tgt << V >> {
   - **AntoraModule** : (varchar(50))
-  **PackageName** : (varchar(200))
-  **TaskPath** : (varchar(8000))
-  **ParameterBindingSequence** : (varchar(1000))
+  - **PackageName** : (varchar(200))
+  - **TaskPath** : (varchar(8000))
+  - **ParameterBindingSequence** : (varchar(1000))
   --
 }
 
@@ -797,8 +797,8 @@ logs.usp_ExecutionLog_insert <.. ssis.usp_PERSIST_PackageTask_Sql_Parameter_tgt
 ssis.AntoraModule_tgt_filter <.. ssis.PackageTask_Sql_Parameter_tgt
 ssis.Package_src <.. ssis.AntoraModule_tgt_filter
 ssis.Package_src <.. ssis.PackageTask_Sql_Parameter_src
-ssis.PackageTask_Sql_Parameter_src <.. ssis.PackageTask_Sql_Parameter_tgt
 ssis.PackageTask_Sql_Parameter_src <.. ssis.usp_PERSIST_PackageTask_Sql_Parameter_tgt
+ssis.PackageTask_Sql_Parameter_src <.. ssis.PackageTask_Sql_Parameter_tgt
 ssis.PackageTask_Sql_Parameter_tgt <.. ssis.usp_PERSIST_PackageTask_Sql_Parameter_tgt
 ssis.Project <.. ssis.Package_src
 ssis_t.pkgStats <.. ssis.Package_src
@@ -912,9 +912,9 @@ entity "puml-link:dhw:sqldb:ssis.packagetask_sql_parameter_src.adoc[]" as ssis.P
 
 entity "puml-link:dhw:sqldb:ssis.packagetask_sql_parameter_tgt.adoc[]" as ssis.PackageTask_Sql_Parameter_tgt << V >> {
   - **AntoraModule** : (varchar(50))
-  **PackageName** : (varchar(200))
-  **TaskPath** : (varchar(8000))
-  **ParameterBindingSequence** : (varchar(1000))
+  - **PackageName** : (varchar(200))
+  - **TaskPath** : (varchar(8000))
+  - **ParameterBindingSequence** : (varchar(1000))
   - ControlFlowDetailsRowID : (int)
   ParameterBindingParameterName : (varchar(1000))
   ResultSetParameterName : (varchar(1000))

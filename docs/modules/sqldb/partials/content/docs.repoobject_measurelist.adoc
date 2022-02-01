@@ -797,8 +797,8 @@ docs.fs_cleanStringForAnchorId <.. docs.RepoObject_MeasureList
 docs.fs_cleanStringForHeader <.. docs.RepoObject_MeasureList
 docs.fs_cleanStringForPuml <.. docs.RepoObject_MeasureList
 docs.Measure_MeasurePropertyList <.. docs.RepoObject_MeasureList
-docs.RepoObject_MeasureList <.. docs.RepoObject_Plantuml_Entity
 docs.RepoObject_MeasureList <.. docs.RepoObject_Adoc
+docs.RepoObject_MeasureList <.. docs.RepoObject_Plantuml_Entity
 docs.RepoObject_OutputFilter_T_gross <.. docs.RepoObject_MeasureList
 repo.Measure_union <.. docs.RepoObject_MeasureList
 ssas.Measure_translation_displayfolder_union <.. docs.RepoObject_MeasureList
@@ -940,7 +940,7 @@ entity "puml-link:dhw:sqldb:property.propertyname_measure.adoc[]" as property.Pr
 }
 
 entity "puml-link:dhw:sqldb:property.propertyname_measure_t.adoc[]" as property.PropertyName_Measure_T << U >> {
-  **property_name** : (nvarchar(128))
+  - **property_name** : (nvarchar(128))
   --
 }
 
@@ -950,7 +950,7 @@ entity "puml-link:dhw:sqldb:property.propertyname_repoobject.adoc[]" as property
 }
 
 entity "puml-link:dhw:sqldb:property.propertyname_repoobject_t.adoc[]" as property.PropertyName_RepoObject_T << U >> {
-  **property_name** : (nvarchar(128))
+  - **property_name** : (nvarchar(128))
   --
 }
 
@@ -1008,16 +1008,16 @@ entity "puml-link:dhw:sqldb:reference.additional_reference_from_properties_src.a
 }
 
 entity "puml-link:dhw:sqldb:reference.additional_reference_from_properties_tgt.adoc[]" as reference.additional_Reference_from_properties_tgt << V >> {
-  **referenced_AntoraComponent** : (nvarchar(max))
-  **referenced_AntoraModule** : (nvarchar(max))
-  **referenced_Schema** : (nvarchar(max))
-  **referenced_Object** : (nvarchar(max))
-  **referenced_Column** : (nvarchar(max))
-  **referencing_AntoraComponent** : (nvarchar(max))
-  **referencing_AntoraModule** : (nvarchar(max))
-  **referencing_Schema** : (nvarchar(max))
-  **referencing_Object** : (nvarchar(max))
-  **referencing_Column** : (nvarchar(max))
+  - **referenced_AntoraComponent** : (nvarchar(128))
+  - **referenced_AntoraModule** : (nvarchar(128))
+  - **referenced_Schema** : (nvarchar(128))
+  - **referenced_Object** : (nvarchar(128))
+  **referenced_Column** : (nvarchar(128))
+  - **referencing_AntoraComponent** : (nvarchar(128))
+  - **referencing_AntoraModule** : (nvarchar(128))
+  - **referencing_Schema** : (nvarchar(128))
+  - **referencing_Object** : (nvarchar(128))
+  **referencing_Column** : (nvarchar(128))
   --
 }
 
@@ -1036,13 +1036,13 @@ entity "puml-link:dhw:sqldb:reference.additional_reference_from_ssas_src.adoc[]"
 }
 
 entity "puml-link:dhw:sqldb:reference.additional_reference_from_ssas_tgt.adoc[]" as reference.additional_Reference_from_ssas_tgt << V >> {
-  **referenced_AntoraComponent** : (nvarchar(128))
-  **referenced_AntoraModule** : (nvarchar(128))
-  **referenced_Schema** : (nvarchar(max))
-  **referenced_Object** : (nvarchar(max))
-  **referenced_Column** : (nvarchar(500))
-  **referencing_AntoraComponent** : (nvarchar(max))
-  **referencing_AntoraModule** : (nvarchar(max))
+  - **referenced_AntoraComponent** : (nvarchar(128))
+  - **referenced_AntoraModule** : (nvarchar(128))
+  - **referenced_Schema** : (nvarchar(128))
+  - **referenced_Object** : (nvarchar(128))
+  **referenced_Column** : (nvarchar(128))
+  - **referencing_AntoraComponent** : (nvarchar(128))
+  - **referencing_AntoraModule** : (nvarchar(128))
   - **referencing_Schema** : (nvarchar(128))
   - **referencing_Object** : (nvarchar(128))
   **referencing_Column** : (nvarchar(128))
@@ -1097,14 +1097,14 @@ entity "puml-link:dhw:sqldb:reference.additional_reference_wo_columns_from_prope
 }
 
 entity "puml-link:dhw:sqldb:reference.additional_reference_wo_columns_from_properties_tgt.adoc[]" as reference.additional_Reference_wo_columns_from_properties_tgt << V >> {
-  **referenced_AntoraComponent** : (nvarchar(max))
-  **referenced_AntoraModule** : (nvarchar(max))
-  **referenced_Schema** : (nvarchar(max))
-  **referenced_Object** : (nvarchar(max))
-  **referencing_AntoraComponent** : (nvarchar(max))
-  **referencing_AntoraModule** : (nvarchar(max))
-  **referencing_Schema** : (nvarchar(max))
-  **referencing_Object** : (nvarchar(max))
+  - **referenced_AntoraComponent** : (nvarchar(128))
+  - **referenced_AntoraModule** : (nvarchar(128))
+  - **referenced_Schema** : (nvarchar(128))
+  - **referenced_Object** : (nvarchar(128))
+  - **referencing_AntoraComponent** : (nvarchar(128))
+  - **referencing_AntoraModule** : (nvarchar(128))
+  - **referencing_Schema** : (nvarchar(128))
+  - **referencing_Object** : (nvarchar(128))
   --
 }
 
@@ -1142,8 +1142,8 @@ entity "puml-link:dhw:sqldb:reference.repoobject_reference_sqlexpressiondependen
 }
 
 entity "puml-link:dhw:sqldb:reference.repoobject_reference_t.adoc[]" as reference.RepoObject_reference_T << U >> {
-  **referenced_RepoObject_guid** : (uniqueidentifier)
-  **referencing_RepoObject_guid** : (uniqueidentifier)
+  - **referenced_RepoObject_guid** : (uniqueidentifier)
+  - **referencing_RepoObject_guid** : (uniqueidentifier)
   --
 }
 
@@ -1300,7 +1300,7 @@ entity "puml-link:dhw:sqldb:ssas.measure_translation_displayfolder_union.adoc[]"
 entity "puml-link:dhw:sqldb:ssas.measure_translation_t.adoc[]" as ssas.Measure_translation_T << U >> {
   - **Measure_guid** : (uniqueidentifier)
   - **cultures_name** : (nvarchar(10))
-  **RepoObject_name** : (nvarchar(128))
+  - **RepoObject_name** : (nvarchar(128))
   --
 }
 
@@ -1333,7 +1333,7 @@ entity "puml-link:dhw:sqldb:ssas.model_json_31_tables.adoc[]" as ssas.model_json
 
 entity "puml-link:dhw:sqldb:ssas.model_json_31_tables_t.adoc[]" as ssas.model_json_31_tables_T << U >> {
   - **databasename** : (nvarchar(128))
-  **tables_name** : (nvarchar(128))
+  - **tables_name** : (nvarchar(128))
   --
 }
 
@@ -1347,7 +1347,7 @@ entity "puml-link:dhw:sqldb:ssas.model_json_311_tables_columns.adoc[]" as ssas.m
 entity "puml-link:dhw:sqldb:ssas.model_json_311_tables_columns_t.adoc[]" as ssas.model_json_311_tables_columns_T << U >> {
   - **databasename** : (nvarchar(128))
   - **tables_name** : (nvarchar(128))
-  **tables_columns_name** : (nvarchar(128))
+  - **tables_columns_name** : (nvarchar(128))
   --
 }
 
@@ -1426,7 +1426,7 @@ entity "puml-link:dhw:sqldb:ssas.model_json_33_datasources.adoc[]" as ssas.model
 
 entity "puml-link:dhw:sqldb:ssas.model_json_33_datasources_t.adoc[]" as ssas.model_json_33_dataSources_T << U >> {
   - **databasename** : (nvarchar(128))
-  **dataSources_name** : (nvarchar(500))
+  - **dataSources_name** : (nvarchar(500))
   --
 }
 
@@ -1449,7 +1449,7 @@ entity "puml-link:dhw:sqldb:ssas.model_json_3411_cultures_translations_model.ado
 
 entity "puml-link:dhw:sqldb:ssas.model_json_3411_cultures_translations_model_t.adoc[]" as ssas.model_json_3411_cultures_translations_model_T << U >> {
   - **databasename** : (nvarchar(128))
-  **cultures_name** : (nvarchar(500))
+  - **cultures_name** : (nvarchar(10))
   --
 }
 
@@ -1808,7 +1808,7 @@ entity "puml-link:dhw:sqldb:docs.repoobject_plantuml_pumlentityfklist.adoc[]" as
 
 entity "puml-link:dhw:sqldb:docs.repoobject_plantuml_t.adoc[]" as docs.RepoObject_Plantuml_T << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
-  **cultures_name** : (nvarchar(10))
+  - **cultures_name** : (nvarchar(10))
   --
 }
 
@@ -2049,8 +2049,8 @@ docs.fs_cleanStringForAnchorId <.. docs.RepoObject_MeasureList
 docs.fs_cleanStringForHeader <.. docs.RepoObject_MeasureList
 docs.fs_cleanStringForPuml <.. docs.RepoObject_MeasureList
 docs.Measure_MeasurePropertyList <.. docs.RepoObject_MeasureList
-docs.RepoObject_MeasureList <.. docs.RepoObject_Plantuml_Entity
 docs.RepoObject_MeasureList <.. docs.RepoObject_Adoc
+docs.RepoObject_MeasureList <.. docs.RepoObject_Plantuml_Entity
 docs.RepoObject_OutputFilter_T_gross <.. docs.RepoObject_MeasureList
 repo.Measure_union <.. docs.RepoObject_MeasureList
 ssas.Measure_translation_displayfolder_union <.. docs.RepoObject_MeasureList

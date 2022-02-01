@@ -1546,15 +1546,15 @@ skinparam class {
 
 
 entity "puml-link:dhw:sqldb:reference.repoobjectcolumn_reference_t.adoc[]" as reference.RepoObjectColumn_reference_T << U >> {
-  **referenced_RepoObjectColumn_guid** : (uniqueidentifier)
-  **referencing_RepoObjectColumn_guid** : (uniqueidentifier)
+  - **referenced_RepoObjectColumn_guid** : (uniqueidentifier)
+  - **referencing_RepoObjectColumn_guid** : (uniqueidentifier)
   is_referenced_object : (tinyint)
   is_referencing_object_equal_referenced_object : (tinyint)
   referenced_column_name : (nvarchar(128))
   referenced_entity_name : (nvarchar(128))
   referenced_external_AntoraComponent : (nvarchar(128))
   referenced_external_AntoraModule : (nvarchar(128))
-  referenced_is_external : (tinyint)
+  - referenced_is_external : (bit)
   referenced_RepoObject_guid : (uniqueidentifier)
   referenced_schema_name : (nvarchar(128))
   referenced_type : (char(2))
@@ -1562,7 +1562,7 @@ entity "puml-link:dhw:sqldb:reference.repoobjectcolumn_reference_t.adoc[]" as re
   referencing_entity_name : (nvarchar(128))
   referencing_external_AntoraComponent : (nvarchar(128))
   referencing_external_AntoraModule : (nvarchar(128))
-  referencing_is_external : (tinyint)
+  - referencing_is_external : (bit)
   referencing_RepoObject_guid : (uniqueidentifier)
   referencing_schema_name : (nvarchar(128))
   referencing_type : (char(2))
@@ -1674,8 +1674,8 @@ entity "puml-link:dhw:sqldb:reference.repoobjectcolumn_reference.adoc[]" as refe
 }
 
 entity "puml-link:dhw:sqldb:reference.repoobjectcolumn_reference_t.adoc[]" as reference.RepoObjectColumn_reference_T << U >> {
-  **referenced_RepoObjectColumn_guid** : (uniqueidentifier)
-  **referencing_RepoObjectColumn_guid** : (uniqueidentifier)
+  - **referenced_RepoObjectColumn_guid** : (uniqueidentifier)
+  - **referencing_RepoObjectColumn_guid** : (uniqueidentifier)
   --
 }
 
@@ -1703,11 +1703,11 @@ entity "puml-link:dhw:sqldb:repo.repoobjectcolumn_missingsource_typev.adoc[]" as
 }
 
 reference.RepoObjectColumn_reference <.. reference.RepoObjectColumn_reference_T
-reference.RepoObjectColumn_reference_T <.. repo.RepoObjectColumn_MissingSource_TypeV
 reference.RepoObjectColumn_reference_T <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing
 reference.RepoObjectColumn_reference_T <.. reference.RepoObjectColumn_ReferencedReferencing
 reference.RepoObjectColumn_reference_T <.. reference.usp_PERSIST_RepoObjectColumn_reference_T
 reference.RepoObjectColumn_reference_T <.. reference.RepoObjectColumn_RelationScript
+reference.RepoObjectColumn_reference_T <.. repo.RepoObjectColumn_MissingSource_TypeV
 reference.RepoObjectColumn_reference_T <.. docs.RepoObject_Plantuml_ColRefList_1_1
 
 footer The diagram is interactive and contains links.
@@ -1810,7 +1810,7 @@ entity "puml-link:dhw:sqldb:property.propertyname_repoobject.adoc[]" as property
 }
 
 entity "puml-link:dhw:sqldb:property.propertyname_repoobject_t.adoc[]" as property.PropertyName_RepoObject_T << U >> {
-  **property_name** : (nvarchar(128))
+  - **property_name** : (nvarchar(128))
   --
 }
 
@@ -1874,16 +1874,16 @@ entity "puml-link:dhw:sqldb:reference.additional_reference_from_properties_src.a
 }
 
 entity "puml-link:dhw:sqldb:reference.additional_reference_from_properties_tgt.adoc[]" as reference.additional_Reference_from_properties_tgt << V >> {
-  **referenced_AntoraComponent** : (nvarchar(max))
-  **referenced_AntoraModule** : (nvarchar(max))
-  **referenced_Schema** : (nvarchar(max))
-  **referenced_Object** : (nvarchar(max))
-  **referenced_Column** : (nvarchar(max))
-  **referencing_AntoraComponent** : (nvarchar(max))
-  **referencing_AntoraModule** : (nvarchar(max))
-  **referencing_Schema** : (nvarchar(max))
-  **referencing_Object** : (nvarchar(max))
-  **referencing_Column** : (nvarchar(max))
+  - **referenced_AntoraComponent** : (nvarchar(128))
+  - **referenced_AntoraModule** : (nvarchar(128))
+  - **referenced_Schema** : (nvarchar(128))
+  - **referenced_Object** : (nvarchar(128))
+  **referenced_Column** : (nvarchar(128))
+  - **referencing_AntoraComponent** : (nvarchar(128))
+  - **referencing_AntoraModule** : (nvarchar(128))
+  - **referencing_Schema** : (nvarchar(128))
+  - **referencing_Object** : (nvarchar(128))
+  **referencing_Column** : (nvarchar(128))
   --
 }
 
@@ -1902,13 +1902,13 @@ entity "puml-link:dhw:sqldb:reference.additional_reference_from_ssas_src.adoc[]"
 }
 
 entity "puml-link:dhw:sqldb:reference.additional_reference_from_ssas_tgt.adoc[]" as reference.additional_Reference_from_ssas_tgt << V >> {
-  **referenced_AntoraComponent** : (nvarchar(128))
-  **referenced_AntoraModule** : (nvarchar(128))
-  **referenced_Schema** : (nvarchar(max))
-  **referenced_Object** : (nvarchar(max))
-  **referenced_Column** : (nvarchar(500))
-  **referencing_AntoraComponent** : (nvarchar(max))
-  **referencing_AntoraModule** : (nvarchar(max))
+  - **referenced_AntoraComponent** : (nvarchar(128))
+  - **referenced_AntoraModule** : (nvarchar(128))
+  - **referenced_Schema** : (nvarchar(128))
+  - **referenced_Object** : (nvarchar(128))
+  **referenced_Column** : (nvarchar(128))
+  - **referencing_AntoraComponent** : (nvarchar(128))
+  - **referencing_AntoraModule** : (nvarchar(128))
   - **referencing_Schema** : (nvarchar(128))
   - **referencing_Object** : (nvarchar(128))
   **referencing_Column** : (nvarchar(128))
@@ -1963,14 +1963,14 @@ entity "puml-link:dhw:sqldb:reference.additional_reference_wo_columns_from_prope
 }
 
 entity "puml-link:dhw:sqldb:reference.additional_reference_wo_columns_from_properties_tgt.adoc[]" as reference.additional_Reference_wo_columns_from_properties_tgt << V >> {
-  **referenced_AntoraComponent** : (nvarchar(max))
-  **referenced_AntoraModule** : (nvarchar(max))
-  **referenced_Schema** : (nvarchar(max))
-  **referenced_Object** : (nvarchar(max))
-  **referencing_AntoraComponent** : (nvarchar(max))
-  **referencing_AntoraModule** : (nvarchar(max))
-  **referencing_Schema** : (nvarchar(max))
-  **referencing_Object** : (nvarchar(max))
+  - **referenced_AntoraComponent** : (nvarchar(128))
+  - **referenced_AntoraModule** : (nvarchar(128))
+  - **referenced_Schema** : (nvarchar(128))
+  - **referenced_Object** : (nvarchar(128))
+  - **referencing_AntoraComponent** : (nvarchar(128))
+  - **referencing_AntoraModule** : (nvarchar(128))
+  - **referencing_Schema** : (nvarchar(128))
+  - **referencing_Object** : (nvarchar(128))
   --
 }
 
@@ -2003,8 +2003,8 @@ entity "puml-link:dhw:sqldb:reference.repoobject_reference_sqlexpressiondependen
 }
 
 entity "puml-link:dhw:sqldb:reference.repoobject_reference_t.adoc[]" as reference.RepoObject_reference_T << U >> {
-  **referenced_RepoObject_guid** : (uniqueidentifier)
-  **referencing_RepoObject_guid** : (uniqueidentifier)
+  - **referenced_RepoObject_guid** : (uniqueidentifier)
+  - **referencing_RepoObject_guid** : (uniqueidentifier)
   --
 }
 
@@ -2053,8 +2053,8 @@ entity "puml-link:dhw:sqldb:reference.repoobjectcolumn_reference_sqlmodules.adoc
 }
 
 entity "puml-link:dhw:sqldb:reference.repoobjectcolumn_reference_t.adoc[]" as reference.RepoObjectColumn_reference_T << U >> {
-  **referenced_RepoObjectColumn_guid** : (uniqueidentifier)
-  **referencing_RepoObjectColumn_guid** : (uniqueidentifier)
+  - **referenced_RepoObjectColumn_guid** : (uniqueidentifier)
+  - **referencing_RepoObjectColumn_guid** : (uniqueidentifier)
   --
 }
 
@@ -2342,7 +2342,7 @@ entity "puml-link:dhw:sqldb:ssas.model_json_31_tables.adoc[]" as ssas.model_json
 
 entity "puml-link:dhw:sqldb:ssas.model_json_31_tables_t.adoc[]" as ssas.model_json_31_tables_T << U >> {
   - **databasename** : (nvarchar(128))
-  **tables_name** : (nvarchar(128))
+  - **tables_name** : (nvarchar(128))
   --
 }
 
@@ -2356,7 +2356,7 @@ entity "puml-link:dhw:sqldb:ssas.model_json_311_tables_columns.adoc[]" as ssas.m
 entity "puml-link:dhw:sqldb:ssas.model_json_311_tables_columns_t.adoc[]" as ssas.model_json_311_tables_columns_T << U >> {
   - **databasename** : (nvarchar(128))
   - **tables_name** : (nvarchar(128))
-  **tables_columns_name** : (nvarchar(128))
+  - **tables_columns_name** : (nvarchar(128))
   --
 }
 
@@ -2415,7 +2415,7 @@ entity "puml-link:dhw:sqldb:ssas.model_json_33_datasources.adoc[]" as ssas.model
 
 entity "puml-link:dhw:sqldb:ssas.model_json_33_datasources_t.adoc[]" as ssas.model_json_33_dataSources_T << U >> {
   - **databasename** : (nvarchar(128))
-  **dataSources_name** : (nvarchar(500))
+  - **dataSources_name** : (nvarchar(500))
   --
 }
 
@@ -2527,9 +2527,9 @@ reference.RepoObject_reference_persistence_target_as_source_explicit <.. referen
 reference.RepoObject_reference_SqlExpressionDependencies <.. reference.RepoObject_reference_persistence_target_as_source_explicit
 reference.RepoObject_reference_SqlExpressionDependencies <.. reference.RepoObject_reference_union
 reference.RepoObject_reference_SqlExpressionDependencies <.. reference.RepoObject_reference_persistence_target_as_source
-reference.RepoObject_reference_T <.. reference.RepoObjectColumn_reference_additional
 reference.RepoObject_reference_T <.. reference.RepoObjectColumn_reference_SqlExpressionDependencies
 reference.RepoObject_reference_T <.. reference.RepoObjectColumn_reference_virtual
+reference.RepoObject_reference_T <.. reference.RepoObjectColumn_reference_additional
 reference.RepoObject_reference_union <.. reference.RepoObject_reference
 reference.RepoObject_reference_virtual <.. reference.RepoObject_reference_union
 reference.RepoObjectColumn_reference <.. reference.RepoObjectColumn_reference_T
@@ -2630,13 +2630,13 @@ sqlparse.RepoObject_SqlModules_41_from <.. sqlparse.RepoObject_SqlModules_41_fro
 sqlparse.RepoObject_SqlModules_41_from_T <.. sqlparse.RepoObject_SqlModules_42_from_Identifier
 sqlparse.RepoObject_SqlModules_42_from_Identifier <.. sqlparse.RepoObject_SqlModules_43_from_Identifier
 sqlparse.RepoObject_SqlModules_43_from_Identifier <.. sqlparse.RepoObject_SqlModules_44_from_Identifier_QuoteName
-sqlparse.RepoObject_SqlModules_44_from_Identifier_QuoteName <.. sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias
 sqlparse.RepoObject_SqlModules_44_from_Identifier_QuoteName <.. sqlparse.RepoObject_SqlModules_71_reference_ExpliciteTableAlias
+sqlparse.RepoObject_SqlModules_44_from_Identifier_QuoteName <.. sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias
 sqlparse.RepoObject_SqlModules_51_Identitfier <.. sqlparse.RepoObject_SqlModules_52_Identitfier_QuoteName
 sqlparse.RepoObject_SqlModules_52_Identitfier_QuoteName <.. sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union
 sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union <.. sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union_T
-sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union_T <.. sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias
 sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union_T <.. sqlparse.RepoObject_SqlModules_71_reference_ExpliciteTableAlias
+sqlparse.RepoObject_SqlModules_61_SelectIdentifier_Union_T <.. sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias
 sqlparse.RepoObject_SqlModules_71_reference_ExpliciteTableAlias <.. sqlparse.RepoObject_SqlModules_79_reference_union
 sqlparse.RepoObject_SqlModules_72_reference_NoTableAlias <.. sqlparse.RepoObject_SqlModules_79_reference_union
 sqlparse.RepoObject_SqlModules_79_reference_union <.. reference.RepoObjectColumn_reference_SqlModules
@@ -2791,7 +2791,7 @@ entity "puml-link:dhw:sqldb:docs.repoobject_plantuml_pumlentityfklist.adoc[]" as
 
 entity "puml-link:dhw:sqldb:docs.repoobject_plantuml_t.adoc[]" as docs.RepoObject_Plantuml_T << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
-  **cultures_name** : (nvarchar(10))
+  - **cultures_name** : (nvarchar(10))
   --
 }
 
@@ -2862,8 +2862,8 @@ entity "puml-link:dhw:sqldb:reference.ftv_repoobjectcolumn_referencetree.adoc[]"
 }
 
 entity "puml-link:dhw:sqldb:reference.repoobjectcolumn_reference_t.adoc[]" as reference.RepoObjectColumn_reference_T << U >> {
-  **referenced_RepoObjectColumn_guid** : (uniqueidentifier)
-  **referencing_RepoObjectColumn_guid** : (uniqueidentifier)
+  - **referenced_RepoObjectColumn_guid** : (uniqueidentifier)
+  - **referencing_RepoObjectColumn_guid** : (uniqueidentifier)
   --
 }
 
@@ -3058,9 +3058,9 @@ repo.RepoObject_sat2_T <.. repo.usp_PERSIST_RepoObject_sat2_T
 repo.RepoObject_sat2_T <.. docs.RepoObject_Adoc
 repo.RepoObject_sat2_T <.. property.RepoObjectProperty_Collect_source_ROGross
 repo.RepoObject_SqlCreateTable <.. reference.ftv_RepoObject_ColumReferenceRepoObject
-repo.RepoObjectColumn_gross2 <.. docs.RepoObject_ColumnList
 repo.RepoObjectColumn_gross2 <.. repo.RepoObject_ColumnList
 repo.RepoObjectColumn_gross2 <.. uspgenerator.usp_GeneratorUsp_insert_update_persistence
+repo.RepoObjectColumn_gross2 <.. docs.RepoObject_ColumnList
 repo.usp_index_inheritance <.. repo.usp_main
 repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.usp_index_inheritance
 repo.usp_PERSIST_RepoObject_sat2_T <.. repo.usp_main
@@ -3139,15 +3139,15 @@ entity "puml-link:dhw:sqldb:reference.repoobjectcolumn_reference.adoc[]" as refe
 }
 
 entity "puml-link:dhw:sqldb:reference.repoobjectcolumn_reference_t.adoc[]" as reference.RepoObjectColumn_reference_T << U >> {
-  **referenced_RepoObjectColumn_guid** : (uniqueidentifier)
-  **referencing_RepoObjectColumn_guid** : (uniqueidentifier)
+  - **referenced_RepoObjectColumn_guid** : (uniqueidentifier)
+  - **referencing_RepoObjectColumn_guid** : (uniqueidentifier)
   is_referenced_object : (tinyint)
   is_referencing_object_equal_referenced_object : (tinyint)
   referenced_column_name : (nvarchar(128))
   referenced_entity_name : (nvarchar(128))
   referenced_external_AntoraComponent : (nvarchar(128))
   referenced_external_AntoraModule : (nvarchar(128))
-  referenced_is_external : (tinyint)
+  - referenced_is_external : (bit)
   referenced_RepoObject_guid : (uniqueidentifier)
   referenced_schema_name : (nvarchar(128))
   referenced_type : (char(2))
@@ -3155,7 +3155,7 @@ entity "puml-link:dhw:sqldb:reference.repoobjectcolumn_reference_t.adoc[]" as re
   referencing_entity_name : (nvarchar(128))
   referencing_external_AntoraComponent : (nvarchar(128))
   referencing_external_AntoraModule : (nvarchar(128))
-  referencing_is_external : (tinyint)
+  - referencing_is_external : (bit)
   referencing_RepoObject_guid : (uniqueidentifier)
   referencing_schema_name : (nvarchar(128))
   referencing_type : (char(2))
@@ -3256,11 +3256,11 @@ entity "puml-link:dhw:sqldb:repo.repoobjectcolumn_missingsource_typev.adoc[]" as
 }
 
 reference.RepoObjectColumn_reference <.. reference.RepoObjectColumn_reference_T
-reference.RepoObjectColumn_reference_T <.. repo.RepoObjectColumn_MissingSource_TypeV
 reference.RepoObjectColumn_reference_T <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing
 reference.RepoObjectColumn_reference_T <.. reference.RepoObjectColumn_ReferencedReferencing
 reference.RepoObjectColumn_reference_T <.. reference.usp_PERSIST_RepoObjectColumn_reference_T
 reference.RepoObjectColumn_reference_T <.. reference.RepoObjectColumn_RelationScript
+reference.RepoObjectColumn_reference_T <.. repo.RepoObjectColumn_MissingSource_TypeV
 reference.RepoObjectColumn_reference_T <.. docs.RepoObject_Plantuml_ColRefList_1_1
 "reference.RepoObjectColumn_reference::is_referenced_object" <-- "reference.RepoObjectColumn_reference_T::is_referenced_object"
 "reference.RepoObjectColumn_reference::is_referencing_object_equal_referenced_object" <-- "reference.RepoObjectColumn_reference_T::is_referencing_object_equal_referenced_object"

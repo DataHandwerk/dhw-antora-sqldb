@@ -678,7 +678,7 @@ view
 * IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#startbnoblankgroupendb[no_group]
 +
 --
-* <<column-referencing_index_guid>>; uniqueidentifier
+* <<column-referencing_index_name>>; nvarchar(450)
 --
 * PK, Unique, Real: 0, 0, 0
 
@@ -689,7 +689,7 @@ view
 * IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#startbnoblankgroupendb[no_group]
 +
 --
-* <<column-referenced_SysObject_schema_name>>; nvarchar(128)
+* <<column-referenced_IndexPatternColumnName>>; nvarchar(128)
 --
 * PK, Unique, Real: 0, 0, 0
 
@@ -700,7 +700,7 @@ view
 * IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#startbnoblankgroupendb[no_group]
 +
 --
-* <<column-referencing_SysObject_schema_name>>; nvarchar(128)
+* <<column-ForeignKey_guid>>; uniqueidentifier
 --
 * PK, Unique, Real: 0, 0, 0
 
@@ -711,7 +711,7 @@ view
 * IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#startbnoblankgroupendb[no_group]
 +
 --
-* <<column-referenced_index_guid>>; uniqueidentifier
+* <<column-referenced_index_name>>; nvarchar(450)
 --
 * PK, Unique, Real: 0, 0, 0
 
@@ -722,7 +722,7 @@ view
 * IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#startbnoblankgroupendb[no_group]
 +
 --
-* <<column-referenced_index_name>>; nvarchar(450)
+* <<column-referencing_SysObject_schema_name>>; nvarchar(128)
 --
 * PK, Unique, Real: 0, 0, 0
 
@@ -733,7 +733,7 @@ view
 * IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#startbnoblankgroupendb[no_group]
 +
 --
-* <<column-referencing_index_name>>; nvarchar(450)
+* <<column-referenced_SysObject_schema_name>>; nvarchar(128)
 --
 * PK, Unique, Real: 0, 0, 0
 
@@ -744,7 +744,7 @@ view
 * IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#startbnoblankgroupendb[no_group]
 +
 --
-* <<column-referencing_SysObject_name>>; nvarchar(128)
+* <<column-referencing_index_guid>>; uniqueidentifier
 --
 * PK, Unique, Real: 0, 0, 0
 
@@ -755,7 +755,7 @@ view
 * IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#startbnoblankgroupendb[no_group]
 +
 --
-* <<column-referenced_SysObject_name>>; nvarchar(128)
+* <<column-referenced_index_guid>>; uniqueidentifier
 --
 * PK, Unique, Real: 0, 0, 0
 
@@ -766,7 +766,7 @@ view
 * IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#startbnoblankgroupendb[no_group]
 +
 --
-* <<column-referencing_IndexPatternColumnName>>; nvarchar(128)
+* <<column-referencing_SysObject_name>>; nvarchar(128)
 --
 * PK, Unique, Real: 0, 0, 0
 
@@ -777,7 +777,7 @@ view
 * IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#startbnoblankgroupendb[no_group]
 +
 --
-* <<column-referenced_IndexPatternColumnName>>; nvarchar(128)
+* <<column-referenced_SysObject_name>>; nvarchar(128)
 --
 * PK, Unique, Real: 0, 0, 0
 
@@ -788,7 +788,7 @@ view
 * IndexSemanticGroup: xref:other/indexsemanticgroup.adoc#startbnoblankgroupendb[no_group]
 +
 --
-* <<column-ForeignKey_guid>>; uniqueidentifier
+* <<column-referencing_IndexPatternColumnName>>; nvarchar(128)
 --
 * PK, Unique, Real: 0, 0, 0
 
@@ -1233,12 +1233,12 @@ referencing_index_guid; uniqueidentifier
 - idx_ForeignKey_ssas_Indexes__10
 
 ..
-referencing_SysObject_schema_name; nvarchar(128)
+referenced_SysObject_schema_name; nvarchar(128)
 --
 - idx_ForeignKey_ssas_Indexes__11
 
 ..
-referenced_SysObject_schema_name; nvarchar(128)
+referencing_SysObject_schema_name; nvarchar(128)
 --
 - idx_ForeignKey_ssas_Indexes__2
 
@@ -1338,7 +1338,7 @@ entity "puml-link:dhw:sqldb:repo.foreignkey_ssas_indexpattern.adoc[]" as repo.Fo
 
 entity "puml-link:dhw:sqldb:repo.index_ssas_t.adoc[]" as repo.Index_ssas_T << U >> {
   - **databasename** : (nvarchar(128))
-  **index_name** : (nvarchar(450))
+  - **index_name** : (nvarchar(450))
   --
 }
 
@@ -1402,7 +1402,7 @@ entity "puml-link:dhw:sqldb:repo.index_ssas.adoc[]" as repo.Index_ssas << V >> {
 
 entity "puml-link:dhw:sqldb:repo.index_ssas_t.adoc[]" as repo.Index_ssas_T << U >> {
   - **databasename** : (nvarchar(128))
-  **index_name** : (nvarchar(450))
+  - **index_name** : (nvarchar(450))
   --
 }
 
@@ -1443,7 +1443,7 @@ entity "puml-link:dhw:sqldb:ssas.model_json_31_tables.adoc[]" as ssas.model_json
 
 entity "puml-link:dhw:sqldb:ssas.model_json_31_tables_t.adoc[]" as ssas.model_json_31_tables_T << U >> {
   - **databasename** : (nvarchar(128))
-  **tables_name** : (nvarchar(128))
+  - **tables_name** : (nvarchar(128))
   --
 }
 
@@ -1457,7 +1457,7 @@ entity "puml-link:dhw:sqldb:ssas.model_json_311_tables_columns.adoc[]" as ssas.m
 entity "puml-link:dhw:sqldb:ssas.model_json_311_tables_columns_t.adoc[]" as ssas.model_json_311_tables_columns_T << U >> {
   - **databasename** : (nvarchar(128))
   - **tables_name** : (nvarchar(128))
-  **tables_columns_name** : (nvarchar(128))
+  - **tables_columns_name** : (nvarchar(128))
   --
 }
 
@@ -1607,7 +1607,7 @@ entity "puml-link:dhw:sqldb:docs.repoobject_plantuml_pumlentityfklist.adoc[]" as
 
 entity "puml-link:dhw:sqldb:docs.repoobject_plantuml_t.adoc[]" as docs.RepoObject_Plantuml_T << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
-  **cultures_name** : (nvarchar(10))
+  - **cultures_name** : (nvarchar(10))
   --
 }
 
@@ -1884,14 +1884,13 @@ entity "puml-link:dhw:sqldb:repo.foreignkey_ssas_indexpattern.adoc[]" as repo.Fo
 
 entity "puml-link:dhw:sqldb:repo.index_ssas_t.adoc[]" as repo.Index_ssas_T << U >> {
   - **databasename** : (nvarchar(128))
-  **index_name** : (nvarchar(450))
-  - ColumnName : (nvarchar(128))
+  - **index_name** : (nvarchar(450))
+  - ColumnName : (nvarchar(max))
   - index_guid : (uniqueidentifier)
   - is_index_primary_key : (bit)
   - is_index_unique : (bit)
   - RepoObject_guid : (uniqueidentifier)
-  - TableID : (numeric(20, 0))
-  - TableName : (nvarchar(128))
+  - TableName : (nvarchar(max))
   --
 }
 

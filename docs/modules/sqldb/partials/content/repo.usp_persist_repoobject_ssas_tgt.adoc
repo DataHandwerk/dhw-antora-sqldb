@@ -51,7 +51,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2022-01-21 18:39:34
+2022-01-23 17:32:31
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -797,7 +797,7 @@ entity "puml-link:dhw:sqldb:ssas.model_json_31_tables.adoc[]" as ssas.model_json
 
 entity "puml-link:dhw:sqldb:ssas.model_json_31_tables_t.adoc[]" as ssas.model_json_31_tables_T << U >> {
   - **databasename** : (nvarchar(128))
-  **tables_name** : (nvarchar(128))
+  - **tables_name** : (nvarchar(128))
   --
 }
 
@@ -941,9 +941,9 @@ entity "puml-link:dhw:sqldb:repo.repoobject_ssas_tgt.adoc[]" as repo.RepoObject_
   InheritanceDefinition : (nvarchar(4000))
   InheritanceType : (tinyint)
   is_external : (bit)
-  - is_repo_managed : (int)
+  is_repo_managed : (bit)
   is_required_ObjectMerge : (bit)
-  - is_ssas : (int)
+  - is_ssas : (bit)
   is_SysObject_missing : (bit)
   - modify_dt : (datetime)
   pk_index_guid : (uniqueidentifier)
@@ -953,13 +953,13 @@ entity "puml-link:dhw:sqldb:repo.repoobject_ssas_tgt.adoc[]" as repo.RepoObject_
   - RepoObject_name : (nvarchar(128))
   RepoObject_Referencing_Count : (int)
   - RepoObject_schema_name : (nvarchar(128))
-  - RepoObject_type : (varchar(1))
+  - RepoObject_type : (char(2))
   SysObject_id : (int)
-  - SysObject_modify_date : (datetime)
+  SysObject_modify_date : (datetime)
   - SysObject_name : (nvarchar(128))
   - SysObject_parent_object_id : (int)
   - SysObject_schema_name : (nvarchar(128))
-  - SysObject_type : (varchar(1))
+  SysObject_type : (char(2))
   --
 }
 
@@ -1123,14 +1123,14 @@ ON
 T.[RepoObject_guid] = S.[RepoObject_guid]
 
 WHERE
-   T.[is_repo_managed] <> S.[is_repo_managed]
+   T.[is_repo_managed] <> S.[is_repo_managed] OR (S.[is_repo_managed] IS NULL AND NOT T.[is_repo_managed] IS NULL) OR (NOT S.[is_repo_managed] IS NULL AND T.[is_repo_managed] IS NULL)
 OR T.[is_ssas] <> S.[is_ssas]
 OR T.[RepoObject_name] <> S.[RepoObject_name]
 OR T.[RepoObject_schema_name] <> S.[RepoObject_schema_name]
 OR T.[RepoObject_type] <> S.[RepoObject_type]
 OR T.[SysObject_name] <> S.[SysObject_name]
 OR T.[SysObject_schema_name] <> S.[SysObject_schema_name]
-OR T.[SysObject_type] <> S.[SysObject_type]
+OR T.[SysObject_type] <> S.[SysObject_type] OR (S.[SysObject_type] IS NULL AND NOT T.[SysObject_type] IS NULL) OR (NOT S.[SysObject_type] IS NULL AND T.[SysObject_type] IS NULL)
 
 
 -- Logging START --

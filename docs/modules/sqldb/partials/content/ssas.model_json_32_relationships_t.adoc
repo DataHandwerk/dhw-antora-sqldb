@@ -953,9 +953,9 @@ entity "puml-link:dhw:sqldb:ssas.usp_persist_model_json_32_relationships_t.adoc[
 }
 
 ssas.model_json_32_relationships <.. ssas.model_json_32_relationships_T
+ssas.model_json_32_relationships_T <.. ssas.IndexColumn_from_Relationship
 ssas.model_json_32_relationships_T <.. repo.ForeignKey_ssas_IndexPattern
 ssas.model_json_32_relationships_T <.. ssas.usp_PERSIST_model_json_32_relationships_T
-ssas.model_json_32_relationships_T <.. ssas.IndexColumn_from_Relationship
 
 footer The diagram is interactive and contains links.
 
@@ -1163,7 +1163,7 @@ entity "puml-link:dhw:sqldb:docs.repoobject_plantuml_pumlentityfklist.adoc[]" as
 
 entity "puml-link:dhw:sqldb:docs.repoobject_plantuml_t.adoc[]" as docs.RepoObject_Plantuml_T << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
-  **cultures_name** : (nvarchar(10))
+  - **cultures_name** : (nvarchar(10))
   --
 }
 
@@ -1320,7 +1320,7 @@ entity "puml-link:dhw:sqldb:repo.index_ssas_indexpatterncolumnguid.adoc[]" as re
 
 entity "puml-link:dhw:sqldb:repo.index_ssas_t.adoc[]" as repo.Index_ssas_T << U >> {
   - **databasename** : (nvarchar(128))
-  **index_name** : (nvarchar(450))
+  - **index_name** : (nvarchar(450))
   --
 }
 
@@ -1370,7 +1370,7 @@ entity "puml-link:dhw:sqldb:repo.indexcolumn_union.adoc[]" as repo.IndexColumn_u
 }
 
 entity "puml-link:dhw:sqldb:repo.indexcolumn_union_t.adoc[]" as repo.IndexColumn_union_T << U >> {
-  **index_guid** : (uniqueidentifier)
+  - **index_guid** : (uniqueidentifier)
   - **index_column_id** : (int)
   --
 }
@@ -1508,8 +1508,8 @@ docs.ftv_RepoObject_Reference_PlantUml_EntityRefList <.. docs.RepoObject_Plantum
 docs.IndexSemanticgroup <.. docs.AntoraPage_IndexSemanticGroup
 docs.IndexSemanticgroupPatterndatatype <.. docs.IndexSemanticgroup
 docs.ObjectRefCyclic_EntityList <.. docs.ObjectRefCyclic
-docs.RepoObject_Adoc <.. docs.usp_PERSIST_RepoObject_Adoc_T
 docs.RepoObject_Adoc <.. docs.RepoObject_Adoc_T
+docs.RepoObject_Adoc <.. docs.usp_PERSIST_RepoObject_Adoc_T
 docs.REpoObject_Adoc_T <.. docs.usp_PERSIST_RepoObject_Adoc_T
 docs.RepoObject_ColumnList <.. docs.usp_PERSIST_RepoObject_ColumnList_T
 docs.RepoObject_ColumnList <.. docs.RepoObject_ColumnList_T
@@ -1588,12 +1588,12 @@ repo.Index_SqlConstraint_PkUq <.. repo.RepoObject_SqlCreateTable
 repo.Index_ssas <.. repo.usp_PERSIST_Index_ssas_T
 repo.Index_ssas <.. repo.Index_ssas_T
 repo.Index_ssas_IndexPatternColumnGuid <.. repo.Index_union
+repo.Index_ssas_T <.. repo.IndexColumn_ssas_gross
 repo.Index_ssas_T <.. repo.Index_union
 repo.Index_ssas_T <.. repo.IndexColumn_ssas
 repo.Index_ssas_T <.. repo.Index_ssas_IndexPatternColumnGuid
 repo.Index_ssas_T <.. repo.usp_PERSIST_Index_ssas_T
 repo.Index_ssas_T <.. repo.ForeignKey_ssas_Indexes
-repo.Index_ssas_T <.. repo.IndexColumn_ssas_gross
 repo.Index_union <.. repo.Index_Settings_ForUpdate
 repo.Index_union <.. repo.usp_Index_finish
 repo.Index_union <.. repo.Index_gross
@@ -1606,12 +1606,12 @@ repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.In
 repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.Index_referencing_IndexPatternColumnGuid
 repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T
 repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_check
-repo.IndexColumn_ssas <.. repo.usp_PERSIST_IndexColumn_ssas_T
 repo.IndexColumn_ssas <.. repo.IndexColumn_ssas_T
+repo.IndexColumn_ssas <.. repo.usp_PERSIST_IndexColumn_ssas_T
 repo.IndexColumn_ssas_gross <.. repo.IndexColumn_union
-repo.IndexColumn_ssas_T <.. repo.IndexColumn_ssas_gross
 repo.IndexColumn_ssas_T <.. repo.Index_ssas_IndexPatternColumnGuid
 repo.IndexColumn_ssas_T <.. repo.usp_PERSIST_IndexColumn_ssas_T
+repo.IndexColumn_ssas_T <.. repo.IndexColumn_ssas_gross
 repo.IndexColumn_union <.. repo.usp_PERSIST_IndexColumn_union_T
 repo.IndexColumn_union <.. repo.IndexColumn_union_T
 repo.IndexColumn_union_T <.. repo.Index_IndexPattern
@@ -1786,9 +1786,9 @@ entity "puml-link:dhw:sqldb:ssas.usp_persist_model_json_32_relationships_t.adoc[
 }
 
 ssas.model_json_32_relationships <.. ssas.model_json_32_relationships_T
+ssas.model_json_32_relationships_T <.. ssas.IndexColumn_from_Relationship
 ssas.model_json_32_relationships_T <.. repo.ForeignKey_ssas_IndexPattern
 ssas.model_json_32_relationships_T <.. ssas.usp_PERSIST_model_json_32_relationships_T
-ssas.model_json_32_relationships_T <.. ssas.IndexColumn_from_Relationship
 "ssas.model_json_32_relationships::databasename" <-- "ssas.model_json_32_relationships_T::databasename"
 "ssas.model_json_32_relationships::relationships_crossFilteringBehavior" <-- "ssas.model_json_32_relationships_T::relationships_crossFilteringBehavior"
 "ssas.model_json_32_relationships::relationships_fromCardinality" <-- "ssas.model_json_32_relationships_T::relationships_fromCardinality"

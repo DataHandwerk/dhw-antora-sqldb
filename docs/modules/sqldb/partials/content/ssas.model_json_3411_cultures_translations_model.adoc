@@ -760,7 +760,7 @@ entity "puml-link:dhw:sqldb:ssas.model_json_3411_cultures_translations_model.ado
 
 entity "puml-link:dhw:sqldb:ssas.model_json_3411_cultures_translations_model_t.adoc[]" as ssas.model_json_3411_cultures_translations_model_T << U >> {
   - **databasename** : (nvarchar(128))
-  **cultures_name** : (nvarchar(500))
+  - **cultures_name** : (nvarchar(10))
   --
 }
 
@@ -1043,7 +1043,7 @@ entity "puml-link:dhw:sqldb:docs.repoobject_plantuml_pumlentityfklist.adoc[]" as
 
 entity "puml-link:dhw:sqldb:docs.repoobject_plantuml_t.adoc[]" as docs.RepoObject_Plantuml_T << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
-  **cultures_name** : (nvarchar(10))
+  - **cultures_name** : (nvarchar(10))
   --
 }
 
@@ -1159,7 +1159,7 @@ entity "puml-link:dhw:sqldb:ssas.measure_translation_displayfolder_union.adoc[]"
 entity "puml-link:dhw:sqldb:ssas.measure_translation_t.adoc[]" as ssas.Measure_translation_T << U >> {
   - **Measure_guid** : (uniqueidentifier)
   - **cultures_name** : (nvarchar(10))
-  **RepoObject_name** : (nvarchar(128))
+  - **RepoObject_name** : (nvarchar(128))
   --
 }
 
@@ -1172,7 +1172,7 @@ entity "puml-link:dhw:sqldb:ssas.model_json_3411_cultures_translations_model.ado
 
 entity "puml-link:dhw:sqldb:ssas.model_json_3411_cultures_translations_model_t.adoc[]" as ssas.model_json_3411_cultures_translations_model_T << U >> {
   - **databasename** : (nvarchar(128))
-  **cultures_name** : (nvarchar(500))
+  - **cultures_name** : (nvarchar(10))
   --
 }
 
@@ -1235,11 +1235,11 @@ docs.Culture <.. ssas.Measure_translation
 docs.Culture <.. ssas.RepoObjectColumn_translation
 docs.culture <.. docs.usp_AntoraExport_ObjectRefCyclic
 docs.Culture <.. docs.ObjectRefCyclic
+docs.Culture <.. docs.RepoObject_OutputFilter
 docs.Culture <.. docs.usp_AntoraExport_DocSnippet
 docs.culture <.. docs.usp_AntoraExport
 docs.Culture <.. docs.usp_AntoraExport_Page_IndexSemanticGroup
 docs.culture <.. docs.usp_AntoraExport_ObjectPageTemplate
-docs.Culture <.. docs.RepoObject_OutputFilter
 docs.ftv_RepoObject_Reference_PlantUml_EntityRefList <.. docs.RepoObject_Plantuml
 docs.IndexSemanticgroup <.. docs.AntoraPage_IndexSemanticGroup
 docs.IndexSemanticgroupPatterndatatype <.. docs.IndexSemanticgroup
@@ -1327,10 +1327,10 @@ ssas.Measure_translation_T <.. ssas.Measure_translation_displayfolder_union
 ssas.Measure_translation_T <.. docs.RepoObject_MeasureDescriptionList
 ssas.model_json_3411_cultures_translations_model <.. ssas.usp_PERSIST_model_json_3411_cultures_translations_model_T
 ssas.model_json_3411_cultures_translations_model <.. ssas.model_json_3411_cultures_translations_model_T
-ssas.model_json_3411_cultures_translations_model_T <.. ssas.usp_PERSIST_model_json_3411_cultures_translations_model_T
 ssas.model_json_3411_cultures_translations_model_T <.. docs.RepoObject_OutputFilter
 ssas.model_json_3411_cultures_translations_model_T <.. ssas.model_json_34111_cultures_translations_model_tables
 ssas.model_json_3411_cultures_translations_model_T <.. docs.Culture
+ssas.model_json_3411_cultures_translations_model_T <.. ssas.usp_PERSIST_model_json_3411_cultures_translations_model_T
 ssas.model_json_34111_cultures_translations_model_tables <.. ssas.model_json_341113_cultures_translations_model_tables_measures
 ssas.model_json_34111_cultures_translations_model_tables <.. ssas.model_json_341112_cultures_translations_model_tables_hierarchies
 ssas.model_json_34111_cultures_translations_model_tables <.. ssas.model_json_341111_cultures_translations_model_tables_columns
@@ -1407,8 +1407,8 @@ entity "puml-link:dhw:sqldb:ssas.model_json_3411_cultures_translations_model.ado
 
 entity "puml-link:dhw:sqldb:ssas.model_json_3411_cultures_translations_model_t.adoc[]" as ssas.model_json_3411_cultures_translations_model_T << U >> {
   - **databasename** : (nvarchar(128))
-  **cultures_name** : (nvarchar(500))
-  cultures_translations_model_name : (nvarchar(500))
+  - **cultures_name** : (nvarchar(10))
+  - cultures_translations_model_name : (nvarchar(500))
   cultures_translations_model_perspectives_ja : (nvarchar(max))
   cultures_translations_model_tables_ja : (nvarchar(max))
   cultures_translations_model_translatedDescription : (nvarchar(max))

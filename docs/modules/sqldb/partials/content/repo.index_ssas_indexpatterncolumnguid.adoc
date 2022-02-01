@@ -615,7 +615,7 @@ entity "puml-link:dhw:sqldb:repo.index_ssas_indexpatterncolumnguid.adoc[]" as re
 
 entity "puml-link:dhw:sqldb:repo.index_ssas_t.adoc[]" as repo.Index_ssas_T << U >> {
   - **databasename** : (nvarchar(128))
-  **index_name** : (nvarchar(450))
+  - **index_name** : (nvarchar(450))
   --
 }
 
@@ -686,7 +686,7 @@ entity "puml-link:dhw:sqldb:repo.index_ssas_indexpatterncolumnguid.adoc[]" as re
 
 entity "puml-link:dhw:sqldb:repo.index_ssas_t.adoc[]" as repo.Index_ssas_T << U >> {
   - **databasename** : (nvarchar(128))
-  **index_name** : (nvarchar(450))
+  - **index_name** : (nvarchar(450))
   --
 }
 
@@ -739,7 +739,7 @@ entity "puml-link:dhw:sqldb:ssas.model_json_31_tables.adoc[]" as ssas.model_json
 
 entity "puml-link:dhw:sqldb:ssas.model_json_31_tables_t.adoc[]" as ssas.model_json_31_tables_T << U >> {
   - **databasename** : (nvarchar(128))
-  **tables_name** : (nvarchar(128))
+  - **tables_name** : (nvarchar(128))
   --
 }
 
@@ -753,7 +753,7 @@ entity "puml-link:dhw:sqldb:ssas.model_json_311_tables_columns.adoc[]" as ssas.m
 entity "puml-link:dhw:sqldb:ssas.model_json_311_tables_columns_t.adoc[]" as ssas.model_json_311_tables_columns_T << U >> {
   - **databasename** : (nvarchar(128))
   - **tables_name** : (nvarchar(128))
-  **tables_columns_name** : (nvarchar(128))
+  - **tables_columns_name** : (nvarchar(128))
   --
 }
 
@@ -918,7 +918,7 @@ entity "puml-link:dhw:sqldb:docs.repoobject_plantuml_pumlentityfklist.adoc[]" as
 
 entity "puml-link:dhw:sqldb:docs.repoobject_plantuml_t.adoc[]" as docs.RepoObject_Plantuml_T << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
-  **cultures_name** : (nvarchar(10))
+  - **cultures_name** : (nvarchar(10))
   --
 }
 
@@ -1181,14 +1181,13 @@ entity "puml-link:dhw:sqldb:repo.index_ssas_indexpatterncolumnguid.adoc[]" as re
 
 entity "puml-link:dhw:sqldb:repo.index_ssas_t.adoc[]" as repo.Index_ssas_T << U >> {
   - **databasename** : (nvarchar(128))
-  **index_name** : (nvarchar(450))
-  - ColumnName : (nvarchar(128))
+  - **index_name** : (nvarchar(450))
+  - ColumnName : (nvarchar(max))
   - index_guid : (uniqueidentifier)
   - is_index_primary_key : (bit)
   - is_index_unique : (bit)
   - RepoObject_guid : (uniqueidentifier)
-  - TableID : (numeric(20, 0))
-  - TableName : (nvarchar(128))
+  - TableName : (nvarchar(max))
   --
 }
 
@@ -1209,11 +1208,9 @@ entity "puml-link:dhw:sqldb:repo.index_union.adoc[]" as repo.Index_union << V >>
 entity "puml-link:dhw:sqldb:repo.indexcolumn_ssas_t.adoc[]" as repo.IndexColumn_ssas_T << U >> {
   - **index_guid** : (uniqueidentifier)
   - **index_column_id** : (int)
-  - ColumnName : (nvarchar(128))
-  - ColumnType : (bigint)
+  - ColumnName : (nvarchar(max))
   - databasename : (nvarchar(128))
   - RepoObjectColumn_guid : (uniqueidentifier)
-  - TableID : (numeric(20, 0))
   - TableName : (nvarchar(max))
   ~ is_descending_key : (bit)
   --

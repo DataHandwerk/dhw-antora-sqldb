@@ -53,7 +53,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2022-01-21 18:39:35
+2022-01-23 17:32:31
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -1728,12 +1728,45 @@ Where
 |
 
 
+|1305
+|
+*Update existing HistValidColumns via ColumnName*
+
+* u
+* [repo].[RepoObjectColumn_HistValidColums_setpoint]
+* [repo].[RepoObjectColumn]
+
+
+.Statement
+[%collapsible]
+=====
+[source,sql,numbered]
+----
+Update
+    tgt
+Set
+    tgt.Repo_generated_always_type = setpoint.Repo_generated_always_type
+From
+    repo.RepoObjectColumn                              As tgt
+    Inner Join
+        repo.RepoObjectColumn_HistValidColums_setpoint As setpoint
+            On
+            tgt.RepoObject_guid = setpoint.RepoObject_guid
+            And tgt.Column_name = setpoint.RepoObjectColumn_name
+Where
+    tgt.Repo_generated_always_type <> setpoint.Repo_generated_always_type
+----
+=====
+
+|
+
+
 |1310
 |
 *persistence: insert missing HistValidColumns*
 
 * i
-* [repo].[RepoObject_persistence]
+* [repo].[RepoObjectColumn_HistValidColums_setpoint]
 * [repo].[RepoObjectColumn]
 
 
@@ -1747,29 +1780,37 @@ maybe we should delete them?
 =====
 [source,sql,numbered]
 ----
-INSERT INTO [repo].[RepoObjectColumn] (
- [Repo_generated_always_type]
- , [Repo_is_nullable]
- , [Repo_user_type_name]
- , [Repo_user_type_fullname]
- , [RepoObjectColumn_name]
- , [RepoObject_guid]
- )
-SELECT [Repo_generated_always_type]
- , [Repo_is_nullable]
- , [Repo_user_type_name]
- , [Repo_user_type_fullname]
- , [RepoObjectColumn_name]
- , [RepoObject_guid]
-FROM [repo].[RepoObjectColumn_HistValidColums_setpoint] AS setpoint
-WHERE NOT EXISTS (
-  SELECT 1
-  FROM [repo].[RepoObjectColumn] AS [roc]
-  WHERE [roc].[RepoObject_guid] = [setpoint].[RepoObject_guid]
-   --we link not by ColumnName, but by [Repo_generated_always_type]
-   --this way it is possible to change the name in [repo].[RepoObjectColumn], if required
-   AND [roc].[Repo_generated_always_type] = [setpoint].[Repo_generated_always_type]
-  )
+Insert Into repo.RepoObjectColumn
+(
+    Repo_generated_always_type
+  , Repo_is_nullable
+  , Repo_user_type_name
+  , Repo_user_type_fullname
+  , RepoObjectColumn_name
+  , RepoObject_guid
+)
+Select
+    setpoint.Repo_generated_always_type
+  , setpoint.Repo_is_nullable
+  , setpoint.Repo_user_type_name
+  , setpoint.Repo_user_type_fullname
+  , setpoint.RepoObjectColumn_name
+  , setpoint.RepoObject_guid
+From
+    repo.RepoObjectColumn_HistValidColums_setpoint As setpoint
+Where
+    Not Exists
+(
+    Select
+        1
+    From
+        repo.RepoObjectColumn As roc
+    Where
+        roc.RepoObject_guid                = setpoint.RepoObject_guid
+        --we link not by ColumnName, but by [Repo_generated_always_type]
+        --this way it is possible to change the name in [repo].[RepoObjectColumn], if required
+        And roc.Repo_generated_always_type = setpoint.Repo_generated_always_type
+)
 ----
 =====
 
@@ -2871,7 +2912,7 @@ entity "puml-link:dhw:sqldb:property.propertyname_repoobject.adoc[]" as property
 }
 
 entity "puml-link:dhw:sqldb:property.propertyname_repoobject_t.adoc[]" as property.PropertyName_RepoObject_T << U >> {
-  **property_name** : (nvarchar(128))
+  - **property_name** : (nvarchar(128))
   --
 }
 
@@ -2935,16 +2976,16 @@ entity "puml-link:dhw:sqldb:reference.additional_reference_from_properties_src.a
 }
 
 entity "puml-link:dhw:sqldb:reference.additional_reference_from_properties_tgt.adoc[]" as reference.additional_Reference_from_properties_tgt << V >> {
-  **referenced_AntoraComponent** : (nvarchar(max))
-  **referenced_AntoraModule** : (nvarchar(max))
-  **referenced_Schema** : (nvarchar(max))
-  **referenced_Object** : (nvarchar(max))
-  **referenced_Column** : (nvarchar(max))
-  **referencing_AntoraComponent** : (nvarchar(max))
-  **referencing_AntoraModule** : (nvarchar(max))
-  **referencing_Schema** : (nvarchar(max))
-  **referencing_Object** : (nvarchar(max))
-  **referencing_Column** : (nvarchar(max))
+  - **referenced_AntoraComponent** : (nvarchar(128))
+  - **referenced_AntoraModule** : (nvarchar(128))
+  - **referenced_Schema** : (nvarchar(128))
+  - **referenced_Object** : (nvarchar(128))
+  **referenced_Column** : (nvarchar(128))
+  - **referencing_AntoraComponent** : (nvarchar(128))
+  - **referencing_AntoraModule** : (nvarchar(128))
+  - **referencing_Schema** : (nvarchar(128))
+  - **referencing_Object** : (nvarchar(128))
+  **referencing_Column** : (nvarchar(128))
   --
 }
 
@@ -2963,13 +3004,13 @@ entity "puml-link:dhw:sqldb:reference.additional_reference_from_ssas_src.adoc[]"
 }
 
 entity "puml-link:dhw:sqldb:reference.additional_reference_from_ssas_tgt.adoc[]" as reference.additional_Reference_from_ssas_tgt << V >> {
-  **referenced_AntoraComponent** : (nvarchar(128))
-  **referenced_AntoraModule** : (nvarchar(128))
-  **referenced_Schema** : (nvarchar(max))
-  **referenced_Object** : (nvarchar(max))
-  **referenced_Column** : (nvarchar(500))
-  **referencing_AntoraComponent** : (nvarchar(max))
-  **referencing_AntoraModule** : (nvarchar(max))
+  - **referenced_AntoraComponent** : (nvarchar(128))
+  - **referenced_AntoraModule** : (nvarchar(128))
+  - **referenced_Schema** : (nvarchar(128))
+  - **referenced_Object** : (nvarchar(128))
+  **referenced_Column** : (nvarchar(128))
+  - **referencing_AntoraComponent** : (nvarchar(128))
+  - **referencing_AntoraModule** : (nvarchar(128))
   - **referencing_Schema** : (nvarchar(128))
   - **referencing_Object** : (nvarchar(128))
   **referencing_Column** : (nvarchar(128))
@@ -3020,14 +3061,14 @@ entity "puml-link:dhw:sqldb:reference.additional_reference_wo_columns_from_prope
 }
 
 entity "puml-link:dhw:sqldb:reference.additional_reference_wo_columns_from_properties_tgt.adoc[]" as reference.additional_Reference_wo_columns_from_properties_tgt << V >> {
-  **referenced_AntoraComponent** : (nvarchar(max))
-  **referenced_AntoraModule** : (nvarchar(max))
-  **referenced_Schema** : (nvarchar(max))
-  **referenced_Object** : (nvarchar(max))
-  **referencing_AntoraComponent** : (nvarchar(max))
-  **referencing_AntoraModule** : (nvarchar(max))
-  **referencing_Schema** : (nvarchar(max))
-  **referencing_Object** : (nvarchar(max))
+  - **referenced_AntoraComponent** : (nvarchar(128))
+  - **referenced_AntoraModule** : (nvarchar(128))
+  - **referenced_Schema** : (nvarchar(128))
+  - **referenced_Object** : (nvarchar(128))
+  - **referencing_AntoraComponent** : (nvarchar(128))
+  - **referencing_AntoraModule** : (nvarchar(128))
+  - **referencing_Schema** : (nvarchar(128))
+  - **referencing_Object** : (nvarchar(128))
   --
 }
 
@@ -3204,7 +3245,7 @@ entity "puml-link:dhw:sqldb:ssas.model_json_31_tables.adoc[]" as ssas.model_json
 
 entity "puml-link:dhw:sqldb:ssas.model_json_31_tables_t.adoc[]" as ssas.model_json_31_tables_T << U >> {
   - **databasename** : (nvarchar(128))
-  **tables_name** : (nvarchar(128))
+  - **tables_name** : (nvarchar(128))
   --
 }
 
@@ -3218,7 +3259,7 @@ entity "puml-link:dhw:sqldb:ssas.model_json_311_tables_columns.adoc[]" as ssas.m
 entity "puml-link:dhw:sqldb:ssas.model_json_311_tables_columns_t.adoc[]" as ssas.model_json_311_tables_columns_T << U >> {
   - **databasename** : (nvarchar(128))
   - **tables_name** : (nvarchar(128))
-  **tables_columns_name** : (nvarchar(128))
+  - **tables_columns_name** : (nvarchar(128))
   --
 }
 
@@ -3277,7 +3318,7 @@ entity "puml-link:dhw:sqldb:ssas.model_json_33_datasources.adoc[]" as ssas.model
 
 entity "puml-link:dhw:sqldb:ssas.model_json_33_datasources_t.adoc[]" as ssas.model_json_33_dataSources_T << U >> {
   - **databasename** : (nvarchar(128))
-  **dataSources_name** : (nvarchar(500))
+  - **dataSources_name** : (nvarchar(500))
   --
 }
 
@@ -5843,7 +5884,48 @@ EXEC logs.usp_ExecutionLog_insert
  , @inserted = @rows
 -- Logging END --
 
-/*{"ReportUspStep":[{"Number":1310,"Name":"persistence: insert missing HistValidColumns","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":0,"log_source_object":"[repo].[RepoObject_persistence]","log_target_object":"[repo].[RepoObjectColumn]","log_flag_InsertUpdateDelete":"i"}]}*/
+/*{"ReportUspStep":[{"Number":1305,"Name":"Update existing HistValidColumns via ColumnName","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":0,"log_source_object":"[repo].[RepoObjectColumn_HistValidColums_setpoint]","log_target_object":"[repo].[RepoObjectColumn]","log_flag_InsertUpdateDelete":"u"}]}*/
+PRINT CONCAT('usp_id;Number;Parent_Number: ',6,';',1305,';',NULL);
+
+Update
+    tgt
+Set
+    tgt.Repo_generated_always_type = setpoint.Repo_generated_always_type
+From
+    repo.RepoObjectColumn                              As tgt
+    Inner Join
+        repo.RepoObjectColumn_HistValidColums_setpoint As setpoint
+            On
+            tgt.RepoObject_guid = setpoint.RepoObject_guid
+            And tgt.Column_name = setpoint.RepoObjectColumn_name
+Where
+    tgt.Repo_generated_always_type <> setpoint.Repo_generated_always_type
+
+-- Logging START --
+SET @rows = @@ROWCOUNT
+SET @step_id = @step_id + 1
+SET @step_name = 'Update existing HistValidColumns via ColumnName'
+SET @source_object = '[repo].[RepoObjectColumn_HistValidColums_setpoint]'
+SET @target_object = '[repo].[RepoObjectColumn]'
+
+EXEC logs.usp_ExecutionLog_insert 
+ @execution_instance_guid = @execution_instance_guid
+ , @ssis_execution_id = @ssis_execution_id
+ , @sub_execution_id = @sub_execution_id
+ , @parent_execution_log_id = @parent_execution_log_id
+ , @current_execution_guid = @current_execution_guid
+ , @proc_id = @proc_id
+ , @proc_schema_name = @proc_schema_name
+ , @proc_name = @proc_name
+ , @event_info = @event_info
+ , @step_id = @step_id
+ , @step_name = @step_name
+ , @source_object = @source_object
+ , @target_object = @target_object
+ , @updated = @rows
+-- Logging END --
+
+/*{"ReportUspStep":[{"Number":1310,"Name":"persistence: insert missing HistValidColumns","has_logging":1,"is_condition":0,"is_inactive":0,"is_SubProcedure":0,"log_source_object":"[repo].[RepoObjectColumn_HistValidColums_setpoint]","log_target_object":"[repo].[RepoObjectColumn]","log_flag_InsertUpdateDelete":"i"}]}*/
 PRINT CONCAT('usp_id;Number;Parent_Number: ',6,';',1310,';',NULL);
 
 /*
@@ -5852,35 +5934,43 @@ currently we only insert missing but not delete not required
 maybe we should delete them?
 
 */
-INSERT INTO [repo].[RepoObjectColumn] (
- [Repo_generated_always_type]
- , [Repo_is_nullable]
- , [Repo_user_type_name]
- , [Repo_user_type_fullname]
- , [RepoObjectColumn_name]
- , [RepoObject_guid]
- )
-SELECT [Repo_generated_always_type]
- , [Repo_is_nullable]
- , [Repo_user_type_name]
- , [Repo_user_type_fullname]
- , [RepoObjectColumn_name]
- , [RepoObject_guid]
-FROM [repo].[RepoObjectColumn_HistValidColums_setpoint] AS setpoint
-WHERE NOT EXISTS (
-  SELECT 1
-  FROM [repo].[RepoObjectColumn] AS [roc]
-  WHERE [roc].[RepoObject_guid] = [setpoint].[RepoObject_guid]
-   --we link not by ColumnName, but by [Repo_generated_always_type]
-   --this way it is possible to change the name in [repo].[RepoObjectColumn], if required
-   AND [roc].[Repo_generated_always_type] = [setpoint].[Repo_generated_always_type]
-  )
+Insert Into repo.RepoObjectColumn
+(
+    Repo_generated_always_type
+  , Repo_is_nullable
+  , Repo_user_type_name
+  , Repo_user_type_fullname
+  , RepoObjectColumn_name
+  , RepoObject_guid
+)
+Select
+    setpoint.Repo_generated_always_type
+  , setpoint.Repo_is_nullable
+  , setpoint.Repo_user_type_name
+  , setpoint.Repo_user_type_fullname
+  , setpoint.RepoObjectColumn_name
+  , setpoint.RepoObject_guid
+From
+    repo.RepoObjectColumn_HistValidColums_setpoint As setpoint
+Where
+    Not Exists
+(
+    Select
+        1
+    From
+        repo.RepoObjectColumn As roc
+    Where
+        roc.RepoObject_guid                = setpoint.RepoObject_guid
+        --we link not by ColumnName, but by [Repo_generated_always_type]
+        --this way it is possible to change the name in [repo].[RepoObjectColumn], if required
+        And roc.Repo_generated_always_type = setpoint.Repo_generated_always_type
+)
 
 -- Logging START --
 SET @rows = @@ROWCOUNT
 SET @step_id = @step_id + 1
 SET @step_name = 'persistence: insert missing HistValidColumns'
-SET @source_object = '[repo].[RepoObject_persistence]'
+SET @source_object = '[repo].[RepoObjectColumn_HistValidColums_setpoint]'
 SET @target_object = '[repo].[RepoObjectColumn]'
 
 EXEC logs.usp_ExecutionLog_insert 

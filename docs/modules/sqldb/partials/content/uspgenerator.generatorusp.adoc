@@ -1169,7 +1169,7 @@ entity "puml-link:dhw:sqldb:docs.repoobject_plantuml_pumlentityfklist.adoc[]" as
 
 entity "puml-link:dhw:sqldb:docs.repoobject_plantuml_t.adoc[]" as docs.RepoObject_Plantuml_T << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
-  **cultures_name** : (nvarchar(10))
+  - **cultures_name** : (nvarchar(10))
   --
 }
 
@@ -1291,9 +1291,9 @@ entity "puml-link:dhw:sqldb:reference.repoobject_referencetree_0_30.adoc[]" as r
 }
 
 entity "puml-link:dhw:sqldb:reference.repoobject_referencetree_0_30_t.adoc[]" as reference.RepoObject_ReferenceTree_0_30_T << U >> {
-  **RepoObject_guid** : (uniqueidentifier)
-  **Referencing_guid** : (uniqueidentifier)
-  **Referenced_guid** : (uniqueidentifier)
+  - **RepoObject_guid** : (uniqueidentifier)
+  - **Referencing_guid** : (uniqueidentifier)
+  - **Referenced_guid** : (uniqueidentifier)
   --
 }
 
@@ -1544,8 +1544,8 @@ entity "puml-link:dhw:sqldb:workflow.proceduredependency_persistencedependency_s
 }
 
 entity "puml-link:dhw:sqldb:workflow.proceduredependency_persistencedependency_tgt.adoc[]" as workflow.ProcedureDependency_PersistenceDependency_tgt << V >> {
-  **referenced_Procedure_RepoObject_guid** : (uniqueidentifier)
-  **referencing_Procedure_RepoObject_guid** : (uniqueidentifier)
+  - **referenced_Procedure_RepoObject_guid** : (uniqueidentifier)
+  - **referencing_Procedure_RepoObject_guid** : (uniqueidentifier)
   --
 }
 
@@ -1840,10 +1840,10 @@ workflow.Workflow_ProcedureDependency_T <.. workflow.usp_PERSIST_Workflow_Proced
 workflow.Workflow_ProcedureDependency_T_active <.. workflow.Workflow_ProcedureDependency_T_NotInSortorder
 workflow.Workflow_ProcedureDependency_T_active <.. workflow.Workflow_ProcedureDependency_T_TaskName
 workflow.Workflow_ProcedureDependency_T_active <.. workflow.Workflow_ProcedureDependency_T_redundant
-workflow.Workflow_ProcedureDependency_T_bidirectional <.. workflow.Workflow_ProcedureDependency_T_bidirectional_T
 workflow.Workflow_ProcedureDependency_T_bidirectional <.. workflow.usp_workflow
-workflow.Workflow_ProcedureDependency_T_NotInSortorder <.. workflow.Workflow_ProcedureDependency_T_NotInSortorder_check
+workflow.Workflow_ProcedureDependency_T_bidirectional <.. workflow.Workflow_ProcedureDependency_T_bidirectional_T
 workflow.Workflow_ProcedureDependency_T_NotInSortorder <.. workflow.usp_workflow
+workflow.Workflow_ProcedureDependency_T_NotInSortorder <.. workflow.Workflow_ProcedureDependency_T_NotInSortorder_check
 workflow.Workflow_ProcedureDependency_T_NotInSortorder_check <.. workflow.usp_workflow
 workflow.Workflow_ProcedureDependency_T_redundant <.. workflow.Workflow_ProcedureDependency_wo_redundant
 workflow.Workflow_ProcedureDependency_T_redundant <.. workflow.usp_workflow

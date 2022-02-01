@@ -825,9 +825,9 @@ entity "puml-link:dhw:sqldb:ssis_t.usp_packageanalysis.adoc[]" as ssis_t.usp_Pac
   --
 }
 
-ssis_t.TblConnection <.. ssis_t.usp_GetPackageDetails
 ssis_t.TblConnection <.. ssis.PackageConnection_src
 ssis_t.TblConnection <.. ssis_t.usp_PackageAnalysis
+ssis_t.TblConnection <.. ssis_t.usp_GetPackageDetails
 
 footer The diagram is interactive and contains links.
 
@@ -923,7 +923,7 @@ entity "puml-link:dhw:sqldb:docs.ssis_adoc.adoc[]" as docs.ssis_Adoc << V >> {
 
 entity "puml-link:dhw:sqldb:docs.ssis_adoc_t.adoc[]" as docs.ssis_Adoc_T << U >> {
   - **AntoraModule** : (varchar(50))
-  **PackageBasename** : (varchar(8000))
+  - **PackageBasename** : (varchar(8000))
   --
 }
 
@@ -967,8 +967,8 @@ entity "puml-link:dhw:sqldb:ssis.packageconnection_src.adoc[]" as ssis.PackageCo
 
 entity "puml-link:dhw:sqldb:ssis.packageconnection_tgt.adoc[]" as ssis.PackageConnection_tgt << V >> {
   - **AntoraModule** : (varchar(50))
-  **PackageName** : (varchar(200))
-  **ConnectionManagerID** : (uniqueidentifier)
+  - **PackageName** : (varchar(200))
+  - **ConnectionManagerID** : (uniqueidentifier)
   --
 }
 
@@ -1003,8 +1003,8 @@ docs.usp_PERSIST_ssis_Adoc_T <.. docs.usp_AntoraExport_SsisPartialsContent
 ssis.PackageConnection <.. docs.ssis_Task
 ssis.PackageConnection <.. docs.ssis_TaskList
 ssis.PackageConnection <.. docs.ssis_PackageConnectionList
-ssis.PackageConnection_src <.. ssis.usp_PERSIST_PackageConnection_tgt
 ssis.PackageConnection_src <.. ssis.PackageConnection_tgt
+ssis.PackageConnection_src <.. ssis.usp_PERSIST_PackageConnection_tgt
 ssis.PackageConnection_tgt <.. ssis.PackageConnection
 ssis.PackageConnection_tgt <.. ssis.usp_PERSIST_PackageConnection_tgt
 ssis.usp_PERSIST_PackageConnection_tgt <.. ssis.usp_import
@@ -1088,9 +1088,9 @@ entity "puml-link:dhw:sqldb:ssis_t.usp_packageanalysis.adoc[]" as ssis_t.usp_Pac
   --
 }
 
-ssis_t.TblConnection <.. ssis_t.usp_GetPackageDetails
 ssis_t.TblConnection <.. ssis.PackageConnection_src
 ssis_t.TblConnection <.. ssis_t.usp_PackageAnalysis
+ssis_t.TblConnection <.. ssis_t.usp_GetPackageDetails
 "ssis_t.TblConnection::ConnectionManagerID" <-- "ssis.PackageConnection_src::ConnectionManagerID"
 "ssis_t.TblConnection::ConnectionManagerName" <-- "ssis.PackageConnection_src::ConnectionManagerName"
 "ssis_t.TblConnection::ConnectionManagerType" <-- "ssis.PackageConnection_src::ConnectionManagerType"

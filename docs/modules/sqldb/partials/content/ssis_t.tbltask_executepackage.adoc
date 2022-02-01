@@ -780,7 +780,7 @@ entity "puml-link:dhw:sqldb:docs.ssis_adoc.adoc[]" as docs.ssis_Adoc << V >> {
 
 entity "puml-link:dhw:sqldb:docs.ssis_adoc_t.adoc[]" as docs.ssis_Adoc_T << U >> {
   - **AntoraModule** : (varchar(50))
-  **PackageBasename** : (varchar(8000))
+  - **PackageBasename** : (varchar(8000))
   --
 }
 
@@ -829,8 +829,8 @@ entity "puml-link:dhw:sqldb:ssis.packagetask_src.adoc[]" as ssis.PackageTask_src
 
 entity "puml-link:dhw:sqldb:ssis.packagetask_tgt.adoc[]" as ssis.PackageTask_tgt << V >> {
   - **AntoraModule** : (varchar(50))
-  **PackageName** : (varchar(200))
-  **TaskPath** : (varchar(8000))
+  - **PackageName** : (varchar(200))
+  - **TaskPath** : (varchar(8000))
   --
 }
 
@@ -870,8 +870,8 @@ ssis.PackageTask <.. docs.ssis_Task
 ssis.PackageTask_LevelLagLead <.. docs.ssis_PumlPartialTaskComponent
 ssis.PackageTask_src <.. ssis.usp_PERSIST_PackageTask_tgt
 ssis.PackageTask_src <.. ssis.PackageTask_tgt
-ssis.PackageTask_tgt <.. ssis.PackageTask
 ssis.PackageTask_tgt <.. ssis.usp_PERSIST_PackageTask_tgt
+ssis.PackageTask_tgt <.. ssis.PackageTask
 ssis.usp_PERSIST_PackageTask_tgt <.. ssis.usp_import
 ssis_t.TblTask_ExecutePackage <.. ssis_t.usp_GetPackageDetails
 ssis_t.TblTask_ExecutePackage <.. ssis.PackageTask_src

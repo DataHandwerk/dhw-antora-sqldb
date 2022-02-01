@@ -799,9 +799,9 @@ entity "puml-link:dhw:sqldb:ssis_t.usp_packageanalysis.adoc[]" as ssis_t.usp_Pac
   --
 }
 
-ssis_t.TblVariable <.. ssis_t.usp_GetPackageDetails
 ssis_t.TblVariable <.. ssis.PackageVariable_src
 ssis_t.TblVariable <.. ssis_t.usp_PackageAnalysis
+ssis_t.TblVariable <.. ssis_t.usp_GetPackageDetails
 
 footer The diagram is interactive and contains links.
 
@@ -897,7 +897,7 @@ entity "puml-link:dhw:sqldb:docs.ssis_adoc.adoc[]" as docs.ssis_Adoc << V >> {
 
 entity "puml-link:dhw:sqldb:docs.ssis_adoc_t.adoc[]" as docs.ssis_Adoc_T << U >> {
   - **AntoraModule** : (varchar(50))
-  **PackageBasename** : (varchar(8000))
+  - **PackageBasename** : (varchar(8000))
   --
 }
 
@@ -933,8 +933,8 @@ entity "puml-link:dhw:sqldb:ssis.packagevariable_src.adoc[]" as ssis.PackageVari
 
 entity "puml-link:dhw:sqldb:ssis.packagevariable_tgt.adoc[]" as ssis.PackageVariable_tgt << V >> {
   - **AntoraModule** : (varchar(50))
-  **PackageName** : (varchar(200))
-  **VariableName** : (varchar(500))
+  - **PackageName** : (varchar(200))
+  - **VariableName** : (varchar(500))
   --
 }
 
@@ -1049,9 +1049,9 @@ entity "puml-link:dhw:sqldb:ssis_t.usp_packageanalysis.adoc[]" as ssis_t.usp_Pac
   --
 }
 
-ssis_t.TblVariable <.. ssis_t.usp_GetPackageDetails
 ssis_t.TblVariable <.. ssis.PackageVariable_src
 ssis_t.TblVariable <.. ssis_t.usp_PackageAnalysis
+ssis_t.TblVariable <.. ssis_t.usp_GetPackageDetails
 "ssis_t.TblVariable::ExpressionValue" <-- "ssis.PackageVariable_src::ExpressionValue"
 "ssis_t.TblVariable::VariableDataType" <-- "ssis.PackageVariable_src::VariableDataType"
 "ssis_t.TblVariable::VariableHexValue" <-- "ssis.PackageVariable_src::VariableHexValue"

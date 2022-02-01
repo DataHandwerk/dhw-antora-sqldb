@@ -1049,7 +1049,7 @@ entity "puml-link:dhw:sqldb:docs.repoobject_plantuml_pumlentityfklist.adoc[]" as
 
 entity "puml-link:dhw:sqldb:docs.repoobject_plantuml_t.adoc[]" as docs.RepoObject_Plantuml_T << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
-  **cultures_name** : (nvarchar(10))
+  - **cultures_name** : (nvarchar(10))
   --
 }
 
@@ -1206,7 +1206,7 @@ entity "puml-link:dhw:sqldb:repo.index_ssas_indexpatterncolumnguid.adoc[]" as re
 
 entity "puml-link:dhw:sqldb:repo.index_ssas_t.adoc[]" as repo.Index_ssas_T << U >> {
   - **databasename** : (nvarchar(128))
-  **index_name** : (nvarchar(450))
+  - **index_name** : (nvarchar(450))
   --
 }
 
@@ -1256,7 +1256,7 @@ entity "puml-link:dhw:sqldb:repo.indexcolumn_union.adoc[]" as repo.IndexColumn_u
 }
 
 entity "puml-link:dhw:sqldb:repo.indexcolumn_union_t.adoc[]" as repo.IndexColumn_union_T << U >> {
-  **index_guid** : (uniqueidentifier)
+  - **index_guid** : (uniqueidentifier)
   - **index_column_id** : (int)
   --
 }
@@ -1400,8 +1400,8 @@ docs.ftv_RepoObject_Reference_PlantUml_EntityRefList <.. docs.RepoObject_Plantum
 docs.IndexSemanticgroup <.. docs.AntoraPage_IndexSemanticGroup
 docs.IndexSemanticgroupPatterndatatype <.. docs.IndexSemanticgroup
 docs.ObjectRefCyclic_EntityList <.. docs.ObjectRefCyclic
-docs.RepoObject_Adoc <.. docs.usp_PERSIST_RepoObject_Adoc_T
 docs.RepoObject_Adoc <.. docs.RepoObject_Adoc_T
+docs.RepoObject_Adoc <.. docs.usp_PERSIST_RepoObject_Adoc_T
 docs.REpoObject_Adoc_T <.. docs.usp_PERSIST_RepoObject_Adoc_T
 docs.RepoObject_ColumnList <.. docs.usp_PERSIST_RepoObject_ColumnList_T
 docs.RepoObject_ColumnList <.. docs.RepoObject_ColumnList_T
@@ -1456,8 +1456,8 @@ repo.ForeignKey_Indexes_union_T <.. repo.ForeignKey_gross
 repo.ForeignKey_Indexes_union_T <.. repo.RepoObject_related_FK_union
 repo.ForeignKey_Indexes_union_T <.. docs.RepoObject_PlantUml_FkRefList
 repo.ForeignKey_ssas_Indexes <.. repo.ForeignKey_Indexes_union
-repo.ForeignKey_ssas_IndexPattern <.. repo.ForeignKey_ssas_Indexes
 repo.ForeignKey_ssas_IndexPattern <.. docs.ssas_PumlRelation
+repo.ForeignKey_ssas_IndexPattern <.. repo.ForeignKey_ssas_Indexes
 repo.ForeignKey_virtual_Indexes <.. repo.ForeignKey_Indexes_union
 repo.Index_ColumList <.. repo.usp_PERSIST_Index_ColumList_T
 repo.Index_ColumList <.. repo.Index_ColumList_T
@@ -1477,15 +1477,15 @@ repo.Index_gross <.. repo.ForeignKey_virtual_Indexes
 repo.Index_IndexPattern <.. repo.usp_Index_Settings
 repo.Index_referencing_IndexPatternColumnGuid <.. repo.IndexReferencedReferencing_HasFullColumnsInReferencing
 repo.Index_SqlConstraint_PkUq <.. repo.RepoObject_SqlCreateTable
-repo.Index_ssas <.. repo.usp_PERSIST_Index_ssas_T
 repo.Index_ssas <.. repo.Index_ssas_T
+repo.Index_ssas <.. repo.usp_PERSIST_Index_ssas_T
 repo.Index_ssas_IndexPatternColumnGuid <.. repo.Index_union
-repo.Index_ssas_T <.. repo.IndexColumn_ssas
-repo.Index_ssas_T <.. repo.Index_union
 repo.Index_ssas_T <.. repo.IndexColumn_ssas_gross
+repo.Index_ssas_T <.. repo.Index_union
+repo.Index_ssas_T <.. repo.Index_ssas_IndexPatternColumnGuid
+repo.Index_ssas_T <.. repo.IndexColumn_ssas
 repo.Index_ssas_T <.. repo.ForeignKey_ssas_Indexes
 repo.Index_ssas_T <.. repo.usp_PERSIST_Index_ssas_T
-repo.Index_ssas_T <.. repo.Index_ssas_IndexPatternColumnGuid
 repo.Index_union <.. repo.Index_Settings_ForUpdate
 repo.Index_union <.. repo.usp_Index_finish
 repo.Index_union <.. repo.Index_gross
@@ -1501,9 +1501,9 @@ repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.In
 repo.IndexColumn_ssas <.. repo.IndexColumn_ssas_T
 repo.IndexColumn_ssas <.. repo.usp_PERSIST_IndexColumn_ssas_T
 repo.IndexColumn_ssas_gross <.. repo.IndexColumn_union
+repo.IndexColumn_ssas_T <.. repo.Index_ssas_IndexPatternColumnGuid
 repo.IndexColumn_ssas_T <.. repo.IndexColumn_ssas_gross
 repo.IndexColumn_ssas_T <.. repo.usp_PERSIST_IndexColumn_ssas_T
-repo.IndexColumn_ssas_T <.. repo.Index_ssas_IndexPatternColumnGuid
 repo.IndexColumn_union <.. repo.usp_PERSIST_IndexColumn_union_T
 repo.IndexColumn_union <.. repo.IndexColumn_union_T
 repo.IndexColumn_union_T <.. repo.Index_IndexPattern
@@ -1545,8 +1545,8 @@ repo.usp_PERSIST_IndexColumn_union_T <.. repo.usp_Index_finish
 repo.usp_PERSIST_RepoObject_sat2_T <.. repo.usp_main
 repo.usp_sync_guid_ssas <.. repo.usp_main
 ssas.IndexColumn_from_Relationship <.. ssas.IndexColumn_union
-ssas.IndexColumn_union <.. repo.IndexColumn_ssas
 ssas.IndexColumn_union <.. repo.Index_ssas
+ssas.IndexColumn_union <.. repo.IndexColumn_ssas
 ssas.model_json_32_relationships <.. ssas.model_json_32_relationships_T
 ssas.model_json_32_relationships <.. ssas.usp_PERSIST_model_json_32_relationships_T
 ssas.model_json_32_relationships_T <.. ssas.IndexColumn_from_Relationship

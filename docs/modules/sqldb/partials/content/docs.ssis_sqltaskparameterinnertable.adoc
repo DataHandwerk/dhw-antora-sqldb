@@ -713,9 +713,9 @@ entity "puml-link:dhw:sqldb:ssis.packagetask_sql_parameter_src.adoc[]" as ssis.P
 
 entity "puml-link:dhw:sqldb:ssis.packagetask_sql_parameter_tgt.adoc[]" as ssis.PackageTask_Sql_Parameter_tgt << V >> {
   - **AntoraModule** : (varchar(50))
-  **PackageName** : (varchar(200))
-  **TaskPath** : (varchar(8000))
-  **ParameterBindingSequence** : (varchar(1000))
+  - **PackageName** : (varchar(200))
+  - **TaskPath** : (varchar(8000))
+  - **ParameterBindingSequence** : (varchar(1000))
   --
 }
 
@@ -797,7 +797,7 @@ entity "puml-link:dhw:sqldb:docs.ssis_adoc.adoc[]" as docs.ssis_Adoc << V >> {
 
 entity "puml-link:dhw:sqldb:docs.ssis_adoc_t.adoc[]" as docs.ssis_Adoc_T << U >> {
   - **AntoraModule** : (varchar(50))
-  **PackageBasename** : (varchar(8000))
+  - **PackageBasename** : (varchar(8000))
   --
 }
 
@@ -829,8 +829,8 @@ docs.ssis_Adoc <.. docs.usp_PERSIST_ssis_Adoc_T
 docs.ssis_Adoc <.. docs.ssis_Adoc_T
 docs.ssis_Adoc_T <.. docs.usp_PERSIST_ssis_Adoc_T
 docs.ssis_Adoc_T <.. docs.usp_AntoraExport_SsisPartialsContent
-docs.ssis_SqlTaskParameterInnerTable <.. docs.ssis_Task
 docs.ssis_SqlTaskParameterInnerTable <.. docs.ssis_TaskList
+docs.ssis_SqlTaskParameterInnerTable <.. docs.ssis_Task
 docs.ssis_TaskList <.. docs.ssis_Adoc
 docs.usp_AntoraExport_SsisPartialsContent <.. docs.usp_AntoraExport
 docs.usp_PERSIST_ssis_Adoc_T <.. docs.usp_AntoraExport_SsisPartialsContent

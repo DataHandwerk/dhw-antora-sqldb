@@ -53,7 +53,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2022-01-21 18:39:35
+2022-01-23 17:32:32
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -923,7 +923,7 @@ entity "puml-link:dhw:sqldb:repo.index_ssas.adoc[]" as repo.Index_ssas << V >> {
 
 entity "puml-link:dhw:sqldb:repo.index_ssas_t.adoc[]" as repo.Index_ssas_T << U >> {
   - **databasename** : (nvarchar(128))
-  **index_name** : (nvarchar(450))
+  - **index_name** : (nvarchar(450))
   --
 }
 
@@ -1032,7 +1032,7 @@ entity "puml-link:dhw:sqldb:ssas.measure_translation.adoc[]" as ssas.Measure_tra
 entity "puml-link:dhw:sqldb:ssas.measure_translation_t.adoc[]" as ssas.Measure_translation_T << U >> {
   - **Measure_guid** : (uniqueidentifier)
   - **cultures_name** : (nvarchar(10))
-  **RepoObject_name** : (nvarchar(128))
+  - **RepoObject_name** : (nvarchar(128))
   --
 }
 
@@ -1065,7 +1065,7 @@ entity "puml-link:dhw:sqldb:ssas.model_json_31_tables.adoc[]" as ssas.model_json
 
 entity "puml-link:dhw:sqldb:ssas.model_json_31_tables_t.adoc[]" as ssas.model_json_31_tables_T << U >> {
   - **databasename** : (nvarchar(128))
-  **tables_name** : (nvarchar(128))
+  - **tables_name** : (nvarchar(128))
   --
 }
 
@@ -1079,7 +1079,7 @@ entity "puml-link:dhw:sqldb:ssas.model_json_311_tables_columns.adoc[]" as ssas.m
 entity "puml-link:dhw:sqldb:ssas.model_json_311_tables_columns_t.adoc[]" as ssas.model_json_311_tables_columns_T << U >> {
   - **databasename** : (nvarchar(128))
   - **tables_name** : (nvarchar(128))
-  **tables_columns_name** : (nvarchar(128))
+  - **tables_columns_name** : (nvarchar(128))
   --
 }
 
@@ -1130,7 +1130,7 @@ entity "puml-link:dhw:sqldb:ssas.model_json_33_datasources.adoc[]" as ssas.model
 
 entity "puml-link:dhw:sqldb:ssas.model_json_33_datasources_t.adoc[]" as ssas.model_json_33_dataSources_T << U >> {
   - **databasename** : (nvarchar(128))
-  **dataSources_name** : (nvarchar(500))
+  - **dataSources_name** : (nvarchar(500))
   --
 }
 
@@ -1153,7 +1153,7 @@ entity "puml-link:dhw:sqldb:ssas.model_json_3411_cultures_translations_model.ado
 
 entity "puml-link:dhw:sqldb:ssas.model_json_3411_cultures_translations_model_t.adoc[]" as ssas.model_json_3411_cultures_translations_model_T << U >> {
   - **databasename** : (nvarchar(128))
-  **cultures_name** : (nvarchar(500))
+  - **cultures_name** : (nvarchar(10))
   --
 }
 
@@ -1196,14 +1196,14 @@ entity "puml-link:dhw:sqldb:ssas.usp_persist_model_json_3411_cultures_translatio
 docs.Culture <.. ssas.Measure_translation
 logs.ExecutionLog <.. logs.usp_ExecutionLog_insert
 logs.usp_ExecutionLog_insert <.. repo.usp_PERSIST_RepoSchema_ssas_tgt
+logs.usp_ExecutionLog_insert <.. repo.usp_PERSIST_IndexColumn_ssas_T
+logs.usp_ExecutionLog_insert <.. ssas.usp_PERSIST_model_json_31_tables_T
+logs.usp_ExecutionLog_insert <.. repo.usp_PERSIST_Index_ssas_T
 logs.usp_ExecutionLog_insert <.. repo.usp_PERSIST_RepoObjectColumn_SSAS_tgt
 logs.usp_ExecutionLog_insert <.. repo.usp_PERSIST_RepoObject_SSAS_tgt
-logs.usp_ExecutionLog_insert <.. repo.usp_PERSIST_Index_ssas_T
 logs.usp_ExecutionLog_insert <.. repo.usp_sync_guid_ssas
 logs.usp_ExecutionLog_insert <.. ssas.usp_PERSIST_model_json_32_relationships_T
 logs.usp_ExecutionLog_insert <.. ssas.usp_PERSIST_model_json_311_tables_columns_T
-logs.usp_ExecutionLog_insert <.. ssas.usp_PERSIST_model_json_31_tables_T
-logs.usp_ExecutionLog_insert <.. repo.usp_PERSIST_IndexColumn_ssas_T
 logs.usp_ExecutionLog_insert <.. ssas.usp_PERSIST_model_json_312_tables_measures_T
 logs.usp_ExecutionLog_insert <.. ssas.usp_PERSIST_Measure_translation_T
 logs.usp_ExecutionLog_insert <.. ssas.usp_PERSIST_model_json_3411_cultures_translations_model_T
@@ -1212,8 +1212,8 @@ repo.Index_ssas <.. repo.usp_PERSIST_Index_ssas_T
 repo.Index_ssas <.. repo.Index_ssas_T
 repo.Index_ssas_T <.. repo.usp_PERSIST_Index_ssas_T
 repo.Index_ssas_T <.. repo.IndexColumn_ssas
-repo.IndexColumn_ssas <.. repo.IndexColumn_ssas_T
 repo.IndexColumn_ssas <.. repo.usp_PERSIST_IndexColumn_ssas_T
+repo.IndexColumn_ssas <.. repo.IndexColumn_ssas_T
 repo.IndexColumn_ssas_T <.. repo.usp_PERSIST_IndexColumn_ssas_T
 repo.Measure <.. repo.Measure_union
 repo.Measure_union <.. ssas.Measure_translation

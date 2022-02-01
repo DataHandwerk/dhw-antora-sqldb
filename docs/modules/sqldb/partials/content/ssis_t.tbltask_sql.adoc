@@ -650,8 +650,8 @@ entity "puml-link:dhw:sqldb:ssis_t.usp_getpackagedetails.adoc[]" as ssis_t.usp_G
   --
 }
 
-ssis_t.TblTask_Sql <.. ssis_t.usp_GetPackageDetails
 ssis_t.TblTask_Sql <.. ssis.PackageTask_src
+ssis_t.TblTask_Sql <.. ssis_t.usp_GetPackageDetails
 
 footer The diagram is interactive and contains links.
 
@@ -748,7 +748,7 @@ entity "puml-link:dhw:sqldb:docs.ssis_adoc.adoc[]" as docs.ssis_Adoc << V >> {
 
 entity "puml-link:dhw:sqldb:docs.ssis_adoc_t.adoc[]" as docs.ssis_Adoc_T << U >> {
   - **AntoraModule** : (varchar(50))
-  **PackageBasename** : (varchar(8000))
+  - **PackageBasename** : (varchar(8000))
   --
 }
 
@@ -797,8 +797,8 @@ entity "puml-link:dhw:sqldb:ssis.packagetask_src.adoc[]" as ssis.PackageTask_src
 
 entity "puml-link:dhw:sqldb:ssis.packagetask_tgt.adoc[]" as ssis.PackageTask_tgt << V >> {
   - **AntoraModule** : (varchar(50))
-  **PackageName** : (varchar(200))
-  **TaskPath** : (varchar(8000))
+  - **PackageName** : (varchar(200))
+  - **TaskPath** : (varchar(8000))
   --
 }
 
@@ -828,14 +828,14 @@ docs.ssis_PumlPartialTaskComponent <.. docs.ssis_PumlPackage
 docs.ssis_TaskList <.. docs.ssis_Adoc
 docs.usp_AntoraExport_SsisPartialsContent <.. docs.usp_AntoraExport
 docs.usp_PERSIST_ssis_Adoc_T <.. docs.usp_AntoraExport_SsisPartialsContent
-ssis.PackageTask <.. docs.ssis_Task
 ssis.PackageTask <.. docs.ssis_TaskList
 ssis.PackageTask <.. ssis.PackageTask_LevelLagLead
+ssis.PackageTask <.. docs.ssis_Task
 ssis.PackageTask_LevelLagLead <.. docs.ssis_PumlPartialTaskComponent
 ssis.PackageTask_src <.. ssis.usp_PERSIST_PackageTask_tgt
 ssis.PackageTask_src <.. ssis.PackageTask_tgt
-ssis.PackageTask_tgt <.. ssis.PackageTask
 ssis.PackageTask_tgt <.. ssis.usp_PERSIST_PackageTask_tgt
+ssis.PackageTask_tgt <.. ssis.PackageTask
 ssis.usp_PERSIST_PackageTask_tgt <.. ssis.usp_import
 ssis_t.TblTask_Sql <.. ssis_t.usp_GetPackageDetails
 ssis_t.TblTask_Sql <.. ssis.PackageTask_src
@@ -912,8 +912,8 @@ entity "puml-link:dhw:sqldb:ssis_t.usp_getpackagedetails.adoc[]" as ssis_t.usp_G
   --
 }
 
-ssis_t.TblTask_Sql <.. ssis_t.usp_GetPackageDetails
 ssis_t.TblTask_Sql <.. ssis.PackageTask_src
+ssis_t.TblTask_Sql <.. ssis_t.usp_GetPackageDetails
 "ssis_t.TblTask_Sql::SqlConnection" <-- "ssis.PackageTask_src::SqlConnection"
 "ssis_t.TblTask_Sql::SqlStatementSource" <-- "ssis.PackageTask_src::SqlStatementSource"
 

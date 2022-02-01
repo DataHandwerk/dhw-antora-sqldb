@@ -51,7 +51,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2022-01-21 18:39:36
+2022-01-23 17:32:32
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -669,7 +669,7 @@ entity "puml-link:dhw:sqldb:ssis.projectconnection_src.adoc[]" as ssis.ProjectCo
 
 entity "puml-link:dhw:sqldb:ssis.projectconnection_tgt.adoc[]" as ssis.ProjectConnection_tgt << V >> {
   - **AntoraModule** : (varchar(50))
-  **ConnectionManagerID** : (uniqueidentifier)
+  - **ConnectionManagerID** : (uniqueidentifier)
   --
 }
 
@@ -758,7 +758,7 @@ entity "puml-link:dhw:sqldb:ssis.projectconnection_src.adoc[]" as ssis.ProjectCo
 
 entity "puml-link:dhw:sqldb:ssis.projectconnection_tgt.adoc[]" as ssis.ProjectConnection_tgt << V >> {
   - **AntoraModule** : (varchar(50))
-  **ConnectionManagerID** : (uniqueidentifier)
+  - **ConnectionManagerID** : (uniqueidentifier)
   --
 }
 
@@ -900,8 +900,8 @@ entity "puml-link:dhw:sqldb:ssis.projectconnection_src.adoc[]" as ssis.ProjectCo
 
 entity "puml-link:dhw:sqldb:ssis.projectconnection_tgt.adoc[]" as ssis.ProjectConnection_tgt << V >> {
   - **AntoraModule** : (varchar(50))
-  **ConnectionManagerID** : (uniqueidentifier)
-  ConnectionManagerName : (varchar(max))
+  - **ConnectionManagerID** : (uniqueidentifier)
+  - ConnectionManagerName : (varchar(max))
   ConnectionManagerType : (varchar(max))
   - ConnectionPath : (varchar(8000))
   ConnectionString : (nvarchar(max))
@@ -1069,7 +1069,7 @@ T.[AntoraModule] = S.[AntoraModule]
 AND T.[ConnectionManagerID] = S.[ConnectionManagerID]
 
 WHERE
-   T.[ConnectionManagerName] <> S.[ConnectionManagerName] OR (S.[ConnectionManagerName] IS NULL AND NOT T.[ConnectionManagerName] IS NULL) OR (NOT S.[ConnectionManagerName] IS NULL AND T.[ConnectionManagerName] IS NULL)
+   T.[ConnectionManagerName] <> S.[ConnectionManagerName]
 OR T.[ConnectionManagerType] <> S.[ConnectionManagerType] OR (S.[ConnectionManagerType] IS NULL AND NOT T.[ConnectionManagerType] IS NULL) OR (NOT S.[ConnectionManagerType] IS NULL AND T.[ConnectionManagerType] IS NULL)
 OR T.[ConnectionPath] <> S.[ConnectionPath]
 OR T.[ConnectionString] <> S.[ConnectionString] OR (S.[ConnectionString] IS NULL AND NOT T.[ConnectionString] IS NULL) OR (NOT S.[ConnectionString] IS NULL AND T.[ConnectionString] IS NULL)

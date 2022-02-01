@@ -815,8 +815,8 @@ entity "puml-link:dhw:sqldb:ssis_t.usp_getpackagedetails.adoc[]" as ssis_t.usp_G
   --
 }
 
-ssis_t.TblPrecedenceConstraint <.. ssis_t.usp_GetPackageDetails
 ssis_t.TblPrecedenceConstraint <.. ssis.PackageFlow_src
+ssis_t.TblPrecedenceConstraint <.. ssis_t.usp_GetPackageDetails
 
 footer The diagram is interactive and contains links.
 
@@ -912,7 +912,7 @@ entity "puml-link:dhw:sqldb:docs.ssis_adoc.adoc[]" as docs.ssis_Adoc << V >> {
 
 entity "puml-link:dhw:sqldb:docs.ssis_adoc_t.adoc[]" as docs.ssis_Adoc_T << U >> {
   - **AntoraModule** : (varchar(50))
-  **PackageBasename** : (varchar(8000))
+  - **PackageBasename** : (varchar(8000))
   --
 }
 
@@ -966,9 +966,9 @@ entity "puml-link:dhw:sqldb:ssis.packageflow_src.adoc[]" as ssis.PackageFlow_src
 
 entity "puml-link:dhw:sqldb:ssis.packageflow_tgt.adoc[]" as ssis.PackageFlow_tgt << V >> {
   - **AntoraModule** : (varchar(50))
-  **PackageName** : (varchar(200))
-  **TaskFrom** : (varchar(2000))
-  **Taskto** : (varchar(2000))
+  - **PackageName** : (varchar(200))
+  - **TaskFrom** : (varchar(2000))
+  - **Taskto** : (varchar(2000))
   --
 }
 
@@ -1084,8 +1084,8 @@ entity "puml-link:dhw:sqldb:ssis_t.usp_getpackagedetails.adoc[]" as ssis_t.usp_G
   --
 }
 
-ssis_t.TblPrecedenceConstraint <.. ssis_t.usp_GetPackageDetails
 ssis_t.TblPrecedenceConstraint <.. ssis.PackageFlow_src
+ssis_t.TblPrecedenceConstraint <.. ssis_t.usp_GetPackageDetails
 "ssis_t.TblPrecedenceConstraint::CreationName" <-- "ssis.PackageFlow_src::CreationName"
 "ssis_t.TblPrecedenceConstraint::DTSID" <-- "ssis.PackageFlow_src::DTSID"
 "ssis_t.TblPrecedenceConstraint::EvalOp" <-- "ssis.PackageFlow_src::EvalOp"

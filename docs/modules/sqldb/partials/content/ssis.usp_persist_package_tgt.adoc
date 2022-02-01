@@ -51,7 +51,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2022-01-21 18:39:35
+2022-01-23 17:32:32
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -705,7 +705,7 @@ entity "puml-link:dhw:sqldb:ssis.package_src.adoc[]" as ssis.Package_src << V >>
 
 entity "puml-link:dhw:sqldb:ssis.package_tgt.adoc[]" as ssis.Package_tgt << V >> {
   - **AntoraModule** : (varchar(50))
-  **PackageName** : (varchar(200))
+  - **PackageName** : (varchar(200))
   --
 }
 
@@ -783,7 +783,7 @@ entity "puml-link:dhw:sqldb:ssis.package_src.adoc[]" as ssis.Package_src << V >>
 
 entity "puml-link:dhw:sqldb:ssis.package_tgt.adoc[]" as ssis.Package_tgt << V >> {
   - **AntoraModule** : (varchar(50))
-  **PackageName** : (varchar(200))
+  - **PackageName** : (varchar(200))
   --
 }
 
@@ -927,12 +927,12 @@ entity "puml-link:dhw:sqldb:ssis.package_src.adoc[]" as ssis.Package_src << V >>
 
 entity "puml-link:dhw:sqldb:ssis.package_tgt.adoc[]" as ssis.Package_tgt << V >> {
   - **AntoraModule** : (varchar(50))
-  **PackageName** : (varchar(200))
+  - **PackageName** : (varchar(200))
   PackageCreationDate : (datetime)
   PackageCreatorComputerName : (nvarchar(500))
   PackageCreatorName : (varchar(1000))
   PackageDescription : (nvarchar(max))
-  PackageDTSID : (uniqueidentifier)
+  - PackageDTSID : (uniqueidentifier)
   PackageLastModifiedProductVersion : (nvarchar(500))
   PackageLocaleID : (int)
   PackageObjectName : (nvarchar(500))
@@ -940,7 +940,6 @@ entity "puml-link:dhw:sqldb:ssis.package_tgt.adoc[]" as ssis.Package_tgt << V >>
   PackageProtectionLevel : (varchar(100))
   PackageProtectionLevelName : (varchar(28))
   PackageVersionGUID : (uniqueidentifier)
-  - PackageXML : (xml)
   - ProjectPath : (varchar(8000))
   - RowID : (int)
   --
@@ -1119,7 +1118,7 @@ WHERE
 OR T.[PackageCreatorComputerName] <> S.[PackageCreatorComputerName] OR (S.[PackageCreatorComputerName] IS NULL AND NOT T.[PackageCreatorComputerName] IS NULL) OR (NOT S.[PackageCreatorComputerName] IS NULL AND T.[PackageCreatorComputerName] IS NULL)
 OR T.[PackageCreatorName] <> S.[PackageCreatorName] OR (S.[PackageCreatorName] IS NULL AND NOT T.[PackageCreatorName] IS NULL) OR (NOT S.[PackageCreatorName] IS NULL AND T.[PackageCreatorName] IS NULL)
 OR T.[PackageDescription] <> S.[PackageDescription] OR (S.[PackageDescription] IS NULL AND NOT T.[PackageDescription] IS NULL) OR (NOT S.[PackageDescription] IS NULL AND T.[PackageDescription] IS NULL)
-OR T.[PackageDTSID] <> S.[PackageDTSID] OR (S.[PackageDTSID] IS NULL AND NOT T.[PackageDTSID] IS NULL) OR (NOT S.[PackageDTSID] IS NULL AND T.[PackageDTSID] IS NULL)
+OR T.[PackageDTSID] <> S.[PackageDTSID]
 OR T.[PackageLastModifiedProductVersion] <> S.[PackageLastModifiedProductVersion] OR (S.[PackageLastModifiedProductVersion] IS NULL AND NOT T.[PackageLastModifiedProductVersion] IS NULL) OR (NOT S.[PackageLastModifiedProductVersion] IS NULL AND T.[PackageLastModifiedProductVersion] IS NULL)
 OR T.[PackageLocaleID] <> S.[PackageLocaleID] OR (S.[PackageLocaleID] IS NULL AND NOT T.[PackageLocaleID] IS NULL) OR (NOT S.[PackageLocaleID] IS NULL AND T.[PackageLocaleID] IS NULL)
 OR T.[PackageObjectName] <> S.[PackageObjectName] OR (S.[PackageObjectName] IS NULL AND NOT T.[PackageObjectName] IS NULL) OR (NOT S.[PackageObjectName] IS NULL AND T.[PackageObjectName] IS NULL)

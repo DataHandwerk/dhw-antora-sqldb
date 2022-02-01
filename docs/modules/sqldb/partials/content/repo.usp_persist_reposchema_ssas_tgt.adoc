@@ -51,7 +51,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2022-01-21 18:39:34
+2022-01-23 17:32:31
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -883,11 +883,10 @@ entity "puml-link:dhw:sqldb:repo.reposchema_ssas_tgt.adoc[]" as repo.RepoSchema_
   - **RepoSchema_guid** : (uniqueidentifier)
   has_different_sys_names : (bit)
   - is_RepoSchema_name_uniqueidentifier : (int)
-  - is_ssas : (int)
-  - is_SysSchema_missing : (int)
+  - is_ssas : (bit)
+  is_SysSchema_missing : (bit)
   - is_SysSchema_name_uniqueidentifier : (int)
-  RepoSchema_description : (nvarchar(max))
-  RepoSchema_ms_description : (nvarchar(max))
+  RepoSchema_description : (nvarchar(4000))
   - RepoSchema_name : (nvarchar(128))
   SysSchema_id : (int)
   - SysSchema_name : (nvarchar(128))
@@ -1051,7 +1050,7 @@ T.[RepoSchema_name] = S.[RepoSchema_name]
 
 WHERE
    T.[is_ssas] <> S.[is_ssas]
-OR T.[is_SysSchema_missing] <> S.[is_SysSchema_missing]
+OR T.[is_SysSchema_missing] <> S.[is_SysSchema_missing] OR (S.[is_SysSchema_missing] IS NULL AND NOT T.[is_SysSchema_missing] IS NULL) OR (NOT S.[is_SysSchema_missing] IS NULL AND T.[is_SysSchema_missing] IS NULL)
 OR T.[RepoSchema_description] <> S.[RepoSchema_description] OR (S.[RepoSchema_description] IS NULL AND NOT T.[RepoSchema_description] IS NULL) OR (NOT S.[RepoSchema_description] IS NULL AND T.[RepoSchema_description] IS NULL)
 OR T.[RepoSchema_name] <> S.[RepoSchema_name]
 OR T.[SysSchema_name] <> S.[SysSchema_name]

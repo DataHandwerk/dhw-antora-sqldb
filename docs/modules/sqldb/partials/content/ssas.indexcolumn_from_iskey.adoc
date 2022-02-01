@@ -849,7 +849,7 @@ entity "puml-link:dhw:sqldb:ssas.indexcolumn_union.adoc[]" as ssas.IndexColumn_u
 entity "puml-link:dhw:sqldb:ssas.model_json_311_tables_columns_t.adoc[]" as ssas.model_json_311_tables_columns_T << U >> {
   - **databasename** : (nvarchar(128))
   - **tables_name** : (nvarchar(128))
-  **tables_columns_name** : (nvarchar(128))
+  - **tables_columns_name** : (nvarchar(128))
   --
 }
 
@@ -921,7 +921,7 @@ entity "puml-link:dhw:sqldb:ssas.model_json_31_tables.adoc[]" as ssas.model_json
 
 entity "puml-link:dhw:sqldb:ssas.model_json_31_tables_t.adoc[]" as ssas.model_json_31_tables_T << U >> {
   - **databasename** : (nvarchar(128))
-  **tables_name** : (nvarchar(128))
+  - **tables_name** : (nvarchar(128))
   --
 }
 
@@ -935,7 +935,7 @@ entity "puml-link:dhw:sqldb:ssas.model_json_311_tables_columns.adoc[]" as ssas.m
 entity "puml-link:dhw:sqldb:ssas.model_json_311_tables_columns_t.adoc[]" as ssas.model_json_311_tables_columns_T << U >> {
   - **databasename** : (nvarchar(128))
   - **tables_name** : (nvarchar(128))
-  **tables_columns_name** : (nvarchar(128))
+  - **tables_columns_name** : (nvarchar(128))
   --
 }
 
@@ -1084,7 +1084,7 @@ entity "puml-link:dhw:sqldb:docs.repoobject_plantuml_pumlentityfklist.adoc[]" as
 
 entity "puml-link:dhw:sqldb:docs.repoobject_plantuml_t.adoc[]" as docs.RepoObject_Plantuml_T << U >> {
   - **RepoObject_guid** : (uniqueidentifier)
-  **cultures_name** : (nvarchar(10))
+  - **cultures_name** : (nvarchar(10))
   --
 }
 
@@ -1227,7 +1227,7 @@ entity "puml-link:dhw:sqldb:repo.index_ssas_indexpatterncolumnguid.adoc[]" as re
 
 entity "puml-link:dhw:sqldb:repo.index_ssas_t.adoc[]" as repo.Index_ssas_T << U >> {
   - **databasename** : (nvarchar(128))
-  **index_name** : (nvarchar(450))
+  - **index_name** : (nvarchar(450))
   --
 }
 
@@ -1277,7 +1277,7 @@ entity "puml-link:dhw:sqldb:repo.indexcolumn_union.adoc[]" as repo.IndexColumn_u
 }
 
 entity "puml-link:dhw:sqldb:repo.indexcolumn_union_t.adoc[]" as repo.IndexColumn_union_T << U >> {
-  **index_guid** : (uniqueidentifier)
+  - **index_guid** : (uniqueidentifier)
   - **index_column_id** : (int)
   --
 }
@@ -1482,12 +1482,12 @@ repo.Index_SqlConstraint_PkUq <.. repo.RepoObject_SqlCreateTable
 repo.Index_ssas <.. repo.usp_PERSIST_Index_ssas_T
 repo.Index_ssas <.. repo.Index_ssas_T
 repo.Index_ssas_IndexPatternColumnGuid <.. repo.Index_union
-repo.Index_ssas_T <.. repo.IndexColumn_ssas
-repo.Index_ssas_T <.. repo.Index_union
 repo.Index_ssas_T <.. repo.IndexColumn_ssas_gross
+repo.Index_ssas_T <.. repo.Index_union
+repo.Index_ssas_T <.. repo.Index_ssas_IndexPatternColumnGuid
+repo.Index_ssas_T <.. repo.IndexColumn_ssas
 repo.Index_ssas_T <.. repo.ForeignKey_ssas_Indexes
 repo.Index_ssas_T <.. repo.usp_PERSIST_Index_ssas_T
-repo.Index_ssas_T <.. repo.Index_ssas_IndexPatternColumnGuid
 repo.Index_union <.. repo.IndexReferencedReferencing
 repo.Index_union <.. repo.Index_SqlConstraint_PkUq
 repo.Index_union <.. repo.Index_gross
@@ -1500,12 +1500,12 @@ repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.In
 repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.IndexColumn_virtual_referenced_setpoint
 repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_check
 repo.IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T <.. repo.usp_PERSIST_IndexColumn_ReferencedReferencing_HasFullColumnsInReferencing_T
-repo.IndexColumn_ssas <.. repo.usp_PERSIST_IndexColumn_ssas_T
 repo.IndexColumn_ssas <.. repo.IndexColumn_ssas_T
+repo.IndexColumn_ssas <.. repo.usp_PERSIST_IndexColumn_ssas_T
 repo.IndexColumn_ssas_gross <.. repo.IndexColumn_union
+repo.IndexColumn_ssas_T <.. repo.Index_ssas_IndexPatternColumnGuid
 repo.IndexColumn_ssas_T <.. repo.IndexColumn_ssas_gross
 repo.IndexColumn_ssas_T <.. repo.usp_PERSIST_IndexColumn_ssas_T
-repo.IndexColumn_ssas_T <.. repo.Index_ssas_IndexPatternColumnGuid
 repo.IndexColumn_union <.. repo.usp_PERSIST_IndexColumn_union_T
 repo.IndexColumn_union <.. repo.IndexColumn_union_T
 repo.IndexColumn_union_T <.. repo.Index_ColumList
@@ -1625,7 +1625,7 @@ entity "puml-link:dhw:sqldb:ssas.indexcolumn_union.adoc[]" as ssas.IndexColumn_u
 entity "puml-link:dhw:sqldb:ssas.model_json_311_tables_columns_t.adoc[]" as ssas.model_json_311_tables_columns_T << U >> {
   - **databasename** : (nvarchar(128))
   - **tables_name** : (nvarchar(128))
-  **tables_columns_name** : (nvarchar(128))
+  - **tables_columns_name** : (nvarchar(128))
   - RepoObject_guid : (uniqueidentifier)
   - RepoObjectColumn_guid : (uniqueidentifier)
   tables_columns_dataType : (nvarchar(500))
