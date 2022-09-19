@@ -50,7 +50,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-08-17 18:49:49
+2022-06-30 19:08:33
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -155,11 +155,6 @@ view
 (concat(quotename([proc_schema_name]),'.',quotename([proc_name])))
 --
 {empty} +
-
-.Referenced Columns
---
-* xref:logs.executionlog.adoc#column-procunderlinefullname[+logs.ExecutionLog.proc_fullname+]
---
 
 
 [#column-pumlunderlinesequenceunderlinestartunderlinestop]
@@ -920,7 +915,6 @@ entity "puml-link:dhw:sqldb:logs.executionlog.adoc[]" as logs.ExecutionLog << U 
   sub_execution_id : (int)
   target_object : (nvarchar(261))
   updated : (int)
-  ~ proc_fullname : (nvarchar(517))
   --
 }
 
@@ -949,7 +943,7 @@ entity "puml-link:dhw:sqldb:logs.executionlog_parent.adoc[]" as logs.ExecutionLo
   parent_parameter_18 : (nvarchar(4000))
   parent_parameter_19 : (nvarchar(4000))
   parent_parameter_20 : (nvarchar(4000))
-  parent_proc_fullname : (nvarchar(517))
+  - parent_proc_fullname : (nvarchar(517))
   parent_proc_id : (int)
   parent_proc_name : (nvarchar(128))
   parent_proc_schema_name : (nvarchar(128))
@@ -979,7 +973,6 @@ logs.ExecutionLog_puml_Sequence_start_stop <.. logs.ftv_ExecutionLog_puml_sequen
 "logs.ExecutionLog::created_dt" <-- "logs.ExecutionLog_puml_Sequence_start_stop::created_dt"
 "logs.ExecutionLog::execution_instance_guid" <-- "logs.ExecutionLog_puml_Sequence_start_stop::execution_instance_guid"
 "logs.ExecutionLog::id" <-- "logs.ExecutionLog_puml_Sequence_start_stop::id"
-"logs.ExecutionLog::proc_fullname" <-- "logs.ExecutionLog_puml_Sequence_start_stop::proc_fullname"
 "logs.ExecutionLog_parent::parent_proc_fullname" <-- "logs.ExecutionLog_puml_Sequence_start_stop::parent_proc_fullname"
 
 footer The diagram is interactive and contains links.
@@ -999,7 +992,8 @@ footer The diagram is interactive and contains links.
 ----
 
 
-CREATE View logs.ExecutionLog_puml_Sequence_start_stop
+
+CREATE View [logs].[ExecutionLog_puml_Sequence_start_stop]
 As
 Select
     T1.id
@@ -1021,7 +1015,7 @@ Select
                      ' <- '
              End
            , '"'
-           , T1.proc_fullname
+           , concat(quotename(T1.[proc_schema_name]),'.',quotename(T1.[proc_name])) -- T1.proc_fullname
            , '"'
            , Char ( 13 ) + Char ( 10 )
            , Case T1.step_name
@@ -1033,10 +1027,10 @@ Select
                      'deactivate '
              End
            , '"'
-           , T1.proc_fullname
+           , concat(quotename(T1.[proc_schema_name]),'.',quotename(T1.[proc_name])) -- T1.proc_fullname
            , '"'
          )
-  , T1.proc_fullname
+  , proc_fullname = Concat(quotename(T1.[proc_schema_name]),'.',quotename(T1.[proc_name])) -- T1.proc_fullname
   , parent.parent_proc_fullname
   , T1.created_dt
 From
@@ -1048,6 +1042,7 @@ From
 Where
     T1.step_name In
     ( 'start', 'end' )
+
 ----
 =======
 // end::sql_modules_definition[]

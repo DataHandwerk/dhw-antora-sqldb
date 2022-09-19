@@ -52,7 +52,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2022-01-23 17:32:24
+2022-09-05 18:23:32
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -235,8 +235,12 @@ Begin
 
     Print @command
 
-    --Execute the BCP command
-    Exec sys.xp_cmdshell @command, no_output
+    INSERT Into [docs].[command]
+    (command)
+    VALUES(@command)
+
+    ----Execute the BCP command
+    --Exec sys.xp_cmdshell @command, no_output
 
     Fetch Next From page_cursor
     Into
@@ -261,6 +265,7 @@ Deallocate page_cursor
 // tag::antorareferencedlist[]
 * xref:dhw:sqldb:config.fs_get_parameter_value.adoc[]
 * xref:dhw:sqldb:config.parameter.adoc[]
+* xref:dhw:sqldb:docs.command.adoc[]
 * xref:dhw:sqldb:logs.usp_executionlog_insert.adoc[]
 * xref:dhw:sqldb:ssis.project.adoc[]
 // end::antorareferencedlist[]
@@ -502,6 +507,7 @@ EXEC [docs].[usp_AntoraExport_SsisPageTemplate]
 // tag::referencedobjectlist[]
 * [config].[fs_get_parameter_value]
 * [config].[Parameter]
+* [docs].[command]
 * [logs].[usp_ExecutionLog_insert]
 * [ssis].[Project]
 // end::referencedobjectlist[]
@@ -672,6 +678,11 @@ entity "puml-link:dhw:sqldb:config.parameter.adoc[]" as config.Parameter << U >>
   --
 }
 
+entity "puml-link:dhw:sqldb:docs.command.adoc[]" as docs.command << U >> {
+  - **id** : (int)
+  --
+}
+
 entity "puml-link:dhw:sqldb:docs.usp_antoraexport.adoc[]" as docs.usp_AntoraExport << P >> {
   --
 }
@@ -691,6 +702,7 @@ entity "puml-link:dhw:sqldb:ssis.project.adoc[]" as ssis.Project << U >> {
 
 config.fs_get_parameter_value <.. docs.usp_AntoraExport_SsisPageTemplate
 config.Parameter <.. docs.usp_AntoraExport_SsisPageTemplate
+docs.command <.. docs.usp_AntoraExport_SsisPageTemplate
 docs.usp_AntoraExport_SsisPageTemplate <.. docs.usp_AntoraExport
 logs.usp_ExecutionLog_insert <.. docs.usp_AntoraExport_SsisPageTemplate
 ssis.Project <.. docs.usp_AntoraExport_SsisPageTemplate
@@ -751,6 +763,11 @@ entity "puml-link:dhw:sqldb:configt.parameter_default.adoc[]" as configT.Paramet
   --
 }
 
+entity "puml-link:dhw:sqldb:docs.command.adoc[]" as docs.command << U >> {
+  - **id** : (int)
+  --
+}
+
 entity "puml-link:dhw:sqldb:docs.usp_antoraexport_ssispagetemplate.adoc[]" as docs.usp_AntoraExport_SsisPageTemplate << P >> {
   --
 }
@@ -773,6 +790,7 @@ config.fs_get_parameter_value <.. docs.usp_AntoraExport_SsisPageTemplate
 config.Parameter <.. config.fs_get_parameter_value
 config.Parameter <.. docs.usp_AntoraExport_SsisPageTemplate
 configT.Parameter_default <.. config.Parameter
+docs.command <.. docs.usp_AntoraExport_SsisPageTemplate
 logs.ExecutionLog <.. logs.usp_ExecutionLog_insert
 logs.usp_ExecutionLog_insert <.. docs.usp_AntoraExport_SsisPageTemplate
 ssis.Project <.. docs.usp_AntoraExport_SsisPageTemplate
@@ -884,6 +902,12 @@ entity "puml-link:dhw:sqldb:config.parameter.adoc[]" as config.Parameter << U >>
   --
 }
 
+entity "puml-link:dhw:sqldb:docs.command.adoc[]" as docs.command << U >> {
+  - **id** : (int)
+  - command : (nvarchar(4000))
+  --
+}
+
 entity "puml-link:dhw:sqldb:docs.usp_antoraexport.adoc[]" as docs.usp_AntoraExport << P >> {
   --
 }
@@ -905,6 +929,7 @@ entity "puml-link:dhw:sqldb:ssis.project.adoc[]" as ssis.Project << U >> {
 
 config.fs_get_parameter_value <.. docs.usp_AntoraExport_SsisPageTemplate
 config.Parameter <.. docs.usp_AntoraExport_SsisPageTemplate
+docs.command <.. docs.usp_AntoraExport_SsisPageTemplate
 docs.usp_AntoraExport_SsisPageTemplate <.. docs.usp_AntoraExport
 logs.usp_ExecutionLog_insert <.. docs.usp_AntoraExport_SsisPageTemplate
 ssis.Project <.. docs.usp_AntoraExport_SsisPageTemplate
@@ -1070,8 +1095,12 @@ Begin
 
     Print @command
 
-    --Execute the BCP command
-    Exec sys.xp_cmdshell @command, no_output
+    INSERT Into [docs].[command]
+    (command)
+    VALUES(@command)
+
+    ----Execute the BCP command
+    --Exec sys.xp_cmdshell @command, no_output
 
     Fetch Next From page_cursor
     Into

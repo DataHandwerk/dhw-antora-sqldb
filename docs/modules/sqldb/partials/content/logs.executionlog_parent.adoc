@@ -50,7 +50,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-08-17 18:49:49
+2022-06-30 18:23:13
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -500,7 +500,7 @@ view
 |
 |parent_proc_fullname
 |nvarchar(517)
-|NULL
+|NOT NULL
 |
 |===
 
@@ -509,11 +509,6 @@ view
 (concat(quotename([proc_schema_name]),'.',quotename([proc_name])))
 --
 {empty} +
-
-.Referenced Columns
---
-* xref:logs.executionlog.adoc#column-procunderlinefullname[+logs.ExecutionLog.proc_fullname+]
---
 
 .Referencing Columns
 --
@@ -798,7 +793,7 @@ view
 |
 |<<column-parentunderlineprocunderlinefullname>>
 |nvarchar(517)
-|NULL
+|NOT NULL
 |
 
 |
@@ -1236,7 +1231,7 @@ entity "puml-link:dhw:sqldb:logs.executionlog_parent.adoc[]" as logs.ExecutionLo
   parent_parameter_18 : (nvarchar(4000))
   parent_parameter_19 : (nvarchar(4000))
   parent_parameter_20 : (nvarchar(4000))
-  parent_proc_fullname : (nvarchar(517))
+  - parent_proc_fullname : (nvarchar(517))
   parent_proc_id : (int)
   parent_proc_name : (nvarchar(128))
   parent_proc_schema_name : (nvarchar(128))
@@ -1540,7 +1535,6 @@ entity "puml-link:dhw:sqldb:logs.executionlog.adoc[]" as logs.ExecutionLog << U 
   sub_execution_id : (int)
   target_object : (nvarchar(261))
   updated : (int)
-  ~ proc_fullname : (nvarchar(517))
   --
 }
 
@@ -1569,7 +1563,7 @@ entity "puml-link:dhw:sqldb:logs.executionlog_parent.adoc[]" as logs.ExecutionLo
   parent_parameter_18 : (nvarchar(4000))
   parent_parameter_19 : (nvarchar(4000))
   parent_parameter_20 : (nvarchar(4000))
-  parent_proc_fullname : (nvarchar(517))
+  - parent_proc_fullname : (nvarchar(517))
   parent_proc_id : (int)
   parent_proc_name : (nvarchar(128))
   parent_proc_schema_name : (nvarchar(128))
@@ -1614,7 +1608,6 @@ logs.ExecutionLog_parent <.. logs.ExecutionLog_puml_Sequence_start_stop
 "logs.ExecutionLog::parameter_19" <-- "logs.ExecutionLog_parent::parent_parameter_19"
 "logs.ExecutionLog::parameter_20" <-- "logs.ExecutionLog_parent::parent_parameter_20"
 "logs.ExecutionLog::parent_execution_log_id" <-- "logs.ExecutionLog_parent::parent_execution_log_id"
-"logs.ExecutionLog::proc_fullname" <-- "logs.ExecutionLog_parent::parent_proc_fullname"
 "logs.ExecutionLog::proc_id" <-- "logs.ExecutionLog_parent::parent_proc_id"
 "logs.ExecutionLog::proc_name" <-- "logs.ExecutionLog_parent::parent_proc_name"
 "logs.ExecutionLog::proc_schema_name" <-- "logs.ExecutionLog_parent::parent_proc_schema_name"
@@ -1638,7 +1631,8 @@ footer The diagram is interactive and contains links.
 [source,sql,numbered,indent=0]
 ----
 
-CREATE View logs.ExecutionLog_parent
+
+CREATE View [logs].[ExecutionLog_parent]
 As
 Select
     T1.id
@@ -1670,7 +1664,7 @@ Select
   , parent_parameter_18           = parent.parameter_18
   , parent_parameter_19           = parent.parameter_19
   , parent_parameter_20           = parent.parameter_20
-  , parent_proc_fullname          = parent.proc_fullname
+  , parent_proc_fullname          = Concat(QuoteName(parent.[proc_schema_name]),'.',QuoteName(parent.[proc_name])) --proc_fullname
 From
     logs.ExecutionLog     As T1
     Left Join
@@ -1679,6 +1673,7 @@ From
             parent.id = T1.parent_execution_log_id
 Where
     Not parent.id Is Null
+
 ----
 =======
 // end::sql_modules_definition[]

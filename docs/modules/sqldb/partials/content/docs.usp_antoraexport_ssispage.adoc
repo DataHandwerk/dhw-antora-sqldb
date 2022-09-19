@@ -52,7 +52,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2022-01-23 17:32:24
+2022-09-05 18:23:32
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -228,8 +228,12 @@ Begin
 
     Print @command
 
-    --Execute the BCP command
-    Exec sys.xp_cmdshell @command, no_output
+    INSERT Into [docs].[command]
+    (command)
+    VALUES(@command)
+
+    ----Execute the BCP command
+    --Exec sys.xp_cmdshell @command, no_output
 
     Fetch Next From p_cursor
     Into
@@ -253,6 +257,7 @@ Deallocate p_cursor
 
 // tag::antorareferencedlist[]
 * xref:dhw:sqldb:config.fs_get_parameter_value.adoc[]
+* xref:dhw:sqldb:docs.command.adoc[]
 * xref:dhw:sqldb:docs.fs_cleanstringforfilename.adoc[]
 * xref:dhw:sqldb:logs.usp_executionlog_insert.adoc[]
 * xref:dhw:sqldb:ssis.package.adoc[]
@@ -494,6 +499,7 @@ EXEC [docs].[usp_AntoraExport_SsisPage]
 
 // tag::referencedobjectlist[]
 * [config].[fs_get_parameter_value]
+* [docs].[command]
 * [docs].[fs_cleanStringForFilename]
 * [logs].[usp_ExecutionLog_insert]
 * [ssis].[Package]
@@ -659,6 +665,11 @@ entity "puml-link:dhw:sqldb:config.fs_get_parameter_value.adoc[]" as config.fs_g
   --
 }
 
+entity "puml-link:dhw:sqldb:docs.command.adoc[]" as docs.command << U >> {
+  - **id** : (int)
+  --
+}
+
 entity "puml-link:dhw:sqldb:docs.fs_cleanstringforfilename.adoc[]" as docs.fs_cleanStringForFilename << FN >> {
   --
 }
@@ -682,6 +693,7 @@ entity "puml-link:dhw:sqldb:ssis.package.adoc[]" as ssis.Package << U >> {
 }
 
 config.fs_get_parameter_value <.. docs.usp_AntoraExport_SsisPage
+docs.command <.. docs.usp_AntoraExport_SsisPage
 docs.fs_cleanStringForFilename <.. docs.usp_AntoraExport_SsisPage
 docs.usp_AntoraExport_SsisPage <.. docs.usp_AntoraExport
 logs.usp_ExecutionLog_insert <.. docs.usp_AntoraExport_SsisPage
@@ -743,6 +755,11 @@ entity "puml-link:dhw:sqldb:configt.parameter_default.adoc[]" as configT.Paramet
   --
 }
 
+entity "puml-link:dhw:sqldb:docs.command.adoc[]" as docs.command << U >> {
+  - **id** : (int)
+  --
+}
+
 entity "puml-link:dhw:sqldb:docs.fs_cleanstringforfilename.adoc[]" as docs.fs_cleanStringForFilename << FN >> {
   --
 }
@@ -795,13 +812,14 @@ entity "puml-link:dhw:sqldb:ssis_t.pkgstats.adoc[]" as ssis_t.pkgStats << U >> {
 config.fs_get_parameter_value <.. docs.usp_AntoraExport_SsisPage
 config.Parameter <.. config.fs_get_parameter_value
 configT.Parameter_default <.. config.Parameter
+docs.command <.. docs.usp_AntoraExport_SsisPage
 docs.fs_cleanStringForFilename <.. docs.usp_AntoraExport_SsisPage
 logs.ExecutionLog <.. logs.usp_ExecutionLog_insert
 logs.usp_ExecutionLog_insert <.. docs.usp_AntoraExport_SsisPage
 ssis.AntoraModule_tgt_filter <.. ssis.Package_tgt
 ssis.Package <.. docs.usp_AntoraExport_SsisPage
-ssis.Package_src <.. ssis.Package_tgt
 ssis.Package_src <.. ssis.AntoraModule_tgt_filter
+ssis.Package_src <.. ssis.Package_tgt
 ssis.Package_tgt <.. ssis.Package
 ssis.Project <.. ssis.Package_src
 ssis_t.pkgStats <.. ssis.Package_src
@@ -900,6 +918,12 @@ entity "puml-link:dhw:sqldb:config.fs_get_parameter_value.adoc[]" as config.fs_g
   --
 }
 
+entity "puml-link:dhw:sqldb:docs.command.adoc[]" as docs.command << U >> {
+  - **id** : (int)
+  - command : (nvarchar(4000))
+  --
+}
+
 entity "puml-link:dhw:sqldb:docs.fs_cleanstringforfilename.adoc[]" as docs.fs_cleanStringForFilename << FN >> {
   --
 }
@@ -938,6 +962,7 @@ entity "puml-link:dhw:sqldb:ssis.package.adoc[]" as ssis.Package << U >> {
 }
 
 config.fs_get_parameter_value <.. docs.usp_AntoraExport_SsisPage
+docs.command <.. docs.usp_AntoraExport_SsisPage
 docs.fs_cleanStringForFilename <.. docs.usp_AntoraExport_SsisPage
 docs.usp_AntoraExport_SsisPage <.. docs.usp_AntoraExport
 logs.usp_ExecutionLog_insert <.. docs.usp_AntoraExport_SsisPage
@@ -1097,8 +1122,12 @@ Begin
 
     Print @command
 
-    --Execute the BCP command
-    Exec sys.xp_cmdshell @command, no_output
+    INSERT Into [docs].[command]
+    (command)
+    VALUES(@command)
+
+    ----Execute the BCP command
+    --Exec sys.xp_cmdshell @command, no_output
 
     Fetch Next From p_cursor
     Into

@@ -75,6 +75,7 @@ view
 .Referencing Columns
 --
 * xref:workflow.workflow_sqlusp.adoc#column-usplist[+workflow.Workflow_SqlUsp.UspList+]
+* xref:workflow.workflow_sqlusp_wo_go.adoc#column-usplist[+workflow.Workflow_SqlUsp_wo_GO.UspList+]
 --
 
 
@@ -98,6 +99,7 @@ view
 .Referencing Columns
 --
 * xref:workflow.workflow_sqlusp.adoc#column-workflowunderlineid[+workflow.Workflow_SqlUsp.Workflow_id+]
+* xref:workflow.workflow_sqlusp_wo_go.adoc#column-workflowunderlineid[+workflow.Workflow_SqlUsp_wo_GO.Workflow_id+]
 --
 
 
@@ -116,6 +118,7 @@ view
 .Referencing Columns
 --
 * xref:workflow.workflow_sqlusp.adoc#column-workflowunderlinename[+workflow.Workflow_SqlUsp.Workflow_Name+]
+* xref:workflow.workflow_sqlusp_wo_go.adoc#column-workflowunderlinename[+workflow.Workflow_SqlUsp_wo_GO.Workflow_Name+]
 --
 
 
@@ -228,6 +231,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 
 // tag::antorareferencinglist[]
 * xref:dhw:sqldb:workflow.workflow_sqlusp.adoc[]
+* xref:dhw:sqldb:workflow.workflow_sqlusp_wo_go.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -640,6 +644,10 @@ entity "puml-link:dhw:sqldb:workflow.workflow_sqlusp.adoc[]" as workflow.Workflo
   --
 }
 
+entity "puml-link:dhw:sqldb:workflow.workflow_sqlusp_wo_go.adoc[]" as workflow.Workflow_SqlUsp_wo_GO << V >> {
+  --
+}
+
 entity "puml-link:dhw:sqldb:workflow.workflow_usplist.adoc[]" as workflow.Workflow_UspList << V >> {
   --
 }
@@ -653,6 +661,7 @@ entity "puml-link:dhw:sqldb:workflow.workflowstep_sortorder.adoc[]" as workflow.
 repo.RepoObject <.. workflow.Workflow_UspList
 workflow.Workflow <.. workflow.Workflow_UspList
 workflow.Workflow_UspList <.. workflow.Workflow_SqlUsp
+workflow.Workflow_UspList <.. workflow.Workflow_SqlUsp_wo_GO
 workflow.WorkflowStep_Sortorder <.. workflow.Workflow_UspList
 
 footer The diagram is interactive and contains links.
@@ -1001,8 +1010,8 @@ entity "puml-link:dhw:sqldb:workflow.workflowstep_sortorder.adoc[]" as workflow.
 }
 
 config.ftv_get_parameter_value <.. reference.additional_Reference_is_external
-config.ftv_get_parameter_value <.. ssas.additional_Reference_step1
 config.ftv_get_parameter_value <.. repo.RepoObject_external_src
+config.ftv_get_parameter_value <.. ssas.additional_Reference_step1
 config.Parameter <.. config.ftv_get_parameter_value
 config.Parameter <.. property.PropertyName_RepoObject
 configT.Parameter_default <.. config.Parameter
@@ -1013,8 +1022,8 @@ property.RepoObjectProperty <.. property.PropertyName_RepoObject
 property.RepoObjectProperty <.. property.RepoObjectProperty_SelectedPropertyName_split
 property.RepoObjectProperty_external_src <.. property.RepoObjectProperty_external_tgt
 property.RepoObjectProperty_external_tgt <.. property.RepoObjectProperty
-property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_wo_columns_from_properties_src
 property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_from_properties_src
+property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_wo_columns_from_properties_src
 reference.additional_Reference <.. reference.additional_Reference_is_external
 reference.additional_Reference_from_properties_src <.. reference.additional_Reference_from_properties_tgt
 reference.additional_Reference_from_properties_tgt <.. reference.additional_Reference
@@ -1025,9 +1034,9 @@ reference.additional_Reference_Object <.. reference.additional_Reference_Object_
 reference.additional_Reference_Object_T <.. repo.RepoObject_external_src
 reference.additional_Reference_wo_columns_from_properties_src <.. reference.additional_Reference_wo_columns_from_properties_tgt
 reference.additional_Reference_wo_columns_from_properties_tgt <.. reference.additional_Reference
-repo.RepoObject <.. workflow.Workflow_UspList
 repo.RepoObject <.. property.RepoObjectProperty_external_tgt
 repo.RepoObject <.. repo.RepoObject_external_src
+repo.RepoObject <.. workflow.Workflow_UspList
 repo.RepoObject_external_src <.. repo.RepoObject_external_tgt
 repo.RepoObject_external_tgt <.. repo.RepoObject
 repo.RepoObject_SSAS_src <.. repo.RepoObject_SSAS_tgt
@@ -1039,15 +1048,15 @@ ssas.additional_Reference_step1 <.. reference.additional_Reference_from_ssas_src
 ssas.model_json <.. ssas.model_json_10
 ssas.model_json_10 <.. ssas.model_json_20
 ssas.model_json_20 <.. repo.RepoSchema_ssas_src
+ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
 ssas.model_json_20 <.. ssas.model_json_31_tables
 ssas.model_json_20 <.. ssas.model_json_33_dataSources
-ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
 ssas.model_json_201_descriptions_multiline <.. ssas.model_json_2011_descriptions_StrAgg
 ssas.model_json_2011_descriptions_StrAgg <.. repo.RepoSchema_ssas_src
 ssas.model_json_31_tables <.. ssas.model_json_31_tables_T
-ssas.model_json_31_tables_T <.. ssas.model_json_313_tables_partitions
 ssas.model_json_31_tables_T <.. repo.RepoObject_SSAS_src
 ssas.model_json_31_tables_T <.. ssas.model_json_311_tables_columns
+ssas.model_json_31_tables_T <.. ssas.model_json_313_tables_partitions
 ssas.model_json_311_tables_columns <.. ssas.model_json_311_tables_columns_T
 ssas.model_json_311_tables_columns_T <.. ssas.additional_Reference_step1
 ssas.model_json_313_tables_partitions <.. ssas.model_json_3131_tables_partitions_source
@@ -1105,11 +1114,16 @@ entity "puml-link:dhw:sqldb:workflow.workflow_sqlusp.adoc[]" as workflow.Workflo
   --
 }
 
+entity "puml-link:dhw:sqldb:workflow.workflow_sqlusp_wo_go.adoc[]" as workflow.Workflow_SqlUsp_wo_GO << V >> {
+  --
+}
+
 entity "puml-link:dhw:sqldb:workflow.workflow_usplist.adoc[]" as workflow.Workflow_UspList << V >> {
   --
 }
 
 workflow.Workflow_UspList <.. workflow.Workflow_SqlUsp
+workflow.Workflow_UspList <.. workflow.Workflow_SqlUsp_wo_GO
 
 footer The diagram is interactive and contains links.
 
@@ -1215,6 +1229,14 @@ entity "puml-link:dhw:sqldb:workflow.workflow_sqlusp.adoc[]" as workflow.Workflo
   --
 }
 
+entity "puml-link:dhw:sqldb:workflow.workflow_sqlusp_wo_go.adoc[]" as workflow.Workflow_SqlUsp_wo_GO << V >> {
+  - SqlUsp : (nvarchar(max))
+  UspList : (nvarchar(max))
+  - Workflow_id : (int)
+  Workflow_Name : (nvarchar(500))
+  --
+}
+
 entity "puml-link:dhw:sqldb:workflow.workflow_usplist.adoc[]" as workflow.Workflow_UspList << V >> {
   UspList : (nvarchar(max))
   - Workflow_id : (int)
@@ -1232,10 +1254,14 @@ entity "puml-link:dhw:sqldb:workflow.workflowstep_sortorder.adoc[]" as workflow.
 repo.RepoObject <.. workflow.Workflow_UspList
 workflow.Workflow <.. workflow.Workflow_UspList
 workflow.Workflow_UspList <.. workflow.Workflow_SqlUsp
+workflow.Workflow_UspList <.. workflow.Workflow_SqlUsp_wo_GO
 workflow.WorkflowStep_Sortorder <.. workflow.Workflow_UspList
 "workflow.Workflow_UspList::UspList" <-- "workflow.Workflow_SqlUsp::UspList"
+"workflow.Workflow_UspList::UspList" <-- "workflow.Workflow_SqlUsp_wo_GO::UspList"
 "workflow.Workflow_UspList::Workflow_id" <-- "workflow.Workflow_SqlUsp::Workflow_id"
+"workflow.Workflow_UspList::Workflow_id" <-- "workflow.Workflow_SqlUsp_wo_GO::Workflow_id"
 "workflow.Workflow_UspList::Workflow_Name" <-- "workflow.Workflow_SqlUsp::Workflow_Name"
+"workflow.Workflow_UspList::Workflow_Name" <-- "workflow.Workflow_SqlUsp_wo_GO::Workflow_Name"
 "workflow.WorkflowStep_Sortorder::Workflow_id" <-- "workflow.Workflow_UspList::Workflow_id"
 
 footer The diagram is interactive and contains links.

@@ -1518,8 +1518,8 @@ entity "puml-link:dhw:sqldb:ssis_t.tbltask_dft_component.adoc[]" as ssis_t.TblTa
 }
 
 ssis.AntoraModule_tgt_filter <.. ssis.PackageTask_Dft_Component_tgt
-ssis.Package_src <.. ssis.PackageTask_Dft_Component_src
 ssis.Package_src <.. ssis.AntoraModule_tgt_filter
+ssis.Package_src <.. ssis.PackageTask_Dft_Component_src
 ssis.PackageTask_Dft_Component_src <.. ssis.PackageTask_Dft_Component_tgt
 ssis.Project <.. ssis.Package_src
 ssis_t.pkgStats <.. ssis.Package_src
@@ -1629,24 +1629,24 @@ entity "puml-link:dhw:sqldb:ssis.usp_persist_packagetask_dft_component_tgt.adoc[
   --
 }
 
-docs.ssis_Adoc <.. docs.usp_PERSIST_ssis_Adoc_T
 docs.ssis_Adoc <.. docs.ssis_Adoc_T
+docs.ssis_Adoc <.. docs.usp_PERSIST_ssis_Adoc_T
 docs.ssis_Adoc_T <.. docs.usp_AntoraExport_SsisPartialsContent
 docs.ssis_Adoc_T <.. docs.usp_PERSIST_ssis_Adoc_T
-docs.ssis_DftTaskComponentList <.. docs.ssis_TaskList
 docs.ssis_DftTaskComponentList <.. docs.ssis_Task
-docs.ssis_PumlDftTask <.. docs.ssis_TaskList
+docs.ssis_DftTaskComponentList <.. docs.ssis_TaskList
 docs.ssis_PumlDftTask <.. docs.ssis_Task
-docs.ssis_PumlPartialDftComponent <.. docs.ssis_PumlDftTask
+docs.ssis_PumlDftTask <.. docs.ssis_TaskList
 docs.ssis_PumlPartialDftComponent <.. docs.ssis_DftTaskComponentList
+docs.ssis_PumlPartialDftComponent <.. docs.ssis_PumlDftTask
 docs.ssis_TaskList <.. docs.ssis_Adoc
 docs.usp_AntoraExport_SsisPartialsContent <.. docs.usp_AntoraExport
 docs.usp_PERSIST_ssis_Adoc_T <.. docs.usp_AntoraExport_SsisPartialsContent
 ssis.PackageTask_Dft_Component <.. docs.ssis_DftTaskComponentList
-ssis.PackageTask_Dft_Component <.. docs.ssis_PumlPartialDftComponent
 ssis.PackageTask_Dft_Component <.. docs.ssis_PumlDftTask
-ssis.PackageTask_Dft_Component_tgt <.. ssis.usp_PERSIST_PackageTask_Dft_Component_tgt
+ssis.PackageTask_Dft_Component <.. docs.ssis_PumlPartialDftComponent
 ssis.PackageTask_Dft_Component_tgt <.. ssis.PackageTask_Dft_Component
+ssis.PackageTask_Dft_Component_tgt <.. ssis.usp_PERSIST_PackageTask_Dft_Component_tgt
 ssis.usp_PERSIST_PackageTask_Dft_Component_tgt <.. ssis.usp_import
 
 footer The diagram is interactive and contains links.

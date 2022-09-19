@@ -50,7 +50,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-10-03 16:15:56
+2022-09-08 16:37:22
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -67,7 +67,7 @@ view
 |===
 |
 |DmvColumnList
-|nvarchar(4000)
+|nvarchar(max)
 |NULL
 |
 |===
@@ -105,7 +105,7 @@ view
 // tag::AntoraNonPkColumnTableRows[]
 |
 |<<column-dmvcolumnlist>>
-|nvarchar(4000)
+|nvarchar(max)
 |NULL
 |
 
@@ -491,7 +491,7 @@ skinparam class {
 
 
 entity "puml-link:dhw:sqldb:configt.ssasdmvtableimport_dmvcolumnlist.adoc[]" as configT.SsasDmvTableImport_DmvColumnList << V >> {
-  DmvColumnList : (nvarchar(4000))
+  DmvColumnList : (nvarchar(max))
   DmvTableName : (nvarchar(128))
   --
 }
@@ -740,7 +740,7 @@ entity "puml-link:dhw:sqldb:configt.ssasdmvtableimport.adoc[]" as configT.SsasDm
 }
 
 entity "puml-link:dhw:sqldb:configt.ssasdmvtableimport_dmvcolumnlist.adoc[]" as configT.SsasDmvTableImport_DmvColumnList << V >> {
-  DmvColumnList : (nvarchar(4000))
+  DmvColumnList : (nvarchar(max))
   DmvTableName : (nvarchar(128))
   --
 }
@@ -776,7 +776,6 @@ footer The diagram is interactive and contains links.
 [source,sql,numbered,indent=0]
 ----
 
-
 /*
 <<property_start>>Description
 obsolet
@@ -786,12 +785,12 @@ Because the target table structure was created from
 we just scan the target table columns to get the column lists
 <<property_end>>
 */
-CREATE View [configT].[SsasDmvTableImport_DmvColumnList]
+CREATE View configT.SsasDmvTableImport_DmvColumnList
 As
 Select
     T1.DmvTableName
-  , DmvColumnList = String_Agg ( QuoteName ( sc.name ), Char ( 13 ) + Char ( 10 ) + ', ' ) Within Group(Order By
-                                                                                                            sc.column_id)
+  , DmvColumnList = String_Agg ( Cast(QuoteName ( sc.name ) As NVarchar(Max)), Char ( 13 ) + Char ( 10 ) + ', ' ) Within Group(Order By
+                                                                                                                                   sc.column_id)
 From
     configT.SsasDmvTableImport As T1
     Inner Join

@@ -91,6 +91,7 @@ view
 .Referencing Columns
 --
 * xref:uspgenerator.generatorusp_sqlusp.adoc#column-uspparameters[+uspgenerator.GeneratorUsp_SqlUsp.UspParameters+]
+* xref:uspgenerator.generatorusp_sqlusp_wo_go.adoc#column-uspparameters[+uspgenerator.GeneratorUsp_SqlUsp_wo_GO.UspParameters+]
 --
 
 
@@ -214,6 +215,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 
 // tag::antorareferencinglist[]
 * xref:dhw:sqldb:uspgenerator.generatorusp_sqlusp.adoc[]
+* xref:dhw:sqldb:uspgenerator.generatorusp_sqlusp_wo_go.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -619,12 +621,17 @@ entity "puml-link:dhw:sqldb:uspgenerator.generatorusp_sqlusp.adoc[]" as uspgener
   --
 }
 
+entity "puml-link:dhw:sqldb:uspgenerator.generatorusp_sqlusp_wo_go.adoc[]" as uspgenerator.GeneratorUsp_SqlUsp_wo_GO << V >> {
+  --
+}
+
 entity "puml-link:dhw:sqldb:uspgenerator.generatoruspparameter.adoc[]" as uspgenerator.GeneratorUspParameter << U >> {
   - **id** : (int)
   --
 }
 
 uspgenerator.GeneratorUsp_ParameterList <.. uspgenerator.GeneratorUsp_SqlUsp
+uspgenerator.GeneratorUsp_ParameterList <.. uspgenerator.GeneratorUsp_SqlUsp_wo_GO
 uspgenerator.GeneratorUspParameter <.. uspgenerator.GeneratorUsp_ParameterList
 
 footer The diagram is interactive and contains links.
@@ -746,11 +753,16 @@ entity "puml-link:dhw:sqldb:uspgenerator.generatorusp_sqlusp.adoc[]" as uspgener
   --
 }
 
+entity "puml-link:dhw:sqldb:uspgenerator.generatorusp_sqlusp_wo_go.adoc[]" as uspgenerator.GeneratorUsp_SqlUsp_wo_GO << V >> {
+  --
+}
+
 property.RepoObjectProperty_Collect_source_uspgenerator <.. property.usp_RepoObjectProperty_collect
 property.usp_RepoObject_Inheritance <.. repo.usp_main
 property.usp_RepoObjectProperty_collect <.. property.usp_RepoObject_Inheritance
 property.usp_RepoObjectProperty_collect <.. repo.usp_main
 uspgenerator.GeneratorUsp_ParameterList <.. uspgenerator.GeneratorUsp_SqlUsp
+uspgenerator.GeneratorUsp_ParameterList <.. uspgenerator.GeneratorUsp_SqlUsp_wo_GO
 uspgenerator.GeneratorUsp_SqlUsp <.. property.RepoObjectProperty_Collect_source_uspgenerator
 
 footer The diagram is interactive and contains links.
@@ -807,6 +819,24 @@ entity "puml-link:dhw:sqldb:uspgenerator.generatorusp_sqlusp.adoc[]" as uspgener
   RepoObject_guid : (uniqueidentifier)
   SqlStepList : (nvarchar(max))
   - SqlUsp : (nvarchar(max))
+  SqlViewPersistenceUpdateCheck : (nvarchar(max))
+  usp_Description : (nvarchar(4000))
+  - usp_fullname : (nvarchar(261))
+  - usp_id : (int)
+  - usp_name : (nvarchar(128))
+  - usp_schema : (nvarchar(128))
+  - UspExamples : (nvarchar(4000))
+  UspParameters : (nvarchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:uspgenerator.generatorusp_sqlusp_wo_go.adoc[]" as uspgenerator.GeneratorUsp_SqlUsp_wo_GO << V >> {
+  - AdocUspSteps : (nvarchar(max))
+  - has_logging : (tinyint)
+  MS_Description : (nvarchar(4000))
+  RepoObject_guid : (uniqueidentifier)
+  SqlStepList : (nvarchar(max))
+  - SqlUsp_wo_GO : (nvarchar(max))
   usp_Description : (nvarchar(4000))
   - usp_fullname : (nvarchar(261))
   - usp_id : (int)
@@ -832,8 +862,10 @@ entity "puml-link:dhw:sqldb:uspgenerator.generatoruspparameter.adoc[]" as uspgen
 }
 
 uspgenerator.GeneratorUsp_ParameterList <.. uspgenerator.GeneratorUsp_SqlUsp
+uspgenerator.GeneratorUsp_ParameterList <.. uspgenerator.GeneratorUsp_SqlUsp_wo_GO
 uspgenerator.GeneratorUspParameter <.. uspgenerator.GeneratorUsp_ParameterList
 "uspgenerator.GeneratorUsp_ParameterList::ParameterList" <-- "uspgenerator.GeneratorUsp_SqlUsp::UspParameters"
+"uspgenerator.GeneratorUsp_ParameterList::ParameterList" <-- "uspgenerator.GeneratorUsp_SqlUsp_wo_GO::UspParameters"
 
 footer The diagram is interactive and contains links.
 

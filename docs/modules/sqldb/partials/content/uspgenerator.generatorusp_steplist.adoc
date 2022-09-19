@@ -89,6 +89,7 @@ view
 .Referencing Columns
 --
 * xref:uspgenerator.generatorusp_sqlusp.adoc#column-sqlsteplist[+uspgenerator.GeneratorUsp_SqlUsp.SqlStepList+]
+* xref:uspgenerator.generatorusp_sqlusp_wo_go.adoc#column-sqlsteplist[+uspgenerator.GeneratorUsp_SqlUsp_wo_GO.SqlStepList+]
 --
 
 
@@ -217,6 +218,7 @@ source: property.RepoObjectProperty_cross As rop_cross
 
 // tag::antorareferencinglist[]
 * xref:dhw:sqldb:uspgenerator.generatorusp_sqlusp.adoc[]
+* xref:dhw:sqldb:uspgenerator.generatorusp_sqlusp_wo_go.adoc[]
 // end::antorareferencinglist[]
 
 
@@ -618,6 +620,10 @@ entity "puml-link:dhw:sqldb:uspgenerator.generatorusp_sqlusp.adoc[]" as uspgener
   --
 }
 
+entity "puml-link:dhw:sqldb:uspgenerator.generatorusp_sqlusp_wo_go.adoc[]" as uspgenerator.GeneratorUsp_SqlUsp_wo_GO << V >> {
+  --
+}
+
 entity "puml-link:dhw:sqldb:uspgenerator.generatorusp_steplist.adoc[]" as uspgenerator.GeneratorUsp_StepList << V >> {
   --
 }
@@ -629,6 +635,7 @@ entity "puml-link:dhw:sqldb:uspgenerator.generatoruspstep_sql.adoc[]" as uspgene
 }
 
 uspgenerator.GeneratorUsp_StepList <.. uspgenerator.GeneratorUsp_SqlUsp
+uspgenerator.GeneratorUsp_StepList <.. uspgenerator.GeneratorUsp_SqlUsp_wo_GO
 uspgenerator.GeneratorUspStep_Sql <.. uspgenerator.GeneratorUsp_StepList
 
 footer The diagram is interactive and contains links.
@@ -702,9 +709,9 @@ entity "puml-link:dhw:sqldb:uspgenerator.generatoruspstep_sql.adoc[]" as uspgene
 uspgenerator.ftv_GeneratorUspStep_sql <.. uspgenerator.GeneratorUspStep_Sql
 uspgenerator.ftv_GeneratorUspStep_tree <.. uspgenerator.GeneratorUspStep_Sql
 uspgenerator.GeneratorUsp <.. uspgenerator.GeneratorUspStep_Sql
+uspgenerator.GeneratorUspStep <.. uspgenerator.ftv_GeneratorUspStep_sql
 uspgenerator.GeneratorUspStep <.. uspgenerator.ftv_GeneratorUspStep_tree
 uspgenerator.GeneratorUspStep <.. uspgenerator.GeneratorUspStep_Sql
-uspgenerator.GeneratorUspStep <.. uspgenerator.ftv_GeneratorUspStep_sql
 uspgenerator.GeneratorUspStep_Sql <.. uspgenerator.GeneratorUsp_StepList
 
 footer The diagram is interactive and contains links.
@@ -769,6 +776,10 @@ entity "puml-link:dhw:sqldb:uspgenerator.generatorusp_sqlusp.adoc[]" as uspgener
   --
 }
 
+entity "puml-link:dhw:sqldb:uspgenerator.generatorusp_sqlusp_wo_go.adoc[]" as uspgenerator.GeneratorUsp_SqlUsp_wo_GO << V >> {
+  --
+}
+
 entity "puml-link:dhw:sqldb:uspgenerator.generatorusp_steplist.adoc[]" as uspgenerator.GeneratorUsp_StepList << V >> {
   --
 }
@@ -779,6 +790,7 @@ property.usp_RepoObjectProperty_collect <.. property.usp_RepoObject_Inheritance
 property.usp_RepoObjectProperty_collect <.. repo.usp_main
 uspgenerator.GeneratorUsp_SqlUsp <.. property.RepoObjectProperty_Collect_source_uspgenerator
 uspgenerator.GeneratorUsp_StepList <.. uspgenerator.GeneratorUsp_SqlUsp
+uspgenerator.GeneratorUsp_StepList <.. uspgenerator.GeneratorUsp_SqlUsp_wo_GO
 
 footer The diagram is interactive and contains links.
 
@@ -827,6 +839,24 @@ entity "puml-link:dhw:sqldb:uspgenerator.generatorusp_sqlusp.adoc[]" as uspgener
   RepoObject_guid : (uniqueidentifier)
   SqlStepList : (nvarchar(max))
   - SqlUsp : (nvarchar(max))
+  SqlViewPersistenceUpdateCheck : (nvarchar(max))
+  usp_Description : (nvarchar(4000))
+  - usp_fullname : (nvarchar(261))
+  - usp_id : (int)
+  - usp_name : (nvarchar(128))
+  - usp_schema : (nvarchar(128))
+  - UspExamples : (nvarchar(4000))
+  UspParameters : (nvarchar(max))
+  --
+}
+
+entity "puml-link:dhw:sqldb:uspgenerator.generatorusp_sqlusp_wo_go.adoc[]" as uspgenerator.GeneratorUsp_SqlUsp_wo_GO << V >> {
+  - AdocUspSteps : (nvarchar(max))
+  - has_logging : (tinyint)
+  MS_Description : (nvarchar(4000))
+  RepoObject_guid : (uniqueidentifier)
+  SqlStepList : (nvarchar(max))
+  - SqlUsp_wo_GO : (nvarchar(max))
   usp_Description : (nvarchar(4000))
   - usp_fullname : (nvarchar(261))
   - usp_id : (int)
@@ -859,8 +889,10 @@ entity "puml-link:dhw:sqldb:uspgenerator.generatoruspstep_sql.adoc[]" as uspgene
 }
 
 uspgenerator.GeneratorUsp_StepList <.. uspgenerator.GeneratorUsp_SqlUsp
+uspgenerator.GeneratorUsp_StepList <.. uspgenerator.GeneratorUsp_SqlUsp_wo_GO
 uspgenerator.GeneratorUspStep_Sql <.. uspgenerator.GeneratorUsp_StepList
 "uspgenerator.GeneratorUsp_StepList::StepList" <-- "uspgenerator.GeneratorUsp_SqlUsp::SqlStepList"
+"uspgenerator.GeneratorUsp_StepList::StepList" <-- "uspgenerator.GeneratorUsp_SqlUsp_wo_GO::SqlStepList"
 "uspgenerator.GeneratorUspStep_Sql::usp_id" <-- "uspgenerator.GeneratorUsp_StepList::usp_id"
 
 footer The diagram is interactive and contains links.

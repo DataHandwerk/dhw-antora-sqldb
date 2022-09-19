@@ -52,7 +52,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2022-01-23 17:32:23
+2022-09-05 18:23:32
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -234,8 +234,12 @@ Begin
 
     Print @command
 
-    --Execute the BCP command
-    Exec sys.xp_cmdshell @command, no_output
+    INSERT Into [docs].[command]
+    (command)
+    VALUES(@command)
+
+    ----Execute the BCP command
+    --Exec sys.xp_cmdshell @command, no_output
 
     Fetch Next From page_cursor
     Into
@@ -300,8 +304,12 @@ Begin
 
     Print @command
 
-    --Execute the BCP command
-    Exec sys.xp_cmdshell @command, no_output
+    INSERT Into [docs].[command]
+    (command)
+    VALUES(@command)
+
+    ----Execute the BCP command
+    --Exec sys.xp_cmdshell @command, no_output
 
     Fetch Next From page_cursor
     Into
@@ -324,6 +332,7 @@ Deallocate page_cursor
 
 // tag::antorareferencedlist[]
 * xref:dhw:sqldb:config.parameter.adoc[]
+* xref:dhw:sqldb:docs.command.adoc[]
 * xref:dhw:sqldb:docs.culture.adoc[]
 * xref:dhw:sqldb:docs.fs_antoramodulefolder.adoc[]
 * xref:dhw:sqldb:logs.usp_executionlog_insert.adoc[]
@@ -565,6 +574,7 @@ EXEC [docs].[usp_AntoraExport_ObjectPageTemplate]
 
 // tag::referencedobjectlist[]
 * [config].[Parameter]
+* [docs].[command]
 * [docs].[Culture]
 * [docs].[fs_AntoraModuleFolder]
 * [logs].[usp_ExecutionLog_insert]
@@ -732,6 +742,11 @@ entity "puml-link:dhw:sqldb:config.parameter.adoc[]" as config.Parameter << U >>
   --
 }
 
+entity "puml-link:dhw:sqldb:docs.command.adoc[]" as docs.command << U >> {
+  - **id** : (int)
+  --
+}
+
 entity "puml-link:dhw:sqldb:docs.culture.adoc[]" as docs.Culture << V >> {
   --
 }
@@ -753,6 +768,7 @@ entity "puml-link:dhw:sqldb:logs.usp_executionlog_insert.adoc[]" as logs.usp_Exe
 }
 
 config.Parameter <.. docs.usp_AntoraExport_ObjectPageTemplate
+docs.command <.. docs.usp_AntoraExport_ObjectPageTemplate
 docs.culture <.. docs.usp_AntoraExport_ObjectPageTemplate
 docs.fs_AntoraModuleFolder <.. docs.usp_AntoraExport_ObjectPageTemplate
 docs.usp_AntoraExport_ObjectPageTemplate <.. docs.usp_AntoraExport
@@ -811,6 +827,11 @@ entity "puml-link:dhw:sqldb:config.parameter.adoc[]" as config.Parameter << U >>
 entity "puml-link:dhw:sqldb:configt.parameter_default.adoc[]" as configT.Parameter_default << V >> {
   - **Parameter_name** : (varchar(52))
   - **sub_Parameter** : (nvarchar(26))
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.command.adoc[]" as docs.command << U >> {
+  - **id** : (int)
   --
 }
 
@@ -875,6 +896,7 @@ config.fs_get_parameter_value <.. docs.fs_AntoraModuleFolder
 config.Parameter <.. config.fs_get_parameter_value
 config.Parameter <.. docs.usp_AntoraExport_ObjectPageTemplate
 configT.Parameter_default <.. config.Parameter
+docs.command <.. docs.usp_AntoraExport_ObjectPageTemplate
 docs.culture <.. docs.usp_AntoraExport_ObjectPageTemplate
 docs.fs_AntoraModuleFolder <.. docs.usp_AntoraExport_ObjectPageTemplate
 logs.ExecutionLog <.. logs.usp_ExecutionLog_insert
@@ -990,6 +1012,12 @@ entity "puml-link:dhw:sqldb:config.parameter.adoc[]" as config.Parameter << U >>
   --
 }
 
+entity "puml-link:dhw:sqldb:docs.command.adoc[]" as docs.command << U >> {
+  - **id** : (int)
+  - command : (nvarchar(4000))
+  --
+}
+
 entity "puml-link:dhw:sqldb:docs.culture.adoc[]" as docs.Culture << V >> {
   - cultures_name : (nvarchar(10))
   --
@@ -1012,6 +1040,7 @@ entity "puml-link:dhw:sqldb:logs.usp_executionlog_insert.adoc[]" as logs.usp_Exe
 }
 
 config.Parameter <.. docs.usp_AntoraExport_ObjectPageTemplate
+docs.command <.. docs.usp_AntoraExport_ObjectPageTemplate
 docs.culture <.. docs.usp_AntoraExport_ObjectPageTemplate
 docs.fs_AntoraModuleFolder <.. docs.usp_AntoraExport_ObjectPageTemplate
 docs.usp_AntoraExport_ObjectPageTemplate <.. docs.usp_AntoraExport
@@ -1177,8 +1206,12 @@ Begin
 
     Print @command
 
-    --Execute the BCP command
-    Exec sys.xp_cmdshell @command, no_output
+    INSERT Into [docs].[command]
+    (command)
+    VALUES(@command)
+
+    ----Execute the BCP command
+    --Exec sys.xp_cmdshell @command, no_output
 
     Fetch Next From page_cursor
     Into
@@ -1253,8 +1286,12 @@ Begin
 
     Print @command
 
-    --Execute the BCP command
-    Exec sys.xp_cmdshell @command, no_output
+    INSERT Into [docs].[command]
+    (command)
+    VALUES(@command)
+
+    ----Execute the BCP command
+    --Exec sys.xp_cmdshell @command, no_output
 
     Fetch Next From page_cursor
     Into

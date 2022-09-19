@@ -1177,8 +1177,8 @@ entity "puml-link:dhw:sqldb:ssis_t.tbltask_sql.adoc[]" as ssis_t.TblTask_Sql << 
 }
 
 ssis.AntoraModule_tgt_filter <.. ssis.PackageTask_tgt
-ssis.Package_src <.. ssis.PackageTask_src
 ssis.Package_src <.. ssis.AntoraModule_tgt_filter
+ssis.Package_src <.. ssis.PackageTask_src
 ssis.PackageTask_src <.. ssis.PackageTask_tgt
 ssis.Project <.. ssis.Package_src
 ssis_t.pkgStats <.. ssis.Package_src
@@ -1292,19 +1292,19 @@ entity "puml-link:dhw:sqldb:ssis.usp_persist_packagetask_tgt.adoc[]" as ssis.usp
 
 docs.ssis_Adoc <.. docs.ssis_Adoc_T
 docs.ssis_Adoc <.. docs.usp_PERSIST_ssis_Adoc_T
-docs.ssis_Adoc_T <.. docs.usp_PERSIST_ssis_Adoc_T
 docs.ssis_Adoc_T <.. docs.usp_AntoraExport_SsisPartialsContent
+docs.ssis_Adoc_T <.. docs.usp_PERSIST_ssis_Adoc_T
 docs.ssis_PumlPackage <.. docs.ssis_Adoc
 docs.ssis_PumlPartialTaskComponent <.. docs.ssis_PumlPackage
 docs.ssis_TaskList <.. docs.ssis_Adoc
 docs.usp_AntoraExport_SsisPartialsContent <.. docs.usp_AntoraExport
 docs.usp_PERSIST_ssis_Adoc_T <.. docs.usp_AntoraExport_SsisPartialsContent
+ssis.PackageTask <.. docs.ssis_Task
 ssis.PackageTask <.. docs.ssis_TaskList
 ssis.PackageTask <.. ssis.PackageTask_LevelLagLead
-ssis.PackageTask <.. docs.ssis_Task
 ssis.PackageTask_LevelLagLead <.. docs.ssis_PumlPartialTaskComponent
-ssis.PackageTask_tgt <.. ssis.usp_PERSIST_PackageTask_tgt
 ssis.PackageTask_tgt <.. ssis.PackageTask
+ssis.PackageTask_tgt <.. ssis.usp_PERSIST_PackageTask_tgt
 ssis.usp_PERSIST_PackageTask_tgt <.. ssis.usp_import
 
 footer The diagram is interactive and contains links.

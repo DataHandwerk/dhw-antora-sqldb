@@ -51,7 +51,7 @@ view
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-09-10 20:25:17
+2022-06-30 17:01:04
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -2124,7 +2124,6 @@ entity "puml-link:dhw:sqldb:logs.executionlog.adoc[]" as logs.ExecutionLog << U 
   sub_execution_id : (int)
   target_object : (nvarchar(261))
   updated : (int)
-  ~ proc_fullname : (nvarchar(517))
   --
 }
 
@@ -2266,6 +2265,7 @@ footer The diagram is interactive and contains links.
 ----
 
 
+
 /*
 <<property_start>>exampleUsage 
 --get detailed PlantUML sequence diagram
@@ -2373,7 +2373,7 @@ Select
           Concat (
                      Char ( 13 ) + Char ( 10 )
                    , '== '
-                   , proc_fullname
+                   , concat(quotename([proc_schema_name]),'.',quotename([proc_name])) --proc_fullname
                    , ' - '
                    , step_name
                    , ' =='

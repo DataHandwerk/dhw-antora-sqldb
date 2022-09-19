@@ -48,7 +48,7 @@ user table
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2022-01-23 14:10:33
+2022-09-05 18:18:08
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -818,8 +818,8 @@ entity "puml-link:dhw:sqldb:ssis_t.tbltask_sql_parameter.adoc[]" as ssis_t.TblTa
 }
 
 ssis.AntoraModule_tgt_filter <.. ssis.PackageTask_Sql_Parameter_tgt
-ssis.Package_src <.. ssis.PackageTask_Sql_Parameter_src
 ssis.Package_src <.. ssis.AntoraModule_tgt_filter
+ssis.Package_src <.. ssis.PackageTask_Sql_Parameter_src
 ssis.PackageTask_Sql_Parameter_src <.. ssis.PackageTask_Sql_Parameter_tgt
 ssis.PackageTask_Sql_Parameter_tgt <.. ssis.PackageTask_Sql_Parameter
 ssis.Project <.. ssis.Package_src
@@ -907,10 +907,10 @@ entity "puml-link:dhw:sqldb:ssis.packagetask_sql_parameter.adoc[]" as ssis.Packa
   --
 }
 
-docs.ssis_Adoc <.. docs.usp_PERSIST_ssis_Adoc_T
 docs.ssis_Adoc <.. docs.ssis_Adoc_T
-docs.ssis_Adoc_T <.. docs.usp_PERSIST_ssis_Adoc_T
+docs.ssis_Adoc <.. docs.usp_PERSIST_ssis_Adoc_T
 docs.ssis_Adoc_T <.. docs.usp_AntoraExport_SsisPartialsContent
+docs.ssis_Adoc_T <.. docs.usp_PERSIST_ssis_Adoc_T
 docs.ssis_SqlTaskParameterInnerTable <.. docs.ssis_Task
 docs.ssis_SqlTaskParameterInnerTable <.. docs.ssis_TaskList
 docs.ssis_TaskList <.. docs.ssis_Adoc
@@ -993,13 +993,13 @@ ssis.PackageTask_Sql_Parameter_tgt <.. ssis.PackageTask_Sql_Parameter
 "ssis.PackageTask_Sql_Parameter::AntoraModule" <-- "docs.ssis_SqlTaskParameterInnerTable::AntoraModule"
 "ssis.PackageTask_Sql_Parameter::AntoraModule" <-- "ssis.PackageTask_Sql_Parameter_tgt::AntoraModule"
 "ssis.PackageTask_Sql_Parameter::ControlFlowDetailsRowID" <-- "ssis.PackageTask_Sql_Parameter_tgt::ControlFlowDetailsRowID"
-"ssis.PackageTask_Sql_Parameter::PackageName" <-- "ssis.PackageTask_Sql_Parameter_tgt::PackageName"
 "ssis.PackageTask_Sql_Parameter::PackageName" <-- "docs.ssis_SqlTaskParameterInnerTable::PackageName"
+"ssis.PackageTask_Sql_Parameter::PackageName" <-- "ssis.PackageTask_Sql_Parameter_tgt::PackageName"
 "ssis.PackageTask_Sql_Parameter::ParameterBindingParameterName" <-- "ssis.PackageTask_Sql_Parameter_tgt::ParameterBindingParameterName"
 "ssis.PackageTask_Sql_Parameter::ParameterBindingSequence" <-- "ssis.PackageTask_Sql_Parameter_tgt::ParameterBindingSequence"
 "ssis.PackageTask_Sql_Parameter::ResultSetParameterName" <-- "ssis.PackageTask_Sql_Parameter_tgt::ResultSetParameterName"
-"ssis.PackageTask_Sql_Parameter::TaskPath" <-- "ssis.PackageTask_Sql_Parameter_tgt::TaskPath"
 "ssis.PackageTask_Sql_Parameter::TaskPath" <-- "docs.ssis_SqlTaskParameterInnerTable::TaskPath"
+"ssis.PackageTask_Sql_Parameter::TaskPath" <-- "ssis.PackageTask_Sql_Parameter_tgt::TaskPath"
 
 footer The diagram is interactive and contains links.
 

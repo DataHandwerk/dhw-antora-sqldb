@@ -50,7 +50,7 @@ user table
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2022-01-23 14:10:34
+2022-09-05 18:18:09
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -737,6 +737,10 @@ entity "puml-link:dhw:sqldb:workflow.workflow_sqlusp.adoc[]" as workflow.Workflo
   --
 }
 
+entity "puml-link:dhw:sqldb:workflow.workflow_sqlusp_wo_go.adoc[]" as workflow.Workflow_SqlUsp_wo_GO << V >> {
+  --
+}
+
 entity "puml-link:dhw:sqldb:workflow.workflow_usplist.adoc[]" as workflow.Workflow_UspList << V >> {
   --
 }
@@ -747,10 +751,11 @@ entity "puml-link:dhw:sqldb:workflow.workflowstep_sortorder.adoc[]" as workflow.
   --
 }
 
-workflow.Workflow_ProcedureDependency_T_NotInSortorder <.. workflow.Workflow_ProcedureDependency_T_NotInSortorder_check
 workflow.Workflow_ProcedureDependency_T_NotInSortorder <.. workflow.usp_workflow
+workflow.Workflow_ProcedureDependency_T_NotInSortorder <.. workflow.Workflow_ProcedureDependency_T_NotInSortorder_check
 workflow.Workflow_ProcedureDependency_T_NotInSortorder_check <.. workflow.usp_workflow
 workflow.Workflow_UspList <.. workflow.Workflow_SqlUsp
+workflow.Workflow_UspList <.. workflow.Workflow_SqlUsp_wo_GO
 workflow.WorkflowStep_Sortorder <.. workflow.usp_workflow
 workflow.WorkflowStep_Sortorder <.. workflow.Workflow_ProcedureDependency_T_NotInSortorder
 workflow.WorkflowStep_Sortorder <.. workflow.Workflow_UspList

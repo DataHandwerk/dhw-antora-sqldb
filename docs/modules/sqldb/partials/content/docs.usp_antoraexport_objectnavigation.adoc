@@ -52,7 +52,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2022-01-23 17:32:22
+2022-09-05 18:23:32
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -233,8 +233,12 @@ Begin
 
     Print @command
 
-    --Execute the BCP command
-    Exec sys.xp_cmdshell @command, no_output
+    INSERT Into [docs].[command]
+    (command)
+    VALUES(@command)
+
+    ----Execute the BCP command
+    --Exec sys.xp_cmdshell @command, no_output
 
     Fetch Next From page_cursor
     Into
@@ -302,8 +306,12 @@ Begin
 
     Print @command
 
-    --Execute the BCP command
-    Exec sys.xp_cmdshell @command, no_output
+    INSERT Into [docs].[command]
+    (command)
+    VALUES(@command)
+
+    ----Execute the BCP command
+    --Exec sys.xp_cmdshell @command, no_output
 
     Fetch Next From page_cursor
     Into
@@ -376,8 +384,12 @@ Begin
 
     Print @command
 
-    --Execute the BCP command
-    Exec sys.xp_cmdshell @command, no_output
+    INSERT Into [docs].[command]
+    (command)
+    VALUES(@command)
+
+    ----Execute the BCP command
+    --Exec sys.xp_cmdshell @command, no_output
 
     Fetch Next From page_cursor
     Into
@@ -447,8 +459,12 @@ Begin
 
     Print @command
 
-    --Execute the BCP command
-    Exec sys.xp_cmdshell @command, no_output
+    INSERT Into [docs].[command]
+    (command)
+    VALUES(@command)
+
+    ----Execute the BCP command
+    --Exec sys.xp_cmdshell @command, no_output
 
     Fetch Next From page_cursor
     Into
@@ -515,8 +531,12 @@ Begin
 
     Print @command
 
-    --Execute the BCP command
-    Exec sys.xp_cmdshell @command, no_output
+    INSERT Into [docs].[command]
+    (command)
+    VALUES(@command)
+
+    ----Execute the BCP command
+    --Exec sys.xp_cmdshell @command, no_output
 
     Fetch Next From page_cursor
     Into
@@ -582,8 +602,12 @@ Begin
 
     Print @command
 
-    --Execute the BCP command
-    Exec sys.xp_cmdshell @command, no_output
+    INSERT Into [docs].[command]
+    (command)
+    VALUES(@command)
+
+    ----Execute the BCP command
+    --Exec sys.xp_cmdshell @command, no_output
 
     Set @command = 'bcp "SELECT [partial_content] FROM [docs].[AntoraPage_ObjectByType] '
                    --
@@ -603,8 +627,12 @@ Begin
 
     Print @command
 
-    --Execute the BCP command
-    Exec sys.xp_cmdshell @command, no_output
+    INSERT Into [docs].[command]
+    (command)
+    VALUES(@command)
+
+    ----Execute the BCP command
+    --Exec sys.xp_cmdshell @command, no_output
 
     Set @command = 'bcp "SELECT [page_content] FROM [docs].[AntoraPage_ObjectBySchema] '
                    --
@@ -624,8 +652,12 @@ Begin
 
     Print @command
 
-    --Execute the BCP command
-    Exec sys.xp_cmdshell @command, no_output
+    INSERT Into [docs].[command]
+    (command)
+    VALUES(@command)
+
+    ----Execute the BCP command
+    --Exec sys.xp_cmdshell @command, no_output
 
     Set @command = 'bcp "SELECT [page_content] FROM [docs].[AntoraPage_ObjectByType] '
                    --
@@ -645,8 +677,12 @@ Begin
 
     Print @command
 
-    --Execute the BCP command
-    Exec sys.xp_cmdshell @command, no_output
+    INSERT Into [docs].[command]
+    (command)
+    VALUES(@command)
+
+    ----Execute the BCP command
+    --Exec sys.xp_cmdshell @command, no_output
 
     Fetch Next From page_cursor
     Into
@@ -672,6 +708,7 @@ Deallocate page_cursor
 * xref:dhw:sqldb:docs.antoranavlistrepoobject_by_schema.adoc[]
 * xref:dhw:sqldb:docs.antoranavlistrepoobject_by_schema_type.adoc[]
 * xref:dhw:sqldb:docs.antoranavlistrepoobject_by_type.adoc[]
+* xref:dhw:sqldb:docs.command.adoc[]
 * xref:dhw:sqldb:docs.culture.adoc[]
 * xref:dhw:sqldb:docs.fs_antoramodulefolder.adoc[]
 * xref:dhw:sqldb:docs.fs_cleanstringforfilename.adoc[]
@@ -917,6 +954,7 @@ EXEC [docs].[usp_AntoraExport_ObjectNavigation]
 * [docs].[AntoraNavListRepoObject_by_schema]
 * [docs].[AntoraNavListRepoObject_by_schema_type]
 * [docs].[AntoraNavListRepoObject_by_type]
+* [docs].[command]
 * [docs].[Culture]
 * [docs].[fs_AntoraModuleFolder]
 * [docs].[fs_cleanStringForFilename]
@@ -1098,6 +1136,11 @@ entity "puml-link:dhw:sqldb:docs.antoranavlistrepoobject_by_type.adoc[]" as docs
   --
 }
 
+entity "puml-link:dhw:sqldb:docs.command.adoc[]" as docs.command << U >> {
+  - **id** : (int)
+  --
+}
+
 entity "puml-link:dhw:sqldb:docs.culture.adoc[]" as docs.Culture << V >> {
   --
 }
@@ -1126,6 +1169,7 @@ docs.AntoraNavListPage_by_type <.. docs.usp_AntoraExport_ObjectNavigation
 docs.AntoraNavListRepoObject_by_schema <.. docs.usp_AntoraExport_ObjectNavigation
 docs.AntoraNavListRepoObject_by_schema_type <.. docs.usp_AntoraExport_ObjectNavigation
 docs.AntoraNavListRepoObject_by_type <.. docs.usp_AntoraExport_ObjectNavigation
+docs.command <.. docs.usp_AntoraExport_ObjectNavigation
 docs.culture <.. docs.usp_AntoraExport_ObjectNavigation
 docs.fs_AntoraModuleFolder <.. docs.usp_AntoraExport_ObjectNavigation
 docs.fs_cleanStringForFilename <.. docs.usp_AntoraExport_ObjectNavigation
@@ -1221,6 +1265,11 @@ entity "puml-link:dhw:sqldb:docs.antoranavlistrepoobject_by_schema_type.adoc[]" 
 
 entity "puml-link:dhw:sqldb:docs.antoranavlistrepoobject_by_type.adoc[]" as docs.AntoraNavListRepoObject_by_type << V >> {
   **type** : (char(2))
+  --
+}
+
+entity "puml-link:dhw:sqldb:docs.command.adoc[]" as docs.command << U >> {
+  - **id** : (int)
   --
 }
 
@@ -1795,41 +1844,42 @@ config.fs_get_parameter_value <.. docs.fs_AntoraModuleFolder
 config.ftv_dwh_database <.. repo_sys.ExtendedProperties
 config.ftv_dwh_database <.. repo_sys.sql_expression_dependencies
 config.ftv_dwh_database <.. repo_sys.SysColumn
+config.ftv_get_parameter_value <.. reference.additional_Reference_is_external
 config.ftv_get_parameter_value <.. repo.RepoObject_external_src
 config.ftv_get_parameter_value <.. repo.RepoObject_gross
-config.ftv_get_parameter_value <.. reference.additional_Reference_is_external
 config.ftv_get_parameter_value <.. ssas.additional_Reference_step1
-config.Parameter <.. config.ftv_dwh_database
-config.Parameter <.. property.PropertyName_RepoObject
-config.Parameter <.. config.ftv_get_parameter_value
 config.Parameter <.. config.fs_get_parameter_value
+config.Parameter <.. config.ftv_dwh_database
+config.Parameter <.. config.ftv_get_parameter_value
+config.Parameter <.. property.PropertyName_RepoObject
 configT.Parameter_default <.. config.Parameter
 configT.spt_values <.. configT.type
-configT.type <.. repo.RepoObject_gross_persistence
+configT.type <.. docs.AntoraNavListPage_by_type
 configT.type <.. reference.RepoObject_ReferencedReferencing
 configT.type <.. repo.RepoObject_gross
-configT.type <.. docs.AntoraNavListPage_by_type
+configT.type <.. repo.RepoObject_gross_persistence
 docs.AntoraNavListPage_by_type <.. docs.usp_AntoraExport_ObjectNavigation
 docs.AntoraNavListRepoObject_by_schema <.. docs.usp_AntoraExport_ObjectNavigation
 docs.AntoraNavListRepoObject_by_schema_type <.. docs.usp_AntoraExport_ObjectNavigation
 docs.AntoraNavListRepoObject_by_type <.. docs.usp_AntoraExport_ObjectNavigation
-docs.culture <.. docs.usp_AntoraExport_ObjectNavigation
+docs.command <.. docs.usp_AntoraExport_ObjectNavigation
 docs.Culture <.. docs.RepoObject_OutputFilter
+docs.culture <.. docs.usp_AntoraExport_ObjectNavigation
 docs.fs_AntoraModuleFolder <.. docs.usp_AntoraExport_ObjectNavigation
-docs.fs_cleanStringForFilename <.. repo.RepoObject_gross
-docs.fs_cleanStringForFilename <.. repo.RepoObject_gross_persistence
-docs.fs_cleanStringForFilename <.. docs.usp_AntoraExport_ObjectNavigation
 docs.fs_cleanStringForFilename <.. docs.AntoraNavListPage_by_type
-docs.fs_cleanStringForFilename <.. docs.AntoraNavListRepoObject_by_schema_type
 docs.fs_cleanStringForFilename <.. docs.AntoraNavListRepoObject_by_schema
+docs.fs_cleanStringForFilename <.. docs.AntoraNavListRepoObject_by_schema_type
 docs.fs_cleanStringForFilename <.. docs.AntoraNavListRepoObject_by_type
 docs.fs_cleanStringForFilename <.. docs.RepoObject_OutputFilter
+docs.fs_cleanStringForFilename <.. docs.usp_AntoraExport_ObjectNavigation
 docs.fs_cleanStringForFilename <.. reference.RepoObject_ReferencedReferencing
+docs.fs_cleanStringForFilename <.. repo.RepoObject_gross
+docs.fs_cleanStringForFilename <.. repo.RepoObject_gross_persistence
 docs.fs_cleanStringForPuml <.. docs.RepoObject_OutputFilter
 docs.RepoObject_OutputFilter <.. docs.RepoObject_OutputFilter_T
+docs.RepoObject_OutputFilter_T <.. docs.AntoraNavListPage_by_type
 docs.RepoObject_OutputFilter_T <.. docs.AntoraNavListRepoObject_by_schema
 docs.RepoObject_OutputFilter_T <.. docs.AntoraNavListRepoObject_by_schema_type
-docs.RepoObject_OutputFilter_T <.. docs.AntoraNavListPage_by_type
 docs.RepoObject_OutputFilter_T <.. docs.AntoraNavListRepoObject_by_type
 logs.ExecutionLog <.. logs.usp_ExecutionLog_insert
 logs.usp_ExecutionLog_insert <.. docs.usp_AntoraExport_ObjectNavigation
@@ -1837,15 +1887,15 @@ property.external_RepoObjectProperty <.. property.RepoObjectProperty_external_sr
 property.fs_get_RepoObjectProperty_nvarchar <.. repo.RepoObject_gross
 property.PropertyName_RepoObject <.. property.PropertyName_RepoObject_T
 property.PropertyName_RepoObject_T <.. property.RepoObjectProperty_external_tgt
+property.RepoObjectProperty <.. property.fs_get_RepoObjectProperty_nvarchar
 property.RepoObjectProperty <.. property.PropertyName_RepoObject
 property.RepoObjectProperty <.. property.RepoObjectProperty_SelectedPropertyName_split
-property.RepoObjectProperty <.. property.fs_get_RepoObjectProperty_nvarchar
 property.RepoObjectProperty_external_src <.. property.RepoObjectProperty_external_tgt
 property.RepoObjectProperty_external_tgt <.. property.RepoObjectProperty
-property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_wo_columns_from_properties_src
 property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_from_properties_src
-reference.additional_Reference <.. reference.additional_Reference_is_external
+property.RepoObjectProperty_SelectedPropertyName_split <.. reference.additional_Reference_wo_columns_from_properties_src
 reference.additional_Reference <.. reference.additional_Reference_guid
+reference.additional_Reference <.. reference.additional_Reference_is_external
 reference.additional_Reference_database <.. reference.additional_Reference_database_T
 reference.additional_Reference_database_T <.. repo.RepoObject_gross
 reference.additional_Reference_from_properties_src <.. reference.additional_Reference_from_properties_tgt
@@ -1853,9 +1903,9 @@ reference.additional_Reference_from_properties_tgt <.. reference.additional_Refe
 reference.additional_Reference_from_ssas_src <.. reference.additional_Reference_from_ssas_tgt
 reference.additional_Reference_from_ssas_tgt <.. reference.additional_Reference
 reference.additional_Reference_guid <.. reference.RepoObject_reference_additional
-reference.additional_Reference_is_external <.. reference.additional_Reference_ObjectColumn
 reference.additional_Reference_is_external <.. reference.additional_Reference_database
 reference.additional_Reference_is_external <.. reference.additional_Reference_Object
+reference.additional_Reference_is_external <.. reference.additional_Reference_ObjectColumn
 reference.additional_Reference_Object <.. reference.additional_Reference_Object_T
 reference.additional_Reference_Object_T <.. repo.RepoObject_external_src
 reference.additional_Reference_Object_T <.. repo.RepoObjectColumn_external_src
@@ -1869,29 +1919,29 @@ reference.RepoObject_reference_additional <.. reference.RepoObject_reference_uni
 reference.RepoObject_reference_persistence <.. reference.RepoObject_reference_union
 reference.RepoObject_reference_persistence_target_as_source <.. reference.RepoObject_reference
 reference.RepoObject_reference_persistence_target_as_source <.. reference.RepoObject_reference_union
-reference.RepoObject_reference_persistence_target_as_source_explicit <.. reference.RepoObject_reference_union
 reference.RepoObject_reference_persistence_target_as_source_explicit <.. reference.RepoObject_reference
+reference.RepoObject_reference_persistence_target_as_source_explicit <.. reference.RepoObject_reference_union
+reference.RepoObject_reference_SqlExpressionDependencies <.. reference.RepoObject_reference_persistence_target_as_source
 reference.RepoObject_reference_SqlExpressionDependencies <.. reference.RepoObject_reference_persistence_target_as_source_explicit
 reference.RepoObject_reference_SqlExpressionDependencies <.. reference.RepoObject_reference_union
-reference.RepoObject_reference_SqlExpressionDependencies <.. reference.RepoObject_reference_persistence_target_as_source
 reference.RepoObject_reference_T <.. reference.RepoObject_ReferencedReferencing
 reference.RepoObject_reference_union <.. reference.RepoObject_reference
 reference.RepoObject_reference_virtual <.. reference.RepoObject_reference_union
 reference.RepoObject_ReferencedReferencing <.. repo.RepoObject_gross
 reference.RepoObjectSource_virtual <.. reference.RepoObject_reference_virtual
 repo.Index_Settings <.. repo.RepoObject_gross
+repo.RepoObject <.. property.RepoObjectProperty_external_tgt
+repo.RepoObject <.. reference.additional_Reference_guid
 repo.RepoObject <.. reference.RepoObject_reference_persistence
+repo.RepoObject <.. reference.RepoObject_reference_persistence_target_as_source_explicit
+repo.RepoObject <.. reference.RepoObject_reference_SqlExpressionDependencies
+repo.RepoObject <.. reference.RepoObject_reference_virtual
+repo.RepoObject <.. repo.RepoObject_external_src
+repo.RepoObject <.. repo.RepoObject_gross
+repo.RepoObject <.. repo.RepoObject_gross_persistence
+repo.RepoObject <.. repo.RepoObjectColumn_external_src
 repo.RepoObject <.. repo.SysColumn_RepoObjectColumn_via_name
 repo.RepoObject <.. repo.SysObject_RepoObject_via_name
-repo.RepoObject <.. reference.RepoObject_reference_SqlExpressionDependencies
-repo.RepoObject <.. repo.RepoObject_gross
-repo.RepoObject <.. repo.RepoObject_external_src
-repo.RepoObject <.. reference.RepoObject_reference_virtual
-repo.RepoObject <.. reference.additional_Reference_guid
-repo.RepoObject <.. property.RepoObjectProperty_external_tgt
-repo.RepoObject <.. repo.RepoObjectColumn_external_src
-repo.RepoObject <.. reference.RepoObject_reference_persistence_target_as_source_explicit
-repo.RepoObject <.. repo.RepoObject_gross_persistence
 repo.RepoObject_external_src <.. repo.RepoObject_external_tgt
 repo.RepoObject_external_tgt <.. repo.RepoObject
 repo.RepoObject_external_tgt <.. repo.RepoObjectColumn_external_tgt
@@ -1899,11 +1949,11 @@ repo.RepoObject_gross <.. docs.RepoObject_OutputFilter
 repo.RepoObject_gross_persistence <.. reference.RepoObject_reference_persistence_target_as_source
 repo.RepoObject_persistence <.. reference.RepoObject_reference_persistence
 repo.RepoObject_persistence <.. reference.RepoObject_reference_persistence_target_as_source_explicit
-repo.RepoObject_persistence <.. repo.RepoObject_gross_persistence
 repo.RepoObject_persistence <.. repo.RepoObject_gross
+repo.RepoObject_persistence <.. repo.RepoObject_gross_persistence
 repo.RepoObject_SSAS_src <.. repo.RepoObject_SSAS_tgt
-repo.RepoObject_SSAS_tgt <.. repo.RepoObjectColumn_SSAS_tgt
 repo.RepoObject_SSAS_tgt <.. repo.RepoObject
+repo.RepoObject_SSAS_tgt <.. repo.RepoObjectColumn_SSAS_tgt
 repo.RepoObjectColumn <.. reference.additional_Reference_guid
 repo.RepoObjectColumn <.. repo.SysColumn_RepoObjectColumn_via_name
 repo.RepoObjectColumn_external_src <.. repo.RepoObjectColumn_external_tgt
@@ -1915,8 +1965,8 @@ repo.RepoSchema_ssas_src <.. repo.RepoSchema_ssas_tgt
 repo.RepoSchema_ssas_tgt <.. repo.RepoSchema
 repo.SysColumn_RepoObjectColumn_via_name <.. repo_sys.sql_expression_dependencies
 repo.SysObject_RepoObject_via_name <.. repo_sys.sql_expression_dependencies
-repo_sys.ExtendedProperties <.. repo_sys.SysObject
 repo_sys.ExtendedProperties <.. repo_sys.SysColumn
+repo_sys.ExtendedProperties <.. repo_sys.SysObject
 repo_sys.sql_expression_dependencies <.. reference.RepoObject_reference_SqlExpressionDependencies
 repo_sys.SysColumn <.. repo.SysColumn_RepoObjectColumn_via_name
 repo_sys.SysObject <.. repo.SysObject_RepoObject_via_name
@@ -1925,18 +1975,18 @@ ssas.additional_Reference_step1 <.. reference.additional_Reference_from_ssas_src
 ssas.model_json <.. ssas.model_json_10
 ssas.model_json_10 <.. ssas.model_json_20
 ssas.model_json_20 <.. repo.RepoSchema_ssas_src
-ssas.model_json_20 <.. ssas.model_json_33_dataSources
-ssas.model_json_20 <.. ssas.model_json_31_tables
 ssas.model_json_20 <.. ssas.model_json_201_descriptions_multiline
+ssas.model_json_20 <.. ssas.model_json_31_tables
+ssas.model_json_20 <.. ssas.model_json_33_dataSources
 ssas.model_json_20 <.. ssas.model_json_34_cultures
 ssas.model_json_201_descriptions_multiline <.. ssas.model_json_2011_descriptions_StrAgg
 ssas.model_json_2011_descriptions_StrAgg <.. repo.RepoSchema_ssas_src
 ssas.model_json_31_tables <.. ssas.model_json_31_tables_T
 ssas.model_json_31_tables_T <.. repo.RepoObject_gross
-ssas.model_json_31_tables_T <.. ssas.model_json_316_tables_descriptions_multiline
-ssas.model_json_31_tables_T <.. ssas.model_json_313_tables_partitions
 ssas.model_json_31_tables_T <.. repo.RepoObject_SSAS_src
 ssas.model_json_31_tables_T <.. ssas.model_json_311_tables_columns
+ssas.model_json_31_tables_T <.. ssas.model_json_313_tables_partitions
+ssas.model_json_31_tables_T <.. ssas.model_json_316_tables_descriptions_multiline
 ssas.model_json_311_tables_columns <.. ssas.model_json_311_tables_columns_T
 ssas.model_json_311_tables_columns_T <.. repo.RepoObjectColumn_SSAS_src
 ssas.model_json_311_tables_columns_T <.. ssas.additional_Reference_step1
@@ -1953,9 +2003,9 @@ ssas.model_json_33_dataSources_T <.. ssas.additional_Reference_step1
 ssas.model_json_34_cultures <.. ssas.model_json_341_cultures_translations
 ssas.model_json_341_cultures_translations <.. ssas.model_json_3411_cultures_translations_model
 ssas.model_json_3411_cultures_translations_model <.. ssas.model_json_3411_cultures_translations_model_T
-ssas.model_json_3411_cultures_translations_model_T <.. ssas.model_json_34111_cultures_translations_model_tables
 ssas.model_json_3411_cultures_translations_model_T <.. docs.Culture
 ssas.model_json_3411_cultures_translations_model_T <.. docs.RepoObject_OutputFilter
+ssas.model_json_3411_cultures_translations_model_T <.. ssas.model_json_34111_cultures_translations_model_tables
 ssas.model_json_34111_cultures_translations_model_tables <.. docs.RepoObject_OutputFilter
 sys_dwh.columns <.. repo_sys.ExtendedProperties
 sys_dwh.columns <.. repo_sys.SysColumn
@@ -2097,6 +2147,12 @@ entity "puml-link:dhw:sqldb:docs.antoranavlistrepoobject_by_type.adoc[]" as docs
   --
 }
 
+entity "puml-link:dhw:sqldb:docs.command.adoc[]" as docs.command << U >> {
+  - **id** : (int)
+  - command : (nvarchar(4000))
+  --
+}
+
 entity "puml-link:dhw:sqldb:docs.culture.adoc[]" as docs.Culture << V >> {
   - cultures_name : (nvarchar(10))
   --
@@ -2126,6 +2182,7 @@ docs.AntoraNavListPage_by_type <.. docs.usp_AntoraExport_ObjectNavigation
 docs.AntoraNavListRepoObject_by_schema <.. docs.usp_AntoraExport_ObjectNavigation
 docs.AntoraNavListRepoObject_by_schema_type <.. docs.usp_AntoraExport_ObjectNavigation
 docs.AntoraNavListRepoObject_by_type <.. docs.usp_AntoraExport_ObjectNavigation
+docs.command <.. docs.usp_AntoraExport_ObjectNavigation
 docs.culture <.. docs.usp_AntoraExport_ObjectNavigation
 docs.fs_AntoraModuleFolder <.. docs.usp_AntoraExport_ObjectNavigation
 docs.fs_cleanStringForFilename <.. docs.usp_AntoraExport_ObjectNavigation
@@ -2291,8 +2348,12 @@ Begin
 
     Print @command
 
-    --Execute the BCP command
-    Exec sys.xp_cmdshell @command, no_output
+    INSERT Into [docs].[command]
+    (command)
+    VALUES(@command)
+
+    ----Execute the BCP command
+    --Exec sys.xp_cmdshell @command, no_output
 
     Fetch Next From page_cursor
     Into
@@ -2369,8 +2430,12 @@ Begin
 
     Print @command
 
-    --Execute the BCP command
-    Exec sys.xp_cmdshell @command, no_output
+    INSERT Into [docs].[command]
+    (command)
+    VALUES(@command)
+
+    ----Execute the BCP command
+    --Exec sys.xp_cmdshell @command, no_output
 
     Fetch Next From page_cursor
     Into
@@ -2452,8 +2517,12 @@ Begin
 
     Print @command
 
-    --Execute the BCP command
-    Exec sys.xp_cmdshell @command, no_output
+    INSERT Into [docs].[command]
+    (command)
+    VALUES(@command)
+
+    ----Execute the BCP command
+    --Exec sys.xp_cmdshell @command, no_output
 
     Fetch Next From page_cursor
     Into
@@ -2532,8 +2601,12 @@ Begin
 
     Print @command
 
-    --Execute the BCP command
-    Exec sys.xp_cmdshell @command, no_output
+    INSERT Into [docs].[command]
+    (command)
+    VALUES(@command)
+
+    ----Execute the BCP command
+    --Exec sys.xp_cmdshell @command, no_output
 
     Fetch Next From page_cursor
     Into
@@ -2609,8 +2682,12 @@ Begin
 
     Print @command
 
-    --Execute the BCP command
-    Exec sys.xp_cmdshell @command, no_output
+    INSERT Into [docs].[command]
+    (command)
+    VALUES(@command)
+
+    ----Execute the BCP command
+    --Exec sys.xp_cmdshell @command, no_output
 
     Fetch Next From page_cursor
     Into
@@ -2686,8 +2763,12 @@ Begin
 
     Print @command
 
-    --Execute the BCP command
-    Exec sys.xp_cmdshell @command, no_output
+    INSERT Into [docs].[command]
+    (command)
+    VALUES(@command)
+
+    ----Execute the BCP command
+    --Exec sys.xp_cmdshell @command, no_output
 
     Set @command = 'bcp "SELECT [partial_content] FROM [docs].[AntoraPage_ObjectByType] '
                    --
@@ -2707,8 +2788,12 @@ Begin
 
     Print @command
 
-    --Execute the BCP command
-    Exec sys.xp_cmdshell @command, no_output
+    INSERT Into [docs].[command]
+    (command)
+    VALUES(@command)
+
+    ----Execute the BCP command
+    --Exec sys.xp_cmdshell @command, no_output
 
     Set @command = 'bcp "SELECT [page_content] FROM [docs].[AntoraPage_ObjectBySchema] '
                    --
@@ -2728,8 +2813,12 @@ Begin
 
     Print @command
 
-    --Execute the BCP command
-    Exec sys.xp_cmdshell @command, no_output
+    INSERT Into [docs].[command]
+    (command)
+    VALUES(@command)
+
+    ----Execute the BCP command
+    --Exec sys.xp_cmdshell @command, no_output
 
     Set @command = 'bcp "SELECT [page_content] FROM [docs].[AntoraPage_ObjectByType] '
                    --
@@ -2749,8 +2838,12 @@ Begin
 
     Print @command
 
-    --Execute the BCP command
-    Exec sys.xp_cmdshell @command, no_output
+    INSERT Into [docs].[command]
+    (command)
+    VALUES(@command)
+
+    ----Execute the BCP command
+    --Exec sys.xp_cmdshell @command, no_output
 
     Fetch Next From page_cursor
     Into

@@ -50,7 +50,7 @@ user table
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2021-11-06 12:38:30
+2022-09-05 18:18:08
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -1377,14 +1377,14 @@ entity "puml-link:dhw:sqldb:ssis_t.usp_getpackagedetails.adoc[]" as ssis_t.usp_G
   --
 }
 
-ssis_t.TblTask_Dft_Component <.. ssis_t.usp_GetPackageDetails
-ssis_t.TblTask_Dft_Component <.. ssis_t.TblTask_Dft_Component_outputs_outputColumn_src
-ssis_t.TblTask_Dft_Component <.. ssis_t.TblTask_Dft_Component_outputs_externalMetadataColumn_src
-ssis_t.TblTask_Dft_Component <.. ssis_t.TblTask_Dft_Component_inputs_inputColumn_src
-ssis_t.TblTask_Dft_Component <.. ssis_t.TblTask_Dft_Component_inputs_externalMetadataColumn_src
 ssis_t.TblTask_Dft_Component <.. ssis.PackageTask_Dft_Component_src
-ssis_t.TblTask_Dft_Component <.. ssis_t.TblTask_Dft_Component_outputs_src
+ssis_t.TblTask_Dft_Component <.. ssis_t.TblTask_Dft_Component_inputs_externalMetadataColumn_src
+ssis_t.TblTask_Dft_Component <.. ssis_t.TblTask_Dft_Component_inputs_inputColumn_src
 ssis_t.TblTask_Dft_Component <.. ssis_t.TblTask_Dft_Component_inputs_src
+ssis_t.TblTask_Dft_Component <.. ssis_t.TblTask_Dft_Component_outputs_externalMetadataColumn_src
+ssis_t.TblTask_Dft_Component <.. ssis_t.TblTask_Dft_Component_outputs_outputColumn_src
+ssis_t.TblTask_Dft_Component <.. ssis_t.TblTask_Dft_Component_outputs_src
+ssis_t.TblTask_Dft_Component <.. ssis_t.usp_GetPackageDetails
 
 footer The diagram is interactive and contains links.
 
@@ -1724,29 +1724,29 @@ entity "puml-link:dhw:sqldb:ssis_t.usp_getpackagedetails.adoc[]" as ssis_t.usp_G
   --
 }
 
-docs.ssis_Adoc <.. docs.usp_PERSIST_ssis_Adoc_T
 docs.ssis_Adoc <.. docs.ssis_Adoc_T
-docs.ssis_Adoc_T <.. docs.usp_PERSIST_ssis_Adoc_T
+docs.ssis_Adoc <.. docs.usp_PERSIST_ssis_Adoc_T
 docs.ssis_Adoc_T <.. docs.usp_AntoraExport_SsisPartialsContent
+docs.ssis_Adoc_T <.. docs.usp_PERSIST_ssis_Adoc_T
 docs.ssis_DftTaskComponentInputColumnList <.. docs.ssis_DftTaskComponentInputList
 docs.ssis_DftTaskComponentInputList <.. docs.ssis_DftTaskComponentList
 docs.ssis_DftTaskComponentList <.. docs.ssis_Task
 docs.ssis_DftTaskComponentList <.. docs.ssis_TaskList
 docs.ssis_DftTaskComponentOutputColumnList <.. docs.ssis_DftTaskComponentOutputList
 docs.ssis_DftTaskComponentOutputList <.. docs.ssis_DftTaskComponentList
-docs.ssis_PumlDftTask <.. docs.ssis_TaskList
 docs.ssis_PumlDftTask <.. docs.ssis_Task
-docs.ssis_PumlPartialDftComponent <.. docs.ssis_PumlDftTask
+docs.ssis_PumlDftTask <.. docs.ssis_TaskList
 docs.ssis_PumlPartialDftComponent <.. docs.ssis_DftTaskComponentList
+docs.ssis_PumlPartialDftComponent <.. docs.ssis_PumlDftTask
 docs.ssis_TaskList <.. docs.ssis_Adoc
 docs.usp_AntoraExport_SsisPartialsContent <.. docs.usp_AntoraExport
 docs.usp_PERSIST_ssis_Adoc_T <.. docs.usp_AntoraExport_SsisPartialsContent
-ssis.PackageTask_Dft_Component <.. docs.ssis_PumlDftTask
 ssis.PackageTask_Dft_Component <.. docs.ssis_DftTaskComponentList
+ssis.PackageTask_Dft_Component <.. docs.ssis_PumlDftTask
 ssis.PackageTask_Dft_Component <.. docs.ssis_PumlPartialDftComponent
 ssis.PackageTask_Dft_Component_input <.. docs.ssis_DftTaskComponentInputList
-ssis.PackageTask_Dft_Component_input_externalMetadataColumn <.. docs.ssis_DftTaskComponentOutputColumnList
 ssis.PackageTask_Dft_Component_input_externalMetadataColumn <.. docs.ssis_DftTaskComponentInputColumnList
+ssis.PackageTask_Dft_Component_input_externalMetadataColumn <.. docs.ssis_DftTaskComponentOutputColumnList
 ssis.PackageTask_Dft_Component_input_externalMetadataColumn_src <.. ssis.PackageTask_Dft_Component_input_externalMetadataColumn_tgt
 ssis.PackageTask_Dft_Component_input_externalMetadataColumn_src <.. ssis.usp_PERSIST_PackageTask_Dft_Component_input_externalMetadataColumn_tgt
 ssis.PackageTask_Dft_Component_input_externalMetadataColumn_tgt <.. ssis.PackageTask_Dft_Component_input_externalMetadataColumn
@@ -1754,8 +1754,8 @@ ssis.PackageTask_Dft_Component_input_externalMetadataColumn_tgt <.. ssis.usp_PER
 ssis.PackageTask_Dft_Component_input_inputColumn <.. docs.ssis_DftTaskComponentInputColumnList
 ssis.PackageTask_Dft_Component_input_inputColumn_src <.. ssis.PackageTask_Dft_Component_input_inputColumn_tgt
 ssis.PackageTask_Dft_Component_input_inputColumn_src <.. ssis.usp_PERSIST_PackageTask_Dft_Component_input_inputColumn_tgt
-ssis.PackageTask_Dft_Component_input_inputColumn_tgt <.. ssis.usp_PERSIST_PackageTask_Dft_Component_input_inputColumn_tgt
 ssis.PackageTask_Dft_Component_input_inputColumn_tgt <.. ssis.PackageTask_Dft_Component_input_inputColumn
+ssis.PackageTask_Dft_Component_input_inputColumn_tgt <.. ssis.usp_PERSIST_PackageTask_Dft_Component_input_inputColumn_tgt
 ssis.PackageTask_Dft_Component_input_src <.. ssis.PackageTask_Dft_Component_input_tgt
 ssis.PackageTask_Dft_Component_input_src <.. ssis.usp_PERSIST_PackageTask_Dft_Component_input_tgt
 ssis.PackageTask_Dft_Component_input_tgt <.. ssis.PackageTask_Dft_Component_input
@@ -1774,10 +1774,10 @@ ssis.PackageTask_Dft_Component_output_src <.. ssis.PackageTask_Dft_Component_out
 ssis.PackageTask_Dft_Component_output_src <.. ssis.usp_PERSIST_PackageTask_Dft_Component_output_tgt
 ssis.PackageTask_Dft_Component_output_tgt <.. ssis.PackageTask_Dft_Component_output
 ssis.PackageTask_Dft_Component_output_tgt <.. ssis.usp_PERSIST_PackageTask_Dft_Component_output_tgt
-ssis.PackageTask_Dft_Component_src <.. ssis.usp_PERSIST_PackageTask_Dft_Component_tgt
 ssis.PackageTask_Dft_Component_src <.. ssis.PackageTask_Dft_Component_tgt
-ssis.PackageTask_Dft_Component_tgt <.. ssis.usp_PERSIST_PackageTask_Dft_Component_tgt
+ssis.PackageTask_Dft_Component_src <.. ssis.usp_PERSIST_PackageTask_Dft_Component_tgt
 ssis.PackageTask_Dft_Component_tgt <.. ssis.PackageTask_Dft_Component
+ssis.PackageTask_Dft_Component_tgt <.. ssis.usp_PERSIST_PackageTask_Dft_Component_tgt
 ssis.usp_PERSIST_PackageTask_Dft_Component_input_externalMetadataColumn_tgt <.. ssis.usp_import
 ssis.usp_PERSIST_PackageTask_Dft_Component_input_inputColumn_tgt <.. ssis.usp_import
 ssis.usp_PERSIST_PackageTask_Dft_Component_input_tgt <.. ssis.usp_import
@@ -1785,14 +1785,14 @@ ssis.usp_PERSIST_PackageTask_Dft_Component_output_externalMetadataColumn_tgt <..
 ssis.usp_PERSIST_PackageTask_Dft_Component_output_outputColumn_tgt <.. ssis.usp_import
 ssis.usp_PERSIST_PackageTask_Dft_Component_output_tgt <.. ssis.usp_import
 ssis.usp_PERSIST_PackageTask_Dft_Component_tgt <.. ssis.usp_import
-ssis_t.TblTask_Dft_Component <.. ssis_t.usp_GetPackageDetails
-ssis_t.TblTask_Dft_Component <.. ssis_t.TblTask_Dft_Component_outputs_outputColumn_src
-ssis_t.TblTask_Dft_Component <.. ssis_t.TblTask_Dft_Component_outputs_externalMetadataColumn_src
-ssis_t.TblTask_Dft_Component <.. ssis_t.TblTask_Dft_Component_inputs_inputColumn_src
-ssis_t.TblTask_Dft_Component <.. ssis_t.TblTask_Dft_Component_inputs_externalMetadataColumn_src
 ssis_t.TblTask_Dft_Component <.. ssis.PackageTask_Dft_Component_src
-ssis_t.TblTask_Dft_Component <.. ssis_t.TblTask_Dft_Component_outputs_src
+ssis_t.TblTask_Dft_Component <.. ssis_t.TblTask_Dft_Component_inputs_externalMetadataColumn_src
+ssis_t.TblTask_Dft_Component <.. ssis_t.TblTask_Dft_Component_inputs_inputColumn_src
 ssis_t.TblTask_Dft_Component <.. ssis_t.TblTask_Dft_Component_inputs_src
+ssis_t.TblTask_Dft_Component <.. ssis_t.TblTask_Dft_Component_outputs_externalMetadataColumn_src
+ssis_t.TblTask_Dft_Component <.. ssis_t.TblTask_Dft_Component_outputs_outputColumn_src
+ssis_t.TblTask_Dft_Component <.. ssis_t.TblTask_Dft_Component_outputs_src
+ssis_t.TblTask_Dft_Component <.. ssis_t.usp_GetPackageDetails
 ssis_t.TblTask_Dft_Component_inputs_externalMetadataColumn_src <.. ssis.PackageTask_Dft_Component_input_externalMetadataColumn_src
 ssis_t.TblTask_Dft_Component_inputs_inputColumn_src <.. ssis.PackageTask_Dft_Component_input_inputColumn_src
 ssis_t.TblTask_Dft_Component_inputs_src <.. ssis.PackageTask_Dft_Component_input_src
@@ -2022,14 +2022,14 @@ entity "puml-link:dhw:sqldb:ssis_t.usp_getpackagedetails.adoc[]" as ssis_t.usp_G
   --
 }
 
-ssis_t.TblTask_Dft_Component <.. ssis_t.usp_GetPackageDetails
-ssis_t.TblTask_Dft_Component <.. ssis_t.TblTask_Dft_Component_outputs_outputColumn_src
-ssis_t.TblTask_Dft_Component <.. ssis_t.TblTask_Dft_Component_outputs_externalMetadataColumn_src
-ssis_t.TblTask_Dft_Component <.. ssis_t.TblTask_Dft_Component_inputs_inputColumn_src
-ssis_t.TblTask_Dft_Component <.. ssis_t.TblTask_Dft_Component_inputs_externalMetadataColumn_src
 ssis_t.TblTask_Dft_Component <.. ssis.PackageTask_Dft_Component_src
-ssis_t.TblTask_Dft_Component <.. ssis_t.TblTask_Dft_Component_outputs_src
+ssis_t.TblTask_Dft_Component <.. ssis_t.TblTask_Dft_Component_inputs_externalMetadataColumn_src
+ssis_t.TblTask_Dft_Component <.. ssis_t.TblTask_Dft_Component_inputs_inputColumn_src
 ssis_t.TblTask_Dft_Component <.. ssis_t.TblTask_Dft_Component_inputs_src
+ssis_t.TblTask_Dft_Component <.. ssis_t.TblTask_Dft_Component_outputs_externalMetadataColumn_src
+ssis_t.TblTask_Dft_Component <.. ssis_t.TblTask_Dft_Component_outputs_outputColumn_src
+ssis_t.TblTask_Dft_Component <.. ssis_t.TblTask_Dft_Component_outputs_src
+ssis_t.TblTask_Dft_Component <.. ssis_t.usp_GetPackageDetails
 "ssis_t.TblTask_Dft_Component::AccessMode" <-- "ssis.PackageTask_Dft_Component_src::Component_AccessMode"
 "ssis_t.TblTask_Dft_Component::AlwaysUseDefaultCodePage" <-- "ssis.PackageTask_Dft_Component_src::Component_AlwaysUseDefaultCodePage"
 "ssis_t.TblTask_Dft_Component::CommandTimeout" <-- "ssis.PackageTask_Dft_Component_src::Component_CommandTimeout"
@@ -2041,19 +2041,19 @@ ssis_t.TblTask_Dft_Component <.. ssis_t.TblTask_Dft_Component_inputs_src
 "ssis_t.TblTask_Dft_Component::connectionManagerRefId" <-- "ssis.PackageTask_Dft_Component_src::Component_connectionManagerRefId"
 "ssis_t.TblTask_Dft_Component::ContactInfo" <-- "ssis.PackageTask_Dft_Component_src::Component_ContactInfo"
 "ssis_t.TblTask_Dft_Component::ControlFlowDetailsRowID" <-- "ssis_t.TblTask_Dft_Component_inputs_externalMetadataColumn_src::ControlFlowDetailsRowID"
-"ssis_t.TblTask_Dft_Component::ControlFlowDetailsRowID" <-- "ssis_t.TblTask_Dft_Component_outputs_outputColumn_src::ControlFlowDetailsRowID"
-"ssis_t.TblTask_Dft_Component::ControlFlowDetailsRowID" <-- "ssis_t.TblTask_Dft_Component_outputs_externalMetadataColumn_src::ControlFlowDetailsRowID"
 "ssis_t.TblTask_Dft_Component::ControlFlowDetailsRowID" <-- "ssis_t.TblTask_Dft_Component_inputs_inputColumn_src::ControlFlowDetailsRowID"
 "ssis_t.TblTask_Dft_Component::ControlFlowDetailsRowID" <-- "ssis_t.TblTask_Dft_Component_inputs_src::ControlFlowDetailsRowID"
+"ssis_t.TblTask_Dft_Component::ControlFlowDetailsRowID" <-- "ssis_t.TblTask_Dft_Component_outputs_externalMetadataColumn_src::ControlFlowDetailsRowID"
+"ssis_t.TblTask_Dft_Component::ControlFlowDetailsRowID" <-- "ssis_t.TblTask_Dft_Component_outputs_outputColumn_src::ControlFlowDetailsRowID"
 "ssis_t.TblTask_Dft_Component::ControlFlowDetailsRowID" <-- "ssis_t.TblTask_Dft_Component_outputs_src::ControlFlowDetailsRowID"
 "ssis_t.TblTask_Dft_Component::DefaultCodePage" <-- "ssis.PackageTask_Dft_Component_src::Component_DefaultCodePage"
 "ssis_t.TblTask_Dft_Component::description" <-- "ssis.PackageTask_Dft_Component_src::Component_description"
-"ssis_t.TblTask_Dft_Component::DftComponentId" <-- "ssis_t.TblTask_Dft_Component_inputs_inputColumn_src::DftComponentId"
 "ssis_t.TblTask_Dft_Component::DftComponentId" <-- "ssis_t.TblTask_Dft_Component_inputs_externalMetadataColumn_src::DftComponentId"
+"ssis_t.TblTask_Dft_Component::DftComponentId" <-- "ssis_t.TblTask_Dft_Component_inputs_inputColumn_src::DftComponentId"
+"ssis_t.TblTask_Dft_Component::DftComponentId" <-- "ssis_t.TblTask_Dft_Component_inputs_src::DftComponentId"
 "ssis_t.TblTask_Dft_Component::DftComponentId" <-- "ssis_t.TblTask_Dft_Component_outputs_externalMetadataColumn_src::DftComponentId"
 "ssis_t.TblTask_Dft_Component::DftComponentId" <-- "ssis_t.TblTask_Dft_Component_outputs_outputColumn_src::DftComponentId"
 "ssis_t.TblTask_Dft_Component::DftComponentId" <-- "ssis_t.TblTask_Dft_Component_outputs_src::DftComponentId"
-"ssis_t.TblTask_Dft_Component::DftComponentId" <-- "ssis_t.TblTask_Dft_Component_inputs_src::DftComponentId"
 "ssis_t.TblTask_Dft_Component::FastLoadKeepIdentity" <-- "ssis.PackageTask_Dft_Component_src::Component_FastLoadKeepIdentity"
 "ssis_t.TblTask_Dft_Component::FastLoadKeepNulls" <-- "ssis.PackageTask_Dft_Component_src::Component_FastLoadKeepNulls"
 "ssis_t.TblTask_Dft_Component::FastLoadMaxInsertCommitSize" <-- "ssis.PackageTask_Dft_Component_src::Component_FastLoadMaxInsertCommitSize"
@@ -2066,16 +2066,16 @@ ssis_t.TblTask_Dft_Component <.. ssis_t.TblTask_Dft_Component_inputs_src
 "ssis_t.TblTask_Dft_Component::refId" <-- "ssis.PackageTask_Dft_Component_src::Component_refId"
 "ssis_t.TblTask_Dft_Component::refId" <-- "ssis_t.TblTask_Dft_Component_inputs_externalMetadataColumn_src::refId"
 "ssis_t.TblTask_Dft_Component::refId" <-- "ssis_t.TblTask_Dft_Component_inputs_inputColumn_src::refId"
-"ssis_t.TblTask_Dft_Component::refId" <-- "ssis_t.TblTask_Dft_Component_outputs_outputColumn_src::refId"
-"ssis_t.TblTask_Dft_Component::refId" <-- "ssis_t.TblTask_Dft_Component_outputs_externalMetadataColumn_src::refId"
 "ssis_t.TblTask_Dft_Component::refId" <-- "ssis_t.TblTask_Dft_Component_inputs_src::refId"
+"ssis_t.TblTask_Dft_Component::refId" <-- "ssis_t.TblTask_Dft_Component_outputs_externalMetadataColumn_src::refId"
+"ssis_t.TblTask_Dft_Component::refId" <-- "ssis_t.TblTask_Dft_Component_outputs_outputColumn_src::refId"
 "ssis_t.TblTask_Dft_Component::refId" <-- "ssis_t.TblTask_Dft_Component_outputs_src::refId"
-"ssis_t.TblTask_Dft_Component::RowID" <-- "ssis_t.TblTask_Dft_Component_outputs_src::RowID"
-"ssis_t.TblTask_Dft_Component::RowID" <-- "ssis_t.TblTask_Dft_Component_inputs_src::RowID"
+"ssis_t.TblTask_Dft_Component::RowID" <-- "ssis_t.TblTask_Dft_Component_inputs_externalMetadataColumn_src::RowID"
 "ssis_t.TblTask_Dft_Component::RowID" <-- "ssis_t.TblTask_Dft_Component_inputs_inputColumn_src::RowID"
+"ssis_t.TblTask_Dft_Component::RowID" <-- "ssis_t.TblTask_Dft_Component_inputs_src::RowID"
 "ssis_t.TblTask_Dft_Component::RowID" <-- "ssis_t.TblTask_Dft_Component_outputs_externalMetadataColumn_src::RowID"
 "ssis_t.TblTask_Dft_Component::RowID" <-- "ssis_t.TblTask_Dft_Component_outputs_outputColumn_src::RowID"
-"ssis_t.TblTask_Dft_Component::RowID" <-- "ssis_t.TblTask_Dft_Component_inputs_externalMetadataColumn_src::RowID"
+"ssis_t.TblTask_Dft_Component::RowID" <-- "ssis_t.TblTask_Dft_Component_outputs_src::RowID"
 "ssis_t.TblTask_Dft_Component::SqlCommand" <-- "ssis.PackageTask_Dft_Component_src::Component_SqlCommand"
 "ssis_t.TblTask_Dft_Component::SqlCommandVariable" <-- "ssis.PackageTask_Dft_Component_src::Component_SqlCommandVariable"
 "ssis_t.TblTask_Dft_Component::VariableName" <-- "ssis.PackageTask_Dft_Component_src::Component_VariableName"

@@ -906,8 +906,8 @@ uspgenerator.ftv_GeneratorUspStep_sql <.. uspgenerator.GeneratorUspStep_Sql
 uspgenerator.ftv_GeneratorUspStep_tree <.. uspgenerator.GeneratorUspStep_Sql
 uspgenerator.GeneratorUsp <.. uspgenerator.GeneratorUspStep_Sql
 uspgenerator.GeneratorUspStep <.. uspgenerator.ftv_GeneratorUspStep_sql
-uspgenerator.GeneratorUspStep <.. uspgenerator.GeneratorUspStep_Sql
 uspgenerator.GeneratorUspStep <.. uspgenerator.ftv_GeneratorUspStep_tree
+uspgenerator.GeneratorUspStep <.. uspgenerator.GeneratorUspStep_Sql
 
 footer The diagram is interactive and contains links.
 
@@ -971,6 +971,10 @@ entity "puml-link:dhw:sqldb:uspgenerator.generatorusp_sqlusp.adoc[]" as uspgener
   --
 }
 
+entity "puml-link:dhw:sqldb:uspgenerator.generatorusp_sqlusp_wo_go.adoc[]" as uspgenerator.GeneratorUsp_SqlUsp_wo_GO << V >> {
+  --
+}
+
 entity "puml-link:dhw:sqldb:uspgenerator.generatorusp_steplist.adoc[]" as uspgenerator.GeneratorUsp_StepList << V >> {
   --
 }
@@ -987,6 +991,7 @@ property.usp_RepoObjectProperty_collect <.. property.usp_RepoObject_Inheritance
 property.usp_RepoObjectProperty_collect <.. repo.usp_main
 uspgenerator.GeneratorUsp_SqlUsp <.. property.RepoObjectProperty_Collect_source_uspgenerator
 uspgenerator.GeneratorUsp_StepList <.. uspgenerator.GeneratorUsp_SqlUsp
+uspgenerator.GeneratorUsp_StepList <.. uspgenerator.GeneratorUsp_SqlUsp_wo_GO
 uspgenerator.GeneratorUspStep_Sql <.. uspgenerator.GeneratorUsp_StepList
 
 footer The diagram is interactive and contains links.

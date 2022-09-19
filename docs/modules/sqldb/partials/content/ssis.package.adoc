@@ -52,7 +52,7 @@ user table
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2022-01-23 14:10:32
+2022-09-05 18:18:08
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -1051,9 +1051,9 @@ entity "puml-link:dhw:sqldb:ssis.package_tgt.adoc[]" as ssis.Package_tgt << V >>
 }
 
 ssis.Package <.. docs.ssis_Adoc
-ssis.Package <.. docs.usp_AntoraExport_SsisPage
 ssis.Package <.. docs.ssis_GeneralList
 ssis.Package <.. docs.ssis_navlist_package
+ssis.Package <.. docs.usp_AntoraExport_SsisPage
 ssis.Package_tgt <.. ssis.Package
 
 footer The diagram is interactive and contains links.
@@ -1129,8 +1129,8 @@ entity "puml-link:dhw:sqldb:ssis_t.pkgstats.adoc[]" as ssis_t.pkgStats << U >> {
 }
 
 ssis.AntoraModule_tgt_filter <.. ssis.Package_tgt
-ssis.Package_src <.. ssis.Package_tgt
 ssis.Package_src <.. ssis.AntoraModule_tgt_filter
+ssis.Package_src <.. ssis.Package_tgt
 ssis.Package_tgt <.. ssis.Package
 ssis.Project <.. ssis.Package_src
 ssis_t.pkgStats <.. ssis.Package_src
@@ -1223,18 +1223,18 @@ entity "puml-link:dhw:sqldb:ssis.package.adoc[]" as ssis.Package << U >> {
 
 docs.ssis_Adoc <.. docs.ssis_Adoc_T
 docs.ssis_Adoc <.. docs.usp_PERSIST_ssis_Adoc_T
-docs.ssis_Adoc_T <.. docs.usp_PERSIST_ssis_Adoc_T
 docs.ssis_Adoc_T <.. docs.usp_AntoraExport_SsisPartialsContent
+docs.ssis_Adoc_T <.. docs.usp_PERSIST_ssis_Adoc_T
 docs.ssis_GeneralList <.. docs.ssis_Adoc
 docs.ssis_navlist_package <.. docs.usp_AntoraExport_SsisNavigation
 docs.usp_AntoraExport_SsisNavigation <.. docs.usp_AntoraExport
 docs.usp_AntoraExport_SsisPage <.. docs.usp_AntoraExport
 docs.usp_AntoraExport_SsisPartialsContent <.. docs.usp_AntoraExport
 docs.usp_PERSIST_ssis_Adoc_T <.. docs.usp_AntoraExport_SsisPartialsContent
-ssis.Package <.. docs.ssis_navlist_package
-ssis.Package <.. docs.ssis_GeneralList
-ssis.Package <.. docs.usp_AntoraExport_SsisPage
 ssis.Package <.. docs.ssis_Adoc
+ssis.Package <.. docs.ssis_GeneralList
+ssis.Package <.. docs.ssis_navlist_package
+ssis.Package <.. docs.usp_AntoraExport_SsisPage
 
 footer The diagram is interactive and contains links.
 
@@ -1342,14 +1342,14 @@ entity "puml-link:dhw:sqldb:ssis.package_tgt.adoc[]" as ssis.Package_tgt << V >>
 }
 
 ssis.Package <.. docs.ssis_Adoc
-ssis.Package <.. docs.usp_AntoraExport_SsisPage
 ssis.Package <.. docs.ssis_GeneralList
 ssis.Package <.. docs.ssis_navlist_package
+ssis.Package <.. docs.usp_AntoraExport_SsisPage
 ssis.Package_tgt <.. ssis.Package
-"ssis.Package::AntoraModule" <-- "ssis.Package_tgt::AntoraModule"
 "ssis.Package::AntoraModule" <-- "docs.ssis_Adoc::AntoraModule"
 "ssis.Package::AntoraModule" <-- "docs.ssis_GeneralList::AntoraModule"
 "ssis.Package::AntoraModule" <-- "docs.ssis_navlist_package::AntoraModule"
+"ssis.Package::AntoraModule" <-- "ssis.Package_tgt::AntoraModule"
 "ssis.Package::PackageBasename" <-- "docs.ssis_Adoc::PackageBasename"
 "ssis.Package::PackageCreationDate" <-- "ssis.Package_tgt::PackageCreationDate"
 "ssis.Package::PackageCreatorComputerName" <-- "ssis.Package_tgt::PackageCreatorComputerName"
@@ -1358,9 +1358,9 @@ ssis.Package_tgt <.. ssis.Package
 "ssis.Package::PackageDTSID" <-- "ssis.Package_tgt::PackageDTSID"
 "ssis.Package::PackageLastModifiedProductVersion" <-- "ssis.Package_tgt::PackageLastModifiedProductVersion"
 "ssis.Package::PackageLocaleID" <-- "ssis.Package_tgt::PackageLocaleID"
-"ssis.Package::PackageName" <-- "ssis.Package_tgt::PackageName"
-"ssis.Package::PackageName" <-- "ssis.Package::PackageBasename"
 "ssis.Package::PackageName" <-- "docs.ssis_GeneralList::PackageName"
+"ssis.Package::PackageName" <-- "ssis.Package::PackageBasename"
+"ssis.Package::PackageName" <-- "ssis.Package_tgt::PackageName"
 "ssis.Package::PackageObjectName" <-- "ssis.Package_tgt::PackageObjectName"
 "ssis.Package::PackagePath" <-- "ssis.Package_tgt::PackagePath"
 "ssis.Package::PackageProtectionLevel" <-- "ssis.Package_tgt::PackageProtectionLevel"

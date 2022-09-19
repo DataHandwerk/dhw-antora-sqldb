@@ -52,7 +52,7 @@ stored procedure
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2022-01-23 17:32:24
+2022-09-05 18:23:32
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -228,8 +228,12 @@ Begin
 
     Print @command
 
-    --Execute the BCP command
-    Exec sys.xp_cmdshell @command, no_output
+    INSERT Into [docs].[command]
+    (command)
+    VALUES(@command)
+
+    ----Execute the BCP command
+    --Exec sys.xp_cmdshell @command, no_output
 
     Fetch Next From page_cursor
     Into
@@ -252,6 +256,7 @@ Deallocate page_cursor
 
 // tag::antorareferencedlist[]
 * xref:dhw:sqldb:config.fs_get_parameter_value.adoc[]
+* xref:dhw:sqldb:docs.command.adoc[]
 * xref:dhw:sqldb:docs.ssis_navlist_package.adoc[]
 * xref:dhw:sqldb:logs.usp_executionlog_insert.adoc[]
 // end::antorareferencedlist[]
@@ -492,6 +497,7 @@ EXEC [docs].[usp_AntoraExport_SsisNavigation]
 
 // tag::referencedobjectlist[]
 * [config].[fs_get_parameter_value]
+* [docs].[command]
 * [docs].[ssis_navlist_package]
 * [logs].[usp_ExecutionLog_insert]
 // end::referencedobjectlist[]
@@ -656,6 +662,11 @@ entity "puml-link:dhw:sqldb:config.fs_get_parameter_value.adoc[]" as config.fs_g
   --
 }
 
+entity "puml-link:dhw:sqldb:docs.command.adoc[]" as docs.command << U >> {
+  - **id** : (int)
+  --
+}
+
 entity "puml-link:dhw:sqldb:docs.ssis_navlist_package.adoc[]" as docs.ssis_navlist_package << V >> {
   --
 }
@@ -673,6 +684,7 @@ entity "puml-link:dhw:sqldb:logs.usp_executionlog_insert.adoc[]" as logs.usp_Exe
 }
 
 config.fs_get_parameter_value <.. docs.usp_AntoraExport_SsisNavigation
+docs.command <.. docs.usp_AntoraExport_SsisNavigation
 docs.ssis_navlist_package <.. docs.usp_AntoraExport_SsisNavigation
 docs.usp_AntoraExport_SsisNavigation <.. docs.usp_AntoraExport
 logs.usp_ExecutionLog_insert <.. docs.usp_AntoraExport_SsisNavigation
@@ -733,6 +745,11 @@ entity "puml-link:dhw:sqldb:configt.parameter_default.adoc[]" as configT.Paramet
   --
 }
 
+entity "puml-link:dhw:sqldb:docs.command.adoc[]" as docs.command << U >> {
+  - **id** : (int)
+  --
+}
+
 entity "puml-link:dhw:sqldb:docs.fs_cleanstringforfilename.adoc[]" as docs.fs_cleanStringForFilename << FN >> {
   --
 }
@@ -789,14 +806,15 @@ entity "puml-link:dhw:sqldb:ssis_t.pkgstats.adoc[]" as ssis_t.pkgStats << U >> {
 config.fs_get_parameter_value <.. docs.usp_AntoraExport_SsisNavigation
 config.Parameter <.. config.fs_get_parameter_value
 configT.Parameter_default <.. config.Parameter
+docs.command <.. docs.usp_AntoraExport_SsisNavigation
 docs.fs_cleanStringForFilename <.. docs.ssis_navlist_package
 docs.ssis_navlist_package <.. docs.usp_AntoraExport_SsisNavigation
 logs.ExecutionLog <.. logs.usp_ExecutionLog_insert
 logs.usp_ExecutionLog_insert <.. docs.usp_AntoraExport_SsisNavigation
 ssis.AntoraModule_tgt_filter <.. ssis.Package_tgt
 ssis.Package <.. docs.ssis_navlist_package
-ssis.Package_src <.. ssis.Package_tgt
 ssis.Package_src <.. ssis.AntoraModule_tgt_filter
+ssis.Package_src <.. ssis.Package_tgt
 ssis.Package_tgt <.. ssis.Package
 ssis.Project <.. ssis.Package_src
 ssis_t.pkgStats <.. ssis.Package_src
@@ -895,6 +913,12 @@ entity "puml-link:dhw:sqldb:config.fs_get_parameter_value.adoc[]" as config.fs_g
   --
 }
 
+entity "puml-link:dhw:sqldb:docs.command.adoc[]" as docs.command << U >> {
+  - **id** : (int)
+  - command : (nvarchar(4000))
+  --
+}
+
 entity "puml-link:dhw:sqldb:docs.ssis_navlist_package.adoc[]" as docs.ssis_navlist_package << V >> {
   - AntoraModule : (varchar(50))
   nav_list : (nvarchar(max))
@@ -914,6 +938,7 @@ entity "puml-link:dhw:sqldb:logs.usp_executionlog_insert.adoc[]" as logs.usp_Exe
 }
 
 config.fs_get_parameter_value <.. docs.usp_AntoraExport_SsisNavigation
+docs.command <.. docs.usp_AntoraExport_SsisNavigation
 docs.ssis_navlist_package <.. docs.usp_AntoraExport_SsisNavigation
 docs.usp_AntoraExport_SsisNavigation <.. docs.usp_AntoraExport
 logs.usp_ExecutionLog_insert <.. docs.usp_AntoraExport_SsisNavigation
@@ -1072,8 +1097,12 @@ Begin
 
     Print @command
 
-    --Execute the BCP command
-    Exec sys.xp_cmdshell @command, no_output
+    INSERT Into [docs].[command]
+    (command)
+    VALUES(@command)
+
+    ----Execute the BCP command
+    --Exec sys.xp_cmdshell @command, no_output
 
     Fetch Next From page_cursor
     Into

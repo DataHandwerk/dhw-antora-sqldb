@@ -52,7 +52,7 @@ user table
 == SysObject_modify_date
 
 // tag::SysObject_modify_date[]
-2022-01-23 14:10:32
+2022-09-05 18:18:08
 // end::SysObject_modify_date[]
 
 == AntoraColumnDetails
@@ -273,8 +273,8 @@ user table
 
 .Referenced Columns
 --
-* xref:ssis.packageconnection.adoc#column-connectionstring[+ssis.PackageConnection.ConnectionString+]
 * xref:ssis.packageconnection.adoc#column-connectionmanagertype[+ssis.PackageConnection.ConnectionManagerType+]
+* xref:ssis.packageconnection.adoc#column-connectionstring[+ssis.PackageConnection.ConnectionString+]
 --
 
 
@@ -886,8 +886,8 @@ entity "puml-link:dhw:sqldb:ssis.packageconnection_tgt.adoc[]" as ssis.PackageCo
 }
 
 ssis.PackageConnection <.. docs.ssis_PackageConnectionList
-ssis.PackageConnection <.. docs.ssis_TaskList
 ssis.PackageConnection <.. docs.ssis_Task
+ssis.PackageConnection <.. docs.ssis_TaskList
 ssis.PackageConnection_tgt <.. ssis.PackageConnection
 
 footer The diagram is interactive and contains links.
@@ -976,8 +976,8 @@ entity "puml-link:dhw:sqldb:ssis_t.tblconnection.adoc[]" as ssis_t.TblConnection
 }
 
 ssis.AntoraModule_tgt_filter <.. ssis.PackageConnection_tgt
-ssis.Package_src <.. ssis.PackageConnection_src
 ssis.Package_src <.. ssis.AntoraModule_tgt_filter
+ssis.Package_src <.. ssis.PackageConnection_src
 ssis.PackageConnection_src <.. ssis.PackageConnection_tgt
 ssis.PackageConnection_tgt <.. ssis.PackageConnection
 ssis.Project <.. ssis.Package_src
@@ -1076,8 +1076,8 @@ docs.ssis_TaskList <.. docs.ssis_Adoc
 docs.usp_AntoraExport_SsisPartialsContent <.. docs.usp_AntoraExport
 docs.usp_PERSIST_ssis_Adoc_T <.. docs.usp_AntoraExport_SsisPartialsContent
 ssis.PackageConnection <.. docs.ssis_PackageConnectionList
-ssis.PackageConnection <.. docs.ssis_TaskList
 ssis.PackageConnection <.. docs.ssis_Task
+ssis.PackageConnection <.. docs.ssis_TaskList
 
 footer The diagram is interactive and contains links.
 
@@ -1169,16 +1169,16 @@ entity "puml-link:dhw:sqldb:ssis.packageconnection_tgt.adoc[]" as ssis.PackageCo
 }
 
 ssis.PackageConnection <.. docs.ssis_PackageConnectionList
-ssis.PackageConnection <.. docs.ssis_TaskList
 ssis.PackageConnection <.. docs.ssis_Task
+ssis.PackageConnection <.. docs.ssis_TaskList
 ssis.PackageConnection_tgt <.. ssis.PackageConnection
 "ssis.PackageConnection::AntoraModule" <-- "docs.ssis_PackageConnectionList::AntoraModule"
 "ssis.PackageConnection::AntoraModule" <-- "ssis.PackageConnection_tgt::AntoraModule"
 "ssis.PackageConnection::ConnectionManagerID" <-- "ssis.PackageConnection_tgt::ConnectionManagerID"
 "ssis.PackageConnection::ConnectionManagerName" <-- "ssis.PackageConnection_tgt::ConnectionManagerName"
-"ssis.PackageConnection::ConnectionManagerType" <-- "ssis.PackageConnection_tgt::ConnectionManagerType"
-"ssis.PackageConnection::ConnectionManagerType" <-- "ssis.PackageConnection::isFileAndDtsPackage"
 "ssis.PackageConnection::ConnectionManagerType" <-- "ssis.PackageConnection::DtsPackageBaseName"
+"ssis.PackageConnection::ConnectionManagerType" <-- "ssis.PackageConnection::isFileAndDtsPackage"
+"ssis.PackageConnection::ConnectionManagerType" <-- "ssis.PackageConnection_tgt::ConnectionManagerType"
 "ssis.PackageConnection::ConnectionString" <-- "ssis.PackageConnection::DtsPackageBaseName"
 "ssis.PackageConnection::ConnectionString" <-- "ssis.PackageConnection::isFileAndDtsPackage"
 "ssis.PackageConnection::ConnectionString" <-- "ssis.PackageConnection_tgt::ConnectionString"
